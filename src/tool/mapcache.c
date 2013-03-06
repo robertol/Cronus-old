@@ -146,7 +146,7 @@ int read_map(char *name, struct map_data *m)
 	for (xy = 0; xy < num_cells; xy++)
 	{
 		// Height of the bottom-left corner
-		height = GetFloat( gat + off      );
+		height = GetFloat( gat + off );
 		// Type of cell
 		type   = GetULong( gat + off + 16 );
 		off += 20;

@@ -305,7 +305,7 @@ static void display_title(void) {
 	ShowMessage(""CL_XXBL"          ("CL_BOLD"       \\______  /|__|   \\____/|___|  /____//____  >      "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage(""CL_XXBL"          ("CL_BOLD"              \\/                   \\/           \\/       "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage(""CL_XXBL"          ("CL_BOLD"                  www.cronus-emulator.com                "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
-	ShowMessage(""CL_XXBL"          ("CL_BT_YELLOW"      Baseado no eAthena (c) 2005-2013 Projeto Cronus    "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
+	ShowMessage(""CL_XXBL"          ("CL_BT_YELLOW"      Baseado no Hercules (c) 2005-2013 Projeto Cronus    "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage(""CL_XXBL"          ("CL_BOLD"                                                         "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage(""CL_WTBL"          (=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)"CL_CLL""CL_NORMAL"\n\n");
 
@@ -320,7 +320,7 @@ void usercheck(void)
 {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
+		ShowWarning ("Você está rodando Cronus com os privilégios root, isto não é necessário.\n");
     }
 #endif
 }
