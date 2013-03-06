@@ -1,0 +1,128 @@
+@SET_MAKE@
+
+HAVE_MYSQL=@HAVE_MYSQL@
+ifeq ($(HAVE_MYSQL),yes)
+	ALL_DEPENDS=common_sql login_sql char_sql map_sql tools
+	SQL_DEPENDS=common_sql login_sql char_sql map_sql
+	COMMON_SQL_DEPENDS=mt19937ar libconfig
+	LOGIN_SQL_DEPENDS=mt19937ar libconfig common_sql
+	CHAR_SQL_DEPENDS=mt19937ar libconfig common_sql
+	MAP_SQL_DEPENDS=mt19937ar libconfig common_sql
+	CONVERTERS_DEPENDS=common_sql
+else
+	ALL_DEPENDS=needs_mysql
+	SQL_DEPENDS=needs_mysql
+	COMMON_SQL_DEPENDS=needs_mysql
+	LOGIN_SQL_DEPENDS=needs_mysql
+	CHAR_SQL_DEPENDS=needs_mysql
+	MAP_SQL_DEPENDS=needs_mysql
+endif
+
+
+#####################################################################
+.PHONY: sql  \
+	common_sql \
+	mt19937ar \
+	login_sql \
+	char_sql \
+	map_sql \
+	tools \
+	test \
+	clean help
+
+all: $(ALL_DEPENDS)
+
+sql: $(SQL_DEPENDS)
+
+common_sql: $(COMMON_SQL_DEPENDS)
+	@$(MAKE) -C src/common sql
+
+mt19937ar:
+	@$(MAKE) -C 3rdparty/mt19937ar
+
+libconfig:
+	@$(MAKE) -C 3rdparty/libconfig
+
+login_sql: $(LOGIN_SQL_DEPENDS)
+	@$(MAKE) -C src/login sql
+
+char_sql: $(CHAR_SQL_DEPENDS)
+	@$(MAKE) -C src/char
+
+map_sql: $(MAP_SQL_DEPENDS)
+	@$(MAKE) -C src/map sql
+
+tools:
+	@$(MAKE) -C src/tool
+
+test:
+	@$(MAKE) -C src/test
+
+clean:
+	@$(MAKE) -C src/common $@
+	@$(MAKE) -C 3rdparty/mt19937ar $@
+	@$(MAKE) -C 3rdparty/libconfig $@
+	@$(MAKE) -C src/login $@
+	@$(MAKE) -C src/char $@
+	@$(MAKE) -C src/map $@
+	@$(MAKE) -C src/tool $@
+	@$(MAKE) -C src/test $@
+
+help:
+	@echo "most common targets are 'all' 'sql' 'conf' 'clean' 'help'"
+	@echo "possible targets are:"
+	@echo "'common_sql'  - builds object files used in SQL servers"
+	@echo "'mt19937ar'   - builds object file of Mersenne Twister MT19937"
+	@echo "'libconfig'   - builds object files of libconfig"
+	@echo "'login_sql'   - builds login server (SQL version)"
+	@echo "'char_sql'    - builds char server (SQL version)"
+	@echo "'map_sql'     - builds map server (SQL version)"
+	@echo "'tools'       - builds all the tools in src/tools"
+	@echo "'all'         - builds all the above targets"
+	@echo "'sql'         - builds sql servers (targets 'common_sql' 'login_sql' 'char_sql'"
+	@echo "                'map_sql' and 'import')"
+	@echo "'test'        - builds tests"
+	@echo "'clean'       - cleans builds and objects"
+	@echo "'help'        - outputs this message"
+
+#####################################################################
+
+needs_mysql:
+	@echo "MySQL not found or disabled by the configure script"
+	@exit 1
+
+#####################################################################
+# TODO
+
+install:	conf/%.conf conf/%.txt
+	$(shell read -p "WARNING: This target does not work properly yet. Press Ctrl+C to cancel or Enter to continue.")
+	$(shell mkdir -p /opt/cronus/bin/)
+	$(shell mkdir -p /opt/cronus/etc/cronus/)
+	$(shell mkdir -p /opt/cronus/var/log/cronus/)
+	$(shell mv save /opt/cronus/etc/cronus/save)
+	$(shell mv db /opt/cronus/etc/cronus/db)
+	$(shell mv conf /opt/cronus/etc/cronus/conf)
+	$(shell mv npc /opt/cronus/etc/cronus/npc)
+	$(shell mv log/* /opt/cronus/var/log/cronus/)
+	$(shell cp *-server* /opt/cronus/bin/)
+	$(shell ln -s /opt/cronus/etc/cronus/save/ /opt/cronus/bin/)
+	$(shell ln -s /opt/cronus/etc/cronus/db/ /opt/cronus/bin/)
+	$(shell ln -s /opt/cronus/etc/cronus/conf/ /opt/cronus/bin/)
+	$(shell ln -s /opt/cronus/etc/cronus/npc/ /opt/cronus/bin/)
+	$(shell ln -s /opt/cronus/var/log/cronus/ /opt/cronus/bin/log)
+
+bin-clean:
+	$(shell rm /opt/cronus/bin/login-server*)
+	$(shell rm /opt/cronus/bin/char-server*)
+	$(shell rm /opt/cronus/bin/map-server*)
+
+uninstall:
+	$(shell read -p "WARNING: This target does not work properly yet. Press Ctrl+C to cancel or Enter to continue.")
+	bin-clean
+	$(shell rm /opt/cronus/bin/save)
+	$(shell rm /opt/cronus/bin/db)
+	$(shell rm /opt/cronus/bin/conf)
+	$(shell rm /opt/cronus/bin/npc)
+	$(shell rm /opt/cronus/bin/log)
+	$(shell rm -rf /opt/cronus/etc/cronus)
+	$(shell rm -rf /opt/cronus/var/log/cronus)
