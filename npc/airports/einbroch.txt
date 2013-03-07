@@ -1,12 +1,14 @@
-//===== Hercules Script ======================================
-//= Einbroch Airport Staff
-//===== By: ================================================== 
+//===== Cronus Script ========================================
+//= Equipe do Aeroplano de Einbroch
+//===== Por: =================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Description: ========================================= 
-//= Einbroch Airport Staff
-//===== Additional Comments: ================================= 
-//= Official NPCs.
-//============================================================ 
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatível Com: ======================================
+//= Cronus; Hercules; Hercules.
+//===== Comentários Adicionais: ==============================
+//= 1.0 Versão inicial.
+//============================================================
 
 airport,143,43,5	script	Airport Staff#airport1a::airport1	90,{
 	mes "[Airport Staff]";
