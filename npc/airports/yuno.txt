@@ -1,11 +1,13 @@
-//===== Hercules Script ======================================
-//= Yuno Airport Staff
-//===== By: ================================================== 
+//===== Cronus Script ========================================
+//= Equipe do Aeroplano de Yuno
+//===== Por: =================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Description: ========================================= 
-//= Yuno Airport Staff
-//===== Additional Comments: ================================= 
-//= Official NPCs.
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatível Com: ======================================
+//= Cronus; Hercules; Hercules.
+//===== Comentários Adicionais: ==============================
+//= 1.0 Versão inicial.
 //============================================================ 
 
 y_airport,143,43,5	script	Airport Staff#y_air1a::y_airport1	90,{
