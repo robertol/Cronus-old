@@ -1,11 +1,13 @@
-//===== Hercules Script ======================================
-//= Lighthalzen Airport Staff
-//===== By: ================================================== 
+//===== Cronus Script ========================================
+//= Equipe do Aeroplano de Lighthalzen
+//===== Por: =================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Description: ========================================= 
-//= Lighthalzen Airport Staff
-//===== Additional Comments: ================================= 
-//= Official NPCs.
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatível Com: ======================================
+//= Cronus; Hercules; Hercules.
+//===== Comentários Adicionais: ==============================
+//= 1.0 Versão inicial.
 //============================================================ 
 
 lhz_airport,143,43,5	script	Airport Staff#lhz_air1a::lhz_airport1	90,{
