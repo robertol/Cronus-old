@@ -75,7 +75,7 @@ S_DisplayOwners:
 		if (GetCastleData(.@maps$[.@i],1))
 			Announce "O Castelo de  [" + GetCastleName(.@maps$[.@i]) + "] Foi Conquistado Pelo Clã [" + GetGuildName(GetCastleData(.@maps$[.@i],1)) + "].",bc_all|bc_woe;
 		else
-			Announce "O [" + GetCastleName(.@maps$[.@i]) + "] está Totalmente Desocupado.",bc_all|bc_woe;
+			Announce "O Castelo de [" + GetCastleName(.@maps$[.@i]) + "] está Totalmente Desocupado.",bc_all|bc_woe;
 	}
 	end;
 }
