@@ -16,7 +16,7 @@ struct npc_timerevent_list {
 	int timer,pos;
 };
 struct npc_label_list {
-	char name[NPC_NAME_LENGTH];
+	char name[NAME_LENGTH];
 	int pos;
 };
 struct npc_item_list {
@@ -31,8 +31,8 @@ struct npc_data {
 	struct npc_data *master_nd;
 	short class_;
 	short speed;
-	char name[NPC_NAME_LENGTH+1];// display name
-	char exname[NPC_NAME_LENGTH+1];// unique npc name
+	char name[NAME_LENGTH+1];// display name
+	char exname[NAME_LENGTH+1];// unique npc name
 	int chat_id;
 	int touching_id;
 	unsigned int next_walktime;
@@ -70,7 +70,7 @@ struct npc_data {
 		struct {
 			struct mob_data *md;
 			time_t kill_time;
-			char killer_name[NPC_NAME_LENGTH];
+			char killer_name[NAME_LENGTH];
 		} tomb;
 	} u;
 };
@@ -134,6 +134,7 @@ int npc_enable(const char* name, int flag);
 void npc_setdisplayname(struct npc_data* nd, const char* newname);
 void npc_setclass(struct npc_data* nd, short class_);
 struct npc_data* npc_name2id(const char* name);
+bool npc_isnear(struct block_list * bl);
 
 int npc_get_new_npc_id(void);
 
