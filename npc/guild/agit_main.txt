@@ -3,7 +3,7 @@
 //===== Por: ==================================================
 //= L0ne_W0lf
 //===== Versão Atual: =====================================
-//= 1.9a
+//= 2.0
 //===== Descrição: =========================================
 //= [ Aegis Conversion]
 //= ----------------------------------------------------------
@@ -50,6 +50,7 @@
 //= 1.8 Fixed a possible exploit in guild castle investment. [Brian]
 //= 1.9 Partially rewrote Script. [Masao]
 //= 1.9a Fixed incorrect setcastledata parameter. [Euphy]
+//= Traduzido para Português [ Cronus ]
 //============================================================
 
 // WoE : Main Functions
@@ -396,7 +397,7 @@ OnRecvCastle:
 			if (BaseClass != Job_Merchant) {
 				mes "[Funcionária Kafra]";
 				mes "Me Desculpe, mas o serviço";
-				mes "de aluguem de Carrinho";
+				mes "de alguem de Carrinho";
 				mes "está disponível apenas para Mercadores,";
 				mes "Ferreiros, Mestre-Ferreiro,";
 				mes "Alquimistas, Criador,";
@@ -409,7 +410,7 @@ OnRecvCastle:
 				mes "[Funcionária Kafra]";
 				mes "Voce ja está com";
 				mes "um Carrinho.";
-				mes "Infelizmente, nós não";
+				mes "Infelizmente, nós não podemos";
 				mes "alugar mais de um carrinho a cada cliente";
 				mes "de cada vez.";
 				close2;
@@ -446,7 +447,7 @@ OnRecvCastle:
 			}
 		case 4:
 			mes "[Serviços Kafra]";
-			mes "Nois, da Corporação Kafra,";
+			mes "Nós, da Corporação Kafra,";
 			mes "estamos sempre nos esforçando para fornece-lhe os melhores serviços. Estamos Felizes por poder atender suas Necessidades.";
 			close2;
 			cutin "",255;
