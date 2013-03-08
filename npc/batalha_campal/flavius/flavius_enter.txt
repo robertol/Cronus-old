@@ -1,14 +1,15 @@
-//===== Hercules Script ======================================
-// BattleGround System - Flavius Entrance NPCs
-//===== By: ================================================== 
+//===== Cronus Script ========================================
+//= NPCs referentes a Batalha Campal 
+//===== Por: =================================================
 //= L0ne_W0lf
-//===== Current Version: ===================================== 
-//= 1.0
-//===== Description: ========================================= 
-//= [AEGIS Conversion]
-//= Flavius Battleground Entrance NPCs
-//===== Additional Comments: ================================= 
-//= 1.0 First Version.
+//===== Versão Atual: ========================================
+//= 1.0 
+//===== Compatível com: ======================================
+//= Cronus; Hercules; Hercules.
+//===== Descrição: ===========================================
+//= NPCs referentes a entrada de Flavius
+//===== Comentários Adicionais: ==============================
+//= 1.0 Versão inicial.
 //============================================================
 
 // Flavius Officer - Guillaume
