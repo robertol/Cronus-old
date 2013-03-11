@@ -21,7 +21,7 @@
 //= 1.2 Removed custom text. [Daegaladh]
 //============================================================ 
 
-brasilis,197,221,4	script	Kafra Employee::kaf_bra	117,{
+brasilis,197,221,4	script	Funcionária Kafra::kaf_bra	117,{
 	cutin "kafra_01",2;
 	callfunc "F_Kafra",0,3,0,80,700;
 
