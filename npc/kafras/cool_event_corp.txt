@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
-//= Cool Event Corp. Staff
-//===== By: ================================================== 
+//===== Cronus Script ======================================
+//= Corp. Eventos Incríveis
+//===== Por: ================================================== 
 //= Gepard
-//===== Current Version: ===================================== 
+//===== Versão Atual: ===================================== 
 //= 1.5
-//===== Description: ========================================= 
+//===== Descrição: ========================================= 
 //= Cool Event Corp. Staff (Save, Storage & Pushcart Service)
 //= in Arunafeltz Region.
-//===== Additional Comments: ================================= 
+//===== Comentários Adicionais: ================================= 
 //= 1.0 First version, iRO Sakray X.4 [Gepard]
 //= 1.1 Optimized, fixed a conditional bug [Lupus]
 //= 1.1a Redo back. It wasn't a bug [Lupus]
@@ -16,6 +16,7 @@
 //=	until we got a client/packet based password support [Lupus]
 //= 1.4 Added Veins Cool Event Corp. Staff. [L0ne_W0lf]
 //= 1.5 Cool Event Corp staff is now more iRO like. [L0ne_W0lf]
+//= 1.6 Tradução Pt-Br [ Cronus]
 //============================================================ 
 
 hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
@@ -120,7 +121,7 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 	mes "Bem vindo a Corp. Eventos Incríveis!";
 	mes "Nossa equipe está sempre trabalhando para superar suas expectativas para a qualidade de serviço. Então como posso ajudar hoje?";
 	next;
-	switch(select("Salvar Ponto de Retorno.:Usar Armazém.:Serviço de Teleporte.:Alugar Carrinho.:Serviço de Armazém com senha.:Cancelar.")){
+	switch(select("Salvar Ponto de Retorno:Usar Armazém:Serviço de Teleporte:Alugar Carrinho:Serviço de Armazém com senha:Cancelar")){
 	case 1:
 		mes "[Corp. Eventos Incríveis]";
 		mes "Seu ponto de retorno foi gravado aqui na cidade de Rachel.";
@@ -154,7 +155,7 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 		mes "Por favor";
 		mes "escolha seu destino:";
 		next;
-		if (select("Veins -> 2200 z.:Cancelar.") == 1) {
+		if (select("Veins -> 2200 z:Cancelar") == 1) {
 			if ((countitem(7060) != 0) || (Zeny >= 2200)) {
 				if (countitem(7060) != 0) {
 					delitem 7060,1;
@@ -199,7 +200,7 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 		}
 		mes "O aluguel do carrinho custa 800 zenys. Você deseja alugar o carrinho?";
 		next;
-		if(select("Alugar Carrinho.:Cancelar.") == 1){
+		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
 				mes "[Eventos Incríveis]";
 				mes "Eu lamento, mas você não possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
@@ -211,7 +212,7 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 		close2;
 		break;
 	case 5:
-		callfunc("F_SetKafCode","[Corp. Eventos Incríveis]","Corp. Eventos Incríveis.");
+		callfunc("F_SetKafCode","[Corp. Eventos Incríveis]","Corp. Eventos Incríveis");
 	case 6:
 	default:
 		mes "[Corp. Eventos Incríveis]";
@@ -230,7 +231,7 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 	mes "Nossa equipe está sempre trabalhando para superar suas expectativas";
 	mes "para a qualidade de serviço. Então como posso ajudar hoje?";
 	next;
-	switch(select("Salvar Ponto de Retorno.:Usar Armazém.:Serviço de Teleporte.:Alugar Carrinho.:Serviço Armazém com senha.:Cancelar.")){
+	switch(select("Salvar Ponto de Retorno:Usar Armazém:Serviço de Teleporte:Alugar Carrinho:Serviço Armazém com senha:Cancelar")){
 	case 1:
 		mes "[Corp. Eventos Incríveis]";
 		mes "Seu ponto de retorno foi gravado aqui na cidade de Veins.";
@@ -263,7 +264,7 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 		mes "Por favor";
 		mes "escolha seu destino.";
 		next;
-		if (select("Rachel -> 2200 z.:Cancelar.") == 1) {
+		if (select("Rachel -> 2200 z:Cancelar") == 1) {
 			if ((countitem(7060) != 0) || (Zeny >= 2200)) {
 				if (countitem(7060) != 0) {
 					delitem 7060,1;
@@ -308,7 +309,7 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 		}
 		mes "O aluguel do carrinho de mão custa 800 zenys. Você deseja alugar o carrinho de mão?";
 		next;
-		if(select("Alugar Carrinho.:Cancelar.") == 1){
+		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
 				mes "[Corp. Eventos Incríveis]";
 				mes "Eu lamento, mas você não possui zenys para pagar o aluguel do carrinho de mão que custa 800 zenys.";
