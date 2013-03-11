@@ -388,7 +388,76 @@ function	script	F_VoteKafra	{
 						mes "^FF0000Torre do relógio - Al De Baran - Nível 3, Caverna de Magma Nível 2^000000";
 					}
 					next;
-							mes "[Kafra equipe de votação]";
+					mes "[Kafra equipe de votação]";
+					mes "Se você está interessado";
+					mes "em nosso serviço de teleporte,";
+					mes "por favor vote em";
+					mes "nós agora.";
+					mes "Gostaria de votar na corporação Kafra?";
+					next;
+					switch(select("Não:Sim")) {
+					case 1:
+						mes "[Kafra equipe de votação]";
+						mes "Eu entendo, mas se você";
+						mes "mudar de idéia";
+						mes "será bem vindo para";
+						mes "voltar. Muito obrigado e";
+						mes "tenha um bom dia, aventureiro.";
+						break;
+					case 2:
+						set lhz_vote,$DTS_VoteCount+1;
+						set $DTS_KafraVotes,$DTS_KafraVotes+1;
+						mes "[Kafra equipe de votação]";
+						mes "Obrigado por seu voto!";
+						mes "Nós continuaremos a oferecer";
+						mes "o nosso melhor serviço,";
+						mes "com qualidade excelente.";
+						mes "Desejamos a você um ótimo dia e lembre-se que a Corporação Kafra sempre estará ao seu lado.";
+						break;
+					}
+				}
+				else {
+					mes "[Kafra equipe de votação]";
+					mes "Eu lamento, mas";
+					mes "você não pode participar dessa";
+					mes "eleição. Quando acontecer";
+					mes "a próxima, você poderá";
+					mes "participar.";
+					mes "Muito obrigado por seu apoio~";
+				}
+			}
+			else if ($DTS_Result == 3) {
+				if (lhz_vote <= $DTS_VoteCount) {
+					mes "[Kafra equipe de votação]";
+					mes "Depois de totalizarmos o número de";
+					mes "votos da última eleição,";
+					mes "concluímos que a participação";
+					mes "de eleitores foi mínima,";
+					mes "e por isso não foi satisfatória.";
+					next;
+					mes "[Kafra equipe de votação]";
+					mes "Por isso, faremos uma ";
+					mes "outra eleição para determinar qual empresa";
+					mes "irá fornecer o serviço de teleporte para as Dungeons";
+					mes "Se formos escolhidos,";
+					mes "a Corporação Kafra irá fornecer o teleporte para";
+					mes "as seguntes dungeons...";
+					next;
+					mes " ";
+					mes " ";
+					if ($DTS_KafraWins == 0) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+					}
+					else if ($DTS_KafraWins == 1) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio, Nível 3 ^000000";
+					}
+					else {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio, Nível 3 Lava Dungeon, Nível 2^000000";
+					}
+					next;
+					mes "[Kafra equipe de votação]";
 					mes "Se você gostaria de";
 					mes "contar com serviço de teleporte";
 					mes "para essas áreas, por favor";
