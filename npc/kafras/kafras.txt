@@ -18,6 +18,7 @@
 //=     - L0ne_W0lf, kobra_k88, Samuray22, Evera, Lupus
 //= 1.0 Merged and cleaned up Kafras. [Joseph]
 //= 1.1 Added Izlude RE coordinates. [Euphy]
+//= 1.2 Tradução PT-BR 
 //============================================================ 
 
 // Aldebaran
@@ -364,7 +365,7 @@ cmd_fild07,136,134,4	script	Funcionária Kafra::kaf_cmd_fild07	721,{
 
 // Izlude
 //============================================================
-izlude,128,148,6	script	Funcionária Kafra#izlude	117,{
+--	script	kaf_izlude	-1,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
 	mes "[Funcionária Kafra]";
