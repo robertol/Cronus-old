@@ -1,2 +1,2 @@
-//O limite de linhas é 128. Caso precise de mais, modifique a linha MOTD_LINE_SIZE em pc.c
-Seja bem-vindo(a) à revisão do Cronus SVN! Divirta-se! Por favor reporte qualquer bug/erro que você encontrar em nosso site: www.cronus-emulator.com/forum
+//O limite de linhas � 128. Caso precise de mais, modifique a linha MOTD_LINE_SIZE em pc.c
+Seja bem-vindo(a) ao Cronus! Divirta-se! Por favor reporte qualquer bug/erro que voc� encontrar em nosso site: forum.cronus-emulator.com

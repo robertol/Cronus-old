@@ -6,18 +6,18 @@
 //  \______  /|__|   \____/|___|  /____//____  >
 //         \/                   \/           \/  
 //-----------------------------------------------
-// Traduzido para PortuguÃªs por Mara
+// Traduzido para Português por Mara
 //-----------------------------------------
 // GRF List
 //-----------------------------------------
-// DiretÃ³rio para a sua 'data.grf'
+// Diretório para a sua 'data.grf'
 // ex. -> grf: C:\Program Files\Gravity\RO\data.grf
-// VocÃª pode adicionar mais caso precise
+// Você pode adicionar mais caso precise
 // grf: <caminho para a pasta data>
 
 //------ Outros ---------------------------
 
-// DiretÃ³rio da pasta data (sem colocÃ¡-la no comando data_dir)
+// Diretório da pasta data (sem colocá-la no comando data_dir)
 // ex. -> data_dir: C:\Program Files\Gravity\RO\
 // A pasta data tem que estar em \RO\
 //data_dir: C:\path\to\RO\
