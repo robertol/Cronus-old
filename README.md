@@ -35,8 +35,12 @@ Equipe de Desenvolvimento
 - I am Cold	- Márcio Montenegro
 - Otonii	- Leandro Otonii
 - Yum		- Luann Peixe
-
+- Wolf		- João Victor Senos
+- Golen Maker	- Ligleyson Warnielle
+	
 ### Estágiários/Aprendizes
-- Ryuzaki Aiko	- Ryuzaki Aiko
+- Ryuzaki Aiko	- Vilmar Rosset
 - Rayzir	- Guilherme Fontenele
 - PHpedro	- Pedro
+- Eru Yuuko
+- KaduKiller 
