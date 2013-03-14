@@ -1,17 +1,17 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ========================================
 //= Evento Xmas
-//===== By: ==================================================
+//===== Por: =================================================
 //= rAthena Dev Team
-//===== Traduzido por: =======================================
-//= Ryuzaki Aiko - Cronus-Emulator
-//===== Current Version: =====================================
+//===== Versão Atual: ========================================
 //= 1.5
-//===== Description: =========================================
+//===== Compatível Com: ======================================
+//= Cronus; Hercules; rAthena.
+//===== Descrição: ===========================================
 //= Beat up Antonios and grab his socks.  Get at least 3 and
 //= give them to Santa Claus Claus in exchange for a present.
 //= Includes X-mas mobs.
 //= This npc will disable, the current Santa Claus npc.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: ==============================
 //= Fixed the spawns [shadowlady]
 //= 1.1 Added Xmas Jakk, fixed 2 exploits, fixed reward Box ID [Lupus]
 //= 1.2 Added monsters to the newer fields, thanks to Muad_Dib [MasterOfMuppets]
@@ -21,90 +21,92 @@
 //= Added Christmas goblins to yuno_fild09, thanks to Playtester for pointing it out
 //= 1.4 Added a fix to make Lutie & Bard quests passable during this event [Lupus]
 //= 1.5 Traduzido para português [Ryuzaki Aiko]
+//= 1.6 Pequena otimização. [Rayzir]
 //============================================================
 
 xmas_in,100,96,4	script	Papai Noel::Santa2	718,{
 	mes "[Papai Noel]";
-	if(xmas_npc==0) set xmas_npc, 1; // For Lutie & Bard quest
-	if(#event_xmas > 0 && #event_xmas < 30 ) goto L_Start;
+	if(xmas_npc==0) set xmas_npc, 1;
+	if(#event_xmas > 0 && #event_xmas < 30 )
+	{
+		mes "IEu tenho um pequeno problema...";
+		mes "Tem um tempo para me ouvir?";
+		next;
+		switch(select("Escutar o Papai Noel:Entregar as provas ao Papai Noel:Cancelar")){
+		case 1:
+			mes "[Papai Noel]";
+			mes "Meu problema é o seguinte,";
+			mes "Pareçe ter alguém por ai";
+			mes "que está se passando por mim, e espalhando";
+			mes "terror por toda terra.";
+			next;
+			mes "[Papai Noel]";
+			mes "Como o Grinch da lenda, ele está tomando";
+			mes "os brinquedos de todas crianças e pegando-os";
+			mes "para si.";
+			next;
+			mes "[Papai Noel]";
+			mes "Eu estou muito ocupado criando os brinquedos";
+			mes "para o próximo ano, por isso eu não posso";
+			mes "sair daqui e procurar-lo eu mesmo.";
+			mes "Então, eu gostaria que você procurasse-o";
+			mes "E destrua-o.";
+			next;
+			mes "[Papai Noel]";
+			mes "Ele está com alguns dos meus";
+			mes "sacos mágickos, no entando, ele irá";
+			mes "escapar para outro lugar quando";
+			mes "você tentar atacá-lo.";
+			next;
+			mes "[Papai Noel]";
+			mes "Contudo,";
+			mes "Na pressa, ele tende a derrubar algumas coisas";
+			mes "Se por acaso ele derrubar alguma meia";
+			mes "furada, que ele ultiliza para";
+			mes "roubar os brinquedos das crianças pobres, pegue isto.";
+			next;
+			mes "[Papai Noel]";
+			mes "Se pegar 3 desses, eu vou";
+			mes "vou te dar um prótotipo de uma caixa mistériosa.";
+			mes "Eu tenho mantido-a em meu";
+			mes "laboratório. Ela cospe presentes aleatórios";
+			mes "e me salva de uma tonelada de trabalho.";
+			close;
+		case 2:
+			mes "[Papai Noel]";
+			if(countitem(7034) < 3)
+			{	
+				mes "Você não tem meias suficiêntes como prova.";
+				mes "Vá derrubar mais alguns papais noéis falsos";
+				mes "e pegue mais algumas meias e eu o recompensarei.";
+				close;
+			} else {
+				delitem 7034,3;
+				mes "Hmm, visto que você fez um bom trabalho";
+				mes "pegando uma boa dose de";
+				mes "papais noéis falsos. Continue assim!";
+				next;
+				getitem 644,1; //Gift Box Prototype
+				set #event_xmas,#event_xmas+1;
+				mes "[Papai Noel]";
+				mes "Pegue sua recompensa.";
+				mes "Se você pegar mais três, eu vou te dar outra.";
+				mes "Espero que você aproveite-o.";
+				close;
+			}
+		case 3:
+			mes "[Papai Noel]";
+			mes "Hmm. Bem, pelo menos nós";
+			mes "nos veremos na próxima manhã de natal.";
+			close;
+		}
+	}
 	mes "Feliz Natal!";
 	if(Class==0 || #event_xmas>=30 ) close; //anti exploit protection
 	mes "Eu tenho um presente para você! Ho Ho Ho!";
 	getitem rand(664,667),1; //gives one of 4 gift boxes
 	set #event_xmas,#event_xmas+1;
 	close;
-
-L_Start:
-	mes "IEu tenho um pequeno problema...";
-	mes "Tem um tempo para me ouvir?";
-	next;
-	menu "Escutar o Papai Noel",M_0, "Entregar as provas ao Papai Noel.",M_1, "Cancelar.",M_End;
-
-	M_0:
-		mes "[Papai Noel]";
-		mes "Meu problema é o seguinte,";
-		mes "Pareçe ter alguém por ai";
-		mes "que está se passando por mim, e espalhando";
-		mes "terror por toda terra.";
-		next;
-		mes "[Papai Noel]";
-		mes "Como o Grinch da lenda, ele está tomando";
-		mes "os brinquedos de todas crianças e pegando-os";
-		mes "para si.";
-		next;
-		mes "[Papai Noel]";
-		mes "Eu estou muito ocupado criando os brinquedos";
-		mes "para o próximo ano, por isso eu não posso";
-		mes "sair daqui e procurar-lo eu mesmo.";
-		mes "Então, eu gostaria que você procurasse-o";
-		mes "E o destrua-o.";
-		next;
-		mes "[Papai Noel]";
-		mes "Ele está com alguns dos meus";
-		mes "sacos mágickos, no entando, ele irá";
-		mes "escapar para outro lugar quando";
-		mes "você tentar ataca-lo.";
-		next;
-		mes "[Papai Noel]";
-		mes "Contudo,";
-		mes "Na pressa, ele tende a derrubar algumas coisas";
-		mes "Se por acaso ele derrubar alguma meia";
-		mes "furada, que ele ultiliza para";
-		mes "roubar os brinquedos das crianças pobres, pegue isto.";
-		next;
-		mes "[Papai Noel]";
-		mes "Se pegar 3 desses, eu vou";
-		mes "vou te dar um prótotipo de uma caixa mistériosa.";
-		mes "Eu tenho mantido-a em meu";
-		mes "laboratório. Ela cospe presentes aleatórios";
-		mes "e me salva de uma tonelada de trabalho.";
-		close;
-	M_1:
-		mes "[Papai Noel]";
-		if(countitem(7034) < 3) goto L_NotEnuf;
-		delitem 7034,3;
-		mes "Hmm, visto que você fez um bom trabalho";
-		mes "pegando uma boa dose de";
-		mes "papais noéis falsos. Continue assim!";
-		next;
-		getitem 644,1; //Gift Box Prototype
-		set #event_xmas,#event_xmas+1;
-		mes "[Papai Noel]";
-		mes "Pegue sua recompensa.";
-		mes "Se você pegar mais três, eu vou te dar outra.";
-		mes "Espero que você aproveite-o.";
-		close;
-	
-		L_NotEnuf:
-			mes "Você não tem meias suficiêntes como prova.";
-			mes "Vá derrubar mais alguns papais noéis falsos";
-			mes "e pegue mais algumas meias e eu o recompensarei";
-			close;
-	M_End:
-		mes "[Papai Noel]";
-		mes "Hmm. Bem, pelo menos nós";
-		mes "nos veremos na próxima manhã de natal.";
-		close;
 
 OnInit:
 	disablenpc "Santa1";
