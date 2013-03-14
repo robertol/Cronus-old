@@ -1641,6 +1641,7 @@ int battle_blewcount_bonus(struct map_session_data *sd, uint16 skill_id) {
 	}
 	return 0;
 }
+
 //For quick div adjustment.
 #define damage_div_fix(dmg, div) { if (div > 1) (dmg)*=div; else if (div < 0) (div)*=-1; }
 /*==========================================
