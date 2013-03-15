@@ -44,3 +44,4 @@ Equipe de Desenvolvimento
 - PHpedro	- Pedro
 - Eru Yuuko
 - KaduKiller 
+- beckdeveloper
