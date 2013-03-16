@@ -45,3 +45,4 @@ Equipe de Desenvolvimento
 - Eru Yuuko
 - KaduKiller 
 - beckdeveloper
+- Apo
