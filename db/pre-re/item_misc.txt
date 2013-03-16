@@ -526,8 +526,8 @@
 50,12103,1	// Bloody Branch
 // Cherish Box
 51,5454,1	// Puppy Hat
-51,5455,4	// Decorative Geographer
-51,5456,5	// Summer Hat
+//51,5455,4	// Decorative Geographer
+//51,5456,5	// Summer Hat
 // Cherish Box Ori
 52,2712,3	// Collector's Edition Book
 52,5212,2	// Solar Panels
