@@ -450,10 +450,10 @@
 45,12197,1	// Salty Rice Cake
 45,12198,1	// Lucky Rice Cake
 // Masquerade Ball Box
-46,5296,10	// Drooping Nine Tail
-46,5297,1	// Soul Wing
-46,5298,10	// Dokebi's Wig
-46,5299,10	// Pagdayaw
+//46,5296,10	// Drooping Nine Tail
+//46,5297,1	// Soul Wing
+//46,5298,10	// Dokebi's Wig
+//46,5299,10	// Pagdayaw
 // Tresure Box WoE
 47,603,6	// Old Blue Box
 47,658,6	// Tribal Solidarity

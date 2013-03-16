@@ -298,7 +298,6 @@ adjgroup: "Uso: <nível> <nome do personagem> - Modifica temporariamente o nível 
 kickall: "Desconecta todos os jogadores do servidor."
 mapexit: "Desconecta todos os jogadores e desligar o servidor de mapas."
 reloadscript: "Recarrega todos os scripts."
-reload: "Recarrega o banco de dados de itens, monstros e skills."
 gat: "Para depuração (você inspeciona terreno/área)"
 send: "Para depuração (variedade de pacotes)"
 nuke: "Uso: <nome do personagem>\n" "Mata instantaneamente um jogador cujo nome foi designado, incluindo quem estiver perto."
