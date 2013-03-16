@@ -326,7 +326,7 @@ alberta,113,60,6	script	Funcionária Kafra::kaf_alberta2	112,{
 
 // Brasilis
 //============================================================
-brasilis,197,221,4	script#re	Funcionária Kafra#brasilis	117,{
+brasilis,197,221,4	script	Funcionária Kafra#brlis	117,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
 
@@ -364,7 +364,7 @@ cmd_fild07,136,134,4	script	Funcionária Kafra::kaf_cmd_fild07	721,{
 
 // Izlude
 //============================================================
-	script	kaf_izlude	-1,{
+-	script	kaf_izlude	-1,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
 	mes "[Funcionária Kafra]";
