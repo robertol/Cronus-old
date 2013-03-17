@@ -331,14 +331,14 @@
 33,5042,5	// Bao Bao
 33,5066,2	// Succubus Horn
 // Lotto Box
-35,7391,1	// Lotto Ball 31
-35,7392,1	// Lotto Ball 32
-35,7393,1	// Lotto Ball 33
-35,7394,1	// Lotto Ball 34
-35,7395,1	// Lotto Ball 35
-35,7396,1	// Lotto Ball 36
-35,7397,1	// Lotto Ball 37
-35,7398,1	// Lotto Ball 38
+//35,7391,1	// Lotto Ball 31
+//35,7392,1	// Lotto Ball 32
+//35,7393,1	// Lotto Ball 33
+//35,7394,1	// Lotto Ball 34
+//35,7395,1	// Lotto Ball 35
+//35,7396,1	// Lotto Ball 36
+//35,7397,1	// Lotto Ball 37
+//35,7398,1	// Lotto Ball 38
 35,7540,1	// Lotto Ball 39
 35,7541,1	// Lotto Ball 40
 // Food Package
