@@ -1574,205 +1574,205 @@
 2822,Archer_Manual,Manual do Arqueiro,5,0,,100,,0,,0,0x00000001,7,2,136,,1,0,0,{ bonus bMaxSP,100; skill "AC_OWL",1; skill "AC_CONCENTRATION",1; },{},{}
 2823,Merchant_Manual,Manual do Mercador,5,0,,100,,0,,0,0x00000001,7,2,136,,1,0,0,{ bonus bMaxSP,100; skill "MC_DISCOUNT",1; skill "MC_OVERCHARGE",10; skill "MC_IDENTIFY",1; skill "MC_MAMMONITE",1; },{},{}
 2824,Mage_Manual,Manual do Mago,5,0,,100,,0,,0,0x00000001,7,2,136,,1,0,0,{ bonus bMaxSP,100; skill "MG_SRECOVERY",1; skill "MG_COLDBOLT",1; skill "MG_FIREWALL",1; skill "MG_FIREBOLT",1; },{},{}
-4001,Poring_Card,Carta Poring,6,20,,10,,,,,,,,16,,,,,{ bonus bLuk,2; bonus bFlee2,1; },{},{}
-4002,Fabre_Card,Carta Fabre,6,20,,10,,,,,,,,2,,,,,{ bonus bVit,1; bonus bMaxHP,100; },{},{}
-4003,Pupa_Card,Carta Pupa,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHP,700; },{},{}
-4004,Drops_Card,Carta Drops,6,20,,10,,,,,,,,2,,,,,{ bonus bDex,1; bonus bHit,3; },{},{}
-4005,Poring__Card,Carta Poring Noel,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Dark,20; },{},{}
-4006,Lunatic_Card,Carta Lunático,6,20,,10,,,,,,,,2,,,,,{ bonus bLuk,1; bonus bCritical,1; bonus bFlee2,1; },{},{}
-4007,Pecopeco_Egg_Card,Carta Ovo de Pecopeco,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Formless,20; },{},{}
-4008,Picky_Card,Carta Picky,6,20,,10,,,,,,,,16,,,,,{ bonus bStr,1; bonus bBaseAtk,10; },{},{}
-4009,Chonchon_Card,Carta Chonchon,6,20,,10,,,,,,,,64,,,,,{ bonus bAgi,1; bonus bFlee,2; },{},{}
-4010,Wilow_Card,Carta Salgueiro,6,20,,10,,,,,,,,769,,,,,{ bonus bMaxSP,80; },{},{}
-4011,Picky__Card,Carta Picky com casca,6,20,,10,,,,,,,,16,,,,,{ bonus bVit,1; bonus bMaxHP,100; },{},{}
-4012,Thief_Bug_Egg_Card,Carta Ovo de Besouro-Ladrão,6,20,,10,,,,,,,,32,,,,,{ bonus bMaxHP,400; },{},{}
-4013,Andre_Egg_Card,Carta Ovo de Andre,6,20,,10,,,,,,,,32,,,,,{ bonus bMaxHPrate,5; },{},{}
-4014,Roda_Frog_Card,Carta Sapo de Rodda,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHP,400; bonus bMaxSP,50; },{},{}
-4015,Condor_Card,Carta Condor,6,20,,10,,,,,,,,4,,,,,{ bonus bFlee,10; },{},{}
-4016,Thief_Bug_Card,Carta Besouro-Ladrão,6,20,,10,,,,,,,,16,,,,,{ bonus bAgi,1; },{},{}
-4017,Savage_Babe_Card,Carta Bebe Selvagem,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Stun,500; },{},{}
-4018,Andre_Larva_Card,Carta Larva de Andre,6,20,,10,,,,,,,,2,,,,,{ bonus bInt,1; bonus bMaxSP,10; },{},{}
-4019,Hornet_Card,Carta Zangão,6,20,,10,,,,,,,,2,,,,,{ bonus bStr,1; bonus bBaseAtk,3; },{},{}
-4020,Farmiliar_Card,Carta Familiar,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Blind,500; bonus bBaseAtk,5; },{},{}
-4021,Rocker_Card,Carta Rocker,6,20,,10,,,,,,,,16,,,,,{ bonus bDex,1; bonus bBaseAtk,5; },{},{}
-4022,Spore_Card,Carta Esporo,6,20,,10,,,,,,,,136,,,,,{ bonus bVit,2; },{},{}
-4023,Desert_Wolf_Babe_Card,Carta Filhote de Lobo do Deserto,6,20,,10,,,,,,,,16,,,,,{ bonus bInt,1; },{},{}
-4024,Plankton_Card,Carta Plankton,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Sleep,500; bonus bBaseAtk,5; },{},{}
-4025,Skeleton_Card,Carta Esqueleto,6,20,,10,,,,,,,,2,,,,,{ bonus bBaseAtk,10; bonus2 bAddEff,Eff_Stun,200; },{},{}
-4026,Thief_Bug_Female_Card,Carta Besouro-Ladrão Fêmea,6,20,,10,,,,,,,,2,,,,,{ bonus bAgi,1; bonus bFlee,1; },{},{}
-4027,Kukre_Card,Carta Kukre,6,20,,10,,,,,,,,136,,,,,{ bonus bAgi,2; },{},{}
-4028,Tarou_Card,Carta Tarou,6,20,,10,,,,,,,,136,,,,,{ bonus bStr,2; },{},{}
-4029,Wolf_Card,Carta Lobo,6,20,,10,,,,,,,,2,,,,,{ bonus bBaseAtk,15; bonus bCritical,1; },{},{}
-4030,Mandragora_Card,Carta Mandrágora,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Wind,20; },{},{}
-4031,Pecopeco_Card,Carta PecoPeco,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,10; },{},{}
-4032,Ambernite_Card,Carta Ambernite,6,20,,10,,,,,,,,32,,,,,{ bonus bDef,2; },{},{}
-4033,Poporing_Card,Carta Poporing,6,20,,10,,,,,,,,136,,,,,{ skill "TF_DETOXIFY",1; },{},{}
-4034,Worm_Tail_Card,Carta Rabo-de-Verme,6,20,,10,,,,,,,,136,,,,,{ bonus bDex,2; },{},{}
-4035,Hydra_Card,Carta Hidra,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_DemiHuman,20; },{},{}
-4036,Muka_Card,Carta Muka,6,20,,10,,,,,,,,136,,,,,{ bonus bHPrecovRate,10; },{},{}
-4037,Snake_Card,Carta Jibóia,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Poison,500; bonus bBaseAtk,5; },{},{}
-4038,Zombie_Card,Carta Zumbi,6,20,,10,,,,,,,,64,,,,,{ bonus bHPrecovRate,20; },{},{}
-4039,Stainer_Card,Carta Percevejo,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Silence,2000; bonus bDef,1; },{},{}
-4040,Creamy_Card,Carta Creamy,6,20,,10,,,,,,,,136,,,,,{ skill "AL_TELEPORT",1; },{},{}
-4041,Coco_Card,Carta Koko,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Sleep,2000; bonus bDef,1; },{},{}
-4042,Steel_Chonchon_Card,Carta Chonchon de Aço,6,20,,10,,,,,,,,16,,,,,{ bonus2 bSubEle,Ele_Wind,10; bonus bDef,2; },{},{}
-4043,Andre_Card,Carta Andre,6,20,,10,,,,,,,,2,,,,,{ bonus bBaseAtk,20; },{},{}
-4044,Smokie_Card,Carta Fumacento,6,20,,10,,,,,,,,136,,,,,{ skill "TF_HIDING",1; },{},{ sc_end SC_HIDING; }
-4045,Horn_Card,Carta Besouro-Chifre,6,20,,10,,,,,,,,32,,,,,{ bonus bLongAtkDef,35; },{},{}
-4046,Martin_Card,Carta Martin,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Blind,2000; bonus bDef,1; },{},{}
-4047,Ghostring_Card,Carta Ghostring,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Ghost; bonus bHPrecovRate,-25; },{},{}
-4048,Poison_Spore_Card,Carta Esporo Venenoso,6,20,,10,,,,,,,,136,,,,,{ skill "TF_POISON",3; },{},{}
-4049,Vadon_Card,Carta Vadon,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Fire,20; },{},{}
-4050,Thief_Bug_Male_Card,Carta Besouro-Ladrão Macho,6,20,,10,,,,,,,,64,,,,,{ bonus bAgi,2; },{},{}
-4051,Yoyo_Card,Carta Yoyo,6,20,,10,,,,,,,,136,,,,,{ bonus bFlee2,5; bonus bAgi,1; },{},{}
-4052,Elder_Wilow_Card,Carta Salgueiro Ancião,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,2; },{},{}
-4053,Vitata_Card,Carta Vitata,6,20,,10,,,,,,,,136,,,,,{ skill "AL_HEAL",1; bonus bUseSPrate,25; },{},{}
-4054,Angeling_Card,Carta Angeling,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Holy; },{},{}
-4055,Marina_Card,Carta Marina,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Freeze,500; bonus bBaseAtk,5; },{},{}
-4056,Dustiness_Card,Carta Poeira,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Wind,30; bonus bFlee,5; },{},{}
-4057,Metaller_Card,Carta Metaller,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Silence,500; bonus bBaseAtk,5; },{},{}
-4058,Thara_Frog_Card,Carta Sapo de Thara,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_DemiHuman,30; },{},{}
-4059,Soldier_Andre_Card,Carta Soldado Andre,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Plant,30; },{},{}
-4060,Goblin_Card,Carta Goblin,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Brute,20; },{},{}
-4061,Cornutus_Card,Carta Cornutus,6,20,,10,,,,,,,,16,,,,,{ bonus bUnbreakableArmor,0; bonus bDef,1; },{},{}
-4062,Anacondaq_Card,Carta Anaconda,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Poison,20; },{},{}
-4063,Caramel_Card,Carta Caramelo,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Insect,20; },{},{}
-4064,Zerom_Card,Carta Zerom,6,20,,10,,,,,,,,136,,,,,{ bonus bDex,3; },{},{}
-4065,Kaho_Card,Carta Kaho,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Earth,20; },{},{}
-4066,Orc_Warrior_Card,Carta Guerreiro Orc,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Brute,30; },{},{}
-4067,Megalodon_Card,Carta Megalodon,6,20,,10,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Freeze,2000; bonus bDef,1; },{},{}
-4068,Scorpion_Card,Carta Escorpião,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Plant,20; },{},{}
-4069,Drainliar_Card,Carta Drainliar,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Water,20; },{},{}
-4070,Eggyra_Card,Carta Eggyra,6,20,,10,,,,,,,,64,,,,,{ bonus bSPrecovRate,15; },{},{}
-4071,Orc_Zombie_Card,Carta Orc Zumbi,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Undead,30; bonus bFlee,5; },{},{}
-4072,Golem_Card,Carta Golem,6,20,,10,,,,,,,,2,,,,,{ bonus bUnbreakableWeapon,0; bonus bBaseAtk,5; },{},{}
-4073,Pirate_Skel_Card,Carta Esqueleto Pirata,6,20,,10,,,,,,,,136,,,,,{ skill "MC_DISCOUNT",5; },{},{}
-4074,BigFoot_Card,Carta Pé-Grande,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Insect,30; },{},{}
-4075,Argos_Card,Carta Argos,6,20,,10,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Stone,2000; bonus bDef,1; },{},{}
-4076,Magnolia_Card,Carta Magnólia,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Curse,500; bonus bBaseAtk,5; },{},{}
-4077,Phen_Card,Carta Fen,6,20,,10,,,,,,,,136,,,,,{ bonus bNoCastCancel,0; bonus bCastrate,25; },{},{}
-4078,Savage_Card,Carta Selvagem,6,20,,10,,,,,,,,16,,,,,{ bonus bVit,3; },{},{}
-4079,Mantis_Card,Carta Louva-a-Deus,6,20,,10,,,,,,,,136,,,,,{ bonus bStr,3; },{},{}
-4080,Flora_Card,Carta Flora,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Fish,20; },{},{}
-4081,Hode_Card,Carta Hode,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Earth,30; bonus bFlee,5; },{},{}
-4082,Desert_Wolf_Card,Carta Lobo do Deserto,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Small,15; bonus bBaseAtk,5; },{},{}
-4083,Rafflesia_Card,Carta Rafflesia,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Fish,30; },{},{}
-4084,Marine_Sphere_Card,Carta Esfera Marinha,6,20,,10,,,,,,,,136,,,,,{ skill "SM_MAGNUM",3; },{},{}
-4085,Orc_Skeleton_Card,Carta Orc Esqueleto,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Holy,20; },{},{}
-4086,Soldier_Skeleton_Card,Carta Esqueleto Soldado,6,20,,10,,,,,,,,2,,,,,{ bonus bCritical,9; },{},{}
-4087,Giearth_Card,Carta Giearth,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Confusion,10000; bonus2 bSubEle,Ele_Earth,15; },{},{}
-4088,Frilldora_Card,Carta Frilldora,6,20,,10,,,,,,,,4,,,,,{ skill "AS_CLOAKING",1; },{},{ sc_end SC_CLOAKING; }
-4089,Sword_Fish_Card,Carta Peixe-Espada,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Water; bonus bDef,1; },{},{}
-4090,Munak_Card,Carta Munak,6,20,,10,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Stone,1500; bonus2 bSubEle,Ele_Earth,5; bonus bDef,1; },{},{}
-4091,Kobold_Card,Carta Cobold,6,20,,10,,,,,,,,136,,,,,{ bonus bStr,1; bonus bCritical,4; },{},{}
-4092,Skel_Worker_Card,Carta Esqueleto Operário,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Medium,15; bonus bBaseAtk,5; },{},{}
-4093,Obeaune_Card,Carta Obeaune,6,20,,10,,,,,,,,136,,,,,{ skill "AL_CURE",1; },{},{}
-4094,Archer_Skeleton_Card,Carta Esqueleto Arqueiro,6,20,,10,,,,,,,,2,,,,,{ bonus bLongAtkRate,10; },{},{}
-4095,Marse_Card,Carta Marte,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Water,30; bonus bFlee,5; },{},{}
-4096,Zenorc_Card,Carta Zenorc,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Poison,400; bonus bBaseAtk,10; },{},{}
-4097,Matyr_Card,Carta Matyr,6,20,,10,,,,,,,,64,,,,,{ bonus bMaxHPrate,10; bonus bAgi,1; },{},{}
-4098,Dokebi_Card,Carta Dokebi,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Wind; bonus bDef,1; },{},{}
-4099,Pasana_Card,Carta Pasana,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Fire; bonus bDef,1; },{},{}
-4100,Sohee_Card,Carta Sohee,6,20,,10,,,,,,,,64,,,,,{ bonus bMaxSPrate,15; bonus bSPrecovRate,3; },{},{}
-4101,Sand_Man_Card,Carta Arenoso,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Earth; bonus bDef,1; },{},{}
-4102,Whisper_Card,Carta Sussurro,6,20,,10,,,,,,,,4,,,,,{ bonus bFlee,20; bonus2 bSubEle,Ele_Ghost,-50; },{},{}
-4103,Horong_Card,Carta Horong,6,20,,10,,,,,,,,136,,,,,{ skill "MG_SIGHT",1; },{},{ sc_end SC_SIGHT; }
-4104,Requiem_Card,Carta Réquiem,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Confusion,500; },{},{}
-4105,Marc_Card,Carta Cavalo-Marinho,6,20,,10,,,,,,,,16,,,,,{ bonus2 bSubEle,Ele_Water,5; bonus2 bResEff,Eff_Freeze,10000; },{},{}
-4106,Mummy_Card,Carta Múmia,6,20,,10,,,,,,,,2,,,,,{ bonus bHit,20; },{},{}
-4107,Verit_Card,Carta Verit,6,20,,10,,,,,,,,64,,,,,{ bonus bMaxHPrate,8; bonus bMaxSPrate,8; },{},{}
-4108,Myst_Card,Carta Névoa,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Poison,30; bonus bFlee,5; },{},{}
-4109,Jakk_Card,Carta Jakk,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Fire,30; bonus bFlee,5; },{},{}
-4110,Ghoul_Card,Carta Carniçal,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Poison,2000; bonus bDef,1; },{},{}
-4111,Strouf_Card,Carta Strouf,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Demon,20; },{},{}
-4112,Marduk_Card,Carta Marduk,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Silence,10000; },{},{}
-4113,Marionette_Card,Carta Marionete,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Ghost,30; bonus bFlee,5; },{},{}
-4114,Argiope_Card,Carta Argiope,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Poison; bonus bDef,1; },{},{}
-4115,Hunter_Fly_Card,Carta Mosca Caçadora,6,20,,10,,,,,,,,2,,,,,{ bonus2 bHpDrainRate,30,15; },{},{}
-4116,Isis_Card,Carta Ísis,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Dark,30; bonus bFlee,5; },{},{}
-4117,Side_Winder_Card,Carta Sorrateiro,6,20,,10,,,,,,,,2,,,,,{ skill "TF_DOUBLE",1; bonus bDoubleRate,5; },{},{}
-4118,Petit_Card,Carta Petite,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Dragon,20; },{},{}
-4119,Bathory_Card,Carta Bathory,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Dark; },{},{}
-4120,Petit__Card,Carta Petite Voador,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Dragon,30; },{},{}
-4121,Phreeoni_Card,Carta Freeoni,6,20,,10,,,,,,,,2,,,,,{ bonus bHit,100; },{},{}
-4122,Deviruchi_Card,Carta Deviruchi,6,20,,10,,,,,,,,769,,,,,{ bonus bStr,1; bonus2 bResEff,Eff_Blind,10000; },{},{}
-4123,Eddga_Card,Carta Eddga,6,20,,10,,,,,,,,64,,,,,{ bonus bMaxHPrate,-25; },{ sc_start4 SC_ENDURE,60000,10,0,0,1; },{ sc_end SC_ENDURE; }
-4124,Medusa_Card,Carta Medusa,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Demon,15; bonus2 bResEff,Eff_Stone,10000; },{},{}
-4125,Deviace_Card,Carta Deviace,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_DemiHuman,7; bonus2 bAddRace,RC_Brute,7; bonus2 bAddRace,RC_Plant,7; bonus2 bAddRace,RC_Insect,7; },{},{}
-4126,Minorous_Card,Carta Minorous,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Large,15; bonus bBaseAtk,5; },{},{}
-4127,Nightmare_Card,Carta Pesadelo,6,20,,10,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Sleep,10000; bonus bAgi,1; },{},{}
-4128,Golden_Bug_Card,Carta Besouro-Ladrão Dourado,6,20,,10,,,,,,,,32,,,,,{ bonus bNoMagicDamage,100; bonus bUseSPrate,100; },{},{}
-4129,Baphomet__Card,Carta Bafomé Jr.,6,20,,10,,,,,,,,4,,,,,{ bonus bAgi,3; bonus bCritical,1; },{},{}
-4130,Scorpion_King_Card,Carta Rei Escorpião,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Undead,20; },{},{}
-4131,Moonlight_Flower_Card,Carta Flor do Luar,6,20,,10,,,,,,,,64,,,,,{ bonus bSpeedRate,25; },{},{}
-4132,Mistress_Card,Carta Abelha-Rainha,6,20,,10,,,,,,,,769,,,,,{ bonus bNoGemStone,0; bonus bUseSPrate,25; },{},{}
-4133,Daydric_Card,Carta Raydric,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Neutral,20; },{},{}
-4134,Dracula_Card,Carta Drácula,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSpDrainRate,100,5; },{},{}
-4135,Orc_Load_Card,Carta Senhor dos Orcs,6,20,,10,,,,,,,,16,,,,,{ bonus bShortWeaponDamageReturn,30; },{},{}
-4136,Khalitzburg_Card,Carta Khalitzburg,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Demon,30; },{},{}
-4137,Drake_Card,Carta Drake,6,20,,10,,,,,,,,2,,,,,{ bonus bNoSizeFix,0; },{},{}
-4138,Anubis_Card,Carta Anubis,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Angel,30; },{},{}
-4139,Joker_Card,Carta Coringa,6,20,,10,,,,,,,,136,,,,,{ skill "TF_STEAL",1; },{},{}
-4140,Knight_Of_Abyss_Card,Carta Cavaleiro do Abismo,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Boss,25; },{},{}
-4141,Evil_Druid_Card,Carta Druida Maligno,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Undead; bonus bInt,1; bonus bDef,1; },{},{}
-4142,Doppelganger_Card,Carta Doppelganger,6,20,,10,,,,,,,,2,,,,,{ bonus bAspdRate,10; },{},{}
-4143,Orc_Hero_Card,Carta Orc Herói,6,20,,10,,,,,,,,769,,,,,{ bonus bVit,3; bonus2 bResEff,Eff_Stun,10000; },{},{}
-4144,Osiris_Card,Carta Osíris,6,20,,10,,,,,,,,136,,,,,{ bonus bRestartFullRecover,0; },{},{}
-4145,Berzebub_Card,Carta Belzebu,6,20,,10,,,,,,,,136,,,,,{ bonus bCastrate,-30; },{},{}
-4146,Maya_Card,Carta Maya,6,20,,10,,,,,,,,32,,,,,{ bonus bMagicDamageReturn,50; },{},{}
-4147,Baphomet_Card,Carta Bafomé,6,20,,10,,,,,,,,2,,,,,{ bonus bHit,-10; bonus bSplashRange,1; },{},{}
-4148,Pharaoh_Card,Carta Faraó,6,20,,10,,,,,,,,769,,,,,{ bonus bUseSPrate,-30; },{},{}
-4149,Gargoyle_Card,Carta Gárgula,6,20,,10,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12028,RC_Insect,100; },{},{}
-4150,Goat_Card,Carta Bode,6,20,,10,,,,,,,,16,,,,,{ if(getrefine()<6) { bonus bDef,2; bonus bMdef,5; } },{},{}
-4151,Gajomart_Card,Carta Gajomart,6,20,,10,,,,,,,,64,,,,,{ bonus2 bSubRace,RC_Plant,-20; bonus2 bExpAddRace,RC_Plant,10; },{},{}
-4152,Galapago_Card,Carta Pingu,6,20,,10,,,,,,,,136,,,,,{ bonus2 bAddItemHealRate,IG_Juice,50; bonus3 bAddMonsterDropItem,531,RC_Insect,300; bonus3 bAddMonsterDropItem,532,RC_Insect,300; bonus3 bAddMonsterDropItem,534,RC_Insect,300; },{},{}
-4153,Crab_Card,Carta Caranguejo,6,20,,10,,,,,,,,2,,,,,{ bonus bBaseAtk,5; bonus2 bAddDamageClass,1266,30; },{},{}
-4154,Rice_Cake_Boy_Card,Carta Pirralho,6,20,,10,,,,,,,,136,,,,,{ bonus2 bAddItemHealRate,IG_Candy,50; bonus3 bAddMonsterDropItem,529,RC_DemiHuman,300; bonus3 bAddMonsterDropItem,530,RC_DemiHuman,100; },{},{}
-4155,Goblin_Leader_Card,Carta Líder Goblin,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace2,1,30; },{},{}
-4156,Steam_Goblin_Card,Carta Goblin a Vapor,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Formless,7; },{},{}
-4157,Goblin_Archer_Card,Carta Goblin Arqueiro,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Undead,7; },{},{}
-4158,Flying_Deleter_Card,Carta Exterminador Voador,6,20,,10,,,,,,,,16,,,,,{ bonus bHPrecovRate,-100; bonus bHPGainValue,100; },{},{}
-4159,Nine_Tail_Card,Carta Nove Caudas,6,20,,10,,,,,,,,4,,,,,{ bonus bAgi,2; if(getrefine()>8) bonus bFlee,20; },{},{}
-4160,Antique_Firelock_Card,Carta Soldado Atirador,6,20,,10,,,,,,,,64,,,,,{ bonus bStr,2; if(getrefine()>8) { bonus bMaxHPrate,10; bonus bMaxSPrate,10; } },{},{}
-4161,Grand_Peco_Card,Carta Grand Peco,6,20,,10,,,,,,,,769,,,,,{ bonus3 bAutoSpellWhenHit,"PR_GLORIA",1,50; },{},{}
-4162,Grizzly_Card,Carta Grizzly,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Blind,300; },{},{}
-4163,Gryphon_Card,Carta Grifo,6,20,,10,,,,,,,,2,,,,,{ bonus bFlee,2; bonus bCritical,7; if(BaseClass==Job_Swordman) bonus3 bAutoSpell,"KN_BOWLINGBASH",5,10; },{},{}
-4164,Gullinbursti_Card,Carta Gullinbursti,6,20,,10,,,,,,,,64,,,,,{ bonus2 bSubRace,RC_Fish,-20; bonus2 bExpAddRace,RC_Fish,10; },{},{}
-4165,Gig_Card,Carta Ferrão,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Insect,5; },{},{ heal 0,-5; }
-4166,Nightmare_Terror_Card,Carta Pesadelo Sombrio,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Curse,300; },{},{}
-4167,Neraid_Card,Carta Nereida,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Brute,5; },{},{ heal 0,-5; }
-4168,Dark_Lord_Card,Carta Senhor das Trevas,6,20,,10,,,,,,,,64,,,,,{ bonus3 bAutoSpellWhenHit,"WZ_METEOR",5,100; },{},{}
-4169,Dark_Illusion_Card,Carta Ilusão das Trevas,6,20,,10,,,,,,,,769,,,,,{ bonus bMaxHPrate,-10; bonus bMaxSPrate,-10; bonus bCastrate,-10; },{},{}
-4170,Dark_Frame_Card,Carta Moldura Maldita,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Stone,600; },{},{}
-4171,Dark_Priest_Card,Carta Sacerdote Maldito,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSPVanishRate,50,10; if(BaseJob==Job_Sage) bonus bSPDrainValue,1; },{},{}
-4172,The_Paper_Card,Carta Papel,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,20; bonus2 bSPDrainValue,-1,0; },{},{}
-4173,Demon_Pungus_Card,Carta Pungus,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Sleep,600; },{},{}
-4174,Deviling_Card,Carta Deviling,6,20,,10,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Neutral,50; bonus2 bSubEle,Ele_Water,-50; bonus2 bSubEle,Ele_Earth,-50; bonus2 bSubEle,Ele_Fire,-50; bonus2 bSubEle,Ele_Wind,-50; bonus2 bSubEle,Ele_Poison,-50; bonus2 bSubEle,Ele_Holy,-50; bonus2 bSubEle,Ele_Dark,-50; bonus2 bSubEle,Ele_Ghost,-50; bonus2 bSubEle,Ele_Undead,-50; },{},{}
-4175,Poison_Toad_Card,Carta Sapo Venenoso,6,20,,10,,,,,,,,136,,,,,{ bonus3 bAutoSpell,"TF_POISON",1,20; bonus2 bAddSkillBlow,52,5; },{},{}
-4176,Dullahan_Card,Carta Dullahan,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Dragon,7; },{},{}
-4177,Dryad_Card,Carta Dríade,6,20,,10,,,,,,,,769,,,,,{ bonus3 bAddMonsterDropItem,993,RC_Plant,100; bonus2 bSubEle,Ele_Earth,10; },{},{}
-4178,Dragon_Tail_Card,Carta Lavadeira,6,20,,10,,,,,,,,4,,,,,{ bonus bAgi,1; bonus bFlee,10; bonus2 bSkillAtk,"AC_DOUBLE",5; bonus2 bSkillAtk,"AC_SHOWER",5; },{},{}
-4179,Dragon_Fly_Card,Carta Libélula,6,20,,10,,,,,,,,4,,,,,{ bonus bAgi,1; },{},{}
-4180,Driller_Card,Carta Furador,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Dragon,5; },{},{ heal 0,-5; }
-4181,Disguise_Card,Carta Mascarado,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Silence,300+600*(readparam(bVit)>=77); },{},{}
-4182,Diabolic_Card,Carta Diabolik,6,20,,10,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Demon,5; },{},{ heal 0,-5; }
-4183,Vagabond_Wolf_Card,Carta Lobo Errante,6,20,,10,,,,,,,,4,,,,,{ bonus bStr,1; },{},{}
-4184,Lava_Golem_Card,Carta Golem de Lava,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace2,4,30; },{},{}
-4185,Rideword_Card,Carta Rideword,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,1; if(BaseClass==Job_Acolyte) { bonus bInt,1; bonus bMdef,1; } },{},{}
-4186,Raggler_Card,Carta Raggler,6,20,,10,,,,,,,,64,,,,,{ bonus bStr,1; bonus bVit,1; },{},{}
-4187,Raydric_Archer_Card,Carta Raydric Arqueiro,6,20,,10,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12030,RC_Demon,100; },{},{}
-4188,Leib_Olmai_Card,Carta Leib Olmai,6,20,,10,,,,,,,,769,,,,,{ bonus2 bSubEle,Ele_Fire,10; bonus3 bAddMonsterDropItem,990,RC_Brute,100; },{},{}
-4189,Wraith_Dead_Card,Carta Aparição,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Curse,600; },{},{}
-4190,Wraith_Card,Carta Alma Penada,6,20,,10,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12027,RC_Undead,100; },{},{}
-4191,Loli_Ruri_Card,Carta Loli Ruri,6,20,,10,,,,,,,,16,,,,,{ bonus3 bAutoSpellWhenHit,"AL_HEAL",3,50; },{},{}
-4192,Rotar_Zairo_Card,Carta Giro-Goblin,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Fish,7; },{},{}
-4193,Lude_Card,Carta Lude,6,20,,10,,,,,,,,136,,,,,{ if(BaseJob==Job_Novice||BaseJob==Job_SuperNovice) bonus3 bAutoSpellWhenHit,"SM_ENDURE",1,200; },{},{}
-4194,Rybio_Card,Carta Rybio,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Stun,300+600*(readparam(bDex)>=77); },{},{}
-4195,Leaf_Cat_Card,Carta Gato de Folha,6,20,,10,,,,,,,,769,,,,,{ bonus2 bSubEle,Ele_Water,10; bonus3 bAddMonsterDropItem,991,RC_Fish,100; },{},{}
-4196,Marin_Card,Carta Marin,6,20,,10,,,,,,,,136,,,,,{ bonus2 bAddMonsterDropItem,909,2000; bonus2 bAddMonsterDropItem,7126,10; },{},{}
-4197,Mastering_Card,Carta Mastering,6,20,,10,,,,,,,,4,,,,,{ bonus bLuk,1; },{},{}
-4198,Maya_Puple_Card,Carta Maya Macho,6,20,,10,,,,,,,,769,,,,,{ bonus bIntravision,0; },{},{}
-4199,Merman_Card,Carta Tritão,6,20,,10,,,,,,,,64,,,,,{ bonus bHPrecovRate,10; bonus bSPrecovRate,10; },{},{}
+4001,Poring_Card,Carta Poring,6,20,,1,,,,,,,,16,,,,,{ bonus bLuk,2; bonus bFlee2,1; },{},{}
+4002,Fabre_Card,Carta Fabre,6,20,,1,,,,,,,,2,,,,,{ bonus bVit,1; bonus bMaxHP,100; },{},{}
+4003,Pupa_Card,Carta Pupa,6,20,,1,,,,,,,,16,,,,,{ bonus bMaxHP,700; },{},{}
+4004,Drops_Card,Carta Drops,6,20,,1,,,,,,,,2,,,,,{ bonus bDex,1; bonus bHit,3; },{},{}
+4005,Poring__Card,Carta Poring Noel,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Dark,20; },{},{}
+4006,Lunatic_Card,Carta Lunático,6,20,,1,,,,,,,,2,,,,,{ bonus bLuk,1; bonus bCritical,1; bonus bFlee2,1; },{},{}
+4007,Pecopeco_Egg_Card,Carta Ovo de Pecopeco,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Formless,20; },{},{}
+4008,Picky_Card,Carta Picky,6,20,,1,,,,,,,,16,,,,,{ bonus bStr,1; bonus bBaseAtk,10; },{},{}
+4009,Chonchon_Card,Carta Chonchon,6,20,,1,,,,,,,,64,,,,,{ bonus bAgi,1; bonus bFlee,2; },{},{}
+4010,Wilow_Card,Carta Salgueiro,6,20,,1,,,,,,,,769,,,,,{ bonus bMaxSP,80; },{},{}
+4011,Picky__Card,Carta Picky com casca,6,20,,1,,,,,,,,16,,,,,{ bonus bVit,1; bonus bMaxHP,100; },{},{}
+4012,Thief_Bug_Egg_Card,Carta Ovo de Besouro-Ladrão,6,20,,1,,,,,,,,32,,,,,{ bonus bMaxHP,400; },{},{}
+4013,Andre_Egg_Card,Carta Ovo de Andre,6,20,,1,,,,,,,,32,,,,,{ bonus bMaxHPrate,5; },{},{}
+4014,Roda_Frog_Card,Carta Sapo de Rodda,6,20,,1,,,,,,,,16,,,,,{ bonus bMaxHP,400; bonus bMaxSP,50; },{},{}
+4015,Condor_Card,Carta Condor,6,20,,1,,,,,,,,4,,,,,{ bonus bFlee,10; },{},{}
+4016,Thief_Bug_Card,Carta Besouro-Ladrão,6,20,,1,,,,,,,,16,,,,,{ bonus bAgi,1; },{},{}
+4017,Savage_Babe_Card,Carta Bebe Selvagem,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Stun,500; },{},{}
+4018,Andre_Larva_Card,Carta Larva de Andre,6,20,,1,,,,,,,,2,,,,,{ bonus bInt,1; bonus bMaxSP,10; },{},{}
+4019,Hornet_Card,Carta Zangão,6,20,,1,,,,,,,,2,,,,,{ bonus bStr,1; bonus bBaseAtk,3; },{},{}
+4020,Farmiliar_Card,Carta Familiar,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Blind,500; bonus bBaseAtk,5; },{},{}
+4021,Rocker_Card,Carta Rocker,6,20,,1,,,,,,,,16,,,,,{ bonus bDex,1; bonus bBaseAtk,5; },{},{}
+4022,Spore_Card,Carta Esporo,6,20,,1,,,,,,,,136,,,,,{ bonus bVit,2; },{},{}
+4023,Desert_Wolf_Babe_Card,Carta Filhote de Lobo do Deserto,6,20,,1,,,,,,,,16,,,,,{ bonus bInt,1; },{},{}
+4024,Plankton_Card,Carta Plankton,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Sleep,500; bonus bBaseAtk,5; },{},{}
+4025,Skeleton_Card,Carta Esqueleto,6,20,,1,,,,,,,,2,,,,,{ bonus bBaseAtk,10; bonus2 bAddEff,Eff_Stun,200; },{},{}
+4026,Thief_Bug_Female_Card,Carta Besouro-Ladrão Fêmea,6,20,,1,,,,,,,,2,,,,,{ bonus bAgi,1; bonus bFlee,1; },{},{}
+4027,Kukre_Card,Carta Kukre,6,20,,1,,,,,,,,136,,,,,{ bonus bAgi,2; },{},{}
+4028,Tarou_Card,Carta Tarou,6,20,,1,,,,,,,,136,,,,,{ bonus bStr,2; },{},{}
+4029,Wolf_Card,Carta Lobo,6,20,,1,,,,,,,,2,,,,,{ bonus bBaseAtk,15; bonus bCritical,1; },{},{}
+4030,Mandragora_Card,Carta Mandrágora,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Wind,20; },{},{}
+4031,Pecopeco_Card,Carta PecoPeco,6,20,,1,,,,,,,,16,,,,,{ bonus bMaxHPrate,10; },{},{}
+4032,Ambernite_Card,Carta Ambernite,6,20,,1,,,,,,,,32,,,,,{ bonus bDef,2; },{},{}
+4033,Poporing_Card,Carta Poporing,6,20,,1,,,,,,,,136,,,,,{ skill "TF_DETOXIFY",1; },{},{}
+4034,Worm_Tail_Card,Carta Rabo-de-Verme,6,20,,1,,,,,,,,136,,,,,{ bonus bDex,2; },{},{}
+4035,Hydra_Card,Carta Hidra,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_DemiHuman,20; },{},{}
+4036,Muka_Card,Carta Muka,6,20,,1,,,,,,,,136,,,,,{ bonus bHPrecovRate,10; },{},{}
+4037,Snake_Card,Carta Jibóia,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Poison,500; bonus bBaseAtk,5; },{},{}
+4038,Zombie_Card,Carta Zumbi,6,20,,1,,,,,,,,64,,,,,{ bonus bHPrecovRate,20; },{},{}
+4039,Stainer_Card,Carta Percevejo,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Silence,2000; bonus bDef,1; },{},{}
+4040,Creamy_Card,Carta Creamy,6,20,,1,,,,,,,,136,,,,,{ skill "AL_TELEPORT",1; },{},{}
+4041,Coco_Card,Carta Koko,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Sleep,2000; bonus bDef,1; },{},{}
+4042,Steel_Chonchon_Card,Carta Chonchon de Aço,6,20,,1,,,,,,,,16,,,,,{ bonus2 bSubEle,Ele_Wind,10; bonus bDef,2; },{},{}
+4043,Andre_Card,Carta Andre,6,20,,1,,,,,,,,2,,,,,{ bonus bBaseAtk,20; },{},{}
+4044,Smokie_Card,Carta Fumacento,6,20,,1,,,,,,,,136,,,,,{ skill "TF_HIDING",1; },{},{ sc_end SC_HIDING; }
+4045,Horn_Card,Carta Besouro-Chifre,6,20,,1,,,,,,,,32,,,,,{ bonus bLongAtkDef,35; },{},{}
+4046,Martin_Card,Carta Martin,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Blind,2000; bonus bDef,1; },{},{}
+4047,Ghostring_Card,Carta Ghostring,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Ghost; bonus bHPrecovRate,-25; },{},{}
+4048,Poison_Spore_Card,Carta Esporo Venenoso,6,20,,1,,,,,,,,136,,,,,{ skill "TF_POISON",3; },{},{}
+4049,Vadon_Card,Carta Vadon,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Fire,20; },{},{}
+4050,Thief_Bug_Male_Card,Carta Besouro-Ladrão Macho,6,20,,1,,,,,,,,64,,,,,{ bonus bAgi,2; },{},{}
+4051,Yoyo_Card,Carta Yoyo,6,20,,1,,,,,,,,136,,,,,{ bonus bFlee2,5; bonus bAgi,1; },{},{}
+4052,Elder_Wilow_Card,Carta Salgueiro Ancião,6,20,,1,,,,,,,,769,,,,,{ bonus bInt,2; },{},{}
+4053,Vitata_Card,Carta Vitata,6,20,,1,,,,,,,,136,,,,,{ skill "AL_HEAL",1; bonus bUseSPrate,25; },{},{}
+4054,Angeling_Card,Carta Angeling,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Holy; },{},{}
+4055,Marina_Card,Carta Marina,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Freeze,500; bonus bBaseAtk,5; },{},{}
+4056,Dustiness_Card,Carta Poeira,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Wind,30; bonus bFlee,5; },{},{}
+4057,Metaller_Card,Carta Metaller,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Silence,500; bonus bBaseAtk,5; },{},{}
+4058,Thara_Frog_Card,Carta Sapo de Thara,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_DemiHuman,30; },{},{}
+4059,Soldier_Andre_Card,Carta Soldado Andre,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Plant,30; },{},{}
+4060,Goblin_Card,Carta Goblin,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Brute,20; },{},{}
+4061,Cornutus_Card,Carta Cornutus,6,20,,1,,,,,,,,16,,,,,{ bonus bUnbreakableArmor,0; bonus bDef,1; },{},{}
+4062,Anacondaq_Card,Carta Anaconda,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Poison,20; },{},{}
+4063,Caramel_Card,Carta Caramelo,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Insect,20; },{},{}
+4064,Zerom_Card,Carta Zerom,6,20,,1,,,,,,,,136,,,,,{ bonus bDex,3; },{},{}
+4065,Kaho_Card,Carta Kaho,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Earth,20; },{},{}
+4066,Orc_Warrior_Card,Carta Guerreiro Orc,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Brute,30; },{},{}
+4067,Megalodon_Card,Carta Megalodon,6,20,,1,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Freeze,2000; bonus bDef,1; },{},{}
+4068,Scorpion_Card,Carta Escorpião,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Plant,20; },{},{}
+4069,Drainliar_Card,Carta Drainliar,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Water,20; },{},{}
+4070,Eggyra_Card,Carta Eggyra,6,20,,1,,,,,,,,64,,,,,{ bonus bSPrecovRate,15; },{},{}
+4071,Orc_Zombie_Card,Carta Orc Zumbi,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Undead,30; bonus bFlee,5; },{},{}
+4072,Golem_Card,Carta Golem,6,20,,1,,,,,,,,2,,,,,{ bonus bUnbreakableWeapon,0; bonus bBaseAtk,5; },{},{}
+4073,Pirate_Skel_Card,Carta Esqueleto Pirata,6,20,,1,,,,,,,,136,,,,,{ skill "MC_DISCOUNT",5; },{},{}
+4074,BigFoot_Card,Carta Pé-Grande,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Insect,30; },{},{}
+4075,Argos_Card,Carta Argos,6,20,,1,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Stone,2000; bonus bDef,1; },{},{}
+4076,Magnolia_Card,Carta Magnólia,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Curse,500; bonus bBaseAtk,5; },{},{}
+4077,Phen_Card,Carta Fen,6,20,,1,,,,,,,,136,,,,,{ bonus bNoCastCancel,0; bonus bCastrate,25; },{},{}
+4078,Savage_Card,Carta Selvagem,6,20,,1,,,,,,,,16,,,,,{ bonus bVit,3; },{},{}
+4079,Mantis_Card,Carta Louva-a-Deus,6,20,,1,,,,,,,,136,,,,,{ bonus bStr,3; },{},{}
+4080,Flora_Card,Carta Flora,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Fish,20; },{},{}
+4081,Hode_Card,Carta Hode,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Earth,30; bonus bFlee,5; },{},{}
+4082,Desert_Wolf_Card,Carta Lobo do Deserto,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Small,15; bonus bBaseAtk,5; },{},{}
+4083,Rafflesia_Card,Carta Rafflesia,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Fish,30; },{},{}
+4084,Marine_Sphere_Card,Carta Esfera Marinha,6,20,,1,,,,,,,,136,,,,,{ skill "SM_MAGNUM",3; },{},{}
+4085,Orc_Skeleton_Card,Carta Orc Esqueleto,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Holy,20; },{},{}
+4086,Soldier_Skeleton_Card,Carta Esqueleto Soldado,6,20,,1,,,,,,,,2,,,,,{ bonus bCritical,9; },{},{}
+4087,Giearth_Card,Carta Giearth,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Confusion,10000; bonus2 bSubEle,Ele_Earth,15; },{},{}
+4088,Frilldora_Card,Carta Frilldora,6,20,,1,,,,,,,,4,,,,,{ skill "AS_CLOAKING",1; },{},{ sc_end SC_CLOAKING; }
+4089,Sword_Fish_Card,Carta Peixe-Espada,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Water; bonus bDef,1; },{},{}
+4090,Munak_Card,Carta Munak,6,20,,1,,,,,,,,32,,,,,{ bonus2 bResEff,Eff_Stone,1500; bonus2 bSubEle,Ele_Earth,5; bonus bDef,1; },{},{}
+4091,Kobold_Card,Carta Cobold,6,20,,1,,,,,,,,136,,,,,{ bonus bStr,1; bonus bCritical,4; },{},{}
+4092,Skel_Worker_Card,Carta Esqueleto Operário,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Medium,15; bonus bBaseAtk,5; },{},{}
+4093,Obeaune_Card,Carta Obeaune,6,20,,1,,,,,,,,136,,,,,{ skill "AL_CURE",1; },{},{}
+4094,Archer_Skeleton_Card,Carta Esqueleto Arqueiro,6,20,,1,,,,,,,,2,,,,,{ bonus bLongAtkRate,10; },{},{}
+4095,Marse_Card,Carta Marte,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Water,30; bonus bFlee,5; },{},{}
+4096,Zenorc_Card,Carta Zenorc,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Poison,400; bonus bBaseAtk,10; },{},{}
+4097,Matyr_Card,Carta Matyr,6,20,,1,,,,,,,,64,,,,,{ bonus bMaxHPrate,10; bonus bAgi,1; },{},{}
+4098,Dokebi_Card,Carta Dokebi,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Wind; bonus bDef,1; },{},{}
+4099,Pasana_Card,Carta Pasana,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Fire; bonus bDef,1; },{},{}
+4100,Sohee_Card,Carta Sohee,6,20,,1,,,,,,,,64,,,,,{ bonus bMaxSPrate,15; bonus bSPrecovRate,3; },{},{}
+4101,Sand_Man_Card,Carta Arenoso,6,2,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Earth; bonus bDef,1; },{},{}
+4102,Whisper_Card,Carta Sussurro,6,2,,10,,,,,,,,4,,,,,{ bonus bFlee,20; bonus2 bSubEle,Ele_Ghost,-50; },{},{}
+4103,Horong_Card,Carta Horong,6,20,,1,,,,,,,,136,,,,,{ skill "MG_SIGHT",1; },{},{ sc_end SC_SIGHT; }
+4104,Requiem_Card,Carta Réquiem,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEff,Eff_Confusion,500; },{},{}
+4105,Marc_Card,Carta Cavalo-Marinho,6,20,,1,,,,,,,,16,,,,,{ bonus2 bSubEle,Ele_Water,5; bonus2 bResEff,Eff_Freeze,10000; },{},{}
+4106,Mummy_Card,Carta Múmia,6,20,,1,,,,,,,,2,,,,,{ bonus bHit,20; },{},{}
+4107,Verit_Card,Carta Verit,6,20,,1,,,,,,,,64,,,,,{ bonus bMaxHPrate,8; bonus bMaxSPrate,8; },{},{}
+4108,Myst_Card,Carta Névoa,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Poison,30; bonus bFlee,5; },{},{}
+4109,Jakk_Card,Carta Jakk,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Fire,30; bonus bFlee,5; },{},{}
+4110,Ghoul_Card,Carta Carniçal,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Poison,2000; bonus bDef,1; },{},{}
+4111,Strouf_Card,Carta Strouf,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Demon,20; },{},{}
+4112,Marduk_Card,Carta Marduk,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Silence,10000; },{},{}
+4113,Marionette_Card,Carta Marionete,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Ghost,30; bonus bFlee,5; },{},{}
+4114,Argiope_Card,Carta Argiope,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Poison; bonus bDef,1; },{},{}
+4115,Hunter_Fly_Card,Carta Mosca Caçadora,6,20,,1,,,,,,,,2,,,,,{ bonus2 bHpDrainRate,30,15; },{},{}
+4116,Isis_Card,Carta Ísis,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Dark,30; bonus bFlee,5; },{},{}
+4117,Side_Winder_Card,Carta Sorrateiro,6,20,,1,,,,,,,,2,,,,,{ skill "TF_DOUBLE",1; bonus bDoubleRate,5; },{},{}
+4118,Petit_Card,Carta Petite,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Dragon,20; },{},{}
+4119,Bathory_Card,Carta Bathory,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Dark; },{},{}
+4120,Petit__Card,Carta Petite Voador,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Dragon,30; },{},{}
+4121,Phreeoni_Card,Carta Freeoni,6,20,,1,,,,,,,,2,,,,,{ bonus bHit,100; },{},{}
+4122,Deviruchi_Card,Carta Deviruchi,6,20,,1,,,,,,,,769,,,,,{ bonus bStr,1; bonus2 bResEff,Eff_Blind,10000; },{},{}
+4123,Eddga_Card,Carta Eddga,6,20,,1,,,,,,,,64,,,,,{ bonus bMaxHPrate,-25; },{ sc_start4 SC_ENDURE,60000,10,0,0,1; },{ sc_end SC_ENDURE; }
+4124,Medusa_Card,Carta Medusa,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Demon,15; bonus2 bResEff,Eff_Stone,10000; },{},{}
+4125,Deviace_Card,Carta Deviace,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_DemiHuman,7; bonus2 bAddRace,RC_Brute,7; bonus2 bAddRace,RC_Plant,7; bonus2 bAddRace,RC_Insect,7; },{},{}
+4126,Minorous_Card,Carta Minorous,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddSize,Size_Large,15; bonus bBaseAtk,5; },{},{}
+4127,Nightmare_Card,Carta Pesadelo,6,20,,1,,,,,,,,769,,,,,{ bonus2 bResEff,Eff_Sleep,10000; bonus bAgi,1; },{},{}
+4128,Golden_Bug_Card,Carta Besouro-Ladrão Dourado,6,20,,1,,,,,,,,32,,,,,{ bonus bNoMagicDamage,100; bonus bUseSPrate,100; },{},{}
+4129,Baphomet__Card,Carta Bafomé Jr.,6,20,,1,,,,,,,,4,,,,,{ bonus bAgi,3; bonus bCritical,1; },{},{}
+4130,Scorpion_King_Card,Carta Rei Escorpião,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Undead,20; },{},{}
+4131,Moonlight_Flower_Card,Carta Flor do Luar,6,20,,1,,,,,,,,64,,,,,{ bonus bSpeedRate,25; },{},{}
+4132,Mistress_Card,Carta Abelha-Rainha,6,20,,1,,,,,,,,769,,,,,{ bonus bNoGemStone,0; bonus bUseSPrate,25; },{},{}
+4133,Daydric_Card,Carta Raydric,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Neutral,20; },{},{}
+4134,Dracula_Card,Carta Drácula,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSpDrainRate,100,5; },{},{}
+4135,Orc_Load_Card,Carta Senhor dos Orcs,6,20,,1,,,,,,,,16,,,,,{ bonus bShortWeaponDamageReturn,30; },{},{}
+4136,Khalitzburg_Card,Carta Khalitzburg,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Demon,30; },{},{}
+4137,Drake_Card,Carta Drake,6,20,,1,,,,,,,,2,,,,,{ bonus bNoSizeFix,0; },{},{}
+4138,Anubis_Card,Carta Anubis,6,20,,1,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Angel,30; },{},{}
+4139,Joker_Card,Carta Coringa,6,20,,1,,,,,,,,136,,,,,{ skill "TF_STEAL",1; },{},{}
+4140,Knight_Of_Abyss_Card,Carta Cavaleiro do Abismo,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Boss,25; },{},{}
+4141,Evil_Druid_Card,Carta Druida Maligno,6,20,,1,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Undead; bonus bInt,1; bonus bDef,1; },{},{}
+4142,Doppelganger_Card,Carta Doppelganger,6,20,,1,,,,,,,,2,,,,,{ bonus bAspdRate,10; },{},{}
+4143,Orc_Hero_Card,Carta Orc Herói,6,20,,1,,,,,,,,769,,,,,{ bonus bVit,3; bonus2 bResEff,Eff_Stun,10000; },{},{}
+4144,Osiris_Card,Carta Osíris,6,20,,1,,,,,,,,136,,,,,{ bonus bRestartFullRecover,0; },{},{}
+4145,Berzebub_Card,Carta Belzebu,6,20,,1,,,,,,,,136,,,,,{ bonus bCastrate,-30; },{},{}
+4146,Maya_Card,Carta Maya,6,20,,1,,,,,,,,32,,,,,{ bonus bMagicDamageReturn,50; },{},{}
+4147,Baphomet_Card,Carta Bafomé,6,20,,1,,,,,,,,2,,,,,{ bonus bHit,-10; bonus bSplashRange,1; },{},{}
+4148,Pharaoh_Card,Carta Faraó,6,20,,1,,,,,,,,769,,,,,{ bonus bUseSPrate,-30; },{},{}
+4149,Gargoyle_Card,Carta Gárgula,6,20,,1,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12028,RC_Insect,100; },{},{}
+4150,Goat_Card,Carta Bode,6,20,,1,,,,,,,,16,,,,,{ if(getrefine()<6) { bonus bDef,2; bonus bMdef,5; } },{},{}
+4151,Gajomart_Card,Carta Gajomart,6,20,,1,,,,,,,,64,,,,,{ bonus2 bSubRace,RC_Plant,-20; bonus2 bExpAddRace,RC_Plant,10; },{},{}
+4152,Galapago_Card,Carta Pingu,6,20,,1,,,,,,,,136,,,,,{ bonus2 bAddItemHealRate,IG_Juice,50; bonus3 bAddMonsterDropItem,531,RC_Insect,300; bonus3 bAddMonsterDropItem,532,RC_Insect,300; bonus3 bAddMonsterDropItem,534,RC_Insect,300; },{},{}
+4153,Crab_Card,Carta Caranguejo,6,20,,1,,,,,,,,2,,,,,{ bonus bBaseAtk,5; bonus2 bAddDamageClass,1266,30; },{},{}
+4154,Rice_Cake_Boy_Card,Carta Pirralho,6,20,,1,,,,,,,,136,,,,,{ bonus2 bAddItemHealRate,IG_Candy,50; bonus3 bAddMonsterDropItem,529,RC_DemiHuman,300; bonus3 bAddMonsterDropItem,530,RC_DemiHuman,100; },{},{}
+4155,Goblin_Leader_Card,Carta Líder Goblin,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace2,1,30; },{},{}
+4156,Steam_Goblin_Card,Carta Goblin a Vapor,6,20,,1,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Formless,7; },{},{}
+4157,Goblin_Archer_Card,Carta Goblin Arqueiro,6,20,,1,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Undead,7; },{},{}
+4158,Flying_Deleter_Card,Carta Exterminador Voador,6,20,,1,,,,,,,,16,,,,,{ bonus bHPrecovRate,-100; bonus bHPGainValue,100; },{},{}
+4159,Nine_Tail_Card,Carta Nove Caudas,6,20,,1,,,,,,,,4,,,,,{ bonus bAgi,2; if(getrefine()>8) bonus bFlee,20; },{},{}
+4160,Antique_Firelock_Card,Carta Soldado Atirador,6,20,,1,,,,,,,,64,,,,,{ bonus bStr,2; if(getrefine()>8) { bonus bMaxHPrate,10; bonus bMaxSPrate,10; } },{},{}
+4161,Grand_Peco_Card,Carta Grand Peco,6,20,,1,,,,,,,,769,,,,,{ bonus3 bAutoSpellWhenHit,"PR_GLORIA",1,50; },{},{}
+4162,Grizzly_Card,Carta Grizzly,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Blind,300; },{},{}
+4163,Gryphon_Card,Carta Grifo,6,20,,1,,,,,,,,2,,,,,{ bonus bFlee,2; bonus bCritical,7; if(BaseClass==Job_Swordman) bonus3 bAutoSpell,"KN_BOWLINGBASH",5,10; },{},{}
+4164,Gullinbursti_Card,Carta Gullinbursti,6,20,,1,,,,,,,,64,,,,,{ bonus2 bSubRace,RC_Fish,-20; bonus2 bExpAddRace,RC_Fish,10; },{},{}
+4165,Gig_Card,Carta Ferrão,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Insect,5; },{},{ heal 0,-5; }
+4166,Nightmare_Terror_Card,Carta Pesadelo Sombrio,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Curse,300; },{},{}
+4167,Neraid_Card,Carta Nereida,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Brute,5; },{},{ heal 0,-5; }
+4168,Dark_Lord_Card,Carta Senhor das Trevas,6,20,,1,,,,,,,,64,,,,,{ bonus3 bAutoSpellWhenHit,"WZ_METEOR",5,100; },{},{}
+4169,Dark_Illusion_Card,Carta Ilusão das Trevas,6,20,,1,,,,,,,,769,,,,,{ bonus bMaxHPrate,-10; bonus bMaxSPrate,-10; bonus bCastrate,-10; },{},{}
+4170,Dark_Frame_Card,Carta Moldura Maldita,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Stone,600; },{},{}
+4171,Dark_Priest_Card,Carta Sacerdote Maldito,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSPVanishRate,50,10; if(BaseJob==Job_Sage) bonus bSPDrainValue,1; },{},{}
+4172,The_Paper_Card,Carta Papel,6,20,,1,,,,,,,,2,,,,,{ bonus bCritAtkRate,20; bonus2 bSPDrainValue,-1,0; },{},{}
+4173,Demon_Pungus_Card,Carta Pungus,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Sleep,600; },{},{}
+4174,Deviling_Card,Carta Deviling,6,20,,1,,,,,,,,4,,,,,{ bonus2 bSubEle,Ele_Neutral,50; bonus2 bSubEle,Ele_Water,-50; bonus2 bSubEle,Ele_Earth,-50; bonus2 bSubEle,Ele_Fire,-50; bonus2 bSubEle,Ele_Wind,-50; bonus2 bSubEle,Ele_Poison,-50; bonus2 bSubEle,Ele_Holy,-50; bonus2 bSubEle,Ele_Dark,-50; bonus2 bSubEle,Ele_Ghost,-50; bonus2 bSubEle,Ele_Undead,-50; },{},{}
+4175,Poison_Toad_Card,Carta Sapo Venenoso,6,20,,1,,,,,,,,136,,,,,{ bonus3 bAutoSpell,"TF_POISON",1,20; bonus2 bAddSkillBlow,52,5; },{},{}
+4176,Dullahan_Card,Carta Dullahan,6,20,,1,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Dragon,7; },{},{}
+4177,Dryad_Card,Carta Dríade,6,20,,1,,,,,,,,769,,,,,{ bonus3 bAddMonsterDropItem,993,RC_Plant,100; bonus2 bSubEle,Ele_Earth,10; },{},{}
+4178,Dragon_Tail_Card,Carta Lavadeira,6,20,,1,,,,,,,,4,,,,,{ bonus bAgi,1; bonus bFlee,10; bonus2 bSkillAtk,"AC_DOUBLE",5; bonus2 bSkillAtk,"AC_SHOWER",5; },{},{}
+4179,Dragon_Fly_Card,Carta Libélula,6,20,,1,,,,,,,,4,,,,,{ bonus bAgi,1; },{},{}
+4180,Driller_Card,Carta Furador,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Dragon,5; },{},{ heal 0,-5; }
+4181,Disguise_Card,Carta Mascarado,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Silence,300+600*(readparam(bVit)>=77); },{},{}
+4182,Diabolic_Card,Carta Diabolik,6,20,,1,,,,,,,,2,,,,,{ bonus2 bSPGainRace,RC_Demon,5; },{},{ heal 0,-5; }
+4183,Vagabond_Wolf_Card,Carta Lobo Errante,6,20,,1,,,,,,,,4,,,,,{ bonus bStr,1; },{},{}
+4184,Lava_Golem_Card,Carta Golem de Lava,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddRace2,4,30; },{},{}
+4185,Rideword_Card,Carta Rideword,6,20,,1,,,,,,,,769,,,,,{ bonus bInt,1; if(BaseClass==Job_Acolyte) { bonus bInt,1; bonus bMdef,1; } },{},{}
+4186,Raggler_Card,Carta Raggler,6,20,,1,,,,,,,,64,,,,,{ bonus bStr,1; bonus bVit,1; },{},{}
+4187,Raydric_Archer_Card,Carta Raydric Arqueiro,6,20,,1,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12030,RC_Demon,100; },{},{}
+4188,Leib_Olmai_Card,Carta Leib Olmai,6,20,,1,,,,,,,,769,,,,,{ bonus2 bSubEle,Ele_Fire,10; bonus3 bAddMonsterDropItem,990,RC_Brute,100; },{},{}
+4189,Wraith_Dead_Card,Carta Aparição,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Curse,600; },{},{}
+4190,Wraith_Card,Carta Alma Penada,6,20,,1,,,,,,,,136,,,,,{ bonus3 bAddMonsterDropItem,12027,RC_Undead,100; },{},{}
+4191,Loli_Ruri_Card,Carta Loli Ruri,6,20,,1,,,,,,,,16,,,,,{ bonus3 bAutoSpellWhenHit,"AL_HEAL",3,50; },{},{}
+4192,Rotar_Zairo_Card,Carta Giro-Goblin,6,20,,1,,,,,,,,2,,,,,{ bonus bCritAtkRate,10; bonus2 bCriticalAddRace,RC_Fish,7; },{},{}
+4193,Lude_Card,Carta Lude,6,20,,1,,,,,,,,136,,,,,{ if(BaseJob==Job_Novice||BaseJob==Job_SuperNovice) bonus3 bAutoSpellWhenHit,"SM_ENDURE",1,200; },{},{}
+4194,Rybio_Card,Carta Rybio,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Stun,300+600*(readparam(bDex)>=77); },{},{}
+4195,Leaf_Cat_Card,Carta Gato de Folha,6,20,,1,,,,,,,,769,,,,,{ bonus2 bSubEle,Ele_Water,10; bonus3 bAddMonsterDropItem,991,RC_Fish,100; },{},{}
+4196,Marin_Card,Carta Marin,6,20,,1,,,,,,,,136,,,,,{ bonus2 bAddMonsterDropItem,909,2000; bonus2 bAddMonsterDropItem,7126,10; },{},{}
+4197,Mastering_Card,Carta Mastering,6,20,,1,,,,,,,,4,,,,,{ bonus bLuk,1; },{},{}
+4198,Maya_Puple_Card,Carta Maya Macho,6,20,,1,,,,,,,,769,,,,,{ bonus bIntravision,0; },{},{}
+4199,Merman_Card,Carta Tritão,6,20,,1,,,,,,,,64,,,,,{ bonus bHPrecovRate,10; bonus bSPrecovRate,10; },{},{}
 4200,Megalith_Card,Carta Megalith,6,20,,1,,,,,,,,64,,,,,{ if(getrefine()<6) bonus bMdef,7; },{},{}
 4201,Majoruros_Card,Carta Majoruros,6,20,,1,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Stun,600; },{},{}
 4202,Civil_Servant_Card,Carta Mao Guai,6,20,,1,,,,,,,,2,,,,,{ bonus2 bAddEle,Ele_Ghost,20; },{},{}
