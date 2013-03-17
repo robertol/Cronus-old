@@ -339,8 +339,8 @@
 //35,7396,1	// Lotto Ball 36
 //35,7397,1	// Lotto Ball 37
 //35,7398,1	// Lotto Ball 38
-35,7540,1	// Lotto Ball 39
-35,7541,1	// Lotto Ball 40
+//35,7540,1	// Lotto Ball 39
+//35,7541,1	// Lotto Ball 40
 // Food Package
 36,512,1	// Apple
 36,513,1	// Banana
