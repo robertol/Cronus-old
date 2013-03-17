@@ -745,47 +745,47 @@
 1486,Krieger_Twohand_Spear1,Lança de Duas Mãos Gloriosa,4,20,,0,220,,3,0,0x00004082,7,2,34,4,80,1,5,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; } if(getrefine()>8) { if(BaseJob==Job_Knight) bonus4 bAutoSpellOnSkill,"KN_PIERCE","NPC_CRITICALWOUND",2,200; else if(BaseJob==Job_Crusader) bonus3 bAutoSpell,"PA_PRESSURE",5,200; } },{},{}
 1487,Lance_C,Lance,4,0,,0,220,,3,0,0x00004082,7,2,34,3,1,0,5,{ bonus2 bAddSize,Size_Small,50; bonus2 bAddSize,Size_Medium,50; bonus2 bAddSize,Size_Large,50; },{},{}
 1488,Ahlspiess_C,Ahlspiess,4,20,,0,135,,3,0,0x00004080,7,2,34,4,1,1,5,{ bonus bIgnoreDefRace,RC_NonBoss; bonus bIgnoreDefRace,RC_Boss; bonus2 bAddRace,RC_DemiHuman,10; bonus3 bAutoSpell,"KN_PIERCE",5,30; },{},{}
-1501,Clava,Clava,4,120,,700,23,,1,3,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1502,Clava_,Clava,4,120,,700,23,,1,4,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1503,Clava__,Clava,4,120,,700,23,,1,0,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1504,Maça,Maça,4,1600,,800,37,,1,3,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1505,Maça_,Maça,4,1600,,800,37,,1,4,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1506,Maça__,Maça,4,1600,,800,37,,1,0,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
-1507,Esmagador,Esmagador,4,9000,,1000,54,,1,2,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
-1508,Esmagador_,Esmagador,4,9000,,1000,54,,1,3,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
-1509,Esmagador__,Esmagador,4,9000,,1000,54,,1,3,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
-1510,Mangual,Mangual,4,16000,,900,69,,1,2,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1511,Mangual_,Mangual,4,16000,,900,69,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1512,Mangual__,Mangual,4,16000,,900,69,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1513,Morning_Star,Maça de Guerra,4,41000,,1500,110,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1514,Morning_Star_,Maça de Guerra,4,41000,,1500,110,,1,2,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1515,Morning_Star__,Maça de Guerra,4,41000,,1500,110,,1,2,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1516,Sword_Mace,Maça Espada,4,50000,,1200,130,,1,0,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1517,Sword_Mace_,Maça Espada,4,50000,,1200,130,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1518,Sword_Mace__,Maça Espada,4,50000,,1200,130,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
-1519,Mangual Pesado,Mangual Pesado,4,23000,,800,84,,1,2,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1520,Mangual Pesado_,Mangual Pesado,4,23000,,800,84,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1521,Mangual Pesado__,Mangual Pesado,4,23000,,800,84,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
-1522,Atordoador,Atordoador,4,60000,,2000,140,,1,0,0x00008110,7,2,2,3,27,1,8,{ bonus2 bAddEff,Eff_Stun,1000; },{},{}
-1523,Clava com Espetos,Clava com Espetos,4,20,,700,85,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus bCritical,40; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
-1524,Golden_Mace,Maça de Ouro,4,20,,800,110,,1,1,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,10; bonus bUnbreakableWeapon,0; },{},{}
-1525,Long_Mace,Maça Longa,4,20,,800,135,,3,0,0x00008110,7,2,2,4,40,1,8,{ bonus bLongAtkDef,10; },{},{}
-1526,Maça de Talho,Maça de Talho,4,20,,1000,145,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,15; bonus2 bWeaponComaRace,RC_Undead,10; bonus2 bExpAddRace,RC_Undead,5; },{},{}
-1527,Quatrilho,Quatrilho,4,20,,900,165,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,10; bonus2 bAddRace,RC_DemiHuman,10; bonus2 bAddEle,Ele_Earth,10; },{},{}
-1528,Grand_Cross,Grande Cruz,4,20,,1500,140,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus bAtkEle,Ele_Holy; skill "PR_TURNUNDEAD",3; bonus3 bAutoSpell,"PR_TURNUNDEAD",3,100; bonus2 bSPDrainValueRace,RC_Undead,1; bonus2 bSPGainRace,RC_Undead,3; },{},{}
-1529,Iron_Driver,Taco,4,20,,3000,155,,2,0,0x00008100,7,2,2,3,78,1,8,{},{},{}
-1530,Mjollnir,Mjollnir,4,20,,6000,250,,1,0,0x000444A2,7,2,2,4,95,0,8,{ bonus bAtkEle,Ele_Wind; bonus bDex,40; bonus bStr,15; bonus bAspdRate,10; bonus bUnbreakableWeapon,0; },{},{}
-1531,Spanner,Chave Inglesa,4,20,,2500,115,,1,0,0x00008110,7,2,2,3,55,1,8,{ bonus2 bAddEff,Eff_Blind,100; bonus2 bAddEff,Eff_Stun,100; bonus2 bAddEff,Eff_Poison,100; bonus2 bAddEff,Eff_Freeze,100; },{},{}
-1532,Atordoador_,Atordoador,4,60000,,2000,140,,1,2,0x00008110,7,2,2,3,27,1,8,{ bonus2 bAddEff,Eff_Stun,1000; },{},{}
-1533,Warrior_Balmung,Warrior's Balmung,4,20,,1000,170,,1,0,0xFFFFFFFF,7,2,2,4,48,1,8,{ bonus bAllStats,5; },{},{}
+1501,Clava,Clava,4,120,,70,23,,1,3,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1502,Clava_,Clava,4,120,,70,23,,1,4,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1503,Clava__,Clava,4,120,,70,23,,1,0,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1504,Maça,Maça,4,1600,,80,37,,1,3,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1505,Maça_,Maça,4,1600,,80,37,,1,4,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1506,Maça__,Maça,4,1600,,80,37,,1,0,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
+1507,Esmagador,Esmagador,4,9000,,100,54,,1,2,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
+1508,Esmagador_,Esmagador,4,9000,,100,54,,1,3,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
+1509,Esmagador__,Esmagador,4,9000,,100,54,,1,3,0x0004C5B3,7,2,2,2,14,1,8,{},{},{}
+1510,Mangual,Mangual,4,16000,,90,69,,1,2,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1511,Mangual_,Mangual,4,16000,,90,69,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1512,Mangual__,Mangual,4,16000,,90,69,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1513,Morning_Star,Maça de Guerra,4,41000,,150,110,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1514,Morning_Star_,Maça de Guerra,4,41000,,150,110,,1,2,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1515,Morning_Star__,Maça de Guerra,4,41000,,150,110,,1,2,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1516,Sword_Mace,Maça Espada,4,50000,,120,130,,1,0,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1517,Sword_Mace_,Maça Espada,4,50000,,120,130,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1518,Sword_Mace__,Maça Espada,4,50000,,120,130,,1,1,0x0004C5B2,7,2,2,3,27,1,8,{},{},{}
+1519,Mangual Pesado,Mangual Pesado,4,23000,,80,84,,1,2,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1520,Mangual Pesado_,Mangual Pesado,4,23000,,80,84,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1521,Mangual Pesado__,Mangual Pesado,4,23000,,80,84,,1,3,0x0004C5B2,7,2,2,2,14,1,8,{},{},{}
+1522,Atordoador,Atordoador,4,60000,,200,140,,1,0,0x00008110,7,2,2,3,27,1,8,{ bonus2 bAddEff,Eff_Stun,1000; },{},{}
+1523,Clava com Espetos,Clava com Espetos,4,20,,70,85,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus bCritical,40; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
+1524,Golden_Mace,Maça de Ouro,4,20,,80,110,,1,1,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,10; bonus bUnbreakableWeapon,0; },{},{}
+1525,Long_Mace,Maça Longa,4,20,,80,135,,3,0,0x00008110,7,2,2,4,40,1,8,{ bonus bLongAtkDef,10; },{},{}
+1526,Maça de Talho,Maça de Talho,4,20,,100,145,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,15; bonus2 bWeaponComaRace,RC_Undead,10; bonus2 bExpAddRace,RC_Undead,5; },{},{}
+1527,Quatrilho,Quatrilho,4,20,,90,165,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,10; bonus2 bAddRace,RC_DemiHuman,10; bonus2 bAddEle,Ele_Earth,10; },{},{}
+1528,Grand_Cross,Grande Cruz,4,20,,150,140,,1,0,0x00008110,7,2,2,4,40,1,8,{ bonus bAtkEle,Ele_Holy; skill "PR_TURNUNDEAD",3; bonus3 bAutoSpell,"PR_TURNUNDEAD",3,100; bonus2 bSPDrainValueRace,RC_Undead,1; bonus2 bSPGainRace,RC_Undead,3; },{},{}
+1529,Iron_Driver,Taco,4,20,,300,155,,2,0,0x00008100,7,2,2,3,78,1,8,{},{},{}
+1530,Mjollnir,Mjollnir,4,20,,600,250,,1,0,0x000444A2,7,2,2,4,95,0,8,{ bonus bAtkEle,Ele_Wind; bonus bDex,40; bonus bStr,15; bonus bAspdRate,10; bonus bUnbreakableWeapon,0; },{},{}
+1531,Spanner,Chave Inglesa,4,20,,250,115,,1,0,0x00008110,7,2,2,3,55,1,8,{ bonus2 bAddEff,Eff_Blind,100; bonus2 bAddEff,Eff_Stun,100; bonus2 bAddEff,Eff_Poison,100; bonus2 bAddEff,Eff_Freeze,100; },{},{}
+1532,Atordoador_,Atordoador,4,60000,,200,140,,1,2,0x00008110,7,2,2,3,27,1,8,{ bonus2 bAddEff,Eff_Stun,1000; },{},{}
+1533,Warrior_Balmung,Warrior's Balmung,4,20,,100,170,,1,0,0xFFFFFFFF,7,2,2,4,48,1,8,{ bonus bAllStats,5; },{},{}
 1534,Spanner_C,Wrench,4,2,,0,150,,1,0,0x00008110,7,2,2,3,0,0,8,{ bonus2 bAddEff,Eff_Blind,100; bonus2 bAddEff,Eff_Stun,100; bonus2 bAddEff,Eff_Poison,100; bonus2 bAddEff,Eff_Freeze,100; },{},{}
 1535,Hollgrehenn_Hammer,Martelo de Forja de Hollgrehenn,4,4444,,44,4,,1,1,0x0004C5B2,7,2,2,4,44,1,8,{ bonus bBreakArmorRate,100; bonus bBreakWeaponRate,100; if(readparam(bStr)>=44) { bonus bBaseAtk,44; } },{},{}
 1536,Good_Morning_Star,Good Morning Star,4,20,,0,120,,1,0,0x0004C5B2,7,2,2,1,0,0,8,{ bonus2 bAddRace,RC_Boss,50; bonus2 bAddRace,RC_NonBoss,50; },{},{}
 1537,Quadrille_C,Refined Quadrille,4,1,,0,193,,1,0,0x00008110,7,2,2,4,0,0,8,{ bonus2 bAddRace,RC_DemiHuman,30; bonus2 bAddRace,RC_Demon,40; bonus2 bAddRace,RC_Undead,40; },{},{}
-1538,Clava com Espetos_,Clava com Espetos,4,20,,700,85,,1,2,0x00008110,7,2,2,4,40,1,8,{ bonus bCritical,40; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
+1538,Clava com Espetos_,Clava com Espetos,4,20,,70,85,,1,2,0x00008110,7,2,2,4,40,1,8,{ bonus bCritical,40; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
 1539,Golden_Mace_,Maça de Ouro,4,20,,800,110,,1,2,0x00008110,7,2,2,4,40,1,8,{ bonus2 bAddRace,RC_Undead,10; bonus bUnbreakableWeapon,0; },{},{}
-1540,Grand_Cross_,Crux Magnum,4,20,,1500,140,,1,1,0x00008110,7,2,2,4,40,1,8,{ bonus bAtkEle,Ele_Holy; skill "PR_TURNUNDEAD",3; bonus3 bAutoSpell,"PR_TURNUNDEAD",3,100; bonus2 bSPDrainValueRace,RC_Undead,1; bonus2 bSPGainRace,RC_Undead,3; },{},{}
-1541,Nêmesis,Nêmesis,4,20,,900,120,,1,0,0x00008110,7,2,2,4,60,1,8,{ bonus bAtkEle,Ele_Holy; bonus2 bAddRace,RC_Undead,10; bonus2 bAddRace,RC_Demon,10; bonus3 bAutoSpell,"AL_CRUCIS",1+getrefine(),100; autobonus "{ bonus bBaseAtk,50; }",10,20000,BF_WEAPON,"{ specialeffect2 EF_BLOODDRAIN; }"; },{},{}
+1540,Grand_Cross_,Crux Magnum,4,20,,150,140,,1,1,0x00008110,7,2,2,4,40,1,8,{ bonus bAtkEle,Ele_Holy; skill "PR_TURNUNDEAD",3; bonus3 bAutoSpell,"PR_TURNUNDEAD",3,100; bonus2 bSPDrainValueRace,RC_Undead,1; bonus2 bSPGainRace,RC_Undead,3; },{},{}
+1541,Nêmesis,Nêmesis,4,20,,90,120,,1,0,0x00008110,7,2,2,4,60,1,8,{ bonus bAtkEle,Ele_Holy; bonus2 bAddRace,RC_Undead,10; bonus2 bAddRace,RC_Demon,10; bonus3 bAutoSpell,"AL_CRUCIS",1+getrefine(),100; autobonus "{ bonus bBaseAtk,50; }",10,20000,BF_WEAPON,"{ specialeffect2 EF_BLOODDRAIN; }"; },{},{}
 1542,BF_Morning_Star1,Maça de Campo de Batalha A,4,20,,0,105,,1,0,0x0004C5B3,7,2,2,3,80,1,8,{ bonus bStr,1; bonus bDex,1; bonus2 bAddRace,RC_DemiHuman,75; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
 1543,BF_Morning_Star2,Maça de Campo de Batalha B,4,20,,0,105,,1,0,0x0004C5B3,7,2,2,3,80,1,8,{ bonus bStr,1; bonus bDex,1; bonus2 bAddRace,RC_DemiHuman,75; bonus bUnbreakableWeapon,0; autobonus "{ bonus2 bAddEff,Eff_Stun,5000; }",10,6000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }"; },{},{}
 1544,Frigideira Lunar,Frigideira Lunar,4,20,,700,110,,1,3,0x00008110,2,2,2,3,50,1,8,{ if(readparam(bStr)>=77) { bonus bAspdRate,4; bonus2 bAddEff,Eff_Stun,1500; bonus3 bAddMonsterDropItem,12065,RC_Plant,500; bonus3 bAddMonsterDropItem,12043,RC_Brute,500; bonus3 bAddMonsterDropItem,12069,RC_Fish,500; } },{},{}
