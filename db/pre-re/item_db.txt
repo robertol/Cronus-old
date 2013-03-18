@@ -345,106 +345,106 @@
 997,Great_Nature,Natureza Grandiosa,3,3000,,300,,,,,,,,,,,,,{},{},{}
 998,Ferro,Ferro,3,100,,50,,,,,,,,,,,,,{},{},{}
 999,Aço,Aço,3,1000,,100,,,,,,,,,,,,,{},{},{}
-1000,Star_Crumb,Fragmento Estelar,3,4500,,10,,,,,,0,2,,,,,,{},{},{}
-1001,Sparkling_Dust,Poeira Estelar,3,1500,,1,,,,,,0,2,,,,,,{},{},{}
-1002,Iron_Ore,Minério de Ferro,3,50,,15,,,,,,0,2,,,,,,{},{},{}
-1003,Carvão,Carvão,3,500,,5,,,,,,0,2,,,,,,{},{},{}
-1004,Patriotism_Marks,Insígnia da Cavalaria,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1005,Hammer_Of_Blacksmith,Martelo de Ferreiro,3,2,,80,,,,,,0,2,,,,,,{},{},{}
-1006,Old_Magic_Book,Grimório Antigo,3,2,,3,,,,,,0,2,,,,,,{},{},{}
-1007,Penetration,Colar da Sabedoria,3,2,,40,,,,,,0,2,,,,,,{},{},{}
+1000,Star_Crumb,Fragmento Estelar,3,4500,2250,10,,,,,,0,2,,,,,,{},{},{}
+1001,Sparkling_Dust,Poeira Estelar,3,1500,750,1,,,,,,0,2,,,,,,{},{},{}
+1002,Iron_Ore,Minério de Ferro,3,50,25,15,,,,,,0,2,,,,,,{},{},{}
+1003,Carvão,Carvão,3,500,250,5,,,,,,0,2,,,,,,{},{},{}
+1004,Patriotism_Marks,Insígnia da Cavalaria,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1005,Hammer_Of_Blacksmith,Martelo de Ferreiro,3,2,1,80,,,,,,0,2,,,,,,{},{},{}
+1006,Old_Magic_Book,Grimório Antigo,3,2,1,3,,,,,,0,2,,,,,,{},{},{}
+1007,Penetration,Colar da Sabedoria,3,2,1,4,,,,,,0,2,,,,,,{},{},{}
 1008,Frozen_Heart,Colar do Oblívio,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1009,Sacred_Marks,Mão Divina,3,2,,2,,,,,,0,2,,,,,,{},{},{}
-1010,Fracon,Fracon,3,200,,20,,,,,,0,2,,,,,,{},{},{}
-1011,Emveretarcon,Emveretarcon,3,1000,,20,,,,,,0,2,,,,,,{},{},{}
-1012,Lizard_Scruff,Brasão,3,250,,1,,,,,,0,2,,,,,,{},{},{}
-1013,Colorful_Shell,Casco Arco-Íris,3,90,,1,,,,,,0,2,,,,,,{},{},{}
-1014,Jaws_Of_Ant,Mandíbula de Formiga,3,232,,1,,,,,,0,2,,,,,,{},{},{}
-1015,Thin_N'_Long_Língua,Língua,3,528,,1,,,,,,0,2,,,,,,{},{},{}
-1016,Rat_Tail,Cauda de Rato,3,52,,1,,,,,,0,2,,,,,,{},{},{}
-1017,Moustache_Of_Mole,Bigodes de Toupeira,3,106,,1,,,,,,0,2,,,,,,{},{},{}
-1018,Nail_Of_Mole,Garras de Toupeira,3,210,,1,,,,,,0,2,,,,,,{},{},{}
-1019,Wooden_Block,Tronco,3,60,,1,,,,,,0,2,,,,,,{},{},{}
-1020,Long_Hair,Cabelos Morenos,3,292,,1,,,,,,0,2,,,,,,{},{},{}
-1021,Dokkaebi_Horn,Chifre de Dokebi,3,292,,1,,,,,,0,2,,,,,,{},{},{}
-1022,Fox_Tail,Nove-Caudas,3,650,,1,,,,,,0,2,,,,,,{},{},{}
-1023,Fish_Tail,Cauda de Peixe,3,196,,1,,,,,,0,2,,,,,,{},{},{}
-1024,Chinese_Ink,Tinta de Polvo,3,264,,1,,,,,,0,2,,,,,,{},{},{}
-1025,Spiderweb,Teia de Aranha,3,184,,1,,,,,,0,2,,,,,,{},{},{}
-1026,Avelã ,Avelã ,3,98,,1,,,,,,0,2,,,,,,{},{},{}
-1027,Porcupine_Spike,Espinho de Porco-Espinho,3,158,,1,,,,,,0,2,,,,,,{},{},{}
-1028,Wild_Boar's_Crina,Crina,3,196,,1,,,,,,0,2,,,,,,{},{},{}
-1029,Tiger's_Skin,Pele de Tigre,3,548,,1,,,,,,0,2,,,,,,{},{},{}
-1030,Tiger_Footskin,Pata de Tigre,3,1500,,1,,,,,,0,2,,,,,,{},{},{}
-1031,Limb_Of_Mantis,Foice de Louva-a-Deus,3,196,,1,,,,,,0,2,,,,,,{},{},{}
-1032,Blossom_Of_Maneater,Flor de Planta Carnívora,3,196,,1,,,,,,0,2,,,,,,{},{},{}
-1033,Root_Of_Maneater,Raiz de Planta Carnívora,3,208,,1,,,,,,0,2,,,,,,{},{},{}
-1034,Cobold_Hair,Cabelo Azul,3,342,,1,,,,,,0,2,,,,,,{},{},{}
-1035,Dragon_Canine,Canino de Dragão,3,484,,1,,,,,,0,2,,,,,,{},{},{}
-1036,Dragon_Scale,Escama de Dragão,3,500,,1,,,,,,0,2,,,,,,{},{},{}
-1037,Dragon_Train,Cauda de Dragão,3,1200,,1,,,,,,0,2,,,,,,{},{},{}
-1038,Petite_DiablOfs_Horn,Pequeno Chifre Maligno,3,528,,1,,,,,,0,2,,,,,,{},{},{}
-1039,Petite_DiablOfs_Wing,Pequena Asa Maligna,3,2000,,1,,,,,,0,2,,,,,,{},{},{}
-1040,Elder_Pixie's_Beard,Bigode de Anão Ancião,3,232,,1,,,,,,0,2,,,,,,{},{},{}
-1041,Lampião,Lampião,3,250,,1,,,,,,0,2,,,,,,{},{},{}
-1042,Short_Leg,Pata de Inseto,3,430,,1,,,,,,0,2,,,,,,{},{},{}
-1043,Nail_Of_Orc,Garra de Orc,3,168,,1,,,,,,0,2,,,,,,{},{},{}
-1044,Tooth_Of_,Presa de Zenorc,3,264,,1,,,,,,0,2,,,,,,{},{},{}
-1045,Sacred_Masque,Máscara Ritualística,3,412,,1,,,,,,0,2,,,,,,{},{},{}
-1046,Tweezer,Garra de Escorpião,3,614,,1,,,,,,0,2,,,,,,{},{},{}
-1047,Head_Of_Medusa,Cabeça de Medusa,3,548,,1,,,,,,0,2,,,,,,{},{},{}
-1048,Slender_Snake,Cabelo Horrendo,3,800,,1,,,,,,0,2,,,,,,{},{},{}
-1049,Skirt_Of_Virgin,Saia Virginal,3,1700,,1,,,,,,0,2,,,,,,{},{},{}
-1050,Tendões,Tendões,3,220,,1,,,,,,0,2,,,,,,{},{},{}
-1051,Neurônio,Neurônio,3,450,,1,,,,,,0,2,,,,,,{},{},{}
-1052,Single_Cell,Célula Única,3,46,,1,,,,,,0,2,,,,,,{},{},{}
-1053,Tooth_Of_Ancient_Fish,Dente Fossilizado,3,548,,1,,,,,,0,2,,,,,,{},{},{}
-1054,Lip_Of_Ancient_Fish,Lábios Fossilizados,3,1000,,1,,,,,,0,2,,,,,,{},{},{}
-1055,Earthworm_Peeling,Pele de Minhoca,3,196,,1,,,,,,0,2,,,,,,{},{},{}
-1056,Torrão de Areia,Torrão de Areia,3,306,,1,,,,,,0,2,,,,,,{},{},{}
-1057,Moth_Dust,Pó de Traça,3,138,,1,,,,,,0,2,,,,,,{},{},{}
-1058,Wing_Of_Moth,Asas de Traça,3,200,,1,,,,,,0,2,,,,,,{},{},{}
-1059,Transparent_Cloth,Tecido,3,306,,1,,,,,,0,2,,,,,,{},{},{}
-1060,Golden_Hair,Cabelos Dourados,3,430,,1,,,,,,0,2,,,,,,{},{},{}
-1061,Starsand_Of_Witch,Areia Estelar de Bruxa,3,484,,1,,,,,,0,2,,,,,,{},{},{}
-1062,Pumpkin_Head,Zé-Lanterna,3,374,,1,,,,,,0,2,,,,,,{},{},{}
-1063,Sharpened_Cuspid,Presa,3,680,,10,,,,,,0,2,,,,,,{},{},{}
-1064,Rédeas,Rédeas,3,802,,10,,,,,,0,2,,,,,,{},{},{}
-1065,Booby_Armadilha,Armadilha,3,100,,10,,,,,,0,2,,,,,,{},{},{}
-1066,Tree_Of_Archer_1,Tronco de Alta Qualidade,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1067,Tree_Of_Archer_2,Tronco Sólido,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1068,Tree_Of_Archer_3,Tronco Estéril,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1069,Mushroom_Of_Thief_1,Cogumelo Venenoso,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1070,Mushroom_Of_Thief_2,Cogumelo Borrachento,3,2,,10,,,,,,0,2,,,,,,{},{},{}
-1071,Mage_Test_1,Tubo de Ensaio com Líquido Desconhecido,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1072,Delivery_Message,Mensagem,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1073,Merchant_Recibo de Entrega_1,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1074,Merchant_Recibo de Entrega_2,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1075,Merchant_Recibo de Entrega_3,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1076,Merchant_Recibo de Entrega_4,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1077,Merchant_Recibo de Entrega_5,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1078,Merchant_Recibo de Entrega_6,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1079,Merchant_Recibo de Entrega_7,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1080,Merchant_Recibo de Entrega_8,Recibo de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1081,Merchant_Box_1,Caixa de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1082,Merchant_Box_2,Caixa de Entrega ,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1083,Merchant_Box_3,Caixa de Entrega  ,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1084,Kapra's_Pass,Bilhete da Kafra,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1085,Mage_Test_2,Tubo de Ensaio com Líquido Desconhecido,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1086,Mage_Test_3,Tubo de Ensaio com Líquido Desconhecido,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1087,Mage_Test_4,Tubo de Ensaio com Líquido Desconhecido,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1088,Morocc_Potion,Solução de Morroc,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1089,Payon_Potion,Solução de Payon,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1090,Mage_Test_Etc,Tubo de Ensaio com Líquido Desconhecido,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1091,Merchant_Box_Etc,Caixa de Entrega,3,0,,10,,,,,,0,2,,,,,,{},{},{}
-1092,Empty_Cylinder,Tubo de Ensaio,3,3,,10,,,,,,0,2,,,,,,{},{},{}
-1093,Empty_Potion,Garrafa de Poção,3,10,,10,,,,,,0,2,,,,,,{},{},{}
-1094,Short_Daenggie,Trança Curta,3,278,,10,,,,,,0,2,,,,,,{},{},{}
-1095,Needle_Of_Alarm,Ponteiro,3,546,,10,,,,,,0,2,,,,,,{},{},{}
-1096,Round_Shell,Casca Arredondada,3,780,,10,,,,,,0,2,,,,,,{},{},{}
-1097,Worn_Out_Page,Página Deteriorada,3,948,,10,,,,,,0,2,,,,,,{},{},{}
-1098,Algemas,Algemas,3,658,,10,,,,,,0,2,,,,,,{},{},{}
-1099,Worn_Out_Prison_Uniform,Uniforme Velho de Presidiário,3,680,,10,,,,,,0,2,,,,,,{},{},{}
+1009,Sacred_Marks,Mão Divina,3,2,1,2,,,,,,0,2,,,,,,{},{},{}
+1010,Fracon,Fracon,3,200,100,20,,,,,,0,2,,,,,,{},{},{}
+1011,Emveretarcon,Emveretarcon,3,1000,500,20,,,,,,0,2,,,,,,{},{},{}
+1012,Lizard_Scruff,Brasão,3,250,125,1,,,,,,0,2,,,,,,{},{},{}
+1013,Colorful_Shell,Casco Arco-Íris,3,90,45,1,,,,,,0,2,,,,,,{},{},{}
+1014,Jaws_Of_Ant,Mandíbula de Formiga,3,232,116,1,,,,,,0,2,,,,,,{},{},{}
+1015,Thin_N'_Long_Língua,Língua,3,528,264,1,,,,,,0,2,,,,,,{},{},{}
+1016,Rat_Tail,Cauda de Rato,3,52,26,1,,,,,,0,2,,,,,,{},{},{}
+1017,Moustache_Of_Mole,Bigodes de Toupeira,3,106,53,1,,,,,,0,2,,,,,,{},{},{}
+1018,Nail_Of_Mole,Garras de Toupeira,3,210,105,1,,,,,,0,2,,,,,,{},{},{}
+1019,Wooden_Block,Tronco,3,60,30,1,,,,,,0,2,,,,,,{},{},{}
+1020,Long_Hair,Cabelos Morenos,3,292,146,1,,,,,,0,2,,,,,,{},{},{}
+1021,Dokkaebi_Horn,Chifre de Dokebi,3,292,146,1,,,,,,0,2,,,,,,{},{},{}
+1022,Fox_Tail,Nove-Caudas,3,650,325,1,,,,,,0,2,,,,,,{},{},{}
+1023,Fish_Tail,Cauda de Peixe,3,196,98,1,,,,,,0,2,,,,,,{},{},{}
+1024,Chinese_Ink,Tinta de Polvo,3,264,132,1,,,,,,0,2,,,,,,{},{},{}
+1025,Spiderweb,Teia de Aranha,3,184,92,1,,,,,,0,2,,,,,,{},{},{}
+1026,Avelã ,Avelã ,3,98,49,1,,,,,,0,2,,,,,,{},{},{}
+1027,Porcupine_Spike,Espinho de Porco-Espinho,3,158,79,1,,,,,,0,2,,,,,,{},{},{}
+1028,Wild_Boar's_Crina,Crina,3,196,98,1,,,,,,0,2,,,,,,{},{},{}
+1029,Tiger's_Skin,Pele de Tigre,3,548,274,1,,,,,,0,2,,,,,,{},{},{}
+1030,Tiger_Footskin,Pata de Tigre,3,1500,750,1,,,,,,0,2,,,,,,{},{},{}
+1031,Limb_Of_Mantis,Foice de Louva-a-Deus,3,196,98,1,,,,,,0,2,,,,,,{},{},{}
+1032,Blossom_Of_Maneater,Flor de Planta Carnívora,3,196,98,1,,,,,,0,2,,,,,,{},{},{}
+1033,Root_Of_Maneater,Raiz de Planta Carnívora,3,208,104,1,,,,,,0,2,,,,,,{},{},{}
+1034,Cobold_Hair,Cabelo Azul,3,342,171,1,,,,,,0,2,,,,,,{},{},{}
+1035,Dragon_Canine,Canino de Dragão,3,484,242,1,,,,,,0,2,,,,,,{},{},{}
+1036,Dragon_Scale,Escama de Dragão,3,500,250,1,,,,,,0,2,,,,,,{},{},{}
+1037,Dragon_Train,Cauda de Dragão,3,1200,600,1,,,,,,0,2,,,,,,{},{},{}
+1038,Petite_DiablOfs_Horn,Pequeno Chifre Maligno,3,528,264,1,,,,,,0,2,,,,,,{},{},{}
+1039,Petite_DiablOfs_Wing,Pequena Asa Maligna,3,2000,1000,1,,,,,,0,2,,,,,,{},{},{}
+1040,Elder_Pixie's_Beard,Bigode de Anão Ancião,3,232,116,1,,,,,,0,2,,,,,,{},{},{}
+1041,Lampião,Lampião,3,250,125,1,,,,,,0,2,,,,,,{},{},{}
+1042,Short_Leg,Pata de Inseto,3,430,215,1,,,,,,0,2,,,,,,{},{},{}
+1043,Nail_Of_Orc,Garra de Orc,3,168,84,1,,,,,,0,2,,,,,,{},{},{}
+1044,Tooth_Of_,Presa de Zenorc,3,264,132,1,,,,,,0,2,,,,,,{},{},{}
+1045,Sacred_Masque,Máscara Ritualística,3,412,206,1,,,,,,0,2,,,,,,{},{},{}
+1046,Tweezer,Garra de Escorpião,3,614,307,1,,,,,,0,2,,,,,,{},{},{}
+1047,Head_Of_Medusa,Cabeça de Medusa,3,548,274,1,,,,,,0,2,,,,,,{},{},{}
+1048,Slender_Snake,Cabelo Horrendo,3,800,400,1,,,,,,0,2,,,,,,{},{},{}
+1049,Skirt_Of_Virgin,Saia Virginal,3,1700,850,1,,,,,,0,2,,,,,,{},{},{}
+1050,Tendões,Tendões,3,220,110,1,,,,,,0,2,,,,,,{},{},{}
+1051,Neurônio,Neurônio,3,450,225,1,,,,,,0,2,,,,,,{},{},{}
+1052,Single_Cell,Célula Única,3,46,23,1,,,,,,0,2,,,,,,{},{},{}
+1053,Tooth_Of_Ancient_Fish,Dente Fossilizado,3,548,274,1,,,,,,0,2,,,,,,{},{},{}
+1054,Lip_Of_Ancient_Fish,Lábios Fossilizados,3,1000,500,1,,,,,,0,2,,,,,,{},{},{}
+1055,Earthworm_Peeling,Pele de Minhoca,3,196,98,1,,,,,,0,2,,,,,,{},{},{}
+1056,Torrão de Areia,Torrão de Areia,3,306,153,1,,,,,,0,2,,,,,,{},{},{}
+1057,Moth_Dust,Pó de Traça,3,138,69,1,,,,,,0,2,,,,,,{},{},{}
+1058,Wing_Of_Moth,Asas de Traça,3,200,100,1,,,,,,0,2,,,,,,{},{},{}
+1059,Transparent_Cloth,Tecido,3,306,153,1,,,,,,0,2,,,,,,{},{},{}
+1060,Golden_Hair,Cabelos Dourados,3,430,215,1,,,,,,0,2,,,,,,{},{},{}
+1061,Starsand_Of_Witch,Areia Estelar de Bruxa,3,484,242,1,,,,,,0,2,,,,,,{},{},{}
+1062,Pumpkin_Head,Zé-Lanterna,3,374,187,1,,,,,,0,2,,,,,,{},{},{}
+1063,Sharpened_Cuspid,Presa,3,680,340,10,,,,,,0,2,,,,,,{},{},{}
+1064,Rédeas,Rédeas,3,802,401,10,,,,,,0,2,,,,,,{},{},{}
+1065,Booby_Armadilha,Armadilha,3,100,50,10,,,,,,0,2,,,,,,{},{},{}
+1066,Tree_Of_Archer_1,Tronco de Alta Qualidade,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1067,Tree_Of_Archer_2,Tronco Sólido,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1068,Tree_Of_Archer_3,Tronco Estéril,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1069,Mushroom_Of_Thief_1,Cogumelo Venenoso,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1070,Mushroom_Of_Thief_2,Cogumelo Borrachento,3,2,1,10,,,,,,0,2,,,,,,{},{},{}
+1071,Mage_Test_1,Tubo de Ensaio com Líquido Desconhecido,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1072,Delivery_Message,Mensagem,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1073,Merchant_Recibo de Entrega_1,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1074,Merchant_Recibo de Entrega_2,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1075,Merchant_Recibo de Entrega_3,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1076,Merchant_Recibo de Entrega_4,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1077,Merchant_Recibo de Entrega_5,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1078,Merchant_Recibo de Entrega_6,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1079,Merchant_Recibo de Entrega_7,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1080,Merchant_Recibo de Entrega_8,Recibo de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1081,Merchant_Box_1,Caixa de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1082,Merchant_Box_2,Caixa de Entrega ,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1083,Merchant_Box_3,Caixa de Entrega  ,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1084,Kapra's_Pass,Bilhete da Kafra,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1085,Mage_Test_2,Tubo de Ensaio com Líquido Desconhecido,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1086,Mage_Test_3,Tubo de Ensaio com Líquido Desconhecido,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1087,Mage_Test_4,Tubo de Ensaio com Líquido Desconhecido,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1088,Morocc_Potion,Solução de Morroc,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1089,Payon_Potion,Solução de Payon,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1090,Mage_Test_Etc,Tubo de Ensaio com Líquido Desconhecido,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1091,Merchant_Box_Etc,Caixa de Entrega,3,0,0,10,,,,,,0,2,,,,,,{},{},{}
+1092,Empty_Cylinder,Tubo de Ensaio,3,3,1,10,,,,,,0,2,,,,,,{},{},{}
+1093,Empty_Potion,Garrafa de Poção,3,10,5,10,,,,,,0,2,,,,,,{},{},{}
+1094,Short_Daenggie,Trança Curta,3,278,139,10,,,,,,0,2,,,,,,{},{},{}
+1095,Needle_Of_Alarm,Ponteiro,3,546,273,10,,,,,,0,2,,,,,,{},{},{}
+1096,Round_Shell,Casca Arredondada,3,780,390,10,,,,,,0,2,,,,,,{},{},{}
+1097,Worn_Out_Page,Página Deteriorada,3,948,474,10,,,,,,0,2,,,,,,{},{},{}
+1098,Algemas,Algemas,3,658,329,10,,,,,,0,2,,,,,,{},{},{}
+1099,Worn_Out_Prison_Uniform,Uniforme Velho de Presidiário,3,680,340,10,,,,,,0,2,,,,,,{},{},{}
 1101,Espada,Espada,4,100,,50,25,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
 1102,Espada_,Espada,4,100,,50,25,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
 1103,Espada__,Espada,4,100,,50,25,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
@@ -535,9 +535,9 @@
 1189,Krasnaya,Krasnaya,4,20,,380,200,,2,3,0x00004082,2,2,34,2,50,1,3,{ if(readparam(bStr)>=95) { bonus bBaseAtk,20; } },{},{}
 1190,Claymore_C,Claymore,4,0,,0,220,,1,0,0x00004080,7,2,34,3,1,0,3,{ bonus2 bAddSize,0,40; bonus2 bAddSize,1,40; bonus2 bAddSize,2,40; },{},{}
 1191,Alca_Bringer,Alca Bringer,4,20,10,340,280,,2,0,16514,7,2,34,3,100,1,3,{bonus bAspd,(getrefine()/2);},{},{}
-1992,P_Slayer1,Espada Valhalla Iniciante,4,0,0,0,162,,1,0,16514,7,2,34,2,26,0,3,{},{},{}
-1993,P_Slayer2,Espada Valhalla Intermediária,4,0,0,0,185,,1,0,16514,7,2,34,2,40,0,3,{},{},{}
-1996,Chrome_Twohand_Sword,Espada Cromada de Duas Mãos,4,20,10,40,280,,1,0,16514,7,2,34,3,110,,3,{ bonus bUnbreakableWeapon,0; bonus bAgi,2; bonus bMaxHPRate,10; },{},{}
+1192,P_Slayer1,Espada Valhalla Iniciante,4,0,0,0,162,,1,0,16514,7,2,34,2,26,0,3,{},{},{}
+1193,P_Slayer2,Espada Valhalla Intermediária,4,0,0,0,185,,1,0,16514,7,2,34,2,40,0,3,{},{},{}
+1196,Chrome_Twohand_Sword,Espada Cromada de Duas Mãos,4,20,10,40,280,,1,0,16514,7,2,34,3,110,,3,{ bonus bUnbreakableWeapon,0; bonus bAgi,2; bonus bMaxHPRate,10; },{},{}
 1201,Faca,Faca,4,50,,40,17,,1,3,2124381935,7,2,2,1,1,1,1,{},{},{}
 1202,Faca_,Faca,4,50,,40,17,,1,4,0xFE9F7EEF,7,2,2,1,1,1,1,{},{},{}
 1203,Faca__,Faca,4,50,,40,17,,1,0,0xFE9F7EEF,7,2,2,1,1,1,1,{},{},{}
@@ -748,7 +748,7 @@
 1485,Battle_Fork,Tridente de Batalha,4,20,,70,112,,3,4,16514,2,2,34,2,50,1,5,{},{},{}
 1486,Krieger_Twohand_Spear1,Lança de Duas Mãos Glori,4,20,,0,220,,3,0,16514,7,2,34,4,80,1,5,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; } if(getrefine()>8) { if(BaseJob==Job_Knight) bonus4 bAutoSpellOnSkill,"KN_PIERCE","NPC_CRITICALWOUND",2,200; else if(BaseJob==Job_Crusader) bonus3 bAutoSpell,"PA_PRESSURE",5,200; } },{},{}
 1487,Lance_C,Lance,4,0,,0,220,,3,0,0x00004082,7,2,34,3,1,0,5,{ bonus2 bAddSize,Size_Small,50; bonus2 bAddSize,Size_Medium,50; bonus2 bAddSize,Size_Large,50; },{},{}
-1488,Ahlspiess_C,Ahlspiess,4,20,,0,135,,3,0,16512,7,2,34,4,1,1,5,{ bonus bIgnoreDefRace,RC_NonBoss; bonus bIgnoreDefRace,RC_Boss; bonus2 bAddRace,RC_DemiHuman,10; bonus3 bAutoSpell,"KN_PIERCE",5,30; },{},{}
+1488,Ahlspiess_C,Ahlspiess,4,20,,0,135,,3,0,0x00004080,7,2,34,4,1,1,5,{ bonus bIgnoreDefRace,RC_NonBoss; bonus bIgnoreDefRace,RC_Boss; bonus2 bAddRace,RC_DemiHuman,10; bonus3 bAutoSpell,"KN_PIERCE",5,30; },{},{}
 1501,Clava,Clava,4,120,,70,23,,1,3,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
 1502,Clava_,Clava,4,120,,70,23,,1,4,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
 1503,Clava__,Clava,4,120,,70,23,,1,0,0x0004C5B3,7,2,2,1,2,1,8,{},{},{}
