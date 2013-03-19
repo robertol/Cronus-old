@@ -445,95 +445,95 @@
 1097,Worn_Out_Page,Página Deteriorada,3,948,474,10,,,,,,0,2,,,,,,{},{},{}
 1098,Algemas,Algemas,3,658,329,10,,,,,,0,2,,,,,,{},{},{}
 1099,Worn_Out_Prison_Uniform,Uniforme Velho de Presidiário,3,680,340,10,,,,,,0,2,,,,,,{},{},{}
-1101,Espada,Espada,4,100,,50,25,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1102,Espada_,Espada,4,100,,50,25,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1101,Espada,Espada,4,100,50,50,25,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1102,Espada_,Espada,4,100,50,50,25,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
 1103,Espada__,Espada,4,100,,50,25,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1104,Alfanje,Alfanje,4,1500,,60,39,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1105,Alfanje_,Alfanje,4,1500,,60,39,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1106,Alfanje__,Alfanje,4,1500,,60,39,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1107,Lâmina,Lâmina,4,2900,,70,53,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1108,Lâmina_,Lâmina,4,2900,,70,53,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1109,Lâmina__,Lâmina,4,2900,,70,53,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
-1110,Lapier,Florete,4,10000,,50,70,,1,2,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1111,Lapier_,Florete,4,10000,,50,70,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1112,Lapier__,Florete,4,10000,,50,70,,1,0,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1113,Scimiter,Cimitarra,4,17000,,70,85,,1,2,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1114,Scimiter_,Cimitarra,4,17000,,70,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1115,Scimiter__,Cimitarra,4,17000,,70,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1116,Kataná,Kataná,4,2000,,100,60,,1,3,0x00004082,7,2,34,1,4,1,3,{},{},{}
-1117,Kataná_,Kataná,4,2000,,100,60,,1,4,0x00004082,7,2,34,1,4,1,3,{},{},{}
-1118,Kataná__,Kataná,4,2000,,100,60,,1,0,0x00004082,7,2,34,1,4,1,3,{},{},{}
-1119,Tsurugi,Tsurugi,4,51000,,120,130,,1,1,0x000654E2,7,2,2,3,27,1,2,{},{},{}
-1120,Tsurugi_,Tsurugi,4,51000,,120,130,,1,2,0x000654E2,7,2,2,3,27,1,2,{},{},{}
-1121,Tsurugi__,Tsurugi,4,51000,,120,130,,1,0,0x000654E2,7,2,2,3,27,1,2,{},{},{}
-1122,Ring_Pommel_Saber,Sabre de Impacto,4,24000,,90,100,,1,2,0x000654E2,7,2,2,2,14,1,2,{},{},{}
-1123,Haedonggum,Haedonggum,4,50000,,90,120,,1,1,0x000654E2,7,2,2,3,27,1,2,{ bonus bInt,3; },{},{}
-1124,Orcish_Sword,Espada Orc,4,20,,80,90,,1,0,0x000654E3,7,2,2,3,5,1,2,{ bonus bUnbreakableWeapon,0; },{},{}
-1125,Ring_Pommel_Saber_,Sabre de Impacto,4,24000,,90,100,,1,3,0x000654E2,7,2,2,2,14,1,2,{},{},{}
-1126,Sabre,Sabre,4,49000,,100,115,,1,2,0x000654E2,7,2,2,3,27,1,2,{},{},{}
-1127,Sabre_,Sabre,4,49000,,100,115,,1,3,0x000654E2,7,2,2,3,27,1,2,{},{},{}
-1128,Hae_Dong_Gum_,Haedonggum,4,50000,,90,120,,1,2,0x000654E2,7,2,2,3,27,1,2,{ bonus bInt,3; },{},{}
-1129,Flamberge,Flamberge,4,60000,,150,150,,1,0,0x00004080,7,2,2,3,27,1,2,{},{},{}
-1130,Nagan,Nagan,4,20,,50,120,,1,0,0x000654E2,7,2,2,4,40,1,2,{ skill "TF_DOUBLE",5; bonus bDoubleRate,25; bonus2 bAddRace,RC_DemiHuman,5; },{},{}
-1131,Ice_Falchon,Alfanje de Gelo,4,20,,60,100,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Water; bonus2 bAddEff,Eff_Freeze,500; bonus2 bAddEff2,Eff_Freeze,10; skill "MG_COLDBOLT",3; bonus3 bAutoSpell,"MG_COLDBOLT",3,100; },{},{}
-1132,Lâmina Turca,Lâmina Turca,4,20,,70,115,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bAddEff,Eff_Curse,30; bonus2 bWeaponComaRace,RC_NonBoss,10; },{},{}
-1133,Fire_Brand,Língua de Fogo,4,20,,50,100,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Fire; skill "MG_FIREBOLT",3; bonus3 bAutoSpell,"MG_FIREBOLT",3,100; },{},{}
-1134,Scissores_Sword,Espada de César,4,20,,70,140,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bAddRace,RC_Plant,25; bonus bIgnoreDefRace,RC_Plant; },{},{}
-1135,Cutlas,Cutelo,4,20,,90,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ skill "SM_BASH",5; bonus bStr,2; bonus bDef,1; },{},{}
-1136,Solar_Sword,Espada Solar,4,20,,120,85,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Fire; bonus2 bHPDrainRate,1000,1; bonus2 bSPLossRate,15,10000; },{},{}
-1137,Excalibur,Excalibur,4,20,,120,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bInt,5; bonus bLuk,10; bonus bDex,-1; bonus bAtkEle,Ele_Holy; },{},{}
-1138,Mysteltain_,Mysteltain,4,20,,100,170,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Dark; bonus2 bAddEle,Ele_Ghost,15; bonus3 bAutoSpell,"MG_STONECURSE",3,100; bonus2 bAddEff,Eff_Stone,10; bonus bDex,3; },{},{}
-1139,Tale_Fing_,Talefing,4,20,,100,200,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Dark; bonus2 bHPLossRate,35,10000; },{},{}
-1140,Byeorrun_Gum,Byeollungum,4,20,,90,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bSubRace,RC_NonBoss,-10; bonus2 bAddRace,RC_Boss,50; bonus bAllStats,2; },{},{}
-1141,Immaterial_Sword,Espada Imaterial,4,20,,90,140,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Ghost; bonus2 bSPVanishRate,30,30; bonus bSPDrainValue,-1; bonus bUnbreakableWeapon,0; },{},{}
-1142,Jewel_Sword,Espada Adornada,4,20,,220,104,,1,0,0x000654E2,7,2,2,3,68,1,2,{ bonus2 bAddMonsterDropItemGroup,IG_Jewel,100; },{},{}
-1143,Gaia_Sword,Espada de Gaia,4,20,,250,140,,1,0,0x000654E2,7,2,2,3,74,1,2,{ bonus2 bAddMonsterDropItemGroup,IG_Ore,30; },{},{}
-1144,Sasimi,Sashimi,4,20,,140,75,,1,0,0x000654E2,7,2,2,3,48,1,2,{ bonus bAtkEle,Ele_Wind; bonus3 bAddMonsterDropItem,544,RC_Fish,4000; },{},{}
-1145,Holy_Avenger,Vingadora Sagrada,4,450000,,135,125,,1,0,0x00004000,7,2,2,3,75,1,2,{ bonus bAtkEle,Ele_Holy; bonus bVit,2; },{},{}
-1146,Town_Sword,Espada Citadina,4,42000,,80,100,,1,1,1,7,2,2,3,30,1,2,{},{},{}
-1147,Town_Sword_,Espada Citadina,4,42000,,80,100,,1,2,1,7,2,2,3,30,1,2,{},{},{}
-1148,Star_Dust_Blade,Lâmina de Poeira Estelar,4,20,,100,140,,1,1,1,7,2,2,4,45,1,2,{ bonus2 bAddEff,Eff_Stun,500; bonus bUnbreakableWeapon,0; },{},{}
-1149,Flamberge_,Flamberge,4,60000,,150,150,,1,2,16512,7,2,2,3,27,1,2,{},{},{}
-1151,Espada Matadora,Espada Matadora,4,15000,,130,90,,1,2,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1152,Espada Matadora_,Espada Matadora,4,15000,,130,90,,1,3,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1153,Espada Matadora__,Espada Matadora,4,15000,,130,90,,1,0,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1154,Bastard_Sword,Espada Bastarda,4,22500,,160,115,,1,2,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1155,Bastard_Sword_,Espada Bastarda,4,22500,,160,115,,1,3,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1156,Bastard_Sword__,Espada Bastarda,4,22500,,160,115,,1,0,0x00004082,7,2,34,2,18,1,3,{},{},{}
-1157,Two_Hand_Sword,Espada de Duas Mãos,4,60000,,220,160,,1,1,0x00004082,7,2,34,3,33,1,3,{},{},{}
-1158,Two_Hand_Sword_,Espada de Duas Mãos,4,60000,,220,160,,1,2,0x00004082,7,2,34,3,33,1,3,{},{},{}
-1159,Two_Hand_Sword__,Espada de Duas Mãos,4,60000,,220,160,,1,0,0x00004082,7,2,34,3,33,1,3,{},{},{}
-1160,Broad_Sword,Espada Larga,4,65000,,200,140,,1,1,0x00004082,7,2,34,3,33,1,3,{ bonus bDef,5; bonus bUnbreakableWeapon,0; },{},{}
-1161,Balmung,Balmung,4,20,,100,250,,1,0,0xFFFFFFFF,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; bonus bAtkEle,Ele_Holy; },{},{}
-1162,Broad_Sword_,Espada Larga,4,65000,,200,140,,1,2,0x00004082,7,2,34,3,33,1,3,{ bonus bDef,5; bonus bUnbreakableWeapon,0; },{},{}
-1163,Claymore,Claymore,4,74000,,250,180,,1,0,0x00004080,7,2,34,3,33,1,3,{},{},{}
-1164,Muramasa,Muramasa,4,20,,100,155,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bCritical,30; bonus bAspdRate,8; bonus2 bAddEff2,Eff_Curse,10; },{},{}
-1165,Masamune,Masamune,4,20,,100,200,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bFlee,30; bonus bStr,-5; bonus bAspd,2; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
-1166,Dragon_Slayer,Caçadora de Dragões,4,20,,130,150,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_Dragon; bonus2 bAddRace,RC_Dragon,15; },{},{}
-1167,Schweizersabel,Schweizersabel,4,20,,160,160,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bAtkEle,Ele_Wind; bonus bDef,1; bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,100; },{},{}
-1168,Zweihander,Zweihander,4,20,,220,200,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; },{},{}
-1169,Executora_,Executora,4,20,,220,155,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
-1170,Katzbalger,Katzbalger,4,20,,200,175,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bVit,5; bonus bDef,10; },{},{}
-1171,Zweihander_,Zweihander,4,20,,220,200,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; },{},{}
-1172,Claymore_,Claymore,4,74000,,250,180,,1,2,0x00004080,7,2,34,3,33,1,3,{},{},{}
-1173,Muramasa [A]_C,Muramasa [A],4,1,,0,204,,1,0,0x00004082,7,2,34,4,1,0,3,{ bonus bCritical,30; bonus bAspdRate,8; },{},{}
-1174,Executioner_C,Executioner,4,2,,0,190,,1,0,0x00004082,7,2,34,4,0,0,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
-1175,Altas_Weapon,Zanbatô,4,20,,200,200,,1,1,0x00004082,2,2,34,4,55,1,3,{ bonus bCritical,10; if(readparam(bStr)>=80) bonus bBreakArmorRate,500; },{},{}
-1176,Muscle_Cutter,Dilaceradora,4,20,,220,160,,1,2,0x00004082,2,2,34,4,55,1,3,{ bonus2 bAddEff,Eff_Bleeding,800; bonus3 bAutoSpell,"AL_DECAGI",1,30; },{},{}
-1177,Muramash,Muramash,4,20,,0,120,,1,0,0x00004082,7,2,34,1,0,0,3,{ bonus2 bAddRace,RC_Boss,50; bonus2 bAddRace,RC_NonBoss,50; },{},{}
-1178,Schweizersabel_,Schweizersabel,4,20,,160,160,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bAtkEle,Ele_Wind; bonus bDef,1; bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,100; },{},{}
-1179,Executora__,Executora,4,20,,220,155,,1,1,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
-1180,Dragon_Slayer_,Matadora de Dragões,4,20,,1300,150,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_Dragon; bonus2 bAddRace,RC_Dragon,15; },{},{}
-1181,Tae_Goo_Lyeon,Tae Goo Lyeon,4,20,,200,250,,1,2,0x00004082,2,2,34,4,90,1,3,{ bonus bFlee2,10; if(JobLevel>=70) autobonus "{ bonus bBaseAtk,50; }",10,10000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }"; if(getrefine()>8) { bonus bCastrate,-20; bonus bDelayRate,-20; } },{},{}
-1182,Bloody_Eater,Comedor Sangrento,4,20,,120,200,,1,2,0x00004082,7,2,34,4,50,1,3,{ bonus bAtkEle,Ele_Ghost; autobonus "{ bonus bCritical,100; bonus bBaseAtk,50; }",1,5000,0,"{ specialeffect2 EF_FIRESPLASHHIT; }"; bonus bHPGainValue,100; },{},{}
-1183,BF_Two_Handed_Sword1,Katzbalger de Assalto A,4,20,,0,200,,1,0,0x00004082,7,2,34,3,80,1,3,{ bonus bStr,2; bonus2 bAddRace,RC_DemiHuman,55; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
-1184,BF_Two_Handed_Sword2,Katzbalger de Assalto B,4,20,,0,200,,1,0,0x00004082,7,2,34,3,80,1,3,{ bonus bCritical,20; bonus2 bAddRace,RC_DemiHuman,55; bonus bCritAtkRate,20; bonus bUnbreakableWeapon,0; },{},{}
-1185,Violet_Fear,Terror Violeta,4,20,,220,275,,1,2,0x00004082,2,2,34,4,80,1,3,{ bonus3 bAutoSpell,"WZ_METEOR",3,30; bonus3 bAutoSpell,"WZ_FROSTNOVA",5,50; autobonus "{ bonus bIgnoreDefRace,RC_NonBoss; }",50,5000; },{},{}
-1186,Death_Guidance,Guia da Morte,4,20,,200,200,,1,2,0x00004082,2,2,34,4,70,1,3,{ bonus bStr,5; bonus bAgi,2; bonus bFlee2,20; bonus3 bAutoSpell,"NPC_HELLPOWER",1,10; bonus4 bAutoSpell,"NPC_HELLPOWER",1,10,0; if( getrefine()>8 ) bonus3 bAutoSpell,"NPC_VAMPIRE_GIFT",2,20; else bonus3 bAutoSpell,"NPC_VAMPIRE_GIFT",1,20; },{},{}
-1187,Krieger_Twohand_Sword1,Claymore Gloriosa,4,20,,0,220,,1,0,0x00004082,7,2,34,4,80,1,3,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-3)*(getrefine()-3); bonus2 bIgnoreDefRate,RC_DemiHuman,5; } if(getrefine()>8) { bonus3 bAutoSpell,"LK_CONCENTRATION",getskilllv("LK_CONCENTRATION")>1?getskilllv("LK_CONCENTRATION"):1,30; bonus3 bAutoSpell,"LK_AURABLADE",getskilllv("LK_AURABLADE")>1?getskilllv("LK_AURABLADE"):1,30; } },{},{}
-1188,Veteran_Sword,Espada Veterana,4,10000,,200,180,,1,1,0x00004082,7,2,34,4,80,1,3,{ if(getskilllv("SM_BASH")==10) { bonus2 bSkillAtk,"SM_BASH",50; } if(getskilllv("KN_BOWLINGBASH")==10) { bonus2 bSkillAtk,"KN_BOWLINGBASH",50; } bonus bStr,1; bonus bDex,1; },{},{}
-1189,Krasnaya,Krasnaya,4,20,,380,200,,2,3,0x00004082,2,2,34,2,50,1,3,{ if(readparam(bStr)>=95) { bonus bBaseAtk,20; } },{},{}
-1190,Claymore_C,Claymore,4,0,,0,220,,1,0,0x00004080,7,2,34,3,1,0,3,{ bonus2 bAddSize,0,40; bonus2 bAddSize,1,40; bonus2 bAddSize,2,40; },{},{}
+1104,Alfanje,Alfanje,4,1500,750,60,39,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1105,Alfanje_,Alfanje,4,1500,750,60,39,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1106,Alfanje__,Alfanje,4,1500,750,60,39,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1107,Lâmina,Lâmina,4,2900,1450,70,53,,1,3,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1108,Lâmina_,Lâmina,4,2900,1450,70,53,,1,4,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1109,Lâmina__,Lâmina,4,2900,1450,70,53,,1,0,0x000654E3,7,2,2,1,2,1,2,{},{},{}
+1110,Lapier,Florete,4,10000,5000,50,70,,1,2,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1111,Lapier_,Florete,4,10000,5000,50,70,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1112,Lapier__,Florete,4,10000,5000,50,70,,1,0,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1113,Scimiter,Cimitarra,4,17000,8500,70,85,,1,2,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1114,Scimiter_,Cimitarra,4,17000,8500,70,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1115,Scimiter__,Cimitarra,4,17000,8500,70,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
+1116,Kataná,Kataná,4,2000,1000,100,60,,1,3,0x00004082,7,2,34,1,4,1,3,{},{},{}
+1117,Kataná_,Kataná,4,2000,1000,100,60,,1,4,0x00004082,7,2,34,1,4,1,3,{},{},{}
+1118,Kataná__,Kataná,4,2000,1000,100,60,,1,0,0x00004082,7,2,34,1,4,1,3,{},{},{}
+1119,Tsurugi,Tsurugi,4,51000,25500,120,130,,1,1,0x000654E2,7,2,2,3,27,1,2,{},{},{}
+1120,Tsurugi_,Tsurugi,4,51000,25500,120,130,,1,2,0x000654E2,7,2,2,3,27,1,2,{},{},{}
+1121,Tsurugi__,Tsurugi,4,51000,25500,120,130,,1,0,0x000654E2,7,2,2,3,27,1,2,{},{},{}
+1122,Ring_Pommel_Saber,Sabre de Impacto,4,24000,12000,90,100,,1,2,0x000654E2,7,2,2,2,14,1,2,{},{},{}
+1123,Haedonggum,Haedonggum,4,50000,25000,90,120,,1,1,0x000654E2,7,2,2,3,27,1,2,{ bonus bInt,3; },{},{}
+1124,Orcish_Sword,Espada Orc,4,20,10,80,90,,1,0,0x000654E3,7,2,2,3,5,1,2,{ bonus bUnbreakableWeapon,0; },{},{}
+1125,Ring_Pommel_Saber_,Sabre de Impacto,4,24000,12000,90,100,,1,3,0x000654E2,7,2,2,2,14,1,2,{},{},{}
+1126,Sabre,Sabre,4,49000,24500,100,115,,1,2,0x000654E2,7,2,2,3,27,1,2,{},{},{}
+1127,Sabre_,Sabre,4,49000,24500,100,115,,1,3,0x000654E2,7,2,2,3,27,1,2,{},{},{}
+1128,Hae_Dong_Gum_,Haedonggum,4,50000,25000,90,120,,1,2,0x000654E2,7,2,2,3,27,1,2,{ bonus bInt,3; },{},{}
+1129,Flamberge,Flamberge,4,60000,30000,150,150,,1,0,0x00004080,7,2,2,3,27,1,2,{},{},{}
+1130,Nagan,Nagan,4,20,10,50,120,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bDoubleRate,25; bonus2 bAddRace,RC_DemiHuman,5; },{},{}
+1131,Ice_Falchon,Alfanje de Gelo,4,20,10,60,100,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Water; bonus2 bAddEff,Eff_Freeze,500; bonus2 bAddEff2,Eff_Freeze,10; skill "MG_COLDBOLT",3; bonus3 bAutoSpell,"MG_COLDBOLT",3,100; },{},{}
+1132,Lâmina Turca,Lâmina Turca,4,20,10,70,115,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bAddEff,Eff_Curse,30; bonus2 bWeaponComaRace,RC_NonBoss,10; },{},{}
+1133,Fire_Brand,Língua de Fogo,4,20,10,50,100,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Fire; skill "MG_FIREBOLT",3; bonus3 bAutoSpell,"MG_FIREBOLT",3,100; },{},{}
+1134,Scissores_Sword,Espada de César,4,20,10,70,140,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bAddRace,RC_Plant,25; bonus bIgnoreDefRace,RC_Plant; },{},{}
+1135,Cutlas,Cutelo,4,20,10,90,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ skill "SM_BASH",5; bonus bStr,2; bonus bDef,1; },{},{}
+1136,Solar_Sword,Espada Solar,4,20,10,120,85,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Fire; bonus2 bHPDrainRate,1000,1; bonus2 bSPLossRate,15,10000; },{},{}
+1137,Excalibur,Excalibur,4,20,10,120,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bInt,5; bonus bLuk,10; bonus bDex,-1; bonus bAtkEle,Ele_Holy; },{},{}
+1138,Mysteltain_,Mysteltain,4,20,10,100,170,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Dark; bonus2 bAddEle,Ele_Ghost,15; bonus3 bAutoSpell,"MG_STONECURSE",3,100; bonus2 bAddEff,Eff_Stone,10; bonus bDex,3; },{},{}
+1139,Tale_Fing_,Talefing,4,20,10,100,200,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Dark; bonus2 bHPLossRate,35,10000; },{},{}
+1140,Byeorrun_Gum,Byeollungum,4,20,10,90,150,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus2 bSubRace,RC_NonBoss,-10; bonus2 bAddRace,RC_Boss,50; bonus bAllStats,2; },{},{}
+1141,Immaterial_Sword,Espada Imaterial,4,20,10,90,140,,1,0,0x000654E2,7,2,2,4,40,1,2,{ bonus bAtkEle,Ele_Ghost; bonus2 bSPVanishRate,30,30; bonus bSPDrainValue,-1; bonus bUnbreakableWeapon,0; },{},{}
+1142,Jewel_Sword,Espada Adornada,4,20,10,220,104,,1,0,0x000654E2,7,2,2,3,68,1,2,{ bonus2 bAddMonsterDropItemGroup,IG_Jewel,100; },{},{}
+1143,Gaia_Sword,Espada de Gaia,4,20,10,250,140,,1,0,0x000654E2,7,2,2,3,74,1,2,{ bonus2 bAddMonsterDropItemGroup,IG_Ore,30; },{},{}
+1144,Sasimi,Sashimi,4,20,10,140,75,,1,0,0x000654E2,7,2,2,3,48,1,2,{ bonus bAtkEle,Ele_Wind; bonus3 bAddMonsterDropItem,544,RC_Fish,4000; },{},{}
+1145,Holy_Avenger,Vingadora Sagrada,4,450000,225000,135,125,,1,0,0x00004000,7,2,2,3,75,1,2,{ bonus bAtkEle,Ele_Holy; bonus bVit,2; },{},{}
+1146,Town_Sword,Espada Citadina,4,42000,21000,80,100,,1,1,1,7,2,2,3,30,1,2,{},{},{}
+1147,Town_Sword_,Espada Citadina,4,42000,21000,80,100,,1,2,1,7,2,2,3,30,1,2,{},{},{}
+1148,Star_Dust_Blade,Lâmina de Poeira Estelar,4,20,10,100,140,,1,1,1,7,2,2,4,45,1,2,{ bonus2 bAddEff,Eff_Stun,500; bonus bUnbreakableWeapon,0; },{},{}
+1149,Flamberge_,Flamberge,4,60000,30000,150,150,,1,2,16512,7,2,2,3,27,1,2,{},{},{}
+1151,Espada Matadora,Espada Matadora,4,15000,7500,130,90,,1,2,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1152,Espada Matadora_,Espada Matadora,4,15000,7500,130,90,,1,3,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1153,Espada Matadora__,Espada Matadora,4,15000,7500,130,90,,1,0,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1154,Bastard_Sword,Espada Bastarda,4,22500,11250,160,115,,1,2,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1155,Bastard_Sword_,Espada Bastarda,4,22500,11250,160,115,,1,3,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1156,Bastard_Sword__,Espada Bastarda,4,22500,11250,160,115,,1,0,0x00004082,7,2,34,2,18,1,3,{},{},{}
+1157,Two_Hand_Sword,Espada de Duas Mãos,4,60000,30000,220,160,,1,1,0x00004082,7,2,34,3,33,1,3,{},{},{}
+1158,Two_Hand_Sword_,Espada de Duas Mãos,4,60000,30000,220,160,,1,2,0x00004082,7,2,34,3,33,1,3,{},{},{}
+1159,Two_Hand_Sword__,Espada de Duas Mãos,4,60000,30000,220,160,,1,0,0x00004082,7,2,34,3,33,1,3,{},{},{}
+1160,Broad_Sword,Espada Larga,4,65000,32500,200,140,,1,1,0x00004082,7,2,34,3,33,1,3,{ bonus bDef,5; bonus bUnbreakableWeapon,0; },{},{}
+1161,Balmung,Balmung,4,20,10,100,250,,1,0,0xFFFFFFFF,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; bonus bAtkEle,Ele_Holy; },{},{}
+1162,Broad_Sword_,Espada Larga,4,65000,32500,200,140,,1,2,0x00004082,7,2,34,3,33,1,3,{ bonus bDef,5; bonus bUnbreakableWeapon,0; },{},{}
+1163,Claymore,Claymore,4,74000,36000,250,180,,1,0,0x00004080,7,2,34,3,33,1,3,{},{},{}
+1164,Muramasa,Muramasa,4,20,10,100,155,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bCritical,30; bonus bAspdRate,8; bonus2 bAddEff2,Eff_Curse,10; },{},{}
+1165,Masamune,Masamune,4,20,10,100,200,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bFlee,30; bonus bStr,-5; bonus bAspd,2; bonus bDefRate,-67; bonus bDef2Rate,-67; },{},{}
+1166,Dragon_Slayer,Caçadora de Dragões,4,20,10,130,150,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_Dragon; bonus2 bAddRace,RC_Dragon,15; },{},{}
+1167,Schweizersabel,Schweizersabel,4,20,10,160,160,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bAtkEle,Ele_Wind; bonus bDef,1; bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,100; },{},{}
+1168,Zweihander,Zweihander,4,20,10,220,200,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; },{},{}
+1169,Executora_,Executora,4,20,10,220,155,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
+1170,Katzbalger,Katzbalger,4,20,10,200,175,,1,0,0x00004082,7,2,34,4,48,1,3,{ bonus bVit,5; bonus bDef,10; },{},{}
+1171,Zweihander_,Zweihander,4,20,10,220,200,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bUnbreakableWeapon,0; },{},{}
+1172,Claymore_,Claymore,4,74000,36000,250,180,,1,2,0x00004080,7,2,34,3,33,1,3,{},{},{}
+1173,Muramasa [A]_C,Muramasa [A],4,1,0,0,204,,1,0,0x00004082,7,2,34,4,1,0,3,{ bonus bCritical,30; bonus bAspdRate,8; },{},{}
+1174,Executioner_C,Executioner,4,2,1,0,190,,1,0,0x00004082,7,2,34,4,0,0,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
+1175,Altas_Weapon,Zanbatô,4,20,10,200,200,,1,1,0x00004082,2,2,34,4,55,1,3,{ bonus bCritical,10; if(readparam(bStr)>=80) bonus bBreakArmorRate,500; },{},{}
+1176,Muscle_Cutter,Dilaceradora,4,20,10,220,160,,1,2,0x00004082,2,2,34,4,55,1,3,{ bonus2 bAddEff,Eff_Bleeding,800; bonus3 bAutoSpell,"AL_DECAGI",1,30; },{},{}
+1177,Muramash,Muramash,4,20,10,0,120,,1,0,0x00004082,7,2,34,1,0,0,3,{ bonus2 bAddRace,RC_Boss,50; bonus2 bAddRace,RC_NonBoss,50; },{},{}
+1178,Schweizersabel_,Schweizersabel,4,20,10,160,160,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bAtkEle,Ele_Wind; bonus bDef,1; bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,100; },{},{}
+1179,Executora__,Executora,4,20,10,220,155,,1,1,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_DemiHuman; bonus2 bAddRace,RC_DemiHuman,20; bonus2 bSubRace,RC_DemiHuman,-10; bonus bAtkEle,Ele_Dark; },{},{}
+1180,Dragon_Slayer_,Matadora de Dragões,4,20,10,1300,150,,1,2,0x00004082,7,2,34,4,48,1,3,{ bonus bIgnoreDefRace,RC_Dragon; bonus2 bAddRace,RC_Dragon,15; },{},{}
+1181,Tae_Goo_Lyeon,Tae Goo Lyeon,4,20,10,200,250,,1,2,0x00004082,2,2,34,4,90,1,3,{ bonus bFlee2,10; if(JobLevel>=70) autobonus "{ bonus bBaseAtk,50; }",10,10000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }"; if(getrefine()>8) { bonus bCastrate,-20; bonus bDelayRate,-20; } },{},{}
+1182,Bloody_Eater,Comedor Sangrento,4,20,10,120,200,,1,2,0x00004082,7,2,34,4,50,1,3,{ bonus bAtkEle,Ele_Ghost; autobonus "{ bonus bCritical,100; bonus bBaseAtk,50; }",1,5000,0,"{ specialeffect2 EF_FIRESPLASHHIT; }"; bonus bHPGainValue,100; },{},{}
+1183,BF_Two_Handed_Sword1,Katzbalger de Assalto A,4,20,10,0,200,,1,0,0x00004082,7,2,34,3,80,1,3,{ bonus bStr,2; bonus2 bAddRace,RC_DemiHuman,55; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
+1184,BF_Two_Handed_Sword2,Katzbalger de Assalto B,4,20,10,0,200,,1,0,0x00004082,7,2,34,3,80,1,3,{ bonus bCritical,20; bonus2 bAddRace,RC_DemiHuman,55; bonus bCritAtkRate,20; bonus bUnbreakableWeapon,0; },{},{}
+1185,Violet_Fear,Terror Violeta,4,20,10,220,275,,1,2,0x00004082,2,2,34,4,80,1,3,{ bonus3 bAutoSpell,"WZ_METEOR",3,30; bonus3 bAutoSpell,"WZ_FROSTNOVA",5,50; autobonus "{ bonus bIgnoreDefRace,RC_NonBoss; }",50,5000; },{},{}
+1186,Death_Guidance,Guia da Morte,4,20,10,200,200,,1,2,0x00004082,2,2,34,4,70,1,3,{ bonus bStr,5; bonus bAgi,2; bonus bFlee2,20; bonus3 bAutoSpell,"NPC_HELLPOWER",1,10; bonus4 bAutoSpell,"NPC_HELLPOWER",1,10,0; if( getrefine()>8 ) bonus3 bAutoSpell,"NPC_VAMPIRE_GIFT",2,20; else bonus3 bAutoSpell,"NPC_VAMPIRE_GIFT",1,20; },{},{}
+1187,Krieger_Twohand_Sword1,Claymore Gloriosa,4,20,10,0,220,,1,0,0x00004082,7,2,34,4,80,1,3,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-3)*(getrefine()-3); bonus2 bIgnoreDefRate,RC_DemiHuman,5; } if(getrefine()>8) { bonus3 bAutoSpell,"LK_CONCENTRATION",getskilllv("LK_CONCENTRATION")>1?getskilllv("LK_CONCENTRATION"):1,30; bonus3 bAutoSpell,"LK_AURABLADE",getskilllv("LK_AURABLADE")>1?getskilllv("LK_AURABLADE"):1,30; } },{},{}
+1188,Veteran_Sword,Espada Veterana,4,10000,5000,200,180,,1,1,0x00004082,7,2,34,4,80,1,3,{ if(getskilllv("SM_BASH")==10) { bonus2 bSkillAtk,"SM_BASH",50; } if(getskilllv("KN_BOWLINGBASH")==10) { bonus2 bSkillAtk,"KN_BOWLINGBASH",50; } bonus bStr,1; bonus bDex,1; },{},{}
+1189,Krasnaya,Krasnaya,4,20,10,380,200,,2,3,0x00004082,2,2,34,2,50,1,3,{ if(readparam(bStr)>=95) { bonus bBaseAtk,20; } },{},{}
+1190,Claymore_C,Claymore,4,0,10,0,220,,1,0,0x00004080,7,2,34,3,1,0,3,{ bonus2 bAddSize,0,40; bonus2 bAddSize,1,40; bonus2 bAddSize,2,40; },{},{}
 1191,Alca_Bringer,Alca Bringer,4,20,10,340,280,,2,0,16514,7,2,34,3,100,1,3,{bonus bAspd,(getrefine()/2);},{},{}
 1192,P_Slayer1,Espada Valhalla Iniciante,4,0,0,0,162,,1,0,16514,7,2,34,2,26,0,3,{},{},{}
 1193,P_Slayer2,Espada Valhalla Intermediária,4,0,0,0,185,,1,0,16514,7,2,34,2,40,0,3,{},{},{}
