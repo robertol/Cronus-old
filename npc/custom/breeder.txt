@@ -10,7 +10,7 @@
 
 prontera,124,201,1	script	Universal Rental NPC	726,{
 	if (ismounting()) {
-		message strcharinfo(0),"You must first remove your mount.";
+		message strcharinfo(0),"Remova sua montaria primeiramente.";
 		close; }
 	else if ((eaclass()&EAJ_THIRDMASK==EAJ_RANGER) && !countitem(6124)) {
 		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkoption(Option_Wug) && !checkoption(Option_Wugrider)) {
@@ -29,7 +29,7 @@ prontera,124,201,1	script	Universal Rental NPC	726,{
 		else setriding; }
 	else if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) setmadogear;
 	else {
-		message strcharinfo(0),"You do not meet requirements to rent.";
+		message strcharinfo(0),"Você não atende os requerimentos para o aluguel.";
 		close; }
 	specialeffect2 EF_TEIHIT3;
 	close;

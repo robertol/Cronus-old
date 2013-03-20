@@ -33,11 +33,16 @@ OnUnhide:
 
 OnTouch:
 	switch ($@airplanelocation) {
-	case 0: warp "yuno",92,260; end;
-	case 1: warp "einbroch",92,278; end;
-	case 2: warp "lighthalzen",302,75; end;
-	case 3: warp "hugel",181,146; end;
+		case 0: 
+			warp "yuno",92,260;
+		case 1: 
+			warp "einbroch",92,278;
+		case 2: 
+			warp "lighthalzen",302,75;
+		case 3: 
+			warp "hugel",181,146;
 	}
+	end;
 }
 
 airplane,243,29,0	duplicate(#AirshipWarp-1)	#AirshipWarp-2	45,1,1
@@ -226,8 +231,9 @@ airplane,66,93,3	script	Umbala Lady#ein_p	783,{
 }
 
 airplane,71,91,7	script	Umbala Man#ein_p	789,{
+
+	mes "[Chrmlim]";
 	if (event_umbala >= 3) {
-		mes "[Chrmlim]";
 		mes "Hey there~";
 		mes "From that look on";
 		mes "your face, I see that";
@@ -250,7 +256,6 @@ airplane,71,91,7	script	Umbala Man#ein_p	789,{
 		mes "ended up, um, ^333333in Nifflheim^000000.";
 	}
 	else {
-		mes "[Chrmlim]";
 		mes "Bajoo ga";
 		mes "nukta Airship.";
 		next;
@@ -270,8 +275,8 @@ airplane,71,91,7	script	Umbala Man#ein_p	789,{
 
 airplane,250,58,2	script	Airship Staff#airplane	67,{
 	// Hugel quest addition
+	mes "[Airship Staff]";
 	if (hg_ma1 == 3) {
-		mes "[Airship Staff]";
 		mes "Welcome";
 		mes "to the Airship.";
 		mes "How may I help you?";
@@ -282,7 +287,6 @@ airplane,250,58,2	script	Airship Staff#airplane	67,{
 		close;
 	}
 	// Hugel quest end
-	mes "[Airship Staff]";
 	mes "Welcome";
 	mes "to the Airship.";
 	mes "How may I help you?";
@@ -363,8 +367,8 @@ airplane,72,34,6	script	Aanos#01airplane	702,{
 
 airplane,221,158,2	script	Pilot#airplane	852,{
 	// Hugel quest addition
+	mes "[Pilot]";
 	if (hg_ma1 == 3) {
-		mes "[Pilot]";
 		mes "I wish that I could go drink a cold fresh beer.";
 		mes "Drinking is the goal of my life! Drinking gives me energy!";
 		mes "I am nothing without drinks!";
@@ -656,16 +660,17 @@ airplane_01,243,73,0	script	#AirshipWarp-3	45,1,1,{
 	
 OnTouch:
 	switch ($@airplanelocation2) {
-	case 0: warp "ra_fild12",292,204; end;
-	case 1: 
-		if(checkre(0))
-			warp "izlude",200,73;
-		else
+		case 0: 
+			warp "ra_fild12",292,204;
+		case 1: 
+			if(checkre(0)) {
+				warp "izlude",200,73;
+			}
 			warp "izlude",200,56;
-		end;
-	case 2: warp "yuno",12,261; end;
+		case 2: 
+			warp "yuno",12,261;
 	}
-
+	end;
 OnInit:
 OnHide:
 	misceffect 16;

@@ -12,14 +12,14 @@
 
 -	script	Healer	-1,{
 	
-	set .@Price,0;	// Zeny required for heal
-	set .@Buffs,0;	// Also buff players? (1: yes / 0: no)
-	set .@Delay,0;	// Heal delay, in seconds
+	set .@Price,0;	// Preço requerido
+	set .@Buffs,0;	// Bufar os jogadores? (1: yes / 0: no)
+	set .@Delay,0;	// Tempo de espera, em segundos
 
 	callfunc "F_ClearGarbage",0;
 	if (@HD > gettimetick(2)) end;
 	if (.@Price) {
-		message strcharinfo(0),"Healing costs "+.@Price+" Zeny.";
+		message strcharinfo(0),"Custo: "+.@Price+" Zeny.";
 		if (Zeny < .@Price) end;
 		if(select("^0055FFHeal^000000:^777777Cancel^000000") == 2) close;
 		set Zeny, Zeny-.@Price;
