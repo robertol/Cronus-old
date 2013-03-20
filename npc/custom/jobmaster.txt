@@ -20,16 +20,14 @@ function Job_Menu; function A_An;
 	mes "[Job Master]";
 	if (Class > 4049) {
 		mes "No more jobs are available.";
-		close;
 	}
 	if (checkfalcon() || checkcart() || checkriding() || ismounting()) {
 		mes "Please remove your "+((checkfalcon())?"falcon":"")+((checkcart())?"cart":"")+((checkriding())?"Peco":"")+((ismounting())?"mount":"")+" before proceeding.";
-		close;
 	}
 	if (.SkillPointCheck && SkillPoint) {
 		mes "Please use all your skill points before proceeding.";
-		close;
 	}
+	close;
 
 	set .@eac, eaclass();
 	set .@i, ((.ThirdClass)?roclass(.@eac&EAJ_UPPERMASK):Class);
