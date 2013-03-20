@@ -11,6 +11,7 @@
 //============================================================
 
 airport,143,43,5	script	Airport Staff#airport1a::airport1	90,{
+
 	mes "[Airport Staff]";
 	mes "Welcome to the";
 	mes "Einbroch Airport,";
@@ -26,26 +27,25 @@ airport,143,43,5	script	Airport Staff#airport1a::airport1	90,{
 		mes "the fee will be waived. Will";
 		mes "you board the Airship?";
 		next;
-		if (select("Yes:No") == 1) {
-			if (countitem(7311) > 0) {
-				delitem 7311,1; //Free_Flying_Ship_Ticket
-				warp "airport",148,51;
-				end;
-			}
-			if (Zeny >= 1200) {
-				set Zeny, Zeny - 1200;
-				warp "airport",148,51;
-				end;
-			}
-			mes "[Airport Staff]";
-			mes "I'm sorry, but you don't";
-			mes "have a Free Ticket for";
-			mes "Airship and you don't have";
-			mes "enough zeny for boarding";
-			mes "the Airship. Remember, the";
-			mes "boarding fee is 1,200 zeny.";
-			close;
+		if (select("Yes:No") == 2) close;
+		if (countitem(7311)) {
+			delitem 7311,1;
+			warp "airport",148,51;
+			end;
 		}
+		if (Zeny >= 1200) {
+			set Zeny, Zeny - 1200;
+			warp "airport",148,51;
+			end;
+		}
+		mes "[Airport Staff]";
+		mes "I'm sorry, but you don't";
+		mes "have a Free Ticket for";
+		mes "Airship and you don't have";
+		mes "enough zeny for boarding";
+		mes "the Airship. Remember, the";
+		mes "boarding fee is 1,200 zeny.";
+		close;
 	}
 	mes "[Airport Staff]";
 	mes "Thank you and";
@@ -57,6 +57,7 @@ airport,158,43,5	duplicate(airport1)	Airport Staff#airport1b	90
 airport,126,43,5	duplicate(airport1)	Airport Staff#airport1c	90
 
 airport,143,49,3	script	Arrival Staff#airport2a::airport2	90,{
+
 	mes "[Arrival Staff]";
 	mes "Welcome to Einbroch Airport.";
 	mes "If you are arriving from your";
@@ -72,10 +73,9 @@ airport,143,49,3	script	Arrival Staff#airport2a::airport2	90,{
 		mes "is your intended destination.";
 		mes "Proceed to the main terminal?";
 		next;
-		if (select("Yes:No") == 1) {
-			warp "airport",142,40;
-			end;
-		}
+		if (select("Yes:No") == 2) close;
+		warp "airport",142,40;
+		end;
 	}
 	mes "[Arrival Staff]";
 	mes "Alright, thank you";
@@ -89,6 +89,7 @@ airport,126,51,3	duplicate(airport2)	Arrival Staff#airport2b	90
 airport,158,50,3	duplicate(airport2)	Arrival Staff#airport2c	90
 
 einbroch,94,267,3	script	Airship Staff#ein01	91,{
+
 	mes "[Airship Staff]";
 	mes "Welcome to the";
 	mes "Einbroch Airport.";

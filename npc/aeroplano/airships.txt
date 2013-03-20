@@ -33,11 +33,16 @@ OnUnhide:
 
 OnTouch:
 	switch ($@airplanelocation) {
-	case 0: warp "yuno",92,260; end;
-	case 1: warp "einbroch",92,278; end;
-	case 2: warp "lighthalzen",302,75; end;
-	case 3: warp "hugel",181,146; end;
+		case 0: 
+			warp "yuno",92,260;
+		case 1: 
+			warp "einbroch",92,278;
+		case 2: 
+			warp "lighthalzen",302,75;
+		case 3: 
+			warp "hugel",181,146;
 	}
+	end;
 }
 
 airplane,243,29,0	duplicate(#AirshipWarp-1)	#AirshipWarp-2	45,1,1
@@ -178,6 +183,7 @@ airplane,240,40,1	duplicate(ExitAirplane)	Exit#airplane2a	857
 airplane,247,40,1	duplicate(ExitAirplane)	Exit#airplane2b	857
 
 airplane,100,69,3	script	Airship Crew#ein-1	852,{
+
 	mes "[Airship Crew]";
 	mes "If we've landed at";
 	mes "your destination and";
@@ -189,6 +195,7 @@ airplane,100,69,3	script	Airship Crew#ein-1	852,{
 }
 
 airplane,64,94,1	script	Umbala Kid#ein_p	787,{
+
 	emotion e_swt2;
 	mes "[Kid]";
 	if (event_umbala >= 3) {
@@ -207,6 +214,7 @@ airplane,64,94,1	script	Umbala Kid#ein_p	787,{
 }
 
 airplane,66,93,3	script	Umbala Lady#ein_p	783,{
+
 	emotion e_dots;
 	mes "[Lady]";
 	if (event_umbala >= 3) {
@@ -226,8 +234,9 @@ airplane,66,93,3	script	Umbala Lady#ein_p	783,{
 }
 
 airplane,71,91,7	script	Umbala Man#ein_p	789,{
+
+	mes "[Chrmlim]";
 	if (event_umbala >= 3) {
-		mes "[Chrmlim]";
 		mes "Hey there~";
 		mes "From that look on";
 		mes "your face, I see that";
@@ -250,7 +259,6 @@ airplane,71,91,7	script	Umbala Man#ein_p	789,{
 		mes "ended up, um, ^333333in Nifflheim^000000.";
 	}
 	else {
-		mes "[Chrmlim]";
 		mes "Bajoo ga";
 		mes "nukta Airship.";
 		next;
@@ -269,7 +277,8 @@ airplane,71,91,7	script	Umbala Man#ein_p	789,{
 }
 
 airplane,250,58,2	script	Airship Staff#airplane	67,{
-	// Hugel quest addition
+	
+	mes "[Airship Staff]";
 	if (hg_ma1 == 3) {
 		mes "[Airship Staff]";
 		mes "Welcome";
@@ -281,8 +290,6 @@ airplane,250,58,2	script	Airship Staff#airplane	67,{
 		mes "I am sorry, but I do not think that we have a passenger by that name.";
 		close;
 	}
-	// Hugel quest end
-	mes "[Airship Staff]";
 	mes "Welcome";
 	mes "to the Airship.";
 	mes "How may I help you?";
@@ -333,6 +340,7 @@ airplane,250,58,2	script	Airship Staff#airplane	67,{
 }
 
 airplane,80,71,2	script	Zerta#01airplane	834,{
+
 	mes "[Zerta]";
 	mes "Oh, hello adventurer.";
 	mes "I am currently on a";
@@ -343,6 +351,7 @@ airplane,80,71,2	script	Zerta#01airplane	834,{
 }
 
 airplane,65,63,4	script	Maelin#01airplane	714,{
+
 	mes "[Maelin]";
 	mes "Um, this Airship is";
 	mes "to Lutie, isn't it? I've";
@@ -353,6 +362,7 @@ airplane,65,63,4	script	Maelin#01airplane	714,{
 }
 
 airplane,72,34,6	script	Aanos#01airplane	702,{
+
 	mes "[Aanos]";
 	mes "Oh wooow~";
 	mes "The sky looks";
@@ -362,7 +372,7 @@ airplane,72,34,6	script	Aanos#01airplane	702,{
 }
 
 airplane,221,158,2	script	Pilot#airplane	852,{
-	// Hugel quest addition
+
 	if (hg_ma1 == 3) {
 		mes "[Pilot]";
 		mes "I wish that I could go drink a cold fresh beer.";
@@ -395,72 +405,69 @@ airplane,221,158,2	script	Pilot#airplane	852,{
 		mes "- ...He is not listening to you, at all. -";
 		close;
 	}
-	// Hugel quest end
+	mes "[Pilot]";
 	switch (rand(1,4)) {
-	case 1:
-		mes "[Pilot]";
-		mes "It's been sooo";
-		mes "long since I've";
-		mes "enjoyed a nice, cold";
-		mes "alcoholic brew. But the";
-		mes "job requires me to be as";
-		mes "clear headed as I can!";
-		next;
-		mes "[Pilot]";
-		mes "Always drink responsibly!";
-		mes "Still, I can't remember the";
-		mes "last time I had a real vacation";
-		mes "or even a day off. Yeap, some";
-		mes "booze, some chips, some TV";
-		mes "and serius R&R is in order.";
-		emotion e_sob;
-		close;
-	case 2:
-		mes "[Pilot]";
-		mes "Man, the weather";
-		mes "is really nice today.";
-		mes "Bright, open skies make";
-		mes "for some good visibility";
-		mes "and safe, carefree flying.";
-		close;
-	case 3:
-		mes "[Pilot]";
-		mes "You know, our captain's a";
-		mes "respectable guy. Him and";
-		mes "his brother are actually well";
-		mes "known in the aircraft industry.";
-		mes "Who knew reindeer made";
-		mes "such good captains?";
-		next;
-		mes "[Pilot]";
-		mes "Just between you";
-		mes "and me, I gotta tell";
-		mes "you, that Santa was onto";
-		mes "something, getting reindeers";
-		mes "and elves to work for him.";
-		mes "The man must be a genius!";
-		close;
-	default:
-		mes "[Pilot]";
-		mes "You know, this whole";
-		mes "piloting thing in the air,";
-		mes "it's rather new, you know?";
-		mes "Yeah, they got this Airship";
-		mes "operation in a hurry.";
-		next;
-		emotion e_omg;
-		mes "[Pilot]";
-		mes "Still, they where real";
-		mes "serius, really thought";
-		mes "ahead. I mean, they had us";
-		mes "training while the Airships";
-		mes "were still being invented.";
-		mes "Isn't that freakin' crazy?!";
-		close;
+		case 1:
+			mes "It's been sooo";
+			mes "long since I've";
+			mes "enjoyed a nice, cold";
+			mes "alcoholic brew. But the";
+			mes "job requires me to be as";
+			mes "clear headed as I can!";
+			next;
+			mes "[Pilot]";
+			mes "Always drink responsibly!";
+			mes "Still, I can't remember the";
+			mes "last time I had a real vacation";
+			mes "or even a day off. Yeap, some";
+			mes "booze, some chips, some TV";
+			mes "and serius R&R is in order.";
+			emotion e_sob;
+			close;
+		case 2:
+			mes "Man, the weather";
+			mes "is really nice today.";
+			mes "Bright, open skies make";
+			mes "for some good visibility";
+			mes "and safe, carefree flying.";
+			close;
+		case 3:
+			mes "You know, our captain's a";
+			mes "respectable guy. Him and";
+			mes "his brother are actually well";
+			mes "known in the aircraft industry.";
+			mes "Who knew reindeer made";
+			mes "such good captains?";
+			next;
+			mes "[Pilot]";
+			mes "Just between you";
+			mes "and me, I gotta tell";
+			mes "you, that Santa was onto";
+			mes "something, getting reindeers";
+			mes "and elves to work for him.";
+			mes "The man must be a genius!";
+			close;
+		default:
+			mes "You know, this whole";
+			mes "piloting thing in the air,";
+			mes "it's rather new, you know?";
+			mes "Yeah, they got this Airship";
+			mes "operation in a hurry.";
+			next;
+			emotion e_omg;
+			mes "[Pilot]";
+			mes "Still, they where real";
+			mes "serius, really thought";
+			mes "ahead. I mean, they had us";
+			mes "training while the Airships";
+			mes "were still being invented.";
+			mes "Isn't that freakin' crazy?!";
+			close;
 	}
 }
 
 airplane,50,66,5	script	Apple Merchant#airplane	86,{
+
 	mes "[Fruitz]";
 	mes "Welcome to Fruitz's";
 	mes "Shop where you can";
@@ -549,41 +556,7 @@ airplane,50,66,5	script	Apple Merchant#airplane	86,{
 		mes "to make 1 Apple Juice for you.";
 		mes "Would you like to proceed?";
 		next;
-		switch (select("Yes:No")) {
-		case 1:
-			if (countitem(512) < 3 || countitem(713) < 1) {
-				mes "[Fruitz]";
-				mes "I'm sorry, but you don't";
-				mes "have enough materials to";
-				mes "create a bottle of Apple Juice.";
-				mes "Remember, I need 3 Apples";
-				mes "and 1 Empty Bottle to do it.";
-				close;
-			}
-			else {
-				mes "[Fruitz]";
-				mes "Thank you,";
-				mes "please wait";
-				mes "just a moment.";
-				next;
-				mes "^3355FF*Grind grind*";
-				mes "*Grind grind*";
-				mes "*Clang...!*^000000";
-				next;
-				delitem 512,3; //Apple
-				delitem 713,1; //Empty_Bottle
-				getitem 531,1; //Apple_Juice
-				mes "[Fruitz]";
-				mes "There you go~";
-				mes "I hope you enjoy!";
-				mes "Please feel free to";
-				mes "stop by for your Apple";
-				mes "and Apple Juice needs";
-				mes "at anytime, adventurer~";
-				close;
-			}
-		case 2:
-			mes "[Fruitz]";
+		if (select("Yes:No")==2) {
 			mes "Thanks for stopping";
 			mes "by my shop. Farewell!";
 			mes "Come by anytime when";
@@ -591,6 +564,35 @@ airplane,50,66,5	script	Apple Merchant#airplane	86,{
 			mes "Apple to snack on~";
 			close;
 		}
+		mes "[Fruitz]";
+		if (countitem(512) < 3 || countitem(713) < 1) {
+			mes "I'm sorry, but you don't";
+			mes "have enough materials to";
+			mes "create a bottle of Apple Juice.";
+			mes "Remember, I need 3 Apples";
+			mes "and 1 Empty Bottle to do it.";
+		}
+		else {
+			mes "Thank you,";
+			mes "please wait";
+			mes "just a moment.";
+			next;
+			mes "^3355FF*Grind grind*";
+			mes "*Grind grind*";
+			mes "*Clang...!*^000000";
+			next;
+			delitem 512,3;
+			delitem 713,1;
+			getitem 531,1;
+			mes "[Fruitz]";
+			mes "There you go~";
+			mes "I hope you enjoy!";
+			mes "Please feel free to";
+			mes "stop by for your Apple";
+			mes "and Apple Juice needs";
+			mes "at anytime, adventurer~";
+		}
+		close;
 	case 3:
 		mes "[Fruitz]";
 		mes "I used to be a wandering";
@@ -656,16 +658,15 @@ airplane_01,243,73,0	script	#AirshipWarp-3	45,1,1,{
 	
 OnTouch:
 	switch ($@airplanelocation2) {
-	case 0: warp "ra_fild12",292,204; end;
-	case 1: 
-		if(checkre(0))
-			warp "izlude",200,73;
-		else
+		case 0: 
+			warp "ra_fild12",292,204;
+		case 1: 
+			if(checkre(0)) warp "izlude",200,73;
 			warp "izlude",200,56;
-		end;
-	case 2: warp "yuno",12,261; end;
+		case 2: 
+			warp "yuno",12,261;
 	}
-
+	end;
 OnInit:
 OnHide:
 	misceffect 16;
@@ -817,6 +818,8 @@ airplane_01,250,58,2	script	Airship Staff#airplane01	67,{
 }
 
 airplane_01,50,66,5	script	Apple Merchant#air01	86,{
+
+	mes "[Meltz]";
 	if (checkweight(1201,1) == 0) {
 		mes "- Wait a minute !! -";
 		mes "- Currently you're carrying -";
@@ -825,7 +828,6 @@ airplane_01,50,66,5	script	Apple Merchant#air01	86,{
 		mes "- after you loose some weight. -";
 		close;
 	}
-	mes "[Meltz]";
 	mes "Welcome to Meltz's";
 	mes "Shop where you can";
 	mes "purchase Apples or grind";
@@ -913,35 +915,7 @@ airplane_01,50,66,5	script	Apple Merchant#air01	86,{
 		mes "to make 1 Apple Juice for you.";
 		mes "Would you like to proceed?";
 		next;
-		switch (select("Yes:No")) {
-		case 1:
-			if (countitem(512) < 3 || countitem(713) < 1) {
-				mes "[Meltz]";
-				mes "I'm sorry, but you don't";
-				mes "have enough materials to";
-				mes "create a bottle of Apple Juice.";
-				mes "Remember, I need 3 Apples";
-				mes "and 1 Empty Bottle to do it.";
-				close;
-			}
-			else {
-				mes "[Meltz]";
-				mes "Thank you, please wait.";
-				next;
-				mes "^3355FF*Grind* *Grind*";
-				mes "*Grind* *Grind*";
-				mes "*Clang...!*^000000";
-				next;
-				delitem 512,3; //Apple
-				delitem 713,1; //Empty_Bottle
-				getitem 531,1; //Apple_Juice
-				mes "[Meltz]";
-				mes "There you go~";
-				mes "Please come again.";
-				close;
-			}
-		case 2:
-			mes "[Meltz]";
+		if (select("Yes:No")==2) {
 			mes "Thanks for stopping";
 			mes "by my shop. Farewell!";
 			mes "Come by anytime when";
@@ -949,6 +923,29 @@ airplane_01,50,66,5	script	Apple Merchant#air01	86,{
 			mes "Apple to snack on~";
 			close;
 		}
+		mes "[Meltz]";
+		if (countitem(512) < 3 || countitem(713) < 1) {
+			mes "I'm sorry, but you don't";
+			mes "have enough materials to";
+			mes "create a bottle of Apple Juice.";
+			mes "Remember, I need 3 Apples";
+			mes "and 1 Empty Bottle to do it.";
+		}
+		else {
+			mes "Thank you, please wait.";
+			next;
+			mes "^3355FF*Grind* *Grind*";
+			mes "*Grind* *Grind*";
+			mes "*Clang...!*^000000";
+			next;
+			delitem 512,3; //Apple
+			delitem 713,1; //Empty_Bottle
+			getitem 531,1; //Apple_Juice
+			mes "[Meltz]";
+			mes "There you go~";
+			mes "Please come again.";
+		}
+		close;
 	case 3:
 		mes "[Meltz]";
 		mes "Thanks for stopping";
@@ -961,62 +958,61 @@ airplane_01,50,66,5	script	Apple Merchant#air01	86,{
 }
 
 airplane_01,221,158,2	script	Pilot#airplane_01	852,{
+
+	mes "[Pilot]";
 	switch (rand(1,4)) {
-	case 1:
-		mes "[Pilot]";
-		mes "Longitude, 131 degrees east.";
-		mes "Latitude, 37 degrees north.";
-		mes "We're right on course, captain.";
-		close;
-	case 2:
-		mes "[Pilot]";
-		mes "Looks like a really";
-		mes "cloudy day. Always hard";
-		mes "to navigate when the skies";
-		mes "aren't clear. Guess we'll";
-		mes "need to amp the radar.";
-		close;
-	case 3:
-		mes "[Pilot]";
-		mes "The Captain is a good";
-		mes "man and I can't think of";
-		mes "a finer person to command";
-		mes "this ship. Still, he's pretty";
-		mes "tough, a real slave driver.";
-		next;
-		mes "[^ff0000Tarlock^000000]";
-		mes "^ff0000Hey...!^000000";
-		mes "^ff0000Less chit-chat^000000";
-		mes "^ff0000and more piloting!^000000";
-		next;
-		mes "[Pilot]";
-		mes "R-right away, sir!";
-		mes "(See what I mean?)";
-		close;
-	default:
-		mes "[Pilot]";
-		mes "This uniform is";
-		mes "really dapper, but";
-		mes "it's way too thick to";
-		mes "wear around the Airship.";
-		next;
-		mes "[Pilot]";
-		mes "...";
-		mes "......";
-		mes "No one ever really";
-		mes "comes into this room.";
-		mes "And the captain IS a reindeer.";
-		mes "I could just strip to my boxers.";
-		next;
-		emotion e_omg;
-		mes "[Pilot]";
-		mes "Oh...! Hello there!";
-		mes "E-e-enjoying your flight?!";
-		close;
-	}
+		case 1:
+			mes "Longitude, 131 degrees east.";
+			mes "Latitude, 37 degrees north.";
+			mes "We're right on course, captain.";
+			close;
+		case 2:
+			mes "Looks like a really";
+			mes "cloudy day. Always hard";
+			mes "to navigate when the skies";
+			mes "aren't clear. Guess we'll";
+			mes "need to amp the radar.";
+			close;
+		case 3:
+			mes "The Captain is a good";
+			mes "man and I can't think of";
+			mes "a finer person to command";
+			mes "this ship. Still, he's pretty";
+			mes "tough, a real slave driver.";
+			next;
+			mes "[^ff0000Tarlock^000000]";
+			mes "^ff0000Hey...!^000000";
+			mes "^ff0000Less chit-chat^000000";
+			mes "^ff0000and more piloting!^000000";
+			next;
+			mes "[Pilot]";
+			mes "R-right away, sir!";
+			mes "(See what I mean?)";
+			close;
+		default:
+			mes "This uniform is";
+			mes "really dapper, but";
+			mes "it's way too thick to";
+			mes "wear around the Airship.";
+			next;
+			mes "[Pilot]";
+			mes "...";
+			mes "......";
+			mes "No one ever really";
+			mes "comes into this room.";
+			mes "And the captain IS a reindeer.";
+			mes "I could just strip to my boxers.";
+			next;
+			emotion e_omg;
+			mes "[Pilot]";
+			mes "Oh...! Hello there!";
+			mes "E-e-enjoying your flight?!";
+			close;
+		}
 }
 
 airplane_01,83,61,2	script	Dianne#01airplane_01	72,2,2,{
+
 	mes "[Dianne]";
 	mes "It's so weird!";
 	mes "I went to visit the";
@@ -1026,12 +1022,13 @@ airplane_01,83,61,2	script	Dianne#01airplane_01	72,2,2,{
 	mes "Do you think that...";
 	close;
 
-OnTouch:
-	emotion e_sob;
+	OnTouch:
+		emotion e_sob;
 	end;
 }
 
 airplane_01,69,63,2	script	Mendel#01airplane_01	55,{
+
 	mes "[Mendel]";
 	mes "As I expected, the";
 	mes "in-flight meals are";
@@ -1043,6 +1040,7 @@ airplane_01,69,63,2	script	Mendel#01airplane_01	55,{
 }
 
 airplane_01,71,31,2	script	Swordsman Shimizu#air_01	106,{
+
 	mes "[Swordsman Shimizu]";
 	mes "Finally, after five";
 	mes "years of waiting...";
@@ -1061,6 +1059,7 @@ airplane_01,71,31,2	script	Swordsman Shimizu#air_01	106,{
 //= Typing Challenge
 //============================================================ 
 airplane_01,32,61,4	script	Nils#ein	49,1,1,{
+
 	mes "[Nils]";
 	mes "Welcome to the";
 	mes "^ff0000RO Typing Challenge^000000.";
@@ -1152,13 +1151,12 @@ airplane_01,32,61,4	script	Nils#ein	49,1,1,{
 		set .@end_time, gettime(3)*60*60 + gettime(2)*60 + gettime(1);
 		set .@total_time, .@total_time + (.@start_time - .@end_time);
 		set .@tasoo, (.@letters[.@wordtest] / .@total_time) * 6;
+		mes "[Nils]";
 		if ((.@save1$ == .@word1$[.@wordtest]) && (.@save2$ == .@word2$[.@wordtest])) {
-			mes "[Nils]";
 			mes "Your record is ^ff0000" + .@total_time + " seconds^000000 and";
 			mes "the total letters are " + .@tasoo + ".";
 			next;
 			if (.@tasoo >= 1300) {
-				mes "[Nils]";
 				mes "Hmmm, this record isn't";
 				mes "humanly possible unless you";
 				mes "copy and paste the whole";
@@ -1167,7 +1165,6 @@ airplane_01,32,61,4	script	Nils#ein	49,1,1,{
 				close;
 			}
 			if (.@tasoo >= $050320_ein_typing) {
-				mes "[Nils]";
 				mes "The previous top record was";
 				mes "made by ^0000ff" + $050320_minus1_typing$ + "^000000";
 				mes "with the total ^0000ff" + $050320_ein_typing + "^000000 letters.";
@@ -1179,7 +1176,6 @@ airplane_01,32,61,4	script	Nils#ein	49,1,1,{
 				close;
 			}
 			else {
-				mes "[Nils]";
 				mes "^0000ff" + $050320_minus1_typing$ + "^000000";
 				mes "is the current";
 				mes "record holder with";
@@ -1190,7 +1186,6 @@ airplane_01,32,61,4	script	Nils#ein	49,1,1,{
 			}
 		}
 		else {
-			mes "[Nils]";
 			mes "Oooh...";
 			mes "I'm sorry, but";
 			mes "you entered the";
@@ -1236,6 +1231,7 @@ airplane_01,32,61,4	script	Nils#ein	49,1,1,{
 //= Apple Gambling
 //============================================================ 
 airplane_01,33,68,4	script	Clarice	74,{
+
 	mes "[Clarice]";
 	mes "Hi, I'm Clarice~";
 	mes "How would you like";
