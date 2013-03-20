@@ -624,61 +624,61 @@
 1284,Krishna,Krishna,4,20,10,120,120,,1,2,0x00001000,2,2,34,3,50,1,16,{ bonus2 bSkillAtk,"AS_GRIMTOOTH",10; if(getskilllv("AS_SONICBLOW")) { bonus3 bAutoSpell,"AS_SONICBLOW",getskilllv("AS_SONICBLOW"),5; }else{ bonus3 bAutoSpell,"AS_SONICBLOW",1,5; } },{},{}
 1285,Cakram,Chakram,4,20,10,100,130,,1,2,0x00001000,2,2,34,3,50,1,16,{ if(getskilllv("AS_KATAR")==10) { bonus bHit,10; } bonus2 bSkillAtk,"ASC_METEORASSAULT",20; },{},{}
 1286,Jamadhar_C,Jamadhar,4,0,0,0,200,,1,0,0x00001000,7,2,34,3,1,0,16,{ bonus bUnbreakableWeapon,0; bonus2 bAddSize,Size_Small,40; bonus2 bAddSize,Size_Medium,40; bonus2 bAddSize,Size_Large,40; },{},{}
-1301,Machado,Machado,4,500,,80,38,,1,3,414947,7,2,2,1,3,1,6,{},{},{}
-1302,Machado_,Machado,4,500,,80,38,,1,4,0x000654E3,7,2,2,1,3,1,6,{},{},{}
-1303,Machado__,Machado,4,500,,80,38,,1,0,0x000654E3,7,2,2,1,3,1,6,{},{},{}
-1304,Orcish_Axe,Machado dos Orcs,4,20,,150,75,,1,0,0x000654E3,7,2,2,3,3,1,6,{},{},{}
-1305,Talhador,Talhador,4,20,,120,140,,1,0,279714,7,2,2,4,44,1,6,{ bonus2 bSubRace,RC_DemiHuman,5; bonus3 bAddMonsterDropItem,517,RC_Brute,3000; },{},{}
-1306,War_Axe,Machado de Combate,4,20,,420,140,,1,1,263168,7,2,2,3,76,1,6,{ bonus bDex,2; bonus bLuk,2; },{},{}
-1307,Falcão do Vento,Falcão do Vento,4,18000,,150,115,,1,0,414946,7,2,2,2,14,1,6,{ bonus bAtkEle,Ele_Wind; bonus bAspdRate,5; },{},{}
-1308,Golden_Axe,Machado Dourado,4,20,,300,170,,1,0,1,7,2,2,4,45,1,6,{},{},{}
-1309,Orcish_Axe_,Machado Orc,4,20,,150,75,,1,4,414947,7,2,2,3,3,1,6,{},{},{}
-1310,Krieger_Onehand_Axe1,Retalhador Glorioso,4,20,,0,130,,1,0,279714,7,2,2,4,80,1,6,{ bonus2 bAddRace,RC_DemiHuman,75; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; bonus bAspdRate,5; } if(getrefine()>8) { bonus bAspdRate,5; bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,50; bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","NPC_CRITICALWOUND",2,200; } },{},{}
-1311,Vecer_Axe,Machado Vecer,4,20,,150,140,,1,2,0x000444A2,2,2,2,3,50,1,6,{ if(readparam(bLuk)>=90) { bonus bBaseAtk,20; } if(readparam(bDex)>=90) { bonus bCritical,5; } if(readparam(bDex)>=90||readparam(bLuk)>=90) { bonus2 bSkillAtk,"MC_MAMMONITE",15; } },{},{}
-1312,Orcish_Axe_C,Orcish Axe,4,0,,0,110,,1,0,0x000654E3,7,2,2,3,1,0,6,{ bonus2 bAddSize,Size_Small,70; bonus2 bAddSize,Size_Medium,70; bonus2 bAddSize,Size_Large,70; },{},{}
-1313,Tourist_Axe,Tourist Axe,4,0,,50,77,,1,0,414947,7,2,2,1,1,0,6,{ bonus bStr,2; },{},{}
-1314,F_Tomahawk_C,Tomahawk,4,2,,0,200,,1,0,279714,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; },{},{}
-1315,F_Right_Epsilon_C,Light Epsilon,4,1,,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; bonus bStr,10; },{},{}
-1351,Battle_Axe,Machado de Batalha,4,5400,,150,80,,1,3,0x000444A2,7,2,34,1,3,1,7,{},{},{}
-1352,Battle_Axe_,Machado de Batalha,4,5400,,150,80,,1,4,0x000444A2,7,2,34,1,3,1,7,{},{},{}
-1353,Battle_Axe__,Machado de Batalha,4,5400,,150,80,,1,0,0x000444A2,7,2,34,1,3,1,7,{},{},{}
-1354,Marreta,Marreta,4,15500,,200,120,,1,2,0x000444A2,7,2,34,2,16,1,7,{},{},{}
-1355,Marreta_,Marreta,4,15500,,200,120,,1,3,0x000444A2,7,2,34,2,16,1,7,{},{},{}
-1356,Marreta__,Marreta,4,15500,,200,120,,1,0,0x000444A2,7,2,34,2,16,1,7,{},{},{}
-1357,Demolidor,Demolidor,4,34000,,220,155,,1,1,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1358,Demolidor_,Demolidor,4,34000,,220,155,,1,2,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1359,Demolidor__,Demolidor,4,34000,,220,155,,1,0,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1360,Two_Handed_Axe,Machado de Duas Mãos,4,55000,,250,185,,1,1,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1361,Two_Handed_Axe_,Machado de Duas Mãos,4,55000,,250,185,,1,2,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1362,Two_Handed_Axe__,Machado de Duas Mãos,4,55000,,250,185,,1,0,0x000444A2,7,2,34,3,30,1,7,{},{},{}
-1363,Brood_Axe,Machado Sangrento,4,20,,400,170,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bStr,10; bonus bSpeedRate,25; },{},{}
-1364,Great_Axe,Machado Impetuoso,4,20,,180,187,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus2 bAddSkillBlow,"MC_MAMMONITE",5; bonus2 bAddEff,Eff_Stun,1500; },{},{}
-1365,Sabbath,Sabbath,4,20,,230,120,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Dark; bonus2 bWeaponComaRace,RC_Demon,50; bonus2 bCriticalAddRace,RC_Undead,50; },{},{}
-1366,Right_Epsilon,Cruz Impiedosa,4,20,,230,180,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Holy; skill "AL_HEAL",3; bonus2 bAddRace,RC_Demon,3; },{},{}
-1367,Carniceiro,Carniceiro,4,20,,250,120,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Earth; bonus bIgnoreDefRace,RC_Brute; bonus2 bWeaponComaRace,RC_Brute,40; },{},{}
-1368,Tacape,Tacape,4,20,,250,165,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Wind; skill "ITM_TOMAHAWK",1; },{},{}
-1369,Guilhotina,Guilhotina,4,20,,300,215,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus2 bWeaponComaRace,RC_DemiHuman,30; bonus2 bSPGainRaceAttack,RC_DemiHuman,2; bonus2 bSPGainRace,RC_DemiHuman,20; },{},{}
-1370,Doom_Slayer,Machado do Apocalipse,4,20,,600,10,,1,0,0x000444A2,7,2,34,4,80,1,7,{ bonus bAspdRate,-40; bonus bUseSPrate,100; if(readparam(bStr)>=95){ bonus bBaseAtk,340; bonus2 bAddEff,Eff_Stun,3000; bonus bBreakArmorRate,500; } },{},{}
-1371,Doom_Slayer_,Machado do Apocalipse,4,20,,600,10,,1,1,0x000444A2,7,2,34,4,80,1,7,{ bonus bAspdRate,-40; bonus bUseSPrate,100; if(readparam(bStr)>=95){ bonus bBaseAtk,340; bonus2 bAddEff,Eff_Stun,3000; bonus bBreakArmorRate,500; } },{},{}
-1372,Right_Epsilon_C,Cruz Impiedosa [A],4,1,,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; skill "AL_HEAL",3; bonus2 bAddRace,RC_Demon,3; bonus bStr,10; bonus bSpeedRate,25; },{},{}
-1373,Brood_Axe_C,Refined Bloody Axe,4,2,,0,205,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bStr,20; bonus bSpeedRate,25; bonus bAspdRate,5; },{},{}
-1374,Tomahawk_C,Tomahawk,4,2,,0,200,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; skill "ITM_TOMAHAWK",1; },{},{}
-1375,Bardiche Dentilhado,Bardiche Dentilhado,4,20,,250,200,,1,2,0x000444A2,2,2,34,3,70,1,7,{ bonus2 bSubSize,Size_Medium,13; bonus2 bSubSize,Size_Large,15; },{},{}
-1376,Heart_Breaker,Desolador,4,20,,200,175,,1,1,0x000444A2,2,2,34,4,70,1,7,{ bonus bCritical,20+getrefine(); bonus bAspdRate,5; if((Class==Job_Whitesmith)||(Class==Job_Creator)) bonus3 bAutoSpell,"BS_HAMMERFALL",3,30; },{},{}
-1377,Hurricane_Fury,Fúria do Furacão,4,20,,350,332,,1,1,0x000444A2,2,2,34,4,80,1,7,{ bonus2 bSubSize,Size_Medium,10+getrefine(); bonus bAspdRate,getrefine(); bonus3 bAutoSpell,"NPC_PULSESTRIKE",5,20; },{},{}
-1378,Great_Axe_C,Refined Great Axe,4,1,,0,215,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bStr,5; bonus bHit,20; bonus2 bAddSkillBlow,"MC_MAMMONITE",5; bonus2 bAddEff,Eff_Stun,1500; },{},{}
-1379,BF_Two_Handed_Axe1,Machado de Batalha Insan,4,20,,0,200,,1,0,0x000444A2,7,2,34,3,80,1,7,{ bonus bStr,3; bonus2 bAddRace,RC_DemiHuman,55; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
-1380,BF_Two_Handed_Axe2,Machado de Batalha Insan,4,20,,0,200,,1,0,0x000444A2,7,2,34,3,80,1,7,{ bonus bStr,3; bonus2 bAddRace,RC_DemiHuman,55; autobonus "{ bonus bBreakArmorRate,10000; }",20,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }"; bonus bUnbreakableWeapon,0; },{},{}
-1381,N_Battle_Axe,Machado de Batalha de In,4,0,,0,100,,1,3,0x000444A2,7,2,34,1,3,0,7,{},{},{}
-1382,Krieger_Twohand_Axe1,Machado de Duas Mãos Glo,4,20,,0,220,,1,0,0x000444A2,7,2,34,4,80,1,7,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-3)*(getrefine()-3); bonus2 bIgnoreDefRate,RC_DemiHuman,5; bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,50; } if(getrefine()>8) { bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,100; bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","NPC_CRITICALWOUND",2,200; bonus4 bAutoSpellOnSkill,"WS_CARTTERMINATION","NPC_CRITICALWOUND",2,200; } },{},{}
-1383,Holy_Celestial_Axe,Machado Celestial,4,20,,150,200,,1,0,0x000444A2,7,2,34,4,60,1,7,{ bonus bAtkEle,Ele_Holy; bonus bVit,10; bonus2 bAddRace,RC_Undead,10; bonus3 bAutoSpell,"AL_BLESSING",5,50; },{},{}
-1384,Veteran_Axe,Machado Veterano,4,10000,,300,250,,1,2,0x000444A2,7,2,34,3,80,1,7,{ if(getskilllv("BS_DAGGER")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_SWORD")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_TWOHANDSWORD")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_KNUCKLE")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_SPEAR")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_AXE")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_MACE")==3) { bonus bBaseAtk,10; } bonus bVit,2; },{},{}
-1385,Bradium_Stonehammer,Martelo Quebra-Pedra de ,4,20,,270,210,,1,0,0x000444A2,2,2,34,4,75,1,7,{ bonus3 bAddEffOnSkill,"BS_HAMMERFALL",Eff_Stun,500+(200*getrefine()); },{},{}
-1386,Doom_Slayer_I,Doom Slayer,4,0,,0,20,,1,0,0x000444A2,7,2,34,4,0,0,7,{ if(readparam(bStr)>=95){ bonus bBaseAtk,400; bonus2 bAddEff,Eff_Stun,3000; bonus bAspdRate,-25; bonus bUseSPrate,100; bonus bBreakArmorRate,500; } },{},{}
-1387,Giant_Axe,Machado Gigante,4,20,,400,330,,1,1,0x000444A2,2,2,34,3,50,1,7,{ bonus2 bSkillAtk,"WS_CARTTERMINATION",15; if(readparam(bStr)>=95) { bonus bHit,10; bonus bAspdRate,3; } },{},{}
-1388,Two_Handed_Axe_C,Two-Handed Axe,4,0,,0,220,,1,0,0x000444A2,7,2,34,3,1,0,7,{ bonus2 bAddSize,Size_Small,40; bonus2 bAddSize,Size_Medium,40; bonus2 bAddSize,Size_Large,40; },{},{}
-1389,E_Tomahawk_C,Tomahawk,4,2,,0,200,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; },{},{}
-1390,E_Right_Epsilon_C,Light Epsilon,4,1,,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; bonus bStr,10; },{},{}
+1301,Machado,Machado,4,500,250,80,38,,1,3,414947,7,2,2,1,3,1,6,{},{},{}
+1302,Machado_,Machado,4,500,250,80,38,,1,4,0x000654E3,7,2,2,1,3,1,6,{},{},{}
+1303,Machado__,Machado,4,500,250,80,38,,1,0,0x000654E3,7,2,2,1,3,1,6,{},{},{}
+1304,Orcish_Axe,Machado dos Orcs,4,20,10,150,75,,1,0,0x000654E3,7,2,2,3,3,1,6,{},{},{}
+1305,Talhador,Talhador,4,20,10,120,140,,1,0,279714,7,2,2,4,44,1,6,{ bonus2 bSubRace,RC_DemiHuman,5; bonus3 bAddMonsterDropItem,517,RC_Brute,3000; },{},{}
+1306,War_Axe,Machado de Combate,4,20,10,420,140,,1,1,263168,7,2,2,3,76,1,6,{ bonus bDex,2; bonus bLuk,2; },{},{}
+1307,Falcão do Vento,Falcão do Vento,4,18000,9000,150,115,,1,0,414946,7,2,2,2,14,1,6,{ bonus bAtkEle,Ele_Wind; bonus bAspdRate,5; },{},{}
+1308,Golden_Axe,Machado Dourado,4,20,10,300,170,,1,0,1,7,2,2,4,45,1,6,{},{},{}
+1309,Orcish_Axe_,Machado Orc,4,20,10,150,75,,1,4,414947,7,2,2,3,3,1,6,{},{},{}
+1310,Krieger_Onehand_Axe1,Retalhador Glorioso,4,20,10,0,130,,1,0,279714,7,2,2,4,80,1,6,{ bonus2 bAddRace,RC_DemiHuman,75; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; bonus bAspdRate,5; } if(getrefine()>8) { bonus bAspdRate,5; bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,50; bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","NPC_CRITICALWOUND",2,200; } },{},{}
+1311,Vecer_Axe,Machado Vecer,4,20,10,150,140,,1,2,0x000444A2,2,2,2,3,50,1,6,{ if(readparam(bLuk)>=90) { bonus bBaseAtk,20; } if(readparam(bDex)>=90) { bonus bCritical,5; } if(readparam(bDex)>=90||readparam(bLuk)>=90) { bonus2 bSkillAtk,"MC_MAMMONITE",15; } },{},{}
+1312,Orcish_Axe_C,Orcish Axe,4,0,0,0,110,,1,0,0x000654E3,7,2,2,3,1,0,6,{ bonus2 bAddSize,Size_Small,70; bonus2 bAddSize,Size_Medium,70; bonus2 bAddSize,Size_Large,70; },{},{}
+1313,Tourist_Axe,Tourist Axe,4,0,0,50,77,,1,0,414947,7,2,2,1,1,0,6,{ bonus bStr,2; },{},{}
+1314,F_Tomahawk_C,Tomahawk,4,2,1,0,200,,1,0,279714,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; },{},{}
+1315,F_Right_Epsilon_C,Light Epsilon,4,1,0,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; bonus bStr,10; },{},{}
+1351,Battle_Axe,Machado de Batalha,4,5400,2200,150,80,,1,3,0x000444A2,7,2,34,1,3,1,7,{},{},{}
+1352,Battle_Axe_,Machado de Batalha,4,5400,2200,150,80,,1,4,0x000444A2,7,2,34,1,3,1,7,{},{},{}
+1353,Battle_Axe__,Machado de Batalha,4,5400,2200,150,80,,1,0,0x000444A2,7,2,34,1,3,1,7,{},{},{}
+1354,Marreta,Marreta,4,15500,7750,200,120,,1,2,0x000444A2,7,2,34,2,16,1,7,{},{},{}
+1355,Marreta_,Marreta,4,15500,7750,200,120,,1,3,0x000444A2,7,2,34,2,16,1,7,{},{},{}
+1356,Marreta__,Marreta,4,15500,7750,200,120,,1,0,0x000444A2,7,2,34,2,16,1,7,{},{},{}
+1357,Demolidor,Demolidor,4,34000,17000,220,155,,1,1,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1358,Demolidor_,Demolidor,4,34000,17000,220,155,,1,2,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1359,Demolidor__,Demolidor,4,34000,17000,220,155,,1,0,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1360,Two_Handed_Axe,Machado de Duas Mãos,4,55000,27500,250,185,,1,1,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1361,Two_Handed_Axe_,Machado de Duas Mãos,4,55000,27500,250,185,,1,2,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1362,Two_Handed_Axe__,Machado de Duas Mãos,4,55000,27500,250,185,,1,0,0x000444A2,7,2,34,3,30,1,7,{},{},{}
+1363,Brood_Axe,Machado Sangrento,4,20,10,400,170,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bStr,10; bonus bSpeedRate,25; },{},{}
+1364,Great_Axe,Machado Impetuoso,4,20,10,180,187,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus2 bAddSkillBlow,"MC_MAMMONITE",5; bonus2 bAddEff,Eff_Stun,1500; },{},{}
+1365,Sabbath,Sabbath,4,20,10,230,120,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Dark; bonus2 bWeaponComaRace,RC_Demon,50; bonus2 bCriticalAddRace,RC_Undead,50; },{},{}
+1366,Right_Epsilon,Cruz Impiedosa,4,20,10,230,180,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Holy; skill "AL_HEAL",3; bonus2 bAddRace,RC_Demon,3; },{},{}
+1367,Carniceiro,Carniceiro,4,20,10,250,120,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Earth; bonus bIgnoreDefRace,RC_Brute; bonus2 bWeaponComaRace,RC_Brute,40; },{},{}
+1368,Tacape,Tacape,4,20,10,250,165,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus bAtkEle,Ele_Wind; skill "ITM_TOMAHAWK",1; },{},{}
+1369,Guilhotina,Guilhotina,4,20,10,300,215,,1,0,0x000444A2,7,2,34,4,44,1,7,{ bonus2 bWeaponComaRace,RC_DemiHuman,30; bonus2 bSPGainRaceAttack,RC_DemiHuman,2; bonus2 bSPGainRace,RC_DemiHuman,20; },{},{}
+1370,Doom_Slayer,Machado do Apocalipse,4,20,10,600,10,,1,0,0x000444A2,7,2,34,4,80,1,7,{ bonus bAspdRate,-40; bonus bUseSPrate,100; if(readparam(bStr)>=95){ bonus bBaseAtk,340; bonus2 bAddEff,Eff_Stun,3000; bonus bBreakArmorRate,500; } },{},{}
+1371,Doom_Slayer_,Machado do Apocalipse,4,20,10,600,10,,1,1,0x000444A2,7,2,34,4,80,1,7,{ bonus bAspdRate,-40; bonus bUseSPrate,100; if(readparam(bStr)>=95){ bonus bBaseAtk,340; bonus2 bAddEff,Eff_Stun,3000; bonus bBreakArmorRate,500; } },{},{}
+1372,Right_Epsilon_C,Cruz Impiedosa [A],4,1,0,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; skill "AL_HEAL",3; bonus2 bAddRace,RC_Demon,3; bonus bStr,10; bonus bSpeedRate,25; },{},{}
+1373,Brood_Axe_C,Refined Bloody Axe,4,2,1,0,205,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bStr,20; bonus bSpeedRate,25; bonus bAspdRate,5; },{},{}
+1374,Tomahawk_C,Tomahawk,4,2,1,0,200,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; skill "ITM_TOMAHAWK",1; },{},{}
+1375,Bardiche Dentilhado,Bardiche Dentilhado,4,20,10,250,200,,1,2,0x000444A2,2,2,34,3,70,1,7,{ bonus2 bSubSize,Size_Medium,13; bonus2 bSubSize,Size_Large,15; },{},{}
+1376,Heart_Breaker,Desolador,4,20,10,200,175,,1,1,0x000444A2,2,2,34,4,70,1,7,{ bonus bCritical,20+getrefine(); bonus bAspdRate,5; if((Class==Job_Whitesmith)||(Class==Job_Creator)) bonus3 bAutoSpell,"BS_HAMMERFALL",3,30; },{},{}
+1377,Hurricane_Fury,Fúria do Furacão,4,20,10,350,332,,1,1,0x000444A2,2,2,34,4,80,1,7,{ bonus2 bSubSize,Size_Medium,10+getrefine(); bonus bAspdRate,getrefine(); bonus3 bAutoSpell,"NPC_PULSESTRIKE",5,20; },{},{}
+1378,Great_Axe_C,Refined Great Axe,4,1,0,0,215,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bStr,5; bonus bHit,20; bonus2 bAddSkillBlow,"MC_MAMMONITE",5; bonus2 bAddEff,Eff_Stun,1500; },{},{}
+1379,BF_Two_Handed_Axe1,Machado de Batalha Insan,4,20,10,0,200,,1,0,0x000444A2,7,2,34,3,80,1,7,{ bonus bStr,3; bonus2 bAddRace,RC_DemiHuman,55; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
+1380,BF_Two_Handed_Axe2,Machado de Batalha Insan,4,20,10,0,200,,1,0,0x000444A2,7,2,34,3,80,1,7,{ bonus bStr,3; bonus2 bAddRace,RC_DemiHuman,55; autobonus "{ bonus bBreakArmorRate,10000; }",20,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }"; bonus bUnbreakableWeapon,0; },{},{}
+1381,N_Battle_Axe,Machado de Batalha de In,4,0,0,0,100,,1,3,0x000444A2,7,2,34,1,3,0,7,{},{},{}
+1382,Krieger_Twohand_Axe1,Machado de Duas Mãos Glo,4,20,10,0,220,,1,0,0x000444A2,7,2,34,4,80,1,7,{ bonus2 bAddRace,RC_DemiHuman,70; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-3)*(getrefine()-3); bonus2 bIgnoreDefRate,RC_DemiHuman,5; bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,50; } if(getrefine()>8) { bonus3 bAutoSpell,"NPC_CRITICALWOUND",1,100; bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","NPC_CRITICALWOUND",2,200; bonus4 bAutoSpellOnSkill,"WS_CARTTERMINATION","NPC_CRITICALWOUND",2,200; } },{},{}
+1383,Holy_Celestial_Axe,Machado Celestial,4,20,10,150,200,,1,0,0x000444A2,7,2,34,4,60,1,7,{ bonus bAtkEle,Ele_Holy; bonus bVit,10; bonus2 bAddRace,RC_Undead,10; bonus3 bAutoSpell,"AL_BLESSING",5,50; },{},{}
+1384,Veteran_Axe,Machado Veterano,4,10000,5000,300,250,,1,2,0x000444A2,7,2,34,3,80,1,7,{ if(getskilllv("BS_DAGGER")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_SWORD")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_TWOHANDSWORD")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_KNUCKLE")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_SPEAR")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_AXE")==3) { bonus bBaseAtk,10; } if(getskilllv("BS_MACE")==3) { bonus bBaseAtk,10; } bonus bVit,2; },{},{}
+1385,Bradium_Stonehammer,Martelo Quebra-Pedra de ,4,20,10,270,210,,1,0,0x000444A2,2,2,34,4,75,1,7,{ bonus3 bAddEffOnSkill,"BS_HAMMERFALL",Eff_Stun,500+(200*getrefine()); },{},{}
+1386,Doom_Slayer_I,Doom Slayer,4,0,0,0,20,,1,0,0x000444A2,7,2,34,4,0,0,7,{ if(readparam(bStr)>=95){ bonus bBaseAtk,400; bonus2 bAddEff,Eff_Stun,3000; bonus bAspdRate,-25; bonus bUseSPrate,100; bonus bBreakArmorRate,500; } },{},{}
+1387,Giant_Axe,Machado Gigante,4,20,10,400,330,,1,1,0x000444A2,2,2,34,3,50,1,7,{ bonus2 bSkillAtk,"WS_CARTTERMINATION",15; if(readparam(bStr)>=95) { bonus bHit,10; bonus bAspdRate,3; } },{},{}
+1388,Two_Handed_Axe_C,Two-Handed Axe,4,0,0,0,220,,1,0,0x000444A2,7,2,34,3,1,0,7,{ bonus2 bAddSize,Size_Small,40; bonus2 bAddSize,Size_Medium,40; bonus2 bAddSize,Size_Large,40; },{},{}
+1389,E_Tomahawk_C,Tomahawk,4,2,1,0,200,,1,0,0x000444A2,7,2,34,4,0,0,7,{ bonus bAtkEle,Ele_Wind; },{},{}
+1390,E_Right_Epsilon_C,Light Epsilon,4,1,1,0,229,,1,0,0x000444A2,7,2,34,4,1,0,7,{ bonus bAtkEle,Ele_Holy; bonus bStr,10; },{},{}
 1401,Azagaia,Azagaia,4,150,,70,28,,3,3,16514,7,2,2,1,4,1,4,{},{},{}
 1402,Azagaia_,Azagaia,4,150,,70,28,,3,4,0x00004082,7,2,2,1,4,1,4,{},{},{}
 1403,Azagaia__,Azagaia,4,150,,70,28,,3,0,0x00004082,7,2,2,1,4,1,4,{},{},{}
