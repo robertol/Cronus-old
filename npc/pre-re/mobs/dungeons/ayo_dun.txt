@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
-//= Ayothaya Dungeon Monster Spawn Script
-//===== By: ==================================================
+//===== Cronus Script ======================================
+//= Spawn Cavernas de Ayothaya
+//===== Por: ==================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Using euRO data [Ishizu]
 //= 1.2 Moved Tao Gunka to west cave of Comodo [Lupus]
 //= 1.3 Official jRO 10.3 spawns [Playtester]
@@ -13,17 +13,17 @@
 //============================================================
 
 //==================================================
-// ayo_dun01 - Ancient Shrine Maze
+// ayo_dun01 - Labirinto do Santuário Ancestral
 //==================================================
-ayo_dun01,0,0,0,0	monster	Leaf Cat	1586,65,0,0,0
-ayo_dun01,0,0,0,0	monster	Whisper	1179,10,0,0,0
+ayo_dun01,0,0,0,0  monster	Gato de Folha	1586,65,0,0,0
+ayo_dun01,0,0,0,0	monster	Sussurro	1179,10,0,0,0
 ayo_dun01,0,0,0,0	monster	Kraben	1587,5,0,0,0
-ayo_dun01,0,0,0,0	monster	Ghoul	1036,30,0,0,0
+ayo_dun01,0,0,0,0	monster	Carniçal	1036,30,0,0,0
 
 //==================================================
-// ayo_dun02 - Inside Ancient Shrine
+// ayo_dun02 - Labirinto do Santuário Ancestral
 //==================================================
 ayo_dun02,0,0,0,0	monster	Tamruan	1584,100,0,0,0
-ayo_dun02,0,0,0,0	monster	Whisper	1179,20,0,0,0
+ayo_dun02,0,0,0,0	monster	Sussurro	1179,20,0,0,0
 ayo_dun02,0,0,0,0	monster	Kraben	1587,20,0,0,0
 ayo_dun02,150,90,15,30	boss_monster	Lady Tanee	1688,1,25200000,600000,0
