@@ -11,7 +11,7 @@
 //==================================================
 // c_tower1 - Torre do Relógio 1
 //==================================================
-c_tower1,0,0,0,0  monster	Punk	1199,70,0,0,0
+c_tower1,0,0,0,0	monster	Punk	1199,70,0,0,0
 c_tower1,0,0,0,0	monster	Rideword	1195,70,0,0,0
 c_tower1,0,0,0,0	monster	Gerente	1270,1,0,0,0
 c_tower1,0,0,0,0	monster	Bathory	1102,1,0,0,0

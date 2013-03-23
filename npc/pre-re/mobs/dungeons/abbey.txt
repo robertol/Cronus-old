@@ -12,7 +12,7 @@
 //============================================================
 
 // Ilha Esquecida
-nameless_n,93,211,51,62  monster	Massacre	1864,3,15000,0,1
+nameless_n,93,211,51,62	monster	Massacre	1864,3,15000,0,1
 nameless_n,93,211,51,62	monster	Zumbi Dilacerado	1865,3,15000,0,1
 nameless_n,93,211,51,62	monster	Cão Infernal	1866,5,15000,0,1
 nameless_n,93,211,51,62	monster	Banshee	1867,4,15000,0,1

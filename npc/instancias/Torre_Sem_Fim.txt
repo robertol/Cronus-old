@@ -178,7 +178,7 @@ alberta,214,77,6	script	Capitão Jassen	709,{
 	}
 }
 
-e_tower,81,105,0	script	Pedra de Proteção da Torre	406,{
+e_tower,81,105,0	script	Pedra Proteção da Torre	406,{
 
 	set .@party_id,getcharid(1);
 	set .@ins_mas,getpartyleader(.@party_id,2);
