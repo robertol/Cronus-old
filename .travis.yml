@@ -3,4 +3,4 @@ compiler:
   - gcc
   - clang
 # Change this to your needs
-script: sh configure --enable_64bit; make clean; make all
+script: sh configure --enable_debug; make clean; make all

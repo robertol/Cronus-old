@@ -3507,7 +3507,7 @@ if test "${enable_64bit+set}" = set; then :
 		esac
 
 else
-  enable_64bit="no"
+  enable_64bit="yes"
 
 fi
 
