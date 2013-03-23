@@ -19,7 +19,7 @@
 //==================================================
 // ein_dun01 - Calabouço da Mina
 //==================================================
-ein_dun01,0,0,0,0  monster	Mineiros	1616,70,0,0,0
+ein_dun01,0,0,0,0	monster	Mineiros	1616,70,0,0,0
 ein_dun01,0,0,0,0	monster	Nuvem Tóxica	1620,30,300000,0,0
 ein_dun01,0,0,0,0	monster	Porcellio	1619,30,0,0,0
 ein_dun01,0,0,0,0	monster	Nuvem Venenosa	1621,10,300000,0,0

@@ -12,7 +12,7 @@
 //==================================================
 // anthell01 - Formigueiro Infernal
 //==================================================
-anthell01,0,0,0,0  monster	Familiar	1005,20,0,0,0
+anthell01,0,0,0,0	monster	Familiar	1005,20,0,0,0
 anthell01,0,0,0,0	monster	Andre	1095,15,0,0,0
 anthell01,0,0,0,0	monster	Piere	1160,50,0,0,0
 anthell01,0,0,0,0	monster	Deniro	1105,40,0,0,0

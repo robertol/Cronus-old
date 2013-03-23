@@ -12,7 +12,7 @@
 //==================================================
 // ama_dun01 - Labirinto de Tatames
 //==================================================
-ama_dun01,0,0,0,0  monster	Boneco de Miyabi	1404,65,0,0,0
+ama_dun01,0,0,0,0	monster	Boneco de Miyabi	1404,65,0,0,0
 ama_dun01,0,0,0,0	monster	Soldado Atirador	1403,45,0,0,0
 ama_dun01,0,0,0,0	monster	Shinobi	1401,2,180000,90000,0
 
