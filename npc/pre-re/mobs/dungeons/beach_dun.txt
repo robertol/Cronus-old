@@ -14,7 +14,7 @@
 //==================================================
 // beach_dun - Karu, a Caverna do Oeste
 //==================================================
-beach_dun,0,0,0,0  monster	Medusa	1148,60,0,0,0
+beach_dun,0,0,0,0	monster	Medusa	1148,60,0,0,0
 beach_dun,0,0,0,0	monster	Tritão	1264,3,10000,5000,0
 beach_dun,0,0,0,0	monster	Neraida	1255,20,0,0,0
 beach_dun,0,0,0,0	monster	Peste	1256,20,0,0,0

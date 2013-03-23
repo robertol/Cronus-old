@@ -12,10 +12,10 @@
 //= 1.4 Corrected MVP spawn variance. [L0ne_W0lf]
 //============================================================
 
-/==================================================
+//==================================================
 // gef_dun00 - Calabouço de Geffen
 //==================================================     
-gef_dun00,0,0,0,0  monster	Mosca Caçadora	1035,30,60000,30000,0
+gef_dun00,0,0,0,0	monster	Mosca Caçadora	1035,30,60000,30000,0
 gef_dun00,0,0,0,0	monster	Poporing	1031,15,0,0,0
 gef_dun00,0,0,0,0	monster	Esporo Venenoso	1077,25,0,0,0
 gef_dun00,91,106,0,0	monster	Planta Vermelha	1078,1,300000,150000,0
