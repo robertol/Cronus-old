@@ -39,7 +39,6 @@ Equipe de Desenvolvimento
 - Golen Maker	- Ligleyson Warnielle
 	
 ### Estágiários/Aprendizes
-- Ryuzaki Aiko	- Vilmar Rosset
 - Rayzir	- Guilherme Fontenele
 - PHpedro	- Pedro
 - Eru Yuuko
