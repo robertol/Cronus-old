@@ -1,61 +1,57 @@
-//===== Hercules Script ======================================
-//= Manuk Town
-//===== By: ================================================== 
-//= L0ne_W0lf
-//===== Current Version: ===================================== 
+//===== Cronus Script ========================================
+//= NPCs referentes a cidade de Manuk
+//===== Por: =================================================
+//= rA Dev Team
+//===== Versão Atual: ========================================
 //= 1.3
-//===== Description: ========================================= 
-//= [Aegis Conversion]
-//= Town-specific NPCs for Manuk.
-//===== Additional Comments: ================================= 
-//= 1.0 First Version.
-//= 1.1 Added more town NPCs
-//= 1.2 Added more town NPCs
-//= 1.3 Enabled an NPC
+//===== Compatível com: ======================================
+//= Cronus GIT
+//===== Descrição: ===========================================
+//= NPCs referentes a cidade de Manuk
+//===== Comentários Adicionais: ==============================
+//= 1.3 Adicionado diálogos Oficiais do bRO. [LyDe]
 //============================================================
 
-// cat_enhance
-manuk,304,195,5	script	Soldier#ep13pa829	454,{
+// Manuk
+//============================================================
+manuk,304,195,5	script	Soldado#ep13pa829	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Food Provider]";
-		mes "The Manuk family subsists mostly on refining Gray Hollows that were burried a long time ago deep down under the ground.";
+		mes "[Fornecedor de Alimentos]";
+		mes "O sustento da família Manuk consiste basicamente no refinamento de Gray Hollows que foram enterrados há muito tempo.";
 		close;
-	}
-	else {
-		mes "[Food Provider]";
+	} else {
+		mes "[Fornecedor de Alimentos]";
 		mes "Gdiios duuie Dssoas pogggd fdrul fdddoweet";
 		close;
 	}
 }
 
-manuk,274,239,5	script	Soldier#ep13_2	455,{
+manuk,274,239,5	script	Soldado#ep13_2	455,{
 	if (isequipped(2782) == 1) {
-		mes "[Injured Manuk Soldier]";
-		mes "I can't absorb Bradium Essence anymore because of my fatal injury.";
-		mes "Those wicked fairies attacked me and left me like this.";
+		mes "[Soldado Ferido de Manuk]";
+		mes "Não posso mais ingerir a Essência de Bradium por causa do meu ferimento.";
+		mes "Aquelas fadas estranhas me atacaram e me deixaram assim.";
+		next;
+		mes "[Soldado Ferido de Manuk]";
+		mes "Eu gostaria de poder matar todas as fadas...";
 		close;
-		mes "[Injured Manuk Soldier]";
-		mes "I wish I could kill all the fairies...";
-		close;
-	}
-	else {
-		mes "[Injured Manuk Soldier";
+	} else {
+		mes "[Soldado Ferido de Manuk]";
 		mes "Bhiio aaas dgwer fdds rrrrrpppp Ee";
-		close;
-		mes "[Injured Manuk Soldier]";
+		next;
+		mes "[Soldado Ferido de Manuk]";
 		mes "Foi dsddff gggeeeerr pqowe";
 		close;
 	}
 }
 
-manuk,107,233,5	script	Soldier#ep13_3	454,{
+manuk,107,233,5	script	Soldado#ep13_3	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Anxious Soldier]";
-		mes "Hurry, I am in big trouble. I lost all the Manuk Coins. I think I dropped them somewhere on the snowfield. Gosh, I saw them right before I fell asleep!";
+		mes "[Soldado Ansioso]";
+		mes "Rápido, eu estou com problemas. Perdi todas as minhas moedas de Manuk. Acho que elas caíram em algum lugar na neve. Deus, eu vi-as logo antes de adormecer!";
 		close;
-	}
-	else {
-		mes "[Anxious Soldier]";
+	} else {
+		mes "[Soldado Ansioso]";
 		mes "Qosi dhhui rffd poaner ouh.";
 		close;
 	}
@@ -65,10 +61,10 @@ manuk,107,233,5	script	Soldier#ep13_3	454,{
 manuk,100,100,3	script	Piom	454,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
-		mes "You are... tiny. But you don't seem like a Fairy.";
-		mes "As long as you are not a damned Fairy,";
-		mes "then you are not our foe!";
-		mes "In this world, there are only friends or foe!";
+		mes "Você é... pequeno. Mas não se parece com uma Fada.";
+		mes "Enquanto você não for uma maldita Fada,";
+		mes "você não será nosso inimigo";
+		mes "Nesse mundo há apenas amigos ou inimigos!";
 		close;
 	}
 	else {
@@ -84,17 +80,16 @@ manuk,100,100,3	script	Piom	454,{
 manuk,188,216,3	script	Benknee#ep13_2_1	449,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Benknee]";
-		mes "What brings you here?";
-		mes "Are you a human?";
-		mes "If you are human, you shouldn't be here.";
+		mes "O que traz você aqui?";
+		mes "Você é humano?";
+		mes "Se você é humano, não devia estar aqui.";
 		next;
 		mes "[Benknee]";
-		mes "Jotunheim is a blessed and sacred place.";
-		mes "We, Saphas will be standing with our own feet.";
-		mes "And rise against oppression!";
+		mes "Jotunheim é um lugar sagrado e abençoado.";
+		mes "Nós, Saphas, nos ergueremos";
+		mes "contra a opressão!";
 		close;
-	}
-	else {
+	} else {
 		mes "[Benknee]";
 		mes "Bdf sdio hs ioq";
 		mes "Wfn is ao ps od jd";
@@ -111,12 +106,11 @@ manuk,188,216,3	script	Benknee#ep13_2_1	449,{
 manuk,169,260,3	script	Piom#ep13_2_1	455,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
-		mes "We, Saphas are always together!";
-		mes "Wherever we are. We are always connected to each other.";
-		mes "I don't know where you are from but, you should learn our spirits.";
+		mes "Nós, Saphas, estamos sempre juntos!";
+		mes "Onde quer que estejamos! Estamos sempre conectados.";
+		mes "Não sei de onde você vem, mas você devia aprender conosco.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Piom]";
 		mes "Ng go oois yus dd";
 		mes "You ii iaao nfb ud";
@@ -130,17 +124,16 @@ manuk,169,260,3	script	Piom#ep13_2_1	455,{
 manuk,218,163,3	script	Galtun#ep13_2_1	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Galtun]";
-		mes "Recently, tiny things have been flying around.";
-		mes "I am not sure if they are flies or not.";
-		mes "But it is very annoying.";
+		mes "Recentemente reparei em algumas coisinhas voando por aí.";
+		mes "Não sei se são moscas.";
+		mes "Mas são bem irritantes.";
 		next;
 		mes "[Galtun]";
-		mes "They can only use their small magic from a long distance.";
-		mes "But I can kick them off quickly.";
-		mes "They are so bothersome. But I better not waste my time with them.";
+		mes "Elas usam sua magiquinha de uma grande distância.";
+		mes "Mas eu consigo espantá-las.";
+		mes "Elas são muito chatas. Melhor nem perder tempo com elas.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Galtun]";
 		mes "Ya sda sdou sh dbi";
 		mes "Av bu dgs ldo gp gf ";
@@ -158,11 +151,10 @@ manuk,218,163,3	script	Galtun#ep13_2_1	450,{
 manuk,266,199,5	script	Galtun#ep13_2_2	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Galtun]";
-		mes "I can relax now that we have those piles of Bradium.";
-		mes "But I am also worried that we can spend them in a short time.";
+		mes "Posso descansar agora que temos essas pilhas de Bradium.";
+		mes "Mas também estou preocupado porque podemos gastá-las em pouco tempo.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Galtun]";
 		mes "Bu iu bus sfi a sd";
 		mes "Zsd dwo uf sh osad ";
@@ -175,13 +167,12 @@ manuk,266,199,5	script	Galtun#ep13_2_2	450,{
 manuk,225,129,5	script	Benknee#ep13_2_2	449,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Benknee]";
-		mes "Huh? Who?? Who are you??";
-		mes "Oh, you are not a fairy.";
-		mes "I thought you were a fairy thing.";
-		mes "Anyway, who are you? Can you speak?";
+		mes "Huh? Quem?? Quem é você??";
+		mes "Ah, você não é uma fada.";
+		mes "Achei que você fosse.";
+		mes "Mas quem é você? Você fala?";
 		close;
-	}
-	else {
+	} else {
 		mes "[Benknee]";
 		mes "Bao j pj a sd";
 		mes "Gi oh as d";
@@ -194,16 +185,15 @@ manuk,225,129,5	script	Benknee#ep13_2_2	449,{
 manuk,286,147,3	script	Piom#ep13_2_2	454,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
-		mes "I'll never forget the deep-rooted rancor against those traitors.";
-		mes "I remember how our ancestors died.";
-		mes "I swear that I would avenge them.";
+		mes "Nunca esquecerei o rancor contra esses traidores.";
+		mes "Eu sei como nossos ancestrais morreram.";
+		mes "Eu juro que vingarei-os.";
 		next;
 		mes "[Piom]";
-		mes "First, I'll kick those bastards.";
-		mes "Those flying little things bother me so much.";
+		mes "Primeiro, acabarei com esses bastardos.";
+		mes "Essas coisinhas voadoras me incomodam muito.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Piom]";
 		mes "Vio hs pf I aps";
 		mes "Vs ou oas de ee";
@@ -219,21 +209,20 @@ manuk,286,147,3	script	Piom#ep13_2_2	454,{
 }
 
 manuk,183,185,5	script	Piom#ep13_2_3	454,{
-	set tongyeok,Ring_Of_Wise_King;
+	//set tongyeok,Ring_Of_Wise_King; Qual a função desta variável? ID do Ring_Of_Wise_King é 2782. (Architect)
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
-		mes "Our lives exist for Saphas.";
-		mes "On the other hand,";
-		mes "Saphas lives exist for me.";
+		mes "Nossas vidas existem para Saphas.";
+		mes "Mas por outro lado,";
+		mes "outros Saphas existem por mim.";
 		mes "Hum hahaha!";
 		next;
 		mes "[Piom]";
-		mes "We, Saphas are always together!";
-		mes "Wherever we are!";
-		mes "Cheer for Saphas!";
+		mes "Nós, Saphas, estamos sempre juntos!";
+		mes "Aonde quer que estejamos!";
+		mes "Um viva para os Saphas!";
 		close;
-	}
-	else {
+	} else {
 		mes "[Piom]";
 		mes "Esd fas hdi as sp ad osd";
 		mes "Ns id pie sj idf";
@@ -251,12 +240,11 @@ manuk,183,185,5	script	Piom#ep13_2_3	454,{
 manuk,256,143,3	script	Galtun#ep13_2_3	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Galtun]";
-		mes "I will devote myself to";
-		mes "protect my family and Saphas.";
-		mes "That is all I want...";
+		mes "Eu sempre protegerei";
+		mes "minha família e os Saphas.";
+		mes "É isso que quero...";
 		close;
-	}
-	else {
+	} else {
 		mes "[Galtun]";
 		mes "Mr ishh qw e ee";
 		mes "Baa eou sh ua sd";
@@ -268,12 +256,11 @@ manuk,256,143,3	script	Galtun#ep13_2_3	450,{
 manuk,245,124,3	script	Piom#ep13_2_4	455,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
-		mes "Human, you think our battle is stupid, don't you?";
-		mes "And a waste of time?";
-		mes "But it is really depends on this war whether we can survive or not.";
+		mes "Humano, você acha que nossa luta é estúpida, não é?";
+		mes "E uma perda de tempo?";
+		mes "Mas essa guerra decidirá se sobreviveremos ou não.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Piom]";
 		mes "Nsa dhi pao sdi a jp das";
 		mes "Uaa as iijds kn sdg f";
@@ -288,16 +275,15 @@ manuk,245,124,3	script	Piom#ep13_2_4	455,{
 }
 
 // ep13_2_npc
-man_in01,346,135,0	script	 Worker#ep13bsg1	454,{
+man_in01,346,135,0	script	 Trabalhador#ep13bsg1	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "It is dangerous if the valve is not checked properly every day.";
-		mes "In fact, there was an incident.";
-		mes "It gives me the creeps just thinking about it.";
+		mes "[Trabalhador]";
+		mes "É perigoso ficarmos sem checar a válvula por um dia.";
+		mes "Na verdade, já aconteceu um acidente.";
+		mes "Tenho arrepios só de lembrar.";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "Gs df o aj ud pa";
 		mes "N sd asw ewt jj ";
 		mes "Ud aso pda s ";
@@ -305,74 +291,69 @@ man_in01,346,135,0	script	 Worker#ep13bsg1	454,{
 	}
 }
 
-man_in01,393,134,3	script	Worker#ep13bsg2	454,{
+man_in01,393,134,3	script	Trabalhador#ep13bsg2	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "What!! Wh.. Oh... I... I didn't fall asleep!!";
-		mes "Let's get back to work... that's right work...";
+		mes "[Trabalhador]";
+		mes "O quê!! Q... Ah... Eu... Eu não adormeci!";
+		mes "Vamos voltar ao trabalho... Isso, trabalho...";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "Ns ad jai osd";
 		mes "Rt odj as jo dp as";
 		close;
 	}
 }
 
-man_in01,377,143,5	script	Worker#ep13bsg3	454,{
+man_in01,377,143,5	script	Trabalhador#ep13bsg3	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
+		mes "[Trabalhador]";
 		mes "Hmm... It's working just fine... No probems at all...";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "Mou ii ros oa d d ";
 		close;
 	}
 }
 
-man_in01,333,128,5	script	Worker#ep13bsg4	454,{
+man_in01,333,128,5	script	Trabalhador#ep13bsg4	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "My eyesight is getting weaker these days.";
+		mes "[Trabalhador]";
+		mes "Minha vista está cada vez pior.";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "Yw I eus ia d ap s";
 		close;
 	}
 }
 
-man_in01,336,128,5	script	Worker#ep13bsg5	454,{
+man_in01,336,128,5	script	Trabalhador#ep13bsg5	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "Isn't this fabulous?";
+		mes "[Trabalhador]";
+		mes "Não é maravilhoso?";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "R tt osj dj d";
 		close;
 	}
 }
 
-man_in01,283,288,3	script	Worker#ep13bsg6	454,{
+man_in01,283,288,3	script	Trabalhador#ep13bsg6	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "It is fortunate to have lots of fine quality Bradium today.";
+		mes "[Trabalhador]";
+		mes "Temos sorte de ter Bradium de qualidade hoje.";
 		next;
-		mes "[Worker]";
-		mes "This is all that is left for us.";
+		mes "[Trabalhador]";
+		mes "É tudo que nos resta.";
 		close;
-	}
-	else {
-		mes "[Worker]";
+	} else {
+		mes "[Trabalhador]";
 		mes "Qw eI hs pado as d p ";
 		next;
-		mes "[Worker]";
+		mes "[Trabalhador]";
 		mes "Too fn ish d fd";
 		close;
 	}
@@ -382,10 +363,9 @@ man_in01,283,288,3	script	Worker#ep13bsg6	454,{
 manuk,103,354,5	script	Manuk Galtun#door1	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Galtun]";
-		mes "Here is Manuk where the Sapha who is descendant of Hwergelmir lives.";
+		mes "Aqui é Manuk, onde o Sapha descendente de Hwergelmir mora.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Galtun]";
 		mes "Zd sng pps fsr";
 		close;
@@ -395,10 +375,9 @@ manuk,103,354,5	script	Manuk Galtun#door1	450,{
 manuk,122,354,3	script	Manuk Galtun#door2	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Galtun]";
-		mes "Here is Manuk where the Sapha who is descendant of Hwergelmir lives.";
+		mes "Aqui é Manuk, onde o Sapha descendente de Hwergelmir mora.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Galtun]";
 		mes "To osn dia fg gh gh";
 		close;
@@ -408,15 +387,14 @@ manuk,122,354,3	script	Manuk Galtun#door2	450,{
 manuk,99,334,5	script	Manuk Piom#tre1	460,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Piom]";
-		mes "Galtuns are brave Sapha warriors.";
-		mes "I am a Piom class which is general labor.";
+		mes "Galtuns são guerreiros Sapha.";
+		mes "Sou da classe Piom, dos trabalhadores gerais.";
 		next;
 		mes "[Manuk Piom]";
-		mes "By virtue of the braveness of the Galtun, we can stand for a long time from the diversions of the Laphine.";
-		mes "We always appreciate their efforts.";
+		mes "Graças a bravura dos Galtuns, podemos aguentar Laphine por muito tempo.";
+		mes "Somos gratos pelo esforço deles.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Piom]";
 		mes "H dn i sid p sd ";
 		mes "Nd isjd sapd j s id";
@@ -429,11 +407,10 @@ manuk,99,334,5	script	Manuk Piom#tre1	460,{
 manuk,103,311,3	script	Manuk Piom#tre2	455,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Piom]";
-		mes "My leg...";
-		mes "It's time to already.";
+		mes "Minha perna...";
+		mes "Já está na hora.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Piom]";
 		mes "Fn is d id ";
 		mes "Yon sdi dh so dps";
@@ -445,9 +422,9 @@ manuk,103,311,3	script	Manuk Piom#tre2	455,{
 manuk,194,189,3	script	Manuk Galtun#tre3	450,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Galtun]";
-		mes "ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½?ï¿½";
-		mes "ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½";
-		
+		mes "»¶?À´µ½ÂíU¿?£";
+		mes "Ðè?ÎÒ?Äã?·Âð£¿";
+
 	}
 	else {
 		end;
@@ -458,12 +435,11 @@ manuk,194,189,3	script	Manuk Galtun#tre3	450,{
 manuk,293,203,3	script	Manuk Piom#tre4	454,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Piom]";
-		mes "Hey, Be careful!";
-		mes "This mineral is Bradium which is the life of our tribe.";
-		mes "If you don't handle the stone carefully, you'll be in trouble!";
+		mes "Ei, tome cuidado!";
+		mes "Esse mineral é o Bradium, a vida da nossa tribo!";
+		mes "Se você não manuseá-lo corretamente, terá problemas!";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Piom]";
 		mes "Bmm ish di sd";
 		mes "Fii sd ani s a d s k ds ";
@@ -475,12 +451,11 @@ manuk,293,203,3	script	Manuk Piom#tre4	454,{
 manuk,253,173,3	script	Manuk Benknee#tre5	449,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Manuk Benknee]";
-		mes "Can you see that statue?";
-		mes "He's the Hwergelmir, who is like a legend for us Sapha.";
-		mes "He was a real majestic and brave man.";
+		mes "Você vê aquela estátua?";
+		mes "Ele é Hwergelmir, uma lenda para nós, Saphas.";
+		mes "Ele era um homem bravo e majestoso.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Manuk Piom]";
 		mes "Ys oadj oa s d";
 		mes "Bni ii osd jo as das";
@@ -489,28 +464,25 @@ manuk,253,173,3	script	Manuk Benknee#tre5	449,{
 	}
 }
 
-// ep12_2_dailybs
-manuk,251,180,5	script	Young Villager#ep13bs	454,{
+manuk,251,180,5	script	Villager jovem#ep13bs	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Young Villager]";
-		mes "It's past the time of our date, why isn't she here yet!!?";
+		mes "[Villager jovem]";
+		mes "É passado o tempo da nossa data, porque não é ela aqui ainda!?";
 		close;
-	}
-	else {
+	} else {
 		mes "[Asd]";
 		mes "Ywo di pi butfs oui Afbsu ";
 		close;
 	}
 }
 
-man_in01,360,137,5	script	Mechanic#ep13bs	454,{
+man_in01,360,137,5	script	Mecanico#ep13bs	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Mechanic]";
-		mes "Alien races are not allowed to enter.";
-		mes "It's very dangerous here, please don't come any closer.";
+		mes "[Mecanico]";
+		mes "Raças alienígenas não são autorizados a entrar.";
+		mes "É muito perigoso aqui, por favor, não chegue mais perto.";
 		close;
-	}
-	else {
+	} else {
 		mes "[Asoui]";
 		mes "Fs iua sdjosow ww ";
 		mes "Adds wwpq iusnd ";
@@ -518,17 +490,16 @@ man_in01,360,137,5	script	Mechanic#ep13bs	454,{
 	}
 }
 
-man_in01,68,187,0	script	Worker#ep13bs1	454,{
+man_in01,68,187,0	script	Operário#ep13bs1	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "Hmm, it smells delicious.";
-		mes "It should be time to turn it around now.";
+		mes "[Operário]";
+		mes "Hmm, cheira delicioso.";
+		mes "Deve ser a hora de virar o jogo agora.";
 		next;
-		mes "[Worker]";
-		mes "Hardrock Mammoth steak should be eaten slightly raw!";
+		mes "[Operário]";
+		mes "Hardrock Mammoth bife deve ser comido cru ligeiramente!";
 		close;
-	}
-	else {
+	} else {
 		mes "[Tee]";
 		mes "As woue dpi sha we";
 		mes "Two psie bu le";
@@ -539,23 +510,22 @@ man_in01,68,187,0	script	Worker#ep13bs1	454,{
 	}
 }
 
-man_in01,74,181,3	script	Worker#ep13bs2	454,{
+man_in01,74,181,3	script	Trabalhador#ep13bs2	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Worker]";
-		mes "Chef Cook, how many plates should I put down?";
+		mes "[Trabalhador]";
+		mes "Chef Cook, quantas placas que devo colocar para baixo?";
 		close;
-	}
-	else {
+	} else {
 		mes "[Tee]";
 		mes "We pishd bugs ouwwe iro ";
 		close;
 	}
 }
 
-man_in01,227,280,5	script	Scientist#ep13bs	449,{
+man_in01,227,280,5	script	Cientista#ep13bs	449,{
 	if (isequipped(2782) == 1) {
-		mes "[Scientist]";
-		mes "Is there only one way we can survive..?";
+		mes "[Cientista]";
+		mes "Existe apenas uma maneira que podemos sobreviver ..?";
 		close;
 	}
 	else {

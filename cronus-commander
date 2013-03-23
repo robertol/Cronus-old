@@ -1,12 +1,11 @@
 #!/bin/bash
 # Atalho para funcos Cronus-Commander - http://Cronus-Emulator.com [Raizen]
 # Otimizacoes [Roberto]
-versao="1.5.1"
+versao="1.5.2"
 
 case $1 in
 	recompilar|compilar) 
-		chmod 777 configure
-		./configure --disable-64bit
+		sh configure
 		make clean
 		make all
 	;;

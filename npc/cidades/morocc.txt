@@ -1,336 +1,316 @@
-//===== Hercules Script ======================================
-//= Morroc Town
-//===== By: ================================================== 
+//===== Cronus Script ========================================
+//= NPCs referentes a cidade de Morroc
+//===== Por: =================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: ===================================== 
-//= 2.2
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Morroc Town NPCs
-//===== Additional Comments: ================================= 
-//= Fully working
-//= Fixed Lapidary sprite, Implemented ANTHELL trigger
-//= (in both NPC/Warps) [Lupus]. Removed it from NPC and put in Warp
-//= 1.3 Removed some NPC due to Assassin Job Quest [kobra_k88]
-//= 1.3b mobs name corrected [Lupus], 1.3c - Adv classes support
-//= 1.4 Fixed typos [Nexon]
-//= 1.5 Added a lvl 4 weapon quest related NPC [MasterOfMuppets]
-//= 1.6 Added Bartender NPC, made by Persian69 [Vicious_Pucca]
-//= 1.7 Removed Duplicates [Silent]
-//= 1.8 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
-//= 1.9 Removed duplicate NPC, changed temp char vars to temp npc. [L0ne_W0;f]
-//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
-//= 2.0a Fixed outdated info about Milk [Lupus]
-//= 2.1 Updated/Added NPCs for episode 12.1. [L0ne_W0lf]
-//= 2.2 Removed duplicate bartender NPC. (bugreport:4555) [L0ne_W0lf]
+//===== Versão Atual: ========================================
+//= 2.3
+//===== Compatível com: ======================================
+//= Cronus GIT
+//===== Descrição: ===========================================
+//= NPCs referentes a cidade de Morroc
+//===== Comentários Adicionais: ==============================
+//= 2.3 Adicionado diálogos Oficiais do bRO. [LyDe]
 //============================================================
 
 // Morroc
 //============================================================
-morocc,150,120,5	script	Soldier - Morroc#01::MocSoldier	707,3,3,{
-	mes "[Morroc Soldier]";
-	mes "Hey, you! Stop there.";
-	next;
-	mes "[Morroc Soldier]";
-	mes "This is a restricted area. You can't come any further!";
-	close;
-
+morocc,150,120,5	script	Soldado - Morroc#01::MocSoldier	707,3,3,{
 OnTouch:
-	mes "[Morroc Soldier]";
-	mes "Hey, you! Stop there.";
+	mes "[Soldado de Morroc]";
+	mes "Ei, você! Pare aí.";
 	next;
-	mes "[Morroc Soldier]";
-	mes "This is a restricted area. You can't come any further!";
+	mes "[Soldado de Morroc]";
+	mes "Essa é uma área restrita. Você não pode passar!";
 	close;
 }
 
-morocc,202,244,0	script	Volunteer - Morroc#01	745,{
-	mes "[Morroc Volunteer]";
-	mes "After that terrible incident wiped out the entire Morroc, Rune-Midgard Kingdom has gathered us valunteers to help restorations.";
+morocc,202,244,0	script	Voluntário - Morroc#01	745,{
+	mes "[Voluntário]";
+	mes "Depois que aquele terrível incidente destruíu Morroc, o Reino de Rune-Midgard convocou voluntários para ajudar-nos a reconstruir a cidade.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "As important as it seems, everyone's being careful but there are always some that really don't realize the situation, don't you think?";
+	mes "[Voluntário]";
+	mes "Como é algo importante, as pessoas são muito cuidadosas, mas algumas realmente não percebem a magnitude do incidente.";
 	close;
 }
 
-morocc,88,133,3	script	Volunteer - Morroc#02	748,{
-	mes "[Morroc Volunteer]";
-	mes "We're... We're flooded with work...";
+morocc,88,133,3	script	Voluntário - Morroc#02	748,{
+	mes "[Voluntário]";
+	mes "Nossa... Estamos atolados de trabalho...";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "This work's like never-ending, no matter how hard we try!!!";
-	mes "People of Rune-Midgard!! Please lend us a helping hand!!";
+	mes "[Voluntário]";
+	mes "Não acabamos nunca, não importa o que fazemos!";
+	mes "Povo de Rune-Midgard!! Por favor, venham nos ajudar!!";
 	next;
-	mes "[Morroc Volunteer]";
+	mes "[Voluntário]";
 	mes "Haw.... Whew... Ugh...";
 	close;
 }
 
-morocc,202,110,0	script	Volunteer - Morroc#03	730,{
-	mes "[Morroc Volunteer]";
-	mes "We're still unable to estimate the overall damage.";
+morocc,202,110,0	script	Voluntário - Morroc#03	730,{
+	mes "[Voluntário]";
+	mes "Ainda não estimamos o dano causado.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "Adventurers' Union and Prontera Kingdom are putting their efforts on restorations as well as restraints of the original cause of the disaster.";
+	mes "[Voluntário]";
+	mes "Voluntários estão esforçando-se para reparar o estrago e determinar a causa do desastre.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "Unless we settle the original cause, the damage will even spread out of Morroc. The only thing left is to get worse.";
+	mes "[Voluntário]";
+	mes "Se não determinarmos a causa, o dano se espalhará por Morroc. Isso vai de mal a pior.";
 	close;
 }
 
-morocc,268,287,3	script	Volunteer - Morroc#04	727,{
-	mes "[Morroc Volunteer]";
-	mes "As bad as it seems, we can't even ask for more support.";
-	mes "This sure must be the worst thing ever happened in Rune-Midgard's history.";
+morocc,268,287,3	script	Voluntário - Morroc#04	727,{
+	mes "[Voluntário]";
+	mes "Por pior que esteja, não podemos pedir mais apoio.";
+	mes "Isso foi a pior coisa que aconteceu na história de Rune-Midgard.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "I wish I knew how bad the damage is, but we can't even estimate it. It's like shovelling sand against the tide..";
+	mes "[Voluntário]";
+	mes "Gostaria de saber a extensão do estrago, mas nem conseguimos estimar...";
 	close;
 }
 
-morocc,37,287,0	script	Volunteer - Morroc#05	79,{
-	mes "[Morroc Volunteer]";
-	mes "The town's all shattered, but the real problem is the towners.";
+morocc,37,287,0	script	Voluntário - Morroc#05	79,{
+	mes "[Voluntário]";
+	mes "A cidade está destruída, mas o principal problema são os cidadãos.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "It's a real pity to see those victims of the destroyed town, but the witnesses of the disaster are so much shocked. They're simply not normal now.";
+	mes "[Voluntário]";
+	mes "É muito triste ver todas essas vítimas, e as testemunhas da tragédia estão em estado de choque. Simplesmente não estão normais.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "People are scared to death, but those are fortunate at least.. cause.. many others got mentally ill and stuff..";
+	mes "[Voluntário]";
+	mes "Alguns estão completamente apavorados, mas esses até que têm sorte... Muitos ficaram mentalmente doentes ou coisa pior...";
 	close;
 }
 
-morocc,223,102,0	script	Volunteer - Morroc#06::MocVolunteer	741,{
-	mes "[Morroc Volunteer]";
-	mes "Ugh.. It's kinda spooky, here.. Even this dry wind of the desert seems to have a dark nature.";
+morocc,223,102,0	script	Voluntário - Morroc#06::MocVolunteer	741,{
+	mes "[Voluntário]";
+	mes "Ugh... Isso aqui é meio assustador... Mesmo esse vento seco do deserto parece ter uma natureza negra.";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "Ooh!! Something... I can feel something! The dark and gloomy air flowing around this town is actually giving me a musical motiff!";
+	mes "[Voluntário]";
+	mes "Aah!! Alguma coisa... Estou sentindo alguma coisa! O ar dessa cidade está me dando inspiração para compor uma música!";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "Right, I think you should hear it! The title is.. 'The Rhapsody of Morroc Satan's Rebirth'!!";
+	mes "[Voluntário]";
+	mes "Certo, você tem que ouvir! A música se chama... 'A Saga do Renascimento do Satan Morroc'!!";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "When finally wake up, it's just the same darkness";
-	mes "Failed to be reborn at the same place,";
-	mes "Gotta try harder and harder, never ever give up,";
-	mes "But even after hundreds and thousands of trying,";
-	mes "The great Satan of Morroc can't revive~";
+	mes "[Voluntário]";
+	mes "Quando finalmente acorda, é só a mesma escuridão";
+	mes "Não consegue sair daquele lugar,";
+	mes "Precisa tentar cada vez mais e nunca desistir";
+	mes "Mas mesmo depois de milhares de anos tentando";
+	mes "O grande Satan Morroc não consegue renascer~";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "My stupid button men are useless,";
-	mes "Against those adventurers,";
-	mes "This time I must revive,";
-	mes "Cracking the time and the space,";
-	mes "Will be saved for the last~~~";
+	mes "[Voluntário]";
+	mes "Meus homens são inúteis";
+	mes "Contra esses aventureiros,";
+	mes "Dessa vez eu preciso renascer";
+	mes "Embaralhando o espaço e o tempo,";
+	mes "E eu finalmente estarei salvo~~";
 	next;
-	mes "[Ringing Voice]";
-	mes "Be quiet! Can't you see what's going on?!";
+	mes "[Voz Estridente]";
+	mes "Cale a boca! Você não vê o que está acontecendo?!";
 	specialeffect EF_HIT2,AREA,"Volunteer - Morroc#06";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "Heyyy, you're being too harsh, Senyorita. Your fist may be as fragile as you are, but it sure can hurt somebody.";
+	mes "[Voluntário]";
+	mes "Eeei, não seja tão dura, senhorita. Você pode ser frágil, mas ainda assim pode machucar alguém!";
 	next;
-	mes "[Ringing Voice]";
-	mes "Anyways, isn't that a crib? I think I heard something like that before..";
+	mes "[Voz Estridente]";
+	mes "Enfim, sua canção não é um plágio? Acho que já ouvi antes...";
 	next;
-	mes "[Morroc Volunteer]";
-	mes "No, No way!? It,, sure is not!";
+	mes "[Voluntário]";
+	mes "Não, não mesmo! Claro que não é!";
 	close;
 }
 
-morocc,226,102,4	duplicate(MocVolunteer)	Volunteer - Morroc#07	726
+morocc,226,102,4	duplicate(MocVolunteer)	Voluntário - Morroc#07	726
 
-moc_ruins,123,154,0	script	Young Man#moc01	99,{
-	mes "[Young Man]";
-	mes "The town's completely destroyed, but that giant triangular structure hasn't been harmed at all. Maybe it's protected by some kinda special power.";
+moc_ruins,123,154,0	script	Jovem#moc01	99,{
+	mes "[Jovem]";
+	mes "A cidade está totalmente destruída, mas aquelas estruturas triangulares gigantes não sofreram nenhum dano. Talvez estejam protegidas por algum poder especial.";
 	next;
-	mes "[Young Man]";
-	mes "You know...Those giant, triangular buildings at the NorthWest corner of Morroc known are known to us as Pyramids...";
+	mes "[Jovem]";
+	mes "Sabe... Esses prédios enormes e triangulares no noroeste de Morroc conhecidos como Pirâmides...";
 	next;
-	mes "[Young Man]";
-	mes "Those things have been around here for thousands and thousands of years. No one knows when and why they were built, or who built them.";
+	mes "[Jovem]";
+	mes "Eles estão aqui a milhares de anos. Ninguém sabe desde quando, nem quem os construiu.";
 	next;
-	mes "[Young Man]";
-	mes "All we know is that tons of monsters live inside those weird buildings. You might wanna stay away from those really dangerous places.";
+	mes "[Jovem]";
+	mes "Tudo que sabemos é que um monte de monstros moram lá dentro. É melhor você ficar longe desses lugares perigosos.";
 	next;
-	mes "[Young Man]";
-	mes "Those monsters in the Pyramid would be very, very sensitive to sweet flash smell of people....";
+	mes "[Jovem]";
+	mes "Esses monstros da Pirâmide são muito sensíveis ao cheiro de humanos...";
 	close;
 }
 
-moc_ruins,128,153,0	script	Grampa#moc	61,{
-	mes "[Old Scholar]";
-	mes "I've devoted my life to researching the mysterious pyramids near Morroc. I haven't been able to concretely confirm anything yet, but...";
+moc_ruins,128,153,0	script	Vovô#moc	61,{
+	mes "[Professor Idoso]";
+	mes "Dediquei minha vida ao estudo das Pirâmides perto de Morroc. Ainda não consegui confirmar concretamente nada, mas...";
 	next;
-	mes "[Old Scholar]";
-	mes "I'm sure that the largest pyramid contains the tomb of the ancient king, Osiris! I'm willing to stake my life on it!";
+	mes "[Professor Idoso]";
+	mes "Tenho certeza que a maior pirâmide contém a tumba do velho rei Osiris! Eu aposto minha vida nisso!";
 	close;
 }
 
-moc_ruins,132,144,0	script	Wolf Young Man#moc	85,{
-	mes "[Young Man]";
-	mes "I remember I said the bandits of desert are the desert wolves.. Those bastards always roam around in a bunch and they would get so cruel and outrageous if one of them got attacked.";
+moc_ruins,132,144,0	script	Jovem Homem Lobo#moc	85,{
+	mes "[Jovem]";
+	mes "Eu me lembro de dizer que o maior perigo do deserto são os lobos... Eles sempre andam em grupo e ficam bravíssimos se um deles é atacado.";
 	next;
-	mes "[Young Man]";
-	mes "They are so vicious, and I'm telling ya, I'm no kidding. You can only find some bones and rotten milk in the backpack after these wolves sweep through.";
-	mes "Those things are so mean and vicious..";
+	mes "[Jovem]";
+	mes "Estou te dizendo, não é brincadeira. Você encontra apenas ossos depois que eles passam.";
+	mes "São tão maus...";
 	next;
-	mes "[Young Man]";
-	mes "But the thing is that.. I even kinda feel those merciless cold-blooded monsters are nothing to be afraid of, compared to what has happened in Morroc. Morroc is already a hell.";
+	mes "[Jovem]";
+	mes "Mas agora... Eu acho que esses monstros não são nada se comparados com o que aconteceu em Morroc. Morroc virou um inferno.";
 	close;
 }
 
-moc_ruins,115,144,3	script	Muka Young Man#moc	83,{
-	mes "[Young Man]";
-	mes "I work in the trading business, so I always have to cross the hot, dry Morroc Desert on business.";
+moc_ruins,115,144,3	script	Jovem Homem Muka#moc	83,{
+	mes "[Jovem]";
+	mes "Eu trabalho com trocas, portanto sempre tenho que cruzar o deserto de Morroc a negócios.";
 	next;
-	mes "[Young Man]";
-	mes "But I can't do that anymore.";
+	mes "[Jovem]";
+	mes "Mas não posso mais fazer isso.";
 	next;
-	mes "[Young Man]";
-	mes "Now that I can't, I kind of miss the old days.";
+	mes "[Jovem]";
+	mes "Agora que não posso, sinto falta dos velhos tempos.";
 	next;
-	mes "[Young Man]";
-	mes "Like this one time, while I was in the middle of the desert, I got so thirsty that I caught a cactus.. but before I was able to cut it, it slapped me! Then it shot me in the arse with all these needles...";
+	mes "[Jovem]";
+	mes "Como daquela vez em que eu estava no meio do deserto, fiquei com sede e peguei um cacto... mas antes que eu conseguisse espremê-lo, ele me deu um tapa! Depois atirou agulhas em mim!";
 	next;
-	mes "[Young Man]";
-	mes "Later, I learned that it wasn't a normal cactus I found, but the monster we call 'Muka.'";
-	mes "Now I come to think of it, it was fun as much as dangerous.";
+	mes "[Jovem]";
+	mes "Depois descobri que não era um cacto, era um monstro chamado 'Muka'.";
+	mes "Pensando nisso, foi tão divertido quanto perigoso!";
 	close;
 }
 
-moc_ruins,109,138,0	script	Diamond Young Man#moc	99,{
-	mes "[Young Man]";
-	mes "The undisputed queen of jewels has to be the Diamond. After looking at it just once, no one can deny its beauty.";
+moc_ruins,109,138,0	script	Jovem Homem Diamante#moc	99,{
+	mes "[Jovem]";
+	mes "O rei das jóias é indiscutivelmente o Diamante. Ao olhá-lo, ninguém nega sua beleza.";
 	next;
-	mes "[Young Man]";
-	mes "Many factors determine its value, but the most important thing is its size.";
+	mes "[Jovem]";
+	mes "Muitos fatores determinam o valor de um, mas o principal é o tamanho.";
 	next;
-	mes "[Young Man]";
-	mes "It should also be a perfect crystal, not cracked or chipped, if you want to sell the Diamond for a lot of zeny.";
+	mes "[Jovem]";
+	mes "E também tem que ser um cristal perfeito, sem rachaduras, se você quiser vendê-lo por muitos zenys.";
 	next;
-	mes "[Young Man]";
-	mes "But look! The hardest stone in the world got broken in two!";
+	mes "[Jovem]";
+	mes "Mas olha! A pedra mais resistente do mundo se quebrou em duas!";
 	next;
-	mes "[Young Man]";
-	mes "I know it's not the time to worry about some gemstones but.. this.. was my everything..";
+	mes "[Jovem]";
+	mes "Sei que não é a hora de me preocupar com gemas, mas... isso... era tudo para mim...";
 	close;
 }
 
-morocc,54,251,0	script	Young Man#moc02	89,{
-	mes "[Drunken Young Man]";
-	mes "Wait a second..! Are you perhaps an adventurer? Welcome! How's your trip?";
-	mes "Heh heh~ Let me tell you a story. You know I just got out of that Tavern, there, huh?";
+morocc,54,251,0	script	Jovem#moc02	89,{
+	mes "[Jovem Bêbado]";
+	mes "Espera um pouco...! Você é um aventureiro? Bem-vindo! Como vai sua viagem?";
+	mes "Heh heh~ Deixe eu te contar uma história. Acabei de sair daquela taverna lá, está vendo?";
 	next;
-	mes "[Drunken Young Man]";
-	mes "I heard the Satan Morroc has revived. It just got out of cracking the time and the space blar... hic~";
+	mes "[Jovem Bêbado]";
+	mes "Ouvi que o Satan Morroc renasceu. Ele meio que embaralhou o espaço e o tempo... hic~";
 	next;
-	mes "[Drunken Young Man]";
-	mes "Ah... I kinda wanna see that Satan with my own eyes, but! I really shouldn't. I shouldn't even dream of seeing that Satan in person.";
+	mes "[Jovem Bêbado]";
+	mes "Ah... Eu até queria ver o Satan com meus próprios olhos, mas eu não devia. Não devo nem pensar em vê-lo pessoalmente.";
 	next;
-	mes "[Drunken Young Man]";
-	mes "But I think there'd be nothing to lose if you, a person of bravery, who came through the wile desert try to find it, don't you think? Teehee~ Don't forget to buy me a drink when you find it!";
+	mes "[Jovem Bêbado]";
+	mes "Mas acho que não perderíamos nada se você, uma pessoa corajosa, que veio do deserto, tentasse encontrá-lo, não é? Teehee~ Não esqueça de me pagar um drinque quando encontrá-lo!";
 	mes "Hic!";
 	next;
-	mes "[Drunken Young Man]";
-	mes "Anyway, do you know where we are? I just had a little drink at a tavern, but all of a sudden, the whole town's disappeared when I got out.. or, some five hundred years have passed???!";
+	mes "[Jovem Bêbado]";
+	mes "Enfim, pode me dizer onde estou? Eu só tomei alguns drinques na taverna, mas do nada a cidade desapareceu quando eu saí... ou talvez quinhentos anos tenham se passado!!";
 	close;
 }
 
-moc_ruins,94,117,0	script	Pale Looking Young Man	48,{
-	mes "[Pale-looking Young Man]";
-	mes "... That day... I saw the bloody moon in the sky. It was too silent that it felt so spooky.";
+moc_ruins,94,117,0	script	Jovem Pálido	48,{
+	mes "[Jovem Pálido]";
+	mes "... Aquele dia... Eu vi uma lua sangrenta no céu. Tudo estava silencioso e assustador.";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "Not even a whistle of dry wind, and the air so heavy and stuffy, I could hardly breathe.";
+	mes "[Jovem Pálido]";
+	mes "Nem um único sopro de vento, o ar estava pesado, eu mal conseguia respirar.";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "But then, Bang! It was right that time that I saw the enormous amount of smoke rising up at the Castle of Morroc with an earsplitting sound.";
+	mes "[Jovem Pálido]";
+	mes "Mas aí, Bang! Foi nessa hora que eu vi uma enorme cortina de fumaça saindo do castelo de Morroc.";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "All happened so fast. The Oasis of the Castle was all dried up and the town was destroyed. And... and that voice... I heard a voice.";
+	mes "[Jovem Pálido]";
+	mes "Tudo aconteceu tão rápido... O oásis do castelo secou e toda a cidade foi destruída. E... e então a voz... Eu ouvi uma voz.";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "Blood... Blood is what it takes to pay for the soul... and that dark sound of laughter...";
-	mes "Aah!!! It's... It's still ringing in my ears!!! Aahhhhh!!!!";
+	mes "[Jovem Pálido]";
+	mes "Sangue... Sangue é o que você precisa para pagar pela sua alma... E o som de uma risada negra...";
+	mes "Aah!!! Ainda... Ainda ecoa nos meus ouvidos!!! Aahhhhhh!!!!";
 	next;
-	mes "- It'd be better not to disturb him anymore -";
+	mes "- Melhor não incomodá-lo mais -";
 	close;
 }
 
-moc_ruins,115,82,0	script	Little Girl#moc	703,{
-	mes "[Little Girl]";
-	mes "-Crying-";
+moc_ruins,115,82,0	script	Menininha#moc	703,{
+	mes "[Menininha]";
+	mes "*chorando*";
 	next;
-	mes "[Little Girl]";
-	mes "I'm so scared! Where's mom and dad...! hhooooo... Where's our house...";
+	mes "[Menininha]";
+	mes "Estou com medo! Cadê meus pais...! hhooooo... Cadê minha casa...";
 	next;
-	mes "[Little Boy]";
-	mes "Please stop crying, Eliese... You could even faint if you cry all day long, you know...";
+	mes "[Menino]";
+	mes "Por favor não chore, Eliese... Você pode até desmaiar se chorar tanto assim...";
 	next;
-	mes "[Little Girl]";
-	mes "No! No... Mommy... Daddy....";
+	mes "[Menininha]";
+	mes "Não! Não... Mamãe... Papai...";
 	close;
 }
 
-moc_ruins,118,82,1	script	Little Boy#moc	706,{
-	mes "[Little Boy]";
-	mes "............... Let's stop crying, Eliese...";
+moc_ruins,118,82,1	script	Menino#moc	706,{
+	mes "[Menino]";
+	mes "............... Pare de chorar, Eliese...";
 	next;
-	mes "[Little Girl]";
-	mes "Nooooooo... Mommy... Daddy....!!";
+	mes "[Menininha]";
+	mes "Nããããããoo... Mamãe... Papai....!!";
 	next;
-	mes "[Little Boy]";
-	mes "Mom and Dad are now...";
+	mes "[Menino]";
+	mes "Nossos pais estão...";
 	next;
-	mes "[Little Girl]";
-	mes "No...... noooooo...";
+	mes "[Menininha]";
+	mes "Não... nãããão...";
 	next;
-	mes "[Little Boy]";
-	mes "Right, you love ice-cream, don't you? I.. I can get you an ice-cream if you stop crying. Don't cry, Eliese, please.. Ok? Don't...";
+	mes "[Menino]";
+	mes "Bem, você adora sorvete, não é? Eu... Eu te dou um sorvete se você parar de chorar. Não chore, Eliese, por favor... Tá? Não...";
 	close;
 }
 
-moc_ruins,121,116,4	script	Picky Lady#moc	66,{
+moc_ruins,121,116,4	script	Senhora Picky#moc	66,{
 	mes "[Syvia]";
-	mes "The fields of Rune-Midgard are infested with wild and dangerous monsters..But, you've got to admit a bunch of them are soooo cute!";
-	mes "You know, like how Spore sticks out its tongue after you kill it..";
+	mes "Os campos de Rune-Midgard estão infestados de monstros perigosos... Mas também tem alguns que são muito fofos!";
+	mes "Sabe, como quando o Spore põe a língua para fora ao ser derrotado...";
 	next;
 	mes "[Syvia]";
-	mes "Or, how little Picky wears that tiny egg shell sometimes?..";
+	mes "E, que tal quando o Picky usa aquelas cascas de ovo?..";
 	next;
 	mes "[Syvia]";
-	mes "I can't believe what just has happened.. Our town used to be the one with those cute little monsters, not that kinda of visious dreadful Evil sleeping in! Whew...";
+	mes "Não acredito no que aconteceu. Nossa cidade tinha esses monstros fofos, não esse horrível que chegou agora!";
 	next;
 	mes "[Syvia]";
-	mes "I'm so scared... I just wanna ease my mind watching over those cute little Porings...";
+	mes "Estou com medo... Quero esquecer de tudo e olhar um desses Porings fofinhos...";
 	next;
-	switch(select("What about Angeling?:How about Ghostring?:Quit Conversation")) {
+	switch(select("E o Angeling?:E o Ghostring?:Parar de conversar")) {
 	case 1:
 		mes "[Syvia]";
-		mes "Ooh! Angeling is just like Poring, except it has angel wings! Of course, I don't know if they can actually fly..";
+		mes "Ooh! Angeling é como um Poring, mas com asas de anjo! Bem, não sei se ele realmente pode voar...";
 		next;
 		mes "[Syvia]";
-		mes "Angelings are rarely seen, but can be found among large groups of Porings living in one of the fields south of Prontera.";
-		mes "Angeling is a high level monster with Holy property, so it's immune to most magic, aside from spells that have Neutral or Shadow attack properties.";
+		mes "Angelins são raros, mas podem ser encontrados vivendo com grandes grupos de Porings nos campos ao Sul de Prontera.";
+		mes "Angeling é um monstro forte de propriedade Holy, então é imune a maioria das mágicas, menos as de propriedade Neutra ou Shadow.";
 		next;
 		mes "[Syvia]";
-		mes "Hehe~ Don't you think I know a lot about Porings? I love them soooo much";
+		mes "Hehe~ Você não acha que eu sei muito sobre Porings? Eu os amo muuito~";
 		next;
 		mes "[Syvia]";
 		mes "Hehe... Poring... Hee......";
 		close;
 	case 2:
 		mes "[Syvia]";
-		mes "Ghostring is an evil ghost Poring. It's rarely seen, but can be found among mass groups of Porings living in one of the fields south of Prontera.";
+		mes "Ghostring é um Poring fantasma e malvado. É raramente visto, mas pode ser encontrado vivendo com grandes grupos de Porings nos campos ao Sul de Prontera.";
 		next;
 		mes "[Syvia]";
-		mes "Ghostring is a high-leveled monster with the Ghost property, so it can withstand all physical attacks.";
-		mes "Damage can only be caused to Ghostring through magic spells or weapons with an a specific property.";
+		mes "Ghostring é um monstro forte de propriedade Ghost, então é imune a ataques físicos.";
+		mes "Você só pode causar dano a ele por magia ou armas encantadas com certas propriedades.";
 		next;
 		mes "[Syvia]";
-		mes "Hehe~ Don't you think I know a lot about Porings? I love them soooo much~";
+		mes "Hehe~ Você não acha que eu sei muito sobre Porings? Eu os amo muuito~";
 		next;
 		mes "[Syvia]";
 		mes "Hehe... Poring... Teehee......";
@@ -342,392 +322,386 @@ moc_ruins,121,116,4	script	Picky Lady#moc	66,{
 	}
 }
 
-moc_ruins,155,107,4	script	Ant Man#moc	47,{
+moc_ruins,155,107,4	script	Homem Formiga#moc	47,{
 	mes "[Akira]";
-	mes "Hey, you. Did you cross the desert?";
+	mes "Ei, você. Você atravessou o deserto?";
 	next;
 	mes "[Akira]";
-	mes "When you walk through the desert about one map North and 3 maps East, you'll find the entrance to Ant Hell.";
+	mes "Quando você viajar pelo deserto, se for um mapa para o Norte e três mapas para o Leste, você encontrará a entrada para o formiga Hell.";
 	next;
 	mes "[Akira]";
-	mes "There are two different entrances to the Ant Hell. When you get inside, the 1st and the 2nd underground levels of winding looking caves are connected to each other.";
+	mes "Existem duas entradas para o formiga Hell. Quando você entrar, o primeiro e o segundo níveis subterrâneos são conectados entre si.";
 	next;
 	mes "[Akira]";
-	mes "I'm really wondered how those entrances are after the horrible destruction, but I can't go out.. If you ever hear anything about it, please get me informed.";
+	mes "Me pergunto como estão essas entradas após essa destruição, mas não posso ir até lá... Se você souber de algo, por favor venha me contar.";
 	next;
-	switch(select("About 'Ant Hell':About Ants:End Conversation")) {
+	switch(select("Sobre 'Formigueiro infernal':Sobre 'Formigas':Parar de conversar")) {
 	case 1:
 		mes "[Akira]";
-		mes "That cave is sure a dangerous hell, sticky and all... There are 2 underground levels.";
-		mes "Just head East till you see the bridge which connects to the Payon Forest.";
+		mes "O caverna é perigosa, grudenta... São dois níveis subterrâneos.";
+		mes "Vá para o Leste até encontrar a ponte que leva a Floresta de Payon.";
 		next;
 		mes "[Akira]";
-		mes "In the map right before that bridge, head north to find the entrance to Ant Hell, though I'm not sure if it's still there.";
+		mes "No mapa antes da ponte, vá para o Norte para achar a entrada do formiga Hell, apesar de eu não saber se ela ainda está lá.";
 		close;
 	case 2:
 		mes "[Akira]";
-		mes "Ant Hell is swarming with Ant monsters. You'll notice that they all classed with different names...";
+		mes "formiga Hell está infestado de monstros 'Ant', formigas. Você verá que existem vários tipos diferentes...";
 		next;
 		mes "[Akira]";
-		mes "Andre is the weakest, Piere is comparatively average, and Deniro is the strongest Ant. Keep that in mind so you can fight the Ants suitable to your level.";
+		mes "Andre é o mais fraco, Piere é mediano, e Deniro é o mais forte. Lembre-se disso para não se meter com Ants mais fortes que você.";
 		next;
 		mes "[Akira]";
-		mes "Andre is colored in Ivory, Yellowish Green is Piere, and the Red one is Deniro.";
-		mes "It's really easy to distinguish those from Bitata, the commen ants because they look very different.";
+		mes "Andre tem cor de marfim, Piere é verde-amarelado, e Deniro é vermelho.";
+		mes "É fácil diferenciá-los de Vitatas, formigas comuns, porque eles são muito diferentes.";
 		next;
 		mes "[Akira]";
-		mes "Oh, and those ants are greedy as Porings and will try to steal your items, so keep that in mind.";
+		mes "Ah, e essas formigas são como Porings, vão tentar roubar seus itens. Lembre-se disso.";
 		next;
 		mes "[Akira]";
-		mes "If you ever, could cross the desert without any disturbances from the Satan...";
+		mes "Se você conseguir cruzar o deserto sem ser perturbado pelo Satan...";
 		close;
 	case 3:
 		mes "[Akira]";
-		mes "There's also an old man called Guias, the spirit of the earth. He's pretty hard to deal with.";
+		mes "Existe também um idoso chamado Guias, o espírito da terra. É difícil lidar com ele.";
 		next;
 		mes "[Akira]";
-		mes "Sharp teeth and strong jaws of the ants would be something that you should be careful of, but the shovelling skills of that old granpa is very strong that you should watch out.";
+		mes "Tenha cuidado com os dentes afiados e as garras fortes das formigas, mas as habilidades desse vovô você realmente deve evitar.";
 		next;
 		mes "[Akira]";
-		mes "...Well, what am I talking about? What is left to be afraid when the Satan of Morroc is revived? Huh..huhhuh...";
+		mes "...Nossa, do que eu estou falando? De que mais precisamos ter medo agora que o Satan Morroc renasceu? Huh..huhhuh...";
 		close;
 	}
 }
 
-moc_ruins,143,43,4	script	Assassin Boy#moc	118,{
-	mes "[Slayer Kid]";
-	mes "Unbeatable in man-to-man fights, Assassins always overcome their enemies! Erm, always overcome their enemies without a trace.";
+moc_ruins,143,43,4	script	Criança Estranha#moc	118,{
+	mes "[Criança Estranha]";
+	mes "Assassinos são invencíveis em combates corpo-a-corpo, eles sempre derrotam seus inimigos sem deixar rastro!";
 	next;
-	mes "[Slayer Kid]";
-	mes "But what did they do when this destruction happened in Morroc!!!";
+	mes "[Criança Estranha]";
+	mes "Mas o que será que eles fizeram quando aconteceu isso em Morroc!";
 	next;
-	switch(select("?????:Where I can find the Assassin clan?:End Conversation")) {
+	switch(select("?????:Onde posso encontrar o clan dos assassinos?:Parar de conversar")) {
 	case 1:
-		mes "[Slayer Kid]";
-		mes "I hear Assassins practice killing people, quietly and stealthfully..";
+		mes "[Criança Estranha]";
+		mes "Ouvi dizer que os assassinos praticam matar pessoas rápida e silenciosamente.";
 		next;
-		mes "[Slayer Kid]";
-		mes "I left home three years ago, and have been searching for their secret base ever since...";
-		mes "Are they really that invisible?!";
+		mes "[Criança Estranha]";
+		mes "Fugi de casa três anos atrás, e desde então procuro pela guilda dos assassino...";
+		mes "Eles são tão invisíveis assim?";
 		next;
-		mes "[Slayer Kid]";
-		mes "Well.. Maybe it'd too late now..";
-		mes "Now that the whole town's destroyed... I don't even care what happenes next...";
+		mes "[Criança Estranha]";
+		mes "Bem... Acho que agora é tarde demais...";
+		mes "Agora que a cidade está destruída... Não me importo com o que vai acontecer depois...";
 		close;
 	case 2:
-		mes "[Slayer Kid]";
-		mes "You know what...";
-		mes "It seemed to be impossible to find.";
+		mes "[Criança Estranha]";
+		mes "Sabe...";
+		mes "Parece impossível de achar.";
 		next;
-		mes "[Slayer Kid]";
-		mes "Well, I hear that if you leave this town and go 2 maps east, and then 2 maps South, you should be able to find it..";
+		mes "[Criança Estranha]";
+		mes "Mas ouvi dizer que se você deixar a cidade e ir dois mapas Leste e dois mapas Sul, talvez encontre-a.";
 		next;
-		mes "[Slayer Kid]";
-		mes "The 'Mirage Tower,' the head building of Sograt Desert, is supposed to appear in this awesome sandstorm! But, I still haven't found it.";
+		mes "[Criança Estranha]";
+		mes "A 'Torre da Miragem', o principal prédio do deserto de Sograt, supostamente aparece em grandes tempestades de areia. Mas eu ainda não encontrei-a.";
 		next;
-		mes "[Slayer Kid]";
-		mes "If you find them, and the clan master thinks you're qualified, you can become an Assassin! Or, at least, I think..";
+		mes "[Criança Estranha]";
+		mes "Se você encontrá-los, e o líder do clã achar que você está qualificado, você pode virar um assassino! Bem, pelo menos eu acho que é assim...";
 		next;
-		mes "[Slayer Kid]";
-		mes "And I hear the coolest Assassin of them all is the Assassin Cross! But, that's even a bigger mystery~ You won't be able to see them unless you're a great thief!";
+		mes "[Criança Estranha]";
+		mes "E ouvi dizer que o melhor assassino é o assassino Cross! Mas esse é um mistério ainda maior~ Você não irá encontrá-los a menos que seja um gatuno de primeira!";
 		next;
-		mes "[Slayer Kid]";
-		mes "But then... What the hell were they doing when Morroc was destroyed?!!!";
+		mes "[Criança Estranha]";
+		mes "Mas... O que diabos eles estavam fazendo quando Morroc foi destruída?!!";
 		close;
 	case 3:
-		mes "[Slayer Kid]";
-		mes "Assassin is one of the advanced jobs for Thief, and specializes in fighting with Neutral and Poison property attacks.";
+		mes "[Criança Estranha]";
+		mes "assassino é uma das profissões que vem depois do Gatuno, especializado em lutas de propriedade Neutra ou Poison.";
 		next;
-		mes "[Slayer Kid]";
-		mes "They're also very sneaky! I hear that they're able to cloak so that no one can see them!";
+		mes "[Criança Estranha]";
+		mes "Eles também são muito furtivos! Ouvi dizer que se escondem e ninguém consegue vê-los!";
 		next;
-		mes "[Slayer Kid]";
-		mes "But then... What the hell were they doing when Morroc was destroyed?!!!";
+		mes "[Criança Estranha]";
+		mes "Mas... O que diabos eles estavam fazendo quando Morroc foi destruída?!!";
 		close;
 	}
 }
 
 moc_ruins,173,141,4	script	Dimitri#moc	49,{
 	mes "[Dimitri]";
-	mes "The desert of Morroc has the highest average temperature in Midgard. You might as well think twice before you sit on the sand in the middle of the desert, cause your ass will be toasted.";
+	mes "O deserto de Morroc tem as temperaturas mais altas de Midgard. É melhor pensar duas vezes antes de sentar na areia do deserto, porque seu traseiro vai virar torrada.";
 	next;
-	switch(select("About the desert sands:About the remedy for Fatigue:End Conversation")) {
+	switch(select("Sobre a areia do deserto:Sobre o remédio para fadiga:Cancelar")) {
 	case 1:
 		mes "[Dimitri]";
-		mes "......What I mean is that...";
-		mes "It seems like it should be all burnt, but it's not!";
+		mes ".....O que eu quero dizer é...";
+		mes "Parece que tudo deveria estar queimado, mas não está!";
 		next;
 		mes "[Dimitri]";
-		mes "You can sit down and take a rest whenever you need to and your ass won't burn. I guess the Morroc sand doesn't conduct heat as much as it should.";
+		mes "Você pode se sentar e descansar quando quiser e não vai acontecer nada com seu traseiro. Acho que a areia de Morroc não conduz tanto calor quanto deveria.";
 		next;
 		mes "[Dimitri]";
-		mes "That's why everyone could recover the HP and SP in the middle of desert.";
+		mes "É por isso que todo mundo pode recuperar HP e SP no meio do deserto.";
 		next;
 		mes "[Dimitri]";
-		mes "Now I come to think of it, maybe the reason why Morroc has exceptionally high average temperature is because that Satan is sealed within.";
+		mes "Agora que penso nisso, talvez a razão de Morroc ter temperaturas tão altas seja porque o Satan estava preso embaixo da terra.";
 		close;
 	case 2:
 		mes "[Dimitri]";
-		mes "Recovery!";
-		mes "That's what the potions are for!";
-		mes "Red Potions have become steadily popular since they're so affordable, even though they only recover a little bit of HP.";
+		mes "Recuperação!";
+		mes "É para isso que servem as poções!";
+		mes "Red Potions ficaram populares por serem muito baratas, apesar de recuperarem pouco HP.";
 		next;
 		mes "[Dimitri]";
-		mes "Try this bottle of ice-cold potion when you go into the Oasis around the Pyramid...";
-		mes "Yeah.. you want this bad.. but the situation's not good...";
+		mes "Tente essa garrafa de poção gelada quando você for ao Oasis perto da Pirâmide...";
+		mes "Sim... você quer muito... mas a situação não está boa...";
 		close;
 	case 3:
 		mes "[Dimitri]";
-		mes "Sometimes 'Milk' comes out of 'PecoPeco's Egg.' Now..";
-		mes "I'm not sure how the cow's milk comes out of some bird's egg...";
+		mes "As vezes 'os ovos de peco' dropam 'Leite'. Agora...";
+		mes "Não sei como vem Leite de um ovo de pássaro...";
 		next;
 		mes "[Dimitri]";
-		mes "I may not be a man of science, but how is that even possible?.";
-		mes "I mean, did the Milk come prepackaged with the egg, or did it get in there somehow?..";
-		mes "Oh, whatever.. It's just not the time for this.";
+		mes "Posso não ser um cientista, mas isso é possível?";
+		mes "Digo, o Leite veio junto com o ovo, ou entrou lá de algum jeito?..";
+		mes "Ah, que seja... Não é hora de discutir isso.";
 		close;
 	}
 }
 
-moc_ruins,174,120,4	script	Fly Man#moc	54,{
+moc_ruins,174,120,4	script	Homem Mosca#moc	54,{
 	mes "[Armani]";
-	mes "Ooh, Woooowwww.";
+	mes "Ooh, Uaaauuuu.";
 	next;
 	mes "[Armani]";
-	mes "I... I really saw it.... The Fly Lord gets shattered in pieces in a blink of an eye...";
+	mes "Eu... Eu realmente vi... A mosca dragão pode ser despedaçada em um piscar de olhos...";
 	next;
 	mes "[Armani]";
-	mes "What is really going on? Would it be possible for us to survive??";
+	mes "O que está acontecendo? É possível sobrevivermos?";
 	next;
-	switch(select("The Fly Lord?!")) {
-	case 1:
-		mes "[Armani]";
-		mes "Yes, yes! I'm talking about the Dragon Fly, master of all flies!!";
-		mes "The Dragon Fly is a special one that stays in the North-east of the town.";
-		next;
-		mes "[Armani]";
-		mes "It's so much stronger than the other flies.";
-		next;
-		mes "[Armani]";
-		mes "And when you kill it, there's even a chance that you might earn a ^880000Clip^000000 item!";
-		next;
-		mes "[Armani]";
-		mes "Anyways, don't you think the Satan Morroc is so cruel?";
-		mes "They may not be the same kind, but still isn't it cruel to take that monster's soul with a single blow?";
-		next;
-		mes "[Armani]";
-		mes "What should we do when this dreadful evil has come to life again!";
-		close;
-	}
+	select("Mosca Dragão?!");
+	mes "[Armani]";
+	mes "Sim, sim! A mosca dragão, mestre dos monstros insetos!";
+	mes "O Dragon Fly é um especial, que fica no Nordeste da cidade.";
+	next;
+	mes "[Armani]";
+	mes "É muito mais forte que os outros insetos.";
+	next;
+	mes "[Armani]";
+	mes "E se você vencê-lo, pode até ganhar um ^880000Clip^000000 !";
+	next;
+	mes "[Armani]";
+	mes "Enfim, você não acha o Satan Morroc muito cruel?";
+	mes "Eles podem não ser parecidos, mas não é cruel tirar a alma de um monstro com um único sopro?";
+	next;
+	mes "[Armani]";
+	mes "O que devemos fazer agora que esse demônio voltou a vida?!";
+	close;
 }
 
-moc_ruins,173,70,4	script	Uncle Morroc#moc	48,{
+moc_ruins,173,70,4	script	Tio Morroc#moc	48,{
 	mes "[Phlanette]";
-	mes "Morroc is located in an extremely dry region, surrounded by desert.";
-	mes "No place in the world is as hot as Morroc.";
+	mes "Morroc fica em uma região extremamente seca e cercada por um deserto.";
+	mes "Não existe lugar no mundo mais quente que Morroc.";
 	next;
 	mes "[Phlanette]";
-	mes "I have a hunch that this hot and dry climate in Morroc is because of that Satan sealed deeper underground for so long.";
+	mes "Imagino que esse clima quente e seco de Morroc aconteça porque o Satan Morroc esteve enterrado no subterrâneo por tanto tempo.";
 	next;
-	switch(select("Tell me about the desert.:Quit Conversation")) {
-	case 1:
+	if (select("Me conte sobre o deserto.:Parar de conversar") == 1) {
 		mes "[Phlanette]";
-		mes "Um.. I'll briefly tell ya about the desert if you want to know.";
-		mes "Due to low annual rainfall, low humidity and high evaporation rate, little vegetation can be found in the desert.";
+		mes "Hum... Contarei a você sobre o deserto rapidamente.";
+		mes "Quase não há vegetação no deserto, devido ao baixo índice de chuvas e à baixa umidade do ar.";
 		next;
 		mes "[Phlanette]";
-		mes "Nonetheless, there are a few hardy plants that can survive and grow in the desert.";
+		mes "Ainda assim, algumas plantas conseguem sobreviver e crescer no deserto.";
 		next;
 		mes "[Phlanette]";
-		mes "Unfortunately some of those plants growing around Morroc have been mutated into monsters.";
-		mes "One of those is Muka, the mutated cactus..";
+		mes "Infelizmente algumas dessas plantas que crescem perto de Morroc sofreram mutações e viraram monstros.";
+		mes "Um desses é Muka, o cacto.";
 		next;
 		mes "[Phlanette]";
-		mes "However, now that the Satan has revived, no one's sure of what changes would be made in the life cycles of Morroc.";
-		close;
-	case 2:
-		mes "[Phlanette]";
-		mes "Here and there!";
-		mes "Sand everywhere...";
-		mes "Oh, I curse you, the desert of Morroc!!";
-		mes "Damn you!";
-		next;
-		mes "[Phlanette]";
-		mes "But our of all this hatred, I didn't want it to be completely destroyed...";
-		next;
-		mes "[Phlanette]";
-		mes "How come it's never possible to know its value while it's still around?";
+		mes "Mas agora que Satan renasceu, ninguém sabe que mudanças ocorrerão no ciclo de vida dos animais de Morroc.";
 		close;
 	}
+	mes "[Phlanette]";
+	mes "Aqui e ali!";
+	mes "Areia por todos os lados!";
+	mes "Ah, eu vou amaldiçoar o deserto de Morroc!";
+	mes "Droga!";
+	next;
+	mes "[Phlanette]";
+	mes "Mas mesmo odiando-o, não queria que tivesse sido completamente destruído...";
+	next;
+	mes "[Phlanette]";
+	mes "Por que só percebemos o valor das coisas quando as perdemos?";
+	close;
 }
 
-moc_fild16,199,212,4	script	 Uncle Assassin#moc	55,{
+moc_fild16,199,212,4	script	 Tio Assassino#moc	55,{
 	mes "[Hashisid]";
-	mes "...Assassins are trained";
-	mes "to approach their enemies steathily,";
-	mes " as well as";
-	mes "to shroad their intent.";
-	mes "For this purpose,";
-	mes "we never";
-	mes "look our targets in the eye.";
+	mes "...Assassinos são treinados";
+	mes "para se aproximar dos inimigos";
+	mes "furtivamente e esconder";
+	mes "seus propósitos.";
+	mes "Por isso,";
+	mes "nunca olhamos";
+	mes "nossos alvos nos olhos.";
 	next;
-	switch(select("Notion of Assassin:Quit Conversation")) {
-	case 1:
+	if (select("Sobre Assassinos:Parar de conversar") == 1) {
 		mes "[Hashisid]";
-		mes "Well, then..";
-		mes "I'll tell you what it is!";
-		mes "Assassins ..";
-		mes "may be commonly known as";
-		mes "infiltrators and murderers";
-		mes "who kill without remorse.";
+		mes "Bem, então...";
+		mes "Vou te contar sobre eles!";
+		mes "Assassino...";
+		mes "são comumente conhecidos";
+		mes "como matadores";
+		mes "sem remorsos.";
 		next;
 		mes "[Hashisid]";
-		mes "In actuality,";
-		mes "the Assassin clan";
-		mes "is forbidden to harm innocent people,";
-		mes "or at least,";
-		mes "not without good reason";
+		mes "Mas na verdade os membros";
+		mes "da guilda dos Assassinos";
+		mes "estão proibidos de machucar";
+		mes "pessoas inocentes sem";
+		mes "uma boa razão.";
 		next;
 		mes "[Hashisid]";
-		mes "Our true directive is to assassinate evil creatures,";
-		mes "and to use our stealth to gather intelligence";
-		mes "for the good of all Rune-Midgard.";
-		close;
-	case 2:
-		mes "[Hashisid]";
-		mes "Once upon a time,";
-		mes "our ancestors would";
-		mes "smoke tobacco called 'Hashish'";
-		mes "before performing their duties.";
-		mes "However, we no longer do so,";
-		mes "since insect or animal monsters are";
-		mes "very senstive to the smell.";
-		next;
-		mes "[Hashisid]";
-		mes "We strictly prohibit";
-		mes "smoking or eating";
-		mes "anything that has";
-		mes "strong smell...";
-		mes "If you ever,";
-		mes "try eating those";
-		mes "smelly garlic bread with spicies,";
-		next;
-		mes "[Hashisid]";
-		mes "and try hiding against";
-		mes "those wild boars or wolves,";
-		mes "believe me,";
-		mes "you'll be ripped in pieces.";
+		mes "Nosso alvo são criaturas malignas,";
+		mes "e usamos nossa astúcia para adquirir conhecimento";
+		mes "pelo bem de Rune-Midgard.";
 		close;
 	}
+	mes "[Hashisid]";
+	mes "Muito tempo atrás";
+	mes "nossos ancestrais fumavam";
+	mes "um tipo de tabaco chamado 'Hashish'";
+	mes "antes de irem cumprir suas missões.";
+	mes "Entretanto, não fazemos mais isso,";
+	mes "já que insetos e monstros são";
+	mes "muito sensíveis ao cheiro.";
+	next;
+	mes "[Hashisid]";
+	mes "É estritamente proibido";
+	mes "fumar ou comer";
+	mes "algo que tenha";
+	mes "cheiro forte...";
+	mes "Se alguma vez";
+	mes "você tentar comer esses";
+	mes "pedacinhos de alho com cebola,";
+	next;
+	mes "[Hashisid]";
+	mes "e tentar se esconder";
+	mes "para caçar lobos,";
+	mes "acredite, você";
+	mes "será cortado em pedaços.";
+	close;
 }
 
-moc_fild16,211,254,4	script	Assassin#07rhea_30	118,{
+moc_fild16,211,254,4	script	Assassino#07rhea_30	118,{
 	mes "[La Conte]";
-	mes "Once Thiefs are promoted";
-	mes "to Assassins, which is very professional";
-	mes "they will be able to vary their battle style.";
-	mes "their battle style.";
-	mes "There are 2 main battle styles available to Assassins.";
-	mes "They may either wield dual daggers,";
-	mes "or fight with a set of Katars!";
+	mes "Quando gatunos são promovidos";
+	mes "a assassinos, que são muito mais avançados,";
+	mes "poderão variar seu estilo de batalha.";
+	mes "Existem dois tipos principais";
+	mes "de estilos de batalha para um assassino.";
+	mes "Eles podem lutar com Adagas (facas)";
+	mes "ou com um set de Katars!";
 	next;
-	switch(select("Specialty of Katar:Specialty of Dual Daggers:Quit Conversation")) {
+	switch(select("Especializados em Katar:Especializados em Adagas:Parar de conversar")) {
 	case 1:
 		mes "[La Conte]";
-		mes "A set of Katars is";
-		mes "worn on both of the hands,";
-		mes "and allows Assassins";
-		mes "to quickly slash their enemies.";
-		mes "Anyone can buy a basic set of Katars";
-		mes "in Morroc somewhere.";
-		mes "Of course, only Assassins can use them.";
+		mes "Um set de Katars só é";
+		mes "utilizado com as duas mãos,";
+		mes "e permite que os assassinos";
+		mes "acabem com seus inimigos rapidamente.";
+		mes "Qualquer um pode comprar um set básico";
+		mes "em Morroc, mas claro que";
+		mes "somente assassinos podem utilizá-lo.";
 		next;
 		mes "[La Conte]";
-		mes "The right Katar";
-		mes "usually does more damage,";
-		mes "while the left Katar";
-		mes "is used for the follow-through.";
-		mes "But since Katars are equipped on both hands,";
-		mes "you can't equip a shield or an extra weapon.";
+		mes "A Katar da mão direita";
+		mes "normalmente dá mais";
+		mes "dano que a da esquerda,";
+		mes "utilizada para completar o ataque.";
+		mes "Mas como elas são equipadas nas duas mãos,";
+		mes "você não pode usar um escudo ou outra arma.";
 		next;
 		mes "[La Conte]";
-		mes "Compared to Dual Daggers,";
-		mes "Katars have faster attack speed.";
-		mes "Also, the ^663399Sonic Blow^000000 skill";
-		mes "can only be used with Katars.";
+		mes "Comparadas com Adagas,";
+		mes "Katars te dão mais velocidade de ataque.";
+		mes "Além disso, a habilidade ^663399Lãminas Destruidoras^000000";
+		mes "só pode ser usada com Katars.";
 		next;
 		mes "[La Conte]";
-		mes "You can learn the Sonic Blow skill";
-		mes "at ^663399Level 4 Katar Mastery^000000.";
-		mes "If you're an Assassin,";
-		mes "it's a handy skill to know.";
+		mes "Você pode aprender Lãminas Destruidoras se";
+		mes "tiver a habilidade ^663399Perícia com Katar nível 4^000000.";
+		mes "Se você é um assassino,";
+		mes "é uma habilidade muito útil.";
 		next;
 		mes "[La Conte]";
-		mes "Sonic Blow is the skill";
-		mes "that inflicts 8 contineous hits of";
-		mes "Neutral damage.";
+		mes "Sonic Blow é uma habilidade que";
+		mes "dá oito hits contínuos de";
+		mes "dano neutro.";
 		close;
 	case 2:
 		mes "[La Conte]";
-		mes "Dual Daggers";
-		mes "enables you to equip";
-		mes "2 different kinds of Daggers";
-		mes "at the same time.";
-		mes "Of course,";
-		mes "there are other weapons you can equip";
-		mes "aside from daggers,";
+		mes "Você também pode";
+		mes "equipar duas Adagas diferentes";
+		mes "ao mesmo tempo.";
+		mes "Bem, na verdade";
+		mes "também existem";
+		mes "outras armas que você";
+		mes "pode equipar além de Adagas.";
 		next;
 		mes "[La Conte]";
-		mes "but they'll probably";
-		mes "be lacking in attack speed.";
-		mes "So I suggest daggers.";
-		mes "Also, without a dagger";
-		mes "in your right hand,";
-		mes " you won't be able to use";
-		mes "the ^663399Double Attack^000000 skill.";
+		mes "Mas as outras te darão";
+		mes "menos velocidade de ataque.";
+		mes "Então sugiro Adagas.";
+		mes "Além disso, se você não tiver";
+		mes "uma em sua mão direita,";
+		mes "não poderá usar a";
+		mes "habilidade ^663399Ataque Duplo^000000.";
 		next;
 		mes "[La Conte]";
-		mes "So with Dual Daggers,";
-		mes "you would have a double attack";
-		mes "with the right hand dagger,";
-		mes " and a single attack with your left hand weapon.";
+		mes "Com duas Adagas,";
+		mes "você dará um ataque duplo";
+		mes "com a da mão direita";
+		mes "e um simples com a da esquerda.";
 		next;
 		mes "[La Conte]";
-		mes "So that's three strikes";
-		mes "in one blow!";
-		mes "You can't argue";
-		mes "against that kind of damage!";
+		mes "Então são três hits";
+		mes "em apenas um ataque!";
+		mes "Você não pode reclamar";
+		mes "desse dano!";
 		close;
 	case 3:
 		mes "[La Conte]";
-		mes "Hopefully";
-		mes "you will make good use of";
-		mes "the weapons at your disposal.";
-		mes "Remember";
-		mes "the importance of";
-		mes "strategy and";
-		mes "planning your attacks.";
+		mes "Espero que você";
+		mes "use bem as suas armas.";
+		mes "Nunca se esqueça";
+		mes "da importância";
+		mes "de fazer uma estratégia e";
+		mes "planejar bem";
+		mes "os seus ataques.";
 		close;
 	}
 }
 
 // Other NPCs
 //============================================================
-//Bartender
+//Garçom
 /*
-morocc_in,166,76,3	script	Bartender#02	46,{
-	mes "[Bartender]";
-	mes "What are you going to order?";
+morocc_in,166,76,3	script	Garçom#02	46,{
+	mes "[Garçom]";
+	mes "O que você gostaria de pedir?";
 	next;
-	switch(select("Tropical Sograt:Vemillion the Beach:Nothing.")) {
+	switch(select("Deserto Tropical:Praia de Vemillion:Nada.")) {
 	case 1:
 		if (zeny >= 1000 ) {
 			set zeny,zeny-1000;
 			getitem 12112,1;
-			mes "[Bartender]";
-			mes "Here you go.";
-			mes "Fruits are major ingredients,";
-			mes "but don't drink too much.";
+			mes "[Garçom]";
+			mes "Aqui está.";
+			mes "Frutas são os ingredientes principais,";
+			mes "mas não exagere na bebida.";
 			close;
 		}
 		break;
@@ -735,46 +709,45 @@ morocc_in,166,76,3	script	Bartender#02	46,{
 		if (zeny >= 1000 ) {
 			set zeny,zeny-1000;
 			getitem 12113,1;
-			mes "[Bartender]";
-			mes "Here you go.";
-			mes "but don't drink too much.";
+			mes "[Garçom]";
+			mes "Aqui está,";
+			mes "mas não beba muito.";
 			close;
 		}
 		break;
 	case 3:
-		mes "[Bartender]";
+		mes "[Garçom]";
 		mes "Hmm...";
 		close;
 	}
-	mes "[Bartender]";
-	mes "Are you asking me to give it for free?";
-	mes "You are one crazy person.";
-	mes "Don't even think about drinking if you don't have 1,000 zeny.";
+	mes "[Garçom]";
+	mes "Você está querendo que eu te dê de graça?";
+	mes "Você é maluco.";
+	mes "Nem pense em beber se você não tem 1 000 zenys.";
 	close;
 }
 */
 
-// Assassin Guild Guards
+// Guardas da Guilda dos Assassinos
 //===================================================
-moc_fild16,195,281,4	script	Assassin Guardian#1::SinGuard	707,{
-	mes "[Assassin Guardian]";
+moc_fild16,195,281,4	script	Guardião Assassino#1::SinGuard	707,{
+	mes "[Guardião Assassino]";
 	if(BaseJob == Job_Assassin) {
-		mes "Welcome.";
+		mes "Bem-vindo.";
 		close;
 	}
-	set .@temp, rand(1,4);
-	if(.@temp == 1) mes "........";
-	if(.@temp == 2) mes "Hmmm..........";
-	if(.@temp == 3) mes "Hmmm... you shouldn't be here.....";
-	if(.@temp == 4) mes "You're trespassing on forbidden grounds.......";
-	close;
+	switch(rand(3)) {
+	case 0: mes "........"; close;
+	case 1: mes "Hmmm.........."; close;
+	case 2: mes "Hmmm... você não devia estar aqui....."; close;
+	case 3: mes "Você está entrando em terras proibidas......."; close;
+	}
 }
 
-moc_fild16,204,281,4	duplicate(SinGuard)	Assassin Guardian#2	707
-moc_fild16,207,281,4	duplicate(SinGuard)	Assassin Guardian#3	707
-moc_fild16,216,281,4	duplicate(SinGuard)	Assassin Guardian#4	707
-moc_fild16,200,231,4	duplicate(SinGuard)	Assassin Guardian#5	707
-moc_fild16,211,231,4	duplicate(SinGuard)	Assassin Guardian#6	707
-moc_fild16,200,257,4	duplicate(SinGuard)	Assassin Guardian#7	707
-moc_fild16,211,257,4	duplicate(SinGuard)	Assassin Guardian#8	707
-
+moc_fild16,204,281,4	duplicate(SinGuard)	Guardião Assassino#2	707
+moc_fild16,207,281,4	duplicate(SinGuard)	Guardião Assassino#3	707
+moc_fild16,216,281,4	duplicate(SinGuard)	Guardião Assassino#4	707
+moc_fild16,200,231,4	duplicate(SinGuard)	Guardião Assassino#5	707
+moc_fild16,211,231,4	duplicate(SinGuard)	Guardião Assassino#6	707
+moc_fild16,200,257,4	duplicate(SinGuard)	Guardião Assassino#7	707
+moc_fild16,211,257,4	duplicate(SinGuard)	Guardião Assassino#8	707

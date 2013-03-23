@@ -1,14 +1,16 @@
-//===== Hercules Script ======================================
-//= Jawaii (The Lovers' Paradise) Town
+//===== rAthena Script =======================================
+//= Jawaii (The Lovers' Paradise) Town script
 //===== By: ==================================================
 //= jAthena (1.0)
 //= DNett123 (1.1 - 1.5)
 //= L0ne_w0lf
 //===== Current Version: =====================================
-//= 3.7
+//= 3.6
+//===== Compatible With: =====================================
+//= rAthena SVN
 //===== Description: =========================================
-//= [Official Conversion]
-//= Jawaii Town NPCs
+//= [Aegis OCnversion]
+//= Jawaii Town Npcs
 //===== Additional Comments: =================================
 //= 1.0 Done By jAthena
 //= 1.1 Rough Translation [DNett123]
@@ -33,29 +35,27 @@
 //= 3.4 Added missing checkweights. [L0ne_W0lf]
 //= 3.5 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 3.6 Fixed bartender so he no longer hangs. [L0ne_W0lf]
-//= 3.7 Added Izlude RE coordinates. [Euphy]
+//= 4.0 Parcialmente traduzido e unificado. [MaminhA]
 //============================================================
 
 // Jawaii
 //============================================================
-jawaii,239,112,7	script	Mariner#toizu	100,{
-	mes "[Mariner]";
-	mes "This ship";
-	mes "is heading";
-	mes "towards ^666699Izlude^000000.";
-	mes "Have you enjoyed your time in Jawaii? You should check to see";
-	mes "if you forgot anything before we go.";
+jawaii,239,112,7	script	Marinheiro#toizu	100,{
+	mes "[Marinheiro]";
+	mes "Este navio segue";
+	mes "em direção à";
+	mes "^666699Izlude^000000.";
+	mes "Aproveitou sem tempo em Jawaii? Vá ver se esqueceu";
+	mes "de algo antes de partirmos.";
 	next;
-	mes "[Mariner]";
-	mes "Well, then.";
-	mes "Would you like";
-	mes "to go back to Izlude?";
+	mes "[Marinheiro]";
+	mes "Bem, você gostaria.";
+	mes "de voltar à Izlude?";
 	next;
-	if (select("Go back.:Cancel.") == 1) {
-		mes "[Mariner]";
-		mes "Now, let me";
-		mes "guide you to";
-		mes "Izlude.";
+	if (select("Voltar.:Cancelar.") == 1) {
+		mes "[Marinheiro]";
+		mes "Então, deixe-me";
+		mes "guiar-te para Izlude";
 		close2;
 		if(checkre(0))
 			warp "izlude",195,212;
@@ -63,82 +63,79 @@ jawaii,239,112,7	script	Mariner#toizu	100,{
 			warp "izlude",176,182;
 		end;
 	}
-	mes "[Mariner]";
-	mes "Take your time";
-	mes "and look around as";
-	mes "much as you like.";
-	mes "Somehow,  this is not";
-	mes "a place that you can";
-	mes "visit often, you know?";
+	mes "[Marinheiro]";
+	mes "Nã tenha pressa e";
+	mes "vá dar umas voltinhas.";
+	mes "Aqui não é um lugar que";
+	mes "pode visitar muitas vezes, não é?";
 	close;
 }
 
-jawaii,122,263,5	script	Mariner#toalbe	100,{
-	mes "[Mariner]";
-	mes "This ship";
-	mes "is headed back";
-	mes "towards ^003399Alberta^000000.";
-	mes "Have you enjoyed your time in Jawaii? You should check to see";
-	mes "if you forgot anything before we go.";
+jawaii,122,263,5	script	Marinheiro#toalbe	100,{
+	mes "[Marinheiro]";
+	mes "Este navio";
+	mes "está voltando para";
+	mes "^003399Alberta^000000.";
+	mes "Aproveitou seu tempo em Jawaii? Vá ver se esqueceu";
+	mes "de algo antes de partirmos.";
 	next;
-	mes "[Mariner]";
-	mes "Now, are you";
-	mes "ready to go back";
-	mes "to Alberta?";
+	mes "[Marinheiro]";
+	mes "Então, você está";
+	mes "pronto para voltar";
+	mes "para Alberta?";
 	next;
-	if (select("Go back.:Cancel.") == 1) {
-		mes "[Mariner]";
-		mes "Now, let me";
-		mes "take you back";
-		mes "to Alberta.";
+	if (select("Voltar:Cancelar.") == 1) {
+		mes "[Marinheiro]";
+		mes "Agora, deixe-me";
+		mes "guiar-te para Alberta";
 		close2;
 		warp "alberta",192,157;
 		end;
 	}
-	mes "[Mariner]";
-	mes "Yeah...";
-	mes "Try to enjoy your";
-	mes "vacation as much";
-	mes "as you can. We'll be";
-	mes "ready to leave when";
-	mes "you are.";
+	mes "[Marinheiro]";
+	mes "É...";
+	mes "Aproveite suas férias";
+	mes "o máximo que puder.";
+	mes "Nós estaremos prontos";
+	mes "para partir quando";
+	mes "você estiver.";
 	close;
 }
 
-jawaii,188,218,7	script	Tavern Lady#Jawaii	80,{
-	mes "[Lady]";
-	mes "Oh, dear!";
-	mes "You're not going";
-	mes "to the tavern, are you?";
+jawaii,188,218,7	script	Senhora da Taverna#Jawaii	80,{
+	mes "[Senhora]";
+	mes "Oh, querido!";
+	mes "Você não está indo para";
+	mes "para a taverna, ou está?";
 	next;
-	if (select("No, I am not.:Hell yeah~") == 1) {
-		mes "[Lady]";
-		mes "Whew~!";
-		mes "Thank goodness!";
-		mes "It's just that...";
-		mes "The tavern probably";
-		mes "isn't the best place for";
-		mes "you to enjoy yourself.";
+	if (select("Não, não estou.:Pode crer~") == 1) {
+		mes "[Senhora]";
+		mes "Ufa~!";
+		mes "Obrigado Senhor!";
+		mes "É porque...";
+		mes "Provavelmente, a taverna";
+		mes "não é o melhor lugar para";
+		mes "você aproveitar.";
 		next;
 	}
-	mes "[Lady]";
-	mes "Even though I work there, I still can't believe that kind of place exists! I mean, I thought alcohol was outlawed in the Rune-Midgarts Kingdom!";
+	mes "[Senhora]";
+	mes "Apesar de eu trabalhar aqui, ainda não acredito que um lugar deste existe! Eu achava que álcool era proibido no Reino de Rune-Midgart!";
 	next;
-	mes "[Lady]";
-	mes "I have no idea how singles are";
-	mes "able to find this place. But I've heard that lots of different people come here for different reasons.";
+	mes "[Senhora]";
+	mes "Não tenho ideia de como solteiros";
+	mes "são capazes de encontrar este lugar. Mas eu ouvi que muitas pessoas estranhas vão por motivos estranhos.";
 	next;
-	mes "[Lady]";
-	mes "I've even seen unmarried single people coming here just to get drunk! Oh! And for some reason, people have been disappearing";
-	mes "from the tavern!";
+	mes "[Senhora]";
+	mes "Já vi solteiros vindo aqui só para ficar bêbados! Oh! E por algum motivo, pessoas estão desaparecendo";
+	mes "da taverna!";
 	next;
-	mes "[Lady]";
-	mes "I wonder what's going on?";
-	mes "^666666*Sigh*^000000 I'm a waitress there, but still I just want to tell you not to go in there...";
+	mes "[Senhora]";
+	mes "Eu imagino, o quê está acontecendo?";
+	mes "^666666*Suspiro*^000000 Sou uma garçonete, mas mesmo assim digo-te para não ir lá...";
 	close;
 }
 
-jawaii,220,235,3	script	Jawaii Resident#heart	724,{
+jawaii,220,235,3	script	Residente de Jawaii#heart	724,{
 	mes "[Jawa Jawa]";
 	mes "You know what's";
 	mes "the most beautiful";
@@ -160,7 +157,7 @@ jawaii,220,235,3	script	Jawaii Resident#heart	724,{
 	close;
 }
 
-jawaii,240,146,5	script	Jawaii Resident#desc1	724,{
+jawaii,240,146,5	script	Residente de Jawaii#desc1	724,{
 	mes "[Waii Waii]";
 	mes "Welcome to Jawaii!";
 	next;
@@ -173,7 +170,7 @@ jawaii,240,146,5	script	Jawaii Resident#desc1	724,{
 	close;
 }
 
-jawaii,168,247,5	script	Jawaii Resident#desc2	724,{
+jawaii,168,247,5	script	Residente de Jawaii#desc2	724,{
 	mes "[Waja Waja]";
 	mes "Ah, you must be a tourist.";
 	mes "If you're lost, just head West. Accomodations for newlyweds";
@@ -189,7 +186,7 @@ jawaii,168,247,5	script	Jawaii Resident#desc2	724,{
 	close;
 }
 
-jawaii,165,121,1	script	Jawaii Resident#desc3	724,{
+jawaii,165,121,1	script	Residente de Jawaii#desc3	724,{
 	mes "[Iwa Iwa]";
 	mes "Jawaii~";
 	mes "Jawa~ii~";
@@ -214,7 +211,7 @@ jawaii,165,121,1	script	Jawaii Resident#desc3	724,{
 	close;
 }
 
-jawaii,141,200,3	script	Employee#sroom	798,{
+jawaii,141,200,3	script	Empregado#sroom	798,{
 	mes "[Alowa]";
 	mes "W-Welcome...?";
 	mes "This is o-o-our";
@@ -260,7 +257,7 @@ jawaii,141,200,3	script	Employee#sroom	798,{
 	close;
 }
 
-jawaii,108,199,5	script	Employee#antroom	74,{
+jawaii,108,199,5	script	Empregado#antroom	74,{
 	mes "[Pine Oran]";
 	mes "Welcome to";
 	mes "the Antique room.";
@@ -308,7 +305,7 @@ jawaii,108,199,5	script	Employee#antroom	74,{
 	close;
 }
 
-jawaii,107,189,5	script	Employee#horoom	93,{
+jawaii,107,189,5	script	Empregado#horoom	93,{
 	mes "[Sharkie Rania]";
 	mes "I'll take you";
 	mes "to the Honey Room.";
@@ -339,7 +336,7 @@ jawaii,107,189,5	script	Employee#horoom	93,{
 	close;
 }
 
-jawaii,112,173,7	script	Employee#villroom	93,{
+jawaii,112,173,7	script	Empregado#villroom	93,{
 	mes "[Larks Rania]";
 	mes "Hello dear,";
 	mes "how are you?";
@@ -384,7 +381,7 @@ jawaii,112,173,7	script	Employee#villroom	93,{
 	close;
 }
 
-jawaii,214,168,5	script	Honeymoon Helper#Jawaii	71,{
+jawaii,214,168,5	script	Ajudante de Lua de Mel#Jawaii	71,{
 	mes "[Helper]";
 	mes "There is no place";
 	mes "better for having your";
@@ -431,7 +428,7 @@ jawaii,214,168,5	script	Honeymoon Helper#Jawaii	71,{
 
 // Inside Jawaii
 //============================================================
-jawaii_in,25,94,0	script	Employee#jaw1	724,{
+jawaii_in,25,94,0	script	Empregado#jaw1	724,{
 	mes "[Employee Tryteh]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -460,7 +457,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,96,0	script	Employee#jaw2	724,{
+jawaii_in,25,96,0	script	Empregado#jaw2	724,{
 	mes "[Employee Fey]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -490,7 +487,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,98,0	script	Employee#jaw3	724,{
+jawaii_in,25,98,0	script	Empregado#jaw3	724,{
 	mes "[Employee Buffy]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -534,7 +531,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,100,0	script	Employee#jaw4	724,{
+jawaii_in,25,100,0	script	Empregado#jaw4	724,{
 	mes "[Employee Itere]";
 	mes "Welcome to";
 	mes "Jawaii Tavern~";
@@ -573,7 +570,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,94,4	script	Employee#jaw5	724,{
+jawaii_in,30,94,4	script	Empregado#jaw5	724,{
 	mes "[Employee Tonia]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -606,7 +603,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,96,4	script	Employee#jaw6	724,{
+jawaii_in,30,96,4	script	Empregado#jaw6	724,{
 	mes "[Employee Kay]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -631,7 +628,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,98,4	script	Employee#jaw7	724,{
+jawaii_in,30,98,4	script	Empregado#jaw7	724,{
 	mes "[Employee Amy]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -665,7 +662,7 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,100,4	script	Employee#jaw8	724,{
+jawaii_in,30,100,4	script	Empregado#jaw8	724,{
 	mes "[Employee Yasmine]";
 	mes "Welcome to Jawaii Tavern~";
 	if (getpartnerid()) {
@@ -692,28 +689,28 @@ OnSolo:
 jawaii_in,28,96,0	script	jaw_em_order#Jawaii	-1,3,3,{
 OnTouch:
 	if (getpartnerid()) {
-		donpcevent "Employee#jaw8::OnWelcome";
-		donpcevent "Employee#jaw7::OnWelcome";
-		donpcevent "Employee#jaw6::OnWelcome";
-		donpcevent "Employee#jaw5::OnWelcome";
-		donpcevent "Employee#jaw4::OnWelcome";
-		donpcevent "Employee#jaw3::OnWelcome";
-		donpcevent "Employee#jaw2::OnWelcome";
-		donpcevent "Employee#jaw1::OnWelcome";
+		donpcevent "Empregado#jaw8::OnWelcome";
+		donpcevent "Empregado#jaw7::OnWelcome";
+		donpcevent "Empregado#jaw6::OnWelcome";
+		donpcevent "Empregado#jaw5::OnWelcome";
+		donpcevent "Empregado#jaw4::OnWelcome";
+		donpcevent "Empregado#jaw3::OnWelcome";
+		donpcevent "Empregado#jaw2::OnWelcome";
+		donpcevent "Empregado#jaw1::OnWelcome";
 		end;
 	}
-	donpcevent "Employee#jaw8::OnSolo";
-	donpcevent "Employee#jaw7::OnSolo";
-	donpcevent "Employee#jaw6::OnSolo";
-	donpcevent "Employee#jaw5::OnSolo";
-	donpcevent "Employee#jaw4::OnSolo";
-	donpcevent "Employee#jaw3::OnSolo";
-	donpcevent "Employee#jaw2::OnSolo";
-	donpcevent "Employee#jaw1::OnSolo";
+	donpcevent "Empregado#jaw8::OnSolo";
+	donpcevent "Empregado#jaw7::OnSolo";
+	donpcevent "Empregado#jaw6::OnSolo";
+	donpcevent "Empregado#jaw5::OnSolo";
+	donpcevent "Empregado#jaw4::OnSolo";
+	donpcevent "Empregado#jaw3::OnSolo";
+	donpcevent "Empregado#jaw2::OnSolo";
+	donpcevent "Empregado#jaw1::OnSolo";
 	end;
 }
 	
-jawaii_in,15,104,0	script	Waitress#jawaii	80,{
+jawaii_in,15,104,0	script	Garçonete#jawaii	80,{
 	if (checkweight(1201,1) == 0) {
 		mes "^3355FF * Wait a minute! *";
 		mes "You're carrying too many items with you right now. Please store some of your things into Kafra Storage and try again.^000000";
@@ -827,7 +824,7 @@ jawaii_in,15,104,0	script	Waitress#jawaii	80,{
 	close;
 }
 
-jawaii_in,28,124,0	script	Bartender#jaw	46,{
+jawaii_in,28,124,0	script	Garçom#jaw	46,{
 	mes "[Bartender]";
 	mes "Welcome to the";
 	mes "Jawaii Tavern bar.";
@@ -1112,7 +1109,7 @@ S_KillChar:
 	return;
 }
 	
-jawaii_in,43,115,0	script	Customer#jaw_1	97,{
+jawaii_in,43,115,0	script	Cliente#jaw_1	97,{
 	if (!getpartnerid()) {
 		if (zeny > 99) {
 			mes "[Buchi]";
@@ -1164,7 +1161,7 @@ jawaii_in,43,115,0	script	Customer#jaw_1	97,{
 	close;
 }
 
-jawaii_in,41,106,3	script	Customer#Cage	98,{
+jawaii_in,41,106,3	script	Cliente#Cage	98,{
 	mes "[Cage]";
 	if (getpartnerid()) {
 		mes "....Bah!";
@@ -1213,7 +1210,7 @@ jawaii_in,41,106,3	script	Customer#Cage	98,{
 
 // Inside Prontera
 //============================================================
-prt_in,173,13,4	script	Customer#SoloHan	86,{
+prt_in,173,13,4	script	Cliente#SoloHan	86,{
 	mes "[SoloHan]";
 	if (!getpartnerid()) {
 		mes "Oh man...";
@@ -1387,7 +1384,7 @@ prt_in,173,13,4	script	Customer#SoloHan	86,{
 	close;
 }
 	
-prt_in,170,14,0	script	Customer#Bachewcca	89,{
+prt_in,170,14,0	script	Cliente#Bachewcca	89,{
 	mes "[Bachewcca]";
 	mes "..............";
 	mes "^666666*Gulp....gulp...*^000000";

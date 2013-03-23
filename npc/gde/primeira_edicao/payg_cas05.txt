@@ -1,0 +1,130 @@
+//===== Cronus Script ========================================
+//= Guerra do Emperium (Payon)
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.4
+//===== Compatível Com: ======================================
+//= Cronus GIT;
+//===== Descrição: ===========================================
+//= NPCs referentes ao 5º Castelo de Payon
+//===== Comentários Adicionais: ==============================
+//= 1.4 Adicionado diálogos Oficiais do bRO. [Axl]
+//============================================================
+
+// Guild Flags (Outside Castle)
+//============================================================
+-	script	Palácio da Colina#1::OutsideFlagsPA5	722,{
+
+	set .@GID, GetCastleData("payg_cas05",1);
+
+	if (.@GID == 0) {
+		mes " [Decreto do Reino de Rune Midgard]";
+		mes " ";
+		mes "1. Conforme o Pacto do Reino de Rune Midgard";
+		mes "e o Feudo do Bosque Celestial,";
+		mes "declaro que este Castelo não possui um Senhor.";
+		mes " ";
+		mes "2. Ao Clã que for bravo o bastante";
+		mes "e, superarando os terríveis desafios,";
+		mes "quebrar o Emperium,";
+		mes "será dada a posse deste Castelo";
+		mes "apoiado pelo nosso Rei..";
+		close;
+	}
+	if (getcharid(2) == .@GID) {
+			mes "[ Voz Ecoante ]";
+			mes "Bravo guerreiro......";
+			mes "Deseja retornar ao seu lugar de glória?";
+			next;
+			if (select("Sim.:Não.") == 1) {
+			close2;
+			if (getcharid(2) == GetCastleData("payg_cas05",1)) {
+					warp "payg_cas05",243,27;
+				end;
+			}
+			end;
+		}
+		close;
+	}
+	mes "[Decreto do Reino de Rune Midgard]";
+	mes " ";
+	mes "1. Conforme o Pacto do Reino de Rune Midgard";
+	mes "e o Feudo do Bosque Celestial,";
+	mes "declaro que este castelo pertence ao Clã ^ff0000" + GetGuildName(.@GID) + "^000000 .";
+	mes " ";
+	mes "2. O Líder do Clã ^ff0000"+ GetGuildName(.@GID) + "^000000 se chama";
+	mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+	mes "Se alguém se opõe a este decreto";
+	mes "desembainhe sua espada para fazer valer sua vontade.";
+	close;
+
+OnRecvCastlePy05:
+	FlagEmblem GetCastleData("payg_cas05",1);
+	end;
+}
+
+pay_gld,208,268,4	duplicate(OutsideFlagsPA5)	Palácio da Colina#1-2	722
+pay_gld,199,268,4	duplicate(OutsideFlagsPA5)	Palácio da Colina#2	722
+pay_gld,190,277,3	duplicate(OutsideFlagsPA5)	Palácio da Colina#3	722
+pay_gld,187,294,2	duplicate(OutsideFlagsPA5)	Palácio da Colina#4	722
+
+// Guild Flags (Inside Castle)
+//============================================================
+-	script	Palácio da Colina#5::InsideFlagsPA5	722,{
+	end;
+
+OnRecvCastlePy05:
+	FlagEmblem GetCastleData("payg_cas05",1);
+	end;
+}
+
+payg_cas05,32,249,4	duplicate(InsideFlagsPA5)	Palácio da Colina#5-2	722
+payg_cas05,24,249,4	duplicate(InsideFlagsPA5)	Palácio da Colina#6	722
+payg_cas05,62,271,0	duplicate(InsideFlagsPA5)	Palácio da Colina#7	722
+payg_cas05,57,271,0	duplicate(InsideFlagsPA5)	Palácio da Colina#8	722
+payg_cas05,55,252,2	duplicate(InsideFlagsPA5)	Palácio da Colina#9	722
+payg_cas05,55,260,2	duplicate(InsideFlagsPA5)	Palácio da Colina#10	722
+
+// Guild Flag (Town)
+//============================================================
+payon,123,322,4	duplicate(InsideFlagsPA5)	Palácio da Colina#11	722
+payon,166,161,3	duplicate(InsideFlagsPA5)	Palácio da Colinal#12	722
+
+// Kafra Employee
+//============================================================
+payg_cas05,276,227,1	duplicate(guildkafra)	Kafra#payg_cas05	117
+
+// Steward
+//============================================================
+payg_cas05,277,249,3	duplicate(cm)	Nahzarf#payg_cas05	55
+
+// Treasure Room Exit
+//============================================================
+payg_cas05,161,136,0	script	#lever_PA05	111,{
+	mes " ";
+	mes "Há uma pequena alavanca, você deseja acioná-la?";
+	next;
+	if(select("Acionar.:Não acionar.") == 1) {
+		close2;
+		warp "payg_cas05",277,250;
+		end;
+	}
+	close;
+}
+
+// Guild Dungeon Switch
+//============================================================
+payg_cas05,249,15,0	duplicate(gdlever)	#payg_cas05	111
+
+// Guild Treasure Spawns
+//============================================================
+payg_cas05,157,132,0	duplicate(Gld_Trea_Spawn)	Treasure#payg_cas05	-1
+
+// AGIT Manager
+//============================================================
+payg_cas05,30,30,0	duplicate(Gld_Agit_Manager)	Agit#payg_cas05	-1
+
+// Guardians
+//============================================================
+payg_cas05,277,249,3	duplicate(Gld_Guard_Template)	Guardian#payg_cas05	-1

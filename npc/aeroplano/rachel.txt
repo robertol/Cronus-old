@@ -3,21 +3,21 @@
 //===== Por: =================================================
 //= L0ne_W0lf, Muad_Dib
 //===== Versão Atual: ========================================
-//= 1.0
+//= 1.1
 //===== Compatível Com: ======================================
-//= Cronus; Hercules; rAthena.
+//= eAthena; rAthena; Cronus; brAthena; Maya SVN.
 //===== Comentários Adicionais: ==============================
 //= 1.0 Versão inicial.
+//= 1.1 Traduzido. [mkbu95]
 //============================================================
 
 ra_fild12,295,208,0	script	toairplane#rachel	45,1,1,{
 	end;
 OnTouch:
-	mes "To use the airship, you are required to pay 1,200 zeny or a Free Airship Ticket.";
-	mes "Would you like to use the service?";
+	mes "A taxa de entrada é de 1.200 Zenys. Se tiver um bilhete para o Aeroplano, pode entrar de graça. Gostaria de entrar?";
 	next;
-	if (select("Yes:No") == 1) {
-		if (countitem(7311)) {
+	if (select("Sim:Não") == 1) {
+		if (countitem(7311) > 0) {
 			delitem 7311,1; //Free_Flying_Ship_Ticket
 			warp "airplane_01",245,60;
 			end;
@@ -27,10 +27,11 @@ OnTouch:
 			warp "airplane_01",245,60;
 			end;
 		}
-		mes "I am sorry, but you do not have enough money.";
-		mes "Please remember, you are required to pay 1,200 zeny to use the service.";
+		mes "Me desculpe, mas você não possui 1.200 zeny!";
+		mes "Você não pode embarcar.";
 		close;
 	}
-	mes "Thank you, please come again.";
+	mes "Muito obrigado!";
+	mes "Volte sempre.";
 	close;
 }

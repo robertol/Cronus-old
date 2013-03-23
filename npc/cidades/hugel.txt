@@ -1,120 +1,105 @@
-//===== Hercules Script ======================================
-//= Hugel City
-//===== By: ==================================================
-//= vicious_pucca, Poki#3, erKURITA, Munin, and everybody in the
-//= comments
-//===== Current Version: =====================================
-//= 1.7
-//===== Description: =========================================
-//= NPC's for the City of Hugel.
-//===== Additional Comments: =================================
-//= Cords and Sprites are 100% Correct, but the names are not.
-//= Plus no one knows what the NPCs are talking right now :/ [Poki#3]
-//= Note: Not all the sprites were correct :P [erKURITA]
-//= 1.0 Added the first shop, firecrackers. Thanks RockmanEXE for the info [erKURITA]
-//=	Added more missing npc, but again, only locations and temp names =/ [erKURITA]
-//=	Started the basis of Poring Track. [erKURITA]
-//=	Moved the old lady to npc\guides\guides_hu.txt, since it's Hugel's guard [erKURITA]
-//=	Special thanks to RockmanEXE who provided all necesary info =3
-//=	Abducted/Moved Yan and Yalmire(temp names) to npc\events\custom\p_track. [erKURITA]
-//= 1.1 Commented out the whole list of dummy npcs. They're there for nothing anyway,
-//=	just using up memory. [erKURITA]
-//= 1.2 Added a few NPCs scripted by Munin and fixed up format a little [Playtester]
-//= 1.3 Moved some quests-related NPCs to proper file. [SinSloth]
-//= 1.4 Optimized the Party Supplies Shop [DZeroX]
-//= 1.5 Fixed Party Supplies Shop. [L0ne_W0lf]
-//= 1.6 Removed duplicate "Mudie". [L0ne_W0lf]
-//= 1.7 Removed whitespace and junk. [Kisuka]
+//===== Cronus Script ========================================
+//= NPCs referentes a cidade de Hugel
+//===== Por: =================================================
+//= rA Dev Team
+//===== Versão Atual: ========================================
+//= 1.8
+//===== Compatível com: ======================================
+//= Cronus GIT
+//===== Descrição: ===========================================
+//= NPCs referentes a cidade de Hugel
+//===== Comentários Adicionais: ==============================
+//= 1.8 Adicionado diálogos Oficiais do bRO. [LyDe]
 //============================================================
 
 // Hugel
 //============================================================
-hugel,189,143,5	script	Young Man	898,{
-	mes "[Young Man]";
-	mes "Huh. So that giant";
-	mes "air pouch can make";
-	mes "people float in midair?";
-	mes "Would filling my tummy";
-	mes "with air work the same way?";
+hugel,189,143,5	script	Rapaz	898,{
+	mes "[Rapaz]";
+	mes "Hum. Então aquele enorme";
+	mes "saco cheio de ar faz";
+	mes "as pessoas flutuarem?";
+	mes "Será que se assoprássemos";
+	mes "juntos aquilo ia sair voando?";
 	close;
 }
 
 hugel,126,151,3	script	Emily	90,{
 	mes "[Emily]";
-	mes "I feel so blessed to";
-	mes "live in this quant, little";
-	mes "town. It's so beautiful, and";
-	mes "everyone here is so nice~";
+	mes "Sou muito grata por viver";
+	mes "nessa pequena cidade.";
+	mes "É tão bonita, e as pessoas";
+	mes "são tão simpáticas.";
 	next;
 	mes "[Emily]";
-	mes "For some reason, my older";
-	mes "sister wants to move out of";
-	mes "Hugel as soon as she can. She";
-	mes "Says that she's getting creeped";
-	mes "out by the people that live here.";
-	mes "Don't you think that sounds weird?";
+	mes "Por alguma razão, minha irmã";
+	mes "mais velha quer se mudar daqui";
+	mes "o mais rápido possível. Ela diz";
+	mes "que as pessas que moram aqui";
+	mes "a deixam muito nervosa. Isso é muito";
+	mes "estranho, não acha?";
 	close;
 }
- 
+
 hugel,86,165,5	script	Kayplas	896,{
 	mes "[Kayplas]";
-	mes "Ooh, I really want to";
-	mes "have that red bottle.";
-	mes "I should ask my mom";
-	mes "to buy me one. It doesn't";
-	mes "look too expensive, does it?";
+	mes "Ooh, eu realmente quero";
+	mes "aquela garrafa vermelha!";
+	mes "Vou pedir para a minha mãe";
+	mes "me comprar uma. Não deve";
+	mes "ser muito cara, né?";
 	close;
 }
 
 hugel,71,197,3	script	Lisa	90,{
 	mes "[Lisa]";
-	mes "Hugel is a pretty";
-	mes "small, homely village.";
-	mes "Everyone knows everyone,";
-	mes "everybody knows what";
-	mes "everybody else is doing.";
-	mes "It's so suffocating!";
+	mes "Hugel é uma vila pequena";
+	mes "e aconchegante. Todos";
+	mes "se conhecem, e todos";
+	mes "sabem o que os outros";
+	mes "estão fazendo. Na verdade,";
+	mes "é meio sufocante!";
 	next;
 	mes "[Lisa]";
-	mes "There's no privacy in";
-	mes "small towns. Someday,";
-	mes "I wanna go out and";
-	mes "live in the big city~";
+	mes "Não há privacidade";
+	mes "em cidades pequenas.";
+	mes "Eu gostaria de ir";
+	mes "morar em uma grande cidade~";
 	close;
 }
 
-hugel,169,112,5	script	Old Nikki	892,{
-	mes "[Old Nikki]";
-	mes "You must not be from";
-	mes "around here. Ah, you're";
-	mes "an adventurer, right? Do";
-	mes "you know how I could tell?";
+hugel,169,112,5	script	Velho Nikki	892,{
+	mes "[Velho Nikki]";
+	mes "Você deve ser um";
+	mes "estrangeiro. Ah, você";
+	mes "é um aventureiro, não?";
+	mes "Sabe como eu sei?";
 	next;
-	mes "[Old Nikki]";
-	mes "It's because everyone";
-	mes "who's lived here starts";
-	mes "to look alike after a while.";
-	mes "And you certainly don't look";
-	mes "as old as us. Well, have";
-	mes "a nice day, adventurer~";
+	mes "[Velho Nikki]";
+	mes "É porque todos que moram";
+	mes "aqui começam a ficar parecidos";
+	mes "depois de um tempo. E você";
+	mes "certamente parece mais jovem";
+	mes "do que nós. Bem, tenha um dia";
+	mes "agradável, aventureiro!";
 	close;
 }
 
 hugel,175,115,5	script	Marius	897,{
 	mes "[Marius]";
-	mes "Yes, I'm an old man, but";
-	mes "I can lick a whippersnapper";
-	mes "like you any day of the week!";
-	mes "You know, Hugel's got a longer";
-	mes "life expectancy than all the other towns. You wanna know why?";
+	mes "Posso ser um velho, mas eu";
+	mes "poderia acabar com alguém";
+	mes "como você qualquer hora!";
+	mes "Sabe, Hugel tem uma expectativa";
+	mes "de vida muito maior que a das outras cidades. Sabe por que?";
 	next;
 	mes "[Marius]";
-	mes "It's because the old";
-	mes "coots in this town refuse";
-	mes "to just lay down and die!";
-	mes "Now, c'mon! Lemme show";
-	mes "you how strong I am! Let's";
-	mes "wrestle or something, kid~";
+	mes "É porque os velhos";
+	mes "dessa cidade se recusam";
+	mes "a simplesmente deitar";
+	mes "e morrer! Agora, vamos lá!";
+	mes "Vou mostrar a minha força!";
+	mes "Vamos lutar, garoto!";
 	close;
 }
 
@@ -122,82 +107,80 @@ hugel,175,115,5	script	Marius	897,{
 //============================================================
 hu_in01,111,386,4	script	Chris	86,{
 	mes "[Chris]";
-	mes "You know, the people don't";
-	mes "fight harmful monsters, they";
-	mes "just protect themselves by";
-	mes "equipping armor. That's";
-	mes "just the way they are.";
+	mes "Sabe, as pessoas não lutam";
+	mes "muito com os monstros,";
+	mes "só compram armaduras para";
+	mes "se proteger. É assim";
+	mes "que somos aqui.";
 	next;
 	mes "[Chris]";
-	mes "If you want to buy";
-	mes "some nicer armors,";
-	mes "then I suggest buying";
-	mes "some in a bigger city.";
+	mes "Se você quiser comprar";
+	mes "armas boas, sugiro";
+	mes "que você procure em";
+	mes "uma cidade maior.";
 	close;
 }
 
-hu_in01,23,311,4	script	Party Supplies Shop	898,{
-	mes "[Shopkeeper]";
-	mes "Welcome to the party supplies";
-	mes "shop!";
-	mes "Why don't you enjoy some";
-	mes "spectacular fireworks with your";
-	mes "friends?";
-	mes "We can provide you with 5 of them";
-	mes "at 500 zeny.";
+hu_in01,23,311,4	script	Loja de Suprimentos	898,{
+	mes "[Vendedor]";
+	mes "Bem-vindo à Loja de";
+	mes "Artigos Festivos!";
+	mes "Por que você não";
+	mes "aprecia lindos fogos";
+	mes "de artifício com seus amigos?";
+	mes "Providenciaremos 5 pra você";
+	mes "por 500 zenys.";
 	next;
-	switch (select("Buy:Cancel")) {
-		case 1:
-			if (Zeny < 500) { 
-				mes "[Shopkeeper]";
-				mes "I am sorry, but you don't have";
-				mes "enough money~";
-				close;
-			}
-			set Zeny,Zeny-500;
-			getitem 12018,5;	// Fire_Cracker
-			mes "[Shopkeeper]";
-			mes "Here you go!";
-			mes "Have fun with them!";
+	if (select("Comprar:Cancelar") == 1) {
+		if (Zeny < 500) {
+			mes "[Vendedor]";
+			mes "Sinto muito, você não tem";
+			mes "dinheiro suficiente.";
 			close;
-		case 2:
-			mes "[Shopkeeper]";
-			mes "Thank you, please come again.";
-			close;
+		}
+		set Zeny,Zeny-500;
+		getitem 12018,5;	// Fire_Cracker
+		mes "[Vendedor]";
+		mes "Aqui está!";
+		mes "Divirta-se com eles!";
+		close;
 	}
-}
-
-hu_in01,18,94,0	script	A Part-Timer#1	49,{
-	mes "[Luda]";
-	mes "Welcome to the";
-	mes "Shrine Expedition Office.";
-	mes "I'm Luda, a part-time";
-	mes "assistant. My job is to";
-	mes "keep this office neat and";
-	mes "clean, but look at this place!";
-	next;
-	mes "[Luda]";
-	mes "Still, I think I can";
-	mes "handle this difficult task~";
-	mes "This room is the office for";
-	mes "the Schwaltzvalt Republic team,";
-	mes "and the other is for the Rune-";
-	mes "Midgarts Kingdom team.";
-	next;
-	mes "[Luda]";
-	mes "I have to clean both rooms,";
-	mes "so they keep me pretty busy.";
-	mes "Why don't you volunteer for";
-	mes "their expedition? I know they";
-	mes "can't really pay you, but it's";
-	mes "a great chance to explore~";
+	mes "[Vendedor]";
+	mes "Obrigado e volte novamente!";
 	close;
 }
 
-hu_in01,26,77,4	script	A Part-Timer#2	50,{
-	mes "^3355FFThis part-timer is";
-	mes "completely engrossed";
-	mes "in his task of organizing";
-	mes "files and books.^000000";
+hu_in01,18,94,0	script	Meio expediente#1	49,{
+	mes "[Luda]";
+	mes "Bem-vindo ao escritório da";
+	mes "Organização dos Exploradores do Santuário.";
+	mes "Sou Luda, um assistente";
+	mes "Meu trabalho é manter";
+	mes "o escritório limpo e perfumado,";
+	mes "mas dê uma olhada nesse lugar!";
+	next;
+	mes "[Luda]";
+	mes "Ainda assim, acho que";
+	mes "dou conta dessa difícil tarefa~";
+	mes "Esse aposento é o escritório";
+	mes "do time da República de Schwaltzvalt,";
+	mes "e o próximo serve ao time do";
+	mes "reino de Rune-Midgarts.";
+	next;
+	mes "[Luda]";
+	mes "Preciso arrumar os dois, então";
+	mes "fico bem ocupado. Por que você";
+	mes "não se voluntaria para";
+	mes "participar da expedição?";
+	mes "Acho que não poderão remunerá-lo,";
+	mes "mas é uma ótima oportunidade.";
+	close;
+}
+
+hu_in01,26,77,4	script	Meio expediente#2	50,{
+	mes "^3355FFO assistente está";
+	mes "completamente absorto,";
+	mes "organizando arquivos e";
+	mes "livros.^000000";
 	close;
 }

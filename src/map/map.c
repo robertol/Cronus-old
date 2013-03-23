@@ -78,12 +78,12 @@ char log_db_ip[32] = "127.0.0.1";
 int log_db_port = 3306;
 char log_db_id[32] = "ragnarok";
 char log_db_pw[32] = "ragnarok";
-char log_db_db[32] = "log";
+char log_db_db[32] = "ragnarok";
 Sql* logmysql_handle;
 
 // This param using for sending mainchat
 // messages like whispers to this nick. [LuzZza]
-char main_chat_nick[16] = "Main";
+char main_chat_nick[16] = "Modelo";
 
 char *INTER_CONF_NAME;
 char *LOG_CONF_NAME;
@@ -3389,9 +3389,9 @@ void map_reloadnpc(bool clear)
 		npc_addsrcfile("clear"); // this will clear the current script list
 
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/re/scripts_main.conf");
+	map_reloadnpc_sub("npc/re/scripts_modelo.conf");
 #else
-	map_reloadnpc_sub("npc/pre-re/scripts_main.conf");
+	map_reloadnpc_sub("npc/pre-re/scripts_modelo.conf");
 #endif
 }
 
