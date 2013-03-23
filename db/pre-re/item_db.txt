@@ -797,30 +797,30 @@
 1546,Krieger_Onehand_Mace1,Maça de Guerra Gloriosa,4,20,,0,130,,1,0,0x0004C5B3,7,2,2,4,80,1,8,{ bonus2 bAddRace,RC_DemiHuman,75; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; bonus bAspdRate,5; } if(getrefine()>8) { bonus2 bAddEff,Eff_Stun,2000; bonus bAspdRate,5; } },{},{}
 1547,Mace_Of_Madness,Mace Of Madness,4,20,,0,150,,1,0,0x0004C5B2,7,2,2,3,0,0,8,{ bonus2 bSkillAtk,"MC_CARTREVOLUTION",25; bonus bStr,2; },{},{}
 1548,Veteran_Hammer,Martelo Veterano,4,10000,,1800,160,,1,2,0x00008110,7,2,2,3,80,1,8,{ bonus bHealPower,getskilllv("AL_DP"); bonus bCritical,getskilllv("PR_MACEMASTERY")*2; bonus bInt,1; bonus bLuk,1; },{},{}
-1550,Livro,Livro,4,30000,,600,85,,1,3,0x00410100,7,2,2,2,14,1,15,{},{},{}
-1551,Bíblia,Bíblia,4,60000,,1000,115,,1,2,0x00410100,7,2,2,3,27,1,15,{ bonus bInt,2; },{},{}
-1552,Tábula,Tábula,4,51000,,800,125,,1,1,0x00410100,7,2,2,3,27,1,15,{},{},{}
-1553,Book_Of_Billows,Livro das Ondas,4,35000,,750,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Water; },{},{}
-1554,Book_Of_Mother_Earth,Livro da Mãe Terra,4,35000,,750,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Earth; },{},{}
-1555,Book_Of_Blazing_Sun,Livro do Sol Ardente,4,35000,,750,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Fire; },{},{}
-1556,Book_Of_Gust_Of_Wind,Livro do Golpe de Vento,4,35000,,750,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Wind; },{},{}
-1557,Book_Of_The_Apocalypse,Livro do Apocalipse,4,60000,,800,120,,1,0,0x00410100,7,2,2,4,40,1,15,{ bonus bAtkEle,Ele_Dark; bonus2 bAddEle,Ele_Holy,5; bonus2 bAddEle,Ele_Water,7; bonus2 bAddEle,Ele_Earth,7; bonus2 bAddEle,Ele_Fire,7; bonus2 bAddEle,Ele_Wind,7; },{},{}
-1558,Girl's_Diary,Diário de Menina,4,1500,,300,60,,1,1,0x00410100,7,2,2,4,40,1,15,{ bonus2 bAddDamageClass,1188,150; },{},{}
-1559,Legacy_Of_Dragon,Herança do Dragão,4,20,,700,130,,1,0,0x00410100,7,2,2,4,70,1,15,{ bonus bInt,3; bonus bIgnoreDefRace,RC_Dragon; bonus2 bSPGainRace,RC_Dragon,10; },{},{}
-1560,Diary_Of_Great_Sage,Diário do Sábio,4,20,,1100,100,,1,2,0x00410100,7,2,2,3,60,1,15,{ bonus bMatkRate,15; if(readparam(bStr)>=50) bonus bAspdRate,5; if(readparam(bInt)>=70) bonus bMatkRate,5; },{},{}
-1561,Hardback,Livro Capa Dura,4,20,,1500,140,,1,1,0x00410100,7,2,2,4,55,1,15,{ bonus bStr,3; bonus bDex,2; },{},{}
-1562,Bible_Of_Battlefield,Battlefield Textbook,4,20,,700,110,,1,1,0x00410100,7,2,2,4,80,0,15,{ bonus bInt,3; bonus3 bAutoSpell,"AL_BLESSING",3+(getskilllv("AL_BLESSING")>3)*(getskilllv("AL_BLESSING")-3),20; },{},{}
+1550,Livro,Livro,4,30000,,60,85,,1,3,0x00410100,7,2,2,2,14,1,15,{},{},{}
+1551,Bíblia,Bíblia,4,60000,,100,115,,1,2,0x00410100,7,2,2,3,27,1,15,{ bonus bInt,2; },{},{}
+1552,Tábula,Tábula,4,51000,,80,125,,1,1,0x00410100,7,2,2,3,27,1,15,{},{},{}
+1553,Book_Of_Billows,Livro das Ondas,4,35000,,75,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Water; },{},{}
+1554,Book_Of_Mother_Earth,Livro da Mãe Terra,4,35000,,75,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Earth; },{},{}
+1555,Book_Of_Blazing_Sun,Livro do Sol Ardente,4,35000,,75,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Fire; },{},{}
+1556,Book_Of_Gust_Of_Wind,Livro do Golpe de Vento,4,35000,,75,90,,1,0,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Wind; },{},{}
+1557,Book_Of_The_Apocalypse,Livro do Apocalipse,4,60000,,80,120,,1,0,0x00410100,7,2,2,4,40,1,15,{ bonus bAtkEle,Ele_Dark; bonus2 bAddEle,Ele_Holy,5; bonus2 bAddEle,Ele_Water,7; bonus2 bAddEle,Ele_Earth,7; bonus2 bAddEle,Ele_Fire,7; bonus2 bAddEle,Ele_Wind,7; },{},{}
+1558,Girl's_Diary,Diário de Menina,4,1500,,30,60,,1,1,0x00410100,7,2,2,4,40,1,15,{ bonus2 bAddDamageClass,1188,150; },{},{}
+1559,Legacy_Of_Dragon,Herança do Dragão,4,20,,70,130,,1,0,0x00410100,7,2,2,4,70,1,15,{ bonus bInt,3; bonus bIgnoreDefRace,RC_Dragon; bonus2 bSPGainRace,RC_Dragon,10; },{},{}
+1560,Diary_Of_Great_Sage,Diário do Sábio,4,20,,110,100,,1,2,0x00410100,7,2,2,3,60,1,15,{ bonus bMatkRate,15; if(readparam(bStr)>=50) bonus bAspdRate,5; if(readparam(bInt)>=70) bonus bMatkRate,5; },{},{}
+1561,Hardback,Livro Capa Dura,4,20,,15,140,,1,1,0x00410100,7,2,2,4,55,1,15,{ bonus bStr,3; bonus bDex,2; },{},{}
+1562,Bible_Of_Battlefield,Battlefield Textbook,4,20,,70,110,,1,1,0x00410100,7,2,2,4,80,0,15,{ bonus bInt,3; bonus3 bAutoSpell,"AL_BLESSING",3+(getskilllv("AL_BLESSING")>3)*(getskilllv("AL_BLESSING")-3),20; },{},{}
 1563,Diary_Of_Great_Sage_C,Diário do Sábio [A],4,1,,0,135,,1,2,0x00410100,7,2,2,3,1,0,15,{ bonus bMatkRate,20; bonus bAspdRate,5; },{},{}
 1564,Enciclopédia,Enciclopédia,4,20,,2000,110,,1,2,0x00410100,7,2,2,3,70,1,15,{ bonus bMatkRate,15; bonus bInt,3; bonus bDex,2; bonus bCritical,20+((readparam(bLuk)*2)/10); },{},{}
 1565,Death_Note,Death Note,4,20,,1000,137,,1,2,0x00410100,7,2,2,4,85,1,15,{ bonus bMatkRate,15; bonus bStr,3; bonus bInt,3; bonus bLuk,-20; bonus2 bWeaponComaRace,RC_DemiHuman,10; bonus bAspdRate,getrefine(); if(BaseJob==Job_Sage) bonus3 bAutoSpell,"NPC_HELLJUDGEMENT",5,20; },{},{}
 1566,Diary_Of_Great_Basil,Diary Of Great Basil,4,20,,0,120,,1,0,0x00410100,7,2,2,1,0,0,15,{ bonus2 bAddRace,RC_Boss,50; bonus2 bAddRace,RC_NonBoss,50; },{},{}
 1567,Hardback_C,Refined Hardcover Book,4,1,,0,168,,1,0,0x00410100,7,2,2,4,0,0,15,{ bonus bStr,5; bonus bDex,2; bonus bMatkRate,20; },{},{}
-1568,Book_Of_Billows_,Livro das Ondas,4,35000,,750,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Water; },{},{}
-1569,Book_Of_Mother_Earth_,Livro da Mãe Terra,4,35000,,750,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Earth; },{},{}
-1570,Book_Of_Blazing_Sun_,Livro do Sol Ardente,4,35000,,750,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Fire; },{},{}
-1571,Book_Of_Gust_Of_Wind_,Livro do Golpe de Vento,4,35000,,750,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Wind; },{},{}
+1568,Book_Of_Billows_,Livro das Ondas,4,35000,,75,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Water; },{},{}
+1569,Book_Of_Mother_Earth_,Livro da Mãe Terra,4,35000,,75,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Earth; },{},{}
+1570,Book_Of_Blazing_Sun_,Livro do Sol Ardente,4,35000,,75,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Fire; },{},{}
+1571,Book_Of_Gust_Of_Wind_,Livro do Golpe de Vento,4,35000,,75,90,,1,3,0x00410100,7,2,2,3,27,1,15,{ bonus bAtkEle,Ele_Wind; },{},{}
 1572,Principles_Of_Magic,Princípios da Magia,4,20,,300,60,,1,2,0x00410100,7,2,2,3,60,1,15,{ bonus bMatkRate,20; bonus bInt,3; bonus bSPrecovRate,5; },{},{}
-1573,Ancient_Magic,Magia Antiga,4,20,,700,30,,1,2,0x00410100,7,2,2,3,70,1,15,{ bonus bMatkRate,15; },{},{}
+1573,Ancient_Magic,Magia Antiga,4,20,,70,30,,1,2,0x00410100,7,2,2,3,70,1,15,{ bonus bMatkRate,15; },{},{}
 1574,BF_Book1,Livro de Estratégia de Batalha A,4,20,,0,90,,1,0,0x00410100,7,2,2,3,80,1,15,{ bonus bStr,2; bonus bInt,1; bonus bMatkRate,15; bonus2 bAddRace,RC_DemiHuman,75; bonus2 bIgnoreDefRate,RC_DemiHuman,20; bonus bUnbreakableWeapon,0; },{},{}
 1575,BF_Book2,Livro de Estratégia de Batalha B,4,20,,0,90,,1,0,0x00410100,7,2,2,3,80,1,15,{ bonus bStr,2; bonus bInt,1; bonus bMatkRate,15; bonus2 bIgnoreMDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; },{},{}
 1576,Krieger_Book1,Tábula Gloriosa,4,20,,0,90,,1,0,0x00410100,7,2,2,4,80,1,15,{ bonus bMatkRate,15; bonus2 bAddRace,RC_DemiHuman,80; bonus2 bIgnoreDefRate,RC_DemiHuman,25; bonus bUnbreakableWeapon,0; if(getrefine()>5) { bonus2 bAddRace,RC_DemiHuman,(getrefine()-4)*(getrefine()-4); bonus2 bIgnoreDefRate,RC_DemiHuman,5; } if(getrefine()>8) autobonus "{ bonus bBaseAtk,200; }",30,3000,BF_WEAPON,"{ specialeffect2 EF_BASH3D; }"; },{},{}

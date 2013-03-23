@@ -1,24 +1,55 @@
 #!/bin/bash
-# Atalho para funções Cronus-Commander - http://Cronus-Emulator.com [Raizen]
-# Versão atual: 1.5.0
+# Atalho para funcos Cronus-Commander - http://Cronus-Emulator.com [Raizen]
+# Otimizacoes [Roberto]
+versao="1.5.3"
+
 case $1 in
-	'recompilar') chmod 777 configure ; ./configure ; make clean ; make all;;
-	'compilar') chmod 777 configure ; ./configure ; make clean ; make all;;
-	'atualizarsistema') yum update -y ; yum upgrade -y ; apt-get update -y ;;
-	'mapcache') chmod 777 configure ; ./configure ; make tools ; echo "Map_Cache compilado com sucesso!" ;;
-	'versao') echo "A versão atual do cronus-commander é 1.5.0" ;;
-	'ligar') exec ./login-server & exec ./char-server & exec ./map-server & ;;
-	'desligar') killall map-server char-server login-server ;;
-	'reiniciar') $0 ligar
-	$0 desligar;;
-	'tutorial') echo "As funções existentes atualmente neste script são unicamente para ajudar o usuário na utilização de 
-	comandos via shell. Para utilizar este script, basta que através do ssh acesse seu emulador e digite:
+	recompilar|compilar) 
+		sh configure --disable_64bit
+		make clean
+		make all
+	;;
+	'atualizarsistema')
+		yum update -y
+		yum upgrade -y
+		apt-get update -y
+	;;
+	'mapcache') 
+		if [ ! -f Makefile ]; then
+			$0 compilar
+		fi
+		make tools
+		echo "Map_Cache compilado com sucesso!"
+	;;
+	'versao')
+		echo "A versao atual do cronus-commander eh $versao"
+	;;
+	'ligar')
+		exec ./login-server 
+		exec ./char-server 
+		exec ./map-server 
+	;;
+	'desligar')
+		if [ "$(grep -E "map-server|char-server|login-server" | wc -l)" -ge "0" ]; then
+			pkill -9 map-server
+			pkill -9 char-server
+			pkill -9 login-server
+		fi
+	;;
+	'reiniciar')
+		$0 desligar
+		$0 ligar
+	;;
+	'tutorial')
+		echo "As funcoes existentes atualmente neste script sao unicamente para ajudar o usuario na utilizacao de 
+	comandos via shell. Para utilizar este script, basta que atraves do ssh acesse seu emulador e digite:
 	./cronus-commander PARAMETRO_DE_USO
-	Para ver os parâmetros disponíveis digite:
+	Para ver os parametros disponï¿½veis digite:
 	./cronus-commander comandos
-	Caso tenha qualquer dúvida sobre este sistema, abra um tópico de suporte
-	em http://forum.cronus-emulator.com/";;
-	*) echo "Os parâmetros válidos são:
+	Caso tenha qualquer duvida sobre este sistema, abra um topico de suporte em http://forum.cronus-emulator.com/"
+	;;
+	*) 
+	echo "Os parametros disponiveis sao:
 	ligar|desligar|reiniciar|compilar|recompilar|versao|atualizarsistema|tutorial."
 	;;
 esac

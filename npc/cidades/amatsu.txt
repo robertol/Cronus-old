@@ -1,139 +1,139 @@
-//===== Hercules Script ======================================
-//= Amatsu Town
-//===== By: ================================================== 
-//= rAthena Dev Team
-//===== Current Version: ===================================== 
-//= 1.4
-//===== Description: ========================================= 
-//= [Aegis Conversion]
-//= Amatsu Town Script
-//===== Additional Comments: ================================= 
-//= 1.3 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
-//=	Moved elemental stone trader to 'elemental_trader.txt'
-//= 1.4 Moved Alberta NPC to pre-re/re paths. [Euphy]
+//===== Cronus Script ========================================
+//= NPCs referentes a cidade de Amatsu
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.5
+//===== Compatível com: ======================================
+//= Cronus GIT
+//===== Descrição: ===========================================
+//= NPCs referentes a cidade de Amatsu
+//===== Comentários Adicionais: ==============================
+//= 1.4 Adicionado diálogos Oficiais do bRO. [Axl]
+//= 1.5 NPC de Alberta movido para pastas RE/Pre-RE. [MaminhA]
 //============================================================
 
-// Amatsu Transportation
+// Transporte para Amatsu
 //=====================================================
 -	script	::Sea_Captain_amatsu	-1,{
 	mes "[Walter Moers]";
-	mes "Hey, there.";
-	mes "Have you ever heard that there";
-	mes "are totally different countries";
-	mes "than the Rune-Midgard Kingdom?";
+	mes "Ei, você aí...";
+	mes "você tem ouvido";
+	mes "que há paises totalmente diferentes";
+	mes "do Reino de Rune-Midgard?";
 	next;
-	switch(select("About Amatsu...:Go to Amatsu:Cancel")) {
+	switch(select("Sobre Amatsu...:Ir para Amatsu:Cancelar")) {
 	case 1:
 		mes "[Walter Moers]";
-		mes "I heard that a drifting ship";
-		mes "accidentally discovered it...";
-		mes "The ship was totally destroyed";
-		mes "by a raging storm in heavy fog.";
+		mes "Eu ouvi falar que um navio à deriva";
+		mes "acidentalmente descobriu esta cidade...";
+		mes "O navio foi totalmente destruido";
+		mes "por uma tempestade furiosa em uma forte neblina.";
 		mes " ";
 		next;
 		mes "[Walter Moers]";
-		mes "Anyway, the ship was wrecked";
-		mes "on the beach. It was there";
-		mes "he arrived at a town called Amatsu.";
+		mes "Enfim, o navio afundou";
+		mes "na praia. Foi lá";
+		mes "que chegou em uma cidade chamada Amatsu.";
 		next;
 		mes "[Walter Moers]";
-		mes "The towners took pity on him";
-		mes "and took care of his wounds.";
-		mes "He lived there until he finished making a map.";
+		mes "Os cidadãos tiveram piedade sobre ele";
+		mes "e cuidaram de suas feridas.";
+		mes "Ele viveu ate terminar de fazer o mapa.";
 		next;
 		mes "[Walter Moers]";
-		mes "He passed away when he returned";
-		mes "to Rune-Midgard. Fortunately,";
-		mes "the map was given to our king, Tristan III.";
+		mes "Ele faleceu quando ele retornou";
+		mes "para Rune-Midgard. Por sorte,";
+		mes "o mapa foi pego por outro rei, Tristan III.";
 		next;
 		mes "[Walter Moers]";
-		mes "King Tristan III announced";
-		mes "that he would reward any";
-		mes "person brave enough to venture to Amatsu, and spread copies of this map.";
+		mes "O Rei Tristan III anunciou";
+		mes "que ele recompensaria qualquer";
+		mes "brava pessoa que se aventurasse em Amatsu, e espalhou cópias deste mapa.";
 		next;
 		mes "[Walter Moers]";
-		mes "Many brave and adventurous";
-		mes "sea captains took the";
-		mes "challenge. Great fortune could";
-		mes "be made in trade with Amatsu, as well as the rewards from King Tristan III...";
+		mes "Vários bravos e aventureiros";
+		mes "capitães do mar tomou o";
+		mes "desafio. A grande fortuna poderia";
+		mes "ser feita no comércio com Amatsu, assim como as recompensas do Rei Tristan III...";
 		next;
 		mes "[Walter Moers]";
-		mes "However, they all failed!";
-		mes "To overcome various currents";
-		mes "and bad weather, lots of";
-		mes "experience is required. But they were all blinded by their greed...";
+		mes "Entretanto, todos eles falharam!";
+		mes "Para superar várias correntes marítimas";
+		mes "e o mal tempo, muita";
+		mes "experiência é necessária. Mas eles estavam todos cegos pela fortuna...";
 		next;
 		mes "[Walter Moers]";
-		mes "Finally, a great man discovered";
-		mes "the perfect sealane to Amatsu...";
-		mes "Right! That is me. Sir Walter";
-		mes "Moers. I started the trade with Amatsu! Hahaha! Well, that's all about Amatsu.";
+		mes "Finalmente, o grande homem descobriu";
+		mes "a perfeita rota mais tranquila para Amatsu...";
+		mes "Certo! Isto é meu, Senhor Walter";
+		mes "Moers. Eu iniciei o comercio com Amastu! Hahaha! Ora, isto é tudo sobre Amatsu.";
 		next;
 		mes "[Walter Moers]";
-		mes "I made good money from trades";
-		mes "for years, and now I'm interested";
-		mes "in tourism. If you want to go to Amatsu, let me know~!";
+		mes "Eu fiz bom dinheiro com comércio";
+		mes "por anos, e agora eu me interessei";
+		mes "em turismo. Se você quer ir para Amatsu, então venha saber~!";
 		close;
 	case 2:
 		mes "[Walter Moers]";
-		mes "Oh yeah? It's a long way to";
-		mes "Amatsu. That's why we are";
-		mes "charging a fare. You don't think that crossing oceans and currents is easy, do you?";
+		mes "É isto? Este é um longo caminho para";
+		mes "Amatsu. Por isso irei";
+		mes "cobrar uma taxa. você não pensa que os oceanos e correntes marítimas são fáceis, né?";
 		next;
 		mes "[Walter Moers]";
-		mes "10,000 zeny for a round-trip! I've";
-		mes "got a stately room in a sturdy and";
-		mes "safe trade ship for you. It is a ";
-		mes "reasonable fare when you consider";
-		mes "that this isn't a one way trip.";
+		mes "São 10,000 zeny para o pacote completo! Eu tenho";
+		mes "um quarto esplendido em um resistente e";
+		mes "seguro navio de comercio para você. Esta é uma";
+		mes "tarifa razoável quando você considera";
+		mes "que esta não é apenas uma viagem de ida.";
 		next;
 		mes "[Walter Moers]";
-		mes "Shall we go now? You didn't forget";
-		mes "the fare, right? Let's go.";
+		mes "Devemos ir agora? você não se esqueceu";
+		mes "da tarifa, certo? Vamos lá.";
 		next;
-		if (select("All Aboard!:Cancel") == 1) {
+		if (select("Todos a bordo!:Cancelar") == 1) {
 			if (Zeny > 9999) {
 				mes "[Walter Moers]";
-				mes "Alright, I will start the engine!";
+				mes "Certo, Eu irei iniciar o motor!";
 				close2;
 				set zeny,zeny-10000;
 				warp "amatsu",197,83;
 				end;
 			}
 			mes "[Walter Moers]";
-			mes "Were you even listening to me?";
-			mes "10,000 zeny. If you got";
-			mes "nothing, find some treasure";
-			mes "somewhere, like in a wrecked ship...Show me the money!";
+			mes "Você escutou mesmo?";
+			mes "São 10,000 zeny. Se você";
+			mes "não tem nenhum, procure mais tesouros";
+			mes "em algum lugar, como no navio afundado.... Mostre-me mais dinheiro!";
 			close;
 		}
 		mes "[Walter Moers]";
-		mes "If you are an adventurer,";
-		mes "this is a great chance";
-		mes "to experience a different culture...Well, it is up to you.";
+		mes "Se você for um aventureiro,";
+		mes "esta é a sua grande chance";
+		mes "para experimentar a diferente cultura... Bem, esta é a sua decisão.";
 		close;
 	case 3:
 		mes "[Walter Moers]";
-		mes "If you are tired of your daily";
-		mes "life, take a trip to a distant";
-		mes "country across the ocean.";
-		mes "Someplace like, oh I don't know, Amatsu~";
+		mes "Se você está cansado da sua vida";
+		mes "diária, pegue o pacote para o distante";
+		mes "país atraves do oceano.";
+		mes "Algum lugar como, hum eu não sei, Amatsu~";
 		close;
 	}
 }
 
-amatsu,194,79,5	script	Sea Captain#ama2	709,{
+amatsu,194,79,5	script	Capitao do Mar#ama2	709,{
 	mes "[Walter Moers]";
-	mes "You came... Did you enjoy";
-	mes "your trip to Amatsu...?";
-	mes "Alright, I will take you";
-	mes "back to Alberta.";
+	mes "Você veio... você gostou do";
+	mes "seu pacote para Amatsu...?";
+	mes "Certo, eu irei levar você";
+	mes "de volta para Alberta.";
 	next;
-	if (select("Back to Alberta:Cancel") == 1) {
+	if (select("Voltar para Alberta:Cancelar") == 1) {
 		mes "[Walter Moers]";
-		mes "Let's go then. You must have";
-		mes "so many things to talk about,";
-		mes "right? All aboard now.";
+		mes "Vamos lá. você deve ter";
+		mes "várias coisas para falar sobre,";
+		mes "certo? Todos a bordo agora.";
 		close2;
 		if (checkre(0))
 			warp "alberta",244,72;
@@ -142,279 +142,279 @@ amatsu,194,79,5	script	Sea Captain#ama2	709,{
 		end;
 	}
 	mes "[Walter Moers]";
-	mes "Well, take your time.";
-	mes "The ship to Alberta is";
-	mes "always ready to depart...";
+	mes "Bem, pegue seu tempo.";
+	mes "O navio para Alberta é";
+	mes "sempre pronto para partir...";
 	close;
 }
 
-// Generic Amatsu NPCs
+// NPCs Amatsu
 //=====================================================
 amatsu,230,160,3	script	Well-side Maiden#ama	757,{
 	mes "[Yuuko]";
-	mes "I usually come to this well to";
-	mes "draw water, but never when it's";
-	mes "foggy or rainy. For some reason";
-	mes "whenever the weather is a";
-	mes "certain way, I feel like...";
+	mes "Eu geralmente venho aqui buscar água";
+	mes "neste poço, mas nunca quando é";
+	mes "nebuloso e chuvoso. Para muitos motivos";
+	mes "sempre que o tempo é";
+	mes "o caminho certo, sinto como...";
 	next;
 	mes "[Yuuko]";
-	mes "...someone...or some thing is";
-	mes "struggling to crawl out from";
-	mes "the bottom of this well...";
-	mes "It really gives me the creeps.";
+	mes "...alguém...ou alguma coisa estão";
+	mes "esforcando-se para rastejar para";
+	mes "para fora desse poço...";
+	mes "Realmente me dá arrepios.";
 	close;
 }
 	
 amatsu,179,107,4	script	John#ama	86,{
 	mes "[John]";
-	mes "Yo~";
-	mes "You're not from around here.";
-	mes "Heh, another outsider.";
-	mes "Just like me...";
+	mes "Vo~";
+	mes "Você não é daqui.";
+	mes "Heh, outro distante.";
+	mes "Assim como eu...";
 	next;
 	mes "[John]";
-	mes "It's been five long years";
-	mes "since I've started doing";
-	mes "business here...";
+	mes "Tem cinco longos anos";
+	mes "desde que eu comecei a fazer";
+	mes "negócios aqui...";
 	next;
 	mes "[John]";
-	mes "Af first, I thought, 'What";
-	mes "a great chance!' when the";
-	mes "trade between the Rune-Midgard";
-	mes "Kingdom and Amatsu started.";
+	mes "Primeiro eu pensei, 'O que";
+	mes "uma grande chance!' quando o";
+	mes "comércio entre o Reino de Rune-Midgard";
+	mes "e Amatsu iniciaram.";
 	next;
 	mes "[John]";
-	mes "I wanted to do something great";
-	mes "and make the most of this";
-	mes "new opportunity.";
+	mes "Eu queria fazer algo grande";
+	mes "e tirar o maior partido desta";
+	mes "nova oportunidade.";
 	next;
 	mes "[John]";
-	mes "And so, I decided to go to";
-	mes "Amatsu so I could learn to make";
-	mes "Amatsu cuisine. Then, I could";
-	mes "return to my hometown and make";
-	mes "this exotic food for everyone.";
+	mes "E assim, eu decidi vim para";
+	mes "Amatsu assim que eu pudesse para aprender a fazer a";
+	mes "cozinha local. Então, eu poderia";
+	mes "retornar para minha cidade natal e fazer";
+	mes "esta comida exótica para todos.";
 	next;
 	mes "[John]";
-	mes "But, I fell in love with Amatsu";
-	mes "and I ended up sticking around";
-	mes "here for the last five years.";
-	mes "During all that time, I've";
-	mes "been learning Amatsu cuisine,";
+	mes "Mas, eu me apaixonei por Amatsu";
+	mes "e acabei me aderindo ao redor";
+	mes "daqui nos últimos cinco anos.";
+	mes "Durante todo esse tempo, eu tenho";
+	mes "aprendido a cozinhar Amatsu,";
 	next;
 	mes "[John]";
-	mes "and cooking these dishes for";
-	mes "the towners, and enjoying myself";
-	mes "by talking to the locals,";
-	mes "transfixed in this very spot.";
+	mes "e cozinhar estes pratos";
+	mes "para os cidadão, e desfrutado de mim";
+	mes "a falar com os habitantes locais,";
+	mes "transfixed neste mesmo local.";
 	next;
 	mes "[John]";
-	mes "But recently, across the street,";
-	mes "the Sushi Master opened his shop.";
+	mes "Mas recentemente, do outro lado da rua,";
+	mes "o Mestre Sushi abriu sua loja.";
 	mes "...";
-	mes "Now, my only customers are flies.";
+	mes "Agora, meus clientes são apenas moscas.";
 	next;
 	mes "[John]";
-	mes "I was hoping to fulfill my";
-	mes "dream of becoming a renowned chef";
-	mes "in Amatsu, but...";
-	mes "I guess it's over...";
+	mes "Eu estava esperando para cumprir";
+	mes "meu sonho de se tornar um renomado Chef";
+	mes "de Amatsu, mas...";
+	mes "Acho que é mais...";
 	close;
 }
 	
 amatsu,205,163,3	script	Mimi#ama	759,{
 	mes "[Mimi]";
 	mes "Puhuhu~!";
-	mes "Did you see Miss Amatsu near";
-	mes "the Harbor? Isn't she";
-	mes "preeeetty?";
+	mes "Viu a Miss Amastu perto";
+	mes "do porto? Ela não é";
+	mes "liiiinda?";
 	next;
 	mes "[Mimi]";
-	mes "I'm going to enter the Miss";
-	mes "Amatsu Contest when I'm older.";
+	mes "Eu irei entrar para o Concuso de";
+	mes "Miss Amastu quando for mais velha.";
 	next;
 	mes "[Mimi]";
-	mes "I'm sure that I'm the prettiest";
-	mes "in this town but...";
-	mes "A lady can always use a little more makeup.";
+	mes "Tenho certeza que sou a mais bonita";
+	mes "nesta cidade, mas...";
+	mes "Uma senhora pode usar um pouco mais de maquiagem.";
 	close;
 }
 	
-amatsu,185,115,3	script	Drunken Man#ama	765,{
+amatsu,185,115,3	script	Homem Bêbado#ama	765,{
 	mes "[Kosake]";
-	mes "*Hiccup*...My wife is just like,";
-	mes "...like a man...*Hiccup*...";
-	mes "I'm going to really...*Hiccup*...not go home this time...Hiccup";
+	mes "*Hiccup*...Minha esposa é como,";
+	mes "...como um homem...*Hiccup*...";
+	mes "Eu realmente não estou indo...*Hiccup*...para casa neste momento...Hiccup";
 	next;
-	if (select("Stop drinking and go home:Let's drink together") == 1) {
+	if (select("Pare de beber e ir para casa:Vamos beber juntos") == 1) {
 		mes "[Kosake]";
-		mes "What?! Do you want me to get";
-		mes "hit by my wife's big fist?";
-		mes "That's right! I said 'big fist!'";
+		mes "O que?! Quer realmente que eu seja massacrado";
+		mes "pelos punhos grandes da minha esposa?";
+		mes "Está certo! Eu disse 'grandes punhos!'";
 		next;
 		mes "[Kosake]";
-		mes "Sad to say, I married a woman";
-		mes "with man hands...";
-		mes "Big, strong hands that can kill a tiger.";
+		mes "Triste para dizer, Eu casei com uma mulher";
+		mes "com mãos de homem...";
+		mes "Grandes, mãos fortes que podem maatar um tigre.";
 		next;
-		mes "[Druken Man]";
-		mes "It was in Ko...Koko-something";
-		mes "town. She hit me because I";
-		mes "lost some money...*Hiccup*";
+		mes "[Homem Bêbado]";
+		mes "Foi em Ko...Cidade Koko-alguma coisa.";
+		mes "Ela me bateu, porque perdi";
+		mes "um pouco de dinheiro...*Hiccup*";
 		next;
-		mes "[Druken Man]";
-		mes "Life~~ is~~ nothing~~~";
-		mes "What is zeny~~~~ ";
+		mes "[Homem Bêbado]";
+		mes "A vida~~ não é~~ nada~~~";
+		mes "O que é zeny~~~~ ";
 		mes "*Hiccup*...... *Hiccup*.......";
 		mes ".......................";
 		mes "........Z.z..z...zzz...";
 		close;
 	}
 	mes "[Kosake]";
-	mes "Heh heh... nice lad...";
-	mes "But you know *Hiccup*";
-	mes "I can't give you any of mine! Heheheh...";
+	mes "Heh heh... bonito rapaz...";
+	mes "Mas você sabe *Hiccup*";
+	mes "Eu não posso lhe dar qualquer das minhas! Heheheh...";
 	next;
 	mes "[Kosake]";
-	mes "If you buy me a drink, I will think about it...Hehehe...*Hiccup*..";
+	mes "Se você me comprar uma bebida, irei pensar sobre isto...Hehehe...*Hiccup*..";
 	close;
 }
 	
-amatsu,217,179,1	script	Grandma#ama	760,{
+amatsu,217,179,1	script	Vovó#ama	760,{
 	mes "[Hatsue]";
-	mes "I'm worried about my husband.";
-	mes "He lost a lot of money in some distant town today.";
+	mes "Estou preocupado com meu marido.";
+	mes "Ele perdeu muito dinheiro em algum lugar distante da cidade hoje.";
 	next;
 	mes "[Hatsue]";
-	mes "I got so mad at him, he ran off in";
-	mes "fear! I'm worried...what if he";
-	mes "went to the bar and starts drinking again? The man just doesn't have any backbone. *Phew*";
+	mes "Eu fiquei tao brava com ele, ele fugiu com";
+	mes "medo! Estou preocupada... e se ele";
+	mes "foi ao bar e começar a beber novamente? O homem não tem apenas uma espinha dorsal. *Phew*";
 	close;
 }
 	
 amatsu,287,266,3	script	Jyaburo#ama	766,{
 	mes "[Jyaburo]";
-	mes "This place is special to me.";
-	mes "It's filled with memories of my wife.";
+	mes "Este lugar é especial para mim.";
+	mes "É preenchido com memórias de minha esposa.";
 	next;
 	mes "[Jyaburo]";
-	mes "It was under that big tree where";
-	mes "I first told her I loved her. At";
-	mes "the time, I really didn't know that she also had feelings for me.";
+	mes "Foi sob esta grande árvore onde";
+	mes "a primeira vez disse que a amava. No";
+	mes "momento, realmente não sabia que ela tinha sentimentos por mim.";
 	next;
 	mes "[Jyaburo]";
-	mes "After that day, we had many";
-	mes "conversations here. Quiet";
-	mes "and peaceful, this was our";
-	mes "favorite place to be together.";
+	mes "Após este dia, tivemos muitas";
+	mes "conversas aqui. Silenciosa";
+	mes "e pacífica, este era o nosso";
+	mes "lugar favorito para ficarmos juntos.";
 	next;
 	mes "[Jyaburo]";
-	mes "When I close my eyes here, I";
-	mes "can picture our good times,";
-	mes "and it feels like it all happened yesterday.";
+	mes "Quando eu fecho os meus olhos aqui,";
+	mes "eu posso ver a imagem dos nossos bons tempos,";
+	mes "e sinto como se tivesse acontecido ontem.";
 	mes "...";
 	next;
 	mes "[Jyaburo]";
-	mes "My wife passed away...";
-	mes "So now I only come here by";
-	mes "myself...But I feel like I'm with her whenever I'm here.";
+	mes "Minha esposa faleceu...";
+	mes "Então agora só venho aqui";
+	mes "por mim...Mas sinto que estou com ela sempre que estou aqui.";
 	next;
 	mes "[Jyaburo]";
-	mes "Do you have anyone that you";
-	mes "think about? If you have a";
-	mes "special someone, don't hesitate";
-	mes "or hold back. Be sure to treat";
-	mes "that person specially.";
+	mes "Tem alguém que você";
+	mes "acha? Se você tem";
+	mes "uma pessoa especial, não hesite";
+	mes "ou retenha. Certifique-se de tratar";
+	mes "aquela pessoa especialmente.";
 	next;
 	mes "[Jyaburo]";
-	mes "Human beings live such short";
-	mes "lives. But we're able to laugh";
-	mes "throughout life and forget the";
-	mes "sadness.";
-	mes "...Always be happy.";
+	mes "Os seres humanos vivem vidas tão";
+	mes "curtas. Mas somos capazes de sorrir";
+	mes "por toda a vida e esquecer";
+	mes "a tristeza.";
+	mes "...Seja sempre feliz.";
 	close;
 }
 
-// Legendary Tree
+// Árvore Lengendária
 //=====================================================
-amatsu,269,221,1	script	Propose Girl#ama	758,{
+amatsu,269,221,1	script	Casamenteira#ama	758,{
 	set jap_tree,1;
 	mes "[Hutari Shioko]";
-	mes "It is a pleasure to meet you.";
-	mes "My name is Hutari Shioko.";
-	mes "My hobby is listening to music.";
-	mes "I'm an avid fan of classical music.";
+	mes "É um prazer em conhece-lo.";
+	mes "Meu nome é Hutari Shioko.";
+	mes "Meu hobby é ouvir música.";
+	mes "Sou uma ávida fã de música clássica.";
 	next;
 	mes "[Hutari Shioko]";
-	mes "There is an old story about";
-	mes "the hill in our town.";
-	mes "Have you heard this story before?";
+	mes "Existe uma velha história sobre";
+	mes "a colina na nossa cidade.";
+	mes "Você já ouviu essa história antes?";
 	next;
 	mes "[Hutari Shioko]";
-	mes "It is said that if you propose";
-	mes "under that tree, you and your";
-	mes "lover will live a happy life for all eternity.";
+	mes "Dizem que, se você propor abaixo";
+	mes "desta árvore, vocé e seu";
+	mes "amante irão viver uma vida feliz para toda a eternidade.";
 	next;
 	mes "[Hutari Shioko]";
-	mes "However, the proposal can not be";
-	mes "done at any given time. The legend states that it can only be done on Saturday evenings.";
+	mes "Entretanto, a proposta não pode ser";
+	mes "feita em qualquer momento. A lenda afirma que só pode ser feita no sábado à noite.";
 	next;
 	mes "[Hutari Shioko]";
-	mes "After the proposal, the reply must";
-	mes "be answered before Sunday evening. This is the most crucial part of it.";
+	mes "Após a proposta, a resposta deve ser";
+	mes "antes de domingo à noite. Este é o elemento essencial disto.";
 	next;
 	emotion e_lv2;
 	mes "[Hutari Shioko]";
-	mes "If you like someone...";
-	mes "You should try proposing";
-	mes "under that tree. I'm sure ";
-	mes "happy things will happen, if you do.";
+	mes "Se vocé gosta de alguém...";
+	mes "Você deveria propor";
+	mes "abaixo desta árvore. Eu tenho certeza de que";
+	mes "coisas felizes irão acontecer, se você fizer.";
 	close;
 }
 	
-amatsu,243,202,3	script	Drama Teacher#ama	760,{
+amatsu,243,202,3	script	Professora do Drama#ama	760,{
 	set jap_tree,2;
 	mes "[Garakame sensei]";
-	mes "This is a beautiful place";
-	mes "with everlasting cherry blossoms.";
-	mes "Also, this town is the origin of";
-	mes "legendary play, 'White Dryad.' ";
+	mes "Este é um belo lugar";
+	mes "com eternar cerejas flores.";
+	mes "Além disso, esta cidade é a origem da";
+	mes "lendária jogadora, 'White Dryad.' ";
 	next;
 	if (Sex) {
 		mes "[Garakame sensei]";
-		mes "If you know a girl who is";
-		mes "talented in acting, please";
-		mes "bring her to me. I have been";
-		mes "searching for a girl who could";
-		mes "play the role as the 'White Dryad.'";
+		mes "Se Você conhecer uma garota que é";
+		mes "talentosa em agir, por favor";
+		mes "traga-a para mim. Eu fui à";
+		mes "procura de uma garota que pudesse";
+		mes "desempenhar o papel de 'White Dryad.'";
 		next;
 		mes "[Garakame sensei]";
-		mes "The 'White Dryad' is a nymph of";
-		mes "cherry tree... It has been hard to";
-		mes "find a girl who can perform";
-		mes "as the 'White Drayd...'";
+		mes "A 'White Dryad' é uma ninfa";
+		mes "da cerejeira... Tem sido difícil";
+		mes "encontrar uma garota que pode desempenhar";
+		mes "como a 'White Drayd...'";
 		close;
 	}
 	emotion e_gasp;
 	mes "[Garakame sensei]";
-	mes "Are you interested in acting?";
-	mes "I need someone who sees";
-	mes "the passion in acting and";
-	mes "can understand my vision.";
+	mes "Você tem interesse em atuar?";
+	mes "Preciso de alguém que";
+	mes "vê paixão em atuar e";
+	mes "passa compreender a minha visão.";
 	next;
 	mes "[Garakame sensei]";
-	mes "When you stand on the stage,";
-	mes "you need to become the";
-	mes "character. Your acting needs";
-	mes "to touch the hearts of the";
-	mes "audience and touch their souls.";
+	mes "Quando você está no palco,";
+	mes "você precisa para se tornar um";
+	mes "personagem. Sua atuação necessita";
+	mes "de tocar o coração da";
+	mes "platéia e tocar suas almas.";
 	next;
 	mes "[Garakame sensei]";
-	mes "Everyone's life is like a ";
-	mes "drama, right? Enjoy your life";
-	mes "as what you are and find me";
-	mes "someday when you are ready.";
+	mes "Todo mundo na vida é como";
+	mes "um drama, certo? Aproveite a sua vida";
+	mes "como vocês são de me procure";
+	mes "um dia quando estiver pronto.";
 	close;
 }
 	
@@ -426,72 +426,72 @@ amatsu,283,203,1	script	Bonubonu#ama2	111,{
 	set jap_tree,3;
 	emotion e_swt2;
 	mes "[Bonubonu]";
-	mes "That tree on the hill is";
-	mes "a very old tree. It is a big";
-	mes "cherry tree with everlasting blossoms.";
+	mes "Essa árvore sobre a colina é";
+	mes "uma árvore muito antiga. É uma grande";
+	mes "cerejeira com flores eternas.";
 	next;
 	emotion e_swt2;
 	mes "[Bonubonu]";
-	mes "There is something about this";
-	mes "tree that makes me forget about";
-	mes "all the troubles in my life when I sit under it.";
+	mes "Existe alguma coisa sobre esta";
+	mes "árvore que me faz esquecer todos";
+	mes "os problemas na minha vida quando eu me sento ao seu abrigo.";
 	next;
 	emotion e_swt2;
 	mes "[Bonubonu]";
-	mes "Everything about this tree is";
-	mes "simply wonderful...";
-	mes "I can't really describe how";
-	mes "I feel when I look at it...";
-	mes "It just leaves me breathless...";
+	mes "Tudo sobre esta árvore é";
+	mes "simplesmente maravilhoso...";
+	mes "Não posso descrever como";
+	mes "me sinto quando eu olho para ela...";
+	mes "É só me deixa sem fôlego...";
 	next;
 	emotion e_swt2;
 	mes "[Bonubonu]";
-	mes "You should visit the tree and";
-	mes "spend some time there.";
-	mes "It is really a miraculous and gracious tree...";
+	mes "Você deve visitar a árvore e";
+	mes "passar algum tempo lá.";
+	mes "É realmente uma milagrosa e piedosa árvore...";
 	close;
 }
 	
-amatsu,274,178,7	script	Veterinarian#ama	735,{
+amatsu,274,178,7	script	Veterinário#ama	735,{
 	set jap_tree,4;
 	mes "[Sakura Seiichi]";
-	mes "Ah... I'm not a weirdo so";
-	mes "don't panic. I'm just an ordinary";
-	mes "veterinarian. My job is curing";
-	mes "sick animals.";
+	mes "Ah... Eu não sou um anormal por isso";
+	mes "não entre em pânico. Sou apenas um ordinário";
+	mes "veterinário. Meu trabalho é curar";
+	mes "animais doentes.";
 	mes " ";
 	next;
 	mes "[Sakura Seiichi]";
-	mes "By the way... Do you know?";
-	mes "The story about the cherry tree";
-	mes "on the hill...I guess you haven't heard about it...";
+	mes "A propósito... você sabe?";
+	mes "A história sobre a cerejeira";
+	mes "sobre a colina... Acho que você nunca ouviu falar sobre isso...";
 	next;
 	mes "[Sakura Seiichi]";
-	mes "That tree has a secret of";
-	mes "keeping its beauty and whiteness.";
-	mes "The secret is...";
-	mes "There are corpses buried under...";
-	mes "that tree...";
+	mes "Essa árvore tem um segredo para";
+	mes "manter a sua beleza e brancura.";
+	mes "O segredo é...";
+	mes "Há cadáveres enterrados sob...";
+	mes "aquela árvore...";
 	next;
-	if (select("How horrible!:You have got to be kidding.") == 1) {
+	if (select("Que Horrível!:Você deve estar brincando.") == 1) {
 		mes "[Sakura Seiichi]";
-		mes "Kuhuhu... They could be...";
-		mes "By the way, do you want";
-		mes "make a bet on it...?";
+		mes "Kuhuhu... Poderiam ser...";
+		mes "A propósito, você quer";
+		mes "fazer uma aposta sobre ele...?";
 		next;
 		emotion e_dots;
 		mes "[Sakura Seiichi]";
-		mes "If I..........";
+		mes "Se eu..........";
 		mes "............";
 		mes ".........";
 		next;
-		mes "^3355FFHis voice was getting lower";
-		mes "and lower as the wind blew.";
-		mes "Finally, I couldn't even hear his voice. I can't even recall what he was trying to tell me...^000000";
+		mes "^3355FFSua voz foi ficando mais baixos";
+		mes "e menor que o vento soprou.";
+		mes "Finalmente, não podia nem ouvir a voz dele. Eu não posso mesmo recordar o que ele estava tentando me dizer...^000000";
 		close;
 	}
 	mes "[Sakura Seiichi]";
-	mes "I can't help it if you think that way. But one day, you too could be buried underneath...";
+	mes "Eu não posso ajudá-lo se você pensar de que forma. Mas um dia, você também poderá ser enterrado debaixo...";
 	next;
 	emotion e_dots;
 	mes "[Sakura Seiichi]";
@@ -499,106 +499,87 @@ amatsu,274,178,7	script	Veterinarian#ama	735,{
 	mes "...............";
 	mes "...........";
 	next;
-	mes "^3355FFHis laugh was getting lower";
-	mes "and lower as the wind blew.";
-	mes "Finally, I couldn't even hear anything. I can't even recall what he was trying to tell me...^000000";
+	mes "^3355FFSua risada foi ficando menor";
+	mes "e menor que o vento soprou.";
+	mes "Finalmente, eu não podia nem ouvir nada. Eu não posso mesmo recordar o que ele estava tentando me dizer...^000000";
 	close;
 }
 	
-amatsu,262,197,1	script	Legendary Tree	111,{
+amatsu,262,197,1	script	Árvore Lengendária	111,{
 	if (jap_tree == 1) {
-		mes "^3355FFAs she mentioned, this tree";
-		mes "seems to be a famous place";
-		mes "for proposing lovers.";
-		mes "There were several carved symbols";
-		mes "of hearts and initials of lovers";
-		mes "on the bark.^000000";
+		mes "^3355FFComo ela mencionou, está árvore";
+		mes "parece ser um local famoso";
+		mes "para propor amantes.";
+		mes "Havia vários símbolos esculpidos de";
+		mes "corações e as iniciais dos";
+		mes "amantes sobre a casca.^000000";
 		next;
-		mes "^3355FFBesides proposals, people";
-		mes "gather under this tree when";
-		mes "they discuss important";
-		mes "matters. I could listen to";
-		mes "all kinds of stories";
-		mes "in this magnificent place.^000000";
+		mes "^3355FFAlém de propostas, pessoas se";
+		mes "reúnem sob esta árvore quando";
+		mes "se discutem assuntos";
+		mes "importantes. Eu podia ouvir todos";
+		mes "os tipos de histórias";
+		mes "este magnífico local.^000000";
 		close;
 	}
 	else if (jap_tree == 2) {
-		mes "^3355FFThe legendary play, 'White Dryad'.....";
-		mes "I never heard about that title but";
-		mes "it sounds familiar.";
-		mes "Nymph of cherry tree... What would";
-		mes "be her position in the play?^000000";
+		mes "^3355FFA lendária jogadora, 'White Dryad'.....";
+		mes "Eu nunca ouvi falar que o título";
+		mes "soa familiar.";
+		mes "Ninfa da Cerejeira... Qual seria";
+		mes "sua posição no jogo?^000000";
 		next;
 		if (Sex) {
-			mes "^3355FFI would like to find";
-			mes "a person who is talented";
-			mes "in acting and help her until";
-			mes "she performs the play. However,";
-			mes "it seems to be easier said than done.^000000";
+			mes "^3355FFGostaria de encontrar";
+			mes "uma pessoa que é talentosa";
+			mes "em atuação e ajudá-la";
+			mes "a realizar o jogo. Entretanto,";
+			mes "parece ser mais fácil de dizer do que fazer.^000000";
 			close;
 		}
-		mes "^3355FFI might have talent in";
-		mes "acting which hasn't been discovered yet. I thought, 'If I dress up, I should perform as the 'White Dryad...'^000000";
+		mes "^3355FFEu poderia ter talento na";
+		mes "ação que não foi descoberto ainda. Eu pensei, 'Se eu vestir-se, como eu poderia desempenhar o 'White Dryad...'^000000";
 		close;
 	}
 	else if (jap_tree == 3) {
-		mes "^3355FFUnlike other cherry trees,";
-		mes "this tree has a strong fragnance.";
-		mes "I just fell into a relaxed";
-		mes "mood. The fragnance eased";
-		mes "my burdens and I felt";
-		mes "very comfortable.^000000";
+		mes "^3355FFAo contrário de outras cerejeiras,";
+		mes "essa árvore tem uma forte fragrância.";
+		mes "Eu só caí em um clima descontraído.";
+		mes "A fragrância aliviou minha";
+		mes "carga e me senti";
+		mes "muito confortável.^000000";
 		next;
-		mes "^3355FFIt was just for a few moments";
-		mes "but I could forget the";
-		mes "burdens of life. I wish to";
-		mes "come back again and";
-		mes "sit under this tree...^000000";
+		mes "^3355FFFoi só por alguns momentos,";
+		mes "mas eu poderia esquecer";
+		mes "os encargos da vida. Quero voltar";
+		mes "e sentar sob";
+		mes "esta árvore...^000000";
 		close;
 	}
 	else if (jap_tree == 4) {
-		mes "^3355FFThis strong fragnance";
-		mes "is making me dizzy. Not like";
-		mes "other cherry trees, this tree's";
-		mes "shimmering white petals";
-		mes "felt strange.^000000";
+		mes "^3355FFEsta enorme fragrância";
+		mes "está me deixando tonto. Não como";
+		mes "outras cerejeiras, esta árvore";
+		mes "de pétalas brancas cintilantes";
+		mes "me senti estranho.^000000";
 		next;
-		mes "^3355FFIt feels as if my soul is";
-		mes "being drained if I stay here";
-		mes "longer. After a glimpse of";
-		mes "the cherry tree, I thought to";
-		mes "mayself, 'I must get out of here quickly.'^000000";
+		mes "^3355FFEla se sente como se a minha";
+		mes "alma está sendo drenada";
+		mes "se eu ficar aqui mais tempo. Depois de um pequeno clarão";
+		mes "da cerejeira, eu pensei que por";
+		mes "mim mesmo, 'Eu preciso sair daqui rapidamente.'^000000";
 		close;
 	}
-	mes "^3355FFThere was a cherry tree";
-	mes "on the hill. It doesn't look";
-	mes "like the other trees.";
-	mes "This tree seems to have";
-	mes "a long history...^000000";
+	mes "^3355FFHouve uma cerejeira sobre";
+	mes "a colina. Não parece";
+	mes "como as outras árvores";
+	mes "Esta árvore parece";
+	mes "ter uma longa história...^000000";
 	next;
-	mes "^3355FFAre there any people";
-	mes "who live here? I took";
-	mes "a look around and found";
-	mes "someone down the hill.";
-	mes "I better ask her about this tree.^000000";
+	mes "^3355FFExistem quaisquer pessoas";
+	mes "que vivem aqui? Eu levei";
+	mes "um olhar em volta e encontrei";
+	mes "alguem descendo a colina.";
+	mes "É melhor perguntar a ela sobre esta árvore.^000000";
 	close;
 }
-
-//============================================================ 
-// Old changelog
-//============================================================ 
-//= Amatsu Town NPCs : Revision 2 (Fox quest fix)
-//= Translated by Makenshi and dj
-//= Revisions and edits by Valaris and Darkchild
-//= 1.01 event_sushi -> ama_sushi fixed
-//=      and other fixes, thanks to Shinomori
-//= 1.02 Fixed & Spell Checked [massdriller]
-//= 1.03 Fixed 2 NPC names, slight optimization [Lupus]
-//= 1.04 Fixed a few typos [Nexon]
-//= 1.05 Changed all breaks to ends. [Skotlex]
-//= 1.06 The Captain now uses iRO dialog [MasterOfMuppets]
-//= 1.07 Implemented a missing NPC [MasterOfMuppets]
-//= 1.08 Removed Duplicates [Silent]
-//= 1.1 Split quests into quests/quests_amatsu.txt [Evera]
-//= 1.2	Fixed missing name [Evera]
-//============================================================
