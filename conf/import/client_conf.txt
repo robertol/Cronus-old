@@ -1,0 +1,138 @@
+//-----------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//--------------------------------------------------------------
+// Arquivo de Configuração de Client
+// Originalmente Traduzido por Peter Kieser <pfak@telus.net>
+// Revisado para um inglês culto por Ancyker
+// Traduzido para Português por I am Cold/Mara
+//--------------------------------------------------------------
+// Nota 1: O valor é configurado por (on/off, yes/no ou 1/0)
+// Nota 2: O valor é em porcentagem (100 é o mesmo que 100%)
+// Nota 3: O valor é em bit. Caso não haja descrição,
+//         assuma como valores (1: Pc, 2: Mob, 4: Pet, 8: Homun)
+//--------------------------------------------------------------
+
+
+// Defina aqui qual versão de client será aceita. Some todos os valores de clients:
+// Clients mais antigos que as versões aceitas, e versões não aceitas serão rejeitadas
+// na tela de login
+// 0x00001: Clients older than 2004-09-06aSakray (packet versions 5-9)
+// 0x00002: 2004-09-06aSakexe (versão 10)
+// 0x00004: 2004-09-20aSakexe (versão 11)
+// 0x00008: 2004-10-05aSakexe (versão 12)
+// 0x00010: 2004-10-25aSakexe (versão 13)
+// 0x00020: 2004-11-29aSakexe (versão 14)
+// 0x00040: 2005-01-10bSakexe (versão 15)
+// 0x00080: 2005-05-09aSakexe (versão 16)
+// 0x00100: 2005-06-28aSakexe (versão 17)
+// 0x00200: 2005-07-18aSakexe (versão 18)
+// 0x00400: 2005-07-19bSakexe (versão 19)
+// 0x00800: 2006-03-27aSakexe (versão 20)
+// 0x01000: 2007-01-08aSakexe (versão 21)
+// 0x02000: 2007-02-12aSakexe (versão 22)
+// 0x04000: 2008-09-10aSakexe (versão 23)
+// 0x08000: 2008-08-27aRagexeRE (versão 24)
+// 0x10000: 2008-09-10aRagexeRE (versão 25)
+// default value: 0xFFFFFF (todos os clients)
+packet_ver_flag: 0xFFFFFF
+
+// Delay mínimo entre mensagens whisper/global/grupo/clã (em ms)
+// Mensagem que ultrapassam o delay serão omitidas.
+min_chat_delay: 0
+
+// Número de tinturas e estilos no client
+min_hair_style: 0
+max_hair_style: 27
+min_hair_color: 0
+max_hair_color: 29
+min_cloth_color: 0 
+max_cloth_color: 533
+
+// Quando definido como yes, o campo de dano no envio de pacotes para os mapas da gde 
+// serão definidos como -1, fazendo-se impossível para GMs, Bots e Hexeds saber qual dano 
+// causado por ataques (Nota 1)
+hide_woe_damage: no
+
+// Número "hair style" que identifica os pets.
+// NOTA: O client usa o campo "hair style" nos pacotes de monstros para comunicá-los independentemente dos monstros.
+// Este valor é sempre maior que o max hair style disponível no client referido.
+// Valores que sabe-se que funcionam (todos de clients de 2005):
+// sakexes antigos: 20
+// sakexe 0614: 24
+// sakexe 0628 (e mais novos): 100
+pet_hair_style: 100
+
+// Área visível (quantos quadrados os jogadores podem ver itens/monstros/npc/etc)
+area_size: 15
+
+// Limite máximo de caminhada (até quantas células um jogador pode clicar com o mouse)
+// Padrão: 17
+max_walk_path: 32
+
+// Nível máximo permitido a ser enviado para a unidade de pacotes.
+// Use junto da configuração do aura_lv para enviar exatamente quando a aura deve ser exibida.
+// NOTA: Você deve também configurar o client se quer que isto funcione.
+// NOTA: O padrão é 99. Valores acima de 127 provavelmente serão intepretados incorretamente.
+// NOTA: Se você não sabe o que isto faz, não altere!!!
+max_lv: 99
+
+// Nível exigido para exibir a aura.
+// NOTA: Isto envia o max_lv para o client então exibir a aura.
+// NOTA: aura_lv não deve ser menor que o  max_lv.
+// Exemplo: Se max_lv for 99 e aura_lv for 150, personagens entre os níveis 99 e 149
+//          serão como se fosse nível 98, e somente personagens com nível
+//          150 ou mais serão definidos como 99 e então possuirão aura.
+aura_lv: 300
+
+// Tipos de unidades afetadas por max_lv e configuraçõs de aura. (Note 3)
+// Nota: Se um tipo de unidade que normalmente não mostra aura, é
+//       configurada, ela obterá a aurá quando alcançar o nível requerido.
+// Padrão: 0
+client_limit_unit_lv: 300
+
+// Os itens Smoking e Vestido de Noiva são exibidos quando usados? (Nota 1)
+wedding_modifydisplay: no
+
+// Salvar cores de roupa. (Isto irá reduzir a performance) (Nota 1)
+save_clothcolor: yes
+
+// Exibir cores para as roupas de casamento? (Nota 1)
+// Nota: Ambos, save_clothcolor e wedding_modifydisplay, têm que estar habilitados
+// para que esta opção funcione. Defina para yes se as paletas de cores não possuir as paletas
+// para roupas de Casamento (ou possui menos que de outras classes)
+wedding_ignorepalette: no
+
+// Exibir cores para as roupas de Natal? (Nota 1)
+// Defina para yes se as paletas de cores não possuir as paletas para roupas de Natal (ou possui menos que de outras classes)
+xmas_ignorepalette: no
+
+// Exibir cores para as roupas de Praia?
+// Defina para yes se as paletas de cores não possuir as paletas para roupas de Praia (ou possui menos que de outras classes)
+summer_ignorepalette: no
+
+// Defina como 1 caso seu client tenha problemas com langtype e não consegue exibir o motd.txt devidamente
+motd_type: 0
+
+// Exibir versão do Cronus quando o usuário conectar-se? (Nota 1)
+display_version: no
+
+// Quando afetado pelo efeito "Hallucination", enviar o efeito ao client? (Nota 1)
+// Nota: Defina como 'no' se o client sofre lag devido ao efeito "Wavy" na tela.
+display_hallucination: no
+
+// Defina como 1 se o seu client suporta status de habilidades com temporizador e você quer utilizá-lo (Nota 1)
+// Clients de 2009 ou mais novos suportam isso
+display_status_timers: yes
+
+// Randomizar o emoticon /dice em server-side, previnindo clients de escolher packets para o número desejado. (Nota 1)
+client_reshuffle_dice: yes
+
+// Organiza o armazém do jogador e do clã antes de enviar para o cliente. (Nota 1)
+// Servidores oficiais não organizam o armazém.
+// NOTA: Habilitando esta opção a performance do servidor será reduzida!
+client_sort_storage: no

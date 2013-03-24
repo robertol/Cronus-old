@@ -1,0 +1,126 @@
+//-------------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//--------------------------------------------------------------
+// Arquivo de Configuração do Map-Server
+//--------------------------------------------------------------
+// Traduzido para Português por mkbu95.
+//--------------------------------------------------------------
+
+// Nota: "Comentários" são os textos com duas barras "//" no início da linha
+// Qualquer texto que for comentado não será considerado pelo servidor, e serve
+// apenas como informação/referência.
+
+//--------------------------------------------------------------
+//                     Informações de Configuração
+//--------------------------------------------------------------
+// Conta de comunicação Interserver, registradas em account.txt (ou equivalente)
+// Lembre-se de Alterar a Configuração Padrão, ela não é Recomendada!
+userid: m1bRUIvKk890M3oyPAXx20
+passwd: MfHZg0z4l9WS3VoGy2Tu15
+
+// IP do Char-Server
+// O map-server conecta-se ao char-server usando este endereço de IP.
+// NOTA: é útil quando seu servidor está sendo rodado com um firewall ou
+// em uma máquina com múltiplas interfaces.
+//char_ip: 127.0.0.1
+
+// O map-server reconhece a interface com este endereço de IP.
+// NOTA: Isto permite rodar vários servidores em múltiplas interfaces
+// usando a mesma porta para cada servidor.
+//bind_ip: 127.0.0.1
+
+// Porta do Char-Server
+char_port: 6121
+
+// IP do Map-Server
+// O endereço de IP cujo o client irá usar para se conectar.
+// Defina isto para seu IP público do servidor.
+//map_ip: 127.0.0.1
+
+// Porta do Map-Server
+map_port: 5121
+
+//Formato da data e hora que será exibido antes de todas as mensagens.
+//Pode ter no máximo 20 caracteres.
+//Formatos comuns:
+// %I:%M:%S %p (hora:minuto:segundo 12 horas, formato AM/PM)
+// %H:%M:%S (hora:minuto:segundo, formato 24 horas)
+// %d/%b/%Y (dia/mês/ano)
+//Para informações detalhadas, consulte o manual do comando 'strftime()'.
+//timestamp_format: [%d/%b %H:%M]
+
+//A saída redirecionada contém sequências de escape (códigos de cores)
+stdout_with_ansisequence: no
+
+//Faz com que o servidor registre mensagens para um arquivo na pasta /log/
+//1: Registrar Mensagens de Alerta.
+//2: Registrar Mensagens de Error e Erro com SQL.
+//4: Registrar Mensagens de Depuração (Debug).
+//Exemplo: "console_msg_log: 7" registra as 3 opções acima.
+//Mensagens registradas por essa configuração independe da console_silent
+console_msg_log: 0
+
+//Torne a saída do servidor mais silenciosa omitindo certos tipos de mensagem:
+//1: Esconder mensagens de Informação
+//2: Esconder mensagens de Status
+//4: Esconder Registro
+//8: Esconder mensagens de Alerta
+//16: Esconder Erros e mensagens de Erro SQL.
+//32: Esconder Debugs
+//Exemplo: "console_silent: 7" esconde informações, status e alertas (1+2+4)
+console_silent: 0
+
+//Qual diretório onde todo o banco de dados deverá ser lido?
+db_path: db
+
+// Habilitar os comandos @guildspy e @partyspy?
+// Repare que habilitando esses comandos, reduzirá a performance no envio de pacotes.
+enable_spy: no
+
+// Ler dados de mapas dos GATs e RSWs em arquivos GRF ou pastas data
+// por meio do grf-files.txt ao invés do mapcache?
+use_grf: no
+
+// Comandos do Console
+// Permitir uso de comandos (on/off)
+// Isto previne o uso do >& log.file
+console: off
+
+// Tempo de autosalvamento do banco de dados
+// Todos os personagens serão salvos neste tempo em segundos (exemplo:
+// autosave_time de 60 segundos com 60 personagens online -> um personagem será salvo
+// por segundo)
+autosave_time: 300
+
+// Intervalo mínimo de salvamento do banco de dados (em ms)
+// Previne salvar personagens mais rápido do que esta taxa (previne o char-server 
+// de o salvo-carregamento for maior que o aumento número de personagens)
+minsave_time: 100
+
+// Além do autosave_time, os jogadores também serão salvos quando ocorrer
+// os seguintes casos (adicione quando necessário):
+// 1: Após uma negociação completa
+// 2: Após de realizar uma venda
+// 4: Após fechar o armazém/armazém do clã
+// 8: Após chocar/retornar um ovo de bicho de estimação
+// 16: Após enviar um e-mail com algum anexo
+// 32: Após colocar um item é leilão
+// 64: Após iniciar/deletar/completar uma quest
+// NOTA: Estas configurações diminuem a chance de cópia/perda de itens quando há
+// um crash no servidor server crash por causa doo aumento do lag do map/char-server.Se
+// o servidor raramente tem um crash, mas possui lag no interserver, você pode
+// desconsiderar essa função
+save_settings: 127
+
+// Arquivo de mensagem, quando um jogador entra no jogo, é exibida.
+motd_txt: conf/motd.txt
+
+// Quando @help ou @h é digitado e seu personagem é GM, isto é exibido para ajudar novos gms entender os comandos.
+help_txt: conf/help.txt
+help2_txt: conf/help2.txt
+charhelp_txt: conf/charhelp.txt
