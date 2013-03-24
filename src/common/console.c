@@ -50,7 +50,7 @@ void display_title(void) {
 	ShowMessage (""CL_XXBL"          ("CL_BOLD"              \\/                   \\/           \\/       "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_XXBL"          ("CL_BT_RED"                          Cronus                         "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_XXBL"          ("CL_BOLD"                  www.cronus-emulator.com                "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
-	ShowMessage (""CL_XXBL"          ("CL_BT_YELLOW"      Baseado no Hercules (c) 2005-2013 Projeto Cronus    "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
+	ShowMessage (""CL_XXBL"          ("CL_BT_YELLOW"     Baseado no Hercules (c) 2005-2013 Projeto Cronus    "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_XXBL"          ("CL_BOLD"                                                         "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_WTBL"          (=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)"CL_CLL""CL_NORMAL"\n\n");
 
