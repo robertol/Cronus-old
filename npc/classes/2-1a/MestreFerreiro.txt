@@ -1,5 +1,5 @@
 //===== Cronus Script ========================================
-//= Quest de Classe - Professor
+//= Quest de Classe - Mestre-Ferreiro
 //===== Por: =================================================
 //= Nana
 //= finished, optimized and tested by Lupus
@@ -8,8 +8,8 @@
 //===== Compatibilidade: =====================================
 //= Cronus SVN
 //===== Descrição: ===========================================
-//= Fazer um Mago T. se tornar um Professor
-//===== Comentários Adicional: ===============================
+//= Fazer um Mercador T. se tornar um Mestre-Ferreiro
+//===== Comentários Adicionais: ==============================
 //= 1.1 Made all into functions, additional checks, etc. [Lupus]
 //= 1.2 Made numbers into constants. [Vicious]
 //= 1.3 Now saves/restores all the quest skills [Lupus]
@@ -18,78 +18,74 @@
 //= 1.3c Removido show, setjob	[Yum]
 //============================================================
 
-valkyrie,53,47,3	script	Professor#Valkyrie	743,{
+valkyrie,44,50,5	script	Mestre-Ferreiro#Valkyrie	731,{
 	if (ADVJOB == 0 || Upper != 1) {
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
-			mes "[Professor]";
+			mes "[Mestre-Ferreiro]";
 			mes "Parabéns.";
 			mes "Honra aos guerreiros!";
 			close;
 		}
-		mes "[Professor]";
-		mes "Isso leva uma vida toda...";
-		mes "Literalmente uma vida toda";
-		mes "para acumular o conhecimento";
-		mes "necessário para se tornar";
-		mes "um Professor...";
+		mes "[Mestre-Ferreiro]";
+		mes "Ah...";
+		mes "O auge";
+		mes "da perfeição no trabalho.";
+		mes "Esse é o trabalho de";
+		mes "um Mestre-Ferreiro.";
 		next;
-		mes "[Professor]";
-		mes "Isso é esmagador.";
-		mes "Quanto mais você aprende,";
-		mes "mais você descobre";
-		mes "aquilo que ainda não sabe.";
-		mes "Não existe fim no";
-		mes "processo de aprendizagem...";
+		mes "[Mestre-Ferreiro]";
+		mes "Uma vez que você é o";
+		mes "melhor dos melhores,";
+		mes "você começa a forjar com";
+		mes "o objetivo de descobrir";
+		mes "novas e melhores maneiras de";
+		mes "elaboração...";
 		close;
 	}
-	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
-		mes "[Professor]";
-		mes "Rune-Midgard não";
-		mes "tem Professores suficientes";
-		mes "para ajudar o povo nessa nova era";
-		mes "de prosperidade. O";
-		mes "mundo precisa de você...";
+	else if (ADVJOB == Job_WhiteSmith && Class == Job_Merchant_High && JobLevel > 39) {
+		mes "[Mestre-Ferreiro]";
+		mes "O tempo chegou!";
+		mes "Nosso mundo precisa de bravos";
+		mes "e trabalhadores, aventureiros";
+		mes "como você...";
 		next;
-		mes "[Professor]";
-		mes "Você aceitará essa";
-		mes "incrível responsabilidade?";
-		mes "Você servirá Rune-Midgard";
-		mes "como um Professor?";
+		mes "[Mestre-Ferreiro]";
+		mes "Você gostaria de se";
+		mes "tornar um Mestre-Ferreiro?";
 		next;
 		if (select("Não.:Sim.") == 1) {
-			mes "[Professor]";
+			mes "[Mestre-Ferreiro]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se livre para voltar.";
 			mes "Honra aos guerreiros!";
 			close;
 		}
 		if (SkillPoint) {
-			mes "[Professor]";
+			mes "[Mestre-Ferreiro]";
 			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
 			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
 			close;
 		}
-		jobchange Job_Professor;
+		jobchange Job_WhiteSmith;
 		set ADVJOB,0;
-		mes "[Professor]";
+		mes "[Mestre-Ferreiro]";
 		mes "Parabéns!";
-		mes "Como Professor, eu espero";
-		mes "que você fará sua parte";
-		mes "ativa trazendo";
-		mes "a luz da sabedoria";
-		mes "onde há escuridão.";
+		mes "Como Mestre-Ferreiro,";
+		mes "Eu espero que você forge";
+		mes "um caminho para um futuro";
+		mes "brilhante em Rune-Midgard.";
 		close;
 	}
-	mes "[Professor]";
+	mes "[Mestre-Ferreiro]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
 	mes "o Salão da Honra.";
 	next;
-	mes "[Professor]";
+	mes "[Mestre-Ferreiro]";
 	mes "Por favor sinta-se";
 	mes "confortável enquanto";
 	mes "estiver aqui.";
-	mes "Honra aos guerreiros!";
+	mes "Honra aos guerreiros.";
 	close;
 }

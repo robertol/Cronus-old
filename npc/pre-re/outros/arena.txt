@@ -11,5 +11,5 @@
 //= Moved welcome_arena & bye_arena from main folder
 //============================================================
 
-izlude,128,226,0	warp	welcome_arena	1,1,arena_room,100,30
-arena_room,99,24,0	warp	bye_arena	2,2,izlude,128,220
+izlude,128,226,0	warp	bemvindo_arena	1,1,arena_room,100,30
+arena_room,99,24,0	warp	atemais_arena	2,2,izlude,128,220

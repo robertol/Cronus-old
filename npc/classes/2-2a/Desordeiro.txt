@@ -1,0 +1,96 @@
+//===== Cronus Script ========================================
+//= Quest de Classe - Desordeiro
+//===== Por: =================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Versão Atual: ========================================
+//= 1.3c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Fazer um Gatuno T. se tornar um Desordeiro
+//===== Changelog: ===========================================
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//= 1.3a Traduzido. [.zuport]
+//= 1.3b Revisado. [Heaven]
+//= 1.3c Removido show, setjob	[Yum]
+//============================================================
+
+valkyrie,53,58,3	script	Desordeiro#Valkyrie	747,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Desordeiro]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Desordeiro]";
+		mes "Heh...";
+		mes "É duro";
+		mes "se tornar um herói";
+		mes "sendo suspeito,";
+		mes "falso,";
+		mes "sorrateiro...";
+		next;
+		mes "[Desordeiro]";
+		mes "Mas quando a";
+		mes "coisa fica feia";
+		mes "meus amigos sabem que";
+		mes "podem contar comigo.";
+		mes "Eu preciso deles e";
+		mes "eles precisam de mim.";
+		close;
+	}
+	else if (ADVJOB == Job_Stalker && Class == Job_Thief_High && JobLevel > 39) {
+		mes "[Desordeiro]";
+		mes "Esse mundo precisa";
+		mes "de mais heróis que estão";
+		mes "dispostos a andar na linha";
+		mes "entre a ordem e a anarquia.";
+		next;
+		mes "[Desordeiro]";
+		mes "Você está pronto";
+		mes "para fazer parte";
+		mes "dos mais furtivos dos";
+		mes "guerreiros? Está pronto";
+		mes "para se tornar um Desordeiro?";
+		next;
+		if (select("Não.:Sim.") == 1) {
+			mes "[Desordeiro]";
+			mes "Quando estiver pronto,";
+			mes "sinta-se livre para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Desordeiro]";
+			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
+			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
+			close;
+		}
+		jobchange Job_Stalker;
+		set ADVJOB,0;
+		mes "[Desordeiro]";
+		mes "Parabéns!";
+		mes "Como Desordeiro, eu espero";
+		mes "que você esfaqueie as pessoas certas";
+		mes "nas costas. Banir os";
+		mes "cruéis usando seus próprios";
+		mes "métodos covardes!";
+		close;
+	}
+	mes "[Desordeiro]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Desordeiro]";
+	mes "Por favor sinta-se";
+	mes "confortável enquanto";
+	mes "estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}

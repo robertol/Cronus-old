@@ -1,0 +1,86 @@
+//===== Cronus Script ========================================
+//= Quest de Classe - Lorde
+//===== Por: =================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Versão Atual: ========================================
+//= 1.3c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Fazer um Espadachim T. se tornar um Lorde
+//===== Comentários Adicionais: ==============================
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//= 1.3a Traduzido. [BisoN]
+//= 1.3b Revisado. [Heaven]
+//= 1.3c Removido show, setjob	[Yum]
+//============================================================
+
+valkyrie,44,39,5	script	Lorde#Valkyrie	56,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Lorde]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Lorde]";
+		mes "Nós Lordes temos a";
+		mes "responsabilidade de...";
+		mes "Servir e proteger.";
+		next;
+		mes "[Lorde]";
+		mes "Temos que preservar o bem estar";
+		mes "de nossos companheiros.";
+		mes "Mesmo que para isso,";
+		mes "tenhamos que morrer.";
+		close;
+	}
+	else if (ADVJOB == Job_Lord_Knight && Class == Job_Swordman_High && JobLevel > 39) {
+		mes "[Lorde]";
+		mes "É chegada a hora!";
+		mes "O mundo ainda precisará de você.";
+		mes "Por favor, continue sua vida";
+		mes "de herói, com uma nova aparência.";
+		next;
+		mes "[Lorde]";
+		mes "Está pronto para se tornar um Lorde?";
+		next;
+		if (select("Não.:Sim.") == 1) {
+			mes "[Lorde]";
+			mes "Quando estiver pronto,";
+			mes "fique a vontade para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Lorde]";
+			mes "Você ainda tem pontos de habilidade. Por favor";
+			mes "use todos os pontos de habilidade restantes.";
+			close;
+		}
+		jobchange Job_Lord_Knight;
+		set ADVJOB,0;
+		mes "[Lorde]";
+		mes "Meus parabéns!";
+		mes "Como um Lorde,";
+		mes "Espero que você siga";
+		mes "na linha de frente nas batalhas,";
+		mes "e leve seus companheiros até a vitória!";
+		close;
+	}
+	mes "[Lorde]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Lorde]";
+	mes "Por favor fique";
+	mes "a vontade";
+	mes "enquanto estiver aqui.";
+	mes "Honra aos Guerreiros!";
+	close;
+}

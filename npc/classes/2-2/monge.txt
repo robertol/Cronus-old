@@ -1,0 +1,1566 @@
+//===== Cronus Script ======================================== 
+//= Script Monge
+//===== Por: =================================================
+//= Dino9021, Edited
+//===== Versão Atual: ======================================== 
+//= 2.3
+//===== Descrição: =========================================== 
+//= Muda a classe para Monge
+//===== Changelog: =========================================== 
+//= Traduzido [Olivete]
+//= 2.1 Corrigido item invalido ao deleta o item [Mehah]
+//= Adaptado Classname Na Função F_BlockHigh [Mehah]
+//= 2.2 Traduzido linhas que faltavam, grato a Olivete [Kamper]
+//= 2.2a Removido show, additem	[Yum]
+//= 2.3 Script reestruturado e algumas falas corrigidas [Rafael]
+//============================================================
+
+prt_monk,55,249,4	script	Tohobu Monge Guardião	139,0,5,{
+	mes "[Tohobu]";
+	mes "Quem é você?!";
+	mes "Como ousa entrar no salão sagrado de treinamento sem minha permissão?";
+	next;
+	mes "[Tohobu]";
+	mes "Saia agora!";
+	close;
+}
+
+prt_monk,59,247,4	script	Mestre#1	120,{
+	if (Upper == 1)
+	{
+		mes "[Tohobu]";
+		mes "Hmm? O que te traz aqui?";
+		mes "Se você deseja entrar nesta área sagrada,";
+		mes "deve me informar seu nome e seu nível de classe!";
+		next;
+		mes "[Tohobu]";
+		mes "....ãnh?";
+		mes "Oh, ^FF0000Deus^000000! Me desculpa, eu confundi você com outra pessoa que conheço.";
+		next;
+		mes "[Tohobu]";
+		mes ".......";
+		mes "........";
+		next;
+		mes "[Tohobu]";
+		mes "É estranho... eu nunca confundo as pessoas... oh, bem... tenha um bom dia.";
+		close;
+	}
+	if (MONK_Q == 2)
+	{
+		mes "[Tohobu]";
+		mes "Olá! Você deveria ir falar com o Ancião Wuhai. Ele irá te guiar.";
+		mes "Ele está no Salão principal do mosteiro, que fica a sudeste daqui.";
+		close;
+	}
+	if (MONK_Q > 2)
+	{
+		mes "[Tohobu]";
+		mes "Ei! Olá! Como está indo seu treinamento? Você não irá desistir não é?";
+		close;
+	}
+	if (BaseJob == Job_Monk)
+	{
+		mes "[Tohobu]";
+		mes "Sua presença aqui no ^00FF00Moteiro St. Capitolina^000000 não é desejada.";
+		mes "Mas já que você está aqui, apenas não atrapalhe os Monges que estão em treino, mesmo que você seja um monge!";
+		close;
+	}
+	if (MONK_Q == 0)
+	{
+		mes "[Tohobu]";
+		mes "Hmmm...? O que você quer de mim?";
+		mes "Antes de ir para área de treino, você terá que me dizer seu Nome, Nível base e seu nível de classe.";
+		next;
+		mes "[Tohobu]";
+		mes "Vamos lá! Qual seu nome?";
+		next;
+		if (select ("Ignore ele.", "Diga o nome.") == 1)
+		{
+			mes "[Tohobu]";
+			mes "Você é muito mal educado, saia daqui!";
+			warp "prt_fild03",357,256;
+			close;
+		}
+		mes "[Tohobu]";
+		mes "Então seu nome é " + strcharinfo(0) + " correto?";
+		mes "...Eu acredito que seja pronunciado dessa maneira...";
+		mes "Vejamos... Seu nível de classe é " + JobLevel;
+		next;
+		mes "[Tohobu]";
+		mes "Tudo bem, mas por que você veio até aqui " + strcharinfo(0) + " ?";
+		next;
+		select ("Eu gosto de ver os monges treinando.", "Eu quero ser um monge.", "Eu gostaria de descansar aqui.");
+	}
+	else
+	{
+		mes "[Tohobu]";
+		mes "Bem...Você mudou de idéia depois de olhar em volta?";
+		next;
+		select ("Não.", "Eu quero ser um Monge.", "Eu preciso descansar mais.");
+	}
+
+	switch (@menu)
+	{
+	case 1:
+		mes "[Tohobu]";
+		mes "Ah, entendo.";
+		mes "Tudo bem, eu espero que você possa aprender algo com nosso treino,";
+		mes "talvez isso ajude você a se tornar um honorável Monge.";
+		set MONK_Q, 1;
+		close;
+
+	case 2:
+		if (BaseJob != Job_Acolyte)
+		{
+			mes "[Tohobu]";
+			mes "Oh! Você está brincando?";
+			close;
+		}
+		if (JobLevel >= 40)
+		{
+			if (SkillPoint == 0)
+			{
+				mes "[Tohobu]";
+				mes "Bem... Me parece que você tem as habilidades para se tornar um Monge.";
+				mes "Muito bem, vamos ver... Vá falar com Wuhai, O ancião, ele será seu guia.";
+				// used to determine what item to get at the end
+				if (JobLevel == 50) set JBLVL, 50;
+				set MONK_Q, 2;
+				close;
+			}
+			mes "[Tohobu]";
+			mes "Bem... Me parece que você tem as habilidades para se tornar um Monge,";
+			mes "mas eu acredito que ainda existam habilidades que você não aprendu ainda.";
+			mes "Volte quando tiver usado todos seus pontos de habilidade.";
+			close;
+		}
+		mes "[Tohobu]";
+		mes "Seu nível de classe não é alto o suficiente para virar um Monge.";
+		mes "Volte quando seu nível de classe for pelo menos 40.";
+		next;
+		mes "[Tohobu]";
+		mes "Não tenha pressa, há muito o que se aprender nesse mundo, então volte quando tiver os requistos necessários...";
+		close;
+
+	case 3:
+		mes "[Tohobu]";
+		mes "TUdo bem, você me parece cansado das suas viagens...";
+		mes "Talvez seja melhor descansar um pouco.";
+		mes "Você pode ficar aqui no mosteiro e descansar um pouco antes de sair!";
+		next;
+		mes "[Tohobu]";
+		mes "Nosso estilo de vida é meditar para ganhar mais força.";
+		mes "Espero que olhar nossos treinos te traga alguma paz interior.";
+		close;
+	}
+}
+
+monk_in,99,58,4	script	Ancião Wuhai	60,{
+	function displayItens;
+
+	if (MONK_Q == 2)
+	{
+		mes "[Ancião Wuhai]";
+		mes "Hmmm... Você é o jovem que quer se tornar Monge, correto?";
+		next;
+		if (select ("Sim.", "Não.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Hmmm...? Você não quer?";
+			mes "Devo estar ficando velho, eu achei que você queria.";
+			mes "Muito bem então, melhor você ir embora meu jovem.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Oh! Os jovens de hoje continuam a se lembrar dos Monges...";
+		mes "Bem-vindo, minha criança!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Então você quer ser um Monge! Estou feliz em escutar isso!";
+		mes "Mas primeiro, antes que você se torne um, tem algumas coisas que você precisa saber.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Como Monges, nós temos um treinamento árduo enquanto protegemos a paz do mundo.";
+		next;
+		mes "[Ancião Wuhai]";	
+		mes "A força só é usada para ajudar os mais fracos que precisam, e para protegê-los dos perigos.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Por último, mas não menos importante, nós devemos controlar nossas emoções.";
+		mes "O principal, nunca se sinta orgulhoso demais, ou ficaremos cegos por nosso orgulho e sucesso.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Isso pode ser difícil e até mesmo doloroso, enquanto estamos nesse processo de evolução espiritual";
+		mes "Nós iremos testar os seus limites, veremos até onde você pode suportar.";
+		mes "Você não pode ser um Monge se você não pode aguentar isso.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Vamos lá começar os testes para ver realmente se você poderá se tornar um Monge.";
+		next;
+		if (JBLVL == 50)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Oh, Seu nível de classe é " + JobLevel +" .";
+			mes "Isso prova suas habilidades.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Muito bem feito!";
+			mes "Eu acredito que Deus concorda comigo.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Nessa caso... Existe um Monge de nome Wutao que quer ver você.";
+			mes "Ele está no Cemitério Antigo a norte daqui.";
+			set MONK_Q, 4;
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Primeiramente existe alguns testes que você precisará completar para se tornar um de nós.";
+		next;
+		set MONK_Q, 3;
+		set JOB_MONK_C,rand(1,6);
+		displayItens();
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Para testar sua força interior você precisa coletar esses itens.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Volte aqui quando você tiver todos eles.";
+		mes "Agora vá e que a Benção de Deus esteja contigo.";
+		close;
+	}
+	if (MONK_Q == 3)
+	{
+		switch (JOB_MONK_C)
+		{
+		case 1:
+			setarray .@itens, 913,10, 948,5, 7033,20; //Items: Dente_de_Morcego, Pata_de_Urso, Esporo_Venenoso,
+			break;
+
+		case 2:
+			setarray .@itens, 1027,5, 1025,20, 940,10; //Items: Espinho_de_Porco-Espinho, Teia_de_Aranha, Perna_de_Gafanhoto,
+			break;
+
+		case 3:
+			setarray .@itens, 905,30, 909,5, 955,10; //Items: Caule, Jellopy, Pele_de_Verme,
+			break;
+
+		case 4:
+			setarray .@itens, 938,5, 1055,10, 511,20; //Items: Muco_Pegajoso, Pele_de_Minhoca, Erva_Verde,
+			break;
+
+		case 5:
+			setarray .@itens, 942,20, 1002,5, 510,3; //Items: Cauda_de_Yoyo, Minério_de_Ferro, Erva_Azul,
+			break;
+
+		case 6:
+			setarray .@itens, 943,5, 935,20, 912,5; //Items: Casca_Rija, Casca, Zargônio,
+			break;
+		}
+		// Verifica se tem todos os itens
+		for (set .@i, 0; .@itens[.@i]; set .@i, .@i + 2)
+			if (countitem (.@itens[.@i]) < .@itens[.@i+1])
+			{
+				mes "[Ancião Wuhai]";
+				mes "Hmm... não está pronto ainda?";
+				mes "Deixe-me dizer o que você deverá trazer novamente.";
+				mes "Preste atenção!";
+				next;
+				displayItens();
+				close;
+			}
+		// Remove os itens
+		for (set .@i, 0; .@itens[.@i]; set .@i, .@i + 2)
+			delitem .@itens[.@i], .@itens[.@i+1];
+		mes "[Ancião Wuhai]";
+		mes "Oh! Você trouxe tudo o que pedi!";
+		mes "Well done!";
+		mes "Você será um formidável Monge!";
+		set MONK_Q, 4;
+		set JOB_MONK_C, 0;
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Existe um Monge de nome Wutao; ele deseja falar contigo.";
+		mes "Ele está no Cemitério Antigo, a norte daqui.";
+		close;
+	}
+	if (MONK_Q == 4)
+	{
+		mes "[Ancião Wuhai]";
+		mes "Agora vejamos como mudar de classe.";
+		mes "Encontre Mestre Wuatao.";
+		mes "Ele está no Cemitério Antigo a norte daqui.";
+		close;
+	}
+	if (MONK_Q >= 5 && MONK_Q < 10)
+	{
+		mes "[Ancião Wuhai]";
+		mes "Hmm? Você continua fazendo o teste...?";
+		mes "Tente dar o seu melhor então!";
+		close;
+	}
+	if (MONK_Q >= 10)
+	{
+		if (countitem (506) > 0)
+		{
+			mes "[Ancião Wuhai]";
+			mes "O que? Você não bebeu a Magic Potion ainda?";
+			mes "Então se apresse para terminar a poção Green-ish!";
+			mes "De outra forma você nunca irá alcançar a energia espiritual de um Monge!";
+			set MONK_Q, 11;
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Nós completamos todos os testes... Seu sangue, sua mente e sua alma...";
+		mes "Estão preparadas para você se tornar um Monge.";
+		mes "Até mesmo sua energia espiritual aumentou depois de beber a Magic Potion.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Bom... você deve agora estar sob um juramento.";
+		mes "E então sua classe será alterada.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Você irá dedicar toda sua vida para servir a Deus?";
+		next;
+		if (select ("Sim.", "Não.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "......O Que?......";
+			mes "Então você não está pronto para ser um Monge?";
+			mes "Talvez você queira andar um pouco mais pelo mundo,e se tornar mais preparado?";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Pense nisso com cuidado e volte aqui!";
+			mes "Eu não quero fazer de você um Monge mau.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Você irá usar seus poderes em benefício próprio?";
+		next;
+		if (select ("Sim.", "Não.") == 1)
+		{
+			mes "[Ancião Wuhai]";
+			mes "...NÃO NÃO NÃO NÃO NÃO!! Nosso treino não é para benefício próprio!";
+			mes "Como pode os que protegem o mundo se preocuparem mais com seu benefício próprio do que com os outros?!";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Vá e pense sobre a verdadeira causa de um Monge.";
+			mes "Pensamentos como este irão fazer você ter um poder para o mau apenas!";
+			mes "A corrupção de sua alma irá te guiar para a perda de suas habilidades.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Quando estiver julgando os que foram contra a vontade de Deus,";
+		mes "você irá pensar duas vezes antes de puní-los?";
+		next;
+		if (select ("Não.", "Sim.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "O que você pensa que os Monges são?";
+			mes "Não importa o que eles são, pessoas que fazem mal aos fracos, são como lixo. Eles não têm direito de viver nesse mundo.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Talvez você devesse procurar algumas dessas pessoas que fazem mal ao nosso mundo.";
+			mes "Volte aqui quando você tiver mais senso de justiça.";
+			mes "Então você irá saber o que estou falando.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Você irá ajudar a erradicar todos que se opõem a Deus,";
+		mes "e sacrificar sua vida para o bem dos outros?";
+		next;
+		if (select ("Sim.", "Não.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Oh...nãoooooooo....";
+			mes "Se se sacrificar pode ser bom para todos os outros e mais inimigos seriam dizimados, então isso é uma ação que conta muito!!!.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Sabe o que sacrifício significa? Volte aqui quando você descobrir.";
+			mes "Ah... Sacrifício é tão simples, porém, é muito difícil!";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Você irá manter os monstros te batendo para ajudar outros em batalha?";
+		next;
+		if (select ("Sim.", "Não.") == 1)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Isso não está certo! Treinar com os monstros não serve para benefício de todos!";
+			mes "Pelo contrário, isso é um ato egoísta!";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Mesmo quando você aprender a habilidade 'Steel Body'";
+			mes "Ela deverá ser somente usada em emergência ou quando você encontrar um adversário mais forte.";
+			mes "Mas nunca use em uma situação como essa!";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Pode parecer que você está ajudando, mas na verdade isso é um ato de injustiça!";
+			mes "Qual o verdadeiro principio de ser um Monge?";
+			mes "Volte quando você tiver pensando sobre isso.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Em vilas ou nos campos você repetirá as mesmas conversas?";
+		next;
+		if (select ("Sim.", "Não.") == 1)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Não! Se você faz isso, um Monge não deve fazer isso pois atrapalha as outras pessoas, e assim ninguem irá prestar atencão em você.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "É como se você estivesse jogando as palavras de Deus fora.";
+			mes "Pense em seu comportamento. Isto é certo ou errado?";
+			next;
+			mes "Eu gostaria de testa-lo novamente, mas agora é melhor que você vá e reflita sobre seus pensamentos.";
+			mes "Pense bem antes de voltar aqui!";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Você se sente como um mensageiro de Deus e está pronto para morrer por ele?";
+		next;
+		if (select ("Sim.", "Não.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "Você não pode ser um Monge com esse tipo de sentimento!";
+			mes "Como dizem, a morte é temporária se tivermos que dar nossas vidas para proteger a paz do mundo, e isso sim é uma grande ação.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Aqueles que se opõe a Deus irão ser condenados e os que acreditam nele, serão salvos!";
+			mes "O que vida e morte para você?";
+			mes "Pense nisso.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Finalmente, você precisa confirmar o juramento que você já fez. Você jura por tudo o que disse antes?";
+		next;
+		if (select ("Eu juro.", "Eu recuso.") == 2)
+		{
+			mes "[Ancião Wuhai]";
+			mes "......";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Me parece que... você não teve treino suficiente...";
+			mes "Não posso permitir que você se torne um Monge.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "É melhor que você treine mais.";
+			mes "Volte quando estiver pronto.";
+			next;
+			mes "[Ancião Wuhai]";
+			mes "Que Deus esteja contigo.";
+			close;
+		}
+		mes "[Ancião Wuhai]";
+		mes "Muito bem então... Nós temos completado os juramentos.";
+		mes "Venha mais perto, agora você é " + (Sex ? "meu irmão" : "minha irmã") + "!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Suas promessas foram transmitidas a todos os outros Monges através de nosso corações.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Agora, que comece a cerimônia!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Eu irei fazer uma acupuntura em todos seus 365 pontos e irei abrir suas 1129 artérias e veias";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Ahhhhhhhhh......";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Wuuu... Huuuuuu";
+		next;
+		mes "- Ele respira bem fundo -";
+		next;
+		mes "- A Acupuntra começa... -";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Ahhhh--- Dadadadadada!!!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "DaBaDaBaDadadadaKaBonTatatata!!!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Ahhhh--- Dadadadadada!!!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "WaLaChuOhhhhhhh!!!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Wuuu... Huuuuuu";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "WowHoooo... Está terminado! Agora você é um Monge!";
+		setoption 0;
+		callfunc "Job_Change",Job_Monk;
+		next;
+		mes "[Ancião Wuhai]";
+		mes "(Cough!) (Cough!)";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Estou muito velho...? Me sinto tão cansado... (-soluço-)";
+		mes "Antes eu conseguia escalar montanhas após uma sessão dessas.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Muito bem... Você agora é um Monge...";
+		mes "Bem-vindo a nossa irmandade.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "E nunca esqueça sua promessa.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Matenha isso em sua mente e treine bastante.";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Agora vá...";
+		mes "Aqui está um presente para você.";
+		if (JBLVL < 50) getitem 1801, 1;//Items: Waghnakh,
+		if (JBLVL == 50) getitem 1804, 1;//Items: Knuckle_Duster_,
+		callfunc "F_ClearJobVar";
+		close;
+	}
+	if (BaseJob == Job_Monk)
+	{
+		mes "[Ancião Wuhai]";
+		mes "Talvez você encontre Deus na Mãe-Natureza!";
+		mes "Bem-vindo jovem! O que posso fazer por você?";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Está tudo bem?";
+		mes "Como está seu treino?";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Se você não tem um corpo forte, você não conseguirá ajudar as pessoas que precisam.";
+		mes "Se sua fé está fraca, o mal irá te levar para um caminho de sombras!";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Nunca esqueça disso! Você é o único que protege os fracos e paz do mundo!";
+		mes "Você deve sempre estar atento para todo mal a sua volta. Não deixe o mal te afastar do caminho da luz!";
+		close;
+	}
+	if (BaseJob == Job_Acolyte)
+	{
+		mes "[Ancião Wuhai]";
+		mes "Que você encontre Deus em seus caminhos!";
+		mes "Bem-vindo meu jovem! O que posso fazer por você?";
+		next;
+		mes "[Ancião Wuhai]";
+		mes "Oh! Você é um Noviço....";
+		mes "Se você quer rezar, va para a Santuário de Prontera!";
+		mes "Aqui é a área de treino dos Monges, e não um lugar para você rezar.";
+		mes "Vá e encontre outros lugares para ficar já que você não pretende ser um Monge.";
+		close;
+	}
+	mes "[Ancião Wuhai]";
+	mes "Talvez você encontre seu Deus na Mãe Natureza!!";
+	mes "Bem-vindo viajante, por que você está aqui?";
+	close;
+
+	function	displayItens	{
+		switch (JOB_MONK_C)
+		{
+		case 1:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "10 Dentes de Morcego";
+			mes "5 Patas de Urso";
+			mes "20 Esporos Venenosos";
+			break;
+
+		case 2:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "5 Espinhos de Porco-Espinho";
+			mes "20 Teias de Aranha";
+			mes "10 Pernas de Gafanhoto";
+			break;
+
+		case 3:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "30 Caules";
+			mes "5 Jellopies";
+			mes "10 Peles de Verme";
+			break;
+
+		case 4:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "5 Mucos Pegajoso";
+			mes "10 Peles de Minhoca";
+			mes "20 Ervas Verde";
+			break;
+
+		case 5:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "20 Caudas de Yoyo";
+			mes "5 Minérios de Ferro";
+			mes "3 Ervas Azuis";
+			break;
+
+		case 6:
+			mes "[Ancião Wuhai]";
+			mes "Por favor traga-me isso:";
+			mes "5 Cascas Rija";
+			mes "20 Cascas";
+			mes "5 Zargônios";
+			break;
+		}
+	}
+}
+
+prt_monk,251,255,4	script	Wutao	79,{
+	if (MONK_Q < 4)
+	{
+		mes "[Wutao]";
+		mes "Nós somos Monges!";
+		mes "Nós temos poderes ilimitados!";
+		mes "Nós temos sabedoria ilimitada!";
+		mes "Nós usamos nosso poder e sabedoria para proteger a paz mundial!";
+		next;
+		mes "[Wutao]";
+		mes "Então...";
+		mes "Você é meu inimigo?";
+		mes "Você está bloqueando meu caminho!!!!";
+		next;
+		mes "[Wutao]";
+		mes "Se alguém me bloqueia... eu irei lutar!!";
+		mes "TaAhhhhhh!!!";
+		next;
+		mes "[Wutao]";
+		mes "HuHaaaaaaaa!!!";
+		next;
+		mes "[Wutao]";
+		mes "Se você não é meu inimigo, então saia do meu caminho.";
+		close;
+	}
+	if (MONK_Q == 6)
+	{
+		mes "[Wutao]";
+		mes "O que? Você esqueceu quem você pretende ser?";
+		next;
+		mes "[Wutao]";
+		mes "......Você é tão.......";
+		next;
+		mes "[Wutao]";
+		mes "...Você está testando minha paciência?";
+		next;
+		mes "[Wutao]";
+		mes "...Bem, vo te dizer mais uma vez...";
+		mes "Vá e procure por ^000080Fuhai^000000 e ele te dirá o que fazer.";
+		close;
+	}
+	if (MONK_Q > 6)
+	{
+		mes "[Wutao]";
+		mes "Que Deus esteja contigo.";
+		close;
+	}
+	if (MONK_Q == 4)
+	{
+		mes "[Wutao]";
+		mes "O que posso fazer por você?";
+		mes "Você quer falar sobre Deus?";
+		next;
+		mes "[Wutao]";
+		mes "Oh! você está fazendo o treinamento para virar Monge!";
+		mes "Seu espírito, realmente se parece com um espírito de um Monge.";
+		next;
+		mes "[Wutao]";
+		mes "Me parece que suas artérias e veias estão ficando mais fortes.";
+		mes "Você é um dos aprenderam com o Ancião Wuhai, não é?";
+		mes "Muito bem...";
+		next;
+		mes "[Wutao]";
+		mes "Deixe-me informar você sobre o espírito dos Monges e sobre as simples regras que um Monge segue.";
+		mes "Depois, eu irei ajudar você a ficar mais forte mentamente e fisicamente, para te preparar para o próximo teste.";
+		next;
+		mes "[Wutao]";
+		mes "Agora, lembre-se exatamente o que disser e repita para mim.";
+		mes "Limpe sua mente... Você está pronto?";
+		next;
+		if (select ("Sim.", "Não.") == 2)
+		{
+			mes "[Wutao]";
+			mes "Então volte mais tarde!";
+			close;
+		}
+		mes "[Wutao]";
+		mes "Certo, vamos começar.";
+		next;
+	}
+	if (MONK_Q == 5)
+	{
+		mes "[Wutao]";
+		mes "Muito bem... lá vamos nós novamente.";
+		next;
+	}
+	if (!@JOB_MONK_C2)
+		set @JOB_MONK_C2, rand(1,3);
+	switch (@JOB_MONK_C2)
+	{
+	case 1:
+		setarray .@monk_str$,
+			"Ajudado pelo dragão e pela Fênix,",//0
+			"Ele voa para Ocidente.",//1
+			"Mas a Fênix deve cair em terra.",//2
+			"E o dragão deve voar pelo céu;",//3
+			"Haverá sucessos e falhas,",//4
+			"Porque esta é a lei eterna.",//5
+			"Nós agimos de acordo com as ocasiões,",//6
+			"Deixe-nos ir para as Nove Fontes Douradas.'";//7
+		setarray .@answers,
+			// <número da opção correta, de 1 a n>,<pontos>, <index da pergunta 1>...<index da pergunta n>
+			7,1, 3,2,5,6,4,7,0,1,
+			5,1, 2,6,0,4,1,3,7,5,
+			2,1, 4,2,3,1,5,7,6,0,
+			1,1, 3,0,2,1,5,4,7,6,
+			8,1, 5,3,1,0,2,6,7,4,
+			3,1, 0,1,5,2,4,3,7,6,
+			8,2, 1,0,7,4,5,2,3,6,
+			4,1, 0,6,2,7,3,1,4,5;
+		break;
+
+	case 2:
+		setarray .@monk_str$,
+			"Ele tentou melhoar sua aparência,",//0
+			"Seu corpo era cheio de benção.",//1
+			"Suas palavras soaram como cachoeira,",//2
+			"Ele leu um livro e sabia de tudo isso.",//3
+			"As glórias de Shu em sua perfeita harmônia,",//4
+			"Seu conhecimento envolve o universo.",//5
+			"Ou texto ou nota de um estudante",//6
+			"Uma vez lido, sua memória o mantém.";//7
+		setarray .@answers,
+			// <número da opção correta, de 1 a n>,<pontos>, <index da pergunta 1>...<index da pergunta n>
+			4,1, 1,3,2,0,4,7,5,6,
+			8,1, 5,0,2,3,6,7,4,1,
+			1,1, 2,5,3,4,1,6,0,7,
+			6,1, 1,7,4,6,0,3,5,2,
+			8,1, 7,6,3,2,1,0,5,4,
+			5,1, 6,3,4,2,5,0,1,7,
+			2,2, 1,6,2,7,0,3,4,5,
+			8,1, 0,1,4,6,5,3,2,7;
+		break;
+
+	case 3:
+		setarray .@monk_str$,
+			"Você vê o Nobre? Então siga o caminho de Jieliang,",//0
+			"Observe como as pessoas adoram a Guan Yu,",//1
+			"Cada um excendo seus limites para exalta-lo,",//2
+			"Ele, um dos três irmaos dos santuário do Jardim dos Pêssegos,",//3
+			"Quem ganhou os sacrifícios, como Emperador e Rei.",//4
+			"Incompáraveis, suas auras espalham-se por todo mundo;",//5
+			"Eles resplandecem como grandes luzes no firmamento;",//6
+			"Templos de nosso Lorde Lord Guan Yu não falta em vila alguma,",//7
+			"Suas vívidas árvores são lar para pássaros durante o pôr do sol.";//8
+		setarray .@answers,
+			// <número da opção correta, de 1 a n>,<pontos>, <index da pergunta 1>...<index da pergunta n>
+			2,1, 1,0,7,2,8,5,6,4,3,
+			7,1, 2,7,0,5,8,4,1,3,6,
+			3,1, 6,0,2,1,4,3,5,7,8,
+			5,1, 0,2,5,7,3,8,6,4,1,
+			4,1, 6,7,8,4,1,0,5,3,2,
+			6,1, 3,8,1,7,0,5,2,6,4,
+			3,1, 0,8,6,1,2,3,4,5,7,
+			1,1, 7,5,8,6,4,3,1,2,0,
+			9,1, 3,2,1,4,5,0,6,7,8;
+		break;
+	}
+	mes "[Wutao]";
+	mes "Escute com atenção!";
+	for (set .@i, 0; .@monk_str$[.@i] != ""; set .@i, .@i + 1)
+	{
+		next;
+		mes "[Wutao]";
+		mes .@monk_str$[.@i];
+	}
+	next;
+	mes "[Wutao]";
+	mes "Agora " + strcharinfo(0) + ", é sua vez.";
+	next;
+	set .@n, getarraysize(.@monk_str$);
+	for (set .@i, 0; .@answers[.@i]; set .@i, .@i + (.@n + 2))
+	{
+		set .@menu$, "";
+		for (set .@idx, .@i + 2; .@idx < .@i + (.@n + 2); set .@idx, .@idx + 1)
+			set .@menu$, .@menu$ + .@monk_str$[.@answers[.@idx]] + ":";
+		if (select(.@menu$) == .@answers[.@i])
+			set .@mnk_score, .@mnk_score + .@answers[.@i+1];
+	}
+	if(.@mnk_score < 9)
+	{
+		mes "[" + strcharinfo(0) + "]";
+		mes "Well...";
+		next;
+		mes "[Wutao]";
+		mes "Hmmm... ";
+		next;
+		mes "[Wutao]";
+		mes "Hummm...";	
+		next;
+		mes "[Wutao]";
+		mes "Isso não está correto! Você não memorizou nada!";
+		next;
+		mes "[Wutao]";
+		mes "Você não acredita em si mesmo? Você realmente tem a habilidade pra ser um Monge?";
+		mes "...Essa foi realmente....";
+		next;
+		mes "[Wutao]";
+		mes "Bem... Sem problemas, deseja tentar novamente?";
+		next;
+		mes "[Wutao]";	
+		mes "É claro que sim! Mesmo porque, se você não passar nesse teste, nao poderá fazer o próximo.";
+		set MONK_Q, 5;
+		close;
+	}
+	next;
+	mes "[Wutao]";
+	mes "Hmmm...";
+	next;
+	mes "[Wutao]";
+	mes "...Muito bem!! Perfeito!!";
+	next;
+	mes "[Wutao]";
+	mes "Mas é claro, não fique tão feliz ainda... Ainda há muito antes que você se torne um Monge.";
+	next;
+	mes "[Wutao]";
+	mes "DaAhaaaa...";
+	next;
+	mes "[Wutao]";
+	mes "ShuKeeee.....";
+	next;
+	mes "[Wutao]";
+	mes "SouKouuuuu....";
+	next;
+	mes "[Wutao]";
+	mes "PaYennnn....";
+	next;
+	mes "[Wutao]";
+	mes "Como eu prometi, agora você tem o poder mental de um Monge.";
+	next;
+	mes "[Wutao]";
+	mes "Agora vá! Procure ^000080Fuhai^000000 para outras instruções.";
+	set MONK_Q, 6;
+	close;
+}
+
+prt_monk,57,179,4	script	Fuhai	110,{
+	if (@Choice_mission)
+	{
+		mes "[Fuhai]";
+		mes "Você está pronto?";
+		mes "Na verdade, você não precisa se preparar para nada se você acreditar em si mesmo.";
+		next;
+		mes "[Fuhai]";
+		mes "Se você escolheu esse teste, boa sorte, será um teste de paciência.";
+		next;
+		mes "[Fuhai]";
+		mes "Agora vá dentro da entrada localizada no centro da área de treinamento.";
+		next;
+		mes "[Fuhai]";
+		if (@Choice_mission == 1)
+			mes "Você irá passar no teste se conseguir cogumelos suficientes.";
+		else
+			mes "Você irá passar no teste se conseguir dar voltas o suficiente.";
+		mes "Vamos! O que você esperando?";
+		close;
+	}
+	if (MONK_Q == 6)
+	{
+		mes "[Fuhai]";
+		mes "...";
+		next;
+		mes "[Fuhai]";
+		mes "......";
+		next;
+		mes "[Fuhai]";
+		mes ".........";
+		next;
+		mes "[Fuhai]";
+		mes "............";
+		next;
+		select ("Olá?");
+		mes "[Fuhai]";
+		mes "...Que...QUE?";
+		mes "Como ousa interromper meu treinamento!";
+		mes "Se isto não for muito importante...";
+		next;
+		mes "[Fuhai]";
+		mes "......";
+		mes "Eu não posso prometer que você verá o sol amanhã...";
+		next;
+		mes "[Fuhai]";
+		mes "Por que você está aqui?";
+		mes "Explique-se!";
+		next;
+		if (select("Alguém chamado [Wutao] me enviou aqui.", "Bem... nada...") == 2)
+		{
+			mes "[Fuhai]";
+			mes "......";
+			mes "...Que tal comprar uma caixão para você?";
+			close;
+		}
+		mes "[Fuhai]";
+		mes "Hmmm...Então é isso?";
+		mes "Isto é...";
+		next;
+		mes "[Fuhai]";
+		mes "Oh...Seu estado mental...";
+		mes "Ha! Muito bem...";
+		next;
+		mes "[Fuhai]";
+		mes "É claro, que o que você aprendeu de [Wutao]?";
+		next;
+		if (select("Hmmm...Bem...Isso é...", "Eu repeti o que ele me disse e ele me enviou aqui.", "Ele testou meu estado mental e me enviou aqui.") != 2)
+		{
+			mes "[Fuhai]";
+			mes "Seu tolo!";
+			mes "Não me interrompa mais! Vá embora!";
+			close;
+		}
+		mes "[Fuhai]";
+		mes "Bem...Então?";
+		mes "Ele fez algo por você?";
+		next;
+		switch (select("Ah...Isso...Eu não posso dizer...", "Examinou meu corpo", "Me disse algumas regras para obedecer", "Fortaleceu meu estado mental"))
+		{
+		case 1:
+			mes "[Fuhai]";
+			mes "Seu tolo!";
+			mes "Não me interrompa mais! Vá embora!";
+			close;
+
+		case 2:
+		case 3:
+			mes "[Fuhai]";
+			mes "Isso é verdade, mas não é o principal.";
+			mes "Pense! Use seu cérebro!";
+			close;
+		}
+		set MONK_Q, 7;
+	}
+	if (MONK_Q == 7)
+	{
+		mes "[Fuhai]";
+		mes "Muito bem. No mínimo você sabe o que mudou em seu corpo.";
+		mes "Agora, vamos começar o próximo teste.";
+		next;
+		mes "[Fuhai]";
+		mes "Eu te darei a change de escolher que tipo de teste você quer fazer.";
+		mes "Agora faça sua escolha.";
+		next;
+		set @Choice_mission, select("Coleta de cogumelos", "Uma maratona");
+		mes "[Fuhai]";
+		if (@Choice_mission == 1)
+			mes "Coleta de Cogumelos? Boa escolha!";
+		else
+			mes "Uma maratona? Boa escolha!";
+		mes "Isso fará você entender o valor da paciência e entender o significado do grande poder da força de vontade para quem segue o Caminho de Deus.";
+		mes "Vá e prepare-se! Volte quando estiver pronto.";
+		close;
+	}
+	mes "[Fuhai]";
+	mes "HaAhhhhh....!!!";
+	next;
+	mes "- Parece que ele está pensando alguma coisa -";
+	close;
+}
+
+prt_monk,199,169,4	script	Guarda#2	746,{
+	if (MONK_Q <= 7)
+	{
+		mes "[Guarda ChaoLi]";
+		mes "Esta é a...";
+		mes "Área de Treino dos Monges.";
+		next;
+	}
+	if (MONK_Q == 7)
+	{
+		mes "[Guarda ChaoLi]";
+		mes strcharinfo(0) + "... Correto?!";
+		next;
+		mes "[Guarda ChaoLi]";
+		mes "Vá em frente! Rápido!";
+		mes "Tem mais outro teste esperando por você!";
+		close;
+	}
+	mes "[Guarda ChaoLi]";
+	mes "Por favor não faça barulho aqui.";
+	close;
+}
+
+monk_test,329,61,4	script	Bashu	753,{
+	if (MONK_Q == 7)
+	{
+		mes "[Bashu]";
+		if (@Choice_mission == 0)
+			mes "Por favor selecione um teste.";
+		else if (@Choice_mission == 1)
+			mes "Como eu já sabia, você escolheu coletar cogumelos como seu teste.";
+		else
+			mes "Como eu já sabia, você escolheu a Maratona como seu teste.";
+		mes "Porém se você não completar o teste, poderá mudar para outro sempre que quiser.";
+		next;
+		if (select("A paciência de um Monge - Coletar Cogumelos", "A força de vontade de um Monge - A Maratona") == 1)
+		{
+			mes "[Bashu]";
+			mes "Você escolheu um bom teste para testar a paciência de um Monge - Coleta de Cogumelos";
+			next;
+			warp "job_monk",225,179;
+		}
+		else
+		{
+			mes "[Bashu]";
+			mes "Você escolheu um bom teste para testar a força de vontade de um Monge - A Maratona";	
+			next;
+			warp "monk_test",387,345;
+		}
+		close;
+	}
+	mes "[Bashu]";
+	mes "Bem-vindo ao ^00FF00Mosteiro de St. Capitolina^000000, a área de treinamento dos Monges.";
+	mes "A luz deve brilhar em seu caminho.";
+	mes "Você irá encontrar o Monge Daowen, o juiz do processo de treinamento Monge assim que você entrar.";
+	next;
+	mes "[Bashu]";
+	mes "Nunca toque em nada la dentro, e não faça barulho algum na frente do Monge Daowen.";
+	close;
+}
+
+monk_test,387,347,4	script	Musha	110,{
+	mes "[Musha]";
+	mes "Bem-vindo...";
+	mes "Esta...Esta é a área para testar sua for... força de vontade.";
+	next;
+	mes "[Musha]";
+	mes "Você deve some... somente correr!";
+	mes "Até que digamos para você parar.";
+	mes "Corra...Corra! " + strcharinfo(0) + "! Corra!";
+	next;
+	mes "[Musha]";
+	mes "Somente corra! Vamos, rápido!";
+	next;
+	mes "[Musha]";
+	mes "Um dia eu serei um Monge.";
+	mes "Eu... serei... irei ser... um... Monge.";
+	next;
+	mes "[Musha]";
+	mes "Você... você quer... quer desistir? ou quer cont... continuar?";
+	mes "Desistir?";
+	next;
+	if (select("Eu quero desistir", "Eu quero correr!") == 1)
+	{
+		mapannounce "monk_test","Musha: " + strcharinfo(0) + "desistiu do teste...! Ele desistiu do testa da Maratona... Não... Não tem força de vontade... Hahahahahaha!",8;
+		mes "[Musha]";
+		mes strcharinfo(0) + " desistiu... desistiu do teste...";
+		mes "Desistiu do teste da Maratona";
+		mes "Sem força de vontade... sem força.... Hahahahahahaha!!!";
+		next;
+		warp "prt_monk",196,168;
+		close;
+	}
+	next;
+	mes "[Musha]";
+	mes "Até que mandemos você parar...";
+	mes "Corra... vamos, corra!" + strcharinfo(0) + "! Corra!";
+	set @runtimes, rand(8,10);
+	set @run, 0;
+	close;
+}
+
+monk_test,390,387,0	script	monk_warp	45,1,1,{
+	set @run, @run + 1;
+	if (@run+1 == @runtimes)
+		mapannounce "monk_test","Musha: Vamos Lá! A próxima volta é a última!",8;
+	if (@run == @runtimes)
+	{
+		set MONK_Q, 8;
+		mapannounce "monk_test","Musha: Para... Parabéns!" + strcharinfo(0)+ "Passou! Agora procure por [Daowen], ele está na parte mais pronfuda daqui.",8;
+		warp "prt_monk",196,168;
+		close;
+	}
+	warp "monk_test",388,348;
+	close;
+
+OnTrap:
+	mapannounce "monk_test","trap: " + strcharinfo(0)+ " , você caiu numa armadilha! Nós iremos te enviar para o ponto inicial.",8;
+	warp "monk_test",388,348;
+	close;
+}
+
+//---------------------
+monk_test,386,164,0	script	monk1-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,386,165,0	script	monk1-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,387,164,0	script	monk1-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,387,165,0	script	monk1-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,388,164,0	script	monk1-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,388,165,0	script	monk1-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,389,164,0	script	monk1-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,389,165,0	script	monk1-8	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,386,42,0	script	monk2-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,386,43,0	script	monk2-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,387,42,0	script	monk2-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,387,43,0	script	monk2-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,388,42,0	script	monk2-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,388,43,0	script	monk2-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,389,42,0	script	monk2-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,389,43,0	script	monk2-8	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,184,11,0	script	monk3-1	139,0,3,{doevent "monk_warp::OnTrap";}
+monk_test,185,11,0	script	monk3-2	139,0,3,{doevent "monk_warp::OnTrap";}
+monk_test,186,11,0	script	monk3-3	139,0,3,{doevent "monk_warp::OnTrap";}
+monk_test,187,11,0	script	monk3-4	139,0,3,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,70,10,0	script	monk4-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,70,11,0	script	monk4-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,70,12,0	script	monk4-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,70,13,0	script	monk4-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,71,10,0	script	monk4-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,71,11,0	script	monk4-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,71,12,0	script	monk4-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,71,13,0	script	monk4-8	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,8,30,0	script	monk5-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,8,31,0	script	monk5-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,9,30,0	script	monk5-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,9,31,0	script	monk5-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,10,30,0	script	monk5-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,10,31,0	script	monk5-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,11,30,0	script	monk5-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,11,31,0	script	monk5-8	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,12,30,0	script	monk5-9	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,12,31,0	script	monk5-10	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,13,30,0	script	monk5-11	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,13,31,0	script	monk5-12	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,14,30,0	script	monk5-13	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,14,31,0	script	monk5-14	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,15,30,0	script	monk5-15	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,15,31,0	script	monk5-16	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,10,158,0	script	monk6-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,10,159,0	script	monk6-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,11,158,0	script	monk6-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,11,159,0	script	monk6-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,12,158,0	script	monk6-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,12,159,0	script	monk6-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,13,158,0	script	monk6-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,13,159,0	script	monk6-8	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,38,386,0	script	monk7-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,38,387,0	script	monk7-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,38,388,0	script	monk7-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,38,389,0	script	monk7-4	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,39,386,0	script	monk7-5	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,39,387,0	script	monk7-6	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,39,388,0	script	monk7-7	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,39,389,0	script	monk7-8	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,82,390,0	script	monk8-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,82,391,0	script	monk8-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,83,390,0	script	monk8-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,83,391,0	script	monk8-4	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+monk_test,82,384,0	script	monk9-1	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,82,385,0	script	monk9-2	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,83,384,0	script	monk9-3	139,0,0,{doevent "monk_warp::OnTrap";}
+monk_test,83,385,0	script	monk9-4	139,0,0,{doevent "monk_warp::OnTrap";}
+//---------------------
+
+prt_monk,225,179,4	script	XuanWu#01 	89,{
+	mes "[XuanWu]";
+	mes "Poder ver o crescimento da plantação é um dádiva de Deus.";
+	next;
+	mes "[XuanWu]";
+	mes "Nunca é pouco ver o crescimento desses campos, assim como é marvilhoso ver o crescimento de um forte Monge.";
+	mes "Eu acho que é a coisa mais linda que podemos visualizar.";
+	next;
+	mes "[XuanWu]";
+	mes "Falando francamente com você, fazendeiros são as melhores pessoas desse mundo.";
+	mes "A Blue Potion que você precisa beber, deve ser feita da vontade de Deus e por fazendeiros.";
+	next;
+	mes "[XuanWu]";
+	mes "Nós devemos ser gratos.";
+	next;
+	mes "[XuanWu]";
+	mes "Deus te deu tudo, até mesmo o fazendeiro.";
+	next;
+	mes "[XuanWu]";
+	mes "O fazendeiro é a raiz do mundo. Isso é a mais pura verdade";
+	close;
+}
+
+job_monk,225,179,4	script	XuanWu#02	89,{
+	if (MONK_Q == 8)
+	{
+		mes "[XuanWu]";
+		mes "Você está testando minha paciência?";
+		mes "Vá em [Daowen], fica dentro do edifício.";
+		close;
+	}
+	if (@mission_start == 1)
+	{
+		if ((countitem(1069) >= 30 && countitem(1070) > 0) || (countitem(1070) >= 30 && countitem(1069) > 0))
+		{
+			set MONK_Q, 8;
+			mes "[XuanWu]";
+			mes "Bem, eu acho que você pode fazer melhor que isso...";
+			mes "Mas, eu tenho que dizer que você passou no teste.";
+			set @mission_start, 0;
+			delitem 1069, countitem(1069); //Items: Cogumelo_Venenoso,
+			delitem 1070, countitem(1070); //Items: Cogumelo_Borrachento_,
+			next;
+			mes "[XuanWu]";
+			mes "Vá falar com [Daowen], ele está nas profundezas daqui.";
+			close;
+		}
+		mes "[XuanWu]";
+		mes "Hmmm... isso é o melhor que você pode fazer? Eu não acho que seja suficiente...";
+		next;
+		mes "[XuanWu]";
+		mes "Você quer desistir?";
+		next;
+		if (select ("Continuar coletando", "Desistir") == 1)
+			close;
+	}
+	else
+	{
+		mes "[XuanWu]";
+		mes "Bem-vindo! Eu comando a coleta dos cogumelos.";
+		mes "Meu nome é XuanWu.";
+		next;
+		mes "[XuanWu]";
+		mes "De agora em diante, veja todo esse sofrimento com um treino.";
+		mes "Entende?";
+		next;
+		mes "[XuanWu]";
+		mes "Para a vida de um Monge nós devemos oferecer nossos esforços como tributo.";
+		mes "Fazer a plantação crescer, também é um tipo de treinamento.";
+		next;
+		mes "[XuanWu]";
+		mes "Nós achamos que é a melhor maneira de fazer a vontade de Deus.";
+		mes "Além disso, nós estamos cultivando um tipo de cogumelo que cheira mal.";
+		next;
+		mes "[XuanWu]";
+		mes "Tudo o que você tem que fazer, é destruir esses cogumelos e traze-los de volta para provar seu feito.";
+		mes "Deixe-me explicar melhor. São os ^ff0000Cogumelos Borrachentos^000000 e os ^ff0000Cogumelos Venenosos^000000.";
+		next;
+		mes "[XuanWu]";
+		mes "Se você deseja se tornar mais forte e virar um Monge, vá agora e destrua-os.";
+		mes "Traga-me o máximo que você puder, eu não irei dizer quantos você precisa.";
+		mes "Pode ir!";
+		next;
+		mes "[XuanWu]";
+		mes "Você quer desistir?";
+		next;
+		if (select("Começar a coleta de Cogumelos", "Eu irei desistir") == 1)
+		{
+			mes "[XuanWu]";
+			mes "O que você está esperando? Vamos !!!";
+			set @mission_start, 1;
+			close;
+		}
+	}
+	mapannounce "monk_test","XuanWu: ......Mais um sem paciência.....",8;
+	mes "[XuanWu]";
+	mes "Mais um sem paciência...";
+	set @mission_start, 0;
+	if (countitem(1069))
+		delitem 1069, countitem(1069);//Items: Cogumelo_Venenoso,
+	if (countitem(1070))
+		delitem 1070, countitem(1070);//Items: Cogumelo_Borrachento_,
+	next;
+	warp "prt_monk",196,168;
+	end;
+}
+
+job_monk,191,172,4	script	job_monk_warp	45,1,1,{
+	warp "monk_test",329,57;
+	end;
+}
+
+job_monk,199,169,4	script	Guarda ChaoLi 	746,{
+	mes "[Guarda ChaoLi]";
+	mes "Silêncio na área de testes!";
+	close;
+}
+
+monk_test,319,139,4	script	Daowen	52,{
+	if (MONK_Q == 8)
+	{
+		mes "[Daowen]";
+		mes "Finalmente!";
+		mes "Este é o último teste e eu estou no comando daqui.";
+		mes "Meu nome é Daowen";
+		next;
+		mes "[Daowen]";
+		mes "Bem, o que deveria dizer...";
+		mes "Aqueles que ficarem em seu caminho... lute com eles...";
+		next;
+		mes "[Daowen]";
+		mes "Lute! Bata! Sempre que o inimigo estiver em seu caminho.";
+		mes "Mostre a eles a vontade de Deus!";
+		next;
+		mes "[Daowen]";
+		mes "Não se compare com os fracos acolitos!";
+		mes "Nós somos sempre fortes Monges.";
+		next;
+		mes "[Daowen]";
+		mes "Nós somos diferentes dos sacerdotes que sempre correm!!!";
+		next;
+		mes "[Daowen]";
+		mes "Agora levante seus punhos e prepare-se para lutar !!!";
+		next;
+		mes "[Daowen]";
+		mes "Faça o seu melhor!";
+		mes "HaHaHaHaHa.....!!";
+		next;
+		warp "monk_test",88,73;
+		end;
+	}
+	if (MONK_Q == 9)
+	{
+		mes "[Daowen]";
+		mes "Muito bem!! HaHaHaHa....!!";
+		mes "Eu sabia que você conseguiria";
+		mes "Eu te darei uma poção especial que irá aumentar seu poder.";
+		next;
+		set MONK_Q, 10;
+		if (countitem(506) == 0)
+		{
+			getitem 506, 1; //Items: Green_Potion,
+			mes "[Daowen]";
+			mes "Beba, assim todos seus orgãos internos ficarão fortes o suficiente para você se tornar um Monge.";
+			next;
+		}else{
+			emotion e_what;
+			mes "[Daowen]";
+			mes "O quê....!! Você já tem a poção verde especial!";
+			mes "Beba tudo, e seus órgãos internos se tornarão fortes o bastante para ser um Monge.";
+			next;
+		}
+	}
+	if (MONK_Q == 10)
+	{
+		mes "[Daowen]";
+		mes "Vá para Wuhai - o primeiro com quem você conversou.";
+		close;
+	}
+	mes "[Daowen]";
+	mes "Pode ir, mas vá em silêncio..";
+	mes "HuWuWuuuu......";
+	next;
+	mes "[Daowen]";
+	mes "Este é o Mosteiro de St. Capitolina. Se alguma coisa der errado, tudo o que fizemos poderá ser considerado como nada...";
+	next;
+	mes "[Daowen]";
+	mes "Saia! Se você nao quer morrer!! Não me atrapalhe.";
+	close;
+}
+
+monk_test,88,91,4	script	Assistente do Teste#01	52,{
+	mes "[Assistente do Teste]";
+	mes "Você está pronto para o treino para acabar com o mau?";
+	next;
+	mes "[Assistente do Teste]";
+	mes "A área de teste é um labirinto com paredes invisíveis.";
+	mes "O ponto de saída é oposto ao ponto de entrada.";
+	next;
+	mes "[Assistente do Teste]";
+	mes "Claro que existem alguns monstros durante seu caminho... e você terá que lutar contra eles.";
+	mes "Boa sorte! E que Deus esteja contigo.";
+	next;
+	if(getareausers("monk_test",126,161,165,199) > 0)
+	{
+		mes "[Assistente do Teste]";
+		mes "Oh... tem alguém fazendo o teste, por favor espere um minuto...";
+		close;
+	}
+	killmonster "monk_test","monk_mob1::OnMobDead";
+	enablenpc "monk_mob1_1";
+	enablenpc "monk_mob1_2";
+	enablenpc "monk_mob1_3";
+	enablenpc "monk_mob1_3";
+	warp "monk_test",127,179;
+	end;
+}
+
+monk_test,129,180,4	script	monk_mob1_1	139,0,19,{
+	monster "monk_test",130,183,"--ja--",1015,1,"monk_mob1::OnMobDead";
+	monster "monk_test",130,177,"--ja--",1015,1,"monk_mob1::OnMobDead";
+//~	disablenpc "monk_mob1_1";
+	end;
+}
+monk_test,133,180,4	script	monk_mob1_2	139,0,19,{
+	monster "monk_test",134,183,"--ja--",1015,1,"monk_mob1::OnMobDead";
+	monster "monk_test",134,177,"--ja--",1015,1,"monk_mob1::OnMobDead";
+//~	disablenpc "monk_mob1_2";
+	end;
+}
+monk_test,145,180,4	script	monk_mob1_3	139,0,19,{
+	monster "monk_test",145,180,"--ja--",1041,1,"monk_mob1::OnMobDead";
+//~	disablenpc "monk_mob1_3";
+	end;
+}
+monk_test,155,180,4	script	monk_mob1_4	139,0,19,{
+	monster "monk_test",157,183,"--ja--",1015,1,"monk_mob1::OnMobDead";
+	monster "monk_test",157,177,"--ja--",1015,1,"monk_mob1::OnMobDead";
+//~	disablenpc "monk_mob1_4";
+	end;
+}
+monk_test,165,179,4	script	monk_mob3_warp#01	45,1,1,{
+	set MONK_Q, 9;
+	mapannounce "monk_test","Parabéns!!!" + strcharinfo(0)+ " Passou no teste!! Va falar com [Daowen], ele está nas profundezas daqui.",8;
+	killmonster "monk_test","monk_mob1::OnMobDead";
+	warp "monk_test",317,142;
+	end;
+}
+
+monk_test,1,1,1	script	monk_mob1	-1,{
+OnMobDead:
+		end;
+}
+
+monk_test,95,85,4	script	Assistente do Teste#02	79,{
+	mes "[Assistente do Teste]";
+	mes "Você está pronto para o treino para acabar com o mau?";
+	next;
+	mes "[Assistente do Teste]";
+	mes "A área de teste é um labirinto com paredes invisíveis.";
+	mes "O ponto de saída é oposto ao ponto de entrada.";
+	next;
+	mes "[Assistente do Teste]";
+	mes "Claro que existem alguns monstros durante seu caminho... e você terá que lutar contra eles.";
+	mes "Boa sorte! E que Deus esteja contigo.";
+	next;
+	if (getareausers("monk_test",126,262,165,300) > 0)
+	{
+		mes "[Assistente do Teste]";
+		mes "Oh... tem alguém fazendo o teste, por favor espere um minuto...";
+		close;
+	}
+	killmonster "monk_test","monk_mob2::OnMobDead";
+	enablenpc "monk_mob2_1";
+	enablenpc "monk_mob2_2";
+	enablenpc "monk_mob2_3";
+	enablenpc "monk_mob2_4";
+	warp "monk_test",127,278;
+	end;
+}
+
+monk_test,129,281,4	script	monk_mob2_1	139,0,19,{
+	monster "monk_test",130,278,"--ja--",1015,1,"monk_mob2::OnMobDead";
+	monster "monk_test",130,284,"--ja--",1015,1,"monk_mob2::OnMobDead";
+//~	disablenpc "monk_mob2_1";
+	end;
+}
+monk_test,136,281,4	script	monk_mob2_2	139,0,19,{
+	monster "monk_test",139,278,"--ja--",1015,1,"monk_mob2::OnMobDead";
+	monster "monk_test",139,284,"--ja--",1015,1,"monk_mob2::OnMobDead";
+//~	disablenpc "monk_mob2_2";
+	end;
+}
+monk_test,144,281,4	script	monk_mob2_3	139,0,19,{
+	monster "monk_test",145,281,"--ja--",1041,1,"monk_mob2::OnMobDead";
+//~	disablenpc "monk_mob2_3";
+	end;
+}
+monk_test,153,281,4	script	monk_mob2_4	139,0,19,{
+	monster "monk_test",155,278,"--ja--",1015,1,"monk_mob2::OnMobDead";
+	monster "monk_test",155,284,"--ja--",1015,1,"monk_mob2::OnMobDead";
+//~	disablenpc "monk_mob2_4";
+	end;
+}
+monk_test,165,278,4	script	monk_mob2_warp	45,1,1,{
+	set MONK_Q, 9;
+	mapannounce "monk_test","Parabéns!!" + strcharinfo(0)+ " Passou no teste!! Va falar com [Daowen], ele está nas profundezas daqui.",8;
+	killmonster "monk_test","monk_mob2::OnMobDead";
+	warp "monk_test",317,142;
+	end;
+}
+
+monk_test,1,1,1	script	monk_mob2	-1,{
+OnMobDead:
+		end;
+}
+
+monk_test,82,85,4	script	Assistente do Teste#03	95,{
+	mes "[Assistente do Teste]";
+	mes "Você está pronto para o treino para acabar com o mau?";
+	next;
+	mes "[Assistente do Teste]";
+	mes "A área de teste é um labirinto com paredes invisíveis.";
+	mes "O ponto de saída é oposto ao ponto de entrada.";
+	next;
+	mes "[Assistente do Teste]";
+	mes "Claro que existem alguns monstros durante seu caminho... e você terá que lutar contra eles.";
+	mes "Boa sorte! E que Deus esteja contigo.";
+	next;
+	if(getareausers("monk_test",233,262,269,300) > 0)
+	{
+		mes "[Assistente do Teste]";
+		mes "Oh... tem alguém fazendo o teste, por favor espere um minuto...";
+		close;
+	}
+	killmonster "monk_test","monk_mob3::OnMobDead";
+	enablenpc "monk_mob3_1";
+	enablenpc "monk_mob3_2";
+	enablenpc "monk_mob3_3";
+	enablenpc "monk_mob3_4";
+	warp "monk_test",231,279;
+	end;
+}
+
+monk_test,234,281,4	script	monk_mob3_1	139,0,19,{
+	monster "monk_test",235,277,"--ja--",1015,1,"monk_mob3::OnMobDead";
+	monster "monk_test",235,284,"--ja--",1015,1,"monk_mob3::OnMobDead";
+//~	disablenpc "monk_mob3_1";
+	end;
+}
+monk_test,239,281,4	script	monk_mob3_2	139,0,19,{
+	monster "monk_test",240,277,"--ja--",1015,1,"monk_mob3::OnMobDead";
+	monster "monk_test",240,284,"--ja--",1015,1,"monk_mob3::OnMobDead";
+//~	disablenpc "monk_mob3_2";
+	end;
+}
+monk_test,248,281,4	script	monk_mob3_3	139,0,19,{
+	monster "monk_test",249,281,"--ja--",1041,1,"monk_mob3::OnMobDead";
+//~	disablenpc "monk_mob3_3";
+	end;
+}
+monk_test,260,281,4	script	monk_mob3_4	139,0,19,{
+	monster "monk_test",261,277,"--ja--",1015,1,"monk_mob3::OnMobDead";
+	monster "monk_test",261,284,"--ja--",1015,1,"monk_mob3::OnMobDead";
+//~	disablenpc "monk_mob3_4";
+	end;
+}
+monk_test,269,279,4	script	monk_mob3_warp#02	45,1,1,{
+	set MONK_Q, 9;
+	mapannounce "monk_test","Parabéns!!" + strcharinfo(0)+ " Passou no teste!! Va falar com [Daowen], ele está nas profundezas daqui.",8;
+	killmonster "monk_test","monk_mob3::OnMobDead";
+	warp "monk_test",317,142;
+	end;
+}
+
+monk_test,1,1,1	script	monk_mob3	-1,{
+OnMobDead:
+		end;
+}
+
+//==============================================================================
+// Monsters of Mushroom Collecting
+//==============================================================================
+job_monk,0,0,0,0	monster	Thief Mushroom	1182,170,0,0,0
+job_monk,0,0,0,0	monster	Thief Bug Larva	1051,120,0,0,0
+
+//==============================================================================
+// mapflag
+//==============================================================================
+monk_test	mapflag	nomemo
+monk_test	mapflag	noteleport
+monk_test	mapflag	nosave	SavePoint
+monk_test	mapflag	nopenalty
+monk_test	mapflag	nobranch
+monk_test	mapflag	noexp
+monk_test	mapflag	noloot

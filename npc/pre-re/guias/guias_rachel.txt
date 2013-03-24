@@ -1,15 +1,12 @@
-//===== rAthena Script =======================================
-//= Rachel Guide
-//===== By: ==================================================
+//===== Cronus Script ======================================== 
+//= Guia de Rachel
+//===== Por: ================================================= 
 //= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.2b
-//===== Compatible With: =====================================
-//= rAthena SVN
-//===== Description: =========================================
-//= [Official Conversion]
-//= Rachel City guide
-//===== Additional Comments: =================================
+//===== Versão Atual: ======================================== 
+//= 1.2d
+//===== Compatível com: ====================================== 
+//= Cronus SVN
+//===== Changelog: =========================================== 
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Change the while loops a bit. [L0ne_W0lf]
 //= 1.2 Deleted an Unnecessary "next;" [Samuray22]
@@ -17,70 +14,72 @@
 //= 1.2a Fixed some errors with the loop[Samuray22]
 //	-Thanks to $ephiroth.
 //= 1.2b Deleted a unnecessary "end". [Samuray22]
-//============================================================
+//= 1.2c Revisado. [RoM]
+//= 1.2d Removido show	[Yum]
+//============================================================ 
 
-rachel,138,146,5	script	Rachel Guide	934,{
-	mes "[Rachel Guide]";
-	mes "Welcome to the capital of";
-	mes "Arunafeltz, Rachel where a warm";
-	mes "breath of goddess Freya reaches.";
-	mes "If this is the first time for you";
-	mes "to use the guide services, why";
-	mes "don't you check the \"Notice\" menu first?";
+rachel,138,146,5	script	Guia de Rachel	934,{
+	mes "[Guia de Rachel]";
+	mes "Seja bem-vindo a capital de";
+	mes "Arunafeltz, Rachel. onde o";
+	mes "ar da Deusa Freya extende-se.";
+	mes "Se estás usando pela primeira vez";
+	mes "os serviços de um Guia, por que";
+	mes "não checar o menu 'Tutorial' primeiro?";
 	set .@loop1,1;
 	while(.@loop1) {
 		next;
-		switch(select("Village Guide:Remove Marks from Mini-Map:Notice:Cancel")) {
+		switch(select("Indicações:Remover Indicações:Tutorial:Cancelar")) {
 		case 1:
-			mes "[Rachel Guide]";
-			mes "I can tell you any building location as long as it is in Rachel.";
-			mes "So where do you want to go?";
+			mes "[Guia de Rachel]";
+			mes "Posso lhe indicar qualquer construção de Rachel.";
+			mes "Então, onde você quer ir?";
 			if (.@compass_check == 0) {
-				mes "Would you like me";
-				mes "to mark locations";
-				mes "on your Mini-Map?";
+				mes "Quer que eu marque";
+				mes "as localizações";
+				mes "no seu Mini-Mapa?";
 				next;
-				if (select("Yes:No") == 1) set .@compass_check,1;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
 			}
 			set .@loop2,1;
 			while(.@loop2) {
 				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
 				else next;
 
-				switch(select("Cheshrumnir:Inn:Weapon Shop:Tool Shop:Airport:Cancel")) {
+				switch(select("Cheshrumnir:Estalagem:Loja de Armas:Loja de Utilidades:Aeroporto:Cancelar")) {
 				case 1:
-					mes "[Rachel Guide]";
-					mes "Cheshrumnir is a holy ground where pope, the incarnation of goddess Freya stays.";
-					mes "Take the road to the norh to find the building.";
+					mes "[Guia de Rachel]";
+					mes "Cheshrumnir é o Solo Sagrado onde a Papisa, a encarnação da Deusa Freya vive.";
+					mes "Tome a rua norte para encontrar o prédio.";
 					if (.@compass_check == 1) viewpoint 1,150,249,1,0xFF0000;
 					break;
 				case 2:
-					mes "[Rachel Guide]";
-					mes "You can rest your fatigue off the journey in the Inn.";
-					mes "The left building next to me is the Inn of Rachel.";
+					mes "[Guia de Rachel]";
+					mes "Você pode descansar de suas aventuras na Estalagem.";
+					mes "O prédio á minha esquerda é a Estalagem de Rachel.";
 					if (.@compass_check == 1) viewpoint 1,115,149,2,0xFF00FF;
 					break;
 				case 3:
-					mes "[Rachel Guide]";
-					mes "Do you want to check out the weapons that are sold in Rachel?";
-					mes "The weapon shop is located nearby the western gate.";
+					mes "[Guia de Rachel]";
+					mes "Quer conferir as armas que são vendidas em Rachel?";
+					mes "A Loja de Armas fica perto do portão ocidental.";
 					if (.@compass_check == 1) viewpoint 1,42,87,3,0x99FFFF;
 					break;
 				case 4:
-					mes "[Rachel Guide]";
-					mes "Rachel tool shop sells the best quality potions.";
-					mes "It's located nearby the western gate.";
+					mes "[Guia de Rachel]";
+					mes "A Loja de Utilidades de Rachel vende poções da melhor qualidade.";
+					mes "Está localizada próxima ao portão ocidental.";
 					if (.@compass_check == 1) viewpoint 1,83,78,4,0x0000FF;
 					break;
 				case 5:
-					mes "[Rachel Guide]";
-					mes "The Airport is located outside the eastern gate.";
+					mes "[Guia de Rachel]";
+					mes "O Aeroporto está localizado perto do portão oriental.";
 					if (.@compass_check == 1) viewpoint 1,273,125,5,0x00FF00;
 					break;
 				case 6:
-					mes "[Rachel Guide]";
-					mes "If you like to get rid of all the location marks on your Mini-Map,";
-					mes "just ask me again, and choose \"Remove Marks from Mini-Map\" menu.";
+					mes "[Guia de Rachel]";
+					mes "Se você quiser que eu apague as indicações no seu mini-mapa,";
+					mes "me peça, escolhendo 'Remover Indicações' no menu.";
 					set .@loop2,0;
 					break;
 				}
@@ -93,20 +92,20 @@ rachel,138,146,5	script	Rachel Guide	934,{
 			viewpoint 2,42,87,3,0x99FFFF;
 			viewpoint 2,83,78,4,0x0000FF;
 			viewpoint 2,273,125,5,0x00FF00;
-			mes "[Rachel Guide]";
-			mes "Okay, they are gone now. If you have more locations to ask, just let me know.";
+			mes "[Guia de Rachel]";
+			mes "Ok, eu apaguei tudo. Se você quiser saber mais sobre algum local daqui, venha me procurar.";
 			break;
 		case 3:
-			mes "[Rachel Guide]";
-			mes "When you are using the ''Village Guide'' menu,";
-			mes "make sure that building locations will be marked on your mini-map at the upper right side of your screen.";
-			mes "If you cannot see your mini-map, use the short cut key ''ctrl+tab'' or press the ''Map'' button on your basic information windows, okay?";
-			mes "And you can also zoom out your mini-map by using the ''-'' button in case you cannot view the entire map of the village.";
+			mes "[Guia de Rachel]";
+			mes "Quando você está usando o Guia de 'Indicações',";
+			mes "tenha certeza de que eles estão aparecendo no canto superior direito de sua tela.";
+			mes "Se você não está vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botão 'Mapa' na sua Janela de Informações Básicas, ok?";
+			mes "Você ainda pode diminuir o zoom no mini-mapa apertando o botão '-' no caso de você não estar vendo o mapa da vila por inteiro.";
 			break;
 		case 4:
-			mes "[Rachel Guide]";
-			mes "Hope you have a wonderfull journey";
-			mes "in Arunafeltz.";
+			mes "[Guia de Rachel]";
+			mes "Espero que tenha uma maravilhosa jornada";
+			mes "em Arunafeltz.";
 			close2;
 			set .@loop1,0;
 			break;

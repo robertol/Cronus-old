@@ -1,5 +1,5 @@
 //===== Cronus Script ========================================
-//= Quest de Classe - Professor
+//= Quest de Classe - Atirador de Elite
 //===== Por: =================================================
 //= Nana
 //= finished, optimized and tested by Lupus
@@ -8,8 +8,8 @@
 //===== Compatibilidade: =====================================
 //= Cronus SVN
 //===== Descrição: ===========================================
-//= Fazer um Mago T. se tornar um Professor
-//===== Comentários Adicional: ===============================
+//= Fazer um Arqueiro T. se tornar um Atirador de Elite
+//===== Comentários Adicionais: ==============================
 //= 1.1 Made all into functions, additional checks, etc. [Lupus]
 //= 1.2 Made numbers into constants. [Vicious]
 //= 1.3 Now saves/restores all the quest skills [Lupus]
@@ -18,75 +18,66 @@
 //= 1.3c Removido show, setjob	[Yum]
 //============================================================
 
-valkyrie,53,47,3	script	Professor#Valkyrie	743,{
+valkyrie,44,55,5	script	Atirador de Elite#Valk	727,{
 	if (ADVJOB == 0 || Upper != 1) {
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
-			mes "[Professor]";
+			mes "[Atirador de Elite]";
 			mes "Parabéns.";
 			mes "Honra aos guerreiros!";
 			close;
 		}
-		mes "[Professor]";
-		mes "Isso leva uma vida toda...";
-		mes "Literalmente uma vida toda";
-		mes "para acumular o conhecimento";
-		mes "necessário para se tornar";
-		mes "um Professor...";
-		next;
-		mes "[Professor]";
-		mes "Isso é esmagador.";
-		mes "Quanto mais você aprende,";
-		mes "mais você descobre";
-		mes "aquilo que ainda não sabe.";
-		mes "Não existe fim no";
-		mes "processo de aprendizagem...";
+		mes "[Atirador de Elite]";
+		mes "Um tiro.";
+		mes "Um morto.";
+		mes "Isso não é tão difícil";
+		mes "quando você desenvolve a";
+		mes "visão para esse estilo";
+		mes "de batalha.";
 		close;
 	}
-	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
-		mes "[Professor]";
-		mes "Rune-Midgard não";
-		mes "tem Professores suficientes";
-		mes "para ajudar o povo nessa nova era";
-		mes "de prosperidade. O";
-		mes "mundo precisa de você...";
+	else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Atirador de Elite]";
+		mes "O mundo está precisando";
+		mes "de um poderoso Arqueiro";
+		mes "como você. Você está pronto para";
+		mes "essa incrível responsabilidade?";
 		next;
-		mes "[Professor]";
-		mes "Você aceitará essa";
-		mes "incrível responsabilidade?";
-		mes "Você servirá Rune-Midgard";
-		mes "como um Professor?";
+		mes "[Atirador de Elite]";
+		mes "Está disposto a dar";
+		mes "o próximo passo e se";
+		mes "tornar um Atirador de Elite?";
 		next;
 		if (select("Não.:Sim.") == 1) {
-			mes "[Professor]";
+			mes "[Atirador de Elite]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se livre para voltar.";
 			mes "Honra aos guerreiros!";
 			close;
 		}
 		if (SkillPoint) {
-			mes "[Professor]";
+			mes "[Atirador de Elite]";
 			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
 			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
 			close;
 		}
-		jobchange Job_Professor;
+		jobchange Job_Sniper;
 		set ADVJOB,0;
-		mes "[Professor]";
+		mes "[Atirador de Elite]";
 		mes "Parabéns!";
-		mes "Como Professor, eu espero";
-		mes "que você fará sua parte";
-		mes "ativa trazendo";
-		mes "a luz da sabedoria";
-		mes "onde há escuridão.";
+		mes "Como Atirador de Elite, eu espero";
+		mes "que os seres do mal";
+		mes "nunca estarão seguros";
+		mes "enquanto estiverem";
+		mes "na sua visão!";
 		close;
 	}
-	mes "[Professor]";
+	mes "[Atirador de Elite]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
 	mes "o Salão da Honra.";
 	next;
-	mes "[Professor]";
+	mes "[Atirador de Elite]";
 	mes "Por favor sinta-se";
 	mes "confortável enquanto";
 	mes "estiver aqui.";
