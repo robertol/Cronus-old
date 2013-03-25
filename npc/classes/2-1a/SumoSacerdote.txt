@@ -1,0 +1,85 @@
+//===== Cronus Script ========================================
+//= Quest de Classe - Sumo-Sacerdote
+//===== Por: =================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Versão Atual: ========================================
+//= 1.3c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Fazer um Noviço T. se tornar um Sumo-Sacerdote
+//===== Comentários Adicionais: ==============================
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//= 1.3a Traduzido. [.zuport]
+//= 1.3b Revisado. [Heaven]
+//= 1.3c Removido show, setjob	[Yum]
+//============================================================
+
+valkyrie,44,42,5	script	Sumo-Sacerdote#Valkyrie	60,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Sumo-Sacerdote]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Sumo-Sacerdote]";
+		mes "Através do poder";
+		mes "da santidade, nós podemos";
+		mes "encontrar paz, força";
+		mes "e proteção. Salvando-nos";
+		mes "das forças do mal...";
+		close;
+	}
+	else if (ADVJOB == Job_High_Priest && Class == Job_Acolyte_High && JobLevel > 39) {
+		mes "[Sumo-Sacerdote]";
+		mes "Nosso mundo está";
+		mes "necessitando de pessoas";
+		mes "com dom e convicção.";
+		mes "Por favor continue seus";
+		mes "bons trabalhos como um ainda";
+		mes "maior herói da santidade...";
+		next;
+		mes "[Sumo-Sacerdote]";
+		mes "Você quer se tornar";
+		mes "um Sumo-Sacerdote?";
+		next;
+		if (select("Não.:Sim.") == 1) {
+			mes "[Sumo-Sacerdote]";
+			mes "Quando você estiver pronto,";
+			mes "sinta-se livre para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Sumo-Sacerdote]";
+			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
+			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
+			close;
+		}
+		jobchange Job_High_Priest;
+		set ADVJOB,0;
+		mes "[Sumo-Sacerdote]";
+		mes "Parabéns.";
+		mes "Como Sumo-Sacerdote,";
+		mes "Eu espero que você guie";
+		mes "os outros pelo caminho";
+		mes "da santidade...";
+		close;
+	}
+	mes "[Sumo-Sacerdote]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Sumo-Sacerdote]";
+	mes "Por favor sinta-se";
+	mes "confortável enquanto";
+	mes "estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}
