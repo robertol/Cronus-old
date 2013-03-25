@@ -1,0 +1,86 @@
+//===== Cronus Script ========================================
+//= Quest de Classe - Atirador de Elite
+//===== Por: =================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Versão Atual: ========================================
+//= 1.3c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Fazer um Arqueiro T. se tornar um Atirador de Elite
+//===== Comentários Adicionais: ==============================
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//= 1.3a Traduzido. [.zuport]
+//= 1.3b Revisado. [Heaven]
+//= 1.3c Removido show, setjob	[Yum]
+//============================================================
+
+valkyrie,44,55,5	script	Atirador de Elite#Valk	727,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Atirador de Elite]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Atirador de Elite]";
+		mes "Um tiro.";
+		mes "Um morto.";
+		mes "Isso não é tão difícil";
+		mes "quando você desenvolve a";
+		mes "visão para esse estilo";
+		mes "de batalha.";
+		close;
+	}
+	else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Atirador de Elite]";
+		mes "O mundo está precisando";
+		mes "de um poderoso Arqueiro";
+		mes "como você. Você está pronto para";
+		mes "essa incrível responsabilidade?";
+		next;
+		mes "[Atirador de Elite]";
+		mes "Está disposto a dar";
+		mes "o próximo passo e se";
+		mes "tornar um Atirador de Elite?";
+		next;
+		if (select("Não.:Sim.") == 1) {
+			mes "[Atirador de Elite]";
+			mes "Quando estiver pronto,";
+			mes "sinta-se livre para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Atirador de Elite]";
+			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
+			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
+			close;
+		}
+		jobchange Job_Sniper;
+		set ADVJOB,0;
+		mes "[Atirador de Elite]";
+		mes "Parabéns!";
+		mes "Como Atirador de Elite, eu espero";
+		mes "que os seres do mal";
+		mes "nunca estarão seguros";
+		mes "enquanto estiverem";
+		mes "na sua visão!";
+		close;
+	}
+	mes "[Atirador de Elite]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Atirador de Elite]";
+	mes "Por favor sinta-se";
+	mes "confortável enquanto";
+	mes "estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}

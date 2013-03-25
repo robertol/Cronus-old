@@ -3071,16 +3071,20 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 			if( sc->data[SC_EDP] ){
 				switch(skill_id){
 					case AS_SPLASHER:       case AS_VENOMKNIFE:
-					case AS_GRIMTOOTH:
 					break;
+
 #ifndef RENEWAL_EDP
-					case ASC_BREAKER:       case ASC_METEORASSAULT: break;
+					case ASC_BREAKER:       case ASC_METEORASSAULT: 
+                    case AS_GRIMTOOTH:      break;
 #else
-					case AS_SONICBLOW:
+                    case AS_GRIMTOOTH:
+                    case AS_SONICBLOW:
 					case ASC_BREAKER:
 					case GC_COUNTERSLASH:
 					case GC_CROSSIMPACT:
 						ATK_RATE(50); // only modifier is halved but still benefit with the damage bonus
+						ATK_ADDRATE(sc->data[SC_EDP]->val3);
+                    break;
 #endif
 					default:
 						ATK_ADDRATE(sc->data[SC_EDP]->val3);

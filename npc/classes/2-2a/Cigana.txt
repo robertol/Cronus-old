@@ -1,0 +1,86 @@
+//===== Cronus Script ========================================
+//= Quest de Classe - Cigana
+//===== Por: =================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Versão Atual: ========================================
+//= 1.3c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Fazer uma Arqueira T. se tornar uma Cigana
+//===== Comentários Adicional: ===============================
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//= 1.3a Traduzido. [.zuport]
+//= 1.3b Revisado. [Heaven]
+//= 1.3c Removido show, setjob	[Yum]
+//============================================================
+
+valkyrie,53,56,3	script	Cigana#Valkyrie	101,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Cigana]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Cigana]";
+		mes "Mexe pra esquerda,";
+		mes "mexe pra direita~!";
+		mes "E dê um passo...!";
+		mes "Dançar pode ser";
+		mes "mais que um passatempo.";
+		mes "Para mim, isso é um modo de vida~";
+		close;
+	}
+	else if (ADVJOB == Job_Gypsy && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Cigana]";
+		mes "A terra de Rune-Midgard";
+		mes "está precisando de mulheres talentosas";
+		mes "para mudar sutilmente o balanço";
+		mes "nas batalhas entre o bem";
+		mes "e o mal.";
+		next;
+		mes "[Cigana]";
+		mes "Você está pronta";
+		mes "para pegar esse cargo,";
+		mes "e se tornar uma Cigana?";
+		next;
+		if (select("Não.:Sim.") == 1) {
+			mes "[Cigana]";
+			mes "Quando estiver pronta,";
+			mes "sinta-se livre para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Cigana]";
+			mes "Ainda é possível para você aprender mais algumas habilidades. Por favor";
+			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
+			close;
+		}
+		jobchange Job_Gypsy;
+		set ADVJOB,0;
+		mes "[Cigana]";
+		mes "Parabéns!";
+		mes "Como Cigana, eu sei";
+		mes "que suas performances";
+		mes "irão abalar os corações de todos";
+		mes "aqueles que estarão assistindo...";
+		close;
+	}
+	mes "[Cigana]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Cigana]";
+	mes "Por favor sinta-se";
+	mes "confortável enquanto";
+	mes "estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}

@@ -1,0 +1,295 @@
+//====================== Cronus Script ===============================
+//= Quest da classe Mestre Taekwon
+//===== Por: =========================================================
+//= Page
+//===== Versão Atual: ================================================
+//= 1.3b/1.0
+//===== Compatível com: ==============================================
+//= Cronus GIT
+//===== Descrição: ===================================================
+//= Quest para troca de classe
+//===== Comentários Adicionais: ======================================
+//= 1.0 Traduzido	[Page]
+//= 1.1 Adaptado	[Page]
+//= 1.2 Revisado	[Page]
+//= 1.2a Removido show, setjob	[Yum]
+//= 1.3a Otimizado - Removidas Labels / Menus, etc	[Schrwaizer]
+//= 1.3b Corrigido tabulações e estrutura do script [SoulBlakeer]
+//====================================================================
+
+payon,215,102,2	script	MooHyun#SKTest	828,{
+	if( Class != Job_Taekwon || JobLevel < 40 )
+	{
+		mes "[MooHyun]";
+		mes "Aaaah, o clima está simplesmente adorável, você não acha?";
+		close;
+	}
+	switch(STGL_Q)
+	{
+		case 0:
+			mes "[MooHyun]";
+			mes "Oooh, um Tae Kwon Dô!";
+			mes "Não vejo muitos desses por aqui.";
+			mes "Suponho que não esteja interessado em se tornar ainda mais forte, não é?";
+			next;
+		 	if( select("Oh..?:Na verdade, não.") == 2 ) {
+				mes "[MooHyun]";
+				mes "Entendo. Bom, se é assim que você se sente...";
+				close;
+			}
+			mes "[MooHyun]";
+			mes "Bom, existem esses dedicados";
+			mes "guerreiros que são conhecidos como Mestre Taekwon.";
+			mes "Eu por um acaso conheço alguém que pode lhe";
+			mes "teleportar para o ponto de meditação deles.";
+			next;
+			if( select("Oopa! Eu quero ser um deles!:E...?") == 2 ) {
+				mes "[MooHyun]";
+				mes "Entendo. Bom, se é assim que você se sente...";
+				close;
+			}
+			mes "[MooHyun]";
+			mes "Que coincidência!";
+			mes "Entretanto, ele precisa de raros";
+			mes "materiais para fazer o portal.";
+			set STGL_Q,1;
+			next;
+		case 1:
+			mes "[MooHyun]";
+			mes "Anote bem o quê você terá de levá-lo:";
+			mes "^0000FF- 1 "+getitemname(994)+"^000000";
+			mes "^0000FF- 1 "+getitemname(995)+"^000000";
+			mes "^0000FF- 1 "+getitemname(996)+"^000000";
+			mes "^0000FF- 1 "+getitemname(997)+"^000000";
+			next;
+			mes "[MooHyun]";
+			mes "Você pode achá-lo em Comodo.";
+			mes "Ele normalmente gosta de andar pelo";
+			mes "topo da montanha de lá.";
+			close;
+	}
+	mes "[MooHyun]";
+	mes "Boa sorte em sua missão, Tae Kwon Dô!";
+	close;
+}
+
+comodo,127,231,2	script	Homem do Portal#SKTest	730,{
+	switch( STGL_Q )
+	{
+		case 0:
+			mes "[Homem]";
+			mes "...";
+			close;
+    		case 1:
+			mes "[Homem do Portal]";
+			mes "...";
+			next;
+			mes "[Homem do Portal]";
+			mes "Oh, um Tae Kwon Dô. Creio que MooHyun lhe mandou aqui, então.";
+			mes "Você quer que eu lhe teletransporte?";
+			next;
+			if( select("Sim.:Não.") == 2 ) {
+				mes "[Homem do Portal]";
+				mes "Hmph, gastando meu tempo...";
+				mes "Volte quando você tiver CERTEZA";
+				mes "de que quer que eu lhe teletransporte.";
+				close;
+			}
+			if(countitem(994) < 1 || countitem(995) < 1 || countitem(996) < 1 || countitem(997) < 1) {
+				mes "[Homem do Portal]";
+				mes "Para te teleportar, eu preciso de itens mágicos bem raros.";
+				next;
+				mes "[Homem do Portal]";
+				mes "Traga-me:";
+				mes "^0000FF- 1 "+getitemname(994)+"^000000";
+				mes "^0000FF- 1 "+getitemname(995)+"^000000";
+				mes "^0000FF- 1 "+getitemname(996)+"^000000";
+				mes "^0000FF- 1 "+getitemname(997)+"^000000";
+				close;
+			}
+			delitem 994,1;
+			delitem 995,1;
+			delitem 996,1;
+			delitem 997,1;
+			set STGL_Q,2;
+			mes "[Homem do Portal]";
+			mes "Ótimo! Com estes itens eu posso criar um portal a qualquer hora.";
+			mes "Então se você precisar se teletransportar novamente é só me pedir, ok?";
+			next;
+			warp "job_star",33,41;
+			close;    
+		case 2:
+		case 3:
+			mes "[Homem do Portal]";
+			mes "Você quer que eu lhe teleteleporte novamente?";
+			next;
+			if( select("Sim.:Não.") == 2 ) {
+				close;
+			}
+			warp "job_star",33,41;
+			close;
+	}
+}
+
+job_star,29,33,4	script	Gladiador do Sol#SKTest	823,{
+	if( STGL_Q == 3 ) {
+		warp "job_star",99,41;
+		end;
+	}
+	if( Class != Job_Taekwon && JobLevel <= 40 ) {
+		mes "[Gladiador do Sol]";
+		mes "Como você chegou aqui!?";
+		mes "Vá embora agora!";
+		next;
+		warp "payon",256,242;
+		close;
+	}
+	mes "[Gladiador do Sol]";
+	mes "Ah. Um Tae Kwon Dô.";
+	mes "É sempre bom ver um seguidor de uma arte disciplinada.";
+	next;
+	mes "[Gladiador do Sol]";
+	mes "Eu suponho que você veio aqui para se tornar um Mestre Taekwon.";
+	mes "Então permita-me explicar...";
+	next;
+	mes "[Gladiador do Sol]";
+	mes "O Sol, a Lua, e as Estrelas.";
+	mes "Todos têm suas próprias";
+	mes "energias. Nós, Gladiadores Estrelares,";
+	mes "usamos estas energias adicionadas";
+	mes "com nossa própria força para";
+	mes "ajudar-nos nos combates.";
+	next;
+	mes "[Gladiador do Sol]";
+	mes "Aqui eu ensino os  como";
+	mes "chegar à energia do Sol.";
+	mes "Eu devo lhe ensinar isso agora.";
+	next;
+	mes "^0000FFVocês passam longas horas meditando^000000";
+	mes "^0000FFjuntos embaixo do sol.^000000";
+	mes "^0000FFVocê realmente sente-se quente, mesmo^000000";
+	mes "^0000FFque provavelmente seja por causa de não estar^000000";
+	mes "^0000FFusando protetor solar.^000000";
+	next;
+	mes "[Gladiador do Sol]";
+	mes "Você aprendeu tudo que poderia lhe ensinar.";
+	mes "Eu devo agora lhe enviar para seu";
+	mes "próximo instrutor.";
+	next;
+	warp "job_star",99,41;
+	close;
+}
+
+job_star,95,34,4	script	Gladiador da Lua#SKTest	758,{
+	if(STGL_Q == 3) {
+		warp "job_star",165,39;
+		end;
+	}
+	if(Class != Job_Taekwon || JobLevel < 40) {
+		mes "[Gladiador da Lua]";
+		mes "Como você entrou aqui!?";
+		mes "Vá embora agora!";
+		next;
+		warp "payon",256,242;
+		close;
+	}
+	mes "[Gladiador da Lua]";
+	mes "Ah. Um Taekwon.";
+	mes "É bom que você tenha";
+	mes "conseguido vir de tão longe.";
+	next;
+	mes "[Gladiador da Lua]";
+	mes "Meu trabalho aqui é ajudar";
+	mes "Taekwons a ficarem mais em";
+	mes "contato com as energias da Lua.";
+	next;
+	mes "[Gladiador da Lua]";
+	mes "A Lua tem energias calmantes.";
+	mes "Então deves ter cuidado para";
+	mes "não dormir enquanto medita.";
+	next;
+	mes "[Gladiador da Lua]";
+	mes "Agora, sente-se.";
+	mes "Olhe para a Lua e sinta.";
+	mes "Sua luz flui por você.";
+	next;
+	mes "^0000FFApós alguns minutos de meditação^000000";
+	mes "^0000FFseus olhos começam a ficar pesados.^000000";
+	mes "^0000FFVocê se força para^000000";
+	mes "^0000FFmanter-se acordado, e sente um^000000";
+	mes "^0000FFrenovado vigor.^000000";
+	next;
+	mes "[Gladiador da Lua]";
+	mes "Você aprendeu tudo que eu podia lhe ensinar.";
+	mes "Devo agora lhe enviar para seu próximo e";
+	mes "último instrutor.";
+	next;
+	warp "job_star",165,39;
+	close;
+}
+
+job_star,161,34,4	script	Gladiador das Estrelas#SKTest	77,{
+	if( Class != Job_Taekwon || JobLevel < 40 || STGL_Q != 3 )
+	{
+		mes "[Gladiador das Estrelas]";
+		mes "Como você entrou aqui!?";
+		mes "Vá embora agora!";
+		next;
+		warp "payon",256,252;
+		close;
+	}
+	mes "[Gladiador das Estrelas]";
+	mes "Cumprimentos, Taekwon.";
+	mes "Estou aqui para lhe ensinar sobre";
+	mes "as múltiplas energias que ";
+	mes "vem das Estrelas.";
+	next;
+	if(countitem(1000) < 1 || countitem(1001) < 1)
+	{
+		mes "[Gladiador das Estrelas]";
+		mes "Para se tornar apenas um junto às";
+		mes "estrelas, você terá de me trazer:";
+		mes "^0000FF- 1 Fragmento Estelar^000000";
+		mes "^0000FF- 1 Poeira Estelart^000000";
+		next;
+		mes "[Gladiador das Estrelas]";
+		mes "Eu agora lhe mandarei de volta para que possa";
+		mes "procurar por estes itens.";
+		next;
+		set STGL_Q,3;
+		warp "payon",256,242;
+		close;
+	}
+	if(SkillPoint)
+	{
+		mes "[Gladiador das Estrelas]";
+		mes "Parece-me que você ainda tem";
+		mes "alguns Pontos de Habilidade sobrando.";
+		mes "Use-os, e então";
+		mes "venha falar comigo novamente.";
+		close;
+	}
+	delitem 1000,1;
+	delitem 1001,1;
+	mes "[Gladiador das Estrelas]";
+	mes "Desde que tem os itens requeridos,";
+	mes "nós devemos começar.";
+	next;
+	mes "^0000FFConforme você medita, sente ^000000";
+	mes "^0000FFpoder crescendo dentro de você.^000000";
+	mes "^0000FFEste poder não parece ser^000000";
+	mes "^0000FFseu, mas parece algo que está ^000000";
+	mes "^0000FFem algum lugar lhe dando uma ajuda.^000000";
+	next;
+	jobchange Job_Star_Gladiator;
+	callfunc "F_ClearJobVar";
+	mes "[Gladiador das Estrelas]";
+	mes "Parece-me que você está de fato";
+	mes "em contato com o Sol,a Lua, e as Estrelas.";
+	next;
+	mes "[Gladiador das Estrelas]";
+	mes "Deseje sorte em sua jornada.";
+	next;
+	warp "payon",256,242;
+	close;
+}
