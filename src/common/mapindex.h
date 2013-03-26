@@ -44,8 +44,6 @@ extern char mapindex_cfgfile[80];
 #define MAP_MORA "mora"
 #define MAP_DEWATA "dewata"
 #define MAP_MALANGDO "malangdo"
-#define MAP_MALAYA "malaya"
-#define MAP_ECLAGE "eclage"
 
 const char* mapindex_getmapname(const char* string, char* output);
 const char* mapindex_getmapname_ext(const char* string, char* output);
