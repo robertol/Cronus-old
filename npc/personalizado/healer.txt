@@ -40,7 +40,6 @@ ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	909
 brasilis,194,221,6	duplicate(Healer)	Healer#bra	909
 comodo,184,158,6	duplicate(Healer)	Healer#com	909
 dewata,193,175,6	duplicate(Healer)	Healer#dew	909
-eclage,105,35,4	duplicate(Healer)	Healer#ecl	909
 einbech,142,244,4	duplicate(Healer)	Healer#einbe	909
 einbroch,57,202,6	duplicate(Healer)	Healer#einbr	909
 dicastes01,201,194,4	duplicate(Healer)	Healer#dic	909

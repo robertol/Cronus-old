@@ -19,7 +19,6 @@ comodo	mapflag	reset
 dewata	mapflag	reset
 dicastes01	mapflag	reset
 dicastes02	mapflag	reset
-eclage	mapflag	reset
 einbroch	mapflag	reset
 einbech	mapflag	reset
 geffen	mapflag	reset

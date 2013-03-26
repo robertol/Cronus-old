@@ -2318,36 +2318,39 @@
 4502,Sealed_B_Harword_Card,Carta Mestre-ferreiro Howard Selada,6,20,,10,,,,,,,,2,,,,,{ if (getrefine()>14) { bonus bBreakWeaponRate,800; bonus bBreakArmorRate,600; } else { bonus bBreakWeaponRate,500; bonus bBreakArmorRate,400; } },{},{}
 4503,Sealed_Apocalips_H_Card,Carta Vesper Selada,6,20,,10,,,,,,,,769,,,,,{ bonus bDex,2; bonus2 bIgnoreMdefRate,RC_Boss,((getrefine()>14)?25:15); },{},{}
 4504,Sealed_Eddga_Card,Carta Eddga Selada,6,20,,10,,,,,,,,64,,,,,{ bonus bMaxHPrate,((getrefine()>14)?-35:-50); },{ sc_start4 SC_ENDURE,60000,10,0,0,1; },{ sc_end SC_ENDURE; }
-4505,Scaraba_Card,Scaraba Card,6,20,,10,,,,,,,,136,,,,,{ bonus bMatk,20; bonus bMaxSPrate,-1; },{},{}
-4506,Dolomedes_Card,Dolomedes Card,6,20,,10,,,,,,,,769,,,,,{ bonus bDex,2; if(BaseClass==Job_Archer){ bonus bDex,getrefine()/3; } },{},{}
-4507,Queen_Scaraba_Card,Queen Scaraba Card,6,20,,10,,,,,,,,2,,,,,{},{},{}
-4508,Gold_Scaraba_Card,Gold Scaraba Card,6,20,,10,,,,,,,,136,,,,,{ bonus bBaseAtk,20; bonus bMaxHPrate,-1; },{},{}
-4509,Gold_Queen_Scaraba_Card,Gold Queen Scaraba Card,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,3; bonus2 bSubRace,RC_Insect,10; if(getrefine()>=9) { bonus2 bSubRace,RC_Insect,5; } },{},{}
-4510,Miming_Card,Miming Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAutoSpell,"WM_LULLABY_DEEPSLEEP",1,30; },{},{}
-4511,Little_Fatum_Card,Little Fatum Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Silence,500,ATF_SKILL; },{},{}
-4512,Parus_Card,Parus Card,6,20,,10,,,,,,,,769,,,,,{ bonus bHealPower,3; if(BaseClass==Job_Acolyte){ bonus bHealPower,getrefine()/2; } },{},{}
-4513,Angra_Mantis_Card,Angra Mantis Card,6,20,,10,,,,,,,,769,,,,,{ bonus bCritAtkRate,2; if(BaseClass==Job_Thief){ bonus bCritAtkRate,getrefine()/2; } },{},{}
-4514,Pom_Spider_Card,Pom Spider Card,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Undead,20; },{},{}
-4515,Alnoldi_Card,Alnoldi Card,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Plant,30; },{},{}
-4516,Comodo_Card,Comodo Card,6,20,,10,,,,,,,,16,,,,,{ bonus bDef,50; bonus bFlee,-25; },{},{}
-4517,Cendrawasih_Card,Cendrawasih Card,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,2; if(BaseClass==Job_Mage){ bonus bInt,getrefine()/3; } },{},{}
-4518,Banaspaty_Card,Banaspaty Card,6,20,,10,,,,,,,,2,,,,,{},{},{}
-4519,Butoijo_Card,Butoijo Card,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Angel,20; },{},{}
-4520,Leak_Card,Leak Card,6,20,,10,,,,,,,,4,,,,,{ bonus bStr,3; bonus2 bAddEff,Eff_Confusion,5000; bonus3 bAddEff,Eff_Confusion,5000,ATF_SKILL; },{},{}
-4521,Sedora_Card,Sedora Card,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,15; },{},{}
-4522,Sropho_Card,Sropho Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAutoSpell,"WL_FROSTMISTY",1,30; },{},{}
-4523,Pot_Dofle_Card,Pot Dofle Card,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Water; bonus2 bSubRace,RC_Fish,10; },{},{}
-4524,King_Dramoh_Card,King Dramoh Card,6,20,,10,,,,,,,,769,,,,,{ bonus bStr,2; if(BaseClass==Job_Swordman){ bonus bStr,getrefine()/3; } },{},{}
-4525,Kraken_Card,Kraken Card,6,20,,10,,,,,,,,4,,,,,{ bonus bFlee,10; skill "TF_HIDING",1; skill "RG_RAID",1; bonus3 bAddEffOnSkill,"RG_RAID",Eff_Bleeding,1000; },{},{ sc_end SC_HIDING; }
-4526,Weird_Coelacanth_Card,Weird Coelacanth Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxSPrate,5; bonus bMdef,50; },{},{}
-4527,Dark_Coelacanth_Card,Dark Coelacanth Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,10; bonus bDef,100; },{},{}
-4528,Mutant_Coelacanth_Card,Mutant Coelacanth Card,6,20,,10,,,,,,,,769,,,,,{ bonus bMatkRate,2+(getrefine()/2); bonus bMaxHPrate,-getrefine()/2; },{},{}
-4529,Violent_Coelacanth_Card,Violent Coelacanth Card,6,20,,10,,,,,,,,769,,,,,{ bonus2 bAddRace,RC_NonBoss,2+(getrefine()/2); bonus2 bAddRace,RC_Boss,2+(getrefine()/2); bonus bMaxSPrate,-getrefine()/2; },{},{}
-4530,Siorava_Card,Siorava Card,6,20,,10,,,,,,,,769,,,,,{ bonus bLuk,2; if(BaseClass==Job_Merchant){ bonus bLuk,getrefine()/3; } },{},{}
-4531,Red_Eruma_Card,Red Eruma Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Curse,500,ATF_SKILL; },{},{}
-4532,Wild_Rider_Card,Wild Rider Card,6,20,,10,,,,,,,,64,,,,,{ bonus3 bAutoSpellWhenHit,"AL_INCAGI",1,10; },{},{}
-4533,Octopus_Card,Octopus Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Blind,500,ATF_SKILL; },{},{}
-4534,Giant_Octopus_Card,Giant Octopus Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,12; skill "WZ_WATERBALL",5; },{},{}
+
+// Eclage Cards
+//4505,Scaraba_Card,Scaraba Card,6,20,,10,,,,,,,,136,,,,,{ bonus bMatk,20; bonus bMaxSPrate,-1; },{},{}
+//4506,Dolomedes_Card,Dolomedes Card,6,20,,10,,,,,,,,769,,,,,{ bonus bDex,2; if(BaseClass==Job_Archer){ bonus bDex,getrefine()/3; } },{},{}
+//4507,Queen_Scaraba_Card,Queen Scaraba Card,6,20,,10,,,,,,,,2,,,,,{},{},{}
+//4508,Gold_Scaraba_Card,Gold Scaraba Card,6,20,,10,,,,,,,,136,,,,,{ bonus bBaseAtk,20; bonus bMaxHPrate,-1; },{},{}
+//4509,Gold_Queen_Scaraba_Card,Gold Queen Scaraba Card,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,3; bonus2 bSubRace,RC_Insect,10; if(getrefine()>=9) { bonus2 bSubRace,RC_Insect,5; } },{},{}
+//4510,Miming_Card,Miming Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAutoSpell,"WM_LULLABY_DEEPSLEEP",1,30; },{},{}
+//4511,Little_Fatum_Card,Little Fatum Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Silence,500,ATF_SKILL; },{},{}
+//4512,Parus_Card,Parus Card,6,20,,10,,,,,,,,769,,,,,{ bonus bHealPower,3; if(BaseClass==Job_Acolyte){ bonus bHealPower,getrefine()/2; } },{},{}
+//4513,Angra_Mantis_Card,Angra Mantis Card,6,20,,10,,,,,,,,769,,,,,{ bonus bCritAtkRate,2; if(BaseClass==Job_Thief){ bonus bCritAtkRate,getrefine()/2; } },{},{}
+//4514,Pom_Spider_Card,Pom Spider Card,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Undead,20; },{},{}
+//4515,Alnoldi_Card,Alnoldi Card,6,20,,10,,,,,,,,32,,,,,{ bonus2 bSubRace,RC_Plant,30; },{},{}
+//4516,Comodo_Card,Comodo Card,6,20,,10,,,,,,,,16,,,,,{ bonus bDef,50; bonus bFlee,-25; },{},{}
+//4517,Cendrawasih_Card,Cendrawasih Card,6,20,,10,,,,,,,,769,,,,,{ bonus bInt,2; if(BaseClass==Job_Mage){ bonus bInt,getrefine()/3; } },{},{}
+//4518,Banaspaty_Card,Banaspaty Card,6,20,,10,,,,,,,,2,,,,,{},{},{}
+//4519,Butoijo_Card,Butoijo Card,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_Angel,20; },{},{}
+//4520,Leak_Card,Leak Card,6,20,,10,,,,,,,,4,,,,,{ bonus bStr,3; bonus2 bAddEff,Eff_Confusion,5000; bonus3 bAddEff,Eff_Confusion,5000,ATF_SKILL; },{},{}
+//4521,Sedora_Card,Sedora Card,6,20,,10,,,,,,,,2,,,,,{ bonus bCritAtkRate,15; },{},{}
+//4522,Sropho_Card,Sropho Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAutoSpell,"WL_FROSTMISTY",1,30; },{},{}
+//4523,Pot_Dofle_Card,Pot Dofle Card,6,20,,10,,,,,,,,16,,,,,{ bonus bDefEle,Ele_Water; bonus2 bSubRace,RC_Fish,10; },{},{}
+//4524,King_Dramoh_Card,King Dramoh Card,6,20,,10,,,,,,,,769,,,,,{ bonus bStr,2; if(BaseClass==Job_Swordman){ bonus bStr,getrefine()/3; } },{},{}
+//4525,Kraken_Card,Kraken Card,6,20,,10,,,,,,,,4,,,,,{ bonus bFlee,10; skill "TF_HIDING",1; skill "RG_RAID",1; bonus3 bAddEffOnSkill,"RG_RAID",Eff_Bleeding,1000; },{},{ sc_end SC_HIDING; }
+//4526,Weird_Coelacanth_Card,Weird Coelacanth Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxSPrate,5; bonus bMdef,50; },{},{}
+//4527,Dark_Coelacanth_Card,Dark Coelacanth Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,10; bonus bDef,100; },{},{}
+//4528,Mutant_Coelacanth_Card,Mutant Coelacanth Card,6,20,,10,,,,,,,,769,,,,,{ bonus bMatkRate,2+(getrefine()/2); bonus bMaxHPrate,-getrefine()/2; },{},{}
+//4529,Violent_Coelacanth_Card,Violent Coelacanth Card,6,20,,10,,,,,,,,769,,,,,{ bonus2 bAddRace,RC_NonBoss,2+(getrefine()/2); bonus2 bAddRace,RC_Boss,2+(getrefine()/2); bonus bMaxSPrate,-getrefine()/2; },{},{}
+//4530,Siorava_Card,Siorava Card,6,20,,10,,,,,,,,769,,,,,{ bonus bLuk,2; if(BaseClass==Job_Merchant){ bonus bLuk,getrefine()/3; } },{},{}
+//4531,Red_Eruma_Card,Red Eruma Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Curse,500,ATF_SKILL; },{},{}
+//4532,Wild_Rider_Card,Wild Rider Card,6,20,,10,,,,,,,,64,,,,,{ bonus3 bAutoSpellWhenHit,"AL_INCAGI",1,10; },{},{}
+//4533,Octopus_Card,Octopus Card,6,20,,10,,,,,,,,2,,,,,{ bonus3 bAddEff,Eff_Blind,500,ATF_SKILL; },{},{}
+//4534,Giant_Octopus_Card,Giant Octopus Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,12; skill "WZ_WATERBALL",5; },{},{}
+
 4535,Sealed_Rand_Card,Sealed Randgris Card,6,20,,10,,,,,,,,2,,,,,{},{},{}
 4536,Sealed_Atroce_Card,Sealed Atroce Card,6,20,,10,,,,,,,,2,,,,,{ bonus bBaseAtk,((getrefine()>14)?25:15); autobonus "{ bonus bAspdRate,((getrefine()>14)?75:50); }",5,10000,0,"{ specialeffect2 EF_POTION_BERSERK; }"; },{},{}
 4537,Sealed_Phreeoni_Card,Sealed Phreeoni Card,6,20,,10,,,,,,,,2,,,,,{ bonus bHit,((getrefine()>14)?75:50); },{},{}

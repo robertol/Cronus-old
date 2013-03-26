@@ -420,13 +420,6 @@ ma_zif06	mapflag	noteleport
 ma_zif07	mapflag	noteleport
 ma_zif08	mapflag	noteleport
 ma_zif09	mapflag	noteleport
-ecl_in01	mapflag	noteleport
-ecl_in02	mapflag	noteleport
-ecl_in03	mapflag	noteleport
-ecl_in04	mapflag	noteleport
-1@ecl	mapflag	noteleport
-1@ecl	mapflag	monster_noteleport
-ecl_hub01	mapflag	noteleport
 
 //Orc's Memory ===================
 1@orcs	mapflag	noteleport
