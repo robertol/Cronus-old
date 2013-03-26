@@ -1442,7 +1442,7 @@ int pc_calc_skilltree(struct map_session_data *sd)
 				sd->status.skill[id].id = id;
 				sd->status.skill[id].flag = SKILL_FLAG_TEMPORARY; // So it is not saved, and tagged as a "bonus" skill.
 			}
-			else
+			else if( id != NV_BASIC)      
 			{
 				sd->status.skill[id].flag = SKILL_FLAG_REPLACED_LV_0 + sd->status.skill[id].lv; // Remember original level
 			}
@@ -8415,7 +8415,7 @@ int pc_load_combo(struct map_session_data *sd) {
  *------------------------------------------*/
 int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 {
-	int i,pos,flag=0;
+	int i,pos,flag=0,iflag;
 	struct item_data *id;
 
 	nullpo_ret(sd);
@@ -8566,6 +8566,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 	}
 
 	pc_checkallowskill(sd); //Check if status changes should be halted.
+	iflag = sd->npc_item_flag;
 
 	/* check for combos (MUST be before status_calc_pc) */
 	if ( id ) {
@@ -8608,6 +8609,8 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 			}
 		}
 	}
+	sd->npc_item_flag = iflag;
+	
 	return 0;
 }
 
@@ -8619,7 +8622,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
  * 2 - force unequip
  *------------------------------------------*/
 int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
-	int i;
+	int i,iflag;
 	bool status_cacl = false;
 	nullpo_ret(sd);
 
@@ -8718,6 +8721,7 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 		sd->state.autobonus &= ~sd->status.inventory[n].equip; //Check for activated autobonus [Inkfish]
 
 	sd->status.inventory[n].equip=0;
+	iflag = sd->npc_item_flag;
 
 	/* check for combos (MUST be before status_calc_pc) */
 	if ( sd->inventory_data[n] ) {
@@ -8769,8 +8773,9 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 			}
 		}
 	}
-
-	return 0;
+    sd->npc_item_flag = iflag;
+	
+    return 0;
 }
 
 /*==========================================

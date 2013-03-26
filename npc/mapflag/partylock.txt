@@ -52,6 +52,3 @@
 
 // Bakonawa Hideout ===========
 1@ma_b	mapflag	partylock
-
-// Inside Eclage ===========
-1@ecl	mapflag	partylock

@@ -161,12 +161,6 @@ ma_zif06	mapflag	nopenalty
 ma_zif07	mapflag	nopenalty
 ma_zif08	mapflag	nopenalty
 ma_zif09	mapflag	nopenalty
-eclage	mapflag	nopenalty
-ecl_in01	mapflag	nopenalty
-ecl_in02	mapflag	nopenalty
-ecl_in03	mapflag	nopenalty
-ecl_in04	mapflag	nopenalty
-ecl_hub01	mapflag	nopenalty
 
 // Job Quests ========================
 job_sword1	mapflag	nopenalty
