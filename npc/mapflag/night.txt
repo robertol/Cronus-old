@@ -313,8 +313,5 @@ malaya	mapflag	nightenabled
 ma_fild01	mapflag	nightenabled
 ma_fild02	mapflag	nightenabled
 ma_scene01	mapflag	nightenabled
-eclage	mapflag	nightenabled
-ecl_fild01	mapflag	nightenabled
-ecl_hub01	mapflag	nightenabled
 
 //evt_zombie	mapflag	nightenabled
