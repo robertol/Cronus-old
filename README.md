@@ -42,6 +42,6 @@ Equipe de Desenvolvimento
 - Rayzir	- Guilherme Fontenele
 - PHpedro	- Pedro
 - Eru Yuuko
-- KaduKiller 
+- KaduKiller	- Carlos Salles
 - beckdeveloper
 - Apo
