@@ -309,9 +309,5 @@ dewata	mapflag	nightenabled
 dew_fild01	mapflag	nightenabled
 dew_dun02	mapflag	nightenabled
 malangdo	mapflag	nightenabled
-malaya	mapflag	nightenabled
-ma_fild01	mapflag	nightenabled
-ma_fild02	mapflag	nightenabled
-ma_scene01	mapflag	nightenabled
 
 //evt_zombie	mapflag	nightenabled
