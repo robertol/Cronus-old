@@ -3428,7 +3428,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	} //if (sd)
 
     //Card Fix, tsd side
-    if(tsd)
+    }else if(tsd)
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, flag.lh, wd.flag);
 
 	if( flag.infdef )
