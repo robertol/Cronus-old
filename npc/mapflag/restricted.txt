@@ -81,16 +81,6 @@ arug_cas05	mapflag	restricted	4
 // Somatology Laboratory ===========
 1@lhz	mapflag	restricted	6
 
-// Bangungot Hospital F2 ===========
-1@ma_h	mapflag	restricted	6
-
-// Buwaya Cave ===========
-1@ma_c	mapflag	restricted	6
-
-// Bakonawa Hideout ===========
-1@ma_b	mapflag	restricted	6
-
-
 //Towns
 alberta	mapflag	restricted	7
 aldebaran	mapflag	restricted	7
