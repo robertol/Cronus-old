@@ -11,7 +11,7 @@
 //============================================================
 
 //Prontera Arena ===============
-prt_are_in	mapflag	noskill
+//prt_are_in	mapflag	noskill
 
 //The Sign Quest ===============
 himinn	mapflag	noskill
@@ -28,3 +28,5 @@ p_track01	mapflag	noskill
 p_track02	mapflag	noskill
 
 //evt_zombie	mapflag	noskill
+turbo_room	mapflag	noskill
+itemmall	mapflag	noskill

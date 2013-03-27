@@ -154,3 +154,5 @@ bossnia_01	mapflag	nowarpto
 bossnia_02	mapflag	nowarpto
 bossnia_03	mapflag	nowarpto
 bossnia_04	mapflag	nowarpto
+
+itemmall	mapflag	nowarpto

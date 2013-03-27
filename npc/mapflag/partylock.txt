@@ -43,12 +43,3 @@
 
 // Somatology Laboratory ===========
 1@lhz	mapflag	partylock
-
-// Bangungot Hospital F2 ===========
-1@ma_h	mapflag	partylock
-
-// Buwaya Cave ===========
-1@ma_c	mapflag	partylock
-
-// Bakonawa Hideout ===========
-1@ma_b	mapflag	partylock

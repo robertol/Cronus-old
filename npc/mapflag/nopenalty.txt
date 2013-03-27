@@ -149,18 +149,6 @@ dew_in01	mapflag	nopenalty
 malangdo	mapflag	nopenalty
 mal_in01	mapflag	nopenalty
 mal_in02	mapflag	nopenalty
-malaya	mapflag	nopenalty
-ma_scene01	mapflag	nopenalty
-ma_in01	mapflag	nopenalty
-ma_zif01	mapflag	nopenalty
-ma_zif02	mapflag	nopenalty
-ma_zif03	mapflag	nopenalty
-ma_zif04	mapflag	nopenalty
-ma_zif05	mapflag	nopenalty
-ma_zif06	mapflag	nopenalty
-ma_zif07	mapflag	nopenalty
-ma_zif08	mapflag	nopenalty
-ma_zif09	mapflag	nopenalty
 
 // Job Quests ========================
 job_sword1	mapflag	nopenalty
@@ -198,7 +186,7 @@ job3_war02	mapflag	nopenalty
 job3_gen01	mapflag	nopenalty
 // Ext --------------------
 job3_sha01	mapflag	nopenalty
-job_ko	mapflag	nopenalty
+//job_ko	mapflag	nopenalty
 
 // Misc Quests =======================
 mosk_ship	mapflag	nopenalty
