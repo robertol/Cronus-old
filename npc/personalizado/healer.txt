@@ -50,7 +50,6 @@ izlude,125,118,5	duplicate(Healer)	Healer#izl	909
 lighthalzen,149,103,6	duplicate(Healer)	Healer#li	909
 louyang,225,103,4	duplicate(Healer)	Healer#lou	909
 malangdo,226,188,4	duplicate(Healer)	Healer#mal	909
-malaya,205,205,6	duplicate(Healer)	Healer#malay	909
 manuk,256,176,6	duplicate(Healer)	Healer#man	909
 mid_camp,203,289,6	duplicate(Healer)	Healer#mid	909
 mora,106,100,6	duplicate(Healer)	Healer#mora	909

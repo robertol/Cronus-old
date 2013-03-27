@@ -36,4 +36,3 @@ dicastes01	mapflag	town
 mora	mapflag	town
 dewata	mapflag	town
 malangdo	mapflag	town
-malaya	mapflag	town
