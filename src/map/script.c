@@ -384,7 +384,7 @@ enum {
 	MF_NORETURN,
 	MF_NOWARPTO,
 	MF_NIGHTMAREDROP,
-	MF_RESTRICTED,
+	MF_ZONE,
 	MF_NOCOMMAND,
 	MF_NODROP,
 	MF_JEXP,
@@ -7349,7 +7349,7 @@ BUILDIN_FUNC(strnpcinfo)
 
 
 // aegis->athena slot position conversion table
-static unsigned int equip[] = {EQP_HEAD_TOP,EQP_ARMOR,EQP_HAND_L,EQP_HAND_R,EQP_GARMENT,EQP_SHOES,EQP_ACC_L,EQP_ACC_R,EQP_HEAD_MID,EQP_HEAD_LOW,EQP_COSTUME_HEAD_LOW,EQP_COSTUME_HEAD_MID,EQP_COSTUME_HEAD_TOP};
+static unsigned int equip[] = {EQP_HEAD_TOP,EQP_ARMOR,EQP_HAND_L,EQP_HAND_R,EQP_GARMENT,EQP_SHOES,EQP_ACC_L,EQP_ACC_R,EQP_HEAD_MID,EQP_HEAD_LOW,EQP_COSTUME_HEAD_LOW,EQP_COSTUME_HEAD_MID,EQP_COSTUME_HEAD_TOP,EQP_COSTUME_GARMENT};
 
 /*==========================================
  * GetEquipID(Pos);     Pos: 1-10
@@ -9580,6 +9580,44 @@ static int buildin_announce_sub(struct block_list *bl, va_list ap)
 		clif_broadcast(bl, mes, len, type, SELF);
 	return 0;
 }
+/* Runs item effect on attached character.
+ * itemeffect <item id>;
+ * itemeffect "<item name>"; */
+BUILDIN_FUNC(itemeffect) {
+	TBL_NPC *nd;
+	TBL_PC *sd;
+	struct script_data *data;
+	struct item_data *item_data;
+	
+	nullpo_retr( 1, ( sd = script_rid2sd( st ) ) );
+	nullpo_retr( 1, ( nd = (TBL_NPC *)map_id2bl( sd->npc_id ) ) );
+	
+	data = script_getdata( st, 2 );
+	get_val( st, data );
+	
+	if( data_isstring( data ) ){
+		const char *name = conv_str( st, data );
+		
+		if( ( item_data = itemdb_searchname( name ) ) == NULL ){
+			ShowError( "buildin_itemeffect: Nonexistant item %s requested.\n", name );
+			return 1;
+		}
+	} else if( data_isint( data ) ){
+		int nameid = conv_num( st, data );
+		
+		if( ( item_data = itemdb_exists( nameid ) ) == NULL ){
+			ShowError("buildin_itemeffect: Nonexistant item %d requested.\n", nameid );
+			return 1;
+		}
+	} else {
+		ShowError("buildin_itemeffect: invalid data type for argument #1 (%d).", data->type );
+		return 1;
+	}
+	
+	run_script( item_data->script, 0, sd->bl.id, nd->bl.id );
+	
+	return 0;
+}
 
 BUILDIN_FUNC(mapannounce)
 {
@@ -10692,10 +10730,6 @@ BUILDIN_FUNC(getmapflag)
 			case MF_FOG:				script_pushint(st,map[m].flag.fog); break;
 			case MF_SAKURA:				script_pushint(st,map[m].flag.sakura); break;
 			case MF_LEAVES:				script_pushint(st,map[m].flag.leaves); break;
-			/**
-			 * No longer available, keeping here just in case it's back someday. [Ind]
-			 **/
-			//case MF_RAIN:				script_pushint(st,map[m].flag.rain); break;
 			case MF_NOGO:				script_pushint(st,map[m].flag.nogo); break;
 			case MF_CLOUDS:				script_pushint(st,map[m].flag.clouds); break;
 			case MF_CLOUDS2:			script_pushint(st,map[m].flag.clouds2); break;
@@ -10710,7 +10744,6 @@ BUILDIN_FUNC(getmapflag)
 			case MF_NORETURN:			script_pushint(st,map[m].flag.noreturn); break;
 			case MF_NOWARPTO:			script_pushint(st,map[m].flag.nowarpto); break;
 			case MF_NIGHTMAREDROP:		script_pushint(st,map[m].flag.pvp_nightmaredrop); break;
-			case MF_RESTRICTED:			script_pushint(st,map[m].flag.restricted); break;
 			case MF_NOCOMMAND:			script_pushint(st,map[m].nocommand); break;
 			case MF_NODROP:				script_pushint(st,map[m].flag.nodrop); break;
 			case MF_JEXP:				script_pushint(st,map[m].jexp); break;
@@ -10749,15 +10782,27 @@ static int script_mapflag_pvp_sub(struct block_list *bl,va_list ap) {
 BUILDIN_FUNC(setmapflag)
 {
 	int16 m,i;
-	const char *str;
+	const char *str, *val2;
+	struct script_data* data;
 	int val=0;
 
 	str=script_getstr(st,2);
-	i=script_getnum(st,3);
+	
+	i = script_getnum(st, 3);
+	
 	if(script_hasdata(st,4)){
-		val=script_getnum(st,4);
+		data = script_getdata(st,4);
+		get_val(st, data);
+		
+		
+		if( data_isstring(data) )
+			val2 = script_getstr(st, 4);
+		else
+			val = script_getnum(st, 4);
+
 	}
 	m = map_mapname2mapid(str);
+	
 	if(m >= 0) {
 		switch(i) {
 			case MF_NOMEMO:				map[m].flag.nomemo = 1; break;
@@ -10806,9 +10851,13 @@ BUILDIN_FUNC(setmapflag)
 			case MF_NORETURN:			map[m].flag.noreturn = 1; break;
 			case MF_NOWARPTO:			map[m].flag.nowarpto = 1; break;
 			case MF_NIGHTMAREDROP:		map[m].flag.pvp_nightmaredrop = 1; break;
-			case MF_RESTRICTED:
-				map[m].zone |= 1<<(val+1);
-				map[m].flag.restricted=1;
+			case MF_ZONE: {
+				char zone[6] = "zone\0";
+				char empty[1] = "\0";
+				char params[MAP_ZONE_MAPFLAG_LENGTH];
+				memcpy(params, val2, MAP_ZONE_MAPFLAG_LENGTH);
+				npc_parse_mapflag(map[m].name, empty, zone, params, empty, empty, empty);
+				}
 				break;
 			case MF_NOCOMMAND:			map[m].nocommand = (val <= 0) ? 100 : val; break;
 			case MF_NODROP:				map[m].flag.nodrop = 1; break;
@@ -10872,10 +10921,6 @@ BUILDIN_FUNC(removemapflag)
 			case MF_FOG:				map[m].flag.fog = 0; break;
 			case MF_SAKURA:				map[m].flag.sakura = 0; break;
 			case MF_LEAVES:				map[m].flag.leaves = 0; break;
-			/**
-			 * No longer available, keeping here just in case it's back someday. [Ind]
-			 **/
-			//case MF_RAIN:				map[m].flag.rain = 0; break;
 			case MF_NOGO:				map[m].flag.nogo = 0; break;
 			case MF_CLOUDS:				map[m].flag.clouds = 0; break;
 			case MF_CLOUDS2:			map[m].flag.clouds2 = 0; break;
@@ -10890,11 +10935,8 @@ BUILDIN_FUNC(removemapflag)
 			case MF_NORETURN:			map[m].flag.noreturn = 0; break;
 			case MF_NOWARPTO:			map[m].flag.nowarpto = 0; break;
 			case MF_NIGHTMAREDROP:		map[m].flag.pvp_nightmaredrop = 0; break;
-			case MF_RESTRICTED:
-				map[m].zone ^= 1<<(val+1);
-				if (map[m].zone == 0){
-					map[m].flag.restricted=0;
-				}
+			case MF_ZONE:/* reset zone state, mapflags cant be removed however */
+				map[m].zone = &map_zone_all;
 				break;
 			case MF_NOCOMMAND:			map[m].nocommand = 0; break;
 			case MF_NODROP:				map[m].flag.nodrop = 0; break;
@@ -12968,15 +13010,16 @@ BUILDIN_FUNC(getlook)
         type=script_getnum(st,2);
         val=-1;
         switch(type) {
-        case LOOK_HAIR: val=sd->status.hair; break; //1
-        case LOOK_WEAPON: val=sd->status.weapon; break; //2
-        case LOOK_HEAD_BOTTOM: val=sd->status.head_bottom; break; //3
-        case LOOK_HEAD_TOP: val=sd->status.head_top; break; //4
-        case LOOK_HEAD_MID: val=sd->status.head_mid; break; //5
-        case LOOK_HAIR_COLOR: val=sd->status.hair_color; break; //6
-        case LOOK_CLOTHES_COLOR: val=sd->status.clothes_color; break; //7
-        case LOOK_SHIELD: val=sd->status.shield; break; //8
-        case LOOK_SHOES: break; //9
+			case LOOK_HAIR:			val=sd->status.hair; break; //1
+			case LOOK_WEAPON:		val=sd->status.weapon; break; //2
+			case LOOK_HEAD_BOTTOM:	val=sd->status.head_bottom; break; //3
+			case LOOK_HEAD_TOP:		val=sd->status.head_top; break; //4
+			case LOOK_HEAD_MID:		val=sd->status.head_mid; break; //5
+			case LOOK_HAIR_COLOR:	val=sd->status.hair_color; break; //6
+			case LOOK_CLOTHES_COLOR:val=sd->status.clothes_color; break; //7
+			case LOOK_SHIELD:		val=sd->status.shield; break; //8
+			case LOOK_SHOES: break; //9
+			case LOOK_ROBE:			val=sd->status.robe; break; //12
         }
 
         script_pushint(st,val);
@@ -16475,7 +16518,7 @@ BUILDIN_FUNC(instance_npcname)
 
 	if( instance_id && (nd = npc_name2id(str)) != NULL )
  	{
-		static char npcname[NPC_NAME_LENGTH];
+		static char npcname[NAME_LENGTH];
 		snprintf(npcname, sizeof(npcname), "dup_%d_%d", instance_id, nd->bl.id);
  		script_pushconststr(st,npcname);
 	}
@@ -17591,7 +17634,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(isloggedin,"i?"),
 	BUILDIN_DEF(setmapflagnosave,"ssii"),
 	BUILDIN_DEF(getmapflag,"si"),
-	BUILDIN_DEF(setmapflag,"si?"),
+	BUILDIN_DEF(setmapflag,"sv?"),
 	BUILDIN_DEF(removemapflag,"si?"),
 	BUILDIN_DEF(pvpon,"s"),
 	BUILDIN_DEF(pvpoff,"s"),
@@ -17847,6 +17890,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(cleanmap,"s"),
 	BUILDIN_DEF2(cleanmap,"cleanarea","siiii"),
 	BUILDIN_DEF(npcskill,"viii"),
+	BUILDIN_DEF(itemeffect,"v"),
 	BUILDIN_DEF(consumeitem,"v"),
 	BUILDIN_DEF(delequip,"i"),
 	/**

@@ -1778,12 +1778,12 @@ ACMD_FUNC(go)
 		{ MAP_MANUK,       282, 138 }, // 27=Manuk
 		{ MAP_SPLENDIDE,   197, 176 }, // 28=Splendide
 		{ MAP_BRASILIS,    182, 239 }, // 29=Brasilis
-#ifdef RENEWAL
+  #ifdef RENEWAL 
 		{ MAP_DICASTES,    198, 187 }, // 30=El Dicastes
 		{ MAP_MORA,         44, 151 }, // 31=Mora
 		{ MAP_DEWATA,      200, 180 }, // 32=Dewata
 		{ MAP_MALANGDO,    140, 114 }, // 33=Malangdo Island
-#endif
+  #endif
 	};
 
 	nullpo_retr(-1, sd);
@@ -3789,16 +3789,16 @@ ACMD_FUNC(reloadscript)
  * 0 = no additional information
  * 1 = Show users in that map and their location
  * 2 = Shows NPCs in that map
- * 3 = Shows the shops/chats in that map (not implemented)
+ * 3 = Shows the chats in that map
+ TODO# add the missing mapflags e.g. adjust_skill_damage to display
  *------------------------------------------*/
-ACMD_FUNC(mapinfo)
-{
+ACMD_FUNC(mapinfo) {
 	struct map_session_data* pl_sd;
 	struct s_mapiterator* iter;
 	struct npc_data *nd = NULL;
 	struct chat_data *cd = NULL;
 	char direction[12];
-	int i, m_id, chat_num, list = 0;
+	int i, m_id, chat_num = 0, list = 0, vend_num = 0;
 	unsigned short m_index;
 	char mapname[24];
 
@@ -3833,12 +3833,17 @@ ACMD_FUNC(mapinfo)
 	// count chats (for initial message)
 	chat_num = 0;
 	iter = mapit_getallusers();
-	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
-		if( (cd = (struct chat_data*)map_id2bl(pl_sd->chatID)) != NULL && pl_sd->mapindex == m_index && cd->usersd[0] == pl_sd )
-			chat_num++;
+	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) ) {
+		if( pl_sd->mapindex == m_index ) {
+			if( sd->state.vending )
+				vend_num++;
+			else if( (cd = (struct chat_data*)map_id2bl(pl_sd->chatID)) != NULL && cd->usersd[0] == pl_sd )
+				chat_num++;
+		}
+	}
 	mapit_free(iter);
 
-	sprintf(atcmd_output, msg_txt(1040), mapname, map[m_id].users, map[m_id].npc_num, chat_num); // Map Name: %s | Players In Map: %d | NPCs In Map: %d | Chats In Map: %d
+	sprintf(atcmd_output, msg_txt(1040), mapname, map[m_id].zone->name, map[m_id].users, map[m_id].npc_num, chat_num, vend_num); // Map: %s (Zone:%s) | Players: %d | NPCs: %d | Chats: %d | Vendings: %d
 	clif_displaymessage(fd, atcmd_output);
 	clif_displaymessage(fd, msg_txt(1041)); // ------ Map Flags ------
 	if (map[m_id].flag.town)
@@ -3926,11 +3931,6 @@ ACMD_FUNC(mapinfo)
 		strcat(atcmd_output, msg_txt(1077)); // Fireworks |
 	if (map[m_id].flag.leaves)
 		strcat(atcmd_output, msg_txt(1078)); // Leaves |
-	/**
-	 * No longer available, keeping here just in case it's back someday. [Ind]
-	 **/
-	//if (map[m_id].flag.rain)
-	//	strcat(atcmd_output, msg_txt(1079)); // Rain |
 	if (map[m_id].flag.nightenabled)
 		strcat(atcmd_output, msg_txt(1080)); // Displays Night |
 	clif_displaymessage(fd, atcmd_output);
@@ -7629,7 +7629,7 @@ ACMD_FUNC(mapflag) {
 		checkflag(fog);					checkflag(fireworks);			checkflag(sakura);		checkflag(leaves);
 		checkflag(nogo);				checkflag(nobaseexp);
 		checkflag(nojobexp);			checkflag(nomobloot);			checkflag(nomvploot);	checkflag(nightenabled);
-		checkflag(restricted);			checkflag(nodrop);				checkflag(novending);	checkflag(loadevent);
+		checkflag(nodrop);				checkflag(novending);	checkflag(loadevent);
 		checkflag(nochat);				checkflag(partylock);			checkflag(guildlock);	checkflag(src4instance);
 		clif_displaymessage(sd->fd," ");
 		clif_displaymessage(sd->fd,msg_txt(1312)); // Usage: "@mapflag monster_noteleport 1" (0=Off | 1=On)
@@ -7648,7 +7648,7 @@ ACMD_FUNC(mapflag) {
 	setflag(fog);				setflag(fireworks);			setflag(sakura);			setflag(leaves);
 	setflag(nogo);				setflag(nobaseexp);
 	setflag(nojobexp);			setflag(nomobloot);			setflag(nomvploot);			setflag(nightenabled);
-	setflag(restricted);		setflag(nodrop);			setflag(novending);			setflag(loadevent);
+	setflag(nodrop);			setflag(novending);			setflag(loadevent);
 	setflag(nochat);			setflag(partylock);			setflag(guildlock);			setflag(src4instance);
 
 	clif_displaymessage(sd->fd,msg_txt(1314)); // Invalid flag name or flag.
@@ -7660,7 +7660,7 @@ ACMD_FUNC(mapflag) {
 	clif_displaymessage(sd->fd,"pvp_nocalcrank, gvg_castle, gvg, gvg_dungeon, gvg_noparty, battleground,");
 	clif_displaymessage(sd->fd,"nozenypenalty, notrade, noskill, nowarp, nowarpto, noicewall, snow, clouds, clouds2,");
 	clif_displaymessage(sd->fd,"fog, fireworks, sakura, leaves, nogo, nobaseexp, nojobexp, nomobloot,");
-	clif_displaymessage(sd->fd,"nomvploot, nightenabled, restricted, nodrop, novending, loadevent, nochat, partylock,");
+	clif_displaymessage(sd->fd,"nomvploot, nightenabled, nodrop, novending, loadevent, nochat, partylock,");
 	clif_displaymessage(sd->fd,"guildlock, src4instance");
 
 #undef checkflag
@@ -8592,7 +8592,7 @@ ACMD_FUNC(accinfo) {
 	//remove const type
 	safestrncpy(query, message, NAME_LENGTH);
 
-	intif_request_accinfo( sd->fd, sd->bl.id, sd->group_id, query );
+	intif_request_accinfo( sd->fd, sd->bl.id, pc_get_group_level(sd), query );
 
 	return 0;
 }
