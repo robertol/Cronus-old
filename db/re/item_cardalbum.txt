@@ -391,8 +391,6 @@
 3,4475,3	// Cobalt Mineral Card
 3,4476,3	// Pinguicula Card
 3,4477,3	// Hell Apocalypse Card
-
-// Eclage
 //3,4505,1	// Scaraba Card
 //3,4506,1	// Dolomedes Card
 //3,4508,1	// Gold Scaraba Card
