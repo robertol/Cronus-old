@@ -56,8 +56,8 @@ go: "Uso: <nome da cidade|número>\n" "Teleporta você para uma cidade.\n"
 	"  11: Gonryun (Kulun)                 31: Mora\n"  
 	"  12: Umbala                              32: Dewata\n"  
 	"  13: Niflheim                             33: Ilha de Malangdo\n"   
-	"  14: Louyang	                              
-    "  15: Campo de Treinamento          
+	"  14: Louyang "	                              
+    "  15: Campo de Treinamento "          
     "  16: Prisão\n"                                            
 jumpto: "Uso: <nome do personagem>\n" "Você é teleportado para o personagem selecionado."
 follow: "Uso: <nome do personagem>\n" "Segue um jogador."
