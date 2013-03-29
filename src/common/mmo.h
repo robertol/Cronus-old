@@ -379,7 +379,8 @@ struct mmo_charstatus {
 	struct hotkey hotkeys[MAX_HOTKEYS];
 #endif
 	bool show_equip;
-	short rename;
+	unsigned short rename;
+	unsigned short slotchange;
 
 	time_t delete_date;
 };
