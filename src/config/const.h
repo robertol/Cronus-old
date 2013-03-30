@@ -1,11 +1,12 @@
-// Copyright (c) rAthena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
-#ifndef _RRCONFIGS_CONST_
-#define _RRCONFIGS_CONST_
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
+#ifndef _H_CONSTANTS_
+#define _H_CONSTANTS_
 
 /**
- * rAthena configuration file (http://rathena.org)
- * For detailed guidance on these check http://rathena.org/wiki/SRC/config/
+ * Hercules configuration file (http://hercules.ws)
+ * For detailed guidance on these check http://hercules.ws/wiki/SRC/config/
  **/
 
 /**
@@ -102,4 +103,4 @@
 /**
  * End of File
  **/
-#endif
+#endif /* _H_CONSTANTS_ */
