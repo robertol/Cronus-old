@@ -88,8 +88,14 @@ void pincode_setnew(int fd, struct char_session_data* sd) {
 	strncpy(newpin, (char*)RFIFOP(fd,6), sizeof(newpin));
 	pincode->decrypt(sd->pincode_seed,newpin);
 	pincode->update( sd->account_id, newpin );
+<<<<<<< .mine
+	
 	strncpy(sd->pincode, newpin, sizeof(sd->pincode));
 	pincode->sendstate( fd, sd, PINCODE_ASK );
+=======
+	strncpy(sd->pincode, newpin, sizeof(sd->pincode));
+	pincode->sendstate( fd, sd, PINCODE_ASK );
+>>>>>>> .r204
 }
 
 // 0 = pin is correct
