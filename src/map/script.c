@@ -12915,7 +12915,7 @@ BUILDIN_FUNC(message)
 
 	if((pl_sd=map_nick2sd((char *) player)) == NULL)
 		return 0;
-	clif->displaymessage(pl_sd->fd, msg);
+	clif->message(pl_sd->fd, msg);
 
 	return 0;
 }
