@@ -7262,22 +7262,16 @@ BUILDIN_FUNC(strcharinfo)
 			script_pushstrcopy(st,sd->status.name);
 			break;
 		case 1:
-			if( ( p = party_search(sd->status.party_id) ) != NULL )
-			{
+			if( ( p = party_search(sd->status.party_id) ) != NULL )	{
 				script_pushstrcopy(st,p->party.name);
-			}
-			else
-			{
+			}	else	{
 				script_pushconststr(st,"");
 			}
 			break;
 		case 2:
-			if( ( g = guild_search(sd->status.guild_id) ) != NULL )
-			{
+			if( ( g = guild_search(sd->status.guild_id) ) != NULL )	{
 				script_pushstrcopy(st,g->name);
-			}
-			else
-			{
+			}	else	{
 				script_pushconststr(st,"");
 			}
 			break;
@@ -12706,7 +12700,7 @@ BUILDIN_FUNC(recovery)
 			status_revive(&sd->bl, 100, 100);
 		else
 			status_percent_heal(&sd->bl, 100, 100);
-		clif->displaymessage(sd->fd,msg_txt(680));
+		clif->message(sd->fd,msg_txt(680));
 	}
 	mapit_free(iter);
 	return 0;
@@ -12942,7 +12936,7 @@ BUILDIN_FUNC(npctalk)
 		safestrncpy(name, nd->name, sizeof(name));
 		strtok(name, "#"); // discard extra name identifier if present
 		safesnprintf(message, sizeof(message), "%s : %s", name, str);
-		clif->message(&nd->bl, message);
+		clif->disp_overhead(&nd->bl, message);
 	}
 
 	return 0;
@@ -15369,7 +15363,7 @@ BUILDIN_FUNC(unitattack)
 	switch( unit_bl->type )
 	{
 	case BL_PC:
-		clif->ActionRequest_sub(((TBL_PC *)unit_bl), actiontype > 0 ? 0x07 : 0x00, target_bl->id, gettick());
+		clif->pActionRequest_sub(((TBL_PC *)unit_bl), actiontype > 0 ? 0x07 : 0x00, target_bl->id, gettick());
 		script_pushint(st, 1);
 		return 0;
 	case BL_MOB:
@@ -15427,9 +15421,9 @@ BUILDIN_FUNC(unittalk)
 		struct StringBuf sbuf;
 		StringBuf_Init(&sbuf);
 		StringBuf_Printf(&sbuf, "%s : %s", status_get_name(bl), message);
-		clif->message(bl, StringBuf_Value(&sbuf));
+		clif->disp_overhead(bl, StringBuf_Value(&sbuf));
 		if( bl->type == BL_PC )
-			clif->displaymessage(((TBL_PC*)bl)->fd, StringBuf_Value(&sbuf));
+			clif->message(((TBL_PC*)bl)->fd, StringBuf_Value(&sbuf));
 		StringBuf_Destroy(&sbuf);
 	}
 
