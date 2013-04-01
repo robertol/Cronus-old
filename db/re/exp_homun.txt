@@ -1,4 +1,4 @@
-//Homunculus LvUp experience value table
+//Nível do Homunculo - Tabela com valores de experiência.
 347
 545
 891
