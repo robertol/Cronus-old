@@ -753,3 +753,5 @@ bossnia_01	mapflag	nomemo
 bossnia_02	mapflag	nomemo
 bossnia_03	mapflag	nomemo
 bossnia_04	mapflag	nomemo
+
+itemmall	mapflag	nomemo

@@ -34,7 +34,7 @@ job_sage	mapflag	nosave	SavePoint
 job_star	mapflag	nosave	SavePoint
 job_soul	mapflag	nosave	SavePoint
 job3_sha01	mapflag	nosave	SavePoint
-job_ko	mapflag	nosave	SavePoint
+//job_ko	mapflag	nosave	SavePoint
 // 3-1
 job3_arch01	mapflag	nosave	SavePoint
 job3_arch02	mapflag	nosave	SavePoint
@@ -316,3 +316,6 @@ que_lhz	mapflag	nosave	SavePoint
 // Poring War ====================
 poring_w01	mapflag	nosave	SavePoint
 poring_w02	mapflag	nosave	SavePoint
+
+turbo_room	mapflag	nosave	SavePoint
+itemmall	mapflag	nosave	SavePoint

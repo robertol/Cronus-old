@@ -12,3 +12,4 @@
 
 //prontera	mapflag	novending
 //prt_in	mapflag	novending
+itemmall	mapflag	novending

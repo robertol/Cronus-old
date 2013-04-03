@@ -186,7 +186,7 @@ job3_war02	mapflag	nopenalty
 job3_gen01	mapflag	nopenalty
 // Ext --------------------
 job3_sha01	mapflag	nopenalty
-job_ko	mapflag	nopenalty
+//job_ko	mapflag	nopenalty
 
 // Misc Quests =======================
 mosk_ship	mapflag	nopenalty
