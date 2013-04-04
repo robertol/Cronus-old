@@ -3670,7 +3670,7 @@ void map_zone_init(void) {
 }
 enum bl_type map_zone_bl_type(const char *entry) {
 	char temp[200], *parse;
-	enum bl_type bl;
+	enum bl_type bl = 0;
 	safestrncpy(temp, entry, 200);
 	
 	parse = strtok(temp,"|");
