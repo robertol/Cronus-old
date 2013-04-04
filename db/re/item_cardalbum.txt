@@ -422,8 +422,8 @@
 44,4179,10	// Carta Libélula
 44,4183,10	// Carta Lobo Errante
 44,4197,10	// Carta Mastering
-44,4198,1	// Carta Maya Marcho
-44,4203,10	// Carta Dragõa Mutante
+44,4198,1	// Carta Maya Macho
+44,4203,10	// Carta Dragão Mutante
 44,4207,1	// Carta Mysteltainn
 44,4211,1	// Carta Vocal
 44,4237,5	// Carta Duque Coruja
