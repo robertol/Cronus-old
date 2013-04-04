@@ -1,15 +1,15 @@
 //===== Cronus Script =======================================
-//= Spawn Monstros das Cavernas dos Cl√£s.
+//= Spawn Monstros das Cavernas dos Cl„s.
 //===== Por: ==================================================
 //= Athena (1.0)
-//===== Vers√£o Atual: =====================================
+//===== Vers„o Atual: =====================================
 //= 1.2
-//===== Compat√≠vel Com: =====================================
-//= Athena, rAthena, H√©rcules, Cronus
-//===== Coment√°rios Adicionais: =================================
+//===== CompatÌvel Com: =====================================
+//= Athena, rAthena, HÈrcules, Cronus
+//===== Coment·rios Adicionais: =================================
 //= 1.0 First version
 //= 1.1 Updated spawns to official. [L0ne_W0lf]
-//= 1.2 Tradu√ß√£o [BOO]
+//= 1.2 TraduÁ„o [BOO]
 //============================================================
 
 //==================================================

@@ -2,11 +2,11 @@
 //= Spawn Mina de Einbech
 //===== Por: ==================================================
 //= Athena (1.0)
-//===== Vers√£o Atual: =====================================
+//===== Vers„o Atual: =====================================
 //= 1.5
-//===== Compat√≠vel Com: =====================================
+//===== CompatÌvel Com: =====================================
 //= rAthena, Hercules, Cronus
-//===== Coment√°rios Adicionais: =================================
+//===== Coment·rios Adicionais: =================================
 //= 1.0 spawn N and spawn delays aren't yet correct, so I set
 //=     respawn delays quite big for now [Lupus]
 //= 1.1 Fixed monsters spawn places
@@ -17,17 +17,17 @@
 //============================================================
 
 //==================================================
-// ein_dun01 - Calabou√ßo da Mina
+// ein_dun01 - CalabouÁo da Mina
 //==================================================
 ein_dun01,0,0,0,0	monster	Mineiros	1616,70,0,0,0
-ein_dun01,0,0,0,0	monster	Nuvem T√≥xica	1620,30,300000,0,0
+ein_dun01,0,0,0,0	monster	Nuvem TÛxica	1620,30,300000,0,0
 ein_dun01,0,0,0,0	monster	Porcellio	1619,30,0,0,0
 ein_dun01,0,0,0,0	monster	Nuvem Venenosa	1621,10,300000,0,0
 ein_dun01,0,0,0,0	monster	Fornalha Velha	1617,1,1800000,600000,0
 ein_dun01,0,0,0,0	monster	Ungoliant	1618,1,3600000,3000000,0
 
 //==================================================
-// ein_dun02 - Calabou√ßo da Mina
+// ein_dun02 - CalabouÁo da Mina
 //==================================================
 ein_dun02,0,0,0,0	monster	Obsidiana	1615,10,0,0,0
 ein_dun02,0,0,0,0	monster	Mineral	1614,15,0,0,0

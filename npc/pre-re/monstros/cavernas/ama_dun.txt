@@ -4,7 +4,7 @@
 //= Athena (1.0)
 //===== Current Version: =====================================
 //= 1.2
-//===== Coment√°rios Adicionais: =================================
+//===== Coment·rios Adicionais: =================================
 //= 1.1 Official kRO 10.1 spawns [Playtester]
 //= 1.2 Corrected MVP spawn variance. [L0ne_W0lf]
 //============================================================
@@ -17,7 +17,7 @@ ama_dun01,0,0,0,0	monster	Soldado Atirador	1403,45,0,0,0
 ama_dun01,0,0,0,0	monster	Shinobi	1401,2,180000,90000,0
 
 //==================================================
-// ama_dun02 - Campo de Batalha da Floresta Subterr√¢nea
+// ama_dun02 - Campo de Batalha da Floresta Subterr‚nea
 //==================================================
 ama_dun02,0,0,0,0	monster	Sapo Venenoso	1402,35,180000,90000,0
 ama_dun02,0,0,0,0	monster	Soldado Atirador	1403,20,60000,30000,0
@@ -27,13 +27,13 @@ ama_dun02,0,0,0,0	monster	Horong	1129,10,0,0,0
 ama_dun02,0,0,0,0	monster	Papel	1375,1,180000,90000,0
 
 //==================================================
-// ama_dun03 - Templo Subterr√¢neo de Amatsu
+// ama_dun03 - Templo Subterr‚neo de Amatsu
 //==================================================
 ama_dun03,0,0,0,0	monster	Shinobi	1401,35,600000,300000,0
 ama_dun03,0,0,0,0	monster	Soldado Atirador	1403,25,0,0,0
 ama_dun03,0,0,0,0	monster	Boneco de Miyabi	1404,1,0,0,0
 ama_dun03,0,0,0,0	monster	Tengu	1405,40,600000,300000,0
-ama_dun03,0,0,0,0	monster	M√≠mico	1191,5,0,0,0
+ama_dun03,0,0,0,0	monster	MÌmico	1191,5,0,0,0
 ama_dun03,0,0,0,0	monster	Papel	1375,20,600000,300000,0
 ama_dun03,0,0,0,0	boss_monster	Samurai Encarnado	1492,1,5460000,600000,0
 ama_dun03,0,0,0,0	monster	Shinobi	1401,20,5450000,3600000,0
