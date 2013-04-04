@@ -36,7 +36,7 @@ in_sphinx2,0,0,0,0	monster	Matyr	1146,20,0,0,0
 in_sphinx3,0,0,0,0	monster	Matyr	1146,15,0,0,0
 in_sphinx3,0,0,0,0	monster	Pasana	1154,5,0,0,0
 in_sphinx3,0,0,0,0	monster	Marduk	1140,65,0,0,0
-in_sphinx3,0,0,0,0	monster Mímico  1191,5,600000,300000,1
+in_sphinx3,0,0,0,0	monster Mímico	1191,5,600000,300000,1
 
 //==================================================
 // In_sphinx4 - Esfinge F4
