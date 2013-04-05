@@ -29,18 +29,16 @@ Equipe de Desenvolvimento
 - Raizen	- Carlos Lain
 
 ### Coordenadores
-- Cezarro	- Fernando Cezarro
+- .twink	- Samuel Soares
 
 ### Desenvolvedores
 - I am Cold	- Márcio Montenegro
-- Otonii	- Leandro Otonii
 - Yum		- Luann Peixe
 - Wolf		- João Victor Senos
 - Golen Maker	- Ligleyson Warnielle
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
-- PHpedro	- Pedro
 - Eru Yuuko
 - KaduKiller	- Carlos Salles
 - beckdeveloper
