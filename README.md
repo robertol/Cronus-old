@@ -36,6 +36,7 @@ Equipe de Desenvolvimento
 - Yum		- Luann Peixe
 - Wolf		- João Victor Senos
 - Golen Maker	- Ligleyson Warnielle
+- Axl		- José Goís
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
