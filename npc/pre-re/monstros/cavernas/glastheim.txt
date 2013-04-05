@@ -108,7 +108,7 @@ gl_prison1,0,0,0,0	monster	Fendark	1202,10,0,0,0
 //==================================================
 // glast_01 - Glast Heim
 //==================================================
-glast_01,0,0,0,0	monster	Cavaleiro do Abismo	1219,2,600000,300000,1
+glast_01,0,0,0,0	monster	Cavaleiro do Abismo		1219,2,600000,300000,1
 glast_01,0,0,0,0	monster	Gárgola	1253,10,0,0,1
 glast_01,233,209,15,15	monster	Planta Verde	1080,8,360000,180000,1
 glast_01,233,209,15,15	monster	Planta Azul	1079,2,900000,450000,1
