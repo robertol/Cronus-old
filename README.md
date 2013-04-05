@@ -43,3 +43,4 @@ Equipe de Desenvolvimento
 - KaduKiller	- Carlos Salles
 - beckdeveloper
 - Apo
+- BOO		- José Filho
