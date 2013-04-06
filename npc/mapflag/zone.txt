@@ -81,13 +81,13 @@ arug_cas05	mapflag	zone	GvG2
 1@ma_h	mapflag	zone	Memorial Dungeon
 
 // Buwaya Cave ===========
-1@ma_c	mapflag	zone	Memorial Dungeon
+//1@ma_c	mapflag	zone	Memorial Dungeon
 
 // Bakonawa Hideout ===========
-1@ma_b	mapflag	zone	Memorial Dungeon
+//1@ma_b	mapflag	zone	Memorial Dungeon
 
 // Inside Eclage ===========
-1@ecl	mapflag	zone	Memorial Dungeon
+//1@ecl	mapflag	zone	Memorial Dungeon
 
 //Towns
 alberta	mapflag	zone	Towns
