@@ -1,7 +1,7 @@
-// Mercenary Database
+// Banco de dados de Assistentes
 //
-// Structure of Database:
-// ID,Sprite_Name,Name,LV,HP,SP,Range1,ATK1,ATK2,DEF,MDEF,STR,AGI,VIT,INT,DEX,LUK,Range2,Range3,Scale,Race,Element,Speed,aDelay,aMotion,dMotion
+// Estrutura do banco:
+// ID,Nome do Sprite,Nome,LV,HP,SP,Alcance1,ATK1,ATK2,DEF,MDEF,STR,AGI,VIT,INT,DEX,LUK,Alcance2,Alcance3,Tamanho,Raça,Elemento,Velocidade,aDelay,aMotion,dMotion
 
 // Monster Mercenaries
 1191,MIMIC,Mimic,51,6120,187,2,150,900,10,40,44,121,1,60,75,110,10,12,1,0,60,100,972,500,288
