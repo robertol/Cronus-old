@@ -1,30 +1,30 @@
-// SA_CLASSCHANGE Summonable Monsters Database
+// SA_CLASSCHANGE Banco de dados do monstros convocados.
 //
-// Structure of Database:
-// MobID,DummyName,Rate
+// Estrutura do banco:
+// ID do monstro, Modelo de nome, Taxa
 
-0,Baphomet,1039
+0,Bafomé,1039
 1038,Osiris,1000000
-1039,Baphomet,1000000
+1039,Bafomé,1000000
 1046,Doppelganger,1000000
-1059,Mistress,1000000
-1086,Golden Thief Bug,1000000
-1087,Orc Hero,1000000
+1059,Abelha-Rainha,1000000
+1086,Besouro-Ladrão Dourado,1000000
+1087,Orc Herói,1000000
 1112,Drake,1000000
 1115,Eddga,1000000
 1147,Maya,1000000
-1150,Moonlight Flower,1000000
-1157,Pharaoh,1000000
-1159,Phreeoni,1000000
-1190,Orc Lord,1000000
-1251,Stormy Knight,1000000
-1252,Garm,1000000
-1272,Dark Lord,1000000
-1312,Turtle General,1000000
-1373,Lord of the Dead,1000000
+1150,Flor do Luar,1000000
+1157,Faraó,1000000
+1159,Freeoni,1000000
+1190,Senhor dos Orcs,1000000
+1251,Cavaleiro da Tempestade,1000000
+1252,Hatii,1000000
+1272,Senhor das Trevas,1000000
+1312,General Tartaruga,1000000
+1373,Senhor dos Mortos,1000000
 1388,Arc Angeling,1000000
-1389,Dracula,1000000
-1418,Evil Snake Lord,1000000
-1492,Samurai Specter,1000000
-1511,Amon Ra,1000000
+1389,Drácula,1000000
+1418,Serpente Suprema,1000000
+1492,Samurai Encarnado,1000000
+1511,Amon-Rá,1000000
 1583,Tao Gunka,1000000
