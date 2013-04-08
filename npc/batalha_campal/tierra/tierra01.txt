@@ -104,8 +104,8 @@ OnEnable:
 	donpcevent "OBJ#bat_a01_n::OnEnable";
 	donpcevent "NOBJ_mob#bat_a01_a::Onkill";
 	donpcevent "NOBJ_mob#bat_a01_b::Onkill";
-	donpcevent "Terapeuta de Batalha#a01_a::OnEnable";
-	donpcevent "Terapeuta de Batalha#a01_b::OnEnable";
+	donpcevent "Terapeuta#a01_a::OnEnable";
+	donpcevent "Terapeuta#a01_b::OnEnable";
 	donpcevent "countdown#bat_a01::OnEnable";
 	disablenpc "Ferreiro Guillaume#a01";
 	disablenpc "Ferreiro Croix#bat_a01";
@@ -155,8 +155,8 @@ Onkill:
 
 OnMyMobDead:
 	if (mobcount("bat_a01","OBJ#bat_a01_a::OnMyMobDead") < 1) {
-		donpcevent "Terapeuta de Batalha#a01_a::OnStop";
-		donpcevent "Terapeuta de Batalha#a01_b::OnStop";
+		donpcevent "Terapeuta#a01_a::OnStop";
+		donpcevent "Terapeuta#a01_b::OnStop";
 		set $@TierraBG1_Victory, 2;
 		enablenpc "Vintenar Guillaume#a01_a";
 		enablenpc "Vintenar Croix#a01_b";
@@ -178,8 +178,8 @@ Onkill:
 
 OnMyMobDead:
 	if (mobcount("bat_a01","OBJ#bat_a01_b::OnMyMobDead") < 1) {
-		donpcevent "Terapeuta de Batalha#a01_a::OnStop";
-		donpcevent "Terapeuta de Batalha#a01_b::OnStop";
+		donpcevent "Terapeuta#a01_a::OnStop";
+		donpcevent "Terapeuta#a01_b::OnStop";
 		set $@TierraBG1_Victory, 1;
 		enablenpc "Vintenar Guillaume#a01_a";
 		enablenpc "Vintenar Croix#a01_b";
@@ -458,7 +458,7 @@ OnInit:
 	end;
 }
 
-bat_a01,53,377,3	script	Terapeuta de Batalha#a01_a	95,{
+bat_a01,53,377,3	script	Terapeuta#a01_a	95,{
 	specialeffect2 EF_HEAL;
 	mes "[Terapeuta de Batalha]";
 	mes "Agora feche o seus olhos";
@@ -474,12 +474,12 @@ OnInit:
 OnEnable:
 	stopnpctimer;
 	initnpctimer;
-	enablenpc "Terapeuta de Batalha#a01_a";
+	enablenpc "Terapeuta#a01_a";
 	end;
 
 Onstop:
 	disablenpc "bat_a01_rp1_a_warp";
-	disablenpc "Terapeuta de Batalha#a01_a";
+	disablenpc "Terapeuta#a01_a";
 	stopnpctimer;
 	end;
 
@@ -493,7 +493,7 @@ OnTimer26000:
 	end;
 
 OnTimer26500:
-	donpcevent "Terapeuta de Batalha#a01_a::OnEnable";
+	donpcevent "Terapeuta#a01_a::OnEnable";
 	end;
 }
 
@@ -508,7 +508,7 @@ OnTouch_:
 	end;
 }
 
-bat_a01,45,19,3	script	Terapeuta de Batalha#a01_b	95,{
+bat_a01,45,19,3	script	Terapeuta#a01_b	95,{
 	specialeffect2 EF_HEAL;
 	mes "[Terapeuta de Batalha]";
 	mes "Agora feche o seus olhos";
@@ -524,12 +524,12 @@ OnInit:
 OnEnable:
 	stopnpctimer;
 	initnpctimer;
-	enablenpc "Terapeuta de Batalha#a01_b";
+	enablenpc "Terapeuta#a01_b";
 	end;
 
 Onstop:
 	disablenpc "bat_a01_rp1_b_warp";
-	disablenpc "Terapeuta de Batalha#a01_b";
+	disablenpc "Terapeuta#a01_b";
 	stopnpctimer;
 	end;
 
@@ -543,7 +543,7 @@ OnTimer26000:
 	end;
 
 OnTimer26500:
-	donpcevent "Terapeuta de Batalha#a01_b::OnEnable";
+	donpcevent "Terapeuta#a01_b::OnEnable";
 	end;
 }
 
@@ -558,7 +558,7 @@ OnTouch:
 	end;
 }
 
-bat_a01,60,216,3	script	Fantasma do Vale#bat_a01_n	950,{
+bat_a01,60,216,3	script	Fantasma#bat_a01_n	950,{
 	specialeffect2 EF_HEAL;
 	mes "[Fantasma do Vale]";
 	mes "Boo...Boo...";
@@ -583,7 +583,7 @@ OnTimer26000:
 	end;
 
 OnTimer26500:
-	donpcevent "Fantasma do Vale#bat_a01_n::OnEnable";
+	donpcevent "Fantasma#bat_a01_n::OnEnable";
 	end;
 }
 
@@ -654,15 +654,15 @@ OnTouch_:
 	end;
 }
 
-bat_a01,171,309,3	script	Acampamento Guillaume#flag1	973,{ end; }
-bat_a01,149,310,3	script	Acampamento Guillaume#flag2	973,{ end; }
-bat_a01,119,336,3	script	Acampamento Guillaume#flag3	973,{ end; }
-bat_a01,118,357,3	script	Acampamento Guillaume#flag4	973,{ end; }
-bat_a01,150,380,3	script	Acampamento Guillaume#flag5	973,{ end; }
-bat_a01,173,380,3	script	Acampamento Guillaume#flag6	973,{ end; }
-bat_a01,210,344,3	script	Acampamento Guillaume#flag7	973,{ end; }
-bat_a01,350,325,3	script	Acampamento Guillaume#flag8	973,{ end; }
-bat_a01,358,325,3	script	Acampamento Guillaume#flag9	973,{ end; }
+bat_a01,171,309,3	script	Acampamento Gui#flag1	973,{ end; }
+bat_a01,149,310,3	script	Acampamento Gui#flag2	973,{ end; }
+bat_a01,119,336,3	script	Acampamento Gui#flag3	973,{ end; }
+bat_a01,118,357,3	script	Acampamento Gui#flag4	973,{ end; }
+bat_a01,150,380,3	script	Acampamento Gui#flag5	973,{ end; }
+bat_a01,173,380,3	script	Acampamento Gui#flag6	973,{ end; }
+bat_a01,210,344,3	script	Acampamento Gui#flag7	973,{ end; }
+bat_a01,350,325,3	script	Acampamento Gui#flag8	973,{ end; }
+bat_a01,358,325,3	script	Acampamento Gui#flag9	973,{ end; }
 
 bat_a01,138,12,3	script	Acampamento Croix#flag1	974,{ end; }
 bat_a01,108,36,3	script	Acampamento Croix#flag2	974,{ end; }
