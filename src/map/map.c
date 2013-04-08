@@ -3217,7 +3217,7 @@ int map_readallmaps (void)
 	}
 
 	// finished map loading
-	ShowInfo("Successfully loaded '"CL_WHITE"%d"CL_RESET"' maps."CL_CLL"\n",map_num);
+	ShowInfo("Leitura Finalizada '"CL_WHITE"%d"CL_RESET"' maps."CL_CLL"\n",map_num);
 	instance_start = map_num; // Next Map Index will be instances
 
 	if (maps_removed)
@@ -4155,8 +4155,8 @@ static void map_helpscreen(bool do_exit)
  *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit)
 {
-	ShowInfo(CL_WHITE"rAthena SVN version: %s" CL_RESET"\n", get_svn_revision());
-	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://rathena.org/\n");
+	ShowInfo(CL_WHITE"Cronus SVN version: %s" CL_RESET"\n", get_svn_revision());
+	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
 	ShowInfo(CL_GREEN"IRC Channel:"CL_RESET"\tirc://irc.rathena.net/#rathena\n");
 	ShowInfo("Open "CL_WHITE"readme.txt"CL_RESET" for more information.\n");
 	if( do_exit )

@@ -331,7 +331,7 @@ int inter_guild_tosql(struct guild *g,int flag)
 	}
 
 	if (save_log)
-		ShowInfo("Saved guild (%d - %s):%s\n",g->guild_id,g->name,t_info);
+		ShowInfo("Clã Salvo (%d - %s):%s\n",g->guild_id,g->name,t_info);
 	return 1;
 }
 
@@ -352,7 +352,7 @@ struct guild * inter_guild_fromsql(int guild_id)
 		return g;
 
 #ifdef NOISY
-	ShowInfo("Guild load request (%d)...\n", guild_id);
+	ShowInfo("Solicitação de leitua de Clãs (%d)...\n", guild_id);
 #endif
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT g.`name`,c.`name`,g.`guild_lv`,g.`connect_member`,g.`max_member`,g.`average_lv`,g.`exp`,g.`next_exp`,g.`skill_point`,g.`mes1`,g.`mes2`,g.`emblem_len`,g.`emblem_id`,g.`emblem_data` "
@@ -1136,7 +1136,7 @@ int mapif_parse_CreateGuild(int fd,int account_id,char *name,struct guild_member
 	struct guild *g;
 	int i=0;
 #ifdef NOISY
-	ShowInfo("Creating Guild (%s)\n", name);
+	ShowInfo("Clã criado (%s)\n", name);
 #endif
 	if(search_guildname(name) != 0){
 		ShowInfo("int_guild: guild with same name exists [%s]\n",name);

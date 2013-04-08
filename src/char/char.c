@@ -670,7 +670,7 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 #endif
 	StringBuf_Destroy(&buf);
 	if (save_status[0]!='\0' && save_log)
-		ShowInfo("Saved char %d - %s:%s.\n", char_id, p->name, save_status);
+		ShowInfo("Personagen salvo %d - %s:%s.\n", char_id, p->name, save_status);
 	if (!errors)
 		memcpy(cp, p, sizeof(struct mmo_charstatus));
 	return 0;
@@ -1080,7 +1080,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 
 	memset(p, 0, sizeof(struct mmo_charstatus));
 
-	if (save_log) ShowInfo("Char load request (%d)\n", char_id);
+	if (save_log) ShowInfo("Carregando solicitação de personagem (%d)\n", char_id);
 
 	stmt = SqlStmt_Malloc(sql_handle);
 	if( stmt == NULL )
@@ -1877,7 +1877,7 @@ int mmo_char_send006b(int fd, struct char_session_data* sd)
 #endif
 
 	if (save_log)
-		ShowInfo("Loading Char Data ("CL_BOLD"%d"CL_RESET")\n",sd->account_id);
+		ShowInfo("Lendo Personagem Data ("CL_BOLD"%d"CL_RESET")\n",sd->account_id);
 
 	j = 24 + offset; // offset
 	WFIFOHEAD(fd,j + MAX_CHARS*MAX_CHAR_BUF);
@@ -4444,7 +4444,7 @@ int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data
 	if (login_fd > 0 && session[login_fd] != NULL)
 		return 0;
 
-	ShowInfo("Attempt to connect to login-server...\n");
+	ShowInfo("Tentando se conectar ao servidor de login...\n");
 	login_fd = make_connection(login_ip, login_port, false);
 	if (login_fd == -1)
 	{	//Try again later. [Skotlex]
@@ -4643,7 +4643,7 @@ void sql_config_read(const char* cfgName)
 			sql_config_read(w2);
 	}
 	fclose(fp);
-	ShowInfo("Done reading %s.\n", cfgName);
+	ShowInfo("Leitura finalizada %s.\n", cfgName);
 }
 void char_config_dispatch(char *w1, char *w2) {
 	bool (*dispatch_to[]) (char *w1, char *w2) = {
@@ -4680,7 +4680,7 @@ int char_config_read(const char* cfgName)
 		} else if(strcmpi(w1,"console_silent")==0){
 			msg_silent = atoi(w2);
 			if( msg_silent ) /* only bother if its actually enabled */
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+				ShowInfo("Controle silencioso ajustado: %d\n", atoi(w2));
 		} else if(strcmpi(w1,"stdout_with_ansisequence")==0){
 			stdout_with_ansisequence = config_switch(w2);
 		} else if (strcmpi(w1, "userid") == 0) {
@@ -4802,13 +4802,13 @@ int char_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo("Done reading %s.\n", cfgName);
+	ShowInfo("Leitura realizada %s.\n", cfgName);
 	return 0;
 }
 
 void do_final(void)
 {
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 
 	set_all_offline(-1);
 	set_all_offline_sql();

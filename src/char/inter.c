@@ -735,7 +735,7 @@ static int inter_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo ("Done reading %s.\n", cfgName);
+	ShowInfo ("Leitura Finalizada %s.\n", cfgName);
 
 	return 0;
 }
@@ -767,7 +767,7 @@ int inter_init_sql(const char *file)
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();
-	ShowInfo("Connect Character DB server.... (Character Server)\n");
+	ShowInfo("Conectanto personagem a DB do servidor.... (Character Server)\n");
 	if( SQL_ERROR == Sql_Connect(sql_handle, char_server_id, char_server_pw, char_server_ip, (uint16)char_server_port, char_server_db) )
 	{
 		Sql_ShowDebug(sql_handle);
