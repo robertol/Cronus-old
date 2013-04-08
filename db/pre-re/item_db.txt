@@ -8,7 +8,7 @@
 // - You may use, for example: 10:25 for a item to give 10 atk and 25 weapon matk.
 // Healing Items
 //=============================================================
-501,Red_Potion,Poção Vermelha,0,50,,7,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(45,65),0; },{},{}
+501,Red_Potion,Poção Vermelha,0,50,,7,,,,,0xFFFFFFFF,7,2,,,,,,,{ itemheal rand(45,65),0; },{},{}
 502,Orange_Potion,Poção Laranja,0,200,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(105,145),0; },{},{}
 503,Yellow_Potion,Poção Amarela,0,550,,13,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(175,235),0; },{},{}
 504,White_Potion,Poção Branca,0,1200,,15,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(325,405),0; },{},{}
