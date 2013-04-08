@@ -2,15 +2,15 @@
 //= Spawn Caverna de Magma
 //===== Por: ==================================================
 //= Athena (1.0)
-//===== Vers√£o Atual: =====================================
+//===== Vers„o Atual: =====================================
 //= 1.4
-//===== Compat√≠vel Com: =====================================
+//===== CompatÌvel Com: =====================================
 //= Athena, Rathena, Hercules, Cronus
-//===== Coment√°rios Adicionais: =================================
+//===== Coment·rios Adicionais: =================================
 //= 1.1 fixed 2,3,4 tabs instead of 1... and wrong mob names [Lupus]
 //= 1.2 Official jRO 10.3 spawns [Playtester]
 //= 1.3 More accurate spawns [Playtester]
-//= 1.4 Tradu√ß√£o [BOO]
+//= 1.4 TraduÁ„o [BOO]
 //============================================================
 
 //==================================================
@@ -25,7 +25,7 @@ mag_dun01,0,0,0,0	monster	Grizzly	1381,10,0,0,0
 //==================================================
 // mag_dun02 - Nogg Road F2
 //==================================================
-mag_dun02,0,0,0,0	monster	Ferr√£o	1387,10,0,0,0
+mag_dun02,0,0,0,0	monster	Ferr„o	1387,10,0,0,0
 mag_dun02,0,0,0,0	monster	Exterminador	1384,25,0,0,0
 mag_dun02,0,0,0,0	monster	Exterminador	1385,25,0,0,0
 mag_dun02,0,0,0,0	monster	Diabolik	1382,10,120000,30000,0
