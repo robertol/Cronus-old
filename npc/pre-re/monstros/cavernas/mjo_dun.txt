@@ -2,13 +2,13 @@
 //= Coal Mine(Dead pit) Dungeon Monster Spawn Script
 //===== Por: ==================================================
 //= Athena (1.0)
-//===== Vers√£o Atual: =====================================
+//===== Vers„o Atual: =====================================
 //= 1.2
-//===== Compat√≠vel Com: =====================================
+//===== CompatÌvel Com: =====================================
 //= Athena, rAthena, Hercules, Cronus
-//===== Coment√°rios Adicionais: =================================
+//===== Coment·rios Adicionais: =================================
 //= 1.1 Official kRO 10.1 spawns [Playtester]
-//= 1.2 Tradu√ß√£o[BOO]
+//= 1.2 TraduÁ„o[BOO]
 //============================================================
 
 //==================================================
@@ -23,15 +23,15 @@ mjo_dun01,0,0,0,0	monster	Martin	1145,20,0,0,0
 //==================================================
 mjo_dun02,0,0,0,0	monster	Martin	1145,60,0,0,0
 mjo_dun02,0,0,0,0	monster	Drainliar	1111,20,0,0,0
-mjo_dun02,0,0,0,0	monster	Esqueleto Oper√°rio	1169,20,0,0,0
+mjo_dun02,0,0,0,0	monster	Esqueleto Oper·rio	1169,20,0,0,0
 mjo_dun02,0,0,0,0	monster	Giearth	1121,35,30000,10000,0
 
 //==================================================
 // mjo_dun03 - Mjolnir Dead Pit F3
 //==================================================
 mjo_dun03,0,0,0,0	monster	Martin	1145,5,0,0,0
-mjo_dun03,0,0,0,0	monster	Esqueleto Oper√°rio	1169,70,0,0,0
+mjo_dun03,0,0,0,0	monster	Esqueleto Oper·rio	1169,70,0,0,0
 mjo_dun03,0,0,0,0	monster	Giearth	1121,5,0,0,0
-mjo_dun03,0,0,0,0	monster	N√©voa	1151,35,0,0,0
-mjo_dun03,0,0,0,0	monster	C√£imbra	1209,2,300000,150000,0
+mjo_dun03,0,0,0,0	monster	NÈvoa	1151,35,0,0,0
+mjo_dun03,0,0,0,0	monster	C„imbra	1209,2,300000,150000,0
 mjo_dun03,0,0,0,0	monster	Cramp	1209,1,50000,25000,0
