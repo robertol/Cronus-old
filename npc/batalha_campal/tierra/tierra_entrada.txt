@@ -1,5 +1,5 @@
 //===== Cronus Script ========================================
-//= Battleground - Tierra Enter
+//= Batalha Campal - Tierra Entrada
 //===== Por: =================================================
 //= rA dev Team; LyDe
 //===== Versão Atual: ========================================
