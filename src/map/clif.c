@@ -2712,11 +2712,11 @@ void read_channels_config(void) {
 						break;
 				}
 				if( k == hChSys.colors_count ) {
-					ShowError("channels.conf: unknown color '%s' for channel '%s', skipping channel...\n",color,name);
+					ShowError("channels.conf: Cor Desconhecida '%s' for channel '%s', Pulando Canal...\n",color,name);
 					continue;
 				}
 				if( strcmpi(name,hChSys.local_name) == 0 || strcmpi(name,hChSys.ally_name) == 0 || strdb_exists(clif->channel_db, name) ) {
-					ShowError("channels.conf: duplicate channel '%s', skipping channel...\n",name);
+					ShowError("channels.conf: Canal Duplicado '%s', Pulando Canal...\n",name);
 					continue;
 
 				}
@@ -2729,7 +2729,7 @@ void read_channels_config(void) {
 			}
 		}
 					
-		ShowStatus("Done reading '"CL_WHITE"%d"CL_RESET"' channels in '"CL_WHITE"%s"CL_RESET"'.\n", db_size(clif->channel_db), config_filename);
+		ShowStatus("Leitura Finalizada '"CL_WHITE"%d"CL_RESET"' canais em '"CL_WHITE"%s"CL_RESET"'.\n", db_size(clif->channel_db), config_filename);
 		config_destroy(&channels_conf);
 	}
 }
@@ -3008,7 +3008,7 @@ void clif_updatestatus(struct map_session_data *sd,int type)
 			break;
 
 		default:
-			ShowError("clif->updatestatus : unrecognized type %d\n",type);
+			ShowError("clif->updatestatus : Tipo Não Reconhecido %d\n",type);
 			return;
 	}
 	WFIFOSET(fd,len);
@@ -3033,7 +3033,7 @@ void clif_changestatus(struct map_session_data* sd,int type,int val)
 			WBUFL(buf,8)=val;
 			break;
 		default:
-			ShowError("clif_changestatus : unrecognized type %d.\n",type);
+			ShowError("clif_changestatus :Tipo não Reconhecido %d.\n",type);
 			return;
 	}
 
@@ -17128,7 +17128,7 @@ static int packetdb_readdb(void)
 
 		clif_config.packet_db_ver = j?j:MAX_PACKET_VER;
 	}
-	ShowStatus("Done reading packet database from '"CL_WHITE"%s"CL_RESET"'. Using default packet version: "CL_WHITE"%d"CL_RESET".\n", "packet_db.txt", clif_config.packet_db_ver);
+	ShowStatus("Leitura dos Pacotes Finalizada em'"CL_WHITE"%s"CL_RESET"'. Usando Versão de Pacotes Padrão: "CL_WHITE"%d"CL_RESET".\n", "packet_db.txt", clif_config.packet_db_ver);
 	return 0;
 }
 
