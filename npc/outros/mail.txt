@@ -2,12 +2,12 @@
 //= Caixa de Correio
 //===== Por: ==================================================
 //= L0ne_W0lf
-//===== VersÃ£o Atual: =====================================
+//===== Versão Atual: =====================================
 //= 1.8a
-//===== DescriÃ§Ã£o: ========================================= 
+//===== Descrição: ========================================= 
 //= [Aegis Conversion]
 //= Pickup and write mail from/to players in game.
-//===== ComentÃ¡rios Adicionais: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version, place holders only. [L0ne_W0lf]
 //= 1.1 Dialog updated to Official. [L0ne_W0lf]
 //= 1.2 Swapped "atcommand" for "Openmail". [L0ne_W0lf]
@@ -25,17 +25,17 @@
 //============================================================
 -	script	Mailbox#dummy::MailBox	-1,{
 	mes "[Correios]";
-	mes "Para Ultilizar os ServiÃ§os de Correios,";
-	mes "vocÃª deve pagar uma taxa de 130 zeny.";
-	mes "VocÃª Deseja Ultilizar o ServiÃ§o?";
+	mes "Para Ultilizar os Serviços de Correios,";
+	mes "você deve pagar uma taxa de 130 zeny.";
+	mes "Você Deseja Ultilizar o Serviço?";
 	next;
-	switch(select("Sim.:NÃ£o.")) {
+	switch(select("Sim.:Não.")) {
 	case 1:
 		mes "[Correios]";
 		if (Zeny < 130) {
-			mes "Me Desculpe, mas vocÃª nÃ£o tem Dinheiro Suficiente.";
-			mes "Para usar os ServiÃ§os de Correio,";
-			mes "vocÃª deve pagar uma taxa de 130 zeny.";
+			mes "Me Desculpe, mas você não tem Dinheiro Suficiente.";
+			mes "Para usar os Serviços de Correio,";
+			mes "você deve pagar uma taxa de 130 zeny.";
 			close;
 		}
 		mes "Obrigado, Volte Sempre.";
