@@ -258,12 +258,12 @@ ACMD_FUNC(send)
 
 		if(len)
 		{// show packet length
-			sprintf(atcmd_output, msg_txt(904), type, packet_db[sd->packet_ver][type].len); // Packet 0x%x length: %d
+			sprintf(atcmd_output, msg_txt(904), type, packet_db[type].len); // Packet 0x%x length: %d
 			clif->message(fd, atcmd_output);
 			return 0;
 		}
 
-		len=packet_db[sd->packet_ver][type].len;
+		len=packet_db[type].len;
 		off=2;
 		if(len == 0)
 		{// unknown packet - ERROR
@@ -414,12 +414,10 @@ ACMD_FUNC(send)
 			SKIP_VALUE(message);
 		}
 
-		if(packet_db[sd->packet_ver][type].len == -1)
-		{// send dynamic packet
+		if(packet_db[type].len == -1) {// send dynamic packet
 			WFIFOW(fd,2)=TOW(off);
 			WFIFOSET(fd,off);
-		} else
-		{// send static packet
+		} else {// send static packet
 			if(off < len)
 				memset(WFIFOP(fd,off),0,len-off);
 			WFIFOSET(fd,len);
@@ -1533,6 +1531,7 @@ ACMD_FUNC(pvpoff)
 		return -1;
 	}
 
+	map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
 	map[sd->bl.m].flag.pvp = 0;
 
 	if (!battle_config.pk_mode)
@@ -1568,11 +1567,11 @@ ACMD_FUNC(pvpon)
 		clif->message(fd, msg_txt(161)); // PvP is already On.
 		return -1;
 	}
-
+	
+	map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_PVP_NAME));
 	map[sd->bl.m].flag.pvp = 1;
 
-	if (!battle_config.pk_mode)
-	{// display pvp circle and rank
+	if (!battle_config.pk_mode) {// display pvp circle and rank
 		clif->map_property_mapall(sd->bl.m, MAPPROPERTY_FREEPVPZONE);
 		map_foreachinmap(atcommand_pvpon_sub,sd->bl.m, BL_PC);
 	}
@@ -1594,6 +1593,7 @@ ACMD_FUNC(gvgoff)
 		return -1;
 	}
 
+	map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
 	map[sd->bl.m].flag.gvg = 0;
 	clif->map_property_mapall(sd->bl.m, MAPPROPERTY_NOTHING);
 	map_foreachinmap(atcommand_stopattack,sd->bl.m, BL_CHAR, 0);
@@ -1613,7 +1613,8 @@ ACMD_FUNC(gvgon)
 		clif->message(fd, msg_txt(163)); // GvG is already On.
 		return -1;
 	}
-
+	
+	map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_GVG_NAME));
 	map[sd->bl.m].flag.gvg = 1;
 	clif->map_property_mapall(sd->bl.m, MAPPROPERTY_AGITZONE);
 	clif->message(fd, msg_txt(34)); // GvG: On.
@@ -1900,7 +1901,7 @@ ACMD_FUNC(go)
 		town = 32;
 	} else if (strncmp(map_name, "malangdo", 5) == 0) {
 		town = 33;
-#endif
+#endif	
 	}
 
 	if (town >= 0 && town < ARRAYLENGTH(data))
@@ -3835,7 +3836,7 @@ ACMD_FUNC(mapinfo) {
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) ) {
 		if( pl_sd->mapindex == m_index ) {
-			if( sd->state.vending )
+			if( pl_sd->state.vending )
 				vend_num++;
 			else if( (cd = (struct chat_data*)map_id2bl(pl_sd->chatID)) != NULL && cd->usersd[0] == pl_sd )
 				chat_num++;
@@ -5669,7 +5670,7 @@ ACMD_FUNC(autotrade) {
 		int timeout = atoi(message);
 		status_change_start(&sd->bl, SC_AUTOTRADE, 10000, 0, 0, 0, 0, ((timeout > 0) ? min(timeout,battle_config.at_timeout) : battle_config.at_timeout) * 60000, 0);
 	}
-
+	
 	if( hChSys.ally && sd->status.guild_id ) {
 		struct guild *g = sd->guild, *sg;
 		if( g ) {
@@ -5684,14 +5685,14 @@ ACMD_FUNC(autotrade) {
 			}
 		}
 	}
-
+		
 	if( sd->channel_count ) {
 		for( i = 0; i < sd->channel_count; i++ ) {
 			if( sd->channels[i] != NULL )
 				clif->chsys_left(sd->channels[i],sd);
 		}
 	}
-
+	
 	clif->authfail_fd(sd->fd, 15);
 
 	return 0;
@@ -7363,15 +7364,18 @@ ACMD_FUNC(whereis)
 	return 0;
 }
 
-ACMD_FUNC(version)
-{
-	const char * revision;
+ACMD_FUNC(version) {
+	const char *git = get_git_hash();
+	const char *svn = get_svn_revision();
 
-	if ((revision = get_svn_revision()) != 0) {
-		sprintf(atcmd_output,msg_txt(1295),revision); // rAthena Version SVN r%s
+	if ( git[0] != HERC_UNKNOWN_VER ) {
+		sprintf(atcmd_output,msg_txt(1295),git); // Git Hash '%s'
+		clif->message(fd,atcmd_output);
+	} else if ( svn[0] != HERC_UNKNOWN_VER ) {
+		sprintf(atcmd_output,msg_txt(1436),git); // SVN r%s
 		clif->message(fd,atcmd_output);
 	} else
-		clif->message(fd,msg_txt(1296)); // Cannot determine SVN revision.
+		clif->message(fd,msg_txt(1296)); // Cannot determine version
 
 	return 0;
 }
@@ -7661,6 +7665,23 @@ ACMD_FUNC(mapflag) {
 	}
 	for (i = 0; flag_name[i]; i++) flag_name[i] = (char)tolower(flag_name[i]); //lowercase
 
+	if ( strcmp( flag_name , "gvg" ) == 0 ) {
+		if( flag && !map[sd->bl.m].flag.gvg )
+			map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_GVG_NAME));
+		else if ( !flag && map[sd->bl.m].flag.gvg )
+			map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
+	} else if ( strcmp( flag_name , "pvp" ) == 0 ) {
+		if( flag && !map[sd->bl.m].flag.pvp )
+			map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_PVP_NAME));
+		else if ( !flag && map[sd->bl.m].flag.pvp )
+			map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
+	} else if ( strcmp( flag_name , "battleground" ) == 0 ) {
+		if( flag && !map[sd->bl.m].flag.battleground )
+			map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_BG_NAME));
+		else if ( !flag && map[sd->bl.m].flag.battleground )
+			map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
+	}
+	
 	setflag(autotrade);			setflag(allowks);			setflag(nomemo);			setflag(noteleport);
 	setflag(noreturn);			setflag(monster_noteleport);setflag(nosave);			setflag(nobranch);
 	setflag(noexppenalty);		setflag(pvp);				setflag(pvp_noparty);		setflag(pvp_noguild);
@@ -7673,7 +7694,7 @@ ACMD_FUNC(mapflag) {
 	setflag(nojobexp);			setflag(nomobloot);			setflag(nomvploot);			setflag(nightenabled);
 	setflag(nodrop);			setflag(novending);			setflag(loadevent);
 	setflag(nochat);			setflag(partylock);			setflag(guildlock);			setflag(src4instance);
-
+	
 	clif->message(sd->fd,msg_txt(1314)); // Invalid flag name or flag.
 	clif->message(sd->fd,msg_txt(1312)); // Usage: "@mapflag monster_noteleport 1" (0=Off | 1=On)
 	clif->message(sd->fd,msg_txt(1315)); // Available Flags:

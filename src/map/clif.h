@@ -40,8 +40,7 @@ struct eri;
 /**
  * Defines
  **/
-#define SERVER 0 /* reserved for server use */
-#define packet_len(cmd) packet_db[SERVER][cmd].len
+#define packet_len(cmd) packet_db[cmd].len
 #define clif_menuskill_clear(sd) (sd)->menuskill_id = (sd)->menuskill_val = (sd)->menuskill_val2 = 0;
 #define HCHSYS_NAME_LENGTH 20
 
@@ -50,7 +49,6 @@ struct eri;
  **/
 enum {// packet DB
 	MAX_PACKET_DB  = 0xF00,
-	MAX_PACKET_VER = 32,
 	MAX_PACKET_POS = 20,
 };
 
@@ -340,13 +338,36 @@ enum hChSysChType {
 	hChSys_ALLY		= 3,
 };
 
+enum CASH_SHOP_TABS {
+	CASHSHOP_TAB_NEW		= 0,
+	CASHSHOP_TAB_POPULAR	= 1,
+	CASHSHOP_TAB_LIMITED	= 2,
+	CASHSHOP_TAB_RENTAL		= 3,
+	CASHSHOP_TAB_PERPETUITY = 4,
+	CASHSHOP_TAB_BUFF		= 5,
+	CASHSHOP_TAB_RECOVERY	= 6,
+	CASHSHOP_TAB_ETC		= 7,
+	CASHSHOP_TAB_MAX,
+};
+
+enum CASH_SHOP_BUY_RESULT {
+	CSBR_SUCCESS					= 0x0,
+	CSBR_SHORTTAGE_CASH				= 0x2,
+	CSBR_UNKONWN_ITEM				= 0x3,
+	CSBR_INVENTORY_WEIGHT			= 0x4,
+	CSBR_INVENTORY_ITEMCNT			= 0x5,
+	CSBR_RUNE_OVERCOUNT				= 0x9,
+	CSBR_EACHITEM_OVERCOUNT			= 0xa,
+	CSBR_UNKNOWN					= 0xb,
+};
 
 /**
  * Structures
  **/
+typedef void (*pFunc)(int, struct map_session_data *); //cant help but put it first
 struct s_packet_db {
 	short len;
-	void (*func)(int, struct map_session_data *);
+	pFunc func;
 	short pos[MAX_PACKET_POS];
 };
 
@@ -373,10 +394,15 @@ struct hChSysCh {
 	uint16 m;
 };
 
+struct hCSData {
+	unsigned short id;
+	unsigned int price;
+};
+
 /**
  * Vars
  **/
-struct s_packet_db packet_db[MAX_PACKET_VER + 1][MAX_PACKET_DB + 1];
+struct s_packet_db packet_db[MAX_PACKET_DB + 1];
 unsigned long color_table[COLOR_MAX];
 
 /**
@@ -392,6 +418,11 @@ struct clif_interface {
 	DBMap* channel_db;
 	/* for clif_clearunit_delayed */
 	struct eri *delay_clearunit_ers;
+	/* Cash Shop [Ind/Hercules] */
+	struct {
+		struct hCSData **data[CASHSHOP_TAB_MAX];
+		unsigned int item_count[CASHSHOP_TAB_MAX];
+	} cs;
 	/* core */
 	int (*init) (void);
 	void (*final) (void);
@@ -425,6 +456,7 @@ struct clif_interface {
 	void (*addcards) (unsigned char* buf, struct item* item);
 	void (*item_sub) (unsigned char *buf, int n, struct item *i, struct item_data *id, int equip);
 	void (*getareachar_item) (struct map_session_data* sd,struct flooritem_data* fitem);
+	void (*cashshop_load) (void);
 	/* unit-related */
 	void (*clearunit_single) (int id, clr_type type, int fd);
 	void (*clearunit_area) (struct block_list* bl, clr_type type);
@@ -816,7 +848,6 @@ struct clif_interface {
 	void (*adopt_reply) (struct map_session_data *sd, int type);
 	void (*adopt_request) (struct map_session_data *sd, struct map_session_data *src, int p_id);
 	void (*readbook) (int fd, int book_id, int page);
-	int (*guess_PacketVer) (int fd, int get_previous, int *error);
 	void (*notify_time) (struct map_session_data* sd, unsigned long time);
 	void (*user_count) (struct map_session_data* sd, int count);
 	void (*noask_sub) (struct map_session_data *src, struct map_session_data *target, int type);
@@ -1023,6 +1054,12 @@ struct clif_interface {
 	void (*pDebug) (int fd,struct map_session_data *sd);
 	void (*pSkillSelectMenu) (int fd, struct map_session_data *sd);
 	void (*pMoveItem) (int fd, struct map_session_data *sd);
+	void (*pDull) (int fd, struct map_session_data *sd);
+	/* RagExe Cash Shop [Ind/Hercules] */
+	void (*pCashShopOpen) (int fd, struct map_session_data *sd);
+	void (*pCashShopClose) (int fd, struct map_session_data *sd);
+	void (*pCashShopSchedule) (int fd, struct map_session_data *sd);
+	void (*pCashShopBuy) (int fd, struct map_session_data *sd);
 } clif_s;
 
 struct clif_interface *clif;
