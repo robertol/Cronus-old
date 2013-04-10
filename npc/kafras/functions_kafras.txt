@@ -1,19 +1,19 @@
-Ôªø//===== Cronus Script ======================================
+//===== Cronus Script ======================================
 //= Kafra Functions
 //===== Por: ================================================== 
 //= rAthena Dev Team
 //= Darlskies, Darkchild, Syrus22, Lupus, kobra_k88 (2.0)
 //= L0ne_W0lf
-//===== Vers√£o Atual: ===================================== 
+//===== Vers„o Atual: ===================================== 
 //= 6.8
-//===== Descri√ß√£o: =========================================
+//===== DescriÁ„o: =========================================
 //= These functions handle save, storage, cart rental, teleport,
 //= and Free Teleport/Warp/Rent Cart options for all Kafra NPCs.
 //=
 //= Kafra's will need a lot of work. The Welcome Message argument
 //= may become obsolete, as most kafras have a slightly differing
 //= Welcome message.
-//===== Coment√°rios Adicionais: ================================= 
+//===== Coment·rios Adicionais: ================================= 
 //= v1.1 Now using functions v2.1 Added Cart Rent for Classes: Whitesmith, Professor.
 //= Replaced checkoption(x) into checkcart(0) [Lupus] v2.1b Added Fix Kafra Pass Func [Kobra_k88]
 //= 2.2 Final fix of the Kafra Pass Exploit! [Lupus] a -Izlude[4] fix
@@ -60,7 +60,7 @@
 //= 6.5 Optimized. [Joseph]
 //= 6.6 Added Warp Points / View Points Function. [Joseph]
 //= 6.7 Added Rune Knight Kafra. [Euphy]
-//= 6.8 Tradu√ß√£o Pt-Br [ BOO]
+//= 6.8 TraduÁ„o Pt-Br [ BOO]
 //============================================================ 
 
 //=== Main Function ========================================================
@@ -77,39 +77,39 @@ function	script	F_Kafra	{
 		default:
 		case 0:
 			// Default message (obsolete)
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			mes "Bem Vindo!";
-			mes "A Corpora√ß√£o Kafra";
-			mes "est√° sempre ao seu Lado.";
-			mes "Ent√£o, como Posso Ajuda-lo?";
+			mes "A CorporaÁ„o Kafra";
+			mes "est· sempre ao seu Lado.";
+			mes "Ent„o, como Posso Ajuda-lo?";
 			break;
 		case 1:
 			// Niflheim specific message
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			mes "^666666B beeeemmm-Vindoo";
-			mes "a-a C-coorpoor-r-raa√ß√£ooo... K-kaaafrrrra^000000";
+			mes "a-a C-coorpoor-r-raaÁ„ooo... K-kaaafrrrra^000000";
 			break;
 		case 2:
 			// Guild Castle Kafra message
 			set @GID,getcharid(2);
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 	 		mes "Bem Vindo. ^ff0000" + GetGuildName(@GID) + "^000000 Membro.";
-			mes "A Corpora√ß√£o Kafra estar√° sempre ao seu lado.";
+			mes "A CorporaÁ„o Kafra estar· sempre ao seu lado.";
 			break;
 		case 3:
 			// Amatsu specific message (obsolete)
-			mes "[Funcion√°ria Kafra]";
-			mes "Ent√£o, voc√™ vem de uma terra distante para estudar nossa cultura, ou est√° apenas passeando?";
-			mes "Em ambos os Casos, por que n√£o fica algum tempo?";
-			mes "O ar √© eternamente pesado com";
+			mes "[Funcion·ria Kafra]";
+			mes "Ent„o, vocÍ vem de uma terra distante para estudar nossa cultura, ou est· apenas passeando?";
+			mes "Em ambos os Casos, por que n„o fica algum tempo?";
+			mes "O ar È eternamente pesado com";
 			mes "o perfume de flores silvestres.";
 			break;		
 		case 4:
 			// Louyang and Ayothaya specific message (obsolete)
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			mes "Com as Diversas Kafras";
-			mes "espalhadas pelo mundo, voc√™ nunca";
-			mes "estar√° longe de casa.";
+			mes "espalhadas pelo mundo, vocÍ nunca";
+			mes "estar· longe de casa.";
 			break;		
 		case 5:
 			// NPC has it's own welcome message. (Display nothing)
@@ -120,28 +120,28 @@ function	script	F_Kafra	{
 		deletearray @K_Menu0$[0],getarraysize(@K_Menu0$);
 		if (getarg(0) == 2) {
 			// Guild Kafra Menu override (free Teleport, free Storage, Free Cart)
-			setarray @K_Menu0$[0],"Use Storage","Usar Armaz√©m","Alugar Carrinho","Usar Servi√ßo de Teletransporte","Cancelar";
+			setarray @K_Menu0$[0],"Use Storage","Usar ArmazÈm","Alugar Carrinho","Usar ServiÁo de Teletransporte","Cancelar";
 		} else {
 			switch(getarg(1)){
 				// Save and Storage only
-				case 1:	setarray @K_Menu0$[0],"Salvar","Usar Armaz√©m","Cancelar"; break;
+				case 1:	setarray @K_Menu0$[0],"Salvar","Usar ArmazÈm","Cancelar"; break;
 				// Storage only
-				case 2:	setarray @K_Menu0$[0],"Usar Armaz√©m","Cancelar"; break;
+				case 2:	setarray @K_Menu0$[0],"Usar ArmazÈm","Cancelar"; break;
 				// No Teleport (Common)
-				case 3: setarray @K_Menu0$[0],"Salvar","Usar Armaz√©m","Alugar Carrinho","Checar Outra Informa√ß√£o","Cancelar"; break;
+				case 3: setarray @K_Menu0$[0],"Salvar","Usar ArmazÈm","Alugar Carrinho","Checar Outra InformaÁ„o","Cancelar"; break;
 				// Case 4 is Einbroch no tele message.
 				// No save, or teleport. (Common)
-				case 5:	setarray @K_Menu0$[0],"Usar Armaz√©m","Alugar Carrinho","Checar Outra Informa√ß√£o","Cancelar"; break;
+				case 5:	setarray @K_Menu0$[0],"Usar ArmazÈm","Alugar Carrinho","Checar Outra InformaÁ„o","Cancelar"; break;
 				// Storage and Check Other Information only.
-				case 6:	setarray @K_Menu0$[0],"Usar Armaz√©m","Checar Outra Informa√ß√£o","Cancelar"; break;
+				case 6:	setarray @K_Menu0$[0],"Usar ArmazÈm","Checar Outra InformaÁ„o","Cancelar"; break;
 				// Save, Storage, and Pushcart only (Kafra Warehouse)
-				case 7:	setarray @K_Menu0$[0],"Salvar","Usar Armaz√©m","Alugar Carrinho","Cancelar"; break;
+				case 7:	setarray @K_Menu0$[0],"Salvar","Usar ArmazÈm","Alugar Carrinho","Cancelar"; break;
 				// Save, Storage, Other Check information. (Turbo track)
-				case 8: setarray @K_Menu0$[0],"Salvar","Usar Armaz√©m","Checar Outra Informa√ß√£o","Cancelar"; break;
+				case 8: setarray @K_Menu0$[0],"Salvar","Usar ArmazÈm","Checar Outra InformaÁ„o","Cancelar"; break;
 				// No Save (Rune Knight)
-				case 9: setarray @K_Menu0$[0],"Usar Armaz√©m","Alugar Carrinho","Usar Servi√ßo de Teletransporte","Checar Outra Informa√ß√£o","Cancelar"; break;
+				case 9: setarray @K_Menu0$[0],"Usar ArmazÈm","Alugar Carrinho","Usar ServiÁo de Teletransporte","Checar Outra InformaÁ„o","Cancelar"; break;
 				// Default message (obsolete)
-				default: setarray @K_Menu0$[0],"Salvar","Usar Armaz√©m","Usar Servi√ßo de Teletransporte","Alugar Carrinho","Checar Outra Informa√ß√£o","Cancelar"; break;
+				default: setarray @K_Menu0$[0],"Salvar","Usar ArmazÈm","Usar ServiÁo de Teletransporte","Alugar Carrinho","Checar Outra InformaÁ„o","Cancelar"; break;
 			}
 		}
 		set .@menu$,"";
@@ -150,38 +150,38 @@ function	script	F_Kafra	{
 		set .@j, select (.@menu$) - 1;
 		if (@K_Menu0$[.@j] == "Save") {
 			return;
-		} else if (@K_Menu0$[.@j] == "Usar Armaz√©m") {
+		} else if (@K_Menu0$[.@j] == "Usar ArmazÈm") {
 			// Do not charge for Guild Storage
 			if(getarg(0) == 2) 
 				callfunc "F_KafStor",2,0,0;
 			else 
 				callfunc "F_KafStor",0,getarg(3),getarg(0);
-		} else if (@K_Menu0$[.@j] == "Usar Servi√ßo de Teletransporte") {
+		} else if (@K_Menu0$[.@j] == "Usar ServiÁo de Teletransporte") {
 			// Display Einbroch "No Teleport Service" notice.
 			if(getarg(1) != 4) callfunc "F_KafTele",getarg(0);
 			else {
-				mes "[Funcion√°ria Kafra]";
+				mes "[Funcion·ria Kafra]";
 				mes "Por Causa do ^FF0000Acordo de";
 				mes "Transporte Limitado^000000, a";
-				mes "Corpora√ß√£o Kafra n√£o pode";
-				mes "fornecer os servi√ßos de teletransporte";
-				mes "na Rep√∫blica Schwaltzvalt.";
+				mes "CorporaÁ„o Kafra n„o pode";
+				mes "fornecer os serviÁos de teletransporte";
+				mes "na Rep˙blica Schwaltzvalt.";
 				next;
-				mes "[Funcion√°ria Kafra]";
-				mes "N√≥s Pedimos que, por favor,";
-				mes "use o servi√ßo de Dirig√≠vel.";
+				mes "[Funcion·ria Kafra]";
+				mes "NÛs Pedimos que, por favor,";
+				mes "use o serviÁo de DirigÌvel.";
 				mes "Obrigado por sua,";
-				mes "Compreens√£o e Colabora√ß√£o.";
+				mes "Compreens„o e ColaboraÁ„o.";
 			}
 		} else if (@K_Menu0$[.@j] == "Alugar Carrinho") {
 			if(callfunc("F_KafCart",getarg(0),getarg(4)) == 1) 
 			next;
-		} else if (@K_Menu0$[.@j] == "Checar Outra Informa√ß√£o") {
+		} else if (@K_Menu0$[.@j] == "Checar Outra InformaÁ„o") {
 			callfunc "F_KafInfo",getarg(2);
 		} else if (@K_Menu0$[.@j] == "Cancel"){
 			callfunc "F_KafEnd",getarg(0),0;
 			end;
-		} else if (@K_Menu0$[.@j] == "Usar Armaz√©m") {
+		} else if (@K_Menu0$[.@j] == "Usar ArmazÈm") {
 			callfunc "F_KafStor",1,0;
 		}
 	}
@@ -194,9 +194,9 @@ function	script	F_KafStor	{
 	// Unable to access Guild Storage (Busy)
 	if(getarg(0) == 1){
 		if(guildopenstorage()){
-			mes "[Funcion√°ria Kafra]";
-			mes "Me Desculpe, mais outro Membro do Cl√£ est√° usando o Armaz√©m";
-			mes "neste momento. Por Favor, aguarde at√© que a pessoa tenha Terminado.";
+			mes "[Funcion·ria Kafra]";
+			mes "Me Desculpe, mais outro Membro do Cl„ est· usando o ArmazÈm";
+			mes "neste momento. Por Favor, aguarde atÈ que a pessoa tenha Terminado.";
 			close2;
 			cutin "", 255;
 			end;
@@ -206,19 +206,19 @@ function	script	F_KafStor	{
 	}
 	// Unable to access Normal Storage (Insufficient Basic Skills)
 	if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-		mes "[Funcion√°ria Kafra]";
+		mes "[Funcion·ria Kafra]";
 		// Niflheim Specific Message
 		if (getarg(2) == 1) {
 			mes "^666666S-s-ssoooorry,";
-			mes "Vooo-cc-√™ e-e-eeee";
-			mes "u-um-mm Apprrreeenndizz... √â-e";
-			mes "neece-eess√°riiio aaass Habbiiliidaaadess B√°asicca-s N-niivel 6...^000000";
+			mes "Vooo-cc-Í e-e-eeee";
+			mes "u-um-mm Apprrreeenndizz... …-e";
+			mes "neece-eess·riiio aaass Habbiiliidaaadess B·asicca-s N-niivel 6...^000000";
 			return;
 		}
-		mes "Me desculpe, mas voc√™";
+		mes "Me desculpe, mas vocÍ";
 		mes "precisa das";
-		mes "Habilidades b√°sicas Nivel 6 para";
-		mes "usar o Armaz√©m.";
+		mes "Habilidades b·sicas Nivel 6 para";
+		mes "usar o ArmazÈm.";
 		return;
 	}
 	// Accessing Normal Storage (Skipped if accessing Storage from Guild castle)
@@ -227,21 +227,21 @@ function	script	F_KafStor	{
 		if(countitem(7059)) delitem 7059,1;
 		else {
 			if(Zeny<getarg(1)){
-				mes "[Funcion√°ria Kafra]";
+				mes "[Funcion·ria Kafra]";
 				// Niflheim Specific Message
 				if (getarg(2) == 1) {
 					percentheal -50,-50;
 					mes "^666666Zeeeeeny...";
 					mes "M-ais z-zeny...!";
-					mes "N-necess√°rios 150... zeny...";
+					mes "N-necess·rios 150... zeny...";
 					mes "Ergh! Preciiso de S-angue~!^000000";
 					return;
 				}
 				// Standard Message
-				mes "Me Desculpe, mais voc√™ n√£o";
+				mes "Me Desculpe, mais vocÍ n„o";
 				mes "tem Zenys Suficientes para";
-				mes "o Servi√ßo de Armazem. √â";
-				mes "Necess√°rio para acessar o Armaz√©m "+getarg(1)+" zeny.";
+				mes "o ServiÁo de Armazem. …";
+				mes "Necess·rio para acessar o ArmazÈm "+getarg(1)+" zeny.";
 				return;
 			}
 			set Zeny, Zeny-getarg(1);
@@ -254,17 +254,17 @@ function	script	F_KafStor	{
 		// Niflheim specific Message
 		if (getarg(2) == 1) {
 			percentheal 0,-10;
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			for (set .@i, 0; .@i < 5; set .@i, .@i + 1)
-				mes "^666666Obrigado.. por... Usar... Nossos Servi√ßos...^000000";
+				mes "^666666Obrigado.. por... Usar... Nossos ServiÁos...^000000";
 		}
 		// Normal message
 		else {
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			mes "Aqui, Deixe-me Abrir";
-			mes "o Armaz√©m pra voc√™.";
+			mes "o ArmazÈm pra vocÍ.";
 			mes "Obrigado por usar";
-			mes "os Servi√ßos Kafra.";
+			mes "os ServiÁos Kafra.";
 		}
 	}
 	callfunc("F_CheckKafCode");	//check your storage password, if set
@@ -278,7 +278,7 @@ function	script	F_KafStor	{
 // Teleport Function
 //===================================================
 function	script	F_KafTele	{
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Por Favor , escolha";
 	mes "seu Destino.";
 	next;
@@ -292,11 +292,11 @@ function	script	F_KafTele	{
 	if(countitem(7060) > 0 && getarg(0) != 2) delitem 7060,1;
 	else {
 		if (Zeny<@wrpP[.@j]){
-			mes "[Funcion√°ria Kafra]";
-			mes "Me desculpe, mais voc√™ n√£o tem";
-			mes "zeny suficientes para o servi√ßo";
+			mes "[Funcion·ria Kafra]";
+			mes "Me desculpe, mais vocÍ n„o tem";
+			mes "zeny suficientes para o serviÁo";
 			mes "de Teleporte. Para Teleportar";
-			mes "para "+@wrpD$[.@j]+" s√£o "+@wrpP[.@j]+" zeny.";
+			mes "para "+@wrpD$[.@j]+" s„o "+@wrpP[.@j]+" zeny.";
 			close2;
 			cutin "", 255;
 			end;
@@ -328,20 +328,20 @@ function	script	F_KafTele	{
 function	script	F_KafCart	{
 	// Ensure that the class wanting to rent a pushcart is a merchant
 	if(BaseClass != Job_Merchant){
-		mes "[Funcion√°ria Kafra]";
+		mes "[Funcion·ria Kafra]";
 		mes "Me desculpe, mas o";
-		mes "servi√ßo de aluguel de carrinho";
-		mes "est√° dispon√≠vel apenas para Mercador,";
+		mes "serviÁo de aluguel de carrinho";
+		mes "est· disponÌvel apenas para Mercador,";
 		mes "Ferreiro, Mestre-Ferreiro,";
-		mes "Alquimista e Bioqu√≠mico.";
+		mes "Alquimista e BioquÌmico.";
 		return 1;
 	}
 	// Make sure the invoking character does not have a cart already
 	else if(checkcart() == 1){
-		mes "[Funcion√°ria Kafra]";
-		mes "Voc√™ j√° est√° com";
+		mes "[Funcion·ria Kafra]";
+		mes "VocÍ j· est· com";
 		mes "um Carrinho equipado.";
-		mes "Infelizmente n√£o podemos";
+		mes "Infelizmente n„o podemos";
 		mes "alugar mais de um a cada cliente";
 		mes "por vez.";
 		return 1;
@@ -350,16 +350,16 @@ function	script	F_KafCart	{
 	// Do not consume if in Guild castle.
 	if(countitem(7061) > 0 && getarg(0) != 2) delitem 7061,1;
 	else {
-		mes "[Funcion√°ria Kafra]";
+		mes "[Funcion·ria Kafra]";
 		mes "O aluguel do Carrinho";
-		mes "Custa "+getarg(1)+" zeny. Voc√™";
+		mes "Custa "+getarg(1)+" zeny. VocÍ";
 		mes "gostaria de Aluga-lo?";
 		next;
 		if (select("Alugar Carrinho.:Cancelar") == 2) return 0;
 			if(Zeny<getarg(1)){
-				mes "[Funcion√°ria Kafra]";
-				mes "Me desculpe, mais voc√™";
-				mes "n√£o tem zeny";
+				mes "[Funcion·ria Kafra]";
+				mes "Me desculpe, mais vocÍ";
+				mes "n„o tem zeny";
 				mes "suficiente para pagar. O ";
 				mes "aluguel custa "+getarg(1)+" zeny.";
 				return 1;
@@ -377,33 +377,33 @@ function	script	F_KafCart	{
 function	script	F_KafInfo	{
 	// Uncomment next line to block Kafra Storage Protection
 	//	set .@block, 1;
-		setarray .@m$, "Checar Pontos Especiais Reservados.","Servi√ßo de Senha no Armaz√©m","Localiza√ß√£o das Funcion√°rias Kafra","Cancelar";
+		setarray .@m$, "Checar Pontos Especiais Reservados.","ServiÁo de Senha no ArmazÈm","LocalizaÁ„o das Funcion·rias Kafra","Cancelar";
 		if (getarg(0) == 2) deletearray .@m$[1],2; // Rune Knight
 		else if (.@block) deletearray .@m$[1],1;
 	while (1) {
 		set .@j, select(implode(.@m$,":")) - 1;
 		if (.@m$[.@j] == "Check Special Reserve Points.") {
-			mes "[Funcion√°ria Kafra]";
+			mes "[Funcion·ria Kafra]";
 			mes "Vamor Ver...";
 			mes strcharinfo(0) + "...";
-			mes "Ah, voc√™ tem um total de";
+			mes "Ah, vocÍ tem um total de";
 			mes RESRVPTS+ " Pontos especiais reservados.";
 			next;
-			mes "[Funcion√°ria Kafra]";
-			mes "Voc√™ pode trocar seus pontos";
+			mes "[Funcion·ria Kafra]";
+			mes "VocÍ pode trocar seus pontos";
 			mes "especiais por";
-			mes "recompen√ßas no escrit√≥rio Kafra em Al De Baran. Por Favor, use nossos";
-			mes "servi√ßos convenientes para ver os beneficios do programa de recompen√ßas.";
+			mes "recompenÁas no escritÛrio Kafra em Al De Baran. Por Favor, use nossos";
+			mes "serviÁos convenientes para ver os beneficios do programa de recompenÁas.";
 			next;
 			if(getarg(0) == 1) return;
-		} else if (.@m$[.@j] == "Localiza√ß√£o das Funcion√°rias Kafra") {
+		} else if (.@m$[.@j] == "LocalizaÁ„o das Funcion·rias Kafra") {
 			for (set .@i, 0; .@i <= 3; set .@i, .@i + 1)
 				viewpoint 1,@viewpX[.@i],@viewpY[.@i],(.@i+1),0xFF00FF;
 			next;
 			for (set .@i, 0; .@i <= 3; set .@i, .@i + 1)
 				viewpoint 2,@viewpX[.@i],@viewpY[.@i],(.@i+1),0xFF00FF;
-		} else if (.@m$[.@j] == "Servi√ßo de Senha no Aramz√©m") {
-			callfunc("F_SetKafCode","[Funcion√°ria Kafra]","Servi√ßos Kafra");
+		} else if (.@m$[.@j] == "ServiÁo de Senha no AramzÈm") {
+			callfunc("F_SetKafCode","[Funcion·ria Kafra]","ServiÁos Kafra");
 		} else {
 			return;
 		}
@@ -423,11 +423,11 @@ function	script	F_KafEnd	{
 		mes "foi salvo bem aqui";
 		mes getarg(2)+".";
 		mes "Obrigado por Usar";
-		mes "os servi√ßos Kafra.";
+		mes "os serviÁos Kafra.";
 	} else if(getarg(0)==0 || getarg(0)==5) {	
 		// Generic End
-		mes "N√≥s, da Corpora√ß√£o Kafra,";
-		mes "estamos sempre nos esfor√ßando para fornece-lhe os melhores servi√ßos.Estamos Felizes por poder atender suas Necessidades.";
+		mes "NÛs, da CorporaÁ„o Kafra,";
+		mes "estamos sempre nos esforÁando para fornece-lhe os melhores serviÁos.Estamos Felizes por poder atender suas Necessidades.";
 	} else if(getarg(0)==1) {
 		// Niflheim End
 		percentheal 0,- 25;
@@ -445,7 +445,7 @@ function	script	F_KafEnd	{
 //===================================================
 function	script	F_CheckKafCode	{
 	if(!#kafra_code) return;
-	mes "Digite a Senha de seu Armaz√©m:";
+	mes "Digite a Senha de seu ArmazÈm:";
 	set @code_,0;
 	input @code_;
 	if(@code_ != #kafra_code) {
@@ -466,15 +466,15 @@ function	script	F_CheckKafCode	{
 function	script	F_SetKafCode	{
 	mes getarg(0);
 	if(#kafra_code) {
-		mes "Seu Armaz√©m est√° Protegido com Senha. O que voce quer fazer agora?";
+		mes "Seu ArmazÈm est· Protegido com Senha. O que voce quer fazer agora?";
 		next;
-		switch (select("Mudar Senha do Armaz√©m -> 5000z:Remover Senha do Armaz√©m -> 1000z:Cancelar")) {
+		switch (select("Mudar Senha do ArmazÈm -> 5000z:Remover Senha do ArmazÈm -> 1000z:Cancelar")) {
 			Case 1:
 				mes getarg(0);
 				mes "mas primeiro, digite sua ^0000FFAntiga Senha^000000.";
 				set @code,callfunc("F_EntKafCode");
 				if(!@code || @code != #kafra_code) {
-					mes "Senha Incorreta. Voc√™ n√£o pode Alterar sua Senha.";
+					mes "Senha Incorreta. VocÍ n„o pode Alterar sua Senha.";
 					emotion e_hmm;
 					break;
 				}
@@ -483,29 +483,29 @@ function	script	F_SetKafCode	{
 				break;
 			Case 2:
 				mes getarg(0);
-				mes "Por Favor, Digite sua senha antes de remov√™-la.";
+				mes "Por Favor, Digite sua senha antes de removÍ-la.";
 				set @code,callfunc("F_EntKafCode");
 				if(!@code) {
-					mes "A Senha n√£o foi Removida.";
+					mes "A Senha n„o foi Removida.";
 					emotion e_hmm;
 					break;
 				}
 				next;
 				mes getarg(0);
 				if(Zeny < 1000) {
-					mes "Voc√™ n√£o tem Zeny Suficiente.";
+					mes "VocÍ n„o tem Zeny Suficiente.";
 					emotion e_cash;
 					break;
 				}
 				set Zeny,Zeny-1000;
 				if(@code == #kafra_code) {
 					set #kafra_code,0;
-					mes "Voc√™ Removeu a Senha do seu Armaz√©m com Sucesso.";
+					mes "VocÍ Removeu a Senha do seu ArmazÈm com Sucesso.";
 					mes "Obrigado por Usar "+getarg(1)+".";
 					emotion e_thx;
 				} else {
-					mes "Senha Incorreta. N√≥s N√£o Devolveremos 1000z.";
-					mes "Por Favor, ultilize a senha correta na Pr√≥xima vez.";
+					mes "Senha Incorreta. NÛs N„o Devolveremos 1000z.";
+					mes "Por Favor, ultilize a senha correta na PrÛxima vez.";
 					emotion e_sry;
 				}
 				break;
@@ -513,8 +513,8 @@ function	script	F_SetKafCode	{
 				break;
 		}
 	} else {
-		mes getarg(1)+" Orgulhosamente apresento-lhe um novo servi√ßo:";
-		mes "Prote√ß√£o adicional, Armaz√©m com Senha.";
+		mes getarg(1)+" Orgulhosamente apresento-lhe um novo serviÁo:";
+		mes "ProteÁ„o adicional, ArmazÈm com Senha.";
 		next;
 		switch (select("Colocar uma Nova senha -> 5000z:Cancelar")) {
 			Case 1: callsub S_SET,getarg(0),getarg(1); break;
@@ -527,23 +527,23 @@ function	script	F_SetKafCode	{
 
 S_SET:
 	mes getarg(0);
-	mes "Agora digite a ^FF0000nova senha^000000 para proteger seu Armaz√©m de ladr√µes.";
+	mes "Agora digite a ^FF0000nova senha^000000 para proteger seu ArmazÈm de ladrıes.";
 	set @code,callfunc("F_EntKafCode");
 	if(!@code) {
-		mes "A senha n√£o foi Alterada.";
+		mes "A senha n„o foi Alterada.";
 		emotion e_hmm;
 		return;
 	}
 	next;
 	mes getarg(0);
 	if(Zeny < 5000) {
-		mes "Voc√™ n√£o tem zeny Suficiente.";
+		mes "VocÍ n„o tem zeny Suficiente.";
 		emotion e_cash;
 		return;
 	}
 	set Zeny,Zeny-5000;
 	set #kafra_code,@code;
-	mes "Voc√™ protegeu seu armaz√©m com uma  Senha secreta.";
+	mes "VocÍ protegeu seu armazÈm com uma  Senha secreta.";
 	mes "Obrigado por usar "+getarg(1)+".";
 	emotion e_thx;
 	return;
@@ -558,14 +558,14 @@ function	script	F_EntKafCode	{
 	set @kafcode_try,@kafcode_try+1;
 	if(@kafcode_try>10) {
 		set @kafcode_try,0;
-		logmes "Hack: Tentaram Acessar a Senha do Armaz√©m.";
+		logmes "Hack: Tentaram Acessar a Senha do ArmazÈm.";
 	}
 	if(input(@code_) == 1) {
-		mes "Voc√™ n√£o pode usar uma Senha t√£o grande.";
+		mes "VocÍ n„o pode usar uma Senha t„o grande.";
 		return 0;
 	}
 	if(@code_<1000) {
-		mes "Voc√™ n√£o pode usar uma Senha t√£o Pequena.";
+		mes "VocÍ n„o pode usar uma Senha t„o Pequena.";
 		return 0;
 	}
 	return @code_;
