@@ -1,13 +1,13 @@
 //===== Cronus Script ======================================
-//= Corp. Eventos Incr√≠veis
+//= Corp. Eventos IncrÌveis
 //===== Por: ================================================== 
 //= Gepard
-//===== Vers√£o Atual: ===================================== 
+//===== Vers„o Atual: ===================================== 
 //= 1.5
-//===== Descri√ß√£o: ========================================= 
+//===== DescriÁ„o: ========================================= 
 //= Cool Event Corp. Staff (Save, Storage & Pushcart Service)
 //= in Arunafeltz Region.
-//===== Coment√°rios Adicionais: ================================= 
+//===== Coment·rios Adicionais: ================================= 
 //= 1.0 First version, iRO Sakray X.4 [Gepard]
 //= 1.1 Optimized, fixed a conditional bug [Lupus]
 //= 1.1a Redo back. It wasn't a bug [Lupus]
@@ -16,67 +16,67 @@
 //=	until we got a client/packet based password support [Lupus]
 //= 1.4 Added Veins Cool Event Corp. Staff. [L0ne_W0lf]
 //= 1.5 Cool Event Corp staff is now more iRO like. [L0ne_W0lf]
-//= 1.6 Tradu√ß√£o Pt-Br [ Cronus]
+//= 1.6 TraduÁ„o Pt-Br [ Cronus]
 //============================================================ 
 
 hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 	cutin "zonda_01",2;
-	mes "[Corp. Eventos Incr√≠veis]";
-	mes "Bem-vindo a Corpora√ß√£o Eventos Incr√≠veis.";
-	mes "Nossa equipe est√° sempre trabalhando";
+	mes "[Corp. Eventos IncrÌveis]";
+	mes "Bem-vindo a CorporaÁ„o Eventos IncrÌveis.";
+	mes "Nossa equipe est· sempre trabalhando";
 	mes "para superar suas expectativas";
-	mes "a respeito da qualidade de servi√ßo. Ent√£o";
-	mes "como posso ajud√°-lo hoje?";
+	mes "a respeito da qualidade de serviÁo. Ent„o";
+	mes "como posso ajud·-lo hoje?";
 	next;
-	switch(select("Salvar Ponto de Retorno:Usar Armaz√©m:Alugar Carrinho:Servi√ßo de Armaz√©m com senha:Cancelar")){
+	switch(select("Salvar Ponto de Retorno:Usar ArmazÈm:Alugar Carrinho:ServiÁo de ArmazÈm com senha:Cancelar")){
 	case 1:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		mes "Seu ponto de retorno foi gravado aqui no vilarejo de Hugel.";
-		mes "Obrigado por usar o servi√ßo da Corp. Eventos Incr√≠veis";
+		mes "Obrigado por usar o serviÁo da Corp. Eventos IncrÌveis";
 		savepoint "hugel",96,155;
 		close2;
 		break;
 	case 2:
 		mes "[Cool Event Corp. Staff]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Eu sinto muito, mas voc√™ precisa ser um Aprendiz com n√≠vel 6 de habilidade para poder usar o servi√ßo de armazenamento.";
+			mes "Eu sinto muito, mas vocÍ precisa ser um Aprendiz com nÌvel 6 de habilidade para poder usar o serviÁo de armazenamento.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "Eu lamento, mas voc√™ n√£o tem dinheiro suficiente para usar o servi√ßo de armazenamento.";
-			mes "Para usar o armazenamento, o custo √© de 40 zenys.";
+			mes "Eu lamento, mas vocÍ n„o tem dinheiro suficiente para usar o serviÁo de armazenamento.";
+			mes "Para usar o armazenamento, o custo È de 40 zenys.";
 			close2;
 			break;
 		}
 		set Zeny, Zeny - 40;
-		mes "Deixe-me abrir seu armaz√©m pessoal agora.";
-		mes "Obrigado por usar os servi√ßos da Corp. Eventos incr√≠veis.";
-		mes "Tenha um √≥timo dia. ~";
+		mes "Deixe-me abrir seu armazÈm pessoal agora.";
+		mes "Obrigado por usar os serviÁos da Corp. Eventos incrÌveis.";
+		mes "Tenha um Ûtimo dia. ~";
 		callfunc("F_CheckKafCode");	//check your storage password, if set
 		close2;
 		openstorage;
 		break;
 	case 3:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		if(BaseClass != Job_Merchant){
 			mes "Eu lamento, mas o";
-			mes "servi√ßo de aluguel de carrinhos";
-			mes "s√≥ est√° dispon√≠vel para Mercadores,";
+			mes "serviÁo de aluguel de carrinhos";
+			mes "sÛ est· disponÌvel para Mercadores,";
 			mes "Ferreiros, Mestre-Ferreiros,";
-			mes "Alquimistas, Criadores e suas evolu√ß√µes.";
+			mes "Alquimistas, Criadores e suas evoluÁıes.";
 			close2;
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Voc√™ s√≥ poder√° alugar um carrinho se possuir a habilidade 'Usar Carrinho'.";
+			mes "VocÍ sÛ poder· alugar um carrinho se possuir a habilidade 'Usar Carrinho'.";
 			close2;
 			break;
 		}
 		if(checkcart() == 1){
-			mes "Voc√™ j√° tem";
-			mes "um carrinho de m√£o equipado.";
-			mes "Infelizmente, s√≥ podemos alugar um carrinho por vez.";
+			mes "VocÍ j· tem";
+			mes "um carrinho de m„o equipado.";
+			mes "Infelizmente, sÛ podemos alugar um carrinho por vez.";
 			close2;
 			break;
 		}
@@ -87,12 +87,12 @@ hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 			break;
 		}
 		mes "The Pushcart rental";
-		mes "O aluguel do carrinho de m√£o custa 800 zenys. Voc√™ deseja alugar o carrinho?";
+		mes "O aluguel do carrinho de m„o custa 800 zenys. VocÍ deseja alugar o carrinho?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
-				mes "[Corp. Eventos Incr√≠veis]";
-				mes "Eu lamento, mas voc√™ n√£o possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
+				mes "[Corp. Eventos IncrÌveis]";
+				mes "Eu lamento, mas vocÍ n„o possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
 			} else {
 				set Zeny, Zeny - 800;
 				setcart;
@@ -101,52 +101,52 @@ hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 		close2;
 		break;
 	case 4:
-		callfunc("F_SetKafCode","[Corp. Eventos Incr√≠veis]","Corp. Eventos Incr√≠veis");
+		callfunc("F_SetKafCode","[Corp. Eventos IncrÌveis]","Corp. Eventos IncrÌveis");
 		//the function closes msg and remoes cutins
 	case 5:
 	default:
-		mes "[Corp. Eventos Incr√≠veis]";
-		mes "A Corp. Eventos Incr√≠veis, est√° sempre se esfor√ßando para providenciar o melhor";
-		mes "servi√ßo para nossos clientes.";
-		mes "Ajude-nos a nos tornar os melhores, usando nossos servi√ßos com frequ√™ncia. Obrigado!";
+		mes "[Corp. Eventos IncrÌveis]";
+		mes "A Corp. Eventos IncrÌveis, est· sempre se esforÁando para providenciar o melhor";
+		mes "serviÁo para nossos clientes.";
+		mes "Ajude-nos a nos tornar os melhores, usando nossos serviÁos com frequÍncia. Obrigado!";
 		close2;
 	}
 	cutin "", 255;
 	end;
 }
 
-rachel,109,138,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffRachel	874,{
+rachel,109,138,5	script	Corp. Eventos IncrÌveis::CoolEventCorpStaffRachel	874,{
 	cutin "zonda_01",2;
-	mes "[Corp. Eventos Incr√≠veis]";
-	mes "Bem vindo a Corp. Eventos Incr√≠veis!";
-	mes "Nossa equipe est√° sempre trabalhando para superar suas expectativas para a qualidade de servi√ßo. Ent√£o como posso ajudar hoje?";
+	mes "[Corp. Eventos IncrÌveis]";
+	mes "Bem vindo a Corp. Eventos IncrÌveis!";
+	mes "Nossa equipe est· sempre trabalhando para superar suas expectativas para a qualidade de serviÁo. Ent„o como posso ajudar hoje?";
 	next;
-	switch(select("Salvar Ponto de Retorno:Usar Armaz√©m:Servi√ßo de Teleporte:Alugar Carrinho:Servi√ßo de Armaz√©m com senha:Cancelar")){
+	switch(select("Salvar Ponto de Retorno:Usar ArmazÈm:ServiÁo de Teleporte:Alugar Carrinho:ServiÁo de ArmazÈm com senha:Cancelar")){
 	case 1:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		mes "Seu ponto de retorno foi gravado aqui na cidade de Rachel.";
-		mes "Obrigado por usar o servi√ßo da Corp. Eventos Incr√≠veis~.";
+		mes "Obrigado por usar o serviÁo da Corp. Eventos IncrÌveis~.";
 		savepoint "rachel",113,137;
 		close2;
 		break;
 	case 2:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Eu sinto muito, mas voc√™ precisa ser um Aprendiz";
-			mes "com n√≠vel 6 de habilidade para poder usar o servi√ßo de armazenamento.";
+			mes "Eu sinto muito, mas vocÍ precisa ser um Aprendiz";
+			mes "com nÌvel 6 de habilidade para poder usar o serviÁo de armazenamento.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "Eu lamento, mas voc√™ n√£o tem dinheiro suficiente para usar";
-			mes "o servi√ßo de armazenamento. Para usar o armazenamento, custar√° 40 zenys.";
+			mes "Eu lamento, mas vocÍ n„o tem dinheiro suficiente para usar";
+			mes "o serviÁo de armazenamento. Para usar o armazenamento, custar· 40 zenys.";
 			close2;
 			break;
 		}
 		set Zeny, Zeny - 40;
-		mes "Deixe-me abrir seu armaz√©m pessoal agora.";
-		mes "Obrigado por usar os servi√ßos da Corp. Eventos Incr√≠veis.";
-		mes "Tenha um √≥timo dia!~";
+		mes "Deixe-me abrir seu armazÈm pessoal agora.";
+		mes "Obrigado por usar os serviÁos da Corp. Eventos IncrÌveis.";
+		mes "Tenha um Ûtimo dia!~";
 		callfunc("F_CheckKafCode");
 		close2;
 		openstorage;
@@ -168,27 +168,27 @@ rachel,109,138,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffRachel	874,{
 				end;
 			}
 			else {
-				mes "[Corp. Eventos Incr√≠veis]";
-				mes "Eu lamento, mas voc√™ n√£o tem dinheiro o suficiente para";
-				mes "usar o servi√ßo de teleporte, que custa 2200 zenys.";
+				mes "[Corp. Eventos IncrÌveis]";
+				mes "Eu lamento, mas vocÍ n„o tem dinheiro o suficiente para";
+				mes "usar o serviÁo de teleporte, que custa 2200 zenys.";
 			}
 		}
 		close2;
 		break;
 	case 4:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		if(BaseClass != Job_Merchant){
-			mes "Eu lamento, mas o servi√ßo de aluguel de carrinhos s√≥ est√° dispon√≠vel para Mercadores,Ferreiros, Mestre-Ferreiros,Alquimistas, Criadores e suas evolu√ß√µes.";
+			mes "Eu lamento, mas o serviÁo de aluguel de carrinhos sÛ est· disponÌvel para Mercadores,Ferreiros, Mestre-Ferreiros,Alquimistas, Criadores e suas evoluÁıes.";
 			close2;
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Voc√™ s√≥ pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
+			mes "VocÍ sÛ pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
 			close2;
 			break;
 		}
 		if(checkcart() == 1){
-			mes "Voc√™ j√° tem um carrinho equipado. Infelizmente, s√≥ podemos alugar um carrinho por vez.";
+			mes "VocÍ j· tem um carrinho equipado. Infelizmente, sÛ podemos alugar um carrinho por vez.";
 			close2;
 			break;
 		}
@@ -198,12 +198,12 @@ rachel,109,138,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffRachel	874,{
 			close2;
 			break;
 		}
-		mes "O aluguel do carrinho custa 800 zenys. Voc√™ deseja alugar o carrinho?";
+		mes "O aluguel do carrinho custa 800 zenys. VocÍ deseja alugar o carrinho?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
-				mes "[Eventos Incr√≠veis]";
-				mes "Eu lamento, mas voc√™ n√£o possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
+				mes "[Eventos IncrÌveis]";
+				mes "Eu lamento, mas vocÍ n„o possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
 			} else {
 				set Zeny, Zeny - 800;
 				setcart;
@@ -212,50 +212,50 @@ rachel,109,138,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffRachel	874,{
 		close2;
 		break;
 	case 5:
-		callfunc("F_SetKafCode","[Corp. Eventos Incr√≠veis]","Corp. Eventos Incr√≠veis");
+		callfunc("F_SetKafCode","[Corp. Eventos IncrÌveis]","Corp. Eventos IncrÌveis");
 	case 6:
 	default:
-		mes "[Corp. Eventos Incr√≠veis]";
-		mes "A Corp. Eventos Incr√≠veis, est√° sempre se esfor√ßando para providenciar o melhor servi√ßo para nossos clientes.";
-		mes "Ajude-nos a nos tornar os melhores usando nossos servi√ßos com frequ√™ncia. Muito obrigado!~";
+		mes "[Corp. Eventos IncrÌveis]";
+		mes "A Corp. Eventos IncrÌveis, est· sempre se esforÁando para providenciar o melhor serviÁo para nossos clientes.";
+		mes "Ajude-nos a nos tornar os melhores usando nossos serviÁos com frequÍncia. Muito obrigado!~";
 		close2;
 	}
 	cutin "", 255;
 	end;
 }
 
-veins,208,128,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffVeins	874,{
+veins,208,128,5	script	Corp. Eventos IncrÌveis::CoolEventCorpStaffVeins	874,{
 	cutin "zonda_01",2;
-	mes "[Corp. Eventos Incr√≠veis]";
-	mes "Bem vindo a Corp. Eventos Incr√≠veis.";
-	mes "Nossa equipe est√° sempre trabalhando para superar suas expectativas";
-	mes "para a qualidade de servi√ßo. Ent√£o como posso ajudar hoje?";
+	mes "[Corp. Eventos IncrÌveis]";
+	mes "Bem vindo a Corp. Eventos IncrÌveis.";
+	mes "Nossa equipe est· sempre trabalhando para superar suas expectativas";
+	mes "para a qualidade de serviÁo. Ent„o como posso ajudar hoje?";
 	next;
-	switch(select("Salvar Ponto de Retorno:Usar Armaz√©m:Servi√ßo de Teleporte:Alugar Carrinho:Servi√ßo Armaz√©m com senha:Cancelar")){
+	switch(select("Salvar Ponto de Retorno:Usar ArmazÈm:ServiÁo de Teleporte:Alugar Carrinho:ServiÁo ArmazÈm com senha:Cancelar")){
 	case 1:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		mes "Seu ponto de retorno foi gravado aqui na cidade de Veins.";
-		mes "Obrigado por usar o servi√ßo da Corp. Eventos Incr√≠veis~.";
+		mes "Obrigado por usar o serviÁo da Corp. Eventos IncrÌveis~.";
 		savepoint "veins",204,103;
 		close2;
 		break;
 	case 2:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Eu sinto muito, mas voc√™ precisa ser um Aprendiz com n√≠vel 6 de habilidade para poder usar o servi√ßo de armazenamento.";
+			mes "Eu sinto muito, mas vocÍ precisa ser um Aprendiz com nÌvel 6 de habilidade para poder usar o serviÁo de armazenamento.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "Eu lamento, mas voc√™ n√£o tem dinheiro suficiente para usar o servi√ßo de de armazenamento.";
-			mes "Para usar o armazenamento, custar√° 40 zenys.";
+			mes "Eu lamento, mas vocÍ n„o tem dinheiro suficiente para usar o serviÁo de de armazenamento.";
+			mes "Para usar o armazenamento, custar· 40 zenys.";
 			close2;
 			break;
 		}
 		set Zeny, Zeny - 40;
-		mes "Deixe-me abrir seu armaz√©m pessoal agora.";
-		mes "Obrigado por usar os servi√ßos do grupo da Corp. Eventos Incr√≠veis.";
-		mes "Tenha um √≥timo dia!~";
+		mes "Deixe-me abrir seu armazÈm pessoal agora.";
+		mes "Obrigado por usar os serviÁos do grupo da Corp. Eventos IncrÌveis.";
+		mes "Tenha um Ûtimo dia!~";
 		callfunc("F_CheckKafCode");
 		close2;
 		openstorage;
@@ -277,27 +277,27 @@ veins,208,128,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffVeins	874,{
 				end;
 			}
 			else {
-				mes "[Corp. Eventos Incr√≠veis]";
-				mes "Eu lamento, mas voc√™ n√£o tem dinheiro o suficiente para usar o servi√ßo de teleporte que custa 2200 zenys.";
+				mes "[Corp. Eventos IncrÌveis]";
+				mes "Eu lamento, mas vocÍ n„o tem dinheiro o suficiente para usar o serviÁo de teleporte que custa 2200 zenys.";
 			}
 		}
 		close2;
 		break;
 	case 4:
-		mes "[Corp. Eventos Incr√≠veis]";
+		mes "[Corp. Eventos IncrÌveis]";
 		if(BaseClass != Job_Merchant){
-			mes "Eu lamento, mas o servi√ßo de aluguel de carrinhos s√≥ est√° dispon√≠vel para Mercadores,Ferreiros, Mestre-Ferreiros,Alquimistas, Criadores e suas evolu√ß√µes";
+			mes "Eu lamento, mas o serviÁo de aluguel de carrinhos sÛ est· disponÌvel para Mercadores,Ferreiros, Mestre-Ferreiros,Alquimistas, Criadores e suas evoluÁıes";
 			close2;
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Voc√™ s√≥ pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
+			mes "VocÍ sÛ pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
 			close2;
 			break;
 		}
 		if(checkcart() == 1){
-			mes "Voc√™ j√° tem um carrinho de m√£o equipado.";
-			mes "Infelizmente, s√≥ podemos alugar um carrinho de m√£o por vez.";
+			mes "VocÍ j· tem um carrinho de m„o equipado.";
+			mes "Infelizmente, sÛ podemos alugar um carrinho de m„o por vez.";
 			close2;
 			break;
 		}
@@ -307,12 +307,12 @@ veins,208,128,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffVeins	874,{
 			close2;
 			break;
 		}
-		mes "O aluguel do carrinho de m√£o custa 800 zenys. Voc√™ deseja alugar o carrinho de m√£o?";
+		mes "O aluguel do carrinho de m„o custa 800 zenys. VocÍ deseja alugar o carrinho de m„o?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
-				mes "[Corp. Eventos Incr√≠veis]";
-				mes "Eu lamento, mas voc√™ n√£o possui zenys para pagar o aluguel do carrinho de m√£o que custa 800 zenys.";
+				mes "[Corp. Eventos IncrÌveis]";
+				mes "Eu lamento, mas vocÍ n„o possui zenys para pagar o aluguel do carrinho de m„o que custa 800 zenys.";
 				close2;
 			} else {
 				set Zeny, Zeny - 800;
@@ -322,12 +322,12 @@ veins,208,128,5	script	Corp. Eventos Incr√≠veis::CoolEventCorpStaffVeins	874,{
 		close2;
 		break;
 	case 5:
-		callfunc("F_SetKafCode","[Corp. Eventos Incr√≠veis]","Corp. Eventos Incr√≠veis");
+		callfunc("F_SetKafCode","[Corp. Eventos IncrÌveis]","Corp. Eventos IncrÌveis");
 	case 6:
 	default:
-		mes "[Corp. Eventos Incr√≠veis]";
-		mes "A Corp. Eventos Incr√≠veis, est√° sempre se esfor√ßando para providenciar o melhor servi√ßo para nossos clientes.";
-		mes "Ajude-nos a nos tornar os melhores usando nossos servi√ßos com frequ√™ncia. Muito obrigado!~";
+		mes "[Corp. Eventos IncrÌveis]";
+		mes "A Corp. Eventos IncrÌveis, est· sempre se esforÁando para providenciar o melhor serviÁo para nossos clientes.";
+		mes "Ajude-nos a nos tornar os melhores usando nossos serviÁos com frequÍncia. Muito obrigado!~";
 		close2;
 	}
 	cutin "", 255;
