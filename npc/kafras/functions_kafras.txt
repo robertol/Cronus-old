@@ -148,7 +148,7 @@ function	script	F_Kafra	{
 		for (set .@i, 0; .@i < getarraysize(@K_Menu0$); set .@i, .@i + 1)
 			set .@menu$, .@menu$ + @K_Menu0$[.@i] + ":";	
 		set .@j, select (.@menu$) - 1;
-		if (@K_Menu0$[.@j] == "Save") {
+		if (@K_Menu0$[.@j] == "Salvar") {
 			return;
 		} else if (@K_Menu0$[.@j] == "Usar Armazém") {
 			// Do not charge for Guild Storage
@@ -178,7 +178,7 @@ function	script	F_Kafra	{
 			next;
 		} else if (@K_Menu0$[.@j] == "Checar Outra Informação") {
 			callfunc "F_KafInfo",getarg(2);
-		} else if (@K_Menu0$[.@j] == "Cancel"){
+		} else if (@K_Menu0$[.@j] == "Cancelar"){
 			callfunc "F_KafEnd",getarg(0),0;
 			end;
 		} else if (@K_Menu0$[.@j] == "Usar Armazém") {
@@ -416,7 +416,7 @@ function	script	F_KafInfo	{
 //  arg(2): used to display the name of the area you're saving in.
 //===================================================================
 function	script	F_KafEnd	{
-	mes "[Kafra Employee]";
+	mes "[Funcionária Kafra]";
 	if(getarg(1)==1) {	
 		// Save
 		mes "Seu Ponto de Retorno";
