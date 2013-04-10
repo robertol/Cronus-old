@@ -1,12 +1,12 @@
 //===== Cronus Script ========================================
 //= Arquivo padrão da Guerra do Emperium
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.9
-//===== Compatible With: =====================================
-//= rAthena SVN
-//===== Description: =========================================
+//===== Versão Atual: =====================================
+//= 2.0
+//===== Compatível Com: =====================================
+//= rAthena, Hercules, Cronus
+//===== Descrição: =========================================
 //= [ Aegis Conversion]
 //= ----------------------------------------------------------
 //= - THIS FILE IS REQUIRED FOR GUILD CASTLES TO FUNCTION.
@@ -102,7 +102,7 @@ OnAgitBreak:
 	set .@GID,getcharid(2);
 	// Show and log error if an unguilded player breaks the Emperium. (Should NEVER happen)
 	if (.@GID <= 0) {
-		set .@notice$,"Character "+strcharinfo(0)+" ("+getcharid(0)+") broke the Emperium in Castle: "+strnpcinfo(2)+" while guildless. No data will be saved and Emperium respawned.";
+		set .@notice$,"O Jogador "+strcharinfo(0)+" ("+getcharid(0)+") quebrou o Emperium do Castelo: "+strnpcinfo(2)+" sem um Clã. Nenhum Dado será salvo e o Emperium será Restaurado..";
  		logmes .@notice$; debugmes .@notice$;
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 		end;
@@ -120,7 +120,7 @@ OnAgitBreak:
 	SetCastleData strnpcinfo(2),1, .@GID;
 
 	// Announce that the Emperium is destroyed, and respawn all but new castle-occupants.
-	mapannounce strnpcinfo(2),"The emperium has been destroyed.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
+	mapannounce strnpcinfo(2),"O emperium foi Destruído.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
 	MapRespawnGuildID strnpcinfo(2),.@GID,6;
 
 	// Refresh castle data, disable Kafra and reset Invest information.
@@ -140,7 +140,7 @@ OnAgitBreak:
 	if( agitcheck() )
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 	sleep 7000;
-	announce "The [" + getcastlename(strnpcinfo(2)) + "] castle has been conquered by the [" + getguildName(.@GID) + "] guild.",bc_all|bc_woe;
+	announce "O Castelo de  [" + getcastlename(strnpcinfo(2)) + "] foi conquistado pelo Clã [" + getguildName(.@GID) + "] .",bc_all|bc_woe;
 	end;
 
 // War of Emperium has ended.
@@ -162,7 +162,7 @@ OnGuildBreak:
 	SetCastleData strnpcinfo(2),0,0;
 	// Wait before refreshing guild information.
 	sleep 7000;
-	Announce "Guild Base [" + GetCastleName(strnpcinfo(2)) + "] has been abandoned.",0;
+	Announce "O Castelo [" + GetCastleName(strnpcinfo(2)) + "] foi abandonado.",0;
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
 	end;
 
@@ -342,44 +342,44 @@ OnRecvCastle:
 
 	cutin "kafra_01",2;
 	if (getcharid(2) == .@GID) {
-		mes "[Kafra Employee]";
-		mes "Welcome. ^ff0000" + GetGuildName(.@GID) + "^000000 Member.";
-		mes "The Kafra Corporation will stay with you wherever you go.";
+		mes "[Funcionária Kafra]";
+		mes "Bem Vindo. Membro do Clã ^ff0000" + GetGuildName(.@GID) + "^000000 .";
+		mes "A Corporação Kafra estará com você onde quer que você vá.";
 		next;
-		switch (select("Use Storage:Use Teleport Service:Rent a Pushcart:Cancel")) {
+		switch (select("Usar Armazém:Usar Serviço de Teleporte:Alugar Carrinho:Cancelar")) {
 		case 1:
 			if (getskilllv("NV_BASIC") < 6) {
 				mes "[Kafra Employee]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "Me Desculpe mais você";
+				mes "necessita das";
+				mes "habilidades básicas nível 6 para";
+				mes "usar o Armazém.";
 				close2;
 				cutin "",255;
 				end;
 			}
-			mes "[Kafra Employee]";
-			mes "Here, let me open";
-			mes "your Storage for you.";
-			mes "Thank you for using";
-			mes "the Kafra Service.";
+			mes "[Funcionária Kafra]";
+			mes "Aqui, deixe-me abrir";
+			mes "o armazém para você.";
+			mes "Obrigado por usar";
+			mes "os serviços Kafra.";
 			close2;
 			cutin "",255;
 			openstorage;
 			end;
 		case 2:
-			mes "[Kafra Employee]";
-			mes "Please choose";
-			mes "your destination.";
+			mes "[Funcionária Kafra]";
+			mes "Por favor,";
+			mes "selecione o seu destino.";
 			next;
-			switch (select(.@destination$+" -> 200z:Cancel")) {
+			switch (select(.@destination$+" -> 200z:Cancelar")) {
 			case 1:
 				if (Zeny < 200) {
-					mes "[Kafra Employee]";
-					mes "I'm sorry, but you don't have";
-					mes "enough zeny for the Teleport";
-					mes "Service. The fee to teleport";
-					mes "to "+.@destination$+" is 200 zeny.";
+					mes "[Funcionária Kafra]";
+					mes "Eu sinto muito, mais você não tem";
+					mes "dinheiro suficiente para usar o serviço";
+					mes "de teletransporte. A Taxa de teleporte";
+					mes "para "+.@destination$+" é de 200 zeny.";
 					close2;
 					cutin "",255;
 					end;
@@ -396,41 +396,40 @@ OnRecvCastle:
 			}
 		case 3:
 			if (BaseClass != Job_Merchant) {
-				mes "[Kafra Employee]";
-				mes "I'm sorry, but the";
-				mes "Pushcart rental service";
-				mes "is only available to Merchants,";
-				mes "Blacksmiths, Master Smiths,";
-				mes "Alchemists, Biochemists,";
-				mes "Mechanics and Geneticists.";
+				mes "[Funcionária Kafra]";
+				mes "Me desculpe, mas o";
+				mes "serviço de aluguel de carrinho";
+				mes "está disponível apenas para Mercador,";
+				mes "Ferreiro, Mestre-Ferreiro,";
+				mes "Alquimista e Bioquímico.";
 				close2;
 				cutin "",255;
 				end;
 			}
 			if (checkcart()) {
-				mes "[Kafra Employee]";
-				mes "You already have";
-				mes "a Pushcart equipped.";
-				mes "Unfortunately, we can't";
-				mes "rent more than one to";
-				mes "each customer at a time.";
+				mes "[Funcionária Kafra]";
+				mes "Você já está com";
+				mes "um Carrinho equipado.";
+				mes "Infelizmente não podemos";
+				mes "alugar mais de um a cada cliente";
+				mes "por vez.";
 				close2;
 				cutin "",255;
 				end;
 			}
-			mes "[Kafra Employee]";
-			mes "The Pushcart rental";
-			mes "fee is 800 zeny. Would";
-			mes "you like to rent a Pushcart?";
+			mes "[Funcionária Kafra]";
+			mes "O aluguel do Carrinho";
+			mes "custa 800 zeny. Você";
+			mes "gostaria de alugar o Carrinho?";
 			next;
-			switch (select("Rent a Pushcart.:Cancel")) {
+			switch (select("Alugar Carrinho.:Cancelar")) {
 			case 1:
 				if (Zeny < 800) {
-					mes "[Kafra Employee]";
-					mes "I'm sorry, but you";
-					mes "don't have enough";
-					mes "zeny to pay the Pushcart";
-					mes "rental fee of 800 zeny.";
+					mes "[Funcionária Kafra]";
+					mes "Me desculpe, mais você";
+					mes "não tem zeny";
+					mes "suficiente para pagar. O ";
+					mes "aluguel custa 800 zeny.";
 					close2;
 					cutin "",255;
 					end;
@@ -447,16 +446,16 @@ OnRecvCastle:
 				end;
 			}
 		case 4:
-			mes "[Kafra Employee]";
-			mes "We, here at Kafra Corporation,";
-			mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+			mes "[Funcionária Kafra]";
+			mes "Nós, da Corporação Kafra,";
+			mes "estamos sempre nos esforçando para oferecer os melhores serviços. Esperamos atender suas necessidades.";
 			close2;
 			cutin "",255;
 			end;
 		}
 	}
-	mes "[Kafra Employee]";
-	mes "I am instructed to only offer my services to the ^ff0000"+GetGuildName(.@GID)+"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
+	mes "[Funcionária Kafra]";
+	mes "Eu Fui instruida a Oferecer meus serviços apenas aos membros do Clã ^ff0000"+GetGuildName(.@GID)+"^000000 Guild. Por Favor, procure outra Funcionária Kafra nos Arredores. Desculpe-me pelo incoveniente.";
 	close2;
 	cutin "",255;
 	end;

@@ -1,10 +1,10 @@
 //===== Cronus Script ======================================
-//= Servi√ßo de Teletransporte para Cavernas
+//= ServiÁo de Teletransporte para Cavernas
 //===== Por: ================================================== 
 //= Evera
-//===== Vers√£o Atual: ===================================== 
+//===== Vers„o Atual: ===================================== 
 //= 2.9
-//===== Descri√ß√£o: =========================================
+//===== DescriÁ„o: =========================================
 //= [Official Conversion]
 //= Cool Event Corp NPCs vs. Kafra Dungeon Teleport Service and voting system.
 //= This is a special event on official servers where there's a
@@ -51,10 +51,10 @@
 //= 2.6 Moved Morroc NPCs to Morroc Ruins. [L0ne_W0lf]
 //= 2.7 Fixed a typo, a - to a +. Not sure how that happened. [L0ne_w0lf]
 //= 2.8 Corrected another typo this time in a variable.
-//= 2.9 Tradu√ß√£o Pt-Br - [ Cronus]
+//= 2.9 TraduÁ„o Pt-Br - [ Cronus]
 //============================================================ 
 
-einbroch,246,70,0	script	Tempo da Vota√ß√£o#ein	-1,{
+einbroch,246,70,0	script	Tempo da VotaÁ„o#ein	-1,{
 OnInit:
 	if ($dts) {
 		set $dts,0;
@@ -72,44 +72,44 @@ OnTimer60000:
 	// A part that keeps the same status even after a server shut down
 	if ($DTS_Result == 1) {
 		if ($DTS_JondaWins == 0) {
-			donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+			donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 		}
 		else if ($DTS_JondaWins == 1) {
 			if ($DTS_KafraWins < 2) {
-				donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 			}
 			else {
-				donpcevent "Tempo da Vota√ß√£o3#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o3#ein::OnEnable";
 			}
 		}
 		else {
 			if ($DTS_KafraWins < 2) {
-				donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 			}
 			else {
-				donpcevent "Tempo da Vota√ß√£o3#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o3#ein::OnEnable";
 			}
 		}
 		stopnpctimer;
 	}
 	else if ($DTS_Result == 2) {
 		if ($DTS_JondaWins == 0) {
-			donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+			donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 		}
 		else if ($DTS_JondaWins == 1) {
 			if ($DTS_KafraWins < 2) {
-				donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 			}
 			else {
-				donpcevent "Tempo da Vota√ß√£o4#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o4#ein::OnEnable";
 			}
 		}
 		else {
 			if ($DTS_KafraWins < 2) {
-				donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 			}
 			else {
-				donpcevent "Tempo da Vota√ß√£o4#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o4#ein::OnEnable";
 			}
 		}
 		stopnpctimer;
@@ -123,14 +123,14 @@ OnTimer60000:
 							set $DTS_KafraWins,$DTS_KafraWins+1;
 							set $DTS_Result,1;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else if ($DTS_KafraWins == 2) {
 							set $DTS_Result,1;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 					}
 					else if ($DTS_JondaWins == 1) {
@@ -138,14 +138,14 @@ OnTimer60000:
 							set $DTS_KafraWins,$DTS_KafraWins+1;
 							set $DTS_Result,1;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else {
 							set $DTS_Time,0;
 							set $DTS_Result,1;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o3#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o3#ein::OnEnable";
 						}
 					}
 					else {
@@ -153,14 +153,14 @@ OnTimer60000:
 							set $DTS_KafraWins,$DTS_KafraWins+1;
 							set $DTS_Result,1;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else {
 							set $DTS_Result,1;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#6::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o3#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#6::OnEnable";
+							donpcevent "Tempo da VotaÁ„o3#ein::OnEnable";
 						}
 					}
 				}
@@ -170,14 +170,14 @@ OnTimer60000:
 							set $DTS_JondaWins,$DTS_JondaWins+1;
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else {
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 					}
 					else if ($DTS_KafraWins == 1) {
@@ -185,14 +185,14 @@ OnTimer60000:
 							set $DTS_JondaWins,$DTS_JondaWins+1;
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else {
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o4#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o4#ein::OnEnable";
 						}
 					}
 					else {
@@ -200,14 +200,14 @@ OnTimer60000:
 							set $DTS_JondaWins,$DTS_JondaWins+1;
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 						}
 						else {
 							set $DTS_Result,2;
 							set $DTS_Time,0;
-							donpcevent "Associa√ß√£o Scrutiny#7::OnEnable";
-							donpcevent "Tempo da Vota√ß√£o4#ein::OnEnable";
+							donpcevent "AssociaÁ„o Scrutiny#7::OnEnable";
+							donpcevent "Tempo da VotaÁ„o4#ein::OnEnable";
 						}
 					}
 				}
@@ -215,18 +215,18 @@ OnTimer60000:
 			else {
 				set $DTS_Result,3;
 				set $DTS_Time,0;
-				donpcevent "Tempo da Vota√ß√£o#ein::OnEnable";
+				donpcevent "Tempo da VotaÁ„o#ein::OnEnable";
 			}
 		}
 		else {
 			set $DTS_Time,$DTS_Time+1;
-			donpcevent "Tempo da Vota√ß√£o#ein::OnEnable";
+			donpcevent "Tempo da VotaÁ„o#ein::OnEnable";
 		}
 	}
 	end;
 }
 
-einbroch,245,71,0	script	Tempo da Vota√ß√£o2#ein	-1,{
+einbroch,245,71,0	script	Tempo da VotaÁ„o2#ein	-1,{
 OnEnable:
 	initnpctimer;
 	end;
@@ -239,16 +239,16 @@ OnTimer60000:
 		set $DTS_KafraVotes,0;
 		set $DTS_JondaVotes,0;
 		set $DTS_VoteCount,$DTS_VoteCount+1;
-		donpcevent "Tempo da Vota√ß√£o#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o#ein::OnEnable";
 	}
 	else {
 		set $DTS_PeriodCheck,$DTS_PeriodCheck+1;
-		donpcevent "Tempo da Vota√ß√£o2#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o2#ein::OnEnable";
 	}
 	end;
 }
 
-einbroch,246,71,0	script	Tempo da Vota√ß√£o3#ein	-1,{
+einbroch,246,71,0	script	Tempo da VotaÁ„o3#ein	-1,{
 OnEnable:
 	initnpctimer;
 	end;
@@ -262,16 +262,16 @@ OnTimer60000:
 		set $DTS_JondaVotes,0; //Global Variable
 		set $DTS_JondaWins,$DTS_JondaWins-1;
 		set $DTS_VoteCount,$DTS_VoteCount+1;
-		donpcevent "Tempo da Vota√ß√£o#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o#ein::OnEnable";
 	}
 	else {
 		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
-		donpcevent "Tempo da Vota√ß√£o3#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o3#ein::OnEnable";
 	}
 	end;
 }
 
-einbroch,247,71,0	script	Tempo da Vota√ß√£o4#ein	-1,{
+einbroch,247,71,0	script	Tempo da VotaÁ„o4#ein	-1,{
 OnEnable:
 	initnpctimer;
 	end;
@@ -285,11 +285,11 @@ OnTimer60000:
 		set $DTS_JondaVotes,0; //Global Variable
 		set $DTS_KafraWins,$DTS_KafraWins-1;
 		set $DTS_VoteCount,$DTS_VoteCount+1;
-		donpcevent "Tempo da Vota√ß√£o#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o#ein::OnEnable";
 	}
 	else {
 		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
-		donpcevent "Tempo da Vota√ß√£o4#ein::OnEnable";
+		donpcevent "Tempo da VotaÁ„o4#ein::OnEnable";
 	}
 	end;
 }
@@ -310,47 +310,47 @@ function	script	F_VoteKafra	{
 	case 8: cutin "kafra_08",2; break;
 	case 9: cutin "kafra_09",2; break;
 	}
-	mes "[Kafra equipe de vota√ß√£o]";
-	mes "Ol√° aventureiro!";
-	mes "Como voc√™ deve estar ciente, estamos fazendo uma elei√ß√£o";
+	mes "[Kafra equipe de votaÁ„o]";
+	mes "Ol· aventureiro!";
+	mes "Como vocÍ deve estar ciente, estamos fazendo uma eleiÁ„o";
 	mes "para determinar qual empresa vai";
-	mes "fornecer o servi√ßo de";
+	mes "fornecer o serviÁo de";
 	mes "teleporte para as Dungeons.";
 	mes "Como posso ajudar?";
 	next;
-	switch(select("Raz√£o da elei√ß√£o:Votar:Usar servi√ßo de teleporte:Cancelar")) {
+	switch(select("Raz„o da eleiÁ„o:Votar:Usar serviÁo de teleporte:Cancelar")) {
 	case 1:
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "O Grupo de Eventos Incr√≠veis e a ";
-		mes "Corpora√ß√£o Kafra planejam";
-		mes "fornecer o servi√ßo";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "O Grupo de Eventos IncrÌveis e a ";
+		mes "CorporaÁ„o Kafra planejam";
+		mes "fornecer o serviÁo";
 		mes "de teleporte para as dungeons.";
 		next;
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "Infelizmente, devido √† tecnologia";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "Infelizmente, devido ‡ tecnologia";
 		mes "limitada, apenas uma empresa";
-		mes "poder√° fornecer o servi√ßo de";
+		mes "poder· fornecer o serviÁo de";
 		mes "teleporte para as dungeons por";
-		mes "um tempo. Ent√£o as duas empresas concordaram em realizar elei√ß√µes especiais.";
+		mes "um tempo. Ent„o as duas empresas concordaram em realizar eleiÁıes especiais.";
 		next;
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "Cada empresa tem a sua pr√≥pria pol√≠tica";
-		mes "e garantia usadas no servi√ßo";
-		mes "de teleporte para as dungeons. Nessa elei√ß√£o, os clientes ir√£o";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "Cada empresa tem a sua prÛpria polÌtica";
+		mes "e garantia usadas no serviÁo";
+		mes "de teleporte para as dungeons. Nessa eleiÁ„o, os clientes ir„o";
 		mes "escolher o que acham melhor para eles.";
 		next;
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "Por enquanto, o servi√ßo";
-		mes "de teleporte para as dungeons ter√° um";
-		mes "per√≠odo de experi√™ncia. Dessa forma os clientes";
-		mes "podem ver os benef√≠cios antes da vota√ß√£o final.";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "Por enquanto, o serviÁo";
+		mes "de teleporte para as dungeons ter· um";
+		mes "perÌodo de experiÍncia. Dessa forma os clientes";
+		mes "podem ver os benefÌcios antes da votaÁ„o final.";
 		next;
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "Se voc√™ est√° qualificado para votar,";
-		mes "por favor vote em cada elei√ß√£o";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "Se vocÍ est· qualificado para votar,";
+		mes "por favor vote em cada eleiÁ„o";
 		mes "para decidir qual empresa vai";
-		mes "fornecer o servi√ßo de teleporte para as Dungeons";
-		mes "por um per√≠odo de testes. Obrigado pelo vosso apoio~";
+		mes "fornecer o serviÁo de teleporte para as Dungeons";
+		mes "por um perÌodo de testes. Obrigado pelo vosso apoio~";
 		break;
 	case 2:
 		//if (lhz_boss < 17) {
@@ -368,10 +368,10 @@ function	script	F_VoteKafra	{
 		//else {
 			if ($DTS_Result == 0) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "N√≥s, da Corpora√ß√£o Kafra, ";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "NÛs, da CorporaÁ„o Kafra, ";
 					mes "estamos planejando fornecer o";
-					mes "servi√ßo de teleporte para as dungeons";
+					mes "serviÁo de teleporte para as dungeons";
 					mes "nos seguintes locais...";
 					next;
 					mes " ";
@@ -380,95 +380,95 @@ function	script	F_VoteKafra	{
 						mes "^FF0000Fabrica de Brinquedos Nivel 2^000000";
 					}
 					else if ($DTS_KafraWins == 1) {
-						mes "^FF0000F√°brica de Brinquedos N√≠vel 2^000000";
-						mes "^FF0000Torre do Rel√≥gio - Al De Baran - N√≠vel 3 ^000000";
+						mes "^FF0000F·brica de Brinquedos NÌvel 2^000000";
+						mes "^FF0000Torre do RelÛgio - Al De Baran - NÌvel 3 ^000000";
 					}
 					else {
-						mes "^FF0000F√°brica de Brinquedos Nivel 2^000000";
-						mes "^FF0000Torre do rel√≥gio - Al De Baran - N√≠vel 3, Caverna de Magma N√≠vel 2^000000";
+						mes "^FF0000F·brica de Brinquedos Nivel 2^000000";
+						mes "^FF0000Torre do relÛgio - Al De Baran - NÌvel 3, Caverna de Magma NÌvel 2^000000";
 					}
 					next;
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Se voc√™ est√° interessado";
-					mes "em nosso servi√ßo de teleporte,";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "Se vocÍ est· interessado";
+					mes "em nosso serviÁo de teleporte,";
 					mes "por favor vote em";
-					mes "n√≥s agora.";
-					mes "Gostaria de votar na corpora√ß√£o Kafra?";
+					mes "nÛs agora.";
+					mes "Gostaria de votar na corporaÁ„o Kafra?";
 					next;
-					switch(select("N√£o:Sim")) {
+					switch(select("N„o:Sim")) {
 					case 1:
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Eu entendo, mas se voc√™";
-						mes "mudar de id√©ia";
-						mes "ser√° bem vindo para";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Eu entendo, mas se vocÍ";
+						mes "mudar de idÈia";
+						mes "ser· bem vindo para";
 						mes "voltar. Muito obrigado e";
 						mes "tenha um bom dia, aventureiro.";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_KafraVotes,$DTS_KafraVotes+1;
-						mes "[Kafra equipe de vota√ß√£o]";
+						mes "[Kafra equipe de votaÁ„o]";
 						mes "Obrigado por seu voto!";
-						mes "N√≥s continuaremos a oferecer";
-						mes "o nosso melhor servi√ßo,";
+						mes "NÛs continuaremos a oferecer";
+						mes "o nosso melhor serviÁo,";
 						mes "com qualidade excelente.";
-						mes "Desejamos a voc√™ um √≥timo dia e lembre-se que a Corpora√ß√£o Kafra sempre estar√° ao seu lado.";
+						mes "Desejamos a vocÍ um Ûtimo dia e lembre-se que a CorporaÁ„o Kafra sempre estar· ao seu lado.";
 						break;
 					}
 				}
 				else {
-					mes "[Kafra equipe de vota√ß√£o]";
+					mes "[Kafra equipe de votaÁ„o]";
 					mes "Eu lamento, mas";
-					mes "voc√™ n√£o pode participar dessa";
-					mes "elei√ß√£o. Quando acontecer";
-					mes "a pr√≥xima, voc√™ poder√°";
+					mes "vocÍ n„o pode participar dessa";
+					mes "eleiÁ„o. Quando acontecer";
+					mes "a prÛxima, vocÍ poder·";
 					mes "participar.";
 					mes "Muito obrigado por seu apoio~";
 				}
 			}
 			else if ($DTS_Result == 3) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Depois de totalizarmos o n√∫mero de";
-					mes "votos da √∫ltima elei√ß√£o,";
-					mes "conclu√≠mos que a participa√ß√£o";
-					mes "de eleitores foi m√≠nima,";
-					mes "e por isso n√£o foi satisfat√≥ria.";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "Depois de totalizarmos o n˙mero de";
+					mes "votos da ˙ltima eleiÁ„o,";
+					mes "concluÌmos que a participaÁ„o";
+					mes "de eleitores foi mÌnima,";
+					mes "e por isso n„o foi satisfatÛria.";
 					next;
-					mes "[Kafra equipe de vota√ß√£o]";
+					mes "[Kafra equipe de votaÁ„o]";
 					mes "Por isso, faremos uma ";
-					mes "outra elei√ß√£o para determinar qual empresa";
-					mes "ir√° fornecer o servi√ßo de teleporte para as Dungeons";
+					mes "outra eleiÁ„o para determinar qual empresa";
+					mes "ir· fornecer o serviÁo de teleporte para as Dungeons";
 					mes "Se formos escolhidos,";
-					mes "a Corpora√ß√£o Kafra ir√° fornecer o teleporte para";
+					mes "a CorporaÁ„o Kafra ir· fornecer o teleporte para";
 					mes "as seguntes dungeons...";
 					next;
 					mes " ";
 					mes " ";
 					if ($DTS_KafraWins == 0) {
-						mes "^FF0000F√°brica de Brinquedos, N√≠vel 2^000000";
+						mes "^FF0000F·brica de Brinquedos, NÌvel 2^000000";
 					}
 					else if ($DTS_KafraWins == 1) {
-						mes "^FF0000F√°brica de Brinquedos, N√≠vel 2^000000";
-						mes "^FF0000Torre do Rel√≥gio, N√≠vel 3 ^000000";
+						mes "^FF0000F·brica de Brinquedos, NÌvel 2^000000";
+						mes "^FF0000Torre do RelÛgio, NÌvel 3 ^000000";
 					}
 					else {
-						mes "^FF0000F√°brica de Brinquedos, N√≠vel 2^000000";
-						mes "^FF0000Torre do Rel√≥gio, N√≠vel 3 Lava Dungeon, N√≠vel 2^000000";
+						mes "^FF0000F·brica de Brinquedos, NÌvel 2^000000";
+						mes "^FF0000Torre do RelÛgio, NÌvel 3 Lava Dungeon, NÌvel 2^000000";
 					}
 					next;
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Se voc√™ gostaria de";
-					mes "contar com servi√ßo de teleporte";
-					mes "para essas √°reas, por favor";
-					mes "vote em n√≥s. Voc√™ gostaria de";
-					mes "votar na Corpora√ß√£o Kafra?";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "Se vocÍ gostaria de";
+					mes "contar com serviÁo de teleporte";
+					mes "para essas ·reas, por favor";
+					mes "vote em nÛs. VocÍ gostaria de";
+					mes "votar na CorporaÁ„o Kafra?";
 					next;
-					switch(select("N√£o:Sim")) {
+					switch(select("N„o:Sim")) {
 					case 1:
-						mes "[Kafra equipe de vota√ß√£o]";
+						mes "[Kafra equipe de votaÁ„o]";
 						mes "Entendo. Mas, se mudar";
-						mes "de id√©ia, pode voltar";
+						mes "de idÈia, pode voltar";
 						mes "a qualquer hora. Muito";
 						mes "obrigada e tenha um";
 						mes "bom dia, aventureiro!";
@@ -476,61 +476,61 @@ function	script	F_VoteKafra	{
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_KafraVotes,$DTS_KafraVotes+1;
-						mes "[Kafra equipe de vota√ß√£o]";
+						mes "[Kafra equipe de votaÁ„o]";
 						mes "Obrigada por seu voto!";
 						mes "Faremos nosso melhor para";
-						mes "fornecer servi√ßo de teleporte";
-						mes "de √≥tima qualidade para nossos";
-						mes "clientes! Tenha um bom dia e lembre-se que a Corpora√ß√£o Kafra est√° sempre ao seu lado~";
+						mes "fornecer serviÁo de teleporte";
+						mes "de Ûtima qualidade para nossos";
+						mes "clientes! Tenha um bom dia e lembre-se que a CorporaÁ„o Kafra est· sempre ao seu lado~";
 						break;
 					}
 				}
 				else {
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Ap√≥s contabilizarmos o";
-					mes "n√∫mero de votos da √∫ltima";
-					mes "elei√ß√£o, conclu√≠mos que";
-					mes "o n√∫mero m√≠nimo de participantes";
-					mes "n√£o foi atingido.";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "ApÛs contabilizarmos o";
+					mes "n˙mero de votos da ˙ltima";
+					mes "eleiÁ„o, concluÌmos que";
+					mes "o n˙mero mÌnimo de participantes";
+					mes "n„o foi atingido.";
 					next;
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Portanto, faremos outra elei√ß√£o";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "Portanto, faremos outra eleiÁ„o";
 					mes "para definir qual companhia";
-					mes "ser√° respons√°vel pelo Servi√ßo";
-					mes "de Teleporte. Por√©m, como voc√™";
-					mes "j√° votou, n√£o poder√° votar novamente.";
+					mes "ser· respons·vel pelo ServiÁo";
+					mes "de Teleporte. PorÈm, como vocÍ";
+					mes "j· votou, n„o poder· votar novamente.";
 					next;
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "Sua participa√ß√£o na elei√ß√£o";
-					mes "√© muito importante, e por isso";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "Sua participaÁ„o na eleiÁ„o";
+					mes "È muito importante, e por isso";
 					mes "pedimos que vote novamente na";
-					mes "pr√≥xima elei√ß√£o. Obrigada";
+					mes "prÛxima eleiÁ„o. Obrigada";
 					mes "e tenha um bom dia!";
 				}
 			}
 			else {
-				mes "[Kafra equipe de vota√ß√£o]";
-				mes "Desculpe, n√£o estamos realizando";
-				mes "elei√ß√µes no momento. Quando";
+				mes "[Kafra equipe de votaÁ„o]";
+				mes "Desculpe, n„o estamos realizando";
+				mes "eleiÁıes no momento. Quando";
 				mes "a enquete for reaberta, pedimos";
-				mes "que venha dar sua opini√£o.";
-				mes "Obrigada pela participa√ß√£o e";
+				mes "que venha dar sua opini„o.";
+				mes "Obrigada pela participaÁ„o e";
 				mes "pelo apoio!";
 			}
 		//}
 		break;
 	case 3:
 		if ($DTS_Result == 2) {
-			mes "[Kafra equipe de vota√ß√£o]";
+			mes "[Kafra equipe de votaÁ„o]";
 			mes "Obrigada por escolher o";
-			mes "Servi√ßo de Teleporte para Dungeons.";
-			mes "Lembre-se que os t√≠quetes";
+			mes "ServiÁo de Teleporte para Dungeons.";
+			mes "Lembre-se que os tÌquetes";
 			mes "de Warp Gratuito e os Pontos";
-			mes "Especiais da Corpora√ß√£o Kafra n√£o se";
-			mes "aplicam para esse servi√ßo em particular.";
+			mes "Especiais da CorporaÁ„o Kafra n„o se";
+			mes "aplicam para esse serviÁo em particular.";
 			next;
 			if ($DTS_KafraWins == 0) {
-				switch(select("F√°brica de Brinquedos, N√≠vel 2 -> 4,000 z:Cancelar")) {
+				switch(select("F·brica de Brinquedos, NÌvel 2 -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						cutin "",255;
@@ -539,23 +539,23 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, necess√°ria";
+						mes "a taxa de 4000 zenys, necess·ria";
 						mes "para o teleporte para a Toy Factory.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
 					break;
 				case 2:
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "N√≥s, da Corpora√ß√£o Kafra, sempre";
-					mes "tentamos providenciar um servi√ßo de excel√™ncia. Esperamos que voc√™ aprove!";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "NÛs, da CorporaÁ„o Kafra, sempre";
+					mes "tentamos providenciar um serviÁo de excelÍncia. Esperamos que vocÍ aprove!";
 					break;
 				}
 			}
 			else if ($DTS_KafraWins == 1) {
-				switch(select("F√°brica de Brinquedos, N√≠vel 2 -> 4,000 z:Torre do Rel√≥gio, N√≠vel 3 -> 4,000 z:Cancelar")) {
+				switch(select("F·brica de Brinquedos, NÌvel 2 -> 4,000 z:Torre do RelÛgio, NÌvel 3 -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set zeny,zeny-4000;
@@ -564,10 +564,10 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, necess√°ria";
+						mes "a taxa de 4000 zenys, necess·ria";
 						mes "para o teleporte para a Toy Factory.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
@@ -580,23 +580,23 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, necess√°ria";
-						mes "para o teleporte para a Torre do Rel√≥gio.";
+						mes "a taxa de 4000 zenys, necess·ria";
+						mes "para o teleporte para a Torre do RelÛgio.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
 					break;
 				case 3:
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "N√≥s, da Corpora√ß√£o Kafra, sempre";
-					mes "tentamos providenciar um servi√ßo de excel√™ncia. Esperamos que voc√™ aprove!";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "NÛs, da CorporaÁ„o Kafra, sempre";
+					mes "tentamos providenciar um serviÁo de excelÍncia. Esperamos que vocÍ aprove!";
 					break;
 				}
 			}
 			else {
-				switch(select("F√°brica de Brinquedos, N√≠vel 2 -> 4,000 z:Torre do Rel√≥gio, N√≠vel 3 -> 4,000 z:Lava Dungeon, N√≠vel 2 -> 4,000 z:Cancelar")) {
+				switch(select("F·brica de Brinquedos, NÌvel 2 -> 4,000 z:Torre do RelÛgio, NÌvel 3 -> 4,000 z:Lava Dungeon, NÌvel 2 -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set zeny,zeny-4000;
@@ -605,10 +605,10 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, necess√°ria";
+						mes "a taxa de 4000 zenys, necess·ria";
 						mes "para o teleporte para a Toy Factory.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
@@ -621,11 +621,11 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, necess√°ria";
-						mes "para o teleporte para a Torre do Rel√≥gio.";
+						mes "a taxa de 4000 zenys, necess·ria";
+						mes "para o teleporte para a Torre do RelÛgio.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
 					break;
@@ -637,44 +637,44 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra equipe de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Kafra equipe de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para pagar";
-						mes "a taxa de 4000 zenys, nexess√°ria";
+						mes "a taxa de 4000 zenys, nexess·ria";
 						mes "para o teleporte para a Lava Dungeon.";
 						mes "Cheque seus fundos e volte novamente.";
 					}
 					break;
 				case 4:
-					mes "[Kafra equipe de vota√ß√£o]";
-					mes "N√≥s, da Corpora√ß√£o Kafra, sempre";
-					mes "tentamos providenciar um servi√ßo de excel√™ncia. Esperamos que voc√™ aprove!";
+					mes "[Kafra equipe de votaÁ„o]";
+					mes "NÛs, da CorporaÁ„o Kafra, sempre";
+					mes "tentamos providenciar um serviÁo de excelÍncia. Esperamos que vocÍ aprove!";
 					break;
 				}
 			}
 		}
 		else if ($DTS_Result == 1) {
-			mes "[Kafra equipe de vota√ß√£o]";
+			mes "[Kafra equipe de votaÁ„o]";
 			mes "Sinto muito, mas pelo resultado da";
-			mes "elei√ß√£o, o Grupo de Eventos";
-			mes "Incr√≠veis est√° respons√°vel pelo";
-			mes "Servi√ßo de Teleporte para Dungeons.";
-			mes "Pedimos desculpas pela inconveni√™ncia.";
+			mes "eleiÁ„o, o Grupo de Eventos";
+			mes "IncrÌveis est· respons·vel pelo";
+			mes "ServiÁo de Teleporte para Dungeons.";
+			mes "Pedimos desculpas pela inconveniÍncia.";
 		}
 		else {
-			mes "[Kafra equipe de vota√ß√£o]";
-			mes "Desculpe, o Servi√ßo de Teleporte";
-			mes "para Dungeons n√£o fica dispon√≠vel";
-			mes "durante o per√≠odo de elei√ß√µes.";
-			mes "Ele voltar√° a operar ap√≥s o";
-			mes "an√∫ncio dos resultados. Obrigado";
+			mes "[Kafra equipe de votaÁ„o]";
+			mes "Desculpe, o ServiÁo de Teleporte";
+			mes "para Dungeons n„o fica disponÌvel";
+			mes "durante o perÌodo de eleiÁıes.";
+			mes "Ele voltar· a operar apÛs o";
+			mes "an˙ncio dos resultados. Obrigado";
 			mes "e tenha um bom dia.";
 		}
 		break;
 	case 4:
-		mes "[Kafra equipe de vota√ß√£o]";
-		mes "N√≥s, da Corpora√ß√£o Kafra, sempre";
-		mes "tentamos providenciar um servi√ßo de excel√™ncia. Esperamos que voc√™ aprove!";
+		mes "[Kafra equipe de votaÁ„o]";
+		mes "NÛs, da CorporaÁ„o Kafra, sempre";
+		mes "tentamos providenciar um serviÁo de excelÍncia. Esperamos que vocÍ aprove!";
 		break;
 	}	
 	close2;
@@ -682,243 +682,243 @@ function	script	F_VoteKafra	{
 	end;
 }
 
-yuno,162,191,4	script	Funcion√°ria#yuno	861,{
+yuno,162,191,4	script	Funcion·ria#yuno	861,{
 	callfunc "F_VoteKafra",9;
 }
-prontera,164,125,4	script	Funcion√°ria#prt	116,{
+prontera,164,125,4	script	Funcion·ria#prt	116,{
 	callfunc "F_VoteKafra",2;
 }
-moc_ruins,97,133,4	script	Funcion√°ria#moc	116,{
+moc_ruins,97,133,4	script	Funcion·ria#moc	116,{
 	callfunc "F_VoteKafra",2;
 }
-geffen,122,37,4	script	Funcion√°ria#gef	116,{
+geffen,122,37,4	script	Funcion·ria#gef	116,{
 	callfunc "F_VoteKafra",2;
 }
-payon,158,182,4	script	Funcion√°ria#pay	116,{
+payon,158,182,4	script	Funcion·ria#pay	116,{
 	callfunc "F_VoteKafra",2;
 }
-alberta,119,70,4	script	Funcion√°ria#alb	116,{
+alberta,119,70,4	script	Funcion·ria#alb	116,{
 	callfunc "F_VoteKafra",2;
 }
-aldebaran,145,102,4	script	Funcion√°ria#alde	116,{
+aldebaran,145,102,4	script	Funcion·ria#alde	116,{
 	callfunc "F_VoteKafra",2;
 }
-lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
+lighthalzen,163,60,4	script	Funcion·ria#lght	861,{
 	callfunc "F_VoteKafra",9;
 }
 
--	script	Funcion√°rio::VotingStaffCCE	874,{
+-	script	Funcion·rio::VotingStaffCCE	874,{
 	callfunc "F_ClearGarbage";
 	cutin "zonda_01",2;
-	mes "[Equipe Eventos legais de vota√ß√£o]";
-	mes "Ol√°! N√£o deixe de fazer sua";
-	mes "voz ser ouvida, vote nas elei√ß√µes";
-	mes "entre a Corpora√ß√£o Kafra e o Grupo";
-	mes "de Eventos Incr√≠veis, para decidir";
-	mes "o respons√°vel pelo Servi√ßo de Teleporte para Dungeons!";
+	mes "[Equipe Eventos legais de votaÁ„o]";
+	mes "Ol·! N„o deixe de fazer sua";
+	mes "voz ser ouvida, vote nas eleiÁıes";
+	mes "entre a CorporaÁ„o Kafra e o Grupo";
+	mes "de Eventos IncrÌveis, para decidir";
+	mes "o respons·vel pelo ServiÁo de Teleporte para Dungeons!";
 	next;
-	switch(select("Raz√£o da Elei√ß√£o:Votar:Usar Servi√ßo de Teleporte:Cancelar")) {
+	switch(select("Raz„o da EleiÁ„o:Votar:Usar ServiÁo de Teleporte:Cancelar")) {
 	case 1:
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "O Grupo de Eventos Incr√≠veis";
-		mes "est√° planejando providenciar um novo";
-		mes "Servi√ßo de Teleporte para Dungeons";
-		mes "para seus clientes, um servi√ßo que n√£o";
-		mes "√© realizado pela Corpora√ß√£o Kafra";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "O Grupo de Eventos IncrÌveis";
+		mes "est· planejando providenciar um novo";
+		mes "ServiÁo de Teleporte para Dungeons";
+		mes "para seus clientes, um serviÁo que n„o";
+		mes "È realizado pela CorporaÁ„o Kafra";
 		mes "ainda. Enfim...";
 		next;
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "A Corpora√ß√£o Kafra, que j√°";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "A CorporaÁ„o Kafra, que j·";
 		mes "monopoliza o mercado dos";
-		mes "transportes p√∫blicos, tem planos";
-		mes "de providenciar servi√ßos";
+		mes "transportes p˙blicos, tem planos";
+		mes "de providenciar serviÁos";
 		mes "semelhantes aos nossos.";
 		next;
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "Infelizmente, por limita√ß√µes";
-		mes "tecnol√≥gicas, apenas uma companhia";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "Infelizmente, por limitaÁıes";
+		mes "tecnolÛgicas, apenas uma companhia";
 		mes "pode ser escolhida como fornecedora";
-		mes "do Servi√ßo de Teleporte para Dungeons.";
-		mes "Assim, os clientes √© que decidir√£o qual delas!";
+		mes "do ServiÁo de Teleporte para Dungeons.";
+		mes "Assim, os clientes È que decidir„o qual delas!";
 		next;
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "Elei√ß√µes simult√¢neas em v√°rias";
-		mes "cidades ser√£o feitas, para que";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "EleiÁıes simult‚neas em v·rias";
+		mes "cidades ser„o feitas, para que";
 		mes "os clientes possam votar na companhia";
-		mes "de sua prefer√™ncia.";
+		mes "de sua preferÍncia.";
 		next;
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "Para saber se voc√™ est√°";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "Para saber se vocÍ est·";
 		mes "qualificado como eleitor,";
 		mes "visite nossa sede na cidade de";
-		mes "Lighthalzen, na Rep√∫blica de";
+		mes "Lighthalzen, na Rep˙blica de";
 		mes "Schwaltzvalt. Obrigado por seu ";
 		mes "tempo e tenha um bom dia!";
 		break;
 	case 2:
 			if ($DTS_Result == 0) {
 				if (lhz_vote <= $DTRS_VoteCount) {
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "O Grupo de Eventos Incr√≠veis,";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "O Grupo de Eventos IncrÌveis,";
 					mes "se for escolhido como provedor";
-					mes "do Servi√ßo de Teleporte, oferecer√°";
+					mes "do ServiÁo de Teleporte, oferecer·";
 					mes "transporte para os aventureiros que";
-					mes "forem √†s seguintes dungeons...";
+					mes "forem ‡s seguintes dungeons...";
 					next;
 					mes " ";
 					mes " ";
 					if ($DTS_JondaWins == 0) {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
 					}
 					else if ($DTS_JondaWins == 1) {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
-						mes "^FF0000Torre do Rel√≥gio 3¬∫ andar^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
+						mes "^FF0000Torre do RelÛgio 3∫ andar^000000";
 					}
 					else {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
-						mes "^FF0000Torre do Rel√≥gio 3¬∫ andar^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
+						mes "^FF0000Torre do RelÛgio 3∫ andar^000000";
 						mes "^FF0000Entrada de Glast Heim^000000";
 					}
 					next;
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Se voc√™ gostaria de";
-					mes "contar com servi√ßo de teleporte";
-					mes "para essas √°reas, por favor";
-					mes "vote em n√≥s. Voc√™ gostaria";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Se vocÍ gostaria de";
+					mes "contar com serviÁo de teleporte";
+					mes "para essas ·reas, por favor";
+					mes "vote em nÛs. VocÍ gostaria";
 					mes "de votar no Grupo de";
-					mes "Eventos Incr√≠veis?";
+					mes "Eventos IncrÌveis?";
 					next;
-					switch(select("N√£o:Sim")) {
+					switch(select("N„o:Sim")) {
 					case 1:
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Ah, percebo... Bem, se voc√™ mudar";
-						mes "de opini√£o, sinta-se a vontade para";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Ah, percebo... Bem, se vocÍ mudar";
+						mes "de opini„o, sinta-se a vontade para";
 						mes "voltar aqui e votar no Grupo de";
-						mes "Eventos Incrive√≠s, certo? ";
+						mes "Eventos IncriveÌs, certo? ";
 						mes "Tenha um bom dia~";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_JondaVotes,$DTS_JondaVotes+1;
-						mes "[Equipe Eventos legais de vota√ß√£o]";
+						mes "[Equipe Eventos legais de votaÁ„o]";
 						mes "Obrigado por seu voto!";
-						mes "S√£o clientes como voc√™ que";
-						mes "garantem o sucesso do servi√ßo";
+						mes "S„o clientes como vocÍ que";
+						mes "garantem o sucesso do serviÁo";
 						mes "fornecido pelo Grupo de Eventos";
-						mes "Incr√≠veis. Muito obrigado";
+						mes "IncrÌveis. Muito obrigado";
 						mes "e tenha um bom dia!~";
 						break;
 					}
 				}
 				else {
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Desculpe, voc√™ j√° votou";
-					mes "nessa elei√ß√£o. Mas n√£o";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Desculpe, vocÍ j· votou";
+					mes "nessa eleiÁ„o. Mas n„o";
 					mes "pense que isso te impede";
 					mes "de votar no Grupo de Eventos";
-					mes "Incr√≠veis na pr√≥xima elei√ß√£o!";
+					mes "IncrÌveis na prÛxima eleiÁ„o!";
 					mes "Volte sempre~";
 				}
 			}
 			else if ($DTS_Result == 3) {
 				if (lhz_vote <= $DTRS_VoteCount) {
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Infelizmente, n√£o obtivemos";
-					mes "o n√∫mero de votos necess√°rios";
-					mes "na √∫ltima elei√ß√£o. Por isso";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Infelizmente, n„o obtivemos";
+					mes "o n˙mero de votos necess·rios";
+					mes "na ˙ltima eleiÁ„o. Por isso";
 					mes "em breve realizaremos outra";
 					mes "para decidir qual companhia";
-					mes "fornecer√° o Servi√ßo de Teleporte.";
+					mes "fornecer· o ServiÁo de Teleporte.";
 					next;
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "O Grupo de Eventos Incr√≠veis,";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "O Grupo de Eventos IncrÌveis,";
 					mes "se for escolhido como provedor";
-					mes "do Servi√ßo de Teleporte, oferecer√°";
+					mes "do ServiÁo de Teleporte, oferecer·";
 					mes "transporte para os aventureiros que";
-					mes "forem √†s seguintes dungeons...";
+					mes "forem ‡s seguintes dungeons...";
 					next;
 					mes " ";
 					mes " ";
 					if ($DTS_JondaWins == 0) {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
 					}
 					else if ($DTS_JondaWins == 1) {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
-						mes "^FF0000Torre do Rel√≥gio N√≠vel 3^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
+						mes "^FF0000Torre do RelÛgio NÌvel 3^000000";
 					}
 					else {
-						mes "^FF0000Caverna de Byalan N√≠vel 3^000000";
-						mes "^FF0000Torre do Rel√≥gio N√≠vel 3^000000";
+						mes "^FF0000Caverna de Byalan NÌvel 3^000000";
+						mes "^FF0000Torre do RelÛgio NÌvel 3^000000";
 						mes "^FF0000Entrada de Glast Heim^000000";
 					}
 					next;
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Se voc√™ gostaria de";
-					mes "contar com servi√ßo de teleporte";
-					mes "para essas √°reas, por favor";
-					mes "vote em n√≥s. Voc√™ gostaria";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Se vocÍ gostaria de";
+					mes "contar com serviÁo de teleporte";
+					mes "para essas ·reas, por favor";
+					mes "vote em nÛs. VocÍ gostaria";
 					mes "de votar no Grupo de";
-					mes "Eventos Incr√≠veis?";
+					mes "Eventos IncrÌveis?";
 					next;
-					switch(select("N√£o:Sim")) {
+					switch(select("N„o:Sim")) {
 					case 1:
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Ah, percebo... Bem, se voc√™ mudar";
-						mes "de opini√£o, sinta-se a vontade para";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Ah, percebo... Bem, se vocÍ mudar";
+						mes "de opini„o, sinta-se a vontade para";
 						mes "voltar aqui e votar no Grupo de";
-						mes "Eventos Incr√≠vies, certo?";
+						mes "Eventos IncrÌvies, certo?";
 						mes "Tenha um bom dia~";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_JondaVotes,$DTS_JondaVotes+1;
-						mes "[Equipe Eventos legais de vota√ß√£o]";
+						mes "[Equipe Eventos legais de votaÁ„o]";
 						mes "Obrigado por seu voto!";
-						mes "S√£o clientes como voc√™ que";
-						mes "garantem o sucesso do servi√ßo";
+						mes "S„o clientes como vocÍ que";
+						mes "garantem o sucesso do serviÁo";
 						mes "fornecido pelo Grupo de Eventos";
-						mes "Incr√≠veis. Muito obrigado";
+						mes "IncrÌveis. Muito obrigado";
 						mes "e tenha um bom dia!~";
 						break;
 					}
 				}
 				else {
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Infelizmente, n√£o obtivemos";
-					mes "o n√∫mero de votos necess√°rios";
-					mes "na ultima elei√ß√£o. Por isso";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Infelizmente, n„o obtivemos";
+					mes "o n˙mero de votos necess·rios";
+					mes "na ultima eleiÁ„o. Por isso";
 					mes "em breve realizaremos outra";
 					mes "para decidir qual companhia";
-					mes "fornecer√° o Servi√ßo de Teleporte para Dungeons.";
+					mes "fornecer· o ServiÁo de Teleporte para Dungeons.";
 					next;
-					mes "[Equipe Eventos legais de vota√ß√£o]";
-					mes "Agradecemos voc√™ por";
-					mes "j√° ter participado dessa";
-					mes "segunda elei√ß√£o.";
+					mes "[Equipe Eventos legais de votaÁ„o]";
+					mes "Agradecemos vocÍ por";
+					mes "j· ter participado dessa";
+					mes "segunda eleiÁ„o.";
 					mes "Muito obrigado por";
 					mes "seu apoio~";
 				}
 			}
 			else {
-				mes "[Equipe Eventos legais de vota√ß√£o]";
-				mes "Sinto muito, mas n√£o estamos";
-				mes "realizando elei√ß√µes nesse momento. Por favor,";
-				mes "vote na pr√≥xima para decidir qual companhia";
-				mes "fornecer√° o Servi√ßo de Teleporte para Dungeons.";
+				mes "[Equipe Eventos legais de votaÁ„o]";
+				mes "Sinto muito, mas n„o estamos";
+				mes "realizando eleiÁıes nesse momento. Por favor,";
+				mes "vote na prÛxima para decidir qual companhia";
+				mes "fornecer· o ServiÁo de Teleporte para Dungeons.";
 			}
 		//}
 		break;
 	case 3:
 		if ($DTS_Result == 1) {
-			mes "[Equipe Eventos legais de vota√ß√£o]";
-			mes "Lembre-se que n√£o aceitamos";
-			mes "t√≠quetes de Warp Gratuito nem";
+			mes "[Equipe Eventos legais de votaÁ„o]";
+			mes "Lembre-se que n„o aceitamos";
+			mes "tÌquetes de Warp Gratuito nem";
 			mes "Pontos Especiais nesse";
-			mes "servi√ßo de teleporte. Agora,";
+			mes "serviÁo de teleporte. Agora,";
 			mes "escolha seu destino.";
 			next;
 			if ($DTS_JondaWins == 0) {
-				switch(select("Caverna de Byalan - N√≠vel 3 -> 4,000 z:Cancelar")) {
+				switch(select("Caverna de Byalan - NÌvel 3 -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set zeny,zeny-4000;
@@ -927,26 +927,26 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 2:
-					mes "[Equipe Eventos legais de vota√ß√£o]";
+					mes "[Equipe Eventos legais de votaÁ„o]";
 					mes "Tenha certeza que o Grupo";
-					mes "de Eventos Incr√≠veis far√°";
-					mes "todo o poss√≠vel para garantir";
-					mes "a satisfa√ß√£o de seus clientes,";
+					mes "de Eventos IncrÌveis far·";
+					mes "todo o possÌvel para garantir";
+					mes "a satisfaÁ„o de seus clientes,";
 					mes "os novos e os velhos, e os grandes,";
-					mes "pequenos e m√©dios. Obrigado!~";
+					mes "pequenos e mÈdios. Obrigado!~";
 					break;
 				}
 			}
 			else if ($DTS_JondaWins == 1) {
-				switch(select("Caverna de Byalan - N√≠vel 3 -> 4,000 z:Torre do rel√≥gio, 3¬∫ andar -> 4,000 z:Cancelar")) {
+				switch(select("Caverna de Byalan - NÌvel 3 -> 4,000 z:Torre do relÛgio, 3∫ andar -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set zeny,zeny-4000;
@@ -955,11 +955,11 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 2:
@@ -970,33 +970,33 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 3:
-					mes "[Equipe Eventos legais de vota√ß√£o]";
+					mes "[Equipe Eventos legais de votaÁ„o]";
 					mes "Tenha certeza que o Grupo";
-					mes "de Eventos Incr√≠veis far√°";
-					mes "todo o poss√≠vel para garantir";
-					mes "a satisfa√ß√£o de seus clientes,";
+					mes "de Eventos IncrÌveis far·";
+					mes "todo o possÌvel para garantir";
+					mes "a satisfaÁ„o de seus clientes,";
 					mes "os novos e os velhos, e os grandes,";
-					mes "pequenos e m√©dios. Obrigado!~";
+					mes "pequenos e mÈdios. Obrigado!~";
 					break;
 				}
 			}
 			else {
-				mes "[Equipe Eventos legais de vota√ß√£o]";
-				mes "Lembre-se que n√£o aceitamos";
-				mes "t√≠quetes de Warp Gratuito nem";
+				mes "[Equipe Eventos legais de votaÁ„o]";
+				mes "Lembre-se que n„o aceitamos";
+				mes "tÌquetes de Warp Gratuito nem";
 				mes "Pontos Especiais nesse";
-				mes "servi√ßo de Teleporte. Agora,";
+				mes "serviÁo de Teleporte. Agora,";
 				mes "escolha seu destino.";
 				next;
-				switch(select("Caverna de Byalan - N√≠vel 3 -> 4,000 z:Torre do Rel√≥gio, 3¬∫ andar -> 4,000 z:Entrada de Glast Heim -> 4,000 z:Cancelar")) {
+				switch(select("Caverna de Byalan - NÌvel 3 -> 4,000 z:Torre do RelÛgio, 3∫ andar -> 4,000 z:Entrada de Glast Heim -> 4,000 z:Cancelar")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set zeny,zeny-4000;
@@ -1005,11 +1005,11 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 2:
@@ -1020,11 +1020,11 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 3:
@@ -1035,51 +1035,51 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 						end;
 					}
 					else {
-						mes "[Equipe Eventos legais de vota√ß√£o]";
-						mes "Desculpe, voc√™ n√£o tem";
+						mes "[Equipe Eventos legais de votaÁ„o]";
+						mes "Desculpe, vocÍ n„o tem";
 						mes "dinheiro suficiente para teleportar";
 						mes "para essa dungeon. A taxa";
-						mes "√© de 4000 zenys.";
+						mes "È de 4000 zenys.";
 					}
 					break;
 				case 4:
-					mes "[Equipe Eventos legais de vota√ß√£o]";
+					mes "[Equipe Eventos legais de votaÁ„o]";
 					mes "Tenha certeza que o Grupo";
-					mes "de Eventos Incr√≠veis far√°";
-					mes "todo o poss√≠vel para garantir";
-					mes "a satisfa√ß√£o de seus clientes,";
+					mes "de Eventos IncrÌveis far·";
+					mes "todo o possÌvel para garantir";
+					mes "a satisfaÁ„o de seus clientes,";
 					mes "os novos e os velhos, e os grandes,";
-					mes "pequenos e m√©dios. Obrigado!~";
+					mes "pequenos e mÈdios. Obrigado!~";
 					break;
 				}
 			}
 		}
 		else if ($DTS_Result == 2) {
-			mes "[Equipe Eventos legais de vota√ß√£o]";
+			mes "[Equipe Eventos legais de votaÁ„o]";
 			mes "Sinto muito, mas o Grupo de";
-			mes "Eventos Incr√≠veis n√£o est√°";
-			mes "oferecendo o Servi√ßo de ";
+			mes "Eventos IncrÌveis n„o est·";
+			mes "oferecendo o ServiÁo de ";
 			mes "Teleporte para Dungeons, por";
-			mes "causa do resultado da √∫ltima";
-			mes "elei√ß√£o. Na pr√≥xima, vote em n√≥s! Bom dia~";
+			mes "causa do resultado da ˙ltima";
+			mes "eleiÁ„o. Na prÛxima, vote em nÛs! Bom dia~";
 		}
 		else {
-			mes "[Equipe Eventos legais de vota√ß√£o]";
-			mes "Desculpe, o Servi√ßo de Teleporte";
-			mes "para Dungeons n√£o fica dispon√≠vel";
-			mes "durante o per√≠odo de elei√ß√µes.";
-			mes "Ele voltar√° a operar ap√≥s o an√∫ncio dos resultados.";
+			mes "[Equipe Eventos legais de votaÁ„o]";
+			mes "Desculpe, o ServiÁo de Teleporte";
+			mes "para Dungeons n„o fica disponÌvel";
+			mes "durante o perÌodo de eleiÁıes.";
+			mes "Ele voltar· a operar apÛs o an˙ncio dos resultados.";
 			mes "Obrigado e tenha um bom dia.";
 		}
 		break;
 	case 4:
-		mes "[Equipe Eventos legais de vota√ß√£o]";
-		mes "O Grupo de Eventos Incr√≠veis";
+		mes "[Equipe Eventos legais de votaÁ„o]";
+		mes "O Grupo de Eventos IncrÌveis";
 		mes "trabalha para a satisfazer seus";
 		mes "clientes, sempre tentando";
-		mes "superar a n√≥s mesmos nos";
-		mes "padr√µes de qualidade. Obrigado";
-		mes "e tenha um dia muito agrad√°vel.";
+		mes "superar a nÛs mesmos nos";
+		mes "padrıes de qualidade. Obrigado";
+		mes "e tenha um dia muito agrad·vel.";
 		break;
 	}
 	close2;
@@ -1087,16 +1087,16 @@ lighthalzen,163,60,4	script	Funcion√°ria#lght	861,{
 	end;
 }
 
-yuno,153,191,6	duplicate(VotingStaffCCE)	Funcion√°rio#yuno	874
-prontera,147,125,6	duplicate(VotingStaffCCE)	Funcion√°rio#prt	874
-moc_ruins,104,133,6	duplicate(VotingStaffCCE)	Funcion√°rio#moc	874
-geffen,117,37,6	duplicate(VotingStaffCCE)	Funcion√°rio#gef	874
-payon,153,182,6	duplicate(VotingStaffCCE)	Funcion√°rio#pay	874
-alberta,114,70,6	duplicate(VotingStaffCCE)	Funcion√°rio#alb	874
-aldebaran,138,102,6	duplicate(VotingStaffCCE)	Funcion√°rio#alde	874
-lighthalzen,154,60,6	duplicate(VotingStaffCCE)	Funcion√°rio#lhz	874
+yuno,153,191,6	duplicate(VotingStaffCCE)	Funcion·rio#yuno	874
+prontera,147,125,6	duplicate(VotingStaffCCE)	Funcion·rio#prt	874
+moc_ruins,104,133,6	duplicate(VotingStaffCCE)	Funcion·rio#moc	874
+geffen,117,37,6	duplicate(VotingStaffCCE)	Funcion·rio#gef	874
+payon,153,182,6	duplicate(VotingStaffCCE)	Funcion·rio#pay	874
+alberta,114,70,6	duplicate(VotingStaffCCE)	Funcion·rio#alb	874
+aldebaran,138,102,6	duplicate(VotingStaffCCE)	Funcion·rio#alde	874
+lighthalzen,154,60,6	duplicate(VotingStaffCCE)	Funcion·rio#lhz	874
 
-yuno,103,225,0	script	Associa√ß√£o Scrutiny#5	-1,{
+yuno,103,225,0	script	AssociaÁ„o Scrutiny#5	-1,{
 OnInit:
 	initnpctimer;
 	end;
@@ -1108,31 +1108,31 @@ OnEnable:
 OnTimer7200000:
 	stopnpctimer;
 	if (($DTS_Result == 0) || ($DTS_Result == 3)) {
-		announce "Atualmente a elei√ß√£o para quem vai fornecer o servi√ßo de teleporte para as dungeons est√° sendo realizado nas grandes cidades. Sua participa√ß√£o √© importante.",bc_all,"0x70dbdb";
+		announce "Atualmente a eleiÁ„o para quem vai fornecer o serviÁo de teleporte para as dungeons est· sendo realizado nas grandes cidades. Sua participaÁ„o È importante.",bc_all,"0x70dbdb";
 	}
-	donpcevent "Associa√ß√£o Scrutiny#5::OnEnable";
+	donpcevent "AssociaÁ„o Scrutiny#5::OnEnable";
 	end;
 }
 
-einbroch,248,71,0	script	Associa√ß√£o Scrutiny#6	-1,{
+einbroch,248,71,0	script	AssociaÁ„o Scrutiny#6	-1,{
 OnEnable:
 	initnpctimer;
 	end;
 
 OnTimer1000:
-	announce "Todos os votos da elei√ß√£o para quem vai fornecer o servi√ßo de teleporte para as dungeons j√° foram recebidos e contados.",bc_all,"0x70dbdb";
+	announce "Todos os votos da eleiÁ„o para quem vai fornecer o serviÁo de teleporte para as dungeons j· foram recebidos e contados.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer5000:
-	announce "O resultado de agora √©...",bc_all,"0x70dbdb";
+	announce "O resultado de agora È...",bc_all,"0x70dbdb";
 	end;
 
 OnTimer10000:
-	announce "Desta vez, o Grupo de Eventos Incr√≠veis fornecer√° o servi√ßo de teleporte para as dungeons.",bc_all,"0x70dbdb";
+	announce "Desta vez, o Grupo de Eventos IncrÌveis fornecer· o serviÁo de teleporte para as dungeons.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer15000:
-	announce "Muito obrigado a todos voc√™s que votaram e mostraram seu apoio.",bc_all,"0x70dbdb";
+	announce "Muito obrigado a todos vocÍs que votaram e mostraram seu apoio.",bc_all,"0x70dbdb";
 	stopnpctimer;
 	end;
 }
@@ -1143,24 +1143,24 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	announce "Todos os votos da elei√ß√£o para quem vai fornecer o servi√ßo de teleporte para as dungeons j√° foram recebidos e contados.",bc_all,"0x70dbdb";
+	announce "Todos os votos da eleiÁ„o para quem vai fornecer o serviÁo de teleporte para as dungeons j· foram recebidos e contados.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer5000:
-	announce "O resultado de agora √©...",bc_all,"0x70dbdb";
+	announce "O resultado de agora È...",bc_all,"0x70dbdb";
 	end;
 
 OnTimer10000:
-	announce "Desta vez, a Corpora√ß√£o Kafra fornecer√° o servi√ßo de teleporte para as dungeons.",bc_all,"0x70dbdb";
+	announce "Desta vez, a CorporaÁ„o Kafra fornecer· o serviÁo de teleporte para as dungeons.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer15000:
-	announce "Muito obrigado a todos voc√™s que votaram e mostraram seu apoio.",bc_all,"0x70dbdb";
+	announce "Muito obrigado a todos vocÍs que votaram e mostraram seu apoio.",bc_all,"0x70dbdb";
 	stopnpctimer;
 	end;
 }
 /*
-sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
+sec_in02,17,160,4	script	Garota das VotaÁıes Globais#yuno	864,{
 	mes "[Empregada de Christy]";
 	mes "Senhora Christy!";
 	next;
@@ -1169,39 +1169,39 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 		mes "[Empregada de Christy]";
 		mes "Eu sou a empregada da senhora Cristy";
 		next;
-		switch(select("Verificar Vari√°veis Globais:Definir item Zero:Alterar Vari√°veis Globais")) {
+		switch(select("Verificar Vari·veis Globais:Definir item Zero:Alterar Vari·veis Globais")) {
 		case 1:
 			mes "Current GlobalVar are";
 			next;
 			mes "[Empregada de Christy]";
-			mes "Informa√ß√£o 1 - Checando tempo de vota√ß√£o : "+$DTS_Time+"";
-			mes "Informa√ß√£o 2 : N√∫mero de votos da corpora√ß√£o Eventos legais: "+$DTS_JondaVotes+"";
-			mes "Informa√ß√£o 3 - N√∫mero de votos da Kafra : "+$DTS_KafraVotes+"";
-			mes "Informa√ß√£o 4 - Vencedor:"+$DTS_Result+"";
-			mes "Informa√ß√£o 5 - Verifica√ß√£o periodica do servi√ßo de Teleporte:"+$DTS_PeriodCheck+"";
-			mes "Informa√ß√£o 6 - Pontos da Kafra:"+$DTS_KafraWins+"";
-			mes "Informa√ß√£o 7 - Pontos da Corpora√ß√£o Equipe Legal:"+$DTS_JondaWins+"";
-			mes "Informa√ß√£o 8 - Informa√ß√£o 8 - Checando item definido:"+$DTS_VoteCount+"";
+			mes "InformaÁ„o 1 - Checando tempo de votaÁ„o : "+$DTS_Time+"";
+			mes "InformaÁ„o 2 : N˙mero de votos da corporaÁ„o Eventos legais: "+$DTS_JondaVotes+"";
+			mes "InformaÁ„o 3 - N˙mero de votos da Kafra : "+$DTS_KafraVotes+"";
+			mes "InformaÁ„o 4 - Vencedor:"+$DTS_Result+"";
+			mes "InformaÁ„o 5 - VerificaÁ„o periodica do serviÁo de Teleporte:"+$DTS_PeriodCheck+"";
+			mes "InformaÁ„o 6 - Pontos da Kafra:"+$DTS_KafraWins+"";
+			mes "InformaÁ„o 7 - Pontos da CorporaÁ„o Equipe Legal:"+$DTS_JondaWins+"";
+			mes "InformaÁ„o 8 - InformaÁ„o 8 - Checando item definido:"+$DTS_VoteCount+"";
 			next;
 			mes "[Empregada de Christy]";
-			mes "Atual valor para item definido √©"+lhz_vote+".";
+			mes "Atual valor para item definido È"+lhz_vote+".";
 			close;
 		case 2:
 			set lhz_vote,0;
 			close;
 		case 3:
 			mes "[Empregada de Christy]";
-			mes "Para qual valor global voc√™ gostaria de mudar?";
+			mes "Para qual valor global vocÍ gostaria de mudar?";
 			next;
-			switch(select("1 - Tempo de elei√ß√£o:2 - Votos da corp. Equipe legal:3 - Votos da corp. Kafra:4 - Vencedor:5 - Periodo do servi√ßo de Teletransporte:6 - N√∫mero de portais Kafra:7 - N√∫mero de portais Equipe Legal:8 - Definir valores")) {
+			switch(select("1 - Tempo de eleiÁ„o:2 - Votos da corp. Equipe legal:3 - Votos da corp. Kafra:4 - Vencedor:5 - Periodo do serviÁo de Teletransporte:6 - N˙mero de portais Kafra:7 - N˙mero de portais Equipe Legal:8 - Definir valores")) {
 			case 1:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 1000.";
+				mes "Por favor, entre com um n˙mero entre 0 a 1000.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_Time,.@input;
@@ -1210,12 +1210,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 2:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 1000.";
+				mes "Por favor, entre com um n˙mero entre 0 a 1000.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_JondaVotes,.@input;
@@ -1224,12 +1224,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 3:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 1000.";
+				mes "Por favor, entre com um n˙mero entre 0 a 1000.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_KafraVotes,.@input;
@@ -1238,12 +1238,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 4:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 3.";
+				mes "Por favor, entre com um n˙mero entre 0 a 3.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 3)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_Result,.@input;
@@ -1252,12 +1252,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 5:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero de 0 a 1000.";
+				mes "Por favor, entre com um n˙mero de 0 a 1000.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_PeriodCheck,.@input;
@@ -1266,12 +1266,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 6:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 2.";
+				mes "Por favor, entre com um n˙mero entre 0 a 2.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 2)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_KafraWins,.@input;
@@ -1280,12 +1280,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 7:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 2.";
+				mes "Por favor, entre com um n˙mero entre 0 a 2.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 2)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_JondaWins,.@input;
@@ -1294,12 +1294,12 @@ sec_in02,17,160,4	script	Garota das Vota√ß√µes Globais#yuno	864,{
 				close;
 			case 8:
 				mes "[Empregada de Christy]";
-				mes "Por favor, entre com um n√∫mero entre 0 a 10000.";
+				mes "Por favor, entre com um n˙mero entre 0 a 10000.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 10000)) {
 					mes "[Empregada de Christy]";
-					mes "O valor est√° incorreto.";
+					mes "O valor est· incorreto.";
 					close;
 				}
 				set $DTS_VoteCount,.@input;

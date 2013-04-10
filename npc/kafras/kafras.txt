@@ -2,9 +2,9 @@
 //= Kafras (Cidades/Cavernas/Campos)
 //===== Por: ================================================== 
 //= Joseph
-//===== Vers√£o Atual: ===================================== 
+//===== Vers„o Atual: ===================================== 
 //= 1.1
-//===== Descri√ß√£o: =========================================
+//===== DescriÁ„o: =========================================
 //= Argument settings for callfunc "F_Kafra":
 //=  arg(0): 0 - Default Kafra message
 //=          1 - Niflhiem Kafra message
@@ -13,90 +13,90 @@
 //=  arg(2): 1 - Disable info menu
 //=  arg(3): Cost of Storage service
 //=  arg(4): Cost of Rent a Pushcart service
-//===== Coment√°rios Adicionais: ================================= 
+//===== Coment·rios Adicionais: ================================= 
 //= 0.x Previous Authors: 
 //=     - L0ne_W0lf, kobra_k88, Samuray22, Evera, Lupus
 //= 1.0 Merged and cleaned up Kafras. [Joseph]
 //= 1.1 Added Izlude RE coordinates. [Euphy]
-//= 1.2 Tradu√ß√£o PT-BR 
+//= 1.2 TraduÁ„o PT-BR 
 //============================================================ 
 // Aldebaran
 //============================================================
-aldeba_in,96,181,4	script	Servi√ßo Kafra	113,{
+aldeba_in,96,181,4	script	ServiÁo Kafra	113,{
 	cutin "kafra_05",2;
 	mes "[Kafra Leila]";
 	mes "Hum...?";
-	mes "Seja bem-vindo √† sede da Corpora√ß√£o Kafra";
+	mes "Seja bem-vindo ‡ sede da CorporaÁ„o Kafra";
 	mes "Precisa de alguma coisa?";
 	mes "alguma coisa?";
 	next;
-	switch(select("Salvar Ponto de Retorno:Usar armaz√©m:Alugar Carrinho:Cancelar")) {
+	switch(select("Salvar Ponto de Retorno:Usar armazÈm:Alugar Carrinho:Cancelar")) {
 	case 1:
 		mes "[Kafra Leila]";
 		mes "Seu ponto de retorno";
 		mes "foi salvo aqui na";
-		mes "sede da Corpora√ß√£o Kafra.";
+		mes "sede da CorporaÁ„o Kafra.";
 		mes "Muito obrigado!";
 		next;
 		savepoint "aldeba_in",96,179;
 		mes "[Kafra Leila]";
-		mes "Por favor, fa√ßa";
-		mes "uso dos servi√ßos da Kafra que est√£o";
-		mes "dispon√≠veis em toda a";
+		mes "Por favor, faÁa";
+		mes "uso dos serviÁos da Kafra que est„o";
+		mes "disponÌveis em toda a";
 		mes "Rune-Midgard. Muito obrigado por visitar";
-		mes "a sede da Corpora√ß√£o Kafra.";
+		mes "a sede da CorporaÁ„o Kafra.";
 		close2;
 		break;
 	case 2:
 		if (zeny < 20) {
 			mes "[Kafra Leila]";
-			mes "Com licen√ßa, mas";
-			mes "parece que voc√™ n√£o possui";
+			mes "Com licenÁa, mas";
+			mes "parece que vocÍ n„o possui";
 			mes "20 Zenys para pagar a taxa";
 			mes "de acesso...";
 		}
 		mes "[Kafra Leila]";
 		mes "Embora esta facilidade seja";
 		mes "exclusivamente destinada";
-		mes "a forma√ß√£o das funcion√°rias Kafra";
-		mes "e tamb√©m fun√ß√µes administrativas,";
-		mes "Eu vou acessar seu armaz√©m para voc√™.";
+		mes "a formaÁ„o das funcion·rias Kafra";
+		mes "e tambÈm funÁıes administrativas,";
+		mes "Eu vou acessar seu armazÈm para vocÍ.";
 		next;
 		set Zeny,Zeny-20;
 		set RESRVPTS, RESRVPTS + (20/5);
 		mes "[Kafra Leila]";
-		mes "Na pr√≥xima vez, favor";
-		mes "pergunte a qualquer funcion√°rio";
-		mes "da Corpora√ß√£o Kafra";
-		mes "sobre qualquer um de nossos servi√ßos.";
-		mes "Obrigado por usar nossos servi√ßos.";
-		callfunc("F_CheckKafCode");    // Verifica se o armaz√©m possui senha
+		mes "Na prÛxima vez, favor";
+		mes "pergunte a qualquer funcion·rio";
+		mes "da CorporaÁ„o Kafra";
+		mes "sobre qualquer um de nossos serviÁos.";
+		mes "Obrigado por usar nossos serviÁos.";
+		callfunc("F_CheckKafCode");    // Verifica se o armazÈm possui senha
 		close2;
 		openstorage;
 		break;
 	case 3:
 		mes "[Kafra Leila]";
 		mes "Minhas desculpas, mas";
-		mes "mas eu estou de plant√£o, se eu pudesse";
+		mes "mas eu estou de plant„o, se eu pudesse";
 		mes "eu te ajudaria, mas infelizmente";
-		mes "n√£o possuo carrinhos de m√£o dispon√≠veis.";
-		mes "Porque n√£o procura outro funcion√°rio";
-		mes "da Corpora√ß√£o Kafra?";
+		mes "n„o possuo carrinhos de m„o disponÌveis.";
+		mes "Porque n„o procura outro funcion·rio";
+		mes "da CorporaÁ„o Kafra?";
 		next;
 		mes "[Kafra Leila]";
-		mes "Os funcion√°rios da Corpora√ß√£o Kafra";
-		mes "est√£o por todo o";
+		mes "Os funcion·rios da CorporaÁ„o Kafra";
+		mes "est„o por todo o";
 		mes "continente de Rune-Midgard";
-		mes "e voc√™ pode encontr√°-los em abund√¢ncia";
+		mes "e vocÍ pode encontr·-los em abund‚ncia";
 		mes "fora de Aldebaran.";
 		close2;
 		break;
 	case 4:
 		mes "[Kafra Leila]";
 		mes "^666666*Ufa...*^000000";
-		mes "√ìtimo, porque eu";
+		mes "”timo, porque eu";
 		mes "atualmente, estou descansando.";
-		mes "Agora a escolha da op√ß√£o";
+		mes "Agora a escolha da opÁ„o";
 		mes "''Cancelar'' foi um bom";
 		mes "movimento vindo de sua parte.";
 		close2;
@@ -106,12 +106,12 @@ aldeba_in,96,181,4	script	Servi√ßo Kafra	113,{
 	end;
 }
 
-aldebaran,143,119,4	script	Funcion√°ria Kafra::kaf_aldebaran	113,{
+aldebaran,143,119,4	script	Funcion·ria Kafra::kaf_aldebaran	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° sempre trabalhando para oferecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· sempre trabalhando para oferecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,1,20,600;
 	savepoint "aldebaran",143,109;
 	callfunc "F_KafEnd",0,1,"na cidade de Aldebaran";
@@ -119,24 +119,24 @@ aldebaran,143,119,4	script	Funcion√°ria Kafra::kaf_aldebaran	113,{
 
 // Geffen
 //============================================================
-geffen,120,62,0	script	Funcion√°ria Kafra::kaf_geffen	115,{
+geffen,120,62,0	script	Funcion·ria Kafra::kaf_geffen	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem- vindo~!";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra sempre estar√£o ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "Os serviÁos da CorporaÁ„o Kafra sempre estar„o ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,30,750;
 	savepoint "geffen",119,40;
 	callfunc "F_KafEnd",0,1,"na cidade de Geffen";
 }
 
-geffen,203,123,2	script	Funcion√°ria Kafra::geffen2	114,{
+geffen,203,123,2	script	Funcion·ria Kafra::geffen2	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo! A Corpora√ß√£o Kafra sempre dar√° suporte para os aventureiros de Rune-Midgard com excelentes servi√ßos.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo! A CorporaÁ„o Kafra sempre dar· suporte para os aventureiros de Rune-Midgard com excelentes serviÁos.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,30,750;
 	savepoint "geffen",200,124;
 	callfunc "F_KafEnd",0,1,"na cidade de Geffen";
@@ -144,12 +144,12 @@ geffen,203,123,2	script	Funcion√°ria Kafra::geffen2	114,{
 
 // Morocc
 //============================================================
-morocc,156,97,4	script	Funcion√°ria Kafra::kaf_morocc	113,{
+morocc,156,97,4	script	Funcion·ria Kafra::kaf_morocc	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° trabalhando para oferecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· trabalhando para oferecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,60,930;
 	savepoint "morocc",156,46;
 	callfunc "F_KafEnd",0,1,"na cidade de Morroc";
@@ -158,9 +158,9 @@ morocc,156,97,4	script	Funcion√°ria Kafra::kaf_morocc	113,{
 morocc,160,258,4	script	Kafra::kaf_morocc2	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo! A Corpora√ß√£o Kafra sempre dar√° suporte para os aventureiros de Rune-Midgard com excelentes servi√ßos.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo! A CorporaÁ„o Kafra sempre dar· suporte para os aventureiros de Rune-Midgard com excelentes serviÁos.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,60,930;
 	savepoint "morocc",157,272;
 	callfunc "F_KafEnd",0,1,"na cidade de Morroc";
@@ -168,35 +168,35 @@ morocc,160,258,4	script	Kafra::kaf_morocc2	114,{
 
 // Payon
 //============================================================
-payon,181,104,4	script	Funcion√°ria Kafra::kaf_payon	113,{
+payon,181,104,4	script	Funcion·ria Kafra::kaf_payon	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° sempre trabalhando para oferecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· sempre trabalhando para oferecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,1,60,930;
 	savepoint "payon",160,58;
 	callfunc "F_KafEnd",0,1,"na cidade de Payon";
 }
 
-payon,175,226,4	script	Funcion√°ria Kafra::kaf_payon2	116,{
+payon,175,226,4	script	Funcion·ria Kafra::kaf_payon2	116,{
 	cutin "kafra_02",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra est√£o sempre ao seu lado.";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra est„o sempre ao seu lado.";
 	mes "Como posso ajudar?";
 	callfunc "F_Kafra",5,0,1,60,930;
 	savepoint "payon",257,242;
 	callfunc "F_KafEnd",0,1,"na cidade de Payon";
 }
 
-pay_arche,55,123,0	script	Funcion√°ria Kafra::kaf_payon3	115,{
+pay_arche,55,123,0	script	Funcion·ria Kafra::kaf_payon3	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra est√£o sempre ao seu lado.";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra est„o sempre ao seu lado.";
 	mes "Como posso ajudar?";
 	callfunc "F_Kafra",5,5,1,90,1200;
 	savepoint "pay_arche",49,144;
@@ -205,59 +205,59 @@ pay_arche,55,123,0	script	Funcion√°ria Kafra::kaf_payon3	115,{
 
 // Prontera
 //============================================================
-prontera,152,326,3	script	Funcion√°ria Kafra::kaf_prontera	112,{
+prontera,152,326,3	script	Funcion·ria Kafra::kaf_prontera	112,{
 	cutin "kafra_06",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da corpora√ß√£o est√£o aqui para dar suporte √† voc√™.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da corporaÁ„o est„o aqui para dar suporte ‡ vocÍ.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",157,327;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
 }
 
-prontera,151,29,0	script	Funcion√°ria Kafra::kaf_prontera2	115,{
+prontera,151,29,0	script	Funcion·ria Kafra::kaf_prontera2	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra est√£o sempre ao seu lado.";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra est„o sempre ao seu lado.";
 	mes "Como posso ajudar?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",150,33;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
 }
 
-prontera,29,207,6	script	Funcion√°ria Kafra::kaf_prontera3	113,{
+prontera,29,207,6	script	Funcion·ria Kafra::kaf_prontera3	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° trabalhando para oferecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· trabalhando para oferecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",33,208;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
 }
 
-prontera,282,200,2	script	Funcion√°ria Kafra::kaf_prontera4	114,{
+prontera,282,200,2	script	Funcion·ria Kafra::kaf_prontera4	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo! A Corpora√ß√£o Kafra sempre dar√° suporte para os aventureiros de Rune-Midgard com excelentes servi√ßos.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo! A CorporaÁ„o Kafra sempre dar· suporte para os aventureiros de Rune-Midgard com excelentes serviÁos.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",281,203;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
 }
 
-prontera,146,89,6	script	Funcion√°ria Kafra::kaf_prontera5	117,{
+prontera,146,89,6	script	Funcion·ria Kafra::kaf_prontera5	117,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",116,73;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
@@ -265,34 +265,34 @@ prontera,146,89,6	script	Funcion√°ria Kafra::kaf_prontera5	117,{
 
 // Yuno
 //============================================================
-yuno,152,187,4	script	Funcion√°ria Kafra::kaf_yuno	860,{
+yuno,152,187,4	script	Funcion·ria Kafra::kaf_yuno	860,{
 	cutin "kafra_08",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° sempre trabalhando para fornecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· sempre trabalhando para fornecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",158,125;
 	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
 }
 
-yuno,327,108,4	script	Funcion√°ria Kafra::kaf_yuno2	860,{
+yuno,327,108,4	script	Funcion·ria Kafra::kaf_yuno2	860,{
 	cutin "kafra_08",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° sempre trabalhando para fornecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· sempre trabalhando para fornecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",328,101;
 	callfunc "F_KafEnd",0,1,"na cidade de Juno";
 }
 
-yuno,277,221,4	script	Funcion√°ria Kafra::kaf_yuno3	861,{
+yuno,277,221,4	script	Funcion·ria Kafra::kaf_yuno3	861,{
 	cutin "kafra_09",2;
 	callfunc "F_KafSetYun";
-	mes "[Funcion√°ria Kafra]";
-	mes "A Corpora√ß√£o Kafra est√° sempre trabalhando para fornecer servi√ßos convenientes.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "A CorporaÁ„o Kafra est· sempre trabalhando para fornecer serviÁos convenientes.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",274,229;
 	callfunc "F_KafEnd",0,1,"na cidade de Juno";
@@ -300,25 +300,25 @@ yuno,277,221,4	script	Funcion√°ria Kafra::kaf_yuno3	861,{
 
 // Alberta
 //============================================================
-alberta,28,229,0	script	Funcion√°ria Kafra::kaf_alberta	116,{
+alberta,28,229,0	script	Funcion·ria Kafra::kaf_alberta	116,{
 	cutin "kafra_02",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o sempre estar√£o aqui para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o sempre estar„o aqui para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,50,850;
 	savepoint "alberta",31,231;
 	callfunc "F_KafEnd",0,1,"na cidade de Alberta";
 }
 
-alberta,113,60,6	script	Funcion√°ria Kafra::kaf_alberta2	112,{
+alberta,113,60,6	script	Funcion·ria Kafra::kaf_alberta2	112,{
 	cutin "kafra_06",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o sempre estar√£o aqui para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o sempre estar„o aqui para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,0,0,50,850;
 	savepoint "alberta",117,57;
 	callfunc "F_KafEnd",0,1,"na cidade de Alberta";
@@ -326,7 +326,7 @@ alberta,113,60,6	script	Funcion√°ria Kafra::kaf_alberta2	112,{
 
 // Brasilis
 //============================================================
-brasilis,197,221,4	script	Funcion√°ria Kafra#brlis	117,{
+brasilis,197,221,4	script	Funcion·ria Kafra#brlis	117,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
 
@@ -337,25 +337,25 @@ brasilis,197,221,4	script	Funcion√°ria Kafra#brlis	117,{
 
 // Comodo
 //============================================================
-comodo,195,150,4	script	Funcion√°ria Kafra::kaf_comodo	721,{
+comodo,195,150,4	script	Funcion·ria Kafra::kaf_comodo	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra sempre estar√£o ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra sempre estar„o ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,1,80,1000;
 	savepoint "comodo",204,143;
 	callfunc "F_KafEnd",0,1,"na cidade de Comodo";
 }
 
-cmd_fild07,136,134,4	script	Funcion√°ria Kafra::kaf_cmd_fild07	721,{
+cmd_fild07,136,134,4	script	Funcion·ria Kafra::kaf_cmd_fild07	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra sempre estar√£o ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra sempre estar„o ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	return;
 	callfunc "F_Kafra",5,0,1,80,1000;
 	savepoint "cmd_fild07",127,134;
@@ -367,10 +367,10 @@ cmd_fild07,136,134,4	script	Funcion√°ria Kafra::kaf_cmd_fild07	721,{
 -	script	kaf_izlude	-1,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo √† Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos da Corpora√ß√£o Kafra sempre estar√£o ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo ‡ CorporaÁ„o Kafra.";
+	mes "Os serviÁos da CorporaÁ„o Kafra sempre estar„o ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,0,1,40,820;
 	if (checkre(0))
 		savepoint "izlude",129,97;
@@ -381,7 +381,7 @@ cmd_fild07,136,134,4	script	Funcion√°ria Kafra::kaf_cmd_fild07	721,{
 
 // Moscovia
 //============================================================
-moscovia,223,191,3	script	Funcion√°ria Kafra::kaf_mosk	114,{
+moscovia,223,191,3	script	Funcion·ria Kafra::kaf_mosk	114,{
 	cutin "kafra_04",2;
 	callfunc "F_Kafra",0,3,0,80,700;
 	savepoint "moscovia",221,194;;
@@ -390,12 +390,12 @@ moscovia,223,191,3	script	Funcion√°ria Kafra::kaf_mosk	114,{
 
 // Amatsu
 //============================================================
-amatsu,102,149,4	script	Funcion√°ria Kafra::kaf_amatsu	116,{
+amatsu,102,149,4	script	Funcion·ria Kafra::kaf_amatsu	116,{
 	cutin "kafra_02",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da Corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da CorporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "amatsu",116,94;
 	callfunc "F_KafEnd",0,1,"na cidade de Amatsu";
@@ -403,13 +403,13 @@ amatsu,102,149,4	script	Funcion√°ria Kafra::kaf_amatsu	116,{
 
 // Ayothaya
 //============================================================
-ayothaya,212,169,5	script	Funcion√°ria Kafra::kaf_ayothaya	116,{
+ayothaya,212,169,5	script	Funcion·ria Kafra::kaf_ayothaya	116,{
 	cutin "kafra_02",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo a";
-	mes "Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "ayothaya",149,69;
 	callfunc "F_KafEnd",0,1,"na cidade de Ayotaya";
@@ -417,12 +417,12 @@ ayothaya,212,169,5	script	Funcion√°ria Kafra::kaf_ayothaya	116,{
 
 // Einbech
 //============================================================
-einbech,181,132,5	script	Funcion√°ria Kafra#ein3::kaf_einbech	860,{
+einbech,181,132,5	script	Funcion·ria Kafra#ein3::kaf_einbech	860,{
 	cutin "kafra_08",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo~!";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,4,1,40,850;
 	savepoint "einbech",182,124;
 	callfunc "F_KafEnd",0,1,"na cidade de Einbech";
@@ -430,23 +430,23 @@ einbech,181,132,5	script	Funcion√°ria Kafra#ein3::kaf_einbech	860,{
 
 // Einbroch
 //============================================================
-einbroch,242,205,5	script	Funcion√°ria Kafra#ein2::kaf_einbroch	860,{
+einbroch,242,205,5	script	Funcion·ria Kafra#ein2::kaf_einbroch	860,{
 	cutin "kafra_08",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,4,1,50,800;
 	savepoint "einbroch",238,198;
 	callfunc "F_KafEnd",0,1,"na cidade de Einbroch";
 }
 
-einbroch,59,203,6	script	Funcion√°ria Kafra#ein1::kaf_einbroch2	861,{
+einbroch,59,203,6	script	Funcion·ria Kafra#ein1::kaf_einbroch2	861,{
 	cutin "kafra_09",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo~!";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,4,1,50,800;
 	savepoint "einbroch",240,197;
 	callfunc "F_KafEnd",0,1,"na cidade de Einbroch";
@@ -454,12 +454,12 @@ einbroch,59,203,6	script	Funcion√°ria Kafra#ein1::kaf_einbroch2	861,{
 
 // Gonryun
 //============================================================
-gonryun,159,122,4	script	Funcion√°ria Kafra::kaf_gonryun	116,{
+gonryun,159,122,4	script	Funcion·ria Kafra::kaf_gonryun	116,{
 	cutin "kafra_02",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "gonryun",160,62;
 	callfunc "F_KafEnd",0,1,"na cidade de Kunlun";
@@ -467,34 +467,34 @@ gonryun,159,122,4	script	Funcion√°ria Kafra::kaf_gonryun	116,{
 
 // Lighthalzen
 //============================================================
-lighthalzen,164,100,4	script	Funcion√°ria Kafra::kaf_lighthalzen	860,{
+lighthalzen,164,100,4	script	Funcion·ria Kafra::kaf_lighthalzen	860,{
 	cutin "kafra_08",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lighthalzen",158,94;
 	callfunc "F_KafEnd",0,1,"na cidade de Lighthalzen";
 }
 
-lighthalzen,191,320,4	script	Funcion√°ria Kafra::kaf_lighthalzen2	861,{
+lighthalzen,191,320,4	script	Funcion·ria Kafra::kaf_lighthalzen2	861,{
 	cutin "kafra_09",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo~!";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lighthalzen",194,313;
 	callfunc "F_KafEnd",0,1,"na cidade de Lighthalzen";
 }
 
-lhz_in02,237,284,4	script	Funcion√°ria Kafra::kaf_lhz_in02	861,{
+lhz_in02,237,284,4	script	Funcion·ria Kafra::kaf_lhz_in02	861,{
 	cutin "kafra_09",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo~!";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado";
-	mes "Como posso ajud√°-lo?";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lhz_in02",278,215;
 	callfunc "F_KafEnd",0,1,"na cidade de Lighthalzen";
@@ -502,12 +502,12 @@ lhz_in02,237,284,4	script	Funcion√°ria Kafra::kaf_lhz_in02	861,{
 
 // Louyang
 //============================================================
-louyang,210,104,5	script	Funcion√°ria Kafra::kaf_louyang	117,{
+louyang,210,104,5	script	Funcion·ria Kafra::kaf_louyang	117,{
 	cutin "kafra_01",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "louyang",217,92;
 	callfunc "F_KafEnd",0,1,"na cidade de Louyang";
@@ -515,12 +515,12 @@ louyang,210,104,5	script	Funcion√°ria Kafra::kaf_louyang	117,{
 
 // Umbala
 //============================================================
-umbala,87,160,4	script	Funcion√°ria Kafra::kaf_umbala	721,{
+umbala,87,160,4	script	Funcion·ria Kafra::kaf_umbala	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "Voc√™ sabe que os nossos servi√ßos estar√£o sempre ao seu lado~";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "VocÍ sabe que os nossos serviÁos estar„o sempre ao seu lado~";
 	callfunc "F_Kafra",5,0,1,80,0;
 	savepoint "umbala",126,131;
 	callfunc "F_KafEnd",0,1,"na cidade de Umbala";
@@ -528,7 +528,7 @@ umbala,87,160,4	script	Funcion√°ria Kafra::kaf_umbala	721,{
 
 // Niflheim
 //============================================================
-niflheim,202,180,3	script	Funcion√°ria Kafra::kaf_niflheim	791,{
+niflheim,202,180,3	script	Funcion·ria Kafra::kaf_niflheim	791,{
 	callfunc "F_Kafra",1,2,1,150,0;
 	savepoint "niflheim",192,182;
 	callfunc "F_KafEnd",1,1,"na cidade de Niflheim";
@@ -537,26 +537,26 @@ niflheim,202,180,3	script	Funcion√°ria Kafra::kaf_niflheim	791,{
 // Cavernas e Campos
 //============================================================
 // - Ilha Byalan
-izlu2dun,106,58,8	script	Funcion√°ria Kafra::kaf_izlu2dun	115,{
+izlu2dun,106,58,8	script	Funcion·ria Kafra::kaf_izlu2dun	115,{
 	cutin "kafra_03",2;
 	if(BaseJob==Job_Novice && job_merchant_q2>0) callfunc "F_MercKafra";
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o";
-	mes "estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o";
+	mes "estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,2,1,120,1200;
 	savepoint "izlu2dun",87,170;
 	callfunc "F_KafEnd",0,1,"na Ilha Byalan";
 }
 
 // - Esgoto de Prontera
-prt_fild05,290,224,3	script	Funcion√°ria Kafra::prt_fild05	114,{
+prt_fild05,290,224,3	script	Funcion·ria Kafra::prt_fild05	114,{
 	cutin "kafra_04",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo!";
-	mes "A Corpora√ß√£o Kafra est√° sempre ajudando aventureiros de Rune-Midgard com seus excelentes servi√ßos,";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "A CorporaÁ„o Kafra est· sempre ajudando aventureiros de Rune-Midgard com seus excelentes serviÁos,";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,1,1,40,0;
 
 	M_Save:
@@ -564,51 +564,51 @@ prt_fild05,290,224,3	script	Funcion√°ria Kafra::prt_fild05	114,{
 		callfunc "F_KafEnd",0,1, "no Esgoto de Prontera";
 }
 
-// - Mina do Carv√£o
-mjolnir_02,83,362,4	script	Funcion√°ria Kafra::kaf_mjolnir_02	116,{
+// - Mina do Carv„o
+mjolnir_02,83,362,4	script	Funcion·ria Kafra::kaf_mjolnir_02	116,{
 	cutin "kafra_02",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da Corpora√ß√£o";
-	mes "estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da CorporaÁ„o";
+	mes "estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,6,1,100,0;
 	savepoint "mjolnir_02",98,352;
 	callfunc "F_KafEnd",0,1,"na Mina de Mjolnir";
 }
 
-// - Ru√≠nas de Morroc
-moc_ruins,59,157,5	script	Funcion√°ria Kafra::moc_ruins	114,{
+// - RuÌnas de Morroc
+moc_ruins,59,157,5	script	Funcion·ria Kafra::moc_ruins	114,{
 	cutin "kafra_04",2;
-	mes "[Funcion√°ria Kafra]";
+	mes "[Funcion·ria Kafra]";
 	mes "Bem-vindo!";
-	mes "A Corpora√ß√£o Kafra";
-	mes "est√° sempre ajudando aventureiros de Rune-Midgard com seus excelentes servi√ßos.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "A CorporaÁ„o Kafra";
+	mes "est· sempre ajudando aventureiros de Rune-Midgard com seus excelentes serviÁos.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,2,1,90,1200;
 	savepoint "moc_ruins",41,141;
-	callfunc "F_KafEnd",0,1," nas Pir√¢mides";
+	callfunc "F_KafEnd",0,1," nas Pir‚mides";
 }
 
 // - Caverna dos Orcs
-gef_fild10,73,340,5	script	Funcion√°ria Kafra::kaf_gef_fild10	116,{
+gef_fild10,73,340,5	script	Funcion·ria Kafra::kaf_gef_fild10	116,{
 	cutin "kafra_02",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "As funcion√°rias da corpora√ß√£o estar√£o sempre prontas para servi-lo.";
-	mes "Como posso ajud√°-lo hoje?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "As funcion·rias da corporaÁ„o estar„o sempre prontas para servi-lo.";
+	mes "Como posso ajud·-lo hoje?";
 	callfunc "F_Kafra",5,6,1,130,0;
 	savepoint "gef_fild10",54,326;
 	callfunc "F_KafEnd",0,1,"na Caverna dos Orcs";
 }
 
 // - Navio Fantasma
-alb2trea,59,69,5	script	Funcion√°ria Kafra::kaf_alb2trea	117,{
+alb2trea,59,69,5	script	Funcion·ria Kafra::kaf_alb2trea	117,{
 	cutin "kafra_01",2;
-	mes "[Funcion√°ria Kafra]";
-	mes "Bem-vindo a Corpora√ß√£o Kafra.";
-	mes "Os servi√ßos Kafra estar√£o sempre ao seu lado.";
-	mes "Como posso ajud√°-lo?";
+	mes "[Funcion·ria Kafra]";
+	mes "Bem-vindo a CorporaÁ„o Kafra.";
+	mes "Os serviÁos Kafra estar„o sempre ao seu lado.";
+	mes "Como posso ajud·-lo?";
 	callfunc "F_Kafra",5,2,1,50,0;
 	savepoint "alb2trea",92,64;
 	callfunc "F_KafEnd",0,1,0,"no Navio Fantasma";
