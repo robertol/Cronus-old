@@ -24,23 +24,23 @@
 
 // Brasilis
 //============================================================
-brasilis,197,221,4	script	Kafra Employee::kaf_bra	117,{
+brasilis,197,221,4	script	Funcionária Kafra::kaf_bra	117,{
 	cutin "kafra_01",2;
 	callfunc "F_Kafra",0,3,0,80,700;
 	savepoint "brasilis",195,259;
-	callfunc "F_KafEnd",0,1,"in the city of Brasilis";
+	callfunc "F_KafEnd",0,1,"na cidade de Brasilis";
 }
 
 // Dewata
 //============================================================
-dewata,202,184,6	script	Kafra Employee::kaf_dewata	117,{
+dewata,202,184,6	script	Funcionária Kafra::kaf_dewata	117,{
 	cutin "kafra_01",2;
 	callfunc "F_Kafra",0,10,1,40,700;
 	savepoint "dewata",206,174;
-	callfunc "F_KafEnd",0,1,"on Dewata Island";
+	callfunc "F_KafEnd",0,1,"na ilha de Dewata";
 }
 
 
 // Izlude
 //============================================================
-izlude,128,148,6	duplicate(kaf_izlude)	Kafra Employee	117
+izlude,128,148,6	duplicate(kaf_izlude)	Funcionária Kafra	117
