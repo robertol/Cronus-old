@@ -76,34 +76,34 @@ izlude_in,74,172,4	script	Chefe Espadachim#swd_1	119,{
 			close;
 		}
 		if (job_sword_q == 0) {
-			mes "[Swordman]";
-			mes "So you wish to become a proud Swordman? By all means, please sign up!";
+			mes "[Chefe Espadachim]";
+			mes "Então você desena se tornar um orgulhoso espadachim? Certamente, por favor inscreva-se!";
 			next;
-			if (select("Sign up.:Cancel.") == 1) {
+			if (select("Inscrever-se.:Cancelar.") == 1) {
 				savepoint "izlude_in",65,165;
 				set job_sword_q,1;
 				setquest 1014;
-				mes "[Swordman]";
-				mes "Ah, yes. Your application will be reviewed as soon as possible.";
+				mes "[Chefe Espadachim]";
+				mes "Ah, sim. Sua aplicação será revisada assim que possível.";
 				next;
-				mes "[Swordman]";
-				mes "If you have already met the requirements, you can take an interview right now. Would you like to?";
+				mes "[Chefe Espadachim]";
+				mes "Se você já possui os requerimentos, você pode ser entrevistado agora. Você gostaria?";
 				next;
-				if (select("Yes.:No.") == 1) {
-					mes "[Swordman]";
-					mes "Good, good.";
-					mes "Now, let's see...";
+				if (select("Sim.:Não.") == 1) {
+					mes "[Chefe Espadachim]";
+					mes "Bom, bom.";
+					mes "Agora, vejamos...";
 					next;
 				}
 				else {
-					mes "[Swordman]";
-					mes "Alright then. Feel free to come back whenever you are ready. All you ahve to do now is meet our requirements. Good luck to you.";
+					mes "[Chefe Espadachim]";
+					mes "Ok então. Sinta-se livre para voltar quando estiver pronto. Tudo que você precisa fazer é possuir nossos requerimentos. Boa sorte para você.";
 					close;
 				}
 			}
 			else {
-				mes "[Swordman]";
-				mes "Hm? Alright, come back whenever you change your mind. The world can always use another Swordman!";
+				mes "[Chefe Espadachim]";
+				mes "Hm? Certo, volte quando tiver mudado de ideia. O mundo sempre pode aceitar mais um Espadachim!";
 				close;
 			}
 		}
