@@ -4035,7 +4035,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 			clif->skill_nodamage(src,bl,skill_id,skill_lv,1);
 
 			skill->blown(src,bl,distance_bl(src,bl)-1,unit_getdir(src),0);
-			if( battle->check_target(src,bl,BCT_ENEMY) )
+			if( battle->check_target(src,bl,BCT_ENEMY)>0 )
 				skill->attack(BF_WEAPON,src,src,bl,skill_id,skill_lv,tick,flag);
 			break;
 
@@ -7732,7 +7732,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			break;
 
 		case WL_WHITEIMPRISON:
-			if( (src == bl || battle->check_target(src, bl, BCT_ENEMY)) && !is_boss(bl) )// Should not work with bosses.
+			if( (src == bl || battle->check_target(src, bl, BCT_ENEMY)>0) && !is_boss(bl) )// Should not work with bosses.
 			{
 				int rate = ( sd? sd->status.job_level : 50 ) / 4;
 
@@ -11662,7 +11662,7 @@ int skill_unit_onplace_timer (struct skill_unit *src, struct block_list *bl, uns
 			break;
 
 		case UNT_SEVERE_RAINSTORM:
-			if( battle->check_target(&src->bl, bl, BCT_ENEMY) )
+			if( battle->check_target(&src->bl, bl, BCT_ENEMY) > 0 )
 				skill->attack(BF_WEAPON,ss,&src->bl,bl,WM_SEVERE_RAINSTORM_MELEE,sg->skill_lv,tick,0);
 			break;
 		case UNT_NETHERWORLD:
@@ -11803,7 +11803,7 @@ int skill_unit_onplace_timer (struct skill_unit *src, struct block_list *bl, uns
 			break;
 
 		case UNT_FIRE_MANTLE:
-			if( battle->check_target(&src->bl, bl, BCT_ENEMY) )
+			if( battle->check_target(&src->bl, bl, BCT_ENEMY) > 0 )
 				skill->attack(BF_MAGIC,ss,&src->bl,bl,sg->skill_id,sg->skill_lv,tick,0);
 			break;
 
