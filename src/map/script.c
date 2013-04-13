@@ -13561,7 +13561,7 @@ BUILDIN_FUNC(setbattleflag)
 	if (battle->config_set_value(flag, value) == 0)
 		ShowWarning("buildin_setbattleflag: unknown battle_config flag '%s'\n",flag);
 	else
-		ShowInfo("buildin_setbattleflag: battle_config flag '%s' is now set to '%s'.\n",flag,value);
+		ShowInfo("buildin_setbattleflag: bandeira de configuracao de batalha '%s' ja esta definido para '%s'.\n",flag,value);
 
 	return 0;
 }
@@ -14161,12 +14161,12 @@ BUILDIN_FUNC(sscanf){
             if(sscanf(str, buf, ref_str)==0){
                 break;
             }
-            set_reg(st, sd, add_str(buf_p), buf_p, (void *)(ref_str), reference_getref(data));
-        }else{  // Number
+            set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)(ref_str), reference_getref(data));
+		} else {  // Number
             if(sscanf(str, buf, &ref_int)==0){
                 break;
             }
-            set_reg(st, sd, add_str(buf_p), buf_p, (void *)__64BPRTSIZE(ref_int), reference_getref(data));
+            set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)__64BPRTSIZE(ref_int), reference_getref(data));
         }
         arg++;
 
