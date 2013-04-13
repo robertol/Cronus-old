@@ -75,7 +75,7 @@ static int guild_save_timer(int tid, unsigned int tick, int id, intptr_t data)
 		if( g->save_flag == GS_REMOVE )
 		{// Nothing to save, guild is ready for removal.
 			if (save_log)
-				ShowInfo("Descarregando Clãns (%d - %s)\n", g->guild_id, g->name);
+				ShowInfo("Descarregando Clans (%d - %s)\n", g->guild_id, g->name);
 			db_remove(guild_db_, key);
 		}
 	}
@@ -126,7 +126,7 @@ int inter_guild_tosql(struct guild *g,int flag)
 	if (g->guild_id<=0 && g->guild_id != -1) return 0;
 
 #ifdef NOISY
-	ShowInfo("Pedido do Clãn salvo ("CL_BOLD"%d"CL_RESET" - flag 0x%x).",g->guild_id, flag);
+	ShowInfo("Pedido do Clan salvo ("CL_BOLD"%d"CL_RESET" - flag 0x%x).",g->guild_id, flag);
 #endif
 
 	Sql_EscapeStringLen(sql_handle, esc_name, g->name, strnlen(g->name, NAME_LENGTH));
@@ -331,7 +331,7 @@ int inter_guild_tosql(struct guild *g,int flag)
 	}
 
 	if (save_log)
-		ShowInfo("Clã Salvo (%d - %s):%s\n",g->guild_id,g->name,t_info);
+		ShowInfo("Cla Salvo (%d - %s):%s\n",g->guild_id,g->name,t_info);
 	return 1;
 }
 
@@ -352,7 +352,7 @@ struct guild * inter_guild_fromsql(int guild_id)
 		return g;
 
 #ifdef NOISY
-	ShowInfo("Solicitação de leitua de Clãs (%d)...\n", guild_id);
+	ShowInfo("Solicitacao de leitua de Clans (%d)...\n", guild_id);
 #endif
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT g.`name`,c.`name`,g.`guild_lv`,g.`connect_member`,g.`max_member`,g.`average_lv`,g.`exp`,g.`next_exp`,g.`skill_point`,g.`mes1`,g.`mes2`,g.`emblem_len`,g.`emblem_id`,g.`emblem_data` "
@@ -519,7 +519,7 @@ struct guild * inter_guild_fromsql(int guild_id)
 	g->save_flag |= GS_REMOVE; //But set it to be removed, in case it is not needed for long.
 
 	if (save_log)
-		ShowInfo("Leitura do Clãns (%d - %s)\n", guild_id, g->name);
+		ShowInfo("Leitura do Clans (%d - %s)\n", guild_id, g->name);
 
 	return g;
 }
@@ -541,7 +541,7 @@ int inter_guildcastle_tosql(struct guild_castle *gc)
 	if (SQL_ERROR == Sql_Query(sql_handle, StringBuf_Value(&buf)))
 		Sql_ShowDebug(sql_handle);
 	else if(save_log)
-		ShowInfo("Castelos dos Clãn foram salvos (%d)\n", gc->castle_id);
+		ShowInfo("Castelos dos Clans foram salvos (%d)\n", gc->castle_id);
 
 	StringBuf_Destroy(&buf);
 	return 0;
@@ -593,7 +593,7 @@ static struct guild_castle* inter_guildcastle_fromsql(int castle_id)
 	idb_put(castle_db, castle_id, gc);
 
 	if (save_log)
-		ShowInfo("Leitura dos castelos dos clãns (%d - clãn %d)\n", castle_id, gc->guild_id);
+		ShowInfo("Leitura dos castelos dos clans (%d - clan %d)\n", castle_id, gc->guild_id);
 
 	return gc;
 }
@@ -645,7 +645,7 @@ int inter_guild_CharOnline(int char_id, int guild_id)
 
 	g = inter_guild_fromsql(guild_id);
 	if(!g) {
-		ShowError("Character %d's guild %d not found!\n", char_id, guild_id);
+		ShowError("Personagem %d's clan %d nao encontrado !\n", char_id, guild_id);
 		return 0;
 	}
 
@@ -841,7 +841,7 @@ int guild_calcinfo(struct guild *g)
 	g->max_member = 16 + guild_checkskill(g, GD_EXTENSION) * 6;
 	if(g->max_member > MAX_GUILD)
 	{
-		ShowError("Guild %d:%s has capacity for too many guild members (%d), max supported is %d\n", g->guild_id, g->name, g->max_member, MAX_GUILD);
+		ShowError("Clan %d:%s tem capacidade para membros do clan demais (%d), maximo suportado e %d\n", g->guild_id, g->name, g->max_member, MAX_GUILD);
 		g->max_member = MAX_GUILD;
 	}
 
@@ -859,7 +859,7 @@ int guild_calcinfo(struct guild *g)
 			}
 			else
 			{
-				ShowWarning("Guild %d:%s, member %d:%s has an invalid level %d\n", g->guild_id, g->name, g->member[i].char_id, g->member[i].name, g->member[i].lv);
+				ShowWarning("Clan %d:%s, membros %d:%s tem nivel invalido %d\n", g->guild_id, g->name, g->member[i].char_id, g->member[i].name, g->member[i].lv);
 			}
 
 			if(g->member[i].online)
