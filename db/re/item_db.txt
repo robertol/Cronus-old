@@ -5744,7 +5744,7 @@
 13061,Black_Wing,Adaga Negra,4,20,,600,142,,1,1,0x00020000,7,2,2,3,102,1,1,{ bonus2 bSkillAtk,"SC_FATALMENACE",30+(getrefine()*2); bonus bMatkRate,(getrefine()*3); },{},{}
 13062,Ancient_Dagger,Adaga Ritualística,4,20,,600,107,,0,0,0x028F5EEE,2,2,2,4,120,1,1,{ bonus bMatk,120; bonus bMaxSP,100; bonus bSPrecovRate,5; bonus2 bAddEff2,Eff_Curse,50; },{},{}
 13066,P_Dagger3,Adaga III do Grupo Éden,4,0,,0,165:80,,1,0,0xFE9F7EEF,7,2,2,3,60,0,1,{},{},{}
-13067,Afago,Afago,4,20,,700,107:70,,1,1,0xFE9F7EEF,2,2,2,3,30,1,1,{ bonus2 bHpDrainRate,50,10; },{},{}
+13067,Afago,Afago,4,20,,700,107:70,,1,1,0xFE9F7EEF,2,2,2,3,30,1,1,{ bonus2 bHpDrainRate,20,10; },{},{}
 13068,Manjuba,Manjuba,4,0,,0,160:100,,3,0,0xFE9F7EEF,7,2,2,1,50,0,1,{ bonus bUnbreakableWeapon,0; autobonus "{ bonus bBaseAtk,30; }",10,7000,BF_WEAPON,"{ specialeffect2 EF_ENHANCE; }"; autobonus "{ bonus bMatk,20; }",10,7000,BF_MAGIC,"{ specialeffect2 EF_SUFFRAGIUM; }"; if(BaseLevel>99) { bonus bBaseAtk,10; bonus bMatk,10; } },{},{}
 13069,As-nail,As-nail,4,56000,,500,160:80,,1,0,0x000654E2,7,2,2,4,110,1,1,{ bonus bAtkEle,Ele_Wind; bonus2 bAddEff,Eff_Freeze,100+(getrefine()*50); },{},{}
 13070,Garra Escarlate,Garra Escarlate,4,56000,,500,160:80,,1,0,0x000654E2,7,2,2,4,110,1,1,{ bonus bAtkEle,Ele_Fire; bonus2 bAddEff,Eff_Stone,100+(getrefine()*50); },{},{}
