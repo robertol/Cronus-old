@@ -242,14 +242,14 @@ int chrif_setip(const char* ip) {
 	char ip_str[16];
 	
 	if ( !( char_ip = host2ip(ip) ) ) {
-		ShowWarning("Failed to Resolve Char Server Address! (%s)\n", ip);
+		ShowWarning("Falha ao resolver o servidor de personagens! (%s)\n", ip);
 		
 		return 0;
 	}
 	
 	safestrncpy(char_ip_str, ip, sizeof(char_ip_str));
 	
-	ShowInfo("Char Server IP Address : '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(char_ip, ip_str));
+	ShowInfo("Endereço de IP do servidor de personagens : '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(char_ip, ip_str));
 	
 	return 1;
 }
@@ -341,7 +341,7 @@ int chrif_connect(int fd) {
 int chrif_sendmap(int fd) {
 	int i;
 	
-	ShowStatus("Sending maps to char server...\n");
+	ShowStatus("Envio de mapas para o servidor de personagens...\n");
 	
 	// Sending normal maps, not instances
 	WFIFOHEAD(fd, 4 + instance_start * 4);
@@ -365,7 +365,7 @@ int chrif_recvmap(int fd) {
 	}
 	
 	if (battle_config.etc_log)
-		ShowStatus("Received maps from %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+		ShowStatus("Recebendo mapas de %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
 
 	other_mapserver_count++;
 	
@@ -384,7 +384,7 @@ int chrif_removemap(int fd) {
 	other_mapserver_count--;
 	
 	if(battle_config.etc_log)
-		ShowStatus("remove map of server %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+		ShowStatus("removendo mapa do servidor %d.%d.%d.%d:%d (%d mapas)\n", CONVIP(ip), port, j);
 	
 	return 0;
 }
@@ -452,7 +452,7 @@ int chrif_connectack(int fd) {
 	static bool char_init_done = false;
 
 	if (RFIFOB(fd,2)) {
-		ShowFatalError("Connection to char-server failed %d.\n", RFIFOB(fd,2));
+		ShowFatalError("Falha ao conectar-se ao servidor de personagens %d.\n", RFIFOB(fd,2));
 		exit(EXIT_FAILURE);
 	}
 
@@ -462,10 +462,10 @@ int chrif_connectack(int fd) {
 
 	chrif_sendmap(fd);
 
-	ShowStatus("Event '"CL_WHITE"OnInterIfInit"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInit"));
+	ShowStatus("Evento '"CL_WHITE"OnInterIfInit"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInit"));
 	if( !char_init_done ) {
 		char_init_done = true;
-		ShowStatus("Event '"CL_WHITE"OnInterIfInitOnce"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInitOnce"));
+		ShowStatus("Evento '"CL_WHITE"OnInterIfInitOnce"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInitOnce"));
 		guild_castle_map_init();
 	}
 	

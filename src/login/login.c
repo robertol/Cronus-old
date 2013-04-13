@@ -242,7 +242,7 @@ void chrif_server_reset(int id)
 /// Called when the connection to Char Server is disconnected.
 void chrif_on_disconnect(int id)
 {
-	ShowStatus("O Servidor de Personagens '%s' Foi Desligado.\n", server[id].name);
+	ShowStatus("O Servidor de Personagens '%s' foi desligado.\n", server[id].name);
 	chrif_server_reset(id);
 }
 
@@ -365,7 +365,7 @@ int login_lan_config_read(const char *lancfgName)
 //-----------------------
 int parse_console(const char* command)
 {
-	ShowNotice("Console command: %s\n", command);
+	ShowNotice("Console de comando: %s\n", command);
 
 	if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 || strcmpi("end", command) == 0 )
 		runflag = 0;
@@ -373,12 +373,12 @@ int parse_console(const char* command)
 		ShowInfo(CL_CYAN"Console: "CL_BOLD"I'm Alive."CL_RESET"\n");
 	else if( strcmpi("help", command) == 0 )
 	{
-		ShowInfo("To shutdown the server:\n");
+		ShowInfo("Para desligar o servidor:\n");
 		ShowInfo("  'shutdown|exit|quit|end'\n");
-		ShowInfo("To know if server is alive:\n");
+		ShowInfo("Para saber se o servidor esta ativo:\n");
 		ShowInfo("  'alive|status'\n");
-		ShowInfo("To create a new account:\n");
-		ShowInfo("  'create'\n");
+		ShowInfo("Para criar uma nova conta:\n");
+		ShowInfo("  'criar'\n");
 	}
 	else
 	{// commands with parameters
@@ -395,7 +395,7 @@ int parse_console(const char* command)
 
 			if( sscanf(params, "%23s %23s %c", username, password, &sex) < 3 || strnlen(username, sizeof(username)) < 4 || strnlen(password, sizeof(password)) < 1 )
 			{
-				ShowWarning("Console: Invalid parameters for '%s'. Usage: %s <username> <password> <sex:F/M>\n", cmd, cmd);
+				ShowWarning("Console: parametros invalidos para '%s'. Usage: %s <username> <password> <sex:F/M>\n", cmd, cmd);
 				return 0;
 			}
 
@@ -536,13 +536,13 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,46);
 
 			if( e_mail_check(email) == 0 )
-				ShowNotice("Char-server '%s': Attempt to create an e-mail on an account with a default e-mail REFUSED - e-mail is invalid (account: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': Tentativa de criar um e-mail em uma conta com um padrao de e-mail recusado - e-mail invlido (account: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( !accounts->load_num(accounts, &acc, account_id) || strcmp(acc.email, "a@a.com") == 0 || acc.email[0] == '\0' )
-				ShowNotice("Char-server '%s': Attempt to create an e-mail on an account with a default e-mail REFUSED - account doesn't exist or e-mail of account isn't default e-mail (account: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': Tentativa de criar um e-mail em uma conta com um padrao de e-mail recusado - conta nao existe ou e-mail da conta não é o padrão de e-mail (account: %d, ip: %s).\n", server[id].name, account_id, ip);
 			else {
 				memcpy(acc.email, email, 40);
-				ShowNotice("Char-server '%s': Create an e-mail on an account with a default e-mail (account: %d, new e-mail: %s, ip: %s).\n", server[id].name, account_id, email, ip);
+				ShowNotice("Char-server '%s': Criar um e-mail em uma conta com um padrao de e-mail (account: %d, new e-mail: %s, ip: %s).\n", server[id].name, account_id, email, ip);
 				// Save
 				accounts->save(accounts, &acc);
 			}
@@ -565,7 +565,7 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,6);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': account %d NOT found (ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': conta %d nao existe (ip: %s).\n", server[id].name, account_id, ip);
 			else {
 				safestrncpy(email, acc.email, sizeof(email));
 				expiration_time = acc.expiration_time;
@@ -903,12 +903,12 @@ int parse_fromchar(int fd)
 			if( RFIFOREST(fd) < 6 )
 				return 0;
 			server[id].ip = ntohl(RFIFOL(fd,2));
-			ShowInfo("Updated IP of Server #%d to %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
+			ShowInfo("Atualizando IP do servidor #%d to %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
 			RFIFOSKIP(fd,6);
 		break;
 
 		case 0x2737: //Request to set all offline.
-			ShowInfo("Setting accounts from char-server %d offline.\n", id);
+			ShowInfo("Definir contas do char-server %d offline.\n", id);
 			online_db->foreach(online_db, online_db_setoffline, id);
 			RFIFOSKIP(fd,2);
 		break;
@@ -1006,7 +1006,7 @@ int mmo_auth_new(const char* userid, const char* pass, const char sex, const cha
 	if( !accounts->create(accounts, &acc) )
 		return 0;
 
-	ShowNotice("Account creation (account %s, id: %d, pass: %s, sex: %c)\n", acc.userid, acc.account_id, acc.pass, acc.sex);
+	ShowNotice("Criação de conta (conta %s, id: %d, pass: %s, sex: %c)\n", acc.userid, acc.account_id, acc.pass, acc.sex);
 
 	if( DIFF_TICK(tick, new_reg_tick) > 0 ) {// Update the registration check.
 		num_regs = 0;
@@ -1127,7 +1127,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer) {
 		}
 	}
 
-	ShowNotice("Authentication accepted (account: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
+	ShowNotice("Autenticação aceita (conta: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
 
 	// update session data
 	sd->account_id = acc.account_id;
@@ -1209,7 +1209,7 @@ void login_auth_ok(struct login_session_data* sd)
 			if( data->char_server > -1 )
 			{// Request char servers to kick this account out. [Skotlex]
 				uint8 buf[6];
-				ShowNotice("User '%s' is already online - Rejected.\n", sd->userid);
+				ShowNotice("Usuário '%s' já está online - Rejeitado.\n", sd->userid);
 				WBUFW(buf,0) = 0x2734;
 				WBUFL(buf,2) = sd->account_id;
 				charif_sendallwos(-1, buf, 6);
@@ -1354,7 +1354,7 @@ int parse_login(int fd)
 
 	if( session[fd]->flag.eof )
 	{
-		ShowInfo("Closed connection from '"CL_WHITE"%s"CL_RESET"'.\n", ip);
+		ShowInfo("Conexão fechada de '"CL_WHITE"%s"CL_RESET"'.\n", ip);
 		do_close(fd);
 		return 0;
 	}
@@ -1542,7 +1542,7 @@ int parse_login(int fd)
 			new_ = RFIFOW(fd,84);
 			RFIFOSKIP(fd,86);
 
-			ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', pass: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, sd->passwd, ip);
+			ShowInfo("Solicitação de conexão do servidor de personagens '%s' @ %u.%u.%u.%u:%u (conta: '%s', pass: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, sd->passwd, ip);
 			sprintf(message, "charserver - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 			login_log(session[fd]->client_addr, sd->userid, 100, message);
 
@@ -1574,7 +1574,7 @@ int parse_login(int fd)
 			}
 			else
 			{
-				ShowNotice("Connection of the char-server '%s' REFUSED.\n", server_name);
+				ShowNotice("Conexão com char-server '%s' RECUSADO.\n", server_name);
 				WFIFOHEAD(fd,3);
 				WFIFOW(fd,0) = 0x2711;
 				WFIFOB(fd,2) = 3;
@@ -1584,7 +1584,7 @@ int parse_login(int fd)
 		return 0; // processing will continue elsewhere
 
 		default:
-			ShowNotice("Abnormal end of connection (ip: %s): Unknown packet 0x%x\n", ip, command);
+			ShowNotice("Extremidade anormal de conexão (ip: %s): Pacote Desconhecido 0x%x\n", ip, command);
 			set_eof(fd);
 			return 0;
 		}
@@ -1631,7 +1631,7 @@ int login_config_read(const char* cfgName)
 	char line[1024], w1[1024], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
 	if (fp == NULL) {
-		ShowError("Configuration file (%s) not found.\n", cfgName);
+		ShowError("Arquivo de configuração (%s) não encontrado.\n", cfgName);
 		return 1;
 	}
 	while(fgets(line, sizeof(line), fp)) {
@@ -1648,7 +1648,7 @@ int login_config_read(const char* cfgName)
 		else if(!strcmpi(w1,"console_silent")) {
 			msg_silent = atoi(w2);
 			if( msg_silent ) /* only bother if we actually have this enabled */
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+				ShowInfo("Console ajuste silencioso: %d\n", atoi(w2));
 		}
 		else if( !strcmpi(w1, "bind_ip") ) {
 			login_config.login_ip = host2ip(w2);

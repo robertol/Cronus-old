@@ -56,7 +56,7 @@ void display_title(void) {
 	if( git[0] != HERC_UNKNOWN_VER )
 		ShowInfo("Git Hash: '"CL_WHITE"%s"CL_RESET"'\n", git);
 	else if( svn[0] != HERC_UNKNOWN_VER )
-		ShowInfo("SVN Revision: '"CL_WHITE"%s"CL_RESET"'\n", svn);
+		ShowInfo("Revisao do SVN: '"CL_WHITE"%s"CL_RESET"'\n", svn);
 }
 #ifdef CONSOLE_INPUT
 #ifdef _WIN32

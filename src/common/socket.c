@@ -801,7 +801,7 @@ int do_sockets(int next)
 				if( session[i]->flag.ping != 2 )/* only update if necessary otherwise it'd resend the ping unnecessarily */
 					session[i]->flag.ping = 1;
 			} else {
-				ShowInfo("Session #%d timed out\n", i);
+				ShowInfo("sessao #%d expirou\n", i);
 				set_eof(i);
 			}
 		}
@@ -1334,7 +1334,7 @@ void socket_init(void)
 	add_timer_interval(gettick()+1000, connect_check_clear, 0, 0, 5*60*1000);
 #endif
 
-	ShowInfo("Server supports up to '"CL_WHITE"%u"CL_RESET"' concurrent connections.\n", rlim_cur);
+	ShowInfo("Servidor suporta ate '"CL_WHITE"%u"CL_RESET"' conexoes simultaneas.\n", rlim_cur);
 }
 
 bool session_isValid(int fd)

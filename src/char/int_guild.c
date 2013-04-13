@@ -75,7 +75,7 @@ static int guild_save_timer(int tid, unsigned int tick, int id, intptr_t data)
 		if( g->save_flag == GS_REMOVE )
 		{// Nothing to save, guild is ready for removal.
 			if (save_log)
-				ShowInfo("Guild Unloaded (%d - %s)\n", g->guild_id, g->name);
+				ShowInfo("Descarregando Clãns (%d - %s)\n", g->guild_id, g->name);
 			db_remove(guild_db_, key);
 		}
 	}
@@ -126,7 +126,7 @@ int inter_guild_tosql(struct guild *g,int flag)
 	if (g->guild_id<=0 && g->guild_id != -1) return 0;
 
 #ifdef NOISY
-	ShowInfo("Save guild request ("CL_BOLD"%d"CL_RESET" - flag 0x%x).",g->guild_id, flag);
+	ShowInfo("Pedido do Clãn salvo ("CL_BOLD"%d"CL_RESET" - flag 0x%x).",g->guild_id, flag);
 #endif
 
 	Sql_EscapeStringLen(sql_handle, esc_name, g->name, strnlen(g->name, NAME_LENGTH));
@@ -519,7 +519,7 @@ struct guild * inter_guild_fromsql(int guild_id)
 	g->save_flag |= GS_REMOVE; //But set it to be removed, in case it is not needed for long.
 
 	if (save_log)
-		ShowInfo("Guild loaded (%d - %s)\n", guild_id, g->name);
+		ShowInfo("Leitura do Clãns (%d - %s)\n", guild_id, g->name);
 
 	return g;
 }
@@ -541,7 +541,7 @@ int inter_guildcastle_tosql(struct guild_castle *gc)
 	if (SQL_ERROR == Sql_Query(sql_handle, StringBuf_Value(&buf)))
 		Sql_ShowDebug(sql_handle);
 	else if(save_log)
-		ShowInfo("Saved guild castle (%d)\n", gc->castle_id);
+		ShowInfo("Castelos dos Clãn foram salvos (%d)\n", gc->castle_id);
 
 	StringBuf_Destroy(&buf);
 	return 0;
@@ -593,7 +593,7 @@ static struct guild_castle* inter_guildcastle_fromsql(int castle_id)
 	idb_put(castle_db, castle_id, gc);
 
 	if (save_log)
-		ShowInfo("Loaded guild castle (%d - guild %d)\n", castle_id, gc->guild_id);
+		ShowInfo("Leitura dos castelos dos clãns (%d - clãn %d)\n", castle_id, gc->guild_id);
 
 	return gc;
 }
