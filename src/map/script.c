@@ -4784,6 +4784,7 @@ BUILDIN_FUNC(callfunc)
 		return 1;
 	}
 
+	
 	for( i = st->start+3, j = 0; i < st->end; i++, j++ )
 	{
 		struct script_data* data = push_copy(st->stack,i);
@@ -4791,10 +4792,8 @@ BUILDIN_FUNC(callfunc)
 		{
 			const char* name = reference_getname(data);
 			if( name[0] == '.' ) {
-				if ( !ref )	{
-					ref = (struct DBMap**)aCalloc(sizeof(struct DBMap*), 1);
-					ref[0] = (name[1] == '@' ? st->stack->var_function : st->script->script_vars);
-				}
+			ref = (struct DBMap**)aCalloc(sizeof(struct DBMap*), 1);
+			ref[0] = (name[1] == '@' ? st->stack->var_function : st->script->script_vars);
 				data->ref = ref;
 			}
 		}
