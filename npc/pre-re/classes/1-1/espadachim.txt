@@ -77,17 +77,17 @@ izlude_in,74,172,4	script	Chefe Espadachim#swd_1	119,{
 		}
 		if (job_sword_q == 0) {
 			mes "[Chefe Espadachim]";
-			mes "Então você desena se tornar um orgulhoso espadachim? Certamente, por favor inscreva-se!";
+			mes "Então você deseja se tornar um orgulhoso espadachim? Certamente, por favor inscreva-se!";
 			next;
 			if (select("Inscrever-se.:Cancelar.") == 1) {
 				savepoint "izlude_in",65,165;
 				set job_sword_q,1;
 				setquest 1014;
 				mes "[Chefe Espadachim]";
-				mes "Ah, sim. Sua aplicação será revisada assim que possível.";
+				mes "Ah, sim. Sua aplicação será registrada assim que possível.";
 				next;
 				mes "[Chefe Espadachim]";
-				mes "Se você já possui os requerimentos, você pode ser entrevistado agora. Você gostaria?";
+				mes "Se você já possui os requisitos, você pode ser entrevistado agora. Deseja fazer a entrevista?";
 				next;
 				if (select("Sim.:Não.") == 1) {
 					mes "[Chefe Espadachim]";
@@ -97,7 +97,7 @@ izlude_in,74,172,4	script	Chefe Espadachim#swd_1	119,{
 				}
 				else {
 					mes "[Chefe Espadachim]";
-					mes "Ok então. Sinta-se livre para voltar quando estiver pronto. Tudo que você precisa fazer é possuir nossos requerimentos. Boa sorte para você.";
+					mes "Ok então. Sinta-se livre para voltar quando estiver pronto. Tudo que você precisa fazer é possuir nossos requisitos. Boa sorte para você.";
 					close;
 				}
 			}
@@ -107,68 +107,68 @@ izlude_in,74,172,4	script	Chefe Espadachim#swd_1	119,{
 				close;
 			}
 		}
-		mes "[Swordman]";
+		mes "[Chefe Espadachim]";
 		if (getskilllv("NV_BASIC") < 9) {
-			mes "Hm, you still haven't learned all of the Basic Skills. You need to do that before you can become a Swordman.";
+			mes "Hm, você ainda não aprendeu todas as Habilidade Básicas. Você precisa fazê-lo antes de se tornar Espadachim.";
 			next;
 			mes "[Chefe Espadachim]";
-			mes "Check the requirements for job change again, and come back when you are ready.";
+			mes "Verifique os requisitos para mudança de profissão novamente e volte quando estiver pronto.";
 			close;
 		}
 		else if (job_sword_q <= 3) {
-			mes "Hm, you've learned all of the Basic Skills but didn't take the test yet. You must first pass the exam before you can change your job to Swordman.";
+			mes "Hm, você aprendeu todas as Habilidade Básicas, mas não fez o teste ainda. Você precisa, inicialmente, passar no exame antes de poder mudar sua profissão para Espadachim.";
 			next;
-			mes "[Swordman]";
-			mes "Enter the room to my right so that you can take the test. You'll need to speak to my right so you can enter the examination area.";
+			mes "[Chefe Espadachim]";
+			mes "Entre na sala a minha direita para que possa fazer o teste. Você precisará falar com a pessoa a minha direita para que possa entrar na sala de exames.";
 			close;
 		}
 		else if (job_sword_q == 4) {
-			mes "Hahaha! Congratulations! Now you are fully qualified to be a real Swordman! I will transform you right away!";
+			mes "Hahaha! Parabéns! Agora você está completamente qualificado para ser um verdadeiro Espadachim! Eu irei transformá-lo imediatamente!";
 			next;
 			callfunc "Job_Change",Job_Swordman;
 			set job_sword_q,0;
 			completequest 1014;
 			mes "[Chefe Espadachim]";
-			mes "Once again, congratulations. I expect that you will be a good representative of the Swordman Association.";
+			mes "Novamente, parabéns. Eu espero que você se torne um excelente representante da Associação de Espadachins.";
 			close;
 		}
 	case 2:
 		mes "[Chefe Espadachim]";
-		mes "So you wish to know more about the mighty Swordman job? Well, then...";
+		mes "Então você desenha saber mais sobre a poderosa profissão dos Espadachins? Bem, então...";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "Amongst the First Class jobs, the Swordman is the best melee fighter for three reasons.";
-		mes "There are 3 reasons why Swordy is the best to approch a fight!";
+		mes "Entre as profissões de Primeiras Classes, a profissão Espadachim é a melhor combatente corpo-a-corpo por três razões.";
+		mes "E são elas:";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "First, Swordman has the benefit of additional HP. Second, Swordman generally have access to a wider selection fo weapons than the other First Class jobs.";
+		mes "Primeiro, Espadachins tem o benefício de HP adicional. Segundo, Espadachins geralmente tem acesso a uma seleção mais ampla armas do que outras profissões de Primeira Classe.";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "And third, most of the Swordman skills are crushing physical attacks! In my opinion, being a Swordman is the best job ever!";
+		mes "E terceira, a maioria das habilidade do Espadachim são ataques físicos esmagadores! Na minha opinião, ser um Espadachim é a melhor profissão que existe!";
 		close;
 	case 3:
 		mes "[Chefe Espadachim]";
 		mes "Hmmm...";
 		if (BaseJob != Job_Novice) {
 			if (BaseJob == Job_Swordman)
-				mes "But there's no need to tell you the requirements. You've met them and already became a Swordman! Well, anyway...";
+				mes "Mas não existe necessidade de lhe dizer os requisitos. Você os conhece e já se tornou um Espadachim! Bem, de qualquer maneira...";
 			else
-				mes "It's too late for you to become a Swordman. You already have another job. Still, there's no harm in telling you...";
+				mes "É tarde demais para você se tornar um Espadachim. Você já possui outra profissão. Ainda sim, não há mal nenhum em lhe dizer...";
 		}
 		next;
 		mes "[Chefe Espadachim]";
-		mes "First, you must learn all 9 of the Basic Skills. If you can't complete this requirement, you won't be able to change to any job.";
+		mes "Primeiro, você precisa aprender todos os nove pontos de Habilidades Básicas. Se você não for capaz de completar este requisito, você não será capaz de mudar para nenhuma profissão.";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "Second, you must pass the Swordman Test. Inquire the Test Manager located in the waiting room of the Swordman Test.";
+		mes "Segundo, você precisa passar no Exame de Espadachins. Pergunte ao Guia de Teste localizado na sala de espera do Teste de Espadachim.";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "If you can complete these 2 requirements, you can change to a Chefe Espadachim anytime you want.";
+		mes "Se você puder concluir essas duas exigências, então você pode mudar para um Espadachim a qualquer momento que deseje.";
 		close;
 	case 4:
 		mes "[Chefe Espadachim]";
 		mes "Ha ha ha!";
-		mes "Ah, youth!";
+		mes "Ah, juventude!";
 		close;
 	}
 }
@@ -176,26 +176,26 @@ izlude_in,74,172,4	script	Chefe Espadachim#swd_1	119,{
 izlude_in,62,170,6	script	Chefe Espadachim#swd_2	85,{
 	mes "[Chefe Espadachim]";
 	if (BaseJob == Job_Swordman) {
-		mes "Sorry guy, but I can only allow Novices to enter the Test Hall.";
+		mes "Desculpe jovem, mas eu só posso permitir Novatos a entrar no Salão de Exames.";
 		close;
 	}
 	else if (BaseJob != Job_Novice) {
-		mes "Who the hell are you?! Nobody, other than Novices, is permitted to come in here!";
+		mes "Quem diabos é você?! Ninguém, excepto Novatos, é permitido a vir aqui!";
 		close;
 	}
 	else if (getskilllv("NV_BASIC") < 9) {
-		mes "Stop! I can't let you in until you learn all of the Basic Skills. The Test Hall isn't for goofing off!";
+		mes "Pare! Eu não posso permitir sua entrada até que você aprenda todas as Habilidades Básicas. O Salão de Exames não é lugar para vadiagem!";
 		close;
 	}
 	else if (job_sword_q == 4) {
-		mes "Hey. You need to talk to the Swordman in the center of the room, not me.";
+		mes "Opa! Você precisa falar com o Chefe Espadachim no centro da sala, não comigo.";
 		close;
 	}
 	else if (job_sword_q == 0) {
-		mes "Stop! If you want to take the Swordman Test, you'll need to fill out an application first.";
+		mes "Pare! Se você quer fazer o Exame de Espadachim você precisará preencher uma aplicação primeiro.";
 		next;
 		mes "[Chefe Espadachim]";
-		mes "The Swordman in the center of the room can help you with that, got it?";
+		mes "O Espadachim no centro da sala poderá lhe ajudar com isso, entendeu?";
 		close;
 	}
 	else {
@@ -207,19 +207,19 @@ izlude_in,62,170,6	script	Chefe Espadachim#swd_2	85,{
 
 izlude_in,30,175,4	script	Chefe Espadachim#swd_3	92,{
 	mes "[Chefe Espadachim]";
-	mes "I will tell you about the Test! Listen carefully, I won't repeat myself.";
+	mes "Eu irei lhe contar sobre o Exame! Ouça com atenção, eu não irei repetir.";
 	next;
 	mes "[Chefe Espadachim]";
-	mes "The purpose of this test is to confirm whether or not you are qualified to be a Swordman. As you know, a Swordman needs physical strength and spirit!";
+	mes "A proposta desse exame é confirmar se você é qualificado ou não para se tornar um Espadachim. Como você sabe, um Espadachim necessita de força física e espiritual!";
 	next;
 	mes "[Chefe Espadachim]";
-	mes "Without those, you won't be able to become a Swordman. Now, the conditions for completing this test are very simple.";
+	mes "Sem isso, você não será apto a se tornar um Espadachim. Agora, as condições para completar esse teste são bem simples.";
 	next;
 	mes "[Chefe Espadachim]";
-	mes "You will travel through three courses and must reach the final checkpoint within ^FF000010 minutes^000000.";
+	mes "Você terá que atravessar três percursos e chegar no ponto de controle (checkpoint) final em ^FF000010 minutos^000000.";
 	next;
 	mes "[Chefe Espadachim]";
-	mes "If you choose to 'Surrender,' or if you run out of time, you will not pass the test.";
+	mes "Se você escolher 'Render-se,' ou se você ultrapassar o tempo máximo, você não irá passar no exame.";
 	next;
 	mes "[Chefe Espadachim]";
 	mes "If you find that you are not strong enough to pass the test, head to the entrance of the course and talk to the checkpoint manager.";
