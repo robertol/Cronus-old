@@ -824,4 +824,6 @@ malangdo,150,135,5	script	Roving Merchant	495,{
 		callfunc "F_mal_coin",1,"[Roving Merchant]",.@names$[.@i],.@items[.@i],0,200,0;
 		next;
 	}
+	
 }
+
