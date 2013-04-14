@@ -6078,7 +6078,6 @@ void status_change_init(struct block_list *bl)
 //the flag values are the same as in status_change_start.
 int status_get_sc_def(struct block_list *bl, enum sc_type type, int rate, int tick, int flag)
 {
-	int sc_def = 0, tick_def = 0;
 	//Percentual resistance: 10000 = 100% Resist
 	//Example: 50% -> sc_def=5000 -> 25%; 5000ms -> tick_def=5000 -> 2500ms
 	int sc_def = 0, tick_def = -1; //-1 = use sc_def
