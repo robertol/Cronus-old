@@ -11,7 +11,7 @@ E caso queira candidatar-se a uma vaga na equipe de desenvolvimento, preencha [e
 --------------
 Estado da compilação atual:
 
-[![Build Status](https://travis-ci.org/Cronus-Emulator/Cronus.png?branch=master)](https://travis-ci.org/Cronus-Emulator/Cronus)
+[![Build Status](https://travis-ci.org/Cronus-Emulator/Cronus.png?branch=stable)](https://github.com/Cronus-Emulator/Cronus/tree/stable)
 
 --------------
 
@@ -30,12 +30,12 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - .twink	- Samuel Soares
+- Golen Maker	- Ligleyson Warnielle
 
 ### Desenvolvedores
 - I am Cold	- Márcio Montenegro
 - Yum		- Luann Peixe
 - Wolf		- João Victor Senos
-- Golen Maker	- Ligleyson Warnielle
 - Axl		- José Goís
 	
 ### Estágiários/Aprendizes
