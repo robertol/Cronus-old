@@ -70,4 +70,3 @@
 //#define RENEWAL_ASPD
 
 #endif // _CONFIG_RENEWAL_H_
-

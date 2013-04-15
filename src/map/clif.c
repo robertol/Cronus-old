@@ -44,6 +44,7 @@
 #include "clif.h"
 #include "mail.h"
 #include "quest.h"
+#include "packets_struct.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -256,7 +257,7 @@ static inline unsigned char clif_bl_type(struct block_list *bl) {
 int clif_send_sub(struct block_list *bl, va_list ap) {
 	struct block_list *src_bl;
 	struct map_session_data *sd;
-	unsigned char *buf;
+	void *buf;
 	int len, type, fd;
 
 	nullpo_ret(bl);
@@ -266,7 +267,7 @@ int clif_send_sub(struct block_list *bl, va_list ap) {
 	if (!fd) //Don't send to disconnected clients.
 		return 0;
 
-	buf = va_arg(ap,unsigned char*);
+	buf = va_arg(ap,void*);
 	len = va_arg(ap,int);
 	nullpo_ret(src_bl = va_arg(ap,struct block_list*));
 	type = va_arg(ap,int);
@@ -319,7 +320,7 @@ int clif_send_sub(struct block_list *bl, va_list ap) {
  * Packet Delegation (called on all packets that require data to be sent to more than one client)
  * functions that are sent solely to one use whose ID it posses use WFIFOSET
  *------------------------------------------*/
-int clif_send(const uint8* buf, int len, struct block_list* bl, enum send_target type) {
+int clif_send(const void* buf, int len, struct block_list* bl, enum send_target type) {
 	int i;
 	struct map_session_data *sd, *tsd;
 	struct party_data *p = NULL;
@@ -555,29 +556,23 @@ int clif_send(const uint8* buf, int len, struct block_list* bl, enum send_target
 	return 0;
 }
 
-
 /// Notifies the client, that it's connection attempt was accepted.
 /// 0073 <start time>.L <position>.3B <x size>.B <y size>.B (ZC_ACCEPT_ENTER)
 /// 02eb <start time>.L <position>.3B <x size>.B <y size>.B <font>.W (ZC_ACCEPT_ENTER2)
 void clif_authok(struct map_session_data *sd)
 {
-#if PACKETVER < 20080102
-	const int cmd = 0x73;
-#else
-	const int cmd = 0x2eb;
-#endif
-	int fd = sd->fd;
-
-	WFIFOHEAD(fd,packet_len(cmd));
-	WFIFOW(fd, 0) = cmd;
-	WFIFOL(fd, 2) = gettick();
-	WFIFOPOS(fd, 6, sd->bl.x, sd->bl.y, sd->ud.dir);
-	WFIFOB(fd, 9) = 5; // ignored
-	WFIFOB(fd,10) = 5; // ignored
+	struct packet_authok p;
+	
+	p.PacketType = authokType;
+	p.startTime = gettick();
+	WBUFPOS(&p.PosDir[0],0,sd->bl.x,sd->bl.y,sd->ud.dir); /* do the stupid client math */
+	p.xSize = p.ySize = 5; /* not-used */
+	
 #if PACKETVER >= 20080102
-	WFIFOW(fd,11) = sd->user_font;  // FIXME: Font is currently not saved.
+	p.font = sd->user_font;  // FIXME: Font is currently not saved.
 #endif
-	WFIFOSET(fd,packet_len(cmd));
+	
+	clif->send(&p,sizeof(p),&sd->bl,SELF);
 }
 
 
@@ -1694,6 +1689,9 @@ void clif_hercules_chsys_create(struct hChSysCh *channel, char *name, char *pass
 		safestrncpy(channel->pass, pass, HCHSYS_NAME_LENGTH);
 	
 	channel->opt = hChSys_OPT_BASE;
+	channel->banned = NULL;
+	
+	channel->msg_delay = 0;
 	
 	if( channel->type != hChSys_MAP && channel->type != hChSys_ALLY )
 		strdb_put(clif->channel_db, channel->name, channel);
@@ -3534,9 +3532,16 @@ void clif_useitemack(struct map_session_data *sd,int index,int amount,bool ok)
 }
 
 void clif_hercules_chsys_send(struct hChSysCh *channel, struct map_session_data *sd, char *msg) {
-	char message[150];
-	snprintf(message, 150, "[ #%s ] %s : %s",channel->name,sd->status.name, msg);
-	clif->chsys_msg(channel,sd,message);
+	if( channel->msg_delay != 0 && DIFF_TICK(sd->hchsysch_tick + ( channel->msg_delay * 1000 ), gettick()) > 0 && !pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ) {
+		clif->colormes(sd->fd,COLOR_RED,msg_txt(1455));
+		return;
+	} else {
+		char message[150];
+		snprintf(message, 150, "[ #%s ] %s : %s",channel->name,sd->status.name, msg);
+		clif->chsys_msg(channel,sd,message);
+		if( channel->msg_delay != 0 )
+			sd->hchsysch_tick = gettick();
+	}
 }
 
 /// Inform client whether chatroom creation was successful or not (ZC_ACK_CREATE_CHATROOM).
@@ -5404,12 +5409,12 @@ void clif_status_change(struct block_list *bl,int type,int flag,int tick,int val
 	WBUFL(buf,4)=bl->id;
 	WBUFB(buf,8)=flag;
 #if PACKETVER >= 20120618
-	WBUFL(buf,9)=tick;/* at this stage remain and total are the same value I believe */
-	WBUFL(buf,13)=tick;
 	if(flag && battle_config.display_status_timers && sd) {
 		if (tick <= 0)
 			tick = 9999; // this is indeed what official servers do
-		
+			
+		WBUFL(buf,9) = tick;/* at this stage remain and total are the same value I believe */
+		WBUFL(buf,13) = tick;
 		WBUFL(buf,17) = val1;
 		WBUFL(buf,21) = val2;
 		WBUFL(buf,25) = val3;
@@ -5570,7 +5575,7 @@ void clif_map_property(struct map_session_data* sd, enum map_property property)
 	int fd;
 
 	nullpo_retv(sd);
-
+	
 	fd=sd->fd;
 	WFIFOHEAD(fd,packet_len(0x199));
 	WFIFOW(fd,0)=0x199;
@@ -5632,7 +5637,7 @@ void clif_map_property_mapall(int map, enum map_property property)
 {
 	struct block_list bl;
 	unsigned char buf[16];
-
+	
 	bl.id = 0;
 	bl.type = BL_NUL;
 	bl.m = map;
@@ -8181,16 +8186,16 @@ void clif_specialeffect_value(struct block_list* bl, int effect_id, int num, sen
 }
 // Modification of clif_messagecolor to send colored messages to players to chat log only (doesn't display overhead)
 /// 02c1 <packet len>.W <id>.L <color>.L <message>.?B
-int clif_colormes(struct map_session_data * sd, enum clif_colors color, const char* msg) {
+int clif_colormes(int fd, enum clif_colors color, const char* msg) {
 	unsigned short msg_len = strlen(msg) + 1;
 
-	WFIFOHEAD(sd->fd,msg_len + 12);
-	WFIFOW(sd->fd,0) = 0x2C1;
-	WFIFOW(sd->fd,2) = msg_len + 12;
-	WFIFOL(sd->fd,4) = 0;
-	WFIFOL(sd->fd,8) = color_table[color];
-	safestrncpy((char*)WFIFOP(sd->fd,12), msg, msg_len);
-	WFIFOSET(sd->fd, msg_len + 12);
+	WFIFOHEAD(fd,msg_len + 12);
+	WFIFOW(fd,0) = 0x2C1;
+	WFIFOW(fd,2) = msg_len + 12;
+	WFIFOL(fd,4) = 0;
+	WFIFOL(fd,8) = color_table[color];
+	safestrncpy((char*)WFIFOP(fd,12), msg, msg_len);
+	WFIFOSET(fd, msg_len + 12);
 
 	return 0;
 }
@@ -9037,12 +9042,17 @@ void clif_hercules_chsys_mjoin(struct map_session_data *sd) {
 		
 		clif->chsys_create(map[sd->bl.m].channel,NULL,NULL,hChSys.local_color);
 	}
+	
+	if( map[sd->bl.m].channel->banned && idb_exists(map[sd->bl.m].channel->banned, sd->status.account_id) ) {
+		return;
+	}
+	
 	clif->chsys_join(map[sd->bl.m].channel,sd);
 	
 	if( !( map[sd->bl.m].channel->opt & hChSys_OPT_ANNOUNCE_JOIN ) ) {
 		char mout[60];
 		sprintf(mout, msg_txt(1435),hChSys.local_name,map[sd->bl.m].name); // You're now in the '#%s' channel for '%s'
-		clif->message(sd->fd, mout);
+		clif->colormes(sd->fd, COLOR_DEFAULT, mout);
 	}
 }
 
@@ -9147,7 +9157,6 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 
 	if( map_flag_gvg(sd->bl.m) )
 		clif->map_property(sd, MAPPROPERTY_AGITZONE);
-
 	// info about nearby objects
 	// must use foreachinarea (CIRCULAR_AREA interferes with foreachinrange)
 	map_foreachinarea(clif->getareachar, sd->bl.m, sd->bl.x-AREA_SIZE, sd->bl.y-AREA_SIZE, sd->bl.x+AREA_SIZE, sd->bl.y+AREA_SIZE, BL_ALL, sd);
@@ -9305,6 +9314,8 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 
 	mail_clear(sd);
 
+	clif->maptypeproperty2(&sd->bl,SELF);
+	
 	/* Guild Aura Init */
 	if( sd->state.gmaster_flag ) {
 		guild_guildaura_refresh(sd,GD_LEADERSHIP,guild_checkskill(sd->state.gmaster_flag,GD_LEADERSHIP));
@@ -9901,6 +9912,74 @@ void clif_hercules_chsys_left(struct hChSysCh *channel, struct map_session_data 
 
 }
 
+void clif_hercules_chsys_quitg(struct map_session_data *sd) {
+	unsigned char i;
+	struct hChSysCh *channel = NULL;
+	
+	for( i = 0; i < sd->channel_count; i++ ) {
+		if( (channel = sd->channels[i] ) != NULL && channel->type == hChSys_ALLY ) {
+			idb_remove(channel->users,sd->status.char_id);
+			
+			if( channel == sd->gcbind )
+				sd->gcbind = NULL;
+			
+			if( !db_size(channel->users) && channel->type == hChSys_PRIVATE ) {
+				clif->chsys_delete(channel);
+			} else if( !hChSys.closing && (channel->opt & hChSys_OPT_ANNOUNCE_JOIN) ) {
+				char message[60];
+				sprintf(message, "#%s '%s' left",channel->name,sd->status.name);
+				clif->chsys_msg(channel,sd,message);
+			}
+			sd->channels[i] = NULL;
+		}
+	}
+		
+	if( i < sd->channel_count ) {
+		unsigned char cursor = 0;
+		for( i = 0; i < sd->channel_count; i++ ) {
+			if( sd->channels[i] == NULL )
+				continue;
+			if( cursor != i ) {
+				sd->channels[cursor] = sd->channels[i];
+			}
+			cursor++;
+		}
+		if ( !(sd->channel_count = cursor) ) {
+			aFree(sd->channels);
+			sd->channels = NULL;
+		}
+	}
+	
+}
+
+
+void clif_hercules_chsys_quit(struct map_session_data *sd) {
+	unsigned char i;
+	struct hChSysCh *channel = NULL;
+	
+	for( i = 0; i < sd->channel_count; i++ ) {
+		if( (channel = sd->channels[i] ) != NULL ) {
+			idb_remove(channel->users,sd->status.char_id);
+			
+			if( channel == sd->gcbind )
+				sd->gcbind = NULL;
+			
+			if( !db_size(channel->users) && channel->type == hChSys_PRIVATE ) {
+				clif->chsys_delete(channel);
+			} else if( !hChSys.closing && (channel->opt & hChSys_OPT_ANNOUNCE_JOIN) ) {
+				char message[60];
+				sprintf(message, "#%s '%s' left",channel->name,sd->status.name);
+				clif->chsys_msg(channel,sd,message);
+			}
+			
+		}
+	}
+
+	sd->channel_count = 0;
+	aFree(sd->channels);
+	sd->channels = NULL;	
+}
+
 /// Request for an action.
 /// 0089 <target id>.L <action>.B (CZ_REQUEST_ACT)
 /// 0437 <target id>.L <action>.B (CZ_REQUEST_ACT2)
@@ -10038,7 +10117,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 			}
 			if( k < sd->channel_count ) {
 				clif->chsys_send(channel,sd,message);
-			} else if( channel->pass[0] == '\0' ) {
+			} else if( channel->pass[0] == '\0' && !(channel->banned && idb_exists(channel->banned, sd->status.account_id)) ) {
 				clif->chsys_join(channel,sd);
 				clif->chsys_send(channel,sd,message);
 			} else {
@@ -10287,6 +10366,10 @@ void clif_hercules_chsys_delete(struct hChSysCh *channel) {
 			}
 		}
 		dbi_destroy(iter);
+	}
+	if( channel->banned ) {
+		db_destroy(channel->banned);
+		channel->banned = NULL;
 	}
 	db_destroy(channel->users);
 	if( channel->m ) {
@@ -16490,6 +16573,28 @@ void clif_parse_CashShopBuy(int fd, struct map_session_data *sd) {
 	}
 }
 
+/* [Ind/Hercules] */
+void clif_maptypeproperty2(struct block_list *bl,enum send_target t) {
+#if PACKETVER >= 20130000 /* not entirely sure when this started */
+	struct packet_maptypeproperty2 p;
+	
+	p.PacketType = maptypeproperty2Type;
+	p.type = 0x28;
+	p.flag.usecart = 1;
+	p.flag.party = 1;
+	p.flag.guild = 1;
+	p.flag.siege = map_flag_gvg2(bl->m) ? 1: 0;
+	p.flag.mineffect = 1;
+	p.flag.nolockon = 0;
+	p.flag.countpk = map[bl->m].flag.pvp ? 1 : 0;
+	p.flag.nopartyformation = 0;
+	p.flag.noitemconsumption = 0;
+	p.flag.summonstarmiracle = 0;
+	p.flag.bg = map[bl->m].flag.battleground ? 1 : 0;
+	
+	clif->send(&p,sizeof(p),bl,t);
+#endif
+}
 /*==========================================
  * Main client packet processing function
  *------------------------------------------*/
@@ -16659,7 +16764,7 @@ void packetdb_loaddb(void) {
  *
  *------------------------------------------*/
 int do_init_clif(void) {
-	const char* colors[COLOR_MAX] = { "0xFF0000" };
+	const char* colors[COLOR_MAX] = { "0xFF0000", "0x00ff00" };
 	int i;
 	/**
 	 * Setup Color Table (saves unnecessary load of strtoul on every call)
@@ -16795,6 +16900,7 @@ void clif_defaults(void) {
 	clif->map_property_mapall = clif_map_property_mapall;
 	clif->bossmapinfo = clif_bossmapinfo;
 	clif->map_type = clif_map_type;
+	clif->maptypeproperty2 = clif_maptypeproperty2;
 	/* multi-map-server */
 	clif->changemapserver = clif_changemapserver;
 	/* npc-shop-related */
@@ -17160,6 +17266,8 @@ void clif_defaults(void) {
 	clif->chsys_left = clif_hercules_chsys_left;
 	clif->chsys_delete = clif_hercules_chsys_delete;
 	clif->chsys_mjoin = clif_hercules_chsys_mjoin;
+	clif->chsys_quit = clif_hercules_chsys_quit;
+	clif->chsys_quitg = clif_hercules_chsys_quitg;
 	clif->cashshop_load = clif_cashshop_db;
 	/*------------------------
 	 *- Parse Incoming Packet

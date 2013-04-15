@@ -20,7 +20,6 @@
 static struct item_data* itemdb_array[MAX_ITEMDB];
 static DBMap*            itemdb_other;// int nameid -> struct item_data*
 
-
 struct item_data dummy_item; //This is the default dummy item used for non-existant items. [Skotlex]
 
 /**

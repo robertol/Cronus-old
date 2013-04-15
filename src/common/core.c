@@ -122,7 +122,7 @@ static void sig_proc(int sn) {
 	#ifndef _WIN32
 		case SIGXFSZ:
 			// ignore and allow it to set errno to EFBIG
-			ShowWarning ("Tamanho maximo de arquivo alcancado!\n");
+			ShowWarning ("Max file size reached!\n");
 			//run_flag = 0;	// should we quit?
 			break;
 		case SIGPIPE:
@@ -274,7 +274,7 @@ const char *get_git_hash (void) {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("VocÍ est· rodando o Cronus com privilÈgios root, isto È desnecess·rio.\n");
+		ShowWarning ("Voc√™ est√° utilizando o Cronus com privil√©gios root, isto n√£o √© necess√°rio.\n");
     }
 #endif
 }

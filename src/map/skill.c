@@ -2698,8 +2698,16 @@ int skill_attack (int attack_type, struct block_list* src, struct block_list *ds
 
 	if( rdamage > 0 ) {
 		if( sc && sc->data[SC_REFLECTDAMAGE] ) {
-			if( src != bl )// Don't reflect your own damage (Grand Cross)
+			if( src != bl ) {// Don't reflect your own damage (Grand Cross)
+				bool change = false;
+				if( sd && !sd->state.autocast )
+					change = true;
+				if( change )
+					sd->state.autocast = 1;
 				map_foreachinshootrange(battle->damage_area,bl,skill->get_splash(LG_REFLECTDAMAGE,1),BL_CHAR,tick,bl,dmg.amotion,sstatus->dmotion,rdamage,tstatus->race);
+				if( change )
+					sd->state.autocast = 0;
+			}
 		} else {
 			if( dmg.amotion )
 				battle->delay_damage(tick, dmg.amotion,bl,src,0,CR_REFLECTSHIELD,0,rdamage,ATK_DEF,0,additional_effects);
@@ -4035,7 +4043,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 			clif->skill_nodamage(src,bl,skill_id,skill_lv,1);
 
 			skill->blown(src,bl,distance_bl(src,bl)-1,unit_getdir(src),0);
-			if( battle->check_target(src,bl,BCT_ENEMY)>0 )
+			if( battle->check_target(src,bl,BCT_ENEMY) > 0 )
 				skill->attack(BF_WEAPON,src,src,bl,skill_id,skill_lv,tick,flag);
 			break;
 
@@ -5215,7 +5223,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				int bonus = 25 + 10 * skill_lv;
 				bonus += (pc_checkskill(sd, SA_FLAMELAUNCHER)+pc_checkskill(sd, SA_FROSTWEAPON)+pc_checkskill(sd, SA_LIGHTNINGLOADER)+pc_checkskill(sd, SA_SEISMICWEAPON))*5;
 				clif->skill_nodamage( src, bl, skill_id, skill_lv,
-									battle->check_target(src,bl,BCT_PARTY) ?
+									battle->check_target(src,bl,BCT_PARTY) > 0 ?
 									sc_start2(bl, type, 100, skill_lv, bonus, skill->get_time(skill_id,skill_lv)) :
 									0
 					);
@@ -6634,16 +6642,14 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			//val[3] removes from the current mode
 			//val[4] if set, asks to delete the previous mode change.
 			if(md && md->skill_idx >= 0 && tsc) {
-			
 				clif->emotion(bl, md->db->skill[md->skill_idx].val[0]);
 				if(md->db->skill[md->skill_idx].val[4] && tsce)
 					status_change_end(bl, type, INVALID_TIMER);
-					
-	        //If mode gets set by NPC_EMOTION then the target should be reset [Playtester]
-			if(skill_id == NPC_EMOTION && md->db->skill[md->skill_idx].val[1])
-				mob_unlocktarget(md,tick);
-     
 
+				//If mode gets set by NPC_EMOTION then the target should be reset [Playtester]
+				if(skill_id == NPC_EMOTION && md->db->skill[md->skill_idx].val[1])
+					mob_unlocktarget(md,tick);
+				
 				if(md->db->skill[md->skill_idx].val[1] || md->db->skill[md->skill_idx].val[2])
 					sc_start4(src, type, 100, skill_lv,
 						md->db->skill[md->skill_idx].val[1],
@@ -7737,7 +7743,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			break;
 
 		case WL_WHITEIMPRISON:
-			if( (src == bl || battle->check_target(src, bl, BCT_ENEMY)>0) && !is_boss(bl) )// Should not work with bosses.
+			if( (src == bl || battle->check_target(src, bl, BCT_ENEMY) > 0 ) && !is_boss(bl) )// Should not work with bosses.
 			{
 				int rate = ( sd? sd->status.job_level : 50 ) / 4;
 
@@ -11671,7 +11677,7 @@ int skill_unit_onplace_timer (struct skill_unit *src, struct block_list *bl, uns
 				skill->attack(BF_WEAPON,ss,&src->bl,bl,WM_SEVERE_RAINSTORM_MELEE,sg->skill_lv,tick,0);
 			break;
 		case UNT_NETHERWORLD:
-			if( !(status_get_mode(bl)&MD_BOSS) && ss != bl && battle->check_target(&src->bl, bl, BCT_PARTY) ) {
+			if( !(status_get_mode(bl)&MD_BOSS) && ss != bl && battle->check_target(&src->bl, bl, BCT_PARTY) > 0 ) {
 				if( !(tsc && tsc->data[type]) ){
 					sc_start(bl, type, 100, sg->skill_lv, skill->get_time2(sg->skill_id,sg->skill_lv));
 					sg->limit = DIFF_TICK(tick,sg->tick);
@@ -12852,7 +12858,7 @@ int skill_check_condition_castbegin(struct map_session_data* sd, uint16 skill_id
 				    MOBID_EMPERIUM, MOBID_GUARIDAN_STONE1, MOBID_GUARIDAN_STONE2)) {
 				char output[128];
 				sprintf(output, "You're too close to a stone or emperium to do this skill");
-				clif->colormes(sd, COLOR_RED, output);
+				clif->colormes(sd->fd, COLOR_RED, output);
 				return 0;
 			    }
 			}
@@ -13233,7 +13239,7 @@ int skill_check_condition_castend(struct map_session_data* sd, uint16 skill_id, 
 						skill->get_desc(skill_id),
 						require.ammo_qty,
 						itemdb_jname(sd->status.inventory[i].nameid));
-			clif->colormes(sd,COLOR_RED,e_msg);
+			clif->colormes(sd->fd,COLOR_RED,e_msg);
 			return 0;
 		}
 		if (!(require.ammo&1<<sd->inventory_data[i]->look)) { //Ammo type check. Send the "wrong weapon type" message

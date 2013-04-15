@@ -100,7 +100,7 @@
 #define MAX_GUARDIANS 8	//Local max per castle. [Skotlex]
 #define MAX_QUEST_DB 2400 //Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3 //Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs
+#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs [Raizen]
 
 // for produce
 #define MIN_ATTRIBUTE 0
@@ -512,8 +512,8 @@ struct guild {
 	struct guild_alliance alliance[MAX_GUILDALLIANCE];
 	struct guild_expulsion expulsion[MAX_GUILDEXPULSION];
 	struct guild_skill skill[MAX_GUILDSKILL];
-
-    /* TODO: still used for something?|: */
+	
+	/* TODO: still used for something?|: */
 	unsigned short save_flag; // for TXT saving
 	void *channel;
 };

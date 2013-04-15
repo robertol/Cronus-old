@@ -96,6 +96,7 @@ static DBMap *npc_path_db;
 
 //For holding the view data of npc classes. [Skotlex]
 static struct view_data npc_viewdb[MAX_NPC_CLASS];
+static struct view_data npc_viewdb2[MAX_NPC_CLASS2_END-MAX_NPC_CLASS2_START];
 
 static struct script_event_s
 {	//Holds pointers to the commonly executed scripts for speedup. [Skotlex]
@@ -108,8 +109,13 @@ struct view_data* npc_get_viewdata(int class_)
 {	//Returns the viewdata for normal npc classes.
 	if( class_ == INVISIBLE_CLASS )
 		return &npc_viewdb[0];
-	if (npcdb_checkid(class_) || class_ == WARP_CLASS)
-		return &npc_viewdb[class_];
+	if (npcdb_checkid(class_) || class_ == WARP_CLASS){
+		if( class_ > MAX_NPC_CLASS2_START ){
+			return &npc_viewdb2[class_-MAX_NPC_CLASS2_START];
+		}else{
+			return &npc_viewdb[class_];
+		}
+	}
 	return NULL;
 }
 
@@ -2911,11 +2917,13 @@ int npc_do_atcmd_event(struct map_session_data* sd, const char* command, const c
 	for( i = 0; i < ( strlen( message ) + 1 ) && k < 127; i ++ ) {
 		if( message[i] == ' ' || message[i] == '\0' ) {
 			if( message[ ( i - 1 ) ] == ' ' ) {
-				continue; // To prevent "@atcmd [space][space][space]..."
+				continue; // To prevent "@atcmd [space][space]" and .@atcmd_numparameters return 1 without any parameter.
 			}
 			temp[k] = '\0';
 			k = 0;
-			setd_sub( st, NULL, ".@atcmd_parameters$", j++, (void *)temp, NULL );
+			if( temp[0] != '\0' ) {
+				setd_sub( st, NULL, ".@atcmd_parameters$", j++, (void *)temp, NULL );
+			}
 		} else {
 			temp[k] = message[i];
 			k++;
@@ -2960,7 +2968,7 @@ static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, co
 	if (func_db->put(func_db, db_str2key(w3), db_ptr2data(script), &old_data))
 	{
 		struct script_code *oldscript = (struct script_code*)db_data2ptr(&old_data);
-		ShowInfo("Analisando funcao de usuario:[%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
+		ShowInfo("npc_parse_function: Overwriting user function [%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
 		script_free_vars(oldscript->script_vars);
 		aFree(oldscript->script_buf);
 		aFree(oldscript);
@@ -3785,7 +3793,7 @@ void npc_read_event_script(void)
 	if (battle_config.etc_log) {
 		//Print summary.
 		for (i = 0; i < NPCE_MAX; i++)
-			ShowInfo("%s: %d '%s' eventos.\n", config[i].name, script_event[i].event_count, config[i].event_name);
+			ShowInfo("%s: %d '%s' events.\n", config[i].name, script_event[i].event_count, config[i].event_name);
 	}
 }
 
@@ -3867,16 +3875,16 @@ int npc_reload(void) {
 	//TODO: the following code is copy-pasted from do_init_npc(); clean it up
 	// Reloading npcs now
 	for (nsl = npc_src_files; nsl; nsl = nsl->next) {
-		ShowStatus("Leitura dos arquivos de NPCs: %s"CL_CLL"\r", nsl->name);
+		ShowStatus("Loading NPC file: %s"CL_CLL"\r", nsl->name);
 		npc_parsesrcfile(nsl->name,false);
 	}
-	ShowInfo ("Leitura finalizada '"CL_GREEN"%d"CL_RESET"' NPCs:"CL_CLL"\n"
-		"\t-'"CL_WHITE"%d"CL_RESET"' Portais\n"
-		"\t-'"CL_WHITE"%d"CL_RESET"' Lojas\n"
+	ShowInfo ("Done loading '"CL_WHITE"%d"CL_RESET"' NPCs:"CL_CLL"\n"
+		"\t-'"CL_WHITE"%d"CL_RESET"' Warps\n"
+		"\t-'"CL_WHITE"%d"CL_RESET"' Shops\n"
 		"\t-'"CL_WHITE"%d"CL_RESET"' Scripts\n"
-		"\t-'"CL_WHITE"%d"CL_RESET"' Monstros\n"
-		"\t-'"CL_WHITE"%d"CL_RESET"' Monstros em Cache\n"
-		"\t-'"CL_WHITE"%d"CL_RESET"' Monstros fora do Cache\n",
+		"\t-'"CL_WHITE"%d"CL_RESET"' Spawn sets\n"
+		"\t-'"CL_WHITE"%d"CL_RESET"' Mobs Cached\n"
+		"\t-'"CL_WHITE"%d"CL_RESET"' Mobs Not Cached\n",
 		npc_id - npc_new_min, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
 	
 	do_final_instance();
@@ -3898,8 +3906,8 @@ int npc_reload(void) {
 
 	// Execute rest of the startup events if connected to char-server. [Lance]
 	if(!CheckForCharServer()){
-		ShowStatus("Evento '"CL_WHITE"OnInterIfInit"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInit"));
-		ShowStatus("Evento '"CL_WHITE"OnInterIfInitOnce"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInitOnce"));
+		ShowStatus("Event '"CL_WHITE"OnInterIfInit"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInit"));
+		ShowStatus("Event '"CL_WHITE"OnInterIfInitOnce"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInitOnce"));
 	}
 	return 0;
 }
@@ -3992,6 +4000,8 @@ int do_init_npc(void)
 	npc_viewdb[0].class_ = INVISIBLE_CLASS; //Invisible class is stored here.
 	for( i = 1; i < MAX_NPC_CLASS; i++ )
 		npc_viewdb[i].class_ = i;
+	for( i = MAX_NPC_CLASS2_START; i < MAX_NPC_CLASS2_END; i++ )
+		npc_viewdb2[i - MAX_NPC_CLASS2_START].class_ = i;
 
 	ev_db = strdb_alloc((DBOptions)(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA),2*NPC_NAME_LENGTH+2+1);
 	npcname_db = strdb_alloc(DB_OPT_BASE,NPC_NAME_LENGTH);

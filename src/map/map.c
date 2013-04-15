@@ -1692,38 +1692,18 @@ int map_quit(struct map_session_data *sd) {
 
 	if( sd->state.storage_flag == 1 ) sd->state.storage_flag = 0; // No need to Double Save Storage on Quit.
 
+	if (sd->state.permanent_speed == 1) sd->state.permanent_speed = 0; // Remove lock so speed is set back to normal at login.
+
 	if( sd->ed ) {
 		elemental_clean_effect(sd->ed);
 		unit_remove_map(&sd->ed->bl,CLR_TELEPORT);
 	}
 
-	if( hChSys.ally && sd->status.guild_id ) {
-		struct guild *g = sd->guild, *sg;
-		if( g ) {
-			if( idb_exists(((struct hChSysCh *)g->channel)->users, sd->status.char_id) )
-				clif->chsys_left((struct hChSysCh *)g->channel,sd);
-			for (i = 0; i < MAX_GUILDALLIANCE; i++) {
-				if(	g->alliance[i].guild_id && (sg = guild_search(g->alliance[i].guild_id) ) ) {
-					if( idb_exists(((struct hChSysCh *)sg->channel)->users, sd->status.char_id) )
-						clif->chsys_left((struct hChSysCh *)sg->channel,sd);
-					break;
-				}
-			}
-		}
-	}
-	
 	if( hChSys.local && map[sd->bl.m].channel && idb_exists(map[sd->bl.m].channel->users, sd->status.char_id) ) {
 		clif->chsys_left(map[sd->bl.m].channel,sd);
 	}
 	
-	if( sd->channel_count ) {
-		for( i = 0; i < sd->channel_count; i++ ) {
-			if( sd->channels[i] != NULL )
-				clif->chsys_left(sd->channels[i],sd);
-		}
-		if( hChSys.closing )
-			aFree(sd->channels);
-	}
+	clif->chsys_quit(sd);
 		
 	unit_remove_map_pc(sd,CLR_TELEPORT);
 
@@ -2885,7 +2865,7 @@ int map_addmap(char* mapname)
 
 static void map_delmapid(int id)
 {
-	ShowNotice("Removendo mapa [ %s ] da lista de mapas"CL_CLL"\n",map[id].name);
+	ShowNotice("Removing map [ %s ] from maplist"CL_CLL"\n",map[id].name);
 	memmove(map+id, map+id+1, sizeof(map[0])*(map_num-id-1));
 	map_num--;
 }
@@ -3167,20 +3147,20 @@ int map_readallmaps (void)
 	char map_cache_decode_buffer[MAX_MAP_SIZE];
 
 	if( enable_grf )
-		ShowStatus("Carregando mapas (usando arquivos da GRF)...\n");
+		ShowStatus("Loading maps (using GRF files)...\n");
 	else {
 		char mapcachefilepath[254];
 		sprintf(mapcachefilepath,"%s/%s%s",db_path,DBPATH,"map_cache.dat");
-		ShowStatus("Carregando mapas (usando %s cache de mapas)...\n", mapcachefilepath);
+		ShowStatus("Loading maps (using %s as map cache)...\n", mapcachefilepath);
 		if( (fp = fopen(mapcachefilepath, "rb")) == NULL ) {
-			ShowFatalError("N??oss?l abrir o arquivo map_cache "CL_WHITE"%s"CL_RESET"\n", mapcachefilepath);
+			ShowFatalError("Unable to open map cache file "CL_WHITE"%s"CL_RESET"\n", mapcachefilepath);
 			exit(EXIT_FAILURE); //No use launching server if maps can't be read.
 		}
 
 		// Init mapcache data.. [Shinryo]
 		map_cache_buffer = map_init_mapcache(fp);
 		if(!map_cache_buffer) {
-			ShowFatalError("Falha ao inicializar dados do map_cache (%s)..\n", mapcachefilepath);
+			ShowFatalError("Failed to initialize mapcache data (%s)..\n", mapcachefilepath);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -3190,7 +3170,7 @@ int map_readallmaps (void)
 
 		// show progress
 		if(enable_grf)
-			ShowStatus("Carregando mapas [%i/%i]: %s"CL_CLL"\r", i, map_num, map[i].name);
+			ShowStatus("Loading maps [%i/%i]: %s"CL_CLL"\r", i, map_num, map[i].name);
 
 		// try to load the map
 		if( !
@@ -3244,11 +3224,11 @@ int map_readallmaps (void)
 	}
 
 	// finished map loading
-	ShowInfo("carregado com ?to '"CL_GREEN"%d"CL_RESET"' mapas."CL_CLL"\n",map_num);
+	ShowInfo("Successfully loaded '"CL_WHITE"%d"CL_RESET"' maps."CL_CLL"\n",map_num);
 	instance_start = map_num; // Next Map Index will be instances
 
 	if (maps_removed)
-		ShowNotice("Mapas removidos: '"CL_GREEN"%d"CL_RESET"'\n",maps_removed);
+		ShowNotice("Maps removed: '"CL_WHITE"%d"CL_RESET"'\n",maps_removed);
 
 	return 0;
 }
@@ -3497,7 +3477,7 @@ int inter_config_read(char *cfgName)
 
 	fp=fopen(cfgName,"r");
 	if(fp==NULL){
-		ShowError("Arquivo n?encontrado: %s\n",cfgName);
+		ShowError("File not found: %s\n",cfgName);
 		return 1;
 	}
 	while(fgets(line, sizeof(line), fp))
@@ -3580,10 +3560,10 @@ int map_sql_init(void)
 	// main db connection
 	mmysql_handle = Sql_Malloc();
 
-	ShowInfo("Conectando os mapas com a data base do servidor....\n");
+	ShowInfo("Connecting to the Map DB Server....\n");
 	if( SQL_ERROR == Sql_Connect(mmysql_handle, map_server_id, map_server_pw, map_server_ip, map_server_port, map_server_db) )
 		exit(EXIT_FAILURE);
-	ShowStatus("Conex?bem sucedida! (Conex?com servidor de mapas)\n");
+	ShowStatus("connect success! (Map Server Connection)\n");
 
 	if( strlen(default_codepage) > 0 )
 		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage) )
@@ -3614,10 +3594,10 @@ int log_sql_init(void)
 	// log db connection
 	logmysql_handle = Sql_Malloc();
 
-	ShowInfo(""CL_WHITE"[SQL]"CL_RESET": Conectando-se ao banco de dados Log "CL_WHITE"%s"CL_RESET" em "CL_WHITE"%s"CL_RESET"...\n",log_db_db,log_db_ip);
+	ShowInfo(""CL_WHITE"[SQL]"CL_RESET": Connecting to the Log Database "CL_WHITE"%s"CL_RESET" At "CL_WHITE"%s"CL_RESET"...\n",log_db_db,log_db_ip);
 	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id, log_db_pw, log_db_ip, log_db_port, log_db_db) )
 		exit(EXIT_FAILURE);
-	ShowStatus(""CL_WHITE"[SQL]"CL_RESET": Com sucesso '"CL_GREEN"conectado"CL_RESET"' ao Banco de Dados '"CL_WHITE"%s"CL_RESET"'.\n", log_db_db);
+	ShowStatus(""CL_WHITE"[SQL]"CL_RESET": Successfully '"CL_GREEN"connected"CL_RESET"' to Database '"CL_WHITE"%s"CL_RESET"'.\n", log_db_db);
 
 	if( strlen(default_codepage) > 0 )
 		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage) )
@@ -4729,7 +4709,7 @@ void read_map_zone_db(void) {
 			}
 		}
 		
-		ShowStatus("Leitura realizada '"CL_WHITE"%d"CL_RESET"' zonas '"CL_WHITE"%s"CL_RESET"'.\n", zone_count, config_filename);
+		ShowStatus("Done reading '"CL_WHITE"%d"CL_RESET"' zones in '"CL_WHITE"%s"CL_RESET"'.\n", zone_count, config_filename);
 		/* not supposed to go in here but in skill_final whatever */
 		config_destroy(&map_zone_db);
 	}

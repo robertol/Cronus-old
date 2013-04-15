@@ -982,6 +982,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	sd->cantalk_tick = tick;
 	sd->canskill_tick = tick;
 	sd->cansendmail_tick = tick;
+	sd->hchsysch_tick = tick;
 
 	for(i = 0; i < MAX_SKILL_LEVEL; i++)
 		sd->spirit_timer[i] = INVALID_TIMER;
@@ -4302,7 +4303,7 @@ int pc_useitem(struct map_session_data *sd,int n)
 						sprintf(e_msg,"Item Failed. [%s] is cooling down. wait %d seconds.",
 										itemdb_jname(sd->status.inventory[n].nameid),
 										e_tick+1);
-					clif->colormes(sd,COLOR_RED,e_msg);
+					clif->colormes(sd->fd,COLOR_RED,e_msg);
 					return 0; // Delay has not expired yet
 				}
 			} else {// not yet used item (all slots are initially empty)
@@ -6306,7 +6307,7 @@ int pc_resetskill(struct map_session_data* sd, int flag)
 		if( pc_checkskill(sd, SG_DEVIL) &&  !pc_nextjobexp(sd) )
 			clif->status_change(&sd->bl, SI_DEVIL, 0, 0, 0, 0, 0); //Remove perma blindness due to skill-reset. [Skotlex]
 		i = sd->sc.option;
-		if( i&OPTION_RIDING && pc_checkskill(sd, KN_RIDING) )
+		if( i&OPTION_RIDING && (!pc_checkskill(sd, KN_RIDING) || (sd->class_&MAPID_THIRDMASK) == MAPID_RUNE_KNIGHT) )
 			i &= ~OPTION_RIDING;
 		if( i&OPTION_FALCON && pc_checkskill(sd, HT_FALCON) )
 			i &= ~OPTION_FALCON;
@@ -7594,7 +7595,7 @@ int pc_setoption(struct map_session_data *sd,int type)
 		clif->status_change(&sd->bl, SI_RIDING, 1, 0, 0, 0, 0);
 		status_calc_pc(sd,0);
 	}
-	else if( (!(type&OPTION_RIDING) && p_type&OPTION_RIDING) || (!(type&OPTION_DRAGON) && p_type&OPTION_DRAGON && pc_checkskill(sd,RK_DRAGONTRAINING) > 0) )
+	else if( (!(type&OPTION_RIDING) && p_type&OPTION_RIDING) || (!(type&OPTION_DRAGON) && p_type&OPTION_DRAGON) )
 	{ // Dismount
 		clif->status_change(&sd->bl, SI_RIDING, 0, 0, 0, 0, 0);
 		status_calc_pc(sd,0);
@@ -9542,7 +9543,7 @@ static bool pc_readdb_levelpenalty(char* fields[], int columns, int current)
  *------------------------------------------*/
 int pc_readdb(void)
 {
-	int i,j,k,tmp=0;
+	int i,j,k;
 	FILE *fp;
 	char line[24000],*p;
 
@@ -9639,7 +9640,7 @@ int pc_readdb(void)
 	sv_readdb(db_path, "re/level_penalty.txt", ',', 4, 4, -1, &pc_readdb_levelpenalty);
 	for( k=1; k < 3; k++ ){ // fill in the blanks
 		for( j = 0; j < RC_MAX; j++ ){
-			tmp = 0;
+			int tmp = 0;
 			for( i = 0; i < MAX_LEVEL*2; i++ ){
 				if( i == MAX_LEVEL+1 )
 					tmp = level_penalty[k][j][0];// reset

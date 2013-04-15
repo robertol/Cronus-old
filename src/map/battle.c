@@ -1833,7 +1833,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 			wd.div_ = skill->get_num(GS_CHAINACTION,skill_lv);
 			wd.type = 0x08;
 		}
-		else if(sc && sc->data[SC_FEARBREEZE] && sd->weapontype1==W_BOW 
+		else if(sc && sc->data[SC_FEARBREEZE] && sd->weapontype1==W_BOW
 			&& (i = sd->equip_index[EQI_AMMO]) >= 0 && sd->inventory_data[i] && sd->status.inventory[i].amount > 1){
 				int chance = rand()%100;
 				wd.type = 0x08;
@@ -3044,16 +3044,15 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 					break;
 #ifndef RENEWAL_EDP
 					case ASC_BREAKER:       case ASC_METEORASSAULT: 
-                    case AS_GRIMTOOTH:      break;
+					case AS_GRIMTOOTH:
+					break;
 #else
-                    case AS_GRIMTOOTH:
-                    case AS_SONICBLOW:
+					case AS_SONICBLOW:
 					case ASC_BREAKER:
 					case GC_COUNTERSLASH:
 					case GC_CROSSIMPACT:
+					case AS_GRIMTOOTH:
 						ATK_RATE(50); // only modifier is halved but still benefit with the damage bonus
-						ATK_ADDRATE(sc->data[SC_EDP]->val3);
-                    break;
 #endif
 					default:
 						ATK_ADDRATE(sc->data[SC_EDP]->val3);
@@ -3233,8 +3232,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 			**/
 
 			if( def1 == -400 ) /* being hit by a gazillion units, you hit the jackpot and got -400 which creates a division by 0 and subsequently crashes */
-			def1 = -399;
-      
+				def1 = -399;
 			
 			ATK_ADD2(
 				flag.pdef ?(def1/2):0,
@@ -3398,10 +3396,10 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
 				ATK_ADD(10*sd->status.inventory[index].refine);
 		}
-	} //if (sd)
+	}
 
     //Card Fix, tsd side
-    if(tsd)
+    if(!sd && tsd) //if player on player then it was already measured above
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, flag.lh, wd.flag);
 
 	if( flag.infdef )
@@ -4673,7 +4671,8 @@ int battle_damage_area( struct block_list *bl, va_list ap) {
 		else
 			status_fix_damage(src,bl,damage,0);
 		clif->damage(bl,bl,tick,amotion,dmotion,damage,1,ATK_BLOCK,0);
-		skill->additional_effect(src, bl, CR_REFLECTSHIELD, 1, BF_WEAPON|BF_SHORT|BF_NORMAL,ATK_DEF,tick);
+		if( !(src && src->type == BL_PC && ((TBL_PC*)src)->state.autocast) )
+			skill->additional_effect(src, bl, CR_REFLECTSHIELD, 1, BF_WEAPON|BF_SHORT|BF_NORMAL,ATK_DEF,tick);
 		map_freeblock_unlock();
 	}
 
@@ -4884,8 +4883,9 @@ enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* t
 		rdamage = battle->calc_return_damage(target,src, &damage, wd.flag, 0);
 		if( rdamage > 0 ) {
 			if( tsc && tsc->data[SC_REFLECTDAMAGE] ) {
-				if( src != target )// Don't reflect your own damage (Grand Cross)
-					map_foreachinshootrange(battle->damage_area,target,skill->get_splash(LG_REFLECTDAMAGE,1),BL_CHAR,tick,target,wd.amotion,wd.dmotion,rdamage,tstatus->race,0);
+				if( src != target ) {// Don't reflect your own damage (Grand Cross)
+					map_foreachinshootrange(battle->damage_area,target,skill->get_splash(LG_REFLECTDAMAGE,1),BL_CHAR,tick,target,wd.amotion,wd.dmotion,rdamage,tstatus->race);
+				}
 			} else {
 				rdelay = clif->damage(src, src, tick, wd.amotion, sstatus->dmotion, rdamage, 1, 4, 0);
 				//Use Reflect Shield to signal this kind of skill trigger. [Skotlex]
@@ -6166,5 +6166,4 @@ void battle_defaults(void) {
 	battle->config_adjust = battle_adjust_conf;
 	battle->get_enemy_area = battle_getenemyarea;
 	battle->damage_area = battle_damage_area;
-	
 }

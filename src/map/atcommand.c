@@ -850,7 +850,13 @@ ACMD_FUNC(speed)
 		return -1;
 	}
 
-	sd->base_status.speed = cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
+	if (speed < 0) {
+		sd->base_status.speed = DEFAULT_WALK_SPEED;
+		sd->state.permanent_speed = 0; // Remove lock when set back to default speed.
+	} else {
+		sd->base_status.speed = cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
+		sd->state.permanent_speed = 1; // Set lock when set to non-default speed.
+	}
 	status_calc_bl(&sd->bl, SCB_SPEED);
 	clif->message(fd, msg_txt(8)); // Speed changed.
 	return 0;
@@ -995,14 +1001,24 @@ ACMD_FUNC(jobchange)
 	nullpo_retr(-1, sd);
 
     if (!message || !*message || sscanf(message, "%d %d", &job, &upper) < 1) {
-		int i, found = 0;
+		int i;
+		bool found = false;
 
-        for (i = JOB_NOVICE; i < JOB_MAX; ++i) {
-            if (strncmpi(message, job_name(i), 16) == 0) {
-                job = i;
-				upper = 0;
-				found = 1;
-				break;
+		upper = 0;
+ 
+		// Normal Jobs
+		for( i = JOB_NOVICE; i < JOB_MAX_BASIC && !found; i++ ){
+			if (strncmpi(message, job_name(i), 16) == 0) {
+				job = i;
+				found = true;
+			}
+		}
+ 
+		// High Jobs, Babys and Third
+		for( i = JOB_NOVICE_HIGH; i < JOB_MAX && !found; i++ ){
+			if (strncmpi(message, job_name(i), 16) == 0) {
+				job = i;
+				found = true;
 			}
 		}
 
@@ -1534,8 +1550,10 @@ ACMD_FUNC(pvpoff)
 	map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
 	map[sd->bl.m].flag.pvp = 0;
 
-	if (!battle_config.pk_mode)
+	if (!battle_config.pk_mode) {
 		clif->map_property_mapall(sd->bl.m, MAPPROPERTY_NOTHING);
+		clif->maptypeproperty2(&sd->bl,ALL_SAMEMAP);
+	}
 	map_foreachinmap(atcommand_pvpoff_sub,sd->bl.m, BL_PC);
 	map_foreachinmap(atcommand_stopattack,sd->bl.m, BL_CHAR, 0);
 	clif->message(fd, msg_txt(31)); // PvP: Off.
@@ -1573,6 +1591,7 @@ ACMD_FUNC(pvpon)
 
 	if (!battle_config.pk_mode) {// display pvp circle and rank
 		clif->map_property_mapall(sd->bl.m, MAPPROPERTY_FREEPVPZONE);
+		clif->maptypeproperty2(&sd->bl,ALL_SAMEMAP);
 		map_foreachinmap(atcommand_pvpon_sub,sd->bl.m, BL_PC);
 	}
 
@@ -1596,6 +1615,7 @@ ACMD_FUNC(gvgoff)
 	map_zone_change2(sd->bl.m,map[sd->bl.m].prev_zone);
 	map[sd->bl.m].flag.gvg = 0;
 	clif->map_property_mapall(sd->bl.m, MAPPROPERTY_NOTHING);
+	clif->maptypeproperty2(&sd->bl,ALL_SAMEMAP);
 	map_foreachinmap(atcommand_stopattack,sd->bl.m, BL_CHAR, 0);
 	clif->message(fd, msg_txt(33)); // GvG: Off.
 
@@ -1617,6 +1637,7 @@ ACMD_FUNC(gvgon)
 	map_zone_change2(sd->bl.m,strdb_get(zone_db, MAP_ZONE_GVG_NAME));
 	map[sd->bl.m].flag.gvg = 1;
 	clif->map_property_mapall(sd->bl.m, MAPPROPERTY_AGITZONE);
+	clif->maptypeproperty2(&sd->bl,ALL_SAMEMAP);
 	clif->message(fd, msg_txt(34)); // GvG: On.
 
 	return 0;
@@ -1901,7 +1922,7 @@ ACMD_FUNC(go)
 		town = 32;
 	} else if (strncmp(map_name, "malangdo", 5) == 0) {
 		town = 33;
-#endif	
+#endif
 	}
 
 	if (town >= 0 && town < ARRAYLENGTH(data))
@@ -5647,7 +5668,6 @@ ACMD_FUNC(changelook)
  * Turns on/off Autotrade for a specific player
  *------------------------------------------*/
 ACMD_FUNC(autotrade) {
-	int i;
 	nullpo_retr(-1, sd);
 
 	if( map[sd->bl.m].flag.autotrade != battle_config.autotrade_mapflag ) {
@@ -5670,28 +5690,8 @@ ACMD_FUNC(autotrade) {
 		int timeout = atoi(message);
 		status_change_start(&sd->bl, SC_AUTOTRADE, 10000, 0, 0, 0, 0, ((timeout > 0) ? min(timeout,battle_config.at_timeout) : battle_config.at_timeout) * 60000, 0);
 	}
-	
-	if( hChSys.ally && sd->status.guild_id ) {
-		struct guild *g = sd->guild, *sg;
-		if( g ) {
-			if( idb_exists(((struct hChSysCh *)g->channel)->users, sd->status.char_id) )
-				clif->chsys_left((struct hChSysCh *)g->channel,sd);
-			for (i = 0; i < MAX_GUILDALLIANCE; i++) {
-				if(	g->alliance[i].guild_id && (sg = guild_search(g->alliance[i].guild_id) ) ) {
-					if( idb_exists(((struct hChSysCh *)sg->channel)->users, sd->status.char_id) )
-						clif->chsys_left((struct hChSysCh *)sg->channel,sd);
-					break;
-				}
-			}
-		}
-	}
-		
-	if( sd->channel_count ) {
-		for( i = 0; i < sd->channel_count; i++ ) {
-			if( sd->channels[i] != NULL )
-				clif->chsys_left(sd->channels[i],sd);
-		}
-	}
+			
+	clif->chsys_quit(sd);
 	
 	clif->authfail_fd(sd->fd, 15);
 
@@ -8866,6 +8866,12 @@ ACMD_FUNC(join) {
 		}
 	}
 	
+	if( channel->banned && idb_exists(channel->banned, sd->status.account_id) ) {
+		sprintf(atcmd_output, msg_txt(1438),name); // You cannot join the '%s' channel because you've been banned from it
+		clif->message(fd, atcmd_output);
+		return -1;
+	}
+	
 	if( !( channel->opt & hChSys_OPT_ANNOUNCE_JOIN ) ) {
 		sprintf(atcmd_output, msg_txt(1403),name); // You're now in the '%s' channel
 		clif->message(fd, atcmd_output);
@@ -8905,6 +8911,25 @@ static inline void atcmd_channel_help(int fd, const char *command, bool can_crea
 	sprintf(atcmd_output, msg_txt(1429),command);// -- %s unbind
 	clif->message(fd, atcmd_output);
 	clif->message(fd, msg_txt(1430));// - unbinds your global chat from its attached channel (if binded)
+	sprintf(atcmd_output, msg_txt(1429),command);// -- %s unbind
+	clif->message(fd, atcmd_output);
+	if( can_create ) {
+		sprintf(atcmd_output, msg_txt(1456),command);// -- %s ban <channel name> <character name>
+		clif->message(fd, atcmd_output);
+		clif->message(fd, msg_txt(1457));// - bans <character name> from <channel name> channel
+		sprintf(atcmd_output, msg_txt(1458),command);// -- %s banlist <channel name>
+		clif->message(fd, atcmd_output);
+		clif->message(fd, msg_txt(1459));// - lists all banned characters from <channel name> channel
+		sprintf(atcmd_output, msg_txt(1460),command);// -- %s unban <channel name> <character name>
+		clif->message(fd, atcmd_output);
+		clif->message(fd, msg_txt(1461));// - unbans <character name> from <channel name> channel
+		sprintf(atcmd_output, msg_txt(1467),command);// -- %s unbanall <channel name>
+		clif->message(fd, atcmd_output);
+		clif->message(fd, msg_txt(1468));// - unbans everyone from <channel name>
+		sprintf(atcmd_output, msg_txt(1462),command);// -- %s setopt <channel name> <option name> <option value>
+		clif->message(fd, atcmd_output);
+		clif->message(fd, msg_txt(1463));// - adds or removes <option name> with <option value> to <channel name> channel
+	}
 
 }
 /* [Ind/Hercules] */
@@ -9069,6 +9094,286 @@ ACMD_FUNC(channel) {
 		clif->message(fd, atcmd_output);
 
 		sd->gcbind = NULL;
+	} else if ( strcmpi(key,"ban") == 0 ) {
+		struct map_session_data *pl_sd = NULL;
+		struct hChSysBanEntry *entry = NULL;
+		
+		if( sub1[0] != '#' ) {
+			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
+			return -1;
+		}
+		
+		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
+			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( channel->owner != sd->status.char_id && !pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ) {
+			sprintf(atcmd_output, msg_txt(1412), sub1);// You're not the owner of channel '%s'
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( sub2[0] == '\0' || ( pl_sd = map_nick2sd(sub2) ) == NULL ) {
+			sprintf(atcmd_output, msg_txt(1434), sub2);// Player '%s' was not found
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( pc_has_permission(pl_sd, PC_PERM_HCHSYS_ADMIN) ) {
+			clif->message(fd, msg_txt(1464)); // Ban failed, not possible to ban this user.
+			return -1;
+		}
+		
+		if( channel->banned && idb_exists(channel->banned,pl_sd->status.account_id) ) {
+			sprintf(atcmd_output, msg_txt(1465), pl_sd->status.name);// Player '%s' is already banned from this channel
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( !channel->banned )
+			channel->banned = idb_alloc(DB_OPT_BASE|DB_OPT_ALLOW_NULL_DATA|DB_OPT_RELEASE_DATA);
+		
+		CREATE(entry, struct hChSysBanEntry, 1);
+		
+		safestrncpy(entry->name, pl_sd->status.name, NAME_LENGTH);
+		
+		idb_put(channel->banned, pl_sd->status.account_id, entry);
+		
+		clif->chsys_left(channel,pl_sd);
+		
+		sprintf(atcmd_output, msg_txt(1437),pl_sd->status.name,sub1); // Player '%s' has now been banned from '%s' channel
+		clif->message(fd, atcmd_output);
+	} else if ( strcmpi(key,"unban") == 0 ) {
+		struct map_session_data *pl_sd = NULL;
+		
+		if( sub1[0] != '#' ) {
+			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
+			return -1;
+		}
+		
+		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
+			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( channel->owner != sd->status.char_id && !pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ) {
+			sprintf(atcmd_output, msg_txt(1412), sub1);// You're not the owner of channel '%s'
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( !channel->banned ) {
+			sprintf(atcmd_output, msg_txt(1439), sub1);// Channel '%s' has no banned players
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( sub2[0] == '\0' || ( pl_sd = map_nick2sd(sub2) ) == NULL ) {
+			sprintf(atcmd_output, msg_txt(1434), sub2);// Player '%s' was not found
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+				
+		if( !idb_exists(channel->banned,pl_sd->status.account_id) ) {
+			sprintf(atcmd_output, msg_txt(1440), pl_sd->status.name);// Player '%s' is not banned from this channel
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+				
+		idb_remove(channel->banned, pl_sd->status.account_id);
+		
+		if( !db_size(channel->banned) ) {
+			db_destroy(channel->banned);
+			channel->banned = NULL;
+		}
+		
+		sprintf(atcmd_output, msg_txt(1441),pl_sd->status.name,sub1); // Player '%s' has now been unbanned from the '%s' channel
+		clif->message(fd, atcmd_output);
+	} else if ( strcmpi(key,"unbanall") == 0 ) {		
+		if( sub1[0] != '#' ) {
+			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
+			return -1;
+		}
+		
+		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
+			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( channel->owner != sd->status.char_id && !pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ) {
+			sprintf(atcmd_output, msg_txt(1412), sub1);// You're not the owner of channel '%s'
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+				
+		if( !channel->banned ) {
+			sprintf(atcmd_output, msg_txt(1439), sub1);// Channel '%s' has no banned players
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		db_destroy(channel->banned);
+		channel->banned = NULL;
+		
+		sprintf(atcmd_output, msg_txt(1442),sub1); // Removed all bans from '%s' channel
+		clif->message(fd, atcmd_output);
+	} else if ( strcmpi(key,"banlist") == 0 ) {
+		DBIterator *iter = NULL;
+		DBKey key;
+		DBData *data;
+		bool isA = pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN)?true:false;
+		if( sub1[0] != '#' ) {
+			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
+			return -1;
+		}
+		
+		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
+			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( channel->owner != sd->status.char_id && !isA ) {
+			sprintf(atcmd_output, msg_txt(1412), sub1);// You're not the owner of channel '%s'
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( !channel->banned ) {
+			sprintf(atcmd_output, msg_txt(1439), sub1);// Channel '%s' has no banned players
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		sprintf(atcmd_output, msg_txt(1443), channel->name);// -- '%s' ban list
+		clif->message(fd, atcmd_output);
+		
+		iter = db_iterator(channel->banned);
+		
+		for( data = iter->first(iter,&key); iter->exists(iter); data = iter->next(iter,&key) ) {
+			struct hChSysBanEntry * entry = db_data2ptr(data);
+			
+			if( !isA )
+				sprintf(atcmd_output, msg_txt(1444), entry->name);// - %s %s
+			else
+				sprintf(atcmd_output, msg_txt(1445), entry->name, key.i);// - %s (%d)
+			
+			clif->message(fd, atcmd_output);
+		}
+
+		dbi_destroy(iter);
+		
+	} else if ( strcmpi(key,"setopt") == 0 ) {
+		const char* opt_str[3] = {
+			"None",
+			"JoinAnnounce",
+			"MessageDelay",
+		};
+		
+		if( sub1[0] != '#' ) {
+			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
+			return -1;
+		}
+				
+		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
+			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( channel->owner != sd->status.char_id && !pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ) {
+			sprintf(atcmd_output, msg_txt(1412), sub1);// You're not the owner of channel '%s'
+			clif->message(fd, atcmd_output);
+			return -1;
+		}
+		
+		if( sub2[0] == '\0' ) {
+			clif->message(fd, msg_txt(1446));// You need to input a option
+			return -1;
+		}
+		
+		for( k = 1; k < 3; k++ ) {
+			if( strcmpi(sub2,opt_str[k]) == 0 )
+				break;
+		}
+		
+		if( k == 3 ) {
+			sprintf(atcmd_output, msg_txt(1447), sub2);// '%s' is not a known channel option
+			clif->message(fd, atcmd_output);
+			clif->message(fd, msg_txt(1448)); // -- Available options
+			for( k = 1; k < 3; k++ ) {
+				sprintf(atcmd_output, msg_txt(1444), opt_str[k]);// - '%s'
+				clif->message(fd, atcmd_output);
+			}
+			return -1;
+		}
+				
+		if( sub3[0] == '\0' ) {
+			if ( k == hChSys_OPT_MSG_DELAY ) {
+				sprintf(atcmd_output, msg_txt(1466), opt_str[k]);// For '%s' you need the amount of seconds (from 0 to 10)
+				clif->message(fd, atcmd_output);
+				return -1;
+			} else if( channel->opt & k ) {
+				sprintf(atcmd_output, msg_txt(1449), opt_str[k],opt_str[k]); // option '%s' is already enabled, if you'd like to disable it type '@channel setopt %s 0'
+				clif->message(fd, atcmd_output);
+				return -1;
+			} else {
+				channel->opt |= k;
+				sprintf(atcmd_output, msg_txt(1450), opt_str[k],channel->name);//option '%s' is now enabled for channel '%s'
+				clif->message(fd, atcmd_output);
+				return 0;
+			}
+		} else {
+			int v = atoi(sub3);
+			if( k == hChSys_OPT_MSG_DELAY ) {
+				if( v < 0 || v > 10 ) {
+					sprintf(atcmd_output, msg_txt(1451), v, opt_str[k]);// value '%d' for option '%s' is out of range (limit is 0-10)
+					clif->message(fd, atcmd_output);
+					return -1;
+				}
+				if( v == 0 ) {
+					channel->opt &=~ k;
+					channel->msg_delay = 0;
+					sprintf(atcmd_output, msg_txt(1453), opt_str[k],channel->name,v);// option '%s' is now disabled for channel '%s'
+					clif->message(fd, atcmd_output);
+					return 0;
+				} else {
+					channel->opt |= k;
+					channel->msg_delay = v;
+					sprintf(atcmd_output, msg_txt(1452), opt_str[k],channel->name,v);// option '%s' is now enabled for channel '%s' with %d seconds
+					clif->message(fd, atcmd_output);
+					return 0;
+				}
+			} else {
+				if( v ) {
+					if( channel->opt & k ) {
+						sprintf(atcmd_output, msg_txt(1449), opt_str[k],opt_str[k]); // option '%s' is already enabled, if you'd like to disable it type '@channel opt %s 0'
+						clif->message(fd, atcmd_output);
+						return -1;
+					} else {
+						channel->opt |= k;
+						sprintf(atcmd_output, msg_txt(1454), opt_str[k],channel->name);//option '%s' is now enabled for channel '%s'
+						clif->message(fd, atcmd_output);
+					}
+				} else {
+					if( !(channel->opt & k) ) {
+						sprintf(atcmd_output, msg_txt(1454), opt_str[k],channel->name); // option '%s' is not enabled on channel '%s'
+						clif->message(fd, atcmd_output);
+						return -1;
+					} else {
+						channel->opt &=~ k;
+						sprintf(atcmd_output, msg_txt(1453), opt_str[k],channel->name);// option '%s' is now disabled for channel '%s'
+						clif->message(fd, atcmd_output);
+						return 0;
+					}
+				}
+			}
+			
+		}
+		
 	} else {
 		atcmd_channel_help(fd,command,( hChSys.allow_user_channel_creation || pc_has_permission(sd, PC_PERM_HCHSYS_ADMIN) ));
 	}

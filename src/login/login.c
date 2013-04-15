@@ -242,7 +242,7 @@ void chrif_server_reset(int id)
 /// Called when the connection to Char Server is disconnected.
 void chrif_on_disconnect(int id)
 {
-	ShowStatus("O Servidor de Personagens '%s' foi desligado.\n", server[id].name);
+	ShowStatus("Char-server '%s' has disconnected.\n", server[id].name);
 	chrif_server_reset(id);
 }
 
@@ -253,7 +253,7 @@ void chrif_on_disconnect(int id)
 static int sync_ip_addresses(int tid, unsigned int tick, int id, intptr_t data)
 {
 	uint8 buf[2];
-	ShowInfo("Sincronização de IP em Progesso ...\n");
+	ShowInfo("IP Sync in progress...\n");
 	WBUFW(buf,0) = 0x2735;
 	charif_sendallwos(-1, buf, 2);
 	return 0;
@@ -354,7 +354,7 @@ int login_lan_config_read(const char *lancfgName)
 	}
 
 	if( subnet_count > 1 ) /* only useful if there is more than 1 available */
-		ShowStatus("Lendo as Informações de Sub-Rede %d.\n", subnet_count);
+		ShowStatus("Read information about %d subnetworks.\n", subnet_count);
 
 	fclose(fp);
 	return 0;
@@ -365,7 +365,7 @@ int login_lan_config_read(const char *lancfgName)
 //-----------------------
 int parse_console(const char* command)
 {
-	ShowNotice("Console de comando: %s\n", command);
+	ShowNotice("Console command: %s\n", command);
 
 	if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 || strcmpi("end", command) == 0 )
 		runflag = 0;
@@ -373,12 +373,12 @@ int parse_console(const char* command)
 		ShowInfo(CL_CYAN"Console: "CL_BOLD"I'm Alive."CL_RESET"\n");
 	else if( strcmpi("help", command) == 0 )
 	{
-		ShowInfo("Para desligar o servidor:\n");
+		ShowInfo("To shutdown the server:\n");
 		ShowInfo("  'shutdown|exit|quit|end'\n");
-		ShowInfo("Para saber se o servidor esta ativo:\n");
+		ShowInfo("To know if server is alive:\n");
 		ShowInfo("  'alive|status'\n");
-		ShowInfo("Para criar uma nova conta:\n");
-		ShowInfo("  'criar'\n");
+		ShowInfo("To create a new account:\n");
+		ShowInfo("  'create'\n");
 	}
 	else
 	{// commands with parameters
@@ -395,16 +395,16 @@ int parse_console(const char* command)
 
 			if( sscanf(params, "%23s %23s %c", username, password, &sex) < 3 || strnlen(username, sizeof(username)) < 4 || strnlen(password, sizeof(password)) < 1 )
 			{
-				ShowWarning("Console: parametros invalidos para '%s'. Usage: %s <username> <password> <sex:F/M>\n", cmd, cmd);
+				ShowWarning("Console: Invalid parameters for '%s'. Usage: %s <username> <password> <sex:F/M>\n", cmd, cmd);
 				return 0;
 			}
 
 			if( mmo_auth_new(username, password, TOUPPER(sex), "0.0.0.0") != -1 )
 			{
-				ShowError("Console: Falha na Criação da Conta.\n");
+				ShowError("Console: Account creation failed.\n");
 				return 0;
 			}
-			ShowStatus("Console: Conta '%s' criada com Sucesso.\n", username);
+			ShowStatus("Console: Account '%s' created successfully.\n", username);
 		}
 	}
 
@@ -491,7 +491,7 @@ int parse_fromchar(int fd)
 			}
 			else
 			{// authentication not found
-				ShowStatus("Servidor de Personagens '%s': Autenticação da Conta %d NEGADA (ip: %s).\n", server[id].name, account_id, ip);
+				ShowStatus("Char-server '%s': authentication of the account %d REFUSED (ip: %s).\n", server[id].name, account_id, ip);
 				WFIFOHEAD(fd,25);
 				WFIFOW(fd,0) = 0x2713;
 				WFIFOL(fd,2) = account_id;
@@ -517,7 +517,7 @@ int parse_fromchar(int fd)
 			// how many users on world? (update)
 			if( server[id].users != users )
 			{
-				ShowStatus("Usuários Conectados %s : %d\n", server[id].name, users);
+				ShowStatus("set users %s : %d\n", server[id].name, users);
 
 				server[id].users = users;
 			}
@@ -536,13 +536,13 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,46);
 
 			if( e_mail_check(email) == 0 )
-				ShowNotice("Char-server '%s': Tentativa de criar um e-mail em uma conta com um padrao de e-mail recusado - e-mail invlido (account: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': Attempt to create an e-mail on an account with a default e-mail REFUSED - e-mail is invalid (account: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( !accounts->load_num(accounts, &acc, account_id) || strcmp(acc.email, "a@a.com") == 0 || acc.email[0] == '\0' )
-				ShowNotice("Char-server '%s': Tentativa de criar um e-mail em uma conta com um padrao de e-mail recusado - conta nao existe ou e-mail da conta não é o padrão de e-mail (account: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': Attempt to create an e-mail on an account with a default e-mail REFUSED - account doesn't exist or e-mail of account isn't default e-mail (account: %d, ip: %s).\n", server[id].name, account_id, ip);
 			else {
 				memcpy(acc.email, email, 40);
-				ShowNotice("Char-server '%s': Criar um e-mail em uma conta com um padrao de e-mail (account: %d, new e-mail: %s, ip: %s).\n", server[id].name, account_id, email, ip);
+				ShowNotice("Char-server '%s': Create an e-mail on an account with a default e-mail (account: %d, new e-mail: %s, ip: %s).\n", server[id].name, account_id, email, ip);
 				// Save
 				accounts->save(accounts, &acc);
 			}
@@ -565,7 +565,7 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,6);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': conta %d nao existe (ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '%s': account %d NOT found (ip: %s).\n", server[id].name, account_id, ip);
 			else {
 				safestrncpy(email, acc.email, sizeof(email));
 				expiration_time = acc.expiration_time;
@@ -774,12 +774,12 @@ int parse_fromchar(int fd)
 			int account_id = RFIFOL(fd,4);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowStatus("Servidor de Personagens '%s': Recebendo (do Servidor de Personagens) de account_reg2 (Usuário: %d não encontrado, ip: %s).\n", server[id].name, account_id, ip);
+				ShowStatus("Char-server '%s': receiving (from the char-server) of account_reg2 (account: %d not found, ip: %s).\n", server[id].name, account_id, ip);
 			else
 			{
 				int len;
 				int p;
-				ShowNotice("char-server '%s': Recebendo (do Servidor de Personagens) de account_reg2 (Usuário: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("char-server '%s': receiving (from the char-server) of account_reg2 (account: %d, ip: %s).\n", server[id].name, account_id, ip);
 				for( j = 0, p = 13; j < ACCOUNT_REG2_NUM && p < RFIFOW(fd,2); ++j )
 				{
 					sscanf((char*)RFIFOP(fd,p), "%31c%n", acc.account_reg2[j].str, &len);
@@ -903,12 +903,12 @@ int parse_fromchar(int fd)
 			if( RFIFOREST(fd) < 6 )
 				return 0;
 			server[id].ip = ntohl(RFIFOL(fd,2));
-			ShowInfo("Atualizando IP do servidor #%d to %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
+			ShowInfo("Updated IP of Server #%d to %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
 			RFIFOSKIP(fd,6);
 		break;
 
 		case 0x2737: //Request to set all offline.
-			ShowInfo("Definir contas do char-server %d offline.\n", id);
+			ShowInfo("Setting accounts from char-server %d offline.\n", id);
 			online_db->foreach(online_db, online_db_setoffline, id);
 			RFIFOSKIP(fd,2);
 		break;
@@ -1006,7 +1006,7 @@ int mmo_auth_new(const char* userid, const char* pass, const char sex, const cha
 	if( !accounts->create(accounts, &acc) )
 		return 0;
 
-	ShowNotice("Criação de conta (conta %s, id: %d, pass: %s, sex: %c)\n", acc.userid, acc.account_id, acc.pass, acc.sex);
+	ShowNotice("Account creation (account %s, id: %d, pass: %s, sex: %c)\n", acc.userid, acc.account_id, acc.pass, acc.sex);
 
 	if( DIFF_TICK(tick, new_reg_tick) > 0 ) {// Update the registration check.
 		num_regs = 0;
@@ -1127,7 +1127,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer) {
 		}
 	}
 
-	ShowNotice("Autenticação aceita (conta: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
+	ShowNotice("Authentication accepted (account: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
 
 	// update session data
 	sd->account_id = acc.account_id;
@@ -1172,14 +1172,14 @@ void login_auth_ok(struct login_session_data* sd)
 	}
 
 	if( login_config.group_id_to_connect >= 0 && sd->group_id != login_config.group_id_to_connect ) {
-		ShowStatus("Conexão Recusada: O Grupo ID requerido para conexão é %d (Usuário: %s, grupo: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
+		ShowStatus("Connection refused: the required group id for connection is %d (account: %s, group: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
 		WFIFOHEAD(fd,3);
 		WFIFOW(fd,0) = 0x81;
 		WFIFOB(fd,2) = 1; // 01 = Server closed
 		WFIFOSET(fd,3);
 		return;
 	} else if( login_config.min_group_id_to_connect >= 0 && login_config.group_id_to_connect == -1 && sd->group_id < login_config.min_group_id_to_connect ) {
-		ShowStatus("Conexão Recusada: O Grupo ID Mínimo para conexão é %d (Usuário: %s, grupo: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
+		ShowStatus("Connection refused: the minium group id required for connection is %d (account: %s, group: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
 		WFIFOHEAD(fd,3);
 		WFIFOW(fd,0) = 0x81;
 		WFIFOB(fd,2) = 1; // 01 = Server closed
@@ -1194,7 +1194,7 @@ void login_auth_ok(struct login_session_data* sd)
 
 	if( server_num == 0 )
 	{// if no char-server, don't send void list of servers, just disconnect the player with proper message
-		ShowStatus("Conexão Recusada: O Servidor de Personagens não está Online (Usuário: %s).\n", sd->userid);
+		ShowStatus("Connection refused: there is no char-server online (account: %s).\n", sd->userid);
 		WFIFOHEAD(fd,3);
 		WFIFOW(fd,0) = 0x81;
 		WFIFOB(fd,2) = 1; // 01 = Server closed
@@ -1209,7 +1209,7 @@ void login_auth_ok(struct login_session_data* sd)
 			if( data->char_server > -1 )
 			{// Request char servers to kick this account out. [Skotlex]
 				uint8 buf[6];
-				ShowNotice("Usuário '%s' já está online - Rejeitado.\n", sd->userid);
+				ShowNotice("User '%s' is already online - Rejected.\n", sd->userid);
 				WBUFW(buf,0) = 0x2734;
 				WBUFL(buf,2) = sd->account_id;
 				charif_sendallwos(-1, buf, 6);
@@ -1234,7 +1234,7 @@ void login_auth_ok(struct login_session_data* sd)
 	}
 
 	login_log(ip, sd->userid, 100, "login ok");
-	ShowStatus("Conexão de Usuário '%s' aceita.\n", sd->userid);
+	ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
 
 	WFIFOHEAD(fd,47+32*server_num);
 	WFIFOW(fd,0) = 0x69;
@@ -1294,29 +1294,29 @@ void login_auth_failed(struct login_session_data* sd, int result)
 	{
 		const char* error;
 		switch( result ) {
-		case   0: error = "Conta Não Registrada."; break; // 0 = Unregistered ID
-		case   1: error = "Senha Incorreta."; break; // 1 = Incorrect Password
-		case   2: error = "Conta Expirada."; break; // 2 = This ID is expired
-		case   3: error = "Rejeitado pelo Servidor."; break; // 3 = Rejected from Server
-		case   4: error = "Bloqueado pelo GM."; break; // 4 = You have been blocked by the GM Team
-		case   5: error = "Verificar Versão do EXE."; break; // 5 = Your Game's EXE file is not the latest version
-		case   6: error = "Banido."; break; // 6 = Your are Prohibited to log in until %s
-		case   7: error = "Limite de Usuários Atingido."; break; // 7 = Server is jammed due to over populated
-		case   8: error = "Limite de Contas Atingido"; break; // 8 = No more accounts may be connected from this company
-		case   9: error = "Banido pelo DBA"; break; // 9 = MSI_REFUSE_BAN_BY_DBA
-		case  10: error = "Email não Confirmado"; break; // 10 = MSI_REFUSE_EMAIL_NOT_CONFIRMED
-		case  11: error = "Banido pelo GM"; break; // 11 = MSI_REFUSE_BAN_BY_GM
-		case  12: error = "Trabalhando no Database"; break; // 12 = MSI_REFUSE_TEMP_BAN_FOR_DBWORK
-		case  13: error = "Bloqueio Automático"; break; // 13 = MSI_REFUSE_SELF_LOCK
-		case  14: error = "Grupo Não Permitido"; break; // 14 = MSI_REFUSE_NOT_PERMITTED_GROUP
-		case  15: error = "Grupo Não Permitido"; break; // 15 = MSI_REFUSE_NOT_PERMITTED_GROUP
-		case  99: error = "Conta Deletada."; break; // 99 = This ID has been totally erased
-		case 100: error = "Informações de Login."; break; // 100 = Login information remains at %s
-		case 101: error = "Investigação Hacking."; break; // 101 = Account has been locked for a hacking investigation. Please contact the GM Team for more information
-		case 102: error = "Investigação de Bug."; break; // 102 = This account has been temporarily prohibited from login due to a bug-related investigation
-		case 103: error = "Deletando Personagem."; break; // 103 = This character is being deleted. Login is temporarily unavailable for the time being
-		case 104: error = "Deletando Cônjuge do Personagem."; break; // 104 = This character is being deleted. Login is temporarily unavailable for the time being
-		default : error = "Erro Desconhecido."; break;
+		case   0: error = "Unregistered ID."; break; // 0 = Unregistered ID
+		case   1: error = "Incorrect Password."; break; // 1 = Incorrect Password
+		case   2: error = "Account Expired."; break; // 2 = This ID is expired
+		case   3: error = "Rejected from server."; break; // 3 = Rejected from Server
+		case   4: error = "Blocked by GM."; break; // 4 = You have been blocked by the GM Team
+		case   5: error = "Not latest game EXE."; break; // 5 = Your Game's EXE file is not the latest version
+		case   6: error = "Banned."; break; // 6 = Your are Prohibited to log in until %s
+		case   7: error = "Server Over-population."; break; // 7 = Server is jammed due to over populated
+		case   8: error = "Account limit from company"; break; // 8 = No more accounts may be connected from this company
+		case   9: error = "Ban by DBA"; break; // 9 = MSI_REFUSE_BAN_BY_DBA
+		case  10: error = "Email not confirmed"; break; // 10 = MSI_REFUSE_EMAIL_NOT_CONFIRMED
+		case  11: error = "Ban by GM"; break; // 11 = MSI_REFUSE_BAN_BY_GM
+		case  12: error = "Working in DB"; break; // 12 = MSI_REFUSE_TEMP_BAN_FOR_DBWORK
+		case  13: error = "Self Lock"; break; // 13 = MSI_REFUSE_SELF_LOCK
+		case  14: error = "Not Permitted Group"; break; // 14 = MSI_REFUSE_NOT_PERMITTED_GROUP
+		case  15: error = "Not Permitted Group"; break; // 15 = MSI_REFUSE_NOT_PERMITTED_GROUP
+		case  99: error = "Account gone."; break; // 99 = This ID has been totally erased
+		case 100: error = "Login info remains."; break; // 100 = Login information remains at %s
+		case 101: error = "Hacking investigation."; break; // 101 = Account has been locked for a hacking investigation. Please contact the GM Team for more information
+		case 102: error = "Bug investigation."; break; // 102 = This account has been temporarily prohibited from login due to a bug-related investigation
+		case 103: error = "Deleting char."; break; // 103 = This character is being deleted. Login is temporarily unavailable for the time being
+		case 104: error = "Deleting spouse char."; break; // 104 = This character is being deleted. Login is temporarily unavailable for the time being
+		default : error = "Unknown Error."; break;
 		}
 
 		login_log(ip, sd->userid, result, error);
@@ -1325,18 +1325,31 @@ void login_auth_failed(struct login_session_data* sd, int result)
 	if( result == 1 && login_config.dynamic_pass_failure_ban )
 		ipban_log(ip); // log failed password attempt
 
+#if PACKETVER >= 20120000 /* not sure when this started */
+	WFIFOHEAD(fd,26);
+	WFIFOW(fd,0) = 0x83e;
+	WFIFOL(fd,2) = result;
+	if( result != 6 )
+		memset(WFIFOP(fd,6), '\0', 20);
+	else { // 6 = Your are Prohibited to log in until %s
+		struct mmo_account acc;
+		time_t unban_time = ( accounts->load_str(accounts, &acc, sd->userid) ) ? acc.unban_time : 0;
+		timestamp2string((char*)WFIFOP(fd,6), 20, unban_time, login_config.date_format);
+	}
+	WFIFOSET(fd,26);
+#else
 	WFIFOHEAD(fd,23);
 	WFIFOW(fd,0) = 0x6a;
 	WFIFOB(fd,2) = (uint8)result;
 	if( result != 6 )
 		memset(WFIFOP(fd,3), '\0', 20);
-	else
-	{// 6 = Your are Prohibited to log in until %s
+	else { // 6 = Your are Prohibited to log in until %s
 		struct mmo_account acc;
 		time_t unban_time = ( accounts->load_str(accounts, &acc, sd->userid) ) ? acc.unban_time : 0;
 		timestamp2string((char*)WFIFOP(fd,3), 20, unban_time, login_config.date_format);
 	}
 	WFIFOSET(fd,23);
+#endif
 }
 
 
@@ -1354,7 +1367,7 @@ int parse_login(int fd)
 
 	if( session[fd]->flag.eof )
 	{
-		ShowInfo("Conexão fechada de '"CL_WHITE"%s"CL_RESET"'.\n", ip);
+		ShowInfo("Closed connection from '"CL_WHITE"%s"CL_RESET"'.\n", ip);
 		do_close(fd);
 		return 0;
 	}
@@ -1364,8 +1377,8 @@ int parse_login(int fd)
 		// Perform ip-ban check
 		if( login_config.ipban && ipban_check(ipl) )
 		{
-			ShowStatus("Conexão recusada: IP não Autorizado (Negar/permitir, ip: %s).\n", ip);
-			login_log(ipl, "Desconhecido", -3, "IP Banido");
+			ShowStatus("Connection refused: IP isn't authorised (deny/allow, ip: %s).\n", ip);
+			login_log(ipl, "unknown", -3, "ip banned");
 			WFIFOHEAD(fd,23);
 			WFIFOW(fd,0) = 0x6a;
 			WFIFOB(fd,2) = 3; // 3 = Rejected from Server
@@ -1475,7 +1488,7 @@ int parse_login(int fd)
 			safestrncpy(sd->userid, username, NAME_LENGTH);
 			if( israwpass )
 			{
-				ShowStatus("Pedido de Conexão para %s (ip: %s).\n", sd->userid, ip);
+				ShowStatus("Request for connection of %s (ip: %s).\n", sd->userid, ip);
 				safestrncpy(sd->passwd, password, NAME_LENGTH);
 				if( login_config.use_md5_passwds )
 					MD5_String(sd->passwd, sd->passwd);
@@ -1483,7 +1496,7 @@ int parse_login(int fd)
 			}
 			else
 			{
-				ShowStatus("Pedido de Conexão para (modo passwdenc) de %s (ip: %s).\n", sd->userid, ip);
+				ShowStatus("Request for connection (passwdenc mode) of %s (ip: %s).\n", sd->userid, ip);
 				bin2hex(sd->passwd, passhash, 16); // raw binary data here!
 				sd->passwdenc = PASSWORDENC;
 			}
@@ -1493,7 +1506,7 @@ int parse_login(int fd)
 				login_auth_failed(sd, 3); // send "rejected from server"
 				return 0;
 			}
-
+			
 			result = mmo_auth(sd, false);
 
 			if( result == -1 )
@@ -1542,7 +1555,7 @@ int parse_login(int fd)
 			new_ = RFIFOW(fd,84);
 			RFIFOSKIP(fd,86);
 
-			ShowInfo("Solicitação de conexão do servidor de personagens '%s' @ %u.%u.%u.%u:%u (conta: '%s', pass: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, sd->passwd, ip);
+			ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', pass: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, sd->passwd, ip);
 			sprintf(message, "charserver - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 			login_log(session[fd]->client_addr, sd->userid, 100, message);
 
@@ -1553,7 +1566,7 @@ int parse_login(int fd)
 				sd->account_id >= 0 && sd->account_id < ARRAYLENGTH(server) &&
 				!session_isValid(server[sd->account_id].fd) )
 			{
-				ShowStatus("Conexão do Servidor de Personagens '%s' aceita.\n", server_name);
+				ShowStatus("Connection of the char-server '%s' accepted.\n", server_name);
 				safestrncpy(server[sd->account_id].name, server_name, sizeof(server[sd->account_id].name));
 				server[sd->account_id].fd = fd;
 				server[sd->account_id].ip = server_ip;
@@ -1574,7 +1587,7 @@ int parse_login(int fd)
 			}
 			else
 			{
-				ShowNotice("Conexão com char-server '%s' RECUSADO.\n", server_name);
+				ShowNotice("Connection of the char-server '%s' REFUSED.\n", server_name);
 				WFIFOHEAD(fd,3);
 				WFIFOW(fd,0) = 0x2711;
 				WFIFOB(fd,2) = 3;
@@ -1584,7 +1597,7 @@ int parse_login(int fd)
 		return 0; // processing will continue elsewhere
 
 		default:
-			ShowNotice("Extremidade anormal de conexão (ip: %s): Pacote Desconhecido 0x%x\n", ip, command);
+			ShowNotice("Abnormal end of connection (ip: %s): Unknown packet 0x%x\n", ip, command);
 			set_eof(fd);
 			return 0;
 		}
@@ -1631,7 +1644,7 @@ int login_config_read(const char* cfgName)
 	char line[1024], w1[1024], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
 	if (fp == NULL) {
-		ShowError("Arquivo de configuração (%s) não encontrado.\n", cfgName);
+		ShowError("Configuration file (%s) not found.\n", cfgName);
 		return 1;
 	}
 	while(fgets(line, sizeof(line), fp)) {
@@ -1648,13 +1661,13 @@ int login_config_read(const char* cfgName)
 		else if(!strcmpi(w1,"console_silent")) {
 			msg_silent = atoi(w2);
 			if( msg_silent ) /* only bother if we actually have this enabled */
-				ShowInfo("Console ajuste silencioso: %d\n", atoi(w2));
+				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
 		}
 		else if( !strcmpi(w1, "bind_ip") ) {
 			login_config.login_ip = host2ip(w2);
 			if( login_config.login_ip ) {
 				char ip_str[16];
-				ShowStatus("Endereço IP do Servidor de Login : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
+				ShowStatus("Login server binding IP address : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
 			}
 		}
 		else if( !strcmpi(w1, "login_port") ) {
@@ -1783,7 +1796,7 @@ void do_final(void)
 	}
 
 	login_log(0, "login server", 100, "login server shutdown");
-	ShowStatus("Finalizando...\n");
+	ShowStatus("Terminating...\n");
 
 	if( login_config.log_login )
 		loginlog_final();
@@ -1812,7 +1825,7 @@ void do_final(void)
 		login_fd = -1;
 	}
 
-	ShowStatus("Finalizado.\n");
+	ShowStatus("Finished.\n");
 }
 
 //------------------------------
@@ -1836,7 +1849,7 @@ void do_shutdown(void)
 	{
 		int id;
 		runflag = LOGINSERVER_ST_SHUTDOWN;
-		ShowStatus("Desligando...\n");
+		ShowStatus("Shutting down...\n");
 		// TODO proper shutdown procedure; kick all characters, wait for acks, ...  [FlavioJS]
 		for( id = 0; id < ARRAYLENGTH(server); ++id )
 			chrif_server_reset(id);
@@ -1920,7 +1933,7 @@ int do_init(int argc, char** argv)
 
 	account_db_sql_up(accounts);
 	
-	ShowStatus("O Servidor de Login está "CL_GREEN"Pronto"CL_RESET" (Executando o Servidor pela porta %u).\n\n", login_config.login_port);
+	ShowStatus("The login-server is "CL_GREEN"ready"CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_port);
 	login_log(0, "login server", 100, "login server started");
 		
 	return 0;

@@ -4783,7 +4783,6 @@ BUILDIN_FUNC(callfunc)
 		st->state = END;
 		return 1;
 	}
-
 	
 	for( i = st->start+3, j = 0; i < st->end; i++, j++ )
 	{
@@ -4792,8 +4791,8 @@ BUILDIN_FUNC(callfunc)
 		{
 			const char* name = reference_getname(data);
 			if( name[0] == '.' ) {
-			ref = (struct DBMap**)aCalloc(sizeof(struct DBMap*), 1);
-			ref[0] = (name[1] == '@' ? st->stack->var_function : st->script->script_vars);
+				ref = (struct DBMap**)aCalloc(sizeof(struct DBMap*), 1);
+				ref[0] = (name[1] == '@' ? st->stack->var_function : st->script->script_vars);
 				data->ref = ref;
 			}
 		}
@@ -7261,16 +7260,16 @@ BUILDIN_FUNC(strcharinfo)
 			script_pushstrcopy(st,sd->status.name);
 			break;
 		case 1:
-			if( ( p = party_search(sd->status.party_id) ) != NULL )	{
+			if( ( p = party_search(sd->status.party_id) ) != NULL ) {
 				script_pushstrcopy(st,p->party.name);
-			}	else	{
+			} else {
 				script_pushconststr(st,"");
 			}
 			break;
 		case 2:
-			if( ( g = guild_search(sd->status.guild_id) ) != NULL )	{
+			if( ( g = sd->guild ) != NULL ) {
 				script_pushstrcopy(st,g->name);
-			}	else	{
+			} else {
 				script_pushconststr(st,"");
 			}
 			break;
@@ -10176,7 +10175,7 @@ BUILDIN_FUNC(homunculus_mutate)
 	TBL_PC *sd;
 
 	sd = script_rid2sd(st);
-	if( sd == NULL )
+	if( sd == NULL || sd->hd == NULL )
 		return 0;
 
 	if(script_hasdata(st,2))
@@ -10770,6 +10769,7 @@ static int script_mapflag_pvp_sub(struct block_list *bl,va_list ap) {
 		sd->pvp_lost = 0;
 	}
 	clif->map_property(sd, MAPPROPERTY_FREEPVPZONE);
+	clif->maptypeproperty2(&sd->bl,SELF);
 	return 0;
 }
 BUILDIN_FUNC(setmapflag)
@@ -10812,9 +10812,14 @@ BUILDIN_FUNC(setmapflag)
 				break;
 			case MF_PVP_NOPARTY:		map[m].flag.pvp_noparty = 1; break;
 			case MF_PVP_NOGUILD:		map[m].flag.pvp_noguild = 1; break;
-			case MF_GVG:
+			case MF_GVG: {
+				struct block_list bl;
 				map[m].flag.gvg = 1;
 				clif->map_property_mapall(m, MAPPROPERTY_AGITZONE);
+				bl.type = BL_NUL;
+				bl.m = m;
+				clif->maptypeproperty2(&bl,ALL_SAMEMAP);
+				}
 				break;
 			case MF_GVG_NOPARTY:		map[m].flag.gvg_noparty = 1; break;
 			case MF_NOTRADE:			map[m].flag.notrade = 1; break;
@@ -10894,15 +10899,25 @@ BUILDIN_FUNC(removemapflag)
 			case MF_NOBRANCH:			map[m].flag.nobranch = 0; break;
 			case MF_NOPENALTY:			map[m].flag.noexppenalty = 0; map[m].flag.nozenypenalty = 0; break;
 			case MF_NOZENYPENALTY:		map[m].flag.nozenypenalty = 0; break;
-			case MF_PVP:
+			case MF_PVP: {
+				struct block_list bl;
+				bl.type = BL_NUL;
+				bl.m = m;
 				map[m].flag.pvp = 0;
 				clif->map_property_mapall(m, MAPPROPERTY_NOTHING);
+				clif->maptypeproperty2(&bl,ALL_SAMEMAP);
+				}
 				break;
 			case MF_PVP_NOPARTY:		map[m].flag.pvp_noparty = 0; break;
 			case MF_PVP_NOGUILD:		map[m].flag.pvp_noguild = 0; break;
-			case MF_GVG:
+			case MF_GVG: {
+				struct block_list bl;
+				bl.type = BL_NUL;
+				bl.m = m;
 				map[m].flag.gvg = 0;
 				clif->map_property_mapall(m, MAPPROPERTY_NOTHING);
+				clif->maptypeproperty2(&bl,ALL_SAMEMAP);
+				}
 				break;
 			case MF_GVG_NOPARTY:		map[m].flag.gvg_noparty = 0; break;
 			case MF_NOTRADE:			map[m].flag.notrade = 0; break;
@@ -10959,6 +10974,7 @@ BUILDIN_FUNC(pvpon)
 	const char *str;
 	TBL_PC* sd = NULL;
 	struct s_mapiterator* iter;
+	struct block_list bl;
 
 	str = script_getstr(st,2);
 	m = map_mapname2mapid(str);
@@ -10968,6 +10984,10 @@ BUILDIN_FUNC(pvpon)
 	map_zone_change2(m, strdb_get(zone_db, MAP_ZONE_PVP_NAME));
 	map[m].flag.pvp = 1;
 	clif->map_property_mapall(m, MAPPROPERTY_FREEPVPZONE);
+	bl.type = BL_NUL;
+	bl.m = m;
+	clif->maptypeproperty2(&bl,ALL_SAMEMAP);
+
 
 	if(battle_config.pk_mode) // disable ranking functions if pk_mode is on [Valaris]
 		return 0;
@@ -11005,15 +11025,19 @@ BUILDIN_FUNC(pvpoff)
 {
 	int16 m;
 	const char *str;
+	struct block_list bl;
 
 	str=script_getstr(st,2);
 	m = map_mapname2mapid(str);
 	if(m < 0 || !map[m].flag.pvp)
 		return 0; //fixed Lupus
-
+	
 	map_zone_change2(m, map[m].prev_zone);
 	map[m].flag.pvp = 0;
 	clif->map_property_mapall(m, MAPPROPERTY_NOTHING);
+	bl.type = BL_NUL;
+	bl.m = m;
+	clif->maptypeproperty2(&bl,ALL_SAMEMAP);
 
 	if(battle_config.pk_mode) // disable ranking options if pk_mode is on [Valaris]
 		return 0;
@@ -11030,9 +11054,13 @@ BUILDIN_FUNC(gvgon)
 	str=script_getstr(st,2);
 	m = map_mapname2mapid(str);
 	if(m >= 0 && !map[m].flag.gvg) {
+		struct block_list bl;
 		map_zone_change2(m, strdb_get(zone_db, MAP_ZONE_GVG_NAME));
 		map[m].flag.gvg = 1;
 		clif->map_property_mapall(m, MAPPROPERTY_AGITZONE);
+		bl.type = BL_NUL;
+		bl.m = m;
+		clif->maptypeproperty2(&bl,ALL_SAMEMAP);
 	}
 
 	return 0;
@@ -11045,9 +11073,13 @@ BUILDIN_FUNC(gvgoff)
 	str=script_getstr(st,2);
 	m = map_mapname2mapid(str);
 	if(m >= 0 && map[m].flag.gvg) {
+		struct block_list bl;
 		map_zone_change2(m, map[m].prev_zone);
 		map[m].flag.gvg = 0;
 		clif->map_property_mapall(m, MAPPROPERTY_NOTHING);
+		bl.type = BL_NUL;
+		bl.m = m;
+		clif->maptypeproperty2(&bl,ALL_SAMEMAP);
 	}
 
 	return 0;
@@ -13560,7 +13592,7 @@ BUILDIN_FUNC(setbattleflag)
 	if (battle->config_set_value(flag, value) == 0)
 		ShowWarning("buildin_setbattleflag: unknown battle_config flag '%s'\n",flag);
 	else
-		ShowInfo("buildin_setbattleflag: bandeira de configuracao de batalha '%s' ja esta definido para '%s'.\n",flag,value);
+		ShowInfo("buildin_setbattleflag: battle_config flag '%s' is now set to '%s'.\n",flag,value);
 
 	return 0;
 }
@@ -14160,12 +14192,12 @@ BUILDIN_FUNC(sscanf){
             if(sscanf(str, buf, ref_str)==0){
                 break;
             }
-            set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)(ref_str), reference_getref(data));
-		} else {  // Number
+			set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)(ref_str), reference_getref(data));
+        } else {  // Number
             if(sscanf(str, buf, &ref_int)==0){
                 break;
             }
-            set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)__64BPRTSIZE(ref_int), reference_getref(data));
+			set_reg(st, sd, reference_uid( reference_getid(data), reference_getindex(data) ), buf_p, (void *)__64BPRTSIZE(ref_int), reference_getref(data));
         }
         arg++;
 
@@ -15686,6 +15718,7 @@ BUILDIN_FUNC(warpportal)
 	group = skill->unitsetting(bl, AL_WARP, 4, spx, spy, 0);
 	if( group == NULL )
 		return 0;// failed
+	group->val1 = (group->val1<<16)|(short)0;
 	group->val2 = (tpx<<16) | tpy;
 	group->val3 = mapindex;
 
@@ -17287,6 +17320,7 @@ BUILDIN_FUNC(getrandgroupitem) {
 		ShowError("getrandgroupitem: qty is <= 0!\n");
 		return 1;
 	}
+	
 	if(group < 1 || group >= MAX_ITEMGROUP) {
 		ShowError("getrandgroupitem: Invalid group id %d\n", group);
 		return 1;
@@ -17405,46 +17439,6 @@ BUILDIN_FUNC(npcskill)
 	} else {
 		unit_skilluse_id(&nd->bl, sd->bl.id, skill_id, skill_level);
 	}
-
-	return 0;
-}
-
-/* Consumes an item.
- * consumeitem <item id>;
- * consumeitem "<item name>"; */
-BUILDIN_FUNC(consumeitem)
-{
-	TBL_NPC *nd;
-	TBL_PC *sd;
-	struct script_data *data;
-	struct item_data *item_data;
-
-	nullpo_retr( 1, ( sd = script_rid2sd( st ) ) );
-	nullpo_retr( 1, ( nd = (TBL_NPC *)map_id2bl( sd->npc_id ) ) );
-
-	data = script_getdata( st, 2 );
-	get_val( st, data );
-
-	if( data_isstring( data ) ){
-		const char *name = conv_str( st, data );
-
-		if( ( item_data = itemdb_searchname( name ) ) == NULL ){
-			ShowError( "buildin_consumeitem: Nonexistant item %s requested.\n", name );
-			return 1;
-		}
-	}else if( data_isint( data ) ){
-		int nameid = conv_num( st, data );
-
-		if( ( item_data = itemdb_exists( nameid ) ) == NULL ){
-			ShowError("buildin_consumeitem: Nonexistant item %d requested.\n", nameid );
-			return 1;
-		}
-	}else{
-		ShowError("buildin_consumeitem: invalid data type for argument #1 (%d).", data->type );
-		return 1;
-	}
-
-	run_script( item_data->script, 0, sd->bl.id, nd->bl.id );
 
 	return 0;
 }
@@ -17894,8 +17888,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF2(cleanmap,"cleanarea","siiii"),
 	BUILDIN_DEF(npcskill,"viii"),
 	BUILDIN_DEF(itemeffect,"v"),
-	BUILDIN_DEF(consumeitem,"v"),
-    BUILDIN_DEF(delequip,"i"),
+	BUILDIN_DEF(delequip,"i"),
 	/**
 	 * @commands (script based)
 	 **/

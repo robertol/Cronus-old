@@ -7,6 +7,7 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/db.h"
+#include "../common/mmo.h"
 #include <stdarg.h>
 
 /**
@@ -322,13 +323,14 @@ enum clif_messages {
  **/
 enum clif_colors {
 	COLOR_RED,
-	
+	COLOR_DEFAULT,
 	COLOR_MAX
 };
 
 enum hChSysChOpt {
-	hChSys_OPT_BASE				= 0,
-	hChSys_OPT_ANNOUNCE_JOIN	= 1,
+	hChSys_OPT_BASE				= 0x0,
+	hChSys_OPT_ANNOUNCE_JOIN	= 0x1,
+	hChSys_OPT_MSG_DELAY		= 0x2,
 };
 
 enum hChSysChType {
@@ -383,15 +385,21 @@ struct {
 	bool allow_user_channel_creation;
 } hChSys;
 
+struct hChSysBanEntry {
+	char name[NAME_LENGTH];
+};
+
 struct hChSysCh {
 	char name[HCHSYS_NAME_LENGTH];
 	char pass[HCHSYS_NAME_LENGTH];
 	unsigned char color;
 	DBMap *users;
+	DBMap *banned;
 	unsigned int opt;
 	unsigned int owner;
 	enum hChSysChType type;
 	uint16 m;
+	unsigned char msg_delay;
 };
 
 struct hCSData {
@@ -430,7 +438,7 @@ struct clif_interface {
 	void (*setbindip) (const char* ip);
 	void (*setport) (uint16 port);
 	uint32 (*refresh_ip) (void);
-	int (*send) (const uint8* buf, int len, struct block_list* bl, enum send_target type);
+	int (*send) (const void* buf, int len, struct block_list* bl, enum send_target type);
 	int (*send_sub) (struct block_list *bl, va_list ap);
 	int (*parse) (int fd);
 	/* auth */
@@ -493,6 +501,7 @@ struct clif_interface {
 	void (*map_property_mapall) (int map, enum map_property property);
 	void (*bossmapinfo) (int fd, struct mob_data *md, short flag);
 	void (*map_type) (struct map_session_data* sd, enum map_type type);
+	void (*maptypeproperty2) (struct block_list *bl,enum send_target t);
 	/* multi-map-server */
 	void (*changemapserver) (struct map_session_data* sd, unsigned short map_index, int x, int y, uint32 ip, uint16 port);
 	/* npc-shop-related */
@@ -662,7 +671,7 @@ struct clif_interface {
 	void (*msgtable) (int fd, int line);
 	void (*msgtable_num) (int fd, int line, int num);
 	void (*message) (const int fd, const char* mes);
-	int (*colormes) (struct map_session_data * sd, enum clif_colors color, const char* msg);
+	int (*colormes) (int fd, enum clif_colors color, const char* msg);
 	bool (*process_message) (struct map_session_data* sd, int format, char** name_, int* namelen_, char** message_, int* messagelen_);
 	void (*wisexin) (struct map_session_data *sd,int type,int flag);
 	void (*wisall) (struct map_session_data *sd,int type,int flag);
@@ -858,6 +867,8 @@ struct clif_interface {
 	void (*chsys_left) (struct hChSysCh *channel, struct map_session_data *sd);
 	void (*chsys_delete) (struct hChSysCh *channel);
 	void (*chsys_mjoin) (struct map_session_data *sd);
+	void (*chsys_quit) (struct map_session_data *sd);
+	void (*chsys_quitg) (struct map_session_data *sd);
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/

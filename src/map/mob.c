@@ -875,8 +875,8 @@ int mob_setdelayspawn(struct mob_data *md)
 		spawntime = spawntime/100*battle_config.mob_spawn_delay;
 	}
 
-	if (spawntime < 500) //Min respawn time (is it needed?)
-		spawntime = 500;
+	if (spawntime < 5000) //Monsters should never respawn faster than within 5 seconds
+		spawntime = 5000;
 
 	if( md->spawn_timer != INVALID_TIMER )
 		delete_timer(md->spawn_timer, mob_delayspawn);
@@ -2634,8 +2634,10 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 	if (battle_config.mvp_tomb_enabled && md->spawn->state.boss)
 		mvptomb_create(md, mvp_sd ? mvp_sd->status.name : NULL, time(NULL));
 
-	if( !rebirth )
+	if( !rebirth ) {
+		status_change_clear(&md->bl,1);
 		mob_setdelayspawn(md); //Set respawning.
+	}
 	return 3; //Remove from map.
 }
 
