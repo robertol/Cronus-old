@@ -26,6 +26,7 @@
 
 #OSX Xcode project user-sensitive-stuff
 /Hercules
+/Cronus
 
 # /3rdparty/libconfig/
 /3rdparty/libconfig/Makefile
