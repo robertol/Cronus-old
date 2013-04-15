@@ -1,5 +1,6 @@
 language: c
 compiler:
   - gcc
+  - clang
 # Change this to your needs
 script: sh configure; make clean; make all
