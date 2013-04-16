@@ -220,6 +220,12 @@ enum e_skill_flag
 	//...
 };
 
+enum e_mmo_charstatus_opt {
+  OPT_NONE    = 0x0,
+  OPT_SHOW_EQUIP  = 0x1,
+  OPT_ALLOW_PARTY  = 0x2,
+};
+
 struct s_skill {
 	unsigned short id;
 	unsigned char lv;
@@ -380,6 +386,7 @@ struct mmo_charstatus {
 	struct hotkey hotkeys[MAX_HOTKEYS];
 #endif
 	bool show_equip;
+	bool show_equip, allow_party;
 	unsigned short rename;
 	unsigned short slotchange;
 

@@ -433,6 +433,8 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 
 	switch(attack_type){
 		case BF_MAGIC:
+			if( battle->isMagicReflect )
+				nk |= NK_NO_CARDFIX_ATK;
 			if ( sd && !(nk&NK_NO_CARDFIX_ATK) ) {
 				cardfix=cardfix*(100+sd->magic_addrace[tstatus->race])/100;
 				if (!(nk&NK_NO_ELEFIX))
@@ -992,7 +994,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 		//Finally damage reductions....
 		// Assumptio doubles the def & mdef on RE mode, otherwise gives a reduction on the final damage. [Igniz]
 #ifndef RENEWAL
-		if( sc->data[SC_ASSUMPTIO] ) {
+		 if( sc->data[SC_ASSUMPTIO] && !battle->isMagicReflect ) {
 			if( map_flag_vs(bl->m) )
 				damage = damage*2/3; //Receive 66% damage
 			else
@@ -1037,9 +1039,9 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 			damage -= damage * sc->data[SC_ARMOR]->val2 / 100;
 
 #ifdef RENEWAL
-		if(sc->data[SC_ENERGYCOAT] && (flag&BF_WEAPON || flag&BF_MAGIC) && skill_id != WS_CARTTERMINATION)
+		if(sc->data[SC_ENERGYCOAT] && (battle->isMagicReflect || ((flag&BF_WEAPON || flag&BF_MAGIC) && skill_id != WS_CARTTERMINATION)))
 #else
-		if(sc->data[SC_ENERGYCOAT] && flag&BF_WEAPON && skill_id != WS_CARTTERMINATION)
+		if(sc->data[SC_ENERGYCOAT] && (battle->isMagicReflect || (flag&BF_WEAPON && skill_id != WS_CARTTERMINATION)))
 #endif
 		{
 			struct status_data *status = status_get_status_data(bl);
@@ -1909,8 +1911,13 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 		if (rnd()%1000 < cri)
 			flag.cri = 1;
 	}
-	if (flag.cri)
-	{
+		if (flag.cri) {
+			wd.type = 0x0a;
+#ifdef RENEWAL
+			flag.hit = 1;
+#else
+			flag.idef = flag.idef2 = flag.hit = 1;
+#endif
 		wd.type = 0x0a;
 		flag.idef = flag.idef2 = flag.hit = 1;
 	} else {	//Check for Perfect Hit
@@ -3375,8 +3382,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	if(skill_id == CR_GRANDCROSS || skill_id == NPC_GRANDDARKNESS)
 		return wd; //Enough, rest is not needed.
 
-	if (sd)
-	{
+	if (sd)	{
 		if (skill_id != CR_SHIELDBOOMERANG) //Only Shield boomerang doesn't takes the Star Crumbs bonus.
 			ATK_ADD2(wd.div_*sd->right_weapon.star, wd.div_*sd->left_weapon.star);
 		if (skill_id==MO_FINGEROFFENSIVE) { //The finger offensive spheres on moment of attack do count. [Skotlex]
@@ -3389,7 +3395,10 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, 2, wd.flag);
         if( flag.lh )
             wd.damage2 = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage2, 3, wd.flag);
-
+#ifdef RENEWAL
+		if( flag.cri )
+        ATK_ADDRATE(sd->bonus.crit_atk_rate>=100?sd->bonus.crit_atk_rate-60:40);
+#endif
 		if( skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN )
 		{ //Refine bonus applies after cards and elements.
 			short index= sd->equip_index[EQI_HAND_L];
@@ -3402,8 +3411,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
     if(!sd && tsd) //if player on player then it was already measured above
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, flag.lh, wd.flag);
 
-	if( flag.infdef )
-	{ //Plants receive 1 damage when hit
+	if( flag.infdef ) { //Plants receive 1 damage when hit
 		short class_ = status_get_class(target);
 		if( flag.hit || wd.damage > 0 )
 			wd.damage = wd.div_; // In some cases, right hand no need to have a weapon to increase damage
@@ -4080,7 +4088,8 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 			if (!flag.imdef && (
 				sd->bonus.ignore_mdef_ele & ( 1 << tstatus->def_ele ) ||
 				sd->bonus.ignore_mdef_race & ( 1 << tstatus->race ) ||
-				sd->bonus.ignore_mdef_race & ( is_boss(target) ? 1 << RC_BOSS : 1 << RC_NONBOSS )
+				sd->bonus.ignore_mdef_race & ( is_boss(target) ? 1 << RC_BOSS : 1 << RC_NONBOSS ) ||
+				battle->isMagicReflect
 			))
 				flag.imdef = 1;
 		}
@@ -5940,10 +5949,10 @@ void Hercules_report(char* date, char *time_c) {
 	config |= C_RENEWAL_ASPD;
 #endif
 
-/* not a ifdef because SECURE_NPCTIMEOUT is always defined, but either as 0 or higher */
-#if SECURE_NPCTIMEOUT
-	config |= C_SECURE_NPCTIMEOUT;
+#ifdef SECURE_NPCTIMEOUT
+   config |= C_SECURE_NPCTIMEOUT;
 #endif
+  
 	/* non-define part */
 	if( db_use_sqldbs )
 		config |= C_SQL_DBS;
