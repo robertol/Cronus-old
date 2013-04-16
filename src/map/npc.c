@@ -246,23 +246,23 @@ struct npc_data* npc_name2id(const char* name)
  **/
 int npc_rr_secure_timeout_timer(int tid, unsigned int tick, int id, intptr_t data) {
 	struct map_session_data* sd = NULL;
-	//unsigned int timeout = NPC_SECURE_TIMEOUT_NEXT;
+	unsigned int timeout = NPC_SECURE_TIMEOUT_NEXT;
 	if( (sd = map_id2sd(id)) == NULL || !sd->npc_id ) {
 		if( sd ) sd->npc_idle_timer = INVALID_TIMER;
 		return 0;//Not logged in anymore OR no longer attached to a npc
 	}
   
   switch( sd->npc_idle_type ) {
-    //case NPCT_INPUT:
-      //timeout = NPC_SECURE_TIMEOUT_INPUT;
-      //break;
-    //case NPCT_MENU:
-      //timeout = NPC_SECURE_TIMEOUT_MENU;
-      //break;
-    //case NPCT_WAIT: var starts with this value
+    case NPCT_INPUT:
+      timeout = NPC_SECURE_TIMEOUT_INPUT;
+      break;
+    case NPCT_MENU:
+      timeout = NPC_SECURE_TIMEOUT_MENU;
+      break;
+    case NPCT_WAIT: var starts with this value
   }
   
-  if( DIFF_TICK(tick,sd->npc_idle_tick)) {
+  if( DIFF_TICK(tick,sd->npc_idle_tick)> (timeout*1000) ) {
 		/**
 		 * If we still have the NPC script attached, tell it to stop.
 		 **/
