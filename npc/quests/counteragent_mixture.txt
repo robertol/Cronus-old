@@ -31,7 +31,7 @@
 alberta_in,133,55,3	script	Louitz#cm	84,{
 	if (molgenstain == 2) {
 		mes "[Mercador Louitz]";
-		mes "Oh, é você de novamente.";
+		mes "Oh, é você novamente.";
 		mes "Então você tentou encontrar";
 		mes "aquele cientista maluco";
 		mes "que vive em Geffen?";
@@ -42,7 +42,7 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "mas não verificou? Hey,";
 			mes "ele pode ser maluco, mas";
 			mes "acho que a maioria dos gênios são";
-			mes "assim. No entando, eu acho que seria uma boa idéia se você fosse vê-lo.";
+			mes "assim. No entanto, eu acho que seria uma boa idéia se você fosse vê-lo.";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Quero dizer ...";
