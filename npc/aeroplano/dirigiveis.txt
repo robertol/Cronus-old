@@ -265,7 +265,7 @@ airplane,71,91,7	script	Homem de Umbala#ein_p	789,{
 	close;
 }
 
-airplane,250,58,2	script	Assist. do Aeroplano#a2	67,{
+airplane,250,58,2	script	Assist. do Aeroplano#airplane	67,{
 	// Hugel quest addition
 	if (hg_ma1 == 3) {
 		mes "[Assistente do Aeroplano]";
