@@ -2,16 +2,16 @@
 //= Evento Xmas
 //===== Por: =================================================
 //= rAthena Dev Team
-//===== Vers√£o Atual: ========================================
+//===== Vers„o Atual: ========================================
 //= 1.5
-//===== Compat√≠vel Com: ======================================
+//===== CompatÌvel Com: ======================================
 //= Cronus; Hercules; rAthena.
-//===== Descri√ß√£o: ===========================================
+//===== DescriÁ„o: ===========================================
 //= Beat up Antonios and grab his socks.  Get at least 3 and
 //= give them to Santa Claus Claus in exchange for a present.
 //= Includes X-mas mobs.
 //= This npc will disable, the current Santa Claus npc.
-//===== Coment√°rios Adicionais: ==============================
+//===== Coment·rios Adicionais: ==============================
 //= Fixed the spawns [shadowlady]
 //= 1.1 Added Xmas Jakk, fixed 2 exploits, fixed reward Box ID [Lupus]
 //= 1.2 Added monsters to the newer fields, thanks to Muad_Dib [MasterOfMuppets]
@@ -20,9 +20,9 @@
 //= 1.3 Added Christmas Orc to the places where other orcs spawn [MasterOfMuppets]
 //= Added Christmas goblins to yuno_fild09, thanks to Playtester for pointing it out
 //= 1.4 Added a fix to make Lutie & Bard quests passable during this event [Lupus]
-//= 1.5 Traduzido para portugu√™s [Ryuzaki Aiko]
-//= 1.6 Pequena otimiza√ß√£o. [Rayzir]
-//= 1.6a Corre√ß√µes Ortogr√°ficas - Tradu√ß√£o dos Mobs do Evento. [BOO]
+//= 1.5 Traduzido para portuguÍs [Ryuzaki Aiko]
+//= 1.6 Pequena otimizaÁ„o. [Rayzir]
+//= 1.6a CorreÁıes Ortogr·ficas - TraduÁ„o dos Mobs do Evento. [BOO]
 //============================================================
 
 xmas_in,100,96,4	script	Papai Noel::Santa2	718,{
@@ -36,75 +36,75 @@ xmas_in,100,96,4	script	Papai Noel::Santa2	718,{
 		switch(select("Escutar o Papai Noel:Entregar as provas ao Papai Noel:Cancelar")){
 		case 1:
 			mes "[Papai Noel]";
-			mes "Meu problema √© o seguinte,";
-			mes "Parece ter algu√©m por ai";
-			mes "que est√° se passando por mim, e espalhando";
+			mes "Meu problema È o seguinte,";
+			mes "Parece ter alguÈm por ai";
+			mes "que est· se passando por mim, e espalhando";
 			mes "terror por toda terra.";
 			next;
 			mes "[Papai Noel]";
-			mes "Como o Grinch da lenda, ele est√° tomando";
-			mes "os brinquedos de todas crian√ßas e pegando-os";
+			mes "Como o Grinch da lenda, ele est· tomando";
+			mes "os brinquedos de todas crianÁas e pegando-os";
 			mes "para si.";
 			next;
 			mes "[Papai Noel]";
 			mes "Eu estou muito ocupado criando os brinquedos";
-			mes "para o pr√≥ximo ano, por isso eu n√£o posso";
+			mes "para o prÛximo ano, por isso eu n„o posso";
 			mes "sair daqui e procura-lo eu mesmo.";
-			mes "Ent√£o, eu gostaria que voc√™ procurasse-o";
+			mes "Ent„o, eu gostaria que vocÍ procurasse-o";
 			mes "E destrua-o.";
 			next;
 			mes "[Papai Noel]";
-			mes "Ele est√° com alguns dos meus";
-			mes "sacos m√°gicos, no entanto, ele ir√°";
+			mes "Ele est· com alguns dos meus";
+			mes "sacos m·gicos, no entanto, ele ir·";
 			mes "escapar para outro lugar quando";
-			mes "voc√™ tentar atac√°-lo.";
+			mes "vocÍ tentar atac·-lo.";
 			next;
 			mes "[Papai Noel]";
 			mes "Contudo,";
 			mes "Na pressa, ele tende a derrubar algumas coisas";
 			mes "Se por acaso ele derrubar alguma meia";
 			mes "furada, que ele ultiliza para";
-			mes "roubar os brinquedos das crian√ßas pobres, pegue isto.";
+			mes "roubar os brinquedos das crianÁas pobres, pegue isto.";
 			next;
 			mes "[Papai Noel]";
 			mes "Se pegar 3 desses, eu vou";
-			mes "vou te dar um pr√≥totipo de uma caixa mist√©riosa.";
+			mes "vou te dar um prÛtotipo de uma caixa mistÈriosa.";
 			mes "Eu tenho mantido-a em meu";
-			mes "laborat√≥rio. Ela cospe presentes aleat√≥rios";
+			mes "laboratÛrio. Ela cospe presentes aleatÛrios";
 			mes "e me salva de uma tonelada de trabalho.";
 			close;
 		case 2:
 			mes "[Papai Noel]";
 			if(countitem(7034) < 3)
 			{	
-				mes "Voc√™ n√£o tem meias suficientes como prova.";
-				mes "V√° derrubar mais alguns papais no√©is falsos";
+				mes "VocÍ n„o tem meias suficientes como prova.";
+				mes "V· derrubar mais alguns papais noÈis falsos";
 				mes "e pegue mais algumas meias e eu o recompensarei.";
 				close;
 			} else {
 				delitem 7034,3;
-				mes "Hmm, visto que voc√™ fez um bom trabalho";
+				mes "Hmm, visto que vocÍ fez um bom trabalho";
 				mes "pegando uma boa dose de";
-				mes "papais no√©is falsos. Continue assim!";
+				mes "papais noÈis falsos. Continue assim!";
 				next;
 				getitem 644,1; //Gift Box Prototype
 				set #event_xmas,#event_xmas+1;
 				mes "[Papai Noel]";
 				mes "Pegue sua recompensa.";
-				mes "Se voc√™ pegar mais tr√™s, eu vou te dar outra.";
-				mes "Espero que voc√™ aproveite-o.";
+				mes "Se vocÍ pegar mais trÍs, eu vou te dar outra.";
+				mes "Espero que vocÍ aproveite-o.";
 				close;
 			}
 		case 3:
 			mes "[Papai Noel]";
-			mes "Hmm. Bem, pelo menos n√≥s";
-			mes "nos veremos na pr√≥xima manh√£ de natal.";
+			mes "Hmm. Bem, pelo menos nÛs";
+			mes "nos veremos na prÛxima manh„ de natal.";
 			close;
 		}
 	}
 	mes "Feliz Natal!";
 	if(Class==0 || #event_xmas>=30 ) close; //anti exploit protection
-	mes "Eu tenho um presente para voc√™! Ho Ho Ho!";
+	mes "Eu tenho um presente para vocÍ! Ho Ho Ho!";
 	getitem rand(664,667),1; //gives one of 4 gift boxes
 	set #event_xmas,#event_xmas+1;
 	close;
