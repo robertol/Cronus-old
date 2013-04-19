@@ -2,18 +2,18 @@
 //= Controle de GM
 //===== Por: ==================================================
 //= Zawe
-//===== Vers√£o Atual: =========================================
+//===== Vers„o Atual: =========================================
 //= 0.1
 //===== Description: ==========================================
-//= Script que salva em uma vari√°vel "temporaria" quais GM's
+//= Script que salva em uma vari·vel "temporaria" quais GM's
 //= entraram no Dia e por quanto tempo eles ficaram Online.
-//===== Coment√°rios Adicionais: ===============================
-//= 0.1 Cria√ß√£o do Script [ZaweOwnedz]
-//===== Observa√ß√µes: ==========================================
+//===== Coment·rios Adicionais: ===============================
+//= 0.1 CriaÁ„o do Script [ZaweOwnedz]
+//===== ObservaÁıes: ==========================================
 //= Para ver quem entrou mande um PM para o npc 
 //= GMControl(npc:GMControl) com qualquer mensagem.
 //= Para limpar mande uma PM contendo a mensagem clean.
-//= N√£o esqueca de alterar as configura√ß√µes no final do script.
+//= N„o esqueca de alterar as configuraÁıes no final do script.
 //=============================================================
 -	script	GMControl	-1,{
 
@@ -80,7 +80,7 @@ OnClock0001:
 OnInit:
 	set .gm_acesso,90; // Nivel maior ou igual a esse podem acessar o Script
 	set .gm_level,20; // Nivel maior ou igual a esse tem seu tempo salvo
-	// N√£o mexa no que est√° escrito abaixo
+	// N„o mexa no que est· escrito abaixo
 	setarray $GMwho$[0],"None";
 	setarray $GMtime[0],0;
 	end;

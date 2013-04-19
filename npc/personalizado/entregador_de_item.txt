@@ -2,33 +2,33 @@
 //= Entregador de Item
 //===== Por: ==================================================
 //= Zawe
-//===== Versï¿½o Atual: =========================================
+//===== Versão Atual: =========================================
 //= 0.3
-//===== Description: ==========================================
+//===== Descrição: ==========================================
 //= Entregador de Item que entrega para offline. Com 
-//= modificaï¿½ï¿½o para Alterar e Deletar Envios nï¿½o Completados.
-//===== Comentï¿½rios Adicionais: ===============================
-//= 0.1 Criaï¿½ï¿½o do Script [ZaweOwnedz]
-//= 0.2 Melhorando no envio Online [ZaweOwnedz]
-//= 0.3 Correï¿½ï¿½o de erros [ZaweOwnedz]
-//===== Observaï¿½ï¿½es: ==========================================
+//= modificação para Alterar e Deletar Envios não Completados.
+//===== Comentários Adicionais: ===============================
+//= 0.1 Criação do Script [Zawe]
+//= 0.2 Melhorando no envio Online [Zawe]
+//= 0.3 Correção de erros [Zawe]
+//===== Observações: ==========================================
 //= O Entregador aguenta somente 40 entregas salvas.
-//= Nï¿½o esqueca de alterar as configuraï¿½ï¿½es no final do script.
+//= Não esqueca de alterar as configurações no final do script.
 //=============================================================
 prontera,160,160,4	script	Entregador de Itens	92,{
 
 function	Manager	{
 	if(attachrid(getarg(0))) {
-		mes "Olï¿½, "+strcharinfo(0)+".";
-		mes "Vocï¿½ possui "+getarg(2)+" "+getitemname(getarg(1))+" esperando para ser resgatado.";
-		mes "Vocï¿½ gostï¿½ria de resgata-los nesse exato momento?";
+		mes "Olá, "+strcharinfo(0)+".";
+		mes "Você possui "+getarg(2)+" "+getitemname(getarg(1))+" esperando para ser resgatado.";
+		mes "Você gostária de resgata-los nesse exato momento?";
 		mes " ";
-		mes "Obs: Tenha cuidado na hora de pegar itens nï¿½o transferiveis. Tenha certeza de estar com o personagem certo.";
+		mes "Obs: Tenha cuidado na hora de pegar itens não transferiveis. Tenha certeza de estar com o personagem certo.";
 		getitem getarg(1),getarg(2);
 		close;
 	}
 	if(getarraysize($itemsmanage) > 125) {
-		mes "Espaï¿½o insuficiente. Por favor delete algum envio ou espere um envio ser completado.";
+		mes "Espaço insuficiente. Por favor delete algum envio ou espere um envio ser completado.";
 		close;
 	}
 	for(set .@i,0; .@i < 3; set .@i,.@i + 1) {
@@ -41,7 +41,7 @@ function	InputEntreg	{
 	while(.@itemid < 512) {
 		input .@itemid;
 		if(.@itemid < 512) {
-			mes "ID de Item invï¿½lido.";
+			mes "ID de Item inválido.";
 			mes "Por favor redigite o ID.";
 			next;
 		}
@@ -50,7 +50,7 @@ function	InputEntreg	{
 	while(.@itemquant > .item_quant || .@itemquant == 0) {
 		input .@itemquant;
 		if(.@itemquant > .item_quant || .@itemquant == 0) {
-			mes "Numero invï¿½lido. Digite um numero entre(1 ~ "+.item_quant+").";
+			mes "Numero inválido. Digite um numero entre(1 ~ "+.item_quant+").";
 			mes "Por favor redigite a Quant.";
 			next;
 		}
@@ -59,13 +59,13 @@ function	InputEntreg	{
 }
 
 if(getgmlevel() < .gm_lvl) end;
-mes "O que vocï¿½ deseja fazer?";
+mes "O que você deseja fazer?";
 switch(select("~ Adicionar Envio:~ Alterar Envio:~ Deletar Envio:~ Sair")) {
 next;
 
 case 1:
 	if(.sql) {
-		mes "De que maneira vocï¿½ deseja enviar?";
+		mes "De que maneira você deseja enviar?";
 		set .@menu,select("~ Accound ID:~ Personagem:~ Login:~ Sair");
 		if(.@menu == 4) close;
 		while(.@temp2 < 2000000){
@@ -88,7 +88,7 @@ case 1:
 	close;
 
 case 2:
-	mes "Escolha um dos Envios que vocï¿½ deseja alterar.";
+	mes "Escolha um dos Envios que você deseja alterar.";
 	mes " ";
 	mes "Account ID | Item | Quantidade";
 	for(set .@i,0; .@i < getarraysize($itemsmanage); set .@i,.@i + 3) {
@@ -111,11 +111,11 @@ case 2:
 		input .@newquant;
 		setarray $itemsmanage[((.@menu-1)*3)+2],.@newquant;
 	}
-	mes "Alteraï¿½ï¿½o completada.";
+	mes "Alteração completada.";
 	close;
 
 case 3:
-	mes "Escolha um dos Envios que vocï¿½ deseja deletar.";
+	mes "Escolha um dos Envios que você deseja deletar.";
 	mes " ";
 	mes "Account ID | Item | Quantidade";
 	for(set .@i,0; .@i < getarraysize($itemsmanage); set .@i,.@i + 3) {
@@ -126,7 +126,7 @@ case 3:
 	set .@menu,select(.@menu$);
 	if(.@menu == (.@i/3)+1) close;
 	mes "Tem certeza que deseja deletar esse Envio?";
-	if(select("Sim:Nï¿½o") == 2) close;
+	if(select("Sim:Não") == 2) close;
 	deletearray $itemsmanage[((.@menu-1)*3)],3;
 	mes "Envio deletado com sucesso.";
 	close;
@@ -136,12 +136,12 @@ case 3:
 OnPCLoginEvent:
 	for(set .@i,0; .@i < getarraysize($itemsmanage); set .@i,.@i + 3) {
 		if(getcharid(3) == $itemsmanage[.@i]) {
-			mes "Olï¿½, "+strcharinfo(0)+".";
-			mes "Vocï¿½ possui "+$itemsmanage[.@i+2]+" "+getitemname($itemsmanage[.@i+1])+" esperando para ser resgatado.";
-			mes "Vocï¿½ gostï¿½ria de resgata-los nesse exato momento?";
+			mes "Olá, "+strcharinfo(0)+".";
+			mes "Você possui "+$itemsmanage[.@i+2]+" "+getitemname($itemsmanage[.@i+1])+" esperando para ser resgatado.";
+			mes "Você gostária de resgata-los nesse exato momento?";
 			mes " ";
-			mes "Obs: Tenha cuidado na hora de pegar itens nï¿½o transferiveis. Tenha certeza de estar com o personagem certo.";
-			if(select("Sim:Nï¿½o") == 2) close;
+			mes "Obs: Tenha cuidado na hora de pegar itens não transferiveis. Tenha certeza de estar com o personagem certo.";
+			if(select("Sim:Não") == 2) close;
 			getitem $itemsmanage[.@i+1],$itemsmanage[.@i+2];
 			deletearray $itemsmanage[.@i],3;
 			next;
@@ -151,7 +151,7 @@ OnPCLoginEvent:
 
 OnInit:
 	set .gm_lvl,90;			// Level minimo do GM para utilizar o Npc
-	set .sql,1;				// Servidor usa SQL? 0 = Nï¿½o | 1 = Sim
+	set .sql,1;				// Servidor usa SQL? 0 = Não | 1 = Sim
 	set .item_quant,25;		// Quantidade maxima de item para enviar
 	end;
 

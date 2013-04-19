@@ -2,20 +2,20 @@
 //= Quest Manager
 //===== Por: ==================================================
 //= Zawe
-//===== VersÃ£o Atual: =========================================
+//===== Versão Atual: =========================================
 //= 0.1
-//===== DescriÃ§Ã£o: ==========================================
+//===== Descrição: ==========================================
 //= Shop Quest Manager. Com suporte de apenas 1 Item de Reward 
 //= e mais ou menos 70 de Requerimento,  possivel escolher o 
 //= item atravez de um Shop. No caso de falta de items 
 //= requeridos, o script avisara ao jogador que items faltam.
-//===== ComentÃ¡rios Adicionais: ===============================
-//= 0.1 CriaÃ§Ã£o do Script [Zawe]
-//===== ObservaÃ§Ãµes: ==========================================
+//===== Comentários Adicionais: ===============================
+//= 0.1 Criação do Script [Zawe]
+//===== Observações: ==========================================
 //= Para configurar siga o exemplo:
-//= Ex: Add(535,1,536,1,537,1); - Recebe 1 AbÃ³bora(535) e perde
-//= 1 Sorvete(536) e 1 RaÃ§Ã£o para Bixinho(537)
-//= Mais informaÃ§Ãµes nas linhas 29 e 30.
+//= Ex: Add(535,1,536,1,537,1); - Recebe 1 Abóbora(535) e perde
+//= 1 Sorvete(536) e 1 Ração para Bixinho(537)
+//= Mais informações nas linhas 29 e 30.
 //=============================================================
 prontera,155,170,5	script	Quest Manager	965,{
 function Add;
@@ -25,14 +25,14 @@ end;
  
 OnInit:
     npcshopdelitem "qshop",537;
-    // NÃ£o mexa em nada acima disso
+    // Não mexa em nada acima disso
     // Add(Reward ID,Reward Amount,Required ID,Required Amount,{,...}); {,...} = Infinitamente como Required ID, Required Amount
-    // Ex: Add(535,1,536,1,537,1); - Recebe 1 AbÃ³bora(535) e perde 1 Sorvete(536) e 1 RaÃ§Ã£o para Bixinho(537)
+    // Ex: Add(535,1,536,1,537,1); - Recebe 1 Abóbora(535) e perde 1 Sorvete(536) e 1 Ração para Bixinho(537)
     end;
 
 OnBuyItem:
     if(getarraysize(@bought_nameid) > 1) {
-        mes "Por favor escolha sÃ³ um item.";
+        mes "Por favor escolha só um item.";
         close;
     }
     mes "["+strnpcinfo(1)+"]";
