@@ -30,6 +30,7 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - .twink	- Samuel Soares
+- JAF		- João Angelo Franco
 
 ### Desenvolvedores
 - I am Cold	- Márcio Montenegro
