@@ -39,13 +39,13 @@ hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 	case 2:
 		mes "[Cool Event Corp. Staff]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Eu sinto muito, mas você precisa ser um Aprendiz com nível 6 de habilidade para poder usar o serviço de armazenamento.";
+			mes "Eu sinto muito, mas você precisa ser um Aprendiz com nível 6 de habilidade para poder usar o serviço de Armazém.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "Eu lamento, mas você não tem dinheiro suficiente para usar o serviço de armazenamento.";
-			mes "Para usar o armazenamento, o custo é de 40 zenys.";
+			mes "Eu lamento, mas você não tem dinheiro suficiente para usar o serviço de Armazém.";
+			mes "Para usar o Armazém, o custo é de 40 zeny.";
 			close2;
 			break;
 		}
@@ -87,12 +87,12 @@ hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 			break;
 		}
 		mes "The Pushcart rental";
-		mes "O aluguel do carrinho de mão custa 800 zenys. Você deseja alugar o carrinho?";
+		mes "O aluguel do carrinho de mão custa 800 zeny. Você deseja alugar o carrinho?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
 				mes "[Corp. Eventos Incríveis]";
-				mes "Eu lamento, mas você não possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
+				mes "Eu lamento, mas você não possui zeny suficiente. O Aluguel do carrinho custa 800 zeny.";
 			} else {
 				set Zeny, Zeny - 800;
 				setcart;
@@ -133,13 +133,13 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 		mes "[Corp. Eventos Incríveis]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
 			mes "Eu sinto muito, mas você precisa ser um Aprendiz";
-			mes "com nível 6 de habilidade para poder usar o serviço de armazenamento.";
+			mes "com nível 6 de habilidade para poder usar o serviço de Armazém.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
 			mes "Eu lamento, mas você não tem dinheiro suficiente para usar";
-			mes "o serviço de armazenamento. Para usar o armazenamento, custará 40 zenys.";
+			mes "o serviço de Armazém. Para usar o Armazém, o custo é de 40 zeny.";
 			close2;
 			break;
 		}
@@ -169,8 +169,8 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 			}
 			else {
 				mes "[Corp. Eventos Incríveis]";
-				mes "Eu lamento, mas você não tem dinheiro o suficiente para";
-				mes "usar o serviço de teleporte, que custa 2200 zenys.";
+				mes "Eu lamento, mas você não tem dinheiro suficiente para";
+				mes "usar o serviço de teleporte. O Serviço custa 2200 zeny.";
 			}
 		}
 		close2;
@@ -183,7 +183,7 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Você só pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
+			mes "Você só pode alugar um carrinho se possuir a habilidade 'Usar Carrinho'.";
 			close2;
 			break;
 		}
@@ -198,12 +198,12 @@ rachel,109,138,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffRachel	874,{
 			close2;
 			break;
 		}
-		mes "O aluguel do carrinho custa 800 zenys. Você deseja alugar o carrinho?";
+		mes "O aluguel do carrinho custa 800 zeny. Você deseja alugar o carrinho?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
 				mes "[Eventos Incríveis]";
-				mes "Eu lamento, mas você não possui zenys para pagar o aluguel do carrinho que custa 800 zenys.";
+				mes "Eu lamento, mas você não possui zeny suficiente. O Aluguel do carrinho custa 800 zeny.";
 			} else {
 				set Zeny, Zeny - 800;
 				setcart;
@@ -242,13 +242,13 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 	case 2:
 		mes "[Corp. Eventos Incríveis]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Eu sinto muito, mas você precisa ser um Aprendiz com nível 6 de habilidade para poder usar o serviço de armazenamento.";
+			mes "Eu sinto muito, mas você precisa ser um Aprendiz com nível 6 de habilidade para poder usar o serviço de Armazém.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "Eu lamento, mas você não tem dinheiro suficiente para usar o serviço de de armazenamento.";
-			mes "Para usar o armazenamento, custará 40 zenys.";
+			mes "Eu lamento, mas você não tem dinheiro suficiente para usar o serviço de Armazém.";
+			mes "Para usar o Armazém, o custo é de 40 zeny.";
 			close2;
 			break;
 		}
@@ -278,7 +278,7 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 			}
 			else {
 				mes "[Corp. Eventos Incríveis]";
-				mes "Eu lamento, mas você não tem dinheiro o suficiente para usar o serviço de teleporte que custa 2200 zenys.";
+				mes "Eu lamento, mas você não tem dinheiro o suficiente para usar o serviço de teleporte. O Serviço custa 2200 zeny.";
 			}
 		}
 		close2;
@@ -291,7 +291,7 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Você só pode alugar um carrinho se possuir a abilidade 'Usar Carrinho'.";
+			mes "Você só pode alugar um carrinho se possuir a habilidade 'Usar Carrinho'.";
 			close2;
 			break;
 		}
@@ -307,12 +307,12 @@ veins,208,128,5	script	Corp. Eventos Incríveis::CoolEventCorpStaffVeins	874,{
 			close2;
 			break;
 		}
-		mes "O aluguel do carrinho de mão custa 800 zenys. Você deseja alugar o carrinho de mão?";
+		mes "O aluguel do carrinho de mão custa 800 zeny. Você deseja alugar o carrinho de mão?";
 		next;
 		if(select("Alugar Carrinho:Cancelar") == 1){
 			if(Zeny < 800){
 				mes "[Corp. Eventos Incríveis]";
-				mes "Eu lamento, mas você não possui zenys para pagar o aluguel do carrinho de mão que custa 800 zenys.";
+				mes "Eu lamento, mas você não possui zeny suficiente. O aluguel do carrinho de mão custa 800 zeny.";
 				close2;
 			} else {
 				set Zeny, Zeny - 800;

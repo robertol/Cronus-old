@@ -30,7 +30,7 @@ aldeba_in,96,181,4	script	Serviço Kafra	113,{
 	mes "Precisa de alguma coisa?";
 	mes "alguma coisa?";
 	next;
-	switch(select("Salvar Ponto de Retorno:Usar armazém:Alugar Carrinho:Cancelar")) {
+	switch(select("Salvar Ponto de Retorno:Usar Armazém:Alugar Carrinho:Cancelar")) {
 	case 1:
 		mes "[Kafra Leila]";
 		mes "Seu ponto de retorno";
@@ -273,7 +273,7 @@ yuno,152,187,4	script	Funcionária Kafra::kaf_yuno	860,{
 	mes "Como posso ajudá-lo?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",158,125;
-	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
+	callfunc "F_KafEnd",0,1,"na cidade de Juno";
 }
 
 yuno,327,108,4	script	Funcionária Kafra::kaf_yuno2	860,{

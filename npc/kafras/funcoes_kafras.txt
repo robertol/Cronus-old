@@ -81,7 +81,7 @@ function	script	F_Kafra	{
 			mes "Bem Vindo!";
 			mes "A Corporação Kafra";
 			mes "está sempre ao seu Lado.";
-			mes "Então, como Posso Ajuda-lo?";
+			mes "Então, como Posso Ajudá-lo?";
 			break;
 		case 1:
 			// Niflheim specific message
@@ -239,7 +239,7 @@ function	script	F_KafStor	{
 				}
 				// Standard Message
 				mes "Me Desculpe, mais você não";
-				mes "tem Zenys Suficientes para";
+				mes "tem Zeny Suficiente para";
 				mes "o Serviço de Armazem. É";
 				mes "Necessário para acessar o Armazém "+getarg(1)+" zeny.";
 				return;
@@ -279,7 +279,7 @@ function	script	F_KafStor	{
 //===================================================
 function	script	F_KafTele	{
 	mes "[Funcionária Kafra]";
-	mes "Por Favor , escolha";
+	mes "Por Favor, escolha";
 	mes "seu Destino.";
 	next;
 	set .@menu$, "";
@@ -294,7 +294,7 @@ function	script	F_KafTele	{
 		if (Zeny<@wrpP[.@j]){
 			mes "[Funcionária Kafra]";
 			mes "Me desculpe, mais você não tem";
-			mes "zeny suficientes para o serviço";
+			mes "zeny suficiente para o serviço";
 			mes "de Teleporte. Para Teleportar";
 			mes "para "+@wrpD$[.@j]+" são "+@wrpP[.@j]+" zeny.";
 			close2;
@@ -353,7 +353,7 @@ function	script	F_KafCart	{
 		mes "[Funcionária Kafra]";
 		mes "O aluguel do Carrinho";
 		mes "Custa "+getarg(1)+" zeny. Você";
-		mes "gostaria de Aluga-lo?";
+		mes "gostaria de Alugá-lo?";
 		next;
 		if (select("Alugar Carrinho.:Cancelar") == 2) return 0;
 			if(Zeny<getarg(1)){
@@ -422,12 +422,12 @@ function	script	F_KafEnd	{
 		mes "Seu Ponto de Retorno";
 		mes "foi salvo bem aqui";
 		mes getarg(2)+".";
-		mes "Obrigado por Usar";
+		mes "Obrigado por Ultilizar";
 		mes "os serviços Kafra.";
 	} else if(getarg(0)==0 || getarg(0)==5) {	
 		// Generic End
 		mes "Nós, da Corporação Kafra,";
-		mes "estamos sempre nos esforçando para fornece-lhe os melhores serviços.Estamos Felizes por poder atender suas Necessidades.";
+		mes "estamos sempre nos esforçando para fornece-lhe os melhores serviços. Estamos felizes por poder atender suas Necessidades.";
 	} else if(getarg(0)==1) {
 		// Niflheim End
 		percentheal 0,- 25;
@@ -471,7 +471,7 @@ function	script	F_SetKafCode	{
 		switch (select("Mudar Senha do Armazém -> 5000z:Remover Senha do Armazém -> 1000z:Cancelar")) {
 			Case 1:
 				mes getarg(0);
-				mes "mas primeiro, digite sua ^0000FFAntiga Senha^000000.";
+				mes "Mas primeiro, digite sua ^0000FFAntiga Senha^000000.";
 				set @code,callfunc("F_EntKafCode");
 				if(!@code || @code != #kafra_code) {
 					mes "Senha Incorreta. Você não pode Alterar sua Senha.";
@@ -543,7 +543,7 @@ S_SET:
 	}
 	set Zeny,Zeny-5000;
 	set #kafra_code,@code;
-	mes "Você protegeu seu armazém com uma  Senha secreta.";
+	mes "Você protegeu seu armazém com uma Senha secreta.";
 	mes "Obrigado por usar "+getarg(1)+".";
 	emotion e_thx;
 	return;
@@ -558,7 +558,7 @@ function	script	F_EntKafCode	{
 	set @kafcode_try,@kafcode_try+1;
 	if(@kafcode_try>10) {
 		set @kafcode_try,0;
-		logmes "Hack: Tentaram Acessar a Senha do Armazém.";
+		logmes "Hack: Tentou colocar a senha de armazenamento.";
 	}
 	if(input(@code_) == 1) {
 		mes "Você não pode usar uma Senha tão grande.";
@@ -592,7 +592,7 @@ function	script	F_KafSet	{
 		setarray @viewpY[0], 229, 60, 0, 0;
 	} else if (strnpcinfo(4) == "aldebaran") {
 		setarray @wrpP[0], 1200, 1200, 1800, 1700;
-		setarray @wrpD$[0], "Geffen", "Juno" , "Izlude", "Mjolnir Dead Pit";
+		setarray @wrpD$[0], "Geffen", "Juno" , "Izlude", "Mina Abandonada de Mjolnir";
 	} else if (strnpcinfo(4) == "comodo" ) {
 		setarray @wrpD$[0], "Morroc", "Comodo Ilha do Farol", "Umbala";
 		setarray @wrpP[0], 1800, 1200, 1800;
@@ -600,7 +600,7 @@ function	script	F_KafSet	{
 		setarray @wrpD$[0], "Comodo", "Morroc";
 		setarray @wrpP[0], 1200, 1200;
 	} else if (strnpcinfo(4) == "geffen") {
-		setarray @wrpD$[0], "Prontera", "Al De Baran", "Vila dos Orcs", "Mjolnir Dead Pit";
+		setarray @wrpD$[0], "Prontera", "Al De Baran", "Vila dos Orcs", "Mina Abandonada de Mjolnir";
 		setarray @wrpP[0], 1200, 1200, 1200, 1700;
 		setarray @viewpX[0], 120, 203;
 		setarray @viewpY[0], 62, 123;
