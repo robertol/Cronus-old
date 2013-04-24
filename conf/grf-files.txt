@@ -18,6 +18,5 @@
 //------ Outros ---------------------------
 
 // Diretório da pasta data (sem colocá-la no comando data_dir)
-// ex. -> data_dir: C:\Program Files\Gravity\RO\
-// A pasta data tem que estar em \RO\
-//data_dir: C:\path\to\RO\
+//data_dir: C:\Program Files (x86)\LeveUp! Games\RagnarokOnline\data.grf
+//data_dir: C:\Program Files\LeveUp! Games\RagnarokOnline\data.grf
