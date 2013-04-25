@@ -43,6 +43,6 @@ Equipe de Desenvolvimento
 - Rayzir	- Guilherme Fontenele
 - Eru Yuuko
 - KaduKiller	- Carlos Salles
-- beckdeveloper
+- beckdeveloper - Valderson Rodrigues
 - Apo
 - BOO		- José Filho
