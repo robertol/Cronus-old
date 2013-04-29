@@ -26,19 +26,19 @@ OnRecvCastle2:
 	if (!getcastledata(strnpcinfo(2),1)) {
 		donpcevent strnpcinfo(0)+"::OnStart";
 		// Monster spawns are identical for all castles.
-		monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
+		monster strnpcinfo(2),0,0,"Druida Malígno",1117,10;
 		monster strnpcinfo(2),0,0,"Khalitzburg",1132,4;
-		monster strnpcinfo(2),0,0,"Abysmal Knight",1219,3;
-		monster strnpcinfo(2),0,0,"Executioner",1205,1;
+		monster strnpcinfo(2),0,0,"Cavaleiro do Abismo",1219,3;
+		monster strnpcinfo(2),0,0,"Executor",1205,1;
 		monster strnpcinfo(2),0,0,"Penomena",1216,10;
-		monster strnpcinfo(2),0,0,"Alarm",1193,18;
-		monster strnpcinfo(2),0,0,"Clock",1269,9;
-		monster strnpcinfo(2),0,0,"Raydric Archer",1276,12;
-		monster strnpcinfo(2),0,0,"Wanderer",1208,3;
+		monster strnpcinfo(2),0,0,"Alarme",1193,18;
+		monster strnpcinfo(2),0,0,"Relógio",1269,9;
+		monster strnpcinfo(2),0,0,"Raydric Arqueiro",1276,12;
+		monster strnpcinfo(2),0,0,"Andarilho",1208,3;
 		monster strnpcinfo(2),0,0,"Alice",1275,1;
-		monster strnpcinfo(2),0,0,"Bloody Knight",1268,2;
-		monster strnpcinfo(2),0,0,"Dark Lord",1272,2;
-		monster strnpcinfo(2),0,0,"Tower Keeper",1270,4;
+		monster strnpcinfo(2),0,0,"Cavaleiro Sanguinário",1268,2;
+		monster strnpcinfo(2),0,0,"Senhor das Trevas",1272,2;
+		monster strnpcinfo(2),0,0,"Gerente",1270,4;
 	}
 	if (getcastledata(strnpcinfo(2),9) < 1)
 		disablenpc "Kafra Employee#"+substr(strnpcinfo(2),0,1)+substr(strnpcinfo(2),8,9);
