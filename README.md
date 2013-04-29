@@ -38,6 +38,7 @@ Equipe de Desenvolvimento
 - Wolf		- João Victor Senos
 - Golen Maker	- Ligleyson Warnielle
 - Axl		- José Goís
+- Cainho	- Caio Mateus
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
