@@ -2956,7 +2956,7 @@ int npc_do_atcmd_event(struct map_session_data* sd, const char* command, const c
 		}
 	}
 
-	setd_sub(st, NULL, ".@atcmd_numparameters", 0, (void *)__64BPTRSIZE(j), NULL);
+	setd_sub(st, NULL, ".@atcmd_numparameters", 0, (void *)__64BPRTSIZE(j), NULL);
 	aFree(temp);
 
 	run_script_main(st);
@@ -3399,6 +3399,8 @@ const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, const char
 		map[m].flag.leaves=state;
 	else if (!strcmpi(w3,"nightenabled"))
 		map[m].flag.nightenabled=state;
+	else if (!strcmpi(w3,"nogo"))
+		map[m].flag.nogo=state;
 	else if (!strcmpi(w3,"noexp")) {
 		map[m].flag.nobaseexp=state;
 		map[m].flag.nojobexp=state;

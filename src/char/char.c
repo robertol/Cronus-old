@@ -1,4 +1,4 @@
-// Copyright (c) Cronus Dev Team, licensed under GNU GPL.
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
 // See the LICENSE file
 // Portions Copyright (c) Athena Dev Teams
 
@@ -125,7 +125,7 @@ int max_connect_user = -1;
 int gm_allow_group = -1;
 int autosave_interval = DEFAULT_AUTOSAVE_INTERVAL;
 int start_zeny = 0;
-int start_items[MAX_START_ITEMS*2];
+int start_items[64]; // 32 itens a partir do permitido.
 int guild_exp_rate = 100;
 
 //Custom limits for the fame lists. [Skotlex]
@@ -1059,6 +1059,13 @@ int mmo_chars_fromsql(struct char_session_data* sd, uint8* buf)
 		j += mmo_char_tobuf(WBUFP(buf, j), &p);
 	}
 	
+#if PACKETVER >= 20130000
+	/* for some reason the client doesn't like "3" characters (yes...3) we gotta send a fake one or it wont display any =_= */
+	if( j == 432 ){/* we just duplicate the last visually the client will say 4 chars instead of 3 though >_> */
+		j += mmo_char_tobuf(WBUFP(buf, j), &p);
+	}
+#endif
+
 	memset(sd->new_name,0,sizeof(sd->new_name));
 
 	SqlStmt_Free(stmt);
@@ -1878,7 +1885,7 @@ int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
 
 	return 106+offset;
 }
-int mmo_char_send006b(int fd, struct char_session_data* sd);	
+	
 //----------------------------------------
 // [Ind/Hercules] notify client about charselect window data
 //----------------------------------------
@@ -1896,7 +1903,10 @@ void mmo_char_send082d(int fd, struct char_session_data* sd) {
 	WFIFOB(fd,8) = sd->char_slots;
 	memset(WFIFOP(fd,9), 0, 20); // unused bytes
 	WFIFOSET(fd,29);
-	mmo_char_send006b(fd,sd);
+	WFIFOHEAD(fd, 6);
+	WFIFOW(fd,0) = 0x9a0;
+	WFIFOL(fd,2) = 1;
+	WFIFOSET(fd, 6);
 	
 }
 //----------------------------------------
@@ -4329,6 +4339,20 @@ int parse_char(int fd)
 					RFIFOSKIP(fd, 8);
 				}
 			break;
+			
+			/* [Ind/Hercules] after hours reading over and over Shakto's network report, finally found this little ***hole */
+			case 0x9a1:
+				FIFOSD_CHECK(2);
+				{
+					int j = 4;
+					RFIFOSKIP(fd, 2);
+					WFIFOHEAD(fd,j + (MAX_CHARS*MAX_CHAR_BUF));
+					WFIFOW(fd,0) = 0x99d;
+					j+=mmo_chars_fromsql(sd, WFIFOP(fd,j));
+					WFIFOW(fd,2) = j;
+					WFIFOSET(fd,j);
+				}
+				break;
 				
 			// unknown packet received
 			default:
@@ -4791,7 +4815,7 @@ int char_config_read(const char* cfgName)
 	
 			i = 0;
 			split = strtok(w2, ",");
-			while (split != NULL && i < MAX_START_ITEMS*2) {
+			while (split != NULL) {
 			split2 = split;
 			split = strtok(NULL, ",");
 			start_items[i] = atoi(split2);

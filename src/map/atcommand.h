@@ -1,89 +1,51 @@
-// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
-// See the LICENSE file
-// Portions Copyright (c) Athena Dev Teams
- 
- #ifndef _ATCOMMAND_H_
- #define _ATCOMMAND_H_
- 
-/**
- * Declarações
- **/
+// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
+// For more information, see LICENCE in the main folder
+
+#ifndef _ATCOMMAND_H_
+#define _ATCOMMAND_H_
+
 struct map_session_data;
-struct AtCommandInfo;
 
-/**
- * Definições
- **/
-#define ATCOMMAND_LENGTH 50
-#define MAX_MSG 1500
+//This is the distance at which @autoloot works,
+//if the item drops farther from the player than this,
+//it will not be autolooted. [Skotlex]
+//Note: The range is unlimited unless this define is set.
+//#define AUTOLOOT_DISTANCE AREA_SIZE
 
-/**
- * Enumerações
- **/
- typedef enum {
+extern char atcommand_symbol;
+extern char charcommand_symbol;
+
+typedef enum {
 	COMMAND_ATCOMMAND = 1,
 	COMMAND_CHARCOMMAND = 2,
- } AtCommandType;
+} AtCommandType;
 
-/**
- * Typedef
- **/
-typedef bool (*AtCommandFunc)(const int fd, struct map_session_data* sd, const char* command, const char* message,struct AtCommandInfo *info);
-typedef struct AtCommandInfo AtCommandInfo;
-typedef struct AliasInfo AliasInfo;
+typedef int (*AtCommandFunc)(const int fd, struct map_session_data* sd, const char* command, const char* message);
 
-/**
- * Structures
- **/
-struct AliasInfo {
-	AtCommandInfo *command;
-	char alias[ATCOMMAND_LENGTH];
-};
+bool is_atcommand(const int fd, struct map_session_data* sd, const char* message, int type);
 
-struct AtCommandInfo {
-	char command[ATCOMMAND_LENGTH];
-	AtCommandFunc func;
-	char *at_groups;/* quick @commands "can-use" lookup */
-	char *char_groups;/* quick @charcommands "can-use" lookup */
-	char *help;/* quick access to this @command's help string */
-	bool log;/* whether to log this command or not, regardless of group settings */
-};
+void do_init_atcommand(void);
+void do_final_atcommand(void);
+void atcommand_db_load_groups(int* group_ids);
 
-struct atcmd_binding_data {
-	char command[ATCOMMAND_LENGTH];
-	char npc_event[ATCOMMAND_LENGTH];
-	int group_lv;
-	int group_lv_char;
-	bool log;
-};
-
-/**
- * Interface
- **/
-struct atcommand_interface {
-	unsigned char at_symbol;
-	unsigned char char_symbol;
-	/* atcommand binding */
-	struct atcmd_binding_data** binding;
-	int binding_count;
-	/* */
-	void (*init) (void);
-	void (*final) (void);
-	/* */
-	bool (*parse) (const int fd, struct map_session_data* sd, const char* message, int type);
-	bool (*can_use) (struct map_session_data *sd, const char *command);
-	bool (*can_use2) (struct map_session_data *sd, const char *command, AtCommandType type);
-	void (*load_groups) (int* group_ids);
-	AtCommandInfo* (*exists) (const char* name);
-	int (*msg_read) (const char* cfgName);
-	void (*final_msg) (void);
-	/* atcommand binding */
-	struct atcmd_binding_data* (*get_bind_byname) (const char* name);
-} atcommand_s;
-
-struct atcommand_interface *atcommand;
+bool atcommand_exists(const char* name);
 
 const char* msg_txt(int msg_number);
-void atcommand_defaults(void);
+int msg_config_read(const char* cfgName);
+void do_final_msg(void);
+
+extern int atcmd_binding_count;
+
+// @commands (script based)
+struct atcmd_binding_data {
+	char command[50];
+	char npc_event[50];
+	int level;
+	int level2;
+};
+
+struct atcmd_binding_data** atcmd_binding;
+
+struct atcmd_binding_data* get_atcommandbind_byname(const char* name);
 
 #endif /* _ATCOMMAND_H_ */

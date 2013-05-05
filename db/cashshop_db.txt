@@ -1,55 +1,45 @@
-//-------------------------------------------------------------
-// _________                                    
-// \_   ___ \_______  ____   ____  __ __  ______
-// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
-// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
-//  \______  /|__|   \____/|___|  /____//____  >
-//         \/                   \/           \/  
-//		     http://forum.cronus-emulator.com
-//--------------------------------------------------------------
-// Suporte ao Cash Shop
-//--------------------------------------------------------------
+// Hercules Cash Shop Database
+// Format: 
+// Tab ID or Tab Name, ItemID or Item Name, Price
+//
+// Tabs:
+// 0 = New
+// 1 = Popular
+// 2 = Limited
+// 3 = Rental
+// 4 = Permanent
+// 5 = Scroll
+// 6 = Usable
+// 7 = Other
 
-cash_shop: (
-{
-  cat_0: { //New
-    Apple:100
-    ID531:250
-  }
-  
-  cat_1: { //Popular
-	ID513:100
-    Banana_Juice:250
-  }
-  
-  cat_2: { //Limited
-    Grape:100
-    ID533:250
-  }
-  
-  cat_3: { //Rental
-    ID515:100
-    Carrot_Juice:250
-  }
-  
-  cat_4: { //Permanent
-    Green_Herb:100
-    ID510:250
-  }
-  
-  cat_5: { //Scroll
-    ID501:100
-    ID502:250
-  }
-  
-  cat_6: { //Usable
-    White_Potion:150
-    Blue_Potion:500
-  }
-  
-  cat_7: { //Other
-    ID909:400
-    ID907:500
-  }
-}
-)
+//New
+New,Apple,100
+0,531,250
+
+//Popular
+1,513,100
+Popular,Banana_Juice,250
+
+//Limited
+2,Grape,100
+Limited,533,250
+
+//Rental
+Rental,515,100
+3,Carrot_Juice,250
+
+//Permanent
+4,Green_Herb,100
+Permanent,510,250
+
+//Scroll
+5,501,100
+5,502,250
+
+//Usable
+usable,White_Potion,150
+usable,Blue_Potion,500
+
+//Other
+7,909,400
+7,907,500
