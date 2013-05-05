@@ -330,7 +330,7 @@ int unit_walktoxy( struct block_list *bl, short x, short y, int flag)
 		&& wpd.path_len > 14 ) // Official number of walkable cells is 14 if and only if there is an obstacle between. [malufett]
 		return 0;
 #endif
-	if( battle_config.max_walk_path < wpd.path_len )
+	if( (battle_config.max_walk_path < wpd.path_len) && (bl->type != BL_NPC) )
 		return 0;
 
 	if (flag&4 && DIFF_TICK(ud->canmove_tick, gettick()) > 0 &&
@@ -2099,8 +2099,8 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 				chat_leavechat(sd,0);
 			if(sd->trade_partner)
 				trade_tradecancel(sd);
-			buyingstore_close(sd);
-			searchstore_close(sd);
+			buyingstore->close(sd);
+			searchstore->close(sd);
 			if(sd->state.storage_flag == 1)
 				storage_storage_quit(sd,0);
 			else if (sd->state.storage_flag == 2)

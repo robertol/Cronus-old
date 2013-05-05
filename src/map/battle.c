@@ -3379,6 +3379,26 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 
 	if(skill_id == CR_GRANDCROSS || skill_id == NPC_GRANDDARKNESS)
 		return wd; //Enough, rest is not needed.
+		
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+	if( src && skill_id ) {
+   	 for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+      	if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+			if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+				if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+				continue;
+			if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+				continue;
+        }
+        if( wd.damage > map[src->m].zone->capped_skills[i]->cap )
+			wd.damage = map[src->m].zone->capped_skills[i]->cap;
+        if( wd.damage2 > map[src->m].zone->capped_skills[i]->cap )
+			wd.damage2 = map[src->m].zone->capped_skills[i]->cap;
+        break;
+      }
+    }
+  }
+#endif
 
 	if (sd)	{
 		if (skill_id != CR_SHIELDBOOMERANG) //Only Shield boomerang doesn't takes the Star Crumbs bonus.
@@ -3406,7 +3426,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	}
 
     //Card Fix, tsd side
-    if(!sd && tsd) //if player on player then it was already measured above
+    if(tsd) //if player on player then it was already measured above
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, flag.lh, wd.flag);
 
 	if( flag.infdef ) { //Plants receive 1 damage when hit
@@ -4071,6 +4091,26 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 					MATK_ADD(50);
 			}
 		}
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+		if( src && skill_id ) {
+			for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+        if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+          if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+            if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+              continue;
+            if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+              continue;
+          }
+          if( ad.damage > map[src->m].zone->capped_skills[i]->cap )
+			ad.damage = map[src->m].zone->capped_skills[i]->cap;
+          if( ad.damage2 > map[src->m].zone->capped_skills[i]->cap )
+			ad.damage2 = map[src->m].zone->capped_skills[i]->cap;
+          break;
+        }
+      }
+    }
+#endif
+
 #ifdef RENEWAL
 		ad.damage = battle->calc_cardfix(BF_MAGIC, src, target, nk, s_ele, 0, ad.damage, 0, ad.flag);
 #endif
@@ -4455,8 +4495,27 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 		}
 	}
 
-    md.damage =  battle->calc_cardfix(BF_MISC, src, target, nk, s_ele, 0, md.damage, 0, md.flag);
-
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+	if( src && skill_id ) {
+		for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+				if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+				continue;
+          if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+				continue;
+			}
+        if( md.damage > map[src->m].zone->capped_skills[i]->cap )
+			md.damage = map[src->m].zone->capped_skills[i]->cap;
+        if( md.damage2 > map[src->m].zone->capped_skills[i]->cap )
+			md.damage2 = map[src->m].zone->capped_skills[i]->cap;
+        break;
+      }
+    }
+  }
+#endif
+    md.damage = battle->calc_cardfix(BF_MISC, src, target, nk, s_ele, 0, md.damage, 0, md.flag);
+	
 	if (sd && (i = pc_skillatk_bonus(sd, skill_id)))
 		md.damage += md.damage*i/100;
 
@@ -4530,6 +4589,28 @@ struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct bl
 		memset(&d,0,sizeof(d));
 		break;
 	}
+	
+#ifdef HMAP_ZONE_DAMAGE_CAP_TYPE
+  if( bl && skill_id ) {
+    int i;
+    for(i = 0; i < map[bl->m].zone->capped_skills_count; i++) {
+      if( skill_id == map[bl->m].zone->capped_skills[i]->nameid && (map[bl->m].zone->capped_skills[i]->type & bl->type) ) {
+        if( bl->type == BL_MOB && map[bl->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+          if( (((TBL_MOB*)bl)->status.mode&MD_BOSS) && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+            continue;
+          if( ((TBL_MOB*)bl)->special_state.clone && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+            continue;
+        }
+        if( d.damage > map[bl->m].zone->capped_skills[i]->cap )
+			d.damage = map[bl->m].zone->capped_skills[i]->cap;
+        if( d.damage2 > map[bl->m].zone->capped_skills[i]->cap )
+			d.damage2 = map[bl->m].zone->capped_skills[i]->cap;
+        break;
+      }
+    }
+  }
+#endif
+
 	if( d.damage + d.damage2 < 1 ) { //Miss/Absorbed
 		//Weapon attacks should go through to cause additional effects.
 		if (d.dmg_lv == ATK_DEF /*&& attack_type&(BF_MAGIC|BF_MISC)*/) // Isn't it that additional effects don't apply if miss?
@@ -5875,7 +5956,7 @@ void Hercules_report(char* date, char *time_c) {
 	enum config_table {
 		C_CIRCULAR_AREA         = 0x0001,
 		C_CELLNOSTACK           = 0x0002,
-		C_BETA_THREAD_TEST      = 0x0004,
+		//C_BETA_THREAD_TEST      = 0x0004, (Slot Free)
 		C_SCRIPT_CALLFUNC_CHECK = 0x0008,
 		C_OFFICIAL_WALKPATH     = 0x0010,
 		C_RENEWAL               = 0x0020,
@@ -5904,10 +5985,6 @@ void Hercules_report(char* date, char *time_c) {
 
 #ifdef CELL_NOSTACK
 	config |= C_CELLNOSTACK;
-#endif
-
-#ifdef BETA_THREAD_TEST
-	config |= C_BETA_THREAD_TEST;
 #endif
 
 #ifdef SCRIPT_CALLFUNC_CHECK
@@ -5954,7 +6031,7 @@ void Hercules_report(char* date, char *time_c) {
 	if( db_use_sqldbs )
 		config |= C_SQL_DBS;
 
-	if( log_config.sql_logs )
+	if( logs->config.sql_logs )
 		config |= C_SQL_LOGS;
 
 #define BFLAG_LENGTH 35
@@ -6106,8 +6183,10 @@ int battle_config_read(const char* cfgName)
 
 	count--;
 
-	if (count == 0)
+	if (count == 0) {
 		battle->config_adjust();
+		clif->bc_ready();
+	}
 
 	return 0;
 }

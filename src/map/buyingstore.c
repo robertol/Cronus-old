@@ -12,6 +12,7 @@
 #include "clif.h"  // clif->buyingstore_*
 #include "log.h"  // log_pick_pc, log_zeny
 #include "pc.h"  // struct map_session_data
+#include "chrif.h"
 
 
 /// constants (client-side restrictions)
@@ -230,7 +231,7 @@ void buyingstore_open(struct map_session_data* sd, int account_id)
 		return;
 	}
 
-	if( !searchstore_queryremote(sd, account_id) && ( sd->bl.m != pl_sd->bl.m || !check_distance_bl(&sd->bl, &pl_sd->bl, AREA_SIZE) ) )
+	if( !searchstore->queryremote(sd, account_id) && ( sd->bl.m != pl_sd->bl.m || !check_distance_bl(&sd->bl, &pl_sd->bl, AREA_SIZE) ) )
 	{// out of view range
 		return;
 	}
@@ -270,13 +271,13 @@ void buyingstore_trade(struct map_session_data* sd, int account_id, unsigned int
 		return;
 	}
 
-	if( !searchstore_queryremote(sd, account_id) && ( sd->bl.m != pl_sd->bl.m || !check_distance_bl(&sd->bl, &pl_sd->bl, AREA_SIZE) ) )
+	if( !searchstore->queryremote(sd, account_id) && ( sd->bl.m != pl_sd->bl.m || !check_distance_bl(&sd->bl, &pl_sd->bl, AREA_SIZE) ) )
 	{// out of view range
 		clif->buyingstore_trade_failed_seller(sd, BUYINGSTORE_TRADE_SELLER_FAILED, 0);
 		return;
 	}
 
-	searchstore_clearremote(sd);
+	searchstore->clearremote(sd);
 
 	if( pl_sd->status.zeny < pl_sd->buyingstore.zenylimit )
 	{// buyer lost zeny in the mean time? fix the limit
@@ -380,6 +381,11 @@ void buyingstore_trade(struct map_session_data* sd, int account_id, unsigned int
 		clif->buyingstore_delete_item(sd, index, amount, pl_sd->buyingstore.items[listidx].price);
 		clif->buyingstore_update_item(pl_sd, nameid, amount);
 	}
+	
+	if( save_settings&128 ) {
+		chrif_save(sd, 0);
+		chrif_save(pl_sd, 0);
+	}
 
 	// check whether or not there is still something to buy
 	ARR_FIND( 0, pl_sd->buyingstore.slots, i, pl_sd->buyingstore.items[i].amount != 0 );
@@ -463,11 +469,23 @@ bool buyingstore_searchall(struct map_session_data* sd, const struct s_search_st
 			;
 		}
 
-		if( !searchstore_result(s->search_sd, sd->buyer_id, sd->status.account_id, sd->message, it->nameid, it->amount, it->price, buyingstore_blankslots, 0) )
+		if( !searchstore->result(s->search_sd, sd->buyer_id, sd->status.account_id, sd->message, it->nameid, it->amount, it->price, buyingstore_blankslots, 0) )
 		{// result set full
 			return false;
 		}
 	}
 
 	return true;
+}
+void buyingstore_defaults(void) {
+	buyingstore = &buyingstore_s;
+  
+	buyingstore->setup = buyingstore_setup;
+	buyingstore->create = buyingstore_create;
+	buyingstore->close = buyingstore_close;
+	buyingstore->open = buyingstore_open;
+	buyingstore->trade = buyingstore_trade;
+	buyingstore->search = buyingstore_search;
+	buyingstore->searchall = buyingstore_searchall;
+
 }

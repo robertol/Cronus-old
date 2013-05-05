@@ -1,3 +1,12 @@
+//-------------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//		     http://forum.cronus-emulator.com
+//--------------------------------------------------------------
 //id,range,hit,inf,element,nk,splash,max,list_num,castcancel,cast_defence_rate,inf2,maxcount,skill_type,blow_count,name,description
 // 01 ID
 // 02 range (combo skills do not check for range when used,
@@ -38,7 +47,6 @@
 //    0x1000- disable usage on enemies (for non-offensive skills).
 //    0x2000- skill ignores land protector (e.g. arrow shower)
 //    0x4000- chorus skill
-//    0x8000- skill wont be passed to clones
 // 13 maxcount: max amount of skill instances to place on the ground when
 //    player_land_skill_limit/monster_land_skill_limit is enabled. For skills
 //    that attack using a path, this is the path length to be used.
