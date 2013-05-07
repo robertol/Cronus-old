@@ -2523,7 +2523,7 @@ REPLACE INTO `item_db` VALUES (5321,'Indonesian_Bandana','Bandana Merah Putih',5
 REPLACE INTO `item_db` VALUES (5322,'Scarf','Kerchief',5,20,NULL,100,NULL,2,NULL,NULL,0xFFFFFFFF,7,2,256,NULL,24,1,343,'bonus bMdef,2; bonus bFlee,5;',NULL,NULL);
 REPLACE INTO `item_db` VALUES (5323,'Misstrance_Crown','Misstrance Crown',5,20,NULL,0,NULL,10,NULL,NULL,0xFFFFFFFF,7,2,256,NULL,NULL,NULL,165,'bonus bAllStats,2;',NULL,NULL);
 REPLACE INTO `item_db` VALUES (5324,'Little_Angel_Doll','Little Angel Doll',5,20,NULL,300,NULL,2,NULL,NULL,0xFFFFFFFF,7,2,256,NULL,10,1,344,'bonus bDex,3; bonus4 bAutoSpellWhenHit,"CR_GRANDCROSS",3,30,0;',NULL,NULL);
-REPLACE INTO `item_db` VALUES (5325,'Robo_Eye','Robo Eye',5,20,NULL,200,NULL,2,NULL,NULL,0xFFFFFFFF,7,2,512,NULL,10,NULL,345,'bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; bonus bMatkRate,2; bonus bDex,1;',NULL,NULL);
+REPLACE INTO `item_db` VALUES (5325,'Robo_Eye','Robo Eye',5,20,NULL,200,NULL,2,NULL,NULL,0xFFFFFFFF,7,2,512,NULL,10,NULL,345,'bonus bAtkRate,3; bonus bMatkRate,3; bonus bDex,1;',NULL,NULL);
 REPLACE INTO `item_db` VALUES (5326,'Masquerade_C','Masquerade C',5,1,NULL,0,NULL,1,NULL,NULL,0xFFFFFFFF,7,2,512,NULL,NULL,NULL,78,'bonus2 bAddRace,RC_DemiHuman,7;',NULL,NULL);
 REPLACE INTO `item_db` VALUES (5327,'Orc_Hero_Helm_C','Refined Helmet of Orc Hero',5,1,NULL,0,NULL,10,NULL,NULL,0xFFFFFFFE,7,2,768,NULL,NULL,NULL,178,'bonus bStr,5; bonus bVit,3;',NULL,NULL);
 REPLACE INTO `item_db` VALUES (5328,'Evil_Wing_Ears_C','Evil Wing Ears C',5,1,NULL,0,NULL,2,NULL,NULL,0xFFFFFFFF,7,2,512,NULL,NULL,NULL,152,'bonus bStr,1;',NULL,NULL);
