@@ -1,14 +1,16 @@
-//===== Hercules Script ======================================
-//= Universal Rental NPC
-//===== By: ==================================================
+//===== Cronus Script ==========================================
+//= Negociante
+//===== Por: ===================================================
 //= Euphy
-//===== Current Version: =====================================
-//= 1.0
-//===== Description: =========================================
-//= One-click automatic mount rentals.
-//============================================================
+//===== Versão Atual: ==========================================
+//= 1.1
+//===== Descrição: =============================================
+//= Concede montárias, peco, carrinhos e falcões em um clique.
+//===== Comentários Adicionais: ================================
+//= 1.1 Realizado algumas alterações. [Cainho]
+//==============================================================
 
-prontera,124,201,1	script	Universal Rental NPC	726,{
+prontera,124,201,1	script	Negociante	790,{
 	if (ismounting()) {
 		message strcharinfo(0),"Remova sua montaria, primeiramente.";
 		close; }

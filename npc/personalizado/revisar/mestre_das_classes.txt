@@ -1,31 +1,32 @@
-//===== rAthena Script =======================================
-//= Job Master
-//===== By: ==================================================
+//===== Cronus Script ============================================
+//= Mestre das Classes
+//===== Por: =====================================================
 //= Euphy
-//===== Current Version: =====================================
-//= 1.3
-//===== Compatible With: ===================================== 
-//= rAthena SVN r16114+
-//===== Description: =========================================
-//= A fully functional job changer.
-//===== Additional Comments: =================================  
+//===== Versão Atual: ============================================
+//= 1.4
+//===== Compatível Com: ==========================================
+//= Cronus SVN
+//===== Descrição: ===============================================
+//= Troca sua classe sem necessidade de quest.
+//===== Comentários Adicionais: ==================================
 //= 1.1 Fixed reset on Baby job change. [Euphy]
 //= 1.2 Added Expanded Super Novice support and initial Kagerou/Oboro support. [Euphy]
 //= 1.3 Kagerou/Oboro added. [Euphy]
-//============================================================
+//= 1.4 Traduzido para Português. [Cainho]
+//================================================================
 
-prontera,153,193,6	script	Job Master	123,{
+prontera,153,193,6	script	Mestre das Classes	872,{
 function Job_Menu; function A_An;
 
-	mes "[Job Master]";
+	mes "[Mestre das Classes]";
 	if (Class > 4049) {
-		mes "No more jobs are available.";
+		mes "Não existem mais expansões para sua classe?";
 	}
 	if (checkfalcon() || checkcart() || checkriding() || ismounting()) {
-		mes "Please remove your "+((checkfalcon())?"falcon":"")+((checkcart())?"cart":"")+((checkriding())?"Peco":"")+((ismounting())?"mount":"")+" before proceeding.";
+		mes "Por favor remova seu "+((checkfalcon())?"falcão":"")+((checkcart())?"carrinho":"")+((checkriding())?"Peco":"")+((ismounting())?"montaria":"")+" para continuar.";
 	}
 	if (.SkillPointCheck && SkillPoint) {
-		mes "Please use all your skill points before proceeding.";
+		mes "Por favor use todos os seus pontos de habilidade para continuar.";
 	}
 	close;
 
@@ -34,25 +35,25 @@ function Job_Menu; function A_An;
 	if (.@i > 6 && .@i < 22) {
 		if (BaseLevel < .Rebirth[0] || JobLevel < .Rebirth[1]) {
 			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .Rebirth[1]-JobLevel;
-			mes "You need "+((.@blvl>0)?.@blvl+" more base levels "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" more job levels ":"")+"to continue.";
+			mes "Você precisa de mais "+((.@blvl>0)?.@blvl+" níveis de base e de mais "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" níveis de classe ":"")+"para continuar.";
 			close;
 		}
 		if (Class > 21) {
-			mes "Switch to third class?";
+			mes "Avançar para a Terceira Classe?";
 			next;
 			Job_Menu(roclass(.@eac|EAJL_THIRD));
 			close;
 		}
 		while(1) {
-			mes "Select an option.";
+			mes "Selecione uma opção.";
 			next;
-			set .@i, select(" ~ ^0055FFRebirth^000000:"+((.ThirdClass)?" ~ ^FF0000Third Class^000000":"")+": ~ ^777777Cancel^000000");
+			set .@i, select(" ~ ^0055FFRenascer^000000:"+((.ThirdClass)?" ~ ^FF0000Terceira Classe^000000":"")+": ~ ^777777Sair^000000");
 			if (.@i==3) close;
-			mes "[Job Master]";
-			mes "Are you sure?";
+			mes "[Mestre das Classes]";
+			mes "Você tem certeza?";
 			next;
 			Job_Menu(((.@i==1)?4001:roclass(.@eac|EAJL_THIRD)));
-			mes "[Job Master]";
+			mes "[Mestre das Classes]";
 		}
 	}
 	set .@j1, roclass(.@eac|EAJL_2_1); set .@j2,roclass(.@eac|EAJL_2_2);
@@ -61,40 +62,40 @@ function Job_Menu; function A_An;
 	if (.@exp[0] && .ThirdClass) {
 		if (BaseLevel < .Rebirth[0] || JobLevel < .@exp[1]) {
 			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .@exp[1]-JobLevel;
-			mes "You need "+((.@blvl>0)?.@blvl+" more base levels "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" more job levels ":"")+"to continue.";
+			mes "Você precisa de mais "+((.@blvl>0)?.@blvl+" níveis de base e de mais "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" níveis de classe ":"")+"para continuar.";
 			close;
 		}
-		mes "Switch to "+jobname(.@exp[0])+"?";
+		mes "Mudar para "+jobname(.@exp[0])+"?";
 		next;
 		Job_Menu(.@exp[0]);
 		close;
 	}
 	if (.@eac&EAJL_2)
 		if (.@eac&(EAJL_UPPER|EAJL_BABY) || roclass(.@eac|EAJL_UPPER) == -1) {
-			mes "No more jobs are available.";
+			mes "Não existem mais expansões para sua classe.";
 			close;
 		}
 	if ((.@eac&EAJ_BASEMASK) == EAJ_NOVICE) {
 		if (JobLevel < .JobReq[0])
 			mes "A job level of "+.JobReq[0]+" is required to change into the 1st Class.";
 		else if (Class == 4001 && .LastJob && lastJob) {
-			mes "Switch classes now?";
+			mes "Mudar de classe agora?";
 			next;
 			Job_Menu(roclass((eaclass(lastJob)&EAJ_BASEMASK)|EAJL_UPPER));
 		} else switch(Class) {
 			case 0: Job_Menu(1,2,3,4,5,6,23,4046,24,25,4023);
 			case 4001: Job_Menu(4002,4003,4004,4005,4006,4007);
 			case 4023: Job_Menu(4024,4025,4026,4027,4028,4029,4045);
-			default: mes "An error has occurred."; break;
+			default: mes "Ocorreu um erro."; break;
 		}
 		close;
 	}
 	if (roclass(.@eac|EAJL_2_1) == -1 || roclass(.@eac|EAJL_2_2) == -1)
 		mes "No more jobs are available.";
 	else if (!(.@eac&EAJL_2) && JobLevel < .JobReq[1])
-		mes "A job level of "+.JobReq[1]+" is required to change into the 2nd Class.";
+		mes "É necessário possuir nível de classe "+.JobReq[1]+" para mudar para a Segunda Classe.";
 	else if (.LastJob && lastJob && (.@eac&EAJL_UPPER)) {
-		mes "Switch classes now?";
+		mes "Mudar de classe agora?";
 		next;
 		Job_Menu(lastJob+4001);
 	} else
@@ -104,7 +105,7 @@ function Job_Menu; function A_An;
 function Job_Menu {
 	while(1) {
 		if (getargcount() > 1) {
-			mes "Select a job.";
+			mes "Selecione uma classe.";
 			set .@menu$,"";
 			for(set .@i,0; .@i<getargcount(); set .@i,.@i+1)
 				set .@menu$, .@menu$+" ~ "+jobname(getarg(.@i))+":";
@@ -113,18 +114,18 @@ function Job_Menu {
 			set .@i, getarg(select(.@menu$)-1,0);
 			if (!.@i) close;
 			if ((.@i == 23 || .@i == 4045) && BaseLevel < .SNovice) {
-				mes "[Job Master]";
-				mes "A base level of "+.SNovice+" is required to turn into a "+jobname(.@i)+".";
+				mes "[Mestre das Classes]";
+				mes "É necessário possuir nível de classe "+.SNovice+" para tornar-se "+(Sex?"Um":"Uma")+" "+jobname(.@i)+".";
 				close;
 			}
-			mes "[Job Master]";
-			mes "Are you sure?";
+			mes "[Mestre das Classes]";
+			mes "Tem certeza?";
 			next;
 		} else
 			set .@i, getarg(0);
-		if (select(" ~ Change into ^0055FF"+jobname(.@i)+"^000000 class: ~ ^777777"+((getargcount() > 1)?"Go back":"Cancel")+"^000000") == 1) {
-			mes "[Job Master]";
-			mes "You are now "+A_An(jobname(.@i))+"!";
+		if (select(" ~ Mudar para ^0055FF"+jobname(.@i)+"^000000 class: ~ ^777777"+((getargcount() > 1)?"Voltar":"Sair")+"^000000") == 1) {
+			mes "[Mestre das Classes]";
+			mes "Agora você é "+(Sex?"Um":"Uma")+" "+A_An(jobname(.@i))+"!";
 			if (.@i==4001 && .LastJob) set lastJob, Class;
 			jobchange .@i;
 			if (.@i==4001 || .@i==4023) resetlvl(1);
@@ -133,7 +134,7 @@ function Job_Menu {
 			close;
 		}
 		if (getargcount() == 1) return;
-		mes "[Job Master]";
+		mes "[Mestre das Classes]";
 	}
 	end;
 }
@@ -142,8 +143,8 @@ function A_An {
 	setarray .@A$[0],"a","e","i","o","u";
 	set .@B$, "_"+getarg(0);
 	for(set .@i,0; .@i<5; set .@i,.@i+1)
-		if (compare(.@B$,"_"+.@A$[.@i])) return "an "+getarg(0);
-	return "a "+getarg(0);
+		if (compare(.@B$,"_"+.@A$[.@i])) return ""+(Sex?"Um":"Uma")+" "+getarg(0);
+	return ""+(Sex?"Um":"Uma")+" "+getarg(0);
 }
 
 Get_Platinum:
