@@ -58,7 +58,7 @@ prt_in,88,105,2	script	Recrutador	105,{
 		mes "Quer que eu te mande para lá?";
 		next;
 		switch(select("Ir para a entrada dos esgotos.:Cancelar")){
-			case 1: warp "prt_fild05.gat",274,208; end;
+			case 1: warp "prt_fild05",274,208; end;
 			case 2: close;
 		}
 	}
@@ -137,7 +137,7 @@ prt_in,88,105,2	script	Recrutador	105,{
 }
 
 
-prt_fild05.gat,270,212,5	script	Encarregado dos Esgotos::prte	105,{
+prt_fild05,270,212,5	script	Encarregado dos Esgotos::prte	105,{
 	mes "[Encarregado dos Esgotos]";
 	if(MISC_QUEST & 8){
 		mes "Esta é a entrada para os esgotos.";
