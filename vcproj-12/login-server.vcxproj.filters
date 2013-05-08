@@ -13,6 +13,9 @@
     <ClCompile Include="..\src\login\loginlog_sql.c">
       <Filter>login_sql</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\common\conf.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\common\core.c">
       <Filter>common</Filter>
     </ClCompile>
@@ -23,6 +26,9 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\src\common\ers.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\common\HPM.c">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\src\common\malloc.c">
@@ -102,6 +108,9 @@
     <ClInclude Include="..\src\common\cbasetypes.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\common\conf.h">
+      <Filter>common</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\common\core.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -112,6 +121,12 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\src\common\ers.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\HPM.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\HPMi.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\src\common\malloc.h">

@@ -68,7 +68,7 @@ static const int packet_len_table[0x3d] = { // U - used, F - free
 //2b08: Outgoing, chrif_searchcharid -> '...'
 //2b09: Incoming, map_addchariddb -> 'Adds a name to the nick db'
 //2b0a: Incoming/Outgoing, socket_datasync()
-//2b0b: FREE
+//2b0b: Outgoing, update charserv skillid2idx
 //2b0c: Outgoing, chrif_changeemail -> 'change mail address ...'
 //2b0d: Incoming, chrif_changedsex -> 'Change sex of acc XY'
 //2b0e: Outgoing, chrif_char_ask_name -> 'Do some operations (change sex, ban / unban etc)'
@@ -310,8 +310,8 @@ int chrif_save(struct map_session_data *sd, int flag) {
 
 	if( sd->status.pet_id > 0 && sd->pd )
 		intif_save_petdata(sd->status.account_id,&sd->pd->pet);
-	if( sd->hd && merc_is_hom_active(sd->hd) )
-		merc_save(sd->hd);
+	if( sd->hd && homun_alive(sd->hd) )
+		homun->save(sd->hd);
 	if( sd->md && mercenary_get_lifetime(sd->md) > 0 )
 		mercenary_save(sd->md);
 	if( sd->ed && elemental_get_lifetime(sd->ed) > 0 )
@@ -470,6 +470,7 @@ int chrif_connectack(int fd) {
 	}
 	
 	socket_datasync(fd, true);
+	chrif_skillid2idx(fd);
 
 	return 0;
 }
@@ -882,21 +883,23 @@ int chrif_changedsex(int fd) {
 
 		// reset skill of some job
 		if ((sd->class_&MAPID_UPPERMASK) == MAPID_BARDDANCER) {
-			int i;
+			int i, idx = 0;
 			// remove specifical skills of Bard classes 
 			for(i = 315; i <= 322; i++) {
-				if (sd->status.skill[i].id > 0 && sd->status.skill[i].flag == SKILL_FLAG_PERMANENT) {
-					sd->status.skill_point += sd->status.skill[i].lv;
-					sd->status.skill[i].id = 0;
-					sd->status.skill[i].lv = 0;
+				idx = skill->get_index(i);
+				if (sd->status.skill[idx].id > 0 && sd->status.skill[idx].flag == SKILL_FLAG_PERMANENT) {
+					sd->status.skill_point += sd->status.skill[idx].lv;
+					sd->status.skill[idx].id = 0;
+					sd->status.skill[idx].lv = 0;
 				}
 			}
 			// remove specifical skills of Dancer classes 
 			for(i = 323; i <= 330; i++) {
-				if (sd->status.skill[i].id > 0 && sd->status.skill[i].flag == SKILL_FLAG_PERMANENT) {
-					sd->status.skill_point += sd->status.skill[i].lv;
-					sd->status.skill[i].id = 0;
-					sd->status.skill[i].lv = 0;
+				idx = skill->get_index(i);
+				if (sd->status.skill[idx].id > 0 && sd->status.skill[idx].flag == SKILL_FLAG_PERMANENT) {
+					sd->status.skill_point += sd->status.skill[idx].lv;
+					sd->status.skill[idx].id = 0;
+					sd->status.skill[idx].lv = 0;
 				}
 			}
 			clif->updatestatus(sd, SP_SKILLPOINT);
@@ -963,20 +966,21 @@ int chrif_divorceack(int char_id, int partner_id) {
  *------------------------------------------*/
 int chrif_deadopt(int father_id, int mother_id, int child_id) {
 	struct map_session_data* sd;
+	int idx = skill->get_index(WE_CALLBABY);
 
 	if( father_id && ( sd = map_charid2sd(father_id) ) != NULL && sd->status.child == child_id ) {
 		sd->status.child = 0;
-		sd->status.skill[WE_CALLBABY].id = 0;
-		sd->status.skill[WE_CALLBABY].lv = 0;
-		sd->status.skill[WE_CALLBABY].flag = 0;
+		sd->status.skill[idx].id = 0;
+		sd->status.skill[idx].lv = 0;
+		sd->status.skill[idx].flag = 0;
 		clif->deleteskill(sd,WE_CALLBABY);
 	}
 
 	if( mother_id && ( sd = map_charid2sd(mother_id) ) != NULL && sd->status.child == child_id ) {
 		sd->status.child = 0;
-		sd->status.skill[WE_CALLBABY].id = 0;
-		sd->status.skill[WE_CALLBABY].lv = 0;
-		sd->status.skill[WE_CALLBABY].flag = 0;
+		sd->status.skill[idx].id = 0;
+		sd->status.skill[idx].lv = 0;
+		sd->status.skill[idx].flag = 0;
 		clif->deleteskill(sd,WE_CALLBABY);
 	}
 
@@ -1370,6 +1374,24 @@ void chrif_keepalive(int fd) {
 void chrif_keepalive_ack(int fd) {
 	session[fd]->flag.ping = 0;/* reset ping state, we received a packet */
 }
+void chrif_skillid2idx(int fd) {
+	int i, count = 0;
+	
+	if( fd == 0 ) fd = char_fd;
+	
+	WFIFOHEAD(fd,4 + (MAX_SKILL * 4));
+	WFIFOW(fd,0) = 0x2b0b;
+	for(i = 0; i < MAX_SKILL; i++) {
+		if( skill_db[i].nameid ) {
+			WFIFOW(fd, 4 + (count*4)) = skill_db[i].nameid;
+			WFIFOW(fd, 6 + (count*4)) = i;
+			count++;
+		}
+	}
+	WFIFOW(fd,2) = 4 + (count * 4);
+	WFIFOSET(fd,4 + (count * 4));
+
+}
 /*==========================================
  *
  *------------------------------------------*/
@@ -1555,19 +1577,19 @@ int chrif_removefriend(int char_id, int friend_id) {
 }
 
 void chrif_send_report(char* buf, int len) {
-
 #ifndef STATS_OPT_OUT
-	WFIFOHEAD(char_fd,len + 2);
-	
-	WFIFOW(char_fd,0) = 0x3008;
-	
-	memcpy(WFIFOP(char_fd,2), buf, len);
-	
-	WFIFOSET(char_fd,len + 2);
-	
-	flush_fifo(char_fd); /* ensure it's sent now. */
+	if( char_fd ) {
+		WFIFOHEAD(char_fd,len + 2);
+		
+		WFIFOW(char_fd,0) = 0x3008;
+		
+		memcpy(WFIFOP(char_fd,2), buf, len);
+		
+		WFIFOSET(char_fd,len + 2);
+		
+		flush_fifo(char_fd); /* ensure it's sent now. */
+	}
 #endif
-
 }
 
 /**
@@ -1626,3 +1648,4 @@ int do_init_chrif(void) {
 
 	return 0;
 }
+

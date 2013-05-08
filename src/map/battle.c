@@ -988,11 +988,10 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 				status_change_end(bl,SC_VOICEOFSIREN,INVALID_TIMER);
 		}
 
-
 		//Finally damage reductions....
 		// Assumptio doubles the def & mdef on RE mode, otherwise gives a reduction on the final damage. [Igniz]
 #ifndef RENEWAL
-		 if( sc->data[SC_ASSUMPTIO] ) {
+		if( sc->data[SC_ASSUMPTIO] ) {
 			if( map_flag_vs(bl->m) )
 				damage = damage*2/3; //Receive 66% damage
 			else
@@ -1135,7 +1134,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 			pc_addspiritball(sd,skill->get_time(LG_FORCEOFVANGUARD,sce->val1),sce->val3);
 		if (sc->data[SC_STYLE_CHANGE] && rnd()%2) {
                     TBL_HOM *hd = BL_CAST(BL_HOM,bl);
-                    if (hd) hom_addspiritball(hd, 10); //add a sphere
+                    if (hd) homun->addspiritball(hd, 10); //add a sphere
                 }
 
 		if( sc->data[SC__DEADLYINFECT] && damage > 0 && rnd()%100 < 65 + 5 * sc->data[SC__DEADLYINFECT]->val1 )
@@ -1196,7 +1195,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 			status_change_spread(src, bl);
                 if (sc->data[SC_STYLE_CHANGE] && rnd()%2) {
                     TBL_HOM *hd = BL_CAST(BL_HOM,bl);
-                    if (hd) hom_addspiritball(hd, 10);
+                    if (hd) homun->addspiritball(hd, 10);
                 }
 	}
 	/* no data claims these settings affect anything other than players */
@@ -1909,15 +1908,13 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 		if (rnd()%1000 < cri)
 			flag.cri = 1;
 	}
-		if (flag.cri) {
-			wd.type = 0x0a;
-#ifdef RENEWAL
-			flag.hit = 1;
-#else
-			flag.idef = flag.idef2 = flag.hit = 1;
-#endif
+	if (flag.cri) {
 		wd.type = 0x0a;
+#ifdef RENEWAL
+		flag.hit = 1;
+#else
 		flag.idef = flag.idef2 = flag.hit = 1;
+#endif
 	} else {	//Check for Perfect Hit
 		if(sd && sd->bonus.perfect_hit > 0 && rnd()%100 < sd->bonus.perfect_hit)
 			flag.hit = 1;
@@ -3046,17 +3043,17 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 			if( sc->data[SC_EDP] ){
 				switch(skill_id){
 					case AS_SPLASHER:       case AS_VENOMKNIFE:
+#ifndef RENEWAL_EDP
+					case AS_GRIMTOOTH:
+#endif
 					break;
 #ifndef RENEWAL_EDP
-					case ASC_BREAKER:       case ASC_METEORASSAULT: 
-					case AS_GRIMTOOTH:
-					break;
+					case ASC_BREAKER:       case ASC_METEORASSAULT: break;
 #else
 					case AS_SONICBLOW:
 					case ASC_BREAKER:
 					case GC_COUNTERSLASH:
 					case GC_CROSSIMPACT:
-					case AS_GRIMTOOTH:
 						ATK_RATE(50); // only modifier is halved but still benefit with the damage bonus
 #endif
 					default:
@@ -3379,8 +3376,26 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 
 	if(skill_id == CR_GRANDCROSS || skill_id == NPC_GRANDDARKNESS)
 		return wd; //Enough, rest is not needed.
-
-	if (sd)	{
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+	if( src && skill_id ) {
+		for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+				if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+						continue;
+					if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+						continue;
+				}
+				if( wd.damage > map[src->m].zone->capped_skills[i]->cap )
+					wd.damage = map[src->m].zone->capped_skills[i]->cap;
+				if( wd.damage2 > map[src->m].zone->capped_skills[i]->cap )
+					wd.damage2 = map[src->m].zone->capped_skills[i]->cap;
+				break;
+			}
+		}
+	}
+#endif
+	if (sd) {
 		if (skill_id != CR_SHIELDBOOMERANG) //Only Shield boomerang doesn't takes the Star Crumbs bonus.
 			ATK_ADD2(wd.div_*sd->right_weapon.star, wd.div_*sd->left_weapon.star);
 		if (skill_id==MO_FINGEROFFENSIVE) { //The finger offensive spheres on moment of attack do count. [Skotlex]
@@ -3394,8 +3409,8 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
         if( flag.lh )
             wd.damage2 = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage2, 3, wd.flag);
 #ifdef RENEWAL
-		if( flag.cri )
-        ATK_ADDRATE(sd->bonus.crit_atk_rate>=100?sd->bonus.crit_atk_rate-60:40);
+	    if( flag.cri )
+		    ATK_ADDRATE(sd->bonus.crit_atk_rate>=100?sd->bonus.crit_atk_rate-60:40);
 #endif
 		if( skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN )
 		{ //Refine bonus applies after cards and elements.
@@ -3406,7 +3421,7 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	}
 
     //Card Fix, tsd side
-    if(!sd && tsd) //if player on player then it was already measured above
+    if(tsd) //if player on player then it was already measured above
         wd.damage = battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, flag.lh, wd.flag);
 
 	if( flag.infdef ) { //Plants receive 1 damage when hit
@@ -4071,6 +4086,25 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 					MATK_ADD(50);
 			}
 		}
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+		if( src && skill_id ) {
+			for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+				if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+					if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+						if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+							continue;
+						if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+							continue;
+					}
+					if( ad.damage > map[src->m].zone->capped_skills[i]->cap )
+						ad.damage = map[src->m].zone->capped_skills[i]->cap;
+					if( ad.damage2 > map[src->m].zone->capped_skills[i]->cap )
+						ad.damage2 = map[src->m].zone->capped_skills[i]->cap;
+					break;
+				}
+			}
+		}
+#endif
 #ifdef RENEWAL
 		ad.damage = battle->calc_cardfix(BF_MAGIC, src, target, nk, s_ele, 0, ad.damage, 0, ad.flag);
 #endif
@@ -4454,8 +4488,26 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 			md.dmg_lv=ATK_FLEE;
 		}
 	}
-
-    md.damage =  battle->calc_cardfix(BF_MISC, src, target, nk, s_ele, 0, md.damage, 0, md.flag);
+#ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
+	if( src && skill_id ) {
+		for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
+				if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+						continue;
+					if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+						continue;
+				}
+				if( md.damage > map[src->m].zone->capped_skills[i]->cap )
+					md.damage = map[src->m].zone->capped_skills[i]->cap;
+				if( md.damage2 > map[src->m].zone->capped_skills[i]->cap )
+					md.damage2 = map[src->m].zone->capped_skills[i]->cap;
+				break;
+			}
+		}
+	}
+#endif
+    md.damage = battle->calc_cardfix(BF_MISC, src, target, nk, s_ele, 0, md.damage, 0, md.flag);
 
 	if (sd && (i = pc_skillatk_bonus(sd, skill_id)))
 		md.damage += md.damage*i/100;
@@ -4530,6 +4582,28 @@ struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct bl
 		memset(&d,0,sizeof(d));
 		break;
 	}
+	
+#ifdef HMAP_ZONE_DAMAGE_CAP_TYPE
+	if( bl && skill_id ) {
+		int i;
+		for(i = 0; i < map[bl->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[bl->m].zone->capped_skills[i]->nameid && (map[bl->m].zone->capped_skills[i]->type & bl->type) ) {
+				if( bl->type == BL_MOB && map[bl->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)bl)->status.mode&MD_BOSS) && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+						continue;
+					if( ((TBL_MOB*)bl)->special_state.clone && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+						continue;
+				}
+				if( d.damage > map[bl->m].zone->capped_skills[i]->cap )
+					d.damage = map[bl->m].zone->capped_skills[i]->cap;
+				if( d.damage2 > map[bl->m].zone->capped_skills[i]->cap )
+					d.damage2 = map[bl->m].zone->capped_skills[i]->cap;
+				break;
+			}
+		}
+	}
+#endif
+	
 	if( d.damage + d.damage2 < 1 ) { //Miss/Absorbed
 		//Weapon attacks should go through to cause additional effects.
 		if (d.dmg_lv == ATK_DEF /*&& attack_type&(BF_MAGIC|BF_MISC)*/) // Isn't it that additional effects don't apply if miss?
@@ -4973,9 +5047,9 @@ enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* t
 	}
 	if (sd) {
 		if( wd.flag&BF_SHORT && sc && sc->data[SC__AUTOSHADOWSPELL] && rnd()%100 < sc->data[SC__AUTOSHADOWSPELL]->val3 &&
-			sd->status.skill[sc->data[SC__AUTOSHADOWSPELL]->val1].id != 0 && sd->status.skill[sc->data[SC__AUTOSHADOWSPELL]->val1].flag == SKILL_FLAG_PLAGIARIZED )
+			sd->status.skill[skill->get_index(sc->data[SC__AUTOSHADOWSPELL]->val1)].id != 0 && sd->status.skill[skill->get_index(sc->data[SC__AUTOSHADOWSPELL]->val1)].flag == SKILL_FLAG_PLAGIARIZED )
 		{
-			int r_skill = sd->status.skill[sc->data[SC__AUTOSHADOWSPELL]->val1].id,
+			int r_skill = sd->status.skill[skill->get_index(sc->data[SC__AUTOSHADOWSPELL]->val1)].id,
 				r_lv = sc->data[SC__AUTOSHADOWSPELL]->val2;
 
 			if (r_skill != AL_HOLYLIGHT && r_skill != PR_MAGNUS) {
@@ -5608,6 +5682,7 @@ static const struct _battle_data {
 	{ "wedding_ignorepalette",              &battle_config.wedding_ignorepalette,           0,      0,      1,              },
 	{ "xmas_ignorepalette",                 &battle_config.xmas_ignorepalette,              0,      0,      1,              },
 	{ "summer_ignorepalette",               &battle_config.summer_ignorepalette,            0,      0,      1,              },
+	{ "hanbok_ignorepalette",               &battle_config.hanbok_ignorepalette,            0,      0,      1,              },
 	{ "natural_healhp_interval",            &battle_config.natural_healhp_interval,         6000,   NATURAL_HEAL_INTERVAL, INT_MAX, },
 	{ "natural_healsp_interval",            &battle_config.natural_healsp_interval,         8000,   NATURAL_HEAL_INTERVAL, INT_MAX, },
 	{ "natural_heal_skill_interval",        &battle_config.natural_heal_skill_interval,     10000,  NATURAL_HEAL_INTERVAL, INT_MAX, },
@@ -5774,7 +5849,6 @@ static const struct _battle_data {
 	{ "show_hp_sp_gain",                    &battle_config.show_hp_sp_gain,                 1,      0,      1,              },
 	{ "mob_npc_event_type",                 &battle_config.mob_npc_event_type,              1,      0,      1,              },
 	{ "character_size",                     &battle_config.character_size,                  1|2,    0,      1|2,            },
-	{ "mob_max_skilllvl",                   &battle_config.mob_max_skilllvl,                MAX_SKILL_LEVEL, 1, MAX_SKILL_LEVEL, },
 	{ "retaliate_to_master",                &battle_config.retaliate_to_master,             1,      0,      1,              },
 	{ "rare_drop_announce",                 &battle_config.rare_drop_announce,              0,      0,      10000,          },
 	{ "duel_allow_pvp",                     &battle_config.duel_allow_pvp,                  0,      0,      1,              },
@@ -5784,6 +5858,7 @@ static const struct _battle_data {
 	{ "duel_time_interval",                 &battle_config.duel_time_interval,              60,     0,      INT_MAX,        },
 	{ "duel_only_on_same_map",              &battle_config.duel_only_on_same_map,           0,      0,      1,              },
 	{ "skip_teleport_lv1_menu",             &battle_config.skip_teleport_lv1_menu,          0,      0,      1,              },
+	{ "mob_max_skilllvl",                   &battle_config.mob_max_skilllvl,                100,	1,		INT_MAX,		},
 	{ "allow_skill_without_day",            &battle_config.allow_skill_without_day,         0,      0,      1,              },
 	{ "allow_es_magic_player",              &battle_config.allow_es_magic_pc,               0,      0,      1,              },
 	{ "skill_caster_check",                 &battle_config.skill_caster_check,              1,      0,      1,              },
@@ -5865,9 +5940,10 @@ static const struct _battle_data {
  * Hercules anonymous statistic usage report -- packet is built here, and sent to char server to report.
  **/
 void Hercules_report(char* date, char *time_c) {
-	int i, rev = 0, bd_size = ARRAYLENGTH(battle_data);
+	int i, bd_size = ARRAYLENGTH(battle_data);
 	unsigned int config = 0;
-	const char* rev_str;
+	const char *svn = get_svn_revision();
+	const char *git = get_git_hash();
 	char timestring[25];
 	time_t curtime;
 	char* buf;
@@ -5875,7 +5951,7 @@ void Hercules_report(char* date, char *time_c) {
 	enum config_table {
 		C_CIRCULAR_AREA         = 0x0001,
 		C_CELLNOSTACK           = 0x0002,
-		C_BETA_THREAD_TEST      = 0x0004,
+		C_CONSOLE_INPUT			= 0x0004,
 		C_SCRIPT_CALLFUNC_CHECK = 0x0008,
 		C_OFFICIAL_WALKPATH     = 0x0010,
 		C_RENEWAL               = 0x0020,
@@ -5888,16 +5964,16 @@ void Hercules_report(char* date, char *time_c) {
 		C_SECURE_NPCTIMEOUT     = 0x1000,
 		C_SQL_DBS               = 0x2000,
 		C_SQL_LOGS              = 0x4000,
+		C_MEMWATCH				= 0x8000,
+		C_DMALLOC				= 0x10000,
+		C_GCOLLECT				= 0x20000,
+		C_SEND_SHORTLIST		= 0x40000,
 	};
-
-	if( (rev_str = get_svn_revision()) != 0 )
-		rev = atoi(rev_str);
 
 	/* we get the current time */
 	time(&curtime);
 	strftime(timestring, 24, "%Y-%m-%d %H:%M:%S", localtime(&curtime));
-
-
+	
 #ifdef CIRCULAR_AREA
 	config |= C_CIRCULAR_AREA;
 #endif
@@ -5906,10 +5982,10 @@ void Hercules_report(char* date, char *time_c) {
 	config |= C_CELLNOSTACK;
 #endif
 
-#ifdef BETA_THREAD_TEST
-	config |= C_BETA_THREAD_TEST;
+#ifdef CONSOLE_INPUT
+	config |= C_CONSOLE_INPUT;
 #endif
-
+	
 #ifdef SCRIPT_CALLFUNC_CHECK
 	config |= C_SCRIPT_CALLFUNC_CHECK;
 #endif
@@ -5947,42 +6023,56 @@ void Hercules_report(char* date, char *time_c) {
 #endif
 
 #ifdef SECURE_NPCTIMEOUT
-   config |= C_SECURE_NPCTIMEOUT;
+	config |= C_SECURE_NPCTIMEOUT;
 #endif
-  
+	
 	/* non-define part */
 	if( db_use_sqldbs )
 		config |= C_SQL_DBS;
 
-	if( log_config.sql_logs )
+	if( logs->config.sql_logs )
 		config |= C_SQL_LOGS;
+
+#ifdef MEMWATCH
+	config |= C_MEMWATCH;
+#endif
+#ifdef DMALLOC
+	config |= C_DMALLOC;
+#endif
+#ifdef GCOLLECT
+	config |= C_GCOLLECT;
+#endif
+
+#ifdef SEND_SHORTLIST
+	config |= C_SEND_SHORTLIST;
+#endif
 
 #define BFLAG_LENGTH 35
 
-	CREATE(buf, char, 6 + 12 + 9 + 24 + 4 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) ) + 1 );
+	CREATE(buf, char, 6 + 12 + 9 + 24 + 41 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) ) + 1 );
 
 	/* build packet */
 
 	WBUFW(buf,0) = 0x3000;
-	WBUFW(buf,2) = 6 + 12 + 9 + 24 + 4 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) );
-	WBUFW(buf,4) = 0x9c;
+	WBUFW(buf,2) = 6 + 12 + 9 + 24 + 41 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) );
+	WBUFW(buf,4) = 0x9e;
 
 	safestrncpy((char*)WBUFP(buf,6), date, 12);
 	safestrncpy((char*)WBUFP(buf,6 + 12), time_c, 9);
 	safestrncpy((char*)WBUFP(buf,6 + 12 + 9), timestring, 24);
 
-	WBUFL(buf,6 + 12 + 9 + 24)         = rev;
-	WBUFL(buf,6 + 12 + 9 + 24 + 4)     = map_getusers();
+	safestrncpy((char*)WBUFP(buf,6 + 12 + 9 + 24), git[0] != HERC_UNKNOWN_VER ? git : svn[0] != HERC_UNKNOWN_VER ? svn : "Unknown", 41);
+	WBUFL(buf,6 + 12 + 9 + 24 + 41)     = map_getusers();
 
-	WBUFL(buf,6 + 12 + 9 + 24 + 4 + 4) = config;
-	WBUFL(buf,6 + 12 + 9 + 24 + 4 + 4 + 4) = bd_size;
+	WBUFL(buf,6 + 12 + 9 + 24 + 41 + 4) = config;
+	WBUFL(buf,6 + 12 + 9 + 24 + 41 + 4 + 4) = bd_size;
 
 	for( i = 0; i < bd_size; i++ ) {
-		safestrncpy((char*)WBUFP(buf,6 + 12 + 9+ 24  + 4 + 4 + 4 + 4 + ( i * ( BFLAG_LENGTH + 4 ) ) ), battle_data[i].str, 35);
-		WBUFL(buf,6 + 12 + 9 + 24 + 4 + 4 + 4 + 4 + BFLAG_LENGTH + ( i * ( BFLAG_LENGTH + 4 )  )  ) = *battle_data[i].val;
+		safestrncpy((char*)WBUFP(buf,6 + 12 + 9 + 24 + 41 + 4 + 4 + 4 + ( i * ( BFLAG_LENGTH + 4 ) ) ), battle_data[i].str, 35);
+		WBUFL(buf,6 + 12 + 9 + 24 + 41 + 4 + 4 + 4 + BFLAG_LENGTH + ( i * ( BFLAG_LENGTH + 4 )  )  ) = *battle_data[i].val;
 	}
 
-	chrif_send_report(buf,  6 + 12 + 9 + 24 + 4 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) ) );
+	chrif_send_report(buf,  6 + 12 + 9 + 24 + 41 + 4 + 4 + 4 + ( bd_size * ( BFLAG_LENGTH + 4 ) ) );
 
 	aFree(buf);
 
@@ -6106,8 +6196,10 @@ int battle_config_read(const char* cfgName)
 
 	count--;
 
-	if (count == 0)
+	if (count == 0) {
 		battle->config_adjust();
+		clif->bc_ready();
+	}
 
 	return 0;
 }

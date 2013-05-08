@@ -79,7 +79,8 @@
 #define MAX_ZENY 1000000000
 #define MAX_FAME 1000000000
 #define MAX_CART 100
-#define MAX_SKILL 3100
+#define MAX_SKILL 1477
+#define MAX_SKILL_ID 10015 //[Ind/Hercules] max used skill id
 #define GLOBAL_REG_NUM 256   // max permanent character variables per char
 #define ACCOUNT_REG_NUM 64   // max permanent local account variables per account
 #define ACCOUNT_REG2_NUM 16  // max permanent global account variables per account
@@ -100,7 +101,7 @@
 #define MAX_GUARDIANS 8	//Local max per castle. [Skotlex]
 #define MAX_QUEST_DB 2400 //Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3 //Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs [Raizen]
+#define MAX_START_ITEMS 32	//Max number of items allowed to be given to a char whenever it's created. [mkbu95]
 
 // for produce
 #define MIN_ATTRIBUTE 0
@@ -221,9 +222,9 @@ enum e_skill_flag
 };
 
 enum e_mmo_charstatus_opt {
-  OPT_NONE    = 0x0,
-  OPT_SHOW_EQUIP  = 0x1,
-  OPT_ALLOW_PARTY  = 0x2,
+	OPT_NONE		= 0x0,
+	OPT_SHOW_EQUIP	= 0x1,
+	OPT_ALLOW_PARTY	= 0x2,
 };
 
 struct s_skill {

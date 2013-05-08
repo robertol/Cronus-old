@@ -34,7 +34,7 @@
 ///
 /// leave this line to enable renewal item drop rate algorithms
 /// while enabled a special modified based on the difference between the player and monster level is applied
-/// based on the http://irowiki.org/wiki/Drop_System#Level_Factor table
+/// based on the http://irowiki.org/wiki/Drop_System//#Level_Factor table
 //#define RENEWAL_DROP
 
 /// renewal exp rate algorithms
@@ -67,6 +67,6 @@
 /// - AGI has a greater factor in ASPD increase
 /// - there is a change in how skills/items give ASPD
 /// - some skill/item ASPD bonuses won't stack
-//#define RENEWAL_ASPD
+////#define RENEWAL_ASPD
 
 #endif // _CONFIG_RENEWAL_H_

@@ -332,6 +332,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\common\HPM.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\common\HPM.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\common\HPMi.h"
+				>
+			</File>
+			<File
 				RelativePath="..\src\common\malloc.c"
 				>
 			</File>
@@ -585,6 +597,14 @@
 			</File>
 			<File
 				RelativePath="..\src\map\intif.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\map\irc-bot.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\map\irc-bot.h"
 				>
 			</File>
 			<File

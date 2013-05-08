@@ -6,6 +6,7 @@
 #define _PC_H_
 
 #include "../common/mmo.h" // JOB_*, MAX_FAME_LIST, struct fame_list, struct mmo_charstatus
+#include "../common/ers.h"
 #include "../common/timer.h" // INVALID_TIMER
 #include "atcommand.h" // AtCommandType
 #include "battle.h" // battle_config
@@ -110,9 +111,9 @@ struct s_autobonus {
 };
 
 enum npc_timeout_type {
-  NPCT_INPUT = 0,
-  NPCT_MENU  = 1,
-  NPCT_WAIT  = 2,
+	NPCT_INPUT = 0,
+	NPCT_MENU  = 1,
+	NPCT_WAIT  = 2,
 };
 
 struct map_session_data {
@@ -189,7 +190,8 @@ struct map_session_data {
 	unsigned short class_;	//This is the internal job ID used by the map server to simplify comparisons/queries/etc. [Skotlex]
 	int group_id, group_pos, group_level;
 	unsigned int permissions;/* group permissions */
-
+	bool group_log_command;
+	
 	struct mmo_charstatus status;
 	struct registry save_reg;
 
@@ -398,8 +400,8 @@ struct map_session_data {
 	int guildspy; // [Syrus22]
 	int partyspy; // [Syrus22]
 
-	int vended_id;
-	int vender_id;
+	unsigned int vended_id;
+	unsigned int vender_id;
 	int vend_num;
 	char message[MESSAGE_SIZE];
 	struct s_vending vending[MAX_VENDING];
@@ -512,11 +514,17 @@ struct map_session_data {
 	unsigned char fontcolor;
 	unsigned int hchsysch_tick;
 	
+	/* [Ind/Hercules] */
+	struct sc_display_entry **sc_display;
+	unsigned char sc_display_count;
+	
 	// temporary debugging of bug #3504
 	const char* delunit_prevfile;
 	int delunit_prevline;
 
 };
+
+struct eri *pc_sc_display_ers;
 
 //Update this max as necessary. 55 is the value needed for Super Baby currently
 //Raised to 84 since Expanded Super Novice needs it.
@@ -695,13 +703,13 @@ enum equip_pos {
 
 int pc_class2idx(int class_);
 int pc_get_group_level(struct map_session_data *sd);
-int pc_get_group_id(struct map_session_data *sd);
+#define pc_get_group_id(sd) ( (sd)->group_id )
 int pc_getrefinebonus(int lv,int type);
 bool pc_can_give_items(struct map_session_data *sd);
 
-bool pc_can_use_command(struct map_session_data *sd, const char *command, AtCommandType type);
+bool pc_can_use_command(struct map_session_data *sd, const char *command);
 #define pc_has_permission(sd, permission) ( ((sd)->permissions&permission) != 0 )
-bool pc_should_log_commands(struct map_session_data *sd);
+#define pc_should_log_commands(sd) ( (sd)->group_log_command != false )
 
 int pc_setrestartvalue(struct map_session_data *sd,int type);
 int pc_makesavestatus(struct map_session_data *);
@@ -716,6 +724,7 @@ int pc_equippoint(struct map_session_data *sd,int n);
 int pc_setinventorydata(struct map_session_data *sd);
 
 int pc_checkskill(struct map_session_data *sd,uint16 skill_id);
+int pc_checkskill2(struct map_session_data *sd,uint16 index);
 int pc_checkallowskill(struct map_session_data *sd);
 int pc_checkequip(struct map_session_data *sd,int pos);
 
@@ -878,10 +887,12 @@ const char * job_name(int class_);
 
 struct skill_tree_entry {
 	short id;
+	unsigned short idx;
 	unsigned char max;
 	unsigned char joblv;
 	struct {
 		short id;
+		unsigned short idx;
 		unsigned char lv;
 	} need[MAX_PC_SKILL_REQUIRE];
 }; // Celest

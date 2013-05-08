@@ -130,12 +130,12 @@ void aFree_(void *p, const char *file, int line, const char *func)
 /* USE_MEMMGR */
 
 /*
- *	Memory manager
+ * Memory manager
  *     able to handle malloc and free efficiently
  *     Since the complex processing, I might be slightly heavier.
  *
  * (I'm sorry for the poor description ^ ^;) such as data structures
- *    Divided into "blocks" of a plurality of memory, "unit" of a plurality of blocks further
+ *		Divided into "blocks" of a plurality of memory, "unit" of a plurality of blocks further
  *      I have to divide. Size of the unit, a plurality of distribution equal to the capacity of one block
  *      That's what you have. For example, if one unit of 32KB, one block 1 Yu 32Byte
  *      Knit, or are able to gather 1024, gathered 512 units 64Byte
@@ -164,15 +164,15 @@ void aFree_(void *p, const char *file, int line, const char *func)
 
 /* block */
 struct block {
-  struct block* block_next;    /* Then the allocated area */
-  struct block* unfill_prev;    /* The previous area not filled */
-  struct block* unfill_next;    /* The next area not filled */
-  unsigned short unit_size;    /* The size of the unit */
-  unsigned short unit_hash;    /* The hash of the unit */
-  unsigned short unit_count;    /* The number of units */
-  unsigned short unit_used;    /* The number of used units */
-  unsigned short unit_unfill;    /* The number of unused units */
-  unsigned short unit_maxused;  /* The maximum value of units used */
+	struct block* block_next;		/* Then the allocated area */
+	struct block* unfill_prev;		/* The previous area not filled */
+	struct block* unfill_next;		/* The next area not filled */
+	unsigned short unit_size;		/* The size of the unit */
+	unsigned short unit_hash;		/* The hash of the unit */
+	unsigned short unit_count;		/* The number of units */
+	unsigned short unit_used;		/* The number of used units */
+	unsigned short unit_unfill;		/* The number of unused units */
+	unsigned short unit_maxused;	/* The maximum value of units used */
 	char   data[ BLOCK_DATA_SIZE ];
 };
 
@@ -383,7 +383,7 @@ void _mfree(void *ptr, const char *file, int line, const char *func )
 
 	head = (struct unit_head *)((char *)ptr - sizeof(struct unit_head) + sizeof(long));
 	if(head->size == 0) {
-		/*  area that is directly secured by malloc () */
+		/* area that is directly secured by malloc () */
 		struct unit_head_large *head_large = (struct unit_head_large *)((char *)ptr - sizeof(struct unit_head_large) + sizeof(long));
 		if(
 			*(long*)((char*)head_large + sizeof(struct unit_head_large) - sizeof(long) + head_large->size)

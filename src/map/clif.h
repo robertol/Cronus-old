@@ -324,6 +324,7 @@ enum clif_messages {
 enum clif_colors {
 	COLOR_RED,
 	COLOR_DEFAULT,
+	COLOR_WHITE,
 	COLOR_MAX
 };
 
@@ -338,6 +339,7 @@ enum hChSysChType {
 	hChSys_PRIVATE	= 1,
 	hChSys_MAP		= 2,
 	hChSys_ALLY		= 3,
+	hChSys_IRC		= 4,
 };
 
 enum CASH_SHOP_TABS {
@@ -377,12 +379,14 @@ struct {
 	unsigned long *colors;
 	char **colors_name;
 	unsigned char colors_count;
-	bool local, ally;
+	bool local, ally, irc;
 	bool local_autojoin, ally_autojoin;
-	char local_name[HCHSYS_NAME_LENGTH], ally_name[HCHSYS_NAME_LENGTH];
-	unsigned char local_color, ally_color;
+	char local_name[HCHSYS_NAME_LENGTH], ally_name[HCHSYS_NAME_LENGTH], irc_name[HCHSYS_NAME_LENGTH];
+	unsigned char local_color, ally_color, irc_color;
 	bool closing;
 	bool allow_user_channel_creation;
+	char irc_server[40], irc_channel[20], irc_nick[30], irc_nick_pw[30];
+	unsigned short irc_server_port;
 } hChSys;
 
 struct hChSysBanEntry {
@@ -462,6 +466,7 @@ struct clif_interface {
 	void (*unequipitemack) (struct map_session_data *sd,int n,int pos,int ok);
 	void (*useitemack) (struct map_session_data *sd,int index,int amount,bool ok);
 	void (*addcards) (unsigned char* buf, struct item* item);
+	void (*addcards2) (unsigned short *cards, struct item* item);
 	void (*item_sub) (unsigned char *buf, int n, struct item *i, struct item_data *id, int equip);
 	void (*getareachar_item) (struct map_session_data* sd,struct flooritem_data* fitem);
 	void (*cashshop_load) (void);
@@ -483,9 +488,9 @@ struct clif_interface {
 	void (*skill_delunit) (struct skill_unit *unit);
 	void (*skillunit_update) (struct block_list* bl);
 	int (*clearunit_delayed_sub) (int tid, unsigned int tick, int id, intptr_t data);
-	int (*set_unit_idle) (struct block_list* bl, unsigned char* buffer, bool spawn);
-	void (*setdisguise) (struct block_list *bl, unsigned char *buf,int len);
-	int (*set_unit_walking) (struct block_list* bl, struct unit_data* ud, unsigned char* buffer);
+	void (*set_unit_idle) (struct block_list* bl, struct map_session_data *tsd,enum send_target target);
+	void (*spawn_unit) (struct block_list* bl,enum send_target target);
+	void (*set_unit_walking) (struct block_list* bl, struct map_session_data *tsd,struct unit_data* ud, enum send_target target);
 	int (*calc_walkdelay) (struct block_list *bl,int delay, int type, int damage, int div_);
 	void (*getareachar_skillunit) (struct map_session_data *sd, struct skill_unit *unit);
 	void (*getareachar_unit) (struct map_session_data* sd,struct block_list *bl);
@@ -562,7 +567,7 @@ struct clif_interface {
 	void (*mvp_noitem) (struct map_session_data* sd);
 	void (*changed_dir) (struct block_list *bl, enum send_target target);
 	void (*charnameack) (int fd, struct block_list *bl);
-	void (*monster_hp_bar) ( struct mob_data* md, int fd );
+	void (*monster_hp_bar) ( struct mob_data* md, struct map_session_data *sd );
 	int (*hpmeter) (struct map_session_data *sd);
 	void (*hpmeter_single) (int fd, int id, unsigned int hp, unsigned int maxhp);
 	int (*hpmeter_sub) (struct block_list *bl, va_list ap);
@@ -591,8 +596,8 @@ struct clif_interface {
 	int (*poison_list) (struct map_session_data *sd, uint16 skill_lv);
 	int (*autoshadowspell_list) (struct map_session_data *sd);
 	int (*skill_itemlistwindow) ( struct map_session_data *sd, uint16 skill_id, uint16 skill_lv );
-	int (*sc_notick) (struct block_list *bl,int type,int flag,int val1, int val2, int val3);
-	int (*sc_single) (int fd, int id,int type,int flag,int val1, int val2, int val3);
+	void (*sc_load) (struct block_list *bl, int tid, enum send_target target, int type, int val1, int val2, int val3);
+	void (*sc_end) (struct block_list *bl, int tid, enum send_target target, int type);
 	void (*initialstatus) (struct map_session_data *sd);
 	/* player-unit-specific-related */
 	void (*updatestatus) (struct map_session_data *sd,int type);
@@ -690,7 +695,7 @@ struct clif_interface {
 	void (*openvendingreq) (struct map_session_data* sd, int num);
 	void (*showvendingboard) (struct block_list* bl, const char* message, int fd);
 	void (*closevendingboard) (struct block_list* bl, int fd);
-	void (*vendinglist) (struct map_session_data* sd, int id, struct s_vending* vending);
+	void (*vendinglist) (struct map_session_data* sd, unsigned int id, struct s_vending* vending);
 	void (*buyvending) (struct map_session_data* sd, int index, int amount, int fail);
 	void (*openvending) (struct map_session_data* sd, int id, struct s_vending* vending);
 	void (*vendingreport) (struct map_session_data* sd, int index, int amount);
@@ -863,6 +868,7 @@ struct clif_interface {
 	void (*noask_sub) (struct map_session_data *src, struct map_session_data *target, int type);
 	void (*chsys_create) (struct hChSysCh *channel, char *name, char *pass, unsigned char color);
 	void (*chsys_msg) (struct hChSysCh *channel, struct map_session_data *sd, char *msg);
+	void (*chsys_msg2) (struct hChSysCh *channel, char *msg);
 	void (*chsys_send) (struct hChSysCh *channel, struct map_session_data *sd, char *msg);
 	void (*chsys_join) (struct hChSysCh *channel, struct map_session_data *sd);
 	void (*chsys_left) (struct hChSysCh *channel, struct map_session_data *sd);
@@ -870,6 +876,7 @@ struct clif_interface {
 	void (*chsys_mjoin) (struct map_session_data *sd);
 	void (*chsys_quit) (struct map_session_data *sd);
 	void (*chsys_quitg) (struct map_session_data *sd);
+	void (*bc_ready) (void);
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/
@@ -1073,6 +1080,7 @@ struct clif_interface {
 	void (*pCashShopSchedule) (int fd, struct map_session_data *sd);
 	void (*pCashShopBuy) (int fd, struct map_session_data *sd);
 	void (*pPartyTick) (int fd, struct map_session_data *sd);
+	void (*pGuildInvite2) (int fd, struct map_session_data *sd);
 } clif_s;
 
 struct clif_interface *clif;

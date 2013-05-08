@@ -125,7 +125,7 @@ int max_connect_user = -1;
 int gm_allow_group = -1;
 int autosave_interval = DEFAULT_AUTOSAVE_INTERVAL;
 int start_zeny = 0;
-int start_items[64]; // 32 itens a partir do permitido.
+int start_items[MAX_START_ITEMS*2];
 int guild_exp_rate = 100;
 
 //Custom limits for the fame lists. [Skotlex]
@@ -145,6 +145,8 @@ unsigned int save_flag = 0;
 
 // Initial position (it's possible to set it in conf file)
 struct point start_point = { 0, 53, 111 };
+
+unsigned short skillid2idx[MAX_SKILL_ID];
 
 //-----------------------------------------------------
 // Auth database
@@ -436,7 +438,6 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 			errors++;
 	}
 	
-
 	if (
 		(p->base_exp != cp->base_exp) || (p->base_level != cp->base_level) ||
 		(p->job_level != cp->job_level) || (p->job_exp != cp->job_exp) ||
@@ -455,14 +456,14 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		(p->head_mid != cp->head_mid) || (p->head_bottom != cp->head_bottom) || (p->delete_date != cp->delete_date) ||
 		(p->rename != cp->rename) || (p->slotchange != cp->slotchange) || (p->robe != cp->robe) ||
 		(p->show_equip != cp->show_equip) || (p->allow_party != cp->allow_party)
-		) {  //Save status
+	) {	//Save status
 		unsigned int opt = 0;
-    
+		
 		if( p->allow_party )
 			opt |= OPT_ALLOW_PARTY;
 		if( p->show_equip )
 			opt |= OPT_SHOW_EQUIP;
-    
+		
 		if( SQL_ERROR == Sql_Query(sql_handle, "UPDATE `%s` SET `base_level`='%d', `job_level`='%d',"
 			"`base_exp`='%u', `job_exp`='%u', `zeny`='%d',"
 			"`max_hp`='%d',`hp`='%d',`max_sp`='%d',`sp`='%d',`status_point`='%d',`skill_point`='%d',"
@@ -566,18 +567,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		strcat(save_status, " memo");
 	}
 
-	//FIXME: is this neccessary? [ultramage]
-	for(i=0;i<MAX_SKILL;i++)
-		if ((p->skill[i].lv != 0) && (p->skill[i].id == 0))
-			p->skill[i].id = i; // Fix skill tree
-
-
 	//skills
-	if( memcmp(p->skill, cp->skill, sizeof(p->skill)) )
-	{
+	if( memcmp(p->skill, cp->skill, sizeof(p->skill)) ) {
 		//`skill` (`char_id`, `id`, `lv`)
-		if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `char_id`='%d'", skill_db, p->char_id) )
-		{
+		if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `char_id`='%d'", skill_db, p->char_id) ) {
 			Sql_ShowDebug(sql_handle);
 			errors++;
 		}
@@ -1059,13 +1052,6 @@ int mmo_chars_fromsql(struct char_session_data* sd, uint8* buf)
 		j += mmo_char_tobuf(WBUFP(buf, j), &p);
 	}
 	
-#if PACKETVER >= 20130000
-	/* for some reason the client doesn't like "3" characters (yes...3) we gotta send a fake one or it wont display any =_= */
-	if( j == 432 ){/* we just duplicate the last visually the client will say 4 chars instead of 3 though >_> */
-		j += mmo_char_tobuf(WBUFP(buf, j), &p);
-	}
-#endif
-
 	memset(sd->new_name,0,sizeof(sd->new_name));
 
 	SqlStmt_Free(stmt);
@@ -1168,7 +1154,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 50, SQLDT_UINT32, &p->delete_date, 0, NULL, NULL)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 51, SQLDT_SHORT,  &p->robe, 0, NULL, NULL)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 52, SQLDT_USHORT, &p->slotchange, 0, NULL, NULL)
-	||  SQL_ERROR == SqlStmt_BindColumn(stmt, 53, SQLDT_UINT,  &opt, 0, NULL, NULL)
+	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 53, SQLDT_UINT,	&opt, 0, NULL, NULL)
 	)
 	{
 		SqlStmt_ShowDebug(stmt);
@@ -1184,6 +1170,18 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	p->last_point.map = mapindex_name2id(last_map);
 	p->save_point.map = mapindex_name2id(save_map);
 
+	if( p->last_point.map == 0 ) {
+		p->last_point.map = strdb_iget(mapindex_db, MAP_DEFAULT);
+		p->last_point.x = MAP_DEFAULT_X;
+		p->last_point.y = MAP_DEFAULT_Y;
+	}
+	
+	if( p->save_point.map == 0 ) {
+		p->save_point.map = strdb_iget(mapindex_db, MAP_DEFAULT);
+		p->save_point.x = MAP_DEFAULT_X;
+		p->save_point.y = MAP_DEFAULT_Y;
+	}
+	
 	strcat(t_msg, " status");
 
 	if (!load_everything) // For quick selection of data when displaying the char menu
@@ -1202,8 +1200,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 2, SQLDT_SHORT,  &tmp_point.y, 0, NULL, NULL) )
 		SqlStmt_ShowDebug(stmt);
 
-	for( i = 0; i < MAX_MEMOPOINTS && SQL_SUCCESS == SqlStmt_NextRow(stmt); ++i )
-	{
+	for( i = 0; i < MAX_MEMOPOINTS && SQL_SUCCESS == SqlStmt_NextRow(stmt); ++i ) {
 		tmp_point.map = mapindex_name2id(point_map);
 		memcpy(&p->memo_point[i], &tmp_point, sizeof(tmp_point));
 	}
@@ -1286,10 +1283,9 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	if( tmp_skill.flag != SKILL_FLAG_PERM_GRANTED )
 		tmp_skill.flag = SKILL_FLAG_PERMANENT;
 
-	for( i = 0; i < MAX_SKILL && SQL_SUCCESS == SqlStmt_NextRow(stmt); ++i )
-	{
-		if( tmp_skill.id < ARRAYLENGTH(p->skill) )
-			memcpy(&p->skill[tmp_skill.id], &tmp_skill, sizeof(tmp_skill));
+	for( i = 0; i < MAX_SKILL && SQL_SUCCESS == SqlStmt_NextRow(stmt); ++i ) {
+		if( skillid2idx[tmp_skill.id] )
+			memcpy(&p->skill[skillid2idx[tmp_skill.id]], &tmp_skill, sizeof(tmp_skill));
 		else
 			ShowWarning("mmo_char_fromsql: ignoring invalid skill (id=%u,lv=%u) of character %s (AID=%d,CID=%d)\n", tmp_skill.id, tmp_skill.lv, p->name, p->account_id, p->char_id);
 	}
@@ -1339,14 +1335,13 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	if (save_log) ShowInfo("Loaded char (%d - %s): %s\n", char_id, p->name, t_msg);	//ok. all data load successfuly!
 	SqlStmt_Free(stmt);
 	StringBuf_Destroy(&buf);
-	
+
 	/* load options into proper vars */
 	if( opt & OPT_ALLOW_PARTY )
 		p->allow_party = true;
 	if( opt & OPT_SHOW_EQUIP )
 		p->show_equip = true;
-  
-
+	
 	cp = idb_ensure(char_db_, char_id, create_charstatus);
 	memcpy(cp, p, sizeof(struct mmo_charstatus));
 	return 1;
@@ -1595,8 +1590,9 @@ int make_new_char_sql(struct char_session_data* sd, char* name_, int str, int ag
 	//Retrieve the newly auto-generated char id
 	char_id = (int)Sql_LastInsertId(sql_handle);
 	//Give the char the default items
-		for (k = 0; k < ARRAYLENGTH(start_items) && start_items[k] != 0; k += 2) {
-			if( SQL_ERROR == Sql_Query(sql_handle, "INSERT INTO `%s` (`char_id`,`nameid`, `amount`, `identify`) VALUES ('%d', '%d', '%d', '%d')", inventory_db, char_id, start_items[k], start_items[k + 1], 1) )
+	
+	for (k = 0; k < ARRAYLENGTH(start_items) && start_items[k] != 0; k += 2) {
+		if( SQL_ERROR == Sql_Query(sql_handle, "INSERT INTO `%s` (`char_id`,`nameid`, `amount`, `identify`) VALUES ('%d', '%d', '%d', '%d')", inventory_db, char_id, start_items[k], start_items[k + 1], 1) )
 				Sql_ShowDebug(sql_handle);
 	}
 
@@ -1885,7 +1881,7 @@ int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
 
 	return 106+offset;
 }
-	
+	int mmo_char_send006b(int fd, struct char_session_data* sd);
 //----------------------------------------
 // [Ind/Hercules] notify client about charselect window data
 //----------------------------------------
@@ -1903,10 +1899,7 @@ void mmo_char_send082d(int fd, struct char_session_data* sd) {
 	WFIFOB(fd,8) = sd->char_slots;
 	memset(WFIFOP(fd,9), 0, 20); // unused bytes
 	WFIFOSET(fd,29);
-	WFIFOHEAD(fd, 6);
-	WFIFOW(fd,0) = 0x9a0;
-	WFIFOL(fd,2) = 1;
-	WFIFOSET(fd, 6);
+	mmo_char_send006b(fd,sd);
 	
 }
 //----------------------------------------
@@ -2145,304 +2138,302 @@ int parse_fromlogin(int fd) {
 
 	while(RFIFOREST(fd) >= 2) {
 		uint16 command = RFIFOW(fd,0);
+		switch( command ) {
 
-		switch( command )
-		{
+			// acknowledgement of connect-to-loginserver request
+			case 0x2711:
+				if (RFIFOREST(fd) < 3)
+					return 0;
 
-		// acknowledgement of connect-to-loginserver request
-		case 0x2711:
-			if (RFIFOREST(fd) < 3)
-				return 0;
+				if (RFIFOB(fd,2)) {
+					//printf("connect login server error : %d\n", RFIFOB(fd,2));
+					ShowError("Can not connect to login-server.\n");
+					ShowError("The server communication passwords (default s1/p1) are probably invalid.\n");
+					ShowError("Also, please make sure your login db has the correct communication username/passwords and the gender of the account is S.\n");
+					ShowError("The communication passwords are set in /conf/map-server.conf and /conf/char-server.conf\n");
+					set_eof(fd);
+					return 0;
+				} else {
+					ShowStatus("Connected to login-server (connection #%d).\n", fd);
+					loginif_on_ready();
+				}
+				RFIFOSKIP(fd,3);
+			break;
 
-			if (RFIFOB(fd,2)) {
-				//printf("connect login server error : %d\n", RFIFOB(fd,2));
-				ShowError("Can not connect to login-server.\n");
-				ShowError("The server communication passwords (default s1/p1) are probably invalid.\n");
-				ShowError("Also, please make sure your login db has the correct communication username/passwords and the gender of the account is S.\n");
-				ShowError("The communication passwords are set in /conf/map-server.conf and /conf/char-server.conf\n");
+			// acknowledgement of account authentication request
+			case 0x2713:
+				if (RFIFOREST(fd) < 25)
+					return 0;
+			{
+				int account_id = RFIFOL(fd,2);
+				uint32 login_id1 = RFIFOL(fd,6);
+				uint32 login_id2 = RFIFOL(fd,10);
+				uint8 sex = RFIFOB(fd,14);
+				uint8 result = RFIFOB(fd,15);
+				int request_id = RFIFOL(fd,16);
+				uint32 version = RFIFOL(fd,20);
+				uint8 clienttype = RFIFOB(fd,24);
+				RFIFOSKIP(fd,25);
+
+				if( session_isActive(request_id) && (sd=(struct char_session_data*)session[request_id]->session_data) &&
+					!sd->auth && sd->account_id == account_id && sd->login_id1 == login_id1 && sd->login_id2 == login_id2 && sd->sex == sex )
+				{
+					int client_fd = request_id;
+					sd->version = version;
+					sd->clienttype = clienttype;
+					switch( result )
+					{
+					case 0:// ok
+						char_auth_ok(client_fd, sd);
+						break;
+					case 1:// auth failed
+						WFIFOHEAD(client_fd,3);
+						WFIFOW(client_fd,0) = 0x6c;
+						WFIFOB(client_fd,2) = 0;// rejected from server
+						WFIFOSET(client_fd,3);
+						break;
+					}
+				}
+			}
+			break;
+
+			case 0x2717: // account data
+				if (RFIFOREST(fd) < 72)
+					return 0;
+
+				// find the authenticated session with this account id
+				ARR_FIND( 0, fd_max, i, session[i] && (sd = (struct char_session_data*)session[i]->session_data) && sd->auth && sd->account_id == RFIFOL(fd,2) );
+				if( i < fd_max ) {
+					int server_id;
+					memcpy(sd->email, RFIFOP(fd,6), 40);
+					sd->expiration_time = (time_t)RFIFOL(fd,46);
+					sd->group_id = RFIFOB(fd,50);
+					sd->char_slots = RFIFOB(fd,51);
+					if( sd->char_slots > MAX_CHARS ) {
+						ShowError("Account '%d' `character_slots` column is higher than supported MAX_CHARS (%d), update MAX_CHARS in mmo.h! capping to MAX_CHARS...\n",sd->account_id,sd->char_slots);
+						sd->char_slots = MAX_CHARS;/* cap to maximum */
+					} else if ( sd->char_slots <= 0 )/* no value aka 0 in sql */
+						sd->char_slots = MAX_CHARS;/* cap to maximum */
+					safestrncpy(sd->birthdate, (const char*)RFIFOP(fd,52), sizeof(sd->birthdate));
+					safestrncpy(sd->pincode, (const char*)RFIFOP(fd,63), sizeof(sd->pincode));
+					sd->pincode_change = RFIFOL(fd,68);
+					ARR_FIND( 0, ARRAYLENGTH(server), server_id, server[server_id].fd > 0 && server[server_id].map[0] );
+					// continued from char_auth_ok...
+					if( server_id == ARRAYLENGTH(server) || //server not online, bugreport:2359
+						(max_connect_user == 0 && sd->group_id != gm_allow_group) ||
+						( max_connect_user > 0 && count_users() >= max_connect_user && sd->group_id != gm_allow_group ) ) {
+						// refuse connection (over populated)
+						WFIFOHEAD(i,3);
+						WFIFOW(i,0) = 0x6c;
+						WFIFOW(i,2) = 0;
+						WFIFOSET(i,3);
+					} else {
+						// send characters to player
+	#if PACKETVER >= 20130000
+						mmo_char_send082d(i, sd);
+	#else
+						mmo_char_send006b(i, sd);
+	#endif
+	#if PACKETVER >= 20110309
+						pincode->handle(i, sd);
+	#endif
+					}
+				}
+				RFIFOSKIP(fd,72);
+			break;
+
+			// login-server alive packet
+			case 0x2718:
+				if (RFIFOREST(fd) < 2)
+					return 0;
+				RFIFOSKIP(fd,2);
+				session[fd]->flag.ping = 0;
+			break;
+
+			// changesex reply
+			case 0x2723:
+				if (RFIFOREST(fd) < 7)
+					return 0;
+			{
+				unsigned char buf[7];
+
+				int acc = RFIFOL(fd,2);
+				int sex = RFIFOB(fd,6);
+				RFIFOSKIP(fd,7);
+
+				if( acc > 0 )
+				{// TODO: Is this even possible?
+					int char_id[MAX_CHARS];
+					int class_[MAX_CHARS];
+					int guild_id[MAX_CHARS];
+					int num;
+					char* data;
+
+					struct auth_node* node = (struct auth_node*)idb_get(auth_db, acc);
+					if( node != NULL )
+						node->sex = sex;
+
+					// get characters
+					if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `char_id`,`class`,`guild_id` FROM `%s` WHERE `account_id` = '%d'", char_db, acc) )
+						Sql_ShowDebug(sql_handle);
+					for( i = 0; i < MAX_CHARS && SQL_SUCCESS == Sql_NextRow(sql_handle); ++i )
+					{
+						Sql_GetData(sql_handle, 0, &data, NULL); char_id[i] = atoi(data);
+						Sql_GetData(sql_handle, 1, &data, NULL); class_[i] = atoi(data);
+						Sql_GetData(sql_handle, 2, &data, NULL); guild_id[i] = atoi(data);
+					}
+					num = i;
+					for( i = 0; i < num; ++i )
+					{
+						if( class_[i] == JOB_BARD || class_[i] == JOB_DANCER ||
+							class_[i] == JOB_CLOWN || class_[i] == JOB_GYPSY ||
+							class_[i] == JOB_BABY_BARD || class_[i] == JOB_BABY_DANCER ||
+							class_[i] == JOB_MINSTREL || class_[i] == JOB_WANDERER ||
+							class_[i] == JOB_MINSTREL_T || class_[i] == JOB_WANDERER_T ||
+							class_[i] == JOB_BABY_MINSTREL || class_[i] == JOB_BABY_WANDERER ||
+							class_[i] == JOB_KAGEROU || class_[i] == JOB_OBORO )
+						{
+							// job modification
+							if( class_[i] == JOB_BARD || class_[i] == JOB_DANCER )
+								class_[i] = (sex ? JOB_BARD : JOB_DANCER);
+							else if( class_[i] == JOB_CLOWN || class_[i] == JOB_GYPSY )
+								class_[i] = (sex ? JOB_CLOWN : JOB_GYPSY);
+							else if( class_[i] == JOB_BABY_BARD || class_[i] == JOB_BABY_DANCER )
+								class_[i] = (sex ? JOB_BABY_BARD : JOB_BABY_DANCER);
+							else if( class_[i] == JOB_MINSTREL || class_[i] == JOB_WANDERER )
+								class_[i] = (sex ? JOB_MINSTREL : JOB_WANDERER);
+							else if( class_[i] == JOB_MINSTREL_T || class_[i] == JOB_WANDERER_T )
+								class_[i] = (sex ? JOB_MINSTREL_T : JOB_WANDERER_T);
+							else if( class_[i] == JOB_BABY_MINSTREL || class_[i] == JOB_BABY_WANDERER )
+								class_[i] = (sex ? JOB_BABY_MINSTREL : JOB_BABY_WANDERER);
+							else if( class_[i] == JOB_KAGEROU || class_[i] == JOB_OBORO )
+								class_[i] = (sex ? JOB_KAGEROU : JOB_OBORO);
+						}
+
+						if( SQL_ERROR == Sql_Query(sql_handle, "UPDATE `%s` SET `class`='%d', `weapon`='0', `shield`='0', `head_top`='0', `head_mid`='0', `head_bottom`='0' WHERE `char_id`='%d'", char_db, class_[i], char_id[i]) )
+							Sql_ShowDebug(sql_handle);
+
+						if( guild_id[i] )// If there is a guild, update the guild_member data [Skotlex]
+							inter_guild_sex_changed(guild_id[i], acc, char_id[i], sex);
+					}
+					Sql_FreeResult(sql_handle);
+
+					// disconnect player if online on char-server
+					disconnect_player(acc);
+				}
+
+				// notify all mapservers about this change
+				WBUFW(buf,0) = 0x2b0d;
+				WBUFL(buf,2) = acc;
+				WBUFB(buf,6) = sex;
+				mapif_sendall(buf, 7);
+			}
+			break;
+
+			// reply to an account_reg2 registry request
+			case 0x2729:
+				if (RFIFOREST(fd) < 4 || RFIFOREST(fd) < RFIFOW(fd,2))
+					return 0;
+
+			{	//Receive account_reg2 registry, forward to map servers.
+				unsigned char buf[13+ACCOUNT_REG2_NUM*sizeof(struct global_reg)];
+				memcpy(buf,RFIFOP(fd,0), RFIFOW(fd,2));
+				WBUFW(buf,0) = 0x3804; //Map server can now receive all kinds of reg values with the same packet. [Skotlex]
+				mapif_sendall(buf, WBUFW(buf,2));
+				RFIFOSKIP(fd, RFIFOW(fd,2));
+			}
+			break;
+
+			// State change of account/ban notification (from login-server)
+			case 0x2731:
+				if (RFIFOREST(fd) < 11)
+					return 0;
+
+			{	// send to all map-servers to disconnect the player
+				unsigned char buf[11];
+				WBUFW(buf,0) = 0x2b14;
+				WBUFL(buf,2) = RFIFOL(fd,2);
+				WBUFB(buf,6) = RFIFOB(fd,6); // 0: change of statut, 1: ban
+				WBUFL(buf,7) = RFIFOL(fd,7); // status or final date of a banishment
+				mapif_sendall(buf, 11);
+			}
+				// disconnect player if online on char-server
+				disconnect_player(RFIFOL(fd,2));
+
+				RFIFOSKIP(fd,11);
+			break;
+
+			// Login server request to kick a character out. [Skotlex]
+			case 0x2734:
+				if (RFIFOREST(fd) < 6)
+					return 0;
+			{
+				int aid = RFIFOL(fd,2);
+				struct online_char_data* character = (struct online_char_data*)idb_get(online_char_db, aid);
+				RFIFOSKIP(fd,6);
+				if( character != NULL )
+				{// account is already marked as online!
+					if( character->server > -1 )
+					{	//Kick it from the map server it is on.
+						mapif_disconnectplayer(server[character->server].fd, character->account_id, character->char_id, 2);
+						if (character->waiting_disconnect == INVALID_TIMER)
+							character->waiting_disconnect = add_timer(gettick()+AUTH_TIMEOUT, chardb_waiting_disconnect, character->account_id, 0);
+					}
+					else
+					{// Manual kick from char server.
+						struct char_session_data *tsd;
+						int i;
+						ARR_FIND( 0, fd_max, i, session[i] && (tsd = (struct char_session_data*)session[i]->session_data) && tsd->account_id == aid );
+						if( i < fd_max )
+						{
+							WFIFOHEAD(i,3);
+							WFIFOW(i,0) = 0x81;
+							WFIFOB(i,2) = 2; // "Someone has already logged in with this id"
+							WFIFOSET(i,3);
+							set_eof(i);
+						}
+						else // still moving to the map-server
+							set_char_offline(-1, aid);
+					}
+				}
+				idb_remove(auth_db, aid);// reject auth attempts from map-server
+			}
+			break;
+
+			// ip address update signal from login server
+			case 0x2735:
+			{
+				unsigned char buf[2];
+				uint32 new_ip = 0;
+
+				WBUFW(buf,0) = 0x2b1e;
+				mapif_sendall(buf, 2);
+
+				new_ip = host2ip(login_ip_str);
+				if (new_ip && new_ip != login_ip)
+					login_ip = new_ip; //Update login ip, too.
+
+				new_ip = host2ip(char_ip_str);
+				if (new_ip && new_ip != char_ip)
+				{	//Update ip.
+					char_ip = new_ip;
+					ShowInfo("Updating IP for [%s].\n", char_ip_str);
+					// notify login server about the change
+					WFIFOHEAD(fd,6);
+					WFIFOW(fd,0) = 0x2736;
+					WFIFOL(fd,2) = htonl(char_ip);
+					WFIFOSET(fd,6);
+				}
+
+				RFIFOSKIP(fd,2);
+			}
+			break;
+
+			default:
+				ShowError("Unknown packet 0x%04x received from login-server, disconnecting.\n", command);
 				set_eof(fd);
 				return 0;
-			} else {
-				ShowStatus("Connected to login-server (connection #%d).\n", fd);
-				loginif_on_ready();
 			}
-			RFIFOSKIP(fd,3);
-		break;
-
-		// acknowledgement of account authentication request
-		case 0x2713:
-			if (RFIFOREST(fd) < 25)
-				return 0;
-		{
-			int account_id = RFIFOL(fd,2);
-			uint32 login_id1 = RFIFOL(fd,6);
-			uint32 login_id2 = RFIFOL(fd,10);
-			uint8 sex = RFIFOB(fd,14);
-			uint8 result = RFIFOB(fd,15);
-			int request_id = RFIFOL(fd,16);
-			uint32 version = RFIFOL(fd,20);
-			uint8 clienttype = RFIFOB(fd,24);
-			RFIFOSKIP(fd,25);
-
-			if( session_isActive(request_id) && (sd=(struct char_session_data*)session[request_id]->session_data) &&
-				!sd->auth && sd->account_id == account_id && sd->login_id1 == login_id1 && sd->login_id2 == login_id2 && sd->sex == sex )
-			{
-				int client_fd = request_id;
-				sd->version = version;
-				sd->clienttype = clienttype;
-				switch( result )
-				{
-				case 0:// ok
-					char_auth_ok(client_fd, sd);
-					break;
-				case 1:// auth failed
-					WFIFOHEAD(client_fd,3);
-					WFIFOW(client_fd,0) = 0x6c;
-					WFIFOB(client_fd,2) = 0;// rejected from server
-					WFIFOSET(client_fd,3);
-					break;
-				}
-			}
-		}
-		break;
-
-		case 0x2717: // account data
-			if (RFIFOREST(fd) < 72)
-				return 0;
-
-			// find the authenticated session with this account id
-			ARR_FIND( 0, fd_max, i, session[i] && (sd = (struct char_session_data*)session[i]->session_data) && sd->auth && sd->account_id == RFIFOL(fd,2) );
-			if( i < fd_max ) {
-				int server_id;
-				memcpy(sd->email, RFIFOP(fd,6), 40);
-				sd->expiration_time = (time_t)RFIFOL(fd,46);
-				sd->group_id = RFIFOB(fd,50);
-				sd->char_slots = RFIFOB(fd,51);
-				if( sd->char_slots > MAX_CHARS ) {
-					ShowError("Account '%d' `character_slots` column is higher than supported MAX_CHARS (%d), update MAX_CHARS in mmo.h! capping to MAX_CHARS...\n",sd->account_id,sd->char_slots);
-					sd->char_slots = MAX_CHARS;/* cap to maximum */
-				} else if ( sd->char_slots <= 0 )/* no value aka 0 in sql */
-					sd->char_slots = MAX_CHARS;/* cap to maximum */
-				safestrncpy(sd->birthdate, (const char*)RFIFOP(fd,52), sizeof(sd->birthdate));
-				safestrncpy(sd->pincode, (const char*)RFIFOP(fd,63), sizeof(sd->pincode));
-				sd->pincode_change = RFIFOL(fd,68);
-				ARR_FIND( 0, ARRAYLENGTH(server), server_id, server[server_id].fd > 0 && server[server_id].map[0] );
-				// continued from char_auth_ok...
-				if( server_id == ARRAYLENGTH(server) || //server not online, bugreport:2359
-					(max_connect_user == 0 && sd->group_id != gm_allow_group) ||
-					( max_connect_user > 0 && count_users() >= max_connect_user && sd->group_id != gm_allow_group ) ) {
-					// refuse connection (over populated)
-					WFIFOHEAD(i,3);
-					WFIFOW(i,0) = 0x6c;
-					WFIFOW(i,2) = 0;
-					WFIFOSET(i,3);
-				} else {
-					// send characters to player
-#if PACKETVER >= 20130000
-					mmo_char_send082d(i, sd);
-#else
-					mmo_char_send006b(i, sd);
-#endif
-#if PACKETVER >= 20110309
-					pincode->handle(i, sd);
-#endif
-				}
-			}
-			RFIFOSKIP(fd,72);
-		break;
-
-		// login-server alive packet
-		case 0x2718:
-			if (RFIFOREST(fd) < 2)
-				return 0;
-			RFIFOSKIP(fd,2);
-			session[fd]->flag.ping = 0;
-		break;
-
-		// changesex reply
-		case 0x2723:
-			if (RFIFOREST(fd) < 7)
-				return 0;
-		{
-			unsigned char buf[7];
-
-			int acc = RFIFOL(fd,2);
-			int sex = RFIFOB(fd,6);
-			RFIFOSKIP(fd,7);
-
-			if( acc > 0 )
-			{// TODO: Is this even possible?
-				int char_id[MAX_CHARS];
-				int class_[MAX_CHARS];
-				int guild_id[MAX_CHARS];
-				int num;
-				char* data;
-
-				struct auth_node* node = (struct auth_node*)idb_get(auth_db, acc);
-				if( node != NULL )
-					node->sex = sex;
-
-				// get characters
-				if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `char_id`,`class`,`guild_id` FROM `%s` WHERE `account_id` = '%d'", char_db, acc) )
-					Sql_ShowDebug(sql_handle);
-				for( i = 0; i < MAX_CHARS && SQL_SUCCESS == Sql_NextRow(sql_handle); ++i )
-				{
-					Sql_GetData(sql_handle, 0, &data, NULL); char_id[i] = atoi(data);
-					Sql_GetData(sql_handle, 1, &data, NULL); class_[i] = atoi(data);
-					Sql_GetData(sql_handle, 2, &data, NULL); guild_id[i] = atoi(data);
-				}
-				num = i;
-				for( i = 0; i < num; ++i )
-				{
-					if( class_[i] == JOB_BARD || class_[i] == JOB_DANCER ||
-						class_[i] == JOB_CLOWN || class_[i] == JOB_GYPSY ||
-						class_[i] == JOB_BABY_BARD || class_[i] == JOB_BABY_DANCER ||
-						class_[i] == JOB_MINSTREL || class_[i] == JOB_WANDERER ||
-						class_[i] == JOB_MINSTREL_T || class_[i] == JOB_WANDERER_T ||
-						class_[i] == JOB_BABY_MINSTREL || class_[i] == JOB_BABY_WANDERER ||
-						class_[i] == JOB_KAGEROU || class_[i] == JOB_OBORO )
-					{
-						// job modification
-						if( class_[i] == JOB_BARD || class_[i] == JOB_DANCER )
-							class_[i] = (sex ? JOB_BARD : JOB_DANCER);
-						else if( class_[i] == JOB_CLOWN || class_[i] == JOB_GYPSY )
-							class_[i] = (sex ? JOB_CLOWN : JOB_GYPSY);
-						else if( class_[i] == JOB_BABY_BARD || class_[i] == JOB_BABY_DANCER )
-							class_[i] = (sex ? JOB_BABY_BARD : JOB_BABY_DANCER);
-						else if( class_[i] == JOB_MINSTREL || class_[i] == JOB_WANDERER )
-							class_[i] = (sex ? JOB_MINSTREL : JOB_WANDERER);
-						else if( class_[i] == JOB_MINSTREL_T || class_[i] == JOB_WANDERER_T )
-							class_[i] = (sex ? JOB_MINSTREL_T : JOB_WANDERER_T);
-						else if( class_[i] == JOB_BABY_MINSTREL || class_[i] == JOB_BABY_WANDERER )
-							class_[i] = (sex ? JOB_BABY_MINSTREL : JOB_BABY_WANDERER);
-						else if( class_[i] == JOB_KAGEROU || class_[i] == JOB_OBORO )
-							class_[i] = (sex ? JOB_KAGEROU : JOB_OBORO);
-					}
-
-					if( SQL_ERROR == Sql_Query(sql_handle, "UPDATE `%s` SET `class`='%d', `weapon`='0', `shield`='0', `head_top`='0', `head_mid`='0', `head_bottom`='0' WHERE `char_id`='%d'", char_db, class_[i], char_id[i]) )
-						Sql_ShowDebug(sql_handle);
-
-					if( guild_id[i] )// If there is a guild, update the guild_member data [Skotlex]
-						inter_guild_sex_changed(guild_id[i], acc, char_id[i], sex);
-				}
-				Sql_FreeResult(sql_handle);
-
-				// disconnect player if online on char-server
-				disconnect_player(acc);
-			}
-
-			// notify all mapservers about this change
-			WBUFW(buf,0) = 0x2b0d;
-			WBUFL(buf,2) = acc;
-			WBUFB(buf,6) = sex;
-			mapif_sendall(buf, 7);
-		}
-		break;
-
-		// reply to an account_reg2 registry request
-		case 0x2729:
-			if (RFIFOREST(fd) < 4 || RFIFOREST(fd) < RFIFOW(fd,2))
-				return 0;
-
-		{	//Receive account_reg2 registry, forward to map servers.
-			unsigned char buf[13+ACCOUNT_REG2_NUM*sizeof(struct global_reg)];
-			memcpy(buf,RFIFOP(fd,0), RFIFOW(fd,2));
-			WBUFW(buf,0) = 0x3804; //Map server can now receive all kinds of reg values with the same packet. [Skotlex]
-			mapif_sendall(buf, WBUFW(buf,2));
-			RFIFOSKIP(fd, RFIFOW(fd,2));
-		}
-		break;
-
-		// State change of account/ban notification (from login-server)
-		case 0x2731:
-			if (RFIFOREST(fd) < 11)
-				return 0;
-
-		{	// send to all map-servers to disconnect the player
-			unsigned char buf[11];
-			WBUFW(buf,0) = 0x2b14;
-			WBUFL(buf,2) = RFIFOL(fd,2);
-			WBUFB(buf,6) = RFIFOB(fd,6); // 0: change of statut, 1: ban
-			WBUFL(buf,7) = RFIFOL(fd,7); // status or final date of a banishment
-			mapif_sendall(buf, 11);
-		}
-			// disconnect player if online on char-server
-			disconnect_player(RFIFOL(fd,2));
-
-			RFIFOSKIP(fd,11);
-		break;
-
-		// Login server request to kick a character out. [Skotlex]
-		case 0x2734:
-			if (RFIFOREST(fd) < 6)
-				return 0;
-		{
-			int aid = RFIFOL(fd,2);
-			struct online_char_data* character = (struct online_char_data*)idb_get(online_char_db, aid);
-			RFIFOSKIP(fd,6);
-			if( character != NULL )
-			{// account is already marked as online!
-				if( character->server > -1 )
-				{	//Kick it from the map server it is on.
-					mapif_disconnectplayer(server[character->server].fd, character->account_id, character->char_id, 2);
-					if (character->waiting_disconnect == INVALID_TIMER)
-						character->waiting_disconnect = add_timer(gettick()+AUTH_TIMEOUT, chardb_waiting_disconnect, character->account_id, 0);
-				}
-				else
-				{// Manual kick from char server.
-					struct char_session_data *tsd;
-					int i;
-					ARR_FIND( 0, fd_max, i, session[i] && (tsd = (struct char_session_data*)session[i]->session_data) && tsd->account_id == aid );
-					if( i < fd_max )
-					{
-						WFIFOHEAD(i,3);
-						WFIFOW(i,0) = 0x81;
-						WFIFOB(i,2) = 2; // "Someone has already logged in with this id"
-						WFIFOSET(i,3);
-						set_eof(i);
-					}
-					else // still moving to the map-server
-						set_char_offline(-1, aid);
-				}
-			}
-			idb_remove(auth_db, aid);// reject auth attempts from map-server
-		}
-		break;
-
-		// ip address update signal from login server
-		case 0x2735:
-		{
-			unsigned char buf[2];
-			uint32 new_ip = 0;
-
-			WBUFW(buf,0) = 0x2b1e;
-			mapif_sendall(buf, 2);
-
-			new_ip = host2ip(login_ip_str);
-			if (new_ip && new_ip != login_ip)
-				login_ip = new_ip; //Update login ip, too.
-
-			new_ip = host2ip(char_ip_str);
-			if (new_ip && new_ip != char_ip)
-			{	//Update ip.
-				char_ip = new_ip;
-				ShowInfo("Updating IP for [%s].\n", char_ip_str);
-				// notify login server about the change
-				WFIFOHEAD(fd,6);
-				WFIFOW(fd,0) = 0x2736;
-				WFIFOL(fd,2) = htonl(char_ip);
-				WFIFOSET(fd,6);
-			}
-
-			RFIFOSKIP(fd,2);
-		}
-		break;
-
-		default:
-			ShowError("Unknown packet 0x%04x received from login-server, disconnecting.\n", command);
-			set_eof(fd);
-			return 0;
-		}
 	}
 
 	RFIFOFLUSH(fd);
@@ -2688,14 +2679,12 @@ int parse_frommap(int fd)
 	int id;
 
 	ARR_FIND( 0, ARRAYLENGTH(server), id, server[id].fd == fd );
-	if( id == ARRAYLENGTH(server) )
-	{// not a map server
+	if( id == ARRAYLENGTH(server) ) {// not a map server
 		ShowDebug("parse_frommap: Disconnecting invalid session #%d (is not a map-server)\n", fd);
 		do_close(fd);
 		return 0;
 	}
-	if( session[fd]->flag.eof )
-	{
+	if( session[fd]->flag.eof ) {
 		do_close(fd);
 		server[id].fd = -1;
 		mapif_on_disconnect(id);
@@ -2703,7 +2692,6 @@ int parse_frommap(int fd)
 	}
 
 	while(RFIFOREST(fd) >= 2) {
-		
 		switch(RFIFOW(fd,0)) {
 
 			case 0x2b0a:
@@ -2713,7 +2701,22 @@ int parse_frommap(int fd)
 				RFIFOSKIP(fd,RFIFOW(fd,2));
 				break;
 
-					
+			case 0x2b0b:
+				if( RFIFOREST(fd) < RFIFOW(fd, 2) )
+					return 0;
+				memset(&skillid2idx, 0, sizeof(skillid2idx));
+				j = RFIFOW(fd, 2) - 4;
+				if( j )
+					j /= 4;
+				for(i = 0; i < j; i++) {
+					if( RFIFOW(fd, 4 + (i*4)) > MAX_SKILL_ID ) {
+						ShowWarning("Error skillid2dx[%d] = %d failed, %d is higher than MAX_SKILL_ID (%d)\n",RFIFOW(fd, 4 + (i*4)), RFIFOW(fd, 6 + (i*4)),RFIFOW(fd, 4 + (i*4)),MAX_SKILL_ID);
+						continue;
+					}
+					skillid2idx[RFIFOW(fd, 4 + (i*4))] = RFIFOW(fd, 6 + (i*4));
+				}
+				RFIFOSKIP(fd, RFIFOW(fd, 2));
+				break;
 			case 0x2afa: // Receiving map names list from the map-server
 				if (RFIFOREST(fd) < 4 || RFIFOREST(fd) < RFIFOW(fd,2))
 					return 0;
@@ -3384,16 +3387,18 @@ int parse_frommap(int fd)
 				if( RFIFOREST(fd) < RFIFOW(fd,4) )
 					return 0;/* packet wasn't fully received yet (still fragmented) */
 				else {
-					int sfd;/* stat server fd */
+					int sfd;/* stat server fd */					
 					RFIFOSKIP(fd, 2);/* we skip first 2 bytes which are the 0x3008, so we end up with a buffer equal to the one we send */
 
-					if( (sfd = make_connection(host2ip("stats.hercules.ws"),(uint16)25421,true) ) == -1 ) {
+					if( (sfd = make_connection(host2ip("stats.hercules.ws"),(uint16)25427,true) ) == -1 ) {
 						RFIFOSKIP(fd, RFIFOW(fd,2) );/* skip this packet */
+						RFIFOFLUSH(fd);
 						break;/* connection not possible, we drop the report */
 					}
-
+			
 					session[sfd]->flag.server = 1;/* to ensure we won't drop our own packet */
-
+					realloc_fifo(sfd, FIFOSIZE_SERVERLINK, FIFOSIZE_SERVERLINK);
+					
 					WFIFOHEAD(sfd, RFIFOW(fd,2) );
 
 					memcpy((char*)WFIFOP(sfd,0), (char*)RFIFOP(fd, 0), RFIFOW(fd,2));
@@ -3403,8 +3408,9 @@ int parse_frommap(int fd)
 					flush_fifo(sfd);
 
 					do_close(sfd);
-
+					
 					RFIFOSKIP(fd, RFIFOW(fd,2) );/* skip this packet */
+					RFIFOFLUSH(fd);
 			}
 			break;
 
@@ -3731,6 +3737,7 @@ int parse_char(int fd)
 		#define FIFOSD_CHECK(rest) { if(RFIFOREST(fd) < rest) return 0; if (sd==NULL || !sd->auth) { RFIFOSKIP(fd,rest); return 0; } }
 
 		cmd = RFIFOW(fd,0);
+
 		switch( cmd ) {
 
 			// request to connect
@@ -4339,20 +4346,6 @@ int parse_char(int fd)
 					RFIFOSKIP(fd, 8);
 				}
 			break;
-			
-			/* [Ind/Hercules] after hours reading over and over Shakto's network report, finally found this little ***hole */
-			case 0x9a1:
-				FIFOSD_CHECK(2);
-				{
-					int j = 4;
-					RFIFOSKIP(fd, 2);
-					WFIFOHEAD(fd,j + (MAX_CHARS*MAX_CHAR_BUF));
-					WFIFOW(fd,0) = 0x99d;
-					j+=mmo_chars_fromsql(sd, WFIFOP(fd,j));
-					WFIFOW(fd,2) = j;
-					WFIFOSET(fd,j);
-				}
-				break;
 				
 			// unknown packet received
 			default:
@@ -4363,26 +4356,6 @@ int parse_char(int fd)
 	}
 
 	RFIFOFLUSH(fd);
-	return 0;
-}
-
-// Console Command Parser [Wizputer]
-int parse_console(const char* command)
-{
-	ShowNotice("Console command: %s\n", command);
-
-	if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 || strcmpi("end", command) == 0 )
-		runflag = 0;
-	else if( strcmpi("alive", command) == 0 || strcmpi("status", command) == 0 )
-		ShowInfo(CL_CYAN"Console: "CL_BOLD"I'm Alive."CL_RESET"\n");
-	else if( strcmpi("help", command) == 0 )
-	{
-		ShowInfo("To shutdown the server:\n");
-		ShowInfo("  'shutdown|exit|quit|end'\n");
-		ShowInfo("To know if server is alive:\n");
-		ShowInfo("  'alive|status'\n");
-	}
-
 	return 0;
 }
 
@@ -4809,24 +4782,24 @@ int char_config_read(const char* cfgName)
 				ShowError("Specified start_point %s not found in map-index cache.\n", map);
 			start_point.x = x;
 			start_point.y = y;
-			} else if (strcmpi(w1, "start_items") == 0) {
+		} else if (strcmpi(w1, "start_items") == 0) {
 			int i;
 			char *split, *split2;
-	
+
 			i = 0;
 			split = strtok(w2, ",");
-			while (split != NULL) {
-			split2 = split;
-			split = strtok(NULL, ",");
-			start_items[i] = atoi(split2);
-			if (start_items[i] < 0)
-			start_items[i] = 0;
-			++i;
+			while (split != NULL && i < MAX_START_ITEMS*2) {
+				split2 = split;
+				split = strtok(NULL, ",");
+				start_items[i] = atoi(split2);
+				if (start_items[i] < 0)
+					start_items[i] = 0;
+				++i;
 			}
 
-		if (i%2) { //we know it must be a even number
-			ShowError("Specified 'start_items' is missing a parameter. Removing '%d'.\n", start_items[i - 1]);
-			start_items[i - 1] = 0;
+			if (i%2) { //we know it must be a even number
+				ShowError("Specified 'start_items' is missing a parameter. Removing '%d'.\n", start_items[i - 1]);
+				start_items[i - 1] = 0;
 			}
 		} else if (strcmpi(w1, "start_zeny") == 0) {
 			start_zeny = atoi(w2);
@@ -4921,9 +4894,8 @@ void do_abort(void)
 {
 }
 
-void set_server_type(void)
-{
-	SERVER_TYPE = ATHENA_SERVER_CHAR;
+void set_server_type(void) {
+	SERVER_TYPE = SERVER_TYPE_CHAR;
 }
 
 
@@ -4945,8 +4917,8 @@ void do_shutdown(void)
 }
 
 
-int do_init(int argc, char **argv)
-{
+int do_init(int argc, char **argv) {
+	memset(&skillid2idx, 0, sizeof(skillid2idx));
 	//Read map indexes
 	mapindex_init();
 	start_point.map = mapindex_name2id("new_zone01");
@@ -4960,7 +4932,7 @@ int do_init(int argc, char **argv)
 	if (strcmp(userid, "s1")==0 && strcmp(passwd, "p1")==0) {
 		ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
 		ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
-		ShowNotice("And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)\n");
+		ShowNotice("And then change the user/password to use in conf/char-server.conf (or conf/import/char_conf.txt)\n");
 	}
 	
 	inter_init_sql((argc > 2) ? argv[2] : inter_cfgName); // inter server configuration

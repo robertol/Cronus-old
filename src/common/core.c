@@ -17,6 +17,7 @@
 	#include "../common/sql.h"
 	#include "../config/core.h"
 	#include "../common/strlib.h"
+	#include "../common/HPM.h"
 #endif
 
 #include <stdio.h>
@@ -37,7 +38,6 @@ int arg_c = 0;
 char **arg_v = NULL;
 
 char *SERVER_NAME = NULL;
-char SERVER_TYPE = ATHENA_SERVER_NONE;
 
 #ifndef MINICORE	// minimalist Core
 // Added by Gabuzomeu
@@ -274,7 +274,7 @@ const char *get_git_hash (void) {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("Você está utilizando o Cronus com privilégios root, isto não é necessário.\n");
+		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
     }
 #endif
 }
@@ -295,6 +295,9 @@ int main (int argc, char **argv)
 		arg_c = argc;
 		arg_v = argv;
 	}
+#ifndef MINICORE
+	hpm_defaults();
+#endif
 	console_defaults();
 	
 	malloc_init();// needed for Show* in display_title() [FlavioJS]
@@ -320,13 +323,16 @@ int main (int argc, char **argv)
 #endif
 
 	timer_init();
-	
+
 	console->init();
+
+#ifndef MINICORE
+	HPM->init();
+#endif
 		
 	socket_init();
 
 	do_init(argc,argv);
-
 	{// Main runtime cycle
 		int next;
 		while (runflag != CORE_ST_STOP) {
@@ -338,7 +344,9 @@ int main (int argc, char **argv)
 	console->final();
 	
 	do_final();
-
+#ifndef MINICORE
+	HPM->final();
+#endif
 	timer_final();
 	socket_final();
 	db_final();

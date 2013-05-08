@@ -1,0 +1,57 @@
+/*
+//-----------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//-----------------------------------------------
+//Traduzido por BOO
+
+//Arquivo de Configuração dos Canais. */
+
+chsys: (
+{
+	/* Canais Padrão (Disponível para Todos) */
+	default_channels: {
+		/* Nome_do_canal : Cor_do_Canal */
+	 	main: "Orange" /* Disponível Como #main */
+		support: "Blue" /* Disponível Como #support */
+		trade: "Red" /* Disponível Como #trade */
+		offtopic: "Cyan" /* Disponível Como #offtopic */
+		/* Adicione Quantos Canais você preferir. */
+	}
+	/* Cores Disponíveis */
+	colors: {
+		Default: "0xffffff" /* Canais Customizados ultilizarão a primeira lista até que uma nova fonte seja selecionada ultilizando @channels.  */
+		Red: "0xff0000"
+		Blue: "0x83cfe9"
+		Orange: "0xe57c00"
+		Cyan: "0x00b89d"
+		Yellow: "0xffff90"
+		Green: "0x28bf00"
+		Normal: "0x00ff00"
+		/* Adicione Quantos Canais você preferir. */
+	}
+	/* Todos os Jogadores poderão criar um canal (privado) ultilizando o comando @channels? */
+	/* (Tambem é necessário permitir que os jogadores ultilizem @channels em groups.conf) */
+
+	allow_user_channel_creation: true
+
+	/* "map_local_channel" é um canal único para cada mapa. */
+
+	map_local_channel: true
+	map_local_channel_name: "map" /* Disponível Como #map */
+	map_local_channel_color: "Yellow"
+	map_local_channel_autojoin: true /* Desativar a entrada automática em mapas listados no mapflag ou em zonas */
+
+	/* "ally_channel" é um canal compartilhado com todos os seus alidados do Clã */
+
+	ally_channel_enabled: true
+	ally_channel_name: "ally" /* Disponível Como #ally */
+	ally_channel_color: "Green"
+	ally_channel_autojoin: true
+}
+)
+

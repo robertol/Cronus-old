@@ -16,9 +16,9 @@ struct status_change;
  * Changing this limit requires edits to refine_db.txt
  **/
 #ifdef RENEWAL
-#	define MAX_REFINE 20
+	#define MAX_REFINE 20
 #else
-#	define MAX_REFINE 10
+	#define MAX_REFINE 10
 #endif
 
 enum refine_type {
@@ -650,6 +650,9 @@ typedef enum sc_type {
 #ifdef RENEWAL	
 	SC_EXTREMITYFIST2,
 #endif
+	
+	SC_ALL_RIDING,
+	SC_HANBOK,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 } sc_type;
@@ -1450,30 +1453,30 @@ enum {
 };
 
 enum {
-	OPTION_NOTHING   = 0x00000000,
-	OPTION_SIGHT     = 0x00000001,
-	OPTION_HIDE      = 0x00000002,
-	OPTION_CLOAK     = 0x00000004,
-	OPTION_FALCON    = 0x00000010,
-	OPTION_RIDING    = 0x00000020,
-	OPTION_INVISIBLE = 0x00000040,
-	OPTION_ORCISH    = 0x00000800,
-	OPTION_WEDDING   = 0x00001000,
-	OPTION_RUWACH    = 0x00002000,
-	OPTION_CHASEWALK = 0x00004000,
-	OPTION_FLYING    = 0x00008000, //Note that clientside Flying and Xmas are 0x8000 for clients prior to 2007.
-	OPTION_XMAS      = 0x00010000,
-	OPTION_TRANSFORM = 0x00020000,
-	OPTION_SUMMER    = 0x00040000,
-	OPTION_DRAGON1   = 0x00080000,
-	OPTION_WUG       = 0x00100000,
-	OPTION_WUGRIDER  = 0x00200000,
-	OPTION_MADOGEAR  = 0x00400000,
-	OPTION_DRAGON2   = 0x00800000,
-	OPTION_DRAGON3   = 0x01000000,
-	OPTION_DRAGON4   = 0x02000000,
-	OPTION_DRAGON5   = 0x04000000,
-	OPTION_MOUNTING  = 0x08000000,
+	OPTION_NOTHING		= 0x00000000,
+	OPTION_SIGHT		= 0x00000001,
+	OPTION_HIDE			= 0x00000002,
+	OPTION_CLOAK		= 0x00000004,
+	OPTION_FALCON		= 0x00000010,
+	OPTION_RIDING		= 0x00000020,
+	OPTION_INVISIBLE	= 0x00000040,
+	OPTION_ORCISH		= 0x00000800,
+	OPTION_WEDDING		= 0x00001000,
+	OPTION_RUWACH		= 0x00002000,
+	OPTION_CHASEWALK	= 0x00004000,
+	OPTION_FLYING		= 0x00008000, //Note that clientside Flying and Xmas are 0x8000 for clients prior to 2007.
+	OPTION_XMAS			= 0x00010000,
+	OPTION_TRANSFORM	= 0x00020000,
+	OPTION_SUMMER		= 0x00040000,
+	OPTION_DRAGON1		= 0x00080000,
+	OPTION_WUG			= 0x00100000,
+	OPTION_WUGRIDER		= 0x00200000,
+	OPTION_MADOGEAR		= 0x00400000,
+	OPTION_DRAGON2		= 0x00800000,
+	OPTION_DRAGON3		= 0x01000000,
+	OPTION_DRAGON4		= 0x02000000,
+	OPTION_DRAGON5		= 0x04000000,
+	OPTION_HANBOK		= 0x08000000,
 	
 #ifndef NEW_CARTS
 	OPTION_CART1     = 0x00000008,
@@ -1560,6 +1563,13 @@ struct weapon_atk {
 #endif
 };
 
+sc_type SkillStatusChangeTable[MAX_SKILL];  // skill  -> status
+int StatusIconChangeTable[SC_MAX];          // status -> "icon" (icon is a bit of a misnomer, since there exist values with no icon associated)
+unsigned int StatusChangeFlagTable[SC_MAX]; // status -> flags
+int StatusSkillChangeTable[SC_MAX];         // status -> skill
+int StatusRelevantBLTypes[SI_MAX];          // "icon" -> enum bl_type (for clif->status_change to identify for which bl types to send packets)
+bool StatusDisplayType[SC_MAX];
+
 
 //For holding basic status (which can be modified by status changes)
 struct status_data {
@@ -1634,6 +1644,11 @@ struct regen_data {
 
 	//skill-regen, sitting-skill-regen (since not all chars with regen need it)
 	struct regen_data_sub *sregen, *ssregen;
+};
+
+struct sc_display_entry {
+	enum sc_type type;
+	int val1,val2,val3;
 };
 
 struct status_change_entry {

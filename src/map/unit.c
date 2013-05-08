@@ -330,7 +330,7 @@ int unit_walktoxy( struct block_list *bl, short x, short y, int flag)
 		&& wpd.path_len > 14 ) // Official number of walkable cells is 14 if and only if there is an obstacle between. [malufett]
 		return 0;
 #endif
-	if( battle_config.max_walk_path < wpd.path_len )
+	if( (battle_config.max_walk_path < wpd.path_len) && (bl->type != BL_NPC) )
 		return 0;
 
 	if (flag&4 && DIFF_TICK(ud->canmove_tick, gettick()) > 0 &&
@@ -491,7 +491,7 @@ int unit_run(struct block_list *bl)
 
 	if( (to_x == bl->x && to_y == bl->y ) || (to_x == (bl->x+1) || to_y == (bl->y+1)) || (to_x == (bl->x-1) || to_y == (bl->y-1))) {
 		//If you can't run forward, you must be next to a wall, so bounce back. [Skotlex]
-		clif->status_change(bl, SI_BUMP, 1, 0, 0, 0, 0);
+		clif->sc_load(bl,bl->id,AREA,SI_BUMP,0,0,0);
 
 		//Set running to 0 beforehand so status_change_end knows not to enable spurt [Kevin]
 		unit_bl2ud(bl)->state.running = 0;
@@ -499,7 +499,7 @@ int unit_run(struct block_list *bl)
 
 		skill->blown(bl,bl,skill->get_blewcount(TK_RUN,lv),unit_getdir(bl),0);
 		clif->fixpos(bl); //Why is a clif->slide (skill->blown) AND a fixpos needed? Ask Aegis.
-		clif->status_change(bl, SI_BUMP, 0, 0, 0, 0, 0);
+		clif->sc_end(bl,bl->id,AREA,SI_BUMP);
 		return 0;
 	}
 	if (unit_walktoxy(bl, to_x, to_y, 1))
@@ -511,7 +511,7 @@ int unit_run(struct block_list *bl)
 	} while (--i > 0 && !unit_walktoxy(bl, to_x, to_y, 1));
 	if ( i == 0 ) {
 		// copy-paste from above
-		clif->status_change(bl, SI_BUMP, 1, 0, 0, 0, 0);
+		clif->sc_load(bl,bl->id,AREA,SI_BUMP,0,0,0);
 
 		//Set running to 0 beforehand so status_change_end knows not to enable spurt [Kevin]
 		unit_bl2ud(bl)->state.running = 0;
@@ -519,7 +519,7 @@ int unit_run(struct block_list *bl)
 
 		skill->blown(bl,bl,skill->get_blewcount(TK_RUN,lv),unit_getdir(bl),0);
 		clif->fixpos(bl);
-		clif->status_change(bl, SI_BUMP, 0, 0, 0, 0, 0);
+		clif->sc_end(bl,bl->id,AREA,SI_BUMP);
 		return 0;
 	}
 	return 1;
@@ -2099,8 +2099,8 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 				chat_leavechat(sd,0);
 			if(sd->trade_partner)
 				trade_tradecancel(sd);
-			buyingstore_close(sd);
-			searchstore_close(sd);
+			buyingstore->close(sd);
+			searchstore->close(sd);
 			if(sd->state.storage_flag == 1)
 				storage_storage_quit(sd,0);
 			else if (sd->state.storage_flag == 2)
@@ -2264,7 +2264,7 @@ void unit_remove_map_pc(struct map_session_data *sd, clr_type clrtype)
 
 	if(sd->pd)
 		unit_remove_map(&sd->pd->bl, clrtype);
-	if(merc_is_hom_active(sd->hd))
+	if(homun_alive(sd->hd))
 		unit_remove_map(&sd->hd->bl, clrtype);
 	if(sd->md)
 		unit_remove_map(&sd->md->bl, clrtype);
@@ -2294,8 +2294,7 @@ int unit_free(struct block_list *bl, clr_type clrtype)
 	if( bl->prev )	//Players are supposed to logout with a "warp" effect.
 		unit_remove_map(bl, clrtype);
 
-	switch( bl->type )
-	{
+	switch( bl->type ) {
 		case BL_PC:
 		{
 			struct map_session_data *sd = (struct map_session_data*)bl;
@@ -2331,7 +2330,6 @@ int unit_free(struct block_list *bl, clr_type clrtype)
 				sd->reg_num = 0;
 			}
 			if( sd->regstr ) {
-				int i;
 				for( i = 0; i < sd->regstr_num; ++i )
 					if( sd->regstr[i].data )
 						aFree(sd->regstr[i].data);
@@ -2348,6 +2346,15 @@ int unit_free(struct block_list *bl, clr_type clrtype)
 				aFree(sd->combos.bonus);
 				aFree(sd->combos.id);
 				sd->combos.count = 0;
+			}
+			/* [Ind/Hercules] */
+			if( sd->sc_display_count ) {
+				for(i = 0; i < sd->sc_display_count; i++) {
+					ers_free(pc_sc_display_ers, sd->sc_display[i]);
+				}
+				sd->sc_display_count = 0;
+				aFree(sd->sc_display);
+				sd->sc_display = NULL;
 			}
 			break;
 		}
@@ -2467,11 +2474,10 @@ int unit_free(struct block_list *bl, clr_type clrtype)
 		{
 			struct homun_data *hd = (TBL_HOM*)bl;
 			struct map_session_data *sd = hd->master;
-			merc_hom_hungry_timer_delete(hd);
+			homun->hunger_timer_delete(hd);
 			if( hd->homunculus.intimacy > 0 )
-				merc_save(hd);
-			else
-			{
+				homun->save(hd);
+			else {
 				intif_homunculus_requestdelete(hd->homunculus.hom_id);
 				if( sd )
 					sd->status.hom_id = 0;
