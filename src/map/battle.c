@@ -3044,11 +3044,8 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 				switch(skill_id){
 					case AS_SPLASHER:       case AS_VENOMKNIFE:
 #ifndef RENEWAL_EDP
-					case AS_GRIMTOOTH:
-#endif
-					break;
-#ifndef RENEWAL_EDP
-					case ASC_BREAKER:       case ASC_METEORASSAULT: break;
+					case ASC_BREAKER:       case ASC_METEORASSAULT:
+					case AS_GRIMTOOTH:		break;
 #else
 					case AS_SONICBLOW:
 					case ASC_BREAKER:

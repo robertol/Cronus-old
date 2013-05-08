@@ -274,7 +274,7 @@ const char *get_git_hash (void) {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
+		ShowWarning ("Você está rodando Cronus com privilégios root, isto não é necessário.\n");
     }
 #endif
 }

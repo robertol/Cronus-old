@@ -1713,11 +1713,7 @@ ACMD(go)
 		{ MAP_GEFFEN,      119,  59 }, //  2=Geffen
 		{ MAP_PAYON,       162, 233 }, //  3=Payon
 		{ MAP_ALBERTA,     192, 147 }, //  4=Alberta
-#ifdef RENEWAL
-		{ MAP_IZLUDE,      128, 146 }, //  5=Izlude (Renewal)
-#else
 		{ MAP_IZLUDE,      128, 114 }, //  5=Izlude
-#endif
 		{ MAP_ALDEBARAN,   140, 131 }, //  6=Al de Baran
 		{ MAP_LUTIE,       147, 134 }, //  7=Lutie
 		{ MAP_COMODO,      209, 143 }, //  8=Comodo
@@ -1742,12 +1738,12 @@ ACMD(go)
 		{ MAP_MANUK,       282, 138 }, // 27=Manuk
 		{ MAP_SPLENDIDE,   197, 176 }, // 28=Splendide
 		{ MAP_BRASILIS,    182, 239 }, // 29=Brasilis
+#ifdef RENEWAL
 		{ MAP_DICASTES,    198, 187 }, // 30=El Dicastes
 		{ MAP_MORA,         44, 151 }, // 31=Mora
 		{ MAP_DEWATA,      200, 180 }, // 32=Dewata
 		{ MAP_MALANGDO,    140, 114 }, // 33=Malangdo Island
-		{ MAP_MALAYA,      242, 211 }, // 34=Malaya Port
-		{ MAP_ECLAGE,      110,  39 }, // 35=Eclage
+#endif
 	};
 	
 	nullpo_retr(-1, sd);
@@ -1850,6 +1846,7 @@ ACMD(go)
 		town = 28;
 	} else if (strncmp(map_name, "brasilis", 3) == 0) {
 		town = 29;
+#ifdef RENEWAL
 	} else if (strncmp(map_name, "dicastes01", 3) == 0) {
 		town = 30;
 	} else if (strcmp(map_name,  "mora") == 0) {
@@ -1858,10 +1855,7 @@ ACMD(go)
 		town = 32;
 	} else if (strncmp(map_name, "malangdo", 5) == 0) {
 		town = 33;
-	} else if (strncmp(map_name, "malaya", 5) == 0) {
-		town = 34;
-	} else if (strncmp(map_name, "eclage", 3) == 0) {
-		town = 35;
+#endif
 	}
 	
 	if (town >= 0 && town < ARRAYLENGTH(data))
