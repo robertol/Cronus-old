@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================
 //= 1.3d
 //===== Compatível Com: ======================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= Advance Class jobchanger after kRO Normals.
 //===== Comentários Adicionais: ==============================

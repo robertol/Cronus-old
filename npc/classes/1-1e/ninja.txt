@@ -5,7 +5,7 @@
 //===== Versão Atual: ========================================
 //= 1.4b
 //===== Compatível com: ======================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Description: =========================================
 //= Quest para se tornar Ninja, adicionado npcs em Amatsu e em
 //= Einbroch.

@@ -5,7 +5,7 @@
 //===== Versão Atual: ======================================== 
 //= 2.1b
 //===== Compatível com: ====================================== 
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: =========================================== 
 //= [Aegis Conversion]
 //= Muda a classe para Super Aprendiz

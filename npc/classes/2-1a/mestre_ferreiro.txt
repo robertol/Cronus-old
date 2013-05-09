@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================
 //= 1.3c
 //===== Compatibilidade: =====================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= Fazer um Mercador T. se tornar um Mestre-Ferreiro
 //===== Comentários Adicionais: ==============================

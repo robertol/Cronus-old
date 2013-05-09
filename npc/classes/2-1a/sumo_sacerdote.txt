@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================
 //= 1.3c
 //===== Compatibilidade: =====================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= Fazer um Noviço T. se tornar um Sumo-Sacerdote
 //===== Comentários Adicionais: ==============================

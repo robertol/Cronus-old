@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================
 //= 1.3c
 //===== Compatibilidade: =====================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= Fazer uma Arqueira T. se tornar uma Cigana
 //===== Comentários Adicional: ===============================

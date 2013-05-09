@@ -6,7 +6,7 @@
 //===== Current Version: ===================================== 
 //= 3.4a
 //===== Compatible With: ===================================== 
-//= Cronus  SVN
+//= Cronus  GIT
 //===== Description: ========================================= 
 //= [Aegis Conversion]
 //= Job quest for Crusader classes

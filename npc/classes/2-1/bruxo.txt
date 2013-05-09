@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================= 
 //= 2.9b
 //===== Compatível com: ======================================= 
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ============================================ 
 //= [Conversão Aegis]
 //= Muda a classe para Bruxo

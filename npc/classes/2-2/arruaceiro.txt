@@ -5,7 +5,7 @@
 //===== Versão Atual: ========================================
 //= 2.9b
 //===== Compatível com: ===================================== 
-//= Cronus SVN - 1226
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= [Aegis Conversion]
 //= Job quest for Rogue classes

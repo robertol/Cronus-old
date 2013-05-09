@@ -6,7 +6,7 @@
 //===== Versão Atual: ========================================
 //= 1.3c
 //===== Compatibilidade: =====================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= Fazer um Espadachim T. se tornar um Lorde
 //===== Comentários Adicionais: ==============================

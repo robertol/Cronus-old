@@ -9,7 +9,7 @@
 //===== Versão Atual: ========================================= 
 //= 2.7
 //===== Compatível com: ======================================= 
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ============================================ 
 //= [Conversão Aegis]
 //= Muda a classe para Ferreiro

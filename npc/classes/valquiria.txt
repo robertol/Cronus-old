@@ -7,7 +7,7 @@
 //===== Versão Atual: =======================================
 //= 3.0b
 //===== Compatível Com: =====================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ==========================================
 //= [Conversão Aegis]
 //= Missão para se tornar uma Transclasse. (Avançada/Renascida)

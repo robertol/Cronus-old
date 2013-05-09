@@ -7,7 +7,7 @@
 //===== Versão Atual: ========================================
 //= 2.9b
 //===== Compatível com: ======================================
-//= Cronus SVN
+//= Cronus GIT
 //===== Descrição: ===========================================
 //= [Aegis Conversion]
 //= Job Change quest for Knight class.
