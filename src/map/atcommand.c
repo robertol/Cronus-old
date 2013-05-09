@@ -10196,6 +10196,7 @@ void atcommand_db_clear(void) {
 		dbi_destroy(iter);
 
 		db_destroy(atcommand->db);
+		atcommand->db = NULL;
 	}
 	if (atcommand->alias_db != NULL)
 		db_destroy(atcommand->alias_db);
@@ -10212,6 +10213,8 @@ void atcommand_doload(void) {
 }
 
 void do_init_atcommand(void) {
+	atcommand->db = NULL;
+	atcommand->alias_db = NULL;
 	atcommand->at_symbol = '@';
 	atcommand->char_symbol = '#';
 	atcommand->binding_count = 0;
