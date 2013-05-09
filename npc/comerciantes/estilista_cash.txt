@@ -1,5 +1,5 @@
 //===== Cronus Script ======================================
-//= stilista - Estilos de Cabelo (Cash)
+//= Estilista - Estilos de Cabelo (Cash)
 //===== Por: ================================================== 
 //= Kisuka
 //===== Versão Atual: ===================================== 
