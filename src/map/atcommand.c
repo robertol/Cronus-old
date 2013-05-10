@@ -876,9 +876,8 @@ ACMD(option)
 		// notify the user of the requirement to enter an option
 		clif->message(fd, msg_txt(921)); // Please enter at least one option.
 		
-		if( text )
-		{// send the help text associated with this command
-			clif->message( fd, text );
+		if( text ) {// send the help text associated with this command
+			clif->messageln( fd, text );
 		}
 		
 		return false;
@@ -969,7 +968,7 @@ ACMD(jobchange)
 		if (!found) {
 			text = atcommand_help_string(info);
             if (text)
-                clif->message(fd, text);
+                clif->messageln(fd, text);
 			return false;
 		}
 	}
@@ -992,7 +991,7 @@ ACMD(jobchange)
 	} else {
 		text = atcommand_help_string(info);
         if (text)
-            clif->message(fd, text);
+            clif->messageln(fd, text);
 		return false;
 	}
 	
@@ -1763,9 +1762,8 @@ ACMD(go)
 		
 		clif->message(fd, msg_txt(38)); // Invalid location number, or name.
 		
-		if( text )
-		{// send the text to the client
-			clif->message( fd, text );
+		if( text ) {// send the text to the client
+			clif->messageln( fd, text );
 		}
 		
 		return false;
@@ -3116,9 +3114,8 @@ ACMD(questskill)
 		// send the error message as always
 		clif->message(fd, msg_txt(1027)); // Please enter a quest skill number.
 		
-		if( text )
-		{// send the skill ID list associated with this command
-			clif->message( fd, text );
+		if( text ) {// send the skill ID list associated with this command
+			clif->messageln( fd, text );
 		}
 		
 		return false;
@@ -3160,9 +3157,8 @@ ACMD(lostskill)
 		// send the error message as always
 		clif->message(fd, msg_txt(1027)); // Please enter a quest skill number.
 		
-		if( text )
-		{// send the skill ID list associated with this command
-			clif->message( fd, text );
+		if( text ) {// send the skill ID list associated with this command
+			clif->messageln( fd, text );
 		}
 		
 		return false;
@@ -4852,7 +4848,7 @@ ACMD(undisguise)
 /*==========================================
  * UndisguiseAll
  *------------------------------------------*/
-ACMD(undisguiseall)	{
+ACMD(undisguiseall) {
 	struct map_session_data *pl_sd;
 	struct s_mapiterator* iter;
 	nullpo_retr(-1, sd);
@@ -8991,7 +8987,6 @@ ACMD(channel) {
 			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
 			return false;
 		}
-		
 		for(k = 0; k < sd->channel_count; k++) {
 			if( strcmpi(sub1+1,sd->channels[k]->name) == 0 )
 				break;
@@ -9013,7 +9008,6 @@ ACMD(channel) {
 		} else
 			clif->chsys_left(sd->channels[k],sd);
 		sprintf(atcmd_output, msg_txt(1426),sub1); // You've left the '%s' channel
-		clif->message(fd, atcmd_output);
 		clif->message(fd, atcmd_output);
 	} else if ( strcmpi(key,"bindto") == 0 ) {
 		
@@ -9229,6 +9223,7 @@ ACMD(channel) {
 			clif->message(fd, msg_txt(1405));// Channel name must start with a '#'
 			return false;
 		}
+		
 		if( !(channel = strdb_get(clif->channel_db, sub1 + 1)) ) {
 			sprintf(atcmd_output, msg_txt(1407), sub1);// Channel '%s' is not available
 			clif->message(fd, atcmd_output);
@@ -9336,7 +9331,7 @@ ACMD(fontcolor) {
 	unsigned char k;
 	unsigned short msg_len = 1;
 	char mout[40];
-	
+
 	if( !message || !*message ) {
 		for( k = 0; k < hChSys.colors_count; k++ ) {
 			msg_len += sprintf(mout, "[ %s ] : %s",command,hChSys.colors_name[k]);
