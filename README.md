@@ -30,20 +30,19 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - .twink	- Samuel Soares
-- JAF		- João Angelo Franco
 
 ### Desenvolvedores
 - I am Cold	- Márcio Montenegro
 - Yum		- Luann Peixe
 - Wolf		- João Victor Senos
 - Golen Maker	- Ligleyson Warnielle
-- Axl		- José Goís
+- jBK		- José Goís
 - Cainho	- Caio Mateus
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
 - Eru Yuuko
 - KaduKiller	- Carlos Salles
-- beckdeveloper - Valderson Rodrigues
+- BeckDeveloper - Valderson Rodrigues
 - Apo
 - BOO		- José Filho
