@@ -861,9 +861,9 @@ int pc_isequip(struct map_session_data *sd,int n)
 
 	if (sd->sc.count) {
 
-		if(item->equip & EQP_ARMS && item->type == IT_WEAPON && sd->sc.data[SC_STRIPWEAPON]) // Also works with left-hand weapons [DracoRPG]
+		if(item->equip & EQP_ARMS && item->type == IT_WEAPON && (!(sd->sc.data[SC_CP_WEAPON]) && sd->sc.data[SC_STRIPWEAPON])) // Also works with left-hand weapons [DracoRPG]
 			return 0;
-		if(item->equip & EQP_SHIELD && item->type == IT_ARMOR && sd->sc.data[SC_STRIPSHIELD])
+		if(item->equip & EQP_SHIELD && item->type == IT_ARMOR && (!(sd->sc.data[SC_CP_SHIELD]) && sd->sc.data[SC_STRIPSHIELD]))
 			return 0;
 		if(item->equip & EQP_ARMOR && sd->sc.data[SC_STRIPARMOR])
 			return 0;
