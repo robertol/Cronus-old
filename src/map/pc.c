@@ -1057,15 +1057,9 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	if( !changing_mapservers ) {
 
 		if (battle_config.display_version == 1) {
-			const char* svn = get_svn_revision();
-			const char* git = get_git_hash();
+			const char* ver = versao();
 			char buf[256];
-			if( git[0] != HERC_UNKNOWN_VER )
-				sprintf(buf,"Git Hash: %s", git);
-			else if( svn[0] != HERC_UNKNOWN_VER )
-				sprintf(buf,"SVN Revision: %s", svn);
-			else
-				sprintf(buf,"Unknown Version");
+				sprintf(buf,"Versão: %s", ver);
 			clif->message(sd->fd, buf);
 		}
 

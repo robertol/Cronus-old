@@ -5940,8 +5940,7 @@ static const struct _battle_data {
 void Hercules_report(char* date, char *time_c) {
 	int i, bd_size = ARRAYLENGTH(battle_data);
 	unsigned int config = 0;
-	const char *svn = get_svn_revision();
-	const char *git = get_git_hash();
+	const char *ver = versao();
 	char timestring[25];
 	time_t curtime;
 	char* buf;
@@ -6059,7 +6058,7 @@ void Hercules_report(char* date, char *time_c) {
 	safestrncpy((char*)WBUFP(buf,6 + 12), time_c, 9);
 	safestrncpy((char*)WBUFP(buf,6 + 12 + 9), timestring, 24);
 
-	safestrncpy((char*)WBUFP(buf,6 + 12 + 9 + 24), git[0] != HERC_UNKNOWN_VER ? git : svn[0] != HERC_UNKNOWN_VER ? svn : "Unknown", 41);
+	safestrncpy((char*)WBUFP(buf,6 + 12 + 9 + 24), ver, 41);
 	WBUFL(buf,6 + 12 + 9 + 24 + 41)     = map_getusers();
 
 	WBUFL(buf,6 + 12 + 9 + 24 + 41 + 4) = config;

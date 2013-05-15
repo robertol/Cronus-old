@@ -5058,11 +5058,9 @@ static void map_helpscreen(bool do_exit)
  * Map-Server Version Screen [MC Cameri]
  *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit) {
-	const char *svn = get_svn_revision();
-	const char *git = get_git_hash();
-	ShowInfo(CL_WHITE"Hercules version: %s" CL_RESET"\n", git[0] != HERC_UNKNOWN_VER ? git : svn[0] != HERC_UNKNOWN_VER ? svn : "Unknown");
-	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://hercules.ws/\n");
-	ShowInfo(CL_GREEN"IRC Channel:"CL_RESET"\tirc://irc.rizon.net/#Hercules\n");
+	const char *ver = versao();
+	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
+	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
 	ShowInfo("Open "CL_WHITE"readme.txt"CL_RESET" for more information.\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);

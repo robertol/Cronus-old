@@ -534,8 +534,7 @@ static void memmgr_log (char *buf)
 	if( !log_fp ) {
 		time_t raw;
 		struct tm* t;
-		const char* svn = get_svn_revision();
-		const char* git = get_git_hash();
+		const char *ver = versao();
 
 		log_fp = fopen(memmer_logfile,"at");
 		if (!log_fp) log_fp = stdout;
@@ -543,8 +542,7 @@ static void memmgr_log (char *buf)
 		time(&raw);
 		t = localtime(&raw);
 		fprintf(log_fp, "\nMemory manager: Memory leaks found at %d/%02d/%02d %02dh%02dm%02ds (rev %s).\n",
-			(t->tm_year+1900), (t->tm_mon+1), t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec,
-				git[0] != HERC_UNKNOWN_VER ? git : svn[0] != HERC_UNKNOWN_VER ? svn : "Unknown");
+			(t->tm_year+1900), (t->tm_mon+1), t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec,ver);
 	}
 	fprintf(log_fp, "%s", buf);
 	return;

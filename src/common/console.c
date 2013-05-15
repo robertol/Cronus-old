@@ -38,8 +38,7 @@ struct console_interface console_s;
  *	CORE : Display title
  *--------------------------------------*/
 void display_title(void) {
-	const char* svn = get_svn_revision();
-	const char* git = get_git_hash();
+	const char* ver = versao();
 
 	ShowMessage("\n");
 	ShowMessage (""CL_WTBL"          (=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)"CL_CLL""CL_NORMAL"\n");
@@ -55,10 +54,7 @@ void display_title(void) {
 	ShowMessage (""CL_XXBL"          ("CL_BOLD"                                                         "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_WTBL"          (=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)"CL_CLL""CL_NORMAL"\n\n\a");
 
-	if( git[0] != HERC_UNKNOWN_VER )
-		ShowInfo("Git Hash: '"CL_WHITE"%s"CL_RESET"'\n", git);
-	else if( svn[0] != HERC_UNKNOWN_VER )
-		ShowInfo("Revisao do SVN: '"CL_WHITE"%s"CL_RESET"'\n", svn);
+	ShowInfo("Versão: "CL_RED"%s"CL_RED"\n", ver);
 }
 #ifdef CONSOLE_INPUT
 #ifdef _WIN32

@@ -16639,12 +16639,9 @@ BUILDIN(is_function) {
  * get_revision() -> retrieves the current svn revision (if available)
  **/
 BUILDIN(get_revision) {
-	const char *svn = get_svn_revision();
+	const char *ver = versao();
 	
-	if ( svn[0] != HERC_UNKNOWN_VER )
-		script_pushint(st,atoi(svn));
-	else
-		script_pushint(st,-1);//unknown
+	script_pushint(st,atoi(ver));
 	
 	return true;
 }
