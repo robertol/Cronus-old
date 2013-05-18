@@ -1306,12 +1306,12 @@ int battle_calc_gvg_damage(struct block_list *src,struct block_list *bl,int dama
 			}
 		}
 		if(src->type != BL_MOB) {
-			struct guild *g = src->type == BL_PC ? ((TBL_PC *)src)->guild : guild_search(status_get_guild_id(src));
+			struct guild *g = src->type == BL_PC ? ((TBL_PC *)src)->guild : guild->search(status_get_guild_id(src));
 
-			if (class_ == MOBID_EMPERIUM && (!g || guild_checkskill(g,GD_APPROVAL) <= 0 ))
+			if (class_ == MOBID_EMPERIUM && (!g || guild->checkskill(g,GD_APPROVAL) <= 0 ))
 				return 0;
 
-			if (g && battle_config.guild_max_castles && guild_checkcastles(g)>=battle_config.guild_max_castles)
+			if (g && battle_config.guild_max_castles && guild->checkcastles(g)>=battle_config.guild_max_castles)
 				return 0; // [MouseJstr]
 		}
 	}
@@ -3374,19 +3374,19 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	if(skill_id == CR_GRANDCROSS || skill_id == NPC_GRANDDARKNESS)
 		return wd; //Enough, rest is not needed.
 #ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
-	if( src && skill_id ) {
-		for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
-			if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
-				if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
-					if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+	if( target && skill_id ) {
+		for(i = 0; i < map[target->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[target->m].zone->capped_skills[i]->nameid && (map[target->m].zone->capped_skills[i]->type & target->type) ) {
+				if( target->type == BL_MOB && map[target->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)target)->status.mode&MD_BOSS) && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
 						continue;
-					if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+					if( ((TBL_MOB*)target)->special_state.clone && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
 						continue;
 				}
-				if( wd.damage > map[src->m].zone->capped_skills[i]->cap )
-					wd.damage = map[src->m].zone->capped_skills[i]->cap;
-				if( wd.damage2 > map[src->m].zone->capped_skills[i]->cap )
-					wd.damage2 = map[src->m].zone->capped_skills[i]->cap;
+				if( wd.damage > map[target->m].zone->capped_skills[i]->cap )
+					wd.damage = map[target->m].zone->capped_skills[i]->cap;
+				if( wd.damage2 > map[target->m].zone->capped_skills[i]->cap )
+					wd.damage2 = map[target->m].zone->capped_skills[i]->cap;
 				break;
 			}
 		}
@@ -4084,19 +4084,19 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 			}
 		}
 #ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
-		if( src && skill_id ) {
-			for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
-				if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
-					if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
-						if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+		if( target && skill_id ) {
+			for(i = 0; i < map[target->m].zone->capped_skills_count; i++) {
+				if( skill_id == map[target->m].zone->capped_skills[i]->nameid && (map[target->m].zone->capped_skills[i]->type & target->type) ) {
+					if( target->type == BL_MOB && map[target->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+						if( (((TBL_MOB*)target)->status.mode&MD_BOSS) && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
 							continue;
-						if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+						if( ((TBL_MOB*)target)->special_state.clone && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
 							continue;
 					}
-					if( ad.damage > map[src->m].zone->capped_skills[i]->cap )
-						ad.damage = map[src->m].zone->capped_skills[i]->cap;
-					if( ad.damage2 > map[src->m].zone->capped_skills[i]->cap )
-						ad.damage2 = map[src->m].zone->capped_skills[i]->cap;
+					if( ad.damage > map[target->m].zone->capped_skills[i]->cap )
+						ad.damage = map[target->m].zone->capped_skills[i]->cap;
+					if( ad.damage2 > map[target->m].zone->capped_skills[i]->cap )
+						ad.damage2 = map[target->m].zone->capped_skills[i]->cap;
 					break;
 				}
 			}
@@ -4486,19 +4486,19 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 		}
 	}
 #ifndef HMAP_ZONE_DAMAGE_CAP_TYPE
-	if( src && skill_id ) {
-		for(i = 0; i < map[src->m].zone->capped_skills_count; i++) {
-			if( skill_id == map[src->m].zone->capped_skills[i]->nameid && (map[src->m].zone->capped_skills[i]->type & src->type) ) {
-				if( src->type == BL_MOB && map[src->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
-					if( (((TBL_MOB*)src)->status.mode&MD_BOSS) && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+	if( target && skill_id ) {
+		for(i = 0; i < map[target->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[target->m].zone->capped_skills[i]->nameid && (map[target->m].zone->capped_skills[i]->type & target->type) ) {
+				if( target->type == BL_MOB && map[target->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)target)->status.mode&MD_BOSS) && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
 						continue;
-					if( ((TBL_MOB*)src)->special_state.clone && !(map[src->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+					if( ((TBL_MOB*)target)->special_state.clone && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
 						continue;
 				}
-				if( md.damage > map[src->m].zone->capped_skills[i]->cap )
-					md.damage = map[src->m].zone->capped_skills[i]->cap;
-				if( md.damage2 > map[src->m].zone->capped_skills[i]->cap )
-					md.damage2 = map[src->m].zone->capped_skills[i]->cap;
+				if( md.damage > map[target->m].zone->capped_skills[i]->cap )
+					md.damage = map[target->m].zone->capped_skills[i]->cap;
+				if( md.damage2 > map[target->m].zone->capped_skills[i]->cap )
+					md.damage2 = map[target->m].zone->capped_skills[i]->cap;
 				break;
 			}
 		}
@@ -4581,20 +4581,20 @@ struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct bl
 	}
 	
 #ifdef HMAP_ZONE_DAMAGE_CAP_TYPE
-	if( bl && skill_id ) {
+	if( target && skill_id ) {
 		int i;
-		for(i = 0; i < map[bl->m].zone->capped_skills_count; i++) {
-			if( skill_id == map[bl->m].zone->capped_skills[i]->nameid && (map[bl->m].zone->capped_skills[i]->type & bl->type) ) {
-				if( bl->type == BL_MOB && map[bl->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
-					if( (((TBL_MOB*)bl)->status.mode&MD_BOSS) && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
+		for(i = 0; i < map[target->m].zone->capped_skills_count; i++) {
+			if( skill_id == map[target->m].zone->capped_skills[i]->nameid && (map[target->m].zone->capped_skills[i]->type & target->type) ) {
+				if( target->type == BL_MOB && map[target->m].zone->capped_skills[i]->subtype != MZS_NONE ) {
+					if( (((TBL_MOB*)target)->status.mode&MD_BOSS) && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_BOSS) )
 						continue;
-					if( ((TBL_MOB*)bl)->special_state.clone && !(map[bl->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
+					if( ((TBL_MOB*)target)->special_state.clone && !(map[target->m].zone->disabled_skills[i]->subtype&MZS_CLONE) )
 						continue;
 				}
-				if( d.damage > map[bl->m].zone->capped_skills[i]->cap )
-					d.damage = map[bl->m].zone->capped_skills[i]->cap;
-				if( d.damage2 > map[bl->m].zone->capped_skills[i]->cap )
-					d.damage2 = map[bl->m].zone->capped_skills[i]->cap;
+				if( d.damage > map[target->m].zone->capped_skills[i]->cap )
+					d.damage = map[target->m].zone->capped_skills[i]->cap;
+				if( d.damage2 > map[target->m].zone->capped_skills[i]->cap )
+					d.damage2 = map[target->m].zone->capped_skills[i]->cap;
 				break;
 			}
 		}
@@ -5474,7 +5474,7 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 		{
 			int s_guild = status_get_guild_id(s_bl);
 			int t_guild = status_get_guild_id(t_bl);
-			if( !(map[m].flag.pvp && map[m].flag.pvp_noguild) && s_guild && t_guild && (s_guild == t_guild || guild_isallied(s_guild, t_guild)) && (!map[m].flag.battleground || sbg_id == tbg_id) )
+			if( !(map[m].flag.pvp && map[m].flag.pvp_noguild) && s_guild && t_guild && (s_guild == t_guild || guild->isallied(s_guild, t_guild)) && (!map[m].flag.battleground || sbg_id == tbg_id) )
 				state |= BCT_GUILD;
 			else
 				state |= BCT_ENEMY;
@@ -5507,7 +5507,7 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 		{
 			int s_guild = status_get_guild_id(s_bl);
 			int t_guild = status_get_guild_id(t_bl);
-			if(s_guild && t_guild && (s_guild == t_guild || guild_isallied(s_guild, t_guild)))
+			if(s_guild && t_guild && (s_guild == t_guild || guild->isallied(s_guild, t_guild)))
 				state |= BCT_GUILD;
 		}
     } //end non pvp/gvg chk rivality
@@ -5817,7 +5817,6 @@ static const struct _battle_data {
 	{ "mobs_level_up_exp_rate",             &battle_config.mobs_level_up_exp_rate,          1,      1,      INT_MAX,        },
 	{ "pk_min_level",                       &battle_config.pk_min_level,                    55,     1,      INT_MAX,        },
 	{ "skill_steal_max_tries",              &battle_config.skill_steal_max_tries,           0,      0,      UCHAR_MAX,      },
-	{ "motd_type",                          &battle_config.motd_type,                       0,      0,      1,              },
 	{ "finding_ore_rate",                   &battle_config.finding_ore_rate,                100,    0,      INT_MAX,        },
 	{ "exp_calc_type",                      &battle_config.exp_calc_type,                   0,      0,      1,              },
 	{ "exp_bonus_attacker",                 &battle_config.exp_bonus_attacker,              25,     0,      INT_MAX,        },

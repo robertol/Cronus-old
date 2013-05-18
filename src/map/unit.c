@@ -1077,8 +1077,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 		if( skill->get_inf(skill_id)&INF_SELF_SKILL && skill->get_nk(skill_id)&NK_NO_DAMAGE )// exploit fix
 			target_id = src->id;
 		temp = 1;
-	} else
-	if ( target_id == src->id &&
+	} else if ( target_id == src->id &&
 		skill->get_inf(skill_id)&INF_SELF_SKILL &&
 		skill->get_inf2(skill_id)&INF2_NO_TARGET_SELF )
 	{
@@ -1091,8 +1090,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 		if(skill->not_ok(skill_id, sd)) // [MouseJstr]
 			return 0;
 
-		switch(skill_id)
-		{	//Check for skills that auto-select target
+		switch(skill_id) {	//Check for skills that auto-select target
 		case MO_CHAINCOMBO:
 			if (sc && sc->data[SC_BLADESTOP]){
 				if ((target=map_id2bl(sc->data[SC_BLADESTOP]->val4)) == NULL)
@@ -1114,8 +1112,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 			target_id = target->id;
 	}
 	if (src->type==BL_HOM)
-	switch(skill_id)
-	{ //Homun-auto-target skills.
+		switch(skill_id) { //Homun-auto-target skills.
 		case HLIF_HEAL:
 		case HLIF_AVOID:
 		case HAMI_DEFENCE:
@@ -1181,7 +1178,12 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 				sd->skill_lv_old = skill_lv;
 				break;
 			}
+		/* temporarily disabled, awaiting for kenpachi to detail this so we can make it work properly */
+#if 0
+		if ( sd->skillitem != skill_id && !skill->check_condition_castbegin(sd, skill_id, skill_lv) )
+#else
 			if (!skill->check_condition_castbegin(sd, skill_id, skill_lv))
+#endif
 				return 0;
 	}
 
@@ -2109,9 +2111,9 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 			if(sd->party_invite>0)
 				party_reply_invite(sd,sd->party_invite,0);
 			if(sd->guild_invite>0)
-				guild_reply_invite(sd,sd->guild_invite,0);
+				guild->reply_invite(sd,sd->guild_invite,0);
 			if(sd->guild_alliance>0)
-				guild_reply_reqalliance(sd,sd->guild_alliance_account,0);
+				guild->reply_reqalliance(sd,sd->guild_alliance_account,0);
 			if(sd->menuskill_id)
 				sd->menuskill_id = sd->menuskill_val = 0;
 			if( sd->touching_id )
@@ -2140,7 +2142,7 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 				skill->sit(sd,0);
 			}
 			party_send_dot_remove(sd);//minimap dot fix [Kevin]
-			guild_send_dot_remove(sd);
+			guild->send_dot_remove(sd);
 			bg_send_dot_remove(sd);
 
 			if( map[bl->m].users <= 0 || sd->state.debug_remove_map )
@@ -2317,7 +2319,7 @@ int unit_free(struct block_list *bl, clr_type clrtype)
 			// Notify friends that this char logged out. [Skotlex]
 			map_foreachpc(clif->friendslist_toggle_sub, sd->status.account_id, sd->status.char_id, 0);
 			party_send_logout(sd);
-			guild_send_memberinfoshort(sd,0);
+			guild->send_memberinfoshort(sd,0);
 			pc_cleareventtimer(sd);
 			pc_inventory_rental_clear(sd);
 			pc_delspiritball(sd,sd->spiritball,1);

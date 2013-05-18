@@ -1,2 +1,0 @@
-//O limite de linhas é 128. Caso precise de mais, modifique a linha MOTD_LINE_SIZE em pc.c
-Seja bem-vindo(a) ao Cronus! Divirta-se! Por favor reporte qualquer bug/erro que você encontrar em nosso Fórum.
