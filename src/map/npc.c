@@ -1619,7 +1619,7 @@ int npc_buylist(struct map_session_data* sd, int n, unsigned short* item_list)
 static int npc_selllist_sub(struct map_session_data* sd, int n, unsigned short* item_list, struct npc_data* nd)
 {
 	char npc_ev[EVENT_NAME_LENGTH];
-	char card_slot[NAME_LENGTH];
+	char card_slot[NPC_NAME_LENGTH];
 	int i, j, idx;
 	int key_nameid = 0;
 	int key_amount = 0;
@@ -1983,27 +1983,27 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 {
 	const char* p;
 	struct npc_data* dnd;// duplicate npc
-	char newname[NAME_LENGTH];
+	char newname[NPC_NAME_LENGTH];
 
 	// parse name
 	p = strstr(name,"::");
 	if( p ) { // <Display name>::<Unique name>
 		size_t len = p-name;
-		if( len > NAME_LENGTH ) {
-			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH ) {
+			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 			safestrncpy(nd->name, name, sizeof(nd->name));
 		} else {
 			memcpy(nd->name, name, len);
 			memset(nd->name+len, 0, sizeof(nd->name)-len);
 		}
 		len = strlen(p+2);
-		if( len > NAME_LENGTH )
-			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH )
+			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->exname, p+2, sizeof(nd->exname));
 	} else {// <Display name>
 		size_t len = strlen(name);
-		if( len > NAME_LENGTH )
-			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH )
+			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->name, name, sizeof(nd->name));
 		safestrncpy(nd->exname, name, sizeof(nd->exname));
 	}
@@ -2692,7 +2692,7 @@ const char* npc_parse_duplicate(char* w1, char* w2, char* w3, char* w4, const ch
 }
 
 int npc_duplicate4instance(struct npc_data *snd, int16 m) {
-	char newname[NAME_LENGTH];
+	char newname[NPC_NAME_LENGTH];
 
 	if( map[m].instance_id == 0 )
 		return 1;
@@ -3007,7 +3007,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 {
 	int num, class_, m,x,y,xs,ys, i,j;
 	int mob_lv = -1, ai = -1, size = -1;
-	char mapname[32], mobname[NAME_LENGTH];
+	char mapname[32], mobname[NPC_NAME_LENGTH];
 	struct spawn_data mob, *data;
 	struct mob_db* db;
 
@@ -3899,7 +3899,7 @@ int npc_reload(void) {
 
 	map_zone_init();
 	
-	npc->motd = npc_name2id("HerculesMOTD"); /* [Ind/Hercules] */
+	npc->motd = npc_name2id("CronusMOTD"); /* [Ind/Hercules] */
 	
 	//Re-read the NPC Script Events cache.
 	npc_read_event_script();
@@ -4010,8 +4010,8 @@ int do_init_npc(void)
 	for( i = MAX_NPC_CLASS2_START; i < MAX_NPC_CLASS2_END; i++ )
 		npc_viewdb2[i - MAX_NPC_CLASS2_START].class_ = i;
 
-	ev_db = strdb_alloc((DBOptions)(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA),2*NAME_LENGTH+2+1);
-	npcname_db = strdb_alloc(DB_OPT_BASE,NAME_LENGTH);
+	ev_db = strdb_alloc((DBOptions)(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA),2*NPC_NAME_LENGTH+2+1);
+	npcname_db = strdb_alloc(DB_OPT_BASE,NPC_NAME_LENGTH);
 	npc_path_db = strdb_alloc(DB_OPT_BASE|DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA,80);
 
 	timer_event_ers = ers_new(sizeof(struct timer_event_data),"clif.c::timer_event_ers",ERS_OPT_NONE);
@@ -4033,7 +4033,7 @@ int do_init_npc(void)
 
 	map_zone_init();
 	
-	npc->motd = npc_name2id("HerculesMOTD"); /* [Ind/Hercules] */
+	npc->motd = npc_name2id("CronusMOTD"); /* [Ind/Hercules] */
 	
 	// set up the events cache
 	memset(script_event, 0, sizeof(script_event));

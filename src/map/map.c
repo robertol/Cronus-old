@@ -5055,7 +5055,7 @@ static void map_helpscreen(bool do_exit)
  *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit) {
 	const char *ver = versao();
-	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
+	ShowInfo(CL_WHITE"Versao do Cronus: %s" CL_RESET"\n", ver);
 	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);

@@ -1055,7 +1055,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 		if (battle_config.display_version == 1) {
 			const char* ver = versao();
 			char buf[256];
-			sprintf(buf,"Versão: %s", ver);
+			sprintf(buf,"Versao: %s", ver);
 			clif->message(sd->fd, buf);
 		}
 		
