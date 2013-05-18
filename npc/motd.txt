@@ -8,8 +8,8 @@
 //           http://forum.cronus-emulator.com
 //==============================================================
 // 
-// run when any character logs in, attached to them.
+// executado quando qualquer personagem loga, que lhes são inerentes
 -	script	CronusMOTD	-1,{
-message strcharinfo(0),"Welcome to Hercules! Enjoy! Please report any bugs you find.";
+message strcharinfo(0),"Bem-vindo ao  Cronus! Divirta-se! favor relatar quaisquer bugs que você encontrar.";
 end;
 }
