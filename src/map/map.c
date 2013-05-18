@@ -3409,9 +3409,9 @@ void map_reloadnpc(bool clear)
 		npc_addsrcfile("clear"); // this will clear the current script list
 
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/pre-re/scripts_pre-renovacao.conf");
-#else
 	map_reloadnpc_sub("npc/re/scripts_renovacao.conf");
+#else
+	map_reloadnpc_sub("npc/pre-re/scripts_pre-renovacao.conf");
 #endif
 }
 
