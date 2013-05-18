@@ -50,6 +50,7 @@
 
 #define ERS_BLOCK_ENTRIES 2048
 
+
 struct ers_list
 {
 	struct ers_list *Next;
@@ -82,7 +83,7 @@ typedef struct ers_cache
 	
 	// Objects in-use count
 	unsigned int UsedObjs;
-
+	
 	// Linked list
 	struct ers_cache *Next, *Prev;
 } ers_cache_t;
@@ -93,7 +94,7 @@ struct ers_instance_t {
 	
 	// Name, used for debbuging purpouses
 	char *Name;
-
+		
 	// Misc options
 	enum ERSOptions Options;
 
@@ -281,7 +282,7 @@ static void ers_obj_destroy(ERS self)
 	
 	if( instance->Options & ERS_OPT_FREE_NAME )
 		aFree(instance->Name);
-
+	
 	aFree(instance);
 }
 

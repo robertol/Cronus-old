@@ -102,6 +102,7 @@ bool hplugin_populate(struct hplugin *plugin, const char *filename) {
 		}
 		*Link = ToLink[i].Ref;
 	}
+	
 	return true;
 }
 void hplugin_load(const char* filename) {
@@ -157,7 +158,7 @@ void hplugin_load(const char* filename) {
 	}
 	
 	*sql_handle = HPM->import_symbol("sql_handle");
-	
+
 	if( !( HPMi = plugin_import(plugin->dll, "HPMi",struct HPMi_interface **) ) ) {
 		ShowWarning("HPM:plugin_load: failed to retrieve 'HPMi' for '"CL_WHITE"%s"CL_RESET"', skipping...\n", filename);
 		HPM->unload(plugin);
@@ -284,7 +285,7 @@ void hplugins_share_defaults(void) {
 	HPM->share(add_timer_interval,"add_timer_interval");
 	HPM->share(add_timer_func_list,"add_timer_func_list");
 	HPM->share(delete_timer,"delete_timer");
-	HPM->share(get_uptime,"get_uptime");
+	HPM->share(get_uptime,"get_uptime");	
 }
 CPCMD(plugins) {
 	if( HPM->plugin_count == 0 ) {

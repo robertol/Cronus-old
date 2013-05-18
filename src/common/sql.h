@@ -63,130 +63,78 @@ typedef enum SqlDataType SqlDataType;
 typedef struct Sql Sql;
 typedef struct SqlStmt SqlStmt;
 
-
 struct sql_interface {
-
-
-
-/// Establishes a connection.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Establishes a connection.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*Connect) (Sql* self, const char* user, const char* passwd, const char* host, uint16 port, const char* db);
-
-
-
-
-/// Retrieves the timeout of the connection.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Retrieves the timeout of the connection.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*GetTimeout) (Sql* self, uint32* out_timeout);
-
-
-
-
-/// Retrieves the name of the columns of a table into out_buf, with the separator after each name.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Retrieves the name of the columns of a table into out_buf, with the separator after each name.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*GetColumnNames) (Sql* self, const char* table, char* out_buf, size_t buf_len, char sep);
-
-
-
-
-/// Changes the encoding of the connection.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Changes the encoding of the connection.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*SetEncoding) (Sql* self, const char* encoding);
-
-
-
-/// Pings the connection.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Pings the connection.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*Ping) (Sql* self);
-
-
-
-/// Escapes a string.
-/// The output buffer must be at least strlen(from)*2+1 in size.
-///
-/// @return The size of the escaped string
+	/// Escapes a string.
+	/// The output buffer must be at least strlen(from)*2+1 in size.
+	///
+	/// @return The size of the escaped string
 	size_t (*EscapeString) (Sql* self, char* out_to, const char* from);
-
-
-
-/// Escapes a string.
-/// The output buffer must be at least from_len*2+1 in size.
-///
-/// @return The size of the escaped string
+	/// Escapes a string.
+	/// The output buffer must be at least from_len*2+1 in size.
+	///
+	/// @return The size of the escaped string
 	size_t (*EscapeStringLen) (Sql* self, char* out_to, const char* from, size_t from_len);
-
-
-
-/// Executes a query.
-/// Any previous result is freed.
-/// The query is constructed as if it was sprintf.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Executes a query.
+	/// Any previous result is freed.
+	/// The query is constructed as if it was sprintf.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*Query) (Sql* self, const char* query, ...);
-
-
-
-/// Executes a query.
-/// Any previous result is freed.
-/// The query is constructed as if it was svprintf.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Executes a query.
+	/// Any previous result is freed.
+	/// The query is constructed as if it was svprintf.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*QueryV) (Sql* self, const char* query, va_list args);
-
-
-
-/// Executes a query.
-/// Any previous result is freed.
-/// The query is used directly.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Executes a query.
+	/// Any previous result is freed.
+	/// The query is used directly.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*QueryStr) (Sql* self, const char* query);
-
-
-
-/// Returns the number of the AUTO_INCREMENT column of the last INSERT/UPDATE query.
-///
-/// @return Value of the auto-increment column
+	/// Returns the number of the AUTO_INCREMENT column of the last INSERT/UPDATE query.
+	///
+	/// @return Value of the auto-increment column
 	uint64 (*LastInsertId) (Sql* self);
-
-
-
-/// Returns the number of columns in each row of the result.
-///
-/// @return Number of columns
+	/// Returns the number of columns in each row of the result.
+	///
+	/// @return Number of columns
 	uint32 (*NumColumns) (Sql* self);
-
-
-
-/// Returns the number of rows in the result.
-///
-/// @return Number of rows
+	/// Returns the number of rows in the result.
+	///
+	/// @return Number of rows
 	uint64 (*NumRows) (Sql* self);
-
-
-
-/// Fetches the next row.
-/// The data of the previous row is no longer valid.
-///
-/// @return SQL_SUCCESS, SQL_ERROR or SQL_NO_DATA
+	/// Fetches the next row.
+	/// The data of the previous row is no longer valid.
+	///
+	/// @return SQL_SUCCESS, SQL_ERROR or SQL_NO_DATA
 	int (*NextRow) (Sql* self);
-
-
-
-/// Gets the data of a column.
-/// The data remains valid until the next row is fetched or the result is freed.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
+	/// Gets the data of a column.
+	/// The data remains valid until the next row is fetched or the result is freed.
+	///
+	/// @return SQL_SUCCESS or SQL_ERROR
 	int (*GetData) (Sql* self, size_t col, char** out_buf, size_t* out_len);
-
-
-
-/// Frees the result of the query.
+	/// Frees the result of the query.
 	void (*FreeResult) (Sql* self);
 	/// Shows debug information (last query).
 	void (*ShowDebug_) (Sql* self, const char* debug_file, const unsigned long debug_line);
@@ -200,15 +148,11 @@ struct sql_interface *SQL;
 
 void sql_defaults(void);
 
-
-
 #if defined(SQL_REMOVE_SHOWDEBUG)
-#define Sql_ShowDebug(self) (void)0
+	#define Sql_ShowDebug(self) (void)0
 #else
 	#define Sql_ShowDebug(self) SQL->ShowDebug_(self, __FILE__, __LINE__)
 #endif
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Prepared Statements
@@ -222,8 +166,6 @@ void sql_defaults(void);
 // example queries with parameters:
 // 1) SELECT col FROM table WHERE id=?
 // 2) INSERT INTO table(col1,col2) VALUES(?,?)
-
-
 
 /// Allocates and initializes a new SqlStmt handle.
 /// It uses the connection of the parent Sql handle.
@@ -240,8 +182,6 @@ struct SqlStmt* SqlStmt_Malloc(Sql* sql);
 ///
 /// @return SQL_SUCCESS or SQL_ERROR
 int SqlStmt_Prepare(SqlStmt* self, const char* query, ...);
-
-
 
 /// Prepares the statement.
 /// Any previous result is freed and all parameter bindings are removed.
@@ -330,9 +270,9 @@ void SqlStmt_FreeResult(SqlStmt* self);
 void Sql_HerculesUpdateCheck(Sql* self);
 
 #if defined(SQL_REMOVE_SHOWDEBUG)
-#define SqlStmt_ShowDebug(self) (void)0
+	#define SqlStmt_ShowDebug(self) (void)0
 #else
-#define SqlStmt_ShowDebug(self) SqlStmt_ShowDebug_(self, __FILE__, __LINE__)
+	#define SqlStmt_ShowDebug(self) SqlStmt_ShowDebug_(self, __FILE__, __LINE__)
 #endif
 /// Shows debug information (with statement).
 void SqlStmt_ShowDebug_(SqlStmt* self, const char* debug_file, const unsigned long debug_line);

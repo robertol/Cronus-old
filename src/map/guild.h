@@ -98,7 +98,7 @@ struct guild_interface {
 	void (*agit_end) (void);
 	void (*agit2_start) (void);
 	void (*agit2_end) (void);
-/* guild flag cachin */
+	/* guild flag cachin */
 	void (*flag_add) (struct npc_data *nd);
 	void (*flag_remove) (struct npc_data *nd);
 	void (*flags_clear) (void);

@@ -17,8 +17,6 @@
 extern int arg_c;
 extern char **arg_v;
 
-#define HERC_UNKNOWN_VER '\x02'
-
 /// @see E_CORE_ST
 extern int runflag;
 extern char *SERVER_NAME;

@@ -36,7 +36,6 @@ struct TimerData {
 
 // Function prototype declaration
 
-
 int do_timer(unsigned int tick);
 void timer_init(void);
 void timer_final(void);

@@ -3044,8 +3044,11 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 				switch(skill_id){
 					case AS_SPLASHER:       case AS_VENOMKNIFE:
 #ifndef RENEWAL_EDP
-					case ASC_BREAKER:       case ASC_METEORASSAULT:
-					case AS_GRIMTOOTH:		break;
+					case AS_GRIMTOOTH:
+#endif
+					break;
+#ifndef RENEWAL_EDP
+					case ASC_BREAKER:       case ASC_METEORASSAULT: break;
 #else
 					case AS_SONICBLOW:
 					case ASC_BREAKER:
@@ -5930,7 +5933,7 @@ static const struct _battle_data {
 	{ "item_restricted_consumption_type",   &battle_config.item_restricted_consumption_type,1,      0,      1,              },
 	{ "max_walk_path",						&battle_config.max_walk_path,					17,     1,      MAX_WALKPATH,   },
 	{ "item_enabled_npc",					&battle_config.item_enabled_npc,				1,      0,      1,				},
-	{ "gm_ignore_warpable_area",			&battle_config.gm_ignore_warpable_area,      	0,    	2,    	100,      		},
+	{ "gm_ignore_warpable_area",			&battle_config.gm_ignore_warpable_area,			0,		2,		100,			},
 };
 #ifndef STATS_OPT_OUT
 /**

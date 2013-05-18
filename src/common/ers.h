@@ -75,9 +75,7 @@ enum ERSOptions {
 	ERS_OPT_CLEAR		= 0x1,/* silently clears any entries left in the manager upon destruction */
 	ERS_OPT_WAIT		= 0x2,/* wait for entries to come in order to list! */
 	ERS_OPT_FREE_NAME	= 0x4,/* name is dynamic memory, and should be freed */
-
 };
-
 
 /**
  * Public interface of the entry manager.

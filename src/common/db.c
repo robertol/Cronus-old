@@ -510,7 +510,7 @@ static void db_rebalance_erase(DBNode node, DBNode *root)
 			// put the right of 'node' in 'y' 
 			y->right = node->right;
 			node->right->parent = y;
-		// 'y' is a direct child of 'node'
+			// 'y' is a direct child of 'node'
 		} else {
 			x_parent = y;
 		}
@@ -2829,7 +2829,6 @@ void linkdb_final( struct linkdb_node** head )
 	}
 	*head = NULL;
 }
-
 void db_defaults(void) {
 	DB = &DB_s;
 	DB->alloc = db_alloc;

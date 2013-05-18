@@ -148,15 +148,16 @@ void signals_init (void) {
 #endif
 }
 #endif
+
 const char *versao () {
 	static char vers[13]="";
-    	FILE *fp;
-   
-    	if((fp=fopen("conf/import/versao.txt","r")) != NULL){
-       		fgets(vers, 12, fp);
+		FILE *fp;
+    if((fp=fopen("conf/import/versao.txt","r")) != NULL){
+        fgets(vers, 12, fp);
 	} else {
 		strcpy(vers,"Desconhecida");
 	}
+	
 	fclose(fp);
 
 	return vers;
@@ -165,7 +166,7 @@ const char *versao () {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("Você está rodando Cronus com privilégios root, isto não é necessário.\n");
+		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
     }
 #endif
 }
@@ -182,7 +183,6 @@ void core_defaults(void) {
 	db_defaults();
 #endif
 }
-
 /*======================================
  *	CORE : MAINROUTINE
  *--------------------------------------*/

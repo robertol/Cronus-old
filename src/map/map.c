@@ -3172,7 +3172,7 @@ int map_readallmaps (void) {
 	int maps_removed = 0;
 	char *map_cache_buffer = NULL; // Has the uncompressed gat data of all maps, so just one allocation has to be made
 	char map_cache_decode_buffer[MAX_MAP_SIZE];
-
+	
 	if( enable_grf )
 		ShowStatus("Loading maps (using GRF files)...\n");
 	else {
@@ -3409,9 +3409,9 @@ void map_reloadnpc(bool clear)
 		npc_addsrcfile("clear"); // this will clear the current script list
 
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/re/scripts_renovacao.conf");
-#else
 	map_reloadnpc_sub("npc/pre-re/scripts_pre-renovacao.conf");
+#else
+	map_reloadnpc_sub("npc/re/scripts_renovacao.conf");
 #endif
 }
 
@@ -5057,7 +5057,6 @@ static void map_versionscreen(bool do_exit) {
 	const char *ver = versao();
 	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
 	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
-	ShowInfo("Open "CL_WHITE"readme.txt"CL_RESET" for more information.\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }

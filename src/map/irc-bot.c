@@ -26,7 +26,7 @@ int irc_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 		return 0;
 	
 	ircbot->last_try = gettick();
-	
+
 	if( ( ircbot->fd = make_connection(ircbot->ip,hChSys.irc_server_port,true) ) > 0 ){
 		session[ircbot->fd]->func_parse = ircbot->parse;
 		session[ircbot->fd]->flag.server = 1;
@@ -193,7 +193,6 @@ void irc_privmsg(int fd, char *cmd, char *source, char *target, char *msg) {
 			ircbot->parse_source(source,source_nick,source_ident,source_host);
 
 		if( ircbot->channel ) {
-
 			snprintf(send_string, 150, "[ #%s ] IRC.%s : %s",ircbot->channel->name,source_nick,msg);
 			clif->chsys_msg2(ircbot->channel,send_string);
 		}
@@ -206,7 +205,6 @@ void irc_relay (char *name, char *msg) {
 	sprintf(send_string,"PRIVMSG %s :[ %s ] : %s",hChSys.irc_channel,name,msg);
 	ircbot->send(send_string);
 }
-
 void irc_bot_init(void) {
 	const struct irc_func irc_func_base[] = {
 		{ "PING" , ircbot->pong },
@@ -217,7 +215,7 @@ void irc_bot_init(void) {
 
 	if( !hChSys.irc )
 		return;
-	
+
 	if (!(ircbot->ip = host2ip(hChSys.irc_server))) {
 		ShowError("Unable to resolve '%s' (irc server), disabling irc channel...\n", hChSys.irc_server);
 		hChSys.irc = false;

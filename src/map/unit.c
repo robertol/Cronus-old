@@ -1091,35 +1091,36 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 			return 0;
 
 		switch(skill_id) {	//Check for skills that auto-select target
-		case MO_CHAINCOMBO:
-			if (sc && sc->data[SC_BLADESTOP]){
-				if ((target=map_id2bl(sc->data[SC_BLADESTOP]->val4)) == NULL)
+			case MO_CHAINCOMBO:
+				if (sc && sc->data[SC_BLADESTOP]){
+					if ((target=map_id2bl(sc->data[SC_BLADESTOP]->val4)) == NULL)
+						return 0;
+				}
+				break;
+			case WE_MALE:
+			case WE_FEMALE:
+				if (!sd->status.partner_id)
 					return 0;
-			}
-			break;
-		case WE_MALE:
-		case WE_FEMALE:
-			if (!sd->status.partner_id)
-				return 0;
-			target = (struct block_list*)map_charid2sd(sd->status.partner_id);
-			if (!target) {
-				clif->skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
-				return 0;
-			}
-			break;
+				target = (struct block_list*)map_charid2sd(sd->status.partner_id);
+				if (!target) {
+					clif->skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+					return 0;
+				}
+				break;
 		}
 		if (target)
 			target_id = target->id;
 	}
+
 	if (src->type==BL_HOM)
 		switch(skill_id) { //Homun-auto-target skills.
-		case HLIF_HEAL:
-		case HLIF_AVOID:
-		case HAMI_DEFENCE:
-		case HAMI_CASTLE:
-			target = battle->get_master(src);
-			if (!target) return 0;
-			target_id = target->id;
+			case HLIF_HEAL:
+			case HLIF_AVOID:
+			case HAMI_DEFENCE:
+			case HAMI_CASTLE:
+				target = battle->get_master(src);
+				if (!target) return 0;
+				target_id = target->id;
 	}
 
 	if( !target ) // choose default target
@@ -1177,14 +1178,14 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 				sd->skill_id_old = skill_id;
 				sd->skill_lv_old = skill_lv;
 				break;
-			}
+		}
 		/* temporarily disabled, awaiting for kenpachi to detail this so we can make it work properly */
 #if 0
 		if ( sd->skillitem != skill_id && !skill->check_condition_castbegin(sd, skill_id, skill_lv) )
 #else
-			if (!skill->check_condition_castbegin(sd, skill_id, skill_lv))
+		if ( !skill->check_condition_castbegin(sd, skill_id, skill_lv) )
 #endif
-				return 0;
+			return 0;
 	}
 
 	if( src->type == BL_MOB )

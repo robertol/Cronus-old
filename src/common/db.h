@@ -693,7 +693,6 @@ struct DBMap {
 \*****************************************************************************/
 
 struct db_interface {
-
 /**
  * Returns the fixed options according to the database type.
  * Sets required options and unsets unsupported options.
@@ -873,7 +872,6 @@ void (*final) (void);
 struct db_interface *DB;
 
 void db_defaults(void);
-
 // Link DB System - From jAthena
 struct linkdb_node {
 	struct linkdb_node *next;

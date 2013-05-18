@@ -2012,23 +2012,23 @@ int guild_castledataloadack(int len, struct guild_castle *gc)
 	} else { // load received castles into memory, one by one
 		for( i = 0; i < n; i++, gc++ ) {
 			struct guild_castle *c = guild->castle_search(gc->castle_id);
-		if (!c) {
-			ShowError("guild_castledataloadack: castle id=%d not found.\n", gc->castle_id);
-			continue;
-		}
+			if (!c) {
+				ShowError("guild_castledataloadack: castle id=%d not found.\n", gc->castle_id);
+				continue;
+			}
 
-		// update map-server castle data with new info
-		memcpy(&c->guild_id, &gc->guild_id, sizeof(struct guild_castle) - offsetof(struct guild_castle, guild_id));
+			// update map-server castle data with new info
+			memcpy(&c->guild_id, &gc->guild_id, sizeof(struct guild_castle) - offsetof(struct guild_castle, guild_id));
 
 			if( c->guild_id ) {
-			if( i != ev )
+				if( i != ev )
 					guild->request_info(c->guild_id);
-			else { // last owned one
+				else { // last owned one
 					guild->npc_request_info(c->guild_id, "::OnAgitInit");
 					guild->npc_request_info(c->guild_id, "::OnAgitInit2");
+				}
 			}
 		}
-	}
 	}
 	ShowStatus("Received '"CL_WHITE"%d"CL_RESET"' guild castles from char-server.\n", n);
 	return 0;

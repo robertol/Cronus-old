@@ -68,7 +68,6 @@ struct fame_list taekwon_fame_list[MAX_FAME_LIST];
 
 static unsigned short equip_pos[EQI_MAX]={EQP_ACC_L,EQP_ACC_R,EQP_SHOES,EQP_GARMENT,EQP_HEAD_LOW,EQP_HEAD_MID,EQP_HEAD_TOP,EQP_ARMOR,EQP_HAND_L,EQP_HAND_R,EQP_COSTUME_HEAD_TOP,EQP_COSTUME_HEAD_MID,EQP_COSTUME_HEAD_LOW,EQP_COSTUME_GARMENT,EQP_AMMO};
 
-
 //Links related info to the sd->hate_mob[]/sd->feel_map[] entries
 const struct sg_data sg_info[MAX_PC_FEELHATE] = {
 		{ SG_SUN_ANGER, SG_SUN_BLESS, SG_SUN_COMFORT, "PC_FEEL_SUN", "PC_HATE_MOB_SUN", is_day_of_sun },
@@ -1012,7 +1011,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 
 	sd->guild_x = -1;
 	sd->guild_y = -1;
-	
+
 	sd->disguise = -1;
 	
 	// Event Timers
@@ -1056,11 +1055,10 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 		if (battle_config.display_version == 1) {
 			const char* ver = versao();
 			char buf[256];
-				sprintf(buf,"Versão: %s", ver);
+			sprintf(buf,"Versão: %s", ver);
 			clif->message(sd->fd, buf);
 		}
-
-
+		
 		// message of the limited time of the account
 		if (expiration_time != 0) { // don't display if it's unlimited or unknow value
 			char tmpstr[1024];
@@ -1241,7 +1239,6 @@ int pc_reg_received(struct map_session_data *sd)
 
 	if( npc->motd ) /* [Ind/Hercules] */
 		run_script(npc->motd->u.scr.script, 0, sd->bl.id, fake_nd->bl.id);
-
 
 	return 1;
 }
@@ -1642,9 +1639,9 @@ int pc_disguise(struct map_session_data *sd, int class_) {
 		if( class_ == -1 && sd->disguise == sd->status.class_ ) {
 			clif->clearunit_single(-sd->bl.id,CLR_OUTSIGHT,sd->fd);
 		} else if ( class_ != sd->status.class_ ) {
-		pc_stop_walking(sd, 0);
-		clif->clearunit_area(&sd->bl, CLR_OUTSIGHT);
-	}
+			pc_stop_walking(sd, 0);
+			clif->clearunit_area(&sd->bl, CLR_OUTSIGHT);
+		}
 	}
 
 	if (class_ == -1) {

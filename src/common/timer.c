@@ -358,23 +358,23 @@ int do_timer(unsigned int tick) {
 			timer_data[tid].type &= ~TIMER_REMOVE_HEAP;
 
 			switch( timer_data[tid].type ) {
-			default:
-			case TIMER_ONCE_AUTODEL:
-				timer_data[tid].type = 0;
-				if (free_timer_list_pos >= free_timer_list_max) {
-					free_timer_list_max += 256;
-					RECREATE(free_timer_list,int,free_timer_list_max);
-					memset(free_timer_list + (free_timer_list_max - 256), 0, 256 * sizeof(int));
-				}
-				free_timer_list[free_timer_list_pos++] = tid;
-			break;
-			case TIMER_INTERVAL:
-				if( DIFF_TICK(timer_data[tid].tick, tick) < -1000 )
-					timer_data[tid].tick = tick + timer_data[tid].interval;
-				else
-					timer_data[tid].tick += timer_data[tid].interval;
-				push_timer_heap(tid);
-			break;
+				default:
+				case TIMER_ONCE_AUTODEL:
+					timer_data[tid].type = 0;
+					if (free_timer_list_pos >= free_timer_list_max) {
+						free_timer_list_max += 256;
+						RECREATE(free_timer_list,int,free_timer_list_max);
+						memset(free_timer_list + (free_timer_list_max - 256), 0, 256 * sizeof(int));
+					}
+					free_timer_list[free_timer_list_pos++] = tid;
+				break;
+				case TIMER_INTERVAL:
+					if( DIFF_TICK(timer_data[tid].tick, tick) < -1000 )
+						timer_data[tid].tick = tick + timer_data[tid].interval;
+					else
+						timer_data[tid].tick += timer_data[tid].interval;
+					push_timer_heap(tid);
+				break;
 			}
 		}
 	}

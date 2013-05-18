@@ -12,14 +12,11 @@
 #include <string.h>
 #undef __USE_GNU
 
-
 #ifdef WIN32
-#define HAVE_STRTOK_R
-#define strtok_r(s,delim,save_ptr) _strtok_r((s),(delim),(save_ptr))
-char* _strtok_r(char* s1, const char* s2, char** lasts);
+	#define HAVE_STRTOK_R
+	#define strtok_r(s,delim,save_ptr) _strtok_r((s),(delim),(save_ptr))
+	char *_strtok_r(char* s1, const char* s2, char** lasts);
 #endif
-
-
 
 /// Bitfield determining the behaviour of sv_parse and sv_split.
 typedef enum e_svopt {
@@ -120,45 +117,44 @@ struct stringbuf_interface {
 struct stringbuf_interface *StrBuf;
 
 struct sv_interface {
-
-/// Parses a single field in a delim-separated string.
-/// The delimiter after the field is skipped.
-///
-/// @param sv Parse state
-/// @return 1 if a field was parsed, 0 if done, -1 on error.
+	/// Parses a single field in a delim-separated string.
+	/// The delimiter after the field is skipped.
+	///
+	/// @param sv Parse state
+	/// @return 1 if a field was parsed, 0 if done, -1 on error.
 	int (*parse_next) (struct s_svstate* sv);
-
-/// Parses a delim-separated string.
-/// Starts parsing at startoff and fills the pos array with position pairs.
-/// out_pos[0] and out_pos[1] are the start and end of line.
-/// Other position pairs are the start and end of fields.
-/// Returns the number of fields found or -1 if an error occurs.
+	
+	/// Parses a delim-separated string.
+	/// Starts parsing at startoff and fills the pos array with position pairs.
+	/// out_pos[0] and out_pos[1] are the start and end of line.
+	/// Other position pairs are the start and end of fields.
+	/// Returns the number of fields found or -1 if an error occurs.
 	int (*parse) (const char* str, int len, int startoff, char delim, int* out_pos, int npos, enum e_svopt opt);
-
-/// Splits a delim-separated string.
-/// WARNING: this function modifies the input string
-/// Starts splitting at startoff and fills the out_fields array.
-/// out_fields[0] is the start of the next line.
-/// Other entries are the start of fields (nul-teminated).
-/// Returns the number of fields found or -1 if an error occurs.
+	
+	/// Splits a delim-separated string.
+	/// WARNING: this function modifies the input string
+	/// Starts splitting at startoff and fills the out_fields array.
+	/// out_fields[0] is the start of the next line.
+	/// Other entries are the start of fields (nul-teminated).
+	/// Returns the number of fields found or -1 if an error occurs.
 	int (*split) (char* str, int len, int startoff, char delim, char** out_fields, int nfields, enum e_svopt opt);
-
-/// Escapes src to out_dest according to the format of the C compiler.
-/// Returns the length of the escaped string.
-/// out_dest should be len*4+1 in size.
+	
+	/// Escapes src to out_dest according to the format of the C compiler.
+	/// Returns the length of the escaped string.
+	/// out_dest should be len*4+1 in size.
 	size_t (*escape_c) (char* out_dest, const char* src, size_t len, const char* escapes);
-
-/// Unescapes src to out_dest according to the format of the C compiler.
-/// Returns the length of the unescaped string.
-/// out_dest should be len+1 in size and can be the same buffer as src.
+	
+	/// Unescapes src to out_dest according to the format of the C compiler.
+	/// Returns the length of the unescaped string.
+	/// out_dest should be len+1 in size and can be the same buffer as src.
 	size_t (*unescape_c) (char* out_dest, const char* src, size_t len);
-
-/// Skips a C escape sequence (starting with '\\').
+	
+	/// Skips a C escape sequence (starting with '\\').
 	const char* (*skip_escaped_c) (const char* p);
-
-/// Opens and parses a file containing delim-separated columns, feeding them to the specified callback function row by row.
-/// Tracks the progress of the operation (current line number, number of successfully processed rows).
-/// Returns 'true' if it was able to process the specified file, or 'false' if it could not be read.
+	
+	/// Opens and parses a file containing delim-separated columns, feeding them to the specified callback function row by row.
+	/// Tracks the progress of the operation (current line number, number of successfully processed rows).
+	/// Returns 'true' if it was able to process the specified file, or 'false' if it could not be read.
 	bool (*readdb) (const char* directory, const char* filename, char delim, int mincols, int maxcols, int maxrows, bool (*parseproc)(char* fields[], int columns, int current));
 } sv_s;
 
@@ -192,5 +188,4 @@ void strlib_defaults(void);
 	#define strline(str,pos) strlib->strline(str,pos)
 	#define bin2hex(output,input,count) strlib->bin2hex(output,input,count)
 #endif /* STRLIB_C */
-
 #endif /* _STRLIB_H_ */

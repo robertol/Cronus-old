@@ -1138,8 +1138,7 @@ void clif_spawn_unit(struct block_list* bl, enum send_target target) {
 #endif
 	if( disguised(bl) ) {
 		if( sd->status.class_ != sd->disguise )
-	clif->send(&p,sizeof(p),bl,target);
-
+			clif->send(&p,sizeof(p),bl,target);
 #if PACKETVER >= 20071106
 		p.objecttype = pcdb_checkid(status_get_viewdata(bl)->class_) ? 0x0 : 0x5; //PC_TYPE : NPC_MOB_TYPE
 		p.GID = -bl->id;
@@ -1150,8 +1149,7 @@ void clif_spawn_unit(struct block_list* bl, enum send_target target) {
 	} else
 		clif->send(&p,sizeof(p),bl,target);
 
-	}
-
+}
 
 /*==========================================
  * Prepares 'unit walking' packet
@@ -5796,14 +5794,14 @@ void clif_resurrection(struct block_list *bl,int type)
 	WBUFL(buf,2)=bl->id;
 	WBUFW(buf,6)=0;
 
-	clif->send(buf,packet_len(0x148),bl,type==1 ? AREA : AREA_WOS);
+	clif->send(buf,packet_len(0x148),bl, type == 1 ? AREA : AREA_WOS);
 	if (disguised(bl)) {
 		if( ((TBL_PC*)bl)->fontcolor ) {
 			WBUFL(buf,2)=-bl->id;
 			clif->send(buf,packet_len(0x148),bl, SELF);
 		} else
-		clif->spawn(bl);
-}
+			clif->spawn(bl);
+	}
 }
 
 
@@ -9842,7 +9840,7 @@ int clif_undisguise_timer(int tid, unsigned int tick, int id, intptr_t data) {
 	if( (sd = map_id2sd(id)) ) {
 		sd->fontcolor_tid = INVALID_TIMER;
 		if( sd->fontcolor && sd->disguise == sd->status.class_ )
-		pc_disguise(sd,-1);
+			pc_disguise(sd,-1);
 	}
 	return 0;
 }
@@ -16873,7 +16871,6 @@ void clif_parse_CashShopBuy(int fd, struct map_session_data *sd) {
 
 	}
 }
-
 /* [Ind/Hercules] */
 void clif_parse_CashShopReqTab(int fd, struct map_session_data *sd) {
 	short tab = RFIFOW(fd, 2);
@@ -16995,7 +16992,6 @@ int clif_parse(int fd) {
 			return 0;
 		
 		cmd = RFIFOW(fd,0);
-		
 		// filter out invalid / unsupported packets
 		if (cmd > MAX_PACKET_DB || packet_db[cmd].len == 0) {
 			ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x, %d bytes received), disconnecting session #%d.\n", cmd, RFIFOREST(fd), fd);

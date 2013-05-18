@@ -8258,13 +8258,11 @@ BUILDIN(itemskill) {
 	lv = script_getnum(st,3);
 /* temporarily disabled, awaiting for kenpachi to detail this so we can make it work properly */
 #if 0
-	
 	if( !script_hasdata(st, 4) ) {
 		if( !skill->check_condition_castbegin(sd,id,lv) || !skill->check_condition_castend(sd,id,lv) )
 			return true;
 	}
 #endif
-	
 	sd->skillitem=id;
 	sd->skillitemlv=lv;
 	clif->item_skill(sd,id,lv);

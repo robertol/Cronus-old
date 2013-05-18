@@ -1667,33 +1667,6 @@ ACMD(hair_style)
 }
 
 /*==========================================
- * @haircolor && @hcolor
- *------------------------------------------*/
-ACMD(hair_color)
-{
-	int hair_color = 0;
-	nullpo_retr(-1, sd);
-	
-	memset(atcmd_output, '\0', sizeof(atcmd_output));
-	
-	if (!message || !*message || sscanf(message, "%d", &hair_color) < 1) {
-		sprintf(atcmd_output, msg_txt(994), MIN_HAIR_COLOR, MAX_HAIR_COLOR); // Please enter a hair color (usage: @haircolor/@hcolor <hair color: %d-%d>).
-		clif->message(fd, atcmd_output);
-		return false;
-	}
-	
-	if (hair_color >= MIN_HAIR_COLOR && hair_color <= MAX_HAIR_COLOR) {
-		pc_changelook(sd, LOOK_HAIR_COLOR, hair_color);
-		clif->message(fd, msg_txt(36)); // Appearence changed.
-	} else {
-		clif->message(fd, msg_txt(37)); // An invalid number was specified.
-		return false;
-	}
-	
-	return true;
-}
-
-/*==========================================
  * @go [city_number or city_name] - Updated by Harbin
  *------------------------------------------*/
 ACMD(go)
@@ -3990,7 +3963,7 @@ ACMD(mount_peco)
 {
 	nullpo_retr(-1, sd);
 	
-	if (sd->disguise != -1 ) {
+	if (sd->disguise != -1) {
 		clif->message(fd, msg_txt(212)); // Cannot mount while in disguise.
 		return false;
 	}
@@ -7242,7 +7215,7 @@ ACMD(whereis)
 
 ACMD(version) {
 	const char *ver = versao();
-	
+  
 	sprintf(atcmd_output,msg_txt(1295),ver); // Versão '%s'
 	clif->message(fd,atcmd_output);
 	
@@ -10137,12 +10110,11 @@ bool atcommand_hp_add(char *name, AtCommandFunc func) {
 	safestrncpy(cmd->command, name, sizeof(cmd->command));
 	cmd->func = func;
 	cmd->help = NULL;/* start as null dear */
-	
+
 	strdb_put(atcommand->db, cmd->command, cmd);
 	return true;
 }
 void atcommand_db_clear(void) {
-
 	if (atcommand->db != NULL) {
 		DBIterator *iter = db_iterator(atcommand->db);
 		AtCommandInfo* cmd;

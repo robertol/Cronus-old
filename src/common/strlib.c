@@ -747,44 +747,44 @@ size_t sv_escape_c(char* out_dest, const char* src, size_t len, const char* esca
 
 	for( i = 0, j = 0; i < len; ++i ) {
 		switch( src[i] ) {
-		case '\0':// octal 0
-			out_dest[j++] = '\\';
-			out_dest[j++] = '0';
-			out_dest[j++] = '0';
-			out_dest[j++] = '0';
-			break;
-		case '\r':// carriage return
-			out_dest[j++] = '\\';
-			out_dest[j++] = 'r';
-			break;
-		case '\n':// line feed
-			out_dest[j++] = '\\';
-			out_dest[j++] = 'n';
-			break;
-		case '\\':// escape character
-			out_dest[j++] = '\\';
-			out_dest[j++] = '\\';
-			break;
-		default:
-				if( strchr(escapes,src[i]) ) {// escape
+			case '\0':// octal 0
 				out_dest[j++] = '\\';
+				out_dest[j++] = '0';
+				out_dest[j++] = '0';
+				out_dest[j++] = '0';
+				break;
+			case '\r':// carriage return
+				out_dest[j++] = '\\';
+				out_dest[j++] = 'r';
+				break;
+			case '\n':// line feed
+				out_dest[j++] = '\\';
+				out_dest[j++] = 'n';
+				break;
+			case '\\':// escape character
+				out_dest[j++] = '\\';
+				out_dest[j++] = '\\';
+				break;
+			default:
+				if( strchr(escapes,src[i]) ) {// escape
+					out_dest[j++] = '\\';
 					switch( src[i] ) {
-				case '\a': out_dest[j++] = 'a'; break;
-				case '\b': out_dest[j++] = 'b'; break;
-				case '\t': out_dest[j++] = 't'; break;
-				case '\v': out_dest[j++] = 'v'; break;
-				case '\f': out_dest[j++] = 'f'; break;
-				case '\?': out_dest[j++] = '?'; break;
-				default:// to octal
-					out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0700)>>6));
-					out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0070)>>3));
-					out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0007)   ));
-					break;
+						case '\a': out_dest[j++] = 'a'; break;
+						case '\b': out_dest[j++] = 'b'; break;
+						case '\t': out_dest[j++] = 't'; break;
+						case '\v': out_dest[j++] = 'v'; break;
+						case '\f': out_dest[j++] = 'f'; break;
+						case '\?': out_dest[j++] = '?'; break;
+						default:// to octal
+							out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0700)>>6));
+							out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0070)>>3));
+							out_dest[j++] = '0'+((char)(((unsigned char)src[i]&0007)   ));
+							break;
+					}
 				}
-			}
-			else
-				out_dest[j++] = src[i];
-			break;
+				else
+					out_dest[j++] = src[i];
+				break;
 		}
 	}
 	out_dest[j] = 0;
@@ -835,14 +835,14 @@ size_t sv_unescape_c(char* out_dest, const char* src, size_t len) {
 					ShowWarning("sv_unescape_c: \\x with no following hex digits\n");
 					continue;
 				}
-				do{
+				do {
 					if( c > 0x0F && inrange ) {
 						ShowWarning("sv_unescape_c: hex escape sequence out of range\n");
 						inrange = 0;
 					}
 					c = (c<<4)|low2hex[(unsigned char)src[i]];// hex digit
 					++i;
-				}while( i < len && ISXDIGIT(src[i]) );
+				} while( i < len && ISXDIGIT(src[i]) );
 				out_dest[j++] = (char)c;
 			} else if( src[i] == '0' || src[i] == '1' || src[i] == '2' || src[i] == '3' ) {// octal escape sequence (255=0377)
 				unsigned char c = src[i]-'0';
@@ -860,15 +860,15 @@ size_t sv_unescape_c(char* out_dest, const char* src, size_t len) {
 				if( strchr(SV_ESCAPE_C_SUPPORTED, src[i]) == NULL )
 					ShowWarning("sv_unescape_c: unknown escape sequence \\%c\n", src[i]);
 				switch( src[i] ) {
-				case 'a': out_dest[j++] = '\a'; break;
-				case 'b': out_dest[j++] = '\b'; break;
-				case 't': out_dest[j++] = '\t'; break;
-				case 'n': out_dest[j++] = '\n'; break;
-				case 'v': out_dest[j++] = '\v'; break;
-				case 'f': out_dest[j++] = '\f'; break;
-				case 'r': out_dest[j++] = '\r'; break;
-				case '?': out_dest[j++] = '\?'; break;
-				default: out_dest[j++] = src[i]; break;
+					case 'a': out_dest[j++] = '\a'; break;
+					case 'b': out_dest[j++] = '\b'; break;
+					case 't': out_dest[j++] = '\t'; break;
+					case 'n': out_dest[j++] = '\n'; break;
+					case 'v': out_dest[j++] = '\v'; break;
+					case 'f': out_dest[j++] = '\f'; break;
+					case 'r': out_dest[j++] = '\r'; break;
+					case '?': out_dest[j++] = '\?'; break;
+					default: out_dest[j++] = src[i]; break;
 				}
 				++i;// escaped character
 			}
@@ -884,24 +884,24 @@ const char* skip_escaped_c(const char* p) {
 	if( p && *p == '\\' ) {
 		++p;
 		switch( *p ) {
-		case 'x':// hexadecimal
-			++p;
-			while( ISXDIGIT(*p) )
+			case 'x':// hexadecimal
 				++p;
-			break;
-		case '0':
-		case '1':
-		case '2':
-		case '3':// octal
-			++p;
-			if( *p >= '0' && *p <= '7' )
+				while( ISXDIGIT(*p) )
+					++p;
+				break;
+			case '0':
+			case '1':
+			case '2':
+			case '3':// octal
 				++p;
-			if( *p >= '0' && *p <= '7' )
-				++p;
-			break;
-		default:
-			if( *p && strchr(SV_ESCAPE_C_SUPPORTED, *p) )
-				++p;
+				if( *p >= '0' && *p <= '7' )
+					++p;
+				if( *p >= '0' && *p <= '7' )
+					++p;
+				break;
+			default:
+				if( *p && strchr(SV_ESCAPE_C_SUPPORTED, *p) )
+					++p;
 		}
 	}
 	return p;
