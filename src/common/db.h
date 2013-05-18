@@ -653,10 +653,10 @@ struct DBMap {
 #define strdb_ensure(db,k,f) ( DB->data2ptr((db)->ensure((db),DB->str2key(k),(f))) )
 
 // Database creation and destruction macros
-#define idb_alloc(opt)            DB->alloc(__FILE__,__LINE__,DB_INT,(opt),sizeof(int))
-#define uidb_alloc(opt)           DB->alloc(__FILE__,__LINE__,DB_UINT,(opt),sizeof(unsigned int))
-#define strdb_alloc(opt,maxlen)   DB->alloc(__FILE__,__LINE__,DB_STRING,(opt),(maxlen))
-#define stridb_alloc(opt,maxlen)  DB->alloc(__FILE__,__LINE__,DB_ISTRING,(opt),(maxlen))
+#define idb_alloc(opt)            DB->alloc(__FILE__,__func__,__LINE__,DB_INT,(opt),sizeof(int))
+#define uidb_alloc(opt)           DB->alloc(__FILE__,__func__,__LINE__,DB_UINT,(opt),sizeof(unsigned int))
+#define strdb_alloc(opt,maxlen)   DB->alloc(__FILE__,__func__,__LINE__,DB_STRING,(opt),(maxlen))
+#define stridb_alloc(opt,maxlen)  DB->alloc(__FILE__,__func__,__LINE__,DB_ISTRING,(opt),(maxlen))
 #define db_destroy(db)            ( (db)->destroy((db),NULL) )
 // Other macros
 #define db_clear(db)        ( (db)->clear(db,NULL) )
@@ -777,7 +777,7 @@ DBReleaser (*custom_release)  (DBRelease which);
  * @see #db_default_release(DBType,DBOptions)
  * @see #db_fix_options(DBType,DBOptions)
  */
-DBMap* (*alloc) (const char *file, int line, DBType type, DBOptions options, unsigned short maxlen);
+DBMap* (*alloc) (const char *file, const char *func, int line, DBType type, DBOptions options, unsigned short maxlen);
 
 /**
  * Manual cast from 'int' to the union DBKey.
