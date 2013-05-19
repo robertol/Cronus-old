@@ -1628,12 +1628,12 @@ ACMD(autoattack)
 	nullpo_retr(-1, sd);
 	if (sd->sc.option & OPTION_AUTOATTACK)
 	{
-		clif->message(fd, "Auto-attack Ativado");
+		clif->message(fd, "Auto-attack Desativado");
 		sd->sc.option &= ~OPTION_AUTOATTACK;
 		unit_stop_attack(&sd->bl);
 	}else
 	{
-		clif->message(fd, "Auto-attack Desativado");
+		clif->message(fd, "Auto-attack Ativado");
 		sd->sc.option |= OPTION_AUTOATTACK;
 		add_timer(gettick()+200,autoattack_timer,sd->bl.id,0);
 	}
