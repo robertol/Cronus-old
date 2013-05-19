@@ -113,71 +113,69 @@ prontera,130,213,5	script	Riding Creature Master	105,{
 	close;
 }
 
-// Peco removing NPC
+// Npc romovedor de Peco Peco
 //============================================================
-prontera,125,208,5	script	Peco Peco Remover	105,{
-	mes "[Soldier]";
-	mes "If you're unable to dismount from a Peco Peco";
-	mes "for some unknown reason,";
-	mes "please feel free to use my services.";
+prontera,125,208,5	script	Removedor de Peco Peco	105,{
+	mes "[Soldado]";
+	mes "Se você é incapaz de desmontar de um Peco Peco";
+	mes "por alguma razão desconhecida,";
+	mes "Por favor, sinta-se a vontade para usar os meus serviços.";
 	if (checkriding()) {
 		next;
-		mes "[Soldier]";
-		mes "You're riding a Peco Peco.";
-		mes "Would you like to dismount?";
+		mes "[Soldado]";
+		mes "Você está montando um Peco Peco.";
+		mes "Gostaria de desmontar?";
 		next;
 		switch(select("Yes:No")) {
 		case 1:
 			setriding 0;
-			mes "[Soldier]";
-			mes "Say, how does it feel to";
-			mes "step on the ground on your own";
-			mes "feet again?";
+			mes "[Soldado]";
+			mes "Diga-me, como você se sente";
+			mes "Pisando a terra com seus próprios pés";
 			close;
 		case 2:
-			mes "[Soldier]";
-			mes "I see. Please feel free to ask me";
-			mes "if you change your mind.";
+			mes "[Soldado]";
+			mes "Por favor não hesite em perguntar se mudar de idéia";
 			close;
 		}
 	}
 	close;
 }
 
-// Magic Gear Renter
+// Mestre da Engrenagem Mágica
 //============================================================
-prontera,163,178,3	script	Magic Gear Master	105,{
-	mes "[Magic Gear Master]";
+prontera,163,178,4	script	Mestre da Engrenagem Mágica	105,{
+	mes "[Mestre de Materiais Mágicos]";
 	if (Class == Job_Mechanic || Class == Job_Mechanic_T || Class == Job_Baby_Mechanic) {
-		mes "Welcome. Would you like to rent a Magic Gear?";
+		mes "Bem-vindo. Gostaria de alugar um material mágico?";
 		next;
 		switch(select("Yes:No")) {
 		case 1:
 			if (!getskilllv("NC_MADOLICENCE")) {
-				mes "[Magic Gear Master]";
-				mes "Please learn how to use a Magic Gear first.";
+				mes "[Mestre da Engrenagem Mágica]";
+				mes "Por favor, aprenda como usar uma engrenagem mágica primeiro.";
 				close;
 			}
 			else if (checkmadogear()) {
-				mes "[Magic Gear Master]";
-				mes "You already have a Magic Gear.";
+				mes "[Mestre da Engrenagem Mágica]";
+				mes "Você já tem uma engrenagem mágica.";
 				close;
 			}
 			else if(ismounting()) {
-				mes "[Magic Gear Master]";
-				mes "Please remove your cash mount.";
+				mes "[Mestre da Engrenagem Mágica]";
+				mes "Por favor, remova seu dinheiro.";
 				close;
 			}
 			setmadogear;
 			close;
 		case 2:
-			mes "[Magic Gear Master]";
-			mes "I see. Then have a great day.";
+			mes "[Mestre da Engrenagem Mágica]";
+			mes "Eu vejo. Então, um grande dia.";
 			close;
 		}
 	}
-	mes "How may I help you?";
-	mes "Magic Gears are only available for Mechanics.";
+	mes "Em que posso ajudá-lo?";
+	mes "As engrenagem mágica estão disponíveis apenas para Mecânico.";
 	close;
 	
 }
