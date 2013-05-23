@@ -6,7 +6,6 @@
 
 help: "Params: <comando> \n" "Mostra ajuda para o comando especificado."
 noask: "Auto rejeita ofertas/convites."
-gmotd: "Transmite a mensagem do dia para todos os jogadores."
 me: "Params: <message>\n" "Exibe o texto normal como uma mensagem neste formato: *nome da mensagem* (como /me no mIRC)."
 fakename: "Params: <nome>\n" "Altera temporariamente o seu nome a sua escolha."
 npctalk: "Params: <nome do NPC> <mensagem>\n" "Força um NPC para exibir uma mensagem no chat normal."

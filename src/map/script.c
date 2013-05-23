@@ -1095,18 +1095,16 @@ const char* parse_simpleexpr(const char *p)
 		add_scriptc(C_STR);
 		p++;
 		while( *p && *p != '"' ){
-			if( (unsigned char)p[-1] <= 0x7e && *p == '\\' )
-			{
+			if( (unsigned char)p[-1] <= 0x7e && *p == '\\' ) {
 				char buf[8];
-				size_t len = skip_escaped_c(p) - p;
-				size_t n = sv_unescape_c(buf, p, len);
+				size_t len = sv->skip_escaped_c(p) - p;
+				size_t n = sv->unescape_c(buf, p, len);
 				if( n != 1 )
 					ShowDebug("parse_simpleexpr: unexpected length %d after unescape (\"%.*s\" -> %.*s)\n", (int)n, (int)len, p, (int)n, buf);
 				p += len;
 				add_scriptb(*buf);
 				continue;
-			}
-			else if( *p == '\n' )
+			} else if( *p == '\n' )
 				disp_error_message("parse_simpleexpr: unexpected newline @ string",p);
 			add_scriptb(*p++);
 		}
@@ -2040,16 +2038,16 @@ static const char* script_print_line(StringBuf* buf, const char* p, const char* 
 	int i;
 	if( p == NULL || !p[0] ) return NULL;
 	if( line < 0 )
-		StringBuf_Printf(buf, "*% 5d : ", -line);
+		StrBuf->Printf(buf, "*% 5d : ", -line);
 	else
-		StringBuf_Printf(buf, " % 5d : ", line);
+		StrBuf->Printf(buf, " % 5d : ", line);
 	for(i=0;p[i] && p[i] != '\n';i++){
 		if(p + i != mark)
-			StringBuf_Printf(buf, "%c", p[i]);
+			StrBuf->Printf(buf, "%c", p[i]);
 		else
-			StringBuf_Printf(buf, "\'%c\'", p[i]);
+			StrBuf->Printf(buf, "\'%c\'", p[i]);
 	}
-	StringBuf_AppendStr(buf, "\n");
+	StrBuf->AppendStr(buf, "\n");
 	return p+i+(p[i] == '\n' ? 1 : 0);
 }
 
@@ -2074,10 +2072,10 @@ void script_error(const char* src, const char* file, int start_line, const char*
 		p=lineend+1;
 	}
 
-	StringBuf_Init(&buf);
-	StringBuf_AppendStr(&buf, "\a\n");
-	StringBuf_Printf(&buf, "script error on %s line %d\n", file, line);
-	StringBuf_Printf(&buf, "    %s\n", error_msg);
+	StrBuf->Init(&buf);
+	StrBuf->AppendStr(&buf, "\a\n");
+	StrBuf->Printf(&buf, "script error on %s line %d\n", file, line);
+	StrBuf->Printf(&buf, "    %s\n", error_msg);
 	for(j = 0; j < 5; j++ ) {
 		script_print_line(&buf, linestart[j], NULL, line + j - 5);
 	}
@@ -2085,8 +2083,8 @@ void script_error(const char* src, const char* file, int start_line, const char*
 	for(j = 0; j < 5; j++) {
 		p = script_print_line(&buf, p, NULL, line + j + 1 );
 	}
-	ShowError("%s", StringBuf_Value(&buf));
-	StringBuf_Destroy(&buf);
+	ShowError("%s", StrBuf->Value(&buf));
+	StrBuf->Destroy(&buf);
 }
 
 /*==========================================
@@ -3660,7 +3658,7 @@ int script_config_read(char *cfgName)
  */
 static int db_script_free_code_sub(DBKey key, DBData *data, va_list ap)
 {
-	struct script_code *code = db_data2ptr(data);
+	struct script_code *code = DB->data2ptr(data);
 	if (code)
 		script_free_code(code);
 	return 0;
@@ -4062,7 +4060,7 @@ BUILDIN(menu)
 			return false;
 		}
 		
-		StringBuf_Init(&buf);
+		StrBuf->Init(&buf);
 		sd->npc_menu = 0;
 		for( i = 2; i < script_lastdata(st); i += 2 )
 		{
@@ -4073,7 +4071,7 @@ BUILDIN(menu)
 			data = script_getdata(st, i+1);
 			if( !data_islabel(data) )
 			{// not a label
-				StringBuf_Destroy(&buf);
+				StrBuf->Destroy(&buf);
 				ShowError("script:menu: argument #%d (from 1) is not a label or label not found.\n", i);
 				script_reportdata(data);
 				st->state = END;
@@ -4084,8 +4082,8 @@ BUILDIN(menu)
 			if( text[0] == '\0' )
 				continue;// empty string, ignore
 			if( sd->npc_menu > 0 )
-				StringBuf_AppendStr(&buf, ":");
-			StringBuf_AppendStr(&buf, text);
+				StrBuf->AppendStr(&buf, ":");
+			StrBuf->AppendStr(&buf, text);
 			sd->npc_menu += menu_countoptions(text, 0, NULL);
 		}
 		st->state = RERUNLINE;
@@ -4094,18 +4092,18 @@ BUILDIN(menu)
 		/**
 		 * menus beyond this length crash the client (see bugreport:6402)
 		 **/
-		if( StringBuf_Length(&buf) >= 2047 ) {
+		if( StrBuf->Length(&buf) >= 2047 ) {
 			struct npc_data * nd = map_id2nd(st->oid);
 			char* menu;
 			CREATE(menu, char, 2048);
-			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			safestrncpy(menu, StrBuf->Value(&buf), 2047);
+			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StrBuf->Length(&buf));
 			clif->scriptmenu(sd, st->oid, menu);
 			aFree(menu);
 		} else
-			clif->scriptmenu(sd, st->oid, StringBuf_Value(&buf));
+			clif->scriptmenu(sd, st->oid, StrBuf->Value(&buf));
 		
-		StringBuf_Destroy(&buf);
+		StrBuf->Destroy(&buf);
 		
 		if( sd->npc_menu >= 0xff )
 		{// client supports only up to 254 entries; 0 is not used and 255 is reserved for cancel; excess entries are displayed but cause 'uint8' overflow
@@ -4181,15 +4179,15 @@ BUILDIN(select)
 	if( sd->state.menu_or_input == 0 ) {
 		struct StringBuf buf;
 		
-		StringBuf_Init(&buf);
+		StrBuf->Init(&buf);
 		sd->npc_menu = 0;
 		for( i = 2; i <= script_lastdata(st); ++i ) {
 			text = script_getstr(st, i);
 			
 			if( sd->npc_menu > 0 )
-				StringBuf_AppendStr(&buf, ":");
+				StrBuf->AppendStr(&buf, ":");
 			
-			StringBuf_AppendStr(&buf, text);
+			StrBuf->AppendStr(&buf, text);
 			sd->npc_menu += menu_countoptions(text, 0, NULL);
 		}
 		
@@ -4199,17 +4197,17 @@ BUILDIN(select)
 		/**
 		 * menus beyond this length crash the client (see bugreport:6402)
 		 **/
-		if( StringBuf_Length(&buf) >= 2047 ) {
+		if( StrBuf->Length(&buf) >= 2047 ) {
 			struct npc_data * nd = map_id2nd(st->oid);
 			char* menu;
 			CREATE(menu, char, 2048);
-			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			safestrncpy(menu, StrBuf->Value(&buf), 2047);
+			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StrBuf->Length(&buf));
 			clif->scriptmenu(sd, st->oid, menu);
 			aFree(menu);
 		} else
-			clif->scriptmenu(sd, st->oid, StringBuf_Value(&buf));
-		StringBuf_Destroy(&buf);
+			clif->scriptmenu(sd, st->oid, StrBuf->Value(&buf));
+		StrBuf->Destroy(&buf);
 		
 		if( sd->npc_menu >= 0xff ) {
 			ShowWarning("buildin_select: Too many options specified (current=%d, max=254).\n", sd->npc_menu);
@@ -4261,14 +4259,14 @@ BUILDIN(prompt)
 	{
 		struct StringBuf buf;
 		
-		StringBuf_Init(&buf);
+		StrBuf->Init(&buf);
 		sd->npc_menu = 0;
 		for( i = 2; i <= script_lastdata(st); ++i )
 		{
 			text = script_getstr(st, i);
 			if( sd->npc_menu > 0 )
-				StringBuf_AppendStr(&buf, ":");
-			StringBuf_AppendStr(&buf, text);
+				StrBuf->AppendStr(&buf, ":");
+			StrBuf->AppendStr(&buf, text);
 			sd->npc_menu += menu_countoptions(text, 0, NULL);
 		}
 		
@@ -4278,17 +4276,17 @@ BUILDIN(prompt)
 		/**
 		 * menus beyond this length crash the client (see bugreport:6402)
 		 **/
-		if( StringBuf_Length(&buf) >= 2047 ) {
+		if( StrBuf->Length(&buf) >= 2047 ) {
 			struct npc_data * nd = map_id2nd(st->oid);
 			char* menu;
 			CREATE(menu, char, 2048);
-			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			safestrncpy(menu, StrBuf->Value(&buf), 2047);
+			ShowWarning("NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StrBuf->Length(&buf));
 			clif->scriptmenu(sd, st->oid, menu);
 			aFree(menu);
 		} else
-			clif->scriptmenu(sd, st->oid, StringBuf_Value(&buf));
-		StringBuf_Destroy(&buf);
+			clif->scriptmenu(sd, st->oid, StrBuf->Value(&buf));
+		StrBuf->Destroy(&buf);
 		
 		if( sd->npc_menu >= 0xff )
 		{
@@ -4819,7 +4817,7 @@ BUILDIN(warpguild)
 	int y           = script_getnum(st,4);
 	int gid         = script_getnum(st,5);
 	
-	g = guild_search(gid);
+	g = guild->search(gid);
 	if( g == NULL )
 		return true;
 	
@@ -4834,7 +4832,7 @@ BUILDIN(warpguild)
 	}
 	
 	iter = mapit_getallusers();
-	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	for( pl_sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); pl_sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if( pl_sd->status.guild_id != gid )
 			continue;
@@ -4859,7 +4857,7 @@ BUILDIN(warpguild)
 				break;
 		}
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 	
 	return true;
 }
@@ -6761,7 +6759,7 @@ BUILDIN(getguildname)
 	
 	guild_id = script_getnum(st,2);
 	
-	if( ( g = guild_search(guild_id) ) != NULL )
+	if( ( g = guild->search(guild_id) ) != NULL )
 	{
 		script_pushstrcopy(st,g->name);
 	}
@@ -6783,7 +6781,7 @@ BUILDIN(getguildmaster)
 	
 	guild_id = script_getnum(st,2);
 	
-	if( ( g = guild_search(guild_id) ) != NULL )
+	if( ( g = guild->search(guild_id) ) != NULL )
 	{
 		script_pushstrcopy(st,g->member[0].name);
 	}
@@ -6801,7 +6799,7 @@ BUILDIN(getguildmasterid)
 	
 	guild_id = script_getnum(st,2);
 	
-	if( ( g = guild_search(guild_id) ) != NULL )
+	if( ( g = guild->search(guild_id) ) != NULL )
 	{
 		script_pushint(st,g->member[0].char_id);
 	}
@@ -7695,7 +7693,7 @@ BUILDIN(guildskill)
 	id = ( script_isstring(st,2) ? skill->name2id(script_getstr(st,2)) : script_getnum(st,2) );
 	level = script_getnum(st,3);
 	for( i=0; i < level; i++ )
-		guild_skillup(sd, id);
+		guild->skillup(sd, id);
 	
 	return true;
 }
@@ -7731,11 +7729,11 @@ BUILDIN(getgdskilllv)
 	
 	guild_id = script_getnum(st,2);
 	skill_id = ( script_isstring(st,3) ? skill->name2id(script_getstr(st,3)) : script_getnum(st,3) );
-	g = guild_search(guild_id);
+	g = guild->search(guild_id);
 	if( g == NULL )
 		script_pushint(st, -1);
 	else
-		script_pushint(st, guild_checkskill(g,skill_id));
+		script_pushint(st, guild->checkskill(g,skill_id));
 	
 	return true;
 }
@@ -8258,12 +8256,13 @@ BUILDIN(itemskill) {
 	
 	id = ( script_isstring(st,2) ? skill->name2id(script_getstr(st,2)) : script_getnum(st,2) );
 	lv = script_getnum(st,3);
-	
+/* temporarily disabled, awaiting for kenpachi to detail this so we can make it work properly */
+#if 0
 	if( !script_hasdata(st, 4) ) {
 		if( !skill->check_condition_castbegin(sd,id,lv) || !skill->check_condition_castend(sd,id,lv) )
 			return true;
 	}
-	
+#endif
 	sd->skillitem=id;
 	sd->skillitemlv=lv;
 	clif->item_skill(sd,id,lv);
@@ -8373,7 +8372,7 @@ BUILDIN(guildgetexp)
 	if(exp < 0)
 		return true;
 	if(sd && sd->status.guild_id > 0)
-		guild_getexp (sd, exp);
+		guild->getexp (sd, exp);
 	
 	return true;
 }
@@ -8394,7 +8393,7 @@ BUILDIN(guildchangegm)
 	if (!sd)
 		script_pushint(st,0);
 	else
-		script_pushint(st,guild_gm_change(guild_id, sd));
+		script_pushint(st,guild->gm_change(guild_id, sd));
 	
 	return true;
 }
@@ -9292,7 +9291,7 @@ BUILDIN(getusersname)
 	
 	group_level = pc_get_group_level(sd);
 	iter = mapit_getallusers();
-	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	for( pl_sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); pl_sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if (pc_has_permission(pl_sd, PC_PERM_HIDE_SESSION) && pc_get_group_level(pl_sd) > group_level)
 			continue; // skip hidden sessions
@@ -9303,7 +9302,7 @@ BUILDIN(getusersname)
 		 clif->scriptnext(sd,st->oid);*/
 		clif->scriptmes(sd,st->oid,pl_sd->status.name);
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 	
 	return true;
 }
@@ -9323,7 +9322,7 @@ BUILDIN(getmapguildusers)
 		script_pushint(st,-1);
 		return true;
 	}
-	g = guild_search(gid);
+	g = guild->search(gid);
 	
 	if (g){
 		for(i = 0; i < g->max_member; i++)
@@ -10567,7 +10566,7 @@ BUILDIN(pvpon)
 		return true;
 	
 	iter = mapit_getallusers();
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if( sd->bl.m != m || sd->pvp_timer != INVALID_TIMER )
 			continue; // not applicable
@@ -10579,7 +10578,7 @@ BUILDIN(pvpon)
 		sd->pvp_won = 0;
 		sd->pvp_lost = 0;
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 	
 	return true;
 }
@@ -10744,7 +10743,7 @@ BUILDIN(agitstart)
 {
 	if(agit_flag==1) return true;      // Agit already Start.
 	agit_flag=1;
-	guild_agit_start();
+	guild->agit_start();
 	return true;
 }
 
@@ -10752,7 +10751,7 @@ BUILDIN(agitend)
 {
 	if(agit_flag==0) return true;      // Agit already End.
 	agit_flag=0;
-	guild_agit_end();
+	guild->agit_end();
 	return true;
 }
 
@@ -10760,7 +10759,7 @@ BUILDIN(agitstart2)
 {
 	if(agit2_flag==1) return true;      // Agit2 already Start.
 	agit2_flag=1;
-	guild_agit2_start();
+	guild->agit2_start();
 	return true;
 }
 
@@ -10768,7 +10767,7 @@ BUILDIN(agitend2)
 {
 	if(agit2_flag==0) return true;      // Agit2 already End.
 	agit2_flag=0;
-	guild_agit2_end();
+	guild->agit2_end();
 	return true;
 }
 
@@ -10811,9 +10810,9 @@ BUILDIN(flagemblem)
 		clif->guild_emblem_area(&nd->bl);
 		/* guild flag caching */
 		if( g_id ) /* adding a id */
-			guild_flag_add(nd);
+			guild->flag_add(nd);
 		else if( changed ) /* removing a flag */
-			guild_flag_remove(nd);
+			guild->flag_remove(nd);
 	}
 	return true;
 }
@@ -10821,7 +10820,7 @@ BUILDIN(flagemblem)
 BUILDIN(getcastlename)
 {
 	const char* mapname = mapindex_getmapname(script_getstr(st,2),NULL);
-	struct guild_castle* gc = guild_mapname2gc(mapname);
+	struct guild_castle* gc = guild->mapname2gc(mapname);
 	const char* name = (gc) ? gc->castle_name : "";
 	script_pushstrcopy(st,name);
 	return true;
@@ -10831,7 +10830,7 @@ BUILDIN(getcastledata)
 {
 	const char *mapname = mapindex_getmapname(script_getstr(st,2),NULL);
 	int index = script_getnum(st,3);
-	struct guild_castle *gc = guild_mapname2gc(mapname);
+	struct guild_castle *gc = guild->mapname2gc(mapname);
 	
 	if (gc == NULL) {
 		script_pushint(st,0);
@@ -10875,7 +10874,7 @@ BUILDIN(setcastledata)
 	const char *mapname = mapindex_getmapname(script_getstr(st,2),NULL);
 	int index = script_getnum(st,3);
 	int value = script_getnum(st,4);
-	struct guild_castle *gc = guild_mapname2gc(mapname);
+	struct guild_castle *gc = guild->mapname2gc(mapname);
 	
 	if (gc == NULL) {
 		ShowWarning("buildin_setcastledata: guild castle for map '%s' not found\n", mapname);
@@ -10887,7 +10886,7 @@ BUILDIN(setcastledata)
 		return false;
 	}
 	
-	guild_castledatasave(gc->castle_id, index, value);
+	guild->castledatasave(gc->castle_id, index, value);
 	return true;
 }
 
@@ -10904,7 +10903,7 @@ BUILDIN(requestguildinfo)
 	}
 	
 	if(guild_id>0)
-		guild_npc_request_info(guild_id,event);
+		guild->npc_request_info(guild_id,event);
 	return true;
 }
 
@@ -11106,7 +11105,7 @@ BUILDIN(mapwarp)	// Added by RoVeRT
 	
 	switch(check_val){
 		case 1:
-			g = guild_search(check_ID);
+			g = guild->search(check_ID);
 			if (g){
 				for( i=0; i < g->max_member; i++)
 				{
@@ -11426,7 +11425,7 @@ BUILDIN(guardianinfo)
 	int id = script_getnum(st,3);
 	int type = script_getnum(st,4);
 	
-	struct guild_castle* gc = guild_mapname2gc(mapname);
+	struct guild_castle* gc = guild->mapname2gc(mapname);
 	struct mob_data* gd;
 	
 	if( gc == NULL || id < 0 || id >= MAX_GUARDIANS )
@@ -12303,7 +12302,7 @@ BUILDIN(recovery)
 	struct s_mapiterator* iter;
 	
 	iter = mapit_getallusers();
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if(pc_isdead(sd))
 			status_revive(&sd->bl, 100, 100);
@@ -12311,7 +12310,7 @@ BUILDIN(recovery)
 			status_percent_heal(&sd->bl, 100, 100);
 		clif->message(sd->fd,msg_txt(680));
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 	return true;
 }
 /*==========================================
@@ -13596,7 +13595,7 @@ BUILDIN(sprintf)
     safestrncpy(buf, format, len+1);
 	
     // Issue sprintf for each parameter
-    StringBuf_Init(&final_buf);
+    StrBuf->Init(&final_buf);
     q = buf;
     while((p = strchr(q, '%'))!=NULL){
         if(p!=q){
@@ -13606,12 +13605,12 @@ BUILDIN(sprintf)
                 buf2_len = len;
             }
             safestrncpy(buf2, q, len);
-            StringBuf_AppendStr(&final_buf, buf2);
+            StrBuf->AppendStr(&final_buf, buf2);
             q = p;
         }
         p = q+1;
         if(*p=='%'){  // %%
-            StringBuf_AppendStr(&final_buf, "%");
+            StrBuf->AppendStr(&final_buf, "%");
             q+=2;
             continue;
         }
@@ -13625,7 +13624,7 @@ BUILDIN(sprintf)
             ShowError("buildin_sprintf: Not enough arguments passed!\n");
             if(buf) aFree(buf);
             if(buf2) aFree(buf2);
-            StringBuf_Destroy(&final_buf);
+            StrBuf->Destroy(&final_buf);
             script_pushconststr(st,"");
             return false;
         }
@@ -13647,21 +13646,21 @@ BUILDIN(sprintf)
         // the scripter's responsibility.
         data = script_getdata(st, arg+3);
         if(data_isstring(data)){  // String
-            StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
+            StrBuf->Printf(&final_buf, buf2, script_getstr(st, arg+3));
         }else if(data_isint(data)){  // Number
-            StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
+            StrBuf->Printf(&final_buf, buf2, script_getnum(st, arg+3));
         }else if(data_isreference(data)){  // Variable
             char* name = reference_getname(data);
             if(name[strlen(name)-1]=='$'){  // var Str
-                StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
+                StrBuf->Printf(&final_buf, buf2, script_getstr(st, arg+3));
             }else{  // var Int
-                StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
+                StrBuf->Printf(&final_buf, buf2, script_getnum(st, arg+3));
             }
         }else{  // Unsupported type
             ShowError("buildin_sprintf: Unknown argument type!\n");
             if(buf) aFree(buf);
             if(buf2) aFree(buf2);
-            StringBuf_Destroy(&final_buf);
+            StrBuf->Destroy(&final_buf);
             script_pushconststr(st,"");
             return false;
         }
@@ -13670,7 +13669,7 @@ BUILDIN(sprintf)
 	
     // Append anything left
     if(*q){
-        StringBuf_AppendStr(&final_buf, q);
+        StrBuf->AppendStr(&final_buf, q);
     }
 	
     // Passed more, than needed
@@ -13679,11 +13678,11 @@ BUILDIN(sprintf)
         script_reportsrc(st);
     }
 	
-    script_pushstrcopy(st, StringBuf_Value(&final_buf));
+    script_pushstrcopy(st, StrBuf->Value(&final_buf));
 	
     if(buf) aFree(buf);
     if(buf2) aFree(buf2);
-    StringBuf_Destroy(&final_buf);
+    StrBuf->Destroy(&final_buf);
 	
     return true;
 }
@@ -13878,7 +13877,7 @@ BUILDIN(replacestr)
 		}
 	}
 	
-	StringBuf_Init(&output);
+	StrBuf->Init(&output);
 	
 	for(; i < inputlen; i++) {
 		if(count && count == numFinds) {	//found enough, stop looking
@@ -13888,19 +13887,19 @@ BUILDIN(replacestr)
 		for(f = 0; f <= findlen; f++) {
 			if(f == findlen) { //complete match
 				numFinds++;
-				StringBuf_AppendStr(&output, replace);
+				StrBuf->AppendStr(&output, replace);
 				
 				i += findlen - 1;
 				break;
 			} else {
 				if(usecase) {
 					if((i + f) > inputlen || input[i + f] != find[f]) {
-						StringBuf_Printf(&output, "%c", input[i]);
+						StrBuf->Printf(&output, "%c", input[i]);
 						break;
 					}
 				} else {
 					if(((i + f) > inputlen || input[i + f] != find[f]) && TOUPPER(input[i+f]) != TOUPPER(find[f])) {
-						StringBuf_Printf(&output, "%c", input[i]);
+						StrBuf->Printf(&output, "%c", input[i]);
 						break;
 					}
 				}
@@ -13910,10 +13909,10 @@ BUILDIN(replacestr)
 	
 	//append excess after enough found
 	if(i < inputlen)
-		StringBuf_AppendStr(&output, &(input[i]));
+		StrBuf->AppendStr(&output, &(input[i]));
 	
-	script_pushstrcopy(st, StringBuf_Value(&output));
-	StringBuf_Destroy(&output);
+	script_pushstrcopy(st, StrBuf->Value(&output));
+	StrBuf->Destroy(&output);
 	return true;
 }
 
@@ -14173,20 +14172,20 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 	// Execute the query
 	query = script_getstr(st,2);
 	
-	if( SQL_ERROR == Sql_QueryStr(handle, query) ) {
+	if( SQL_ERROR == SQL->QueryStr(handle, query) ) {
 		Sql_ShowDebug(handle);
 		script_pushint(st, 0);
 		return false;
 	}
 	
-	if( Sql_NumRows(handle) == 0 ) { // No data received
-		Sql_FreeResult(handle);
+	if( SQL->NumRows(handle) == 0 ) { // No data received
+		SQL->FreeResult(handle);
 		script_pushint(st, 0);
 		return true;
 	}
 	
 	// Count the number of columns to store
-	num_cols = Sql_NumColumns(handle);
+	num_cols = SQL->NumColumns(handle);
 	if( num_vars < num_cols ) {
 		ShowWarning("script:query_sql: Too many columns, discarding last %u columns.\n", (unsigned int)(num_cols-num_vars));
 		script_reportsrc(st);
@@ -14196,12 +14195,12 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 	}
 	
 	// Store data
-	for( i = 0; i < max_rows && SQL_SUCCESS == Sql_NextRow(handle); ++i ) {
+	for( i = 0; i < max_rows && SQL_SUCCESS == SQL->NextRow(handle); ++i ) {
 		for( j = 0; j < num_vars; ++j ) {
 			char* str = NULL;
 			
 			if( j < num_cols )
-				Sql_GetData(handle, j, &str, NULL);
+				SQL->GetData(handle, j, &str, NULL);
 			
 			data = script_getdata(st, j+3);
 			name = reference_getname(data);
@@ -14211,13 +14210,13 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 				setd_sub(st, sd, name, i, (void *)__64BPTRSIZE((str?atoi(str):0)), reference_getref(data));
 		}
 	}
-	if( i == max_rows && max_rows < Sql_NumRows(handle) ) {
-		ShowWarning("script:query_sql: Only %d/%u rows have been stored.\n", max_rows, (unsigned int)Sql_NumRows(handle));
+	if( i == max_rows && max_rows < SQL->NumRows(handle) ) {
+		ShowWarning("script:query_sql: Only %d/%u rows have been stored.\n", max_rows, (unsigned int)SQL->NumRows(handle));
 		script_reportsrc(st);
 	}
 	
 	// Free data
-	Sql_FreeResult(handle);
+	SQL->FreeResult(handle);
 	script_pushint(st, i);
 	
 	return true;
@@ -14245,7 +14244,7 @@ BUILDIN(escape_sql)
 	str = script_getstr(st,2);
 	len = strlen(str);
 	esc_str = (char*)aMalloc(len*2+1);
-	Sql_EscapeStringLen(mmysql_handle, esc_str, str, len);
+	SQL->EscapeStringLen(mmysql_handle, esc_str, str, len);
 	script_pushstr(st, esc_str);
 	return true;
 }
@@ -15006,12 +15005,12 @@ BUILDIN(unittalk)
 	if( bl != NULL )
 	{
 		struct StringBuf sbuf;
-		StringBuf_Init(&sbuf);
-		StringBuf_Printf(&sbuf, "%s : %s", status_get_name(bl), message);
-		clif->disp_overhead(bl, StringBuf_Value(&sbuf));
+		StrBuf->Init(&sbuf);
+		StrBuf->Printf(&sbuf, "%s : %s", status_get_name(bl), message);
+		clif->disp_overhead(bl, StrBuf->Value(&sbuf));
 		if( bl->type == BL_PC )
-			clif->message(((TBL_PC*)bl)->fd, StringBuf_Value(&sbuf));
-		StringBuf_Destroy(&sbuf);
+			clif->message(((TBL_PC*)bl)->fd, StrBuf->Value(&sbuf));
+		StrBuf->Destroy(&sbuf);
 	}
 	
 	return true;

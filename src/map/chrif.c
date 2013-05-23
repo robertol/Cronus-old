@@ -466,7 +466,7 @@ int chrif_connectack(int fd) {
 	if( !char_init_done ) {
 		char_init_done = true;
 		ShowStatus("Event '"CL_WHITE"OnInterIfInitOnce"CL_RESET"' executed with '"CL_WHITE"%d"CL_RESET"' NPCs.\n", npc_event_doall("OnInterIfInitOnce"));
-		guild_castle_map_init();
+		guild->castle_map_init();
 	}
 	
 	socket_datasync(fd, true);
@@ -479,7 +479,7 @@ int chrif_connectack(int fd) {
  * @see DBApply
  */
 static int chrif_reconnect(DBKey key, DBData *data, va_list ap) {
-	struct auth_node *node = db_data2ptr(data);
+	struct auth_node *node = DB->data2ptr(data);
 	
 	switch (node->state) {
 		case ST_LOGIN:
@@ -529,7 +529,7 @@ void chrif_on_ready(void) {
 	do_reconnect_storage();
 
 	//Re-save any guild castles that were modified in the disconnection time.
-	guild_castle_reconnect(-1, 0, 0);
+	guild->castle_reconnect(-1, 0, 0);
 }
 
 
@@ -687,7 +687,7 @@ void chrif_authfail(int fd) {/* HELLO WORLD. ip in RFIFOL 15 is not being used (
  * @see DBApply
  */
 int auth_db_cleanup_sub(DBKey key, DBData *data, va_list ap) {
-	struct auth_node *node = db_data2ptr(data);
+	struct auth_node *node = DB->data2ptr(data);
 	const char* states[] = { "Login", "Logout", "Map change" };
 	
 	if(DIFF_TICK(gettick(),node->node_created)>60000) {
@@ -1245,7 +1245,7 @@ int chrif_load_scdata(int fd) {
 }
 
 /*==========================================
- * Send rates and motd to char server [Wizputer]
+ * Send rates to char server [Wizputer]
  * S 2b16 <base rate>.L <job rate>.L <drop rate>.L
  *------------------------------------------*/
 int chrif_ragsrvinfo(int base_rate, int job_rate, int drop_rate) {
@@ -1509,13 +1509,13 @@ int send_users_tochar(void) {
 	
 	iter = mapit_getallusers();
 	
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) ) {
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) ) {
 		WFIFOL(char_fd,6+8*i) = sd->status.account_id;
 		WFIFOL(char_fd,6+8*i+4) = sd->status.char_id;
 		i++;
 	}
 	
-	mapit_free(iter);
+	mapit->free(iter);
 	
 	WFIFOW(char_fd,2) = 6 + 8*users;
 	WFIFOW(char_fd,4) = users;
@@ -1596,7 +1596,7 @@ void chrif_send_report(char* buf, int len) {
  * @see DBApply
  */
 int auth_db_final(DBKey key, DBData *data, va_list ap) {
-	struct auth_node *node = db_data2ptr(data);
+	struct auth_node *node = DB->data2ptr(data);
 	
 	if (node->char_dat)
 		aFree(node->char_dat);

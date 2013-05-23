@@ -54,7 +54,7 @@ void display_title(void) {
 	ShowMessage (""CL_XXBL"          ("CL_BOLD"                                                         "CL_XXBL")"CL_CLL""CL_NORMAL"\n");
 	ShowMessage (""CL_WTBL"          (=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)"CL_CLL""CL_NORMAL"\n\n\a");
 
-	ShowInfo("Versão: "CL_RED"%s"CL_RED"\n", ver);
+	ShowInfo("Cronus "CL_RED "Versao:%s" CL_RESET"\n", ver);
 }
 #ifdef CONSOLE_INPUT
 #ifdef _WIN32
@@ -95,7 +95,7 @@ CPCMD(help) {
 }
 /* [Ind/Hercules] */
 CPCMD(malloc_usage) {
-	unsigned int val = (unsigned int)malloc_usage();
+	unsigned int val = (unsigned int)malloclib->usage();
 	ShowInfo("malloc_usage: %.2f MB\n",(double)(val)/1024);
 }
 #define CP_DEF_C(x) { #x , NULL , NULL, NULL }

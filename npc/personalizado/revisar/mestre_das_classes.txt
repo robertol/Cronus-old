@@ -21,14 +21,17 @@ function Job_Menu; function A_An;
 	mes "[Mestre das Classes]";
 	if (Class > 4049) {
 		mes "Não existem mais expansões para sua classe?";
+		close;
 	}
 	if (checkfalcon() || checkcart() || checkriding() || ismounting()) {
 		mes "Por favor remova seu "+((checkfalcon())?"falcão":"")+((checkcart())?"carrinho":"")+((checkriding())?"Peco":"")+((ismounting())?"montaria":"")+" para continuar.";
+		close;
 	}
 	if (.SkillPointCheck && SkillPoint) {
 		mes "Por favor use todos os seus pontos de habilidade para continuar.";
+		close;
 	}
-	close;
+	
 
 	set .@eac, eaclass();
 	set .@i, ((.ThirdClass)?roclass(.@eac&EAJ_UPPERMASK):Class);

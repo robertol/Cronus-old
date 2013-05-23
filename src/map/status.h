@@ -1491,6 +1491,7 @@ enum {
 	
 	// compound constants
 	OPTION_DRAGON    = OPTION_DRAGON1|OPTION_DRAGON2|OPTION_DRAGON3|OPTION_DRAGON4|OPTION_DRAGON5,
+	OPTION_AUTOATTACK   = 0x10000000,
 };
 
 //Defines for the manner system [Skotlex]

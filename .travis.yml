@@ -1,6 +1,10 @@
 language: c
 compiler:
-  - gcc
   - clang
-# Change this to your needs
-script: sh configure; make clean; make all
+  - gcc
+
+script: uname -a && sh configure --enable-debug && make all
+
+branches:
+  only:
+    - master
