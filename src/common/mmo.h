@@ -1,5 +1,6 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
 
 #ifndef	_MMO_H_
 #define	_MMO_H_
@@ -49,6 +50,9 @@
 #ifndef PACKETVER
 	#define PACKETVER 20120418
 #endif
+
+/// comment following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE)
+#define PACKETVER_RE
 
 //Remove/Comment this line to disable sc_data saving. [Skotlex]
 #define ENABLE_SC_SAVING
@@ -101,7 +105,7 @@
 #define MAX_GUARDIANS 8	//Local max per castle. [Skotlex]
 #define MAX_QUEST_DB 2400 //Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3 //Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs [Raizen] 
+#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs [Raizen]
 #define MAX_START_ITEMS 32	//Max number of items allowed to be given to a char whenever it's created. [mkbu95]
 
 // for produce

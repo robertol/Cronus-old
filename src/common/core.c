@@ -5,6 +5,7 @@
 #include "../common/mmo.h"
 #include "../common/showmsg.h"
 #include "../common/malloc.h"
+#include "../common/strlib.h"
 #include "core.h"
 #include "../common/console.h"
 
@@ -16,7 +17,6 @@
 	#include "../common/mempool.h"
 	#include "../common/sql.h"
 	#include "../config/core.h"
-	#include "../common/strlib.h"
 	#include "../common/HPM.h"
 #endif
 
@@ -148,15 +148,16 @@ void signals_init (void) {
 #endif
 }
 #endif
+
 const char *versao () {
 	static char vers[13]="";
-    	FILE *fp;
-   
-    	if((fp=fopen("conf/import/versao.txt","r")) != NULL){
-       		fgets(vers, 12, fp);
+		FILE *fp;
+    if((fp=fopen("conf/import/versao.txt","r")) != NULL){
+        fgets(vers, 12, fp);
 	} else {
 		strcpy(vers,"Desconhecida");
 	}
+	
 	fclose(fp);
 
 	return vers;
@@ -165,33 +166,40 @@ const char *versao () {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("Você está rodando Cronus com privilégios root, isto não é necessário.\n");
+		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
     }
 #endif
 }
-
+void core_defaults(void) {
+#ifndef MINICORE
+	hpm_defaults();
+#endif
+	console_defaults();
+	strlib_defaults();
+	malloc_defaults();
+#ifndef MINICORE
+	sql_defaults();
+	timer_defaults();
+	db_defaults();
+#endif
+}
 /*======================================
  *	CORE : MAINROUTINE
  *--------------------------------------*/
-int main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
 	{// initialize program arguments
 		char *p1 = SERVER_NAME = argv[0];
 		char *p2 = p1;
-		while ((p1 = strchr(p2, '/')) != NULL || (p1 = strchr(p2, '\\')) != NULL)
-		{
+		while ((p1 = strchr(p2, '/')) != NULL || (p1 = strchr(p2, '\\')) != NULL) {
 			SERVER_NAME = ++p1;
 			p2 = p1;
 		}
 		arg_c = argc;
 		arg_v = argv;
 	}
-#ifndef MINICORE
-	hpm_defaults();
-#endif
-	console_defaults();
+	core_defaults();
 	
-	malloc_init();// needed for Show* in display_title() [FlavioJS]
+	malloclib->init();// needed for Show* in display_title() [FlavioJS]
 	
 	console->display_title();
 	
@@ -206,7 +214,7 @@ int main (int argc, char **argv)
 	Sql_Init();
 	rathread_init();
 	mempool_init();
-	db_init();
+	DB->init();
 	signals_init();
 	
 #ifdef _WIN32
@@ -240,12 +248,12 @@ int main (int argc, char **argv)
 #endif
 	timer_final();
 	socket_final();
-	db_final();
+	DB->final();
 	mempool_final();
 	rathread_final();
 #endif
 
-	malloc_final();
+	malloclib->final();
 
 	return 0;
 }

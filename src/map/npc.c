@@ -353,7 +353,7 @@ int npc_event_doall_sub(DBKey key, DBData *data, va_list ap)
 	const char* name;
 	int rid;
 
-	nullpo_ret(ev = db_data2ptr(data));
+	nullpo_ret(ev = DB->data2ptr(data));
 	nullpo_ret(c = va_arg(ap, int *));
 	nullpo_ret(name = va_arg(ap, const char *));
 	rid = va_arg(ap, int);
@@ -381,7 +381,7 @@ static int npc_event_do_sub(DBKey key, DBData *data, va_list ap)
 	int* c;
 	const char* name;
 
-	nullpo_ret(ev = db_data2ptr(data));
+	nullpo_ret(ev = DB->data2ptr(data));
 	nullpo_ret(c = va_arg(ap, int *));
 	nullpo_ret(name = va_arg(ap, const char *));
 
@@ -1785,7 +1785,7 @@ int npc_remove_map(struct npc_data* nd)
  */
 static int npc_unload_ev(DBKey key, DBData *data, va_list ap)
 {
-	struct event_data* ev = db_data2ptr(data);
+	struct event_data* ev = DB->data2ptr(data);
 	char* npcname = va_arg(ap, char *);
 
 	if(strcmp(ev->nd->exname,npcname)==0){
@@ -1852,7 +1852,7 @@ int npc_unload(struct npc_data* nd, bool single) {
 			ev_db->foreach(ev_db,npc_unload_ev,nd->exname); //Clean up all events related
 
 		iter = mapit_geteachpc();
-		for( bl = (struct block_list*)mapit_first(iter); mapit_exists(iter); bl = (struct block_list*)mapit_next(iter) ) {
+		for( bl = (struct block_list*)mapit->first(iter); mapit->exists(iter); bl = (struct block_list*)mapit->next(iter) ) {
 			struct map_session_data *sd = ((TBL_PC*)bl);
 			if( sd && sd->npc_timer_id != INVALID_TIMER ) {
 				const struct TimerData *td = get_timer(sd->npc_timer_id);
@@ -1866,7 +1866,7 @@ int npc_unload(struct npc_data* nd, bool single) {
 				sd->npc_timer_id = INVALID_TIMER;
 			}
 		}
-		mapit_free(iter);
+		mapit->free(iter);
 
 		if (nd->u.scr.timerid != INVALID_TIMER) {
 			const struct TimerData *td;
@@ -1889,7 +1889,7 @@ int npc_unload(struct npc_data* nd, bool single) {
 			}
 		}
 		if( nd->u.scr.guild_id )
-			guild_flag_remove(nd);
+			guild->flag_remove(nd);
 	}
 
 	script_stop_sleeptimers(nd->bl.id);
@@ -2302,7 +2302,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 int npc_convertlabel_db(DBKey key, DBData *data, va_list ap)
 {
 	const char* lname = (const char*)key.str;
-	int lpos = db_data2i(data);
+	int lpos = DB->data2i(data);
 	struct npc_label_list** label_list;
 	int* label_list_num;
 	const char* filepath;
@@ -2972,9 +2972,9 @@ static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, co
 		return end;
 
 	func_db = script_get_userfunc_db();
-	if (func_db->put(func_db, db_str2key(w3), db_ptr2data(script), &old_data))
+	if (func_db->put(func_db, DB->str2key(w3), DB->ptr2data(script), &old_data))
 	{
-		struct script_code *oldscript = (struct script_code*)db_data2ptr(&old_data);
+		struct script_code *oldscript = (struct script_code*)DB->data2ptr(&old_data);
 		ShowInfo("npc_parse_function: Overwriting user function [%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
 		script_free_vars(oldscript->script_vars);
 		aFree(oldscript->script_buf);
@@ -3606,7 +3606,7 @@ void npc_parsesrcfile(const char* filepath, bool runOnInit)
 		lines++;
 
 		// w1<TAB>w2<TAB>w3<TAB>w4
-		count = sv_parse(p, len+buffer-p, 0, '\t', pos, ARRAYLENGTH(pos), (e_svopt)(SV_TERMINATE_LF|SV_TERMINATE_CRLF));
+		count = sv->parse(p, len+buffer-p, 0, '\t', pos, ARRAYLENGTH(pos), (e_svopt)(SV_TERMINATE_LF|SV_TERMINATE_CRLF));
 		if( count < 0 )
 		{
 			ShowError("npc_parsesrcfile: Parse error in file '%s', line '%d'. Stopping...\n", filepath, strline(buffer,p-buffer));
@@ -3776,7 +3776,7 @@ void npc_read_event_script(void)
 		for( data = iter->first(iter,&key); iter->exists(iter); data = iter->next(iter,&key) )
 		{
 			const char* p = key.str;
-			struct event_data* ed = db_data2ptr(data);
+			struct event_data* ed = DB->data2ptr(data);
 			unsigned char count = script_event[i].event_count;
 
 			if( count >= ARRAYLENGTH(script_event[i].event) )
@@ -3824,7 +3824,7 @@ int npc_reload(void) {
 	struct block_list* bl;
 
 	/* clear guild flag cache */
-	guild_flags_clear();
+	guild->flags_clear();
 
 	npc_clear_pathlist();
 
@@ -3836,7 +3836,7 @@ int npc_reload(void) {
 	//Remove all npcs/mobs. [Skotlex]
 
 	iter = mapit_geteachiddb();
-	for( bl = (struct block_list*)mapit_first(iter); mapit_exists(iter); bl = (struct block_list*)mapit_next(iter) ) {
+	for( bl = (struct block_list*)mapit->first(iter); mapit->exists(iter); bl = (struct block_list*)mapit->next(iter) ) {
 		switch(bl->type) {
 		case BL_NPC:
 			if( bl->id != fake_nd->bl.id )// don't remove fake_nd
@@ -3847,7 +3847,7 @@ int npc_reload(void) {
 			break;
 		}
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 
 	if(battle_config.dynamic_mobs)
 	{// dynamic check by [random]
@@ -3898,6 +3898,8 @@ int npc_reload(void) {
 		instance_init(instance[i].instance_id);
 
 	map_zone_init();
+	
+	npc->motd = npc_name2id("CronusMOTD"); /* [Ind/Hercules] */
 	
 	//Re-read the NPC Script Events cache.
 	npc_read_event_script();
@@ -4031,6 +4033,8 @@ int do_init_npc(void)
 
 	map_zone_init();
 	
+	npc->motd = npc_name2id("CronusMOTD"); /* [Ind/Hercules] */
+	
 	// set up the events cache
 	memset(script_event, 0, sizeof(script_event));
 	npc_read_event_script();
@@ -4061,4 +4065,9 @@ int do_init_npc(void)
 	// End of initialization
 
 	return 0;
+}
+void npc_defaults(void) {
+	npc = &npc_s;
+	
+	npc->motd = NULL;
 }

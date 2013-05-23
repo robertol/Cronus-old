@@ -13,7 +13,7 @@
 prontera,124,201,1	script	Negociante	790,{
 	if (ismounting()) {
 		message strcharinfo(0),"Remova sua montaria, primeiramente.";
-		close; }
+		end; }
 	else if ((eaclass()&EAJ_THIRDMASK==EAJ_RANGER) && !countitem(6124)) {
 		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkoption(Option_Wug) && !checkoption(Option_Wugrider)) {
 			if(select(" ~ Falcon: ~ Warg")==1) setfalcon;
@@ -32,7 +32,7 @@ prontera,124,201,1	script	Negociante	790,{
 	else if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) setmadogear;
 	else {
 		message strcharinfo(0),"Você não atende os requisitos necessários para o aluguel.";
-		close; }
+		end; }
 	specialeffect2 EF_TEIHIT3;
 	end;
 }

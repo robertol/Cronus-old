@@ -130,21 +130,21 @@ void aFree_(void *p, const char *file, int line, const char *func)
 /* USE_MEMMGR */
 
 /*
- * Memory manager
- *     able to handle malloc and free efficiently
- *     Since the complex processing, I might be slightly heavier.
- *
- * (I'm sorry for the poor description ^ ^;) such as data structures
- *		Divided into "blocks" of a plurality of memory, "unit" of a plurality of blocks further
- *      I have to divide. Size of the unit, a plurality of distribution equal to the capacity of one block
- *      That's what you have. For example, if one unit of 32KB, one block 1 Yu 32Byte
- *      Knit, or are able to gather 1024, gathered 512 units 64Byte
- *      I can be or have. (Excluding padding, the unit_head)
- *
- *     Lead-linked list (block_prev, block_next) in each other is the same size block
- *       Linked list (hash_prev, hash_nect) even among such one in the block with the figure
- *       I like to have. Thus, reuse of memory no longer needed can be performed efficiently.
- */
+* Memory manager
+*     able to handle malloc and free efficiently
+*     Since the complex processing, I might be slightly heavier.
+*
+* (I'm sorry for the poor description ^ ^;) such as data structures
+*		Divided into "blocks" of a plurality of memory, "unit" of a plurality of blocks further
+*      I have to divide. Size of the unit, a plurality of distribution equal to the capacity of one block
+*      That's what you have. For example, if one unit of 32KB, one block 1 Yu 32Byte
+*      Knit, or are able to gather 1024, gathered 512 units 64Byte
+*      I can be or have. (Excluding padding, the unit_head)
+*
+*     Lead-linked list (block_prev, block_next) in each other is the same size block
+*       Linked list (hash_prev, hash_nect) even among such one in the block with the figure
+*       I like to have. Thus, reuse of memory no longer needed can be performed efficiently.
+*/
 
 /* Alignment of the block */
 #define BLOCK_ALIGNMENT1	16
@@ -210,7 +210,7 @@ static unsigned short size2hash( size_t size )
 		return (unsigned short)(size + BLOCK_ALIGNMENT1 - 1) / BLOCK_ALIGNMENT1;
 	} else if( size <= BLOCK_DATA_SIZE ){
 		return (unsigned short)(size - BLOCK_DATA_SIZE1 + BLOCK_ALIGNMENT2 - 1) / BLOCK_ALIGNMENT2
-				+ BLOCK_DATA_COUNT1;
+			+ BLOCK_DATA_COUNT1;
 	} else {
 		return 0xffff;	// If it exceeds the block length hash I do not
 	}
@@ -235,7 +235,7 @@ void* _mmalloc(size_t size, const char *file, int line, const char *func )
 		ShowError("_mmalloc: %d\n", size);
 		return NULL;
 	}
-	
+
 	if(size == 0) {
 		return NULL;
 	}
@@ -250,7 +250,7 @@ void* _mmalloc(size_t size, const char *file, int line, const char *func )
 			p->unit_head.block = NULL;
 			p->unit_head.size  = 0;
 			p->unit_head.file  = file;
-			p->unit_head.line  = line;
+			p->unit_head.line  = (unsigned short)line;
 			p->prev = NULL;
 			if (unit_head_large_first == NULL)
 				p->next = NULL;
@@ -324,7 +324,7 @@ void* _mmalloc(size_t size, const char *file, int line, const char *func )
 
 	head->block = block;
 	head->file  = file;
-	head->line  = line;
+	head->line  = (unsigned short)line;
 	head->size  = (unsigned short)size;
 	*(long*)((char*)head + sizeof(struct unit_head) - sizeof(long) + size) = 0xdeadbeaf;
 	return (char *)head + sizeof(struct unit_head) - sizeof(long);
@@ -332,7 +332,7 @@ void* _mmalloc(size_t size, const char *file, int line, const char *func )
 
 void* _mcalloc(size_t num, size_t size, const char *file, int line, const char *func )
 {
-	void *p = _mmalloc(num * size,file,line,func);
+	void *p = malloclib->malloc(num * size,file,line,func);
 	memset(p,0,num * size);
 	return p;
 }
@@ -341,7 +341,7 @@ void* _mrealloc(void *memblock, size_t size, const char *file, int line, const c
 {
 	size_t old_size;
 	if(memblock == NULL) {
-		return _mmalloc(size,file,line,func);
+		return malloclib->malloc(size,file,line,func);
 	}
 
 	old_size = ((struct unit_head *)((char *)memblock - sizeof(struct unit_head) + sizeof(long)))->size;
@@ -353,11 +353,11 @@ void* _mrealloc(void *memblock, size_t size, const char *file, int line, const c
 		return memblock;
 	}  else {
 		// Size Large
-		void *p = _mmalloc(size,file,line,func);
+		void *p = malloclib->malloc(size,file,line,func);
 		if(p != NULL) {
 			memcpy(p,memblock,old_size);
 		}
-		_mfree(memblock,file,line,func);
+		malloclib->free(memblock,file,line,func);
 		return p;
 	}
 }
@@ -368,7 +368,7 @@ char* _mstrdup(const char *p, const char *file, int line, const char *func )
 		return NULL;
 	} else {
 		size_t len = strlen(p);
-		char *string  = (char *)_mmalloc(len + 1,file,line,func);
+		char *string  = (char *)malloclib->malloc(len + 1,file,line,func);
 		memcpy(string,p,len+1);
 		return string;
 	}
@@ -422,7 +422,7 @@ void _mfree(void *ptr, const char *file, int line, const char *func )
 #ifdef DEBUG_MEMMGR
 			memset(ptr, 0xfd, block->unit_size - sizeof(struct unit_head) + sizeof(long) );
 			head->file = file;
-			head->line = line;
+			head->line = (unsigned short)line;
 #endif
 			memmgr_assert( block->unit_used > 0 );
 			if(--block->unit_used == 0) {
@@ -619,7 +619,7 @@ static void memmgr_final (void)
 					memmgr_log (buf);
 #endif /* LOG_MEMMGR */
 					// get block pointer and free it [celest]
-					_mfree(ptr, ALC_MARK);
+					malloclib->free(ptr, ALC_MARK);
 				}
 			}
 		}
@@ -661,9 +661,9 @@ static void memmgr_init (void)
 
 
 /*======================================
- * Initialise
- *--------------------------------------
- */
+* Initialise
+*--------------------------------------
+*/
 
 
 /// Tests the memory for errors and memory leaks.
@@ -715,5 +715,30 @@ void malloc_init (void)
 #endif
 #ifdef USE_MEMMGR
 	memmgr_init ();
+#endif
+}
+
+void malloc_defaults()
+{
+	malloclib = &malloclib_s;
+	malloclib->init = malloc_init;
+	malloclib->final = malloc_final;
+	malloclib->memory_check = malloc_memory_check;
+	malloclib->usage = malloc_usage;
+	malloclib->verify_ptr = malloc_verify_ptr;
+
+// Athena's built-in Memory Manager
+#ifdef USE_MEMMGR
+	malloclib->malloc  =	 _mmalloc;
+	malloclib->calloc  =	 _mcalloc;
+	malloclib->realloc =	 _mrealloc;
+	malloclib->astrdup =	 _mstrdup;
+	malloclib->free    =	 _mfree;
+#else
+	malloclib->malloc  =	aMalloc_;
+	malloclib->calloc  =	aCalloc_;
+	malloclib->realloc =	aRealloc_;
+	malloclib->astrdup =	aStrdup_;
+	malloclib->free    =	aFree_;
 #endif
 }

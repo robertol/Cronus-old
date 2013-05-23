@@ -1,5 +1,6 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
 
 #ifndef _NPC_H_
 #define _NPC_H_
@@ -16,7 +17,7 @@ struct npc_timerevent_list {
 	int timer,pos;
 };
 struct npc_label_list {
-	char name[NPC_NAME_LENGTH];
+	char name[NAME_LENGTH];
 	int pos;
 };
 struct npc_item_list {
@@ -31,7 +32,7 @@ struct npc_data {
 	struct npc_data *master_nd;
 	short class_;
 	short speed;
-	char name[NPC_NAME_LENGTH+1];// display name
+	char name[NAME_LENGTH+1];// display name
 	char exname[NAME_LENGTH+1];// unique npc name
 	int chat_id;
 	int touching_id;
@@ -70,7 +71,7 @@ struct npc_data {
 		struct {
 			struct mob_data *md;
 			time_t kill_time;
-			char killer_name[NPC_NAME_LENGTH];
+			char killer_name[NAME_LENGTH];
 		} tomb;
 	} u;
 };
@@ -187,5 +188,16 @@ int npc_cashshop_buylist(struct map_session_data *sd, int points, int count, uns
 int npc_do_atcmd_event(struct map_session_data* sd, const char* command, const char* message, const char* eventname);
 
 bool npc_unloadfile( const char* path );
+
+/* npc.c interface (barely started/WIP) */
+struct npc_interface {
+	/* */
+	struct npc_data *motd;
+	/* */
+} npc_s;
+
+struct npc_interface *npc;
+
+void npc_defaults(void);
 
 #endif /* _NPC_H_ */

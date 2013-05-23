@@ -117,7 +117,6 @@ static int block_free_count = 0, block_free_lock = 0;
 static struct block_list *bl_list[BL_LIST_MAX];
 static int bl_list_count = 0;
 
-struct map_data map[MAX_MAP_PER_SERVER];
 int map_num = 0;
 int map_port=0;
 
@@ -152,7 +151,6 @@ struct map_cache_map_info {
 };
 
 char db_path[256] = "db";
-char motd_txt[256] = "conf/motd.txt";
 char help_txt[256] = "conf/help.txt";
 char help2_txt[256] = "conf/help2.txt";
 char charhelp_txt[256] = "conf/charhelp.txt";
@@ -1480,7 +1478,7 @@ static DBData create_charid2nick(DBKey key, va_list args)
 {
 	struct charid2nick *p;
 	CREATE(p, struct charid2nick, 1);
-	return db_ptr2data(p);
+	return DB->ptr2data(p);
 }
 
 /// Adds(or replaces) the nick of charid to nick_db and fullfils pending requests.
@@ -1516,7 +1514,7 @@ void map_delnickdb(int charid, const char* name)
 	struct map_session_data* sd;
 	DBData data;
 
-	if (!nick_db->remove(nick_db, db_i2key(charid), &data) || (p = db_data2ptr(&data)) == NULL)
+	if (!nick_db->remove(nick_db, DB->i2key(charid), &data) || (p = DB->data2ptr(&data)) == NULL)
 		return;
 
 	while( p->requests ) {
@@ -1826,7 +1824,7 @@ struct map_session_data * map_nick2sd(const char *nick)
 	iter = mapit_getallusers();
 
 	found_sd = NULL;
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if( battle_config.partial_name_scan )
 		{// partial name search
@@ -1849,7 +1847,7 @@ struct map_session_data * map_nick2sd(const char *nick)
 			break;
 		}
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 
 	if( battle_config.partial_name_scan && qty != 1 )
 		found_sd = NULL;
@@ -1902,8 +1900,7 @@ struct mob_data * map_id2boss(int id)
 
 /// Applies func to all the players in the db.
 /// Stops iterating if func returns -1.
-void map_foreachpc(int (*func)(struct map_session_data* sd, va_list args), ...)
-{
+void map_map_foreachpc(int (*func)(struct map_session_data* sd, va_list args), ...) {
 	DBIterator* iter;
 	struct map_session_data* sd;
 
@@ -1924,7 +1921,7 @@ void map_foreachpc(int (*func)(struct map_session_data* sd, va_list args), ...)
 
 /// Applies func to all the mobs in the db.
 /// Stops iterating if func returns -1.
-void map_foreachmob(int (*func)(struct mob_data* md, va_list args), ...)
+void map_map_foreachmob(int (*func)(struct mob_data* md, va_list args), ...)
 {
 	DBIterator* iter;
 	struct mob_data* md;
@@ -1946,7 +1943,7 @@ void map_foreachmob(int (*func)(struct mob_data* md, va_list args), ...)
 
 /// Applies func to all the npcs in the db.
 /// Stops iterating if func returns -1.
-void map_foreachnpc(int (*func)(struct npc_data* nd, va_list args), ...)
+void map_map_foreachnpc(int (*func)(struct npc_data* nd, va_list args), ...)
 {
 	DBIterator* iter;
 	struct block_list* bl;
@@ -1972,7 +1969,7 @@ void map_foreachnpc(int (*func)(struct npc_data* nd, va_list args), ...)
 
 /// Applies func to everything in the db.
 /// Stops iteratin gif func returns -1.
-void map_foreachregen(int (*func)(struct block_list* bl, va_list args), ...)
+void map_map_foreachregen(int (*func)(struct block_list* bl, va_list args), ...)
 {
 	DBIterator* iter;
 	struct block_list* bl;
@@ -1994,7 +1991,7 @@ void map_foreachregen(int (*func)(struct block_list* bl, va_list args), ...)
 
 /// Applies func to everything in the db.
 /// Stops iterating if func returns -1.
-void map_foreachiddb(int (*func)(struct block_list* bl, va_list args), ...)
+void map_map_foreachiddb(int (*func)(struct block_list* bl, va_list args), ...)
 {
 	DBIterator* iter;
 	struct block_list* bl;
@@ -2705,7 +2702,7 @@ static DBData create_map_data_other_server(DBKey key, va_list args)
 	mdos=(struct map_data_other_server *)aCalloc(1,sizeof(struct map_data_other_server));
 	mdos->index = mapindex;
 	memcpy(mdos->name, mapindex_id2name(mapindex), MAP_NAME_LENGTH);
-	return db_ptr2data(mdos);
+	return DB->ptr2data(mdos);
 }
 
 /*==========================================
@@ -2735,7 +2732,7 @@ int map_setipport(unsigned short mapindex, uint32 ip, uint16 port)
  */
 int map_eraseallipport_sub(DBKey key, DBData *data, va_list va)
 {
-	struct map_data_other_server *mdos = db_data2ptr(data);
+	struct map_data_other_server *mdos = DB->data2ptr(data);
 	if(mdos->cell == NULL) {
 		db_remove(map_db,key);
 		aFree(mdos);
@@ -3169,14 +3166,13 @@ void map_removemapdb(struct map_data *m)
 /*======================================
  * Initiate maps loading stage
  *--------------------------------------*/
-int map_readallmaps (void)
-{
+int map_readallmaps (void) {
 	int i;
 	FILE* fp=NULL;
 	int maps_removed = 0;
 	char *map_cache_buffer = NULL; // Has the uncompressed gat data of all maps, so just one allocation has to be made
 	char map_cache_decode_buffer[MAX_MAP_SIZE];
-
+	
 	if( enable_grf )
 		ShowStatus("Loading maps (using GRF files)...\n");
 	else {
@@ -3343,8 +3339,6 @@ int map_config_read(char *cfgName)
 				minsave_interval = 1;
 		} else if (strcmpi(w1, "save_settings") == 0)
 			save_settings = atoi(w2);
-		else if (strcmpi(w1, "motd_txt") == 0)
-			strcpy(motd_txt, w2);
 		else if (strcmpi(w1, "help_txt") == 0)
 			strcpy(help_txt, w2);
 		else if (strcmpi(w1, "help2_txt") == 0)
@@ -3509,15 +3503,15 @@ int inter_config_read(char *cfgName)
 int map_sql_init(void)
 {
 	// main db connection
-	mmysql_handle = Sql_Malloc();
+	mmysql_handle = SQL->Malloc();
 
 	ShowInfo("Connecting to the Map DB Server....\n");
-	if( SQL_ERROR == Sql_Connect(mmysql_handle, map_server_id, map_server_pw, map_server_ip, map_server_port, map_server_db) )
+	if( SQL_ERROR == SQL->Connect(mmysql_handle, map_server_id, map_server_pw, map_server_ip, map_server_port, map_server_db) )
 		exit(EXIT_FAILURE);
 	ShowStatus("connect success! (Map Server Connection)\n");
 
 	if( strlen(default_codepage) > 0 )
-		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage) )
+		if ( SQL_ERROR == SQL->SetEncoding(mmysql_handle, default_codepage) )
 			Sql_ShowDebug(mmysql_handle);
 
 	return 0;
@@ -3526,11 +3520,11 @@ int map_sql_init(void)
 int map_sql_close(void)
 {
 	ShowStatus("Close Map DB Connection....\n");
-	Sql_Free(mmysql_handle);
+	SQL->Free(mmysql_handle);
 	mmysql_handle = NULL;
 	if (logs->config.sql_logs) {
 		ShowStatus("Close Log DB Connection....\n");
-		Sql_Free(logmysql_handle);
+		SQL->Free(logmysql_handle);
 		logmysql_handle = NULL;
 	}
 	return 0;
@@ -3539,15 +3533,15 @@ int map_sql_close(void)
 int log_sql_init(void)
 {
 	// log db connection
-	logmysql_handle = Sql_Malloc();
+	logmysql_handle = SQL->Malloc();
 
 	ShowInfo(""CL_WHITE"[SQL]"CL_RESET": Connecting to the Log Database "CL_WHITE"%s"CL_RESET" At "CL_WHITE"%s"CL_RESET"...\n",log_db_db,log_db_ip);
-	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id, log_db_pw, log_db_ip, log_db_port, log_db_db) )
+	if ( SQL_ERROR == SQL->Connect(logmysql_handle, log_db_id, log_db_pw, log_db_ip, log_db_port, log_db_db) )
 		exit(EXIT_FAILURE);
 	ShowStatus(""CL_WHITE"[SQL]"CL_RESET": Successfully '"CL_GREEN"connected"CL_RESET"' to Database '"CL_WHITE"%s"CL_RESET"'.\n", log_db_db);
 
 	if( strlen(default_codepage) > 0 )
-		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage) )
+		if ( SQL_ERROR == SQL->SetEncoding(logmysql_handle, default_codepage) )
 			Sql_ShowDebug(logmysql_handle);
 	return 0;
 }
@@ -4857,7 +4851,7 @@ void read_map_zone_db(void) {
  */
 int map_db_final(DBKey key, DBData *data, va_list ap)
 {
-	struct map_data_other_server *mdos = db_data2ptr(data);
+	struct map_data_other_server *mdos = DB->data2ptr(data);
 	if(mdos && mdos->cell == NULL)
 		aFree(mdos);
 	return 0;
@@ -4868,7 +4862,7 @@ int map_db_final(DBKey key, DBData *data, va_list ap)
  */
 int nick_db_final(DBKey key, DBData *data, va_list args)
 {
-	struct charid2nick* p = db_data2ptr(data);
+	struct charid2nick* p = DB->data2ptr(data);
 	struct charid_request* req;
 
 	if( p == NULL )
@@ -4916,7 +4910,7 @@ int cleanup_sub(struct block_list *bl, va_list ap)
  */
 static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
 {
-	return cleanup_sub(db_data2ptr(data), va);
+	return cleanup_sub(DB->data2ptr(data), va);
 }
 
 /*==========================================
@@ -4934,9 +4928,9 @@ void do_final(void)
 
 	//Ladies and babies first.
 	iter = mapit_getallusers();
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 		map_quit(sd);
-	mapit_free(iter);
+	mapit->free(iter);
 
 	/* prepares npcs for a faster shutdown process */
 	do_clear_npc();
@@ -4963,7 +4957,7 @@ void do_final(void)
 	do_final_instance();
 	do_final_itemdb();
 	do_final_storage();
-	do_final_guild();
+	guild->final();
 	do_final_party();
 	do_final_pc();
 	do_final_pet();
@@ -4996,6 +4990,8 @@ void do_final(void)
 
     map_sql_close();
 	ers_destroy(map_iterator_ers);
+	
+	aFree(map);
 
 	ShowStatus("Finished.\n");
 }
@@ -5059,9 +5055,8 @@ static void map_helpscreen(bool do_exit)
  *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit) {
 	const char *ver = versao();
-	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
+	ShowInfo(CL_WHITE"Versao do Cronus: %s" CL_RESET"\n", ver);
 	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
-	ShowInfo("Open "CL_WHITE"readme.txt"CL_RESET" for more information.\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -5081,9 +5076,9 @@ void do_shutdown(void)
 		{
 			struct map_session_data* sd;
 			struct s_mapiterator* iter = mapit_getallusers();
-			for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+			for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 				clif->GM_kick(NULL, sd);
-			mapit_free(iter);
+			mapit->free(iter);
 			flush_fifos();
 		}
 		chrif_check_shutdown();
@@ -5162,18 +5157,50 @@ void map_hp_symbols(void) {
 	HPM->share(searchstore,"searchstore");
 	HPM->share(skill,"skill");
 	HPM->share(vending,"vending");
+	/* partial */
+	HPM->share(mapit,"mapit");
+	HPM->share(map_foreachpc,"map_foreachpc");
+	HPM->share(map_foreachmob,"map_foreachmob");
+	HPM->share(map_foreachnpc,"map_foreachnpc");
+	HPM->share(map_foreachregen,"map_foreachregen");
+	HPM->share(map_foreachiddb,"map_foreachiddb");
+	/* sql link */
+	HPM->share(mmysql_handle,"sql_handle");
 	/* specific */
 	HPM->share(atcommand->create,"addCommand");
 	HPM->share(script->addScript,"addScript");
+	/* vars */
+	HPM->share(map,"map");
+}
+/* temporary until the map.c "Hercules Renewal Phase One" design is complete. */
+void map_defaults(void) {
+	mapit = &mapit_s;
+	
+	mapit->alloc = mapit_alloc;
+	mapit->free = mapit_free;
+	mapit->first = mapit_first;
+	mapit->last = mapit_last;
+	mapit->next = mapit_next;
+	mapit->prev = mapit_prev;
+	mapit->exists = mapit_exists;
+
+	map_foreachpc = map_map_foreachpc;
+	map_foreachmob = map_map_foreachmob;
+	map_foreachnpc = map_map_foreachnpc;
+	map_foreachregen = map_map_foreachregen;
+	map_foreachiddb = map_map_foreachiddb;
 }
 void load_defaults(void) {
 	atcommand_defaults();
 	battle_defaults();
 	buyingstore_defaults();
 	clif_defaults();
+	guild_defaults();
 	homunculus_defaults();
 	ircbot_defaults();
 	log_defaults();
+	map_defaults();
+	npc_defaults();
 	script_defaults();
 	searchstore_defaults();
 	skill_defaults();
@@ -5284,6 +5311,8 @@ int do_init(int argc, char *argv[])
 		}
 	}
 	
+	CREATE(map,struct map_data,MAX_MAP_PER_SERVER);
+	
 	load_defaults();
 	
 	map_config_read(MAP_CONF_NAME);
@@ -5364,7 +5393,7 @@ int do_init(int argc, char *argv[])
 	do_init_pc();
 	do_init_status();
 	do_init_party();
-	do_init_guild();
+	guild->init();
 	do_init_storage();
 	do_init_pet();
 	homun->init();

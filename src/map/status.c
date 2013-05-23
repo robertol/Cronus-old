@@ -2096,7 +2096,7 @@ int status_calc_mob_(struct mob_data* md, bool first)
 	if(flag&4)
 	{	// Strengthen Guardians - custom value +10% / lv
 		struct guild_castle *gc;
-		gc=guild_mapname2gc(map[md->bl.m].name);
+		gc=guild->mapname2gc(map[md->bl.m].name);
 		if (!gc)
 			ShowError("status_calc_mob: No castle set at map %s\n", map[md->bl.m].name);
 		else
@@ -5876,7 +5876,7 @@ int status_get_emblem_id(struct block_list *bl) {
 			break;
 		case BL_NPC:
 			if (((TBL_NPC*)bl)->subtype == SCRIPT && ((TBL_NPC*)bl)->u.scr.guild_id > 0) {
-				struct guild *g = guild_search(((TBL_NPC*)bl)->u.scr.guild_id);
+				struct guild *g = guild->search(((TBL_NPC*)bl)->u.scr.guild_id);
 				if (g)
 					return g->emblem_id;
 			}
@@ -9007,58 +9007,59 @@ int status_change_clear(struct block_list* bl, int type) {
 		if(!sc->data[i])
 		  continue;
 
-		if(type == 0)
-		switch (i) {	//Type 0: PC killed -> Place here statuses that do not dispel on death.
-			case SC_ELEMENTALCHANGE://Only when its Holy or Dark that it doesn't dispell on death
-				if( sc->data[i]->val2 != ELE_HOLY && sc->data[i]->val2 != ELE_DARK )
-					break;
-			case SC_WEIGHT50:
-			case SC_WEIGHT90:
-			case SC_EDP:
-			case SC_MELTDOWN:
-			case SC_XMAS:
-			case SC_SUMMER:
-			case SC_HANBOK:
-			case SC_NOCHAT:
-			case SC_FUSION:
-			case SC_EARTHSCROLL:
-			case SC_READYSTORM:
-			case SC_READYDOWN:
-			case SC_READYCOUNTER:
-			case SC_READYTURN:
-			case SC_DODGE:
-			case SC_JAILED:
-			case SC_EXPBOOST:
-			case SC_ITEMBOOST:
-			case SC_HELLPOWER:
-			case SC_JEXPBOOST:
-			case SC_AUTOTRADE:
-			case SC_WHISTLE:
-			case SC_ASSNCROS:
-			case SC_POEMBRAGI:
-			case SC_APPLEIDUN:
-			case SC_HUMMING:
-			case SC_DONTFORGETME:
-			case SC_FORTUNE:
-			case SC_SERVICE4U:
-			case SC_FOOD_STR_CASH:
-			case SC_FOOD_AGI_CASH:
-			case SC_FOOD_VIT_CASH:
-			case SC_FOOD_DEX_CASH:
-			case SC_FOOD_INT_CASH:
-			case SC_FOOD_LUK_CASH:
-			case SC_DEF_RATE:
-			case SC_MDEF_RATE:
-			case SC_INCHEALRATE:
-			case SC_INCFLEE2:
-			case SC_INCHIT:
-			case SC_ATKPOTION:
-			case SC_MATKPOTION:
-			case SC_S_LIFEPOTION:
-			case SC_L_LIFEPOTION:
-			case SC_PUSH_CART:
-			case SC_ALL_RIDING:
-				continue;
+		if(type == 0) {
+			switch (i) {	//Type 0: PC killed -> Place here statuses that do not dispel on death.
+				case SC_ELEMENTALCHANGE://Only when its Holy or Dark that it doesn't dispell on death
+					if( sc->data[i]->val2 != ELE_HOLY && sc->data[i]->val2 != ELE_DARK )
+						break;
+				case SC_WEIGHT50:
+				case SC_WEIGHT90:
+				case SC_EDP:
+				case SC_MELTDOWN:
+				case SC_XMAS:
+				case SC_SUMMER:
+				case SC_HANBOK:
+				case SC_NOCHAT:
+				case SC_FUSION:
+				case SC_EARTHSCROLL:
+				case SC_READYSTORM:
+				case SC_READYDOWN:
+				case SC_READYCOUNTER:
+				case SC_READYTURN:
+				case SC_DODGE:
+				case SC_JAILED:
+				case SC_EXPBOOST:
+				case SC_ITEMBOOST:
+				case SC_HELLPOWER:
+				case SC_JEXPBOOST:
+				case SC_AUTOTRADE:
+				case SC_WHISTLE:
+				case SC_ASSNCROS:
+				case SC_POEMBRAGI:
+				case SC_APPLEIDUN:
+				case SC_HUMMING:
+				case SC_DONTFORGETME:
+				case SC_FORTUNE:
+				case SC_SERVICE4U:
+				case SC_FOOD_STR_CASH:
+				case SC_FOOD_AGI_CASH:
+				case SC_FOOD_VIT_CASH:
+				case SC_FOOD_DEX_CASH:
+				case SC_FOOD_INT_CASH:
+				case SC_FOOD_LUK_CASH:
+				case SC_DEF_RATE:
+				case SC_MDEF_RATE:
+				case SC_INCHEALRATE:
+				case SC_INCFLEE2:
+				case SC_INCHIT:
+				case SC_ATKPOTION:
+				case SC_MATKPOTION:
+				case SC_S_LIFEPOTION:
+				case SC_L_LIFEPOTION:
+				case SC_PUSH_CART:
+				case SC_ALL_RIDING:
+					continue;
+			}
 		}
 
 		if( type == 3 ) {
@@ -9087,7 +9088,10 @@ int status_change_clear(struct block_list* bl, int type) {
 	sc->opt1 = 0;
 	sc->opt2 = 0;
 	sc->opt3 = 0;
-
+	sc->bs_counter = 0;
+#ifndef RENEWAL
+	sc->sg_counter = 0;
+#endif
 	if( type == 0 || type == 2 )
 		clif->changeoption(bl);
 
@@ -11282,13 +11286,13 @@ int status_readdb(void)
 
 
 #ifdef RENEWAL_ASPD
-	sv_readdb(db_path, "re/job_db1.txt",   ',',	6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE,	-1,		&status_readdb_job1);
+	sv->readdb(db_path, "re/job_db1.txt",   ',',	6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE,	-1,		&status_readdb_job1);
 #else
-	sv_readdb(db_path, "pre-re/job_db1.txt",   ',',	5+MAX_WEAPON_TYPE, 5+MAX_WEAPON_TYPE,	-1,		&status_readdb_job1);
+	sv->readdb(db_path, "pre-re/job_db1.txt",   ',',	5+MAX_WEAPON_TYPE, 5+MAX_WEAPON_TYPE,	-1,		&status_readdb_job1);
 #endif
-	sv_readdb(db_path, "job_db2.txt",   ',', 1,                 1+MAX_LEVEL,       -1,                            &status_readdb_job2);
-	sv_readdb(db_path, "size_fix.txt",  ',', MAX_WEAPON_TYPE,   MAX_WEAPON_TYPE,    ARRAYLENGTH(atkmods),         &status_readdb_sizefix);
-	sv_readdb(db_path, DBPATH"refine_db.txt", ',', 4+MAX_REFINE, 4+MAX_REFINE, ARRAYLENGTH(refine_info), &status_readdb_refine);
+	sv->readdb(db_path, "job_db2.txt",   ',', 1,                 1+MAX_LEVEL,       -1,                            &status_readdb_job2);
+	sv->readdb(db_path, "size_fix.txt",  ',', MAX_WEAPON_TYPE,   MAX_WEAPON_TYPE,    ARRAYLENGTH(atkmods),         &status_readdb_sizefix);
+	sv->readdb(db_path, DBPATH"refine_db.txt", ',', 4+MAX_REFINE, 4+MAX_REFINE, ARRAYLENGTH(refine_info), &status_readdb_refine);
 
 	return 0;
 }

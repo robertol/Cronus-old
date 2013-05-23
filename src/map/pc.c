@@ -34,7 +34,7 @@
 #include "npc.h" // fake_nd
 #include "pet.h" // pet_unlocktarget()
 #include "party.h" // party_search()
-#include "guild.h" // guild_search(), guild_request_info()
+#include "guild.h" // guild->search(), guild_request_info()
 #include "script.h" // script_config
 #include "skill.h"
 #include "status.h" // struct status_data
@@ -67,9 +67,6 @@ struct fame_list chemist_fame_list[MAX_FAME_LIST];
 struct fame_list taekwon_fame_list[MAX_FAME_LIST];
 
 static unsigned short equip_pos[EQI_MAX]={EQP_ACC_L,EQP_ACC_R,EQP_SHOES,EQP_GARMENT,EQP_HEAD_LOW,EQP_HEAD_MID,EQP_HEAD_TOP,EQP_ARMOR,EQP_HAND_L,EQP_HAND_R,EQP_COSTUME_HEAD_TOP,EQP_COSTUME_HEAD_MID,EQP_COSTUME_HEAD_LOW,EQP_COSTUME_GARMENT,EQP_AMMO};
-
-#define MOTD_LINE_SIZE 128
-static char motd_text[MOTD_LINE_SIZE][CHAT_SIZE_MAX]; // Message of the day buffer [Valaris]
 
 //Links related info to the sd->hate_mob[]/sd->feel_map[] entries
 const struct sg_data sg_info[MAX_PC_FEELHATE] = {
@@ -180,13 +177,12 @@ int pc_addspiritball(struct map_session_data *sd,int interval,int max)
 
 	nullpo_ret(sd);
 
-	if(max > MAX_SKILL_LEVEL)
-		max = MAX_SKILL_LEVEL;
+	if(max > MAX_SPIRITBALL)
+		max = MAX_SPIRITBALL;
 	if(sd->spiritball < 0)
 		sd->spiritball = 0;
 
-	if( sd->spiritball && sd->spiritball >= max )
-	{
+	if( sd->spiritball && sd->spiritball >= max ) {
 		if(sd->spirit_timer[0] != INVALID_TIMER)
 			delete_timer(sd->spirit_timer[0],pc_spiritball_timer);
 		sd->spiritball--;
@@ -225,8 +221,8 @@ int pc_delspiritball(struct map_session_data *sd,int count,int type)
 	if(count > sd->spiritball)
 		count = sd->spiritball;
 	sd->spiritball -= count;
-	if(count > MAX_SKILL_LEVEL)
-		count = MAX_SKILL_LEVEL;
+	if(count > MAX_SPIRITBALL)
+		count = MAX_SPIRITBALL;
 
 	for(i=0;i<count;i++) {
 		if(sd->spirit_timer[i] != INVALID_TIMER) {
@@ -234,7 +230,7 @@ int pc_delspiritball(struct map_session_data *sd,int count,int type)
 			sd->spirit_timer[i] = INVALID_TIMER;
 		}
 	}
-	for(i=count;i<MAX_SKILL_LEVEL;i++) {
+	for(i=count;i<MAX_SPIRITBALL;i++) {
 		sd->spirit_timer[i-count] = sd->spirit_timer[i];
 		sd->spirit_timer[i] = INVALID_TIMER;
 	}
@@ -861,9 +857,9 @@ int pc_isequip(struct map_session_data *sd,int n)
 
 	if (sd->sc.count) {
 
-		if(item->equip & EQP_ARMS && item->type == IT_WEAPON && (!(sd->sc.data[SC_CP_WEAPON]) && sd->sc.data[SC_STRIPWEAPON])) // Also works with left-hand weapons [DracoRPG]
+		if(item->equip & EQP_ARMS && item->type == IT_WEAPON && sd->sc.data[SC_STRIPWEAPON]) // Also works with left-hand weapons [DracoRPG]
 			return 0;
-		if(item->equip & EQP_SHIELD && item->type == IT_ARMOR && (!(sd->sc.data[SC_CP_SHIELD]) && sd->sc.data[SC_STRIPSHIELD]))
+		if(item->equip & EQP_SHIELD && item->type == IT_ARMOR && sd->sc.data[SC_STRIPSHIELD])
 			return 0;
 		if(item->equip & EQP_ARMOR && sd->sc.data[SC_STRIPARMOR])
 			return 0;
@@ -979,7 +975,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	sd->cansendmail_tick = tick;
 	sd->hchsysch_tick = tick;
 
-	for(i = 0; i < MAX_SKILL_LEVEL; i++)
+	for(i = 0; i < MAX_SPIRITBALL; i++)
 		sd->spirit_timer[i] = INVALID_TIMER;
 	for(i = 0; i < ARRAYLENGTH(sd->autobonus); i++)
 		sd->autobonus[i].active = INVALID_TIMER;
@@ -1015,7 +1011,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 
 	sd->guild_x = -1;
 	sd->guild_y = -1;
-	
+
 	sd->disguise = -1;
 	
 	// Event Timers
@@ -1059,18 +1055,10 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 		if (battle_config.display_version == 1) {
 			const char* ver = versao();
 			char buf[256];
-				sprintf(buf,"Versão: %s", ver);
+			sprintf(buf,"Versao: %s", ver);
 			clif->message(sd->fd, buf);
 		}
-
-		// Message of the Day [Valaris]
-		for(i=0; motd_text[i][0] && i < MOTD_LINE_SIZE; i++) {
-			if (battle_config.motd_type)
-				clif->disp_onlyself(sd,motd_text[i],strlen(motd_text[i]));
-			else
-				clif->message(sd->fd, motd_text[i]);
-		}
-
+		
 		// message of the limited time of the account
 		if (expiration_time != 0) { // don't display if it's unlimited or unknow value
 			char tmpstr[1024];
@@ -1202,7 +1190,7 @@ int pc_reg_received(struct map_session_data *sd)
 	if (sd->status.party_id)
 		party_member_joined(sd);
 	if (sd->status.guild_id)
-		guild_member_joined(sd);
+		guild->member_joined(sd);
 
 	// pet
 	if (sd->status.pet_id > 0)
@@ -1249,6 +1237,8 @@ int pc_reg_received(struct map_session_data *sd)
 		clif->changeoption(&sd->bl);
 	}
 
+	if( npc->motd ) /* [Ind/Hercules] */
+		run_script(npc->motd->u.scr.script, 0, sd->bl.id, fake_nd->bl.id);
 
 	return 1;
 }
@@ -1646,8 +1636,12 @@ int pc_disguise(struct map_session_data *sd, int class_) {
 	}
 
 	if (sd->bl.prev != NULL) {
-		pc_stop_walking(sd, 0);
-		clif->clearunit_area(&sd->bl, CLR_OUTSIGHT);
+		if( class_ == -1 && sd->disguise == sd->status.class_ ) {
+			clif->clearunit_single(-sd->bl.id,CLR_OUTSIGHT,sd->fd);
+		} else if ( class_ != sd->status.class_ ) {
+			pc_stop_walking(sd, 0);
+			clif->clearunit_area(&sd->bl, CLR_OUTSIGHT);
+		}
 	}
 
 	if (class_ == -1) {
@@ -4081,7 +4075,8 @@ int pc_isUseitem(struct map_session_data *sd,int n)
 		return 0;
 
 	if( (item->item_usage.flag&NOUSE_SITTING) && (pc_issit(sd) == 1) && (pc_get_group_level(sd) < item->item_usage.override) ) {
-		clif->colormes(sd->fd,COLOR_WHITE,msg_txt(1474));
+		clif->msgtable(sd->fd,664);
+		//clif->colormes(sd->fd,COLOR_WHITE,msg_txt(1474));
 		return 0; // You cannot use this item while sitting.
 	}
 
@@ -4744,7 +4739,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 		if (battle_config.clear_unit_onwarp&BL_PC)
 			skill->clear_unitgroup(&sd->bl);
 		party_send_dot_remove(sd); //minimap dot fix [Kevin]
-		guild_send_dot_remove(sd);
+		guild->send_dot_remove(sd);
 		bg_send_dot_remove(sd);
 		if (sd->regen.state.gc)
 			sd->regen.state.gc = 0;
@@ -4819,7 +4814,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 
 	if( sd->status.guild_id > 0 && map[m].flag.gvg_castle )
 	{	// Increased guild castle regen [Valaris]
-		struct guild_castle *gc = guild_mapindex2gc(sd->mapindex);
+		struct guild_castle *gc = guild->mapindex2gc(sd->mapindex);
 		if(gc && gc->guild_id == sd->status.guild_id)
 			sd->regen.state.gc = 1;
 	}
@@ -4943,7 +4938,7 @@ int pc_checkskill(struct map_session_data *sd,uint16 skill_id) {
 		struct guild *g;
 
 		if( sd->status.guild_id>0 && (g=sd->guild)!=NULL)
-			return guild_checkskill(g,skill_id);
+			return guild->checkskill(g,skill_id);
 		return 0;
 	} else if(!(index = skill->get_index(skill_id)) || index >= ARRAYLENGTH(sd->status.skill) ) {
 		ShowError("pc_checkskill: Invalid skill id %d (char_id=%d).\n", skill_id, sd->status.char_id);
@@ -4965,7 +4960,7 @@ int pc_checkskill2(struct map_session_data *sd,uint16 index) {
 		struct guild *g;
 		
 		if( sd->status.guild_id>0 && (g=sd->guild)!=NULL)
-			return guild_checkskill(g,skill_db[index].nameid);
+			return guild->checkskill(g,skill_db[index].nameid);
 		return 0;
 	}
 	if(sd->status.skill[index].id == skill_db[index].nameid)
@@ -5751,7 +5746,7 @@ int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int
 		return 0; // no exp on pvp maps
 
 	if(sd->status.guild_id>0)
-		base_exp-=guild_payexp(sd,base_exp);
+		base_exp-=guild->payexp(sd,base_exp);
 
 	if(src) pc_calcexp(sd, &base_exp, &job_exp, src);
 
@@ -6048,7 +6043,7 @@ int pc_skillup(struct map_session_data *sd,uint16 skill_id) {
 	nullpo_ret(sd);
 
 	if( skill_id >= GD_SKILLBASE && skill_id < GD_SKILLBASE+MAX_GUILDSKILL ) {
-		guild_skillup(sd, skill_id);
+		guild->skillup(sd, skill_id);
 		return 0;
 	}
 
@@ -6884,10 +6879,10 @@ void pc_revive(struct map_session_data *sd,unsigned int hp, unsigned int sp) {
 		pc_setinvincibletimer(sd, battle_config.pc_invincible_time);
 
 	if( sd->state.gmaster_flag ) {
-		guild_guildaura_refresh(sd,GD_LEADERSHIP,guild_checkskill(sd->state.gmaster_flag,GD_LEADERSHIP));
-		guild_guildaura_refresh(sd,GD_GLORYWOUNDS,guild_checkskill(sd->state.gmaster_flag,GD_GLORYWOUNDS));
-		guild_guildaura_refresh(sd,GD_SOULCOLD,guild_checkskill(sd->state.gmaster_flag,GD_SOULCOLD));
-		guild_guildaura_refresh(sd,GD_HAWKEYES,guild_checkskill(sd->state.gmaster_flag,GD_HAWKEYES));
+		guild->aura_refresh(sd,GD_LEADERSHIP,guild->checkskill(sd->state.gmaster_flag,GD_LEADERSHIP));
+		guild->aura_refresh(sd,GD_GLORYWOUNDS,guild->checkskill(sd->state.gmaster_flag,GD_GLORYWOUNDS));
+		guild->aura_refresh(sd,GD_SOULCOLD,guild->checkskill(sd->state.gmaster_flag,GD_SOULCOLD));
+		guild->aura_refresh(sd,GD_HAWKEYES,guild->checkskill(sd->state.gmaster_flag,GD_HAWKEYES));
 	}
 }
 // script
@@ -7544,6 +7539,15 @@ int pc_changelook(struct map_session_data *sd,int type,int val)
 	nullpo_ret(sd);
 
 	switch(type){
+		case LOOK_BASE:
+			status_set_viewdata(&sd->bl, val);
+			clif->changelook(&sd->bl,LOOK_BASE,sd->vd.class_);
+			clif->changelook(&sd->bl,LOOK_WEAPON,sd->status.weapon);
+			if (sd->vd.cloth_color)
+				clif->changelook(&sd->bl,LOOK_CLOTHES_COLOR,sd->vd.cloth_color);
+			clif->skillinfoblock(sd);
+			return 0;
+			break;
 		case LOOK_HAIR:	//Use the battle_config limits! [Skotlex]
 			val = cap_value(val, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
 
@@ -9109,7 +9113,7 @@ int pc_autosave(int tid, unsigned int tick, int id, intptr_t data)
 		save_flag = 1; //Noone was saved, so save first found char.
 
 	iter = mapit_getallusers();
-	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
+	for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
 	{
 		if(sd->bl.id == last_save_id && save_flag != 1) {
 			save_flag = 1;
@@ -9126,7 +9130,7 @@ int pc_autosave(int tid, unsigned int tick, int id, intptr_t data)
 		chrif_save(sd,0);
 		break;
 	}
-	mapit_free(iter);
+	mapit->free(iter);
 
 	interval = autosave_interval/(map_usercount()+1);
 	if(interval < minsave_interval)
@@ -9614,10 +9618,10 @@ int pc_readdb(void)
 	count = 0;
 	// Reset and read skilltree
 	memset(skill_tree,0,sizeof(skill_tree));
-	sv_readdb(db_path, DBPATH"skill_tree.txt", ',', 3+MAX_PC_SKILL_REQUIRE*2, 4+MAX_PC_SKILL_REQUIRE*2, -1, &pc_readdb_skilltree);
+	sv->readdb(db_path, DBPATH"skill_tree.txt", ',', 3+MAX_PC_SKILL_REQUIRE*2, 4+MAX_PC_SKILL_REQUIRE*2, -1, &pc_readdb_skilltree);
 
 #if defined(RENEWAL_DROP) || defined(RENEWAL_EXP)
-	sv_readdb(db_path, "re/level_penalty.txt", ',', 4, 4, -1, &pc_readdb_levelpenalty);
+	sv->readdb(db_path, "re/level_penalty.txt", ',', 4, 4, -1, &pc_readdb_levelpenalty);
 	for( k=1; k < 3; k++ ){ // fill in the blanks
 		for( j = 0; j < RC_MAX; j++ ){
 			int tmp = 0;
@@ -9723,66 +9727,6 @@ int pc_readdb(void)
 	return 0;
 }
 
-// Read MOTD on startup. [Valaris]
-int pc_read_motd(void)
-{
-	FILE* fp;
-
-	// clear old MOTD
-	memset(motd_text, 0, sizeof(motd_text));
-
-	// read current MOTD
-	if( ( fp = fopen(motd_txt, "r") ) != NULL )
-	{
-		char* buf, * ptr;
-		unsigned int lines = 0, entries = 0;
-		size_t len;
-
-		while( entries < MOTD_LINE_SIZE && fgets(motd_text[entries], sizeof(motd_text[entries]), fp) )
-		{
-			lines++;
-
-			buf = motd_text[entries];
-
-			if( buf[0] == '/' && buf[1] == '/' )
-			{
-				continue;
-			}
-
-			len = strlen(buf);
-
-			while( len && ( buf[len-1] == '\r' || buf[len-1] == '\n' ) )
-			{// strip trailing EOL characters
-				len--;
-			}
-
-			if( len )
-			{
-				buf[len] = 0;
-
-				if( ( ptr = strstr(buf, " :") ) != NULL && ptr-buf >= NAME_LENGTH )
-				{// crashes newer clients
-					ShowWarning("Found sequence '"CL_WHITE" :"CL_RESET"' on line '"CL_WHITE"%u"CL_RESET"' in '"CL_WHITE"%s"CL_RESET"'. This can cause newer clients to crash.\n", lines, motd_txt);
-				}
-			}
-			else
-			{// empty line
-				buf[0] = ' ';
-				buf[1] = 0;
-			}
-			entries++;
-		}
-		fclose(fp);
-
-		ShowStatus("Done reading '"CL_WHITE"%u"CL_RESET"' entries in '"CL_WHITE"%s"CL_RESET"'.\n", entries, motd_txt);
-	}
-	else
-	{
-		ShowWarning("File '"CL_WHITE"%s"CL_RESET"' not found.\n", motd_txt);
-	}
-
-	return 0;
-}
 void pc_itemcd_do(struct map_session_data *sd, bool load) {
 	int i,cursor = 0;
 	struct item_cd* cd = NULL;
@@ -9834,7 +9778,6 @@ int do_init_pc(void) {
 	itemcd_db = idb_alloc(DB_OPT_RELEASE_DATA);
 
 	pc_readdb();
-	pc_read_motd(); // Read MOTD [Valaris]
 
 	add_timer_func_list(pc_invincible_timer, "pc_invincible_timer");
 	add_timer_func_list(pc_eventtimer, "pc_eventtimer");
