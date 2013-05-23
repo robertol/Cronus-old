@@ -3,7 +3,7 @@ compiler:
   - clang
   - gcc
 
-script: uname -a && ./configure --enable-debug && make
+script: uname -a && sh configure --enable-debug && make all
 
 branches:
   only:
