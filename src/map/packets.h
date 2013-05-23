@@ -2084,8 +2084,9 @@ packet(0x020d,-1);
 	packet(0x0998,8,clif->pEquipItem,2,4);
 	packet(0x0447,2); // PACKET_CZ_BLOCKING_PLAY_CANCEL
 	// New Packets End
+#endif
 	
-	#if PACKETVER >= 20130515
+#if PACKETVER >= 20130515
 	// Shuffle Start
 	packet(0x0369,7,clif->pActionRequest,2,6);
 	packet(0x083C,10,clif->pUseSkillToId,2,4,6);
