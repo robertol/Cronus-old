@@ -8,8 +8,8 @@
 //           http://forum.cronus-emulator.com
 //==============================================================
 // 
-// executado quando qualquer personagem loga, que lhes sÃ£o inerentes
+// executado quando qualquer personagem loga, que lhes s�o inerentes
 -	script	CronusMOTD	-1,{
-message strcharinfo(0),"Bem-vindo ao  Cronus! Divirta-se! favor relatar quaisquer bugs que vocÃª encontrar.";
+message strcharinfo(0),"Bem-vindo ao  Cronus! Divirta-se! Favor, relatar quaisquer bugs que voc� encontrar.";
 end;
 }
