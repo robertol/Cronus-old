@@ -1,4 +1,4 @@
-﻿//===== Hercules Documentation ================================
+﻿//===== Hercules Documentation ===============================
 //= Hercules Script Commands
 //===== By: ==================================================
 //= Hercules Dev Team
@@ -7,22 +7,24 @@
 //= Commands are sorted depending on their functionality.
 //============================================================
 
-This document is a reference manual for all the scripting commands and functions 
-available in current Hercules GIT. It is not a simple tutorial. When people tell 
-you to "Read The F***ing Manual", they mean this.
+This document is a reference manual for all the scripting commands and 
+functions available in current Hercules GIT. It is not a simple tutorial. 
+When people tell you to "Read The F***ing Manual", they mean this.
 
-The information was mostly acquired through looking up how things actually work 
-in the source code of the server, which was written by many people over time, 
-and lots of them don't speak English and never left any notes - or are otherwise 
-not available for comments. As such, anything written in here might not be 
-correct, it is only correct to the best of our knowledge, which is limited.
+The information was mostly acquired through looking up how things actually 
+work in the source code of the server, which was written by many people 
+over time, and lots of them don't speak English and never left any notes - 
+or are otherwise not available for comments. As such, anything written in 
+here might not be correct, it is only correct to the best of our 
+knowledge, which is limited.
 
-This is not a place to teach you basic programming. This document will not teach 
-you basic programming by itself. It's more of a reference for those who have at 
-least a vague idea of what they want to do and want to know what tools they have 
-available to do it. We've tried to keep it as simple as feasible, but if you 
-don't understand it, getting a clear book on programming in general will help 
-better than yelling around the forum for help.
+This is not a place to teach you basic programming. This document will not 
+teach you basic programming by itself. It's more of a reference for those 
+who have at least a vague idea of what they want to do and want to know 
+what tools they have available to do it. We've tried to keep it as simple 
+as feasible, but if you don't understand it, getting a clear book on 
+programming in general will help better than yelling around the forum for 
+help.
 
 A little learning never caused anyone's head to explode.
 
@@ -35,34 +37,35 @@ The commands and functions are listed in no particular order:
 
 Descriptive text
 
-    Small example if possible. Will usually be incomplete, it's there just to 
-    give you an idea of how it works in practice.
+    Small example if possible. Will usually be incomplete, it's there just 
+    to give you an idea of how it works in practice.
 
 To find a specific command, use Ctrl+F, (or whatever keys call up a search 
-function in whatever you're reading this with) put an * followed by the command 
-name, and it should find the command description for you.
+function in whatever you're reading this with) put an * followed by the 
+command name, and it should find the command description for you.
 
-If you find anything omitted, please respond. :)
+If you find anything omitted, please tell us. :)
 
 Syntax
 ------
 
-Throughout this document, wherever a command wants an argument, it is given in 
-<angle brackets>. This doesn't mean you should type the angle brackets. :) If an 
-argument of a command is optional, it is given in {curly brackets}. You've 
-doubtlessly seen this convention somewhere, if you didn't, get used to it, 
-that's how big boys do it. If a command can optionally take an unspecified 
-number of arguments, you'll see a list like this:
+Throughout this document, wherever a command wants an argument, it is 
+given in <angle brackets>. This doesn't mean you should type the angle 
+brackets. :) If an argument of a command is optional, it is given in 
+{curly brackets}. You've doubtlessly seen this convention somewhere, if 
+you didn't, get used to it, that's how big boys do it. If a command can 
+optionally take an unspecified number of arguments, you'll see a list like 
+this:
 
 command <argument>{,<argument>...<argument>}
 
 This still means they will want to be separated by commas.
 
-Where a command wants a string, it will be given in "quotes", if it's a number, 
-it will be given without them. Normally, you can put an expression, like a bunch 
-of functions or operators returning a value, in (round brackets) instead of most 
-numbers. Round brackets will not always be required, but they're often a good 
-idea.
+Where a command wants a string, it will be given in "quotes", if it's a 
+number, it will be given without them. Normally, you can put an 
+expression, like a bunch of functions or operators returning a value, in 
+(round brackets) instead of most numbers. Round brackets will not always 
+be required, but they're often a good idea.
 
 Wherever you refer to a map name, it's always 'mapname' or 'mapname.gat'
 (Please, don't use .gat suffix anymore. It's useless.) 
@@ -71,17 +74,18 @@ Wherever you refer to a map name, it's always 'mapname' or 'mapname.gat'
 Script loading structure
 ------------------------
 
-Scripts are loaded by the map server as referenced in the 'conf/map-server.conf' 
-configuration file, but in the default configuration, it doesn't load any script 
-files itself. Instead, it loads the file 'npc/scripts_main.conf' which itself 
-contains references to other files. The actual scripts are loaded from txt 
-files, which are linked up like this:
+Scripts are loaded by the map server as referenced in the 
+'conf/map-server.conf' configuration file, but in the default 
+configuration, it doesn't load any script files itself. Instead, it loads 
+the file 'npc/scripts_main.conf' which itself contains references to other 
+files. The actual scripts are loaded from txt files, which are linked up 
+like this:
 
 npc: <path to a filename>
 
-Any line like this, invoked, ultimately, by 'map-server.conf' will load up the 
-script contained in this file, which will make the script available. No file 
-will get loaded twice, to prevent possible errors.
+Any line like this, invoked, ultimately, by 'map-server.conf' will load up 
+the script contained in this file, which will make the script available. 
+No file will get loaded twice, to prevent possible errors.
 
 Another configuration file option of relevance is:
 
@@ -90,14 +94,14 @@ delnpc: <path to a filename>
 This will unload a specified script filename from memory, which, while 
 seemingly useless, may sometimes be required.
 
-Whenever '//' is encountered in a line upon reading, everything beyond this on 
-that line is considered to be a comment and is ignored. This works wherever you 
-place it.
+Whenever '//' is encountered in a line upon reading, everything beyond 
+this on that line is considered to be a comment and is ignored. This works 
+wherever you place it.
 
 // This line will be ignored when processing the script.
 
-Block comments can also be used, where you can place /* and */ between any text you 
-wish Hercules to ignore.
+Block comments can also be used, where you can place /* and */ between any 
+text you wish Hercules to ignore.
 
 Example:
 /* This text,
@@ -105,23 +109,25 @@ Example:
  * is ignored, until the following 
  * symbol is encountered: */
  
-The asterisks (*) in front of each line is a personal preference, and is not required.
+The asterisks (*) in front of each line is a personal preference, and is 
+not required.
 
-Upon loading all the files, the server will execute all the top-level commands 
-in them. No variables exist yet at this point, no commands can be called other 
-than those given in this section. These commands set up the basic server script 
-structure - create NPC objects, spawn monster objects, set map flags, etc. No 
-code is actually executed at this point except them. The top-level commands the 
-scripting are pretty confusing, since they aren't structured like you would 
-expect commands, command name first, but rather, normally start with a map name.
+Upon loading all the files, the server will execute all the top-level 
+commands in them. No variables exist yet at this point, no commands can be 
+called other than those given in this section. These commands set up the 
+basic server script structure - create NPC objects, spawn monster objects, 
+set map flags, etc. No code is actually executed at this point except 
+them. The top-level commands the scripting are pretty confusing, since 
+they aren't structured like you would expect commands, command name first, 
+but rather, normally start with a map name.
 
-What's more confusing about the top-level commands is that most of them use a 
-tab symbol to divide their arguments.
+What's more confusing about the top-level commands is that most of them 
+use a tab symbol to divide their arguments.
 
-To prevent problems and confusion, the tab symbols are written as '%TAB%' or '<TAB>'
-throughout this document, even though this makes the text a bit less readable. 
-Using an invisible symbol to denote arguments is one of the bad things about 
-this language, but we're stuck with it for now. :)
+To prevent problems and confusion, the tab symbols are written as '%TAB%' 
+or '<TAB>' throughout this document, even though this makes the text a bit 
+less readable. Using an invisible symbol to denote arguments is one of the 
+bad things about this language, but we're stuck with it for now. :)
 
 Here is a list of valid top-level commands:
 
@@ -129,11 +135,11 @@ Here is a list of valid top-level commands:
 
 <map name>%TAB%mapflag%TAB%<flag>
 
-This will, upon loading, set a specified map flag on a map you like. These are 
-normally in files inside 'conf/mapflag' and are loaded first, so by the time the 
-server's up, all the maps have the flags they should have. Map flags determine 
-the behavior of the map regarding various common problems, for a better 
-explanation, see 'setmapflag'.
+This will, upon loading, set a specified map flag on a map you like. These 
+are normally in files inside 'npc/mapflag' and are loaded first, so by the 
+time the server's up, all the maps have the flags they should have. Map 
+flags determine the behavior of the map regarding various common problems, 
+for a better explanation, see 'setmapflag'.
 
 ** Create a permanent monster spawn:
 
@@ -141,43 +147,45 @@ explanation, see 'setmapflag'.
 
 Map name is the name of the map the monsters will spawn on. x,y are the
 coordinates where the mob should spawn. If xs and ys are non-zero, they
-specify the 'radius' of a spawn-rectangle area centered at x,y.
-Putting zeros instead of these coordinates will spawn the monsters randomly.
-Note this is only the initial spawn zone, as mobs random-walk, they are free
-to move away from their specified spawn region.
+specify the 'radius' of a spawn-rectangle area centered at x,y. Putting 
+zeros instead of these coordinates will spawn the monsters randomly. Note 
+this is only the initial spawn zone, as mobs random-walk, they are free to 
+move away from their specified spawn region.
 
-Monster name is the name the monsters will have on screen, and has no relation 
-whatsoever to their names anywhere else. It's the mob id that counts, which 
-identifies monster record in 'mob_db.txt' database of monsters. If the mob name 
-is given as "--ja--", the 'japanese name' field from the monster database is 
-used, (which, in Hercules, actually contains an English name) if it's "--en--", 
-it's the 'english name' from the monster database (which contains an uppercase 
-name used to summon the monster with a GM command).
+Monster name is the name the monsters will have on screen, and has no 
+relation whatsoever to their names anywhere else. It's the mob id that 
+counts, which identifies monster record in 'mob_db.txt' database of 
+monsters. If the mob name is given as "--ja--", the 'japanese name' field 
+from the monster database is used, (which, in Hercules, actually contains 
+an English name) if it's "--en--", it's the 'english name' from the 
+monster database (which contains an uppercase name used to summon the 
+monster with a GM command).
 
 Amount is the amount of monsters that will be spawned when this command is 
 executed, it is affected by spawn rates in 'battle.conf'.
 
-Delay1 and delay2 control monster respawn delays - the first one is the fixed
-base respawn time, and the second is random variance on top of the base time.
-Both values are given in milliseconds (1000 = 1 second).
-Note that the server also enforces a minimum respawn delay of 5 seconds.
+Delay1 and delay2 control monster respawn delays - the first one is the 
+fixed base respawn time, and the second is random variance on top of the 
+base time. Both values are given in milliseconds (1000 = 1 second). Note 
+that the server also enforces a minimum respawn delay of 5 seconds.
 
-You can specify a custom level to use for the mob different from the one of
-the database by adjoining the level after the name with a comma. eg:
+You can specify a custom level to use for the mob different from the one 
+of the database by adjoining the level after the name with a comma. eg: 
 "Poring,50" for a name will spawn a monster with name Poring and level 50.
 
-Event is a script event to be executed when the mob is killed. The event must
-be in the form "NPCName::OnEventName" to execute, and the event name label
-should start with "On". As with all events, if the NPC is an on-touch NPC, the
-player who triggers the script must be within 'trigger' range for the event to
-work.
+Event is a script event to be executed when the mob is killed. The event 
+must be in the form "NPCName::OnEventName" to execute, and the event name 
+label should start with "On". As with all events, if the NPC is an 
+on-touch NPC, the player who triggers the script must be within 'trigger' 
+range for the event to work.
 
-There are two optional fields for monster size and AI.  Size can be 0 (medium),
-1 (small), or 2 (big).  AI can be 0 (default), 1 (attack/friendly), 2 (sphere),
-3 (flora), or 4 (zanzou).
+There are two optional fields for monster size and AI. Size can be 0 
+(medium), 1 (small), or 2 (big). AI can be 0 (default), 1 
+(attack/friendly), 2 (sphere), 3 (flora), or 4 (zanzou).
 
-Alternately, a monster spawned using 'boss_monster' instead of 'monster' is able
-to be detected on the map with the SC_BOSSMAPINFO status (used by Convex Mirror).
+Alternately, a monster spawned using 'boss_monster' instead of 'monster' 
+is able to be detected on the map with the SC_BOSSMAPINFO status (used by 
+Convex Mirror, item ID# 12214).
 
 ** NPC names
 
@@ -187,13 +195,14 @@ NPC names are kinda special and are formatted this way:
 
 <Display name>{::<Unique name>}
 
-All NPCs need to have a unique name that is used for identification purposes.
-When you have to identify a NPC by it's name, you should use <Unique name>.
-If <Unique name> is not provided, use <Display name> instead.
+All NPCs need to have a unique name that is used for identification 
+purposes. When you have to identify a NPC by it's name, you should use 
+<Unique name>. If <Unique name> is not provided, use <Display name> 
+instead.
 
-The client has a special feature when displaying names:
-if the display name contains a '#' character, it hides that part of the name.
-ex: if your NPC is named 'Hunter#hunter1', it will be displayed as 'Hunter'
+The client has a special feature when displaying names: if the display 
+name contains a '#' character, it hides that part of the name.
+Ex: if your NPC is named 'Hunter#hunter1', it will be displayed as 'Hunter'
 
 <Display name> must be at most 24 characters in length.
 <Unique name> must be at most 24 characters in length.
@@ -202,16 +211,16 @@ ex: if your NPC is named 'Hunter#hunter1', it will be displayed as 'Hunter'
 
 <from map name>,<fromX>,<fromY>,<facing>%TAB%warp%TAB%<warp name>%TAB%<spanx>,<spany>,<to map name>,<toX>,<toY>
 
-This will define a warp NPC that will warp a player between maps, and while most 
-arguments of that are obvious, some deserve special mention.
+This will define a warp NPC that will warp a player between maps, and 
+while most arguments of that are obvious, some deserve special mention.
 
-SpanX and SpanY will make the warp sensitive to a character who didn't step 
-directly on it, but walked into a zone which is centered on the warp from 
-coordinates and is SpanX in each direction across the X axis and SpanY in each 
-direction across the Y axis.
+SpanX and SpanY will make the warp sensitive to a character who didn't 
+step directly on it, but walked into a zone which is centered on the warp 
+from coordinates and is SpanX in each direction across the X axis and 
+SpanY in each direction across the Y axis.
 
-Warp NPC objects also have a name, because you can use it to refer to them later 
-with 'enablenpc'/'disablenpc' 
+Warp NPC objects also have a name, because you can use it to refer to them 
+later with 'enablenpc'/'disablenpc'.
 
 Facing of a warp object is irrelevant, it is not used in the code and all 
 current scripts have a zero in there.
@@ -221,41 +230,42 @@ current scripts have a zero in there.
 <map name>,<x>,<y>,<facing>%TAB%script%TAB%<NPC Name>%TAB%<sprite id>,{<code>}
 <map name>,<x>,<y>,<facing>%TAB%script%TAB%<NPC Name>%TAB%<sprite id>,<triggerX>,<triggerY>,{<code>}
 
-This will place an NPC object on a specified map at the specified location, and 
-is a top-level command you will use the most in your custom scripting. The NPCs 
-are triggered by clicking on them, and/or by walking in their trigger area, if 
-defined, see that below.
+This will place an NPC object on a specified map at the specified 
+location, and is a top-level command you will use the most in your custom 
+scripting. The NPCs are triggered by clicking on them, and/or by walking 
+in their trigger area, if defined. See that below.
 
-Facing is a direction the NPC sprite will face in. Not all NPC sprites have 
-different images depending on the direction you look from, so for some facing 
-will be meaningless. Facings are counted counterclockwise in increments of 45 
-degrees, where 0 means facing towards the top of the map. (So to turn the sprite 
-towards the bottom of the map, you use facing 4, and to make it look southeast 
-it's facing 5.)
+Facing is a direction the NPC sprite will face in. Not all NPC sprites 
+have different images depending on the direction you look from, so for 
+some facing will be meaningless. Facings are counted counterclockwise in 
+increments of 45 degrees, where 0 means facing towards the top of the map. 
+(So to turn the sprite towards the bottom of the map, you use facing 4, 
+and to make it look southeast it's facing 5.)
 
-Sprite id is the sprite number used to display this particular NPC. For a full 
-list of sprite id numbers see http://kalen.s79.xrea.com/npc/npce.shtml You may 
-also use a monster's ID number instead to display a monster sprite for this NPC. 
-It is possible to use a job sprite as well, but you must first define it as a 
-monster sprite in 'mob_avail.txt', a full description on how to do this is not 
-in the scope of this manual.
+Sprite id is the sprite number used to display this particular NPC. For a 
+full list of sprite id numbers see http://kalen.s79.xrea.com/npc/npce.shtml
+You may also use a monster's ID number instead to display a monster sprite 
+for this NPC. It is possible to use a job sprite as well, but you must 
+first define it as a monster sprite in 'mob_avail.txt', a full description 
+on how to do this is not in the scope of this manual.
 A '-1' sprite id will make the NPC invisible (and unclickable). 
-A '111' sprite id will make an NPC which does not have a sprite, but is still 
-clickable, which is useful if you want to make a clickable object of the 3D 
-terrain.
+A '111' sprite id will make an NPC which does not have a sprite, but is 
+still clickable, which is useful if you want to make a clickable object of 
+the 3D terrain.
 
 TriggerX and triggerY, if given, will define an area, centered on NPC and 
 spanning triggerX cells in every direction across X and triggerY in every 
 direction across Y. Walking into that area will trigger the NPC. If no 
-'OnTouch:' special label is present in the NPC code, the execution will start 
-from the beginning of the script, otherwise, it will start from the 'OnTouch:' 
-label. Monsters can also trigger the NPC, though the label 'OnTouchNPC:' is 
-used in this case.
+'OnTouch:' special label is present in the NPC code, the execution will 
+start from the beginning of the script, otherwise, it will start from the 
+'OnTouch:' label. Monsters can also trigger the NPC, though the label 
+'OnTouchNPC:' is used in this case.
 
 The code part is the script code that will execute whenever the NPC is 
-triggered. It may contain commands and function calls, descriptions of which 
-compose most of this document. It has to be in curly brackets, unlike elsewhere 
-where we use curly brackets, these do NOT signify an optional parameter.
+triggered. It may contain commands and function calls, descriptions of 
+which compose most of this document. It has to be in curly brackets, 
+unlike elsewhere where we use curly brackets, these do NOT signify an 
+optional parameter.
 
 ** Define a 'floating' NPC object.
 
@@ -263,30 +273,30 @@ where we use curly brackets, these do NOT signify an optional parameter.
 
 This will define an NPC object not triggerable by normal means. This would 
 normally mean it's pointless since it can't do anything, but there are 
-exceptions, mostly related to running scripts at specified time, which is what 
-these floating NPC objects are for. More on that below.
+exceptions, mostly related to running scripts at specified time, which is 
+what these floating NPC objects are for. More on that below.
 
 ** Define a shop/cashshop NPC.
 
 -%TAB%shop%TAB%<NPC Name>%TAB%<sprite id>,<itemid>:<price>{,<itemid>:<price>...}
 <map name>,<x>,<y>,<facing>%TAB%shop%TAB%<NPC Name>%TAB%<sprite id>,<itemid>:<price>{,<itemid>:<price>...}
 
-This will define a shop NPC, which, when triggered (which can only be done by 
-clicking) will cause a shop window to come up. No code whatsoever runs in shop 
-NPCs and you can't change the prices otherwise than by editing the script 
-itself. (No variables even exist at this point of scripting, so don't even 
-bother trying to use them.)
+This will define a shop NPC, which, when triggered (which can only be done 
+by clicking) will cause a shop window to come up. No code whatsoever runs 
+in shop NPCs and you can't change the prices otherwise than by editing the 
+script itself (no variables even exist at this point of scripting, so 
+don't even bother trying to use them).
 
-The item id is the number of item in the 'item_db.txt' database. If Price is set 
-to -1, the 'buy price' given in the item database will be used. Otherwise, the 
-price you gave will be used for this item, which is how you create differing 
-prices for items in different shops.
+The item id is the number of item in the 'item_db.txt' database. If Price 
+is set to -1, the 'buy price' given in the item database will be used. 
+Otherwise, the price you gave will be used for this item, which is how you 
+create differing prices for items in different shops.
 
-You can alternatively use "cashshop" in place of "shop" to use the Cash Shop 
-interface, allowing you to buy items with special points (Currently stored as 
-account vars in global_reg #CASHPOINTS and #KAFRAPOINTS).
-This type of shop will not allow you to sell items at it, you may only
-purchase items here. The layout used to define sale items still count, and
+You can alternatively use "cashshop" in place of "shop" to use the Cash 
+Shop interface, allowing you to buy items with special points (Currently 
+stored as account vars in global_reg #CASHPOINTS and #KAFRAPOINTS). This 
+type of shop will not allow you to sell items at it, you may only purchase 
+items here. The layout used to define sale items still count, and 
 "<price>" refers to how many points will be spent purchasing the them.
 
 ** Define an warp/shop/cashshop/NPC duplicate.
@@ -301,21 +311,22 @@ This will duplicate an warp/shop/cashshop/NPC referred to by 'label'.
 Warp duplicates inherit the target location.
 Shop/cashshop duplicates inherit the item list.
 NPC duplicates inherit the script code.
-The rest (name, location, facing, sprite ID, span/trigger area)
-is obtained from the definition of the duplicate (not inherited).
+The rest (name, location, facing, sprite ID, span/trigger area) is 
+obtained from the definition of the duplicate (not inherited).
 
 ** Define a function object
 
 function%TAB%script%TAB%<function name>%TAB%{<code>}
 
-This will define a function object, callable with the 'callfunc' command (see 
-below). This object will load on every map server separately, so you can get at 
-it from anywhere. It's not possible to call the code in this object by 
-anything other than the 'callfunc' script command.
+This will define a function object, callable with the 'callfunc' command 
+(see below). This object will load on every map server separately, so you 
+can get at it from anywhere. It's not possible to call the code in this 
+object by anything other than the 'callfunc' script command.
 
-The code part is the script code that will execute whenever the function is 
-called with 'callfunc'. It has to be in curly brackets, unlike elsewhere where 
-we use curly brackets, these do NOT signify an optional parameter.
+The code part is the script code that will execute whenever the function 
+is called with 'callfunc'. It has to be in curly brackets, unlike 
+elsewhere where we use curly brackets, these do NOT signify an optional 
+parameter.
 
 
 Once an object is defined which has a 'code' field to it's definition, it 
@@ -328,82 +339,83 @@ What a RID is and why do you need to know
 
 Most scripting commands and functions will want to request data about a 
 character, store variables referenced to that character, send stuff to the 
-client connected to that specific character. Whenever a script is invoked by a 
-character, it is passed a so-called RID - this is the account ID number of a 
-character that caused the code to execute by clicking on it, walking into it's 
-OnTouch zone, or otherwise.
+client connected to that specific character. Whenever a script is invoked 
+by a character, it is passed a so-called RID - this is the account ID 
+number of a character that caused the code to execute by clicking on it, 
+walking into it's OnTouch zone, or otherwise.
 
-If you are only writing common NPCs, you don't need to bother with it. However, 
-if you use functions, if you use timers, if you use clock-based script 
-activation, you need to be aware of all cases when a script execution can be 
-triggered without a RID attached. This will make a lot of commands and functions 
-unusable, since they want data from a specific character, want to send stuff to 
-a specific client, want to store variables specific to that character, and they 
-would not know what character to work on if there's no RID.
+If you are only writing common NPCs, you don't need to bother with it. 
+However, if you use functions, if you use timers, if you use clock-based 
+script activation, you need to be aware of all cases when a script 
+execution can be triggered without a RID attached. This will make a lot of 
+commands and functions unusable, since they want data from a specific 
+character, want to send stuff to a specific client, want to store 
+variables specific to that character, and they would not know what 
+character to work on if there's no RID.
 
-Unless you use 'attachrid' to explicitly attach a character to the script first.
+Unless you use 'attachrid' to explicitly attach a character to the script 
+first (see player-related commands).
 
 Whenever we say 'invoking character', we mean 'the character who's RID is 
-attached to the running script. The script function "playerattached" can be
-used to check which is the currently attached player to the script (it will
-return 0 if the there is no player attached or the attached player no longer
-is logged on to the map-server).
+attached to the running script. The script function "playerattached" can 
+be used to check which is the currently attached player to the script (it 
+will return 0 if the there is no player attached or the attached player no 
+longer is logged on to the map-server).
 
 But what about GID?
 --- ---- ----- ----
 
-GID stands for the Game ID of something, this can either be the GID obtained
-through mobspawn (mob control commands) or the account ID of a character.
-Another way would be to right click on a mob, 
-NPC or char as GM sprited char to view the GID.
-
-This is mostly used for the new version of skill and the mob control commands
-implemented (but NEVER documented by Lance. Shame on you...).
+GID stands for the Game ID of something, this can either be the GID of a 
+mob obtained through the monster script command (if only summoned one), 
+the GID of a NPC obtained through the getnpcid script command or the 
+account ID of a character (same as its RID). Another way would be to right 
+click on a mob, NPC or char as GM sprited char to view its GID.
 
 Item and pet scripts
 --------------------
 
-Each item in the item database has three special fields - Script , OnEquip_Script
-and OnUnequip_Script. The first is script code run every time a character equips the item, 
-with the RID of the equipping character. Every time they unequip an item, all 
-temporary bonuses given by the script commands are cleared, and all the scripts 
-are executed once again to rebuild them. This also happens in several other 
-situations (like upon login) but the full list is currently unknown.
+Each item in the item database has three special fields - Script, 
+OnEquip_Script and OnUnequip_Script. The first is script code run every 
+time a character equips the item, with the RID of the equipping character. 
+Every time they unequip an item, all temporary bonuses given by the script 
+commands are cleared, and all the scripts are executed once again to 
+rebuild them. This also happens in several other situations (like upon 
+login) but the full list is currently unknown.
 
-OnEquip_Script is a piece of script code run whenever the item is used by a character 
-by double-clicking on it. OnUnequip_Script runs whenever the
-equipment is unequip by a character
+OnEquip_Script is a piece of script code run whenever the item is used by 
+a character by double-clicking on it. OnUnequip_Script runs whenever the 
+equipment is unequipped by a character.
 
-Not all script commands work properly in the item scripts. Where commands and 
-functions are known to be meant specifically for use in item scripts, they are 
-described as such.
+Not all script commands work properly in the item scripts. Where commands 
+and functions are known to be meant specifically for use in item scripts, 
+they are described as such.
 
 Every pet in the pet database has a PetScript field, which determines pet 
-behavior. It is invoked wherever a pet of the specified type is spawned. 
-(hatched from an egg, or loaded from the char server when a character who had 
-that pet following them connects) This may occur in some other situations as 
-well. Don't expect anything other than commands definitely marked as usable in 
-pet scripts to work in there reliably.
+behavior. It is invoked wherever a pet of the specified type is spawned 
+(hatched from an egg, or loaded from the char server when a character who 
+had that pet following them connects). This may occur in some other 
+situations as well. Don't expect anything other than commands definitely 
+marked as usable in pet scripts to work in there reliably.
 
 Numbers
 -------
 
-Beside the common decimal numbers, which are nothing special whatsoever (though 
-do not expect to use fractions, since ALL numbers are integer in this language), 
-the script engine also handles hexadecimal numbers, which are otherwise 
-identical. Writing a number like '0x<hex digits>' will make it recognized as a 
-hexadecimal value. Notice that 0x10 is equal to 16. Also notice that if you try 
-to 'mes 0x10' it will print '16'.
+Beside the common decimal numbers, which are nothing special whatsoever 
+(though do not expect to use fractions, since ALL numbers are integer in 
+this language), the script engine also handles hexadecimal numbers, which 
+are otherwise identical. Writing a number like '0x<hex digits>' will make 
+it recognized as a hexadecimal value. Notice that 0x10 is equal to 16. 
+Also notice that if you try to 'mes 0x10' it will print '16'.
 
 This is not used much, but it pays to know about it.
 
 Variables
 ---------
 
-The meat of every programming language is variables - places where you store 
-data.
+The meat of every programming language is variables - places where you 
+store data.
 
-In the Hercules scripting language, variable names are not case sensitive.
+In Hercules scripting language, variable names are not case sensitive.
 
 Variables are divided into and uniquely identified by the combination of:
 prefix  - determines the scope and extent (or lifetime) of the variable
@@ -423,51 +435,45 @@ permanent - They still exist when the server resets.
 temporary - They cease to exist when the server resets.
 
 Prefix: scope and extent
-nothing  - A permanent variable attached to the character, the default variable
-           type. They are stored with all the account data in "save\athena.txt"
-           in TXT versions and in the SQL versions in the `global_reg_value`
-           table using type 3.
+nothing  - A permanent variable attached to the character, the default 
+           variable type. They are stored with all the account data in the 
+           `global_reg_value` table using type 3.
 "@"      - A temporary variable attached to the character.
-           SVN versions before 2094 revision and RC5 version will also treat
-           'l' as a temporary variable prefix, so beware of having variable
-           names starting with 'l' if you want full backward compatibility.
+           They disappear when the character logs out.
 "$"      - A global permanent variable.
-           They are stored in "save\mapreg.txt" or database table `mapreg`,
-           depending on server type.
+           They are stored in database table `mapreg`.
 "$@"     - A global temporary variable.
-           This is important for scripts which are called with no RID
+           Thhey are important for scripts which are called with no RID
            attached, that is, not triggered by a specific character object.
 "."      - A NPC variable.
-           They exist in the NPC and disappear when the server restarts or the 
-           NPC is reloaded. Can be accessed from inside the NPC or by calling 
-           'getvariableofnpc'. Function objects can also have .variables which 
-           are accessible from inside the function, however 'getvariableofnpc' 
-           does NOT work on function objects.
+           They exist in the NPC and disappear when the server restarts or 
+           the NPC is reloaded. Can be accessed from inside the NPC or by 
+           calling 'getvariableofnpc'. Function objects can also have 
+           .variables which are accessible from inside the function, 
+           however 'getvariableofnpc' does NOT work on function objects.
 ".@"     - A scope variable.
-           They are unique to the instance and scope. Each instance has it's 
-           own scope that ends when the script ends. Calling a function with 
-           callsub/callfunc starts a new scope, returning from the function 
-           ends it. When a scope ends, it's variables are converted to values 
-           ('return .@var;' returns a value, not a reference).
-"'"      - An instance variable
-           These are used with the instancing system, and are unique to each 
-           party's instance.
+           They are unique to the instance and scope. Each instance has 
+           its own scope that ends when the script ends. Calling a 
+           function with callsub/callfunc starts a new scope, returning 
+           from the function ends it. When a scope ends, it's variables 
+           are converted to values ('return .@var;' returns a value, not a 
+           reference).
+"'"      - An instance variable.
+           These are used with the instancing system, and are unique to 
+           each party's instance.
 "#"      - A permanent local account variable.
-           They are stored with all the account data in "save\accreg.txt" in
-           TXT versions and in the SQL versions in the 'global_reg_value'
-           table using type 2.
+           They are stored in the 'global_reg_value' table using type 2.
 "##"     - A permanent global account variable stored by the login server.
-           They are stored in "save\account.txt" and in the SQL versions in the
-           'global_reg_value' table, using type 1. The only difference you will
-           note from normal # variables is when you have multiple char-servers
-           connected to the same login server. The # variables are unique to
-           each char-server, while the ## variables are shared by all these
-           char-servers.
+           They are stored in the 'global_reg_value' table, using type 1. 
+           The only difference you will note from normal # variables is 
+           when you have multiple char-servers connected to the same 
+           login-server. The # variables are unique to each char-server, 
+           while the ## variables are shared by all these char-servers.
 
 Postfix: integer or string
-nothing - integer variable, can store positive and negative numbers, but only 
-          whole numbers (so don't expect to do any fractional math)
-'$'     - string variable, can store text
+nothing - integer variable, can store positive and negative numbers, but 
+          only whole numbers (so don't expect to do any fractional math).
+'$'     - string variable, can store text.
 
 Examples:
   name  - permanent character integer variable
@@ -490,14 +496,15 @@ $@name$ - temporary global string variable
 If a variable was never set, it is considered to equal zero for integer 
 variables or an empty string ("", nothing between the quotes) for string 
 variables. Once you set it to that, the variable is as good as forgotten 
-forever, and no trace remains of it even if it was stored with character or 
-account data.
+forever, and no trace remains of it even if it was stored with character 
+or account data.
 
-Some variables are special, that is, they are already defined for you by the 
-scripting engine. You can see the full list somewhere in 'db/const.txt', which 
-is a file you should read, since it also allows you to replace lots of numbered 
-arguments for many commands with easier to read text. The special variables most 
-commonly used are all permanent character-based variables:
+Some variables are special, that is, they are already defined for you by 
+the scripting engine. You can see the full list somewhere in 
+'db/const.txt', which is a file you should read, since it also allows you 
+to replace lots of numbered arguments for many commands with easier to 
+read text. The special variables most commonly used are all permanent 
+character-based variables:
 
 Zeny        - Amount of Zeny.
 Hp          - Current amount of hit points.
@@ -510,32 +517,34 @@ BaseLevel   - Character's base level.
 JobLevel    - Character's job level.
 BaseExp     - Amount of base experience points.
 JobExp      - Amount of job experience points.
-NextBaseExp - Amount of base experience points needed to reach the next level.
-NextJobExp  - Amount of job experience points needed to reach the next level.
+NextBaseExp - Amount of base experience points needed to reach next level.
+NextJobExp  - Amount of job experience points needed to reach next level.
 Weight      - Amount of weight the character currently carries.
 MaxWeight   - Maximum weight the character can carry.
 Sex         - 0 if female, 1 if male.
 Class       - Character's job.
-Upper       - 0 if the character is a normal class, 1 if advanced, 2 if baby.
+Upper       - 0 if the character is normal class, 1 if advanced, 2 if baby.
 BaseClass   - The character's 1-1 'normal' job, regardless of Upper value.
-              For example, this will return Job_Acolyte for Acolyte, Priest/Monk,
-              High Priest/Champion, and Arch Bishop/Sura. If the character has not
-              reached a 1-1 class, it will return Job_Novice.
+              For example, this will return Job_Acolyte for Acolyte, 
+              Priest/Monk, High Priest/Champion, and Arch Bishop/Sura. 
+              If the character has not reached a 1-1 class, it will return 
+              Job_Novice.
 BaseJob     - The character's 'normal' job, regardless of Upper value.
               For example, this will return Job_Acolyte for Acolyte,
               Baby Acolyte, and High Acolyte.
-Karma       - The character's karma. Karma system is not fully functional, but 
-              this doesn't mean this doesn't work at all. Not tested.
-Manner      - The character's manner rating. Becomes negative if the player 
-              utters words forbidden through the use of 'manner.txt' client-side 
-              file.
+Karma       - The character's karma. Karma system is not fully functional, 
+              but this doesn't mean this doesn't work at all. Not tested.
+Manner      - The character's manner rating. Becomes negative if the 
+              player utters words forbidden through the use of 
+              'manner.txt' client-side file.
 
-While these behave as variables, do not always expect to just set them - it is 
-not certain whether this will work for all of them. Whenever there is a command 
-or a function to set something, it's usually preferable to use that instead. The 
-notable exception is Zeny, which you can and often will address directly -
-setting it will make the character own this number of Zeny.
-If you try to set Zeny to a negative number, the script will be terminated with an error.
+While these behave as variables, do not always expect to just set them - 
+it is not certain whether this will work for all of them. Whenever there 
+is a command or a function to set something, it's usually preferable to 
+use that instead. The notable exception is Zeny, which you can and often 
+will address directly - setting it will make the character own this number 
+of Zeny. If you try to set Zeny to a negative number, the script will be 
+terminated with an error.
 
 Assigning variables
 --------- ---------
@@ -547,11 +556,12 @@ programming languages.
     @x = 100;
     @x = @y = 100;
 
-Support for modifying variable values using 'set' is still supported (and required
-to exist for this new method to work) so previous scripts will continue to work.
+Support for modifying variable values using 'set' is still supported (and 
+required to exist for this method to work) so previous scripts will 
+continue working.
 
-When assigning values, all operator methods are supported which exist in the below
-'Operators' section. For instance:
+When assigning values, all operator methods are supported which exist in 
+the below 'Operators' section. For instance:
 
     @x += 100;
     @x -= 100;
@@ -567,52 +577,52 @@ when modifying variables to perform the action as required.
 
 Note:
 
- !! Currently the scripting engine does not support directly copying array variables.
- !! In order to copy arrays between variables the use of 'copyarray' function is still
- !! required.
+ !! Currently the scripting engine does not support directly copying array 
+ !! variables. In order to copy arrays between variables the use of 
+ !! 'copyarray' function is still required.
 
 Strings
 -------
 
-To include symbol '"' in a string you should use prefix '\"'
+To include symbol '"' in a string you should use prefix '\"'.
 
 
 Arrays
 ------
 
-Arrays (in Hercules at least) are essentially a set of variables going under the 
-same name. You can tell between the specific variables of an array with an 
-'array index', a number of a variable in that array:
+Arrays (in Hercules at least) are essentially a set of variables going 
+under the same name. You can tell between the specific variables of an 
+array with an 'array index', a number of a variable in that array:
 
 <variable name>[<array index>]
 
-Variables stored in this way, inside an array, are also called 'array elements'. 
-Arrays are specifically useful for storing a set of similar data (like several 
-item IDs for example) and then looping through it. You can address any array 
-variable as if it was a normal variable:
+Variables stored in this way, inside an array, are also called 'array 
+elements'. Arrays are specifically useful for storing a set of similar 
+data (like several item IDs for example) and then looping through it. You 
+can address any array variable as if it was a normal variable:
 
     set @arrayofnumbers[0],1;
 
-You can also do sneaky things like using a variable (or an expression, or even a 
-value from an another array) to get at an array value:
+You can also do sneaky things like using a variable (or an expression, or 
+even a value from an another array) to get at an array value:
 
     set @x,100;
     set @arrayofnumbers[@x],10;
     
 This will make @arrayofnumbers[100] equal to 10.
 
-Notice that index numbering always starts with 0. Arrays cannot hold more than 
-128 variables. (So the last one can't have a number higher than 127)
+Notice that index numbering always starts with 0. Arrays cannot hold more 
+than 128 variables (so the last one can't have a number higher than 127).
 
-And array indexes probably can't be negative. Nobody tested what happens when 
-you try to get a negatively numbered variable from an array, but it's not going 
-to be pretty. :)
+And array indexes probably can't be negative. Nobody tested what happens 
+when you try to get a negatively numbered variable from an array, but it's 
+not going to be pretty. :)
 
 Arrays can naturally store strings:
 
-@menulines$[0] is the 0th element of the @menulines$ array of strings. Notice 
-the '$', normally denoting a string variable, before the square brackets that 
-denotes an array index.
+@menulines$[0] is the 0th element of the @menulines$ array of strings. 
+Notice the '$', normally denoting a string variable, before the square 
+brackets that denotes an array index.
 
 Resume of the allowed variable and array scopes
 ------ -- --- ------- -------- --- ----- ------
@@ -659,12 +669,13 @@ Variable References
 Operators
 ---------
 
-Operators are things you can do to variables and numbers. They are either the 
-common mathematical operations or conditional operators
+Operators are things you can do to variables and numbers. They are either 
+the common mathematical operations or conditional operators:
 
-+ - will add two numbers. If you try to add two strings, the result will be a 
-    string glued together at the +. You can add a number to a string, and the
-    result will be a string. No other math operators work with strings.
++ - will add two numbers. If you try to add two strings, the result will 
+    be a string glued together at the +. You can add a number to a string, 
+    and the result will be a string. No other math operators work with 
+    strings.
 - - will subtract two numbers. 
 * - will multiply two numbers.
 / - will divide two numbers. Note that this is an integer division, i.e.
@@ -672,20 +683,22 @@ common mathematical operations or conditional operators
 % - will give you the remainder of the division. 7%2 is equal to 1.
 
 There are also conditional operators. This has to do with the conditional 
-command 'if' and they are meant to return either 1 if the condition is satisfied 
-and 0 if it isn't. (That's what they call 'boolean' variables. 0 means 'False'. 
-Anything except the zero is 'True' Odd as it is, -1 and -5 and anything below 
-zero will also be True.)
+command 'if' and they are meant to return either 1 if the condition is 
+satisfied and 0 if it isn't. That's what they call 'boolean' variables. 0 
+means 'False'. Anything except the zero is 'True'. Odd as it is, -1 and -5 
+and anything below zero will also be True.)
 
-You can compare numbers to each other and you compare strings to each other, but 
-you can not compare numbers to strings.
+You can compare numbers to each other and you compare strings to each 
+other, but you can not compare numbers to strings.
 
- ==  - Is true if both sides are equal. For strings, it means they are the same.
- >=  - True if the first value is equal to, or greater than, the second value.
- <=  - True if the first value is equal to, or less than, the second value
- >   - True if the first value greater than the second value
- <   - True if the first value is less than the second value
- !=  - True if the first value IS NOT equal to the second one
+ ==  - Is true if both sides are equal. For strings, it means they contain 
+       the same value.
+ >=  - True if the first value is equal to, or greater than, the second 
+       value.
+ <=  - True if the first value is equal to, or less than, the second value.
+ >   - True if the first value greater than the second value.
+ <   - True if the first value is less than the second value.
+ !=  - True if the first value IS NOT equal to the second one.
 
 Examples:
 
@@ -713,16 +726,18 @@ Logical bitwise operators work only on numbers, and they are the following:
  >> - Right shift.
 	Left shift moves the binary 1(s) of a number n positions to the left,
 	which is the same as multiplying by 2, n times.
-	In the other hand, Right shift moves the binary 1(s) of a number n positions
-	to the right, which is the same as dividing by 2, n times.
+	In the other hand, Right shift moves the binary 1(s) of a number n 
+    positions to the right, which is the same as dividing by 2, n times.
 		Example:
 		set b,2;
 		set a, b << 3;
 		mes a;
 		set a, a >> 2;
 		mes a;
-	The first mes command would display 16, which is the same as 2 x (2 x 2 x 2) = 16.
-	The second mes command would display 4, which is the same as 16 / 2 = 8. 8 / 2 = 4.
+	The first mes command would display 16, which is the same as: 
+    2 x (2 x 2 x 2) = 16.
+	The second mes command would display 4, which is the same as: 
+    16 / 2 = 8; 8 / 2 = 4.
  &  - And.
  |  - Or.
 	The bitwise operator AND (&) is used to test two values against each other, 
@@ -746,9 +761,9 @@ Logical bitwise operators work only on numbers, and they are the following:
 	Why? :
 		10 = 2^1 + 2^3 (2 + 8), so in bits, it would be 1010
 		2 = 2^1 (2), so in bits (same size) it would be 0010
-		The & (AND) operator sets bits which are active (1) in both arguments, so in the
-		example 1010 & 0010, only the 2^1 bit is active (1) in both. Resulting in the bit
-		0010, which is 2.
+		The & (AND) operator sets bits which are active (1) in both 
+        arguments, so in the example 1010 & 0010, only the 2^1 bit is 
+        active (1) in both. Resulting in the bit 0010, which is 2.
 	- Basic example of creating and using a bit-mask:
 		set @options,2|4|16; //(note: this is the same as 2+4+16, or 22)
 		if (@options & 1)	mes "Option 1 is activated";
@@ -756,46 +771,50 @@ Logical bitwise operators work only on numbers, and they are the following:
 		if (@options & 4) mes "Option 3 is activated";
 		if (@options & 8) mes "Option 4 is activated";
 		if (@options & 16) mes "Options 5 is activated";
-	This would return the messages about option 2, 3 and 5 being shown (since we've set
-	the 2,4 and 16 bit to 1).
+	This would return the messages about option 2, 3 and 5 being shown 
+    (since we've set the 2,4 and 16 bit to 1).
  ^  - Xor.
-	The bitwise operator XOR (eXclusive OR) sets a binary position to 0 if both 
-	numbers have the same value in the said position. On the other hand, it 
-	sets to 1 if they have different values in the said binary position.
-	This is another way of setting and unsetting bits in bit-masks.
+	The bitwise operator XOR (eXclusive OR) sets a binary position to 0 if 
+    both numbers have the same value in the said position. On the other 
+    hand, it sets to 1 if they have different values in the said binary 
+    position. This is another way of setting and unsetting bits in 
+    bit-masks.
 	
 	Example:
 	- First let's set the quests that are currently in progress:
 		set inProgress,1|8|16; // quest 1,8 and 16 are in progress
 	- After playing for a bit, the player starts another quest:
 		if( inProgress&2 == 0 ){
-			// this will set the bit for quest 2 (inProgress has that bit set to 0)
+			// this will set the bit for quest 2 (inProgress has that bit 
+            // set to 0)
 			set inProgress,inProgress^2;
 			mes "Quest 2: find a newbie and be helpful to him for an hour.";
 			close;
 		}
-	- After spending some time reading info on Xor's, the player finally completes quest 1:
+	- After spending some time reading info on Xor's, the player finally 
+      completes quest 1:
 		if( inProgress&1 && isComplete ){
-			// this will unset the bit for quest 1 (inProgress has that bit set to 1)
+			// this will unset the bit for quest 1 (inProgress has that 
+            // bit set to 1)
 			set inProgress,inProgress^1;
 			mes "Quest 1 complete!! You unlocked the secrets of the Xor dynasty, use them wisely.";
 			close;
 		}
 
-Unary operators with only with a single number, which follows the operator, and
-are following:
+Unary operators with only with a single number, which follows the 
+operator, and are the following:
 
  -  - Negation.
-	The sign of the number will be reversed. If the number was positive, it will
-	become negative and vice versa.
+	The sign of the number will be reversed. If the number was positive, 
+    it will become negative and vice versa.
 
 	Example:
 		set .@myvar,10;
 		mes "Negative 10 is "+(-.@myvar);
 
  !  - Logical Not.
-	Reverses the boolean result of an expression. True will become false and
-	false will become true.
+	Reverses the boolean result of an expression. True will become false 
+    and	false will become true.
 
 	Example:
 		if(!callfunc("F_dosomething"))
@@ -805,15 +824,17 @@ are following:
 		}
 
  ~  - Bitwise Not.
-	Reverses each bit in a number, also known as one's complement. Cleared bits
-	are set, and set bits are cleared.
+	Reverses each bit in a number, also known as one's complement. Cleared 
+    bits are set, and set bits are cleared.
 
 	Example:
-	- Ensure, that quest 2 is disabled, while keeping all other active, if they are.
-		set inProgress,inProgress&(~2);  // same as set inProgress,inProgress&0xfffffffd
+	- Ensure, that quest 2 is disabled, while keeping all other active, if 
+      they are.
+		set inProgress,inProgress&(~2);  
+        // same as set inProgress,inProgress&0xfffffffd
 
-Ternary operators take three expressions (numbers, strings or boolean), and are
-following:
+Ternary operators take three expressions (numbers, strings or boolean), 
+and are the following:
 
  ?: - Conditional operator
 	Very useful e.g. to replace
@@ -836,14 +857,14 @@ Within executable script code, some lines can be labels:
 <label name>:
 
 Labels are points of reference in your script, which can be used to route 
-execution with 'goto', 'menu' and 'jump_zero' commands, invoked with 'doevent' 
-and 'donpcevent' commands and are otherwise essential. A label's name may not be 
-longer than 22 characters. (23rd is the ':'.) There is some confusion in the 
-source about whether it's 22, 23 or 24 all over the place, so keeping labels 
-under 22 characters could be wise. It may only contain alphanumeric characters 
-and underscore. In addition to labels you name yourself, there are also some 
-special labels which the script engine will start execution from if a special 
-event happens:
+execution with 'goto', 'menu' and 'jump_zero' commands, invoked with 
+'doevent' and 'donpcevent' commands and are otherwise essential. A label's 
+name may not be longer than 22 characters. (23rd is the ':'.) There is 
+some confusion in the source about whether it's 22, 23 or 24 all over the 
+place, so keeping labels under 22 characters could be wise. It may only 
+contain alphanumeric characters and underscore. In addition to labels you 
+name yourself, there are also some special labels which the script engine 
+will start execution from if a special event happens:
 
 OnClock<hour><minute>:
 OnMinute<minute>:
@@ -851,19 +872,20 @@ OnHour<hour>:
 On<weekday><hour><minute>:
 OnDay<month><day>:
 
-This will execute when the server clock hits the specified date or time. Hours 
-and minutes are given in military time. ('0105' will mean 01:05 AM). Weekdays 
-are Sun,Mon,Tue,Wed,Thu,Fri,Sat. Months are 01 to 12, days are 01 to 31. 
-Remember the zero. :)
+This will execute when the server clock hits the specified date or time. 
+Hours and minutes are given in military time. ('0105' will mean 01:05 AM). 
+Weekdays are Sun,Mon,Tue,Wed,Thu,Fri,Sat. Months are 01 to 12, days are 01 
+to 31. Remember the zero. :)
 
 OnInit:
 OnInterIfInit:
 OnInterIfInitOnce:
 
-OnInit will execute every time the scripts loading is complete, including when 
-they are reloaded with @reloadscript command. OnInterIfInit will execute when 
-the map server connects to a char server, OnInterIfInitOnce will only execute 
-once and will not execute if the map server reconnects to the char server later.
+OnInit will execute every time the scripts loading is complete, including 
+when they are reloaded with @reloadscript command. OnInterIfInit will 
+execute when the map server connects to a char server, OnInterIfInitOnce 
+will only execute once and will not execute if the map server reconnects 
+to the char server later.
 
 OnAgitStart:
 OnAgitEnd:
@@ -872,25 +894,28 @@ OnAgitStart2:
 OnAgitEnd2:
 OnAgitInit2:
 
-OnAgitStart will run whenever the server shifts into WoE mode, whether it is 
-done with @agitstart GM command or with 'AgitStart' script command. OnAgitEnd 
-will do likewise for the end of WoE.
+OnAgitStart will run whenever the server shifts into WoE mode, whether it 
+is done with @agitstart GM command or with 'AgitStart' script command. 
+OnAgitEnd will do likewise for the end of WoE.
 
-OnAgitInit will run when data for all castles and all guilds that hold a castle 
-is received by map-server from the char-server after initial connect.
+OnAgitInit will run when data for all castles and all guilds that hold a 
+castle is received by map-server from the char-server after initial 
+connect.
 
-No RID will be attached while any of the above mentioned labels are triggered, so 
-no character or account-based variables will be accessible, until you attach a 
-RID with 'attachrid' (see below).
+No RID will be attached while any of the above mentioned labels are 
+triggered, so no character or account-based variables will be accessible, 
+until you attach a RID with 'attachrid' (see below).
 
-The above also applies to, the last three labels, the only difference is that
-these labels are used exclusively for WoE SE, and are called independently.
+The above also applies to, the last three labels, the only difference is 
+that these labels are used exclusively for WoE SE, and are called 
+independently.
 
 OnTouch:
 
-This label will be executed if a trigger area is defined for the NPC object it's 
-in. If it isn't present, the execution will start from the beginning of the NPC 
-code. The RID of the triggering character object will be attached.
+This label will be executed if a trigger area is defined for the NPC 
+object it's in. If it isn't present, the execution will start from the 
+beginning of the NPC code. The RID of the triggering character object will 
+be attached.
 
 OnTouch_:
 
@@ -906,13 +931,13 @@ It's pretty obvious when these four special labels will be invoked.
 
 OnPCDieEvent:
 
-This special label triggers when a player dies. The variable 'killerrid' is
-set to the ID of the killer.
+This special label triggers when a player dies. The variable 'killerrid' 
+is set to the ID of the killer.
 
 OnPCKillEvent:
 
-This special label triggers when a player kills another player. The variable
-'killedrid' is set to the ID of the player killed.
+This special label triggers when a player kills another player. The 
+variable 'killedrid' is set to the ID of the player killed.
 
 OnNPCKillEvent:
 
@@ -921,21 +946,22 @@ This special label triggers when a player kills a monster. The variable
 
 OnPCLoadMapEvent:
 
-This special label will trigger once a player steps in a map marked with the 
-'loadevent' mapflag and attach its RID. The fact that this label requires a 
-mapflag for it to work is because, otherwise, it'd be server-wide and trigger
-every time a player would change maps. Imagine the server load with 1,000 players
-(oh the pain...)
+This special label will trigger once a player steps in a map marked with 
+the 'loadevent' mapflag and attach its RID. The fact that this label 
+requires a mapflag for it to work is because, otherwise, it'd be 
+server-wide and trigger every time a player would change maps. Imagine the 
+server load with 1,000 players (oh the pain...)
 
-Only the special labels which are not associated with any script command are 
-listed here. There are other kinds of labels which may be triggered in a similar 
-manner, but they are described with their associated commands.
+Only the special labels which are not associated with any script command 
+are listed here. There are other kinds of labels which may be triggered in 
+a similar manner, but they are described with their associated commands.
 
 On<label name>:
 
 These special labels are used with Mob scripts mostly, and script commands
-that requires you to point/link a command to a mob or another NPC, giving a label
-name to start from. The label name can be any of your liking, but must be
+that requires you to point/link a command to a mob or another NPC, giving 
+a label name to start from. The label name can be any of your liking, but 
+must be started with "On".
 
 Example:
 
@@ -954,28 +980,29 @@ Each time you kill one, that announce will appear in blue to everyone.
 
 "Global" labels
 
-There's a catch with labels and doevent. If you call a label (using doevent)
-and called label is in NPC that has trigger area, that label must end with
-"Global" to work globally (i.e. if RID is outside of the trigger area, which
-usually happens since otherwise there would be no point calling the label with
-doevent, because OnTouch would do the job). For further reference look for
-npc_event in npc.c.
+There's a catch with labels and doevent. If you call a label (using 
+doevent) and called label is in NPC that has trigger area, that label must 
+end with "Global" to work globally (i.e. if RID is outside of the trigger 
+area, which usually happens since otherwise there would be no point 
+calling the label with doevent, because OnTouch would do the job). For 
+further reference look for npc_event in npc.c.
 
 Scripting commands and functions
 --------------------------------
 
-The commands and functions are listed here in no particular order. There's a 
-difference between commands and functions - commands leave no 'return value' 
-which might be used in a conditional statement, as a command argument, or stored 
-in a variable. Calling commands as if they were functions will sometimes work, 
-but is not advised, as this can lead to some hard to track errors. Calling 
-functions as if they were commands will mess up the stack, so 'return' command 
-will not return correctly after this happens in a particular script.
+The commands and functions are listed here in no particular order. There's 
+a difference between commands and functions - commands leave no 'return 
+value' which might be used in a conditional statement, as a command 
+argument, or stored in a variable. Calling commands as if they were 
+functions will sometimes work, but is not advised, as this can lead to 
+some hard to track errors. Calling functions as if they were commands will 
+mess up the stack, so 'return' command will not return correctly after 
+this happens in a particular script.
 
-All commands must end with a ';'. Actually, you may expect to have multiple 
-commands on one line if you properly terminate them with a ';', but it's better 
-if you don't, since it is not certain just whether the scripting engine will 
-behave nicely if you do.
+All commands must end with a ';'. Actually, you may expect to have 
+multiple commands on one line if you properly terminate them with a ';', 
+but it's better if you don't, since it is not certain just whether the 
+scripting engine will behave nicely if you do.
 
 -------------------------
 
@@ -998,36 +1025,36 @@ From here on, we will have the commands sorted as follow:
 =====================
 ---------------------------------------
 
-*mes "<string>";
+*mes "<string>"{,"<string>"..."<string>"};
 
-This command will displays a box on the screen for the invoking character, if no 
-such box is displayed already, and will print the string specified into that 
-box. There is normally no 'close' or 'next' button on this box, unless you 
-create one with 'close' or 'next', and while it's open the player can't do much 
-else, so it's important to create a button later. If the string is empty, it 
-will show up as an empty line.
+This command will displays a box on the screen for the invoking character, 
+if no such box is displayed already, and will print the string specified 
+into that box. There is normally no 'close' or 'next' button on this box, 
+unless you create one with 'close' or 'next', and while it's open the 
+player can't do much else, so it's important to create a button later. If 
+the string is empty, it will show up as an empty line.
 
     mes "Text that will appear in the box";
 
-Inside the string you may put color codes, which will alter the color of the 
-text printed after them. The color codes are all '^<R><G><B>' and contain three 
-hexadecimal numbers representing colors as if they were HTML colors - ^FF0000 is 
-bright red, ^00FF00 is bright green, ^0000FF is bright blue, ^000000 is black. 
-^FF00FF is a pure magenta, but it's also a color that is considered transparent 
-whenever the client is drawing windows on screen, so printing text in that color 
-will have kind of a weird effect. Once you've set a text's color to something, 
-you have to set it back to black unless you want all the rest of the text be in 
-that color:
+Inside the string you may put color codes, which will alter the color of 
+the text printed after them. The color codes are all '^<R><G><B>' and 
+contain three hexadecimal numbers representing colors as if they were HTML 
+colors - ^FF0000 is bright red, ^00FF00 is bright green, ^0000FF is bright 
+blue, ^000000 is black. ^FF00FF is a pure magenta, but it's also a color 
+that is considered transparent whenever the client is drawing windows on 
+screen, so printing text in that color will have kind of a weird effect. 
+Once you've set a text's color to something, you have to set it back to 
+black unless you want all the rest of the text be in that color:
 
     mes "This is ^FF0000 red ^000000 and this is ^00FF00 green, ^000000 so.";
     
-Notice that the text coloring is handled purely by the client. If you use non-
-English characters, the color codes might get screwed if they stick to letters 
-with no intervening space. Separating them with spaces from the letters on 
-either side solves the problem.
+Notice that the text coloring is handled purely by the client. If you use 
+non-English characters, the color codes might get screwed if they stick to 
+letters with no intervening space. Separating them with spaces from the 
+letters on either side solves the problem.
 
-To display multiple lines of message while only using a single mes; command,
-use the script command in the following format:
+To display multiple lines of message while only using a single mes; 
+command, use the script command in the following format:
 
     mes "Line 1", "Line 2", "Line 3";
 
@@ -1039,18 +1066,18 @@ the relevant script file.
 *next;
 
 This command will display a 'next' button in the message window for the
-invoking character. Clicking on it will cause the window to clear and display
-a new one. Used to segment NPC-talking, next is often used in combination with
-'mes' and 'close'.
+invoking character. Clicking on it will cause the window to clear and 
+display a new one. Used to segment NPC-talking, next is often used in 
+combination with 'mes' and 'close'.
 
-If no window is currently on screen, one will be created, but once the invoking
-character clicks on it, a warning is thrown on the server console and the script
-will terminate.
+If no window is currently on screen, one will be created, but once the 
+invoking character clicks on it, a warning is thrown on the server console 
+and the script will terminate.
 
     mes "[Woman]";
     mes "This would appear on the page";
     next;
-    // This is needed cause it is a new page and the top will now be blank
+    // This is needed since it is a new page and the top will now be blank
     mes "[Woman]";
     mes "This would appear on the 2nd page";
 
@@ -1058,29 +1085,31 @@ will terminate.
 
 *close;
 
-This command will create a 'close' button in the message window for the invoking 
-character. If no window is currently on screen, the script execution will end. This is one 
-of the ways to end a speech from an NPC. Once the button is clicked, the NPC 
-script execution will end, and the message box will disappear.
+This command will create a 'close' button in the message window for the 
+invoking character. If no window is currently on screen, the script 
+command 'end;' must be used. This is one of the ways to end a speech from 
+an NPC. Once the button is clicked, the NPC script execution will end, and 
+the message box will disappear.
 
     mes "[Woman]";
-    mes "I am finished talking to you, click the close button";
+    mes "I am finished talking to you, click the close button.";
     close;
-    mes "This command will not run at all, cause the script has ended.";
+    mes "This command will not run at all, since the script has ended.";
 
 ---------------------------------------
 
 *close2;
 
-This command will create a 'close' button in the message window for the invoking 
-character. WARNING: If no window is currently on screen, the script execution will halt 
-indefinitely! See 'close'. There is one important difference, though - even though 
-the message box will have closed, the script execution will not stop, and commands after 
-'close2' will still run, meaning an 'end' has to be used to stop the script, unless you 
-make it stop in some other manner.
+This command will create a 'close' button in the message window for the 
+invoking character. WARNING: If no window is currently on screen, the 
+script execution will halt indefinitely! See 'close'. There is one 
+important difference, though - even though the message box will have 
+closed, the script execution will not stop, and commands after 'close2' 
+will still run, meaning an 'end' has to be used to stop the script, unless 
+you make it stop in some other manner.
 
     mes "[Woman]";
-    mes "I will warp you now";
+    mes "I will warp you now.";
     close2;
     warp "place",50,50;
     end;
@@ -1091,9 +1120,8 @@ Don't expect things to run smoothly if you don't make your scripts 'end'.
 
 *end;
 
-This command will stop the execution for this particular script. The two 
-versions are perfectly equivalent. It is the normal way to end a script which 
-does not use 'mes'.
+This command will stop the execution for this particular script.
+It is required for any script not using 'mes'.
 
         if (BaseLevel<=10) goto L_Lvl10;
         if (BaseLevel<=20) goto L_Lvl20;
@@ -1115,20 +1143,22 @@ does not use 'mes'.
         npctalk "Look at that you are almost 2nd profession";
         end;
 
-Without the use if 'end' it would travel through the labels until the end of the 
-script. If you were lvl 10 or less, you would see all the speech lines, the use 
-of 'end' stops this, and ends the script.
+Without the use if 'end' it would travel through the labels until the end 
+of the script. If you were lvl 10 or less, you would see all the speech 
+lines, the use of 'end' stops this, and ends the script.
 
 ---------------------------------------
 
 *set <variable>,<expression>;
 *set(<variable>,<expression>)
 
-This command will set a variable to the value that the expression results in. 
-This is the only way to set a variable directly.
+This command will set a variable to the value that the expression results 
+in. This isn't the only way to set a variable directly: you can set them 
+much like any other programming language as stated before (refer to the 
+'Assigning variables' section).
 
-This is the most basic script command and is used a lot whenever you try to do 
-anything more advanced than just printing text into a message box.
+This is the most basic script command and is used a lot whenever you try 
+to do anything more advanced than just printing text into a message box.
 
     set @x,100;
     
@@ -1136,8 +1166,8 @@ will make @x equal 100.
 
     set @x,1+5/8+9;
     
-will compute 1+5/8+9 (which is, surprisingly, 10 - remember, all numbers are 
-integer in this language) and make @x equal it.
+will compute 1+5/8+9 (which is, surprisingly, 10 - remember, all numbers 
+are integer in this language) and make @x equal to it.
 
 Returns the variable reference.
 
@@ -1145,8 +1175,8 @@ Returns the variable reference.
 
 *setd "<variable name>",<value>;
 
-Works almost identically as set, except the variable name is identified as a string 
-and can thus be constructed dynamically.
+Works almost identically as set, except the variable name is identified as 
+a string and can thus be constructed dynamically.
 
 This command is equivalent to:
   set getd("variable name"),<value>;
@@ -1183,24 +1213,26 @@ This can only be used to get . variables.
 
 Examples:
 
-//This will return the value of .var, note that this can't be used, since the value isn't caught.
+//This will return the value of .var, note that this can't be used, since 
+//the value isn't caught.
 	getvariableofnpc(.var,"TargetNPC");
 	
-//This will set the .v variable to the value of the TargetNPC's .var variable.
+//This will set the .v variable to the value of the TargetNPC's .var 
+//variable.
 	set .v,getvariableofnpc(.var,"TargetNPC");
 	
 //This will set the .var variable of TargetNPC to 1.
 	set getvariableofnpc(.var,"TargetNPC"),1;
 
-Note: even though function objects can have .variables, 
-getvariableofnpc will not work on them.
+Note: even though function objects can have .variables, getvariableofnpc 
+will not work on them.
 
 ---------------------------------------
 
 *goto <label>;
 
-This command will make the script jump to a label, usually used in conjunction 
-with other command, such as "if", but often used on it's own.
+This command will make the script jump to a label, usually used in 
+conjunction with other command, such as "if", but often used on it's own.
 
 	...
 	goto Label;
@@ -1208,25 +1240,25 @@ with other command, such as "if", but often used on it's own.
 Label:
 	mes "This will be seen";
 
-Note by FlavioJS: goto's are "evil" and should be avoided if possible (ò_ó)
+Gotos are considered to be harmful and should be avoided whenever possible.
 
 ---------------------------------------
 
 *menu "<option_text>",<target_label>{,"<option_text>",<target_label>,...};
 
-This command will create a selectable menu for the invoking character. Only one 
-menu can be on screen at the same time.
+This command will create a selectable menu for the invoking character. 
+Only one menu can be on screen at the same time.
 
-Depending on what the player picks from the menu, the script execution will 
-continue from the corresponding label. (it's string-label pairs, not label-
-string)
+Depending on what the player picks from the menu, the script execution 
+will continue from the corresponding label. It's string-label pairs, not 
+label-string.
 
 Options can be grouped together, separated by the character ':'.
 
 	menu "A:B",L_Wrong,"C",L_Right;
 
-It also sets a special temporary character variable @menu, which contains the 
-number of option the player picked. (Numbering of options starts at 1.)
+It also sets a special temporary character variable @menu, which contains 
+the number of option the player picked. Numbering of options starts at 1. 
 This number is consistent with empty options and grouped options.
 
        menu "A::B",L_Wrong,"",L_Impossible,"C",L_Right;
@@ -1256,18 +1288,18 @@ optimize big scripts.
 
 Both these examples will perform the exact same task.
 
-If you give an empty string as a menu item, the item will not display. This
-can effectively be used to script dynamic menus by using empty string for
-entries that should be unavailable at that time.
+If you give an empty string as a menu item, the item will not display. 
+This can effectively be used to script dynamic menus by using empty string 
+for entries that should be unavailable at that time.
 
 You can do it by using arrays, but watch carefully - this trick isn't high 
-wizardry, but minor magic at least. You can't expect to easily duplicate it 
-until you understand how it works.
+wizardry, but minor magic at least. You can't expect to easily duplicate 
+it until you understand how it works.
 
-Create a temporary array of strings to contain your menu items, and populate it 
-with the strings that should go into the menu at this execution, making sure not 
-to leave any gaps. Normally, you do it with a loop and an extra counter, like 
-this:
+Create a temporary array of strings to contain your menu items, and 
+populate it with the strings that should go into the menu at this 
+execution, making sure not to leave any gaps. Normally, you do it with a 
+loop and an extra counter, like this:
 
 	setarray @possiblemenuitems$[0],<list of potential menu items>;
 	set @j,0; // That's the menu lines counter.
@@ -1281,7 +1313,8 @@ this:
 		
 		if (<condition>)
 		{
-			// We record the option into the list of options actually available.
+			// We record the option into the list of options actually 
+            // available.
 			
 			set @menulist$[@j],@possiblemenuitems$[@i];
 			
@@ -1290,8 +1323,8 @@ this:
 			
 			set @menureference[@j],@i;
 			
-			// Since we've just added a menu item into the list, we increment 
-			// the menu lines counter.
+			// Since we've just added a menu item into the list, we 
+            // increment the menu lines counter.
 			
 			set @j,@j+1;
 		}
@@ -1299,52 +1332,55 @@ this:
 		// We go on to the next possible menu item.
 	}
 
-This will create you an array @menulist$ which contains the text of all items 
-that should actually go into the menu based on your condition, and an array 
-@menureference, which contains their numbers in the list of possible menu items. 
-(Remember, arrays start with 0.) There's less of them than the possible menu 
-items you've defined, but the menu command can handle the empty lines - only if 
-they are last in the list, and if it's made this way, they are. Now comes a 
-dirty trick:
+This will create you an array @menulist$ which contains the text of all 
+items that should actually go into the menu based on your condition, and 
+an array @menureference, which contains their numbers in the list of 
+possible menu items. Remember, arrays start with 0. There's less of them 
+than the possible menu items you've defined, but the menu command can 
+handle the empty lines - only if they are last in the list, and if it's 
+made this way, they are. Now comes a dirty trick:
 
 	// X is whatever the most menu items you expect to handle.
 	menu @menulist$[0],-,@menulist$[1],-,....@menulist$[<X>],-;
 
 This calls up a menu of all your items. Since you didn't copy some of the 
-possible menu items into the list, it's end is empty and so no menu items will 
-show up past the end. But this menu call doesn't jump anywhere, it just 
-continues execution right after the menu command. (And it's a good thing it 
-doesn't, cause you can only explicitly define labels to jump to, and how do you 
-know which ones to define if you don't know beforehand which options will end up 
-where in your menu?)
+possible menu items into the list, it's end is empty and so no menu items 
+will show up past the end. But this menu call doesn't jump anywhere, it 
+just continues execution right after the menu command. (And it's a good 
+thing it doesn't, cause you can only explicitly define labels to jump to, 
+and how do you know which ones to define if you don't know beforehand 
+which options will end up where in your menu?)
 But how do you figure out which option the user picked? Enter the @menu.
 
 @menu contains the number of option that the user selected from the list, 
-starting with 1 for the first option. You know now which option the user picked 
-and which number in your real list of possible menu items it translated to:
+starting with 1 for the first option. You know now which option the user 
+picked and which number in your real list of possible menu items it 
+translated to:
 
     mes "You selected "+@possiblemenuitems$[@menureference[@menu-1]]+"!";
 
 @menu is the number of option the user picked.
-@menu-1 is the array index for the list of actually used menu items that we 
-made.
-@menureference[@menu-1] is the number of the item in the array of possible menu 
-items that we've saved just for this purpose.
+@menu-1 is the array index for the list of actually used menu items that 
+we made.
+@menureference[@menu-1] is the number of the item in the array of possible 
+menu items that we've saved just for this purpose.
 
-And @possiblemenuitems$[@menureference[@menu-1]] is the string that we used to 
-display the menu line the user picked. (Yes, it's a handful, but it works.)
+And @possiblemenuitems$[@menureference[@menu-1]] is the string that we 
+used to display the menu line the user picked. (Yes, it's a handful, but 
+it works.)
 
-You can set up a bunch of 'if (@menureference[@menu-1]==X) goto Y' statements to 
-route your execution based on the line selected and still generate a different 
-menu every time, which is handy when you want to, for example, make users select 
-items in any specific order before proceeding, or make a randomly shuffled menu.
+You can set up a bunch of 'if (@menureference[@menu-1]==X) goto Y' 
+statements to route your execution based on the line selected and still 
+generate a different menu every time, which is handy when you want to, for 
+example, make users select items in any specific order before proceeding, 
+or make a randomly shuffled menu.
 
-Kafra code bundled with the standard distribution uses a similar array-based 
-menu technique for teleport lists, but it's much simpler and doesn't use @menu, 
-probably since that wasn't documented anywhere.
+Kafra code bundled with the standard distribution uses a similar 
+array-based menu technique for teleport lists, but it's much simpler and 
+doesn't use @menu, probably since that wasn't documented anywhere.
 
-See also 'select', which is probably better in this particular case. Instead of 
-menu, you could use 'select' like this:
+See also 'select', which is probably better in this particular case. 
+Instead of menu, you could use 'select' like this:
 
     set @dummy,select(@menulist$[0],@menulist$[1],....@menulist$[<X>]);
     
@@ -1356,28 +1392,28 @@ perfectly equivalent.
 *select("<option>"{,"<option>",...})
 *prompt("<option>"{,"<option>",...})
 
-This function is a handy replacement for 'menu' for some specific cases where 
-you don't want a complex label structure - like, for example, asking simple yes-
-no questions. It will return the number of menu option picked, starting with 1. 
-Like 'menu', it will also set the variable @menu to contain the option the user 
-picked.
+This function is a handy replacement for 'menu' for some specific cases 
+where you don't want a complex label structure - like, for example, asking 
+simple yes-no questions. It will return the number of menu option picked, 
+starting with 1. Like 'menu', it will also set the variable @menu to 
+contain the option the user picked.
 
     if (select("Yes:No")==1) mes "You said yes, I know.";
 
 And like 'menu', the selected option is consistent with grouped options 
 and empty options.
 
-prompt works almost the same as select, except that when a character clicks
-the Cancel button, this function will return 255 instead.
+'prompt' works almost the same as select, except that when a character 
+clicks the Cancel button, this function will return 255 instead.
 
 ---------------------------------------
 
 *input(<variable>{,<min>{,<max>}})
 
 This command will make an input box pop up on the client connected to the 
-invoking character, to allow entering of a number or a string. This has many 
-uses, one example would be a guessing game, also making use of the 'rand' 
-function:
+invoking character, to allow entering of a number or a string. This has 
+many uses, one example would be a guessing game, also making use of the 
+'rand' function:
 
 	mes "[Woman]";
 	mes "Try and guess the number I am thinking of.";
@@ -1398,8 +1434,9 @@ function:
 		close;
 	}
 
-If you give the input command a string variable to put the input in, it will 
-allow the player to enter text. Otherwise, only numbers will be allowed.
+If you give the input command a string variable to put the input in, it 
+will allow the player to enter text. Otherwise, only numbers will be 
+allowed.
 
 	mes "[Woman]";
 	mes "Please say HELLO";
@@ -1419,15 +1456,15 @@ allow the player to enter text. Otherwise, only numbers will be allowed.
 	}
 
 Normally you may not input a negative number with this command.
-This is done to prevent exploits in badly written scripts, which would 
-let people, for example, put negative amounts of Zeny into a bank script and 
+This is done to prevent exploits in badly written scripts, which would let 
+people, for example, put negative amounts of Zeny into a bank script and 
 receive free Zeny as a result.
 
 The command has two optional arguments and a return value. 
 The default value of 'min' and 'max' can be set with 'input_min_value' and 
 'input_max_value' in script.conf.
-For numeric inputs the value is capped to the range [min,max]. Returns 1 if 
-the value was higher than 'max', -1 if lower than 'min' and 0 otherwise.
+For numeric inputs the value is capped to the range [min,max]. Returns 1 
+if the value was higher than 'max', -1 if lower than 'min' and 0 otherwise.
 For string inputs it returns 1 if the string was longer than 'max', -1 is 
 shorter than 'min' and 0 otherwise.
 
@@ -1436,9 +1473,9 @@ shorter than 'min' and 0 otherwise.
 *callfunc "<function>"{,<argument>,...<argument>};
 *callfunc("<function>"{,<argument>,...<argument>})
 
-This command lets you call up a function NPC. A function NPC can be called from 
-any script on any map server. Using the 'return' command it will come back to 
-the place that called it.
+This command lets you call up a function NPC. A function NPC can be called 
+from any script on any map server. Using the 'return' command it will come 
+back to the place that called it.
 
 	place,50,50,6%TAB%script%TAB%Woman%TAB%115,{
 		mes "[Woman]"
@@ -1454,13 +1491,13 @@ the place that called it.
 		end;
 	}
 
-You can pass arguments to your function - values telling it what exactly to do -
-which will be available there with getarg() (see 'getarg')
+You can pass arguments to your function - values telling it what exactly 
+to do - which will be available there with getarg() (see 'getarg').
 Notice that returning is not mandatory, you can end execution right there.
 
-If you want to return a real value from inside your function NPC, it is better 
-to write it in the function form, which will also work and will make the script 
-generally cleaner:
+If you want to return a real value from inside your function NPC, it is 
+better to write it in the function form, which will also work and will 
+make the script generally cleaner:
 
 	place,50,50,6%TAB%script%TAB%Man%TAB%115,{
 		mes "[Man]"
@@ -1475,8 +1512,8 @@ generally cleaner:
 		return 1;// it's odd
 	}
 
-Alternately, user-defined functions may be called directly without the use of 
-the 'callfunc' script command.
+Alternately, user-defined functions may be called directly without the use 
+of the 'callfunc' script command.
 
 	function<TAB>script<TAB>SayHello<TAB>{
 		mes "Hello " + getarg(0);
@@ -1492,23 +1529,24 @@ the 'callfunc' script command.
 Note:
 
  !! A user-defined function must be declared /before/ a script attempts to
- !! call it. That is to say, any functions should be placed above scripts or NPCs
- !! (or loaded in a separate file first) before attempting to call them directly.
+ !! call it. That is to say, any functions should be placed above scripts 
+ !! or NPCs (or loaded in a separate file first) before attempting to call 
+ !! them directly.
 
 ---------------------------------------
 
 *callsub <label>{,<argument>,...<argument>};
 *callsub(<label>{,<argument>,...<argument>})
 
-This command will go to a specified label within the current script (do NOT use 
-quotes around it) coming in as if it were a 'callfunc' call, and pass it 
-arguments given, if any, which can be recovered there with 'getarg'. When done 
-there, you should use the 'return' command to go back to the point from where 
-this label was called. This is used when there is a specific thing the script 
-will do over and over, this lets you use the same bit of code as many times as 
-you like, to save space and time, without creating extra NPC objects which are 
-needed with 'callfunc'. A label is not callable in this manner from another 
-script.
+This command will go to a specified label within the current script (do 
+NOT use quotes around it) coming in as if it were a 'callfunc' call, and 
+pass it arguments given, if any, which can be recovered there with 
+'getarg'. When done there, you should use the 'return' command to go back 
+to the point from where this label was called. This is used when there is 
+a specific thing the script will do over and over, this lets you use the 
+same bit of code as many times as you like, to save space and time, 
+without creating extra NPC objects which are needed with 'callfunc'. A 
+label is not callable in this manner from another script.
 
 Example 1: callsub for checking (if checks pass, return to script)
 	callsub S_CheckFull, "guild_vs2",50;
@@ -1529,7 +1567,8 @@ S_CheckFull:
 	return;
 
 Example 2: callsub used repeatedly, with different arguments
-// notice how the Zeny check/delete is reused, instead of copy-pasting for every warp
+// notice how the Zeny check/delete is reused, instead of copy-pasting for 
+// every warp.
 	switch(select("Abyss Lake:Amatsu Dungeon:Anthell:Ayothaya Dungeon:Beacon Island, Pharos") {
 		case 1:	callsub S_DunWarp,"hu_fild05",192,207;
 		case 2:	callsub S_DunWarp,"ama_in02",119,181;
@@ -1557,14 +1596,14 @@ S_DunWarp:
 
 *getarg(<index>{,<default_value>})
 
-This function is used when you use the 'callsub' or 'callfunc' commands. In the 
-call you can specify variables that will make that call different from another 
-one. This function will return an argument the function or subroutine was 
-called with, and is the normal way to get them. 
+This function is used when you use the 'callsub' or 'callfunc' commands. 
+In the call you can specify variables that will make that call different 
+from another one. This function will return an argument the function or 
+subroutine was called with, and is the normal way to get them. 
 This is another thing that can let you use the same code more than once. 
 
-Argument numbering starts with 0, i.e. the first argument you gave is number 0. 
-If no such argument was given, a zero is returned.
+Argument numbering starts with 0, i.e. the first argument you gave is 
+number 0. If no such argument was given, a zero is returned.
 
 	place,50,50,6%TAB%script%TAB%Woman1%TAB%115,{
 		mes "[Woman]";
@@ -1587,11 +1626,11 @@ If no such argument was given, a zero is returned.
 		if(@win==0) return;
 		mes "Sorry you lost";
 
-"woman1" NPC object calls the funcNPC. The argument it gives in this call is 
-stated as 2, so when the random number is generated by the 'rand' function, it 
-can only be 0 or 1. Whereas "woman2" gives 5 as the argument number 0 when 
-calling the function, so the random number could be 0, 1, 2, 3 or 4, this makes 
-"woman2" less likely to say the player won. 
+"woman1" NPC object calls the funcNPC. The argument it gives in this call 
+is stated as 2, so when the random number is generated by the 'rand' 
+function, it can only be 0 or 1. Whereas "woman2" gives 5 as the argument 
+number 0 when calling the function, so the random number could be 0, 1, 2, 
+3 or 4, this makes "woman2" less likely to say the player won. 
 
 You can pass multiple arguments in a function call:
 
@@ -1599,20 +1638,20 @@ You can pass multiple arguments in a function call:
 
 getarg(0) would be 5, getarg(1) would be 4 and getarg(2) would be 3.
 
-Getarg has an optional argument:
+Getarg also has an optional argument:
 If the target argument exists, it is returned.
-Otherwise, if <default_value> is present it is returned instead, 
-if not the script terminates immediately.
+Otherwise, if <default_value> is present it is returned instead, if not 
+the script terminates immediately.
 
-in the previous example getarg(2,-1) would be 3 and getarg(3,-1) would be -1
+In previous example getarg(2,-1) would be 3 and getarg(3,-1) would be -1.
 
 ---------------------------------------
 
 *getargcount()
 
-This function is used when you use the 'callsub' or 'callfunc' commands. In the 
-call you can specify arguments. This function will return the number of arguments 
-provided.
+This function is used when you use the 'callsub' or 'callfunc' commands. 
+In the call you can specify arguments. This function will return the 
+number of arguments provided.
 
 Example:
 	callfunc "funcNPC",5,4,3;
@@ -1626,16 +1665,17 @@ Example:
 
 *return {<value>};
 
-This command causes the script execution to leave previously called function
-with callfunc or script with callsub and return to the location, where the call
-originated from. Optionally a return value can be supplied, when the call was
-done using the function form. 
+This command causes the script execution to leave previously called 
+function with callfunc or script with callsub and return to the location, 
+where the call originated from. Optionally a return value can be supplied, 
+when the call was done using the function form. 
 
-Using this command outside of functions or scripts referenced by callsub will
-result in error and termination of the script.
+Using this command outside of functions or scripts referenced by callsub 
+will result in error and termination of the script.
 
 	callfunc "<your function>";// when nothing is returned
-	set <variable>,callfunc("<your function>");// when a value is being returned
+	set <variable>,callfunc("<your function>");
+    // when a value is being returned
 
 ---------------------------------------
 
@@ -1645,8 +1685,9 @@ result in error and termination of the script.
 <code>
 }
 
-This works like callfunc, and is used for cleaner and faster scripting. The function
-must be defined and used within a script, and works like a label with arguments.
+This works like callfunc, and is used for cleaner and faster scripting. 
+The function must be defined and used within a script, and works like a 
+label with arguments.
 Note that the name may only contain alphanumeric characters and underscore.
 
 Usage:
@@ -1729,24 +1770,25 @@ Example:
 
 *if (<condition>) <statement>;
 
-This is the basic conditional statement command, and just about the only one 
-available in this scripting language. 
+This is the basic conditional statement command, and just about the only 
+one available in this scripting language. 
 
-The condition can be any expression. All expressions resulting in a non-zero 
-value will be considered True, including negative values. All expressions 
-resulting in a zero are false.
+The condition can be any expression. All expressions resulting in a 
+non-zero value will be considered True, including negative values. All 
+expressions resulting in a zero are false.
 
-If the expression results in True, the statement will be executed. If it isn't 
-true, nothing happens and we move on to the next line of the script.
+If the expression results in True, the statement will be executed. If it 
+isn't true, nothing happens and we move on to the next line of the script.
 
     if (1)  mes "This will always print.";
     if (0)  mes "And this will never print.";
     if (5)  mes "This will also always print.";
     if (-1) mes "Funny as it is, this will also print just fine.";
 
-For more information on conditional operators see the operators section above.
-Anything that is returned by a function can be used in a condition check without 
-bothering to store it in a specific variable:
+For more information on conditional operators see the operators section 
+above.
+Anything that is returned by a function can be used in a condition check 
+without bothering to store it in a specific variable:
 
     if (strcharinfo(0)=="Daniel Jackson") mes "It is true, you are Daniel!";
 
@@ -1786,7 +1828,8 @@ Example 4:
 
         mes "[Quest Person]";
         if(countitem(512)>=1) goto L_GiveApple;
-        // The number 512 was found from item_db, it is the item number for the Apple.
+        // The number 512 was found from item_db, it is the item number 
+        // for the Apple.
         mes "Can you please bring me an apple?";
         close;
     L_GiveApple:
@@ -1843,7 +1886,7 @@ else
 	dothat;
 	
 If the condition doesn't meet, it'll do the action following the else.
-We can also group several actions depending on a condition, the following way:
+We can also group several actions depending on a condition, this way:
 
 if (<condition)
 {
@@ -1857,13 +1900,14 @@ if (<condition)
 	dothat4;
 }
 
-Remember that if you plan to do several actions upon the condition being false, and 
-you forget to use the curly braces (the { } ), the second action will be executed regardless
-the output of the condition, unless of course, you stop the execution of the script if the
-condition is true (that is, in the first grouping using a return; , and end; or a close; )
+Remember that if you plan to do several actions upon the condition being 
+false, and you forget to use the curly braces (the { } ), the second 
+action will be executed regardless the output of the condition, unless of 
+course, you stop the execution of the script if the condition is true 
+(that is, in the first grouping using a return; , and end; or a close; ).
 
-Also, you can have multiple conditions nested or chained, and don't worry about limits as to
-how many nested if you can have, there is no spoon ;)
+Also, you can have multiple conditions nested or chained, and don't worry 
+about limits as to how many nested if you can have, there is no spoon ;).
 
 ...
 if (<condition 1>)
@@ -1881,28 +1925,30 @@ else if (<condition 2>)
 
 *jump_zero (<condition>),<label>;
 
-This command works kinda like an 'if'+'goto' combination in one go. (See 'if'). 
-If the condition is false (equal to zero) this command will immediately jump to 
-the specified label like in 'goto'. While 'if' is more generally useful, for
-some cases this could be an optimization.
+This command works like an 'if'+'goto' combination in one go. (See 'if'). 
+If the condition is false (equal to zero) this command will immediately 
+jump to the specified label like in 'goto'. While 'if' is more generally 
+useful, for some cases this could be an optimization.
 
 The main reason for this command is that other control statements, like
-'switch', 'for' or 'while', are disassembled into simple expressions together
-with this command when a script is parsed.
+'switch', 'for' or 'while', are disassembled into simple expressions 
+together with this command when a script is parsed.
 
 ---------------------------------------
 
 *while (<condition>) <statement>;
 
-This is probably the simplest and most frequently used loop structure. The 'while' 
-statement can be interpreted as "while <condition> is true, perform <statement>". 
-It is a pretest loop, meaning the conditional expression is tested before any of the 
-statements in the body of the loop are performed. If the condition evaluates to 
-false, the statement(s) in the body of the loop is/are never executed. If the 
-condition evaluates to true, the statement(s) are executed, then control transfers 
-back to the conditional expression, which is reevaluated and the cycle continues. 
+This is probably the simplest and most frequently used loop structure. The 
+'while' statement can be interpreted as "while <condition> is true, 
+perform <statement>". It is a pretest loop, meaning the conditional 
+expression is tested before any of the statements in the body of the loop 
+are performed. If the condition evaluates to false, the statement(s) in 
+the body of the loop is/are never executed. If the condition evaluates to 
+true, the statement(s) are executed, then control transfers back to the 
+conditional expression, which is reevaluated and the cycle continues.
 
-Multiple statements can be grouped with { }, curly braces, just like with the 'if' statement.
+Multiple statements can be grouped with { }, curly braces, just like with 
+the 'if' statement.
 
 Example 1:
 	while (switch(select("Yes:No") == 2 ))
@@ -1934,14 +1980,15 @@ Example 4: sentinel-controlled loop
 
 *for (<variable initialization>; <condition>; <variable update>) <statement>;
 
-Another pretest looping structure is the 'for' statement. It is considered a 
-specialized form of the 'while' statement, and is usually associated with counter-
-controlled loops. Here are the steps of the 'for' statement: the initialize 
-statement is executed first and only once. The condition test is performed. 
-When the condition evaluates to false, the rest of the for statement is skipped. 
-When the condition evaluates to true, the body of the loop is executed, then the 
-update statement is executed (this usually involves incrementing a variable). 
-Then the condition is reevaluated and the cycle continues. 
+Another pretest looping structure is the 'for' statement. It is considered 
+a specialized form of the 'while' statement, and is usually associated 
+with counter-controlled loops. Here are the steps of the 'for' statement: 
+the initialize statement is executed first and only once. The condition 
+test is performed. When the condition evaluates to false, the rest of the 
+for statement is skipped. When the condition evaluates to true, the body 
+of the loop is executed, then the update statement is executed (this 
+usually involves incrementing a variable). Then the condition is 
+reevaluated and the cycle continues. 
 
 Example 1:
 	for( set .@i, 1; .@i <= 5; set .@i, .@i +1 )
@@ -1956,11 +2003,11 @@ Example 2:
 
 *do { <statement>; } while (<condition>);
 
-The 'do...while' is the only post-test loop structure available in this script 
-language. With a post-test, the statements are executed once before the condition 
-is tested. When the condition is true, the statement(s) are repeated. When the 
-condition is false, control is transferred to the statement following the 
-'do...while' loop expression.
+The 'do...while' is the only post-test loop structure available in this 
+script language. With a post-test, the statements are executed once before 
+the condition is tested. When the condition is true, the statement(s) are 
+repeated. When the condition is false, control is transferred to the 
+statement following the 'do...while' loop expression.
 
 Example 1: sentinel-controlled loop
 	mes "This menu will keep appearing until you pick Cancel";
@@ -1980,9 +2027,9 @@ Example 2: counter-controlled loop
 
 *freeloop(<toggle>)
 
-Toggling this to enabled (1) allows the script instance to bypass the infinite loop 
-protection, allowing your script to loop as much as it may need. Disabling (0) will
-warn you if an infinite loop is detected.
+Toggling this to enabled (1) allows the script instance to bypass the 
+infinite loop protection, allowing your script to loop as much as it may 
+need. Disabling (0) will warn you if an infinite loop is detected.
 
 Example:
 	freeloop(1); // enable script to loop freely
@@ -1991,7 +2038,8 @@ Example:
 	for ( set .@i,0; .@i<.@bigloop; set .@i, .@i+1 ) {
 		dothis;
 		// will sleep the script for 1ms when detect an infinity loop to 
-		// let Hercules do what it need to do (socket, timer, process, etc.)
+		// let Hercules do what it need to do (socket, timer, process, 
+        // etc.)
 	}
 
 	freeloop(0); // disable
@@ -2005,8 +2053,8 @@ Example:
 
 *setarray <array name>[<first value>],<value>{,<value>...<value>};
 
-This command will allow you to quickly fill up an array in one go. Check the 
-Kafra scripts in the distribution to see this used a lot.
+This command will allow you to quickly fill up an array in one go. Check 
+the Kafra scripts in the distribution to see this used a lot.
 
     setarray @array[0], 100, 200, 300, 400, 500, 600;
 
@@ -2026,7 +2074,8 @@ will produce:
 
 *cleararray <array name>[<first value to alter>],<value>,<number of values to set>;
 
-This command will change many array values at the same time to the same value.
+This command will change many array values at the same time to the same 
+value.
 
     setarray @array[0], 100, 200, 300, 400, 500, 600;
     // This will make all 6 values 0
@@ -2042,8 +2091,8 @@ See 'setarray'.
 
 *copyarray <destination array>[<first value>],<source array>[<first value>],<amount of data to copy>;
 
-This command lets you quickly shuffle a lot of data between arrays, which is in 
-some cases invaluable.
+This command lets you quickly shuffle a lot of data between arrays, which 
+is in some cases invaluable.
 
     setarray @array[0], 100, 200, 300, 400, 500, 600;
     // So we have made @array[]
@@ -2066,22 +2115,22 @@ New Array:
  @array2[2] = 0
  @array2[3] = 0
 
-Notice that @array[4] and @array[5] won't be copied to the second array, and it will return a 
-0.
+Notice that @array[4] and @array[5] won't be copied to the second array, 
+and it will return a 0.
 
 ---------------------------------------
 
 *deletearray <array name>[<first value>],<how much to delete>;
 
-This command will delete a specified number of array elements totally from an 
-array, shifting all the elements beyond this towards the beginning.
+This command will delete a specified number of array elements totally from 
+an array, shifting all the elements beyond this towards the beginning.
 
-    // This will delete array element 0, and move all the other array elements 
-    // up one place.
+    // This will delete array element 0, and move all the other array 
+    // elements up one place.
     deletearray @array[0],1
 
-// This would delete array elements numbered 1, 2 and 3, leave element 0 in its 
-// place, and move the other elements ups, so there are no gaps.
+// This would delete array elements numbered 1, 2 and 3, leave element 0 
+// in its place, and move the other elements ups, so there are no gaps.
 
     deletearray @array[1],3
 
@@ -2094,16 +2143,16 @@ array, shifting all the elements beyond this towards the beginning.
 
 *strcharinfo(<type>)
 
-This function will return either the name, party name or guild name for the 
-invoking character. Whatever it returns is determined by type.
+This function will return either the name, party name or guild name for 
+the invoking character. Whatever it returns is determined by type.
 
  0 - Character's name.
  1 - The name of the party they're in if any.
  2 - The name of the guild they're in if any.
  3 - The name of the map the character is in.
  
-If a character is not a member of any party or guild, an empty string will be 
-returned when requesting that information.
+If a character is not a member of any party or guild, an empty string will 
+be returned when requesting that information.
 
 ---------------------------------------
 
@@ -2123,8 +2172,8 @@ Whatever it returns is determined by type.
 *getarraysize(<array name>)
 
 This function returns the number of values that are contained inside the 
-specified array. Notice that zeros and empty strings at the end of this array 
-are not counted towards this number.
+specified array. Notice that zeros and empty strings at the end of this 
+array are not counted towards this number.
 
 For example:
 
@@ -2142,15 +2191,16 @@ This will make @arraysize == 6. But if you try this:
 
 *getelementofarray(<array name>,<index>)
 
-This command retrieves the value of the element of given array at given index.
-This is equivalent to using:
+This command retrieves the value of the element of given array at given 
+index. This is equivalent to using:
 
     <array name>[<index>]
 
-The reason for this is, that this short form is internally converted into a call
-to getelementofarray, when the script is loaded.
+The reason for this is, that this short form is internally converted into 
+a call to getelementofarray, when the script is loaded.
 
-Also useful when passing arrays to functions or accessing another npc's arrays: 
+Also useful when passing arrays to functions or accessing another npc's 
+arrays: 
     getelementofarray(getarg(0),<index>)
     getelementofarray(getvariableofnpc(.var, "testNPC"),<index>)
 
@@ -2158,26 +2208,26 @@ Also useful when passing arrays to functions or accessing another npc's arrays:
 
 *readparam(<parameter number>)
 
-This function will return the basic stats of an invoking character, referred to 
-by the parameter number. Instead of a number, you can use a parameter name if it 
-is defined in 'db/const.txt'.
+This function will return the basic stats of an invoking character, 
+referred to by the parameter number. Instead of a number, you can use a 
+parameter name if it is defined in 'db/const.txt'.
 
 Example parameters:
 
-StatusPoint, BaseLevel, SkillPoint, Class, Upper, Zeny, Sex, Weight, MaxWeight,
-JobLevel, BaseExp, JobExp, NextBaseExp, NextJobExp, Hp, MaxHp, Sp, MaxSp,
-BaseJob, Karma, Manner, bVit, bDex, bAgi, bStr, bInt, bLuk
+StatusPoint, BaseLevel, SkillPoint, Class, Upper, Zeny, Sex, Weight, 
+MaxWeight, JobLevel, BaseExp, JobExp, NextBaseExp, NextJobExp, Hp, MaxHp, 
+Sp, MaxSp, BaseJob, Karma, Manner, bVit, bDex, bAgi, bStr, bInt, bLuk
 
-All of these also behave as variables, but don't expect to be able to just 'set' 
-them - some will not work for various internal reasons.
+All of these also behave as variables, but don't expect to be able to just 
+'set' them - some will not work for various internal reasons.
 
 Example 1:
 
     // Returns how many status points you haven't spent yet.
     mes "Unused status points: "+readparam(9);
 
-Using this particular information as a function call is not required. Typing this
-will return the same result:
+Using this particular information as a function call is not required. 
+Typing this will return the same result:
 
     mes "Unused status points: "+StatusPoint;
 
@@ -2192,8 +2242,8 @@ You can also use this command to get stat values.
 
 *getcharid(<type>{,"<character name>"})
 
-This function will return a unique ID number of the invoking character, or, if a 
-character name is specified, of that player.
+This function will return a unique ID number of the invoking character, 
+or, if a character name is specified, of that player.
 
 Type is the kind of associated ID number required:
 
@@ -2203,16 +2253,16 @@ Type is the kind of associated ID number required:
  3 - Account ID number.
  4 - Battle ground ID
 
-For most purposes other than printing it, a number is better to have than a name 
-(people do horrifying things to their character names).
+For most purposes other than printing it, a number is better to have than 
+a name (people do horrifying things to their character names).
 
-If the character is not in a party or not in a guild, the function will return 0 
-if guild or party number is requested. If a name is specified and the character 
-is not found, 0 is returned.
+If the character is not in a party or not in a guild, the function will 
+return 0 if guild or party number is requested. If a name is specified and 
+the character is not found, 0 is returned.
 
-If getcharid(0) returns a zero, the script got called not by a character and 
-doesn't have an attached RID. Note that this will cause the map server to
-print "player not attached!" error messages, so it is preferred to use
+If getcharid(0) returns a zero, the script got called not by a character 
+and doesn't have an attached RID. Note that this will cause the map server 
+to print "player not attached!" error messages, so it is preferred to use 
 "playerattached" to check for the character attached to the script.
 
 if( getcharid(2) == 0 ) mes "Only members of a guild are allowed here!";
@@ -2221,9 +2271,9 @@ if( getcharid(2) == 0 ) mes "Only members of a guild are allowed here!";
 
 *getnpcid(<type>{,"<npc name>"});
 
-Retrieves IDs of the currently invoked NPC. If a unique npc name is
-given, IDs of that NPC are retrieved instead. Type specifies what ID
-to retrieve and can be one of the following:
+Retrieves IDs of the currently invoked NPC. If a unique npc name is given, 
+IDs of that NPC are retrieved instead. Type specifies what ID to retrieve 
+and can be one of the following:
 
     0 - Unit ID (GID)
 
@@ -2251,39 +2301,40 @@ currently online and 0 if they are not or if the character has no partner.
 
 *getpartnerid()
 
-This function returns the character ID of the invoking character's marriage 
-partner, if any. If the invoking character is not married, it will return 0, 
-which is a quick way to see if they are married:
+This function returns the character ID of the invoking character's 
+marriage partner, if any. If the invoking character is not married, it 
+will return 0, which is a quick way to see if they are married:
 
-    if (getpartnerid()) mes "I'm not going to be your girlfriend!";
+    if (!getpartnerid()) mes "I'm not going to be your girlfriend!";
     if (getpartnerid()) mes "You're married already!";
 
 ---------------------------------------
 
 *getpartyname(<party id>)
 
-This function will return the name of a party that has the specified ID number. 
-If there is no such party ID, "null" will be returned.
+This function will return the name of a party that has the specified ID 
+number. If there is no such party ID, "null" will be returned.
 
 Lets say the ID of a party was saved as a global variable:
 
-    // This would return the name of the party from the ID stored in a variable
+    // This would return the name of the party from the ID stored in a 
+    // variable
     mes "You're in the '"+getpartyname($@var)+"' party, I know!";
 
 ---------------------------------------
 
 *getpartymember <party id>{,<type>};
 
-This command will find all members of a specified party and returns their names 
-(or character id or account id depending on the value of "type") into an array
-of temporary global variables. There's actually quite a few commands like this
-which will fill a special variable with data upon execution and not do anything
-else.
+This command will find all members of a specified party and returns their 
+names (or character id or account id depending on the value of "type") 
+into an array of temporary global variables. There's actually quite a few 
+commands like this which will fill a special variable with data upon 
+execution and not do anything else.
 
 Upon executing this,
 
-$@partymembername$[] is a global temporary string array which contains all the 
-                     names of these party members
+$@partymembername$[] is a global temporary string array which contains all 
+                     the names of these party members.
                      (only set when type is 0 or not specified)
 
 $@partymembercid[]   is a global temporary number array which contains the 
@@ -2296,18 +2347,19 @@ $@partymemberaid[]   is a global temporary number array which contains the
 
 $@partymembercount   is the number of party members that were found.
 
-The party members will (apparently) be found regardless of whether they are 
-online or offline. Note that the names come in no particular order.
+The party members will (apparently) be found regardless of whether they 
+are online or offline. Note that the names come in no particular order.
 
 Be sure to use $@partymembercount to go through this array, and not 
-'getarraysize', because it is not cleared between runs of 'getpartymember'. If 
-someone with 7 party members invokes this script, the array would have 7 
-elements. But if another person calls up the NPC, and he has a party of 5, the 
-server will not clear the array for you, overwriting the values instead. So in 
-addition to returning the 5 member names, the 6th and 7th elements from the last 
-call remain, and you will get 5+2 members, of which the last 2 don't belong to 
-the new guy's party. $@partymembercount will always contain the correct number, 
-(5) unlike 'getarraysize()' which will return 7 in this case.
+'getarraysize', because it is not cleared between runs of 'getpartymember'.
+If someone with 7 party members invokes this script, the array would have 
+7 elements. But if another person calls up the NPC, and he has a party of 
+5, the server will not clear the array for you, overwriting the values 
+instead. So in addition to returning the 5 member names, the 6th and 7th 
+elements from the last call remain, and you will get 5+2 members, of which 
+the last 2 don't belong to the new guy's party. $@partymembercount will 
+always contain the correct number, (5) unlike 'getarraysize()' which will 
+return 7 in this case.
 
 Example 1: list party member names
 
@@ -2315,10 +2367,10 @@ Example 1: list party member names
 	getpartymember getcharid(1),0;
 	
 	// It's a good idea to copy the global temporary $@partymember***** 
-	// variables to your own scope variables because if you have pauses in this 
-	// script (sleep, sleep2, next, close2, input, menu, select, or prompt), 
-	// another player could click this NPC, trigger 'getpartymember', and 
-	// overwrite the $@partymember***** variables.
+	// variables to your own scope variables because if you have pauses in 
+    // this script (sleep, sleep2, next, close2, input, menu, select, or 
+    // prompt), another player could click this NPC, trigger 
+    // 'getpartymember', and overwrite the $@partymember***** variables.
 	set .@count, $@partymembercount;
 	copyarray .@name$[0], $@partymembername$[0], $@partymembercount;
 	
@@ -2346,10 +2398,11 @@ Example 2: check party count (with a 'next' pause), before warping to event
 	for ( set .@i, 0; .@i < $@partymembercount; set .@i, .@i +1 )
 		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) )
 			set .@count_online, .@count_online +1 ;
-	// We search accountID & charID because a single party can have multiple 
-	// characters from the same account. Without searching through the charID, 
-	// if a player has 2 characters from the same account inside the party but 
-	// only 1 char online, it would count their online char twice.
+	// We search accountID & charID because a single party can have 
+    // multiple characters from the same account. Without searching 
+    // through the charID, if a player has 2 characters from the same 
+    // account inside the party but only 1 char online, it would count 
+    // their online char twice.
 	
 	if ( .@count_online != .register_num ) {
 		mes "All your party members must be online to continue";
@@ -2363,9 +2416,10 @@ Example 2: check party count (with a 'next' pause), before warping to event
 	next; // careful here
 	select "Yes";
 	
-	// When a script hits a next, menu, sleep or input that pauses the script, 
-	// players can invite or /leave and make changes in their party. To prevent 
-	// this, we call getpartymember again and compare with the original values.
+	// When a script hits a next, menu, sleep or input that pauses the 
+    // script, players can invite or /leave and make changes in their 
+    // party. To prevent this, we call getpartymember again and compare 
+    // with the original values.
 	
 	getpartymember getcharid(1), 1;
 	if ( $@partymembercount != .register_num ) {
@@ -2387,8 +2441,8 @@ Example 2: check party count (with a 'next' pause), before warping to event
 *getpartyleader(<party id>{,<type>})
 
 This function returns some information about the given party-id's leader.
-When type is omitted, the default information retrieved is the leader's name.
-Possible types are:
+When type is omitted, the default information retrieved is the leader's 
+name. Possible types are:
 
 	1: Leader account id
 	2: Leader character id
@@ -2397,8 +2451,9 @@ Possible types are:
 	5: Leader's current level as stored on the party structure (may not be
 	   current level if leader leveled up recently).
 
-If retrieval fails (leader not found or party does not exist), this function
-returns "null" instead of the character name, and -1 for the other types.
+If retrieval fails (leader not found or party does not exist), this 
+function returns "null" instead of the character name, and -1 for the 
+other types.
 
 ---------------------------------------
 
@@ -2407,16 +2462,16 @@ returns "null" instead of the character name, and -1 for the other types.
 This function will return the number for the current character look value 
 specified by type. See 'setlook' for valid look types.
 
-This can be used to make a certain script behave differently for characters 
-dressed in black. :)
+This can be used to make a certain script behave differently for 
+characters dressed in black. :)
 
 ---------------------------------------
 
 *getsavepoint(<information type>)
 
-This function will return information about the invoking character's save point. 
-You can use it to let a character swap between several recorded save points. 
-Available information types are:
+This function will return information about the invoking character's save 
+point. You can use it to let a character swap between several recorded 
+save points. Available information types are:
 
  0 - Map name (a string)
  1 - X coordinate
