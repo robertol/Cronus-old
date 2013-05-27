@@ -89,7 +89,7 @@
 #define GLOBAL_REG_NUM 256   // Max permanent character variables per char
 #define ACCOUNT_REG_NUM 64   // Max permanent local account variables per account
 #define ACCOUNT_REG2_NUM 16  // Max permanent global account variables per account
-//Should hold the max of GLOBAL/ACCOUNT/ACCOUNT2 (needed for some arrays that hold all three)
+// Should hold the max of GLOBAL/ACCOUNT/ACCOUNT2 (needed for some arrays that hold all three)
 #define MAX_REG_NUM 256
 #define DEFAULT_WALK_SPEED 150
 #define MIN_WALK_SPEED 0
@@ -103,10 +103,12 @@
 #define MAX_GUILDALLIANCE 16
 #define MAX_GUILDSKILL	15      // Increased max guild skills because of new skills [Sara-chan]
 #define MAX_GUILDLEVEL 50
-#define MAX_GUARDIANS 8	//Local max per castle. [Skotlex]
-#define MAX_QUEST_DB 2400 //Max quests that the server will load
-#define MAX_QUEST_OBJECTIVES 3 //Max quest objectives for a quest
-#define MAX_START_ITEMS 32	//Max number of items allowed to be given to a char whenever it's created. [mkbu95]
+#define MAX_GUARDIANS 8	// Local max per castle. [Skotlex]
+#define MAX_QUEST_DB 2400 // Max quests that the server will load
+#define MAX_QUEST_OBJECTIVES 3 // Max quest objectives for a quest
+#define MAX_START_ITEMS 32	// Max number of items allowed to be given to a char whenever it's created. [mkbu95]
+#define MAX_NPC_LENGTH 37 // Tamanho máximo do nome de NPCs [Raizen]
+
 
 // for produce
 #define MIN_ATTRIBUTE 0
