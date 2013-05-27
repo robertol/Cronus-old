@@ -1145,7 +1145,7 @@
 2128,Herald_Of_GOD_,Spiritus Sancti,5,128000,,1600,,120,,1,0x00004000,7,2,32,,83,1,4,{ bonus bVit,3; bonus bInt,2; bonus bMdef,3; bonus bUnbreakableShield,0; },{},{}
 2129,Exorcism_Bible,Bíblia de Exorcismo,5,20,,600,,80,,0,0x00008100,7,2,32,,50,1,5,{ bonus bHPrecovRate,3; bonus bSPrecovRate,3; bonus bInt,1; },{},{}
 2130,Cross_Shield,Escudo Cruzado,5,20,,2000,,130,,1,0x00004000,7,2,32,,80,1,4,{ bonus bStr,1; bonus2 bSkillAtk,"PA_SHIELDCHAIN",30; bonus2 bSkillAtk,"CR_SHIELDBOOMERANG",30; bonus bUseSPrate,10; },{},{}
-2131,Magic_Study_Vol1,Bíblia da Magia, Vol. 1,5,20,,1000,,18,,1,0x00810204,2,2,32,,70,1,5,{ bonus bMdef,3; bonus bInt,2; bonus2 bAddEffWhenHit,Eff_Stun,1000; },{},{}
+2131,Magic_Study_Vol1,Bíblia da Magia Vol. 1,5,20,,1000,,18,,1,0x00810204,2,2,32,,70,1,5,{ bonus bMdef,3; bonus bInt,2; bonus2 bAddEffWhenHit,Eff_Stun,1000; },{},{}
 2132,Shelter_Resistance,Escudo de Força [A],5,20,,0,,9,,0,0xFFFFFFFF,2,2,32,,0,0,2,{ bonus2 bSubEle,Ele_Neutral,20; bonus2 bSubEle,Ele_Water,20; bonus2 bSubEle,Ele_Earth,20; bonus2 bSubEle,Ele_Fire,20; bonus2 bSubEle,Ele_Wind,20; bonus2 bSubEle,Ele_Poison,20; bonus2 bSubEle,Ele_Holy,20; bonus2 bSubEle,Ele_Dark,20; bonus2 bSubEle,Ele_Ghost,20; bonus2 bSubEle,Ele_Undead,20; bonus bShortWeaponDamageReturn,1; },{},{}
 2133,Tournament_Shield,Escudo de Torneio,5,20,,1000,,105,,1,0x00004082,2,2,32,,50,1,4,{ bonus2 bAddRace,RC_NonBoss,1; bonus2 bAddRace,RC_Boss,1; if( Class == Job_Lord_Knight ) bonus bAspdRate,-5; },{},{}
 2134,Shield_Of_Naga,Escudo de Escamas de Naga,5,20,,500,,35,,1,0x00CFFF80,2,2,32,,70,1,2,{ bonus bMdef,3; autobonus2 "{ bonus bShortWeaponDamageReturn,(getrefine()*3); }",10,5000,BF_WEAPON,"{ specialeffect2 EF_GUARD; }"; },{},{}
@@ -5860,7 +5860,7 @@
 13292,Dried_Squid,Dried Squid,10,10,,20,50,,,,0x02000000,7,2,32768,,1,,7,{ bonus bAtkEle,Ele_Neutral; /*bonus2 bAddEff,Eff_Blind,?;*/ },{},{}
 13293,Flying_Fish,Flying Fish,10,10,,20,50,,,,0x02000000,7,2,32768,,1,,6,{ bonus bAtkEle,Ele_Neutral; /*bonus2 bAddEff,Eff_Bleeding,?;*/ },{},{}
 13294,Explosive_Kunai,Explosive Kunai,10,100,,30,50,,,,0x02000000,7,2,32768,,100,,7,{ bonus bAtkEle,Ele_Neutral; },{},{}
- // Ninja Fuuma Shurikens
+// Ninja Fuuma Shurikens
 13300,Huuma_Bird_Wing,Shuriken Alado Huuma,4,90000,,3000,150,,1,0,0x02000000,7,2,34,4,65,1,22,{ bonus bUnbreakableWeapon,0; bonus bAtkEle,Ele_Wind; bonus bDex,-2; bonus bAgi,-1; },{},{}
 13301,Huuma_Giant_Wheel,Shuriken Roda-Gigante Huuma,4,40000,,2500,50,,1,3,0x02000000,7,2,34,4,42,1,22,{ bonus bUnbreakableWeapon,0; bonus2 bAddEff,Eff_Bleeding,100; },{},{}
 13302,Huuma_Giant_Wheel_,Shuriken Roda-Gigante Huuma,4,40000,,2500,50,,1,4,0x02000000,7,2,34,4,42,1,22,{ bonus bUnbreakableWeapon,0; bonus2 bAddEff,Eff_Bleeding,100; },{},{}

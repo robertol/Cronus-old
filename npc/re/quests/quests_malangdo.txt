@@ -1908,14 +1908,14 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 
 // Archangel Wing Enchants :: enc_angel
 //============================================================
-malangdo,234,153,6  script  Notice Board#mal  837,{
+malangdo,234,153,6	script	Notice Board#mal	837,{
   mes "^0000FFThere's a hastily written message on this bulletin board.^000000";
   next;
   mes "A fallen angel within will unlock a hidden enchantment to Archangel Wings.";
   close;
 }
 
-mal_in01,15,16,3  script  Fallen Angel#mal  403,{
+mal_in01,15,16,3	script	Fallen Angel#mal	403,{
   disable_items;
   if (checkweight(1201,1) == 0) {
     mes "You are carrying too many items, please reduce them and come back!";
