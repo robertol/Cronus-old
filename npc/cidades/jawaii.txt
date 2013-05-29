@@ -1,17 +1,17 @@
 //===== Cronus Script =======================================
 //= Jawaii (The Lovers' Paradise) Town script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= jAthena (1.0)
 //= DNett123 (1.1 - 1.5)
 //= L0ne_w0lf
-//===== Current Version: =====================================
-//= 3.6
-//===== Compatible With: =====================================
-//= rAthena SVN
-//===== Description: =========================================
+//===== Versão Atual: =====================================
+//= 4.1
+//===== Compatível Com: =====================================
+//= Cronus
+//===== Descrição: =========================================
 //= [Aegis OCnversion]
 //= Jawaii Town Npcs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Done By jAthena
 //= 1.1 Rough Translation [DNett123]
 //= 1.2 Started Grammer Corrections [DNett123]
@@ -36,6 +36,7 @@
 //= 3.5 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 3.6 Fixed bartender so he no longer hangs. [L0ne_W0lf]
 //= 4.0 Parcialmente traduzido e unificado. [MaminhA]
+//= 4.1 Traduções e Correções [BOO]
 //============================================================
 
 // Jawaii
@@ -45,7 +46,7 @@ jawaii,239,112,7	script	Marinheiro#toizu	100,{
 	mes "Este navio segue";
 	mes "em direção à";
 	mes "^666699Izlude^000000.";
-	mes "Você aproveitou sem tempo em Jawaii? Vá ver se esqueceu";
+	mes "Você aproveitou seu tempo em Jawaii? Vá ver se esqueceu";
 	mes "de algo antes de partirmos.";
 	next;
 	mes "[Marinheiro]";
@@ -57,14 +58,11 @@ jawaii,239,112,7	script	Marinheiro#toizu	100,{
 		mes "Então, deixe-me";
 		mes "guiar-te para Izlude";
 		close2;
-		if(checkre(0))
 			warp "izlude",195,212;
-		else
-			warp "izlude",176,182;
 		end;
 	}
 	mes "[Marinheiro]";
-	mes "Nã tenha pressa e";
+	mes "Não tenha pressa e";
 	mes "vá dar umas voltinhas.";
 	mes "Aqui não é um lugar que";
 	mes "pode visitar muitas vezes, não é?";
@@ -119,11 +117,11 @@ jawaii,188,218,7	script	Senhorita da Taberna#Jawaii	80,{
 		next;
 	}
 	mes "[Senhora]";
-	mes "Apesar de eu trabalhar aqui, ainda não acredito que um lugar deste existe! Eu achava que álcool era proibido no Reino de Rune-Midgart!";
+	mes "Apesar de eu trabalhar aqui, ainda não acredito que um lugar deste existe! Eu achava que álcool era proibido no Reino de Rune-Midgard!";
 	next;
 	mes "[Senhora]";
 	mes "Não tenho ideia de como solteiros";
-	mes "são capazes de encontrar este lugar. Mas eu ouvi que muitas pessoas estranhas vão por motivos estranhos.";
+	mes "são capazes de encontrar neste lugar. Mas eu ouvi que muitas pessoas estranhas vão por motivos estranhos.";
 	next;
 	mes "[Senhora]";
 	mes "Já vi solteiros vindo aqui só para ficar bêbados! Oh! E por algum motivo, pessoas estão desaparecendo";
@@ -131,58 +129,58 @@ jawaii,188,218,7	script	Senhorita da Taberna#Jawaii	80,{
 	next;
 	mes "[Senhora]";
 	mes "Eu imagino, o quê está acontecendo?";
-	mes "^666666*Suspiro*^000000 Sou uma garçonete, mas mesmo assim digo-te para não ir lá...";
+	mes "^666666*Suspiro*^000000 Sou uma garçonete, mesmo assim digo-te para não ir lá...";
 	close;
 }
 
 jawaii,220,235,3	script	Moradora de Jawaii#heart	724,{
 	mes "[Jawa Jawa]";
-	mes "You know what's";
-	mes "the most beautiful";
-	mes "place in Jawaii?";
+	mes "Você sabe qual";
+	mes "é o lugar mais";
+	mes "bonito de Jawaii?";
 	next;
 	mes "[Jawa Jawa]";
-	mes "It's 'Heart Island,' which is just a little north of here. The water surrounding Heart Island is not that deep, so you can just walk across if you're careful.";
+	mes "É a 'Ilha do Coração', que é um pouco ao norte daqui. A água ao redor da ilha do Coração não é tão profunda, de modo que você pode atravessar, se você tiver cuidado.";
 	next;
 	mes "[Jawa Jawa]";
-	mes "That's the best place to share an intimate moment with the person";
-	mes "you love. It's perfectly secluded and such a beautiful area.";
+	mes "Esse é o melhor lugar para compartilhar um momento íntimo com a pessoa que";
+	mes "você ama. É totalmente isolado, e é um lugar tão bonito.";
 	next;
 	mes "[Jawa Jawa]";
-	mes "Of course, it's probably not";
-	mes "a good idea to go there by";
-	mes "yourself if you're single.";
-	mes "You'd look like such";
-	mes "a pathetic loser!";
+	mes "Claro, provavelmente não é";
+	mes "uma boa idéia ir para lá";
+	mes "se você estiver sozinho.";
+	mes "Você ficaria com a cara de";
+	mes "um perdedor patético!";
 	close;
 }
 
 jawaii,240,146,5	script	Moradora de Jawaii#desc1	724,{
 	mes "[Waii Waii]";
-	mes "Welcome to Jawaii!";
+	mes "Bem Vindo a Jawaii!";
 	next;
 	mes "[Waii Waii]";
-	mes "Here, you can enjoy your";
-	mes "honeymoon without worrying about any interruptions. You don't even have to bother with that notorious Single Army!";
+	mes "Aqui, você pode desfrutar";
+	mes "da sua lua de mel sem se preocupar com quaisquer interrupções. Você não precisa nem se preocupar com as rotinas do Exército!";
 	next;
 	mes "[Waii Waii]";
-	mes "Well, there are a few monsters around, but you'll be okay as long as you don't attack them first. Think of them as the original residents of this island, another sight to enjoy.";
+	mes "Bem, há alguns monstros por aí, mas você vai ficar bem, desde que você não atacá-los primeiro. Pense neles como os habitantes originais da ilha, uma outra visão para desfrutar.";
 	close;
 }
 
 jawaii,168,247,5	script	Moradora de Jawaii#desc2	724,{
 	mes "[Waja Waja]";
-	mes "Ah, you must be a tourist.";
-	mes "If you're lost, just head West. Accomodations for newlyweds";
-	mes "are located in the western part of Jawaii. The lodging here is";
-	mes "pretty amazing.";
+	mes "Ah, você deve ser um turista.";
+	mes "Se você está perdido, dirija-se ao Oeste, onde estão as acomodações dos recém casados.";
+	mes "que estão localizadas na parte ocidental de Jawaii. As acomodações";
+	mes "são incríveis.";
 	next;
 	mes "[Waja Waja]";
-	mes "There are four different themed rooms, so you can choose one to your liking. There's a Guide around if you want to ask for more information.";
+	mes "Existem quatro diferentes salas temáticas, assim você pode escolher uma de seu gosto. Também existe um guia se precisar pedir informações.";
 	next;
 	mes "[Waja Waja]";
-	mes "When you want to go back, please head to the NorthWest to board";
-	mes "a ship to Alberta. If you want to sail to Izlude, there's a ship waiting in the SouthEast.";
+	mes "Quando você quiser sair, por favor, dirija-se ao navio";
+	mes "do noroeste para ir em Alberta. Se você deseja retornar a Izlude, existe um navio aguardando ao Sudeste.";
 	close;
 }
 
@@ -190,149 +188,148 @@ jawaii,165,121,1	script	Moradora de Jawaii#desc3	724,{
 	mes "[Iwa Iwa]";
 	mes "Jawaii~";
 	mes "Jawa~ii~";
-	mes "Where you can";
-	mes "find happiness~";
+	mes "Onde Você Pode";
+	mes "encontrar a felicidade~";
 	next;
 	mes "[Iwa Iwa]";
-	mes "Oh, isn't it beautiful? You don't have to do anything other than relax and breathe in the peaceful atmosphere. That's one of the";
-	mes "best things about Jawaii.";
+	mes "Ahh, não é linda? Você não precisa fazer mais nada além de relaxar e respirar nessa atmosfera pacífica. Essa é uma";
+	mes "das melhores coisas em Jawaii.";
 	next;
 	mes "[Iwa Iwa]";
-	mes "Ooh! Sometimes we hold";
-	mes "concerts on this stage. If you're good at singing, why don't you";
-	mes "go up on stage and sing";
-	mes "a song for us?";
+	mes "Ohh! As vezes a gente espera";
+	mes "algum concerto nesse palco. Se você for um bom cantor";
+	mes "porque não sobe ao palco  e";
+	mes "canta para agente?";
 	next;
 	mes "[Iwa Iwa]";
 	mes "Jawaii~";
 	mes "Jawa~ii~";
-	mes "Where you can";
-	mes "find happiness~";
+	mes "É onde você pode";
+	mes "encontrar a felicidade~";
 	close;
 }
 
 jawaii,141,200,3	script	Funciónario#sroom	798,{
 	mes "[Alowa]";
-	mes "W-Welcome...?";
-	mes "This is o-o-our";
-	mes "s-sweet room.";
-	mes "We, we just c-cleaned";
-	mes "this r-room for you";
-	mes "o-of course.";
+	mes "B-Bem vindo...?";
+	mes "Essa é n-no-nossa";
+	mes "sa-sala de doces.";
+	mes "Nós, estamos li-limpando";
+	mes "esta sa-sala para você";
+	mes "é cla-claro.";
 	next;
 	mes "[Alowa]";
-	mes "Th-The charge is is";
-	mes "1000 zeny p-p-per person?";
-	mes "P-please pay me the fee and";
-	mes "I,I'll let you in. I ssss...swear!";
+	mes "Para fi-ficar aqui é";
+	mes "1000 zeny po-por pessoa?";
+	mes "Po-por favor, me pague a taxa e eu";
+	mes "vou deixar você entrar ... eu juro!";
 	next;
 	mes "[Alowa]";
-	mes "I, I'll also ca-carry your luggage. B-but pay me first. Otherwise, my bo-boss will be unhappy and... ^666666*Gulp*^000000";
+	mes "E-eu também vou le-levar sua bagatem, ma-mas me pague primeiro. Ou meu pa-patrão vai ficar insatisfeito comigo... ^666666*Gulp*^000000";
 	next;
 	mes "[Alowa]";
-	mes "^333333Beat me to death...^000000";
+	mes "^333333Me surrar até a morte...^000000";
 	next;
-	if (select("Use.:Cancel.") == 1) {
+	if (select("Usar.:Cancelar.") == 1) {
 		mes "[Alowa]";
 		if (zeny > 999) {
-			mes "T-Thank you ssso much!";
-			mes "L-Let open the room door";
-			mes "ffffor you. Thank y-you.";
-			mes "Ha-have a good time.";
+			mes "Mu-muito o-obrigado!";
+			mes "De-deixe-me abrir os aposentos";
+			mes "para você. Obriga-gado.";
+			mes "Te-tenha um ótimo dia.";
 			close2;
 			set zeny,zeny-1000;
 			warp "jawaii_in",116,64;
 			end;
 		}
-		mes "Oh no! Oh no no no no no.";
-		mes "Th-This isn't enough money?";
-		mes "I-I'm ssssorry, but my b-boss w-will beat me if I l-let you";
-		mes "in without paying...";
+		mes "Ah não! Ah não não não não.";
+		mes "Se-seu dinheiro não é suficiente?";
+		mes "Eu sssssinto muito, mas se meu che-chefe souber que e-eu deixei você passar se-sem pagar";
+		mes "ele vai me bater...";
 		close;
 	}
 	mes "[Alowa]";
 	mes "^666666*Sniff*^000000";
-	mes "B-but I promise th-that this room is the nicest and cl-cleanest room! P-Please! C-come back!";
+	mes "Ma-mas, eu prometo, es-se quarto é o mais bonito e li-limpo! Po-porfavor! Volte quando quiser!";
 	Emotion e_sob;
 	close;
 }
-
 jawaii,108,199,5	script	Funcionária#antroom	74,{
 	mes "[Pine Oran]";
-	mes "Welcome to";
-	mes "the Antique room.";
+	mes "Bem Vindo ao";
+	mes "Quarto Antigo.";
 	next;
 	mes "[Pine Oran]";
-	mes "This room provides lovers with";
-	mes "an atmosphere of plush elegance.";
-	mes "Every comfort is provided for";
-	mes "young couples in this room.";
+	mes "Esse aposento proporcionará aos amantes";
+	mes "uma atmosfera de elegância com pelúcia.";
+	mes "Todo conforto será providenciado";
+	mes "para o jovem casal nesse aposento.";
 	next;
 	mes "[Pine Oran]";
-	mes "All the rooms may have the same basic structure, but each of them has their own unqiue interior to suit the tastes of different people.";
+	mes "Todos os quartos podem ter a mesma estrutura básica, mas cada um deles tem seu próprio interior exclusivo para atender a todos os Gostos.";
 	next;
 	mes "[Pine Oran]";
-	mes "If you would like to lodge here, it is required to pay a 1,000 zeny fee for each person before entering. Since you're here to make fond memories of your honeymoon,";
-	mes "you should stay in the nicest room.";
+	mes "Se você gostar daqui, é necessário pagar uma taxa de 1,000 zeny  por pessoa antes de entrar. Aqui você poderá  fazer ótimas lembranças de sua lua de mel,";
+	mes "Você deve ficar nesse belo quarto.";
 	next;
 	mes "[Pine Oran]";
-	mes "Do not hesitate to let me know when you've decided on the Antique Room. Once you've made your choice,";
-	mes "I will guide you there.";
+	mes "Não hesite em me avisar quando você tiver decidido sobre o quarto antigo. Uma vez que você fez a sua escolha";
+	mes "Eu o levarei até lá.";
 	next;
-	if (select("Use.:Cancel.") == 1) {
+	if (select("Usar.:Cancelar.") == 1) {
 		mes "[Pine Oran]";
 		if (zeny > 999) {
-			mes "Thank you";
-			mes "for using";
-			mes "our services.";
-			mes "Please...";
-			mes "Make yourself";
-			mes "comfortable.";
+			mes "Muito Obrigado";
+			mes "por usar";
+			mes "nossos serviços.";
+			mes "Por Favor...";
+			mes "Sinta-se";
+			mes "confortável.";
 			close2;
 			set zeny,zeny-1000;
 			warp "jawaii_in",129,110;
 			end;
 		}
-		mes "I am sorry, but you don't seem to have enough money. If it's alright, why don't you check your current funds and see what you can do";
-		mes "about this situation?";
+		mes "Sinto muito, mas você não tem dinheiro suficiente. Se está tudo certo, por que você não verifica os seus fundos atuais e ver o que você pode fazer";
+		mes "sobre essa situação?";
 		close;
 	}
 	mes "[Pine Oran]";
-	mes "Please...";
-	mes "Take your time.";
-	mes "There should be no rush";
-	mes "when it comes to leisure.";
+	mes "Por Favor...";
+	mes "Aproveite seu tempo.";
+	mes "Não deve haver pressa";
+	mes "quando se trata de lazer.";
 	close;
 }
 
 jawaii,107,189,5	script	Funcionária#horoom	93,{
 	mes "[Sharkie Rania]";
-	mes "I'll take you";
-	mes "to the Honey Room.";
-	mes "It costs 1,000 zeny.";
+	mes "Eu vou levar você";
+	mes "para o Quarto de Mel.";
+	mes "isso vai custar 1.000 zenys.";
 	next;
 	mes "[Sharkie Rania]";
-	mes "So you wanna go?";
+	mes "Então Vai querer ir?";
 	next;
-	if (select("Use.:Cancel.") == 1) {
+	if (select("Usar.:Cancelar.") == 1) {
 		mes "[Sharkie Rania]";
 		if (zeny > 999) {
-			mes "Eh, alright.";
-			mes "Let's get going.";
+			mes "Eh, certo.";
+			mes "Vamos Indo...";
 			close2;
 			set zeny,zeny-1000;
 			warp "jawaii_in",86,117;
 			end;
 		}
-		mes "You...";
-		mes "Don't have";
-		mes "enough money.";
-		mes "C'mon, romance";
-		mes "takes zeny, got it?";
+		mes "Você...";
+		mes "Não Tem";
+		mes "Dinheiro Suficiente.";
+		mes "Vamos Romântico,";
+		mes "pega seu Dinheiro, entendeu?";
 		close;
 	}
 	mes "[Sharkie Rania]";
-	mes "No prob.";
+	mes "Sem Problemas.";
 	close;
 }
 
