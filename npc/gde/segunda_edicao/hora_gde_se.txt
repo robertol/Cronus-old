@@ -1,19 +1,19 @@
-//===== rAthena Script =======================================
-//= War of Emperium SE - Auto-Start
-//===== By: ==================================================
+//===== Cronus Script =======================================
+//= Guerra do Emperium SE - Início Automático da GdE
+//===== Por: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
 //= 1.0
-//===== Compatible With: =====================================
-//= rAthena SVN; RO Episode 11.3
-//===== Description: =========================================
-//= Auto Start for War of Emperium
-//= To know how to set up WoE times, go to doc\woe_time_explanation.txt
+//===== Compatível Com: =====================================
+//= Cronus
+//===== Descrição: =========================================
+//= Início Automático da Guerra do Emperium
+//= Veja mais Informações Sobre a Configuração, em: doc\woe_time_explanation.txt
 //=============================================
-//= gettime(3): Gets hour (24 hour time)
-//= gettime(4): Gets day of week 1=Monday, 2=Tuesday,
-//= 3=Wednesday, 4=Thursday, etc.
-//===== Additional Comments: =================================
+//= gettime(3): Horário (24 hrs)
+//= gettime(4): Dia da semana 1=Segunda, 2=Terça,
+//= 3=Quarta, 4=Quinta, 5=Sexta, 6=Sábado, 7=Domingo.
+//===== Comentários Adicionais: =================================
 //= 1.0 Copy/Paste of the original setter.
 //============================================================
 
@@ -22,10 +22,10 @@
 -	script	Agit2_Event	-1,{
 	end;
 
-OnClock1800:	//start time for Tues(2), Thurs(4)
-OnClock2000:	//end time for Tues(2), Thurs(4)
-OnClock2100:	//start time for Sat(6)
-OnClock2300:	//end time for Sat(6)
+OnClock1800:	//Inicio da WoE na Terça(2), Quinta(4)
+OnClock2000:	//Término da WOE na Terça(2), Quinta(4)
+OnClock2100:	//Inicio da WoE no Sábado(6)
+OnClock2300:	//Término da WOE no Sábado(6)
 
 OnAgitInit2:
 	// starting time checks
