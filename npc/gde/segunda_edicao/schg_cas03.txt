@@ -25,9 +25,9 @@ schg_cas03,287,226,5	duplicate(Guardian#template)	Elzee#sc03	868
 schg_cas03,50,50,3	duplicate(Kafra#template)	Funcionária Kafra#sc03	117
 schg_cas03,242,309,0	duplicate(Guardian Stone#template)	1ª Runa Guardiã#sc03	844
 schg_cas03,376,250,0	duplicate(Guardian Stone#template)	2ª Runa Guardiã#sc03	844
-schg_cas03,335,298,0	duplicate(Control#template)	Dispositivo de Controle01#sc03	111
-schg_cas03,200,227,0	duplicate(Control#template)	Dispositivo de Controle02#sc03	111
-schg_cas03,273,205,0	duplicate(Control#template)	Dispositivo de Controle03#sc03	111
+schg_cas03,335,298,0	duplicate(Control#template)	Controle01#sc03	111
+schg_cas03,200,227,0	duplicate(Control#template)	Controle02#sc03	111
+schg_cas03,273,205,0	duplicate(Control#template)	Controle03#sc03	111
 schg_cas03,199,25,0	duplicate(Switch#template)	#sch03_switch	111
 schg_cas03,25,22,3	duplicate(Sunflower#template)	Girassol Misterioso#03	976
 

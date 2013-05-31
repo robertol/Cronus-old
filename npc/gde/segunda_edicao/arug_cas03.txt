@@ -25,9 +25,9 @@ arug_cas03,146,315,3	duplicate(Guardian#template)	Yehsus#ar03	868
 arug_cas03,315,98,5	duplicate(Kafra#template)	Funcionária Kafra#ar03	117
 arug_cas03,65,171,0	duplicate(Guardian Stone#template)	1ª Runa Guardiã#ar03	844
 arug_cas03,212,149,0	duplicate(Guardian Stone#template)	2ª Runa Guardiã#ar03	844
-arug_cas03,136,158,0	duplicate(Control#template)	Dispositivo de Controle01#ar03	111
-arug_cas03,135,212,0	duplicate(Control#template)	Dispositivo de Controle02#ar03	111
-arug_cas03,134,266,0	duplicate(Control#template)	Dispositivo de Controle03#ar03	111
+arug_cas03,136,158,0	duplicate(Control#template)	Controle01#ar03	111
+arug_cas03,135,212,0	duplicate(Control#template)	Controle02#ar03	111
+arug_cas03,134,266,0	duplicate(Control#template)	Controle03#ar03	111
 arug_cas03,299,277,0	duplicate(Switch#template)	#aru03_switch	111
 arug_cas03,312,154,3	duplicate(Sunflower#template)	Girassol Misterioso#08	977
 

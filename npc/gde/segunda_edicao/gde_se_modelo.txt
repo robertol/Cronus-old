@@ -41,7 +41,7 @@ OnRecvCastle2:
 		monster strnpcinfo(2),0,0,"Gerente",1270,4;
 	}
 	if (getcastledata(strnpcinfo(2),9) < 1)
-		disablenpc "Kafra Employee#"+substr(strnpcinfo(2),0,1)+substr(strnpcinfo(2),8,9);
+		disablenpc "Funcionária Kafra#"+substr(strnpcinfo(2),0,1)+substr(strnpcinfo(2),8,9);
 	end;
 
 OnAgitStart2:
@@ -461,7 +461,7 @@ OnTreasureDied:
 				mes "allow her to stay with us.";
 				close;
 			}
-			disablenpc "Kafra Employee#"+strnpcinfo(2);
+			disablenpc "Funcionária Kafra#"+strnpcinfo(2);
 			setcastledata strnpcinfo(4),9,0;
 			mes "[ Steward ]";
 			mes "That Kafra Employee";
@@ -497,7 +497,7 @@ OnTreasureDied:
 					close;
 				}
 				set Zeny, Zeny-10000;
-				enablenpc "Kafra Employee#"+strnpcinfo(2);
+				enablenpc "Funcionária Kafra#"+strnpcinfo(2);
 				setcastledata strnpcinfo(4),9,1;
 				mes "[ Steward ]";
 				mes "Very well. We have formed";
@@ -602,7 +602,7 @@ OnStartArena:
 	for(set .@i,4; .@i<10; set .@i,.@i+1)
 		setcastledata strnpcinfo(4),.@i,0;
 	// Disable Kafra
-	disablenpc "Kafra Employee#"+strnpcinfo(2);
+	disablenpc "Funcionária Kafra#"+strnpcinfo(2);
 
 	announce "The ["+getguildname(.@GID)+"] guild conquered the ["+.@region$+" "+charat(strnpcinfo(2),3)+"] stronghold of "+getcastlename(strnpcinfo(4))+"!",bc_all|bc_woe;
 	mapannounce strnpcinfo(4),"The emperium has been shattered!",bc_map,"0x00FF00",FW_NORMAL,20,0,40;

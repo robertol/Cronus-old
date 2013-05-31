@@ -1,4 +1,4 @@
-﻿// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
 // See the LICENSE file
 // Portions Copyright (c) Athena Dev Teams
 
@@ -58,7 +58,7 @@
 #define ENABLE_SC_SAVING
 
 // Comment the following like to disable server-side hot-key saving support. [Skotlex]
-//Note that newer clients no longer save hotkeys in the registry!
+// Note that newer clients no longer save hotkeys in the registry!
 #define HOTKEY_SAVING
 
 #if PACKETVER < 20090603
@@ -72,7 +72,6 @@
         #define MAX_HOTKEYS 38
 #endif
 
-#define MAX_MAP_PER_SERVER 1500 // Increased to allow creation of Instance Maps
 #define MAX_INVENTORY 100
 //Max number of characters per account. Note that changing this setting alone is not enough if the client is not hexed to support more characters as well.
 #define MAX_CHARS 9
@@ -85,10 +84,10 @@
 #define MAX_FAME 1000000000
 #define MAX_CART 100
 #define MAX_SKILL 1477
-#define MAX_SKILL_ID 10015	// [Ind/Hercules] max used skill ID
-#define GLOBAL_REG_NUM 256	// max permanent character variables per char
-#define ACCOUNT_REG_NUM 64	// max permanent local account variables per account
-#define ACCOUNT_REG2_NUM 16	// max permanent global account variables per account
+#define MAX_SKILL_ID 10015   // [Ind/Hercules] max used skill ID
+#define GLOBAL_REG_NUM 256   // Max permanent character variables per char
+#define ACCOUNT_REG_NUM 64   // Max permanent local account variables per account
+#define ACCOUNT_REG2_NUM 16  // Max permanent global account variables per account
 //Should hold the max of GLOBAL/ACCOUNT/ACCOUNT2 (needed for some arrays that hold all three)
 #define MAX_REG_NUM 256
 #define DEFAULT_WALK_SPEED 150
@@ -97,17 +96,17 @@
 #define MAX_STORAGE 600
 #define MAX_GUILD_STORAGE 600
 #define MAX_PARTY 12
-#define MAX_GUILD 16+10*6	// increased max guild members +6 per 1 extension levels [Lupus]
-#define MAX_GUILDPOSITION 20	// increased max guild positions to accomodate for all members [Valaris] (removed) [PoW]
+#define MAX_GUILD 16+10*6       // Increased max guild members +6 per 1 extension levels [Lupus]
+#define MAX_GUILDPOSITION 20    // Increased max guild positions to accomodate for all members [Valaris] (removed) [PoW]
 #define MAX_GUILDEXPULSION 32
 #define MAX_GUILDALLIANCE 16
-#define MAX_GUILDSKILL	15 // increased max guild skills because of new skills [Sara-chan]
+#define MAX_GUILDSKILL	15      // Increased max guild skills because of new skills [Sara-chan]
 #define MAX_GUILDLEVEL 50
-#define MAX_GUARDIANS 8	//Local max per castle. [Skotlex]
-#define MAX_QUEST_DB 2400 //Max quests that the server will load
-#define MAX_QUEST_OBJECTIVES 3 //Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37 //Tamanho máximo do nome de NPCs [Raizen]
-#define MAX_START_ITEMS 32 // Max number of items allowed to be given to a char whenever it's created. [mkbu95]
+#define MAX_GUARDIANS 8         // Local max per castle. [Skotlex]
+#define MAX_QUEST_DB 2410       // Max quests that the server will load
+#define MAX_QUEST_OBJECTIVES 3  // Max quest objectives for a quest
+#define NPC_NAME_LENGTH 37 		//Tamanho m�ximo do nome de NPCs [Raizen]
+#define MAX_START_ITEMS 32	    // Max number of items allowed to be given to a char whenever it's created. [mkbu95]
 
 // for produce
 #define MIN_ATTRIBUTE 0
@@ -133,36 +132,36 @@
 #define MAX_FRIENDS 40
 #define MAX_MEMOPOINTS 3
 
-//Size of the fame list arrays.
+// Size of the fame list arrays.
 #define MAX_FAME_LIST 10
 
-//Limits to avoid ID collision with other game objects
+// Limits to avoid ID collision with other game objects
 #define START_ACCOUNT_NUM 2000000
 #define END_ACCOUNT_NUM 100000000
 #define START_CHAR_NUM 150000
 
-//Guilds
+// Guilds
 #define MAX_GUILDMES1 60
 #define MAX_GUILDMES2 120
 
-//Base Homun skill.
+// Base Homun skill.
 #define HM_SKILLBASE 8001
 #define MAX_HOMUNSKILL 43
 #define MAX_HOMUNCULUS_CLASS	52	// [orn] Increased to 60 from 16 to allow new Homun-S.
 #define HM_CLASS_BASE 6001
 #define HM_CLASS_MAX (HM_CLASS_BASE+MAX_HOMUNCULUS_CLASS-1)
 
-//Mail System
+// Mail System
 #define MAIL_MAX_INBOX 30
 #define MAIL_TITLE_LENGTH 40
 #define MAIL_BODY_LENGTH 200
 
-//Mercenary System
+// Mercenary System
 #define MC_SKILLBASE 8201
 #define MAX_MERCSKILL 40
 #define MAX_MERCENARY_CLASS 61
 
-//Elemental System
+// Elemental System
 #define MAX_ELEMENTALSKILL 42
 #define EL_SKILLBASE 8401
 #define MAX_ELESKILLTREE 3
@@ -188,7 +187,7 @@ enum item_types {
 };
 
 
-//Questlog system [Kevin] [Inkfish]
+// Questlog system [Kevin] [Inkfish]
 typedef enum quest_state { Q_INACTIVE, Q_ACTIVE, Q_COMPLETE } quest_state;
 
 struct quest {
@@ -244,14 +243,14 @@ struct global_reg {
 	char value[256];
 };
 
-//Holds array of global registries, used by the char server and converter.
+// Holds array of global registries, used by the char server and converter.
 struct accreg {
 	int account_id, char_id;
 	int reg_num;
 	struct global_reg reg[MAX_REG_NUM];
 };
 
-//For saving status changes across sessions. [Skotlex]
+// For saving status changes across sessions. [Skotlex]
 struct status_change_data {
 	unsigned short type; //SC_type
 	long val1, val2, val3, val4, tick; //Remaining duration.
@@ -528,6 +527,10 @@ struct guild {
 	
 	/* TODO: still used for something?|: */
 	unsigned short save_flag; // for TXT saving
+	
+	unsigned short *instance;
+	unsigned short instances;
+	
 	void *channel;
 };
 

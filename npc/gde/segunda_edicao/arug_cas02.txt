@@ -25,9 +25,9 @@ arug_cas02,38,259,5	duplicate(Guardian#template)	Yumenes#ar02	868
 arug_cas02,354,326,3	duplicate(Kafra#template)	Funcionária Kafra#ar02	117
 arug_cas02,33,168,0	duplicate(Guardian Stone#template)	1ª Runa Guardiã#ar02	844
 arug_cas02,245,168,0	duplicate(Guardian Stone#template)	2ª Runa Guardiã#ar02	844
-arug_cas02,143,228,0	duplicate(Control#template)	Dispositivo de Controle01#ar02	111
-arug_cas02,118,356,0	duplicate(Control#template)	Dispositivo de Controle02#ar02	111
-arug_cas02,56,308,0	duplicate(Control#template)	Dispositivo de Controle03#ar02	111
+arug_cas02,143,228,0	duplicate(Control#template)	Controle01#ar02	111
+arug_cas02,118,356,0	duplicate(Control#template)	Controle02#ar02	111
+arug_cas02,56,308,0	duplicate(Control#template)	Controle03#ar02	111
 arug_cas02,386,227,0	duplicate(Switch#template)	#aru02_switch	111
 arug_cas02,350,294,3	duplicate(Sunflower#template)	Girassol Misterioso#07	977
 
