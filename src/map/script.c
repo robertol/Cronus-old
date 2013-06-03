@@ -2278,10 +2278,9 @@ struct script_code* parse_script(const char *src,const char *file,int line,int o
 
 /// Returns the player attached to this script, identified by the rid.
 /// If there is no player attached, the script is terminated.
-TBL_PC *script_rid2sd(struct script_state *st)
-{
-	TBL_PC *sd=map_id2sd(st->rid);
-	if(!sd){
+TBL_PC *script_rid2sd(struct script_state *st) {
+	TBL_PC *sd;
+	if( !( sd = map_id2sd(st->rid) ) ){
 		ShowError("script_rid2sd: fatal error ! player not attached!\n");
 		script_reportfunc(st);
 		script_reportsrc(st);
@@ -11192,7 +11191,7 @@ BUILDIN(mobcount)	// Added by RoVeRT
 		event = NULL;
 	else
 		check_event(st, event);
-	
+
 	if( strcmp(mapname, "this") == 0 ) {
 		struct map_session_data *sd = script_rid2sd(st);
 		if( sd )
@@ -11201,17 +11200,16 @@ BUILDIN(mobcount)	// Added by RoVeRT
 			script_pushint(st,-1);
 			return true;
 		}
-	}
-	else if( (m = map_mapname2mapid(mapname)) < 0 ) {
+	} else if( (m = map_mapname2mapid(mapname)) < 0 ) {
 		script_pushint(st,-1);
 		return true;
 	}
-	
-	if( map[m].flag.src4instance && map[m].instance_id >= 0 && st->instance_id >= 0 && (m = instance->mapid2imapid(m, st->instance_id)) < 0 ) {
+
+	if( map[m].flag.src4instance && map[m].instance_id == -1 && st->instance_id >= 0 && (m = instance->mapid2imapid(m, st->instance_id)) < 0 ) {
 		script_pushint(st,-1);
 		return true;
 	}
-	
+
 	script_pushint(st,map_foreachinmap(buildin_mobcount_sub, m, BL_MOB, event));
 	
 	return true;
@@ -17911,6 +17909,7 @@ void script_defaults(void) {
 	script->addScript = script_hp_add;
 	script->conv_num = conv_num;
 	script->conv_str = conv_str;
+	script->rid2sd = script_rid2sd;
 	
 	script->queue = script_hqueue_get;
 	script->queue_add = script_hqueue_add;

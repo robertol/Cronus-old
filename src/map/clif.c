@@ -226,7 +226,6 @@ uint32 clif_refresh_ip(void) {
 	}
 	return 0;
 }
-
 #if PACKETVER >= 20071106
 static inline unsigned char clif_bl_type(struct block_list *bl) {
 	switch (bl->type) {
@@ -850,7 +849,7 @@ void clif_set_unit_idle(struct block_list* bl, struct map_session_data *tsd, enu
 	p.speed = status_get_speed(bl);
 	p.bodyState = (sc) ? sc->opt1 : 0;
 	p.healthState = (sc) ? sc->opt2 : 0;
-	p.effectState = (sc) ? sc->option : 0;
+	p.effectState = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	p.job = vd->class_;
 	p.head = vd->hair_style;
 	p.weapon = vd->weapon;
@@ -1092,7 +1091,7 @@ void clif_spawn_unit(struct block_list* bl, enum send_target target) {
 	p.speed = status_get_speed(bl);
 	p.bodyState = (sc) ? sc->opt1 : 0;
 	p.healthState = (sc) ? sc->opt2 : 0;
-	p.effectState = (sc) ? sc->option : 0;
+	p.effectState = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	p.job = vd->class_;
 	p.head = vd->hair_style;
 	p.weapon = vd->weapon;
@@ -1172,7 +1171,7 @@ void clif_set_unit_walking(struct block_list* bl, struct map_session_data *tsd, 
 	p.speed = status_get_speed(bl);
 	p.bodyState = (sc) ? sc->opt1 : 0;
 	p.healthState = (sc) ? sc->opt2 : 0;
-	p.effectState = (sc) ? sc->option : 0;
+	p.effectState = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	p.job = vd->class_;
 	p.head = vd->hair_style;
 	p.weapon = vd->weapon;
@@ -2763,7 +2762,7 @@ void read_channels_config(void) {
 				ShowWarning("channels.conf : irc channel enabled but irc_channel_network wasn't found, disabling irc channel...\n");
 			}
 			if( config_setting_lookup_string(settings, "irc_channel_channel", &irc_channel) )
-				safestrncpy(hChSys.irc_channel, irc_channel, 20);
+				safestrncpy(hChSys.irc_channel, irc_channel, 50);
 			else {
 				hChSys.irc = false;
 				ShowWarning("channels.conf : irc channel enabled but irc_channel_channel wasn't found, disabling irc channel...\n");
@@ -2772,7 +2771,7 @@ void read_channels_config(void) {
 				if( strcmpi(irc_nick,"Hercules_chSysBot") == 0 ) {
 					sprintf(hChSys.irc_nick, "Hercules_chSysBot%d",rand()%777);
 				} else
-					safestrncpy(hChSys.irc_nick, irc_nick, 30);
+					safestrncpy(hChSys.irc_nick, irc_nick, 40);
 			} else {
 				hChSys.irc = false;
 				ShowWarning("channels.conf : irc channel enabled but irc_channel_nick wasn't found, disabling irc channel...\n");
@@ -3639,16 +3638,17 @@ void clif_changeoption(struct block_list* bl)
 	struct map_session_data* sd;
 
 	nullpo_retv(bl);
-	sc = status_get_sc(bl);
-	if (!sc) return; //How can an option change if there's no sc?
+	
+	if ( !(sc = status_get_sc(bl)) && bl->type != BL_NPC ) return; //How can an option change if there's no sc?
+	
 	sd = BL_CAST(BL_PC, bl);
 
 #if PACKETVER >= 7
 	WBUFW(buf,0) = 0x229;
 	WBUFL(buf,2) = bl->id;
-	WBUFW(buf,6) = sc->opt1;
-	WBUFW(buf,8) = sc->opt2;
-	WBUFL(buf,10) = sc->option;
+	WBUFW(buf,6) = (sc) ? sc->opt1 : 0;
+	WBUFW(buf,8) = (sc) ? sc->opt2 : 0;
+	WBUFL(buf,10) = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	WBUFB(buf,14) = (sd)? sd->status.karma : 0;
 	if(disguised(bl)) {
 		clif->send(buf,packet_len(0x229),bl,AREA_WOS);
@@ -3662,9 +3662,9 @@ void clif_changeoption(struct block_list* bl)
 #else
 	WBUFW(buf,0) = 0x119;
 	WBUFL(buf,2) = bl->id;
-	WBUFW(buf,6) = sc->opt1;
-	WBUFW(buf,8) = sc->opt2;
-	WBUFW(buf,10) = sc->option;
+	WBUFW(buf,6) = (sc) ? sc->opt1 : 0;
+	WBUFW(buf,8) = (sc) ? sc->opt2 : 0;
+	WBUFL(buf,10) = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	WBUFB(buf,12) = (sd)? sd->status.karma : 0;
 	if(disguised(bl)) {
 		clif->send(buf,packet_len(0x119),bl,AREA_WOS);
@@ -3681,19 +3681,17 @@ void clif_changeoption(struct block_list* bl)
 
 /// Displays status change effects on NPCs/monsters (ZC_NPC_SHOWEFST_UPDATE).
 /// 028a <id>.L <effect state>.L <level>.L <showEFST>.L
-void clif_changeoption2(struct block_list* bl)
-{
+void clif_changeoption2(struct block_list* bl) {
 	unsigned char buf[20];
 	struct status_change *sc;
 
-	sc = status_get_sc(bl);
-	if (!sc) return; //How can an option change if there's no sc?
+	if ( !(sc = status_get_sc(bl)) && bl->type != BL_NPC ) return; //How can an option change if there's no sc?
 
 	WBUFW(buf,0) = 0x28a;
 	WBUFL(buf,2) = bl->id;
-	WBUFL(buf,6) = sc->option;
+	WBUFL(buf,6) = (sc) ? sc->option : bl->type == BL_NPC ? ((TBL_NPC*)bl)->option : 0;
 	WBUFL(buf,10) = clif_setlevel(bl);
-	WBUFL(buf,14) = sc->opt3;
+	WBUFL(buf,14) = (sc) ? sc->opt3 : 0;
 	if(disguised(bl)) {
 		clif->send(buf,packet_len(0x28a),bl,AREA_WOS);
 		WBUFL(buf,2) = -bl->id;
