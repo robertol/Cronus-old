@@ -335,46 +335,46 @@ jawaii,107,189,5	script	Funcionária#horoom	93,{
 
 jawaii,112,173,7	script	Funcionária#villroom	93,{
 	mes "[Larks Rania]";
-	mes "Hello dear,";
-	mes "how are you?";
-	mes "Are you looking for";
-	mes "a room to stay in?";
+	mes "Olá querido,";
+	mes "como você está?";
+	mes "Você está procurando";
+	mes "um quarto para ficar?";
 	next;
 	mes "[Larks Rania]";
-	mes "This is called the Villa Room.";
-	mes "I recommend this room to people";
-	mes "who prefer to stay in a place with";
-	mes "a comfortable atmosphere";
-	mes "much like home.";
+	mes "Este é o Chamado Quarto Villa.";
+	mes "Eu recomendo este quarto para pessoas";
+	mes "que preferem estar em um ambiente";
+	mes "com uma atmosfera confortável";
+	mes "como estivesse em sua casa.";
 	next;
 	mes "[Larks Rania]";
-	mes "Just like all the other rooms,";
-	mes "the lodging charge is 1,000 zeny.";
-	mes "I can guide you to the Villa Room";
-	mes "right now, if you wish. Would you";
-	mes "like to stay?";
+	mes "Assim como todos os quartos,";
+	mes "a hospedagem custa 1,000 Zeny.";
+	mes "Eu posso guia-lo ao quarto Villa";
+	mes "agora mesmo, se vocÊ quiser. Você";
+	mes "gostaria de ficar?";
 	next;
-	if (select("Use.:Cancel.") == 1) {
+	if (select("Usar.:Cancelar.") == 1) {
 		mes "[Larks Rania]";
 		if (zeny > 999) {
-			mes "Thank you~";
-			mes "Enjoy your stay.";
+			mes "Obrigado~";
+			mes "Aproveite a sua estadia.";
 			close2;
 			set zeny,zeny-1000;
 			warp "jawaii_in",87,75;
 			end;
 		}
-		mes "Oh what a shame!";
-		mes "You don't seem";
-		mes "to have enough money...?";
-		mes "Why don't you ask your";
-		mes "partner to help you";
-		mes "with the charge?";
+		mes "Oh que pena!";
+		mes "Parece que você";
+		mes "não tem dinheiro suficiente...";
+		mes "Por que não pergunta";
+		mes "ao seu companheiro";
+		mes "se ele nao pode te ajudar?";
 		close;
 	}
 	mes "[Larks Rania]";
-	mes "No problem~";
-	mes "If you like, you may wish to check the Honey Room. Although the roomkeeper, Sharkie, is a shy girl, the room is really beautiful.";
+	mes "Sem Problemas~";
+	mes "Se você quiser, você pode ver o Quarto de Mel. Apesar de Sharkie ser uma garota muito tímida, o quarto realmente é muito bonito..";
 	close;
 }
 
