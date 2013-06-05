@@ -1,16 +1,16 @@
-//===== rAthena Script ======================================= 
-//= Mr. Smile Quest
-//===== By: ================================================== 
+//===== Cronus Script ======================================= 
+//= Quest Dona Risadinha
+//===== Por: ================================================== 
 //= Daegaladh, Masao
-//===== Current Version: ===================================== 
+//===== Versão Atual: ===================================== 
 //= 1.0
-//===== Compatible With: ===================================== 
-//= rAthena SVN
-//===== Description: ========================================= 
+//===== Compatível Com: ===================================== 
+//= Cronus
+//===== Descrição: ========================================= 
 //= [Aegis Conversion]
 //= Trade Clover, Fluff and Jellopy for a Mr. Smile mask.
-//===== Additional Comments: ================================= 
+//===== Comentários Adicionais: ================================= 
 //= 1.0 Updated to match the new Izlude Map. [Masao]
 //============================================================ 
 
-izlude,125,175,4	duplicate(SmileHelper)	Smile Assistance#iz	92
+izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz	92
