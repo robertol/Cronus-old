@@ -1,737 +1,684 @@
-//===== rAthena Script ======================================= 
-//= Thief Class Tutorial and Job Specific Quest
-//===== By: ================================================== 
-//= Fix up by Jukka
-//===== Current Version: ===================================== 
-//= 1.4
-//===== Compatible With: ===================================== 
-//= rAthena SVN (Testet in Trunk 88xx)
-//===== Description: ========================================= 
-//=
-//===== Additional Comments: ================================= 
+//===== Cronus Script ========================================
+//= Quest Específica da Classe Gatuno
+//===== Por: =================================================
+//= Cardoso
+//===== Versão Atual: ========================================
+//= 1.3b CR / 1.3 eA
+//===== Descrição: ===========================================
+//= Quest para Gatunos
+//===== Changelog: ===========================================
 //= 1.0 Fully working
 //= 1.1 optimized [Lupus]
 //=	TODO: Test, Add correct misceffects numbers
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.2b Traduzido e revisado [Cardoso]
 //= 1.3 Fixed a few minor mistakes [Playtester]
-//= 1.4 Misc. updates. [L0ne_W0lf]
-//============================================================ 
-
-// Thief Trainer
+//= 1.3b Revisado novamente, pré-otimizado [Keoy]
+//	 Eu incluí os babys nas quests, se alguém tiver informações oficiais
+//	se eles participam ou não, por favor informar no bugtracker
 //============================================================
-moc_ruins,66,164,4	script	Thief Trainer#T	84,{
+
+moc_ruins,66,164,4	script	Treinador de Gatunos#T	84,{
 	mes "[Yierhan]";
-	if(Class == Job_Novice){
-		mes "Eh...?";
-		mes "A Novice?";
-		mes "Still thinking";
-		mes "what job you're";
-		mes "gonna choose...";
-		mes "Am I right?";
+	if(Class == Job_Novice)
+	{
+		mes "Humn...?";
+		mes "Um aprendiz?";
+		mes "Ainda pensando";
+		mes "em qual classe";
+		mes "irá escolher...";
+		mes "Não é mesmo?";
 		next;
 		mes "[Yierhan]";
-		mes "Listen, if you ever decide to become a Thief--a smart choice";
-		mes "I might add--come and talk to me. I'll show you the ropes!";
+		mes "Escute, se você decidir se tornar um gatuno - uma ótima escolha";
+		mes "Venha e fale comigo. Eu lhe mostro o caminho!";
 		close;
 
-	} else if(Class == Job_Thief || Class == Job_Thief_High || Class == Job_Assassin || Class ==Job_Assassin_Cross || Class == Job_Rogue || Class == Job_Stalker){
-		if(Class == Job_Thief_High || Class == Job_Assassin || Class == Job_Assassin_Cross || Class == Job_Rogue || Class == Job_Stalker){
-			if(tu_thief01 < 8){
-				mes "Whaaaat are you";
-				mes "doin' here? There's";
-				mes "nothing I can teach you!";
-				mes "You're waaay beyond me!";
+	} else
+	//if(Class == Job_Thief || Class == Job_Thief_High || Class == Job_Assassin || Class ==Job_Assassin_Cross || Class == Job_Rogue || Class == Job_Stalker)
+	if ( (eaclass()&EAJ_BASEMASK) == EAJ_THIEF )
+	{
+		if( Class != Job_Thief )
+		{
+			if(tu_thief01 < 8)
+			{
+				mes "O que você está";
+				mes "fazendo aqui?! Não há";
+				mes "nada que eu possa lhe ensinar!";
+				mes "Você está muito a minha frente!";
 				next;
 				mes "[Yierhan]";
-				mes "In fact, I think";
-				mes "you're qualified";
-				mes "to teach me some stuff!";
-				mes "Come on! I need new moves!";
+				mes "Aproveitando... Você";
+				mes "poderia me ensinar";
+				mes "algumas coisas!";
+				mes "Por favor! Preciso de novos golpes!";
 				close;
 			}
 		}
-		if(tu_thief01 == 0){
-			mes "Heya pal.";
-			mes "I'm Yierhan.";
-			mes "I happen to be";
-			mes "the guy in charge";
-			mes "of training new Thieves.";
+		if(tu_thief01 == 0)
+		{
+			mes "Olá.";
+			mes "Sou Yierhan.";
+			mes "Eu sou o cara";
+			mes "encarregado de treinar";
+			mes "novos gatunos.";
 			next;
-			switch(select("Training?:Training? Right now?")){
+			switch(select("Treino?:Treino? Agora?!"))
+			{
 			case 1:
 				mes "[Yierhan]";
-				mes "Yeah, training. I mean, this kind of stuff is second nature to some people, but other guys need a little more help. So this is one of those 'just in case' things.";
+				mes "Isso, treino. Mas fique tranquilo é apenas uma precaução.";
 				next;
 				break;
 			case 2:
 				mes "[Yierhan]";
-				mes "Right now?";
-				mes "Yeah, right now!";
-				mes "But if you're not ready for some reason, I guess I can wait.";
+				mes "Agora?!";
+				mes "Sim, agora!";
+				mes "Mas se você não está preparad"+(Sex)?"o":"a"+" por alguma razão, acho que posso esperar.";
 				close;
 			}
 			mes "[Yierhan]";
-			mes "Alright, first of all, Thieves use melee attacks. Well, most of us do. There are a few who like using long range Bows. But all of us are good at bein' fast!";
+			mes "Ok, antes de tudo, Gatunos usam ataques físicos. Bom, a maioria. Há alguns que gostam de usar arcos. Mas todos gostamos de velocidade!";
 			next;
 			mes "[Yierhan]";
-			mes "So for melee attacks, which stat increases your damage? Come on";
-			mes "now, you should know this if you didn't skip the Novice Training Grounds.";
+			mes "Então para ataques físicos, qual atributo aumenta o dano? Vamos, ";
+			mes "você deve saber isso... Se você não pulou o treino básico";
 			next;
-			switch(select("^6B8E23INT^000000:^2F4F2FSTR^000000:^23238EDEX^000000")){
+			switch(select("^6B8E23INT^000000:^2F4F2FFOR^000000:^23238EDES^000000"))
+			{
 			case 1:
 				mes "[Yierhan]";
-				mes "Say whaaat? ^6B8E23INT^000000 affects magic damage, magic defense and some skills. Thieves don't even work with magic!";
+				mes "Affee! ^6B8E23INT^000000 implica no dano mágico, defesa mágica e algumas habilidades. Gatunos não usam magia!";
 				next;
 				mes "[Yierhan]";
-				mes "You musta skipped the Novice Training Grounds altogether! Not that I blame you though. Anyway, it's ^2F4F2FSTR^000000 that increases your attack damage, got it?";
+				mes "Você deve ter pulado o treinamento básico mesmo! Não que eu esteja criticando. De qualquer forma, é ^2F4F2FFOR^000000 que aumenta o dano físico, ok?";
 				next;
 				mes "[Yierhan]";
-				mes "So if you're feeling like the damage you're making is pretty weak, you might want more stat points in ^2F4F2FSTR^000000. How high your raise your own STR is really up to you.";
+				mes "Se você achar que seu dano físico está muito fraquinho, tente colocar mais pontos ^2F4F2FFOR^000000.";
 				set tu_thief01, 1;
-				getexp 20,10;
-				specialeffect2 EF_HIT5;
+				getexp 200,100;
+				//misceffect EF_HIT5;
 				close;
 			case 2:
 				mes "[Yierhan]";
-				mes "Yeah, that's right! If you wanna increase your damage, you need";
-				mes "to put some stat points into ^2F4F2FSTR^000000. Increasing STR also increases";
-				mes "your Max Weight Limit too.";
+				mes "Isso, está certo! Se você deseja aumentar o dano físico";
+				mes "você deve colocar mais pontos em ^2F4F2FFOR^000000. Aumentando a força, aumentará";
+				mes "sua capacidade de carregar itens também.";
 				next;
 				mes "[Yierhan]";
-				mes "So if you're feeling like the damage you're making is pretty weak, you might want more stat points in ^2F4F2FSTR^000000. How high your raise your own STR is really up to you.";
+				mes "Se você achar que seu dano físico está muito fraquinho, tente colocar mais pontos em ^2F4F2FFOR^000000.";
 				next;
 				mes "[Yierhan]";
-				mes "Sure, ^23238EDEX^000000 and LUK can";
-				mes "also increase your attack damage, but they're insignificant compared to STR. I repeat: ^660000insignificant^000000.";
+				mes "Claro, ^23238EDEs^000000 e SOR também podem";
+				mes "aumentar seu dano físico, mas é muito pouco comparado com ^2F4F2FFOR^000000.";
 				set tu_thief01, 1;
-				getexp 40,20;
-				specialeffect2 EF_HIT5;
+				getexp 400,200;
+				//misceffect EF_HIT5;
 				close;
 			case 3:
 				mes "[Yierhan]";
-				mes "Say whaaat? ^23238EDEX^000000 affects";
-				mes "your attack accuracy, not your damage! Well, unless you're using";
-				mes "a Bow. Otherwise, it increases your damage only by a tiny bit.";
+				mes "Affee! ^23238EDES^000000 implica na";
+				mes "precisão dos ataques, não o dano! Bom, a não ser que esteja";
+				mes "usando um arco. Se não for o caso ^23238EDES^000000 aumentará muito pouco o dano.";
 				next;
 				mes "[Yierhan]";
-				mes "You musta skipped the Novice Training Grounds altogether! Not that I blame you though. Anyway, it's ^2F4F2FSTR^000000 that increases your attack damage, got it?";
+				mes "Você deve ter pulado o treinamento básico mesmo! Não que eu esteja criticando. De qualquer forma, é a ^2F4F2FFOR^000000 que aumenta o dano físico, ok?";
 				next;
 				mes "[Yierhan]";
-				mes "So if you're feeling like the damage you're making is pretty weak, you might want more stat points in ^2F4F2FSTR^000000. How high your raise your own STR is really up to you.";
+				mes "Se você achar que seu dano físico está muito fraquinho, tente colocar mais pontos ^2F4F2FFOR^000000.";
 				set tu_thief01, 1;
-				getexp 20,10;
-				specialeffect2 EF_HIT5;
+				getexp 200,100;
+				//misceffect EF_HIT5;
 				close;
 			}
-		} else if(tu_thief01 == 1){
-			mes "Alright, enough about stats.";
-			mes "You know what? I think I'll just talk to you about the skills that we Thieves use.";
+		} else if(tu_thief01 == 1)
+		{
+			mes "Ok, chega de falar sobre atributos.";
+			mes "Quer saber? Eu acho que vou falar sobre as habilidades que nós gatunos usamos.";
 			next;
 			mes "[Yierhan]";
-			mes "So level up your skills, learn a few new ones if you want, and";
-			mes "then come back over here.";
+			mes "Mas antes tente evoluir um pouco suas habilidades";
+			mes "e depois volte aqui.";
 			set tu_thief01, 2;
 			close;
-		} else if(tu_thief01 == 2){
-			mes "Okay, let me see your skills. You know you gotta change your battle strategy depending on what skills you have, right? Skills are just as important as stats!";
+		} else if(tu_thief01 == 2)
+		{
+			mes "Ok, deixe-me ver suas habilidades. Você sabia que dependendo das suas habilidades você deve mudar sua estratégia de batalha? Habilidades são tão importantes quanto atributos!";
 			next;
-			set .@chk_th_skill1, getskilllv("TF_DOUBLE");
-			set .@chk_th_skill2, getskilllv("TF_MISS");
-			set .@chk_th_skill3, getskilllv("TF_STEAL");
-			set .@chk_th_skill4, getskilllv("TF_HIDING");
-			set .@chk_th_skill5, getskilllv("TF_POISON");
-			set .@chk_th_skill6, getskilllv("TF_DETOXIFY");
+			set @chk_th_skill1, getskilllv("TF_DOUBLE");
+			set @chk_th_skill2, getskilllv("TF_MISS");
+			set @chk_th_skill3, getskilllv("TF_STEAL");
+			set @chk_th_skill4, getskilllv("TF_HIDING");
+			set @chk_th_skill5, getskilllv("TF_POISON");
+			set @chk_th_skill6, getskilllv("TF_DETOXIFY");
 
-			if(.@chk_th_skill1 == 0 && .@chk_th_skill2 == 0 && .@chk_th_skill3 == 0 && .@chk_th_skill4 == 0 && .@chk_th_skill5 == 0 && .@chk_th_skill6 == 0){
+			if(@chk_th_skill1 == 0 && @chk_th_skill2 == 0 && @chk_th_skill3 == 0 && @chk_th_skill4 == 0 && @chk_th_skill5 == 0 && @chk_th_skill6 == 0){
 				mes "[Yierhan]";
-				mes "You haven't learned any skills yet? Come on, it's your skills that'll set you apart from Novices and everyone else!";
+				mes "Você ainda não aprendeu nenhuma habilidade? Vamos lá, são suas habilidades que o diferenciam de todo mundo!";
 				close;
 			} else {
-				if(.@chk_th_skill1 > 0){
+				if(@chk_th_skill1 > 0){
 					mes "[Yierhan]";
-					mes "Ah, so you've learned";
-					mes "Level "+.@chk_th_skill1+" Double Attack.";
-					mes "Nice! This skill gives you the chance to attack twice in one";
-					mes "attack. Wicked!";
+					mes "Ah, então você aprendeu:";
+					mes "O nível "+@chk_th_skill1+" de Ataque duplo.";
+					mes "Ótimo! Essa habilidade lhe dá uma chance de atacar duas vezes o alvo";
+					mes "ao invés de uma. É muito boa!";
 					next;
 					mes "[Yierhan]";
-					mes "It's a Passive skill, so it's always in effect and won't have to use any SP to use it. The higher your Double Attack skill level, the more double attacks you'll do.";
-					next;
-				}
-				if(.@chk_th_skill2 > 0){
-					mes "[Yierhan]";
-					mes "Let's see...";
-					mes "Level "+.@chk_th_skill2+" Increase Dodge?";
-					mes "That increases your Flee Rate, meaning you've got a better chance of dodging attacks from your enemies.";
-					next;
-					mes "[Yierhan]";
-					mes "Just like the Double Attack skill, Increase Dodge is a Passive skill. It won't use SP and it's always in";
-					mes "effect. If you don't like to bruise, this is your skill.";
+					mes "É uma habilidade passiva, por isso não usa SP e sempre está ativa.";
 					next;
 				}
-				if(.@chk_th_skill3 > 0){
+				if(@chk_th_skill2 > 0){
 					mes "[Yierhan]";
-					mes "Whoa, so you've";
-					mes "got Level "+.@chk_th_skill3+" Steal~";
-					mes "Now that's the skill which gives our job its name! You can't use";
-					mes "it against people, though...";
-					next;
-					mes "[Yierhan]";
-					mes "But you can use Steal to take items from monsters. If you're lucky, you can get some good items that way. Oh, and Steal doesn't affect monster drop rates.";
+					mes "Ah, então você aprendeu:";
+					mes "O nível "+@chk_th_skill2+" de Perícia em esquiva?";
+					mes "Essa habilidade aumenta a chance de seus inimigos errarem o ataque.";
 					next;
 				}
-				if(.@chk_th_skill4 > 0){
+				if(@chk_th_skill3 > 0){
 					mes "[Yierhan]";
-					mes "You've learned";
-					mes "Level "+.@chk_th_skill4+" Hiding?";
-					mes "Let's see, you can only learn";
-					mes "that after learning the Steal skill up to a certain level.";
+					mes "Uau, você conseguiu";
+					mes "O nível "+@chk_th_skill3+" de Furto~";
+					mes "É essa a habilidade que dá o nome de nossa classe! Porém não dá para";
+					mes "usar nas pessoas, infelizmente...";
 					next;
 					mes "[Yierhan]";
-					mes "Of course, you use ";
-					mes "the Hiding skill to hide underground in an emergency, like when you're surrounded by tough enemies. Be careful though...";
-					next;
-					mes "[Yierhan]";
-					mes "Certain monsters will still be able to find you, no matter how well you hide. There are even a few monsters that can flush you out of hiding!";
+					mes "Mas você pode roubar itens de monstros. Se você tiver sorte, pode conseguir um item bom.";
 					next;
 				}
-				if(.@chk_th_skill5 > 0){
+				if(@chk_th_skill4 > 0){
 					mes "[Yierhan]";
-					mes "Alright, I see that you";
-					mes "know Level "+.@chk_th_skill5+" Envenom.";
-					mes "You like being dangerous,";
-					mes "don't you?";
+					mes "Você aprendeu:";
+					mes "O nível "+@chk_th_skill4+" de Esconderijo?";
 					next;
 					mes "[Yierhan]";
-					mes "This attack skill has the chance";
-					mes "to poison your enemy for a set amount of time. While poisoned, an enemy will constantly lose its HP and will have decreased defense.";
+					mes "Essa habilidade é muito útil,";
+					mes "principalmente quando você está rodeado de inimigos fortes. Mas tome cuidado...";
 					next;
 					mes "[Yierhan]";
-					mes "Eh, but remember.";
-					mes "If the monster's too strong for you, you might not be able to poison it. So don't go crazy.";
+					mes "Alguns monstros ainda podem detecta-lo não importando o quanto tente se esconder, eles te acham!";
 					next;
 				}
-				if(.@chk_th_skill6 > 0){
+				if(@chk_th_skill5 > 0){
 					mes "[Yierhan]";
-					mes "Level "+.@chk_th_skill6+" Detoxify.";
-					mes "If you took the trouble to learn that, you must be the cautious";
-					mes "type or something.";
+					mes "Ok, vejo que aprendeu";
+					mes "O nível "+@chk_th_skill5+" de Envenenar.";
+					mes "Você gosta de ser perigoso,";
+					mes "não gosta?";
 					next;
 					mes "[Yierhan]";
-					mes "You can only learn Detoxify";
-					mes "after you learn the Envenom skill. Detoxify allows you to counteract the effects of poison on a target.";
+					mes "Esse ataque tem a chance de envenenar";
+					mes "seu inimigo por um curto periodo de tempo. Enquanto envenenado o inimigo perderá HP constantemente e ficará com a defesa fragilizada.";
+					next;
+					mes "[Yierhan]";
+					mes "Heh, mas lembre-se.";
+					mes "Se o monstro for muito mais forte que você será quase impossível envenena-lo. Então não dê uma de louco.";
+					next;
+				}
+				if(@chk_th_skill6 > 0){
+					mes "[Yierhan]";
+					mes "O nível "+@chk_th_skill6+" Desintoxicar.";
+					next;
+					mes "[Yierhan]";
+					mes "Você só pode aprender Desintoxicar";
+					mes "depois de ter aprendido a habilidade Envenenar. Desintoxicar lhe permite retirar o envenenamento de certo alvo.";
 					next;
 				}
 			}
 			mes "[Yierhan]";
-			mes "Alright, I guess";
-			mes "if you want to know";
-			mes "about any other skills,";
-			mes "I can explain real quick.";
+			mes "Ok, se você";
+			mes "quiser saber sobre";
+			mes "qualquer outra habilidade,";
+			mes "eu posso lhe explicar rapidamente.";
 			set tu_thief01, 3;
-			getexp BaseLevel*3,BaseLevel*2;
-			specialeffect2 EF_HIT5;
+			getexp BaseLevel*30,BaseLevel*15;
+			//misceffect EF_HIT5;//CHECK
 			close;
-		} else if(tu_thief01 == 3){
-			mes "So...";
-			mes "Are there any";
-			mes "skills you want";
-			mes "explained or is this";
-			mes "pretty much stuff you";
-			mes "already know?";
+		} else if(tu_thief01 == 3)
+		{
+			mes "Então...";
+			mes "Há mais alguma";
+			mes "habilidade que você";
+			mes "quer que eu explique ou";
+			mes "já tem toda informação";
+			mes "que deseja?";
 			next;
-			while(1){
-				switch(select("Double Attack:Increase Dodge:Steal:Hiding:Envenom:Detoxify:I know enough.")) {
-				case 1:
+			while(1)
+			{
+				switch(select("Ataque Duplo:Perícia em esquiva:Furto:Esconderijo:Envenenar:Desintoxicar:Cancelar"))
+				{
+				case 1: 
 					mes "[Yierhan]";
-					mes "Just like its name,";
-					mes "Double Attack gives your attacks the chance to be a double attack, two strikes in one blow.";
+					mes "Como o nome diz,";
+					mes "permite que você de dois ataques ao invés de um, com uma % de sucesso.";
 					next;
 					mes "[Yierhan]";
-					mes "It's a Passive skill, so it's always in effect and won't have to use any SP to use it. The higher your Double Attack skill level, the more double attacks you'll do.";
-					set .@read_d, 1;
+					mes "É uma habilidade passiva, por isso não usa SP e sempre está ativa.";
+					set @read_d, 1;
 					next;
 					break;
 				case 2:
 					mes "[Yierhan]";
-					mes "Increase Dodge";
-					mes "gives a nice boost";
-					mes "to your Flee Rate that";
-					mes "the other jobs don't offer.";
-					mes "Why take your lumps when you";
-					mes "can avoid them altogether?";
+					mes "Perícia em esquiva";
+					mes "aumenta sua taxa de";
+					mes "esquiva que faz com";
+					mes "que seus inimigos errem";
+					mes "ataques contra você.";
 					next;
 					mes "[Yierhan]";
-					mes "Just like the Double Attack skill, Increase Dodge is a Passive skill. It won't use SP and it's always in";
-					mes "effect. If you don't like to bruise, this is your skill.";
-					set .@read_f, 1;
+					mes "Assim como o ataque duplo, essa habilidade é passiva por isso não usa SP e sempre está ativa.";
+					set @read_f, 1;
 					next;
 					break;
 				case 3:
 					mes "[Yierhan]";
-					mes "Steal is an Active Skill that has the chance of nabbing you some";
-					mes "free items! You can't use it against other people, though.";
-					next;
-					specialeffect2 EF_STEAL;
-					mes "[Yierhan]";
-					mes "But you can use Steal to take items from monsters! If you're lucky, you can get some good items that way. Oh, and Steal doesn't affect monster drop rates.";
-					set .@read_s, 1;
+					mes "Furto é uma habilidade ativa que dá a chance de roubar alguns itens de graça.";
+					mes "Mas você só pode roubar itens de monstros. Infelizmente não funciona com humanos.";
+					set @read_s, 1;
 					next;
 					break;
 				case 4:
 					mes "[Yierhan]";
-					mes "Hiding is an active skill where you submerge yourself underground. You can only stay hidden so long, and you can't move, but sometimes it's better than being found!";
+					mes "Esconderijo é uma habilidade ativa, que permite que você se esconda no subsolo. Você não poderá se mexer enquanto essa habilidade estiver ativada.";
 					next;
 					mes "[Yierhan]";
-					mes "Of course, you use ";
-					mes "the Hiding skill to hide underground in an emergency, like when you're surrounded by tough enemies. Be careful though...";
+					mes "Essa habilidade é muito útil,";
+					mes "principalmente quando você está rodeado de inimigos fortes. Mas tome cuidado...";
 					next;
 					mes "[Yierhan]";
-					mes "Certain monsters will still be able to find you, no matter how well you hide. There are even a few monsters that can flush you out of hiding!";
-					set .@read_p, 1;
+					mes "Alguns monstros ainda podem detecta-lo não importando o quando tente se esconder, eles te acham!";
+					set @read_p, 1;
 					next;
 					break;
-				case 5:
+				case 5: 
 					mes "[Yierhan]";
-					mes "Envenom is an offensive Active Skill that every Thief should know. But that's just what I think.";
+					mes "Envenenar é uma habilidade ativa e ofensiva, que todo gatuno deveria ter, na minha opinião...";
 					next;
 					mes "[Yierhan]";
-					mes "This attack skill has the chance";
-					mes "to poison your enemy for a set amount of time. While poisoned, an enemy will constantly lose its HP and will have decreased defense.";
-					mes "Remember that.";
-					set .@read_h, 1;
+					mes "Esse ataque tem a chance de";
+					mes "envenenar seu inimigo por um periodo de tempo. Enquanto envenenado o inimigo perderá HP constantemente e ficará com a defesa fragilizada.";
+					mes "Lembre-se disso.";
+					set @read_h, 1;
 					next;
 					break;
-				case 6:
+				case 6: 
 					mes "[Yierhan]";
-					mes "Since Thieves deal";
-					mes "quite a bit with poison,";
-					mes "we've got to have a way";
-					mes "to, well, have a taste";
-					mes "of our own medicine.";
+					mes "Já que nós gatunos";
+					mes "podemos envenar, é";
+					mes "necessário saber como";
+					mes "reverter o envenenamento,";
+					mes "e é para isso que serve a habilidade Desintoxicar.";
 					next;
 					mes "[Yierhan]";
-					mes "You can learn Detoxify";
-					mes "after you learn the Envenom skill. Detoxify allows you to counteract the effects of poison on a target.";
-					set .@read_r, 1;
+					mes "Você só pode aprender Desintoxicar";
+					mes "depois de ter aprendido a habilidade Envenenar. Desintoxicar lhe permite retirar o envenenamento de certo alvo.";
+					set @read_r, 1;
 					next;
-					specialeffect2 EF_DETOXICATION;
+					//misceffect EF_DETOXICATION;
 					next;
 					break;
 				case 7:
 					mes "[Yierhan]";
-					mes "Yeah...";
-					mes "I'm tired of explaining these skills anyway. Let's move on to";
-					mes "the next part of Thief training...";
+					mes "Boa...";
+					mes "Eu estou cansado de explicar todas essas habilidades mesmo. Vamos avançar para a";
+					mes "próxima parte de nosso treinamento...";
 					next;
 					mes "[Yierhan]";
-					mes "Now that you're such an expert on skills, I want you to level up your skills and come back, got it?";
+					mes "Agora que você é praticamente um Expert em habilidades, eu queria que você evoluísse um pouco as habilidades, ok?";
 					set tu_thief01, 4;
-					specialeffect2 EF_HIT5;
-					if(.@read_d){
-						getexp 30,10;
+					//misceffect EF_HIT5;
+					if(@read_d){
+						getexp 300,100;
 					}
-					if(.@read_f){
-						getexp 30,10;
+					if(@read_f){
+						getexp 300,100;
 					}
-					if(.@read_s){
-						getexp 30,10;
+					if(@read_s){
+						getexp 300,100;
 					}
-					if(.@read_p){
-						getexp 30,10;
+					if(@read_p){
+						getexp 300,100;
 					}
-					if(.@read_h){
-						getexp 30,10;
+					if(@read_h){
+						getexp 300,100;
 					}
-					if(.@read_r){
-						getexp 30,10;
+					if(@read_r){
+						getexp 300,100;
 					}
 					close;
 				}
 			}
 		} else if(tu_thief01 == 4){
-			mes "Alright, we studied the skills and you've been practicing a little, right? You better have...";
+			mes "Ok, nós estudamos as habilidades, você já práticou um pouco, não é? ...Espero que sim.";
 			next;
 			mes "[Yierhan]";
-			mes "Alright, now I got some actual fight training I want you to do. Here's a chance for you to figure what skills are best for which situations.";
+			mes "Ok, agora quero que você faça esse treinamento de luta. Está é a chance de experimentar qual habilidade é melhor em certas situações.";
 			next;
 			mes "[Yierhan]";
-			mes "Go and get me";
-			mes "10 ^ff0000Feather of Birds^000000.";
-			mes "You can go ahead and kill Pickies to get those. It really shouldn't be that hard. Oh, and use this Wing thingee to come back.";
+			mes "Vá e me traga";
+			mes "10 ^ff0000"+getitemname(916)+"^000000.";
+			mes "Você pode consiguir isso matando Pickys. Não vai ser difícil. Ah, e use essa asa para voltar aqui.";
 			set tu_thief01, 5;
 			savepoint "moc_ruins",80,164;
-			getitem 602,1; //Wing_Of_Butterfly
-			getexp 10,5;
-			specialeffect2 EF_HIT5;
+			getitem 602, 1;
+			getexp 100,50;
+			//misceffect EF_HIT5;
 			close2;
 			warp "moc_fild12",158,373;
 			end;
 		} else if(tu_thief01 == 5 || tu_thief01 == 6){
-			if(countitem(916) < 10){
-				mes "'Ey, you don't have the 10 ^ff0000Feather of Birds^000000 I asked you for! You gotta apply what you know, you know.";
-				mes "Now hurry up and do it!";
+			if(countitem(916) < 10){	//Feather_Of_Birds
+				mes "Ei, você não";
+				mes "tem os 10 ^ff0000"+getitemname(916)+"^000000 que lhe pedi.";
+				mes "Lembre-se que, experiência é o mais importante.";
 				close2;
 				warp "moc_fild07",203,38;
 				end;
 			} else {
-				mes "Alright...!";
-				mes "Nice work, pal.";
-				mes "Seeing as you got these feathers, you must be really gung-ho about becoming a good Thief.";
+				mes "Ah~ Agora sim.";
+				mes "Bom trabalho, meu amigo.";
+				mes "Essas penas são o símbolo de sua evolução.";
 				next;
 				mes "[Yierhan]";
-				mes "I hope you keep";
-				mes "putting in the work";
-				mes "to get better and better.";
-				mes "Always do your best! Oh,";
-				mes "and do you have any questions?";
+				mes "Eu espero que continue dando o melhor de você.";
+				mes "Você tem alguma dúvida?";
 				next;
 				if(tu_thief01 == 6){
-					switch(select("About those traces...:Nope.")) {
- 					case 1:
+					switch(select("A respeito dos vestigios.", "No.")){
+					case 1:
 						mes "[Yierhan]";
-						mes "You found out, eh?";
-						mes "Well, I didn't really";
-						mes "wanna tell you this, on";
-						mes "account of you bein' a brand";
-						mes "brand new Thief and all, but...";
+						mes "Ah....";
+						mes "Você achou alguns vestigios, né?";
+						mes "Hmmm...";
+						mes "Eu não gostaria de lhe contar sobre isso,";
+						mes "logo depois de ter se tornado um gatuno...mas...";
 						next;
 						mes "[Yierhan]";
-						mes "There was this";
-						mes "fight that was in";
-						mes "the Southern part";
-						mes "of this town.";
+						mes "Houve uma batalha ao sul da cidade.";
+						mes "Era meio noite quando aconteceu, por isso";
+						mes "apenas algumas pessoas sabem sobre isso.";
+						mes "Eu fiquei acordado até mais tarde para uma reunião do clã,";
+						mes "e sem querer testemunhei a batalha.";
 						next;
 						mes "[Yierhan]";
-						mes "Since it happened late at night, only a few people actually know about it. As for me, I stayed late at a guild meeting, so it was";
-						mes "dumb luck that I saw it.";
+						mes "Depois eu fui até onde ocorreu a batalha.";
+						mes "Tudo que achei foi aqueles vestigios indicando que a batalha continuou mais para o sul.";
+						mes "Parece que esses vestigios tem a ver com alguns Assassinos...";
+						mes "já que o vestigios são venenosos.";
+						mes "Mas isso é somente minha suposição.";
 						next;
 						mes "[Yierhan]";
-						mes "I went back to where the fight happened and I found traces that showed that the guys who were fighting went south.";
-						next;
-						mes "[Yierhan]";
-						mes "Since poison was used in";
-						mes "the fight, I'm guessing an Assassin was involved, but I can't be too sure. If you wanna check it out, follow the traces of that fight.";
-						next;
-						mes "[Yierhan]";
-						mes "Eh, but be careful";
-						mes "not to get too close";
-						mes "to the poison! That stuff";
-						mes "is pretty strong!";
+						mes "Se você estiver interessado, siga os vestigios.";
+						mes "Mas não se esqueça, eles ainda são venenosos.";
 						set tu_thief01, 8;
-						getitem 1207,1; //Main_Gauche
-						getexp 100,50;
-						specialeffect2 EF_HIT5;
+						getitem 1207, 1;
+						getexp 1000,500;
+						//misceffect EF_HIT5;
 						close;
 					case 2:
 						mes "[Yierhan]";
-						mes "Good!";
-						mes "Less work for me!";
-						mes "Alright, you better get stronger the next time I see you. Oh, and you can have this stuff. You know, since you're so gangster and all.";
+						mes "Ah, tudo bem então.";
+						mes "Espero ver você muito mais forte, futuramente.";
+						mes "E por favor aceite isso.";
+						mes "Hahaha...";
 						set tu_thief01, 7;
-						getitem 1207,1; //Main_Gauche
-						getexp 50,20;
-						specialeffect2 EF_HIT5;
+						getitem 1207, 1;
+						getexp 500,200;
+						//misceffect EF_HIT5;
 						close;
 					}
 				} else {
-					switch(select("It was nice to meet you.:Nope.")) {
+					switch(select("Foi um prazer lhe conhecer.", "Não."))
+					{
 					case 1:
 						mes "[Yierhan]";
-						mes "Yeah, it was pretty cool just hanging out. Keep fighting";
-						mes "monsters the way you do and";
-						mes "you'll be a great Thief in no time.";
+						mes "Hahaha...foi um prazer para mim também.";
+						mes "Espero que de o melhor de sí sempre!";
+						mes "Assim, você se tornará o mais poderoso gatuno de todos os tempos.";
 						next;
 						mes "[Yierhan]";
-						mes "And since I like";
-						mes "you so much, kid,";
-						mes "you can have this.";
-						mes "Take it, it's yours!";
-						set tu_thief01, 7;
-						getitem 1207,1; //Main_Gauche
-						getexp 50,20;
-						specialeffect2 EF_HIT5;
-						close;
+						mes "E por favor aceite isso.";
+						mes "Hahaha...";
+						break;
 					case 2:
 						mes "[Yierhan]";
-						mes "Good!";
-						mes "Less work for me!";
-						mes "Alright, you better get stronger the next time I see you. Oh, and you can have this stuff. You know, since you're so gangster and all.";
-						set tu_thief01, 7;
-						getitem 1207,1; //Main_Gauche
-						getexp 50,20;
-						specialeffect2 EF_HIT5;
-						close;
+						mes "Ah, tudo bem então.";
+						mes "Espero ver você muito mais forte, futuramente.";
+						mes "E por favor aceite isso.";
+						mes "Hahaha...";
+						break;
 					}
+					set tu_thief01, 7;
+					getitem 1207, 1;
+					getexp 500,200;
+					close;
 				}
 			}
 		} else if(tu_thief01 == 7){
-			mes "[Yierhan]";
-			mes "You know...";
-			mes "There was this";
-			mes "fight that was in";
-			mes "the Southern part";
-			mes "of this town.";
+			mes "Houve uma batalha ao sul da cidade.";
+			mes "Era meio noite quando aconteceu, por isso";
+			mes "apenas algumas sabem sobre isso.";
+			mes "Eu fiquei acordado até mais tarde para uma reunião da guilda,";
+			mes "e sem querer testemunhei a batalha.";
 			next;
 			mes "[Yierhan]";
-			mes "Since it happened late at night, only a few people actually know about it. As for me, I stayed late at a guild meeting, so it was";
-			mes "dumb luck that I saw it.";
+			mes "Depois eu fui até onde ocorreu a batalha.";
+			mes "Tudo que achei foi aqueles vestigios indicando que a batalha continuou mais para o sul.";
+			mes "Parece que esses vestigios tem a ver com alguns Assassinos...";
+			mes "já que o vestigios são venenosos.";
+			mes "Mas isso é somente minha suposição.";
 			next;
 			mes "[Yierhan]";
-			mes "I went back to where the fight happened and I found traces that showed that the guys who were fighting went south.";
+			mes "Se você estiver interessado, siga os vestigios.";
+			mes "Mas não se esqueça, eles ainda são venenosos.";
 			next;
 			mes "[Yierhan]";
-			mes "Since poison was used in";
-			mes "the fight, I'm guessing an Assassin was involved, but I can't be too sure. If you wanna check it out, follow the traces of that fight.";
-			next;
-			mes "[Yierhan]";
-			mes "Eh, but be careful";
-			mes "not to get too close";
-			mes "to the poison! That stuff";
-			mes "is pretty strong!";
-			next;
-			mes "[Yierhan]";
-			mes "Hey, you might run into";
-			mes "poison, so remember that";
-			mes "Green Herbs and Green Potions";
-			mes "will counteract it. Oh, and keep in mind that Red Gemstones can";
-			mes "be used in poison attacks.";
-			next;
-			mes "[Yierhan]";
-			mes "Hey, if you do";
-			mes "decide to check it";
-			mes "out, be real careful";
-			mes "other there, okay?";
+			mes "Não se esqueça, erva verde e poção verde podem";
+			mes "curar envenenamento. Se alguem";
+			mes "aparecer com uma Gema Vermelha na sua frente, cuidado.";
+			mes "Ele pode tentar te envenenar com a Gema.";
 			set tu_thief01, 8;
-			getexp 20,10;
-			specialeffect2 EF_HIT5;
+			getexp 200,100;
+			//misceffect EF_HIT5;
 			close;
 		} else if(tu_thief01 == 8){
-			mes "Heya pal.";
-			mes "You doin' alright?";
+			mes "Então, como você está?";
+			mes "Lutando contra inimigos desconhecidos e correndo";
+			mes "grande perigo como sempre?.";
+			mes "Parece que em torno da cidade há alguns inimigos poderosos,";
+			mes "portanto cuidado.";
 			next;
 			mes "[Yierhan]";
-			mes "Fighting against something";
-			mes "you know nothing about is always risky. Since I've heard there are outsiders around flaunting their power, you better be careful.";
-			next;
-			mes "[Yierhan]";
-			mes "It's a good policy to just be really careful on your adventures. Look out for monsters and look";
-			mes "out for people! Got it?";
+			mes "Quando estiver por ai, tome o máximo";
+			mes "de cuidado. Não só monstros são seus inimigos,";
+			mes "mas, pessoas também, até seus amigos.";
 			close;
 		} else if(tu_thief01 < 26){
-			mes "I heard there was";
-			mes "this one Assassin";
-			mes "that went on a mission";
-			mes "and never returned.";
+			mes "Eu fiquei sabendo que um grande assassino";
+			mes "nunca voltou de sua missão.";
+			mes "Porem o Clã dos Assassinos divulgou que a missão foi concluída,";
+			mes "mas ele nunca voltou para lá.";
+			mes "E olha que ele era muito forte e competente...pelo que me recordo.";
 			next;
 			mes "[Yierhan]";
-			mes "What's so weird about it was that the Assassin Guild reported that the mission was completed!";
-			mes "I remember hearing that guy";
-			mes "was really good...";
-			next;
-			mes "[Yierhan]";
-			mes "Crazy, isn't it?";
-			mes "Anyway, take";
-			mes "care of yourself.";
+			mes "Portanto, tome cuidado, fique sempre atento.";
 			close;
 		} else if(tu_thief01 == 26){
-			mes "'Ey, did you";
-			mes "complete your mission?";
-			mes "I know, I know, the thing you've gotta do is pretty rough.";
+			mes "Você terminou sua missão?";
+			mes "Eu sei que ela não era fácil.";
 			next;
-			switch(select("I'm still investigating.:Not yet.:Yes, I did.")) {
+			switch(select("Estou ainda investigando.:Ainda não.:Sim, terminei.")){
 			case 1:
 				mes "[Yierhan]";
-				mes "Ah, gotcha. Well, that's understandable. I mean, these things take time, you know?";
+				mes "Ah...";
+				mes "Entendo. Ela não é simples de ser terminada.";
+				mes "Continue fazendo um bom trabalho.";
 				close;
 			case 2:
 				mes "[Yierhan]";
-				mes "Yeah...?";
-				mes "That's alright.";
-				mes "I guess these kinds of things require patience. And thinking.";
-				mes "You know, things I'm horrible at.";
+				mes "Ah...";
+				mes "Entendo. Ela não é simples de ser terminada.";
+				mes "Continue fazendo um bom trabalho.";
 				close;
 			case 3:
 				mes "[Yierhan]";
-				mes "Alright...!";
-				mes "So what's up?";
-				mes "Hit me up with";
-				mes "what you know~";
+				mes "Ohhhh, você conseguiu!";
+				mes "Ok, está tudo certo.";
+				mes "Estava esperando por muito tempo esse dia chegar.";
 				next;
-				mes "^3355FFYou explain the results of your investigation to Yierhan and tell him about the scrap of cloth you found on your mission.^000000";
-				next;
-				mes "[Yierhan]";
-				mes "Scrap of cloth?";
-				mes "Huh, alright. Say,";
-				mes "lemme have a looksee.";
+				mes "- Você informou a ele sobre sua investigação -";
+				mes "- e sobre o pedaço de pano adquirido em sua missão. -";
 				next;
 				mes "[Yierhan]";
-				mes "Whoa!";
-				mes "You did great.";
-				mes "This is some pretty";
-				mes "important information!";
+				mes "Hmm...";
+				mes "Deixe-me ver o pano.";
+				next;
+				mes "- Você deu a ele o pedaço de pano. -";
 				next;
 				mes "[Yierhan]";
-				mes "You see, the pattern on this cloth is sort of like one of the codes Assassins use. And this particular pattern looks like something from one of those higher Assassins.";
+				mes "HUmm...";
+				mes "Você fez...";
+				mes "Você fez um ótimo trabalho.";
+				mes "Você me trouxe informações muito impotantes.";
 				next;
 				mes "[Yierhan]";
-				mes "I might be able to figure out what happened that night with the new information this cloth might lead me to. Thanks a lot!";
+				mes "Como você pode ver, a textura desse pano";
+				mes "é peculiar de assassinos.";
+				mes "E essa textura particularmente é";
+				mes "usada por Algozes.";
 				next;
 				mes "[Yierhan]";
-				mes "From here on,";
-				mes "the higher ups in the";
-				mes "guild will take over this investigation. You did your job perfectly, so it's time for you to hone your skills.";
+				mes "Com isso, eu posso descubrir";
+				mes "o que aconteceu aquela noite.";
+				mes "Obrigado.";
 				next;
 				mes "[Yierhan]";
-				mes "Hey, this stuff is yours. Think of it as a reward for helping us out. Take care of yourself now~";
+				mes "Vou perguntar para outros integrantes mais sábio o clã para cuidar";
+				mes "da investigação.";
+				mes "Você fez perfeitamente o trabalho, agora quero";
+				mes "que você foque o seu treinamento.";
+				next;
+				mes "[Yierhan]";
+				mes "Por favor aceite isso.";
+				mes "É uma recompença pelo seu ótimo trabalho.";
 				set tu_thief01, 27;
-				getitem 2307,1; //Mantle
+				getitem 2307, 1;
 				set Zeny, Zeny + 5000;
-				getexp 800,300;
+				getexp 8000,3000;
+				next;
+				mes "[Yierhan]";
+				mes "Tome cuidado agora.";
 				close;
 			}
 		} else {
-			mes "[Yierhan]";
-			mes "Hey...";
-			mes "You got dreams,";
-			mes "don't you? I know,";
-			mes "it's a bit of a deep";
-			mes "subject I pulled outta";
-			mes "nowhere, but...";
-			next;
-			mes "[Yierhan]";
-			mes "I just like telling people to follow their dreams. So do it. Life without anything to look forward to is pretty boring, doncha think?";
-			close;
+			mes "Sempre busque seu sonho.";
+			mes "A vida sem um sonho não é uma vida perfeita.";
+			close2;
 		}
-	} else if(Class == Job_Mage || Class == Job_Mage_High || Class == Job_Wizard || Class == Job_High_Wizard || Class == Job_Sage || Class == Job_Professor){
-		if(tu_magician01 < 7){
-			mes "[Yierhan]";
-			mes "Heya.";
-			mes "I'm the Thief trainer around here. Sure, it looks like we don't got much in common, but...";
-			next;
-			mes "[Yierhan]";
-			mes "I actually got a few magic using friends here and there. That mystic stuff is waaay over my head, but";
-			mes "I got a lotta respect for it.";
+	//} else if(Class == Job_Mage || Class == Job_Mage_High || Class == Job_Wizard || Class == Job_High_Wizard || Class == Job_Sage || Class == Job_Professor){
+	} else if ( (eaclass()&EAJ_BASEMASK) == EAJ_MAGE )
+	{
+		if(tu_magician01 < 7)
+		{
+			mes "Sou um treinador de gatunos.";
+			mes "E pelo visto você não é um.";
+			mes "Você deve ser gatuno se quiser";
+			mes "ter um professor como eu...hahaha.";
 			close;
-		} else if(tu_magician01 == 7){
+		} else if(tu_magician01 == 7)
+		{
 			mes "Hm...?";
-			mes "That's weird, usually only";
-			mes "Thieves hang around this joint. What's someone like you doing";
-			mes "here? Unless...";
+			mes "Estranho, apenas gatunos andam por aqui. O que alguem como você faz por aqui? A não ser que...";
 			next;
-			switch(select("I'm here on behalf of 'Mana.'")) {
+			switch(select("Estou aqui em nome de 'Mana.'"))
+			{
 			case 1:
 				mes "[Yierhan]";
-				mes "Right, you must be the help that Mana sent! You came just at the right time. You see, we found something weird in South Morroc.";
+				mes "Ah, estava esperando por você. Bom, eu pedi a Mana que me ajudasse com uma coisa.";
 				next;
 				mes "[Yierhan]";
-				mes "Basically, we found traces of poison that were used in a fight. We were going to investigate it, but we've been swamped with all this other work.";
+				mes "Você veio na hora certa. Sabe, algo muito estranho foi achado ao sul de Morroc.";
 				next;
 				mes "[Yierhan]";
-				mes "That's why we've been asking";
-				mes "for help from the Mage Guild. Fortunately, I'm pals with Mana, so...";
+				mes "Basicamente, achamos rastros de veneno usado em uma batalha. Nós iamos investigar, mas temos coisas mais importantes a fazer.";
 				next;
 				mes "[Yierhan]";
-				mes "Anyway, head over to";
-				mes "South Morroc since it seems to be a good place to start investigating. You'll see what we found right outside the South Morroc gate.";
+				mes "Foi por isso que pedi uma ajuda ao Clã dos Magos. Felizmente, tenho amizade com Mana...";
+				next;
+				mes "[Yierhan]";
+				mes "Então, por favor se dirija para o sul de morroc, lá é o melhor local para começar a investigação. Você logo verá o que achamos logo que sair de Morroc.";
 				set tu_magician01, 8;
 				break;
 			}
 		} else if(tu_magician01 < 26){
-			mes "I heard there was";
-			mes "this one Assassin";
-			mes "that went on a mission";
-			mes "and never returned.";
+			mes "Há histórias que dizem que um Grande Assassino desapareceu em uma missão...";
 			next;
 			mes "[Yierhan]";
-			mes "What's so weird about it was that the Assassin Guild reported that the mission was completed!";
-			mes "I remember hearing that guy";
-			mes "was really good...";
+			mes "O que é estranho sobre isso, é que a Guilda dos Assassinos informou que a missão foi concluída.";
 			next;
 			mes "[Yierhan]";
-			mes "Be careful, pal.";
-			mes "It seems your";
-			mes "investigation";
-			mes "might be related to";
-			mes "that mysterious Assassin...";
+			mes "Tome cuidado, amigo. Parece que sua missão tem a ver com esse misterioso assassino...";
 			close;
 		} else if(tu_magician01 == 26){
-			mes "So how's the";
-			mes "investigation";
-			mes "coming along?";
-			mes "I've been so busy,";
-			mes "I couldn't focus";
-			mes "on it at all...";
+			mes "Hmm.....";
+			mes "Então como vai indo?";
+			mes "Estou tão ocupado com vários trabalhos ultimamente";
+			mes "que quase não tenho tempo para investigar.";
 			next;
-			switch(select("I'm still investigating.:I'm not done yet...:Oh, I finished~")) {
+			switch(select("Eu ainda estou investigando.:Ainda nada.:Terminei de investigar.")){
 			case 1:
 				mes "[Yierhan]";
-				mes "Ah, gotcha. Well, that's understandable. I mean, these things take time, you know?";
-				close;
+				mes "Ah...";
+				mes "Entendo. Ela não é simples de ser terminada.";
+				mes "Continue fazendo um bom trabalho.";
+				close2;
 				break;
 			case 2:
 				mes "[Yierhan]";
-				mes "Yeah...?";
-				mes "That's alright.";
-				mes "I guess these kinds of things require patience. And thinking.";
-				mes "You know, things I'm horrible at.";
-				close;
+				mes "Ah...";
+				mes "Entendo. Ela não é simples de ser terminada.";
+				mes "Continue tentando.";
+				close2;
 				break;
 			case 3:
 				mes "[Yierhan]";
-				mes "Alright...!";
-				mes "So what's up?";
-				mes "Hit me up with";
-				mes "what you know~";
+				mes "Ohhhh, você conseguiu!";
+				mes "Ok, está tudo certo.";
+				mes "Estava esperando por muito tempo esse dia chegar.";
 				next;
-				mes "^3355FFYou explain the results of your investigation to Yierhan and tell him about the scrap of cloth you found on your mission.^000000";
-				next;
-				mes "[Yierhan]";
-				mes "Scrap of cloth?";
-				mes "Huh, alright. Say,";
-				mes "lemme have a looksee.";
+				mes "- Você informou ele sobre sua investigação -";
+				mes "- e sobre o pedaço de pano adquirido em sua missão. -";
 				next;
 				mes "[Yierhan]";
-				mes "Whoa!";
-				mes "You did great.";
-				mes "This is some pretty";
-				mes "important information!";
+				mes "Como você pode ver, a textura desse pano";
+				mes "é peculiar de assassinos.";
+				mes "E essa textura particularmente é";
+				mes "usada por Algozes.";
 				next;
 				mes "[Yierhan]";
-				mes "You see, the pattern on this cloth is sort of like one of the codes Assassins use. And this particular pattern looks like something from one of those higher Assassins.";
+				mes "Com isso, eu posso descubrir";
+				mes "o que aconteceu aquela noite.";
+				mes "Obrigado.";
 				next;
 				mes "[Yierhan]";
-				mes "I might be able to figure out what happened that night with the new information this cloth might lead me to. Thanks a lot!";
-				next;
-				mes "[Yierhan]";
-				mes "From here on,";
-				mes "the higher ups in the";
-				mes "guild will take over this investigation. You did your job perfectly, so it's time for you to hone your skills.";
-				next;
-				mes "[Yierhan]";
-				mes "Hey, this stuff is yours. Think of it as a reward for helping us out. Right, and I'll let Mana know you did a great job. Take care of yourself now~";
+				mes "Ah, aceite isso como forma de gratidão.";
+				mes "Mandarei uma mensagem à Mana falando sobre sua ajuda.";
+				mes "Se cuide.";
 				set tu_magician01, 27;
 				set Zeny, Zeny + 5000;
-				getexp 500,200;
-				close;
+				getexp 5000,2000;
+				close2;
+				break;
 			}
 		} else {
-			mes "Just as I thought,";
-			mes "more than one group";
-			mes "was involved in all this.";
-			mes "Huh. Something real bad";
-			mes "might happen soon...";
+			mes "Como disse, não foi apenas um grupo mas no mínimo";
+			mes "dois ou até três grupos envolvidos com isso.";
+			mes "Hmm...Tenho a sensaçao que algo ruim acontecerá em breve.";
 			close;
 		}
 	}
-	mes "Some people think";
-	mes "the desert is just a";
-	mes "dangerous, uncomfortable";
-	mes "place where no one wants";
-	mes "to be. But there's all";
-	mes "sorts of great stuff here.";
-	next;
-	mes "[Yierhan]";
-	mes "We got the blazing heat that encourages skimpy outfits, we got... Cacti. We got more sand than the beach. Um... Sandstorms?";
+	mes "A coisa mais romantica ";
+	mes "no deserto são com certeza";
+	mes "as tempestades de areia. Hahaha.";
 	close;
 }
