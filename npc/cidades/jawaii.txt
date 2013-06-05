@@ -425,7 +425,7 @@ jawaii,214,168,5	script	Auxiliar Lua de Mel#Jawaii	71,{
 
 // Interior de Jawaii
 //============================================================
-jawaii_in,25,94,0	script	Funcionaria#jaw1	724,{
+jawaii_in,25,94,0	script	Empregada#jaw1	724,{
 	mes "[Funcionária Tryteh]";
 	mes "Bem vindo a Taberna de Jawaii~";
 	if (getpartnerid()) {
@@ -453,26 +453,26 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,96,0	script	Empregado#jaw2	724,{
-	mes "[Employee Fey]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,25,96,0	script	Empregada#jaw2	724,{
+	mes "[Funcionária Fey]";
+	mes "Bem Vindo a Taverna de Jawaii~";
 	if (getpartnerid()) {
 		next;
-		mes "[Employee Fey]";
-		mes "We hope that you enjoy your time here with the one that you love. Isn't this place nice and cozy,";
-		mes "a perfect romantic atmosphere?";
+		mes "[Funcionária Fey]";
+		mes "Esperamos que você aproveite seu tempo aqui com o que você ama. Este lugar não é agradável e acolhedor,";
+		mes "com uma atmosfera romântica perfeita?";
 		next;
-		mes "[Employee Fey]";
-		mes "It would be absolutely perfect if it weren't for those 'Invincible Single Army' weirdos. Somehow,";
-		mes "a few of those dorks found their way here. To hell with them!";
+		mes "[Funcionária Fey]";
+		mes "Seria absolutamente perfeito se não fossem esses estranhos da 'Armada dos Solteiros Invencíveis'. Eles apareceram";
+		mes "aqui por algum motivo. Que vão para o inferno!";
 		close;
 	}
 	else if (!getpartnerid()) {
-		mes "Have a good time! But please,";
-		mes "try not to interrupt the happily married people here!";
+		mes "Divirta-se! Mas por favor";
+		mes "tente não atrapalhar os recém-casados daqui!";
 		close;
 	}
-	mes "I hope you will have a good time~";
+	mes "Espero que você se divirta~";
 	close;
 
 OnWelcome:
@@ -483,40 +483,40 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,98,0	script	Empregado#jaw3	724,{
-	mes "[Employee Buffy]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,25,98,0	script	Empregada#jaw3	724,{
+	mes "[Funcionária Buffy]";
+	mes "Bem Vindo a Taverna de Jawaii~";
 	if (getpartnerid()) {
 		next;
-		mes "[Employee Buffy]";
+		mes "[Funcionária Buffy]";
 		mes "Oh~";
-		mes "Look at you...";
-		mes "You look perfect";
+		mes "Olhe Só você...";
+		mes "você é o par perfeito";
 		if (sex)
-			mes "for your wife~";
+			mes "para sua esposa~";
 		else
-			mes "with your husband~";
-		mes "Awwww, I want to";
-		mes "get married soon~!";
+			mes "para o seu marido~";
+		mes "Awwww, eu gostaria de ";
+		mes "me casar em breve~!";
 		close;
 	}
 	else if (!getpartnerid()) {
 		next;
-		mes "[Employee Buffy]";
+		mes "[Funcionária Buffy]";
 		mes "Hmm...?";
-		mes "You don't look like";
-		mes "you're married, are you?";
+		mes "você não parece";
+		mes "que está casado, certo?";
 		if (sex) {
 			next;
-			mes "[Employee Buffy]";
-			mes "I'm pretty good";
-			mes "at cooking and cleaning";
-			mes "^666666*AHEM*^000000 I've got a ^FF0000nice body^000000.";
-			mes "So what do you think...?";
+			mes "[Funcionário Buffy]";
+			mes "Eu sou muito Boa";
+			mes "em coinhar e limpar.";
+			mes "^666666*AHEM*^000000 Eu tenho um ^FF0000belo corpo^000000.";
+			mes "Então, o que você acha...?";
 		}
 		close;
 	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta~";
 	close;
 
 OnWelcome:
@@ -527,35 +527,34 @@ OnSolo:
 	end;
 }
 
-jawaii_in,25,100,0	script	Empregado#jaw4	724,{
-	mes "[Employee Itere]";
-	mes "Welcome to";
-	mes "Jawaii Tavern~";
+jawaii_in,25,100,0	script	Empregada#jaw4	724,{
+	mes "[Funcionária Itere]";
+	mes "Bem Vindo à";
+	mes "Taverna de Jawaii~";
 	if (getpartnerid()) {
 		next;
-		mes "[Employee Itere]";
+		mes "[Funcionária Itere]";
 		mes "Oh~";
-		mes "You look so happy";
-		mes "to be here with your";
-		mes "partner! How precious~";
+		mes "Você parece muito feliz";
+		mes "por estar aqui com a";
+		mes "sua amada! Que beleza~";
+		close;
+	} else if (!getpartnerid()) {
+		mes "Espero que aproveite";
+		mes "a sua est--";
+		mes "Espere um pouco...!";
+		next;
+		mes "[Funcionária Itere]";
+		mes "Você...";
+		mes "É melhor que você não seja membro";
+		mes "da Armada dos Solteiros Invencíveis!";
+		next;
+		mes "[Funcionária Itere]";
+		mes "Bem, faça o que fizer, não entre em desespero, fique bêbado";
+		mes "e incomode os recém-casados!";
 		close;
 	}
-	else if (!getpartnerid()) {
-		mes "I hope you";
-		mes "enjoy your st--";
-		mes "Wait a minute...!";
-		next;
-		mes "[Employee Itere]";
-		mes "You're...";
-		mes "You better not be part of";
-		mes "the Invincible Single Army!";
-		next;
-		mes "[Employee Itere]";
-		mes "Well, whatever you do, don't despair, get drunk and then";
-		mes "bother the married couples!";
-		close;
-	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta.";
 	close;
 
 OnWelcome:
@@ -566,29 +565,28 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,94,4	script	Empregado#jaw5	724,{
-	mes "[Employee Tonia]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,30,94,4	script	Empregada#jaw5	724,{
+	mes "[Funcionária Tonia]";
+	mes "Bem Vindo a Taverna de Jawaii~";
 	if (getpartnerid()) {
 		next;
-		mes "[Employee Tonia]";
-		mes "Congratulations to both of you!";
+		mes "[Funcionária Tonia]";
+		mes "Parabéns à vocês dois!";
 		next;
-		mes "[Employee Tonia]";
-		mes "^666666*Sigh...*^000000";
-		mes "^333333I hope those Single Army morons don't get drunk and do something stupid again...";
+		mes "[Funcionária Tonia]";
+		mes "^666666*Suspiro...*^000000";
+		mes "^333333Espero que esses caras da Armada dos Solteiros não fiquem bêbados e façam besteiras de novo...";
+		close;
+	} else if (!getpartnerid()) {
+		mes "Espere. Você...!";
+		next;
+		mes "[Funcionária Tonia]";
+		mes "Ei--!";
+		mes "Você não é bem vindo aqui!";
+		mes "P-pare de beber! Agora mesmo!";
 		close;
 	}
-	else if (!getpartnerid()) {
-		mes "Wait a sec. You're...!";
-		next;
-		mes "[Employee Tonia]";
-		mes "Hey--!";
-		mes "You're not welcome here!";
-		mes "S-Stop drinking! Right this instant!";
-		close;
-	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta.";
 	close;
 
 OnWelcome:
@@ -599,21 +597,21 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,96,4	script	Empregado#jaw6	724,{
-	mes "[Employee Kay]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,30,96,4	script	Empregada#jaw6	724,{
+	mes "[Funcionária Kay]";
+	mes "Bem Vindo a Taverna de Jawaii~";
 	if (getpartnerid()) {
 		next;
-		mes "[Employee Kay]";
-		mes "Oh gosh...!";
-		mes "Lately, I've been dealing with too many drunks in this place! It's been really hard for me to take care of it all...";
+		mes "[Funcionária Kay]";
+		mes "Oh Deus...!";
+		mes "Ultimamente, eu tenho lidado com muitos bêbados neste lugar! Tem sido muito difícil para mim cuidar de tudo...";
 		close;
 	}
 	else if (!getpartnerid()) {
-		mes "I understand that you want to relax and take a break, but please be careful and don't drink too much.";
+		mes "Eu entendo que você quer relaxar, mas por favor, tenha cuidado e não beba demais.";
 		close;
 	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta.";
 	close;
 	
 OnWelcome:
@@ -624,30 +622,29 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,98,4	script	Empregado#jaw7	724,{
-	mes "[Employee Amy]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,30,98,4	script	Empregada#jaw7	724,{
+	mes "[Funcionária Amy]";
+	mes "Bem vindo à taverna de Jawaii~";
 	if (getpartnerid()) {
-		mes "Oh! You and your partner look perfect for each other. Like, um,";
-		mes "a gun and a bullet! No...?";
+		mes "Oh! Vocês são perfeitos juntos! Parecem, hum,";
+		mes "uma arma e uma bala! Não...?";
 		next;
-		mes "[Employee Amy]";
-		mes "How about...";
-		mes "Milk and cookies?";
-		mes "Gin and tonic?";
+		mes "[Funcionária Amy]";
+		mes "Que tal...";
+		mes "Leite e biscoitos?";
+		mes "Gim e água tônica?";
 		mes "Jackie Tucker";
-		mes "and Chris Chan...?";
-		mes "Ummmm....";
+		mes "e Chris Chan...?";
+		mes "Hummmm....";
 		close;
-	}
-	else if (!getpartnerid()) {
+	} else if (!getpartnerid()) {
 		next;
-		mes "[Employee Amy]";
-		mes "Hmm, I don't think this place is for you. But, I see no problem in letting you drink and have a good time, so long as you don't";
-		mes "make a fuss.";
+		mes "[Funcionária Amy]";
+		mes "Hmm, não acho que esse seja o lugar certo para você. Mas posso deixá-lo beber e se divertir, desde que";
+		mes "não exagere.";
 		close;
 	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta.";
 	close;
 
 OnWelcome:
@@ -658,20 +655,20 @@ OnSolo:
 	end;
 }
 
-jawaii_in,30,100,4	script	Empregado#jaw8	724,{
-	mes "[Employee Yasmine]";
-	mes "Welcome to Jawaii Tavern~";
+jawaii_in,30,100,4	script	Empregada#jaw8	724,{
+	mes "[Funcionária Yasmine]";
+	mes "Bem vindo à taverna de Jawaii~";
 	if (getpartnerid()) {
-		mes "Just like the moon and the stars, you and your partner look perfect together. I'm really happy for you!";
+		mes "Assim como a lua e as estrelas, você e seu parceiro parecem perfeitos juntos. Estou muito feliz por você!";
 		close;
 	}
 	else if (!getpartnerid()) {
 		next;
-		mes "[Employee Yasmine]";
-		mes "You don't look like you belong here, but I hope you find your perfect match one of these days. Have fun!";
+		mes "[Funcionária Yasmine]";
+		mes "Você não olha como você pertence aqui, mas eu espero que você encontrar o seu par perfeito um desses dias. Divirta-se!";
 		close;
 	}
-	mes "I hope you will have a good time.";
+	mes "Espero que você se divirta.";
 	close;
 
 OnWelcome:
@@ -685,24 +682,24 @@ OnSolo:
 jawaii_in,28,96,0	script	jaw_em_order#Jawaii	-1,3,3,{
 OnTouch:
 	if (getpartnerid()) {
-		donpcevent "Empregado#jaw8::OnWelcome";
-		donpcevent "Empregado#jaw7::OnWelcome";
-		donpcevent "Empregado#jaw6::OnWelcome";
-		donpcevent "Empregado#jaw5::OnWelcome";
-		donpcevent "Empregado#jaw4::OnWelcome";
-		donpcevent "Empregado#jaw3::OnWelcome";
-		donpcevent "Empregado#jaw2::OnWelcome";
-		donpcevent "Empregado#jaw1::OnWelcome";
+		donpcevent "Empregada#jaw8::OnWelcome";
+		donpcevent "Empregada#jaw7::OnWelcome";
+		donpcevent "Empregada#jaw6::OnWelcome";
+		donpcevent "Empregada#jaw5::OnWelcome";
+		donpcevent "Empregada#jaw4::OnWelcome";
+		donpcevent "Empregada#jaw3::OnWelcome";
+		donpcevent "Empregada#jaw2::OnWelcome";
+		donpcevent "Empregada#jaw1::OnWelcome";
 		end;
 	}
-	donpcevent "Empregado#jaw8::OnSolo";
-	donpcevent "Empregado#jaw7::OnSolo";
-	donpcevent "Empregado#jaw6::OnSolo";
-	donpcevent "Empregado#jaw5::OnSolo";
-	donpcevent "Empregado#jaw4::OnSolo";
-	donpcevent "Empregado#jaw3::OnSolo";
-	donpcevent "Empregado#jaw2::OnSolo";
-	donpcevent "Empregado#jaw1::OnSolo";
+	donpcevent "Empregada#jaw8::OnSolo";
+	donpcevent "Empregada#jaw7::OnSolo";
+	donpcevent "Empregada#jaw6::OnSolo";
+	donpcevent "Empregada#jaw5::OnSolo";
+	donpcevent "Empregada#jaw4::OnSolo";
+	donpcevent "Empregada#jaw3::OnSolo";
+	donpcevent "Empregada#jaw2::OnSolo";
+	donpcevent "Empregada#jaw1::OnSolo";
 	end;
 }
 	
