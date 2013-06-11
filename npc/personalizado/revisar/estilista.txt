@@ -5,7 +5,7 @@
 //===== Versão Atual: ===========================================
 //= 1.2
 //===== Compatível Com: =========================================
-//= Cronus SVN
+//= Cronus
 //===== Descrição: ==============================================
 //= Muda seu Estilo e Cor do cabelo e as cores de suas roupas.
 //===== Comentários Adicionais: =================================
@@ -17,7 +17,7 @@ prontera,170,180,1	script	Estilista#custom_stylist	122,{
 
 	setarray .@Styles[1],getbattleflag("max_cloth_color"),getbattleflag("max_hair_style"),getbattleflag("max_hair_color");
 	setarray .@Look[1],7,1,6;
-	set .@s, select(" ~ Cloth color: ~ Hairstyle: ~ Hair color");
+	set .@s, select(" ~ Cor da Roupa: ~ Estilo de Cabelo: ~ Cor de Cabelo");
 	set .@Revert, getlook(.@Look[.@s]);
 	set .@Style,1;
 	while(1) {

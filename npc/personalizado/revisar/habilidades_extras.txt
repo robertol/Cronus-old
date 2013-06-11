@@ -5,7 +5,7 @@
 //===== Versão Atual: ========================================
 //= 2.9
 //===== Compatível com: ======================================
-//= Cronus SVN
+//= Cronus
 //===== Descrição: ===========================================
 //= Npc que entrega habilidades extras sem necessidade
 //= de realizar quests.
