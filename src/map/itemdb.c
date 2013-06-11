@@ -590,7 +590,7 @@ static void itemdb_read_itemgroup(void)
 {
 	char path[256];
 	unsigned int count;
-	snprintf(path, 255, "%s/"DBPATH"item_group_db.txt", db_path);
+	snprintf(path, 255, "%s/"DBPATH"item_group_db.txt", iMap->db_path);
 	memset(&itemgroup_db, 0, sizeof(itemgroup_db));
 	count = itemdb_read_itemgroup_sub(path);
 	ShowStatus("Done reading '"CL_WHITE"%lu"CL_RESET"' entries in '"CL_WHITE"%s"CL_RESET"'.\n", count, "item_group_db.txt");
@@ -785,7 +785,7 @@ void itemdb_read_combos() {
 	char path[256];
 	FILE* fp;
 	
-	sprintf(path, "%s/%s", db_path, DBPATH"item_combo_db.txt");
+	sprintf(path, "%s/%s", iMap->db_path, DBPATH"item_combo_db.txt");
 	
 	if ((fp = fopen(path, "r")) == NULL) {
 		ShowError("itemdb_read_combos: File not found \"%s\".\n", path);
@@ -1110,7 +1110,7 @@ static int itemdb_readdb(void)
 		char path[256];
 		FILE* fp;
 
-		sprintf(path, "%s/%s", db_path, filename[fi]);
+		sprintf(path, "%s/%s", iMap->db_path, filename[fi]);
 		fp = fopen(path, "r");
 		if( fp == NULL ) {
 			ShowWarning("itemdb_readdb: File not found \"%s\", skipping.\n", path);
@@ -1226,11 +1226,11 @@ static int itemdb_read_sqldb(void) {
 
 	const char* item_db_name[] = {
 								#ifdef RENEWAL
-									item_db_re_db,
+									iMap->item_db_re_db,
 								#else
-									item_db_db,
+									iMap->item_db_db,
 								#endif
-									item_db2_db };
+									iMap->item_db2_db };
 	int fi;
 	
 	for( fi = 0; fi < ARRAYLENGTH(item_db_name); ++fi ) {
@@ -1293,14 +1293,13 @@ uint64 itemdb_unique_id(int8 flag, int64 value) {
 
 	return ++item_uid;
 }
-int itemdb_uid_load(){
+int itemdb_uid_load() {
 
 	char * uid;
-	if (SQL_ERROR == SQL->Query(mmysql_handle, "SELECT `value` FROM `interreg` WHERE `varname`='unique_id'"))
+	if (SQL_ERROR == SQL->Query(mmysql_handle, "SELECT `value` FROM `%s` WHERE `varname`='unique_id'",iMap->interreg_db))
 		Sql_ShowDebug(mmysql_handle);
 
-	if( SQL_SUCCESS != SQL->NextRow(mmysql_handle) )
-	{
+	if( SQL_SUCCESS != SQL->NextRow(mmysql_handle) ) {
 		ShowError("itemdb_uid_load: Unable to fetch unique_id data\n");
 		SQL->FreeResult(mmysql_handle);
 		return -1;
@@ -1318,19 +1317,19 @@ int itemdb_uid_load(){
  *------------------------------------*/
 static void itemdb_read(void) {
 	
-	if (db_use_sqldbs)
+	if (iMap->db_use_sqldbs)
 		itemdb_read_sqldb();
 	else
 		itemdb_readdb();
 	
 	itemdb_read_combos();
 	itemdb_read_itemgroup();
-	sv->readdb(db_path, "item_avail.txt",         ',', 2, 2, -1, &itemdb_read_itemavail);
-	sv->readdb(db_path, DBPATH"item_trade.txt",   ',', 3, 3, -1, &itemdb_read_itemtrade);
-	sv->readdb(db_path, "item_delay.txt",         ',', 2, 2, -1, &itemdb_read_itemdelay);
-	sv->readdb(db_path, "item_stack.txt",         ',', 3, 3, -1, &itemdb_read_stack);
-	sv->readdb(db_path, DBPATH"item_buyingstore.txt",   ',', 1, 1, -1, &itemdb_read_buyingstore);
-	sv->readdb(db_path, "item_nouse.txt",		 ',', 3, 3, -1, &itemdb_read_nouse);
+	sv->readdb(iMap->db_path, "item_avail.txt",         ',', 2, 2, -1, &itemdb_read_itemavail);
+	sv->readdb(iMap->db_path, DBPATH"item_trade.txt",   ',', 3, 3, -1, &itemdb_read_itemtrade);
+	sv->readdb(iMap->db_path, "item_delay.txt",         ',', 2, 2, -1, &itemdb_read_itemdelay);
+	sv->readdb(iMap->db_path, "item_stack.txt",         ',', 3, 3, -1, &itemdb_read_stack);
+	sv->readdb(iMap->db_path, DBPATH"item_buyingstore.txt",   ',', 1, 1, -1, &itemdb_read_buyingstore);
+	sv->readdb(iMap->db_path, "item_nouse.txt",		 ',', 3, 3, -1, &itemdb_read_nouse);
 	
 	itemdb_uid_load();
 }
@@ -1435,7 +1434,7 @@ void itemdb_reload(void)
 	iter = mapit_geteachpc();
 	for( sd = (struct map_session_data*)mapit->first(iter); mapit->exists(iter); sd = (struct map_session_data*)mapit->next(iter) ) {
 		memset(sd->item_delay, 0, sizeof(sd->item_delay));  // reset item delays
-		pc_setinventorydata(sd);
+		pc->setinventorydata(sd);
 		/* clear combo bonuses */
 		if( sd->combos.count ) {
 			aFree(sd->combos.bonus);
@@ -1443,7 +1442,7 @@ void itemdb_reload(void)
 			sd->combos.bonus = NULL;
 			sd->combos.id = NULL;
 			sd->combos.count = 0;
-			if( pc_load_combo(sd) > 0 )
+			if( pc->load_combo(sd) > 0 )
 				status_calc_pc(sd,0);
 		}
 
