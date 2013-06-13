@@ -254,8 +254,6 @@ monk_test,306,151,3	script	Túmulo de Baphomet#edq	111,{
 		set .@partymembercount,$@partymembercount;
 		copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
 
-		set .@instance, instance_id(1);
-		instance_attach(.@instance);
 
 		// 12 hour cooldown
 		set .@ins_bapho_check,checkquest(3046,PLAYTIME);
@@ -720,7 +718,7 @@ OnDisable:
 
 OnMyMobDead:
 	if (mobcount("1@cata",instance_npcname("ins_baphomet_lotto3", instance_id())+"::OnMyMobDead") < 1) {
-		instance_announce 0, "Todos os Apóstolos de Baphomet estão mortos!",bc_map,"0x00ff99";
+		instance_announce -1, "Todos os Apóstolos de Baphomet estão mortos!",bc_map,"0x00ff99";
 	}
 	getitem 6002,1; //Token_Of_Apostle
 	end;
@@ -800,7 +798,7 @@ OnMyMobDead:
 			mes "[Túmulo do Herói]";
 			mes "Agora posso substancializar minha alma. Esperarei no altar de fogo no centro do mapa. Me encontre lá.";
 			next;
-			instance_announce 0, "Alma do Herói : Esperarei no altar de fogo no centro do mapa.",bc_map,"0xFFFF00";
+			instance_announce -1, "Alma do Herói : Esperarei no altar de fogo no centro do mapa.",bc_map,"0xFFFF00";
 			mes "Posso ouvir uma voz fraca.";
 			close;
 		}
@@ -1016,7 +1014,7 @@ OnTouch:
 		mes "[Alma do Herói]";
 		mes "Vão à frente, guerreiros.";
 		cutin "",255;
-		instance_announce 0, "Alma do Herói : Agora já podem ir ao Altar Principal. Ele está localizado no Sudeste do mapa",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : Agora já podem ir ao Altar Principal. Ele está localizado no Sudeste do mapa",bc_map,"0xFFFF00";
 		close;
 	}
 	else if ('ins_baphomet == 4) {
@@ -1758,23 +1756,23 @@ OnDisable:;
 	end;
 
 OnTimer1800000:
-	instance_announce 0, "Alma do Herói : Não temos tempo suficiente. Apressem-se.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Não temos tempo suficiente. Apressem-se.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer2400000:
-	instance_announce 0, "Alma do Herói : Meu corpo está desaparecendo... Apressem-se.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Meu corpo está desaparecendo... Apressem-se.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3000000:
-	instance_announce 0, "Alma do Herói : Tudo acabou... Não tem como prosseguirmos...",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Tudo acabou... Não tem como prosseguirmos...",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3050000:
-	instance_announce 0, "Alma do Herói : Falhamos... Entretanto... Ainda temos chances. Espero que treinem mais até a hora chegar.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Falhamos... Entretanto... Ainda temos chances. Espero que treinem mais até a hora chegar.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3100000:
-	instance_announce 0, "Você falhou em abrir o selo no Altar Principal.",bc_map,"0xFFFF00";
+	instance_announce -1, "Você falhou em abrir o selo no Altar Principal.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3500000:
@@ -1801,19 +1799,19 @@ OnDisable:
 	end;
 
 OnTimer10000:
-	instance_announce 0, "Baphomet : Humanos... interferindo novamente...",bc_map,"0xdb7093";
+	instance_announce -1, "Baphomet : Humanos... interferindo novamente...",bc_map,"0xdb7093";
 	end;
 
 OnTimer13000:
-	instance_announce 0, "Apóstolo de Baphomet : Humanos! Humanos invadiram nosso santuário!",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Humanos! Humanos invadiram nosso santuário!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer16000:
-	instance_announce 0, "Apóstolo de Baphomet : Matem-nos! Não deixem parar a ressurreição de nosso mestre!",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Matem-nos! Não deixem parar a ressurreição de nosso mestre!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer18000:
-	instance_announce 0, "Apóstolo de Baphomet : Apressem-se em liberar os selos dos altares! O retorno de nosso mestre está sobre nós.",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Apressem-se em liberar os selos dos altares! O retorno de nosso mestre está sobre nós.",bc_map,"0xFFFF00";
 	stopnpctimer;
 	disablenpc instance_npcname("ins_2f_enter_broad", instance_id());
 	end;
@@ -1822,7 +1820,7 @@ OnTimer18000:
 2@cata,50,67,0	script	slave_left	-1,5,5,{
 OnTouch:
 	disablenpc instance_npcname("slave_left", instance_id());
-	instance_announce 0, "Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
 	monster "2@cata",55,67,"Apóstolo de Baphomet",1869,1;
 	monster "2@cata",51,67,"Apóstolo de Baphomet",1291,1;
 	monster "2@cata",58,67,"Apóstolo de Baphomet",1292,1;
@@ -1845,7 +1843,7 @@ OnTouch:
 2@cata,109,67,0	script	slave_right	-1,5,5,{
 OnTouch:
 	disablenpc instance_npcname("slave_right", instance_id());
-	instance_announce 0, "Apóstolo de Baphomet : Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
 	monster "2@cata",105,67,"Apóstolo de Baphomet",1869,1;
 	monster "2@cata",104,67,"Apóstolo de Baphomet",1291,1;
 	monster "2@cata",107,67,"Apóstolo de Baphomet",1869,1;
@@ -1868,7 +1866,7 @@ OnTouch:
 2@cata,79,39,0	script	slave_down	-1,5,5,{
 OnTouch:
 	disablenpc instance_npcname("slave_down", instance_id());
-	instance_announce 0, "Apóstolo de Baphomet : Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
+	instance_announce -1, "Apóstolo de Baphomet : Apóstolo de Baphomet : Matem os Humanos! Não os deixem enterromper a volta de nosso Mestre!",bc_map,"0xFFFF00";
 	monster "2@cata",78,41,"Apóstolo de Baphomet",1869,1;
 	monster "2@cata",79,42,"Apóstolo de Baphomet",1291,1;
 	monster "2@cata",78,46,"Apóstolo de Baphomet",1869,1;
@@ -1897,7 +1895,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -1918,7 +1916,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -1936,7 +1934,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -1957,7 +1955,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -1975,7 +1973,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -1996,7 +1994,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -2014,7 +2012,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -2035,7 +2033,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -2053,7 +2051,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -2074,7 +2072,7 @@ OnTouch:
 		percentheal -50,0;
 		sc_start Eff_Stone,20000,0;
 		setquest 3041;
-		instance_announce 0, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
+		instance_announce -1, "O selo é ativado colocando o poder mágico sobre o altar.",bc_map,"0x87ceeb";
 		mes "Eu posso sentir o poder voltando ao altar colocando seu poder mágico.";
 		next;
 		mes "Você não pode colocar o selo novamente durante 3 minutos pois perdeu seu SP com isso.";
@@ -2163,27 +2161,27 @@ OnDisable:
 	end;
 
 OnTimer3000:
-	instance_announce 0, "Alma do Herói : Meu deus! O selo do Altar Principal está enfraquecendo.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Meu deus! O selo do Altar Principal está enfraquecendo.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer6000:
-	instance_announce 0, "Alma do Herói : Companheiros... Escutem com atenção o que irei dizer.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Companheiros... Escutem com atenção o que irei dizer.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer9000:
-	instance_announce 0, "Alma do Herói : Os altares, que controlam o poder altar principal, estão localizados nos cantos Nordeste, Sudeste, Sudoeste e Noroeste deste quarto.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Os altares, que controlam o poder altar principal, estão localizados nos cantos Nordeste, Sudeste, Sudoeste e Noroeste deste quarto.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer12000:
-	instance_announce 0, "Alma do Herói : Encontre estes altares e ative os seus selos antes que Baphomet reviva.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Encontre estes altares e ative os seus selos antes que Baphomet reviva.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer15000:
-	instance_announce 0, "Baphomet : Tarde demais, fracos... Agora, vocês irão sentir o desespero da morte.",bc_map,"0xdb7093";
+	instance_announce -1, "Baphomet : Tarde demais, fracos... Agora, vocês irão sentir o desespero da morte.",bc_map,"0xdb7093";
 	end;
 
 OnTimer17000:
-	instance_announce 0, "Baphomet : Ninguém pode me prejudicar aqui. Você será o meu primeiro sacrifício.",bc_map,"0xdb7093";
+	instance_announce -1, "Baphomet : Ninguém pode me prejudicar aqui. Você será o meu primeiro sacrifício.",bc_map,"0xdb7093";
 	donpcevent instance_npcname("control_baphomet", instance_id())+"::OnEnable";
 	donpcevent instance_npcname("ins_2f_hero_broad2", instance_id())+"::OnEnable";
 	stopnpctimer;
@@ -2207,7 +2205,7 @@ OnMyMobDead:
 		set 'ins_baphomet,7;
 		setquest 3046;
 		erasequest 3041;
-		instance_announce 0, "Baphomet : Não! Nãoooo!Levarei isso como insulto, seus insetos!... Não...",bc_map,"0xdb7093";
+		instance_announce -1, "Baphomet : Não! Nãoooo!Levarei isso como insulto, seus insetos!... Não...",bc_map,"0xdb7093";
 		enablenpc instance_npcname("Alma do Herói#2F", instance_id());
 		disablenpc instance_npcname("slave_down", instance_id());
 		disablenpc instance_npcname("slave_left", instance_id());
@@ -2236,31 +2234,31 @@ OnDisable:
 	end;
 
 OnTimer8000:
-	instance_announce 0, "Alma do Herói : Não se preocupem, o Baphomet ainda pode ser derrotado.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Não se preocupem, o Baphomet ainda pode ser derrotado.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer11000:
-	instance_announce 0, "Alma do Herói : Vá para os alteres e ativem os selos.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Vá para os alteres e ativem os selos.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer13000:
-	instance_announce 0, "Alma do Herói : Quando os selos se recuperarem, Baphomet ficará vulnerável.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Quando os selos se recuperarem, Baphomet ficará vulnerável.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer16000:
-	instance_announce 0, "Alma do Herói : Você deve atrair Baphomet aos altares não selados. Caso contrário, seu esforço será inútil.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Você deve atrair Baphomet aos altares não selados. Caso contrário, seu esforço será inútil.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer19000:
-	instance_announce 0, "Alma do Herói : Temos apenas 1 hora de parar Baphomet. Se o tempo passar, o poder dos selos será inútil.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Temos apenas 1 hora de parar Baphomet. Se o tempo passar, o poder dos selos será inútil.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer22000:
-	instance_announce 0, "Baphomet : É inútil. Faça mais selos. Eu vou esmagá-los. Nenhum de vocês vai sobreviver.",bc_map,"0xdb7093";
+	instance_announce -1, "Baphomet : É inútil. Faça mais selos. Eu vou esmagá-los. Nenhum de vocês vai sobreviver.",bc_map,"0xdb7093";
 	end;
 
 OnTimer26000:
-	instance_announce 0, "Alma do Herói : O poder mágico do selo central está se esgotando. Vá para o selo central e coloque o poder mágico.",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : O poder mágico do selo central está se esgotando. Vá para o selo central e coloque o poder mágico.",bc_map,"0xFFFF00";
 	enablenpc instance_npcname("Selo Mágico#0", instance_id());
 	disablenpc instance_npcname("Selo Mágico#2", instance_id());
 	disablenpc instance_npcname("Selo Mágico#4", instance_id());
@@ -2336,11 +2334,11 @@ OnDisable:
 	end;
 
 OnTimer3600000:
-	instance_announce 0, "Baphomet : krrrr... Agora você não pode me parar por causa de um selo. Basta esperar pela sua morte.",bc_map,"0xdb7093";
+	instance_announce -1, "Baphomet : krrrr... Agora você não pode me parar por causa de um selo. Basta esperar pela sua morte.",bc_map,"0xdb7093";
 	end;
 
 OnTimer3605000:
-	instance_announce 0, "Alma do Herói : Você não pode mais parar o Baphomet com os selos. Tudo agora depende de Deus ...",bc_map,"0xFFFF00";
+	instance_announce -1, "Alma do Herói : Você não pode mais parar o Baphomet com os selos. Tudo agora depende de Deus ...",bc_map,"0xFFFF00";
 	donpcevent instance_npcname("ins_2f_hero_pattern_c", instance_id())+"::OnDisable";
 	end;
 }
@@ -2359,7 +2357,7 @@ OnDisable:
 OnTimer70000:
 	switch(rand(1,5)) {
 	case 1:
-		instance_announce 0, "Alma do Herói : Meu Deus! O poder controlado pelo altar principal está enfraquecendo!",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : Meu Deus! O poder controlado pelo altar principal está enfraquecendo!",bc_map,"0xFFFF00";
 		enablenpc instance_npcname("Selo Mágico#0", instance_id());
 		disablenpc instance_npcname("Selo Mágico#2", instance_id());
 		disablenpc instance_npcname("Selo Mágico#4", instance_id());
@@ -2367,7 +2365,7 @@ OnTimer70000:
 		disablenpc instance_npcname("Selo Mágico#10", instance_id());
 		break;
 	case 2:
-		instance_announce 0, "Alma do Herói : O poder do altar das 2 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : O poder do altar das 2 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("Selo Mágico#0", instance_id());
 		enablenpc instance_npcname("Selo Mágico#2", instance_id());
 		disablenpc instance_npcname("Selo Mágico#4", instance_id());
@@ -2375,7 +2373,7 @@ OnTimer70000:
 		disablenpc instance_npcname("Selo Mágico#10", instance_id());
 		break;
 	case 3:
-		instance_announce 0, "Alma do Herói : O poder do altar das 4 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : O poder do altar das 4 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("Selo Mágico#0", instance_id());
 		disablenpc instance_npcname("Selo Mágico#2", instance_id());
 		enablenpc instance_npcname("Selo Mágico#4", instance_id());
@@ -2383,7 +2381,7 @@ OnTimer70000:
 		disablenpc instance_npcname("Selo Mágico#10", instance_id());
 		break;
 	case 4:
-		instance_announce 0, "Alma do Herói : O poder do altar das 8 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : O poder do altar das 8 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("Selo Mágico#0", instance_id());
 		disablenpc instance_npcname("Selo Mágico#2", instance_id());
 		disablenpc instance_npcname("Selo Mágico#4", instance_id());
@@ -2391,7 +2389,7 @@ OnTimer70000:
 		disablenpc instance_npcname("Selo Mágico#10", instance_id());
 		break;
 	case 5:
-		instance_announce 0, "Alma do Herói : O poder do altar das 10 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
+		instance_announce -1, "Alma do Herói : O poder do altar das 10 horas está enfraquecendo. Vá para o altar e reative-o.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("Selo Mágico#0", instance_id());
 		disablenpc instance_npcname("Selo Mágico#2", instance_id());
 		disablenpc instance_npcname("Selo Mágico#4", instance_id());
