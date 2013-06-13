@@ -1,285 +1,285 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================= 
 //= Misc. Message Boards
-//===== By: ================================================== 
-//= kobra_k88
-//= L0ne_W0lf
-//===== Current Version: ===================================== 
-//= 1.6
-//===== Description: ========================================= 
+//===== Por: ================================================
+//= kobra_k88, L0ne_W0lf
+//===== Versão Atual: =======================================
+//= 1.6b
+//===== Compatível com: =====================================
+//= Cronus
+//===== Descrição: ========================================== 
+//= [Aegis Conversion]
 //= Misc. Message Boards for:
-//=  - Prontera
-//=  - Morroc
-//=  - Geffen
-//=  - Al De Baran
-//=  - Izlude
-//=  - Alberta
-//===== Additional Comments: ================================= 
+//=  - Prontera - Morroc - Geffen - Al De Baran - Izlude - Alberta
+//===== Comentários Adicionais: =============================
 //= Rearranged [Lupus]
 //= Fixed spelling mistakes. [Nexon]
 //= 1.3 Removed Duplicates [Silent]
 //= 1.4 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
 //= 1.5 Removed a duplicate related to the Sign Quest. [SinSloth]
 //= 1.5 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 1.6 Commented out conflicting npcs. (bugreport:4093) [L0ne_W0lf]
+//= 1.6 Traduzido por [Zidane Tribal]
+//= 1.6a Revisão Geral do Script [Mara]
+//= 1.6b Pequenas correções gramaticais [Keoy]
 //============================================================
 
 // Prontera
 //============================================================
-prontera,158,213,1	script	Sign Post#Prt1	111,{
-	mes "^993300- The Sign Post Reads -^000000";
-	mes "North to Prontera Castle";
-	mes "North to Al De Baran";
-	mes "Northwest to Geffen";
-	mes "East to Prontera Fields";
-	mes "South to Prontera Fields";
-	mes "Southeast to Alberta";
-	mes "Southwest to Morroc";
-	mes "Southwest to Comodo";
-	mes "West to Prontera Fields";
+prontera,158,213,1	script	Direções#Prt1	111,{
+	mes "^993300- Direções -^000000";
+	mes "Norte para o Castelo de Prontera";
+	mes "Norte para Al De Baran";
+	mes "Noroeste para Geffen";
+	mes "Leste para os Campos de Prontera";
+	mes "Sul para os Campos de Prontera";
+	mes "Sudeste para Alberta";
+	mes "Sudoeste para Morroc";
+	mes "Sudoeste para Comodo";
+	mes "Oeste para os Campos de Prontera";
 	close;
 }
 
-prontera,156,197,1	script	Prontera Bulletin#Prt2	111,{
-	mes "^993300- The Prontera Bulletin Reads -^000000";
-	mes "Wanted: Two Clip Accessories";
-	mes "Please contact...";
-	mes "- Name appears to be worn off -";
-	mes "Selling: Used Bastard Sword";
-	mes "Will take any offer!";
-	mes "Contact Abramulious";
-	mes "Help Wanted: Buying or selling a used Peco Peco?";
-	mes "Contact Grasisium in Morroc now!";
+prontera,156,197,1	script	Comunicado de Prontera	111,{
+	mes "^993300- Lê-se no comunicado de Prontera -^000000";
+	mes "Procura-se: Duas Presilhas";
+	mes "Favor informar...";
+	mes "- O nome parece estar desgastado -";
+	mes "Vende-se: Espada Bastarda";
+	mes "Aceito qualquer oferta!";
+	mes "Tratar com Abramulious";
+	mes "Procura-se ajuda: Comprando ou Vendendo um Peco Peco usado?";
+	mes "Contate Grasisium em Morroc agora!";
 	close;
 }
 
-prontera,278,212,1	script	Sign#Prt3	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Please help keep Prontera a clean place.";
+prontera,278,212,1	script	Sinal#Prt3	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Favor ajudar a manter Prontera um local limpo.";
 	close;
 }
-/*
-prontera,150,326,1	script	Sign#Prt4	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Citizens of Prontera are Welcomed in the Prontera Castle.";
+
+prontera,150,326,1	script	Sinal#Prt4	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Cidadãos de Prontera são bem-vindos no Castelo de Prontera.";
 	close;
 }
-*/
-prontera,31,212,1	script	Billboard#Prt5	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "~WANTED~";
+
+prontera,31,212,1	script	Letreiro#Prt5	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "~Procurado~";
 	mes "iROGM01";
-	mes "DEAD or ALIVE";
-	mes "*Kill Stealing in Glast Heim*";
-	mes "~REWARD~";
+	mes "Vivo ou Morto";
+	mes "*Ladrão assassino de Glast Heim*";
+	mes "~Recompensa~";
 	mes "50,000 Zeny ";
-	mes "Contact: iROGM02";
+	mes "Contactar: iROGM02";
 	close;
 }
 
-prontera,165,305,1	script	Billboard#Prt6	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "We hope you enjoy your stay in Prontera.";
+prontera,165,305,1	script	Letreiro#Prt6	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "Esperamos que você aproveite a sua estadia em Prontera.";
 	close;
 }
 
-prontera,145,304,1	script	Sign#Prt7	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Note:";
-	mes "I lost my cart in Mt. Mjolnir, if someone finds it please tell me, my life was in that bucket of goods!";
+prontera,145,304,1	script	Sinal#Prt7	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Nota:";
+	mes "Perdi meu carrinho no Mt. Mjolnir, se alguém encontrá-lo por favor me diga, minha vida está nesse balde de mercadorias!";
 	close;
 }
 
 // Morroc
 //============================================================
-morocc,144,84,1	script	Sign#Moc1	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Wanted: Body guard to protect my shop from thieves";
-	mes "Please contact Butcher";
+morocc,144,84,1	script	Sinal#Moc1	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Procura-se: Guarda-costas para proteger minha loja de ladrões";
+	mes "Favor falar com Butcher";
 	close;
 }
 
-morocc,145,83,1	script	Sign#Moc2	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Selling, well groomed Peco Peco!";
-	mes "This beautiful specimen has only been ridden by myself, comes with a saddle, a harness and...";
+morocc,145,83,1	script	Sinal#Moc2	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Vendo, Peco Peco bem preparado!";
+	mes "Este belo exemplar só foi montado por mim, vem com sela, arreio e...";
 	close;
 }
 
-morocc,32,174,1	script	Bulletin#Moc3	111,{
-	mes "^993300- The Bulletin Reads -^000000";
-	mes "^0099FFMorroc women up in arms!^000000";
-	mes "A recent study has shown that the majority of male citizens in";
-	mes "Morroc prefer the women of Geffen. 90 of the 100 male citizens";
-	mes "of Morroc claimed that they have had numerous relationships";
-	mes "with Geffen women outside of the Morroc Region.";
+morocc,32,174,1	script	Comunicado#Moc3	111,{
+	mes "^993300- Lê-se no Comunicado -^000000";
+	mes "^0099FFMulheres de Morroc em guerra!^000000";
+	mes "Um estudo recente demonstrou que a maioria dos cidadãos do sexo masculino em";
+	mes "Morroc prefere as mulheres de Geffen. 90 dos 100 cidadãos do sexo masculino";
+	mes "de Morroc alegaram que tiveram inúmeras relações com as mulheres";
+	mes "de Geffen fora da região de Morroc.";
 	next;
-	mes "^993300- The Bulletin Continued -^000000";
-	mes "'I just prefer their company better, that's all...' said one Morroc man.";
-	mes "'it's not like I'm against Morroc women or anything, so what's the problem...'";
-	mes "Besides emotional and stressful issues in regards to the daily";
-	mes "activities of these males.";
-	mes "Hunting still seems to be their number one priority";
-	mes "over finding decent woman within the region....";
+	mes "^993300- O Comunicado continua -^000000";
+	mes "'Eu prefiro a companhia delas, isto é tudo...' disse um homem de Morroc.";
+	mes "'não sou contra as mulheres de Morroc ou algo do tipo, então qual o problema...'";
+	mes "Além de problemas emocionais e estressante no que diz respeito";
+	mes "às atividades diárias desses homens.";
+	mes "Caçar ainda parece ser a sua prioridade número um,";
+	mes "mais do que encontrar mulheres na região....";
 	close;
 }
 
-morocc,168,266,1	script	Sign#Moc5	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome to Morroc.";
+morocc,168,266,1	script	Sinal#Moc5	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem-vindo a Morroc.";
 	close;
 }
 
-morocc,168,264,1	script	Billboard#Moc6	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "^CC0033Battle Royal!^000000";
-	mes "Do you have what it takes to battle someone in a no holds barred, player vs. player game of death!";
-	mes "Head to Prontera if you think you have what it takes!";
+morocc,168,264,1	script	Letreiro#Moc6	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "^CC0033Batalha Real!^000000";
+	mes "Você tem o que é preciso para a batalha? Algo que não pode ser parado, jogador vs. jogador o jogo da morte!";
+	mes "Dirija-se a Prontera se você acha que tem o que é preciso!";
 	close;
 }
 
-morocc,298,211,1	script	Sign#Moc7	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome to Morroc.";
+morocc,298,211,1	script	Sinal#Moc7	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem-vindo a Morroc.";
 	close;
 }
 
 // Geffen
 //============================================================
-geffen,116,58,1	script	Geffen Bulletin#Gef1	111,{
-	mes "^993300- The Geffen Bulletin Reads -^000000";
-	mes "Remember Wizard's...It's not how many skills you know, it's the magic that counts!";
+geffen,116,58,1	script	Comunicado de Geffen	111,{
+	mes "^993300- Lê-se no comunicado de Geffen -^000000";
+	mes "Lembrem-se Bruxos...Não é quantas habilidades vocês sabem, é o mago que conta!";
 	close;
 }
-/*
-geffen,61,174,1	script	Sign#Gef2	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "- Seems to be written in a language unfamiliar to you -";
+
+geffen,61,174,1	script	Sinal#Gef2	111,{
+OnClick:
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "- Parece estar escrito em um idioma desconhecido para você -";
 	close;
 }
-*/
-geffen,113,104,1	script	Billboard#Gef3	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "Selling: Brand new Chon Chon Doll!";
-	mes "What a great gift to give to a loved one, contact me now!";
-	mes "- Name seems to be smeared -";
+
+geffen,113,104,1	script	Letreiro#Gef3	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "Vendo: Boneco de ChonChon de marca!";
+	mes "Um ótimo presente para dar a pessoa querida, entre agora em contato comigo!";
+	mes "- Nome parece estar manchado -";
 	mes " ";
-	mes "Buying: Manteau!";
-	mes "I'm freezing and I have no zeny, please help me!";
-	mes "Contact Edionyus";
+	mes "Compro: Manto!";
+	mes "Estou congelado e não tenho zeny, por favor me ajude!";
+	mes "Contate Edionyus";
 	close;
 }
 
-geffen,119,190,1	script	Sign Post#Gef4	111,{
-	mes "^993300- The Sign Post Reads -^000000";
-	mes "North to Geffen Fields";
-	mes "Northeast to Al De Baran";
-	mes "Northwest to Glast Heim";
-	mes "East to Geffen Fields";
-	mes "South to Morroc";
-	mes "Southeast to Prontera";
-	mes "Southeast to Alberta";
-	mes "Southwest to Comodo";
-	mes "West to Geffen Fields";
+geffen,119,190,1	script	Direções#Gef4	111,{
+	mes "^993300- Direções -^000000";
+	mes "Norte para os Campos de Geffen";
+	mes "Nordeste para Al De Baran";
+	mes "Noroeste para Glast Heim";
+	mes "Leste para os Campos de Geffen";
+	mes "Sul para Morroc";
+	mes "Sudeste para Prontera";
+	mes "Sudeste para Alberta";
+	mes "Sudoeste para Comodo";
+	mes "Oeste para os Campos de Geffen";
 	close;
 }
 
-geffen,168,175,1	script	Sign#Gef5	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "''Your always welcomed in Geffen''";
+geffen,168,175,1	script	Sinal#Gef5	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "''Você sempre será bem vindo em Geffen''";
 	close;
 }
 
-geffen,183,61,1	script	Sign#Gef6	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome.";
+geffen,183,61,1	script	Sinal#Gef6	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem-vindo.";
 	close;
 }
 
 // Al De Baran
 //============================================================
-aldebaran,181,172,1	script	Billboard#Alde1	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "In Search of:";
-	mes "I lost my Bongun pet, it wasn't my fault, it just ran away...";
-	mes "If you see him, please let me know. Reward to whomever finds him!";
+aldebaran,181,172,1	script	Letreiro#Alde1	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "A procura de:";
+	mes "Perdi o meu pet de Bongun, não foi minha culpa, ele simplesmente fugiu...";
+	mes "Se você vê-lo, por favor me avise. Recompensa para quem encontrá-lo!";
 	close;
 }
 
-aldebaran,133,104,1	script	Al De Baran Bulletin#Al2	111,{
-	mes "^993300- The Al De Baran Bulletin Reads -^000000";
-	mes "''Enjoy your stay in Al De Baran''";
+aldebaran,133,104,1	script	Comunicado Al De Baran	111,{
+	mes "^993300- Lê-se no coomunicado de Al De Baran -^000000";
+	mes "''Desfrute da sua estadia em Al De Baran''";
 	close;
 }
 
-aldebaran,54,223,1	script	Billboard#Alde3	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "Help Wanted:";
-	mes "We are looking for young, strong and athletic people who are";
-	mes "interested in a full time career as a Blacksmith. If your interested, please contact Altiregen";
-	mes "in Geffen!";
+aldebaran,54,223,1	script	Letreiro#Alde3	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "Procura-se ajudante:";
+	mes "Estamos à procura de jovens, fortes e atléticos. Pessoas que estão";
+	mes "interessados em uma carreira em tempo integral como um ferreiro. Se é do seu interesse, entre em contato com Altiregen";
+	mes "em Geffen!";
 	close;
 }
 
 aldebaran,197,228,1	script	#Alde4	-1,1,1,{
 OnTouch:
-	mes "[Home Owner]";
-	mes "Get off my roof you no good leecher!";
+	mes "[Dono da Casa]";
+	mes "Saia do meu telhado sua parasita!";
 	close;
 }
 
-aldebaran,217,222,1	script	Sign#Alde5	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "I saw Santa Claus in Lutie!";
-	mes "- The rest looks like scribble -";
+aldebaran,217,222,1	script	Sinal#Alde5	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Eu vi o Papai Noel em Lutie!";
+	mes "- O resto parece rabiscado -";
 	close;
 }
 
 // Izlude
 //============================================================
-izlude,54,139,1	script	Sign#Iz1	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome to the Swordsman Academy.";
+izlude,54,139,1	script	Sinal#Iz1	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem vindo à Academia Espadachim.";
 	close;
 }
 
-izlude,144,148,1	script	Sign#Iz2	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome.";
+izlude,144,148,1	script	Sinal#Iz2	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem vindo.";
 	close;
 }
 
 // Alberta
 //============================================================
-alberta,35,241,1	script	Billboard#Alb1	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "Welcome to Alberta, the Merchant's paradise.";
+alberta,35,241,1	script	Letreiro#Alb1	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "Bem vindo a Alberta, o paraíso dos Mercadores.";
 	close;
 }
 
-alberta,37,39,1	script	Billboard#Alb2	111,{
-	mes "^993300- The Billboard Reads -^000000";
-	mes "Welcome.";
+alberta,37,39,1	script	Letreiro#Alb2	111,{
+	mes "^993300- Lê-se no letreiro -^000000";
+	mes "Bem vindo.";
 	close;
 }
 
-alberta,99,151,1	script	Sign#Alb3	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Tools by the Cart full!";
-	mes "You need tools? We got'em!";
-	mes "Come on in, we never close!";
+alberta,99,151,1	script	Sinal#Alb3	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Ferramentas completas para carrinhos";
+	mes "Você precisa de ferramentas? Nós temos!";
+	mes "Venha, nós nunca fechamos!";
 	close;
 }
 
-alberta,196,152,1	script	Sign#Alb4	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Docking and Shipment times very on load. For information regarding";
-	mes "Shipping and Receiving, please...";
-	mes "- You can't make out the rest -";
+alberta,196,152,1	script	Sinal#Alb4	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Atracagem e embarque de cargas. Informações relativas ao";
+	mes "envio e recebimento, por favor...";
+	mes "- Você não pode ler o resto -";
 	close;
 }
 
-alberta,149,54,1	script	Sign#Alb5	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome.";
+alberta,149,54,1	script	Sinal#Alb5	111,{
+	mes "^993300- Lê-se no sinal -^000000";
+	mes "Bem vindo.";
 	close;
 }
