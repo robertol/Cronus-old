@@ -60,8 +60,8 @@
 
 /* ATCMD_FUNC(mobinfo) HIT and FLEE calculations */
 #ifdef RENEWAL
-	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi + mob->status.luk/5 + 100 )
-	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex + mob->status.luk/3 + 175 )
+	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi + 100 )
+	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex + 150 )
 #else
 	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi )
 	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex )
@@ -93,8 +93,10 @@
 	#define MAX_CARTS 5
 #endif
 /* Client Supports Party Recruit or Party Booking? */
+#ifdef PACKETVER_RE
 #if (PACKETVER == 20120410) || (PACKETVER == 20120418)
 	#define	PARTY_RECRUIT
+#endif
 #endif
 // Renewal variable cast time reduction
 #ifdef RENEWAL_CAST

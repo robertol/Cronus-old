@@ -2019,6 +2019,12 @@ packet(0x020d,-1);
 	packet(0x0916,26,clif->pGuildInvite2,2);
 #endif
 
+#ifndef PACKETVER_RE
+#if PACKETVER >= 20120604
+	packet(0x0861,18,clif->pPartyBookingRegisterReq,2,4,6);
+#endif
+#endif
+
 //2012-06-18aRagexeRE
 #if PACKETVER >= 20120618
 	packet(0x0983,29);
@@ -2091,6 +2097,7 @@ packet(0x020d,-1);
 	// New Packets
 	packet(0x0998,8,clif->pEquipItem,2,4);
 	packet(0x0447,2); // PACKET_CZ_BLOCKING_PLAY_CANCEL
+	packet(0x099f,24);
 	// New Packets End
 #endif
 
