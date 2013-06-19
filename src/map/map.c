@@ -5133,8 +5133,8 @@ static void map_helpscreen(bool do_exit)
 *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit) {
 	const char *ver = versao();
-	ShowInfo(CL_WHITE"Versao do Cronus: %s" CL_RESET"\n", ver);
-	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://forum.cronus-emulator.com/\n");
+	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
+	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://cronus-emulator.com/\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -5234,13 +5234,16 @@ void map_hp_symbols(void) {
 	HPM->share(guild,"guild");
 	HPM->share(homun,"homun");
 	HPM->share(ircbot,"ircbot");
+	HPM->share(itemdb,"itemdb");
 	HPM->share(logs,"logs");
+	HPM->share(mail,"mail");
 	HPM->share(script,"script");
 	HPM->share(searchstore,"searchstore");
 	HPM->share(skill,"skill");
 	HPM->share(vending,"vending");
 	HPM->share(pc,"pc");
 	HPM->share(party,"party");
+	HPM->share(trade,"trade");
 	HPM->share(iMap,"iMap");
 	/* partial */
 	HPM->share(mapit,"mapit");
@@ -5263,7 +5266,9 @@ void load_defaults(void) {
 	homunculus_defaults();
 	instance_defaults();
 	ircbot_defaults();
+	itemdb_defaults();
 	log_defaults();
+	mail_defaults();
 	npc_defaults();
 	script_defaults();
 	searchstore_defaults();
@@ -5271,6 +5276,7 @@ void load_defaults(void) {
 	vending_defaults();
 	pc_defaults();
 	party_defaults();
+	trade_defaults();
 }
 int do_init(int argc, char *argv[])
 {
@@ -5308,6 +5314,7 @@ int do_init(int argc, char *argv[])
 	sprintf(iMap->mob_db2_db, "mob_db2");
 	sprintf(iMap->mob_skill_db_db, "mob_skill_db");
 	sprintf(iMap->mob_skill_db2_db, "mob_skill_db2");
+	sprintf(iMap->interreg_db, "interreg");
 
 	iMap->INTER_CONF_NAME="conf/inter-server.conf";
 	iMap->LOG_CONF_NAME="conf/logs.conf";

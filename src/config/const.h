@@ -92,12 +92,7 @@
 #else
 	#define MAX_CARTS 5
 #endif
-/* Client Supports Party Recruit or Party Booking? */
-#ifdef PACKETVER_RE
-#if (PACKETVER == 20120410) || (PACKETVER == 20120418)
-	#define	PARTY_RECRUIT
-#endif
-#endif
+
 // Renewal variable cast time reduction
 #ifdef RENEWAL_CAST
 	#define VARCAST_REDUCTION(val){ \
@@ -110,6 +105,13 @@
 #ifdef MINICORE
 	#undef CONSOLE_INPUT
 #endif
+
+#ifdef RENEWAL
+	#define ITEMDB_SQL_COLUMNS 24
+#else
+	#define ITEMDB_SQL_COLUMNS 22
+#endif
+
 
 /**
  * End of File

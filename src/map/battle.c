@@ -753,8 +753,8 @@ int battle_calc_masteryfix(struct block_list *src, struct block_list *target, ui
 		int ratio = sd->status.base_level + status_get_dex(src) + status_get_luk(src);
 		if ( i == 2 ) ratio += status_get_str(src); //Star Anger
 		if  (skill < 4 )
-			ratio /= 12 - 3 * skill;
-		damage += damage * ratio;
+			ratio /= (12 - 3 * skill);
+		damage += damage * ratio / 100;
 	}
 	
 	if( sc ){
@@ -4345,15 +4345,11 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 				wd.damage = sstatus->max_hp* 9/100;
 				wd.damage2 = 0;
 				break;
-				
-#ifdef RENEWAL
-			case MO_EXTREMITYFIST:	// [malufett]
-				wd.damage = battle->calc_base_damage(src, target, skill_id, skill_lv, nk, n_ele, s_ele, s_ele_, EQI_HAND_R, (sc && sc->data[SC_MAXIMIZEPOWER]?1:0)|8, wd.flag);
-				// first value is still not confirm.
-				wd.damage = status_get_sp(src) + 10 * status_get_sp(src) * wd.damage / 100 + 8 * wd.damage;
-				flag.tdef = 1;
-				break;
 			case NJ_ISSEN: // [malufett]
+#ifndef RENEWAL
+				wd.damage = 40*sstatus->str +skill_lv*(sstatus->hp/10 + 35);
+				wd.damage2 = 0;
+#else
 				{
 					short totaldef = status_get_total_def(target);
 					i = 0;
@@ -4367,12 +4363,14 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 						ATK_RATE(50);
 					flag.idef = 1;
 				}
-#else
-				
-				wd.damage = 40*sstatus->str +skill_lv*(sstatus->hp/10 + 35);
-				wd.damage2 = 0;
-#endif
 				break;	
+			case MO_EXTREMITYFIST:	// [malufett]
+				wd.damage = battle->calc_base_damage(src, target, skill_id, skill_lv, nk, n_ele, s_ele, s_ele_, EQI_HAND_R, (sc && sc->data[SC_MAXIMIZEPOWER]?1:0)|8, wd.flag);
+				// first value is still not confirm.
+				wd.damage = status_get_sp(src) + 10 * status_get_sp(src) * wd.damage / 100 + 8 * wd.damage;
+				flag.tdef = 1;
+#endif
+				break;
 #ifndef RENEWAL
 			case LK_SPIRALPIERCE:
 			case ML_SPIRALPIERCE:
@@ -6375,7 +6373,7 @@ static const struct _battle_data {
 	{ "cashshop_show_points",               &battle_config.cashshop_show_points,            0,      0,      1,              },
 	{ "mail_show_status",                   &battle_config.mail_show_status,                0,      0,      2,              },
 	{ "client_limit_unit_lv",               &battle_config.client_limit_unit_lv,            0,      0,      BL_ALL,         },
-// BattleGround Settings
+	// BattleGround Settings
 	{ "bg_update_interval",                 &battle_config.bg_update_interval,              1000,   100,    INT_MAX,        },
 	{ "bg_flee_penalty",                    &battle_config.bg_flee_penalty,                 20,     0,      INT_MAX,        },
 	/**
@@ -6400,6 +6398,7 @@ static const struct _battle_data {
 	{ "max_walk_path",						&battle_config.max_walk_path,					17,     1,      MAX_WALKPATH,   },
 	{ "item_enabled_npc",					&battle_config.item_enabled_npc,				1,      0,      1,				},
 	{ "gm_ignore_warpable_area",			&battle_config.gm_ignore_warpable_area,			0,		2,		100,			},
+	{ "packet_obfuscation",					&battle_config.packet_obfuscation,				1,		0,		3,				},
 };
 #ifndef STATS_OPT_OUT
 /**
@@ -6623,7 +6622,7 @@ void battle_adjust_conf(void) {
 
 #ifndef CELL_NOSTACK
 	if (battle_config.cell_stack_limit != 1)
-		ShowWarning("Battle setting 'cell_stack_limit' takes no effect as this server was compiled without Cell Stack Limit support.\n");
+		ShowWarning("Battle setting 'cell_stack_limit' takes no effect as this server was compiled without Cell Stack Limit support (CELL_NOSTACK).\n");
 #endif
 }
 

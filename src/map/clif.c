@@ -632,6 +632,7 @@ void clif_authfail_fd(int fd, int type)
 	WFIFOB(fd,2) = type;
 	WFIFOSET(fd,packet_len(0x81));
 	set_eof(fd);
+
 }
 
 
@@ -5963,12 +5964,13 @@ void clif_wis_message(int fd, const char* nick, const char* mes, int mes_len)
 	safestrncpy((char*)WFIFOP(fd,28), mes, mes_len);
 	WFIFOSET(fd,WFIFOW(fd,2));
 #else
+	struct map_session_data *ssd = iMap->nick2sd(nick);
+
 	WFIFOHEAD(fd, mes_len + NAME_LENGTH + 8);
 	WFIFOW(fd,0) = 0x97;
 	WFIFOW(fd,2) = mes_len + NAME_LENGTH + 8;
 	safestrncpy((char*)WFIFOP(fd,4), nick, NAME_LENGTH);
-	WFIFOL(fd,28) = 0; // isAdmin; if nonzero, also displays text above char
-	// TODO: WFIFOL(fd,28) = pc->get_group_level(ssd);
+	WFIFOL(fd,28) = (pc->get_group_level(ssd) == 99) ? 1 : 0; // isAdmin; if nonzero, also displays text above char
 	safestrncpy((char*)WFIFOP(fd,32), mes, mes_len);
 	WFIFOSET(fd,WFIFOW(fd,2));
 #endif
@@ -8559,7 +8561,7 @@ void clif_refresh(struct map_session_data *sd)
 	// unlike vending, resuming buyingstore crashes the client.
 	buyingstore->close(sd);
 
-	mail_clear(sd);
+	mail->clear(sd);
 	
 	if( disguised(&sd->bl) ) {/* refresh-da */
 		short disguise = sd->disguise;
@@ -9288,6 +9290,7 @@ void clif_parse_WantToConnection(int fd, struct map_session_data* sd) {
 		WFIFOB(fd,2) = 3; // Rejected by server
 		WFIFOSET(fd,packet_len(0x6a));
 		set_eof(fd);
+
 		return;
 	}
 
@@ -9301,6 +9304,8 @@ void clif_parse_WantToConnection(int fd, struct map_session_data* sd) {
 
 	CREATE(sd, TBL_PC, 1);
 	sd->fd = fd;
+	sd->cryptKey = (( clif->cryptKey[0] * clif->cryptKey[1] ) + clif->cryptKey[2]) & 0xFFFFFFFF;
+	
 	session[fd]->session_data = sd;
 
 	pc->setnewpc(sd, account_id, char_id, login_id1, client_tick, sex, fd);
@@ -9597,7 +9602,7 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 		}
 	}
 
-	mail_clear(sd);
+	mail->clear(sd);
 
 	clif->maptypeproperty2(&sd->bl,SELF);
 	
@@ -9752,7 +9757,7 @@ void clif_parse_progressbar(int fd, struct map_session_data * sd)
 	if( iTimer->gettick() < sd->progressbar.timeout && sd->st )
 		sd->st->state = END;
 
-	sd->progressbar.npc_id = sd->progressbar.timeout = 0;
+	sd->state.workinprogress = sd->progressbar.npc_id = sd->progressbar.timeout = 0;
 	npc_scriptcont(sd, npc_id, false);
 }
 
@@ -9772,8 +9777,8 @@ void clif_parse_WalkToXY(int fd, struct map_session_data *sd)
 
 	if (sd->sc.opt1 && ( sd->sc.opt1 == OPT1_STONEWAIT || sd->sc.opt1 == OPT1_BURNING ))
 		; //You CAN walk on this OPT1 value.
-	else if( sd->progressbar.npc_id )
-		clif->progressbar_abort(sd);
+	/*else if( sd->progressbar.npc_id )
+		clif->progressbar_abort(sd);*/
 	else if (pc_cant_act(sd))
 		return;
 
@@ -9819,6 +9824,7 @@ void clif_parse_QuitGame(int fd, struct map_session_data *sd)
 		(!battle_config.prevent_logout || DIFF_TICK(iTimer->gettick(), sd->canlog_tick) > battle_config.prevent_logout) )
 	{
 		set_eof(fd);
+
 		clif->disconnect_ack(sd, 0);
 	} else {
 		clif->disconnect_ack(sd, 1);
@@ -10567,7 +10573,7 @@ void clif_parse_DropItem(int fd, struct map_session_data *sd)
 		if (pc_isdead(sd))
 			break;
 
-		if ( pc_cant_act2(sd) )
+		if ( pc_cant_act2(sd) || sd->state.vending )
 			break;
 
 		if (sd->sc.count && (
@@ -10789,7 +10795,7 @@ void clif_parse_NpcClicked(int fd,struct map_session_data *sd)
 #endif
 		return;
 	}
-	if ( pc_cant_act2(sd) || !(bl = iMap->id2bl(RFIFOL(fd,2))) )
+	if ( pc_cant_act2(sd) || !(bl = iMap->id2bl(RFIFOL(fd,2))) || sd->state.vending )
 		return;
 	
 	switch (bl->type) {
@@ -11036,7 +11042,7 @@ void clif_parse_TradeRequest(int fd,struct map_session_data *sd)
 		return;
 	}
 
-	trade_traderequest(sd,t_sd);
+	trade->request(sd,t_sd);
 }
 
 
@@ -11047,7 +11053,7 @@ void clif_parse_TradeRequest(int fd,struct map_session_data *sd)
 ///     4 = rejected
 void clif_parse_TradeAck(int fd,struct map_session_data *sd)
 {
-	trade_tradeack(sd,RFIFOB(fd,2));
+	trade->ack(sd,RFIFOB(fd,2));
 }
 
 
@@ -11059,9 +11065,9 @@ void clif_parse_TradeAddItem(int fd,struct map_session_data *sd)
 	int amount = RFIFOL(fd,4);
 
 	if( index == 0 )
-		trade_tradeaddzeny(sd, amount);
+		trade->addzeny(sd, amount);
 	else
-		trade_tradeadditem(sd, index, (short)amount);
+		trade->additem(sd, index, (short)amount);
 }
 
 
@@ -11069,7 +11075,7 @@ void clif_parse_TradeAddItem(int fd,struct map_session_data *sd)
 /// 00eb
 void clif_parse_TradeOk(int fd,struct map_session_data *sd)
 {
-	trade_tradeok(sd);
+	trade->ok(sd);
 }
 
 
@@ -11077,7 +11083,7 @@ void clif_parse_TradeOk(int fd,struct map_session_data *sd)
 /// 00ed
 void clif_parse_TradeCancel(int fd,struct map_session_data *sd)
 {
-	trade_tradecancel(sd);
+	trade->cancel(sd);
 }
 
 
@@ -11085,7 +11091,7 @@ void clif_parse_TradeCancel(int fd,struct map_session_data *sd)
 /// 00ef
 void clif_parse_TradeCommit(int fd,struct map_session_data *sd)
 {
-	trade_tradecommit(sd);
+	trade->commit(sd);
 }
 
 
@@ -14466,8 +14472,8 @@ void clif_parse_Mail_refreshinbox(int fd, struct map_session_data *sd)
 	else
 		clif->mail_refreshinbox(sd);
 
-	mail_removeitem(sd, 0);
-	mail_removezeny(sd, 0);
+	mail->removeitem(sd, 0);
+	mail->removezeny(sd, 0);
 }
 
 
@@ -14541,7 +14547,7 @@ void clif_parse_Mail_read(int fd, struct map_session_data *sd)
 
 	if( mail_id <= 0 )
 		return;
-	if( mail_invalid_operation(sd) )
+	if( mail->invalid_operation(sd) )
 		return;
 
 	clif->mail_read(sd, RFIFOL(fd,2));
@@ -14560,7 +14566,7 @@ void clif_parse_Mail_getattach(int fd, struct map_session_data *sd)
 		return;
 	if( mail_id <= 0 )
 		return;
-	if( mail_invalid_operation(sd) )
+	if( mail->invalid_operation(sd) )
 		return;
 
 	ARR_FIND(0, MAIL_MAX_INBOX, i, sd->mail.inbox.msg[i].id == mail_id);
@@ -14621,7 +14627,7 @@ void clif_parse_Mail_delete(int fd, struct map_session_data *sd)
 		return;
 	if( mail_id <= 0 )
 		return;
-	if( mail_invalid_operation(sd) )
+	if( mail->invalid_operation(sd) )
 		return;
 
 	ARR_FIND(0, MAIL_MAX_INBOX, i, sd->mail.inbox.msg[i].id == mail_id);
@@ -14647,7 +14653,7 @@ void clif_parse_Mail_return(int fd, struct map_session_data *sd)
 
 	if( mail_id <= 0 )
 		return;
-	if( mail_invalid_operation(sd) )
+	if( mail->invalid_operation(sd) )
 		return;
 
 	ARR_FIND(0, MAIL_MAX_INBOX, i, sd->mail.inbox.msg[i].id == mail_id);
@@ -14671,7 +14677,7 @@ void clif_parse_Mail_setattach(int fd, struct map_session_data *sd)
 	if (idx < 0 || amount < 0)
 		return;
 
-	flag = mail_setitem(sd, idx, amount);
+	flag = mail->setitem(sd, idx, amount);
 	clif->mail_setattachment(fd,idx,flag);
 }
 
@@ -14687,9 +14693,9 @@ void clif_parse_Mail_winopen(int fd, struct map_session_data *sd)
 	int flag = RFIFOW(fd,2);
 
 	if (flag == 0 || flag == 1)
-		mail_removeitem(sd, 0);
+		mail->removeitem(sd, 0);
 	if (flag == 0 || flag == 2)
-		mail_removezeny(sd, 0);
+		mail->removezeny(sd, 0);
 }
 
 
@@ -14721,10 +14727,10 @@ void clif_parse_Mail_send(int fd, struct map_session_data *sd)
 	if (body_len > MAIL_BODY_LENGTH)
 		body_len = MAIL_BODY_LENGTH;
 
-	if( !mail_setattachment(sd, &msg) ) { // Invalid Append condition
+	if( !mail->setattachment(sd, &msg) ) { // Invalid Append condition
 		clif->mail_send(sd->fd, true); // fail
-		mail_removeitem(sd,0);
-		mail_removezeny(sd,0);
+		mail->removeitem(sd,0);
+		mail->removezeny(sd,0);
 		return;
 	}
 
@@ -14746,7 +14752,7 @@ void clif_parse_Mail_send(int fd, struct map_session_data *sd)
 
 	msg.timestamp = time(NULL);
 	if( !intif_Mail_send(sd->status.account_id, &msg) )
-		mail_deliveryfail(sd, &msg);
+		mail->deliveryfail(sd, &msg);
 
 	sd->cansendmail_tick = iTimer->gettick() + 1000; // 1 Second flood Protection
 }
@@ -17394,8 +17400,14 @@ void clif_parse_bgqueue_revoke_req(int fd, struct map_session_data *sd) {
 }
 
 void clif_parse_bgqueue_battlebegin_ack(int fd, struct map_session_data *sd) {
-	//struct packet_bgqueue_battlebegin_ack *p = P2PTR(fd, bgqueue_checkstateType);
-	return;
+	struct packet_bgqueue_battlebegin_ack *p = P2PTR(fd, bgqueue_checkstateType);
+	struct bg_arena *arena;
+	if( !bg->queue_on ) return; /* temp, until feature is complete */
+	if( ( arena = bg->name2arena(p->bg_name) ) ) {
+		bg->queue_ready_ack(arena,sd, ( p->result == 1 ) ? true : false);
+	} else {
+		clif->bgqueue_ack(sd,BGQA_FAIL_BGNAME_INVALID, 0);
+	}
 	//if ( p->result == 1 )
 	//	bg->queue_pc_ready(sd);
 	//else
@@ -17435,6 +17447,47 @@ void clif_scriptclear(struct map_session_data *sd, int npcid) {
 	p.NpcID = npcid;
 	
 	clif->send(&p,sizeof(p), &sd->bl, SELF);
+}
+unsigned short clif_decrypt_cmd( int cmd, struct map_session_data *sd ) {
+	if( sd ) {
+		sd->cryptKey = (( sd->cryptKey * clif->cryptKey[1] ) + clif->cryptKey[2]) & 0xFFFFFFFF;
+		return (cmd ^ ((sd->cryptKey >> 16) & 0x7FFF));
+	}
+	return (cmd ^ (((( clif->cryptKey[0] * clif->cryptKey[1] ) + clif->cryptKey[2]) >> 16) & 0x7FFF));
+}
+unsigned short clif_parse_cmd_normal ( int fd, struct map_session_data *sd ) {
+	unsigned short cmd = RFIFOW(fd,0);
+	// filter out invalid / unsupported packets
+	if (cmd > MAX_PACKET_DB || packet_db[cmd].len == 0)
+		return 0;
+
+	return cmd;
+}
+unsigned short clif_parse_cmd_optional ( int fd, struct map_session_data *sd ) {
+	unsigned short cmd = RFIFOW(fd,0);
+
+	// filter out invalid / unsupported packets
+	if (cmd > MAX_PACKET_DB || packet_db[cmd].len == 0) {
+		cmd = clif->decrypt_cmd( cmd, sd );
+		if( cmd > MAX_PACKET_DB || packet_db[cmd].len == 0 )
+			return 0;
+		RFIFOW(fd, 0) = cmd;
+	}
+
+	return cmd;
+}
+unsigned short clif_parse_cmd_decrypt ( int fd, struct map_session_data *sd ) {
+	unsigned short cmd = RFIFOW(fd,0);
+
+	cmd = clif->decrypt_cmd( cmd, sd );
+	
+	// filter out invalid / unsupported packets
+	if (cmd > MAX_PACKET_DB || packet_db[cmd].len == 0 )
+		return 0;
+	
+	RFIFOW(fd, 0) = cmd;
+
+	return cmd;
 }
 
 /*==========================================
@@ -17479,20 +17532,18 @@ int clif_parse(int fd) {
 		if (RFIFOREST(fd) < 2)
 			return 0;
 		
-		cmd = RFIFOW(fd,0);
-				
-		// filter out invalid / unsupported packets
-		if (cmd > MAX_PACKET_DB || packet_db[cmd].len == 0) {
-			ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x, %d bytes received), disconnecting session #%d.\n", cmd, RFIFOREST(fd), fd);
+		if( !( cmd = clif->parse_cmd(fd,sd) ) ) {
+			ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x, %d bytes received), disconnecting session #%d.\n", RFIFOW(fd,0), RFIFOREST(fd), fd);
 #ifdef DUMP_INVALID_PACKET
 			ShowDump(RFIFOP(fd,0), RFIFOREST(fd));
 #endif
 			set_eof(fd);
 			return 0;
 		}
+				
 		// determine real packet length
-		packet_len = packet_db[cmd].len;
-		if (packet_len == -1) { // variable-length packet
+		if ( ( packet_len = packet_db[cmd].len ) == -1) { // variable-length packet
+
 			if (RFIFOREST(fd) < 4)
 				return 0;
 			
@@ -17503,9 +17554,11 @@ int clif_parse(int fd) {
 				ShowDump(RFIFOP(fd,0), RFIFOREST(fd));
 #endif
 				set_eof(fd);
+
 				return 0;
 			}
 		}
+
 		if ((int)RFIFOREST(fd) < packet_len)
 			return 0; // not enough data received to form the packet
 
@@ -17598,14 +17651,29 @@ void packetdb_loaddb(void) {
 	memset(packet_db,0,sizeof(packet_db));
 	
 	#define packet(id, size, ...) packetdb_addpacket(id, size, ##__VA_ARGS__, 0xFFFF)
+	#define packetKeys(a,b,c) { clif->cryptKey[0] = a; clif->cryptKey[1] = b; clif->cryptKey[2] = c; }
 	#include "packets.h" /* load structure data */
 	#undef packet
+	#undef packetKeys
 }
 void clif_bc_ready(void) {
 	if( battle_config.display_status_timers )
 		clif->status_change = clif_status_change;
 	else
 		clif->status_change = clif_status_change_notick;
+	
+	switch( battle_config.packet_obfuscation ) {
+		case 0:
+			clif->parse_cmd = clif_parse_cmd_normal;
+			break;
+		default:
+		case 1:
+			clif->parse_cmd = clif_parse_cmd_optional;
+			break;
+		case 2:
+			clif->parse_cmd = clif_parse_cmd_decrypt;
+			break;
+	}
 }
 /*==========================================
  *
@@ -17689,6 +17757,8 @@ void clif_defaults(void) {
 	clif->send = clif_send;
 	clif->send_sub = clif_send_sub;
 	clif->parse = clif_parse;
+	clif->parse_cmd = clif_parse_cmd_optional;
+	clif->decrypt_cmd = clif_decrypt_cmd;
 	/* auth */
 	clif->authok = clif_authok;
 	clif->authrefuse = clif_authrefuse;

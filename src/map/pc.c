@@ -4249,7 +4249,7 @@ int pc_useitem(struct map_session_data *sd,int n)
 
 	nullpo_ret(sd);
 
-	if( sd->npc_id ){
+	if( sd->npc_id || sd->state.workinprogress&1 ){
 		/* TODO: add to clif->messages enum */
 #ifdef RENEWAL
 		clif->msg(sd, 0x783); // TODO look for the client date that has this message.
@@ -4289,8 +4289,8 @@ int pc_useitem(struct map_session_data *sd,int n)
 		return 0;
 	
 	/* Items with delayed consume are not meant to work while in mounts except reins of mount(12622) */
-	if( sd->inventory_data[n]->flag.delay_consume ) {
-		if( nameid != ITEMID_REINS_OF_MOUNT && sd->sc.data[SC_ALL_RIDING] )
+	if( sd->inventory_data[n]->flag.delay_consume && nameid != ITEMID_REINS_OF_MOUNT ) {
+		if( sd->sc.data[SC_ALL_RIDING] )
 			return 0;
 		else if( pc_issit(sd) )
 			return 0;
@@ -4317,7 +4317,8 @@ int pc_useitem(struct map_session_data *sd,int n)
 			} else {// not yet used item (all slots are initially empty)
 				sd->item_delay[i].nameid = nameid;
 			}
-			sd->item_delay[i].tick = tick + sd->inventory_data[n]->delay;
+			if( !(nameid == ITEMID_REINS_OF_MOUNT && sd->sc.option&(OPTION_WUGRIDER|OPTION_RIDING|OPTION_DRAGON|OPTION_MADOGEAR)) )
+				sd->item_delay[i].tick = tick + sd->inventory_data[n]->delay;
 		} else {// should not happen
 			ShowError("pc_useitem: Exceeded item delay array capacity! (nameid=%d, char_id=%d)\n", nameid, sd->status.char_id);
 		}
@@ -6661,7 +6662,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	npc_script_event(sd,NPCE_DIE);
 		
 	// Clear anything NPC-related when you die and was interacting with one.
-	if (sd->npc_id) {
+	if (sd->npc_id || sd->npc_shopid) {
 		if (sd->state.using_fake_npc) {
 			clif->clearunit_single(sd->npc_id, CLR_OUTSIGHT, sd->fd);
 			sd->state.using_fake_npc = 0;
@@ -6672,6 +6673,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 			sd->npc_menu = 0;
 
 		sd->npc_id = 0;
+		sd->npc_shopid = 0;
 		if (sd->st && sd->st->state != END)
 			sd->st->state = END;
 	}

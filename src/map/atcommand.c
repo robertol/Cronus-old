@@ -3712,9 +3712,32 @@ ACMD(reloadpcdb)
  *------------------------------------------*/
 ACMD(reloadscript)
 {
+	struct s_mapiterator* iter;
+	struct map_session_data* pl_sd;
+
 	nullpo_retr(-1, sd);
 	//atcommand_broadcast( fd, sd, "@broadcast", "Server is reloading scripts..." );
 	//atcommand_broadcast( fd, sd, "@broadcast", "You will feel a bit of lag at this point !" );
+	
+	iter = mapit_getallusers();
+	for( pl_sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); pl_sd = (TBL_PC*)mapit->next(iter) ) {
+		if (pl_sd->npc_id || pl_sd->npc_shopid) {
+			if (pl_sd->state.using_fake_npc) {
+				clif->clearunit_single(pl_sd->npc_id, CLR_OUTSIGHT, pl_sd->fd);
+				pl_sd->state.using_fake_npc = 0;
+			}
+			if (pl_sd->state.menu_or_input)
+				pl_sd->state.menu_or_input = 0;
+			if (pl_sd->npc_menu)
+				pl_sd->npc_menu = 0;
+
+			pl_sd->npc_id = 0;
+			pl_sd->npc_shopid = 0;
+			if (pl_sd->st && pl_sd->st->state != END)
+				pl_sd->st->state = END;
+		}
+	}
+	mapit->free(iter);
 	
 	flush_fifos();
 	iMap->reloadnpc(true); // reload config files seeking for npcs
@@ -6391,7 +6414,7 @@ ACMD(trade)
 		return false;
 	}
 	
-	trade_traderequest(sd, pl_sd);
+	trade->request(sd, pl_sd);
 	return true;
 }
 
@@ -6595,7 +6618,7 @@ ACMD(misceffect) {
 ACMD(mail)
 {
 	nullpo_ret(sd);
-	mail_openmail(sd);
+	mail->openmail(sd);
 	return true;
 }
 
@@ -7249,9 +7272,8 @@ ACMD(whereis)
 ACMD(version) {
 	const char *ver = versao();
 	
-		sprintf(atcmd_output,msg_txt(1295),ver); // Versão '%s'
-		clif->message(fd,atcmd_output);
-	
+	sprintf(atcmd_output,msg_txt(1295),ver); // Versão '%s'
+	clif->message(fd,atcmd_output);
 	return true;
 }
 

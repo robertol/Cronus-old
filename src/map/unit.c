@@ -327,7 +327,7 @@ int unit_walktoxy( struct block_list *bl, short x, short y, int flag)
 	path_search(&wpd, bl->m, bl->x, bl->y, x, y, flag&1, CELL_CHKNOPASS); // Count walk path cells
 #ifdef OFFICIAL_WALKPATH
 	if( !path_search_long(NULL, bl->m, bl->x, bl->y, x, y, CELL_CHKNOPASS) // Check if there is an obstacle between
-		&& (wpd.path_len > 14) // Official number of walkable cells is 14 if and only if there is an obstacle between. [malufett]
+		&& (wpd.path_len > (battle_config.max_walk_path/17)*14) // Official number of walkable cells is 14 if and only if there is an obstacle between. [malufett]
 		&& (bl->type != BL_NPC) ) // If type is a NPC, please disregard.
 		return 0;
 #endif
@@ -2104,7 +2104,7 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 			if(sd->chatID)
 				chat_leavechat(sd,0);
 			if(sd->trade_partner)
-				trade_tradecancel(sd);
+				trade->cancel(sd);
 			buyingstore->close(sd);
 			searchstore->close(sd);
 			if(sd->state.storage_flag == 1)

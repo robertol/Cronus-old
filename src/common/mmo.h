@@ -54,6 +54,13 @@
 // Comment the following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE).
 #define PACKETVER_RE
 
+// Client support for experimental RagexeRE UI present in 2012-04-10 and 2012-04-18
+#ifdef PACKETVER_RE
+#if (PACKETVER == 20120410) || (PACKETVER == 20120418)
+	#define	PARTY_RECRUIT
+#endif
+#endif
+
 // Comment the following line to disable sc_data saving. [Skotlex]
 #define ENABLE_SC_SAVING
 
@@ -105,7 +112,7 @@
 #define MAX_GUARDIANS 8         // Local max per castle. [Skotlex]
 #define MAX_QUEST_DB 2410       // Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3  // Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37 		//Tamanho máximo do nome de NPCs [Raizen]
+#define NPC_NAME_LENGTH 37		//Tamanho máximo do nome de NPCs [Raizen]
 #define MAX_START_ITEMS 32	    // Max number of items allowed to be given to a char whenever it's created. [mkbu95]
 
 // for produce

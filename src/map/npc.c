@@ -276,7 +276,7 @@ int npc_rr_secure_timeout_timer(int tid, unsigned int tick, int id, intptr_t dat
 		clif->scriptclear(sd,sd->npc_id);
 		sd->npc_idle_timer = INVALID_TIMER;
 	} else //Create a new instance of ourselves to continue
-		sd->npc_idle_timer = iTimer->add_timer(iTimer->(gettick() + (SECURE_NPCTIMEOUT_INTERVAL*1000),npc_rr_secure_timeout_timer,sd->bl.id,0);
+		sd->npc_idle_timer = iTimer->add_timer(iTimer->gettick() + (SECURE_NPCTIMEOUT_INTERVAL*1000),npc_rr_secure_timeout_timer,sd->bl.id,0);
 	return 0;
 }
 #endif
@@ -1867,6 +1867,7 @@ int npc_unload(struct npc_data* nd, bool single) {
 			aFree(nd->u.scr.timer_event);
 		if (nd->src_id == 0) {
 			if(nd->u.scr.script) {
+				script_stop_instances(nd->bl.id);
 				script_free_code(nd->u.scr.script);
 				nd->u.scr.script = NULL;
 			}
@@ -1885,8 +1886,6 @@ int npc_unload(struct npc_data* nd, bool single) {
 		nd->ud = NULL;
 	}
 	
-	script_stop_sleeptimers(nd->bl.id);
-
 	aFree(nd);
 
 	return 0;
