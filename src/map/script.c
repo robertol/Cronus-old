@@ -97,10 +97,8 @@ int str_hash[SCRIPT_HASH_SIZE];
 //#define SCRIPT_HASH_SDBM
 #define SCRIPT_HASH_ELF
 
-static DBMap* scriptlabel_db=NULL; // const char* label_name -> int script_pos
 static DBMap* userfunc_db=NULL; // const char* func_name -> struct script_code*
 static int parse_options=0;
-DBMap* script_get_label_db(void){ return scriptlabel_db; }
 DBMap* script_get_userfunc_db(void){ return userfunc_db; }
 
 // important buildin function references for usage in scripts
@@ -178,6 +176,8 @@ int potion_hp=0, potion_per_hp=0, potion_sp=0, potion_per_sp=0;
 int potion_target=0;
 
 
+struct script_interface script_s;
+
 c_op get_com(unsigned char *script,int *pos);
 int get_num(unsigned char *script,int *pos);
 
@@ -238,7 +238,8 @@ enum {
 	MF_MONSTER_NOTELEPORT,
 	MF_PVP_NOCALCRANK,	//50
 	MF_BATTLEGROUND,
-	MF_RESET
+	MF_RESET,
+	MF_NOTOMB
 };
 
 const char* script_op2name(int op)
@@ -1397,7 +1398,7 @@ const char* parse_syntax(const char* p)
 					v = p2-p; // length of word at p2
 					memcpy(label,p,v);
 					label[v]='\0';
-					if( !script_get_constant(label, &v) )
+					if( !script->get_constant(label, &v) )
 						disp_error_message("parse_syntax: 'case' label is not an integer",p);
 					p = skip_word(p);
 				} else { //Numeric value
@@ -1649,7 +1650,7 @@ const char* parse_syntax(const char* p)
 					script->str_data[l].type = C_USERFUNC;
 					set_label(l, script_pos, p);
 					if( parse_options&SCRIPT_USE_LABEL_DB )
-						strdb_iput(scriptlabel_db, get_str(l), script_pos);
+						script->label_add(l,script_pos);
 				}
 				else
 					disp_error_message("parse_syntax:function: function name is invalid", func_name);
@@ -1951,25 +1952,31 @@ bool script_get_constant(const char* name, int* value)
 }
 
 /// Creates new constant or parameter with given value.
-void script_set_constant(const char* name, int value, bool isparameter)
-{
+void script_set_constant(const char* name, int value, bool isparameter) {
 	int n = add_str(name);
 
-	if( script->str_data[n].type == C_NOP )
-	{// new
+	if( script->str_data[n].type == C_NOP ) {// new
 		script->str_data[n].type = isparameter ? C_PARAM : C_INT;
 		script->str_data[n].val  = value;
-	}
-	else if( script->str_data[n].type == C_PARAM || script->str_data[n].type == C_INT )
-	{// existing parameter or constant
+	} else if( script->str_data[n].type == C_PARAM || script->str_data[n].type == C_INT ) {// existing parameter or constant
 		ShowError("script_set_constant: Attempted to overwrite existing %s '%s' (old value=%d, new value=%d).\n", ( script->str_data[n].type == C_PARAM ) ? "parameter" : "constant", name, script->str_data[n].val, value);
-	}
-	else
-	{// existing name
+	} else {// existing name
 		ShowError("script_set_constant: Invalid name for %s '%s' (already defined as %s).\n", isparameter ? "parameter" : "constant", name, script_op2name(script->str_data[n].type));
 	}
 }
+/* will override if necessary */
+void script_set_constant2(const char *name, int value, bool isparameter) {
+	int n = add_str(name);
+	
+	if( script->str_data[n].type != C_NOP ) {
+		script->str_data[n].func = NULL;
+		script->str_data[n].backpatch = -1;
+		script->str_data[n].label = -1;
+	}
 
+	script->str_data[n].type = isparameter ? C_PARAM : C_INT;
+	script->str_data[n].val  = value;
+}
 /*==========================================
  * Reading constant databases
  * const.txt
@@ -2083,7 +2090,7 @@ struct script_code* parse_script(const char *src,const char *file,int line,int o
 
 	// who called parse_script is responsible for clearing the database after using it, but just in case... lets clear it here
 	if( options&SCRIPT_USE_LABEL_DB )
-		db_clear(scriptlabel_db);
+		script->label_count = 0;
 	parse_options = options;
 
 	if( setjmp( error_jump ) != 0 ) {
@@ -2157,7 +2164,7 @@ struct script_code* parse_script(const char *src,const char *file,int line,int o
 			i=add_word(p);
 			set_label(i,script_pos,p);
 			if( parse_options&SCRIPT_USE_LABEL_DB )
-				strdb_iput(scriptlabel_db, get_str(i), script_pos);
+				script->label_add(i,script_pos);
 			p=tmpp+1;
 			p=skip_space(p);
 			continue;
@@ -2776,28 +2783,31 @@ struct script_state* script_alloc_state(struct script_code* rootscript, int pos,
 /// Frees a script state.
 ///
 /// @param st Script state
-void script_free_state(struct script_state* st)
-{
-	if(st->bk_st) {// backup was not restored
-		ShowDebug("script_free_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
-	}
+void script_free_state(struct script_state* st) {
+	if( idb_exists(script->st_db,st->id) ) {
+		if(st->bk_st) {// backup was not restored
+			ShowDebug("script_free_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+		}
 
-	if( st->sleep.timer != INVALID_TIMER )
-		iTimer->delete_timer(st->sleep.timer, run_script_timer);
-	script_free_vars(st->stack->var_function);
-	script->pop_stack(st, 0, st->stack->sp);
-	aFree(st->stack->stack_data);
-	ers_free(script->stack_ers, st->stack);
-	if( st->script && st->script->script_vars && !db_size(st->script->script_vars) ) {
-		script_free_vars(st->script->script_vars);
-		st->script->script_vars = NULL;
-	}
-	st->stack = NULL;
-	st->pos = -1;
-	idb_remove(script->st_db, st->id);
-	ers_free(script->st_ers, st);
-	if( --script->active_scripts == 0 ) {
-		script->next_id = 0;
+		if( st->sleep.timer != INVALID_TIMER )
+			iTimer->delete_timer(st->sleep.timer, run_script_timer);
+		if( st->stack ) {
+			script_free_vars(st->stack->var_function);
+			script->pop_stack(st, 0, st->stack->sp);
+			aFree(st->stack->stack_data);
+			ers_free(script->stack_ers, st->stack);
+			st->stack = NULL;
+		}
+		if( st->script && st->script->script_vars && !db_size(st->script->script_vars) ) {
+			script_free_vars(st->script->script_vars);
+			st->script->script_vars = NULL;
+		}
+		st->pos = -1;
+		idb_remove(script->st_db, st->id);
+		ers_free(script->st_ers, st);
+		if( --script->active_scripts == 0 ) {
+			script->next_id = 0;
+		}
 	}
 }
 
@@ -3276,7 +3286,7 @@ void run_script(struct script_code *rootscript,int pos,int rid,int oid) {
 	run_script_main(st);
 }
 
-void script_stop_instances(int id) {
+void script_stop_instances(struct script_code *code) {
 	DBIterator *iter;
 	struct script_state* st;
 	
@@ -3286,7 +3296,7 @@ void script_stop_instances(int id) {
 	iter = db_iterator(script->st_db);
 	
 	for( st = dbi_first(iter); dbi_exists(iter); st = dbi_next(iter) ) {
-		if( st->oid == id ) {
+		if( st->script == code ) {
 			script_free_state(st);
 		}
 	}
@@ -3298,17 +3308,19 @@ void script_stop_instances(int id) {
  * Timer function for sleep
  *------------------------------------------*/
 int run_script_timer(int tid, unsigned int tick, int id, intptr_t data) {
-	struct script_state *st     = (struct script_state *)data;
-	TBL_PC *sd = iMap->id2sd(st->rid);
+	struct script_state *st     = idb_get(script->st_db,(int)data);
+	if( st ) {
+		TBL_PC *sd = iMap->id2sd(st->rid);
 
-	if((sd && sd->status.char_id != id) || (st->rid && !sd)) { //Character mismatch. Cancel execution.
-		st->rid = 0;
-		st->state = END;
+		if((sd && sd->status.char_id != id) || (st->rid && !sd)) { //Character mismatch. Cancel execution.
+			st->rid = 0;
+			st->state = END;
+		}
+		st->sleep.timer = INVALID_TIMER;
+		if(st->state != RERUNLINE)
+			st->sleep.tick = 0;
+		run_script_main(st);
 	}
-	st->sleep.timer = INVALID_TIMER;
-	if(st->state != RERUNLINE)
-		st->sleep.tick = 0;
-	run_script_main(st);
 	return 0;
 }
 
@@ -3504,7 +3516,7 @@ void run_script_main(struct script_state *st)
 		sd = iMap->id2sd(st->rid); // Get sd since script might have attached someone while running. [Inkfish]
 		st->sleep.charid = sd?sd->status.char_id:0;
 		st->sleep.timer  = iTimer->add_timer(iTimer->gettick()+st->sleep.tick,
-			run_script_timer, st->sleep.charid, (intptr_t)st);
+			run_script_timer, st->sleep.charid, (intptr_t)st->id);
 	} else if(st->state != END && st->rid){
 		//Resume later (st is already attached to player).
 		if(st->bk_st) {
@@ -3751,7 +3763,6 @@ void do_final_script(void) {
 
 	mapreg_final();
 
-	db_destroy(scriptlabel_db);
 	userfunc_db->destroy(userfunc_db, db_script_free_code_sub);
 	autobonus_db->destroy(autobonus_db, db_script_free_code_sub);
 
@@ -3807,6 +3818,9 @@ void do_final_script(void) {
 	ers_destroy(script->stack_ers);
 	
 	db_destroy(script->st_db);
+	
+	if( script->labels != NULL )
+		aFree(script->labels);
 }
 /*==========================================
  * Initialization
@@ -3814,7 +3828,6 @@ void do_final_script(void) {
 void do_init_script(void) {
 	script->st_db = idb_alloc(DB_OPT_BASE);
 	userfunc_db = strdb_alloc(DB_OPT_DUP_KEY,0);
-	scriptlabel_db = strdb_alloc(DB_OPT_DUP_KEY,50);
 	autobonus_db = strdb_alloc(DB_OPT_DUP_KEY,0);
 
 	script->st_ers = ers_new(sizeof(struct script_state), "script.c::st_ers", ERS_OPT_NONE);
@@ -3834,7 +3847,7 @@ int script_reload() {
 	struct script_state *st;
 
 	userfunc_db->clear(userfunc_db, db_script_free_code_sub);
-	db_clear(scriptlabel_db);
+	script->label_count = 0;
 
 	for( i = 0; i < atcommand->binding_count; i++ ) {
 		aFree(atcommand->binding[i]);
@@ -5564,11 +5577,11 @@ BUILDIN(countitem)
 	
 	if( data_isstring(data) )
 	{// item name
-		id = itemdb_searchname(script->conv_str(st, data));
+		id = itemdb->search_name(script->conv_str(st, data));
 	}
 	else
 	{// item id
-		id = itemdb_exists(script->conv_num(st, data));
+		id = itemdb->exists(script->conv_num(st, data));
 	}
 	
 	if( id == NULL )
@@ -5611,11 +5624,11 @@ BUILDIN(countitem2)
 	
 	if( data_isstring(data) )
 	{// item name
-		id = itemdb_searchname(script->conv_str(st, data));
+		id = itemdb->search_name(script->conv_str(st, data));
 	}
 	else
 	{// item id
-		id = itemdb_exists(script->conv_num(st, data));
+		id = itemdb->exists(script->conv_num(st, data));
 	}
 	
 	if( id == NULL )
@@ -5678,9 +5691,9 @@ BUILDIN(checkweight)
 	    data = script_getdata(st,i);
 	    script->get_val(st, data);  // convert into value in case of a variable
 	    if( data_isstring(data) ){// item name
-		    id = itemdb_searchname(script->conv_str(st, data));
+		    id = itemdb->search_name(script->conv_str(st, data));
 	    } else {// item id
-		    id = itemdb_exists(script->conv_num(st, data));
+		    id = itemdb->exists(script->conv_num(st, data));
 	    }
 	    if( id == NULL ) {
 		    ShowError("buildin_checkweight: Invalid item '%s'.\n", script_getstr(st,i));  // returns string, regardless of what it was
@@ -5794,7 +5807,7 @@ BUILDIN(checkweight2)
 	    script_removetop(st, -1, 0);
 	    if(fail) continue; //cpntonie to depop rest
 		
-		if(itemdb_exists(nameid) == NULL ){
+		if(itemdb->exists(nameid) == NULL ){
 			ShowError("buildin_checkweight2: Invalid item '%d'.\n", nameid);
 			fail=1;
 			continue;
@@ -5852,7 +5865,7 @@ BUILDIN(getitem)
 	if( data_isstring(data) )
 	{// "<item name>"
 		const char *name=script->conv_str(st,data);
-		if( (item_data = itemdb_searchname(name)) == NULL ){
+		if( (item_data = itemdb->search_name(name)) == NULL ){
 			ShowError("buildin_getitem: Nonexistant item %s requested.\n", name);
 			return false; //No item created.
 		}
@@ -5864,7 +5877,7 @@ BUILDIN(getitem)
 			nameid = -nameid;
 			flag = 1;
 		}
-		if( nameid <= 0 || !(item_data = itemdb_exists(nameid)) ){
+		if( nameid <= 0 || !(item_data = itemdb->exists(nameid)) ){
 			ShowError("buildin_getitem: Nonexistant item %d requested.\n", nameid);
 			return false; //No item created.
 		}
@@ -5939,7 +5952,7 @@ BUILDIN(getitem2)
 	script->get_val(st,data);
 	if( data_isstring(data) ){
 		const char *name=script->conv_str(st,data);
-		struct item_data *item_data = itemdb_searchname(name);
+		struct item_data *item_data = itemdb->search_name(name);
 		if( item_data )
 			nameid=item_data->nameid;
 		else
@@ -5963,7 +5976,7 @@ BUILDIN(getitem2)
 	
 	if(nameid > 0) {
 		memset(&item_tmp,0,sizeof(item_tmp));
-		item_data=itemdb_exists(nameid);
+		item_data=itemdb->exists(nameid);
 		if (item_data == NULL)
 			return -1;
 		if(item_data->type==IT_WEAPON || item_data->type==IT_ARMOR){
@@ -6035,7 +6048,7 @@ BUILDIN(rentitem)
 	if( data_isstring(data) )
 	{
 		const char *name = script->conv_str(st,data);
-		struct item_data *itd = itemdb_searchname(name);
+		struct item_data *itd = itemdb->search_name(name);
 		if( itd == NULL )
 		{
 			ShowError("buildin_rentitem: Nonexistant item %s requested.\n", name);
@@ -6046,7 +6059,7 @@ BUILDIN(rentitem)
 	else if( data_isint(data) )
 	{
 		nameid = script->conv_num(st,data);
-		if( nameid <= 0 || !itemdb_exists(nameid) )
+		if( nameid <= 0 || !itemdb->exists(nameid) )
 		{
 			ShowError("buildin_rentitem: Nonexistant item %d requested.\n", nameid);
 			return false;
@@ -6097,7 +6110,7 @@ BUILDIN(getnameditem)
 	script->get_val(st,data);
 	if( data_isstring(data) ){
 		const char *name=script->conv_str(st,data);
-		struct item_data *item_data = itemdb_searchname(name);
+		struct item_data *item_data = itemdb->search_name(name);
 		if( item_data == NULL)
 		{	//Failed
 			script_pushint(st,0);
@@ -6107,7 +6120,7 @@ BUILDIN(getnameditem)
 	}else
 		nameid = script->conv_num(st,data);
 	
-	if(!itemdb_exists(nameid)/* || itemdb_isstackable(nameid)*/)
+	if(!itemdb->exists(nameid)/* || itemdb_isstackable(nameid)*/)
 	{	//Even though named stackable items "could" be risky, they are required for certain quests.
 		script_pushint(st,0);
 		return true;
@@ -6146,12 +6159,30 @@ BUILDIN(getnameditem)
  * gets a random item ID from an item group [Skotlex]
  * groupranditem group_num
  *------------------------------------------*/
-BUILDIN(grouprandomitem)
-{
-	int group;
+BUILDIN(grouprandomitem) {
+	struct item_data *data;
+	int nameid;
 	
-	group = script_getnum(st,2);
-	script_pushint(st,itemdb_searchrandomid(group));
+	if( script_hasdata(st, 2) )
+		nameid = script_getnum(st, 2);
+	else if ( script->current_item_id )
+		nameid = script->current_item_id;
+	else {
+		ShowWarning("buildin_grouprandomitem: no item id provided and no item attached\n");
+		script_pushint(st, 0);
+		return true;
+	}
+	
+	if( !(data = itemdb->exists(nameid)) ) {
+		ShowWarning("buildin_grouprandomitem: unknown item id %d\n",nameid);
+		script_pushint(st, 0);
+	} else if ( !data->group ) {
+		ShowWarning("buildin_grouprandomitem: item '%s' (%d) isn't a group!\n",data->name,nameid);
+		script_pushint(st, 0);
+	} else {
+		script_pushint(st, itemdb->group_item(data->group));
+	}
+		
 	return true;
 }
 
@@ -6171,13 +6202,13 @@ BUILDIN(makeitem)
 	script->get_val(st,data);
 	if( data_isstring(data) ){
 		const char *name=script->conv_str(st,data);
-		if( (item_data = itemdb_searchname(name)) )
+		if( (item_data = itemdb->search_name(name)) )
 			nameid=item_data->nameid;
 		else
 			nameid=UNKNOWN_ITEM_ID;
 	} else {
 		nameid=script->conv_num(st,data);
-		if( nameid <= 0 || !(item_data = itemdb_exists(nameid)) ){
+		if( nameid <= 0 || !(item_data = itemdb->exists(nameid)) ){
 			ShowError("makeitem: Nonexistant item %d requested.\n", nameid);
 			return false; //No item created.
 		}
@@ -6384,7 +6415,7 @@ BUILDIN(delitem)
 	if( data_isstring(data) )
 	{
 		const char* item_name = script->conv_str(st,data);
-		struct item_data* id = itemdb_searchname(item_name);
+		struct item_data* id = itemdb->search_name(item_name);
 		if( id == NULL )
 		{
 			ShowError("script:delitem: unknown item \"%s\".\n", item_name);
@@ -6396,7 +6427,7 @@ BUILDIN(delitem)
 	else
 	{
 		it.nameid = script->conv_num(st,data);// <item id>
-		if( !itemdb_exists( it.nameid ) )
+		if( !itemdb->exists( it.nameid ) )
 		{
 			ShowError("script:delitem: unknown item \"%d\".\n", it.nameid);
 			st->state = END;
@@ -6453,7 +6484,7 @@ BUILDIN(delitem2)
 	if( data_isstring(data) )
 	{
 		const char* item_name = script->conv_str(st,data);
-		struct item_data* id = itemdb_searchname(item_name);
+		struct item_data* id = itemdb->search_name(item_name);
 		if( id == NULL )
 		{
 			ShowError("script:delitem2: unknown item \"%s\".\n", item_name);
@@ -6465,7 +6496,7 @@ BUILDIN(delitem2)
 	else
 	{
 		it.nameid = script->conv_num(st,data);// <item id>
-		if( !itemdb_exists( it.nameid ) )
+		if( !itemdb->exists( it.nameid ) )
 		{
 			ShowError("script:delitem: unknown item \"%d\".\n", it.nameid);
 			st->state = END;
@@ -8179,20 +8210,18 @@ BUILDIN(gettimestr)
 /*==========================================
  * Open player storage
  *------------------------------------------*/
-BUILDIN(openstorage)
-{
+BUILDIN(openstorage) {
 	TBL_PC* sd;
 	
 	sd = script_rid2sd(st);
 	if( sd == NULL )
 		return true;
 	
-	storage_storageopen(sd);
+	storage->open(sd);
 	return true;
 }
 
-BUILDIN(guildopenstorage)
-{
+BUILDIN(guildopenstorage) {
 	TBL_PC* sd;
 	int ret;
 	
@@ -8200,7 +8229,7 @@ BUILDIN(guildopenstorage)
 	if( sd == NULL )
 		return true;
 	
-	ret = storage_guild_storageopen(sd);
+	ret = gstorage->open(sd);
 	script_pushint(st,ret);
 	return true;
 }
@@ -8424,7 +8453,12 @@ BUILDIN(monster)
 	if (sd && strcmp(mapn, "this") == 0)
 		m = sd->bl.m;
 	else {
-		m = iMap->mapname2mapid(mapn);
+		
+		if ( ( m = iMap->mapname2mapid(mapn) ) == -1 ) {
+			ShowWarning("buildin_monster: Attempted to spawn monster class %d on non-existing map '%s'\n",class_, mapn);
+			return false;
+		}
+		
 		if (map[m].flag.src4instance && st->instance_id >= 0) { // Try to redirect to the instance map, not the src map
 			if ((m = instance->mapid2imapid(m, st->instance_id)) < 0) {
 				ShowError("buildin_monster: Trying to spawn monster (%d) on instance map (%s) without instance attached.\n", class_, mapn);
@@ -8458,7 +8492,7 @@ BUILDIN(getmobdrops)
 	{
 		if( mob->dropitem[i].nameid < 1 )
 			continue;
-		if( itemdb_exists(mob->dropitem[i].nameid) == NULL )
+		if( itemdb->exists(mob->dropitem[i].nameid) == NULL )
 			continue;
 		
 		mapreg_setreg(reference_uid(add_str("$@MobDrop_item"), j), mob->dropitem[i].nameid);
@@ -9131,14 +9165,14 @@ BUILDIN(itemeffect) {
 	if( data_isstring( data ) ){
 		const char *name = script->conv_str( st, data );
 		
-		if( ( item_data = itemdb_searchname( name ) ) == NULL ){
+		if( ( item_data = itemdb->search_name( name ) ) == NULL ){
 			ShowError( "buildin_itemeffect: Nonexistant item %s requested.\n", name );
 			return false;
 		}
 	} else if( data_isint( data ) ){
 		int nameid = script->conv_num( st, data );
 		
-		if( ( item_data = itemdb_exists( nameid ) ) == NULL ){
+		if( ( item_data = itemdb->exists( nameid ) ) == NULL ){
 			ShowError("buildin_itemeffect: Nonexistant item %d requested.\n", nameid );
 			return false;
 		}
@@ -9365,7 +9399,7 @@ BUILDIN(getareadropitem)
 	script->get_val(st,data);
 	if( data_isstring(data) ){
 		const char *name=script->conv_str(st,data);
-		struct item_data *item_data = itemdb_searchname(name);
+		struct item_data *item_data = itemdb->search_name(name);
 		item=UNKNOWN_ITEM_ID;
 		if( item_data )
 			item=item_data->nameid;
@@ -9934,7 +9968,7 @@ BUILDIN(changesex)
 	// to avoid any problem with equipment and invalid sex, equipment is unequiped.
 	for( i=0; i<EQI_MAX; i++ )
 		if( sd->equip_index[i] >= 0 ) pc->unequipitem(sd, sd->equip_index[i], 3);
-	chrif_changesex(sd);
+	chrif->changesex(sd);
 	return true;
 }
 
@@ -10313,6 +10347,7 @@ BUILDIN(getmapflag)
 			case MF_PVP_NOCALCRANK:		script_pushint(st,map[m].flag.pvp_nocalcrank); break;
 			case MF_BATTLEGROUND:		script_pushint(st,map[m].flag.battleground); break;
 			case MF_RESET:				script_pushint(st,map[m].flag.reset); break;
+			case MF_NOTOMB:				script_pushint(st,map[m].flag.notomb); break;
 		}
 	}
 	
@@ -10429,6 +10464,7 @@ BUILDIN(setmapflag)
 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank = 1; break;
 			case MF_BATTLEGROUND:		map[m].flag.battleground = (val <= 0 || val > 2) ? 1 : val; break;
 			case MF_RESET:				map[m].flag.reset = 1; break;
+			case MF_NOTOMB:				map[m].flag.notomb = 1; break;
 		}
 	}
 	
@@ -10517,6 +10553,7 @@ BUILDIN(removemapflag)
 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank = 0; break;
 			case MF_BATTLEGROUND:		map[m].flag.battleground = 0; break;
 			case MF_RESET:				map[m].flag.reset = 0; break;
+			case MF_NOTOMB:				map[m].flag.notomb = 0; break;
 		}
 	}
 	
@@ -11448,13 +11485,13 @@ BUILDIN(getitemname)
 	
 	if( data_isstring(data) ){
 		const char *name=script->conv_str(st,data);
-		struct item_data *item_data = itemdb_searchname(name);
+		struct item_data *item_data = itemdb->search_name(name);
 		if( item_data )
 			item_id=item_data->nameid;
 	}else
 		item_id=script->conv_num(st,data);
 	
-	i_data = itemdb_exists(item_id);
+	i_data = itemdb->exists(item_id);
 	if (i_data == NULL)
 	{
 		script_pushconststr(st,"null");
@@ -11476,7 +11513,7 @@ BUILDIN(getitemslots)
 	
 	item_id=script_getnum(st,2);
 	
-	i_data = itemdb_exists(item_id);
+	i_data = itemdb->exists(item_id);
 	
 	if (i_data)
 		script_pushint(st,i_data->slot);
@@ -11517,7 +11554,7 @@ BUILDIN(getiteminfo)
 	
 	item_id	= script_getnum(st,2);
 	n	= script_getnum(st,3);
-	i_data = itemdb_exists(item_id);
+	i_data = itemdb->exists(item_id);
 	
 	if (i_data && n>=0 && n<=14) {
 		item_arr = (int*)&i_data->value_buy;
@@ -11559,7 +11596,7 @@ BUILDIN(setiteminfo)
 	item_id	= script_getnum(st,2);
 	n	= script_getnum(st,3);
 	value	= script_getnum(st,4);
-	i_data = itemdb_exists(item_id);
+	i_data = itemdb->exists(item_id);
 	
 	if (i_data && n>=0 && n<=14) {
 		item_arr = (int*)&i_data->value_buy;
@@ -13108,7 +13145,7 @@ BUILDIN(equip)
 	sd = script_rid2sd(st);
 	
 	nameid=script_getnum(st,2);
-	if((item_data = itemdb_exists(nameid)) == NULL)
+	if((item_data = itemdb->exists(nameid)) == NULL)
 	{
 		ShowError("wrong item ID : equipitem(%i)\n",nameid);
 		return false;
@@ -13127,7 +13164,7 @@ BUILDIN(autoequip)
 	nameid=script_getnum(st,2);
 	flag=script_getnum(st,3);
 	
-	if( ( item_data = itemdb_exists(nameid) ) == NULL )
+	if( ( item_data = itemdb->exists(nameid) ) == NULL )
 	{
 		ShowError("buildin_autoequip: Invalid item '%d'.\n", nameid);
 		return false;
@@ -14466,7 +14503,7 @@ BUILDIN(setitemscript)
 	new_bonus_script = script_getstr(st,3);
 	if( script_hasdata(st,4) )
 		n=script_getnum(st,4);
-	i_data = itemdb_exists(item_id);
+	i_data = itemdb->exists(item_id);
 	
 	if (!i_data || new_bonus_script==NULL || ( new_bonus_script[0] && new_bonus_script[0]!='{' )) {
 		script_pushint(st,0);
@@ -14632,10 +14669,10 @@ BUILDIN(searchitem)
 	int32 i;
 	TBL_PC* sd = NULL;
 	
-	if ((items[0] = itemdb_exists(atoi(itemname))))
+	if ((items[0] = itemdb->exists(atoi(itemname))))
 		count = 1;
 	else {
-		count = itemdb_searchname_array(items, ARRAYLENGTH(items), itemname);
+		count = itemdb->search_name_array(items, ARRAYLENGTH(items), itemname);
 		if (count > MAX_SEARCH) count = MAX_SEARCH;
 	}
 	
@@ -16074,27 +16111,33 @@ BUILDIN(has_instance) {
 		int i = 0, j = 0;
 		if( sd->instances ) {
 			for( i = 0; i < sd->instances; i++ ) {
-				ARR_FIND(0, instances[sd->instance[i]].num_map, j, map[instances[sd->instance[i]].map[j]].instance_src_map == m);
-				if( j != instances[sd->instance[i]].num_map )
-					break;
+				if( sd->instance[i] >= 0 ) {
+					ARR_FIND(0, instances[sd->instance[i]].num_map, j, map[instances[sd->instance[i]].map[j]].instance_src_map == m);
+					if( j != instances[sd->instance[i]].num_map )
+						break;
+				}
 			}
 			if( i != sd->instances )
 				instance_id = sd->instance[i];
 		}
 		if( instance_id == -1 && sd->status.party_id && (p = party->search(sd->status.party_id)) && p->instances ) {
 			for( i = 0; i < p->instances; i++ ) {
-				ARR_FIND(0, instances[p->instance[i]].num_map, j, map[instances[p->instance[i]].map[j]].instance_src_map == m);
-				if( j != instances[p->instance[i]].num_map )
-					break;
+				if( p->instance[i] >= 0 ) {
+					ARR_FIND(0, instances[p->instance[i]].num_map, j, map[instances[p->instance[i]].map[j]].instance_src_map == m);
+					if( j != instances[p->instance[i]].num_map )
+						break;
+				}
 			}
 			if( i != p->instances )
 				instance_id = p->instance[i];
 		}
 		if( instance_id == -1 && sd->guild && sd->guild->instances ) {
 			for( i = 0; i < sd->guild->instances; i++ ) {
-				ARR_FIND(0, instances[sd->guild->instance[i]].num_map, j, map[instances[sd->guild->instance[i]].map[j]].instance_src_map == m);
-				if( j != instances[sd->guild->instance[i]].num_map )
-					break;
+				if( sd->guild->instance[i] >= 0 ) {
+					ARR_FIND(0, instances[sd->guild->instance[i]].num_map, j, map[instances[sd->guild->instance[i]].map[j]].instance_src_map == m);
+					if( j != instances[sd->guild->instance[i]].num_map )
+						break;
+				}
 			}
 			if( i != sd->guild->instances )
 				instance_id = sd->guild->instance[i];
@@ -16829,50 +16872,53 @@ BUILDIN(checkre)
 	return true;
 }
 
-/* getrandgroupitem <group_id>,<quantity> */
+/* getrandgroupitem <container_item_id>,<quantity> */
 BUILDIN(getrandgroupitem) {
-	TBL_PC* sd;
-	int i, get_count = 0, flag, nameid, group = script_getnum(st, 2), qty = script_getnum(st,3);
-	struct item item_tmp;
+	struct item_data *data = NULL;
+	struct map_session_data *sd = NULL;
+	int nameid = script_getnum(st, 2);
+	int count = script_getnum(st, 3);
 	
-	if( !( sd = script_rid2sd(st) ) )
-		return true;
-	
-	if( qty <= 0 ) {
-		ShowError("getrandgroupitem: qty is <= 0!\n");
-		return false;
-	}
-	
-	if(group < 1 || group >= MAX_ITEMGROUP) {
-		ShowError("getrandgroupitem: Invalid group id %d\n", group);
-		return false;
-	}
-	if (!itemgroup_db[group].qty) {
-		ShowError("getrandgroupitem: group id %d is empty!\n", group);
-		return false;
-	}
-	
-	nameid = itemdb_searchrandomid(group);
-	memset(&item_tmp,0,sizeof(item_tmp));
-	
-	item_tmp.nameid   = nameid;
-	item_tmp.identify = itemdb_isidentified(nameid);
-	
-	//Check if it's stackable.
-	if (!itemdb_isstackable(nameid))
-		get_count = 1;
-	else
-		get_count = qty;
-	
-	for (i = 0; i < qty; i += get_count) {
-		// if not pet egg
-		if (!pet_create_egg(sd, nameid)) {
-			if ((flag = pc->additem(sd, &item_tmp, get_count, LOG_TYPE_SCRIPT))) {
-				clif->additem(sd, 0, 0, flag);
-				if( pc->candrop(sd,&item_tmp) )
-					iMap->addflooritem(&item_tmp,get_count,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0);
+	if( !(data = itemdb->exists(nameid)) ) {
+		ShowWarning("buildin_getrandgroupitem: unknown item id %d\n",nameid);
+		script_pushint(st, 1);
+	} else if ( count <= 0 ) {
+		ShowError("buildin_getrandgroupitem: qty is <= 0!\n");
+		script_pushint(st, 1);
+	} else if ( !data->group ) {
+		ShowWarning("buildin_getrandgroupitem: item '%s' (%d) isn't a group!\n",data->name,nameid);
+		script_pushint(st, 1);
+	} else if( !( sd = script->rid2sd(st) ) ) {
+		ShowWarning("buildin_getrandgroupitem: no player attached!! (item %s (%d))\n",data->name,nameid);
+		script_pushint(st, 1);
+	} else {
+		int i, get_count, flag;
+		struct item it;
+		
+		memset(&it,0,sizeof(it));
+
+		nameid = itemdb->group_item(data->group);
+
+		it.nameid = nameid;
+		it.identify = itemdb_isidentified(nameid);
+		
+		if (!itemdb_isstackable(nameid))
+			get_count = 1;
+		else
+			get_count = count;
+		
+		for (i = 0; i < count; i += get_count) {
+			// if not pet egg
+			if (!pet_create_egg(sd, nameid)) {
+				if ((flag = pc->additem(sd, &it, get_count, LOG_TYPE_SCRIPT))) {
+					clif->additem(sd, 0, 0, flag);
+					if( pc->candrop(sd,&it) )
+						iMap->addflooritem(&it,get_count,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0);
+				}
 			}
 		}
+		
+		script_pushint(st, 0);
 	}
 	
 	return true;
@@ -16969,9 +17015,7 @@ struct hQueue *script_hqueue_get(int idx) {
 		return NULL;
 	return &script->hq[idx];
 }
-/* set .@id,queue(); */
-/* creates queue, returns created queue id */
-BUILDIN(queue) {
+int script_hqueue_create(void) {
 	int idx = script->hqs;
 	int i;
 	
@@ -16992,8 +17036,12 @@ BUILDIN(queue) {
 	script->hq[ idx ].onDeath[0] = '\0';
 	script->hq[ idx ].onLogOut[0] = '\0';
 	script->hq[ idx ].onMapChange[0] = '\0';
-
-	script_pushint(st,idx);
+	return idx;
+}
+/* set .@id,queue(); */
+/* creates queue, returns created queue id */
+BUILDIN(queue) {
+	script_pushint(st,script->queue_create());
 	return true;
 }
 /* set .@length,queuesize(.@queue_id); */
@@ -17004,8 +17052,14 @@ BUILDIN(queuesize) {
 	if( idx < 0 || idx >= script->hqs || script->hq[idx].items == -1 ) {
 		ShowWarning("buildin_queuesize: unknown queue id %d\n",idx);
 		script_pushint(st, 0);
-	} else
-		script_pushint(st, script->hq[ idx ].items );
+	} else {
+		/* value of script->hq[].items isn't to be trusted for we dont reduce the size when members are removed to save on memory allocation */
+		int i, count = 0;
+		for( i = 0; i < script->hq[ idx ].items; i++ )
+			if( script->hq[ idx ].item[i] != -1  )
+				count++;
+		script_pushint(st, count);
+	}
 		
 	return true;
 }
@@ -17072,17 +17126,17 @@ bool script_hqueue_remove(int idx, int var) {
 		
 		for(i = 0; i < script->hq[idx].items; i++) {
 			if( script->hq[idx].item[i] == var ) {
-				return true;
+				break;
 			}
 		}
 		
 		if( i != script->hq[idx].items ) {
 			struct map_session_data *sd;
-			script->hq[idx].item[i] = 0;
+			script->hq[idx].item[i] = -1;
 			
 			if( var >= START_ACCOUNT_NUM && (sd = iMap->id2sd(var)) ) {
 				for(i = 0; i < sd->queues_count; i++) {
-					if( sd->queues[i] == var ) {
+					if( sd->queues[i] == idx ) {
 						break;
 					}
 				}
@@ -17184,7 +17238,33 @@ BUILDIN(queuedel) {
 	
 	return true;
 }
+void script_hqueue_clear(int idx) {
+	if( idx < 0 || idx >= script->hqs || script->hq[idx].items == -1 ) {
+		ShowWarning("script_hqueue_clear: unknown queue id %d\n",idx);
+		return;
+	} else {
+		struct map_session_data *sd;
+		int i, j;
+		
+			for(i = 0; i < script->hq[idx].items; i++) {
+				if( script->hq[idx].item[i] != -1 ) {
 
+					if( script->hq[idx].item[i] >= START_ACCOUNT_NUM && (sd = iMap->id2sd(script->hq[idx].item[i])) ) {
+						for(j = 0; j < sd->queues_count; j++) {
+							if( sd->queues[j] == idx ) {
+								break;
+							}
+						}
+						
+						if( j != sd->queues_count )
+							sd->queues[j] = -1;
+					}
+					script->hq[idx].item[i] = -1;
+				}
+			}
+	}
+	return;
+}
 /* set .@id, queueiterator(.@queue_id); */
 /* creates a new queue iterator, returns its id */
 BUILDIN(queueiterator) {
@@ -17193,7 +17273,7 @@ BUILDIN(queueiterator) {
 	int idx = script->hqis;
 	int i;
 	
-	if( qid < 0 || qid >= script->hqs || script->hq[idx].items == -1 || !(queue = script->queue(qid)) ) {
+	if( qid < 0 || qid >= script->hqs || script->hq[qid].items == -1 || !(queue = script->queue(qid)) ) {
 		ShowWarning("queueiterator: invalid queue id %d\n",qid);
 		return true;
 	}
@@ -17204,14 +17284,15 @@ BUILDIN(queueiterator) {
 		}
 	}
 	
-	if( i == script->hqis )
+	if( i == script->hqis ) {
 		RECREATE(script->hqi, struct hQueueIterator, ++script->hqis);
-	else
+		script->hqi[ idx ].item = NULL;
+	} else
 		idx = i;
-	
+
 	RECREATE(script->hqi[ idx ].item, int, queue->items);
-	
-	memcpy(&script->hqi[idx].item, &queue->item, sizeof(int)*queue->items);
+
+	memcpy(script->hqi[idx].item, queue->item, sizeof(int)*queue->items);
 	
 	script->hqi[ idx ].items = queue->items;
 	script->hqi[ idx ].pos = 0;
@@ -17227,7 +17308,7 @@ BUILDIN(qiget) {
 	if( idx < 0 || idx >= script->hqis ) {
 		ShowWarning("buildin_qiget: unknown queue iterator id %d\n",idx);
 		script_pushint(st, 0);
-	} else if ( script->hqi[idx].pos == script->hqi[idx].items ) {
+	} else if ( script->hqi[idx].pos -1 == script->hqi[idx].items ) {
 		script_pushint(st, 0);
 	} else {
 		struct hQueueIterator *it = &script->hqi[idx];
@@ -17244,7 +17325,7 @@ BUILDIN(qicheck) {
 	if( idx < 0 || idx >= script->hqis ) {
 		ShowWarning("buildin_qicheck: unknown queue iterator id %d\n",idx);
 		script_pushint(st, 0);
-	} else if ( script->hqi[idx].pos == script->hqi[idx].items ) {
+	} else if ( script->hqi[idx].pos -1 == script->hqi[idx].items ) {
 		script_pushint(st, 0);
 	} else {
 		script_pushint(st, 1);
@@ -17266,7 +17347,101 @@ BUILDIN(qiclear) {
 	
 	return true;
 }
+/**
+ * packageitem({<optional container_item_id>})
+ * when no item id is provided it tries to assume it comes from the current item id being processed (if any)
+ **/
+BUILDIN(packageitem) {
+	struct item_data *data = NULL;
+	struct map_session_data *sd = NULL;
+	int nameid;
 
+	if( script_hasdata(st, 2) )
+		nameid = script_getnum(st, 2);
+	else if ( script->current_item_id )
+		nameid = script->current_item_id;
+	else {
+		ShowWarning("buildin_packageitem: no item id provided and no item attached\n");
+		script_pushint(st, 1);
+		return true;
+	}
+		
+	if( !(data = itemdb->exists(nameid)) ) {
+		ShowWarning("buildin_packageitem: unknown item id %d\n",nameid);
+		script_pushint(st, 1);
+	} else if ( !data->package ) {
+		ShowWarning("buildin_packageitem: item '%s' (%d) isn't a package!\n",data->name,nameid);
+		script_pushint(st, 1);
+	} else if( !( sd = script->rid2sd(st) ) ) {
+		ShowWarning("buildin_packageitem: no player attached!! (item %s (%d))\n",data->name,nameid);
+		script_pushint(st, 1);
+	} else {
+		itemdb->package_item(sd,data->package);
+		script_pushint(st, 0);
+	}
+	
+	return true;
+}
+/* New Battlegrounds Stuff */
+/* bg_team_create(map_name,respawn_x,respawn_y) */
+/* returns created team id or -1 when fails */
+BUILDIN(bg_create_team) {
+	const char *map_name, *ev = "", *dev = "";//ev and dev will be dropped.
+	int x, y, mapindex = 0, bg_id;
+		
+	map_name = script_getstr(st,2);
+	if( strcmp(map_name,"-") != 0 ) {
+		mapindex = mapindex_name2id(map_name);
+		if( mapindex == 0 ) { // Invalid Map
+			script_pushint(st,0);
+			return true;
+		}
+	}
+	
+	x = script_getnum(st,3);
+	y = script_getnum(st,4);
+	
+	if( (bg_id = bg_create(mapindex, x, y, ev, dev)) == 0 ) { // Creation failed
+		script_pushint(st,-1);
+	} else
+		script_pushint(st,bg_id);
+	
+	return true;
+
+}
+/* bg_join_team(team_id{,optional account id}) */
+/* when account id is not present it tries to autodetect from the attached player (if any) */
+/* returns 0 when successful, 1 otherwise */
+BUILDIN(bg_join_team) {
+	struct map_session_data *sd;
+	int team_id = script_getnum(st, 2);
+	
+	if( script_hasdata(st, 3) )
+		sd = iMap->id2sd(script_getnum(st, 3));
+	else
+		sd = script->rid2sd(st);
+	
+	if( !sd )
+		script_pushint(st, 1);
+	else
+		script_pushint(st,bg_team_join(team_id, sd)?0:1);
+	
+	return true;
+}
+/* bg_match_over( arena_name {, optional canceled } ) */
+/* returns 0 when successful, 1 otherwise */
+BUILDIN(bg_match_over) {
+	bool canceled = script_hasdata(st,3) ? true : false;
+	struct bg_arena *arena = bg->name2arena((char*)script_getstr(st, 2));
+	
+	if( arena ) {
+		bg->match_over(arena,canceled);
+		script_pushint(st, 0);
+	} else
+		script_pushint(st, 1);
+	
+	return true;
+}
 // declarations that were supposed to be exported from npc_chat.c
 #ifdef PCRE_SUPPORT
 	BUILDIN(defpattern);
@@ -17780,6 +17955,13 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(qicheck,"i"),
 		BUILDIN_DEF(qiget,"i"),
 		BUILDIN_DEF(qiclear,"i"),
+		
+		BUILDIN_DEF(packageitem,"?"),
+		
+		/* New BG Commands [Hercules] */
+		BUILDIN_DEF(bg_create_team,"sii"),
+		BUILDIN_DEF(bg_join_team,"i?"),
+		BUILDIN_DEF(bg_match_over,"s?"),
 	};
 	int i,n, len = ARRAYLENGTH(BUILDIN), start = script->buildin_count;
 	char* p;
@@ -17830,6 +18012,19 @@ void script_parse_builtin(void) {
 	}
 }
 
+void script_label_add(int key, int pos) {
+	int idx = script->label_count;
+	
+	if( script->labels_size == script->label_count ) {
+		script->labels_size += 1024;
+		RECREATE(script->labels, struct script_label_entry, script->labels_size);
+	}
+	
+	script->labels[idx].key = key;
+	script->labels[idx].pos = pos;
+	script->label_count++;
+}
+
 void script_defaults(void) {
 	script = &script_s;
 	
@@ -17857,6 +18052,12 @@ void script_defaults(void) {
 	script->word_buf = NULL;
 	script->word_size = 0;
 	
+	script->current_item_id = 0;
+	
+	script->labels = NULL;
+	script->label_count = 0;
+	script->labels_size = 0;
+	
 	script->init = do_init_script;
 	script->final = do_final_script;
 	
@@ -17872,9 +18073,16 @@ void script_defaults(void) {
 	script->push_str = push_str;
 	script->push_copy = push_copy;
 	script->pop_stack = pop_stack;
+	script->set_constant = script_set_constant;
+	script->set_constant2 = script_set_constant2;
+	script->get_constant = 	script_get_constant;
 	
 	script->queue = script_hqueue_get;
 	script->queue_add = script_hqueue_add;
 	script->queue_del = script_hqueue_del;
 	script->queue_remove = script_hqueue_remove;
+	script->queue_create = script_hqueue_create;
+	script->queue_clear = script_hqueue_clear;
+	
+	script->label_add = script_label_add;
 }

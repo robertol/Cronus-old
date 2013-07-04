@@ -1714,6 +1714,23 @@ struct s_skill_magicmushroom_db {
 extern struct s_skill_magicmushroom_db skill_magicmushroom_db[MAX_SKILL_MAGICMUSHROOM_DB];
 
 /**
+ * Skill Cool Down Delay Saving
+ * Struct skill_cd is not a member of struct map_session_data
+ * to keep cooldowns in memory between player log-ins.
+ * All cooldowns are reset when server is restarted.
+ **/
+struct skill_cd {
+	int duration[MAX_SKILL_TREE];//milliseconds
+#if PACKETVER >= 20120604
+	int total[MAX_SKILL_TREE];
+#endif
+	short skidx[MAX_SKILL_TREE];//the skill index entries belong to
+	short nameid[MAX_SKILL_TREE];//skill id
+	unsigned int started[MAX_SKILL_TREE];
+	unsigned char cursor;
+};
+
+/**
  * Vars
  **/
 extern int enchant_eff[5];
@@ -1728,6 +1745,8 @@ struct skill_interface {
 	int (*final) (void);
 	void (*reload) (void);
 	void (*read_db) (void);
+	/* */
+	DBMap* cd_db; // char_id -> struct skill_cd
 	/* accesssors */
 	int	(*get_index) ( uint16 skill_id );
 	int	(*get_type) ( uint16 skill_id );
@@ -1917,7 +1936,8 @@ struct skill_interface {
 	int (*elementalanalysis) (struct map_session_data *sd, int n, uint16 skill_lv, unsigned short *item_list);
 	int (*changematerial) (struct map_session_data *sd, int n, unsigned short *item_list);
 	int (*get_elemental_type) (uint16 skill_id, uint16 skill_lv);
-} skill_s;
+	void (*cooldown_save) (struct map_session_data * sd);
+};
 
 struct skill_interface *skill;
 

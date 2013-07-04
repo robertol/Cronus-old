@@ -945,7 +945,7 @@ int unit_can_move(struct block_list *bl) {
 						||  sc->data[SC__MANHOLE]
 						||  sc->data[SC_CURSEDCIRCLE_ATKER]
 						||  sc->data[SC_CURSEDCIRCLE_TARGET]
-						|| (sc->data[SC_CRYSTALIZE] && bl->type != BL_MOB)
+						|| (sc->data[SC_COLD] && bl->type != BL_MOB)
 						||  sc->data[SC_NETHERWORLD]
 						|| (sc->data[SC_CAMOUFLAGE] && sc->data[SC_CAMOUFLAGE]->val1 < 3 && !(sc->data[SC_CAMOUFLAGE]->val3&1))
 						||  sc->data[SC_MEIKYOUSISUI]
@@ -2108,9 +2108,9 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 			buyingstore->close(sd);
 			searchstore->close(sd);
 			if(sd->state.storage_flag == 1)
-				storage_storage_quit(sd,0);
+				storage->pc_quit(sd,0);
 			else if (sd->state.storage_flag == 2)
-				storage_guild_storage_quit(sd,0);
+				gstorage->pc_quit(sd,0);
 			sd->state.storage_flag = 0; //Force close it when being warped.
 			if(sd->party_invite>0)
 				party->reply_invite(sd,sd->party_invite,0);

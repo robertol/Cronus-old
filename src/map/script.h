@@ -191,19 +191,15 @@ int set_var(struct map_session_data *sd, char *name, void *val);
 int run_script_timer(int tid, unsigned int tick, int id, intptr_t data);
 void run_script_main(struct script_state *st);
 
-void script_stop_instances(int id);
+void script_stop_instances(struct script_code *code);
 struct linkdb_node* script_erase_sleepdb(struct linkdb_node *n);
 void script_free_code(struct script_code* code);
 void script_free_vars(struct DBMap *storage);
 struct script_state* script_alloc_state(struct script_code* rootscript, int pos, int rid, int oid);
 void script_free_state(struct script_state* st);
 
-struct DBMap* script_get_label_db(void);
 struct DBMap* script_get_userfunc_db(void);
 void script_run_autobonus(const char *autobonus,int id, int pos);
-
-bool script_get_constant(const char* name, int* value);
-void script_set_constant(const char* name, int value, bool isparameter);
 
 void script_cleararray_pc(struct map_session_data* sd, const char* varname, void* value);
 void script_setarray_pc(struct map_session_data* sd, const char* varname, uint8 idx, void* value, int* refcache);
@@ -232,6 +228,10 @@ struct str_data_struct {
 	bool (*func)(struct script_state *st);
 	int val;
 	int next;
+};
+
+struct script_label_entry {
+	int key,pos;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -357,9 +357,15 @@ struct script_interface {
 	char *str_buf;
 	int str_size; // size of the buffer
 	int str_pos; // next position to be assigned
-	//
+	/* */
 	char *word_buf;
 	int word_size;
+	/*  */
+	unsigned short current_item_id;
+	/* */
+	struct script_label_entry *labels;
+	int label_count;
+	int labels_size;
 	/*  */
 	void (*init) (void);
 	void (*final) (void);
@@ -376,12 +382,18 @@ struct script_interface {
 	struct script_data* (*push_str) (struct script_stack* stack, enum c_op type, char* str);
 	struct script_data* (*push_copy) (struct script_stack* stack, int pos);
 	void (*pop_stack) (struct script_state* st, int start, int end);
+	void (*set_constant) (const char* name, int value, bool isparameter);
+	void (*set_constant2) (const char *name, int value, bool isparameter);
+	bool (*get_constant) (const char* name, int* value);
+	void (*label_add)(int key, int pos);
 	/* */
 	struct hQueue *(*queue) (int idx);
 	bool (*queue_add) (int idx, int var);
 	bool (*queue_del) (int idx);
 	bool (*queue_remove) (int idx, int var);
-} script_s;
+	int (*queue_create) (void);
+	void (*queue_clear) (int idx);
+};
 
 struct script_interface *script;
 

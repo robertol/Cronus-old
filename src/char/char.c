@@ -2028,7 +2028,7 @@ static void char_auth_ok(int fd, struct char_session_data *sd)
 			if (character->waiting_disconnect == INVALID_TIMER)
 				character->waiting_disconnect = iTimer->add_timer(iTimer->gettick()+20000, chardb_waiting_disconnect, character->account_id, 0);
 			if (character)
-			character->pincode_enable = -1;
+				character->pincode_enable = -1;
 			WFIFOHEAD(fd,3);
 			WFIFOW(fd,0) = 0x81;
 			WFIFOB(fd,2) = 8;
@@ -3683,11 +3683,8 @@ static void char_delete2_accept(int fd, struct char_session_data* sd)
 	}
 
 	// refresh character list cache
-	for(k = i; k < MAX_CHARS-1; k++) {
-		sd->found_char[k] = sd->found_char[k+1];
-	}
-	sd->found_char[MAX_CHARS-1] = -1;
-
+	sd->found_char[i] = -1;
+	
 	char_delete2_accept_ack(fd, char_id, 1);
 }
 

@@ -1,10 +1,10 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
 
 #ifndef	_TRADE_H_
 #define	_TRADE_H_
 
-//#include "map.h"
 struct map_session_data;
 
 struct trade_interface {
@@ -17,9 +17,10 @@ struct trade_interface {
 	void (*ok) (struct map_session_data *sd);
 	void (*cancel) (struct map_session_data *sd);
 	void (*commit) (struct map_session_data *sd);
-} trade_s;
+};
 
 struct trade_interface *trade;
+
 void trade_defaults(void);
 
 #endif /* _TRADE_H_ */
