@@ -6,7 +6,7 @@
 # Changelog
 # - Otimizacoes e feita melhorias estruturais no script [Roberto]
 
-versao="2.0"
+versao="2.1"
 
 case $1 in
 	'compilar') 
@@ -35,22 +35,23 @@ case $1 in
 		echo "Cronus-Commander versao $versao"
 	;;
 	'ligar')
-		loglogin=""
-		logchar=""
-		logmap=""
-		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "0" ]; then
-			if [ "$3" == "logando" ]; then
-				loglogin="> $PWD/logs/login-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
-				logchar="> $PWD/logs/char-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
-				logmap="> $PWD/logs/map-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
-			fi
-			exec ./login-server $loglogin
-			exec ./char-server $logchar
-			exec ./map-server $logmap
-		fi
-		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "3" ]; then
-			echo "Seu servidor parece estar ligado."
-		fi
+#		loglogin=""
+#		logchar=""
+#		logmap=""
+#		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "0" ]; then
+#			if [ "$3" == "logando" ]; then
+#				loglogin="> $PWD/logs/login-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#				logchar="> $PWD/logs/char-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#				logmap="> $PWD/logs/map-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#			fi
+#			exec ./login-server $loglogin
+#			exec ./char-server $logchar
+#			exec ./map-server $logmap
+#		fi
+#		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "3" ]; then
+#			echo "Seu servidor parece estar ligado."
+#		fi*/
+		exec ./login-server & exec ./char-server & exec ./map-server &
 	;;
 	'desligar')
 		if [ "$(grep -E "map-server|char-server|login-server" | wc -l)" -ge "0" ]; then
