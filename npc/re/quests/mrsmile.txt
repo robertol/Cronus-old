@@ -13,4 +13,4 @@
 //= 1.0 Updated to match the new Izlude Map. [Masao]
 //============================================================ 
 
-izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz	92
+izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz2	92
