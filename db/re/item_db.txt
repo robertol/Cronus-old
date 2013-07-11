@@ -31,7 +31,7 @@
 521,Leaflet_Of_Aloe,Folha de Aloe,0,360,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(325,405),0; },{},{}
 522,Fruit_Of_Mastela,Mastela,0,8500,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(400,600),0; },{},{}
 523,Holy_Water,Água Benta,0,20,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Curse; },{},{}
-525,Panacéia,Panacéia,0,500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_ILLUSION; },{},{}
+525,Panacea,Panacéia,0,500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_ILLUSION; },{},{}
 526,Royal_Jelly,Geléia Real,0,7000,,150,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(325,405),rand(40,60); sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_ILLUSION; },{},{}
 528,Monster's_Feed,Ração para Monstros,0,60,,150,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(72,108),0; },{},{}
 529,Bala,Bala,0,10,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(45,65),0; },{},{}
@@ -107,7 +107,7 @@
 602,Wing_Of_Butterfly,Asa de Borboleta,11,300,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "AL_TELEPORT",3; },{},{}
 603,Old_Blue_Box,Velha Caixa Azul,2,10000,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem(IG_BlueBox),1; },{},{}
 604,Branch_Of_Dead_Tree,Galho Seco,2,50,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ monster "this",-1,-1,"--ja--",-1,1,""; },{},{}
-605,Analgésico,Analgésico,11,2000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "SM_ENDURE",1; },{},{}
+605,Anodyne,Analgésico,11,2000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "SM_ENDURE",1; },{},{}
 606,Aloebera,Aloe Vera,11,1500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "SM_SELFPROVOKE",1; },{},{}
 607,Yggdrasilberry,Fruto de Yggdrasil,0,5000,,300,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 100,100; },{},{}
 608,Seed_Of_Yggdrasil,Semente de Yggdrasil,0,5000,,300,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 50,50; },{},{}
