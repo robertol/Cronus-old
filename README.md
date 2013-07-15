@@ -30,6 +30,7 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - .twink	- Samuel Soares
+- BOO		- José Filho
 
 ### Desenvolvedores
 - I am Cold	- Márcio Montenegro
@@ -38,11 +39,13 @@ Equipe de Desenvolvimento
 - Golen Maker	- Ligleyson Warnielle
 - jBK		- José Goís
 - Cainho	- Caio Mateus
+- BeckDeveloper - Valderson Rodrigues
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
 - Eru Yuuko
 - KaduKiller	- Carlos Salles
-- BeckDeveloper - Valderson Rodrigues
 - Apo
-- BOO		- José Filho
+- Aster0id		- Bruno Soares
+- Ziegifried	- Yuri Butzke
+- Linne Ribeiro
