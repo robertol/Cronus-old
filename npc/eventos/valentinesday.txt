@@ -11,119 +11,120 @@
 //= 08/28/05 : Ver. 1.01 Added a missing close; [Muad_Dib]
 //= Converted to rAthena format by Dr.Evil
 //= 1.1 Cleaning. [Euphy]
+//= 1.2 Traduzido. [Linne Ribeiro]
 //============================================================
 
-// Stephen - Valentine Event Chocolate seller
+// Stephen - Valentine Evento Vendedor de Chocolates
 //============================================================
 alberta,26,243,4	script	Stephen	58,{
 	mes "[Stephen]";
-	mes "Guess what I've got?";
-	mes "A tasty treat not easily found in Rune-Midgard....";
+	mes "Adivinha o que eu tenho?";
+	mes "Um deleite saboroso não é facilmente encontrado em Rune-Midgard ....";
 	next;
 	mes "[Stephen]";
 	mes "Chocolate!";
-	mes "That's right, don't you love chocolate.... I do.";
-	mes "And you are in luck, because I'm selling them for only 5,000 zeny a piece!";
+	mes "Isso mesmo, você gosta de chocolate? .... Eu faço.";
+	mes "E você está na sorte, porque eu estou vendendo por apenas 5.000 zeny um pedaço!";
 	next;
-	if(select("I want some chocolate!:No thanks.")==2) {
+	if(select("Eu quero um pouco de chocolate!:Não, obrigado.")==2) {
 		mes "[Stephen]";
-		mes "You don't want any chocolate?";
-		mes "I'm telling you! You'll regret it!";
-		mes "You better get some now... you won't come across Chocolate like this ever again!";
-		mes "Think it over and visit me again sometime.";
+		mes "Você não quer chocolate?";
+		mes "Eu estou te dizendo! Você vai se arrepender!";
+		mes "É melhor ter algum agora ... você não vai se deparar com Chocolate como este nunca mais!";
+		mes "Pense sobre isso e me visitar novamente algum dia.";
 		close; }
 	mes "[Stephen]";
 	mes "Hah!";
-	mes "I knew it!";
-	mes "But I can't sell you more then 5 at once... but, if you really need more....";
-	mes "you can come back again.";
-	mes "So how many do you want?";
+	mes "Eu sabia!";
+	mes "Mas eu não posso vender-lhe mais do que 5 de uma vez ... Mas, se você realmente precisa de mais ....";
+	mes "você pode voltar.";
+	mes "Então, quantos você quer?";
 	next;
 	input .@i;
 	if (.@i <= 0) close;
 	mes "[Stephen]";
 	if (.@i > 5)  {
-		mes "I'm sorry, but I can't give you that many.";
+		mes "Sinto muito, mas não posso dar-lhe muitos.";
 		close; }
 	if (Zeny < .@i*5000) {
-		mes "I'm sorry, but it seems you can't afford to buy these off me.";
+		mes "Sinto muito, mas parece que você não pode dar ao luxo de comprá-los de mim.";
 		close; }
 	set Zeny, Zeny - .@i*5000;
 	getitem 558,.@i;
-	mes "There you go!";
-	mes "You can give that to someone as a gift, or enjoy it yourself!";
-	mes "Mmm... sweet chocolate...";
-	mes "Visit me anytime...!";
+	mes "Parabens "+strcharinfo(0)+" !";
+	mes "Você pode dar isso a alguém como um presente, ou divertir-se!";
+	mes "Mmm ... doce de chocolate ...";
+	mes "Visite-me a qualquer hora! ...";
 	close;
 }
 
-// Jainie -- Gives information about Valentine Event
+// Jainie -- Valentine Evento Fornece informações sobre o Evento dos Namorados
 //============================================================
 alberta,29,243,4	script	Jainie	53,{
 	mes "[Jainie]";
-	mes "You know what? The chocolate that my boyfriend sells are from me!";
-	mes "I made them by myself.";
+	mes "Você sabia?. Que o chocolate que meu namorado vende são de mim!";
+	mes "Eu os fiz sozinha.";
 	next;
 	mes "[Jainie]";
-	mes "You know ... In cetain countries, there's a tradition of presenting chocolates to a person that you love...";
-	mes "They call it, ^3355FFValentine's Day^000000.";
+	mes "Você sabe ... Em alguns países, há uma tradição de apresentar chocolates para uma pessoa que você ama ...";
+	mes "Essa tradição se chama ^3355FFDia dos Namorados^000000.";
 	next;
 	mes "[Jainie]";
-	mes "So I gave him my delicious chocolate...";
-	mes "And then he made me cook a lot more...";
-	mes "And now he is selling them to everyone.";
-	mes "I guess he really enjoyed it.";
-	mes "But, I do feel good when people buy something I have made.";
+	mes "Então, dei-lhe o meu delicioso chocolate ...";
+	mes "E então ele me fez cozinhar muito mais ...";
+	mes "E agora ele vendê a todos.";
+	mes "Eu acho que ele realmente gostou";
+	mes "E, eu me sinto bem quando as pessoas compram algo que eu fiz.";
 	next;
 	mes "[Jainie]";
-	mes "It would be great if you bought some too...";
-	mes "I will be making chocolates for a while so...";
+	mes "Seria ótimo se você compra-se alguns também ...";
+	mes "Eu estarei fazendo chocolates por um tempo assim ...";
 	close;
 }
 
-// Carl Orleans -- Valentine Event Chocolate maker
+// Carl Orleans -- Valentine Evento Fabricante de Chocolates
 //============================================================
 prt_castle,54,34,4	script	Carl Orleans	47,{
 	mes "[Carl Orleans]";
-	mes "Yes?";
+	mes "Sim?";
 	next;
-	if(select("I want some hand made chocolate...:I'm lost, sorry to bother you.")==2) {
+	if(select("Eu quero uma mão feita de chocolate ...:Estou perdido, desculpe incomodá-lo.")==2) {
 		mes "[Carl Orleans]";
-		mes "Oh... well, if you want me to make some of my special Hand Made Chocolate....";
-		mes "You will need to give me at least ^0000FF 3 Chocolates^000000.";
+		mes "Oh ... bem, se você quiser fazer um pouco da minha mão especial Feito Chocolate ....";
+		mes "Você terá que me dar pelo menos ^0000FF 3 Chocolates^000000.";
 		next;
 		mes "[Carl Orleans]";
-		mes "That's right, only ^0000FF 3 Chocolates^000000";
-		mes "Bring them to me and you'll get what you came for.";
+		mes "É isso mesmo, só ^0000FF 3 Chocolates^000000";
+		mes "Traga-os para mim e você vai ter o que você veio procurar.";
 		next;
 		mes "[Carl Orleans]";
-		mes "See You.";
+		mes "Volte sempre.";
 		close; }
 	mes "[Carl Orleans]";
-	mes "Well, I just might be able to fulfill your needs...";
+	mes "Bem, eu poderia ser capaz de satisfazer as suas necessidades ...";
 	next;
 	mes "[Carl Orleans]";
 	if (countitem(558) < 3) {
-		mes "I'm sorry, you don't have enough Chocolate Bars to do this.";
+		mes "Sinto muito, você não tem barras de chocolate suficiente para fazer isso.";
 		close; }
 	delitem 558,3;
-	mes "You got 3 pieces of pure chocolate, I see.";
-	mes "Give them to me...";
+	mes "Você tem três pedaços de chocolate puro, eu vejo.";
+	mes "Dê-lhes para mim ...";
 	next;
 	mes "[Carl Orleans]";
-	mes "Ok, now I will only create my special hand made chocolates if you promise to use it wisely.";
+	mes "Ok, agora eu só irei criar a minha mão especial feito chocolates se você prometer usá-la sabiamente.";
 	next;
 	mes "[Carl Orleans]";
 	mes "....Hmmmmmm.....";
-	mes "Well...";
+	mes "Bem ...";
 	next;
 	mes "[Carl Orleans]";
 	getitem 559,1;
-	mes "Here.";
-	mes "I hope you give it to someone special, because its a special chocolate.";
-	mes "As you know... only I can create this.";
+	mes "Aqui.";
+	mes "Espero que dê para alguém especial, porque é um chocolate especial.";
+	mes "Como você sabe ... só eu posso criar isso.";
 	next;
 	mes "[Carl Orleans]";
-	mes "Enjoy.";
+	mes "Aproveite.";
 	close;
 }
