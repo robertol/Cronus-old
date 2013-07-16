@@ -45,7 +45,6 @@ Equipe de Desenvolvimento
 - Rayzir	- Guilherme Fontenele
 - Eru Yuuko
 - KaduKiller	- Carlos Salles
-- Apo
 - Aster0id		- Bruno Soares
 - Ziegifried	- Yuri Butzke
 - Linne Ribeiro
