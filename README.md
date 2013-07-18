@@ -4,7 +4,7 @@
 * Portal: (http://portal.cronus-emulator.com/)
 * Forum: (http://forum.cronus-emulator.com/)
 
-Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/trackdown).
+Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/tracker).
 
 E caso queira candidatar-se a uma vaga na equipe de desenvolvimento, preencha [este formulário](http://forum.cronus-emulator.com/index.php?app=contato).
 
