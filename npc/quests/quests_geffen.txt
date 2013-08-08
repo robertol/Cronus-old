@@ -1,164 +1,181 @@
 //===== rAthena Script ======================================= 
 //= Quest NPCs related to Geffen
 //===== By: ================================================== 
-//= kobra_k88 & Samuray22
+//= Dojo
 //===== Current Version: ===================================== 
-//= 1.4
-//===== Compatible With: ===================================== 
+//= 1.0
+//===== Compatible With: =====================================
 //= rAthena 7.15 +
-//===== Description: ========================================= 
+//===== Description: =========================================
+//= [Conversão do Aegis]
 //= Welding Mask and Headset Quests.
 //===== Additional Comments: ================================= 
-//= 1.1 Fixed exploits [Lupus]
-//= 1.2 Removed Duplicates [Silent]
-//= 1.3 Updated "Welding Mask" Quest to the Official one. [Samuray22]
-//= 1.3a replaced item "names" with item id. Added missing [Lupus]
-//= 1.4 Updated welding mask and headset quests. [L0ne_W0lf]
-//============================================================ 
-
-// Blacksmith: 'Welding Mask' Quest
+//= 1.0 Primeira versão. [Dojo]
 //============================================================
-geffen_in,144,166,4	script	Blacksmith	63,{
-	mes "[Blacksmith]";
-	mes "You've never heard of me? Why, I'm the Veteran Blacksmith of this land. I've spent 30 years in this hot and bloody hellfire, bending steel to my iron will!";
+
+//==============================================================================================
+// Quest da Máscara de Solda
+//==============================================================================================
+geffen_in,144,166,4	script	Ferreiro	63,{
+	if (checkweight(1201,1) == 0 ) {
+		mes "- Ei, espere aí !! -";
+		mes "- Você não pode receber mais itens -";
+		mes "Porque está carregando muitos itens. -";
+		mes "- Por favor, alivie um pouco a sua carga e tente de novo - ";
+		close;
+	}
+	mes "[Ferreiro]";
+	mes "Sou o melhor Ferreiro que existe! Sabia?";
+	mes "Trabalho há 30 anos neste fogo do inferno insuportável!";
+	mes "Sou um Ferreiro há muitos anos, eu inventei algo incrível. Quer saber o que é?";
 	next;
-	mes "[Blacksmith]";
-	mes "But...";
-	mes "I am growing older and my prowess begins to fade with age. So I've invented something for young, hot, upcoming Blacksmiths, in hopes that they too will master my craft...";
+	if(select("Sim:Acho que não me ajudaria muito...") == 2) {
+		mes "[Ferreiro]";
+		mes "Deixe pra lá... Não vou perder meu tempo falando com você! Vá embora!";
+		close;
+	}
+	mes "[Ferreiro]";
+	mes "Como ferreiros, nós derretemos produtos metálicos a uma alta temperatura.";
+	mes "Assim temos que encarar o calor e metais líquidos toda hora, nossos rostos vivem sempre queimados e machucados...";
+	mes "Mas com esse item... Você não precisa se preocupar. Te apresento ^3355FF'Máscara de Solda'^000000 !!";
 	next;
-	switch(select("What is it?:...")) {
-	case 1:
-		mes "[Blacksmith]";
-		mes "We Blacksmiths must always manipulate steel under extreme heat, and the hot air and melted metals are more than most people can stand.";
+	mes "[Ferreiro]";
+	mes "Protege seu rosto do calor.";
+	mes "Este é o item mais procurado pelas pessoas!";
+	mes "Que tal? Se me der ^2244FF'50 Aços'^000000 e ^4422FF2000 Zeny^000000, Farei uma para você imediatamente!";
+	next;
+	if(select("Nada mal! Eu quero uma.:Não me parece muito útil.") == 2) {
+		mes "[Ferreiro]";
+		mes "Uh-uh... Não sabe o que está perdendo!";
+		mes "Meu jovem, você deve cuidar de seu rosto antes que ele fique cheio de rugas.";
+		close;
+	}
+	if ((countitem(999) > 49) && (Zeny > 1999)) {
+		mes "[Ferreiro]";
+		mes "Ótimo! Farei agora mesmo!!";
 		next;
-		mes "[Blacksmith]";
-		mes "For the sake of our craft, our beautiful, yet masculine faces are put at risk...";
-		next;
-		mes "[Blacksmith]";
-		mes "But with this wonder of technology, there's no need to worry! Behold, the ^3355FFWelding Mask^000000 !!";
-		next;
-		mes "[Blacksmith]";
-		mes "It works by covering your face with a fat metal plate. Truly, it's an item that everyone should want! If not yourself, it'd be a good idea to give this to a friend who is studying smithing.";
-		next;
-		mes "[Blacksmith]";
-		mes "So how about it ? If you give me ^2244FF50 Steel^000000 and ^4422FFonly 2000 Zeny^000000, I will make it for you right away~!!";
-		next;
-		switch(select("Hm... Not bad. Alright.:How does it work again?")) {
-		case 1:
-			if ((countitem(999) > 49) && (Zeny > 1999)){
-				mes "[Blacksmith]";
-				mes "Ah, I see that you appreciate a Blacksmith's work! Alright, I'll do it right away !!";
-				next;
-				delitem 999,50;  //Steel
-				set Zeny,Zeny-2000;
-				getitem 2292,1; // Welding_Mask
-				mes "[Blacksmith]";
-				mes "Hahaha~! Make good use of that!";
-				close;
-			}
-			else {
-				mes "[Blacksmith]";
-				mes "Hmmm...";
-				mes "You do not have the items I require.";
-				next;
-				mes "[Blacksmith]";
-				mes "A common Blacksmith would interpret this as a sign of disrepect, but I will forgive you. Just don't forget what I need if you want me to make you this mask.";
-				close;
-			}
-		case 2:
-			mes "[Blacksmith]";
-			mes "The ^3355FFWelding Mask^000000 protects your face by covering it with a fat metal plate. This invention is the result of 30 years of endless toil at the hammer and anvil.";
-			close;
-		}
-	case 2:
-		mes "[Blacksmith]";
-		mes "Ah...!";
-		mes "I guess this is the first time you've met a Blacksmith as great as me, and you're just speechless with awe. Please, take your time and speak up when you are ready.";
-		next;
-		mes "^3355FFThis guy seems";
-		mes "a little full";
-		mes "of himself.^000000";
+		delitem 999,50; //Steel
+		set Zeny,Zeny - 2000;
+		getitem 2292,1; //Welding_Mask
+		mes "[Ferreiro]";
+		mes "Agora pode trabalhar no calor!";
+		mes "Tchau...";
+		close;
+	}
+	else {
+		mes "[Ferreiro]";
+		mes "Olha! Não posso fazer se você não tiver aço e zeny o suficiente!";
+		mes "Você entende de alquimia? É o que você precisa!";
+		mes "Ache aço e zeny para poder fazer alquimia.";
 		close;
 	}
 }
 
-// Eric: 'Headset' Quest
-//============================================================
-geffen_in,30,71,4	script	Eric	83,{
-	mes "[Eric]";
-	mes "Please listen";
-	mes "to my story";
-	mes "of my blessed";
-	mes "grandfather.";
+//=============================================================================================
+// Quest do Fone de Ouvido
+//=============================================================================================
+geffen_in,30,71,4	script	Zenhizha	83,{
+	if (checkweight(1201,1) == 0 ) {
+		mes "- Ei, espere aí !! -";
+		mes "- Você não pode receber mais itens -";
+		mes "Porque está carregando muitos itens. -";
+		mes "- Por favor, alivie um pouco a sua carga e tente de novo - ";
+		close;
+	}
+	mes "[Zenhizha]";
+	mes "Quer ouvir a história do meu avô? É sobre a fabricação de Fones de Ouvido";
 	next;
-	switch(select("Talk:Ask about Items needed:Manufacture:Quit")) {
+	switch(select("Continuar falando:De que item precisa?:Tente fabricá-lo:Cancelar")) {
 	case 1:
-		mes "[Eric]";
-		mes "My Grandfather, who passed away a few years ago, was special to me. He always stayed with me, and took care of me. He was much better than my old man, who was always busy working.";
+		mes "[Zenhizha]";
+		mes "Ele morreu há alguns anos...";
+		mes "Ele foi muito importante para mim...";
+		mes "Mais importante que meu pai.";
+		mes "Ainda sinto como se ele nunca tivesse me deixado.";
 		next;
-		mes "[Eric]";
-		mes "To me, Grandfather's library was always like a fantasy land where I could escape. I spent most of my time there.";
+		mes "[Zenhizha]";
+		mes "Sempre gostei de sua sala de estudos.";
+		mes "É como um Xanadu.";
+		mes "Sempre que pensava nele...";
+		mes "Eu iria lá ler alguns livros.";
 		next;
-		mes "[Eric]";
-		mes "I learned a lot of things from his books in the Library. Grandfather was interested in Alchemy and Music, and his Library was filled with many mysterious old books.";
+		mes "[Zenhizha]";
+		mes "Lá...";
+		mes "Posso aprender tanto daqueles livros...";
+		mes "Meu avô adorava alquimia e música...";
+		mes "Há muitos livros sobre isso...";
 		next;
-		mes "[Eric]";
-		mes "One day...";
-		mes "As usual, I went to the Library and discovered an interesting schematic.";
+		mes "[Zenhizha]";
+		mes "Certo dia...";
+		mes "Fui lá como de costume.";
+		mes "E achei um rascunho por acidente.";
 		next;
-		mes "[Eric]";
-		mes "It showed some instrument which looked like Ear Muffs that, when worn on the head, could transmit music or whispers to the ears through a thin wire.";
+		mes "[Zenhizha]";
+		mes "Neste rascunho há algo que parece com um Aquecedor de Orelha.";
+		mes "Ao colocá-lo, dá pra se escutar vozes...";
+		mes "Elas parecem vir de um músico.";
+		mes "Como se tivesse uma orquestra dentro do Aquecedor de Orelha.";
 		next;
-		mes "[Eric]";
-		mes "I guess...";
-		mes "It is my grand father's unfinished work. I met a few Alchemists and asked them to produce it, but they rejected my offer...";
+		mes "[Zenhizha]";
+		mes "Eu quero realizar o último desejo de meu avô...";
+		mes "Produzi-lo!";
+		mes "Mostrei este rascunho a outros alquimistas.";
+		mes "Eu pedi para eles fabricarem! Mas nenhum deles consegue entender como funciona.";
 		next;
-		mes "[Eric]";
-		mes "In the end, I thought 'I've gotta make it myself.' So I researched for a few years, and now I fully understand how to make that thing. But, I could never gather the materials to make it!";
+		mes "[Zenhizha]";
+		mes "Por isso, eu mesmo andei estudando...";
+		mes "Já faz anos...";
+		mes "Finalmente consegui entender.";
+		mes "Só me resta achar o item para fazê-lo.";
 		next;
-		mes "[Eric]";
-		mes "If I can get those articles, I would build it right away. If you are interested in my idea, would you bring them for me?";
+		mes "[Zenhizha]";
+		mes "Se tivesse os itens...";
+		mes "Poderia começar prontamente...";
+		mes "Se.. estiver interessado...";
+		mes "Poderia me ajudar a achar esses itens?";
 		next;
-		mes "[Eric]";
-		mes "All I wanna do is build this thing in honor of my grandfather and finish the work he started. If you ask me to keep it, I wouldn't mind.";
+		mes "[Zenhizha]";
+		mes "Só quero realizar seu último desejo.";
+		mes "Criar o Fone de Ouvido do rascunho.";
+		mes "Posso dá-lo a você quando terminar.";
 		close;
 	case 2:
-		mes "[Eric]";
-		mes "40 ^3355FFSteel^000000";
-		mes "1 ^3355FFOridecon^000000";
-		mes "1 ^3355FFAlcohol^000000";
-		mes "1 ^3355FFCoal^000000";
-		mes "These are the things I need for Grandfather's masterpiece.";
+		mes "[Zenhizha]";
+		mes "Precisarei de ^3355FFAços^000000 ^FF555540^000000,";
+		mes "E ^3355FFOridecon^000000 ^FF55551^000000,";
+		mes "E ^3355FFÁlcool^000000 ^FF55551^000000,";
+		mes "E ^3355FFCarvão^000000 ^FF55551^000000.";
+		mes "Preciso de tudo isso.";
 		close;
 	case 3:
 		if ((countitem(999) > 39) && (countitem(984) > 0) && (countitem(970) > 0) && (countitem(1003) > 0)) {
 			delitem 999,40; //Steel
 			delitem 984,1; //Oridecon
-			delitem 970,1; //Alchol
+			delitem 970,1; //Alcohol
 			delitem 1003,1; //Coal
 			getitem 5001,1; //Headset
-			mes "*Tap! Tap! Tap!*";
+			mes "[Zenhizha]";
+			mes "Tap! Tap! Tap! ...";
 			next;
-			mes "[Eric]";
-			mes "Thank you.";
-			mes "Because of you, I could accomplish my grandfather's wish. He would be happy if he looked down on me from Heaven.";
+			mes "[Zenhizha]";
+			mes "Muito obrigado!";
+			mes "Por sua causa, pude realizar o desejo de meu avô.";
+			mes "Ele ficará feliz se puder ver do céu.";
 			next;
-			mes "[Eric]";
-			mes "As I said, please take this. I am just proud that I can make this by myself.";
+			mes "[Zenhizha]";
+			mes "Como disse antes. Pode levá-lo!";
+			mes "Estou tão feliz de poder construí-lo.";
 			close;
 		}
 		else {
-			mes "[Eric]";
-			mes "Thank you for trying to help me, but you didn't bring all the items I need. I think you will find them all soon though.";
+			mes "[Zenhizha]";
+			mes "Obrigado pela gentileza... mas não há itens o suficiente aqui.";
+			mes "Volte quando tiver todos!";
 			close;
 		}
 	case 4:
-		mes "[Eric]";
-		mes "N-no?";
-		mes "Well...";
-		mes "You have your own";
-		mes "worries, I suppose.";
-		mes "Farewell.";
+		mes "[Zenhizha]";
+		mes "Tchau!";
 		close;
 	}
 }

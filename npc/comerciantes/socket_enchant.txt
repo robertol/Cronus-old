@@ -1,69 +1,60 @@
 //===== Hercules Script ======================================
 //= Episode 11.1 Socket Enchant NPC
 //===== By: ==================================================
-//= rAthena Dev Team
+//= DoJo
 //===== Current Version: =====================================
-//= 2.0a
+//= 1.0
 //===== Compatible With: =====================================
 //= Hercules Git
 //===== Description: =========================================
-//= [Aegis Conversion]
+//= [Conversão do Aegis]
 //= Adds slots to selected weapons and armor.
 //===== Additional Comments: =================================
-//= 0.1a added missing L_No: to 2 funcs [Lupus]
-//= 0.1b Removed duplicates [Toms]
-//= 0.2	Added missing next;'s [Evera]
-//= 0.3 Fixed Zweihander[+] id [Lupus]
-//= 1.0 Fixed ingredients check [Lupus]
-//= 1.1	Updated to official. [SinSloth]
-//= 1.1b Optimized/cleaned [ultramage]
-//= 1.2 Fixed some typos and a nasty bug. [SinSloth]
-//= 1.3 Fixed a wrong item ID with Sphinx Hat. [SinSloth]
-//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 1.5 Removed Ontouch trigger area from NPCs. [L0ne_W0lf]
-//= 1.6 Replaced effect numerics with constants. [Samuray22]
-//= 1.7 Adjusted prices on some armor and weapons. [L0ne_W0lf]
-//= 1.8 Added missing Gae Bolg and Dragon Slayer. [Kisuka]
-//= 1.9 Moved Episode 12 items to separate NPC.
-//=     Some cleanup & optimization. [Gepard]
-//= 2.0 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
-//= 2.0a Added 'disable_items' command. [Euphy]
+//= 1.0 Primeira Versão [Dojo]
+//
 //============================================================
 
 -	script	Seiyablem#dummy::SocketEnchant	-1,{
 	if (checkweight(1201,1) == 0)
 	{
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- No momento, você está carregando -";
+		mes "- muitos itens. -";
+		mes "- Volte depois após - ";
+		mes "- guardar alguns itens no Armazém Kafra. -";
 		close;
 	}
 	mes "[Seiyablem]";
-	mes "I'm an engineer that specializes in adding Slots to normal Weapons and Armor.";
-	mes "My service fee, the required materials and the chance of success all depend on the specific item I'm working on.";
+	mes "Sou um engenheiro especializado em";
+	mes "abrir slots em armas e armaduras normais.";
+	mes "Algumas pessoas me perguntam por que é tão difícil fazer buracos nas armas,";
+	mes "mas eu digo que elas não entendem como este trabalho é complicado.";
 	next;
 	mes "[Seiyablem]";
-	mes "Adding Slots may seem simple, but it's far more complicated than it looks.";
-	mes "If you're interested in my service, let me know.";
+	mes "Na verdade, tenho certeza que você nunca viu";
+	mes "alguém fazer isso antes de mim. O que prova";
+	mes "que a fabricação de slots é um trabalho dificílimo.";
+	mes "De qualquer forma, você tem algum equipamento no qual queira colocar um slot?";
+	mes "A taxa de serviço, os materiais necessários e a chance de sucesso";
+	mes "variam de acordo com o equipamento.";
+	mes "Primeiro, escolha para qual equipamento você quer o slot.";
 	next;
-	switch(select("Add Slot to Weapon:Add Slot to Armor:Slot Attempt Info:Cancel"))
+	switch(select("Arma:Armadura:Mais Informaçõe:Sair"))
 	{
 		case 1:
 			mes "[Seiyablem]";
-			mes "You want to add a Slot to a weapon?";
-			mes "I categorize weapons by their difficulty in adding a Slot, C Class being easiest and S Class the most difficult.";
-			mes "Which class would you like to try?";
+			mes "Arma, você disse? Claro, será um prazer.";
+            mes "As armas são divididas em 4 classes diferentes,";
+			mes "de acordo com a dificuldade do trabalho.";
+			mes "A classe C é a mais fácil, e a classe S é a mais difícil.";
+			mes "Qual classe você quer tentar?";
 			next;
-			switch(select("C Class:B Class:A Class:S Class"))
+			switch(select("Classe C:Classe B:Classe A:Classe S"))
 			{
 				case 1:
 					mes "[Seiyablem]";
-					mes "C Class, eh?";
-					mes "Now, I can only upgrade certain equipment in that class, so please choose one of the following items, so we can try to add a Slot to it.";
+					mes "Classe C, entendi. Então, que tipo de arma você tem?";
 					next;
-					switch(select("Trident:Rope:Violin"))
+					switch(select("Tridente:Cordel:Violino"))
 					{
 						case 1: callfunc "Func_Socket",1460,1461,40,66,200,1010,10;
 						case 2: callfunc "Func_Socket",1950,1951,40,66,200,1010,10;
@@ -71,11 +62,10 @@
 					}
 				case 2:
 					mes "[Seiyablem]";
-					mes "B Class?";
-					mes "Alright, this is the average equipment category.";
-					mes "Please choose the weapon to which you'd like me to try to add a Slot.";
+					mes "Você escolheu a classe B.";
+					mes "Então, que tipo de arma você tem?";
 					next;
-					switch(select("Chain:Gladius:Gakkung Bow:Pike:Haedonggum:Lute:Wire:Waghnakh:Arbalest Bow"))
+					switch(select("Mangual Pesado:Gladius:Gakkung:Pique:Haedonggum:Alaúde:Açoite:Waghnak:Arbaleste"))
 					{
 						case 1: callfunc "Func_Socket",1519,1520,40,61,300,1010,10;
 						case 2: callfunc "Func_Socket",1219,1220,40,61,300, 984, 1,999,5;
@@ -89,11 +79,10 @@
 					}
 				case 3:
 					mes "[Seiyablem]";
-					mes "Ooh, A Class.";
-					mes "This is some high risk territory!";
-					mes "Alright, which weapon would you like me to try adding a Slot?";
+					mes "Classe A? Você parece querer demais. Mas não tem problema.";
+					mes "Então, que tipo de arma você tem?";
 					next;
-					switch(select("Hunter Bow:Survivor's Rod(INT):Zweihander:Flamberge:Infiltrator:Ballista:Stunner:Berserk:Claymore"))
+					switch(select("Arco de Caçador:Bastão do Sobrevivente(INT):Zweihander:Espada Flamberge:Infiltrador:Balista:Atordoador:Fúria Insana:Claymore"))
 					{
 						case 1: callfunc "Func_Socket",1718,1726,40,61,500,984,2,999,10;
 						case 2: callfunc "Func_Socket",1619,1620,40,61,500,984,5,999,10;
@@ -107,12 +96,10 @@
 					}
 				case 4:
 					mes "[Seiyablem]";
-					mes "Whoa, whoa, whoa...";
-					mes "S class? Alright...";
-					mes "It'd be a near miracle if I can actually pull this off.";
-					mes "Okay... Which weapon shall we try adding a Slot to?";
+					mes "Quê... mas... Classe S?! *Treme*";
+					mes "Então... para qual arma de classe S você quer fazer um slot?!";
 					next;
-					switch(select("Gungnir:Poison Knife:Ice Pick:Sucsamad:Ginnungagap:Cutlas:Crescent Scythe:Survivor's Rod(DEX)"))
+					switch(select("Gungnir:Adaga Venenosa:Rondel:Sucsamad:Ginnungagap:Cutelo:Foice:Bastão do Sobrevivente(DES)"))
 					{
 						case 1: callfunc "Func_Socket", 1413, 1418,40,51,1000,984,5,999,10;
 						case 2: callfunc "Func_Socket", 1239,13016,40,51,1000,984,5,999,10;
@@ -126,21 +113,19 @@
 			}
 		case 2:
 			mes "[Seiyablem]";
-			mes "Armor, you said?";
-			mes "Sure, no problem.";
-			mes "Armor is divided into 4 different classes, depending on the work difficulty.";
-			mes "C Class is the easiest one, and S Class he hardest one.";
-			mes "Which class would you like to try?";
+			mes "Armadura, você disse? Claro, será um prazer.";
+			mes "As armaduras são divididas em 4 classes diferentes,";
+			mes "de acordo com a dificuldade do trabalho.";
+			mes "A classe C é a mais fácil, e a classe S é a mais difícil.";
+			mes "Qual classe você quer tentar?";
 			next;
-			switch(select("C Class:B Class:A Class:S Class"))
+			switch(select( "Classe C:Classe B:Classe A:Classe S"))
 			{
 				case 1:
 					mes "[Seiyablem]";
-					mes "C Class Armor, eh?";
-					mes "Sounds reasonable.";
-					mes "Which armor would you like to try adding a Slot?";
+					mes "Classe C, entendi. Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Mantle:Coat:Circlet:Biretta"))
+					switch(select("Capote:Casaco:Tiara:Solidéu"))
 					{
 						case 1: callfunc "Func_Socket",2307,2308,40,66,200,999,3;
 						case 2: callfunc "Func_Socket",2309,2310,40,66,200,999,3;
@@ -149,10 +134,10 @@
 					}
 				case 2:
 					mes "[Seiyablem]";
-					mes "You have chosen average B Class.";
-					mes "So, what kind of armor do you have?";
+					mes "Você escolheu a classe B.";
+                    mes "Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Mirror Shield:Chain Mail:Saint Robe:Silk Robe:Boots:Shoes:Muffler:Guard:Buckler:Shield:Bongun Hat"))
+					switch(select("Escudo Espelhado:Cota de Malha:Manto Sagrado:Manto de Seda:Botas:Sapatos:Sobrepeliz:Vembrassa:Broquel:Escudo:Chapéu de Bongun"))
 					{
 						case 1:  callfunc "Func_Socket",2107,2108,40,61,250,999,5;
 						case 2:  callfunc "Func_Socket",2314,2315,40,61,250,999,5;
@@ -168,11 +153,10 @@
 					}
 				case 3:
 					mes "[Seiyablem]";
-					mes "Ooh, A Class.";
-					mes "This is some high risk territory!";
-					mes "Alright, which armor would you like me to try adding a Slot?";
+					mes "Classe A? Você parece querer demais. Mas não tem problema.";
+					mes "Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Gemmed Sallet:Bucket Hat:Memory Book:Tights:Legion Plate Armor:Full Plate:Thief Clothes:Greaves:Coif:Manteau:Helm:Ninja Suit:Orc Helm:Ancient Cape:Monk Hat:Golden Gear:Brooch:Munak Hat"))
+					switch(select("Capacete de Schallern:Chapéu de Balde:Grimório:Malha:Armadura Legionária:Armadura Metálica:Traje de Gatuno:Grevas:Chapéu de Freira:Manteau:Capacete:Indumentária Ninja:Capacete de Orc:Capa Velha:Chapéu de Monge:Peça Dourada:Broche:Chapéu de Munak"))
 					{
 						case 1:  callfunc "Func_Socket",2230,2231,40,61,400,985,1;
 						case 2:  callfunc "Func_Socket",5114,5120,40,61,400,985,1;
@@ -195,11 +179,10 @@
 					}
 				case 4:
 					mes "[Seiyablem]";
-					mes "Um... S Class?";
-					mes "You sure about this?";
-					mes "Alright... Let me know the Armor to which you'd like to add a Slot, and I'll tell what I need to try it.";
+					mes "Quê... mas... Classe S?! *Treme*";
+					mes "Então... para qual armadura de classe S você quer fazer um slot?!";
 					next;
-					switch(select("Majestic Goat:Spiky Band:Bone Helm:Corsair:Crown:Tiara:Sphinx Hat:Robe of Cast:Earring:Ring:Bow Thimble"))
+					switch(select("Chifres Majestosos:Chifres Pontudos:Elmo de Osso:Chapéu de Corsário:Coroa:Diadema:Coroa de Faraó :Manto da Conjuração:Brinco:Anel:Luva de Puxada"))
 					{
 						case 1:  callfunc "Func_Socket",2256,5160,40,51,2000,985,2;
 						case 2:  callfunc "Func_Socket",2258,5161,40,51,2000,985,2;
@@ -216,32 +199,57 @@
 			}
 		case 3:
 			mes "[Seiyablem]";
-			mes "Well, I haven't really refined the art of Slot Addition.";
-			mes "It's so complicated that I'd be lying if I told you that I knew every factor that affected the process.";
-			mes "Still, I do notice a few trends...";
+			mes "Vou dar uma dica para você.";
+			mes "Já viajei a muitos lugares,";
+			mes "e abri slots em armas e armaduras.";
+			mes "Trabalhando nesta cidade de Payon há algum tempo,";
+			mes "percebi que equipamentos com aprimoramento maior";
+			mes "podem ter uma chance de sucesso maior para abrir slots.";
 			next;
 			mes "[Seiyablem]";
-			mes "In some towns, Slot addition attempts are more successful for equipment with fewer upgrades.";
-			mes "In other towns, the opposite is true.";
-			mes "isn't that really peculiar?";
+			mes "A diferença é bem sutil, mas sinto que";
+			mes "tenho mais sorte ao trabalhar com equipamentos mais aprimorados, sabe?";
+			mes "Claro, há o risco do equipamento se perder";
+			mes "se falharmos ao criar um slot.";
+			mes "Só estou falando da chance de sucesso.";
 			next;
 			mes "[Seiyablem]";
-			mes "Oh, there's also something really important that you should know.";
-			mes "If you ask me to add a Slot to something, make sure that you don't have multiples of it in your inventory.";
+			mes "Em algumas cidades, há uma chance de sucesso maior";
+			mes "para abrir slots em equipamentos menos aprimorados.";
+			mes "Mas Payon não é uma dessas cidades.";
 			next;
 			mes "[Seiyablem]";
-			mes "Here's an example: if you have a +7 Manteau and a normal Manteau in your inventory, then I will randomly pick one of them for my Slot Addition attempt.";
-			mes "Just remember to be careful.";
+			mes "E há mais uma coisa que você precisa saber.";
+			mes "Vou dar um exemplo.";
+			mes "Digamos que você tenha um Manteau +7 e um Manteau normal.";
+			mes "E você me peça para abrir um slot em um dos Manteaus.";
+			mes "Então, em qual Manteau você acha que eu trabalharia?";
 			next;
 			mes "[Seiyablem]";
-			mes "Again, ^FF0000only carry one of the equipment to which you want me to add a Slot^000000.";
-			mes "All other equipment with the same name should be placed in your Kafra Storage, got it?";
+			mes "A resposta: isso é aleatório.";
+			mes "Ou seja, se você tivesse mais de";
+			mes "um equipamento do mesmo nome em seu inventário,";
+			mes "eu usaria um deles, aleatoriamente, para abrir um slot,";
+			mes "você goste ou não.";
+			next;
+			mes "[Seiyablem]";
+			mes "^FF0000Portanto, se você quiser abrir um slot em um equipamento específico,";
+			mes "^FF0000trate de trazer somente esse item para mim,";
+			mes "^FF0000e deixe os outros equipamentos do mesmo nome em seu armazém.";
+			next;
+			mes "[Seiyablem]";
+			mes "Se você não me der ouvidos,";
+			mes "e trouxer mais de um item do mesmo nome,";
+			mes "não vou assumir a responsabilidade pelo resultado indesejado.";
+			next;
+			mes "[Seiyablem]";
+			mes "Você não precisa de mais explicações, precisa?";
+			mes " É preciso ver para crer! Então, por que não tenta criar um slot,";
+			mes "e me ajuda a ganhar a vida, hein?";
 			close;
 		case 4:
 			mes "[Seiyablem]";
-			mes "Take it easy, adventurer.";
-			mes "If you ever want to try adding a Slot to some of your equipment, come back and let me know.";
-			mes "Seeya~";
+			mes "Bah!";
 			close;
 	}
 }
@@ -250,46 +258,44 @@ function	script	Func_Socket	{
 
 	disable_items;
 	mes "[Seiyablem]";
-	mes "You want to add a Slot to a " + getitemname(getarg(0)) + "?";
-	mes "Alright, please bring me ^FF0000" + getarg(6) + " " + getitemname(getarg(5)) + (getarg(6) > 1 && getarg(5) != 999 ? "s":"") + "^000000, " + (getarg(7,0) != 0 && getarg(8,0) != 0 ? ("^FF0000" + getarg(8,0) + " " + getitemname(getarg(7,0)) + (getarg(8,0) > 1 && getarg(7,0) != 999 ? "s":"") + "^000000 ") : "") + "and my ^FF0000" + (getarg(4) >= 1000 ? (getarg(4)/1000 + ",000") : getarg(4)) + ",000 zeny^000000 service fee.";
-	mes "Ah, and don't forget to bring that " + getitemname(getarg(0)) + "!";
+	mes " " + getitemname(getarg(0)) + "? Certo, então você deve me trazer";
+	mes "^FF0000" + getarg(6) + " " + getitemname(getarg(5)) + (getarg(6) > 1 && getarg(5) != 999 ? "s":"") + "^000000, " + (getarg(7,0) != 0 && getarg(8,0) != 0 ? ("^FF0000" + getarg(8,0) + " " + getitemname(getarg(7,0)) + (getarg(8,0) > 1 && getarg(7,0) != 999 ? "s":"") + "^000000 ") : "") + "e ^FF0000" + (getarg(4) >= 1000 ? (getarg(4)/1000 + ",000") : getarg(4)) + ",000 zenys^000000 como taxa de serviço.";
+	mes " É claro, não esqueça de me trazer um " + getitemname(getarg(0)) + "!";
 	next;
 	mes "[Seiyablem]";
-	if (getiteminfo(getarg(0),5)&2) // EQP_HAND_R = 2, it's a weapon
+	if (getiteminfo(getarg(0),5)&2) // EQP_HAND_R = 2, é uma arma
 	{
-		mes "I can try to add a slot now if you have the required items and zeny.";
-		mes "However, you should know that there's a chance that I might fail.";
-		mes "Therefore, I need to give you a fair warning...";
-		next;
-		mes "[Seiyablem]";
-		mes "If this attempt to add a Slot to your Weapon fails, then the ^FF0000Weapon^000000, ^FF0000and any Cards compounded to it will be destroyed^000000.";
+		mes "Você já trouxe tudo?";
+		mes "Preciso avisar: se falharmos em criar um slot,";
+		mes "você perderá a ^FF0000Warma e todo o material usado.^000000";
+		mes "Lembre-se também que, se a arma tiver sido aprimorada, e tiver sido equipada com uma carta,";
+		mes "você a perderá mesmo se conseguir criar um slot.";
 	}
-	else // armor
+	else // armadura
 	{
-		mes "If you have all the required materials, my zeny service fee and the Armor, then we can go ahead with the Slot Addition attempt.";
-		mes "But before that, I must warn you of the risk.";
-		next;
-		mes "[Seiyablem]";
-		mes "If this attempt to add a Slot to your Armor fails, then the ^FF0000Armor^000000, ^FF0000it's upgrades^000000 ^FF0000and any Cards compounded to it will be destroyed^000000.";
+		mes "Você já trouxe tudo?";
+		mes "Preciso avisar: se falharmos em criar um slot,";
+		mes "você perderá a ^FF0000armadura e todo o material usado.^000000";
+		mes "Lembre-se também que, se a armadura tiver sido aprimorada, e tiver sido equipada com uma carta,";
+		mes "você a perderá mesmo se conseguir criar um slot.";
 	}
-	mes "Do you still want to try to add a Slot?";
 	next;
-	switch(select("Attempt Slot Addition:Cancel"))
+	switch(select("Pedir criação de slot.:Tentar da próxima vez."))
 	{
 		case 1:
 			if ((Zeny >= getarg(4)*1000) && (countitem(getarg(5)) >= getarg(6)) && (countitem(getarg(7,512)) >= getarg(8,0)) && (countitem(getarg(0)) > 0)) // if there's no getarg(7) and getarg(8) provided, check itemcount against 0 (we still need a valid item ID though)
 			{
 				mes "[Seiyablem]";
-				mes "Alright then, let the work begin!";
-				mes "You'd better pray for a successful result.";
+				mes "Muito bem, então que o trabalho comece!";
+				mes "Reze para conseguir um bom resultado.";
 				next;
 				set .@a, rand(1,100);
 				if ((.@a > getarg(2)) && (.@a < getarg(3)))
 				{
 					specialeffect getarg(3) == 51 ? EF_LORD : EF_SANCTUARY; // only S Class items have Lord of Vermillion effect
 					mes "[Seiyablem]";
-					mes "Great, it seems to be successful.";
-					mes "It looks pretty well done. Congratulations!";
+					mes "Ótimo, parece que deu certo.";
+					mes "O trabalho saiu muito bem feito. Parabéns!";
 					delitem getarg(0),1;
 					delitem getarg(5),getarg(6);
 					if (getarg(7,0) != 0 && getarg(8,0) != 0)
@@ -298,17 +304,17 @@ function	script	Func_Socket	{
 					getitem getarg(1),1;
 					next;
 					mes "[Seiyablem]";
-					mes "See you again, buddy!";
+					mes "Te vejo depois, camarada!";
 					close;
 				}
 				else
 				{
 					specialeffect EF_SUI_EXPLOSION;
 					mes "[Seiyablem]";
-					mes "Wah! ...I am so sorry, it failed.";
-					mes "However, I am completely innocent.";
-					mes "This is your luck, and it is destined by god, okay?";
-					mes "Don't be so disappointed, and try next time.";
+					mes "Ugh! ... Sinto muito, falhou.";
+					mes "Mas eu não tive culpa alguma.";
+					mes "Isso tem a ver com sua sorte e com seu destino, certo?";
+					mes "Não fique tão desapontado, tente de novo da próxima vez.";
 					delitem getarg(0),1;
 					delitem getarg(5),getarg(6);
 					if (getarg(7,0) != 0 && getarg(8,0) != 0)
@@ -316,22 +322,20 @@ function	script	Func_Socket	{
 					set Zeny, Zeny - getarg(4)*1000;
 					next;
 					mes "[Seiyablem]";
-					mes "I wish you good luck next time!";
+					mes "Te desejo boa sorte da próxima vez!";
 					close;
 				}
 			}
 			else
 			{
 				mes "[Seiyablem]";
-				mes "I'd like to go ahead with this Slot Addition attempt, but you're missing a few things.";
-				mes "You sure that you have the equipment, required materials and the zeny?";
+				mes "Você é tapado ou o quê? Você não trouxe todo o material necessário!";
+				mes "Traga tudo, e rápido!";
 				close;
 			}
 		case 2:
 			mes "[Seiyablem]";
-			mes "Need some time to think about it, huh?";
-			mes "Alright, I can understand.";
-			mes "Just remember that life's no fun if you're always playing it safe~";
+			mes "Até mais.";
 			close;
 	}
 }
@@ -341,24 +345,24 @@ lhz_in02,281,35,5	duplicate(SocketEnchant)	Seiyablem#lhz	84
 prt_in,33,70,5	duplicate(SocketEnchant)	Seiyablem#prt	84
 morocc,51,41,4	duplicate(SocketEnchant)	Seiyablem#moc	84
 
--	script	Young Man#dummy::SocketMan	-1,{
-	mes "[Young Man]";
-	mes "I'm considering becoming a Slotting Engineer.";
-	mes "It's a new field where you can add Slots to equipment, and it'd be cool if I can work in such a lucrative career.";
+-	script	Jovem#dummy::SocketMan	-1,{
+	mes "[Jovem]";
+	mes "Criar um slot em um equipamento";
+	mes "pode alterar sua opção.";
 	next;
-	mes "[Young Man]";
-	mes "There's a huge element of luck involved in successfully adding Slots from what I can understand.";
-	mes "You fail sometimes, but if you're super lucky, you can add two Slots.";
-	mes "Crazy. Huh?";
+	mes "[Jovem]";
+	mes "Ah, este caso é extremamente raro,";
+	mes "mas às vezes você pode criar";
+	mes "2 slots em um equipamento de uma só vez.";
+	mes " É claro, nem todo equipamento oferece esta chance.";
 	next;
-	mes "[Young Man]";
-	mes "But don't get too excited.";
-	mes "Only certain equipment can handle the addition of two extra Slots.";
-	mes "There's so much more I have to learn before I can even be an apprentice...";
+	mes "[Jovem]";
+	mes "Estou pensando em estudar";
+	mes "para me tornar um engenheiro criador de slots.";
 	close;
 }
 
-prt_in,31,57,1	duplicate(SocketMan)	Young Man#prt	97
-payon,143,143,7	duplicate(SocketMan)	Young Man#pay	97
-morocc,60,42,3	duplicate(SocketMan)	Young Man#moc	97
-lhz_in02,269,33,5	duplicate(SocketMan)	Young Man#lhz	97
+prt_in,31,57,1	duplicate(SocketMan)	Jovem#prt0	97
+payon,143,143,7	duplicate(SocketMan)	Jovem#pay0	97
+morocc,60,42,3	duplicate(SocketMan)	Jovem#moc0	97
+lhz_in02,269,33,5	duplicate(SocketMan)	Jovem#lhz0	97
