@@ -65,7 +65,7 @@ hu_fild05,0,0,0,0	monster	Ovo de Dragão	1721,20,5000,0,0
 //==================================================
 hu_fild06,0,0,0,0	monster	Molusco	1074,50,5000,0,0
 hu_fild06,0,0,0,0	monster	Caranguejo	1073,20,5000,0,0
-hu_fild06,0,0,0,0	monster	Estrela do Mar	1266,20,5000,0,0
+hu_fild06,0,0,0,0	monster	Estrela-do-Mar	1266,20,5000,0,0
 hu_fild06,234,251,14,120	monster	Planta Verde	1080,10,600000,0,1
 hu_fild06,234,251,14,120	monster	Planta Amarela	1081,10,600000,0,1
 

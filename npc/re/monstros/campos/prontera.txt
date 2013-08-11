@@ -16,7 +16,7 @@
 //==================================================
 // prt_fild00 - Prontera Field 
 //==================================================
-prt_fild00,0,0,0,0	monster	Sapo de Roda	1012,130,5000,0,0
+prt_fild00,0,0,0,0	monster	Sapo de Rodda	1012,130,5000,0,0
 prt_fild00,0,0,0,0	monster	Ambernite	1094,50,5000,0,0
 prt_fild00,0,0,0,0	monster	Bebê Selvagem	1167,20,5000,0,0
 prt_fild00,227,212,0,0	monster	Planta Brilhante	1083,1,1800000,900000,1
@@ -58,7 +58,7 @@ prt_fild03,148,107,5,5	monster	Planta Verde	1080,5,360000,180000,1
 // prt_fild04 - Prontera Field 
 //==================================================
 prt_fild04,0,0,0,0	monster	Ambernite	1094,80,5000,0,0
-prt_fild04,0,0,0,0	monster	Sapo de Roda	1012,20,5000,0,0
+prt_fild04,0,0,0,0	monster	Sapo de Rodda	1012,20,5000,0,0
 prt_fild04,0,0,0,0	monster	Vocal	1088,1,1800000,1200000,0
 prt_fild04,350,114,10,10	monster	Planta Verde	1080,5,900000,450000,1
 

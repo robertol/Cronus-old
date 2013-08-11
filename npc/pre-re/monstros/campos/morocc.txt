@@ -23,7 +23,7 @@
 //=================================================
 moc_fild01,0,0,0,0	monster	Filhote de Lobo do Deserto	1107,70,0,0,0
 moc_fild01,0,0,0,0	monster	Ovo de Andre	1097,20,0,0,0
-moc_fild01,0,0,0,0	monster	Ovo de Peco Peco	1047,20,0,0,0
+moc_fild01,0,0,0,0	monster	Ovo de PecoPeco	1047,20,0,0,0
 moc_fild01,0,0,0,0	monster	Picky	1049,10,0,0,0
 moc_fild01,0,0,0,0	monster	Drops	1113,30,0,0,0
 moc_fild01,0,0,0,0	monster	Poring	1002,10,0,0,0
@@ -34,7 +34,7 @@ moc_fild01,194,51,10,10	monster	Planta Amarela	1081,10,900000,450000,1
 //==================================================
 moc_fild02,0,0,0,0	monster	Peco Peco	1019,70,0,0,0
 moc_fild02,0,0,0,0	monster	Ovo de Andre	1097,10,0,0,0
-moc_fild02,0,0,0,0	monster	Ovo de Peco Peco	1047,40,0,0,0
+moc_fild02,0,0,0,0	monster	Ovo de PecoPeco	1047,40,0,0,0
 moc_fild02,0,0,0,0	monster	Picky	1049,10,0,0,0
 moc_fild02,0,0,0,0	monster	Drops	1113,30,0,0,0
 moc_fild02,89,315,0,0	monster	Planta Amarela	1081,1,180000,90000,1
@@ -111,7 +111,7 @@ moc_fild03,200,263,5,5	monster	Planta Verde	1080,2,180000,90000,1
 // moc_fild07 - Deserto Sograt
 //==================================================
 moc_fild07,0,0,0,0	monster	Drops	1113,70,0,0,0
-moc_fild07,0,0,0,0	monster	Ovo de Peco Peco	1047,50,0,0,0
+moc_fild07,0,0,0,0	monster	Ovo de PecoPeco	1047,50,0,0,0
 moc_fild07,0,0,0,0	monster	Picky com Casca	1050,30,0,0,0
 moc_fild07,0,0,0,0	monster	Picky	1049,30,0,0,0
 moc_fild07,162,333,12,12	monster	Planta Amarela	1081,5,360000,180000,1
@@ -174,7 +174,7 @@ moc_fild11,197,216,0,0	monster	Planta Brilhante	1083,1,1800000,900000,1
 //==================================================
 moc_fild12,0,0,0,0	monster	Picky com Casca	1050,50,0,0,0
 moc_fild12,0,0,0,0	monster	Picky	1049,50,0,0,0
-moc_fild12,0,0,0,0	monster	Ovo de Peco Peco	1047,35,0,0,0
+moc_fild12,0,0,0,0	monster	Ovo de PecoPeco	1047,35,0,0,0
 moc_fild12,0,0,0,0	monster	Drops	1113,35,0,0,0
 moc_fild12,181,336,40,20	monster	Planta Amarela	1081,10,180000,90000,1
 
@@ -261,7 +261,7 @@ moc_fild16,0,0,0,0	monster	Ovo de Andre	1097,10,0,0,0
 // moc_fild17 - Deserto Sograt
 //==================================================
 moc_fild17,0,0,0,0	monster	Hode	1127,50,0,0,0
-moc_fild17,0,0,0,0	monster	Chonchon de Aço	1042,40,0,0,0
+moc_fild17,0,0,0,0	monster	ChonChon de Aço	1042,40,0,0,0
 moc_fild17,0,0,0,0	monster	Magnólia	1138,15,0,0,0
 moc_fild17,0,0,0,0	monster	Frilldora	1119,15,0,0,0
 moc_fild17,0,0,0,0	monster	Andre	1095,10,0,0,0
@@ -282,7 +282,7 @@ moc_fild17,0,0,0,0	boss_monster	Freeoni	1159,1,7200000,600000,1
 //==================================================
 // moc_fild18 - Deserto Sograt
 //==================================================
-moc_fild18,0,0,0,0	monster	Chonchon de Aço	1042,70,0,0,0
+moc_fild18,0,0,0,0	monster	ChonChon de Aço	1042,70,0,0,0
 moc_fild18,0,0,0,0	monster	ChonChon	1011,40,0,0,0
 moc_fild18,0,0,0,0	monster	Muka	1055,80,0,0,0
 moc_fild18,0,0,0,0	monster	Metaller	1058,10,0,0,0

@@ -88,7 +88,7 @@ pay_fild06,268,155,20,20	monster	Planta Brilhante	1083,1,1800000,900000,1
 //==================================================
 // pay_fild07 - Payon Forest
 //==================================================
-pay_fild07,0,0,0,0	monster	Pé Grande	1060,130,5000,0,0
+pay_fild07,0,0,0,0	monster	Pé-Grande	1060,130,5000,0,0
 pay_fild07,0,0,0,0	monster	Caramelo	1103,30,5000,0,0
 pay_fild07,0,0,0,0	monster	Percevejo	1174,20,5000,0,0
 pay_fild07,0,0,0,0	monster	Creamy	1018,20,5000,0,0

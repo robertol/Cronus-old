@@ -140,9 +140,9 @@ pay_dun04,0,0,0,0	monster	Horong	1129,30,5000,0,0
 pay_dun04,0,0,0,0	monster	Esqueleto Arqueiro	1016,15,5000,0,0
 pay_dun04,0,0,0,0	monster	Guardião da Floresta	1277,15,5000,0,0
 pay_dun04,0,0,0,0	monster	Am Mut	1301,1,5000,0,0
-pay_dun04,0,0,0,0	monster	Skeleton General	1290,1,5000,0,0
+pay_dun04,0,0,0,0	monster	Esqueleto General	1290,1,5000,0,0
 pay_dun04,120,115,0,0	boss_monster	Flor do Luar	1150,1,3600000,600000,1
-pay_dun04,120,115,0,0	monster	Cat O Nine Tails	1307,1,3600000,7200000,1
+pay_dun04,120,115,0,0	monster	Gato de Nove Caldas	1307,1,3600000,7200000,1
 pay_dun04,120,120,10,10	monster	Planta Brilhante	1083,1,1800000,900000,1
 pay_dun04,28,110,5,5	monster	Planta Brilhante	1083,1,1800000,900000,1
 pay_dun04,0,0,0,0	monster	Planta Vermelha	1078,10,180000,90000,1

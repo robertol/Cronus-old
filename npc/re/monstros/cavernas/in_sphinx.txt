@@ -18,14 +18,14 @@
 // in_sphinx1 - Sphinx
 //==================================================
 in_sphinx1,0,0,0,0	monster	Drainliar	1111,40,5000,0,0
-in_sphinx1,0,0,0,0	monster	Requiem	1164,20,5000,0,0
+in_sphinx1,0,0,0,0	monster	Réquiem	1164,20,5000,0,0
 in_sphinx1,0,0,0,0	monster	Zerom	1178,20,5000,0,0
 in_sphinx1,0,0,0,0	monster	Matyr	1146,10,5000,0,0
 
 //==================================================
 // in_sphinx2 - Sphinx
 //==================================================
-in_sphinx2,0,0,0,0	monster	Requiem	1164,50,5000,0,0
+in_sphinx2,0,0,0,0	monster	Réquiem	1164,50,5000,0,0
 in_sphinx2,0,0,0,0	monster	Zerom	1178,50,5000,0,0
 in_sphinx2,0,0,0,0	monster	Matyr	1146,20,5000,0,0
 in_sphinx2,0,0,0,0	monster	Drainliar	1111,15,5000,0,0

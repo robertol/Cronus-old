@@ -80,8 +80,8 @@ ve_fild06,0,0,0,0	monster	Planta Brilhante	1083,1,1020000,0,0
 
 //======== [Veins Field-07] ===================================
 ve_fild07,0,0,0,0	monster	Stapo	1784,30,0,0,0
-ve_fild07,64,126,35,55	monster	Estrela do Mar	1266,3,0,0,0
-ve_fild07,256,76,75,37	monster	Estrela do Mar	1266,7,0,0,0
+ve_fild07,64,126,35,55	monster	Estrela-do-Mar	1266,3,0,0,0
+ve_fild07,256,76,75,37	monster	Estrela-do-Mar	1266,7,0,0,0
 ve_fild07,64,126,35,55	monster	Molusco	1074,3,0,0,0
 ve_fild07,256,76,75,37	monster	Molusco	1074,7,0,0,0
 ve_fild07,0,0,0,0	monster	Raggler	1254,24,0,0,0

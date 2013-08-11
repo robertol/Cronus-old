@@ -15,9 +15,9 @@
 //==================================================
 // lou_fild01 - Campos de Louyang
 //==================================================
-lou_fild01,224,315,100,50	monster	Pé Grande	1060,7,0,0,0
-lou_fild01,203,225,110,35	monster	Pé Grande	1060,4,60000,30000,1
-lou_fild01,273,128,75,50	monster	Pé Grande	1060,4,0,0,0
+lou_fild01,224,315,100,50	monster	Pé-Grande	1060,7,0,0,0
+lou_fild01,203,225,110,35	monster	Pé-Grande	1060,4,60000,30000,1
+lou_fild01,273,128,75,50	monster	Pé-Grande	1060,4,0,0,0
 lou_fild01,224,315,100,50	monster	Caramelo	1103,7,0,0,0
 lou_fild01,203,225,110,35	monster	Caramelo	1103,7,0,0,0
 lou_fild01,273,128,75,50	monster	Caramelo	1103,7,0,0,0

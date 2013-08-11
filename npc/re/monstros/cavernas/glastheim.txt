@@ -52,7 +52,7 @@ gl_cas02,0,0,0,0	monster	Mímico	1191,2,5000,0,0
 gl_cas02,0,0,0,0	monster	Alice	1275,1,5000,0,0
 gl_cas02,102,180,0,0	monster	Sussurro	1185,1,1800000,900000,1
 gl_cas02,104,145,5,5	monster	Mysteltainn	1203,1,7200000,3600000,1
-gl_cas02,0,0,0,0	monster	Tirfing	1204,1,7200000,3600000,1
+gl_cas02,0,0,0,0	monster	Tyrfing	1204,1,7200000,3600000,1
 
 //==================================================
 // gl_church - Glast Heim St. Abbey

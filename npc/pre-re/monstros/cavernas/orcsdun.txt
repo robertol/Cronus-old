@@ -14,7 +14,7 @@
 //==================================================
 // orcsdun01 - Calabouço dos Orcs
 //==================================================      
-orcsdun01,0,0,0,0	monster	Chonchon de Aço	1042,10,0,0,0
+orcsdun01,0,0,0,0	monster	ChonChon de Aço	1042,10,0,0,0
 orcsdun01,0,0,0,0	monster	Familiar	1005,15,0,0,0
 orcsdun01,0,0,0,0	monster	Drainliar	1111,5,0,0,0
 orcsdun01,0,0,0,0	monster	Orc Zumbi	1153,10,3000,5000,0
@@ -29,7 +29,7 @@ orcsdun01,58,67,10,10	monster	Planta Branca	1082,3,180000,90000,1
 //==================================================
 // orcsdun02 - Calabouço dos Orcs
 //==================================================     
-orcsdun02,0,0,0,0	monster	Chonchon de Aço	1042,20,0,0,0
+orcsdun02,0,0,0,0	monster	ChonChon de Aço	1042,20,0,0,0
 orcsdun02,0,0,0,0	monster	Drainliar	1111,20,0,0,0
 orcsdun02,0,0,0,0	monster	Orc Esqueleto	1152,10,3000,5000,0
 orcsdun02,0,0,0,0	monster	Orc Esqueleto	1152,20,60000,30000,0

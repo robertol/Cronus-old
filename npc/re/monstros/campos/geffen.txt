@@ -27,7 +27,7 @@ gef_fild00,54,186,5,5	monster	Planta Verde	1080,3,360000,180000,1
 //==================================================
 // gef_fild01 - Geffen Field
 //==================================================
-gef_fild01,0,0,0,0	monster	Sapo de Roda	1012,80,5000,0,0
+gef_fild01,0,0,0,0	monster	Sapo de Rodda	1012,80,5000,0,0
 gef_fild01,0,0,0,0	monster	Ambernite	1094,20,5000,0,0
 gef_fild01,0,0,0,0	monster	Sapo-Cururu	1089,1,3600000,1800000,1
 gef_fild01,215,225,10,10	monster	Planta Verde	1080,5,360000,180000,1
@@ -148,7 +148,7 @@ gef_fild08,162,247,0,0	monster	Planta Azul	1079,1,900000,450000,1
 // gef_fild09 - Geffen Field
 //==================================================
 gef_fild09,0,0,0,0	monster	Ambernite	1094,80,5000,0,0
-gef_fild09,0,0,0,0	monster	Sapo de Roda	1012,20,5000,0,0
+gef_fild09,0,0,0,0	monster	Sapo de Rodda	1012,20,5000,0,0
 gef_fild09,51,43,0,0	monster	Cogumelo Vermelho	1085,1,180000,90000,1
 gef_fild09,125,53,0,0	monster	Cogumelo Vermelho	1085,1,180000,90000,1
 gef_fild09,148,74,0,0	monster	Cogumelo Vermelho	1085,1,180000,90000,1

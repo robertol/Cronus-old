@@ -24,7 +24,7 @@ gl_cas01,0,0,0,0	monster	Rideword	1195,15,0,0,0
 gl_cas01,0,0,0,0	monster	Moldura Maldita	1260,20,0,0,0
 gl_cas01,0,0,0,0	monster	Sussurro	1179,10,0,0,0
 gl_cas01,0,0,0,0	monster	Alice	1275,1,0,0,0
-gl_cas01,0,0,0,0	monster	Tirfing	1204,1,7200000,3600000,1
+gl_cas01,0,0,0,0	monster	Tyrfing	1204,1,7200000,3600000,1
 gl_cas01,0,0,0,0	monster	Barão Coruja	1295,6,0,0,1
 gl_cas01,0,0,0,0	monster	Duque Coruja	1320,20,0,0,1
 
@@ -58,7 +58,7 @@ gl_cas02,93,177,3,3	monster	Cavaleiro do Abismo	1219,1,1800000,900000,1
 gl_cas02,115,177,3,3	monster	Cavaleiro do Abismo	1219,1,1800000,900000,1
 gl_cas02,83,84,2,2	monster	Mímico	1191,1,360000,180000,1
 gl_cas02,83,80,2,2	monster	Mímico	1191,1,360000,180000,1
-gl_cas02,0,0,0,0	monster	Tirfing	1204,1,7200000,3600000,1
+gl_cas02,0,0,0,0	monster	Tyrfing	1204,1,7200000,3600000,1
 gl_cas02,0,0,0,0	monster	Alice	1275,1,0,0,0
 gl_cas02,189,20,1,1	monster	Khalitzburg	1132,1,360000,180000,0
 gl_cas02,190,23,1,1	monster	Andarilho	1208,1,360000,180000,0

@@ -30,7 +30,7 @@ cmd_fild02,0,0,0,0	monster	Foca	1317,120,5000,0,0
 cmd_fild02,0,0,0,0	monster	Pingu	1391,30,5000,0,0
 cmd_fild02,0,0,0,0	monster	Molusco	1074,20,5000,0,0
 cmd_fild02,0,0,0,0	monster	Caranguejo	1073,20,5000,0,0
-cmd_fild02,0,0,0,0	monster	Estrela do Mar	1266,10,5000,0,0
+cmd_fild02,0,0,0,0	monster	Estrela-do-Mar	1266,10,5000,0,0
 cmd_fild02,0,0,0,0	monster	Yakuza	1313,1,5000,0,0
 
 //==================================================
@@ -51,7 +51,7 @@ cmd_fild04,0,0,0,0	monster	Lontra	1323,120,5000,0,0
 cmd_fild04,0,0,0,0	monster	Pingu	1391,30,5000,0,0
 cmd_fild04,0,0,0,0	monster	Molusco	1074,20,5000,0,0
 cmd_fild04,0,0,0,0	monster	Caranguejo	1073,20,5000,0,0
-cmd_fild04,0,0,0,0	monster	Estrela do Mar	1266,10,5000,0,0
+cmd_fild04,0,0,0,0	monster	Estrela-do-Mar	1266,10,5000,0,0
 
 //==================================================
 // cmd_fild05 - Disabled on Renewal
@@ -73,7 +73,7 @@ cmd_fild06,84,375,10,10	monster	Planta Amarela	1081,3,1800000,900000,1
 // cmd_fild07 - Beacon Island, Pharos 
 //==================================================
 cmd_fild07,0,0,0,0	monster	Raggler	1254,100,5000,0,0
-cmd_fild07,0,0,0,0	monster	Estrela do Mar	1266,30,5000,0,0
+cmd_fild07,0,0,0,0	monster	Estrela-do-Mar	1266,30,5000,0,0
 cmd_fild07,0,0,0,0	monster	Molusco	1074,30,5000,0,0
 cmd_fild07,0,0,0,0	monster	Caranguejo	1073,30,5000,0,0
 

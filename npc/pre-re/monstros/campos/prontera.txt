@@ -113,7 +113,7 @@ prt_fild08,0,0,0,0	monster	Drops	1113,10,0,0,0
 //==================================================
 prt_fild09,0,0,0,0	monster	Bebê Selvagem	1167,70,0,0,0
 prt_fild09,0,0,0,0	monster	Filhote de Lobo do Deserto	1107,20,0,0,0
-prt_fild09,0,0,0,0	monster	Ovo de Peco Peco	1047,20,0,0,0
+prt_fild09,0,0,0,0	monster	Ovo de PecoPeco	1047,20,0,0,0
 prt_fild09,0,0,0,0	monster	Picky	1049,20,0,0,0
 prt_fild09,0,0,0,0	monster	Condor	1009,10,0,0,0
 prt_fild09,237,115,5,5	monster	Planta Amarela	1081,3,360000,180000,1
