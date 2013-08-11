@@ -99,7 +99,7 @@ pay_fild07,0,0,0,0	monster	Salgueiro Ancião	1033,70,0,0,0
 pay_fild07,0,0,0,0	monster	Eggyra	1116,40,0,0,0
 pay_fild07,0,0,0,0	monster	Poporing	1031,20,0,0,0
 pay_fild07,0,0,0,0	monster	Salgueiro	1010,20,0,0,0
-pay_fild07,0,0,0,0	monster	Pé-Grande	1060,30,0,0,0
+pay_fild07,0,0,0,0	monster	Pé Grande	1060,30,0,0,0
 pay_fild07,171,331,20,20	monster	Planta Verde	1080,8,900000,450000,1
 
 //==================================================
@@ -117,7 +117,7 @@ pay_fild08,143,156,40,40	monster	Planta Brilhante	1083,1,3600000,1800000,1
 //==================================================
 pay_fild09,0,0,0,0	monster	Poporing	1031,20,0,0,0
 pay_fild09,0,0,0,0	monster	Fumacento	1056,80,0,0,0
-pay_fild09,0,0,0,0	monster	Pé-Grande	1060,70,0,0,0
+pay_fild09,0,0,0,0	monster	Pé Grande	1060,70,0,0,0
 pay_fild09,198,217,30,30	monster	Planta Verde	1080,10,360000,180000,0
 pay_fild09,198,217,30,30	monster	Planta Brilhante	1083,1,1800000,900000,1
 

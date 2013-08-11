@@ -42,7 +42,7 @@ moc_pryd03,0,0,0,0	monster	Verit	1032,20,600000,300000,1
 // moc_pryd04 - Inside Pyramid F4
 //==================================================
 moc_pryd04,0,0,0,0	monster	Múmia	1041,25,0,0,0
-moc_pryd04,0,0,0,0	monster	Xamã do Vento	1297,3,0,0,0
+moc_pryd04,0,0,0,0	monster	Múmia Anciã	1297,3,0,0,0
 moc_pryd04,0,0,0,0	monster	Isis	1029,50,150000,75000,0
 moc_pryd04,0,0,0,0	monster	Mímico	1191,15,600000,300000,1
 moc_pryd04,0,0,0,0	boss_monster	Osíris	1038,1,3600000,600000,0

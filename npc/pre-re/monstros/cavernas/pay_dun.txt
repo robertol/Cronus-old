@@ -72,9 +72,9 @@ pay_dun02,108,191,0,0	monster	Hidra	1068,1,332000,100000,1
 pay_dun02,111,191,0,0	monster	Hidra	1068,1,300000,100000,1
 pay_dun02,107,190,0,0	monster	Hidra	1068,1,320000,100000,1
 pay_dun02,110,190,0,0	monster	Hidra	1068,1,300000,100000,1
-pay_dun02,227,185,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun02,227,184,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun02,229,183,0,0	monster	Mandragora	1020,1,300000,100000,1
+pay_dun02,227,185,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun02,227,184,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun02,229,183,0,0	monster	Mandrágora	1020,1,300000,100000,1
 pay_dun02,214,266,0,0	monster	Planta Vermelha	1078,1,600000,300000,1
 pay_dun02,37,243,0,0	monster	Cogumelo Negro	1084,1,600000,300000,1
 pay_dun02,37,243,0,0	monster	Nove Caudas	1180,1,3600000,1800000,1
@@ -127,17 +127,17 @@ pay_dun03,228,185,0,0	monster	Sohee	1170,2,300000,100000,1
 pay_dun03,228,61,0,0	monster	Planta Vermelha	1078,1,600000,300000,1
 pay_dun03,138,42,0,0	monster	Planta Azul	1079,1,600000,300000,1
 pay_dun03,120,186,0,0	monster	Planta Verde	1080,1,600000,300000,1
-pay_dun03,88,35,0,0	monster	Planta Vermelha	1081,1,600000,300000,1
-pay_dun03,126,135,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,126,134,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,126,133,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,126,132,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,126,131,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,179,134,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,179,133,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,179,132,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,179,131,0,0	monster	Mandragora	1020,1,300000,100000,1
-pay_dun03,179,130,0,0	monster	Mandragora	1020,1,300000,100000,1
+pay_dun03,88,35,0,0	monster	Planta Amarela	1081,1,600000,300000,1
+pay_dun03,126,135,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,126,134,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,126,133,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,126,132,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,126,131,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,179,134,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,179,133,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,179,132,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,179,131,0,0	monster	Mandrágora	1020,1,300000,100000,1
+pay_dun03,179,130,0,0	monster	Mandrágora	1020,1,300000,100000,1
 pay_dun03,0,0,0,0	monster	Guardião da Floresta	1277,3,0,0,0
 pay_dun03,0,0,0,0	monster	Planta Vermelha	1078,15,180000,90000,1
 pay_dun03,246,56,20,20	monster	Planta Branca	1082,3,180000,90000,1
@@ -152,9 +152,9 @@ pay_dun04,120,115,0,0	boss_monster	Flor do Luar	1150,1,3600000,600000,1
 pay_dun04,0,0,0,0	monster	Guardião da Floresta	1277,15,0,0,0
 pay_dun04,0,0,0,0	monster	Esqueleto Arqueiro	1016,15,0,0,0
 pay_dun04,0,0,0,0	monster	Nove Caudas	1180,30,60000,30000,0
-pay_dun04,0,0,0,0	monster	Esqueleto General	1290,1,0,0,0
+pay_dun04,0,0,0,0	monster	Skeleton General	1290,1,0,0,0
 pay_dun04,0,0,0,0	monster	Am Mut	1301,1,0,0,0
-pay_dun04,120,115,0,0	monster	Gato de Nove Caudas	1307,1,3600000,7200000,1
+pay_dun04,120,115,0,0	monster	Cat O Nine Tails	1307,1,3600000,7200000,1
 pay_dun04,120,120,10,10	monster	Planta Brilhante	1083,1,1800000,900000,1
 pay_dun04,28,110,5,5	monster	Planta Brilhante	1083,1,1800000,900000,1
 pay_dun04,0,0,0,0	monster	Planta Vermelha	1078,10,180000,90000,1

@@ -29,7 +29,7 @@ gef_fild00,54,186,5,5	monster	Planta Verde	1080,3,360000,180000,1
 //==================================================
 // gef_fild01 - Arredores de Geffen
 //==================================================
-gef_fild01,0,0,0,0	monster	Sapo de Rodda	1012,50,0,0,0
+gef_fild01,0,0,0,0	monster	Sapo de Roda	1012,50,0,0,0
 gef_fild01,0,0,0,0	monster	Poporing	1031,20,0,0,0
 gef_fild01,0,0,0,0	monster	Sapo-Cururu	1089,1,3600000,1800000,1
 gef_fild01,215,225,10,10	monster	Planta Verde	1080,5,360000,180000,1
@@ -54,7 +54,7 @@ gef_fild02,164,194,1,1	monster	Planta Brilhante	1083,1,1800000,900000,1
 // gef_fild03 - Arredores de Geffen
 //==================================================
 gef_fild03,0,0,0,0	monster	Guerreiro Orc	1023,60,0,0,0
-gef_fild03,0,0,0,0	monster	Grand Orc	1213,1,0,0,0
+gef_fild03,0,0,0,0	monster	Grande Orc	1213,1,0,0,0
 gef_fild03,0,0,0,0	monster	Selvagem	1166,40,0,0,0
 gef_fild03,0,0,0,0	monster	Poporing	1031,20,0,0,0
 gef_fild03,45,350,3,3	monster	Planta Verde	1080,1,180000,90000,1
@@ -83,10 +83,10 @@ gef_fild03,44,133,3,3	monster	Planta Verde	1080,1,180000,90000,1
 // gef_fild04 - Arredores de Geffen
 //==================================================
 gef_fild04,0,0,0,0	monster	Poring	1002,30,0,0,0
-gef_fild04,0,0,0,0	monster	Chonchon	1011,30,0,0,0
+gef_fild04,0,0,0,0	monster	ChonChon	1011,30,0,0,0
 gef_fild04,0,0,0,0	monster	Pupa	1008,60,0,0,0
 gef_fild04,0,0,0,0	monster	Fabre	1007,20,0,0,0
-gef_fild04,0,0,0,0	monster	Sapo de Rodda	1012,20,0,0,0
+gef_fild04,0,0,0,0	monster	Sapo de Roda	1012,20,0,0,0
 gef_fild04,224,82,5,2	monster	Planta Verde	1080,3,360000,180000,1
 gef_fild04,152,82,5,2	monster	Planta Verde	1080,3,360000,180000,1
 
@@ -128,7 +128,7 @@ gef_fild06,0,0,0,0	monster	Planta Brilhante	1083,4,1800000,900000,1
 // gef_fild07 - Arredores de Geffen
 //==================================================
 gef_fild07,0,0,0,0	monster	Poring	1002,20,0,0,0
-gef_fild07,0,0,0,0	monster	Chonchon	1011,30,0,0,0
+gef_fild07,0,0,0,0	monster	ChonChon	1011,30,0,0,0
 gef_fild07,0,0,0,0	monster	Pupa	1008,10,0,0,0
 gef_fild07,0,0,0,0	monster	Fabre	1007,60,0,0,0
 gef_fild07,122,221,0,0	monster	Planta Verde	1080,3,360000,180000,1
@@ -227,4 +227,4 @@ gef_fild14,0,0,0,0	monster	Senhora Orc	1273,20,0,0,0
 gef_fild14,0,0,0,0	boss_monster	Orc Herói	1087,1,3600000,600000,1
 gef_fild14,0,0,0,0	monster	Guerreiro Orc	1023,10,0,0,0
 gef_fild14,0,0,0,0	monster	Orc Arqueiro	1189,30,0,0,0
-gef_fild14,0,0,0,0	monster	Grand Orc	1213,70,0,0,0
+gef_fild14,0,0,0,0	monster	Grande Orc	1213,70,0,0,0

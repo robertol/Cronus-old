@@ -78,7 +78,7 @@ um_fild03,0,0,0,0	monster	Planta Brilhante	1083,2,180000,90000,1
 um_fild04,0,0,0,0	monster	Besouro-Rei	1494,30,0,0,0
 um_fild04,0,0,0,0	monster	Besouro-Chifre	1128,15,0,0,0
 um_fild04,0,0,0,0	monster	Choco	1214,2,0,0,0
-um_fild04,0,0,0,0	monster	Artilheiro Wootan	1498,7,0,0,0
+um_fild04,0,0,0,0	monster	Atirador Wootan	1498,7,0,0,0
 um_fild04,264,293,10,10	monster	Besouro-Chifre	1128,2,1200000,60000,0
 um_fild04,264,293,10,10	monster	Besouro-Rei	1494,4,120000,60000,0
 um_fild04,121,239,10,10	monster	Besouro-Rei	1494,2,120000,60000,0
@@ -93,8 +93,8 @@ um_fild04,206,188,10,10	monster	Besouro-Rei	1494,2,120000,60000,0
 um_fild04,206,188,10,10	monster	Besouro-Chifre	1128,1,120000,60000,0
 um_fild04,239,245,10,10	monster	Besouro-Rei	1494,2,120000,60000,0
 um_fild04,239,245,10,10	monster	Besouro-Chifre	1128,1,120000,60000,0
-um_fild04,239,245,10,10	monster	Artilheiro Wootan	1498,1,300000,60000,0
-um_fild04,91,79,10,10	monster	Artilheiro Wootan	1498,1,300000,60000,0
-um_fild04,295,93,10,10	monster	Artilheiro Wootan	1498,1,300000,60000,0
+um_fild04,239,245,10,10	monster	Atirador Wootan	1498,1,300000,60000,0
+um_fild04,91,79,10,10	monster	Atirador Wootan	1498,1,300000,60000,0
+um_fild04,295,93,10,10	monster	Atirador Wootan	1498,1,300000,60000,0
 um_fild04,0,0,0,0	monster	Planta Vermelha	1078,5,180000,90000,1
 um_fild04,0,0,0,0	monster	Planta Amarela	1081,5,180000,90000,1

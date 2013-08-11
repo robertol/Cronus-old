@@ -18,7 +18,7 @@
 //==================================================
 um_dun01,0,0,0,0	monster	Atirador de Pedras	1495,70,0,0,0
 um_dun01,0,0,0,0	monster	Guerreiro Wootan	1499,10,0,0,0
-um_dun01,0,0,0,0	monster	Artilheiro Wootan	1498,10,0,0,0
+um_dun01,0,0,0,0	monster	Atirador Wootan	1498,10,0,0,0
 um_dun01,0,0,0,0	monster	Planta Amarela	1081,5,180000,90000,1
 um_dun01,0,0,0,0	monster	Planta Verde	1080,5,180000,90000,1
 
@@ -43,14 +43,14 @@ um_dun02,272,163,15,15	monster	Golem de Madeira	1497,2,180000,60000,0
 um_dun02,232,156,15,15	monster	Golem de Madeira	1497,2,300000,60000,0
 um_dun02,232,156,15,15	monster	Golem de Madeira	1497,2,180000,60000,0
 um_dun02,0,0,0,0	monster	Furador	1380,5,0,0,0
-um_dun02,0,0,0,0	monster	Artilheiro Wootan	1498,10,0,0,0
-um_dun02,213,217,15,15	monster	Artilheiro Wootan	1498,2,120000,60000,0
-um_dun02,72,258,15,15	monster	Artilheiro Wootan	1498,3,120000,60000,0
-um_dun02,79,227,10,10	monster	Artilheiro Wootan	1498,1,120000,60000,0
-um_dun02,170,145,10,10	monster	Artilheiro Wootan	1498,1,120000,60000,0
-um_dun02,209,34,15,15	monster	Artilheiro Wootan	1498,1,120000,60000,0
-um_dun02,272,163,15,15	monster	Artilheiro Wootan	1498,1,120000,60000,0
-um_dun02,232,156,15,15	monster	Artilheiro Wootan	1498,1,120000,60000,0
+um_dun02,0,0,0,0	monster	Atirador Wootan	1498,10,0,0,0
+um_dun02,213,217,15,15	monster	Atirador Wootan	1498,2,120000,60000,0
+um_dun02,72,258,15,15	monster	Atirador Wootan	1498,3,120000,60000,0
+um_dun02,79,227,10,10	monster	Atirador Wootan	1498,1,120000,60000,0
+um_dun02,170,145,10,10	monster	Atirador Wootan	1498,1,120000,60000,0
+um_dun02,209,34,15,15	monster	Atirador Wootan	1498,1,120000,60000,0
+um_dun02,272,163,15,15	monster	Atirador Wootan	1498,1,120000,60000,0
+um_dun02,232,156,15,15	monster	Atirador Wootan	1498,1,120000,60000,0
 um_dun02,0,0,0,0	monster	Dríade	1493,25,0,0,0
 um_dun02,0,0,0,0	monster	Planta Amarela	1081,5,180000,90000,1
 um_dun02,0,0,0,0	monster	Planta Vermelha	1078,5,180000,90000,1

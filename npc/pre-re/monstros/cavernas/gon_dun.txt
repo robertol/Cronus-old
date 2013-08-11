@@ -15,7 +15,7 @@
 //==================================================
 // gon_dun01 - Shrine of Gonryun Queen
 //==================================================
-gon_dun01,0,0,0,0	monster	Borboleta Sanguinária	1408,55,650000,350000,0
+gon_dun01,0,0,0,0	monster	Borboleta Sangrenta	1408,55,650000,350000,0
 gon_dun01,0,0,0,0	monster	Pessegueira Encantada	1410,35,0,0,0
 gon_dun01,0,0,0,0	monster	Zipper	1417,30,0,0,0
 gon_dun01,0,0,0,0	monster	Planta Vermelha	1078,5,0,0,0
@@ -26,12 +26,12 @@ gon_dun01,0,0,0,0	monster	Planta Branca	1082,10,0,0,0
 // gon_dun02 - Hermit's Checkers
 //==================================================
 gon_dun02,241,226,15,20	monster	Pessegueira Encantada	1410,2,300000,150000,0
-gon_dun02,241,226,15,20	monster	Leopardo Filhote	1415,4,600000,300000,0
+gon_dun02,241,226,15,20	monster	Filhote de Leopardo	1415,4,600000,300000,0
 gon_dun02,241,226,15,20	monster	Pessegueira Encantada	1410,3,120000,60000,0
 gon_dun02,33,115,10,15	monster	Pessegueira Encantada	1410,1,300000,150000,0
-gon_dun02,33,115,10,15	monster	Leopardo Filhote	1415,2,600000,300000,0
+gon_dun02,33,115,10,15	monster	Filhote de Leopardo	1415,2,600000,300000,0
 gon_dun02,0,0,0,0	monster	Ermitão Maligno	1412,20,690000,390000,0
-gon_dun02,0,0,0,0	monster	Borboleta Sanguinária	1408,20,0,0,0
+gon_dun02,0,0,0,0	monster	Borboleta Sangrenta	1408,20,0,0,0
 gon_dun02,0,0,0,0	monster	Pessegueira Encantada	1410,15,0,0,0
 gon_dun02,0,0,0,0	monster	Planta Amarela	1081,10,0,0,0
 

@@ -29,8 +29,8 @@ cmd_fild01,0,0,0,0	monster	Planta Verde	1080,5,1800000,900000,1
 //==================================================
 // cmd_fild02 - Praia Kokomo
 //==================================================
-cmd_fild02,73,100,40,100	monster	Estrela-do-Mar	1266,5,0,0,0
-cmd_fild02,200,130,150,50	monster	Estrela-do-Mar	1266,5,0,0,0
+cmd_fild02,73,100,40,100	monster	Estrela do Mar	1266,5,0,0,0
+cmd_fild02,200,130,150,50	monster	Estrela do Mar	1266,5,0,0,0
 cmd_fild02,0,0,0,0	monster	Caranguejo	1073,20,0,0,0
 cmd_fild02,0,0,0,0	monster	Crocodilo	1271,10,0,0,0
 cmd_fild02,0,0,0,0	monster	Raggler	1254,30,0,0,0
@@ -42,7 +42,7 @@ cmd_fild02,93,82,40,80	monster	Molusco	1074,5,180000,0,0
 cmd_fild02,0,0,0,0	monster	Yakuza	1313,1,0,0,0
 cmd_fild02,200,130,150,40	monster	Foca	1317,18,0,0,0
 cmd_fild02,93,82,40,80	monster	Foca	1317,2,180000,0,0
-cmd_fild02,0,0,0,0	monster	Galápago	1391,20,0,0,0
+cmd_fild02,0,0,0,0	monster	Pingu	1391,20,0,0,0
 
 //==================================================
 // cmd_fild03 - Mangue Zenhai
@@ -59,7 +59,7 @@ cmd_fild03,145,191,3,3	monster	Planta Brilhante	1083,1,1800000,900000,1
 //==================================================
 // cmd_fild04 - Praia Kokomo
 //==================================================
-cmd_fild04,221,120,120,40	monster	Estrela-do-Mar	1266,45,0,0,0
+cmd_fild04,221,120,120,40	monster	Estrela do Mar	1266,45,0,0,0
 cmd_fild04,0,0,0,0	monster	Crocodilo	1271,40,0,0,0
 cmd_fild04,0,0,0,0	monster	Caranguejo	1073,20,0,0,0
 cmd_fild04,0,0,0,0	monster	Raggler	1254,20,0,0,0
@@ -118,8 +118,8 @@ cmd_fild06,84,375,10,10	monster	Planta Amarela	1081,3,1800000,900000,1
 //==================================================
 // cmd_fild07 - Ilha do Farol, Pharos
 //==================================================
-cmd_fild07,242,108,40,90	monster	Estrela-do-Mar	1266,2,60000,0,0
-cmd_fild07,102,177,60,90	monster	Estrela-do-Mar	1266,3,60000,0,0
+cmd_fild07,242,108,40,90	monster	Estrela do Mar	1266,2,60000,0,0
+cmd_fild07,102,177,60,90	monster	Estrela do Mar	1266,3,60000,0,0
 cmd_fild07,240,107,40,90	monster	Caranguejo	1073,3,60000,0,0
 cmd_fild07,100,175,60,90	monster	Caranguejo	1073,2,60000,0,0
 cmd_fild07,101,176,60,90	monster	Raggler	1254,1,180000,0,0
@@ -193,7 +193,7 @@ cmd_fild08,130,201,10,10	monster	Planta Amarela	1081,4,1800000,900000,1
 //==================================================
 // cmd_fild09 - Fortaleza de Saint Darmain(Sul)
 //==================================================
-cmd_fild09,0,0,0,0	monster	ChonChon de Aço	1042,20,0,0,0
+cmd_fild09,0,0,0,0	monster	Chonchon de Aço	1042,20,0,0,0
 cmd_fild09,0,0,0,0	monster	Drops	1113,20,0,0,0
 cmd_fild09,0,0,0,0	monster	Anaconda	1030,60,0,0,0
 cmd_fild09,0,0,0,0	monster	Condor	1009,20,0,0,0

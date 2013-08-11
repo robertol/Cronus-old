@@ -30,7 +30,7 @@ mjolnir_01,311,271,25,25	monster	Planta Azul	1079,5,360000,180000,1
 //==================================================
 mjolnir_02,0,0,0,0	monster	Zangão	1004,30,0,0,0
 mjolnir_02,0,0,0,0	monster	Creamy	1018,20,0,0,0
-mjolnir_02,0,0,0,0	monster	Petite Terrestre	1155,50,0,0,0
+mjolnir_02,0,0,0,0	monster	Petite	1155,50,0,0,0
 mjolnir_02,0,0,0,0	monster	Poporing	1031,10,0,0,0
 mjolnir_02,0,0,0,0	monster	Flora	1118,30,0,0,0
 mjolnir_02,86,270,0,0	monster	Planta Verde	1080,1,180000,90000,1
@@ -217,7 +217,7 @@ mjolnir_10,0,0,0,0	monster	Louva-a-Deus	1139,20,0,0,0
 mjolnir_10,0,0,0,0	monster	Flora	1118,30,0,0,0
 mjolnir_10,0,0,0,0	monster	Argos	1100,60,0,0,0
 mjolnir_10,0,0,0,0	monster	Poporing	1031,20,0,0,0
-mjolnir_10,0,0,0,0	monster	Petite Terrestre	1155,10,0,0,0
+mjolnir_10,0,0,0,0	monster	Petite	1155,10,0,0,0
 mjolnir_10,123,331,10,10	monster	Planta Brilhante	1083,1,1800000,900000,1
 mjolnir_10,0,0,0,0	monster	Planta Verde	1080,10,180000,90000,1
 
@@ -225,7 +225,7 @@ mjolnir_10,0,0,0,0	monster	Planta Verde	1080,10,180000,90000,1
 // mjolnir_11 - Monte Mjolnir
 //==================================================
 mjolnir_11,0,0,0,0	monster	Argiope	1099,10,0,0,0
-mjolnir_11,0,0,0,0	monster	Mandragora	1020,50,0,0,0
+mjolnir_11,0,0,0,0	monster	Mandrágora	1020,50,0,0,0
 mjolnir_11,0,0,0,0	monster	Flora	1118,60,0,0,0
 mjolnir_11,0,0,0,0	monster	Poporing	1031,10,0,0,0
 mjolnir_11,0,0,0,0	monster	Besouro-Ladrão Macho	1054,30,0,0,0

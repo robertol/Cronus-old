@@ -13,7 +13,7 @@
 //==================================================
 // mosk_fild02 - Campo de Moscóvia
 //==================================================
-mosk_fild02,0,0,0,0	monster	Pé-Grande	1060,40,0,0,0
+mosk_fild02,0,0,0,0	monster	Pé Grande	1060,40,0,0,0
 mosk_fild02,0,0,0,0	monster	Caramelo	1103,20,0,0,0
 mosk_fild02,0,0,0,0	monster	Louva-a-Deus	1139,30,0,0,0
 mosk_fild02,0,0,0,0	monster	Poring	1002,10,0,0,0
