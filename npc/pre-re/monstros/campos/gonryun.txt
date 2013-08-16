@@ -14,7 +14,7 @@
 //==================================================
 // gon_fild01 - Campo de Kunlun
 //==================================================
-gon_fild01,0,0,0,0	monster	Leopardo Filhote	1415,40,600000,300000,0
+gon_fild01,0,0,0,0	monster	Filhote de Leopardo	1415,40,600000,300000,0
 gon_fild01,0,0,0,0	monster	Zipper	1417,20,0,0,0
 gon_fild01,0,0,0,0	monster	Poporing	1031,20,0,0,0
 gon_fild01,0,0,0,0	monster	Pirralho	1409,30,0,0,0

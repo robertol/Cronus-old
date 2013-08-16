@@ -33,5 +33,5 @@ mjo_dun03,0,0,0,0	monster	Martin	1145,5,0,0,0
 mjo_dun03,0,0,0,0	monster	Esqueleto Operário	1169,70,0,0,0
 mjo_dun03,0,0,0,0	monster	Giearth	1121,5,0,0,0
 mjo_dun03,0,0,0,0	monster	Névoa	1151,35,0,0,0
-mjo_dun03,0,0,0,0	monster	Cãimbra	1209,2,300000,150000,0
-mjo_dun03,0,0,0,0	monster	Cramp	1209,1,50000,25000,0
+mjo_dun03,0,0,0,0	monster	Cãibra	1209,2,300000,150000,0
+mjo_dun03,0,0,0,0	monster	Cãibra	1209,1,50000,25000,0

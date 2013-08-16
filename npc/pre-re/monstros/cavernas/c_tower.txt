@@ -35,7 +35,7 @@ c_tower2,0,0,0,0	monster	Ancião	1377,1,3600000,1800000,0
 //==================================================
 // c_tower3 - Torre do Relógio 3
 //==================================================
-c_tower3,0,0,0,0	monster	Alarm	1193,80,0,0,0
+c_tower3,0,0,0,0	monster	Alarme	1193,80,0,0,0
 c_tower3,0,0,0,0	monster	Rideword	1195,5,0,0,0
 c_tower3,153,220,10,10	monster	Rideword	1195,1,126000,100000,0
 c_tower3,0,0,0,0	monster	Mímico	1191,7,0,0,0
@@ -46,7 +46,7 @@ c_tower3,0,0,0,0	monster	Gerente	1270,3,0,0,0
 //==================================================
 c_tower4,0,0,0,0	monster	Gerente	1270,2,1800000,0,0
 c_tower4,0,0,0,0	monster	Gerente	1270,1,3600000,0,0
-c_tower4,0,0,0,0	monster	Whisper	1179,5,0,0,0
+c_tower4,0,0,0,0	monster	Sussurro	1179,5,0,0,0
 c_tower4,0,0,0,0	monster	Ancião	1377,1,3600000,1800000,0
 c_tower4,0,0,0,0	monster	Ancião	1377,1,1800000,600000,0
 c_tower4,108,198,100,10	monster	Alarme	1193,6,0,0,0

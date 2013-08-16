@@ -27,7 +27,7 @@ ice_dun01,0,0,0,0	monster	Muscipular	1780,5,0,0,0
 ice_dun02,0,0,0,0	monster	Yeti	1775,70,0,0,0
 ice_dun02,0,0,0,0	monster	Siroma	1776,30,0,0,0
 ice_dun02,0,0,0,0	monster	Gazeti	1778,15,240000,0,0
-ice_dun02,0,0,0,0	monster	Titï¿½ de Gelo	1777,7,0,0,0
+ice_dun02,0,0,0,0	monster	Titã de Gelo	1777,7,0,0,0
 ice_dun02,33,271,4,4	monster	Estalactite	1789,1,1320000,300000,0
 ice_dun02,110,242,5,5	monster	Estalactite	1789,2,1020000,300000,0
 ice_dun02,150,280,4,4	monster	Estalactite	1789,1,900000,300000,0
@@ -48,17 +48,17 @@ ice_dun02,280,20,5,5	monster	Estalactite	1789,1,960000,300000,0
 //==================================================
 // ice_dun03 - Caverna de Gelo
 //==================================================
-ice_dun03,0,0,0,0	monster	Titï¿½ de Gelo	1777,12,0,0,0
-ice_dun03,0,0,0,0	monster	Titï¿½ de Gelo	1777,10,7200000,3600000,0
+ice_dun03,0,0,0,0	monster	Titã de Gelo	1777,12,0,0,0
+ice_dun03,0,0,0,0	monster	Titã de Gelo	1777,10,7200000,3600000,0
 ice_dun03,0,0,0,0	monster	Gazeti	1778,10,120000,0,0
 ice_dun03,0,0,0,0	monster	Yeti	1775,15,0,0,0
-ice_dun03,113,239,85,50	monster	Titï¿½ de Gelo	1777,12,180000,0,0
+ice_dun03,113,239,85,50	monster	Titã de Gelo	1777,12,180000,0,0
 ice_dun03,113,239,85,50	monster	Gazeti	1778,8,300000,0,0
-ice_dun03,63,110,50,82	monster	Titï¿½ de Gelo	1777,12,180000,0,0
+ice_dun03,63,110,50,82	monster	Titã de Gelo	1777,12,180000,0,0
 ice_dun03,63,110,50,82	monster	Gazeti	1778,8,300000,0,0
-ice_dun03,189,66,80,40	monster	Titï¿½ de Gelo	1777,12,180000,0,0
+ice_dun03,189,66,80,40	monster	Titã de Gelo	1777,12,180000,0,0
 ice_dun03,189,66,80,40	monster	Gazeti	1778,8,300000,0,0
-ice_dun03,235,185,44,80	monster	Titï¿½ de Gelo	1777,12,180000,0,0
+ice_dun03,235,185,44,80	monster	Titã de Gelo	1777,12,180000,0,0
 ice_dun03,235,185,44,80	monster	Gazeti	1778,8,300000,0,0
 ice_dun03,50,243,10,10	monster	Estalactite	1789,2,720000,300000,0
 ice_dun03,149,247,10,43	monster	Estalactite	1789,5,1080000,300000,0

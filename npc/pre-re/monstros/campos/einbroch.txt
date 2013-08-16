@@ -36,10 +36,10 @@ ein_fild01,232,100,25,60	monster	Punk	1199,5,300000,60000,0
 //==================================================
 // ein_fild02 - Campos de Einbroch
 //==================================================
-ein_fild02,105,250,70,80	monster	Driller	1380,10,0,0,0
-ein_fild02,259,269,90,70	monster	Driller	1380,15,0,0,0
-ein_fild02,287,117,55,70	monster	Driller	1380,10,0,0,0
-ein_fild02,108,88,60,60	monster	Driller	1380,10,0,0,0
+ein_fild02,105,250,70,80	monster	Furador	1380,10,0,0,0
+ein_fild02,259,269,90,70	monster	Furador	1380,15,0,0,0
+ein_fild02,287,117,55,70	monster	Furador	1380,10,0,0,0
+ein_fild02,108,88,60,60	monster	Furador	1380,10,0,0,0
 ein_fild02,0,0,0,0	monster	Pungus	1378,30,0,0,0
 ein_fild02,0,0,0,0	monster	Ungoliant	1618,1,75600000,75000000,0
 
@@ -126,7 +126,7 @@ ein_fild08,0,0,0,0	monster	Cogumelo Vermelho	1085,10,120000,60000,0
 // ein_fild09 - Campos de Einbroch
 //==================================================
 ein_fild09,0,0,0,0	monster	Porcellio	1619,70,0,0,0
-ein_fild09,0,0,0,0	monster	Besouro Ladrão	1051,20,0,0,0
+ein_fild09,0,0,0,0	monster	Besouro-Ladrão	1051,20,0,0,0
 ein_fild09,0,0,0,0	monster	Metaling	1613,10,0,0,0
 ein_fild09,100,260,2,2	monster	Ovo de Besouro-Ladrão	1048,3,600000,300000,0
 ein_fild09,0,0,0,0	monster	Planta Vermelha	1078,10,120000,60000,0
@@ -141,8 +141,8 @@ ein_fild10,0,0,0,0	monster	Planta Carnívora	1368,5,0,0,0
 ein_fild10,0,0,0,0	monster	Porcellio	1619,20,0,0,1
 ein_fild10,152,314,130,30	monster	Porcellio	1619,10,0,0,1
 ein_fild10,0,0,0,0	monster	Planta Vermelha	1078,20,120000,60000,0
-ein_fild10,0,0,0,0	monster	Planta Amarelha	1081,20,120000,60000,0
-ein_fild10,0,0,0,0	monster	Planata Azul	1079,20,600000,300000,0
+ein_fild10,0,0,0,0	monster	Planta Amarela	1081,20,120000,60000,0
+ein_fild10,0,0,0,0	monster	Planta Azul	1079,20,600000,300000,0
 ein_fild10,225,95,30,45	monster	Yoyo	1057,6,30000,10000,0
 ein_fild10,320,130,40,40	monster	Yoyo	1057,4,30000,10000,0
 ein_fild10,225,95,30,45	monster	Flora	1118,10,300000,120000,0

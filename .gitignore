@@ -102,6 +102,7 @@
 /vcproj-10/login-server_sql
 /vcproj-10/mapcache
 /vcproj-10/map-server_sql
+/vcproj-10/plugin-sample
 /vcproj-10/*.user
 
 # /vcproj-9/

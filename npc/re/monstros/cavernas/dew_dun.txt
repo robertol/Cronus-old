@@ -3,19 +3,20 @@
 //===== By: ==================================================
 //= Chilly
 //===== Current Version: =====================================
-//= 1.0
+//= 1.1
 //===== Compatible With: =====================================
 //= rAthena SVN
 //===== Description: =========================================
 //= Official kRO monster spawns
 //===== Additional Comments: =================================
 //= 1.0 First Release
+//= 1.1 Traduzido. [mkbu95]
 //============================================================
 
 //==================================================
 // dew_dun01 - Volcanic Island of Krakatoa
 //==================================================
-dew_dun01,0,0,0,0	monster	Ancient Worm	1305,25,0,0,0
+dew_dun01,0,0,0,0	monster	Verme Ancião	1305,25,0,0,0
 dew_dun01,0,0,0,0	monster	Gullinbursti	1311,10,0,0,0
 dew_dun01,0,0,0,0	monster	Comodo	2152,70,0,0,0
 dew_dun01,0,0,0,0	boss_monster	Leak	2156,1,7200000,600000,1

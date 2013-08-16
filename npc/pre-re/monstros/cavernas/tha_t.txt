@@ -57,7 +57,7 @@ tha_t04,0,0,0,0	monster	Mímico Antigo	1699,20,0,0,0
 tha_t04,0,0,0,0	monster	Ancião	1377,20,0,0,0
 tha_t04,0,0,0,0	monster	Barão Coruja	1295,10,0,0,0
 tha_t04,0,0,0,0	monster	Duque Coruja	1320,10,0,0,0
-tha_t04,0,0,0,0	monster	Dama da Guarda	1700,4,1800000,1200000,0
+tha_t04,0,0,0,0	monster	Dama de Guarda	1700,4,1800000,1200000,0
 
 //==================================================
 // tha_t05 - Torre de Thanatos – Andar Superior
@@ -86,7 +86,7 @@ tha_t05,62,63,55,55	monster	Palavra Morta	1698,10,0,0,0
 tha_t05,62,63,55,55	monster	Mímico Antigo	1699,10,0,0,0
 tha_t05,62,63,55,55	monster	Duque Coruja	1320,20,300000,120000,0
 tha_t05,62,63,55,55	monster	Barão Coruja	1295,5,300000,120000,0
-tha_t05,0,0,0,0	monster	Pesar	1707,2,1800000,1200000,0
+tha_t05,0,0,0,0	monster	Pesar de Thanatos	1707,2,1800000,1200000,0
 
 //==================================================
 // tha_t06 - Torre de Thanatos – Andar Superior
@@ -115,7 +115,7 @@ tha_t06,62,63,55,55	monster	Palavra Morta	1698,10,0,0,0
 tha_t06,62,63,55,55	monster	Mímico Antigo	1699,10,0,0,0
 tha_t06,62,63,55,55	monster	Barão Coruja	1295,10,300000,120000,0
 tha_t06,62,63,55,55	monster	Duque Coruja	1320,10,300000,120000,0
-tha_t06,0,0,0,0	monster	Maero	1706,2,1800000,1200000,0
+tha_t06,0,0,0,0	monster	Maero de Thanatos	1706,2,1800000,1200000,0
 
 //==================================================
 // tha_t07 - Torre de Thanatos – Andar Superior
@@ -125,8 +125,8 @@ tha_t07,70,105,40,75	monster	Mímico Antigo	1699,10,300000,120000,0
 tha_t07,70,105,40,75	monster	Lady Solace	1703,7,300000,120000,0
 tha_t07,70,105,40,75	monster	Senhora do Abrigo	1701,7,300000,120000,0
 tha_t07,70,105,40,75	monster	Baronesa da Retribuição	1702,15,0,0,0
-tha_t07,70,105,40,75	monster	Dama da Guarda	1700,7,300000,120000,0
-tha_t07,70,105,40,75	monster	Despero	1705,2,1800000,1200000,0
+tha_t07,70,105,40,75	monster	Dama de Guarda	1700,7,300000,120000,0
+tha_t07,70,105,40,75	monster	Despero de Thanatos	1705,2,1800000,1200000,0
 
 //==================================================
 // tha_t08 - Torre de Thanatos – Andar Superior
@@ -136,8 +136,8 @@ tha_t08,70,105,40,80	monster	Mímico Antigo	1699,10,300000,120000,0
 tha_t08,70,105,40,80	monster	Lady Solace	1703,5,0,0,0
 tha_t08,70,105,40,80	monster	Senhora do Abrigo	1701,5,0,0,0
 tha_t08,70,105,40,80	monster	Baronesa da Retribuição	1702,20,300000,120000,0
-tha_t08,70,105,40,80	monster	Dama da Guarda	1700,5,0,0,0
-tha_t08,70,105,40,80	monster	Odium	1704,2,1800000,1200000,0
+tha_t08,70,105,40,80	monster	Dama de Guarda	1700,5,0,0,0
+tha_t08,70,105,40,80	monster	Odium de Thanatos	1704,2,1800000,1200000,0
 
 //==================================================
 // tha_t09 - Torre de Thanatos – Andar Superior
@@ -146,9 +146,9 @@ tha_t09,50,129,35,35	monster	Plasma	1694,5,0,0,0
 tha_t09,50,129,35,35	monster	Lady Solace	1703,20,600000,0,0
 tha_t09,50,129,35,35	monster	Baronesa da Retribuição	1702,5,420000,0,0
 tha_t09,50,129,35,35	monster	Senhora do Abrigo	1701,5,420000,0,0
-tha_t09,50,129,35,35	monster	Dama da Guarda	1700,5,420000,0,0
-tha_t09,50,129,35,35	monster	Pesar	1707,1,1800000,1200000,0
-tha_t09,50,129,35,35	monster	Pesar	1712,3,1800000,1200000,0
+tha_t09,50,129,35,35	monster	Dama de Guarda	1700,5,420000,0,0
+tha_t09,50,129,35,35	monster	Pesar de Thanatos	1707,1,1800000,1200000,0
+tha_t09,50,129,35,35	monster	Pesar de Thanatos	1712,3,1800000,1200000,0
 
 //==================================================
 // tha_t10 - Torre de Thanatos – Andar Superior
@@ -157,9 +157,9 @@ tha_t10,129,129,35,35	monster	Plasma	1697,5,0,0,0
 tha_t10,129,129,35,35	monster	Baronesa da Retribuição	1702,20,600000,0,0
 tha_t10,129,129,35,35	monster	Lady Solace	1703,5,420000,0,0
 tha_t10,129,129,35,35	monster	Senhora do Abrigo	1701,5,420000,0,0
-tha_t10,129,129,35,35	monster	Dama da Guarda	1700,5,420000,0,0
-tha_t10,129,129,35,35	monster	Maero	1706,1,1800000,1200000,0
-tha_t10,129,129,35,35	monster	Maero	1711,3,1800000,1200000,0
+tha_t10,129,129,35,35	monster	Dama de Guarda	1700,5,420000,0,0
+tha_t10,129,129,35,35	monster	Maero de Thanatos	1706,1,1800000,1200000,0
+tha_t10,129,129,35,35	monster	Maero de Thanatos	1711,3,1800000,1200000,0
 
 //==================================================
 // tha_t11 - Torre de Thanatos – Andar Superior
@@ -168,16 +168,16 @@ tha_t11,50,51,35,35	monster	Plasma	1695,5,0,0,0
 tha_t11,50,51,35,35	monster	Senhora do Abrigo	1701,20,600000,0,0
 tha_t11,50,51,35,35	monster	Lady Solace	1703,5,420000,0,0
 tha_t11,50,51,35,35	monster	Baronesa da Retribuição	1702,5,420000,0,0
-tha_t11,50,51,35,35	monster	Dama da Guarda	1700,5,420000,0,0
-tha_t11,50,51,35,35	monster	Despero	1705,1,1800000,1200000,0
-tha_t11,50,51,35,35	monster	Despero	1710,3,1800000,1200000,0
+tha_t11,50,51,35,35	monster	Dama de Guarda	1700,5,420000,0,0
+tha_t11,50,51,35,35	monster	Despero de Thanatos	1705,1,1800000,1200000,0
+tha_t11,50,51,35,35	monster	Despero de Thanatos	1710,3,1800000,1200000,0
 
 //==================================================
 // tha_t12 - Torre de Thanatos – Andar Superior
 //==================================================
 tha_t12,129,51,35,35	monster	Plasma	1693,5,0,0,0
-tha_t12,129,51,35,35	monster	Dama da Guarda	1700,13,600000,0,0
+tha_t12,129,51,35,35	monster	Dama de Guarda	1700,13,600000,0,0
 tha_t12,129,51,35,35	monster	Lady Solace	1703,5,420000,0,0
 tha_t12,129,51,35,35	monster	Senhora do Abrigo	1701,5,420000,0,0
 tha_t12,129,51,35,35	monster	Baronesa da Retribuição	1702,5,420000,0,0
-tha_t12,129,51,35,35	monster	Odium	1709,4,1800000,1200000,0
+tha_t12,129,51,35,35	monster	Odium de Thanatos	1709,4,1800000,1200000,0

@@ -83,7 +83,7 @@ gef_fild03,44,133,3,3	monster	Planta Verde	1080,1,180000,90000,1
 // gef_fild04 - Arredores de Geffen
 //==================================================
 gef_fild04,0,0,0,0	monster	Poring	1002,30,0,0,0
-gef_fild04,0,0,0,0	monster	Chonchon	1011,30,0,0,0
+gef_fild04,0,0,0,0	monster	ChonChon	1011,30,0,0,0
 gef_fild04,0,0,0,0	monster	Pupa	1008,60,0,0,0
 gef_fild04,0,0,0,0	monster	Fabre	1007,20,0,0,0
 gef_fild04,0,0,0,0	monster	Sapo de Rodda	1012,20,0,0,0
@@ -128,7 +128,7 @@ gef_fild06,0,0,0,0	monster	Planta Brilhante	1083,4,1800000,900000,1
 // gef_fild07 - Arredores de Geffen
 //==================================================
 gef_fild07,0,0,0,0	monster	Poring	1002,20,0,0,0
-gef_fild07,0,0,0,0	monster	Chonchon	1011,30,0,0,0
+gef_fild07,0,0,0,0	monster	ChonChon	1011,30,0,0,0
 gef_fild07,0,0,0,0	monster	Pupa	1008,10,0,0,0
 gef_fild07,0,0,0,0	monster	Fabre	1007,60,0,0,0
 gef_fild07,122,221,0,0	monster	Planta Verde	1080,3,360000,180000,1
@@ -143,7 +143,7 @@ gef_fild08,0,0,0,0	monster	Cobold	1133,20,0,0,0
 gef_fild08,0,0,0,0	monster	Cobold	1134,40,0,0,0
 gef_fild08,0,0,0,0	monster	Cobold	1135,20,0,0,0
 gef_fild08,0,0,0,0	monster	Golem	1040,40,0,0,0
-gef_fild08,0,0,0,0	monster	Chonchon de Aço	1042,20,0,0,0
+gef_fild08,0,0,0,0	monster	ChonChon de Aço	1042,20,0,0,0
 gef_fild08,0,0,0,0	monster	Esporo Venenoso	1077,20,0,0,0
 gef_fild08,65,341,0,0	monster	Planta Azul	1079,1,900000,450000,1
 gef_fild08,111,319,0,0	monster	Planta Azul	1079,1,900000,450000,1
