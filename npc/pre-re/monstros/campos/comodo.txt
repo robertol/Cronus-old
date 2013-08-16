@@ -42,7 +42,7 @@ cmd_fild02,93,82,40,80	monster	Molusco	1074,5,180000,0,0
 cmd_fild02,0,0,0,0	monster	Yakuza	1313,1,0,0,0
 cmd_fild02,200,130,150,40	monster	Foca	1317,18,0,0,0
 cmd_fild02,93,82,40,80	monster	Foca	1317,2,180000,0,0
-cmd_fild02,0,0,0,0	monster	Galápago	1391,20,0,0,0
+cmd_fild02,0,0,0,0	monster	Pingu	1391,20,0,0,0
 
 //==================================================
 // cmd_fild03 - Mangue Zenhai

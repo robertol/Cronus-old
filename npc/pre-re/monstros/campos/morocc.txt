@@ -21,7 +21,7 @@
 //==================================================
 // moc_fild01 - Deserto Sograt
 //=================================================
-moc_fild01,0,0,0,0	monster	Filhote de Lobo	1107,70,0,0,0
+moc_fild01,0,0,0,0	monster	Filhote de Lobo do Deserto	1107,70,0,0,0
 moc_fild01,0,0,0,0	monster	Ovo de Andre	1097,20,0,0,0
 moc_fild01,0,0,0,0	monster	Ovo de PecoPeco	1047,20,0,0,0
 moc_fild01,0,0,0,0	monster	Picky	1049,10,0,0,0
@@ -32,7 +32,7 @@ moc_fild01,194,51,10,10	monster	Planta Amarela	1081,10,900000,450000,1
 //==================================================
 // moc_fild02 - Deserto Sograt
 //==================================================
-moc_fild02,0,0,0,0	monster	PecoPeco	1019,70,0,0,0
+moc_fild02,0,0,0,0	monster	Peco Peco	1019,70,0,0,0
 moc_fild02,0,0,0,0	monster	Ovo de Andre	1097,10,0,0,0
 moc_fild02,0,0,0,0	monster	Ovo de PecoPeco	1047,40,0,0,0
 moc_fild02,0,0,0,0	monster	Picky	1049,10,0,0,0
@@ -319,7 +319,7 @@ moc_fild20,0,0,0,0	monster	Sombra da Ira	1921,1,30000,0,0
 // moc_fild21 - Ruptura Dimensional
 //==================================================
 moc_fild21,0,0,0,0	monster	Golem	1040,61,0,0,0
-moc_fild21,0,0,0,0	monster	Golem Estalactítico	1278,46,0,0,0
+moc_fild21,0,0,0,0	monster	Golem Estalactitico	1278,46,0,0,0
 moc_fild21,0,0,0,0	monster	Golem de Lava	1366,46,0,0,0
 moc_fild21,0,0,0,0	monster	Sombra da Inveja	1918,46,30000,0,0
 moc_fild21,0,0,0,0	monster	Sombra da Gula	1919,46,30000,0,0

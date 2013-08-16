@@ -66,8 +66,8 @@ hu_fild03,231,151,3,3	monster	Cogumelo Negro	1084,2,300000,0,0
 //==================================================
 hu_fild04,0,0,0,0	monster	Breeze	1692,20,0,0,0
 hu_fild04,0,0,0,0	monster	Exterminador	1384,10,420000,24000,0
-hu_fild04,0,0,0,0	monster	Exterminador	1385,10,420000,240000,0
-hu_fild04,0,0,0,0	monster	Petite Terrestre	1155,10,0,0,0
+hu_fild04,0,0,0,0	monster	Deletério	1385,10,420000,240000,0
+hu_fild04,0,0,0,0	monster	Petite	1155,10,0,0,0
 hu_fild04,0,0,0,0	monster	Petite Voador	1156,60,0,0,0
 hu_fild04,0,0,0,0	monster	Novus	1715,20,0,0,0
 hu_fild04,0,0,0,0	monster	Novus	1718,10,0,0,0
@@ -125,8 +125,8 @@ hu_fild06,234,251,14,120	monster	Planta Amarela	1081,10,600000,0,0
 //==================================================
 hu_fild07,0,0,0,0	monster	Breeze	1692,10,0,0,0
 hu_fild07,0,0,0,0	monster	Exterminador	1384,10,420000,24000,0
-hu_fild07,0,0,0,0	monster	Exterminador	1385,10,420000,240000,0
-hu_fild07,0,0,0,0	monster	Petite Terrestre	1155,60,0,0,0
+hu_fild07,0,0,0,0	monster	Deletério	1385,10,420000,240000,0
+hu_fild07,0,0,0,0	monster	Petite	1155,60,0,0,0
 hu_fild07,0,0,0,0	monster	Petite Voador	1156,20,0,0,0
 hu_fild07,0,0,0,0	monster	Novus	1715,10,0,0,0
 hu_fild07,0,0,0,0	monster	Novus	1718,10,0,0,0
