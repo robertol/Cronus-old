@@ -1107,48 +1107,48 @@ jawaii_in,43,115,0	script	Cliente#jaw_1	97,{
 		if (zeny > 99) {
 			mes "[Buchi]";
 			mes "Grrrr...";
-			mes "Damn! I don't";
-			mes "like this place!";
-			mes "I don't like this at all!";
+			mes "Maldição eu não";
+			mes "gosto deste lugar!";
+			mes "Eu não gosto disso!";
 			next;
 			mes "[Buchi]";
-			mes "I can't believe my eyes! Everyone else looks disgustingly happy! It makes me feel so miserable!";
-			mes "You agree, don't you?!";
+			mes "Eu não posso acreditar em meus olhos! todo mundo me olha tão feliz isso faz me sentir tão miserável!";
+			mes "você concorda não é?!";
 			next;
 			mes "[Buchi]";
 			mes "Grrrr...";
 			mes "Bartender!";
-			mes "Give me one more!";
+			mes "Me ve mais uma!";
 		}
 		mes "[Buchi]";
-		mes "Hey, why aren't you drinking?";
-		mes "I guess you're all out of dough.";
-		mes "But I know how you feel. Disgusted with all the lovey dovey around this place, aren't you?";
+		mes "Ei, porque você não está bebendo?";
+		mes "Eu acho que você é tudo de bom.";
+		mes "Mas eu sei como você se sente Desgostoso com todo o Lovey Dovey em torno deste lugar, você não está?";
 		next;
 		mes "[Buchi]";
 		mes "Heh.";
-		mes "Lemme buy";
-		mes "you a drink!";
+		mes "Deixe-me comprar";
+		mes "uma bebida";
 		next;
 		mes "[Buchi]";
-		mes "Drink this at once, and forget about your miserable life! Cheer up, you got the whole future ahead of you and a drink in front of you! Come on, now~!";
+		mes "Beba isso de uma vez, e esqueça sua vida miserável. Anime-se, você tem todo o futuro pela frente e uma bebida na frente de você Vamos, agora ~!";
 		next;
 		mes "^3355FFHe ordered a JJ special for me.^000000";
 		next;
 		mes "["+ strcharinfo(0) +"]";
-		mes "Damn...!";
-		mes "Damn! I will be";
-		mes "the one who laughs last!";
+		mes "Droga...";
+		mes Droga eu vou ser!";
+		mes "quem ri por último!";
 		next;
 		mes "^3355FFYou drank to your fill.^000000";
 		close;
 		percentheal -100,0;
 	}
 	mes "[Buchi]";
-	mes "You look happy...";
-	mes "I hope you'll be";
-	mes "able to feel that";
-	mes "way forever...";
+	mes "Você parece feliz ...";
+	mes "Espero que você seja";
+	mes "capaz de sentir  isto";
+	mes "assim para sempre ...";
 	mes " ";
 	mes "^666666*Hiccup...!*^000000";
 	close;
@@ -1158,46 +1158,46 @@ jawaii_in,41,106,3	script	Cliente#Cage	98,{
 	mes "[Cage]";
 	if (getpartnerid()) {
 		mes "....Bah!";
-		mes "What are you so happy about?";
-		mes "After all, everyone knows marriage is a sham for desperate, lonely people!";
+		mes "Porque você está tão feliz?";
+		mes "Afinal de contas, todo mundo sabe que o casamento é uma farsa para desesperadas, pessoas solitárias!";
 		next;
 		mes "[Cage]";
 		if (sex) {
-			mes "I don't trust anybody!";
-			mes "You're a fool for chaining";
-			mes "yourself to some gorgeous";
-			mes "woman for life!";
-			mes "You hear me?!";
-			mes "A FOOL!";
+			mes "eu não confio em ninguém!";
+			mes "Você é um tolo por encadeamento";
+			mes "se ha algumas lindas";
+			mes "mulheres da vida";
+			mes "Você está me ouvindo?";
+			mes "UM TOLO";
 		}
 		else {
-			mes "Look at you!";
-			mes "You're a fool for";
-			mes "chaining yourself to";
-			mes "some pretty boy for life!";
-			mes "You hear me?! A FOOL!";
+			mes "Olhe para você!";
+			mes "Você é um tolo por";
+			mes "encadeamento";
+			mes "algum menino bonito para a vida!";
+			mes "Você está me ouvindo? UM TOLO!";
 		}
 		next;
 		mes "[Cage]";
-		mes "The single life is";
-		mes "what it's all about!";
-		mes "Women may break my";
-		mes "spirit, but they'll never take...";
-		mes "MY FREEDOM!";
+		mes "A vida de solteiro é";
+		mes "que é tudo";	
+		mes "As mulheres podem quebrar o meu";
+		mes "espírito, mas eles nunca vão ter ...";
+		mes "MINHA LIBERDADE!";
 		close;
 	}
-	mes "Drink, drink...!!";
-	mes "Eat, eat...!!";
-	mes "Join me,";
-	mes "my brother";
-	mes "in singlehood!";
+	mes "Beber, beber ...!";
+	mes "Comer, comer ...!";
+	mes "Irei me juntar,";
+	mes "ao meu irmão";
+	mes "em singlehood!";
 	next;
 	mes "[Cage]";
-	mes "We are free...!";
-	mes "We are free from";
-	mes "the hell of marriage...!";
-	mes "We are the sincere and";
-	mes "competent singles...!";
+	mes "Somos livres! ...";
+	mes "Nós somos livres do";
+	mes "inferno do casamento ...";
+	mes "Nós somos solteiros";
+	mes "sinceros e competentes ...";
 	close;
 }
 
@@ -1206,64 +1206,64 @@ jawaii_in,41,106,3	script	Cliente#Cage	98,{
 prt_in,173,13,4	script	Cliente#SoloHan	86,{
 	mes "[SoloHan]";
 	if (!getpartnerid()) {
-		mes "Oh man...";
-		mes "I think I'm drunk~";
-		mes "^666666*Hiccup...!*^000000";
+		mes "Oh homem ...";
+		mes "Acho que estou bêbado";
+		mes "^666666 *Soluço ... *^000000";
 		next;
 		mes "[SoloHan]";
-		mes "Hey, you...!";
-		mes "You understand, don't you?!";
-		mes "Aren't you upset looking at all these happily married couples?!";
-		mes "Yeah~? Me too!";
+		mes "Ei, você! ...";
+		mes "Você entende, não é?";
+		mes "Você não está chateado olhando para todos esses casais felizes?";
+		mes "Sim! ~ Eu também!";
 		next;
 		mes "[SoloHan]";
-		mes "How dare they show off their happiness in front of people like us--!! ^666666*Sniff*^000000 Just because they found everlasting love, they think they're better than we are?!";
+		mes "Como eles ousam mostrar a sua felicidade na frente de pessoas como nós - ^ 666666 * Sniff * ^ 000000 Só porque eles encontraram o amor eterno, eles pensam que são melhores do que somos!!";
 		next;
 		mes "[SoloHan]";
-		mes "I remember when couples were polite and were lovey dovey behind closed doors. Nowadays they hold hands, and even cuddle in public. I mean, come on! Get a room!";
+		mes "eu me lembro de quando os casais foram educados e foram a  Dovey com portas fechadas Hoje em dia eles dão as mãos, e até mesmo se abraçam em público, quero dizer, vão para um quarto!";
 		next;
 		mes "[SoloHan]";
-		mes "I mean, ^666666*Sniff*^000000, it's not like,";
-		mes "I'm lonely or anything. I don't neeeeeeeed a woman~!";
-		mes "Right, Bachewcca!";
+		mes "Quer dizer, ^ 666666 * Sniff * ^ 000000, não é assim,";
+		mes "Estou sozinho ou qualquer coisa que eu não precise de uma mulher ~.";
+		mes "Certo,Bachewcca!";
 		next;
 		mes "[Bachewcca]";
 		mes "...!";
 		emotion e_no1,0,"Customer#Bachewcca";
 		next;
 		mes "[SoloHan]";
-		mes "It's doesn't really matter whether you're married";
-		mes "or not, right buddy? Right?!";
-		mes "Come on! Drink with me!!";
+		mes "Realmente não importo se você é casado";
+		mes "ou não, amigo, certo?!";
+		mes "Vamos beber comigo!";
 		next;
-		mes "^3355FFSuddenly he treated me as a close friend. It's a little embarassing, but it's not a bad idea to accept";
-		mes "a free drink...^000000";
+		mes "^3355FFSuddenly ele me tratou como um amigo próximo. um pouco estranho, mas não é uma má idéia para aceitar.";
+		mes "uma bebida livre ... ^000000";
 		next;
 		mes "^3355FF* Gulp Gulp Gulp *^000000";
 		percentheal -10,0;
 		next;
 		set .@jaw_roof,1;
 		mes "[SoloHan]";
-		mes "So, what do you say?";
-		mes "Let's go somewhere";
-		mes "with some real liquor.";
+		mes "Então, o que você diria?";
+		mes "Vamos para outra";
+		mes "com algum licor real.";
 		while (1) {
 			next;
-			if (select("...One more drink.:...What kind of place is it?") == 1) {
+			if (select("... Só mais uma bebida:. ... Que tipo de lugar é esse?") == 1) {
 				mes "[SoloHan]";
-				mes "Yeah~!";
-				mes "That's the spirit!";
-				mes "Hey, Bachewcca...";
-				mes "Let's drink!";
+				mes "SIIM~";
+				mes "Esse é o espírito!";
+				mes "Ei, Bachewcca ...";
+				mes "Vamos beber!";
 				next;
 				mes "[Bachewcca]";
 				mes "^666666*Grunt!*^000000";
 				specialeffect EF_TALK_SCREAM,AREA,"Customer#Bachewcca";
 				next;
 				mes "[SoloHan]";
-				mes "To...";
-				mes "To being single!";
-				mes "F-Forever!!!";
+				mes "Para ...";
+				mes "Para ser único";
+				mes "S-Sempre";
 				next;
 				mes "^3355FF* Gulp Gulp Gulp *^000000";
 				percentheal -10,0;
@@ -1271,27 +1271,27 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 				set .@jaw_roof,.@jaw_roof+2;
 				mes "[SoloHan]";
 				if (.@jaw_roof > 8) {
-					mes "Whoa...";
-					mes "You alright?";
-					mes "You seem kind of drunk...";
+					mes "Uau ...";
+					mes "Você está bem?";
+					mes "Você parece bêbado ...";
 					next;
 					mes "[SoloHan]";
-					mes "I guess now's the perfect time to have you sign this! Don't worry, I'll send you straight to paradise!";
+					mes "Eu acho que agora é o momento perfeito para você assinar isso! Não se preocupe,  eu vou mandar você direto para o paraíso!";
 					next;
-					if (select("Sign:Refuse to Sign") == 1) {
+					if (select("Assinar:Se Recusar a Assinar") == 1) {
 						mes "[SoloHan]";
-						mes "Alright!";
-						mes "Take care!";
-						mes "Hahaha!";
+						mes "Tudo bem!";
+						mes "Tome cuidado!";
+						mes "HAHAHAHA";
 						close2;
 						percentheal 100,0;
 						break;
 					}
 					mes "[SoloHan]";
 					mes "Oh...";
-					mes "Man.";
-					mes "So, you spoil parties";
-					mes "like this all the time, eh?";
+					mes "Homem".;
+					mes "Então, você prejudica as partes";
+					mes  "assim o tempo todo, né?";
 					close2;
 					end;
 				}
@@ -1299,35 +1299,35 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 			if (.@jaw_roof > 6) {
 				mes "[SoloHan]";
 				mes "^666666*Hiccup!*^000000";
-				mes "So you feel like having some";
-				mes "real fun? Okay, then just sign over here. Count on me, I'll send you to paradise.";
+				mes "Assim que você sentir vontade de ter alguma";
+				mes "verdadeira diversão, então,  é só assinar aqui e Conte comigo, vou mandá-lo para o paraíso.";
 				next;
-				if (select("Sign:Refuse to Sign") == 1) {
+				if (select("Assinar:Se Recusar a Assinar") == 1) {
 					mes "[SoloHan]";
-					mes "Alright~!";
-					mes "Take care and have fun!";
-					mes "Harass some couples over there for me, will you?";
+					mes "Tudo bem!";
+					mes "Tome cuidado e divirta-se!";
+					mes "Assedie alguns casais lá para mim, vai?"; 
 					close2;
 					percentheal 100,0;
 					break;
 				}
 				mes "[SoloHan]";
 				mes "Oh...";
-				mes "Man.";
-				mes "No wonder you're single. You can't even recognize a good time when it's right in front of you.";
+				mes "Homem".;
+				mes "Não me admira que você é único. Você não consegue saber o bom tempo nem quando ele está bem na sua frente.".;
 				close2;
 				end;
 			}
 			set .@jaw_roof,.@jaw_roof+3;
 			mes "[SoloHan]";
-			mes "Drink, drink!";
-			mes "That's not enough!";
-			mes "Drink more, buddy!";
+			mes "Beba, beba!";
+			mes "Isso não é suficiente!";
+			mes "Beba mais, amigo!";
 			next;
 			mes "[SoloHan]";
-			mes "To...";
-			mes "To being single!";
-			mes "FOR EVER.";
+			mes "Para ...";
+			mes "Para ser único";
+			mes "Sempre".;
 			next;
 			mes "^3355FF*Gulp Gulp Gulp*^000000";
 			percentheal -10,0;
@@ -1337,43 +1337,43 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 		end;
 	}
 	else if (getpartnerid()) {
-		mes "Oh man...";
-		mes "I think I'm drunk~";
-		mes "*Hiccup!*";
+		mes "Oh homem ...";
+		mes "Acho que to bêbado";
+		mes "*Soluço*";
 		next;
 		mes "[SoloHan]";
-		mes "...Wha!?";
-		mes "Oh man!";
-		mes "Get outta my face!";
+		mes "... O quê?";
+		mes "Oh homem!";
+		mes "Saia da minha frente!";
 		if (sex) {
-			mes "You smell like,";
-			mes "whupped boyfriend";
-			mes "or something!";
+			mes "Você cheira como,";
+			mes "um homem namorado";
+			mes "ou algo assim!";	
 		}
 		else {
 			next;
 			mes "[SoloHan]";
-			mes "I think I know a naggy wife";
-			mes "when I see one! Go boss your";
-			mes "hubby around or something!";
+			mes "Acho que sei a esposa naggy";
+			mes "quando vejo um! Vá ao seu patrão";
+			mes "o marido volta ou algo assim!";
 		}
 		next;
 		mes "[SoloHan]";
-		mes "Leave me alone!";
-		mes "I don't want any of your marital bliss to rub off on me. Come on, Bachewcca! Tell 'em their kind ain't welcome here!";
+		mes "Deixe-me em paz!";
+		mes "Eu não quero que nada de sua felicidade conjugal venha passar para mim, Bachewcca Diga a eles que a sua espécie não é bem-vinda aqui.!";
 		next;
 		mes "[Bachewcca]";
 		mes "^666666*Grrr...!*^000000";
 		specialeffect EF_THROWITEM,AREA,"Customer#Bachewcca";
 		close;
 	}
-	mes "Oh man...";
-	mes "I think I'm drunk~";
+	mes "Oh homem ...";
+	mes "Acho que estou bêbado";
 	mes "^666666*Hiccup!*^000000";
 	next;
 	mes "[SoloHan]";
-	mes "What is that...?";
-	mes "Is this the third time this week I've gotten plastered? Bachewcca, help me count!";
+	mes "O que é isso? ...";
+	mes "Esta é a terceira vez nesta semana eu comecei rebocada? Bachewcca me ajude contar!
 	close;
 }
 	
@@ -1381,7 +1381,7 @@ prt_in,170,14,0	script	Cliente#Bachewcca	89,{
 	mes "[Bachewcca]";
 	mes "..............";
 	mes "^666666*Gulp....gulp...*^000000";
-	mes "Grrrrr!! That hit the spot!";
+	mes "Grrrrr que atingiram o local!";
 	emotion e_sob;
 	close;
 }
@@ -1390,53 +1390,53 @@ prt_in,170,14,0	script	Cliente#Bachewcca	89,{
 //============================================================
 -	script	::Honeymoon_Helper_Izlude	-1,{
 	mes "[Helper]";
-	mes "Newlyweds and";
-	mes "long time couples...";
-	mes "We invite you to Jawaii,";
-	mes "the honeymoon resort!";
+	mes "Newlyweds e";
+	mes "casais	ha muito tempo ...";
+	mes "Nós convidamos vocês a Jawaii,";
+	mes "o resort lua de mel!";
 	next;
-	switch(select("Jawaii?:Let's go to Jawaii~!:Cancel.")) {
+	switch(select("Jawaii?:Vamos Jawaii~!:Cancel.")) {
 	case 1:
 		mes "[Helper]";
-		mes "There is an island far, far away from the Rune-Midgard continent.";
-		mes "It is a very quiet and beautiful island resort that only opens";
-		mes "its doors to couples.";
+		mes "Há uma ilha distante, muito distante do continente de Rune-Midgard.";
+		mes "É muito bonita e tranquila uma ilha resort que só abre";
+		mes "suas portas para casais.";
 		next;
 		mes "[Helper]";
-		mes "This is an exclusive travel offer to the special honeymoon resort for Rune-Midgard's citizens. The price, 100,000 zeny, may be expensive, but you really get what you pay for.";
+		mes "Esta é uma oferta de viagem exclusiva para o resort especial de lua de mel para os cidadãos de Rune-Midgard O preço, 100.000 zeny, pode ser caro, mas você realmente usufrui o que você paga.".;
 		next;
 		mes "[Helper]";
-		mes "I guarantee you that some of";
-		mes "the happiest moments you can";
-		mes "experience in your marriage will be on this island. Can you really put a price on that?";
+		mes "Eu garanto a você que alguns dos";
+		mes "os momentos mais felizes que você pode";
+		mes "te de experiência em seu casamento será nesta ilha você pode realmente colocar um preço sobre isso.";
 		close;
 
 	case 2:
 		mes "[Helper]";
 		if (!getpartnerid()) {
 			mes "Errm...";
-			mes "Unfortunately, singles are not allowed on the island. Why don't you go forget your loneliness in the Prontera pub?";
+			mes "Infelizmente, solteiros não são permitidos na ilha Por que não vao esquecer sua solidão no pub de Prontera.";
 			close;
 		}
 		else if (zeny > 99999) {
 			set zeny,zeny-100000;
-			mes "Bon Voyage...!!";
-			mes "Let me guide";
-			mes "you to 'Jawaii!'";
+			mes "Boa viagem!!!!...!!";
+			mes "Deixe-me guiar";
+			mes "você para	Jawaii!'";
 			close2;
 			warp "jawaii",245,125;
 			end;
 		}
-		mes "As I explained, you must have 100,000 zeny in order to visit Jawaii. Why don't you ask your partner for help in gathering the zeny for this trip?";
+		mes "Como eu expliquei, você deve ter 100.000 zeny para visitar Jawaii Por que não pedi ao seu parceiro para lhe ajudar na recolha de zenys para esta viagem.";
 		close;
 
 	case 3:
 		mes "[Helper]";
-		mes "There's there no better way to share special, secluded moments with your beloved than through";
-		mes "a secret trip to a remote, exotic area.";
+		mes "Não há maneira melhor para compartilhar, momentos isolados especiais com seu amado do que através de";
+		mes "uma viagem secreta a uma área remota,super	exótico.";
 		next;
 		mes "[Helper]";
-		mes "A vacation in Jawaii could very well be the greatest gift that you could give to the one you love~";
+		mes "Umas férias em Jawaii podem	muito bem ser o maior presente que você poderia dar para quem você ama";
 		close;
 	}
 }
