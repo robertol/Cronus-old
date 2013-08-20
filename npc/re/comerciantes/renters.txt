@@ -117,65 +117,65 @@ prontera,130,213,5	script	Riding Creature Master	105,{
 //============================================================
 prontera,125,208,5	script	Removedor de Peco Peco	105,{
 	mes "[Soldado]";
-	mes "Se voc√™ √© incapaz de desmontar de um Peco Peco";
-	mes "por alguma raz√£o desconhecida,";
-	mes "Por favor, sinta-se a vontade para usar os meus servi√ßos.";
+	mes "Se vocÍ È incapaz de desmontar de um Peco Peco";
+	mes "por alguma raz„o desconhecida,";
+	mes "Por favor, sinta-se a vontade para usar os meus serviÁos.";
 	if (checkriding()) {
 		next;
 		mes "[Soldado]";
-		mes "Voc√™ est√° montando um Peco Peco.";
+		mes "VocÍ est· montando um Peco Peco.";
 		mes "Gostaria de desmontar?";
 		next;
 		switch(select("Yes:No")) {
 		case 1:
 			setriding 0;
 			mes "[Soldado]";
-			mes "Diga-me, como voc√™ se sente";
-			mes "Pisando a terra com seus pr√≥prios p√©s";
+			mes "Diga-me, como vocÍ se sente";
+			mes "Pisando a terra com seus prÛprios pÈs";
 			close;
 		case 2:
 			mes "[Soldado]";
-			mes "Por favor n√£o hesite em perguntar se mudar de id√©ia";
+			mes "Por favor n„o hesite em perguntar se mudar de idÈia";
 			close;
 		}
 	}
 	close;
 }
 
-// Mestre da Engrenagem M√°gica
+// Mestre da Engrenagem M·gica
 //============================================================
-prontera,163,178,4	script	Mestre da Engrenagem M√°gica	105,{
-	mes "[Mestre de Materiais M√°gicos]";
+prontera,163,178,4	script	Mestre da Engrenagem M·gica	105,{
+	mes "[Mestre de Materiais M·gicos]";
 	if (Class == Job_Mechanic || Class == Job_Mechanic_T || Class == Job_Baby_Mechanic) {
-		mes "Bem-vindo. Gostaria de alugar um material m√°gico?";
+		mes "Bem-vindo. Gostaria de alugar um material m·gico?";
 		next;
 		switch(select("Yes:No")) {
 		case 1:
 			if (!getskilllv("NC_MADOLICENCE")) {
-				mes "[Mestre da Engrenagem M√°gica]";
-				mes "Por favor, aprenda como usar uma engrenagem m√°gica primeiro.";
+				mes "[Mestre da Engrenagem M·gica]";
+				mes "Por favor, aprenda como usar uma engrenagem m·gica primeiro.";
 				close;
 			}
 			else if (checkmadogear()) {
-				mes "[Mestre da Engrenagem M√°gica]";
-				mes "Voc√™ j√° tem uma engrenagem m√°gica.";
+				mes "[Mestre da Engrenagem M·gica]";
+				mes "VocÍ j· tem uma engrenagem m·gica.";
 				close;
 			}
 			else if(ismounting()) {
-				mes "[Mestre da Engrenagem M√°gica]";
+				mes "[Mestre da Engrenagem M·gica]";
 				mes "Por favor, remova seu dinheiro.";
 				close;
 			}
 			setmadogear;
 			close;
 		case 2:
-			mes "[Mestre da Engrenagem M√°gica]";
-			mes "Eu vejo. Ent√£o, um grande dia.";
+			mes "[Mestre da Engrenagem M·gica]";
+			mes "Eu vejo. Ent„o, um grande dia.";
 			close;
 		}
 	}
-	mes "Em que posso ajud√°-lo?";
-	mes "As engrenagem m√°gica est√£o dispon√≠veis apenas para Mec√¢nico.";
+	mes "Em que posso ajud·-lo?";
+	mes "As engrenagem m·gica est„o disponÌveis apenas para Mec‚nico.";
 	close;
 	
 }
