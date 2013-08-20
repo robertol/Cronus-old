@@ -1,17 +1,18 @@
-//===== Hercules Script ======================================
-//= Valentine Event Script
-//===== By: ==================================================
+//===== Cronus Script ======================================
+//= Script Dia dos Namorados
+//===== Por: ==================================================
 //= Muad_Dib (Prometheus Project)
-//===== Current Version: =====================================
-//= 1.1
-//===== Description: =========================================
+//===== Versão Atual: =====================================
+//= 1.3
+//===== Descrição: =========================================
 //
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 07/06/05 : Added 1st Version. [Muad_Dib]
 //= 08/28/05 : Ver. 1.01 Added a missing close; [Muad_Dib]
 //= Converted to rAthena format by Dr.Evil
 //= 1.1 Cleaning. [Euphy]
 //= 1.2 Traduzido. [Linne Ribeiro]
+//= 1.3 Revisado [BOO]
 //============================================================
 
 // Stephen - Valentine Evento Vendedor de Chocolates
@@ -19,22 +20,22 @@
 alberta,26,243,4	script	Stephen	58,{
 	mes "[Stephen]";
 	mes "Adivinha o que eu tenho?";
-	mes "Um deleite saboroso não é facilmente encontrado em Rune-Midgard ....";
+	mes "Um Chocolate saboroso não é facilmente encontrado em Rune-Midgard ....";
 	next;
 	mes "[Stephen]";
 	mes "Chocolate!";
-	mes "Isso mesmo, você gosta de chocolate? .... Eu faço.";
-	mes "E você está na sorte, porque eu estou vendendo por apenas 5.000 zeny um pedaço!";
+	mes "Isso mesmo, você não gosta de chocolate? .... Eu gosto.";
+	mes "E você está com sorte, porque eu estou vendendo por apenas 5.000 zeny cada pedaço!";
 	next;
 	if(select("Eu quero um pouco de chocolate!:Não, obrigado.")==2) {
 		mes "[Stephen]";
 		mes "Você não quer chocolate?";
 		mes "Eu estou te dizendo! Você vai se arrepender!";
-		mes "É melhor ter algum agora ... você não vai se deparar com Chocolate como este nunca mais!";
-		mes "Pense sobre isso e me visitar novamente algum dia.";
+		mes "É melhor ter algum agora ... você não vai se deparar com um Chocolate como este nunca mais!";
+		mes "Pense sobre isso e venha me visitar novamente algum dia.";
 		close; }
 	mes "[Stephen]";
-	mes "Hah!";
+	mes "Haha!";
 	mes "Eu sabia!";
 	mes "Mas eu não posso vender-lhe mais do que 5 de uma vez ... Mas, se você realmente precisa de mais ....";
 	mes "você pode voltar.";
@@ -47,14 +48,14 @@ alberta,26,243,4	script	Stephen	58,{
 		mes "Sinto muito, mas não posso dar-lhe muitos.";
 		close; }
 	if (Zeny < .@i*5000) {
-		mes "Sinto muito, mas parece que você não pode dar ao luxo de comprá-los de mim.";
+		mes "Sinto muito, mas parece que você não tem recursos para comprá-los de mim.";
 		close; }
 	set Zeny, Zeny - .@i*5000;
 	getitem 558,.@i;
-	mes "Parabens "+strcharinfo(0)+" !";
-	mes "Você pode dar isso a alguém como um presente, ou divertir-se!";
-	mes "Mmm ... doce de chocolate ...";
-	mes "Visite-me a qualquer hora! ...";
+	mes "Aqui Está!";
+	mes "Você pode dar isso a alguém como um presente, ou desfrutar-se!";
+	mes "Mmm ... doce chocolate ...";
+	mes "Visite-me qualquer hora! ...";
 	close;
 }
 
@@ -62,23 +63,23 @@ alberta,26,243,4	script	Stephen	58,{
 //============================================================
 alberta,29,243,4	script	Jainie	53,{
 	mes "[Jainie]";
-	mes "Você sabia?. Que o chocolate que meu namorado vende são de mim!";
-	mes "Eu os fiz sozinha.";
+	mes "Você sabia? Os Chocolates que meu namorado vende são de minha autoria!";
+	mes "Eu mesma quem fiz.";
 	next;
 	mes "[Jainie]";
-	mes "Você sabe ... Em alguns países, há uma tradição de apresentar chocolates para uma pessoa que você ama ...";
+	mes "Você sabe ... Em alguns países, há uma tradição de presentar com chocolates uma pessoa que você ama ...";
 	mes "Essa tradição se chama ^3355FFDia dos Namorados^000000.";
 	next;
 	mes "[Jainie]";
-	mes "Então, dei-lhe o meu delicioso chocolate ...";
+	mes "Então, eu dei a ele o meu delicioso chocolate ...";
 	mes "E então ele me fez cozinhar muito mais ...";
-	mes "E agora ele vendê a todos.";
+	mes "E agora ele vende a todos.";
 	mes "Eu acho que ele realmente gostou";
-	mes "E, eu me sinto bem quando as pessoas compram algo que eu fiz.";
+	mes "Mas, eu me sinto bem quando as pessoas compram algo que eu fiz.";
 	next;
 	mes "[Jainie]";
 	mes "Seria ótimo se você compra-se alguns também ...";
-	mes "Eu estarei fazendo chocolates por um tempo assim ...";
+	mes "Eu estarei fazendo chocolates por enquanto ...";
 	close;
 }
 
@@ -88,9 +89,9 @@ prt_castle,54,34,4	script	Carl Orleans	47,{
 	mes "[Carl Orleans]";
 	mes "Sim?";
 	next;
-	if(select("Eu quero uma mão feita de chocolate ...:Estou perdido, desculpe incomodá-lo.")==2) {
+	if(select("Eu quero um chocolate caseiro...:Estou perdido, desculpe incomodá-lo.")==2) {
 		mes "[Carl Orleans]";
-		mes "Oh ... bem, se você quiser fazer um pouco da minha mão especial Feito Chocolate ....";
+		mes "Oh ... bem, se você quiser que eu faça alguns de meus chocolates...";
 		mes "Você terá que me dar pelo menos ^0000FF 3 Chocolates^000000.";
 		next;
 		mes "[Carl Orleans]";
@@ -101,7 +102,7 @@ prt_castle,54,34,4	script	Carl Orleans	47,{
 		mes "Volte sempre.";
 		close; }
 	mes "[Carl Orleans]";
-	mes "Bem, eu poderia ser capaz de satisfazer as suas necessidades ...";
+	mes "Bem, eu talvez possa satisfazer as suas necessidades...";
 	next;
 	mes "[Carl Orleans]";
 	if (countitem(558) < 3) {
@@ -112,17 +113,17 @@ prt_castle,54,34,4	script	Carl Orleans	47,{
 	mes "Dê-lhes para mim ...";
 	next;
 	mes "[Carl Orleans]";
-	mes "Ok, agora eu só irei criar a minha mão especial feito chocolates se você prometer usá-la sabiamente.";
+	mes "Ok, agora eu só irei criar meus chocolates especiais se você prometer usá-los sabiamente.";
 	next;
 	mes "[Carl Orleans]";
 	mes "....Hmmmmmm.....";
-	mes "Bem ...";
+	mes "Ok ...";
 	next;
 	mes "[Carl Orleans]";
 	getitem 559,1;
 	mes "Aqui.";
 	mes "Espero que dê para alguém especial, porque é um chocolate especial.";
-	mes "Como você sabe ... só eu posso criar isso.";
+	mes "Como você sabe ... somente eu posso criá-los";
 	next;
 	mes "[Carl Orleans]";
 	mes "Aproveite.";
