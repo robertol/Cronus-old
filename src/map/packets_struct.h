@@ -18,6 +18,7 @@ struct EQUIPSLOTINFO {
  *
  **/
 enum packet_headers {
+	cart_additem_ackType = 0x12c,
 	sc_notickType = 0x196,
 #if PACKETVER < 20061218
 	additemType = 0xa0,
@@ -52,6 +53,10 @@ enum packet_headers {
 #endif
 	status_change2Type = 0x43f,
 	status_change_endType = 0x196,
+#if PACKETVER < 20091103
+	spawn_unit2Type = 0x7c,
+	idle_unit2Type = 0x78,
+#endif
 #if PACKETVER < 4
 	spawn_unitType = 0x79,
 #elif PACKETVER < 7
@@ -112,7 +117,7 @@ enum packet_headers {
 struct packet_authok {
 	short PacketType;
 	unsigned int startTime;
-	char PosDir[3];
+	unsigned char PosDir[3];
 	unsigned char xSize;
 	unsigned char ySize;
 #if PACKETVER >= 20080102
@@ -172,7 +177,63 @@ struct packet_dropflooritem {
 	unsigned char subY;
 	short count;
 } __attribute__((packed));
-
+#if PACKETVER < 20091103
+struct packet_idle_unit2 {
+	short PacketType;
+	unsigned char objecttype;
+	unsigned int GID;
+	short speed;
+	short bodyState;
+	short healthState;
+	short effectState;
+	short job;
+	short head;
+	short weapon;
+	short accessory;
+	short shield;
+	short accessory2;
+	short accessory3;
+	short headpalette;
+	short bodypalette;
+	short headDir;
+	unsigned int GUID;
+	short GEmblemVer;
+	short honor;
+	short virtue;
+	bool isPKModeON;
+	unsigned char sex;
+	unsigned char PosDir[3];
+	unsigned char xSize;
+	unsigned char ySize;
+	unsigned char state;
+	short clevel;
+} __attribute__((packed));
+struct packet_spawn_unit2 {
+	short PacketType;
+	unsigned char objecttype;
+	unsigned int GID;
+	short speed;
+	short bodyState;
+	short healthState;
+	short effectState;
+	short head;
+	short weapon;
+	short accessory;
+	short job;
+	short shield;
+	short accessory2;
+	short accessory3;
+	short headpalette;
+	short bodypalette;
+	short headDir;
+	bool isPKModeON;
+	unsigned char sex;
+	unsigned char PosDir[3];
+	unsigned char xSize;
+	unsigned char ySize;
+	short clevel;
+} __attribute__((packed));
+#endif
 struct packet_spawn_unit {
 	short PacketType;
 #if PACKETVER >= 20091103
@@ -210,14 +271,14 @@ struct packet_spawn_unit {
 	unsigned int GUID;
 	short GEmblemVer;
 	short honor;
-#if PACKETVER >= 20091103
+#if PACKETVER > 7
 	int virtue;
 #else
 	short virtue;
 #endif
 	bool isPKModeON;
 	unsigned char sex;
-	char PosDir[3];
+	unsigned char PosDir[3];
 	unsigned char xSize;
 	unsigned char ySize;
 	short clevel;
@@ -235,6 +296,8 @@ struct packet_unit_walking {
 	short PacketType;
 #if PACKETVER >= 20091103
 	short PacketLength;
+#endif
+#if PACKETVER > 7
 	unsigned char objecttype;
 #endif
 	unsigned int GID;
@@ -269,14 +332,14 @@ struct packet_unit_walking {
 	unsigned int GUID;
 	short GEmblemVer;
 	short honor;
-#if PACKETVER >= 20091103
+#if PACKETVER > 7
 	int virtue;
 #else
 	short virtue;
 #endif
 	bool isPKModeON;
 	unsigned char sex;
-	char MoveData[6];
+	unsigned char MoveData[6];
 	unsigned char xSize;
 	unsigned char ySize;
 	short clevel;
@@ -327,14 +390,14 @@ struct packet_idle_unit {
 	unsigned int GUID;
 	short GEmblemVer;
 	short honor;
-#if PACKETVER >= 20091103
+#if PACKETVER > 7
 	int virtue;
 #else
 	short virtue;
 #endif
 	bool isPKModeON;
 	unsigned char sex;
-	char PosDir[3];
+	unsigned char PosDir[3];
 	unsigned char xSize;
 	unsigned char ySize;
 	unsigned char state;
@@ -459,6 +522,7 @@ struct packet_script_clear {
 	short PacketType;
 	unsigned int NpcID;
 } __attribute__((packed));
+
 /* made possible thanks to Yommy!! */
 struct packet_package_item_announce {
 	short PacketType;
@@ -469,6 +533,11 @@ struct packet_package_item_announce {
 	char Name[NAME_LENGTH];
 	char unknown;
 	unsigned short BoxItemID;
+} __attribute__((packed));
+
+struct packet_cart_additem_ack {
+	short PacketType;
+	char result;
 } __attribute__((packed));
 
 #pragma pack(pop)

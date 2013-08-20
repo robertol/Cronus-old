@@ -17,7 +17,7 @@ MAP_OBJ = map.o chrif.o clif.o pc.o status.o npc.o \
 	storage.o skill.o atcommand.o battle.o battleground.o \
 	intif.o trade.o party.o vending.o guild.o pet.o \
 	log.o mail.o date.o unit.o homunculus.o mercenary.o quest.o instance.o \
-	buyingstore.o searchstore.o duel.o pc_groups.o elemental.o irc-bot.o
+	buyingstore.o searchstore.o duel.o pc_groups.o elemental.o irc-bot.o HPMmap.o
 MAP_SQL_OBJ = $(MAP_OBJ:%=obj_sql/%) \
 	obj_sql/mapreg_sql.o
 MAP_H = map.h chrif.h clif.h pc.h status.h npc.h \
@@ -27,7 +27,7 @@ MAP_H = map.h chrif.h clif.h pc.h status.h npc.h \
 	log.h mail.h date.h unit.h homunculus.h mercenary.h quest.h instance.h mapreg.h \
 	buyingstore.h searchstore.h duel.h pc_groups.h \
 	../config/core.h ../config/renewal.h ../config/secure.h ../config/const.h \
-	../config/classes/general.h elemental.h packets.h packets_struct.h irc-bot.h
+	../config/classes/general.h elemental.h packets.h packets_struct.h irc-bot.h HPMmap.h
 
 HAVE_MYSQL=@HAVE_MYSQL@
 ifeq ($(HAVE_MYSQL),yes)
@@ -48,6 +48,9 @@ endif
 
 @SET_MAKE@
 
+CC = @CC@
+export CC
+
 #####################################################################
 .PHONY : all txt sql clean help
 
@@ -59,7 +62,7 @@ sql: $(SQL_DEPENDS)
 
 clean:
 	@echo "	CLEAN	map"
-	@rm -rf *.o obj_txt obj_sql ../../map-server@EXEEXT@ ../../map-server@EXEEXT@
+	@rm -rf *.o obj_txt obj_sql ../../map-server@EXEEXT@
 
 help:
 ifeq ($(HAVE_MYSQL),yes)
@@ -92,13 +95,13 @@ obj_sql:
 
 map-server: obj_sql $(MAP_SQL_OBJ) ../common/obj_sql/common_sql.a ../common/obj_all/common.a
 	@echo "	LD	$@"
-	@@CC@ @LDFLAGS@ -o ../../map-server@EXEEXT@ $(MAP_SQL_OBJ) ../common/obj_sql/common_sql.a ../common/obj_all/common.a $(MT19937AR_OBJ) $(LIBCONFIG_OBJ) @LIBS@ @PCRE_LIBS@ @MYSQL_LIBS@
+	@$(CC) @LDFLAGS@ -o ../../map-server@EXEEXT@ $(MAP_SQL_OBJ) ../common/obj_sql/common_sql.a ../common/obj_all/common.a $(MT19937AR_OBJ) $(LIBCONFIG_OBJ) @LIBS@ @PCRE_LIBS@ @MYSQL_LIBS@
 
 # map object files
 
 obj_sql/%.o: %.c $(MAP_H) $(COMMON_H)  $(MT19937AR_H) $(LIBCONFIG_H)
 	@echo "	CC	$<"
-	@@CC@ @CFLAGS@ $(MT19937AR_INCLUDE) $(LIBCONFIG_INCLUDE) $(PCRE_CFLAGS) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
+	@$(CC) @CFLAGS@ $(MT19937AR_INCLUDE) $(LIBCONFIG_INCLUDE) $(PCRE_CFLAGS) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
 
 # missing object files
 ../common/obj_all/common.a:
@@ -107,8 +110,8 @@ obj_sql/%.o: %.c $(MAP_H) $(COMMON_H)  $(MT19937AR_H) $(LIBCONFIG_H)
 ../common/obj_sql/common_sql.a:
 	@$(MAKE) -C ../common sql
         
-MT19937AR_OBJ:
+$(MT19937AR_OBJ):
 	@$(MAKE) -C ../../3rdparty/mt19937ar
 
-LIBCONFIG_OBJ:
+$(LIBCONFIG_OBJ):
 	@$(MAKE) -C ../../3rdparty/libconfig

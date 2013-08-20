@@ -51,6 +51,7 @@
 #include "log.h"
 #include "mail.h"
 #include "irc-bot.h"
+#include "HPMmap.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -80,7 +81,7 @@ char log_db_pw[32] = "ragnarok";
 char log_db_db[32] = "log";
 Sql* logmysql_handle;
 
-// DBMap declaartion
+// DBMap declaration
 static DBMap* id_db=NULL; // int id -> struct block_list*
 static DBMap* pc_db=NULL; // int id -> struct map_session_data*
 static DBMap* mobid_db=NULL; // int id -> struct mob_data*
@@ -133,6 +134,8 @@ struct eri *map_iterator_ers;
 char *map_cache_buffer = NULL; // Has the uncompressed gat data of all maps, so just one allocation has to be made
 
 struct map_interface iMap_s;
+
+struct map_session_data *cpsd;
 
 /*==========================================
 * server player count (of all mapservers)
@@ -357,7 +360,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 
 	//TODO: Perhaps some outs of bounds checking should be placed here?
 	if (bl->type&BL_CHAR) {
-		sc = status_get_sc(bl);
+		sc = iStatus->get_sc(bl);
 
 		skill->unit_move(bl,tick,2);
 		status_change_end(bl, SC_RG_CCONFINE_M, INVALID_TIMER);
@@ -447,6 +450,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 
 /*==========================================
 * Counts specified number of objects on given cell.
+* TODO: merge with bl_getall_area
 *------------------------------------------*/
 int map_count_oncell(int16 m, int16 x, int16 y, int type)
 {
@@ -502,546 +506,607 @@ struct skill_unit* map_find_skill_unit_oncell(struct block_list* target,int16 x,
 	return NULL;
 }
 
-/*==========================================
-* Adapted from foreachinarea for an easier invocation. [Skotlex]
-*------------------------------------------*/
-int map_foreachinrange(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, ...)
+/** @name Functions for block_list search and manipulation
+ */
+
+/* @{ */
+/**
+ * Applies func to every block_list in bl_list starting with bl_list[blockcount].
+ * Sets bl_list_count back to blockcount.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param blockcount Index of first relevant entry in bl_list
+ * @param max Maximum sum of values returned by func (usually max number of func calls)
+ * @param args Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+static int bl_vforeach(int (*func)(struct block_list*, va_list), int blockcount, int max, va_list args)
 {
-	int bx, by, m;
-	int returnCount = 0;	//total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	int x0, x1, y0, y1;
-	va_list ap;
-
-	m = center->m;
-	x0 = max(center->x - range, 0);
-	y0 = max(center->y - range, 0);
-	x1 = min(center->x + range, map[ m ].xs - 1);
-	y1 = min(center->y + range, map[ m ].ys - 1);
-
-	if ( type&~BL_MOB )
-		for ( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-				for( bl = map[m].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-					if( bl->type&type
-						&& bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-						&& check_distance_bl(center, bl, range)
-#endif
-						&& bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-				}
-			}
-		}
-
-		if( type&BL_MOB )
-			for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-				for(bx=x0/BLOCK_SIZE;bx<=x1/BLOCK_SIZE;bx++) {
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-							&& check_distance_bl(center, bl, range)
-#endif
-							&& bl_list_count < BL_LIST_MAX )
-							bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-			}
-
-			if( bl_list_count >= BL_LIST_MAX )
-				ShowWarning("iMap->foreachinrange: block count too many!\n");
-
-			iMap->freeblock_lock();
-
-			for( i = blockcount; i < bl_list_count; i++ )
-				if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-					va_start(ap, type);
-					returnCount += func(bl_list[ i ], ap);
-					va_end(ap);
-				}
-
-				iMap->freeblock_unlock();
-
-				bl_list_count = blockcount;
-				return returnCount;	//[Skotlex]
-}
-
-/*==========================================
-* Same as foreachinrange, but there must be a shoot-able range between center and target to be counted in. [Skotlex]
-*------------------------------------------*/
-int map_foreachinshootrange(int (*func)(struct block_list*,va_list),struct block_list* center, int16 range, int type,...)
-{
-	int bx, by, m;
-	int returnCount = 0;	//total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	int x0, x1, y0, y1;
-	va_list ap;
-
-	m = center->m;
-	if ( m < 0 )
-		return 0;
-
-	x0 = max(center->x-range, 0);
-	y0 = max(center->y-range, 0);
-	x1 = min(center->x+range, map[m].xs-1);
-	y1 = min(center->y+range, map[m].ys-1);
-
-	if ( type&~BL_MOB )
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-				for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-					if( bl->type&type
-						&& bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-						&& check_distance_bl(center, bl, range)
-#endif
-						&& path_search_long(NULL, center->m, center->x, center->y, bl->x, bl->y, CELL_CHKWALL)
-						&& bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-				}
-			}
-		}
-		if( type&BL_MOB )
-			for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-				for( bx=x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-							&& check_distance_bl(center, bl, range)
-#endif
-							&& path_search_long(NULL, center->m, center->x, center->y, bl->x, bl->y, CELL_CHKWALL)
-							&& bl_list_count < BL_LIST_MAX )
-							bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-			}
-
-			if( bl_list_count >= BL_LIST_MAX )
-				ShowWarning("iMap->foreachinrange: block count too many!\n");
-
-			iMap->freeblock_lock();
-
-			for( i = blockcount; i < bl_list_count; i++ )
-				if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-					va_start(ap, type);
-					returnCount += func(bl_list[ i ], ap);
-					va_end(ap);
-				}
-
-				iMap->freeblock_unlock();
-
-				bl_list_count = blockcount;
-				return returnCount;	//[Skotlex]
-}
-
-/*==========================================
-* range = map m (x0,y0)-(x1,y1)
-* Apply *func with ... arguments for the range.
-* @type = BL_PC/BL_MOB etc..
-*------------------------------------------*/
-int map_foreachinarea(int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int type, ...)
-{
-	int bx, by;
-	int returnCount = 0;	//total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	va_list ap;
-
-	if ( m < 0 )
-		return 0;
-
-	if ( x1 < x0 )
-		swap(x0, x1);
-	if ( y1 < y0 )
-		swap(y0, y1);
-
-	x0 = max(x0, 0);
-	y0 = max(y0, 0);
-	x1 = min(x1, map[ m ].xs - 1);
-	y1 = min(y1, map[ m ].ys - 1);
-	if ( type&~BL_MOB )
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ )
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ )
-				for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next )
-					if( bl->type&type && bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1 && bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-	if( type&BL_MOB )
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ )
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ )
-				for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next )
-					if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1 && bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinarea: block count too many!\n");
+	int i;
+	int returnCount = 0;
 
 	iMap->freeblock_lock();
-
-	for( i = blockcount; i < bl_list_count; i++ )
-		if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-			va_start(ap, type);
-			returnCount += func(bl_list[ i ], ap);
-			va_end(ap);
+	for (i = blockcount; i < bl_list_count && returnCount < max; i++) {
+		if (bl_list[i]->prev) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
+			va_list argscopy;
+			va_copy(argscopy, args);
+			returnCount += func(bl_list[i], argscopy);
+			va_end(argscopy);
 		}
+	}
+	iMap->freeblock_unlock();
 
-		iMap->freeblock_unlock();
+	bl_list_count = blockcount;
 
-		bl_list_count = blockcount;
-		return returnCount;	//[Skotlex]
+	return returnCount;
 }
-/*==========================================
-* Adapted from forcountinarea for an easier invocation. [pakpil]
-*------------------------------------------*/
-int map_forcountinrange(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int count, int type, ...)
+
+/**
+ * Applies func to every block_list object of bl_type type on map m.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param type enum bl_type
+ * @param args Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+static int map_vforeachinmap(int (*func)(struct block_list*, va_list), int16 m, int type, va_list args)
 {
-	int bx, by, m;
-	int returnCount = 0;	//total sum of returned values of func() [Skotlex]
+	int i;
+	int returnCount = 0;
+	int bsize; 
+	va_list argscopy;
 	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	int x0, x1, y0, y1;
-	va_list ap;
+	int blockcount = bl_list_count;
 
-	m = center->m;
-	x0 = max(center->x - range, 0);
-	y0 = max(center->y - range, 0);
-	x1 = min(center->x + range, map[ m ].xs - 1);
-	y1 = min(center->y + range, map[ m ].ys - 1);
+	if (m < 0)
+		return 0;
 
-	if ( type&~BL_MOB )
-		for ( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-				for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-					if( bl->type&type
-						&& bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-						&& check_distance_bl(center, bl, range)
-#endif
-						&& bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
+	bsize = map[m].bxs * map[m].bys;
+	for (i = 0; i < bsize; i++) {
+		if (type&~BL_MOB) {
+			for (bl = map[m].block[i]; bl != NULL; bl = bl->next) {
+				if (bl->type&type && bl_list_count < BL_LIST_MAX) {
+					bl_list[bl_list_count++] = bl;
 				}
 			}
 		}
-		if( type&BL_MOB )
-			for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-				for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ){
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1
-#ifdef CIRCULAR_AREA
-							&& check_distance_bl(center, bl, range)
-#endif
-							&& bl_list_count < BL_LIST_MAX )
-							bl_list[ bl_list_count++ ] = bl;
+		if (type&BL_MOB) {
+			for (bl = map[m].block_mob[i]; bl != NULL; bl = bl->next) {
+				if (bl_list_count < BL_LIST_MAX) {
+					bl_list[bl_list_count++] = bl;
+				}
+			}
+		}
+	}
+
+	if (bl_list_count >= BL_LIST_MAX)
+		ShowError("map.c:map_vforeachinmap: bl_list size (%d) exceeded\n", BL_LIST_MAX);
+
+	va_copy(argscopy, args);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, argscopy);
+	va_end(argscopy);
+
+	return returnCount;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type on map m.
+ * Returns the sum of values returned by func.
+ * @see map_vforeachinmap
+ * @param func Function to be applied
+ * @param m Map id
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinmap(int (*func)(struct block_list*, va_list), int16 m, int type, ...)
+{
+	int returnCount = 0;
+	va_list ap;
+
+	va_start(ap, type);
+	returnCount = map_vforeachinmap(func, m, type, ap);
+	va_end(ap);
+
+	return returnCount;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type on all maps
+ * of instance instance_id.
+ * Returns the sum of values returned by func.
+ * @see map_vforeachinmap.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachininstance(int (*func)(struct block_list*, va_list), int16 instance_id, int type, ...)
+{
+	int i;
+	int returnCount = 0;
+
+	for (i = 0; i < instances[instance_id].num_map; i++) {
+		int m = instances[instance_id].map[i];
+		va_list ap;
+		va_start(ap, type);
+		returnCount += map_vforeachinmap(func, m, type, ap);
+		va_end(ap);
+	}
+
+	return returnCount;
+}
+
+/**
+ * Retrieves all map objects in area that are matched by the type
+ * and func. Appends them at the end of global bl_list array.
+ * @param type Matching enum bl_type
+ * @param m Map
+ * @param func Matching function
+ * @param ... Extra arguments for func
+ * @return Number of found objects
+ */
+static int bl_getall_area(int type, int m, int x0, int y0, int x1, int y1, int (*func)(struct block_list*, va_list), ...)
+{
+	va_list args;
+	int bx, by;
+	struct block_list *bl;
+	int found = 0;
+
+	if (m < 0)
+		return 0;
+
+	if (x1 < x0) swap(x0, x1);
+	if (y1 < y0) swap(y0, y1);
+
+	// Limit search area to map size
+	x0 = max(x0, 0);
+	y0 = max(y0, 0);
+	x1 = min(x1, map[m].xs - 1);
+	y1 = min(y1, map[m].ys - 1);
+
+	for (by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++) {
+		for (bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++) {
+			if (type&~BL_MOB) {
+				for (bl = map[m].block[bx + by * map[m].bxs]; bl != NULL; bl = bl->next) {
+					if (bl_list_count < BL_LIST_MAX
+						&& bl->type&type
+						&& bl->x >= x0 && bl->x <= x1
+						&& bl->y >= y0 && bl->y <= y1) {
+							if (func) {
+								va_start(args, func);
+								if (func(bl, args)) {
+									bl_list[bl_list_count++] = bl;
+									found++;
+								}
+								va_end(args);
+							}
+							else {
+								bl_list[bl_list_count++] = bl;
+								found++;
+							}
 					}
 				}
 			}
-
-			if( bl_list_count >= BL_LIST_MAX )
-				ShowWarning("map_forcountinrange: block count too many!\n");
-
-			iMap->freeblock_lock();
-
-			for( i = blockcount; i < bl_list_count; i++ )
-				if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-					va_start(ap, type);
-					returnCount += func(bl_list[ i ], ap);
-					va_end(ap);
-					if( count && returnCount >= count )
-						break;
+			if (type&BL_MOB) { // TODO: fix this code duplication
+				for (bl = map[m].block_mob[bx + by * map[m].bxs]; bl != NULL; bl = bl->next) {
+					if (bl_list_count < BL_LIST_MAX
+						//&& bl->type&type // block_mob contains BL_MOBs only
+						&& bl->x >= x0 && bl->x <= x1
+						&& bl->y >= y0 && bl->y <= y1) {
+							if (func) {
+								va_start(args, func);
+								if (func(bl, args)) {
+									bl_list[bl_list_count++] = bl;
+									found++;
+								}
+								va_end(args);
+							}
+							else {
+								bl_list[bl_list_count++] = bl;
+								found++;
+							}
+					}
 				}
+			}
+		}
+	}
 
-				iMap->freeblock_unlock();
+	if (bl_list_count >= BL_LIST_MAX)
+		ShowError("map.c:bl_getall_area: bl_list size (%d) exceeded\n", BL_LIST_MAX);
 
-				bl_list_count = blockcount;
-				return returnCount;	//[Skotlex]
+	return found;
 }
+
+/**
+ * Checks if bl is within range cells from center.
+ * If CIRCULAR AREA is not used always returns 1, since
+ * preliminary range selection is already done in bl_getall_area.
+ * @return 1 if matches, 0 otherwise
+ */
+static int bl_vgetall_inrange(struct block_list *bl, va_list args)
+{
+#ifdef CIRCULAR_AREA
+	struct block_list *center = va_arg(args, struct block_list*);
+	int range = va_arg(args, int);
+	if (!check_distance_bl(center, bl, range))
+		return 0;
+#endif
+	return 1;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type within range cells from center.
+ * Area is rectangular, unless CIRCULAR_AREA is defined.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param center Center of the selection area
+ * @param range Range in cells from center
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinrange(int (*func)(struct block_list*, va_list), struct block_list* center, int16 range, int type, ...)
+{
+	int returnCount = 0;
+	int blockcount = bl_list_count;
+	va_list ap;
+
+	if (range < 0) range *= -1;
+
+	bl_getall_area(type, center->m, center->x - range, center->y - range, center->x + range, center->y + range, bl_vgetall_inrange, center, range);
+
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
+
+	return returnCount;
+}
+
+/**
+ * Applies func to some block_list objects of bl_type type within range cells from center.
+ * Limit is set by count parameter.
+ * Area is rectangular, unless CIRCULAR_AREA is defined.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param center Center of the selection area
+ * @param range Range in cells from center
+ * @param count Maximum sum of values returned by func (usually max number of func calls)
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_forcountinrange(int (*func)(struct block_list*, va_list), struct block_list* center, int16 range, int count, int type, ...)
+{
+	int returnCount = 0;
+	int blockcount = bl_list_count;
+	va_list ap;
+
+	if (range < 0) range *= -1;
+
+	bl_getall_area(type, center->m, center->x - range, center->y - range, center->x + range, center->y + range, bl_vgetall_inrange, center, range);
+
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, count, ap);
+	va_end(ap);
+
+	return returnCount;
+}
+
+/**
+ * Checks if bl is within shooting range from center.
+ * There must be a shootable path between bl and center.
+ * Does not check for range if CIRCULAR AREA is not defined, since
+ * preliminary range selection is already done in bl_getall_area.
+ * @return 1 if matches, 0 otherwise
+ */
+static int bl_vgetall_inshootrange(struct block_list *bl, va_list args)
+{
+	struct block_list *center = va_arg(args, struct block_list*);
+#ifdef CIRCULAR_AREA
+	int range = va_arg(args, int);
+	if (!check_distance_bl(center, bl, range))
+		return 0;
+#endif
+	if (!path_search_long(NULL, center->m, center->x, center->y, bl->x, bl->y, CELL_CHKWALL))
+		return 0;
+	return 1;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type within shootable range from center.
+ * There must be a shootable path between bl and center.
+ * Area is rectangular, unless CIRCULAR_AREA is defined.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param center Center of the selection area
+ * @param range Range in cells from center
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinshootrange(int (*func)(struct block_list*, va_list), struct block_list* center, int16 range, int type, ...)
+{
+	int returnCount = 0;
+	int blockcount = bl_list_count;
+	va_list ap;
+
+	if (range < 0) range *= -1;
+
+	bl_getall_area(type, center->m, center->x - range, center->y - range, center->x + range, center->y + range, bl_vgetall_inshootrange, center, range);
+
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
+
+	return returnCount;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type in
+ * rectangular area (x0,y0)~(x1,y1) on map m.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param x0 Starting X-coordinate
+ * @param y0 Starting Y-coordinate
+ * @param x1 Ending X-coordinate
+ * @param y1 Ending Y-coordinate
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinarea(int (*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int type, ...)
+{
+	int returnCount = 0;
+	int blockcount = bl_list_count;
+	va_list ap;
+
+	bl_getall_area(type, m, x0, y0, x1, y1, NULL);
+
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
+
+	return returnCount;
+}
+
+/**
+ * Applies func to some block_list objects of bl_type type in
+ * rectangular area (x0,y0)~(x1,y1) on map m.
+ * Limit is set by @count parameter.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param x0 Starting X-coordinate
+ * @param y0 Starting Y-coordinate
+ * @param x1 Ending X-coordinate
+ * @param y1 Ending Y-coordinate
+ * @param count Maximum sum of values returned by func (usually max number of func calls)
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
 int map_forcountinarea(int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int count, int type, ...)
 {
-	int bx, by;
-	int returnCount = 0;	//total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
+	int returnCount = 0;
+	int blockcount = bl_list_count;
 	va_list ap;
 
-	if ( m < 0 )
-		return 0;
+	bl_getall_area(type, m, x0, y0, x1, y1, NULL);
 
-	if ( x1 < x0 )
-		swap(x0, x1);
-	if ( y1 < y0 )
-		swap(y0, y1);
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, count, ap);
+	va_end(ap);
 
-	x0 = max(x0, 0);
-	y0 = max(y0, 0);
-	x1 = min(x1, map[ m ].xs - 1);
-	y1 = min(y1, map[ m ].ys - 1);
-
-	if ( type&~BL_MOB )
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ )
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ )
-				for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next )
-					if( bl->type&type && bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1 && bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-	if( type&BL_MOB )
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ )
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ )
-				for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next )
-					if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1 && bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinarea: block count too many!\n");
-
-	iMap->freeblock_lock();
-
-	for( i = blockcount; i < bl_list_count; i++ )
-		if(bl_list[ i ]->prev) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-			va_start(ap, type);
-			returnCount += func(bl_list[ i ], ap);
-			va_end(ap);
-			if( count && returnCount >= count )
-				break;
-		}
-
-		iMap->freeblock_unlock();
-
-		bl_list_count = blockcount;
-		return returnCount;	//[Skotlex]
+	return returnCount;
 }
 
-/*==========================================
-* For what I get
-* Move bl and do func* with va_list while moving.
-* Mouvement is set by dx dy wich are distance in x and y
-*------------------------------------------*/
-int map_foreachinmovearea(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int type, ...)
+/**
+ * Checks if bl is inside area that was in range cells from the center
+ * before it was moved by (dx,dy) cells, but it is not in range cells
+ * from center after movement is completed.
+ * In other words, checks if bl is inside area that is no longer covered
+ * by center's range.
+ * Preliminary range selection is already done in bl_getall_area.
+ * @return 1 if matches, 0 otherwise
+ */
+static int bl_vgetall_inmovearea(struct block_list *bl, va_list args)
 {
-	int bx, by, m;
-	int returnCount = 0;  //total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	int x0, x1, y0, y1;
-	va_list ap;
+	int dx = va_arg(args, int);
+	int dy = va_arg(args, int);
+	struct block_list *center = va_arg(args, struct block_list*);
+	int range = va_arg(args, int);
 
-	if ( !range ) return 0;
-	if ( !dx && !dy ) return 0; //No movement.
+	if ((dx > 0 && bl->x < center->x - range + dx) ||
+		(dx < 0 && bl->x > center->x + range + dx) ||
+		(dy > 0 && bl->y < center->y - range + dy) ||
+		(dy < 0 && bl->y > center->y + range + dy))
+		return 1;
+	return 0;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type in
+ * area that was covered by range cells from center, but is no
+ * longer after center is moved by (dx,dy) cells (i.e. area that
+ * center has lost sight of).
+ * If used after center has reached its destination and with
+ * opposed movement vector (-dx,-dy), selection corresponds
+ * to new area in center's view).
+ * Uses rectangular area.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param center Center of the selection area
+ * @param range Range in cells from center
+ * @param dx Center's movement on X-axis
+ * @param dy Center's movement on Y-axis
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinmovearea(int (*func)(struct block_list*, va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int type, ...)
+{
+	int returnCount = 0;
+	int blockcount = bl_list_count;
+	va_list ap;
+	int m, x0, x1, y0, y1;
+
+	if (!range) return 0;
+	if (!dx && !dy) return 0; // No movement.
+
+	if (range < 0) range *= -1;
 
 	m = center->m;
-
 	x0 = center->x - range;
 	x1 = center->x + range;
 	y0 = center->y - range;
 	y1 = center->y + range;
 
-	if ( x1 < x0 )
-		swap(x0, x1);
-	if ( y1 < y0 )
-		swap(y0, y1);
-
-	if( dx == 0 || dy == 0 ) {
-		//Movement along one axis only.
-		if( dx == 0 ){
-			if( dy < 0 ) //Moving south
-				y0 = y1 + dy + 1;
-			else //North
-				y1 = y0 + dy - 1;
+	if (dx == 0 || dy == 0) { // Movement along one axis only.
+		if (dx == 0) {
+			if (dy < 0) { y0 = y1 + dy + 1; } // Moving south
+			else        { y1 = y0 + dy - 1; } // North
 		} else { //dy == 0
-			if( dx < 0 ) //West
-				x0 = x1 + dx + 1;
-			else //East
-				x1 = x0 + dx - 1;
+			if (dx < 0) { x0 = x1 + dx + 1; } // West
+			else        { x1 = x0 + dx - 1; } // East
 		}
-
-		x0 = max(x0, 0);
-		y0 = max(y0, 0);
-		x1 = min(x1, map[ m ].xs - 1);
-		y1 = min(y1, map[ m ].ys - 1);
-
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-				if ( type&~BL_MOB ) {
-					for( bl = map[m].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->type&type &&
-							bl->x >= x0 && bl->x <= x1 &&
-							bl->y >= y0 && bl->y <= y1 &&
-							bl_list_count < BL_LIST_MAX )
-							bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-				if ( type&BL_MOB ) {
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->x >= x0 && bl->x <= x1 &&
-							bl->y >= y0 && bl->y <= y1 &&
-							bl_list_count < BL_LIST_MAX )
-							bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-			}
-		}
-	} else { // Diagonal movement
-
-		x0 = max(x0, 0);
-		y0 = max(y0, 0);
-		x1 = min(x1, map[ m ].xs - 1);
-		y1 = min(y1, map[ m ].ys - 1);
-
-		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++ ) {
-			for( bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++ ) {
-				if ( type & ~BL_MOB ) {
-					for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->type&type &&
-							bl->x >= x0 && bl->x <= x1 &&
-							bl->y >= y0 && bl->y <= y1 &&
-							bl_list_count < BL_LIST_MAX )
-							if( ( dx > 0 && bl->x < x0 + dx) ||
-								( dx < 0 && bl->x > x1 + dx) ||
-								( dy > 0 && bl->y < y0 + dy) ||
-								( dy < 0 && bl->y > y1 + dy) )
-								bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-				if ( type&BL_MOB ) {
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->x >= x0 && bl->x <= x1 &&
-							bl->y >= y0 && bl->y <= y1 &&
-							bl_list_count < BL_LIST_MAX)
-							if( ( dx > 0 && bl->x < x0 + dx) ||
-								( dx < 0 && bl->x > x1 + dx) ||
-								( dy > 0 && bl->y < y0 + dy) ||
-								( dy < 0 && bl->y > y1 + dy) )
-								bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-			}
-		}
-
+		bl_getall_area(type, m, x0, y0, x1, y1, NULL);
+	}
+	else { // Diagonal movement
+		bl_getall_area(type, m, x0, y0, x1, y1, bl_vgetall_inmovearea, dx, dy, center, range);
 	}
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinmovearea: block count too many!\n");
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
 
-	iMap->freeblock_lock();	// Prohibit the release from memory
-
-	for( i = blockcount; i < bl_list_count; i++ )
-		if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-			va_start(ap, type);
-			returnCount += func(bl_list[ i ], ap);
-			va_end(ap);
-		}
-
-		iMap->freeblock_unlock();	// Allow Free
-
-		bl_list_count = blockcount;
-		return returnCount;
+	return returnCount;
 }
 
-// -- moonsoul	(added map_foreachincell which is a rework of map_foreachinarea but
-//			 which only checks the exact single x/y passed to it rather than an
-//			 area radius - may be more useful in some instances)
-//
-int map_foreachincell(int (*func)(struct block_list*,va_list), int16 m, int16 x, int16 y, int type, ...)
+/**
+ * Applies func to every block_list object of bl_type type in
+ * cell (x,y) on map m.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param x Target cell X-coordinate
+ * @param y Target cell Y-coordinate
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachincell(int (*func)(struct block_list*, va_list), int16 m, int16 x, int16 y, int type, ...)
 {
-	int bx, by;
-	int returnCount = 0;  //total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
+	int returnCount = 0;
+	int blockcount = bl_list_count;
 	va_list ap;
 
-	if ( x < 0 || y < 0 || x >= map[ m ].xs || y >= map[ m ].ys ) return 0;
+	bl_getall_area(type, m, x, y, x, y, NULL);
 
-	by = y / BLOCK_SIZE;
-	bx = x / BLOCK_SIZE;
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
 
-	if( type&~BL_MOB )
-		for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next )
-			if( bl->type&type && bl->x == x && bl->y == y && bl_list_count < BL_LIST_MAX )
-				bl_list[ bl_list_count++ ] = bl;
-	if( type&BL_MOB )
-		for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs]; bl != NULL; bl = bl->next )
-			if( bl->x == x && bl->y == y && bl_list_count < BL_LIST_MAX)
-				bl_list[ bl_list_count++ ] = bl;
-
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachincell: block count too many!\n");
-
-	iMap->freeblock_lock();
-
-	for( i = blockcount; i < bl_list_count; i++ )
-		if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-			va_start(ap, type);
-			returnCount += func(bl_list[ i ], ap);
-			va_end(ap);
-		}
-
-		iMap->freeblock_unlock();
-
-		bl_list_count = blockcount;
-		return returnCount;
+	return returnCount;
 }
 
-/*============================================================
-* For checking a path between two points (x0, y0) and (x1, y1)
-*------------------------------------------------------------*/
-int map_foreachinpath(int (*func)(struct block_list*,va_list),int16 m,int16 x0,int16 y0,int16 x1,int16 y1,int16 range,int length, int type,...)
+/**
+ * Helper function for map_foreachinpath()
+ * Checks if shortest distance from bl to path
+ * between (x0,y0) and (x1,y1) is shorter than range.
+ * @see map_foreachinpath
+ */
+static int bl_vgetall_inpath(struct block_list *bl, va_list args)
 {
-	int returnCount = 0;  //total sum of returned values of func() [Skotlex]
-	//////////////////////////////////////////////////////////////
-	//
-	// sharp shooting 3 [Skotlex]
-	//
-	//////////////////////////////////////////////////////////////
-	// problem:
-	// Same as Sharp Shooting 1. Hits all targets within range of
-	// the line.
-	// (t1,t2 t3 and t4 get hit)
-	//
-	//     target 1
-	//      x t4
-	//     t2
-	// t3 x
-	//   x
-	//  S
-	//////////////////////////////////////////////////////////////
-	// Methodology:
-	// My trigonometrics and math are a little rusty... so the approach I am writing
-	// here is basicly do a double for to check for all targets in the square that
+	int m  = va_arg(args, int);
+	int x0 = va_arg(args, int);
+	int y0 = va_arg(args, int);
+	int x1 = va_arg(args, int);
+	int y1 = va_arg(args, int);
+	int range = va_arg(args, int);
+	int len_limit = va_arg(args, int);
+	int magnitude2 = va_arg(args, int);
+
+	int xi = bl->x;
+	int yi = bl->y;
+	int xu, yu;
+
+	int k = ( xi - x0 ) * ( x1 - x0 ) + ( yi - y0 ) * ( y1 - y0 );
+
+	if ( k < 0 || k > len_limit ) //Since more skills use this, check for ending point as well.
+		return 0;
+
+	if ( k > magnitude2 && !path_search_long(NULL, m, x0, y0, xi, yi, CELL_CHKWALL) )
+		return 0; //Targets beyond the initial ending point need the wall check.
+
+	//All these shifts are to increase the precision of the intersection point and distance considering how it's
+	//int math.
+	k  = ( k << 4 ) / magnitude2; //k will be between 1~16 instead of 0~1
+	xi <<= 4;
+	yi <<= 4;
+	xu = ( x0 << 4 ) + k * ( x1 - x0 );
+	yu = ( y0 << 4 ) + k * ( y1 - y0 );
+
+//Avoid needless calculations by not getting the sqrt right away.
+#define MAGNITUDE2(x0, y0, x1, y1) ( ( ( x1 ) - ( x0 ) ) * ( ( x1 ) - ( x0 ) ) + ( ( y1 ) - ( y0 ) ) * ( ( y1 ) - ( y0 ) ) )
+
+	k  = MAGNITUDE2(xi, yi, xu, yu);
+
+	//If all dot coordinates were <<4 the square of the magnitude is <<8
+	if ( k > range )
+		return 0;
+
+	return 1;
+}
+
+/**
+ * Applies func to every block_list object of bl_type type in
+ * path on a line between (x0,y0) and (x1,y1) on map m.
+ * Path starts at (x0,y0) and is \a length cells long and \a range cells wide.
+ * Objects beyond the initial (x1,y1) ending point are checked
+ * for walls in the path.
+ * Returns the sum of values returned by func.
+ * @param func Function to be applied
+ * @param m Map id
+ * @param x Target cell X-coordinate
+ * @param y Target cell Y-coordinate
+ * @param type enum bl_type
+ * @param ... Extra arguments for func
+ * @return Sum of the values returned by func
+ */
+int map_foreachinpath(int (*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int16 range, int length, int type, ...)
+{
+	// [Skotlex]
+	// check for all targets in the square that
 	// contains the initial and final positions (area range increased to match the
 	// radius given), then for each object to test, calculate the distance to the
 	// path and include it if the range fits and the target is in the line (0<k<1,
 	// as they call it).
 	// The implementation I took as reference is found at
-	// http://astronomy.swin.edu.au/~pbourke/geometry/pointline/
-	// (they have a link to a C implementation, too)
-	// This approach is a lot like #2 commented on this function, which I have no
-	// idea why it was commented. I won't use doubles/floats, but pure int math for
+	// http://web.archive.org/web/20050720125314/http://astronomy.swin.edu.au/~pbourke/geometry/pointline/
+	// http://paulbourke.net/geometry/pointlineplane/
+	// I won't use doubles/floats, but pure int math for
 	// speed purposes. The range considered is always the same no matter how
 	// close/far the target is because that's how SharpShooting works currently in
-	// kRO.
+	// kRO
 
-	//Generic map_foreach* variables.
-	int i, blockcount = bl_list_count;
-	struct block_list *bl;
-	int bx, by;
-	//method specific variables
-	int magnitude2, len_limit; //The square of the magnitude
-	int k, xi, yi, xu, yu;
-	int mx0 = x0, mx1 = x1, my0 = y0, my1 = y1;
+	int returnCount = 0;
+	int blockcount = bl_list_count;
 	va_list ap;
 
-	//Avoid needless calculations by not getting the sqrt right away.
-#define MAGNITUDE2(x0, y0, x1, y1) ( ( ( x1 ) - ( x0 ) ) * ( ( x1 ) - ( x0 ) ) + ( ( y1 ) - ( y0 ) ) * ( ( y1 ) - ( y0 ) ) )
-
-	if ( m < 0 )
-		return 0;
+	//method specific variables
+	int magnitude2, len_limit; //The square of the magnitude
+	int k;
+	int mx0 = x0, mx1 = x1, my0 = y0, my1 = y1;
 
 	len_limit = magnitude2 = MAGNITUDE2(x0, y0, x1, y1);
-	if ( magnitude2 < 1 ) //Same begin and ending point, can't trace path.
+	if (magnitude2 < 1) //Same begin and ending point, can't trace path.
 		return 0;
 
-	if ( length ) { //Adjust final position to fit in the given area.
+	if (length) { //Adjust final position to fit in the given area.
 		//TODO: Find an alternate method which does not requires a square root calculation.
 		k = (int)sqrt((float)magnitude2);
 		mx1 = x0 + (x1 - x0) * length / k;
@@ -1049,7 +1114,7 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int16 m,int16 x0,i
 		len_limit = MAGNITUDE2(x0, y0, mx1, my1);
 	}
 	//Expand target area to cover range.
-	if ( mx0 > mx1 ) {
+	if (mx0 > mx1) {
 		mx0 += range;
 		mx1 -= range;
 	} else {
@@ -1063,191 +1128,19 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int16 m,int16 x0,i
 		my0 -= range;
 		my1 += range;
 	}
-
-	//The two fors assume mx0 < mx1 && my0 < my1
-	if ( mx0 > mx1 )
-		swap(mx0, mx1);
-	if ( my0 > my1 )
-		swap(my0, my1);
-
-	mx0 = max(mx0, 0);
-	my0 = max(my0, 0);
-	mx1 = min(mx1, map[ m ].xs - 1);
-	my1 = min(my1, map[ m ].ys - 1);
-
 	range *= range << 8; //Values are shifted later on for higher precision using int math.
 
-	if ( type&~BL_MOB )
-		for ( by = my0 / BLOCK_SIZE; by <= my1 / BLOCK_SIZE; by++ ) {
-			for( bx = mx0 / BLOCK_SIZE; bx <= mx1 / BLOCK_SIZE; bx++ ) {
-				for( bl = map[ m ].block[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-					if( bl->prev && bl->type&type && bl_list_count < BL_LIST_MAX ) {
-						xi = bl->x;
-						yi = bl->y;
+	bl_getall_area(type, m, mx0, my0, mx1, my1, bl_vgetall_inpath, m, x0, y0, x1, y1, range, len_limit, magnitude2);
 
-						k = ( xi - x0 ) * ( x1 - x0 ) + ( yi - y0 ) * ( y1 - y0 );
+	va_start(ap, type);
+	returnCount = bl_vforeach(func, blockcount, INT_MAX, ap);
+	va_end(ap);
 
-						if ( k < 0 || k > len_limit ) //Since more skills use this, check for ending point as well.
-							continue;
-
-						if ( k > magnitude2 && !path_search_long(NULL, m, x0, y0, xi, yi, CELL_CHKWALL) )
-							continue; //Targets beyond the initial ending point need the wall check.
-
-						//All these shifts are to increase the precision of the intersection point and distance considering how it's
-						//int math.
-						k  = ( k << 4 ) / magnitude2; //k will be between 1~16 instead of 0~1
-						xi <<= 4;
-						yi <<= 4;
-						xu = ( x0 << 4 ) + k * ( x1 - x0 );
-						yu = ( y0 << 4 ) + k * ( y1 - y0 );
-						k  = MAGNITUDE2(xi, yi, xu, yu);
-
-						//If all dot coordinates were <<4 the square of the magnitude is <<8
-						if ( k > range )
-							continue;
-
-						bl_list[ bl_list_count++ ] = bl;
-					}
-				}
-			}
-		}
-		if( type&BL_MOB )
-			for( by = my0 / BLOCK_SIZE; by <= my1 / BLOCK_SIZE; by++ ) {
-				for( bx = mx0 / BLOCK_SIZE; bx <= mx1 / BLOCK_SIZE; bx++ ) {
-					for( bl = map[ m ].block_mob[ bx + by * map[ m ].bxs ]; bl != NULL; bl = bl->next ) {
-						if( bl->prev && bl_list_count < BL_LIST_MAX ) {
-							xi = bl->x;
-							yi = bl->y;
-							k = ( xi - x0 ) * ( x1 - x0 ) + ( yi - y0 ) * ( y1 - y0 );
-
-							if ( k < 0 || k > len_limit )
-								continue;
-
-							if ( k > magnitude2 && !path_search_long(NULL, m, x0, y0, xi, yi, CELL_CHKWALL) )
-								continue; //Targets beyond the initial ending point need the wall check.
-
-							k  = ( k << 4 ) / magnitude2; //k will be between 1~16 instead of 0~1
-							xi <<= 4;
-							yi <<= 4;
-							xu = ( x0 << 4 ) + k * ( x1 - x0 );
-							yu = ( y0 << 4 ) + k * ( y1 - y0 );
-							k  = MAGNITUDE2(xi, yi, xu, yu);
-
-							//If all dot coordinates were <<4 the square of the magnitude is <<8
-							if ( k > range )
-								continue;
-
-							bl_list[ bl_list_count++ ] = bl;
-						}
-					}
-				}
-			}
-
-			if( bl_list_count >= BL_LIST_MAX )
-				ShowWarning("map_foreachinpath: block count too many!\n");
-
-			iMap->freeblock_lock();
-
-			for( i = blockcount; i < bl_list_count; i++ )
-				if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-					va_start(ap, type);
-					returnCount += func(bl_list[ i ], ap);
-					va_end(ap);
-				}
-
-				iMap->freeblock_unlock();
-
-				bl_list_count = blockcount;
-				return returnCount;	//[Skotlex]
-
-}
-
-// Copy of map_foreachincell, but applied to the whole map. [Skotlex]
-int map_foreachinmap(int (*func)(struct block_list*,va_list), int16 m, int type,...) {
-	int b, bsize;
-	int returnCount = 0;  //total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i;
-	va_list ap;
-
-	bsize = map[ m ].bxs * map[ m ].bys;
-
-	if( type&~BL_MOB )
-		for( b = 0; b < bsize; b++ )
-			for( bl = map[ m ].block[ b ]; bl != NULL; bl = bl->next )
-				if( bl->type&type && bl_list_count < BL_LIST_MAX )
-					bl_list[ bl_list_count++ ] = bl;
-
-	if( type&BL_MOB )
-		for( b = 0; b < bsize; b++ )
-			for( bl = map[ m ].block_mob[ b ]; bl != NULL; bl = bl->next )
-				if( bl_list_count < BL_LIST_MAX )
-					bl_list[ bl_list_count++ ] = bl;
-
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinmap: block count too many!\n");
-
-	iMap->freeblock_lock();
-
-	for( i = blockcount; i < bl_list_count ; i++ )
-		if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-			va_start(ap, type);
-			returnCount += func(bl_list[ i ], ap);
-			va_end(ap);
-		}
-
-		iMap->freeblock_unlock();
-
-		bl_list_count = blockcount;
-		return returnCount;
-}
-// Copy of map_foreachinmap, but applied to all maps in a instance id. [Ind/Hercules]
-int map_foreachininstance(int (*func)(struct block_list*,va_list), int16 instance_id, int type,...) {
-	int b, bsize;
-	int returnCount = 0;  //total sum of returned values of func() [Skotlex]
-	struct block_list *bl;
-	int blockcount = bl_list_count, i, j;
-	int16 m;
-	va_list ap;
-
-	for( j = 0; j < instances[instance_id].num_map; j++ ) {
-
-		m = instances[instance_id].map[j];
-
-		bsize = map[ m ].bxs * map[ m ].bys;
-
-		if( type&~BL_MOB )
-			for( b = 0; b < bsize; b++ )
-				for( bl = map[ m ].block[ b ]; bl != NULL; bl = bl->next )
-					if( bl->type&type && bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-		if( type&BL_MOB )
-			for( b = 0; b < bsize; b++ )
-				for( bl = map[ m ].block_mob[ b ]; bl != NULL; bl = bl->next )
-					if( bl_list_count < BL_LIST_MAX )
-						bl_list[ bl_list_count++ ] = bl;
-
-		if( bl_list_count >= BL_LIST_MAX )
-			ShowWarning("map_foreachininstance: block count too many!\n");
-
-		iMap->freeblock_lock();
-
-		for( i = blockcount; i < bl_list_count ; i++ )
-			if( bl_list[ i ]->prev ) { //func() may delete this bl_list[] slot, checking for prev ensures it wasnt queued for deletion.
-				va_start(ap, type);
-				returnCount += func(bl_list[ i ], ap);
-				va_end(ap);
-			}
-
-			iMap->freeblock_unlock();
-
-	}
-
-	bl_list_count = blockcount;
 	return returnCount;
 }
+#undef MAGNITUDE2
 
+/** @} */
 
 /// Generates a new flooritem object id from the interval [MIN_FLOORITEM, MAX_FLOORITEM).
 /// Used for floor items, skill units and chatroom objects.
@@ -1295,7 +1188,7 @@ int map_clearflooritem_timer(int tid, unsigned int tick, int id, intptr_t data)
 
 
 	if (search_petDB_index(fitem->item_data.nameid, PET_EGG) >= 0)
-		intif_delete_petdata(MakeDWord(fitem->item_data.card[1], fitem->item_data.card[2]));
+		intif->delete_petdata(MakeDWord(fitem->item_data.card[1], fitem->item_data.card[2]));
 
 	clif->clearflooritem(fitem, 0);
 	iMap->deliddb(&fitem->bl);
@@ -1646,7 +1539,7 @@ int map_quit(struct map_session_data *sd) {
 	if (sd->npc_id)
 		npc_event_dequeue(sd);
 
-	if( sd->bg_id )
+	if( sd->bg_id && !sd->bg_queue.arena ) /* TODO: dump this chunk after bg_queue is fully enabled */
 		bg_team_leave(sd,1);
 
 	skill->cooldown_save(sd);
@@ -1672,7 +1565,7 @@ int map_quit(struct map_session_data *sd) {
 	if( sd->sc.count ) {
 		//Status that are not saved...
 		for(i=0; i < SC_MAX; i++){
-			if ( status_get_sc_type(i)&SC_NO_SAVE ){
+			if ( iStatus->get_sc_type(i)&SC_NO_SAVE ){
 				if ( !sd->sc.data[i] )
 					continue;
 				switch( i ){
@@ -1701,7 +1594,7 @@ int map_quit(struct map_session_data *sd) {
 	if (sd->state.permanent_speed == 1) sd->state.permanent_speed = 0; // Remove lock so speed is set back to normal at login.
 
 	if( sd->ed ) {
-		elemental_clean_effect(sd->ed);
+		elemental->clean_effect(sd->ed);
 		unit_remove_map(&sd->ed->bl,CLR_TELEPORT);
 	}
 
@@ -3548,9 +3441,17 @@ int inter_config_read(char *cfgName) {
 			strcpy(map_server_db, w2);
 		else if(strcmpi(w1,"default_codepage")==0)
 			strcpy(default_codepage, w2);
-		else if(strcmpi(w1,"use_sql_db")==0) {
-			iMap->db_use_sqldbs = config_switch(w2);
-			ShowStatus ("Using SQL dbs: %s\n",w2);
+		else if(strcmpi(w1,"use_sql_item_db")==0) {
+			iMap->db_use_sql_item_db = config_switch(w2);
+			ShowStatus ("Using item database as SQL: '%s'\n", w2);
+		}
+		else if(strcmpi(w1,"use_sql_mob_db")==0) {
+			iMap->db_use_sql_mob_db = config_switch(w2);
+			ShowStatus ("Using monster database as SQL: '%s'\n", w2);
+		}
+		else if(strcmpi(w1,"use_sql_mob_skill_db")==0) {
+			iMap->db_use_sql_mob_skill_db = config_switch(w2);
+			ShowStatus ("Using monster skill database as SQL: '%s'\n", w2);
 		}
 		/* sql log db */
 		else if(strcmpi(w1,"log_db_ip")==0)
@@ -4444,7 +4345,7 @@ unsigned short map_zone_str2itemid(const char *name) {
 
 	if( !name )
 		return 0;
-	if( name[0] == 'I' && name[1] == 'D' && strlen(name) <= 7 ) {
+	if( name[0] == 'I' && name[1] == 'D' && strlen(name) < 8 ) {
 		if( !( data = itemdb->exists(atoi(name+2))) ) {
 			return 0;
 		}
@@ -4461,7 +4362,7 @@ unsigned short map_zone_str2skillid(const char *name) {
 	if( !name )
 		return 0;
 
-	if( name[0] == 'I' && name[1] == 'D' && strlen(name) <= 7 ) {
+	if( name[0] == 'I' && name[1] == 'D' && strlen(name) < 8 ) {
 		if( !skill->get_index((nameid = atoi(name+2))) )
 			return 0;
 	} else {
@@ -5003,6 +4904,7 @@ void do_final(void)
 	ShowStatus("Terminating...\n");
 	hChSys.closing = true;
 	HPM->event(HPET_FINAL);
+	if (cpsd) aFree(cpsd);
 
 	//Ladies and babies first.
 	iter = mapit_getallusers();
@@ -5043,11 +4945,11 @@ void do_final(void)
 	homun->final();
 	atcommand->final_msg();
 	skill->final();
-	do_final_status();
+	iStatus->do_final_status();
 	do_final_unit();
 	do_final_battleground();
-	do_final_duel();
-	do_final_elemental();
+	iDuel->do_final_duel();
+	elemental->do_final_elemental();
 	do_final_maps();
 	vending->final();
 
@@ -5175,7 +5077,7 @@ static bool map_arg_next_value(const char* option, int i, int argc)
 
 	return true;
 }
-struct map_session_data cpsd;
+
 CPCMD(gm_position) {
 	int x = 0, y = 0, m = 0;
 	char map_name[25];
@@ -5196,9 +5098,9 @@ CPCMD(gm_position) {
 	}
 
 	ShowInfo("HCP: updated console's game position to '"CL_WHITE"%d %d %s"CL_RESET"'\n",x,y,map_name);
-	cpsd.bl.x = x;
-	cpsd.bl.y = y;
-	cpsd.bl.m = m;
+	cpsd->bl.x = x;
+	cpsd->bl.y = y;
+	cpsd->bl.m = m;
 }
 CPCMD(gm_use) {
 
@@ -5206,25 +5108,27 @@ CPCMD(gm_use) {
 		ShowError("gm:use invalid syntax. use '"CL_WHITE"gm:use @command <optional params>"CL_RESET"'\n");
 		return;
 	}
-	cpsd.fd = -2;
-	if( !atcommand->parse(cpsd.fd, &cpsd, line, 0) )
+	cpsd->fd = -2;
+	if( !atcommand->parse(cpsd->fd, cpsd, line, 0) )
 		ShowInfo("HCP: '"CL_WHITE"%s"CL_RESET"' failed\n",line);
 	else
 		ShowInfo("HCP: '"CL_WHITE"%s"CL_RESET"' was used\n",line);
-	cpsd.fd = 0;
+	cpsd->fd = 0;
 
 }
 /* Hercules Console Parser */
 void map_cp_defaults(void) {
+#ifdef CONSOLE_INPUT
 	/* default HCP data */
-	memset(&cpsd, 0, sizeof(struct map_session_data));
-	strcpy(cpsd.status.name, "Hercules Console");
-	cpsd.bl.x = 150;
-	cpsd.bl.y = 150;
-	cpsd.bl.m = iMap->mapname2mapid("prontera");
+	cpsd = pc->get_dummy_sd();
+	strcpy(cpsd->status.name, "Hercules Console");
+	cpsd->bl.x = MAP_DEFAULT_X;
+	cpsd->bl.y = MAP_DEFAULT_Y;
+	cpsd->bl.m = iMap->mapname2mapid(MAP_DEFAULT);
 
 	console->addCommand("gm:info",CPCMD_A(gm_position));
 	console->addCommand("gm:use",CPCMD_A(gm_use));
+#endif
 }
 /* Hercules Plugin Mananger */
 void map_hp_symbols(void) {
@@ -5251,6 +5155,14 @@ void map_hp_symbols(void) {
 	HPM->share(party,"party");
 	HPM->share(storage,"storage");
 	HPM->share(trade,"trade");
+	HPM->share(iStatus,"iStatus");
+	HPM->share(chat, "chat");
+	HPM->share(iDuel,"iDuel");
+	HPM->share(elemental,"elemental");
+	HPM->share(intif,"intif");
+	HPM->share(mercenary,"mercenary");
+
+
 	/* partial */
 	HPM->share(mapit,"mapit");
 	/* sql link */
@@ -5258,11 +5170,14 @@ void map_hp_symbols(void) {
 	/* specific */
 	HPM->share(atcommand->create,"addCommand");
 	HPM->share(script->addScript,"addScript");
+	HPM->share(HPM_map_addToMSD,"addToMSD");
+	HPM->share(HPM_map_getFromMSD,"getFromMSD");
+	HPM->share(HPM_map_removeFromMSD,"removeFromMSD");
 	/* vars */
 	HPM->share(map,"map");
 }
 
-void load_defaults(void) {
+void map_load_defaults(void) {
 	atcommand_defaults();
 	battle_defaults();
 	battleground_defaults();
@@ -5286,6 +5201,12 @@ void load_defaults(void) {
 	party_defaults();
 	storage_defaults();
 	trade_defaults();
+	status_defaults();
+	chat_defaults();
+	iDuel_defaults();
+	elemental_defaults();
+	intif_defaults();
+	mercenary_defaults();
 }
 int do_init(int argc, char *argv[])
 {
@@ -5314,7 +5235,9 @@ int do_init(int argc, char *argv[])
 	iMap->night_flag = 0; // 0=day, 1=night [Yor]
 	iMap->enable_spy = 0; //To enable/disable @spy commands, which consume too much cpu time when sending packets. [Skotlex]
 
-	iMap->db_use_sqldbs = 0;
+	iMap->db_use_sql_item_db = 0;
+	iMap->db_use_sql_mob_db = 0;
+	iMap->db_use_sql_mob_skill_db = 0;
 
 	sprintf(iMap->item_db_db, "item_db");
 	sprintf(iMap->item_db2_db, "item_db2");
@@ -5393,7 +5316,7 @@ int do_init(int argc, char *argv[])
 	}
 	memset(&index2mapid, -1, sizeof(index2mapid));
 
-	load_defaults();
+	map_load_defaults();
 	map_config_read(iMap->MAP_CONF_NAME);
 	CREATE(map,struct map_data,iMap->map_num);
 	iMap->map_num = 0;
@@ -5424,7 +5347,7 @@ int do_init(int argc, char *argv[])
 
 	battle->config_read(iMap->BATTLE_CONF_FILENAME);
 	atcommand->msg_read(iMap->MSG_CONF_NAME);
-	script_config_read(iMap->SCRIPT_CONF_NAME);
+	script->config_read(iMap->SCRIPT_CONF_NAME);
 	inter_config_read(iMap->INTER_CONF_NAME);
 	logs->config_read(iMap->LOG_CONF_NAME);
 
@@ -5457,6 +5380,7 @@ int do_init(int argc, char *argv[])
 	iTimer->add_timer_func_list(map_removemobs_timer, "map_removemobs_timer");
 	iTimer->add_timer_interval(iTimer->gettick()+1000, map_freeblock_timer, 0, 0, 60*1000);
 
+	HPM->load_sub = HPM_map_plugin_load_sub;
 	HPM->symbol_defaults_sub = map_hp_symbols;
 	HPM->config_read();
 	HPM->event(HPET_INIT);
@@ -5473,19 +5397,19 @@ int do_init(int argc, char *argv[])
 	read_map_zone_db();/* read after item and skill initalization */
 	do_init_mob();
 	pc->do_init_pc();
-	do_init_status();
+	iStatus->do_init_status();
 	party->do_init_party();
 	guild->init();
 	storage->init();
 	do_init_pet();
 	homun->init();
-	do_init_mercenary();
-	do_init_elemental();
+	mercenary->init();
+	elemental->do_init_elemental();
 	do_init_quest();
 	do_init_npc();
 	do_init_unit();
 	do_init_battleground();
-	do_init_duel();
+	iDuel->do_init_duel();
 	vending->init();
 
 	npc_event_do_oninit();	// Init npcs (OnInit)
@@ -5494,7 +5418,11 @@ int do_init(int argc, char *argv[])
 		ShowNotice("Server is running on '"CL_WHITE"PK Mode"CL_RESET"'.\n");
 
 	Sql_HerculesUpdateCheck(mmysql_handle);
-
+	
+#ifdef CONSOLE_INPUT
+	console->setSQL(mmysql_handle);
+#endif
+	
 	ShowStatus("Server is '"CL_GREEN"ready"CL_RESET"' and listening on port '"CL_WHITE"%d"CL_RESET"'.\n\n", map_port);
 
 	if( runflag != CORE_ST_STOP ) {
@@ -5562,6 +5490,23 @@ void map_defaults(void) {
 	iMap->charid2nick = map_charid2nick;
 	iMap->charid2sd = map_charid2sd;
 
+	iMap->map_foreachpc = map_map_foreachpc;
+	iMap->map_foreachmob = map_map_foreachmob;
+	iMap->map_foreachnpc = map_map_foreachnpc;
+	iMap->map_foreachregen = map_map_foreachregen;
+	iMap->map_foreachiddb = map_map_foreachiddb;
+
+	iMap->foreachinrange = map_foreachinrange;
+	iMap->foreachinshootrange = map_foreachinshootrange;
+	iMap->foreachinarea = map_foreachinarea;
+	iMap->forcountinrange = map_forcountinrange;
+	iMap->forcountinarea = map_forcountinarea;
+	iMap->foreachinmovearea = map_foreachinmovearea;
+	iMap->foreachincell = map_foreachincell;
+	iMap->foreachinpath = map_foreachinpath;
+	iMap->foreachinmap = map_foreachinmap;
+	iMap->foreachininstance = map_foreachininstance;
+
 	iMap->id2sd = map_id2sd;
 	iMap->id2md = map_id2md;
 	iMap->id2nd = map_id2nd;
@@ -5606,23 +5551,6 @@ void map_defaults(void) {
 	iMap->clean = map_clean;
 
 	iMap->do_shutdown = do_shutdown;
-
-	iMap->map_foreachpc = map_map_foreachpc;
-	iMap->map_foreachmob = map_map_foreachmob;
-	iMap->map_foreachnpc = map_map_foreachnpc;
-	iMap->map_foreachregen = map_map_foreachregen;
-	iMap->map_foreachiddb = map_map_foreachiddb;
-
-	iMap->foreachinrange = map_foreachinrange;
-	iMap->foreachinshootrange = map_foreachinshootrange;
-	iMap->foreachinarea=map_foreachinarea;
-	iMap->forcountinrange=map_forcountinrange;
-	iMap->forcountinarea=map_forcountinarea;
-	iMap->foreachinmovearea = map_foreachinmovearea;
-	iMap->foreachincell=map_foreachincell;
-	iMap->foreachinpath=map_foreachinpath;
-	iMap->foreachinmap=map_foreachinmap;
-	iMap->foreachininstance=map_foreachininstance;
 
 	/* temporary until the map.c "Hercules Renewal Phase One" design is complete. [Ind] */
 	mapit = &mapit_s;

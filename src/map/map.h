@@ -1,8 +1,10 @@
 // Copyright (c) Hercules Dev Team, licensed under GNU GPL.
 // See the LICENSE file
 // Portions Copyright (c) Athena Dev Teams
+
 #ifndef _MAP_H_
 #define _MAP_H_
+
 #include "../common/cbasetypes.h"
 #include "../common/core.h" // CORE_ST_LAST
 #include "../common/mmo.h"
@@ -11,14 +13,17 @@
 #include "../config/core.h"
 #include "atcommand.h"
 #include <stdarg.h>
+
 struct npc_data;
 struct item_data;
 struct hChSysCh;
+
 enum E_MAPSERVER_ST {
 	MAPSERVER_ST_RUNNING = CORE_ST_LAST,
 	MAPSERVER_ST_SHUTDOWN,
 	MAPSERVER_ST_LAST
 };
+
 #define MAX_NPC_PER_MAP 512
 #define AREA_SIZE battle_config.area_size
 #define DAMAGELOG_SIZE 30
@@ -34,6 +39,7 @@ enum E_MAPSERVER_ST {
 #define MAX_IGNORE_LIST 20 // official is 14
 #define MAX_VENDING 12
 #define MAX_MAP_SIZE 512*512 // Wasn't there something like this already? Can't find it.. [Shinryo]
+
 // Added definitions for WoESE objects. [L0ne_W0lf]
 enum MOBID {
 	MOBID_EMPERIUM = 1288,
@@ -51,6 +57,7 @@ enum MOBID {
 	MOBID_SILVERSNIPER = 2042,
 	MOBID_MAGICDECOY_WIND = 2046,
 };
+
 // The following system marks a different job ID system used by the map server,
 // which makes a lot more sense than the normal one. [Skotlex]
 // These marks the "level" of the job.
@@ -193,6 +200,7 @@ enum {
 	MAPID_BABY_GENETIC,
 	MAPID_BABY_CHASER,
 };
+
 // Max size for inputs to Graffiti, Talkie Box and Vending text prompts
 #define MESSAGE_SIZE (79 + 1)
 // String length you can write in the 'talking box'
@@ -295,7 +303,6 @@ struct block_list {
 	int16 m,x,y;
 	enum bl_type type;
 };
-
 
 // Mob List Held in memory for Dynamic Mobs [Wizputer]
 // Expanded to specify all mob-related spawn data by [Skotlex]
@@ -449,8 +456,7 @@ typedef enum {
 
 } cell_chk;
 
-struct mapcell
-{
+struct mapcell {
 	// terrain flags
 	unsigned char
 walkable : 1,
@@ -517,7 +523,10 @@ struct map_zone_skill_damage_cap_entry {
 #define MAP_ZONE_BG_NAME "Battlegrounds"
 #define MAP_ZONE_PK_NAME "PK Mode"
 #define MAP_ZONE_MAPFLAG_LENGTH 50
+
+//TODO place it in iMap
 DBMap *zone_db;/* string => struct map_zone_data */
+
 struct map_zone_data {
 	char name[MAP_ZONE_NAME_LENGTH];/* 20'd */
 	struct map_zone_disabled_skill_entry **disabled_skills;
@@ -541,13 +550,23 @@ struct map_drop_list {
 	int drop_per;
 };
 
-
 struct map_data {
 	char name[MAP_NAME_LENGTH];
 	uint16 index; // The map index used by the mapindex* functions.
 	struct mapcell* cell; // Holds the information of each map cell (NULL if the map is not on this map-server).
-	struct block_list **block;
-	struct block_list **block_mob;
+	
+	/* 2D Orthogonal Range Search: Grid Implementation
+	   "Algorithms in Java, Parts 1-4" 3.18, Robert Sedgewick
+	   Map is divided into squares, called blocks (side length = BLOCK_SIZE).
+	   For each block there is a linked list of objects in that block (block_list).
+	   Array provides capability to access immediately the set of objects close 
+	   to a given object.
+	   The linked lists provide the flexibility to store the objects without 
+	   knowing ahead how many objects fall into each block.
+	*/
+	struct block_list **block; // Grid array of block_lists containing only non-BL_MOB objects
+	struct block_list **block_mob; // Grid array of block_lists containing only BL_MOB objects
+	
 	int16 m;
 	int16 xs,ys; // map dimensions (in cells)
 	int16 bxs,bys; // map dimensions (in blocks)
@@ -680,26 +699,6 @@ struct map_data_other_server {
 
 struct map_data *map;
 
-
-
-
-
-
-//int map_foreachinrange(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, ...);
-//int map_foreachinshootrange(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, ...);
-//int map_foreachinarea(int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int type, ...);
-//int map_forcountinrange(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int count, int type, ...);
-//int map_forcountinarea(int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int count, int type, ...);
-//int map_foreachinmovearea(int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int type, ...);
-//int map_foreachincell(int (*func)(struct block_list*,va_list), int16 m, int16 x, int16 y, int type, ...);
-//int map_foreachinpath(int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int16 range, int length, int type, ...);
-//int map_foreachinmap(int (*func)(struct block_list*,va_list), int16 m, int type, ...);
-//int map_foreachininstance(int (*func)(struct block_list*,va_list), int16 instance_id, int type,...);
-//
-
-
-
-
 #define map_id2index(id) map[(id)].index
 
 /// Bitfield of flags for the iterator.
@@ -707,7 +706,9 @@ enum e_mapitflags {
 	MAPIT_NORMAL = 0,
 	//	MAPIT_PCISPLAYING = 1,// Unneeded as pc_db/id_db will only hold auth'ed, active players.
 };
+
 struct s_mapiterator;
+
 /* temporary until the map.c "Hercules Renewal Phase One" design is complete. */
 struct mapit_interface {
 	struct s_mapiterator*   (*alloc) (enum e_mapitflags flags, enum bl_type types);
@@ -718,18 +719,14 @@ struct mapit_interface {
 	struct block_list*      (*prev) (struct s_mapiterator* mapit);
 	bool                    (*exists) (struct s_mapiterator* mapit);
 } mapit_s;
+
 struct mapit_interface *mapit;
+
 #define mapit_getallusers() mapit->alloc(MAPIT_NORMAL,BL_PC)
 #define mapit_geteachpc()   mapit->alloc(MAPIT_NORMAL,BL_PC)
 #define mapit_geteachmob()  mapit->alloc(MAPIT_NORMAL,BL_MOB)
 #define mapit_geteachnpc()  mapit->alloc(MAPIT_NORMAL,BL_NPC)
 #define mapit_geteachiddb() mapit->alloc(MAPIT_NORMAL,BL_ALL)
-
-
-
-
-
-
 
 //Useful typedefs from jA [Skotlex]
 typedef struct map_session_data TBL_PC;
@@ -751,8 +748,6 @@ typedef struct elemental_data	TBL_ELEM;
 
 extern Sql* mmysql_handle;
 extern Sql* logmysql_handle;
-
-
 
 /*=====================================
 * Interface : map.h 
@@ -788,7 +783,9 @@ struct map_interface {
 	char *MSG_CONF_NAME;
 	char *GRF_PATH_FILENAME;
 
-	int db_use_sqldbs;
+	int db_use_sql_item_db;
+	int db_use_sql_mob_db;
+	int db_use_sql_mob_skill_db;
 
 	char item_db_db[32];
 	char item_db2_db[32];
@@ -900,7 +897,7 @@ struct map_interface {
 	int (*addmobtolist) (unsigned short m, struct spawn_data *spawn); // [Wizputer]
 	void (*spawnmobs) (int16 m); // [Wizputer]
 	void (*removemobs) (int16 m); // [Wizputer]
-	void (*do_reconnect_map) (void); //Invoked on map-char reconnection [Skotlex] Note used but still keeping it, just in case
+	//void (*do_reconnect_map) (void); //Invoked on map-char reconnection [Skotlex] Note used but still keeping it, just in case
 	void (*addmap2db) (struct map_data *m);
 	void (*removemapdb) (struct map_data *m);
 	void (*clean) (int i);

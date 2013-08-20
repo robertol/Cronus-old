@@ -159,7 +159,7 @@ void mvptomb_create(struct mob_data *md, char *killer, time_t time)
 
 	iMap->addnpc(nd->bl.m, nd);
 	iMap->addblock(&nd->bl);
-	status_set_viewdata(&nd->bl, nd->class_);
+	iStatus->set_viewdata(&nd->bl, nd->class_);
     clif->spawn(&nd->bl);
 
 }
@@ -284,8 +284,8 @@ struct mob_data* mob_spawn_dataset(struct spawn_data *data) {
 	md->spawn_timer = INVALID_TIMER;
 	md->deletetimer = INVALID_TIMER;
 	md->skill_idx = -1;
-	status_set_viewdata(&md->bl, md->class_);
-	status_change_init(&md->bl);
+	iStatus->set_viewdata(&md->bl, md->class_);
+	iStatus->change_init(&md->bl);
 	unit_dataset(&md->bl);
 	
 	iMap->addiddb(&md->bl);
@@ -413,7 +413,7 @@ bool mob_ksprotected (struct block_list *src, struct block_list *target)
 		return true;
 	} while(0);
 
-	status_change_start(target, SC_KSPROTECTED, 10000, sd->bl.id, sd->state.noks, sd->status.party_id, sd->status.guild_id, battle_config.ksprotection, 0);
+	iStatus->change_start(target, SC_KSPROTECTED, 10000, sd->bl.id, sd->state.noks, sd->status.party_id, sd->status.guild_id, battle_config.ksprotection, 0);
 
 	return false;
 }
@@ -908,7 +908,7 @@ int mob_spawn (struct mob_data *md)
 	if (md->spawn && md->class_ != md->spawn->class_)
 	{
 		md->class_ = md->spawn->class_;
-		status_set_viewdata(&md->bl, md->class_);
+		iStatus->set_viewdata(&md->bl, md->class_);
 		md->db = mob_db(md->class_);
 		memcpy(md->name,md->spawn->name,NAME_LENGTH);
 	}
@@ -1031,7 +1031,7 @@ int mob_target(struct mob_data *md,struct block_list *bl,int dist)
 	if(md->target_id && !mob_can_changetarget(md, bl, status_get_mode(&md->bl)))
 		return 0;
 
-	if(!status_check_skilluse(&md->bl, bl, 0, 0))
+	if(!iStatus->check_skilluse(&md->bl, bl, 0, 0))
 		return 0;
 
 	md->target_id = bl->id;	// Since there was no disturbance, it locks on to target.
@@ -1059,10 +1059,10 @@ static int mob_ai_sub_hard_activesearch(struct block_list *bl,va_list ap)
 	mode= va_arg(ap,int);
 
 	//If can't seek yet, not an enemy, or you can't attack it, skip.
-	if ((*target) == bl || !status_check_skilluse(&md->bl, bl, 0, 0))
+	if ((*target) == bl || !iStatus->check_skilluse(&md->bl, bl, 0, 0))
 		return 0;
 
-	if ((mode&MD_TARGETWEAK) && status_get_lv(bl) >= md->level-5)
+	if ((mode&MD_TARGETWEAK) && iStatus->get_lv(bl) >= md->level-5)
 		return 0;
 
 	if(battle->check_target(&md->bl,bl,BCT_ENEMY)<=0)
@@ -1120,7 +1120,7 @@ static int mob_ai_sub_hard_changechase(struct block_list *bl,va_list ap)
 	//If can't seek yet, not an enemy, or you can't attack it, skip.
 	if ((*target) == bl ||
 		battle->check_target(&md->bl,bl,BCT_ENEMY)<=0 ||
-	  	!status_check_skilluse(&md->bl, bl, 0, 0))
+	  	!iStatus->check_skilluse(&md->bl, bl, 0, 0))
 		return 0;
 
 	if(battle->check_range (&md->bl, bl, md->status.rhw.range)) {
@@ -1142,7 +1142,7 @@ static int mob_ai_sub_hard_bg_ally(struct block_list *bl,va_list ap) {
 	md=va_arg(ap,struct mob_data *);
 	target= va_arg(ap,struct block_list**);
 
-	if( status_check_skilluse(&md->bl, bl, 0, 0) && battle->check_target(&md->bl,bl,BCT_ENEMY)<=0 ) {
+	if( iStatus->check_skilluse(&md->bl, bl, 0, 0) && battle->check_target(&md->bl,bl,BCT_ENEMY)<=0 ) {
 		(*target) = bl;
 	}
 	return 1;
@@ -1208,7 +1208,7 @@ static int mob_ai_sub_hard_slavemob(struct mob_data *md,unsigned int tick)
 
 	bl=iMap->id2bl(md->master_id);
 
-	if (!bl || status_isdead(bl)) {
+	if (!bl || iStatus->isdead(bl)) {
 		status_kill(&md->bl);
 		return 1;
 	}
@@ -1268,7 +1268,7 @@ static int mob_ai_sub_hard_slavemob(struct mob_data *md,unsigned int tick)
 				if (tbl && battle->check_target(&md->bl, tbl, BCT_ENEMY) <= 0)
 					tbl = NULL;
 			}
-			if (tbl && status_check_skilluse(&md->bl, tbl, 0, 0)) {
+			if (tbl && iStatus->check_skilluse(&md->bl, tbl, 0, 0)) {
 				md->target_id=tbl->id;
 				md->min_chase=md->db->range3+distance_bl(&md->bl, tbl);
 				if(md->min_chase>MAX_MINCHASE)
@@ -1361,10 +1361,10 @@ int mob_randomwalk(struct mob_data *md,unsigned int tick)
 		}
 		return 0;
 	}
-	speed=status_get_speed(&md->bl);
+	speed=iStatus->get_speed(&md->bl);
 	for(i=c=0;i<md->ud.walkpath.path_len;i++){	// The next walk start time is calculated.
 		if(md->ud.walkpath.path[i]&1)
-			c+=speed*14/10;
+			c+=speed*MOVE_DIAGONAL_COST/MOVE_COST;
 		else
 			c+=speed;
 	}
@@ -1439,7 +1439,7 @@ static bool mob_ai_sub_hard(struct mob_data *md, unsigned int tick)
 	{	//Check validity of current target. [Skotlex]
 		tbl = iMap->id2bl(md->target_id);
 		if (!tbl || tbl->m != md->bl.m ||
-			(md->ud.attacktimer == INVALID_TIMER && !status_check_skilluse(&md->bl, tbl, 0, 0)) ||
+			(md->ud.attacktimer == INVALID_TIMER && !iStatus->check_skilluse(&md->bl, tbl, 0, 0)) ||
 			(md->ud.walktimer != INVALID_TIMER && !(battle_config.mob_ai&0x1) && !check_distance_bl(&md->bl, tbl, md->min_chase)) ||
 			(
 				tbl->type == BL_PC &&
@@ -1480,7 +1480,7 @@ static bool mob_ai_sub_hard(struct mob_data *md, unsigned int tick)
 			if( md->bl.m != abl->m || abl->prev == NULL
 				|| (dist = distance_bl(&md->bl, abl)) >= MAX_MINCHASE // Attacker longer than visual area
 				|| battle->check_target(&md->bl, abl, BCT_ENEMY) <= 0 // Attacker is not enemy of mob
-				|| (battle_config.mob_ai&0x2 && !status_check_skilluse(&md->bl, abl, 0, 0)) // Cannot normal attack back to Attacker
+				|| (battle_config.mob_ai&0x2 && !iStatus->check_skilluse(&md->bl, abl, 0, 0)) // Cannot normal attack back to Attacker
 				|| (!battle->check_range(&md->bl, abl, md->status.rhw.range) // Not on Melee Range and ...
 				&& ( // Reach check
 					(!can_move && DIFF_TICK(tick, md->ud.canmove_tick) > 0 && (battle_config.mob_ai&0x2 || (md->sc.data[SC_SPIDERWEB] && md->sc.data[SC_SPIDERWEB]->val1)
@@ -1500,7 +1500,7 @@ static bool mob_ai_sub_hard(struct mob_data *md, unsigned int tick)
 				}
 			}
 			else
-			if (!(battle_config.mob_ai&0x2) && !status_check_skilluse(&md->bl, abl, 0, 0))
+			if (!(battle_config.mob_ai&0x2) && !iStatus->check_skilluse(&md->bl, abl, 0, 0))
 			{
 				//Can't attack back, but didn't invoke a rude attacked skill...
 			}
@@ -1605,7 +1605,7 @@ static bool mob_ai_sub_hard(struct mob_data *md, unsigned int tick)
 			memcpy (&md->lootitem[md->lootitem_count++], &fitem->item_data, sizeof(md->lootitem[0]));
 		} else {	//Destroy first looted item...
 			if (md->lootitem[0].card[0] == CARD0_PET)
-				intif_delete_petdata( MakeDWord(md->lootitem[0].card[1],md->lootitem[0].card[2]) );
+				intif->delete_petdata( MakeDWord(md->lootitem[0].card[1],md->lootitem[0].card[2]) );
 			memmove(&md->lootitem[0], &md->lootitem[1], (LOOTITEM_SIZE-1)*sizeof(md->lootitem[0]));
 			memcpy (&md->lootitem[LOOTITEM_SIZE-1], &fitem->item_data, sizeof(md->lootitem[0]));
 		}
@@ -1917,7 +1917,7 @@ int mob_respawn(int tid, unsigned int tick, int id, intptr_t data)
 	struct block_list *bl = iMap->id2bl(id);
 
 	if(!bl) return 0;
-	status_revive(bl, (uint8)data, 0);
+	iStatus->revive(bl, (uint8)data, 0);
 	return 1;
 }
 
@@ -2184,7 +2184,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		if (md->sc.data[SC_RICHMANKIM])
 			bonus += md->sc.data[SC_RICHMANKIM]->val2;
 		if(sd) {
-			temp = status_get_class(&md->bl);
+			temp = iStatus->get_class(&md->bl);
 			if(sd->sc.data[SC_MIRACLE]) i = 2; //All mobs are Star Targets
 			else
 			ARR_FIND(0, MAX_PC_FEELHATE, i, temp == sd->hate_mob[i] &&
@@ -2285,7 +2285,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			if(base_exp || job_exp) {
 				if( md->dmglog[i].flag != MDLF_PET || battle_config.pet_attack_exp_to_master ) {
 #ifdef RENEWAL_EXP
-					int rate = pc->level_penalty_mod(tmpsd[i], md, 1);
+					int rate = pc->level_penalty_mod(md->level - (tmpsd[i])->status.base_level, md->status.race, md->status.mode, 1);
 					base_exp = (unsigned int)cap_value(base_exp * rate / 100, 1, UINT_MAX);
 					job_exp = (unsigned int)cap_value(job_exp * rate / 100, 1, UINT_MAX);
 #endif
@@ -2313,9 +2313,9 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		struct item_data* it = NULL;
 		int drop_rate;
 #ifdef RENEWAL_DROP
-		int drop_modifier = mvp_sd    ? pc->level_penalty_mod(mvp_sd, md, 2)   :
-							second_sd ? pc->level_penalty_mod(second_sd, md, 2):
-							third_sd  ? pc->level_penalty_mod(third_sd, md, 2) :
+		int drop_modifier = mvp_sd    ? pc->level_penalty_mod( md->level - mvp_sd->status.base_level, md->status.race, md->status.mode, 2)   :
+							second_sd ? pc->level_penalty_mod( md->level - second_sd->status.base_level, md->status.race, md->status.mode, 2):
+							third_sd  ? pc->level_penalty_mod( md->level - third_sd->status.base_level, md->status.race, md->status.mode, 2) :
 							100;/* no player was attached, we dont use any modifier (100 = rates are not touched) */
 #endif
 		dlist->m = md->bl.m;
@@ -2386,7 +2386,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				char message[128];
 				sprintf (message, msg_txt(541), mvp_sd->status.name, md->name, it->jname, (float)drop_rate/100);
 				//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
-				intif_broadcast(message,strlen(message)+1,0);
+				intif->broadcast(message,strlen(message)+1,0);
 			}
 			// Announce first, or else ditem will be freed. [Lance]
 			// By popular demand, use base drop rate for autoloot code. [Skotlex]
@@ -2527,7 +2527,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 					char message[128];
 					sprintf (message, msg_txt(541), mvp_sd->status.name, md->name, data->jname, temp/100.);
 					//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
-					intif_broadcast(message,strlen(message)+1,0);
+					intif->broadcast(message,strlen(message)+1,0);
 				}
 
 				if((temp = pc->additem(mvp_sd,&item,1,LOG_TYPE_PICKDROP_PLAYER)) != 0) {
@@ -2578,7 +2578,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				quest_update_objective(sd, md->class_);
 
 			if( sd->md && src && src->type != BL_HOM && mob_db(md->class_)->lv > sd->status.base_level/2 )
-				mercenary_kills(sd->md);
+				mercenary->kills(sd->md);
 		}
 
 		if( md->npc_event[0] && !md->state.npc_killmonster ) {
@@ -2625,7 +2625,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 
 	}
 
-	if(!md->spawn) //Tell status_damage to remove it from memory.
+	if(!md->spawn) //Tell iStatus->damage to remove it from memory.
 		return 5; // Note: Actually, it's 4. Oh well...
 
 	// MvP tomb [GreenBox]
@@ -2633,7 +2633,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		mvptomb_create(md, mvp_sd ? mvp_sd->status.name : NULL, time(NULL));
 
 	if( !rebirth ) {
-		status_change_clear(&md->bl,1);
+		iStatus->change_clear(&md->bl,1);
 		mob_setdelayspawn(md); //Set respawning.
 	}
 	return 3; //Remove from map.
@@ -2761,7 +2761,7 @@ int mob_class_change (struct mob_data *md, int class_)
 	mob_stop_attack(md);
 	mob_stop_walking(md, 0);
 	unit_skillcastcancel(&md->bl, 0);
-	status_set_viewdata(&md->bl, class_);
+	iStatus->set_viewdata(&md->bl, class_);
 	clif->class_change(&md->bl, md->vd->class_, 1);
 	status_calc_mob(md, 1);
 	md->ud.state.speed_changed = 1; //Speed change update.
@@ -3355,7 +3355,7 @@ int mob_clone_spawn(struct map_session_data *sd, int16 m, int16 x, int16 y, cons
 	strcpy(db->sprite,sd->status.name);
 	strcpy(db->name,sd->status.name);
 	strcpy(db->jname,sd->status.name);
-	db->lv=status_get_lv(&sd->bl);
+	db->lv=iStatus->get_lv(&sd->bl);
 	memcpy(status, &sd->base_status, sizeof(struct status_data));
 	status->rhw.atk2= status->dex + status->rhw.atk + status->rhw.atk2; //Max ATK
 	status->rhw.atk = status->dex; //Min ATK
@@ -3634,7 +3634,17 @@ static void item_dropratio_adjust(int nameid, int mob_id, int *rate_adjust)
 			*rate_adjust = item_drop_ratio_db[nameid]->drop_ratio;
 	}
 }
-
+/* (mob_parse_dbrow)_cap_value */
+static inline int mob_parse_dbrow_cap_value(int class_, int min, int max, int value) {
+	if( value > max ) {
+		ShowError("mob_parse_dbrow: for class '%d', field value '%d' is higher than the maximum '%d'! capping...\n", class_, value, max);
+		return max;
+	} else if ( value < min ) {
+		ShowError("mob_parse_dbrow: for class '%d', field value '%d' is lower than the minimum '%d'! capping...\n", class_, value, min);
+		return min;
+	}
+	return value;
+}
 /*==========================================
  * processes one mobdb entry
  *------------------------------------------*/
@@ -3683,16 +3693,20 @@ static bool mob_parse_dbrow(char** str)
 	db->job_exp = (unsigned int)cap_value(exp, 0, UINT_MAX);
 
 	status->rhw.range = atoi(str[9]);
-	status->rhw.atk = atoi(str[10]);
-	status->rhw.atk2 = atoi(str[11]);
-	status->def = atoi(str[12]);
-	status->mdef = atoi(str[13]);
-	status->str = atoi(str[14]);
-	status->agi = atoi(str[15]);
-	status->vit = atoi(str[16]);
-	status->int_ = atoi(str[17]);
-	status->dex = atoi(str[18]);
-	status->luk = atoi(str[19]);
+	
+	status->rhw.atk = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[10]));
+	status->rhw.atk2 = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[11]));
+	
+	status->def  = mob_parse_dbrow_cap_value(class_,DEFTYPE_MIN,DEFTYPE_MAX,atoi(str[12]));
+	status->mdef = mob_parse_dbrow_cap_value(class_,DEFTYPE_MIN,DEFTYPE_MAX,atoi(str[13]));
+	
+	status->str  = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[14]));
+	status->agi  = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[15]));
+	status->vit  = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[16]));
+	status->int_ = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[17]));
+	status->dex  = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[18]));
+	status->luk  = mob_parse_dbrow_cap_value(class_,UINT16_MIN,UINT16_MAX,atoi(str[19]));
+	
 	//All status should be min 1 to prevent divisions by zero from some skills. [Skotlex]
 	if (status->str < 1) status->str = 1;
 	if (status->agi < 1) status->agi = 1;
@@ -3751,7 +3765,7 @@ static bool mob_parse_dbrow(char** str)
 	data.bl.type = BL_MOB;
 	data.level = db->lv;
 	memcpy(&data.status, status, sizeof(struct status_data));
-	status_calc_misc(&data.bl, status, db->lv);
+	iStatus->calc_misc(&data.bl, status, db->lv);
 
 	// MVP EXP Bonus: MEXP
 	// Some new MVP's MEXP multipled by high exp-rate cause overflow. [LuzZza]
@@ -3868,13 +3882,12 @@ static bool mob_parse_dbrow(char** str)
 			id->mob[k].id = class_;
 		}
 	}
-
 	// Finally insert monster's data into the database.
 	if (mob_db_data[class_] == NULL)
-		mob_db_data[class_] = (struct mob_db*)aCalloc(1, sizeof(struct mob_db));
+		mob_db_data[class_] = (struct mob_db*)aMalloc(sizeof(struct mob_db));
 	else
 		//Copy over spawn data
-		memcpy(&db->spawn, mob_db_data[class_]->spawn, sizeof(db->spawn));
+		memcpy(&db->spawn, mob_db_data[class_]->spawn, sizeof(db->spawn));		
 
 	memcpy(mob_db_data[class_], db, sizeof(struct mob_db));
 	return true;
@@ -4588,9 +4601,12 @@ static void mob_load(void)
 {
 	sv->readdb(iMap->db_path, "mob_item_ratio.txt", ',', 2, 2+MAX_ITEMRATIO_MOBS, -1, &mob_readdb_itemratio); // must be read before mobdb
 	mob_readchatdb();
-	if (iMap->db_use_sqldbs)
+	if (iMap->db_use_sql_mob_db)
 	{
 		mob_read_sqldb();
+	}
+	if (iMap->db_use_sql_mob_skill_db)
+	{
 		mob_read_sqlskilldb();
 	}
 	else
@@ -4605,10 +4621,10 @@ static void mob_load(void)
 
 void mob_reload(void) {
 	int i;
-
+	
 	//Mob skills need to be cleared before re-reading them. [Skotlex]
 	for (i = 0; i < MAX_MOB_DB; i++)
-		if (mob_db_data[i]) {
+		if (mob_db_data[i] && !mob_is_clone(i)) {
 			memset(&mob_db_data[i]->skill,0,sizeof(mob_db_data[i]->skill));
 			mob_db_data[i]->maxskill=0;
 		}

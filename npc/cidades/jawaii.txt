@@ -1137,7 +1137,7 @@ jawaii_in,43,115,0	script	Cliente#jaw_1	97,{
 		next;
 		mes "["+ strcharinfo(0) +"]";
 		mes "Droga...";
-		mes Droga eu vou ser!";
+		mes "Droga eu vou ser!";
 		mes "quem ri por último!";
 		next;
 		mes "^3355FFYou drank to your fill.^000000";
@@ -1289,7 +1289,7 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 					}
 					mes "[SoloHan]";
 					mes "Oh...";
-					mes "Homem".;
+					mes "Homem.";
 					mes "Então, você prejudica as partes";
 					mes  "assim o tempo todo, né?";
 					close2;
@@ -1313,8 +1313,8 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 				}
 				mes "[SoloHan]";
 				mes "Oh...";
-				mes "Homem".;
-				mes "Não me admira que você é único. Você não consegue saber o bom tempo nem quando ele está bem na sua frente.".;
+				mes "Homem.";
+				mes "Não me admira que você é único. Você não consegue saber o bom tempo nem quando ele está bem na sua frente.";
 				close2;
 				end;
 			}
@@ -1327,7 +1327,7 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 			mes "[SoloHan]";
 			mes "Para ...";
 			mes "Para ser único";
-			mes "Sempre".;
+			mes "Sempre.";
 			next;
 			mes "^3355FF*Gulp Gulp Gulp*^000000";
 			percentheal -10,0;
@@ -1373,7 +1373,7 @@ prt_in,173,13,4	script	Cliente#SoloHan	86,{
 	next;
 	mes "[SoloHan]";
 	mes "O que é isso? ...";
-	mes "Esta é a terceira vez nesta semana eu comecei rebocada? Bachewcca me ajude contar!
+	mes "Esta é a terceira vez nesta semana eu comecei rebocada? Bachewcca me ajude contar!";
 	close;
 }
 	
@@ -1403,7 +1403,7 @@ prt_in,170,14,0	script	Cliente#Bachewcca	89,{
 		mes "suas portas para casais.";
 		next;
 		mes "[Helper]";
-		mes "Esta é uma oferta de viagem exclusiva para o resort especial de lua de mel para os cidadãos de Rune-Midgard O preço, 100.000 zeny, pode ser caro, mas você realmente usufrui o que você paga.".;
+		mes "Esta é uma oferta de viagem exclusiva para o resort especial de lua de mel para os cidadãos de Rune-Midgard O preço, 100.000 zeny, pode ser caro, mas você realmente usufrui o que você paga.";
 		next;
 		mes "[Helper]";
 		mes "Eu garanto a você que alguns dos";

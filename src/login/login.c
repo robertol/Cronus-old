@@ -11,6 +11,7 @@
 #include "../common/socket.h"
 #include "../common/strlib.h"
 #include "../common/timer.h"
+#include "../common/HPM.h"
 #include "account.h"
 #include "ipban.h"
 #include "login.h"
@@ -25,30 +26,13 @@ struct Login_Config login_config;
 int login_fd; // login server socket
 struct mmo_char_server server[MAX_SERVERS]; // char server data
 
-// Account engines available
-static struct{
+static struct account_engine {
 	AccountDB* (*constructor)(void);
 	AccountDB* db;
-} account_engines[] = {
-	{account_db_sql, NULL},
-#ifdef ACCOUNTDB_ENGINE_0
-	{ACCOUNTDB_CONSTRUCTOR(ACCOUNTDB_ENGINE_0), NULL},
-#endif
-#ifdef ACCOUNTDB_ENGINE_1
-	{ACCOUNTDB_CONSTRUCTOR(ACCOUNTDB_ENGINE_1), NULL},
-#endif
-#ifdef ACCOUNTDB_ENGINE_2
-	{ACCOUNTDB_CONSTRUCTOR(ACCOUNTDB_ENGINE_2), NULL},
-#endif
-#ifdef ACCOUNTDB_ENGINE_3
-	{ACCOUNTDB_CONSTRUCTOR(ACCOUNTDB_ENGINE_3), NULL},
-#endif
-#ifdef ACCOUNTDB_ENGINE_4
-	{ACCOUNTDB_CONSTRUCTOR(ACCOUNTDB_ENGINE_4), NULL},
-#endif
-	// end of structure
-	{NULL, NULL}
+} account_engine[] = {
+	{account_db_sql, NULL}
 };
+
 // account database
 AccountDB* accounts = NULL;
 
@@ -389,12 +373,17 @@ int parse_fromchar(int fd)
 	ipl = server[id].ip;
 	ip2str(ipl, ip);
 
-	while( RFIFOREST(fd) >= 2 )
-	{
+	while( RFIFOREST(fd) >= 2 ) {
 		uint16 command = RFIFOW(fd,0);
 
-		switch( command )
-		{
+		if( HPM->packetsc[hpParse_FromChar] ) {
+			if( (j = HPM->parse_packets(fd,hpParse_FromChar)) ) {
+				if( j == 1 ) continue;
+				if( j == 2 ) return 0;
+			}
+		}
+		
+		switch( command ) {
 
 		case 0x2712: // request from char-server to authenticate an account
 			if( RFIFOREST(fd) < 23 )
@@ -1341,12 +1330,17 @@ int parse_login(int fd)
 		sd->fd = fd;
 	}
 
-	while( RFIFOREST(fd) >= 2 )
-	{
+	while( RFIFOREST(fd) >= 2 ) {
 		uint16 command = RFIFOW(fd,0);
 
-		switch( command )
-		{
+		if( HPM->packetsc[hpParse_Login] ) {
+			if( (result = HPM->parse_packets(fd,hpParse_Login)) ) {
+				if( result == 1 ) continue;
+				if( result == 2 ) return 0;
+			}
+		}
+		
+		switch( command ) {
 
 		case 0x0200:		// New alive packet: structure: 0x200 <account.userid>.24B. used to verify if client is always alive.
 			if (RFIFOREST(fd) < 26)
@@ -1578,7 +1572,6 @@ void login_set_defaults()
 	login_config.dynamic_pass_failure_ban_duration = 5;
 	login_config.use_dnsbl = false;
 	safestrncpy(login_config.dnsbl_servs, "", sizeof(login_config.dnsbl_servs));
-	safestrncpy(login_config.account_engine, "auto", sizeof(login_config.account_engine));
 
 	login_config.client_hash_check = 0;
 	login_config.client_hash_nodes = NULL;
@@ -1685,18 +1678,10 @@ int login_config_read(const char* cfgName)
 		else if(!strcmpi(w1, "import"))
 			login_config_read(w2);
 		else
-		if(!strcmpi(w1, "account.engine"))
-			safestrncpy(login_config.account_engine, w2, sizeof(login_config.account_engine));
-		else
-		{// try the account engines
-			int i;
-			for( i = 0; account_engines[i].constructor; ++i )
-			{
-				AccountDB* db = account_engines[i].db;
-				if( db && db->set_property(db, w1, w2) )
-					break;
-			}
-			// try others
+		{
+			AccountDB* db = account_engine[0].db;
+			if( db )
+				db->set_property(db, w1, w2);
 			ipban_config_read(w1, w2);
 			loginlog_config_read(w1, w2);
 		}
@@ -1704,28 +1689,6 @@ int login_config_read(const char* cfgName)
 	fclose(fp);
 	ShowInfo("Finished reading %s.\n", cfgName);
 	return 0;
-}
-
-/// Get the engine selected in the config settings.
-/// Updates the config setting with the selected engine if 'auto'.
-static AccountDB* get_account_engine(void)
-{
-	int i;
-	bool get_first = (strcmp(login_config.account_engine,"auto") == 0);
-
-	for( i = 0; account_engines[i].constructor; ++i )
-	{
-		char name[sizeof(login_config.account_engine)];
-		AccountDB* db = account_engines[i].db;
-		if( db && db->get_property(db, "engine.name", name, sizeof(name)) &&
-			(get_first || strcmp(name, login_config.account_engine) == 0) )
-		{
-			if( get_first )
-				safestrncpy(login_config.account_engine, name, sizeof(login_config.account_engine));
-			return db;
-		}
-	}
-	return NULL;
 }
 
 //--------------------------------------
@@ -1736,31 +1699,29 @@ void do_final(void)
 	int i;
 	struct client_hash_node *hn = login_config.client_hash_nodes;
 
-	while (hn)
-	{
+	ShowStatus("Terminating...\n");
+	
+	HPM->event(HPET_FINAL);
+	
+	while (hn) {
 		struct client_hash_node *tmp = hn;
 		hn = hn->next;
 		aFree(tmp);
 	}
 
 	login_log(0, "login server", 100, "login server shutdown");
-	ShowStatus("Terminating...\n");
 
 	if( login_config.log_login )
 		loginlog_final();
 
 	ipban_final();
 
-	for( i = 0; account_engines[i].constructor; ++i )
-	{// destroy all account engines
-		AccountDB* db = account_engines[i].db;
-		if( db )
-		{
-			db->destroy(db);
-			account_engines[i].db = NULL;
-		}
+	if( account_engine[0].db )
+	{// destroy account engine
+		account_engine[0].db->destroy(account_engine[0].db);
+		account_engine[0].db = NULL;
 	}
-	accounts = NULL; // destroyed in account_engines
+	accounts = NULL; // destroyed in account_engine
 	online_db->destroy(online_db, NULL);
 	auth_db->destroy(auth_db, NULL);
 	
@@ -1813,9 +1774,8 @@ int do_init(int argc, char** argv)
 {
 	int i;
 
-	// intialize engines (to accept config settings)
-	for( i = 0; account_engines[i].constructor; ++i )
-		account_engines[i].db = account_engines[i].constructor();
+	// intialize engine (to accept config settings)
+	account_engine[0].db = account_engine[0].constructor();
 
 	// read login-server configuration
 	login_set_defaults();
@@ -1823,7 +1783,7 @@ int do_init(int argc, char** argv)
 	login_lan_config_read((argc > 2) ? argv[2] : LAN_CONF_NAME);
 
 	rnd_init();
-	
+		
 	for( i = 0; i < ARRAYLENGTH(server); ++i )
 		chrif_server_init(i);
 
@@ -1833,7 +1793,7 @@ int do_init(int argc, char** argv)
 
 	// initialize static and dynamic ipban system
 	ipban_init();
-
+	
 	// Online user database init
 	online_db = idb_alloc(DB_OPT_RELEASE_DATA);
 	iTimer->add_timer_func_list(waiting_disconnect_timer, "waiting_disconnect_timer");
@@ -1855,18 +1815,22 @@ int do_init(int argc, char** argv)
 	}
 
 	// Account database init
-	accounts = get_account_engine();
+	accounts = account_engine[0].db;
 	if( accounts == NULL ) {
-		ShowFatalError("do_init: account engine '%s' not found.\n", login_config.account_engine);
+		ShowFatalError("do_init: account engine 'sql' not found.\n");
 		exit(EXIT_FAILURE);
 	} else {
 
 		if(!accounts->init(accounts)) {
-			ShowFatalError("do_init: Failed to initialize account engine '%s'.\n", login_config.account_engine);
+			ShowFatalError("do_init: Failed to initialize account engine 'sql'.\n");
 			exit(EXIT_FAILURE);
 		}
 	}
 
+	HPM->share(account_db_sql_up(accounts),"sql_handle");
+	HPM->config_read();
+	HPM->event(HPET_INIT);
+	
 	// server port open & binding	
 	if( (login_fd = make_listen_bind(login_config.login_ip,login_config.login_port)) == -1 ) {
 		ShowFatalError("Failed to bind to port '"CL_WHITE"%d"CL_RESET"'\n",login_config.login_port);
@@ -1877,11 +1841,11 @@ int do_init(int argc, char** argv)
 		shutdown_callback = do_shutdown;
 		runflag = LOGINSERVER_ST_RUNNING;
 	}
-
-	account_db_sql_up(accounts);
 	
 	ShowStatus("The login-server is "CL_GREEN"ready"CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_port);
 	login_log(0, "login server", 100, "login server started");
-		
+	
+	HPM->event(HPET_READY);
+	
 	return 0;
 }

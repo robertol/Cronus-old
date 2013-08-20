@@ -62,6 +62,11 @@
 #ifdef RENEWAL
 	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi + 100 )
 	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex + 150 )
+	#define RE_SKILL_REDUCTION(){ \
+			wd.damage = battle->calc_elefix(src, target, skill_id, skill_lv, battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage, 0, wd.flag), nk, n_ele, s_ele, s_ele_, false, flag.arrow); \
+			if( flag.lh ) \
+				wd.damage2 = battle->calc_elefix(src, target, skill_id, skill_lv, battle->calc_cardfix(BF_WEAPON, src, target, nk, s_ele, s_ele_, wd.damage2, 1, wd.flag), nk, n_ele, s_ele, s_ele_, true, flag.arrow); \
+		}
 #else
 	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi )
 	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex )
@@ -70,15 +75,15 @@
 /* Renewal's dmg level modifier, used as a macro for a easy way to turn off. */
 #ifdef RENEWAL_LVDMG
 	#define RE_LVL_DMOD(val) \
-		if( status_get_lv(src) > 100 && val > 0 ) \
-			skillratio = skillratio * status_get_lv(src) / val;
+		if( iStatus->get_lv(src) > 100 && val > 0 ) \
+			skillratio = skillratio * iStatus->get_lv(src) / val;
 	#define RE_LVL_MDMOD(val) \
-		if( status_get_lv(src) > 100 && val > 0) \
-			md.damage = md.damage * status_get_lv(src) / val;
+		if( iStatus->get_lv(src) > 100 && val > 0) \
+			md.damage = md.damage * iStatus->get_lv(src) / val;
 	/* ranger traps special */
 	#define RE_LVL_TMDMOD() \
-		if( status_get_lv(src) > 100 ) \
-			md.damage = md.damage * 150 / 100 + md.damage * status_get_lv(src) / 100;
+		if( iStatus->get_lv(src) > 100 ) \
+			md.damage = md.damage * 150 / 100 + md.damage * iStatus->get_lv(src) / 100;
 #else
 	#define RE_LVL_DMOD(val) 
 	#define RE_LVL_MDMOD(val)

@@ -1,11 +1,11 @@
-//===== rAthena Script =======================================
+//===== Hercules Script ======================================
 //= Sign Your Items
 //===== By: ==================================================
 //= Lupus
 //===== Current Version: =====================================
 //= 1.1a
 //===== Compatible With: =====================================
-//= rAthena SVN
+//= Hercules
 //===== Description: =========================================
 //= Write you name on your rare equipment or weapon ^_-
 //===== Additional Comments: =================================
@@ -15,8 +15,8 @@
 
 prt_in,24,61,7	script	Perchik	47,{
 	
-	setarray .@Item[0],644,3;	// Items requeridos: <ID>,<Quantidade>{,...} (0 para desativar)
-	setarray .@Cost[0],0,5000;	// Requerimento: <preço base>,<preço por refinagem>
+	setarray .@Item[0],644,3;	// Item requirements: <ID>,<Count>{,...} (0 to disable)
+	setarray .@Cost[0],0,5000;	// Zeny requirements: <base price>,<price per refine>
 
 	disable_items;
 	mes "[Perchik]";
@@ -30,9 +30,8 @@ prt_in,24,61,7	script	Perchik	47,{
 		mes "[Perchik]";
 		if (getarraysize(.@Item) || getarraysize(.@Cost)) {
 			mes "For my work I accept:";
-			if (getarraysize(.@Item)) 
-				for(set .@i,0; .@i<getarraysize(.@Item); set .@i,.@i+2)
-					mes " ~ "+.@Item[.@i+1]+"x "+getitemname(.@Item[.@i]);
+			if (getarraysize(.@Item)) for(set .@i,0; .@i<getarraysize(.@Item); set .@i,.@i+2)
+				mes " ~ "+.@Item[.@i+1]+"x "+getitemname(.@Item[.@i]);
 			if (.@Cost[0]) mes " ~ "+.@Cost[0]+" Zeny";
 			if (.@Cost[1]) mes " ~ "+.@Cost[1]+" Zeny per refine";
 		}

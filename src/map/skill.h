@@ -1713,6 +1713,16 @@ struct s_skill_magicmushroom_db {
 };
 extern struct s_skill_magicmushroom_db skill_magicmushroom_db[MAX_SKILL_MAGICMUSHROOM_DB];
 
+struct skill_cd_entry {
+	int duration;//milliseconds
+#if PACKETVER >= 20120604
+	int total;
+#endif
+	short skidx;//the skill index entries belong to
+	unsigned int started;
+	uint16 skill_id;//skill id
+};
+
 /**
  * Skill Cool Down Delay Saving
  * Struct skill_cd is not a member of struct map_session_data
@@ -1720,13 +1730,7 @@ extern struct s_skill_magicmushroom_db skill_magicmushroom_db[MAX_SKILL_MAGICMUS
  * All cooldowns are reset when server is restarted.
  **/
 struct skill_cd {
-	int duration[MAX_SKILL_TREE];//milliseconds
-#if PACKETVER >= 20120604
-	int total[MAX_SKILL_TREE];
-#endif
-	short skidx[MAX_SKILL_TREE];//the skill index entries belong to
-	short nameid[MAX_SKILL_TREE];//skill id
-	unsigned int started[MAX_SKILL_TREE];
+	struct skill_cd_entry *entry[MAX_SKILL_TREE];
 	unsigned char cursor;
 };
 
@@ -1747,6 +1751,11 @@ struct skill_interface {
 	void (*read_db) (void);
 	/* */
 	DBMap* cd_db; // char_id -> struct skill_cd
+	/* */
+	struct eri *unit_ers; //For handling skill_unit's [Skotlex]
+	struct eri *timer_ers; //For handling skill_timerskills [Skotlex]
+	struct eri *cd_ers; // ERS Storage for skill cool down managers [Ind/Hercules]
+	struct eri *cd_entry_ers; // ERS Storage for skill cool down entries [Ind/Hercules]
 	/* accesssors */
 	int	(*get_index) ( uint16 skill_id );
 	int	(*get_type) ( uint16 skill_id );
@@ -1792,7 +1801,7 @@ struct skill_interface {
 	const char*	(*get_name) ( uint16 skill_id );
 	const char*	(*get_desc) ( uint16 skill_id );
 	/* check */
-	void (*chk) (int16* skill_id);
+	void (*chk) (uint16* skill_id);
 	/* whether its CAST_GROUND, CAST_DAMAGE or CAST_NODAMAGE */
 	int (*get_casttype) (uint16 skill_id);
 	int (*get_casttype2) (uint16 index);
@@ -1828,12 +1837,11 @@ struct skill_interface {
 	int (*check_condition_castend) (struct map_session_data *sd, uint16 skill_id, uint16 skill_lv);
 	int (*consume_requirement) (struct map_session_data *sd, uint16 skill_id, uint16 skill_lv, short type);
 	struct skill_condition (*get_requirement) (struct map_session_data *sd, uint16 skill_id, uint16 skill_lv);
-	int (*check_pc_partner) (struct map_session_data *sd, uint16 skill_id, short* skill_lv, int range, int cast_flag);
+	int (*check_pc_partner) (struct map_session_data *sd, uint16 skill_id, uint16* skill_lv, int range, int cast_flag);
 	int (*unit_move) (struct block_list *bl,unsigned int tick,int flag);
 	int (*unit_onleft) (uint16 skill_id, struct block_list *bl,unsigned int tick);
 	int (*unit_onout) (struct skill_unit *src, struct block_list *bl, unsigned int tick);
 	int (*unit_move_unit_group) ( struct skill_unit_group *group, int16 m,int16 dx,int16 dy);
-	int (*guildaura_sub) (struct map_session_data* sd, int id, int strvit, int agidex);
 	int (*sit) (struct map_session_data *sd, int type);
 	void (*brandishspear) (struct block_list* src, struct block_list* bl, uint16 skill_id, uint16 skill_lv, unsigned int tick, int flag);
 	void (*repairweapon) (struct map_session_data *sd, int idx);
@@ -1937,6 +1945,7 @@ struct skill_interface {
 	int (*changematerial) (struct map_session_data *sd, int n, unsigned short *item_list);
 	int (*get_elemental_type) (uint16 skill_id, uint16 skill_lv);
 	void (*cooldown_save) (struct map_session_data * sd);
+	int (*maelstrom_suction) (struct block_list *bl, va_list ap);
 };
 
 struct skill_interface *skill;

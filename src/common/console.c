@@ -2,6 +2,7 @@
 // See the LICENSE file
 // Portions Copyright (c) Athena Dev Teams
 
+#include "../common/cbasetypes.h"
 #include "../common/showmsg.h"
 #include "../common/core.h"
 #include "../config/core.h"
@@ -16,18 +17,20 @@
 	#include "../common/mutex.h"
 	#include "../common/timer.h"
 	#include "../common/strlib.h"
+	#include "../common/sql.h"
 #endif
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef _WIN32
+#if !defined(WIN32)
 	#include <unistd.h>
+	#include <sys/time.h>
 #else
 	#include "../common/winapi.h" // Console close event handling
 #endif
 
 #ifdef CONSOLE_INPUT
-	#ifdef _WIN32
+	#if defined(WIN32)
 		#include <conio.h> /* _kbhit() */
 	#endif
 #endif
@@ -57,11 +60,11 @@ void display_title(void) {
 	ShowInfo("Cronus "CL_RED "Versao:%s" CL_RESET"\n", ver);
 }
 #ifdef CONSOLE_INPUT
-#ifdef _WIN32
+#if defined(WIN32)
 int console_parse_key_pressed(void) {
 	return _kbhit();
 }
-#else /* _WIN32 */
+#else /* WIN32 */
 int console_parse_key_pressed(void) {
 	struct timeval tv;
 	fd_set fds;
@@ -101,6 +104,13 @@ CPCMD(malloc_usage) {
 	unsigned int val = (unsigned int)iMalloc->usage();
 	ShowInfo("malloc_usage: %.2f MB\n",(double)(val)/1024);
 }
+CPCMD(skip) {
+	if( !line ) {
+		ShowDebug("usage example: sql update skip 2013-02-14--16-15.sql\n");
+		return;
+	}
+	Sql_HerculesUpdateSkip(console->SQL, line);
+}
 #define CP_DEF_C(x) { #x , NULL , NULL, NULL }
 #define CP_DEF_C2(x,y) { #x , NULL , #y, NULL }
 #define CP_DEF_S(x,y) { #x , console_parse_ ## x , #y, NULL }
@@ -118,6 +128,9 @@ void console_load_defaults(void) {
 		CP_DEF_S(mem_report,server),
 		CP_DEF_S(malloc_usage,server),
 		CP_DEF_S(exit,server),
+		CP_DEF_C(sql),
+		CP_DEF_C2(update,sql),
+		CP_DEF_S(skip,update),
 	};
 	unsigned int i, len = ARRAYLENGTH(default_list);
 	struct CParseEntry *cmd;
@@ -370,6 +383,9 @@ void console_parse_init(void) {
 	iTimer->add_timer_interval(iTimer->gettick() + 1000, console->parse_timer, 0, 0, 500);/* start listening in 1s; re-try every 0.5s */
 	
 }
+void console_setSQL(Sql *SQL) {
+	console->SQL = SQL;
+}
 #endif /* CONSOLE_INPUT */
 
 void console_init (void) {
@@ -408,5 +424,7 @@ void console_defaults(void) {
 	console->load_defaults = console_load_defaults;
 	console->parse_list_subs = console_parse_list_subs;
 	console->addCommand = console_parse_create;
+	console->setSQL = console_setSQL;
+	console->SQL = NULL;
 #endif
 }

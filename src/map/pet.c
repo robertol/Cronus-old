@@ -78,7 +78,7 @@ int pet_create_egg(struct map_session_data *sd, int item_id)
 	if (pet_id < 0) return 0; //No pet egg here.
 	if (!pc->inventoryblank(sd)) return 0; // Inventory full
 	sd->catch_target_class = pet_db[pet_id].class_;
-	intif_create_pet(sd->status.account_id, sd->status.char_id,
+	intif->create_pet(sd->status.account_id, sd->status.char_id,
 		(short)pet_db[pet_id].class_,
 		(short)mob_db(pet_db[pet_id].class_)->lv,
 		(short)pet_db[pet_id].EggID, 0,
@@ -115,7 +115,7 @@ int pet_attackskill(struct pet_data *pd, int target_id)
 		struct block_list *bl;
 
 		bl=iMap->id2bl(target_id);
-		if(bl == NULL || pd->bl.m != bl->m || bl->prev == NULL || status_isdead(bl) ||
+		if(bl == NULL || pd->bl.m != bl->m || bl->prev == NULL || iStatus->isdead(bl) ||
 			!check_distance_bl(&pd->bl, bl, pd->db->range3))
 			return 0;
 
@@ -141,14 +141,14 @@ int pet_target_check(struct map_session_data *sd,struct block_list *bl,int type)
 	if(bl == NULL || bl->type != BL_MOB || bl->prev == NULL ||
 		pd->pet.intimate < battle_config.pet_support_min_friendly ||
 		pd->pet.hungry < 1 ||
-		pd->pet.class_ == status_get_class(bl))
+		pd->pet.class_ == iStatus->get_class(bl))
 		return 0;
 
 	if(pd->bl.m != bl->m ||
 		!check_distance_bl(&pd->bl, bl, pd->db->range2))
 		return 0;
 
-	if (!status_check_skilluse(&pd->bl, bl, 0, 0))
+	if (!iStatus->check_skilluse(&pd->bl, bl, 0, 0))
 		return 0;
 
 	if(!type) {
@@ -334,7 +334,7 @@ int pet_data_init(struct map_session_data *sd, struct s_pet *pet)
 		if (sd->status.pet_id) {
 			//Wrong pet?? Set incuvate to no and send it back for saving.
 			pet->incuvate = 1;
-			intif_save_petdata(sd->status.account_id,pet);
+			intif->save_petdata(sd->status.account_id,pet);
 			sd->status.pet_id = 0;
 			return 1;
 		}
@@ -355,7 +355,7 @@ int pet_data_init(struct map_session_data *sd, struct s_pet *pet)
 	pd->petDB = &pet_db[i];
 	pd->db = mob_db(pet->class_);
 	memcpy(&pd->pet, pet, sizeof(struct s_pet));
-	status_set_viewdata(&pd->bl, pet->class_);
+	iStatus->set_viewdata(&pd->bl, pet->class_);
 	unit_dataset(&pd->bl);
 	pd->ud.dir = sd->ud.dir;
 
@@ -372,7 +372,7 @@ int pet_data_init(struct map_session_data *sd, struct s_pet *pet)
 	pd->last_thinktime = iTimer->gettick();
 	pd->state.skillbonus = 0;
 	if( battle_config.pet_status_support )
-		run_script(pet_db[i].pet_script,0,sd->bl.id,0);
+		script->run(pet_db[i].pet_script,0,sd->bl.id,0);
 	if( pd->petDB && pd->petDB->equip_script )
 		status_calc_pc(sd,0);
 
@@ -406,7 +406,7 @@ int pet_birth_process(struct map_session_data *sd, struct s_pet *pet)
 		return 1;
 	}
 
-	intif_save_petdata(sd->status.account_id,pet);
+	intif->save_petdata(sd->status.account_id,pet);
 	if (iMap->save_settings&8)
 		chrif->save(sd,0); //is it REALLY Needed to save the char for hatching a pet? [Skotlex]
 
@@ -472,7 +472,7 @@ int pet_select_egg(struct map_session_data *sd,short egg_index)
 		return 0; //Forged packet!
 
 	if(sd->status.inventory[egg_index].card[0] == CARD0_PET)
-		intif_request_petdata(sd->status.account_id, sd->status.char_id, MakeDWord(sd->status.inventory[egg_index].card[1], sd->status.inventory[egg_index].card[2]) );
+		intif->request_petdata(sd->status.account_id, sd->status.char_id, MakeDWord(sd->status.inventory[egg_index].card[1], sd->status.inventory[egg_index].card[2]) );
 	else
 		ShowError("wrong egg item inventory %d\n",egg_index);
 
@@ -529,7 +529,7 @@ int pet_catch_process2(struct map_session_data* sd, int target_id)
 		unit_remove_map(&md->bl,CLR_OUTSIGHT);
 		status_kill(&md->bl);
 		clif->pet_roulette(sd,1);
-		intif_create_pet(sd->status.account_id,sd->status.char_id,pet_db[i].class_,mob_db(pet_db[i].class_)->lv,
+		intif->create_pet(sd->status.account_id,sd->status.char_id,pet_db[i].class_,mob_db(pet_db[i].class_)->lv,
 			pet_db[i].EggID,0,pet_db[i].intimate,100,0,1,pet_db[i].jname);
 	}
 	else
@@ -558,7 +558,7 @@ int pet_get_egg(int account_id,int pet_id,int flag)
 	sd->catch_target_class = -1;
 	
 	if(i < 0) {
-		intif_delete_petdata(pet_id);
+		intif->delete_petdata(pet_id);
 		return 0;
 	}
 
@@ -676,7 +676,7 @@ int pet_equipitem(struct map_session_data *sd,int index)
 
 	pc->delitem(sd,index,1,0,0,LOG_TYPE_OTHER);
 	pd->pet.equip = nameid;
-	status_set_viewdata(&pd->bl, pd->pet.class_); //Updates view_data.
+	iStatus->set_viewdata(&pd->bl, pd->pet.class_); //Updates view_data.
 	clif->send_petdata(NULL, sd->pd, 3, sd->pd->vd.head_bottom);
 	if (battle_config.pet_equip_required)
 	{ 	//Skotlex: start support timers if need
@@ -705,7 +705,7 @@ static int pet_unequipitem(struct map_session_data *sd, struct pet_data *pd)
 
 	nameid = pd->pet.equip;
 	pd->pet.equip = 0;
-	status_set_viewdata(&pd->bl, pd->pet.class_);
+	iStatus->set_viewdata(&pd->bl, pd->pet.class_);
 	clif->send_petdata(NULL, sd->pd, 3, sd->pd->vd.head_bottom);
 	memset(&tmp_item,0,sizeof(tmp_item));
 	tmp_item.nameid = nameid;
@@ -817,7 +817,7 @@ static int pet_randomwalk(struct pet_data *pd,unsigned int tick)
 		}
 		for(i=c=0;i<pd->ud.walkpath.path_len;i++){
 			if(pd->ud.walkpath.path[i]&1)
-				c+=pd->status.speed*14/10;
+				c+=pd->status.speed*MOVE_DIAGONAL_COST/MOVE_COST;
 			else
 				c+=pd->status.speed;
 		}
@@ -877,7 +877,7 @@ static int pet_ai_sub_hard(struct pet_data *pd, struct map_session_data *sd, uns
 	
 	if (pd->target_id) {
 		target= iMap->id2bl(pd->target_id);
-		if (!target || pd->bl.m != target->m || status_isdead(target) ||
+		if (!target || pd->bl.m != target->m || iStatus->isdead(target) ||
 			!check_distance_bl(&pd->bl, target, pd->db->range3))
 		{
 			target = NULL;
@@ -885,7 +885,7 @@ static int pet_ai_sub_hard(struct pet_data *pd, struct map_session_data *sd, uns
 		}
 	}
 	
-	if(!target && pd->loot && pd->msd && pc_has_permission(pd->msd, PC_PERM_TRADE) && pd->loot->count < pd->loot->max && DIFF_TICK(tick,pd->ud.canact_tick)>0) {
+	if(!target && pd->loot && pd->msd && pc->has_permission(pd->msd, PC_PERM_TRADE) && pd->loot->count < pd->loot->max && DIFF_TICK(tick,pd->ud.canact_tick)>0) {
 		//Use half the pet's range of sight.
 		iMap->foreachinrange(pet_ai_sub_hard_lootsearch,&pd->bl,
 			pd->db->range2/2, BL_ITEM,pd,&target);
@@ -1139,7 +1139,7 @@ int pet_heal_timer(int tid, unsigned int tick, int id, intptr_t data)
 		return 0;
 	}
 	
-	status = status_get_status_data(&sd->bl);
+	status = iStatus->get_status_data(&sd->bl);
 	
 	if(pc_isdead(sd) ||
 		(rate = get_percentage(status->sp, status->max_sp)) > pd->s_skill->sp ||
@@ -1152,7 +1152,7 @@ int pet_heal_timer(int tid, unsigned int tick, int id, intptr_t data)
 	pet_stop_attack(pd);
 	pet_stop_walking(pd,1);
 	clif->skill_nodamage(&pd->bl,&sd->bl,AL_HEAL,pd->s_skill->lv,1);
-	status_heal(&sd->bl, pd->s_skill->lv,0, 0);
+	iStatus->heal(&sd->bl, pd->s_skill->lv,0, 0);
 	pd->s_skill->timer=iTimer->add_timer(tick+pd->s_skill->delay*1000,pet_heal_timer,sd->bl.id,0);
 	return 0;
 }
@@ -1176,7 +1176,7 @@ int pet_skill_support_timer(int tid, unsigned int tick, int id, intptr_t data)
 		return 0;
 	}
 	
-	status = status_get_status_data(&sd->bl);
+	status = iStatus->get_status_data(&sd->bl);
 
 	if (DIFF_TICK(pd->ud.canact_tick, tick) > 0)
 	{	//Wait until the pet can act again.
@@ -1219,12 +1219,12 @@ int read_petdb()
 	{
 		if( pet_db[j].pet_script )
 		{
-			script_free_code(pet_db[j].pet_script);
+			script->free_code(pet_db[j].pet_script);
 			pet_db[j].pet_script = NULL;
 		}
 		if( pet_db[j].equip_script )
 		{
-			script_free_code(pet_db[j].equip_script);
+			script->free_code(pet_db[j].equip_script);
 			pet_db[j].pet_script = NULL;
 		}
 	}
@@ -1337,9 +1337,9 @@ int read_petdb()
 			pet_db[j].equip_script = NULL;
 
 			if( *str[20] )
-				pet_db[j].pet_script = parse_script(str[20], filename[i], lines, 0);
+				pet_db[j].pet_script = script->parse(str[20], filename[i], lines, 0);
 			if( *str[21] )
-				pet_db[j].equip_script = parse_script(str[21], filename[i], lines, 0);
+				pet_db[j].equip_script = script->parse(str[21], filename[i], lines, 0);
 
 			j++;
 			entries++;
@@ -1382,12 +1382,12 @@ int do_final_pet(void)
 	{
 		if( pet_db[i].pet_script )
 		{
-			script_free_code(pet_db[i].pet_script);
+			script->free_code(pet_db[i].pet_script);
 			pet_db[i].pet_script = NULL;
 		}
 		if( pet_db[i].equip_script )
 		{
-			script_free_code(pet_db[i].equip_script);
+			script->free_code(pet_db[i].equip_script);
 			pet_db[i].equip_script = NULL;
 		}
 	}

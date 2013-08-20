@@ -294,8 +294,8 @@ int storage_storageaddfromcart(struct map_session_data* sd, int index, int amoun
  *	0 : fail
  *	1 : success
  *------------------------------------------*/
-int storage_storagegettocart(struct map_session_data* sd, int index, int amount)
-{
+int storage_storagegettocart(struct map_session_data* sd, int index, int amount) {
+	int flag = 0;
 	nullpo_ret(sd);
 
 	if( index < 0 || index >= MAX_STORAGE )
@@ -307,8 +307,12 @@ int storage_storagegettocart(struct map_session_data* sd, int index, int amount)
 	if( amount < 1 || amount > sd->status.storage.items[index].amount )
 		return 0;
 	
-	if( pc->cart_additem(sd,&sd->status.storage.items[index],amount,LOG_TYPE_STORAGE) == 0 )
+	if( (flag = pc->cart_additem(sd,&sd->status.storage.items[index],amount,LOG_TYPE_STORAGE)) == 0 )
 		storage->delitem(sd,index,amount);
+	else {
+		clif->dropitem(sd, index,0);
+		clif->cart_additem_ack(sd,flag == 1?0x0:0x1);
+	}
 
 	return 1;
 }
@@ -396,7 +400,7 @@ int storage_guild_storageopen(struct map_session_data* sd)
 	}
 
 	if((gstor = gstorage->id2storage2(sd->status.guild_id)) == NULL) {
-		intif_request_guild_storage(sd->status.account_id,sd->status.guild_id);
+		intif->request_guild_storage(sd->status.account_id,sd->status.guild_id);
 		return 0;
 	}
 	if(gstor->storage_status)
@@ -653,7 +657,7 @@ int storage_guild_storagesave(int account_id, int guild_id, int flag)
 		if (flag) //Char quitting, close it.
 			stor->storage_status = 0;
 	 	if (stor->dirty)
-			intif_send_guild_storage(account_id,stor);
+			intif->send_guild_storage(account_id,stor);
 		return 1;
 	}
 	return 0;
@@ -741,8 +745,8 @@ void storage_defaults(void) {
 	storage->delitem = storage_delitem;
 	storage->open = storage_storageopen;
 	storage->add = storage_storageadd;
-	storage->additem = storage_additem;
 	storage->get = storage_storageget;
+	storage->additem = storage_additem;
 	storage->addfromcart = storage_storageaddfromcart;
 	storage->gettocart = storage_storagegettocart;
 	storage->close = storage_storageclose;

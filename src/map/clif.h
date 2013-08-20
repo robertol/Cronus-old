@@ -52,7 +52,8 @@ struct skill_cd;
  * Enumerations
  **/
 enum {// packet DB
-	MAX_PACKET_DB  = 0xF00,
+	MIN_PACKET_DB  = 0x0064,
+	MAX_PACKET_DB  = 0x0F00,
 	MAX_PACKET_POS = 20,
 };
 
@@ -321,6 +322,7 @@ typedef enum useskill_fail_cause { // clif_skill_fail
 
 enum clif_messages {
 	SKILL_CANT_USE_AREA = 0x536,
+	ITEM_CANT_USE_AREA =  0x537,
 };
 
 /**
@@ -415,6 +417,7 @@ struct {
 	bool allow_user_channel_creation;
 	char irc_server[40], irc_channel[50], irc_nick[40], irc_nick_pw[30];
 	unsigned short irc_server_port;
+	bool irc_use_ghost;
 } hChSys;
 
 struct hChSysBanEntry {
@@ -501,6 +504,7 @@ struct clif_interface {
 	void (*addcards2) (unsigned short *cards, struct item* item);
 	void (*item_sub) (unsigned char *buf, int n, struct item *i, struct item_data *id, int equip);
 	void (*getareachar_item) (struct map_session_data* sd,struct flooritem_data* fitem);
+	void (*cart_additem_ack) (struct map_session_data *sd, int flag);
 	void (*cashshop_load) (void);
 	void (*package_announce) (struct map_session_data *sd, unsigned short nameid, unsigned short containerid);
 	/* unit-related */
@@ -522,7 +526,11 @@ struct clif_interface {
 	void (*skillunit_update) (struct block_list* bl);
 	int (*clearunit_delayed_sub) (int tid, unsigned int tick, int id, intptr_t data);
 	void (*set_unit_idle) (struct block_list* bl, struct map_session_data *tsd,enum send_target target);
-	void (*spawn_unit) (struct block_list* bl,enum send_target target);
+	void (*spawn_unit) (struct block_list* bl, enum send_target target);
+#if PACKETVER < 20091103
+	void (*spawn_unit2) (struct block_list* bl, enum send_target target);
+	void (*set_unit_idle2) (struct block_list* bl, struct map_session_data *tsd, enum send_target target);
+#endif
 	void (*set_unit_walking) (struct block_list* bl, struct map_session_data *tsd,struct unit_data* ud, enum send_target target);
 	int (*calc_walkdelay) (struct block_list *bl,int delay, int type, int damage, int div_);
 	void (*getareachar_skillunit) (struct map_session_data *sd, struct skill_unit *unit);
@@ -905,7 +913,7 @@ struct clif_interface {
 	void (*elemental_updatestatus) (struct map_session_data *sd, int type);
 	/* bgqueue */
 	void (*bgqueue_ack) (struct map_session_data *sd, enum BATTLEGROUNDS_QUEUE_ACK response, unsigned char arena_id);
-	void (*bgqueue_notice_delete) (struct map_session_data *sd, enum BATTLEGROUNDS_QUEUE_NOTICE_DELETED response, unsigned char arena_id);
+	void (*bgqueue_notice_delete) (struct map_session_data *sd, enum BATTLEGROUNDS_QUEUE_NOTICE_DELETED response, char *name);
 	void (*bgqueue_update_info) (struct map_session_data *sd, unsigned char arena_id, int position);
 	void (*bgqueue_joined) (struct map_session_data *sd, int pos);
 	void (*bgqueue_pcleft) (struct map_session_data *sd);
@@ -917,10 +925,13 @@ struct clif_interface {
 	void (*notify_time) (struct map_session_data* sd, unsigned long time);
 	void (*user_count) (struct map_session_data* sd, int count);
 	void (*noask_sub) (struct map_session_data *src, struct map_session_data *target, int type);
+	void (*bc_ready) (void);
+	int (*undisguise_timer) (int tid, unsigned int tick, int id, intptr_t data);
+	/* Hercules Channel System */
 	void (*chsys_create) (struct hChSysCh *channel, char *name, char *pass, unsigned char color);
 	void (*chsys_msg) (struct hChSysCh *channel, struct map_session_data *sd, char *msg);
 	void (*chsys_msg2) (struct hChSysCh *channel, char *msg);
-	void (*chsys_send) (struct hChSysCh *channel, struct map_session_data *sd, char *msg);
+	void (*chsys_send) (struct hChSysCh *channel, struct map_session_data *sd, const char *msg);
 	void (*chsys_join) (struct hChSysCh *channel, struct map_session_data *sd);
 	void (*chsys_left) (struct hChSysCh *channel, struct map_session_data *sd);
 	void (*chsys_delete) (struct hChSysCh *channel);
@@ -929,8 +940,6 @@ struct clif_interface {
 	void (*chsys_quitg) (struct map_session_data *sd);
 	void (*chsys_gjoin) (struct guild *g1,struct guild *g2);
 	void (*chsys_gleave) (struct guild *g1,struct guild *g2);
-	void (*bc_ready) (void);
-	int (*undisguise_timer) (int tid, unsigned int tick, int id, intptr_t data);
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/

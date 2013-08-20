@@ -12,15 +12,16 @@
 #include "battleground.h"
 #include "buyingstore.h"  // struct s_buyingstore
 #include "itemdb.h"
+#include "log.h"
 #include "map.h" // RC_MAX
+#include "mob.h"
+#include "pc_groups.h"
 #include "script.h" // struct script_reg, struct script_regstr
 #include "searchstore.h"  // struct s_search_store_info
 #include "status.h" // OPTION_*, struct weapon_atk
 #include "unit.h" // unit_stop_attack(), unit_stop_walking()
 #include "vending.h" // struct s_vending
-#include "mob.h"
-#include "log.h"
-#include "pc_groups.h"
+
 
 #define MAX_PC_BONUS 10
 #define MAX_PC_SKILL_REQUIRE 5
@@ -158,13 +159,14 @@ struct map_session_data {
 		unsigned short autolootid[AUTOLOOTITEM_SIZE]; // [Zephyrus]
 		unsigned int autolooting : 1; //performance-saver, autolooting state for @alootid
 		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
-		struct guild *gmaster_flag;
+		unsigned int gmaster_flag : 1;
 		unsigned int prevend : 1;//used to flag wheather you've spent 40sp to open the vending or not.
 		unsigned int warping : 1;//states whether you're in the middle of a warp processing
 		unsigned int permanent_speed : 1; // When 1, speed cannot be changed through status_calc_pc().
 		unsigned int dialog : 1;
 		unsigned int prerefining : 1;
 		unsigned int workinprogress : 3; // 1 = disable skill/item, 2 = disable npc interaction, 3 = disable both
+		unsigned int hold_recalc : 1;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -180,9 +182,11 @@ struct map_session_data {
 	} special_state;
 	int login_id1, login_id2;
 	unsigned short class_;	//This is the internal job ID used by the map server to simplify comparisons/queries/etc. [Skotlex]
-	int group_id, group_pos, group_level;
-	unsigned int permissions;/* group permissions */
-	bool group_log_command;
+	
+	/// Groups & permissions
+	int group_id;
+	GroupSettings *group;
+	unsigned int extra_temp_permissions; /* permissions from @addperm */
 	
 	struct mmo_charstatus status;
 	struct registry save_reg;
@@ -229,7 +233,6 @@ struct map_session_data {
 	unsigned int canskill_tick; // used to prevent abuse from no-delay ACT files
 	unsigned int cansendmail_tick; // [Mail System Flood Protection]
 	unsigned int ks_floodprotect_tick; // [Kill Steal Protection]
-    unsigned int bloodylust_tick; // bloodylust player timer [out/in re full-heal protection]
 	struct {
 		short nameid;
 		unsigned int tick;
@@ -328,7 +331,6 @@ struct map_session_data {
 		int fixcastrate,varcastrate;
 		int add_fixcast,add_varcast;
 		int ematk; // matk bonus from equipment
-		int eatk; // atk bonus from equipment
 	} bonus;
 	// zeroed vars end here.
 	int castrate,delayrate,hprate,sprate,dsprate;
@@ -500,8 +502,18 @@ struct map_session_data {
 	unsigned int queues_count;
 	
 	/* Made Possible Thanks to Yommy~! */
-	unsigned int cryptKey;
+	unsigned int cryptKey;                                                 ///< Packet obfuscation key to be used for the next received packet
+	unsigned short (*parse_cmd_func)(int fd, struct map_session_data *sd); ///< parse_cmd_func used by this player
 	
+	unsigned char delayed_damage;//ref. counter bugreport:7307 [Ind/Hercules]
+	
+	struct HPluginData **hdata;
+	unsigned int hdatac;
+	
+	/* */
+	struct {
+		unsigned int second,third;
+	} sktree;
 	// temporary debugging of bug #3504
 	const char* delunit_prevfile;
 	int delunit_prevline;
@@ -654,12 +666,12 @@ enum equip_pos {
 // clientside display macros (values to the left/right of the "+")
 #ifdef RENEWAL
 	#define pc_leftside_atk(sd) ((sd)->battle_status.batk)
-	#define pc_rightside_atk(sd) ((sd)->battle_status.rhw.atk + (sd)->battle_status.lhw.atk + (sd)->battle_status.rhw.atk2 + (sd)->battle_status.lhw.atk2 + (sd)->bonus.eatk )
+	#define pc_rightside_atk(sd) ((sd)->battle_status.rhw.atk + (sd)->battle_status.lhw.atk + (sd)->battle_status.rhw.atk2 + (sd)->battle_status.lhw.atk2 + (sd)->battle_status.equip_atk )
 	#define pc_leftside_def(sd) ((sd)->battle_status.def2)
 	#define pc_rightside_def(sd) ((sd)->battle_status.def)
 	#define pc_leftside_mdef(sd) ((sd)->battle_status.mdef2)
 	#define pc_rightside_mdef(sd) ((sd)->battle_status.mdef)
-#define pc_leftside_matk(sd) (status_base_matk(status_get_status_data(&(sd)->bl), (sd)->status.base_level))
+#define pc_leftside_matk(sd) (iStatus->base_matk(iStatus->get_status_data(&(sd)->bl), (sd)->status.base_level))
 #define pc_rightside_matk(sd) ((sd)->battle_status.rhw.matk+(sd)->battle_status.lhw.matk+(sd)->bonus.ematk)
 #else
 	#define pc_leftside_atk(sd) ((sd)->battle_status.batk + (sd)->battle_status.rhw.atk + (sd)->battle_status.lhw.atk)
@@ -683,9 +695,6 @@ enum equip_pos {
 #endif
 
 #define pc_get_group_id(sd) ( (sd)->group_id )
-
-#define pc_has_permission(sd, permission) ( ((sd)->permissions&permission) != 0 )
-#define pc_should_log_commands(sd) ( (sd)->group_log_command != false )
 
 #define pc_checkoverhp(sd) ((sd)->battle_status.hp == (sd)->battle_status.max_hp)
 #define pc_checkoversp(sd) ((sd)->battle_status.sp == (sd)->battle_status.max_sp)
@@ -750,13 +759,17 @@ struct pc_interface {
 
 	/* funcs */
 	
+	struct map_session_data* (*get_dummy_sd) (void);
 	int (*class2idx) (int class_);
 	int (*get_group_level) (struct map_session_data *sd);
-	int (*getrefinebonus) (int lv,int type);
+	//int (*getrefinebonus) (int lv,int type); FIXME: This function does not exist, nor it is ever called
 	bool (*can_give_items) (struct map_session_data *sd);
 	
 	bool (*can_use_command) (struct map_session_data *sd, const char *command);
-	
+	bool (*has_permission) (struct map_session_data *sd, enum e_pc_permission permission);
+	int (*set_group) (struct map_session_data *sd, int group_id);
+	bool (*should_log_commands) (struct map_session_data *sd);
+
 	int (*setrestartvalue) (struct map_session_data *sd,int type);
 	int (*makesavestatus) (struct map_session_data *);
 	void (*respawn) (struct map_session_data* sd, clr_type clrtype);
@@ -949,8 +962,9 @@ struct pc_interface {
 	
 	void (*baselevelchanged) (struct map_session_data *sd);
 #if defined(RENEWAL_DROP) || defined(RENEWAL_EXP)
-	int (*level_penalty_mod) (struct map_session_data *sd, struct mob_data * md, int type);
+	int (*level_penalty_mod) (int diff, unsigned char race, unsigned short mode, int type);
 #endif
+	int (*calc_skillpoint) (struct map_session_data* sd);
 };
 
 struct pc_interface *pc;

@@ -9,11 +9,11 @@
 
 // items from 2011-11-02 update
 714  // Emperium
-//6381  // Field_Shovel
-//6382  // Urn
-//6393  // Round_Feather
-//6394  // Golden_Feather
-//6395  // Angel_Magic_Power
+6381  // Field_Shovel
+6382  // Urn
+6393  // Round_Feather
+6394  // Golden_Feather
+6395  // Angel_Magic_Power
 //6403
 //6404
 //6405
@@ -693,7 +693,7 @@
 6002  // Token_Of_Apostle
 6003  // Soul_Pendant
 6004  // Bapho_Doll
-//6008  // Wood
+6008  // Wood
 6010  // Pickaxe
 6020  // Fur
 6021  // Peaked_Hat

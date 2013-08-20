@@ -63,6 +63,7 @@ enum {
 	ITEMID_THURISAZ,
 	ITEMID_WYRD,
 	ITEMID_HAGALAZ,
+	ITEMID_LUX_ANIMA = 22540,
 } rune_list;
 
 /**
@@ -123,7 +124,7 @@ struct item_data {
 //Lupus: I rearranged order of these fields due to compatibility with ITEMINFO script command
 //		some script commands should be revised as well...
 	unsigned int class_base[3];	//Specifies if the base can wear this item (split in 3 indexes per type: 1-1, 2-1, 2-2)
-	unsigned class_upper : 4; //Specifies if the upper-type can equip it (bitfield, 1: normal, 2: upper, 3: baby,4:third)
+	unsigned class_upper : 6; //Specifies if the upper-type can equip it (bitfield, 0x01: normal, 0x02: upper, 0x04: baby normal, 0x08: third normal, 0x10: third upper, 0x20: third baby)
 	struct {
 		unsigned short chance;
 		int id;
@@ -202,9 +203,14 @@ struct item_package_must_entry {
 	unsigned int named : 1;
 };
 
+struct item_package_rand_group {
+	struct item_package_rand_entry *random_list;
+	unsigned short random_qty;
+};
+
 struct item_package {
 	unsigned short id;
-	struct item_package_rand_entry *random_list;
+	struct item_package_rand_group *random_groups;
 	struct item_package_must_entry *must_items;
 	unsigned short random_qty;
 	unsigned short must_qty;
@@ -226,7 +232,7 @@ struct item_package {
 #define itemdb_available(n) (itemdb->search(n)->flag.available)
 #define itemdb_viewid(n) (itemdb->search(n)->view_id)
 #define itemdb_autoequip(n) (itemdb->search(n)->flag.autoequip)
-#define itemdb_is_rune(n) (n >= ITEMID_NAUTHIZ && n <= ITEMID_HAGALAZ)
+#define itemdb_is_rune(n) ((n >= ITEMID_NAUTHIZ && n <= ITEMID_HAGALAZ) || n == ITEMID_LUX_ANIMA)
 #define itemdb_is_element(n) (n >= 990 && n <= 993)
 #define itemdb_is_spellbook(n) (n >= 6188 && n <= 6205)
 #define itemdb_is_poison(n) (n >= 12717 && n <= 12724)
@@ -274,6 +280,7 @@ struct itemdb_interface {
 	void (*final) (void);
 	void (*reload) (void);
 	void (*name_constants) (void);
+	void (*force_name_constants) (void);
 	/* */
 	struct item_group *groups;
 	unsigned short group_count;
@@ -290,6 +297,9 @@ struct itemdb_interface {
 	void (*read_groups) (void);
 	void (*read_chains) (void);
 	void (*read_packages) (void);
+	/* */
+	void (*write_cached_packages) (const char *config_filename);
+	bool (*read_cached_packages) (const char *config_filename);
 	/* */
 	struct item_data* (*name2id) (const char *str);
 	struct item_data* (*search_name) (const char *name);

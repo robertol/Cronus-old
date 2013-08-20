@@ -84,7 +84,7 @@ static TBL_PC* guild_sd_check(int guild_id, int account_id, int char_id)
 
 	if (sd->status.guild_id != guild_id)
 	{	//If player belongs to a different guild, kick him out.
- 		intif_guild_leave(guild_id,account_id,char_id,0,"** Guild Mismatch **");
+ 		intif->guild_leave(guild_id,account_id,char_id,0,"** Guild Mismatch **");
 		return NULL;
 	}
 
@@ -179,7 +179,7 @@ static bool guild_read_castledb(char* str[], int columns, int current)
 
 	idb_put(castle_db,gc->castle_id,gc);
 
-	//intif_guild_castle_info(gc->castle_id);
+	//intif->guild_castle_info(gc->castle_id);
 
 	return true;
 }
@@ -313,7 +313,7 @@ int guild_payexp_timer_sub(DBKey key, DBData *data, va_list ap) {
 	else
 		g->member[i].exp+= c->exp;
 
-	intif_guild_change_memberinfo(g->guild_id,c->account_id,c->char_id,
+	intif->guild_change_memberinfo(g->guild_id,c->account_id,c->char_id,
 		GMI_EXP,&g->member[i].exp,sizeof(g->member[i].exp));
 	c->exp=0;
 
@@ -395,7 +395,7 @@ int guild_create(struct map_session_data *sd, const char *name)
 
 	guild_makemember(&m,sd);
 	m.position=0;
-	intif_guild_create(name,&m);
+	intif->guild_create(name,&m);
 	return 1;
 }
 
@@ -420,7 +420,7 @@ int guild_created(int account_id,int guild_id) {
 //Information request
 int guild_request_info(int guild_id)
 {
-	return intif_guild_request_info(guild_id);
+	return intif->guild_request_info(guild_id);
 }
 
 //Information request with event
@@ -564,7 +564,7 @@ int guild_recv_info(struct guild *sg) {
 
 			//Also set the guild master flag.
 			sd->guild = g;
-			sd->state.gmaster_flag = g;
+			sd->state.gmaster_flag = 1;
 			clif->charnameupdate(sd); // [LuzZza]
 			clif->guild_masterormember(sd);
 		}
@@ -733,7 +733,7 @@ int guild_reply_invite(struct map_session_data* sd, int guild_id, int flag)
 		}
 
 		guild_makemember(&m,sd);
-		intif_guild_addmember(guild_id, &m);
+		intif->guild_addmember(guild_id, &m);
 		//TODO: send a minimap update to this player
 	}
 
@@ -754,7 +754,7 @@ void guild_member_joined(struct map_session_data *sd)
 		return;
 	}
 	if (strcmp(sd->status.name,g->master) == 0) {	// set the Guild Master flag
-		sd->state.gmaster_flag = g;
+		sd->state.gmaster_flag = 1;
 		// prevent Guild Skills from being used directly after relog
 		if( battle_config.guild_skill_relog_delay )
 			guild->block_skill(sd, 300000);
@@ -799,7 +799,7 @@ int guild_member_added(int guild_id,int account_id,int char_id,int flag)
         // cancel if player not present or invalide guild_id invitation
 		if (flag == 0) {
 			ShowError("guild: member added error %d is not online\n",account_id);
- 			intif_guild_leave(guild_id,account_id,char_id,0,"** Data Error **");
+ 			intif->guild_leave(guild_id,account_id,char_id,0,"** Data Error **");
 		}
 		return 0;
 	}
@@ -851,7 +851,7 @@ int guild_leave(struct map_session_data* sd, int guild_id, int account_id, int c
 		((iMap->agit_flag || iMap->agit2_flag) && map[sd->bl.m].flag.gvg_castle))
 		return 0;
 
-	intif_guild_leave(sd->status.guild_id, sd->status.account_id, sd->status.char_id,0,mes);
+	intif->guild_leave(sd->status.guild_id, sd->status.account_id, sd->status.char_id,0,mes);
 	return 0;
 }
 
@@ -886,7 +886,7 @@ int guild_expulsion(struct map_session_data* sd, int guild_id, int account_id, i
 	// find the member and perform expulsion
 	i = guild->getindex(g, account_id, char_id);
 	if( i != -1 && strcmp(g->member[i].name,g->master) != 0 ) //Can't expel the GL!
-		intif_guild_leave(g->guild_id,account_id,char_id,1,mes);
+		intif->guild_leave(g->guild_id,account_id,char_id,1,mes);
 
 	return 0;
 }
@@ -933,6 +933,10 @@ int guild_member_withdraw(int guild_id, int account_id, int char_id, int flag, c
 		if( g->instances )
 			instance->check_kick(sd);
 		clif->charnameupdate(sd); //Update display name [Skotlex]
+		status_change_end(&sd->bl, SC_LEADERSHIP, INVALID_TIMER);
+		status_change_end(&sd->bl, SC_GLORYWOUNDS, INVALID_TIMER);
+		status_change_end(&sd->bl, SC_SOULCOLD, INVALID_TIMER);
+		status_change_end(&sd->bl, SC_HAWKEYES, INVALID_TIMER);
 		//TODO: send emblem update to self and people around
 	}
 	return 0;
@@ -950,7 +954,7 @@ int guild_send_memberinfoshort(struct map_session_data *sd,int online)
 	if(!(g = sd->guild))
 		return 0;
 
-	intif_guild_memberinfoshort(g->guild_id,
+	intif->guild_memberinfoshort(g->guild_id,
 		sd->status.account_id,sd->status.char_id,online,sd->status.base_level,sd->status.class_);
 
 	if(!online){
@@ -1043,7 +1047,7 @@ int guild_send_message(struct map_session_data *sd,const char *mes,int len)
 
 	if(sd->status.guild_id==0)
 		return 0;
-	intif_guild_message(sd->status.guild_id,sd->status.account_id,mes,len);
+	intif->guild_message(sd->status.guild_id,sd->status.account_id,mes,len);
 	guild->recv_message(sd->status.guild_id,sd->status.account_id,mes,len);
 
 	// Chat logging type 'G' / Guild Chat
@@ -1069,7 +1073,7 @@ int guild_recv_message(int guild_id,int account_id,const char *mes,int len)
  *---------------------------------------------------*/
 int guild_change_memberposition(int guild_id,int account_id,int char_id,short idx)
 {
-	return intif_guild_change_memberinfo(guild_id,account_id,char_id,GMI_POSITION,&idx,sizeof(idx));
+	return intif->guild_change_memberinfo(guild_id,account_id,char_id,GMI_POSITION,&idx,sizeof(idx));
 }
 
 /*====================================================
@@ -1102,7 +1106,7 @@ int guild_change_position(int guild_id,int idx,
 	p.mode=mode&0x11;
 	p.exp_mode=exp_mode;
 	safestrncpy(p.name,name,NAME_LENGTH);
-	return intif_guild_position(guild_id,idx,&p);
+	return intif->guild_position(guild_id,idx,&p);
 }
 
 /*====================================================
@@ -1133,7 +1137,7 @@ int guild_change_notice(struct map_session_data *sd,int guild_id,const char *mes
 
 	if(guild_id!=sd->status.guild_id)
 		return 0;
-	return intif_guild_notice(guild_id,mes1,mes2);
+	return intif->guild_notice(guild_id,mes1,mes2);
 }
 
 /*====================================================
@@ -1171,7 +1175,7 @@ int guild_change_emblem(struct map_session_data *sd,int len,const char *data)
 		return 0;
 	}
 
-	return intif_guild_emblem(sd->status.guild_id,len,data);
+	return intif->guild_emblem(sd->status.guild_id,len,data);
 }
 
 /*====================================================
@@ -1324,7 +1328,7 @@ int guild_skillup(TBL_PC* sd, uint16 skill_id)
 	if( g->skill_point > 0 &&
 			g->skill[idx].id != 0 &&
 			g->skill[idx].lv < max )
-		intif_guild_skillup(g->guild_id, skill_id, sd->status.account_id, max);
+		intif->guild_skillup(g->guild_id, skill_id, sd->status.account_id, max);
 
 	return 0;
 }
@@ -1363,7 +1367,7 @@ int guild_skillupack(int guild_id,uint16 skill_id,int account_id)
 
 void guild_guildaura_refresh(struct map_session_data *sd, uint16 skill_id, uint16 skill_lv) {
 	struct skill_unit_group* group = NULL;
-	int type = status_skill2sc(skill_id);
+	int type = iStatus->skill2sc(skill_id);
 	if( !(battle_config.guild_aura&((iMap->agit_flag || iMap->agit2_flag)?2:1)) &&
 			!(battle_config.guild_aura&(map_flag_gvg2(sd->bl.m)?8:4)) )
 		return;
@@ -1525,18 +1529,18 @@ int guild_reply_reqalliance(struct map_session_data *sd,int account_id,int flag)
 		for(i=0;i<MAX_GUILDALLIANCE;i++){
 			if(g->alliance[i].guild_id==tsd->status.guild_id &&
 				g->alliance[i].opposition==1)
-				intif_guild_alliance( sd->status.guild_id,tsd->status.guild_id,
+				intif->guild_alliance( sd->status.guild_id,tsd->status.guild_id,
 					sd->status.account_id,tsd->status.account_id,9 );
 		}
 		for(i=0;i<MAX_GUILDALLIANCE;i++){
 			if(tg->alliance[i].guild_id==sd->status.guild_id &&
 				tg->alliance[i].opposition==1)
-				intif_guild_alliance( tsd->status.guild_id,sd->status.guild_id,
+				intif->guild_alliance( tsd->status.guild_id,sd->status.guild_id,
 					tsd->status.account_id,sd->status.account_id,9 );
 		}
 
         // inform other servers
-		intif_guild_alliance( sd->status.guild_id,tsd->status.guild_id,
+		intif->guild_alliance( sd->status.guild_id,tsd->status.guild_id,
 			sd->status.account_id,tsd->status.account_id,0 );
 		return 0;
     } else { // deny
@@ -1560,7 +1564,7 @@ int guild_delalliance(struct map_session_data *sd,int guild_id,int flag)
 		return 0;
 	}	// end addition [Valaris]
 
-	intif_guild_alliance( sd->status.guild_id,guild_id,sd->status.account_id,0,flag|8 );
+	intif->guild_alliance( sd->status.guild_id,guild_id,sd->status.account_id,0,flag|8 );
 	return 0;
 }
 
@@ -1596,13 +1600,13 @@ int guild_opposition(struct map_session_data *sd,struct map_session_data *tsd)
 			if(iMap->agit_flag || iMap->agit2_flag) // Prevent the changing of alliances to oppositions during WoE.
 				return 0;
 			//Change alliance to opposition.
-			intif_guild_alliance( sd->status.guild_id,tsd->status.guild_id,
+			intif->guild_alliance( sd->status.guild_id,tsd->status.guild_id,
 				sd->status.account_id,tsd->status.account_id,8 );
 		}
 	}
 
     // inform other serv
-	intif_guild_alliance( sd->status.guild_id,tsd->status.guild_id,
+	intif->guild_alliance( sd->status.guild_id,tsd->status.guild_id,
 			sd->status.account_id,tsd->status.account_id,1 );
 	return 0;
 }
@@ -1709,7 +1713,7 @@ int guild_broken_sub(DBKey key, DBData *data, va_list ap)
 			for(j=0;j<g->max_member;j++)
 				if( (sd=g->member[j].sd)!=NULL )
 					clif->guild_delalliance(sd,guild_id,g->alliance[i].opposition);
-			intif_guild_alliance(g->guild_id, guild_id,0,0,g->alliance[i].opposition|8);
+			intif->guild_alliance(g->guild_id, guild_id,0,0,g->alliance[i].opposition|8);
 			g->alliance[i].guild_id=0;
 		}
 	}
@@ -1756,8 +1760,13 @@ int guild_broken(int guild_id,int flag)
 				gstorage->pc_quit(sd,1);
 			sd->status.guild_id=0;
 			sd->guild = NULL;
+			sd->state.gmaster_flag = 0;
 			clif->guild_broken(g->member[i].sd,0);
 			clif->charnameupdate(sd); // [LuzZza]
+			status_change_end(&sd->bl, SC_LEADERSHIP, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_GLORYWOUNDS, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_SOULCOLD, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_HAWKEYES, INVALID_TIMER);
 		}
 	}
 
@@ -1790,7 +1799,7 @@ int guild_gm_change(int guild_id, struct map_session_data *sd)
 		return 0;
 
 	//Notify servers that master has changed.
-	intif_guild_change_gm(guild_id, sd->status.name, strlen(sd->status.name)+1);
+	intif->guild_change_gm(guild_id, sd->status.name, strlen(sd->status.name)+1);
 	return 1;
 }
 
@@ -1828,7 +1837,7 @@ int guild_gm_changed(int guild_id, int account_id, int char_id)
 	
 	if (g->member[0].sd && g->member[0].sd->fd) {
 		clif->message(g->member[0].sd->fd, msg_txt(679)); //"You have become the Guild Master!"
-		g->member[0].sd->state.gmaster_flag = g;
+		g->member[0].sd->state.gmaster_flag = 1;
 		//Block his skills for 5 minutes to prevent abuse.
 		guild->block_skill(g->member[0].sd, 300000);
 	}
@@ -1849,9 +1858,9 @@ int guild_gm_changed(int guild_id, int account_id, int char_id)
 /*====================================================
  * Guild disbanded
  *---------------------------------------------------*/
-int guild_break(struct map_session_data *sd,char *name)
-{
+int guild_break(struct map_session_data *sd,char *name) {
 	struct guild *g;
+	struct unit_data *ud;
 	int i;
 
 	nullpo_ret(sd);
@@ -1872,8 +1881,31 @@ int guild_break(struct map_session_data *sd,char *name)
 		clif->guild_broken(sd,2);
 		return 0;
 	}
-
-	intif_guild_break(g->guild_id);
+	
+	/* regardless of char server allowing it, we clear the guild master's auras */
+	if( (ud = unit_bl2ud(&sd->bl)) ) {
+		int count = 0;
+		struct skill_unit_group *groups[4];
+		for (i=0;i<MAX_SKILLUNITGROUP && ud->skillunit[i];i++) {
+			switch (ud->skillunit[i]->skill_id) {
+				case GD_LEADERSHIP:
+				case GD_GLORYWOUNDS:
+				case GD_SOULCOLD:
+				case GD_HAWKEYES:
+					if( count == 4 )
+						ShowWarning("guild_break:'%s' got more than 4 guild aura instances! (%d)\n",sd->status.name,ud->skillunit[i]->skill_id);
+					else
+						groups[count++] = ud->skillunit[i];
+					break;
+			}
+			
+		}
+		for(i = 0; i < count; i++) {
+			skill->del_unitgroup(groups[i],ALC_MARK);
+		}
+	}
+	
+	intif->guild_break(g->guild_id);
 	return 1;
 }
 
@@ -1897,7 +1929,7 @@ void guild_castle_map_init(void)
 			*(cursor++) = gc->castle_id;
 		}
 		dbi_destroy(iter);
-		if (intif_guild_castle_dataload(num, castle_ids))
+		if (intif->guild_castle_dataload(num, castle_ids))
 			ShowStatus("Requested '"CL_WHITE"%d"CL_RESET"' guild castles from char-server...\n", num);
 		aFree(castle_ids);
 	}
@@ -1964,7 +1996,7 @@ int guild_castledatasave(int castle_id, int index, int value)
 		return 0;
 	}
 
-	if (!intif_guild_castle_datasave(castle_id, index, value)) {
+	if (!intif->guild_castle_datasave(castle_id, index, value)) {
 		guild->castle_reconnect(castle_id, index, value);
 	}
 	return 0;
@@ -1974,7 +2006,7 @@ void guild_castle_reconnect_sub(void *key, void *data, va_list ap)
 {
 	int castle_id = GetWord((int)__64BPTRSIZE(key), 0);
 	int index = GetWord((int)__64BPTRSIZE(key), 1);
-	intif_guild_castle_datasave(castle_id, index, *(int *)data);
+	intif->guild_castle_datasave(castle_id, index, *(int *)data);
 	aFree(data);
 }
 

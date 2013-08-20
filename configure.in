@@ -1,14 +1,14 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(rAthena)
-AC_REVISION($Revision$)
+AC_INIT(Hercules)
+AC_REVISION([m4_esyscmd_s([type git >/dev/null 2>&1 && git describe --always 2>/dev/null || echo '(unknown version)'])])
 AC_PREREQ([2.59])
 AC_CONFIG_SRCDIR([src/common/cbasetypes.h])
 AC_CONFIG_FILES([Makefile src/common/Makefile])
 AC_CONFIG_FILES([3rdparty/mt19937ar/Makefile 3rdparty/libconfig/Makefile])
 AC_CONFIG_FILES([src/char/Makefile src/login/Makefile])
-AC_CONFIG_FILES([src/map/Makefile src/tool/Makefile])
+AC_CONFIG_FILES([src/map/Makefile src/plugins/Makefile src/tool/Makefile])
 AC_CONFIG_FILES([src/test/Makefile])
 
 AC_GNU_SOURCE
@@ -185,6 +185,29 @@ AC_ARG_ENABLE(
         esac
     ],
     [enable_lto="yes"]
+)
+
+
+#
+# Renewal
+#
+AC_ARG_ENABLE(
+	[renewal],
+	AC_HELP_STRING(
+		[--disable-renewal],
+		[
+			Disable Ragnarok Renewal support (override settings in src/config/renewal.h)
+		]
+	),
+	[
+		enable_renewal="$enableval"
+		case $enableval in
+			"no");;
+			"yes");;
+			*) AC_MSG_ERROR([[invalid argument --enable-renewal=$enableval... stopping]]);;
+		esac
+	],
+	[enable_renewal="yes"]
 )
 
 
@@ -371,12 +394,12 @@ fi
 #
 AC_MSG_CHECKING([whether $CC produces 32bit code])
 AC_RUN_IFELSE(
-	[
+	[AC_LANG_SOURCE([
 		int main(int argc, char **argv){
 			if(sizeof(void*) == 4) return 0;
 			else return 1;
 		}
-	],
+	])],
 	[
 		AC_MSG_RESULT([yes])
 		CFLAGS="$CFLAGS -march=i686"
@@ -397,14 +420,14 @@ AC_RUN_IFELSE(
 # 
 AC_MSG_CHECKING([whether $CC supports __thread specifier (TLS)])
 AC_RUN_IFELSE(
-	[
+	[AC_LANG_SOURCE([
 		__thread int g_Test = -1;
 
 		int main(int argc, char **argv){
 			g_Test = 0;
 			return g_Test;		
 		}
-	],
+	])],
 	[
 		AC_MSG_RESULT([yes])
 		CFLAGS="$CFLAGS -DHAS_TLS"
@@ -419,7 +442,7 @@ AC_MSG_CHECKING([whether $CC supports -Wno-unused-parameter])
 OLD_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -Wno-unused-parameter"
 AC_COMPILE_IFELSE(
-	[int foo;],
+	[AC_LANG_SOURCE([int foo;])],
 	[AC_MSG_RESULT([yes])],
 	[
 		AC_MSG_RESULT([no])
@@ -441,11 +464,11 @@ if test "$enable_lto" != "no" ; then
 
 	AC_MSG_CHECKING([whether $CC supports -flto])
 	AC_RUN_IFELSE(
-		[
+		[AC_LANG_SOURCE([
 			int main(int argc, char **argv){
                return 0;
            }
-		],
+		])],
 		[
 			AC_MSG_RESULT([yes])
 		],
@@ -466,7 +489,7 @@ AC_MSG_CHECKING([whether $CC supports -Wno-pointer-sign])
 OLD_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -Wno-pointer-sign"
 AC_COMPILE_IFELSE(
-	[int foo;],
+	[AC_LANG_SOURCE([int foo;])],
 	[
 		AC_MSG_RESULT([yes])
 		AC_MSG_CHECKING([whether $CC can actually use -Wno-pointer-sign])
@@ -474,7 +497,7 @@ AC_COMPILE_IFELSE(
 		# Note: -Werror must be before -Wno-pointer-sign, otherwise it does not do anything
 		CFLAGS="$OLD_CFLAGS -Werror -Wno-pointer-sign"
 		AC_COMPILE_IFELSE(
-			[int foo;],
+			[AC_LANG_SOURCE([int foo;])],
 			[
 				AC_MSG_RESULT([yes])
 				CFLAGS="$OLD_CFLAGS -Wno-pointer-sign"
@@ -496,7 +519,7 @@ AC_MSG_CHECKING([whether $CC supports -Wno-switch])
 OLD_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -Wno-switch"
 AC_COMPILE_IFELSE(
-	[int foo;],
+	[AC_LANG_SOURCE([int foo;])],
 	[AC_MSG_RESULT([yes])],
 	[
 		AC_MSG_RESULT([no])
@@ -509,7 +532,7 @@ AC_MSG_CHECKING([whether $CC supports -fPIC])
 OLD_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -fPIC"
 AC_COMPILE_IFELSE(
-	[int foo;],
+	[AC_LANG_SOURCE([int foo;])],
 	[
 		AC_MSG_RESULT([yes])
 		compiler_supports_pic="yes"
@@ -521,6 +544,111 @@ AC_COMPILE_IFELSE(
 )
 CFLAGS="$OLD_CFLAGS"
 
+#
+# option for shared objects
+#
+AC_MSG_CHECKING([how to make shared objects])
+OLD_CFLAGS="$CFLAGS"
+compiler_shared_objects=""
+if test "$compiler_supports_pic" = "yes" ; then
+	my_shared_test_flags="$CFLAGS -fPIC"
+fi
+# default
+CFLAGS="$my_shared_test_flags -shared"
+AC_LINK_IFELSE(
+	[AC_LANG_SOURCE([
+		int bar = 0;
+
+		int foo(void)
+		{
+			return bar;
+		}
+	])],
+	[
+		compiler_shared_objects="-shared"
+	]
+)
+# BeOS specific
+CFLAGS="$my_shared_test_flags -nostart"
+AC_LINK_IFELSE(
+	[AC_LANG_SOURCE([
+		int bar = 0;
+
+		int foo(void)
+		{
+			return bar;
+		}
+	])],
+	[
+		compiler_shared_objects="-nostart"
+	]
+)
+my_shared_test_flags=""
+CFLAGS="$OLD_CFLAGS"
+if test "$compiler_supports_shared_objects" = "no" ; then
+	AC_MSG_RESULT([not supported])
+	AC_MSG_NOTICE([compiler is unable to generate shared objects, disabled plugins (optional)])
+	WITH_PLUGINS="no"
+else
+	AC_MSG_RESULT([$compiler_shared_objects])
+	SOFLAGS="$SOFLAGS $compiler_shared_objects"
+	AC_SUBST([SOFLAGS])
+
+#
+# shared objects need position independent code; some platforms emit
+# it always, others need -fPIC
+#
+AC_MSG_CHECKING([whether $CC needs -fPIC for shared objects])
+OLD_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS $SOFLAGS"
+WITH_PLUGINS="yes"
+AC_LINK_IFELSE(
+	[AC_LANG_SOURCE([
+		int bar = 0;
+
+		int foo(void)
+		{
+			return bar;
+		}
+	])],
+	[
+		AC_MSG_RESULT([no])
+		CFLAGS="$OLD_CFLAGS"
+	],
+	[
+		if test "$compiler_supports_pic" = "yes" ; then
+			# Verify if -shared really fails due to lack of -fPIC or something else
+			CFLAGS="$CFLAGS -fPIC"
+			AC_LINK_IFELSE(
+				[AC_LANG_SOURCE([
+					int bar = 0;
+
+					int foo(void)
+					{
+						return bar;
+					}
+				])],
+				[
+					AC_MSG_RESULT([yes])
+					CFLAGS="$OLD_CFLAGS -fPIC"
+				],
+				[
+					AC_MSG_RESULT([no, but fails for another reason])
+					AC_MSG_ERROR([compiler is unable to compile shared objects for an unhandled reason, please report this with attached config.log... stopping])
+				]
+			)
+		else
+			# Disable compilation of plugins (optional), so 'make all' does not fail
+			AC_MSG_RESULT([yes, but unsupported])
+			AC_MSG_NOTICE([compiler is unable to generate position independent code, disabled plugins (optional)])
+			WITH_PLUGINS="no"
+		fi
+	]
+)
+
+fi
+AC_SUBST([WITH_PLUGINS])
+
 
 #
 # -O2 implies -fstrict-aliasing, but the code is not safe for that
@@ -529,7 +657,7 @@ AC_MSG_CHECKING([whether $CC supports -fno-strict-aliasing])
 OLD_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -fno-strict-aliasing"
 AC_COMPILE_IFELSE(
-	[int foo;],
+	[AC_LANG_SOURCE([int foo;])],
 	[AC_MSG_RESULT([yes])],
 	[
 		AC_MSG_RESULT([no])
@@ -652,6 +780,17 @@ case $enable_profiler in
 		;;
 esac
 
+#
+# Renewal
+#
+case $enable_renewal in
+	"no")
+		CFLAGS="$CFLAGS -DDISABLE_RENEWAL"
+		;;
+	"yes")
+		# default value
+		;;
+esac
 
 #
 # zlib library (required)
@@ -687,7 +826,7 @@ AC_SEARCH_LIBS([clock_gettime], [rt])
 if test "$ac_cv_search_clock_gettime" != "no" ; then
 	AC_MSG_CHECKING([whether CLOCK_MONOTONIC is supported and works])
 	AC_RUN_IFELSE(
-		[
+		[AC_LANG_SOURCE([
 			#include <sys/time.h>
 			#include <time.h>
 			#include <unistd.h>
@@ -697,7 +836,7 @@ if test "$ac_cv_search_clock_gettime" != "no" ; then
 				struct timespec tval;
 				return clock_gettime(CLOCK_MONOTONIC, &tval);
 			}
-		],
+		])],
 		[
 			AC_MSG_RESULT([yes])
 			CFLAGS="$CFLAGS -DHAVE_MONOTONIC_CLOCK"

@@ -18,6 +18,7 @@
 	#include "../common/sql.h"
 	#include "../config/core.h"
 	#include "../common/HPM.h"
+	#include "../common/utils.h"
 #endif
 
 #include <stdio.h>
@@ -166,13 +167,14 @@ const char *versao () {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("Você está rodando o Cronus com privilégios root, isto não é necessário.\n");
+		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
     }
 #endif
 }
 void core_defaults(void) {
 #ifndef MINICORE
 	hpm_defaults();
+	HCache_defaults();
 #endif
 	console_defaults();
 	strlib_defaults();
@@ -224,7 +226,9 @@ int main (int argc, char **argv) {
 	iTimer->init();
 
 	console->init();
-
+	
+	HCache->init();
+	
 #ifndef MINICORE
 	HPM->init();
 #endif

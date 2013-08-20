@@ -2,12 +2,13 @@
 
 HAVE_MYSQL=@HAVE_MYSQL@
 ifeq ($(HAVE_MYSQL),yes)
-	ALL_DEPENDS=common_sql login_sql char_sql map_sql tools
-	SQL_DEPENDS=common_sql login_sql char_sql map_sql
+	ALL_DEPENDS=common_sql login_sql char_sql map_sql tools import
+	SQL_DEPENDS=common_sql login_sql char_sql map_sql import
 	COMMON_SQL_DEPENDS=mt19937ar libconfig
 	LOGIN_SQL_DEPENDS=mt19937ar libconfig common_sql
 	CHAR_SQL_DEPENDS=mt19937ar libconfig common_sql
 	MAP_SQL_DEPENDS=mt19937ar libconfig common_sql
+	TOOLS_DEPENDS=mt19937ar libconfig common_sql
 	CONVERTERS_DEPENDS=common_sql
 else
 	ALL_DEPENDS=needs_mysql
@@ -16,8 +17,19 @@ else
 	LOGIN_SQL_DEPENDS=needs_mysql
 	CHAR_SQL_DEPENDS=needs_mysql
 	MAP_SQL_DEPENDS=needs_mysql
+	TOOLS_DEPENDS=needs_mysql
 endif
 
+WITH_PLUGINS=@WITH_PLUGINS@
+ifeq ($(WITH_PLUGINS),yes)
+	ALL_DEPENDS+=plugins
+	PLUGIN_DEPENDS=common_sql
+else
+	PLUGIN_DEPENDS=no_plugins
+endif
+
+CC = @CC@
+export CC
 
 #####################################################################
 .PHONY: sql  \
@@ -27,6 +39,8 @@ endif
 	char_sql \
 	map_sql \
 	tools \
+	plugins \
+	import \
 	test \
 	clean help
 
@@ -52,11 +66,21 @@ char_sql: $(CHAR_SQL_DEPENDS)
 map_sql: $(MAP_SQL_DEPENDS)
 	@$(MAKE) -C src/map sql
 
-tools:
+tools: $(TOOLS_DEPENDS)
 	@$(MAKE) -C src/tool
 
 test:
 	@$(MAKE) -C src/test
+
+plugins: $(PLUGIN_DEPENDS)
+	@$(MAKE) -C src/plugins
+
+import:
+	@# 1) create conf/import folder
+	@# 2) add missing files
+	@echo "building conf/import folder..."
+	@if test ! -d conf/import ; then mkdir conf/import ; fi
+	@for f in $$(ls conf/import-tmpl) ; do if test ! -e conf/import/$$f ; then cp conf/import-tmpl/$$f conf/import ; fi ; done
 
 clean:
 	@$(MAKE) -C src/common $@
@@ -65,6 +89,7 @@ clean:
 	@$(MAKE) -C src/login $@
 	@$(MAKE) -C src/char $@
 	@$(MAKE) -C src/map $@
+	@$(MAKE) -C src/plugins $@
 	@$(MAKE) -C src/tool $@
 	@$(MAKE) -C src/test $@
 
@@ -78,6 +103,7 @@ help:
 	@echo "'char_sql'    - builds char server (SQL version)"
 	@echo "'map_sql'     - builds map server (SQL version)"
 	@echo "'tools'       - builds all the tools in src/tools"
+	@echo "'import'      - builds conf/import folder from the template conf/import-tmpl"
 	@echo "'all'         - builds all the above targets"
 	@echo "'sql'         - builds sql servers (targets 'common_sql' 'login_sql' 'char_sql'"
 	@echo "                'map_sql' and 'import')"
@@ -91,38 +117,42 @@ needs_mysql:
 	@echo "MySQL not found or disabled by the configure script"
 	@exit 1
 
+no_plugins:
+	@echo "Plugins disabled by the configure script"
+	@exit 1
+
 #####################################################################
 # TODO
 
 install:	conf/%.conf conf/%.txt
 	$(shell read -p "WARNING: This target does not work properly yet. Press Ctrl+C to cancel or Enter to continue.")
-	$(shell mkdir -p /opt/cronus/bin/)
-	$(shell mkdir -p /opt/cronus/etc/cronus/)
-	$(shell mkdir -p /opt/cronus/var/log/cronus/)
-	$(shell mv save /opt/cronus/etc/cronus/save)
-	$(shell mv db /opt/cronus/etc/cronus/db)
-	$(shell mv conf /opt/cronus/etc/cronus/conf)
-	$(shell mv npc /opt/cronus/etc/cronus/npc)
-	$(shell mv log/* /opt/cronus/var/log/cronus/)
-	$(shell cp *-server* /opt/cronus/bin/)
-	$(shell ln -s /opt/cronus/etc/cronus/save/ /opt/cronus/bin/)
-	$(shell ln -s /opt/cronus/etc/cronus/db/ /opt/cronus/bin/)
-	$(shell ln -s /opt/cronus/etc/cronus/conf/ /opt/cronus/bin/)
-	$(shell ln -s /opt/cronus/etc/cronus/npc/ /opt/cronus/bin/)
-	$(shell ln -s /opt/cronus/var/log/cronus/ /opt/cronus/bin/log)
+	$(shell mkdir -p /opt/rathena/bin/)
+	$(shell mkdir -p /opt/rathena/etc/rathena/)
+	$(shell mkdir -p /opt/rathena/var/log/rathena/)
+	$(shell mv save /opt/rathena/etc/rathena/save)
+	$(shell mv db /opt/rathena/etc/rathena/db)
+	$(shell mv conf /opt/rathena/etc/rathena/conf)
+	$(shell mv npc /opt/rathena/etc/rathena/npc)
+	$(shell mv log/* /opt/rathena/var/log/rathena/)
+	$(shell cp *-server* /opt/rathena/bin/)
+	$(shell ln -s /opt/rathena/etc/rathena/save/ /opt/rathena/bin/)
+	$(shell ln -s /opt/rathena/etc/rathena/db/ /opt/rathena/bin/)
+	$(shell ln -s /opt/rathena/etc/rathena/conf/ /opt/rathena/bin/)
+	$(shell ln -s /opt/rathena/etc/rathena/npc/ /opt/rathena/bin/)
+	$(shell ln -s /opt/rathena/var/log/rathena/ /opt/rathena/bin/log)
 
 bin-clean:
-	$(shell rm /opt/cronus/bin/login-server*)
-	$(shell rm /opt/cronus/bin/char-server*)
-	$(shell rm /opt/cronus/bin/map-server*)
+	$(shell rm /opt/rathena/bin/login-server*)
+	$(shell rm /opt/rathena/bin/char-server*)
+	$(shell rm /opt/rathena/bin/map-server*)
 
 uninstall:
 	$(shell read -p "WARNING: This target does not work properly yet. Press Ctrl+C to cancel or Enter to continue.")
 	bin-clean
-	$(shell rm /opt/cronus/bin/save)
-	$(shell rm /opt/cronus/bin/db)
-	$(shell rm /opt/cronus/bin/conf)
-	$(shell rm /opt/cronus/bin/npc)
-	$(shell rm /opt/cronus/bin/log)
-	$(shell rm -rf /opt/cronus/etc/cronus)
-	$(shell rm -rf /opt/cronus/var/log/cronus)
+	$(shell rm /opt/rathena/bin/save)
+	$(shell rm /opt/rathena/bin/db)
+	$(shell rm /opt/rathena/bin/conf)
+	$(shell rm /opt/rathena/bin/npc)
+	$(shell rm /opt/rathena/bin/log)
+	$(shell rm -rf /opt/rathena/etc/rathena)
+	$(shell rm -rf /opt/rathena/var/log/rathena)

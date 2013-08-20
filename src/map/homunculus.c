@@ -143,7 +143,7 @@ int homunculus_vaporize(struct map_session_data *sd, int flag) {
 	if (!hd || hd->homunculus.vaporize)
 		return 0;
 
-	if (status_isdead(&hd->bl))
+	if (iStatus->isdead(&hd->bl))
 		return 0; //Can't vaporize a dead homun.
 
 	if (flag && get_percentage(hd->battle_status.hp, hd->battle_status.max_hp) < 80)
@@ -364,7 +364,7 @@ int homunculus_change_class(struct homun_data *hd, short class_) {
 		return 0;
 	hd->homunculusDB = &homun->db[i];
 	hd->homunculus.class_ = class_;
-	status_set_viewdata(&hd->bl, class_);
+	iStatus->set_viewdata(&hd->bl, class_);
 	homun->calc_skilltree(hd, 1);
 	return 1;
 }
@@ -544,7 +544,7 @@ void homunculus_save(struct homun_data *hd) {
 	//calculation on login)
 	hd->homunculus.hp = hd->battle_status.hp;
 	hd->homunculus.sp = hd->battle_status.sp;
-	intif_homunculus_requestsave(sd->status.account_id, &hd->homunculus);
+	intif->homunculus_requestsave(sd->status.account_id, &hd->homunculus);
 }
 
 unsigned char homunculus_menu(struct map_session_data *sd,unsigned char menu_num) {
@@ -731,7 +731,7 @@ bool homunculus_create(struct map_session_data *sd, struct s_homunculus *hom) {
 	if(i < 0) {
 		ShowError("homunculus_create: unknown class [%d] for homunculus '%s', requesting deletion.\n", hom->class_, hom->name);
 		sd->status.hom_id = 0;
-		intif_homunculus_requestdelete(hom->hom_id);
+		intif->homunculus_requestdelete(hom->hom_id);
 		return false;
 	}
 	sd->hd = hd = (struct homun_data*)aCalloc(1,sizeof(struct homun_data));
@@ -743,8 +743,8 @@ bool homunculus_create(struct map_session_data *sd, struct s_homunculus *hom) {
 	memcpy(&hd->homunculus, hom, sizeof(struct s_homunculus));
 	hd->exp_next = homun->exptable[hd->homunculus.level - 1];
 
-	status_set_viewdata(&hd->bl, hd->homunculus.class_);
-	status_change_init(&hd->bl);
+	iStatus->set_viewdata(&hd->bl, hd->homunculus.class_);
+	iStatus->change_init(&hd->bl);
 	unit_dataset(&hd->bl);
 	hd->ud.dir = sd->ud.dir;
 
@@ -777,7 +777,7 @@ bool homunculus_call(struct map_session_data *sd) {
 
 	// If homunc not yet loaded, load it
 	if (!sd->hd)
-		return intif_homunculus_requestload(sd->status.account_id, sd->status.hom_id);
+		return intif->homunculus_requestload(sd->status.account_id, sd->status.hom_id);
 
 	hd = sd->hd;
 
@@ -892,7 +892,7 @@ bool homunculus_creation_request(struct map_session_data *sd, int class_) {
 	hom.luk = base->luk *10;
 
 	// Request homunculus creation
-	intif_homunculus_create(sd->status.account_id, &hom);
+	intif->homunculus_create(sd->status.account_id, &hom);
 	return true;
 }
 
@@ -904,14 +904,14 @@ bool homunculus_ressurect(struct map_session_data* sd, unsigned char per, short 
 		return false; // no homunculus
 
 	if (!sd->hd) //Load homun data;
-		return intif_homunculus_requestload(sd->status.account_id, sd->status.hom_id);
+		return intif->homunculus_requestload(sd->status.account_id, sd->status.hom_id);
 
 	hd = sd->hd;
 
   	if (hd->homunculus.vaporize)
 		return false; // vaporized homunculi need to be 'called'
 
-	if (!status_isdead(&hd->bl))
+	if (!iStatus->isdead(&hd->bl))
 		return false; // already alive
 
 	homun->init_timers(hd);
@@ -924,7 +924,7 @@ bool homunculus_ressurect(struct map_session_data* sd, unsigned char per, short 
 		iMap->addblock(&hd->bl);
 		clif->spawn(&hd->bl);
 	}
-	status_revive(&hd->bl, per, 0);
+	iStatus->revive(&hd->bl, per, 0);
 	return true;
 }
 
@@ -1146,8 +1146,8 @@ bool homunculus_read_skill_db_sub(char* split[], int columns, int current) {
 	int j;
 	int minJobLevelPresent = 0;
 
-	if( columns == 14 )
-		minJobLevelPresent = 1;	// MinJobLvl has been added
+	if( columns == 15 )
+		minJobLevelPresent = 1;	// MinJobLvl has been added - FIXME: is this extra field even needed anymore?
 
 	// check for bounds [celest]
 	classid = atoi(split[0]) - HM_CLASS_BASE;
@@ -1295,4 +1295,6 @@ void homunculus_defaults(void) {
 	homun->read_skill_db_sub = homunculus_read_skill_db_sub;
 	homun->skill_db_read = homunculus_skill_db_read;
 	homun->exp_db_read = homunculus_exp_db_read;
+	homun->addspiritball = homunculus_addspiritball;
+	homun->delspiritball = homunculus_delspiritball;
 }
