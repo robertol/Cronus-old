@@ -4,6 +4,7 @@
 # Reestruturado e modificado por Roberto - roberto@forbrazil.com.br
 #
 # Changelog
+# - Correcao de bug ao desligar e adicionado uso de screen em ligar [jonimane]
 # - Otimizacoes e feita melhorias estruturais no script [Roberto]
 
 versao="2.1"
@@ -51,10 +52,12 @@ case $1 in
 #		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "3" ]; then
 #			echo "Seu servidor parece estar ligado."
 #		fi*/
-		exec ./login-server & exec ./char-server & exec ./map-server &
+		exec screen -d -m -S login ./login-server &
+		exec screen -d -m -S char ./char-server &
+		exec screen -d -m -S map ./map-server &
 	;;
 	'desligar')
-		if [ "$(grep -E "map-server|char-server|login-server" | wc -l)" -ge "0" ]; then
+		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | wc -l)" -gt "0" ]; then
 			pkill -9 map-server
 			pkill -9 char-server
 			pkill -9 login-server
@@ -69,7 +72,7 @@ case $1 in
 		cpu=(${cpu[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $3}'`)
 		mem=(${mem[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $4}'`)
 		data=(${data[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $9}'`)
-		proc=(${proc[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $11}'`)
+		proc=(${proc[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $16}'`)
 		
 		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | grep -v grep | wc -l)" -gt "0" ]; then
 			echo "Players Online: $(netstat -tunap | grep map | grep -vE "grep|0.0.0.0|127.0.0.1" | awk '{print $5}' | wc -l)"
