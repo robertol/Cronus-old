@@ -1713,6 +1713,7 @@ ACMD(go)
 		{ MAP_GEFFEN,      119,  59 }, //  2=Geffen
 		{ MAP_PAYON,       162, 233 }, //  3=Payon
 		{ MAP_ALBERTA,     192, 147 }, //  4=Alberta
+		{ MAP_IZLUDE,      128, 141 }, //  5=Izlude
 		{ MAP_ALDEBARAN,   140, 131 }, //  6=Al de Baran
 		{ MAP_LUTIE,       147, 134 }, //  7=Lutie
 		{ MAP_COMODO,      209, 143 }, //  8=Comodo
