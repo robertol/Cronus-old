@@ -57,11 +57,12 @@ case $1 in
 		exec screen -d -m -S map ./map-server &
 	;;
 	'desligar')
-		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | wc -l)" -gt "0" ]; then
-			pkill -9 map-server
-			pkill -9 char-server
-			pkill -9 login-server
-		fi
+#		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | wc -l)" -gt "0" ]; then
+#			pkill -9 map-server
+#			pkill -9 char-server
+#			pkill -9 login-server
+#		fi
+		killall -9 map-server login-server char-server
 	;;
 	'reiniciar')
 		$0 desligar

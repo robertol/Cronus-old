@@ -149,6 +149,7 @@
     <ClInclude Include="..\src\common\strlib.h" />
     <ClInclude Include="..\src\common\utils.h" />
     <ClInclude Include="..\src\common\winapi.h" />
+	<ClInclude Include="..\src\config\lang.h" />
     <ClInclude Include="..\src\config\renewal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
