@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Disable Dead Branch use.
 //===== By: ==================================================
 //= HerculesDev Team
@@ -366,7 +366,21 @@ mal_in02	mapflag	nobranch
 1@pump	mapflag	nobranch
 2@pump	mapflag	nobranch
 1@lhz	mapflag	nobranch
+malaya	mapflag	nobranch
+ma_scene01	mapflag	nobranch
+ma_in01	mapflag	nobranch
+1@ma_h	mapflag	nobranch
+1@ma_c	mapflag	nobranch
+1@ma_b	mapflag	nobranch
 
+// Episode 14.2 ===========
+eclage	mapflag	nobranch
+ecl_in01	mapflag	nobranch
+ecl_in02	mapflag	nobranch
+ecl_in03	mapflag	nobranch
+ecl_in04	mapflag	nobranch
+1@ecl	mapflag	nobranch
+ecl_hub01	mapflag	nobranch
 
 //evt_zombie	mapflag	nobranch
 

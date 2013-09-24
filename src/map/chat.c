@@ -388,7 +388,7 @@ int chat_triggerevent(struct chat_data *cd)
 	nullpo_ret(cd);
 
 	if( cd->users >= cd->trigger && cd->npc_event[0] )
-		npc_event_do(cd->npc_event);
+		npc->event_do(cd->npc_event);
 	return 0;
 }
 
@@ -430,7 +430,7 @@ int chat_npckickall(struct chat_data* cd)
 *-------------------------------------*/
 void chat_defaults(void) {
 	chat = &chat_s;
-	/* funcs */
+	/* funcs */
 	
 	chat->createpcchat = chat_createpcchat;
 	chat->joinchat = chat_joinchat;

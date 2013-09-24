@@ -64,6 +64,7 @@
 // Comment the following line to disable sc_data saving. [Skotlex]
 #define ENABLE_SC_SAVING
 
+#if PACKETVER >= 20070227
 // Comment the following like to disable server-side hot-key saving support. [Skotlex]
 // Note that newer clients no longer save hotkeys in the registry!
 #define HOTKEY_SAVING
@@ -74,10 +75,11 @@
 #elif PACKETVER < 20090617
         // (36 = 9 skills x 4 bars)               (0x07d9,254)
         #define MAX_HOTKEYS 36
-#else
+#else // >= 20090617
         // (38 = 9 skills x 4 bars & 2 Quickslots)(0x07d9,268)
         #define MAX_HOTKEYS 38
-#endif
+#endif // 20090603
+#endif // 20070227
 
 #define MAX_INVENTORY 100
 //Max number of characters per account. Note that changing this setting alone is not enough if the client is not hexed to support more characters as well.
@@ -115,7 +117,6 @@
 #define MAX_GUARDIANS 8         // Local max per castle. [Skotlex]
 #define MAX_QUEST_DB 2662       // Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3  // Max quest objectives for a quest
-#define NPC_NAME_LENGTH 37		//Tamanho máximo do nome de NPCs [Raizen]
 #define MAX_START_ITEMS 32	    // Max number of items allowed to be given to a char whenever it's created. [mkbu95]
 
 // for produce
@@ -572,6 +573,13 @@ struct fame_list {
 	int id;
 	int fame;
 	char name[NAME_LENGTH];
+};
+
+enum fame_list_type {
+	RANKTYPE_BLACKSMITH = 0,
+	RANKTYPE_ALCHEMIST  = 1,
+	RANKTYPE_TAEKWON    = 2,
+	RANKTYPE_PK         = 3, //Not supported yet
 };
 
 enum { //Change Guild Infos

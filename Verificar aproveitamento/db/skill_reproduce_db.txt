@@ -1,0 +1,204 @@
+// Lista de reprodução das habilidades copiadas
+//
+// ##TODO## Ajustar esse arquivo e torná-lo uma nova bandeira skill_info2
+//
+// Estrutura do Banco:
+// ID da Habilidade
+//=================================
+
+//Espadachin
+5  //Golpe Fulminante
+7	//Impacto Explosivo
+
+//Mago
+11	// Ataque Espiritual
+13	// Espiritos Anciões
+14	// Lanças de Gelo
+15	// Rajada Congelante
+17	// Bola de Fogo
+18	// Barreira de Fogo
+19	// Lanças de Fogo
+20	// Relâmpago
+21	// Tempestade de Raios
+
+//Noviço
+24	// Revelação
+28	// Curar
+
+//Mercador
+42	// Mammonita
+
+//Arqueiro
+46	// Double Strafe
+47	// Arrow Shower
+
+//Gatuno
+52	// Envenenar
+
+// Ressussitar
+54	// Ressussitar
+
+// Cavaleiro
+62	// Impacto de Tyr
+
+// Sacerdote
+68	// Aspersio
+69	// B.S Sacramenti
+70	// Santuário
+77	// Esconjurar
+79	// Magnus Exorcismus
+
+// Bruxo
+80	// Coluna de Fogo
+81	// Supernova
+83	// Chuva de Meteoro
+84	// Trovão de Júpiter
+85	// Ira de Thor
+86	// Esfera D'Água
+88	// Frost Nova
+89	// Nevasca
+90	// Coluna de Pedra
+91	// Fúria da Terra
+
+// Caçador
+116	// Armadilha Atordoante
+121	// Armadilha Congelante
+122	// Instalar Mina
+123	// Armadilha Explosiva
+
+// Mercenário
+141	// Explosão Tóxica
+
+// Habilidades de Quest da Primeira Classe
+148	// Disparo Violento
+152	// Arremessar Pedra
+156	// Luz Divina
+
+// Arruaceiro
+212	// Apunhalar
+
+// Alquimista
+229	// Fogo Grego
+230	// Terror Ácido
+
+// Templário
+250	// Punição Divina
+251	// Escudo Bumerangue
+253	// Crux Divinum
+254	// Crux Magnun
+
+// Monge
+263	// Combo Triplo
+266	// Impacto Psíquico
+267	// Disparo de Esferas Espirituais
+271	// Punho Supremo de Asura
+272	// Combo Quádruplo
+
+// Habilidade com itens
+337	// Arremessar Tomahawk
+
+// Taekwon
+421	// Chute Aéreo
+
+// Ninja
+526	// Chuva de Moedas
+527	// Virar Tatami
+528	// Corte da Névoa
+529	// Salto das Sombras
+531	// Troca de Pele
+534	// Pétalas Flamejantes
+536	// Dragão Explosivo
+537	// Lança Congelante
+539	// Grande Floco de Neve
+540	// Lâmina de Vento
+541	// Descarga Elétrica
+542	// Brisa Cortante
+
+// Habilidades de Quest da Segunda Classe
+1001	// Avanço Ofensivo
+1004	// Faca Envenenada
+1006	// Explosão Protetora
+1009	// Flecha Fantasma
+1015	// Concessão Espiritual
+
+// Cavaleiro Rúnico
+2002	// Onda de Choque
+2005	// Impacto Flamejante
+2006	// Vento Cortante
+
+// Sicário
+2022	// Lâminas Retalhadoras
+2023	// Passo Sombrio
+2034	// Ameaça Fantasma
+
+// Arcebispo
+2038	// Judex
+2040	// Adoramus
+2051	// Curatio
+2054	// Gemini Lumen
+
+// Arcano
+2202	// Impacto Espiritual
+2203	// Zero Absoluto
+2204	// Esquife de Gelo
+2210	// Drenar Vida
+2211	// Meteoro Escarlate
+2212	// Hell Inferno
+2213	// Cometa
+2214	// Corrente Elétrica
+2216	// Abalo Sismico
+
+// Sentinela
+2233	// Tempestade de Flechas
+2236	// Disparo Certeiro
+2239	// Bomba Relógio
+2253	// Armadilha Glacial
+2254	// Armadilha Incendiária
+
+// Renegado
+2284	// Acerto de Contas
+2288	// Disparo Triplo
+2304	// Cópia Explosiva
+
+// Guardião Real
+2310	// Escudo Compressor
+2315	// Aegis Domini
+2316	// Exceder Limite
+2320	// Espiral Lunar
+2323	// Aegis Inferi
+
+// Shura
+2326	// Punho do Dragão
+2327	// Soco Furacão
+2328	// Impacto Sismico
+2330	// Garra de Tigre
+2332	// Esplosão Espiritual
+2336	// Investida de Shura
+2337	// Rasteira
+2343	// Portões do Inferno
+2344	// Chakra do Silêncio
+2517	// Rugido do Leão
+2518	// Tempestade Espiritual
+
+// Trovador / Musa
+2413	// Ruido Estridente
+2414	// Ressonância
+2418	// Temporal de Mil Flechas
+
+// Feiticeiro
+2443	// Passos da Salamandra
+2444	// Passos de Silfide
+2446	// Castigo de Nerthus
+2447	// Pó de Diamante
+2448	// Implosão Tóxica
+2449	// Onda Psíquica
+2450	// Maldição de Jormungand
+2454	// Lanças de Aesyr
+
+// Bioquímico
+2479	// Armadilha de Espinhos
+2480	// Planta Sanguessuga
+2481	// Esporo Explosivo
+2482	// Muralha de Espinhos
+2483	// Erva Daninha
+2490	// Planta Infernal

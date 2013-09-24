@@ -1,8 +1,7 @@
 ﻿Cronus-Emulator
 ===============
 
-* Portal: (http://portal.cronus-emulator.com/)
-* Forum: (http://forum.cronus-emulator.com/)
+* Website: (http://forum.cronus-emulator.com/)
 
 Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/tracker).
 
@@ -30,20 +29,17 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - .twink	- Samuel Soares
-- BOO		- José Filho
+- MaatSF	- Matheus Silva
+- mkbu96	- Matheus Macabu
 
 ### Desenvolvedores
-- Yum		- Luann Peixe
 - Golen Maker	- Ligleyson Warnielle
-- Cainho	- Caio Mateus
-- BeckDeveloper - Valderson Rodrigues
-- Schrwaizer - Junior Backes 
+- BeckDeveloper	- Valderson Rodrigues
+- Schrwaizer	- Junior Backes
+- BOO			- José Filho
+- fetish		- Wesley Balena
 	
 ### Estágiários/Aprendizes
 - Rayzir	- Guilherme Fontenele
-- Eru Yuuko
-- KaduKiller	- Carlos Salles
-- Aster0id		- Bruno Soares
-- Ziegifried	- Yuri Butzke
 - Linne Ribeiro
 - iTBanner

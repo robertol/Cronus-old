@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Disable Ice Wall.
 //===== By: ==================================================
 //= Hercules Dev Team
@@ -165,6 +165,17 @@ nguild_prt	mapflag	noicewall
 // Somatology Laboratory ===========
 1@lhz	mapflag	noicewall
 
+// Bangungot Hospital F2 ===========
+1@ma_h	mapflag	noicewall
+
+// Buwaya Cave ===========
+1@ma_c	mapflag	noicewall
+
+// Bakonawa Hideout ===========
+1@ma_b	mapflag	noicewall
+
+// Inside Eclage ===========
+1@ecl	mapflag	noicewall
 
 // Poring War ====================
 poring_w01	mapflag	noicewall

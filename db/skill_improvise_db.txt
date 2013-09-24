@@ -1,34 +1,34 @@
-// Banco de Dados  - Habilidade Improviso
-// Banco de dados das habilidades que podem ser convocadas através de Improviso (Habilidade de Trovador/Musa).
+// Improvise Database
+// Database for skills that can be summoned trough Randomize Spell/Improvised Song (Minstrel/Wanderer Skill).
 //
-// Estrutura do Banco :
-// Id da Habilidade, Taxa
+// Structure of Database:
+// SkillID,Rate
 
-// Habilidades de Mago
-10,5000	// Chama Reveladora
-11,5000	// Ataque Espiritual
-12,5000	// Escudo Mágico
-13,5000	// Espíritos Anciões
-14,5000	// Lanças de Gelo
-15,5000	// Rajada Congelante
-16,5000	// Petrificar
-17,5000	// Bolas de Fogo
-18,5000	// Barreira de Fogo
-19,5000	// Lanças de Fogo
-20,5000	// Relâmpago
-21,5000	// Tempestade de Raios
+// Mage Skills
+10,5000	// Sight
+11,5000	// Napalm Beat
+12,5000	// Safety Wall
+13,5000	// Soul Strike
+14,5000	// Cold Bolt
+15,5000	// Frost Diver
+16,5000	// Stone Curse
+17,5000	// Fire Ball
+18,5000	// Fire Wall
+19,5000	// Fire Bolt
+20,5000	// Lightning Bolt
+21,5000	// Thunderstorm
 
-// Habilidades de Bruxo
-80,2500	// Coluna de Fogo
-81,2500	// Supernova
-83,2500	// Chuva de Meteoros
-84,2500	// Trovão de Júpiter
-85,2500	// Ira de Thor
-86,2500	// Esfera D'Água
-87,2500	// Barreira de Gelo
-88,2500	// Congelar
-89,2500	// Nevasca
-90,2500	// Coluna de Pedra
-91,2500	// Fúria de Terra
-92,2500	// Pântano dos Mortos
-93,2500	// Sentido Sobrenatural
+// Wizard Skills
+80,2500	// Fire Pillar
+81,2500	// Sightrasher
+83,2500	// Meteor Storm
+84,2500	// Jupitel Thunder
+85,2500	// Lord of Vermilion
+86,2500	// Water Ball
+87,2500	// Ice Wall
+88,2500	// Frost Nova
+89,2500	// Storm Gust
+90,2500	// Earth Spike
+91,2500	// Heaven's Drive
+92,2500	// Quagmire
+93,2500	// Sense

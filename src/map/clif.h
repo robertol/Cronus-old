@@ -60,13 +60,13 @@ enum {// packet DB
 typedef enum send_target {
 	ALL_CLIENT,
 	ALL_SAMEMAP,
-	AREA,				// area
-	AREA_WOS,			// area, without self
-	AREA_WOC,			// area, without chatrooms
-	AREA_WOSC,			// area, without own chatroom
-	AREA_CHAT_WOC,		// hearable area, without chatrooms
-	CHAT,				// current chatroom
-	CHAT_WOS,			// current chatroom, without self
+	AREA,               // area
+	AREA_WOS,           // area, without self
+	AREA_WOC,           // area, without chatrooms
+	AREA_WOSC,          // area, without own chatroom
+	AREA_CHAT_WOC,      // hearable area, without chatrooms
+	CHAT,               // current chatroom
+	CHAT_WOS,           // current chatroom, without self
 	PARTY,
 	PARTY_WOS,
 	PARTY_SAMEMAP,
@@ -84,7 +84,7 @@ typedef enum send_target {
 	DUEL_WOS,
 	SELF,
 	
-	BG,					// BattleGround System
+	BG,                 // BattleGround System
 	BG_WOS,
 	BG_SAMEMAP,
 	BG_SAMEMAP_WOS,
@@ -93,6 +93,25 @@ typedef enum send_target {
 	
 	BG_QUEUE,
 } send_target;
+
+typedef enum broadcast_flags {
+	BC_ALL         =    0,
+	BC_MAP         =    1,
+	BC_AREA        =    2,
+	BC_SELF        =    3,
+	BC_TARGET_MASK = 0x07,
+
+	BC_PC          = 0x00,
+	BC_NPC         = 0x08,
+	BC_SOURCE_MASK = 0x08, // BC_PC|BC_NPC
+
+	BC_YELLOW      = 0x00,
+	BC_BLUE        = 0x10,
+	BC_WOE         = 0x20,
+	BC_COLOR_MASK  = 0x30, // BC_YELLOW|BC_BLUE|BC_WOE
+
+	BC_DEFAULT     = BC_ALL|BC_PC|BC_YELLOW
+} broadcast_flags;
 
 typedef enum emotion_type {
 	E_GASP = 0,     // /!
@@ -570,7 +589,7 @@ struct clif_interface {
 	void (*scriptclear) (struct map_session_data *sd, int npcid);
 	/* client-user-interface-related */
 	void (*viewpoint) (struct map_session_data *sd, int npc_id, int type, int x, int y, int id, int color);
-	int (*damage) (struct block_list* src, struct block_list* dst, unsigned int tick, int sdelay, int ddelay, int damage, int div, int type, int damage2);
+	int (*damage) (struct block_list* src, struct block_list* dst, unsigned int tick, int sdelay, int ddelay, int64 damage, int div, int type, int64 damage2);
 	void (*sitting) (struct block_list* bl);
 	void (*standing) (struct block_list* bl);
 	void (*arrow_create_list) (struct map_session_data *sd);
@@ -578,6 +597,9 @@ struct clif_interface {
 	void (*fame_blacksmith) (struct map_session_data *sd, int points);
 	void (*fame_alchemist) (struct map_session_data *sd, int points);
 	void (*fame_taekwon) (struct map_session_data *sd, int points);
+	void (*ranklist) (struct map_session_data *sd, enum fame_list_type type);
+	void (*update_rankingpoint) (struct map_session_data *sd, enum fame_list_type type, int points);
+	void (*pRanklist) (int fd, struct map_session_data *sd);
 	void (*hotkeys) (struct map_session_data *sd);
 	int (*insight) (struct block_list *bl,va_list ap);
 	int (*outsight) (struct block_list *bl,va_list ap);
@@ -667,7 +689,7 @@ struct clif_interface {
 	void (*wedding_effect) (struct block_list *bl);
 	void (*divorced) (struct map_session_data* sd, const char* name);
 	void (*callpartner) (struct map_session_data *sd);
-	int (*skill_damage) (struct block_list *src,struct block_list *dst,unsigned int tick,int sdelay,int ddelay,int damage,int div,uint16 skill_id,uint16 skill_lv,int type);
+	int (*skill_damage) (struct block_list *src,struct block_list *dst,unsigned int tick,int sdelay,int ddelay,int64 damage,int div,uint16 skill_id,uint16 skill_lv,int type);
 	int (*skill_nodamage) (struct block_list *src,struct block_list *dst,uint16 skill_id,int heal,int fail);
 	void (*skill_poseffect) (struct block_list *src,uint16 skill_id,int val,int x,int y,int tick);
 	void (*skill_estimation) (struct map_session_data *sd,struct block_list *dst);
@@ -807,7 +829,7 @@ struct clif_interface {
 	void (*bg_hp) (struct map_session_data *sd);
 	void (*bg_xy) (struct map_session_data *sd);
 	void (*bg_xy_remove) (struct map_session_data *sd);
-	void (*bg_message) (struct battleground_data *bg, int src_id, const char *name, const char *mes, int len);
+	void (*bg_message) (struct battleground_data *bgd, int src_id, const char *name, const char *mes, int len);
 	void (*bg_updatescore) (int16 m);
 	void (*bg_updatescore_single) (struct map_session_data *sd);
 	void (*sendbgemblem_area) (struct map_session_data *sd);

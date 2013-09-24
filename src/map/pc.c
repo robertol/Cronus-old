@@ -400,21 +400,17 @@ int pc_banding(struct map_session_data *sd, uint16 skill_lv) {
 // Increases a player's fame points and displays a notice to him
 void pc_addfame(struct map_session_data *sd,int count)
 {
+	int ranktype = -1;
 	nullpo_retv(sd);
 	sd->status.fame += count;
 	if(sd->status.fame > MAX_FAME)
 		sd->status.fame = MAX_FAME;
 	switch(sd->class_&MAPID_UPPERMASK){
-		case MAPID_BLACKSMITH: // Blacksmith
-			clif->fame_blacksmith(sd,count);
-			break;
-		case MAPID_ALCHEMIST: // Alchemist
-			clif->fame_alchemist(sd,count);
-			break;
-		case MAPID_TAEKWON: // Taekwon
-			clif->fame_taekwon(sd,count);
-			break;
+		case MAPID_BLACKSMITH: ranktype = RANKTYPE_BLACKSMITH; break;
+		case MAPID_ALCHEMIST:  ranktype = RANKTYPE_ALCHEMIST; break;
+		case MAPID_TAEKWON: ranktype = RANKTYPE_TAEKWON; break;
 	}
+	clif->update_rankingpoint(sd, ranktype, count);
 	chrif->updatefamelist(sd);
 }
 
@@ -652,7 +648,7 @@ int pc_equippoint(struct map_session_data *sd,int n)
 	if(!sd->inventory_data[n])
 		return 0;
 
-	if (!itemdb_isequip2(sd->inventory_data[n]))
+	if (!itemdb->isequip2(sd->inventory_data[n]))
 		return 0; //Not equippable by players.
 
 	ep = sd->inventory_data[n]->equip;
@@ -1082,7 +1078,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 		
 	//Set here because we need the inventory data for weapon sprite parsing.
 	iStatus->set_viewdata(&sd->bl, sd->status.class_);
-	unit_dataset(&sd->bl);
+	unit->dataset(&sd->bl);
 
 	sd->guild_x = -1;
 	sd->guild_y = -1;
@@ -1143,9 +1139,15 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	if( !changing_mapservers ) {
 
 		if (battle_config.display_version == 1) {
-			const char* ver = versao();
+			const char* svn = get_svn_revision();
+			const char* git = get_git_hash();
 			char buf[256];
-				sprintf(buf,"Versão: %s", ver);
+			if( git[0] != HERC_UNKNOWN_VER )
+				sprintf(buf,"Git Hash: %s", git);
+			else if( svn[0] != HERC_UNKNOWN_VER )
+				sprintf(buf,"SVN Revision: %s", svn);
+			else
+				sprintf(buf,"Unknown Version");
 			clif->message(sd->fd, buf);
 		}
 		
@@ -1328,7 +1330,7 @@ int pc_reg_received(struct map_session_data *sd)
 	}
 
 	if( npc->motd ) /* [Ind/Hercules] */
-		script->run(npc->motd->u.scr.script, 0, sd->bl.id, fake_nd->bl.id);
+		script->run(npc->motd->u.scr.script, 0, sd->bl.id, npc->fake_nd->bl.id);
 
 	return 1;
 }
@@ -3693,7 +3695,7 @@ int pc_checkadditem(struct map_session_data *sd,int nameid,int amount)
 
 	data = itemdb->search(nameid);
 
-	if(!itemdb_isstackable2(data))
+	if(!itemdb->isstackable2(data))
 		return ADDITEM_NEW;
 
 	if( data->stack.inventory && amount > data->stack.amount )
@@ -3939,7 +3941,7 @@ int pc_additem(struct map_session_data *sd,struct item *item_data,int amount,e_l
 
 	i = MAX_INVENTORY;
 
-	if( itemdb_isstackable2(data) && item_data->expire_time == 0 )
+	if( itemdb->isstackable2(data) && item_data->expire_time == 0 )
 	{ // Stackable | Non Rental
 		for( i = 0; i < MAX_INVENTORY; i++ )
 		{
@@ -3970,8 +3972,8 @@ int pc_additem(struct map_session_data *sd,struct item *item_data,int amount,e_l
 		clif->additem(sd,i,amount,0);
 	}
 #ifdef NSI_UNIQUE_ID
-	if( !itemdb_isstackable2(data) && !item_data->unique_id )
-		sd->status.inventory[i].unique_id = itemdb_unique_id(0,0);
+	if( !itemdb->isstackable2(data) && !item_data->unique_id )
+		sd->status.inventory[i].unique_id = itemdb->unique_id(0,0);
 #endif
 	logs->pick_pc(sd, log_type, amount, &sd->status.inventory[i],sd->inventory_data[i]);
 
@@ -4179,7 +4181,7 @@ int pc_isUseitem(struct map_session_data *sd,int n)
 	switch( nameid ) //@TODO, lot oh harcoded nameid here
 	{
 		case 605: // Anodyne
-			if( map_flag_gvg(sd->bl.m) )
+			if( map_flag_gvg2(sd->bl.m) )
 				return 0;
 		case 606:
 			if( pc_issit(sd) )
@@ -4187,7 +4189,7 @@ int pc_isUseitem(struct map_session_data *sd,int n)
 			break;
 		case 601: // Fly Wing
 		case 12212: // Giant Fly Wing
-			if( map[sd->bl.m].flag.noteleport || map_flag_gvg(sd->bl.m) )
+			if( map[sd->bl.m].flag.noteleport || map_flag_gvg2(sd->bl.m) )
 			{
 				clif->skill_mapinfomessage(sd,0);
 				return 0;
@@ -4212,7 +4214,7 @@ int pc_isUseitem(struct map_session_data *sd,int n)
 		case 12024: // Red Pouch
 		case 12103: // Bloody Branch
 		case 12109: // Poring Box
-			if( map[sd->bl.m].flag.nobranch || map_flag_gvg(sd->bl.m) )
+			if( map[sd->bl.m].flag.nobranch || map_flag_gvg2(sd->bl.m) )
 				return 0;
 			break;
 		case 12210: // Bubble Gum
@@ -4470,7 +4472,7 @@ int pc_useitem(struct map_session_data *sd,int n) {
 	
 	script->current_item_id = nameid;
 	
-	script->run(item_script,0,sd->bl.id,fake_nd->bl.id);
+	script->run(item_script,0,sd->bl.id,npc->fake_nd->bl.id);
 	
 	script->current_item_id = 0;
 	script->potion_flag = 0;
@@ -4511,7 +4513,7 @@ int pc_cart_additem(struct map_session_data *sd,struct item *item_data,int amoun
 		return 1;
 
 	i = MAX_CART;
-	if( itemdb_isstackable2(data) && !item_data->expire_time )
+	if( itemdb->isstackable2(data) && !item_data->expire_time )
 	{
 		ARR_FIND( 0, MAX_CART, i,
 			sd->status.cart[i].nameid == item_data->nameid &&
@@ -4725,7 +4727,7 @@ int pc_steal_item(struct map_session_data *sd,struct block_list *bl, uint16 skil
 	memset(&tmp_item,0,sizeof(tmp_item));
 	tmp_item.nameid = itemid;
 	tmp_item.amount = 1;
-	tmp_item.identify = itemdb_isidentified2(data);
+	tmp_item.identify = itemdb->isidentified2(data);
 	flag = pc->additem(sd,&tmp_item,1,LOG_TYPE_PICKDROP_PLAYER);
 
 	//TODO: Should we disable stealing when the item you stole couldn't be added to your inventory? Perhaps players will figure out a way to exploit this behaviour otherwise?
@@ -4747,7 +4749,7 @@ int pc_steal_item(struct map_session_data *sd,struct block_list *bl, uint16 skil
 		char message[128];
 		sprintf (message, msg_txt(542), (sd->status.name != NULL)?sd->status.name :"GM", md->db->jname, data->jname, (float)md->db->dropitem[i].p/100);
 		//MSG: "'%s' stole %s's %s (chance: %0.02f%%)"
-		intif->broadcast(message,strlen(message)+1,0);
+		intif->broadcast(message, strlen(message)+1, BC_DEFAULT);
 	}
 	return 1;
 }
@@ -4816,42 +4818,42 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 		if( sd->instances ) {
 			for( i = 0; i < sd->instances; i++ ) {
 				if( sd->instance[i] >= 0 ) {
-					ARR_FIND(0, instances[sd->instance[i]].num_map, j, map[instances[sd->instance[i]].map[j]].instance_src_map == m && !map[instances[sd->instance[i]].map[j]].cName);
+					ARR_FIND(0, instances[sd->instance[i]].num_map, j, map[instances[sd->instance[i]].map[j]].instance_src_map == m && !map[instances[sd->instance[i]].map[j]].custom_name);
 					if( j != instances[sd->instance[i]].num_map )
 						break;
 				}
 			}
 			if( i != sd->instances ) {
 				m = instances[sd->instance[i]].map[j];
-				mapindex = map[m].index;
+				mapindex = map_id2index(m);
 				stop = true;
 			}
 		}
 		if ( !stop && sd->status.party_id && (p = party->search(sd->status.party_id)) && p->instances ) {
 			for( i = 0; i < p->instances; i++ ) {
 				if( p->instance[i] >= 0 ) {
-					ARR_FIND(0, instances[p->instance[i]].num_map, j, map[instances[p->instance[i]].map[j]].instance_src_map == m && !map[instances[p->instance[i]].map[j]].cName);
+					ARR_FIND(0, instances[p->instance[i]].num_map, j, map[instances[p->instance[i]].map[j]].instance_src_map == m && !map[instances[p->instance[i]].map[j]].custom_name);
 					if( j != instances[p->instance[i]].num_map )
 						break;
 				}
 			}
 			if( i != p->instances ) {
 				m = instances[p->instance[i]].map[j];
-				mapindex = map[m].index;
+				mapindex = map_id2index(m);
 				stop = true;
 			}
 		}
 		if ( !stop && sd->status.guild_id && sd->guild && sd->guild->instances ) {
 			for( i = 0; i < sd->guild->instances; i++ ) {
 				if( sd->guild->instance[i] >= 0 ) {
-					ARR_FIND(0, instances[sd->guild->instance[i]].num_map, j, map[instances[sd->guild->instance[i]].map[j]].instance_src_map == m && !map[instances[sd->guild->instance[i]].map[j]].cName);
+					ARR_FIND(0, instances[sd->guild->instance[i]].num_map, j, map[instances[sd->guild->instance[i]].map[j]].instance_src_map == m && !map[instances[sd->guild->instance[i]].map[j]].custom_name);
 					if( j != instances[sd->guild->instance[i]].num_map )
 						break;
 				}
 			}
 			if( i != sd->guild->instances ) {
 				m = instances[sd->guild->instance[i]].map[j];
-				mapindex = map[m].index;
+				mapindex = map_id2index(m);
 				stop = true;
 			}
 		}
@@ -4868,7 +4870,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 			struct hQueue *queue;
 			if( (queue = script->queue(sd->queues[i])) && queue->onMapChange[0] != '\0' ) {
 				pc->setregstr(sd, script->add_str("QMapChangeTo"), map[m].name);
-				npc_event(sd, queue->onMapChange, 0);
+				npc->event(sd, queue->onMapChange, 0);
 			}
 		}
 		
@@ -4902,7 +4904,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 			skill->clear_unitgroup(&sd->bl);
 		party->send_dot_remove(sd); //minimap dot fix [Kevin]
 		guild->send_dot_remove(sd);
-		bg_send_dot_remove(sd);
+		bg->send_dot_remove(sd);
 		if (sd->regen.state.gc)
 			sd->regen.state.gc = 0;
 		// make sure vending is allowed here
@@ -4924,10 +4926,10 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 			return 2;
 
 		if (sd->npc_id)
-			npc_event_dequeue(sd);
-		npc_script_event(sd, NPCE_LOGOUT);
+			npc->event_dequeue(sd);
+		npc->script_event(sd, NPCE_LOGOUT);
 		//remove from map, THEN change x/y coordinates
-		unit_remove_map_pc(sd,clrtype);
+		unit->remove_map_pc(sd,clrtype);
 		sd->mapindex = mapindex;
 		sd->bl.x=x;
 		sd->bl.y=y;
@@ -4936,7 +4938,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 		chrif->changemapserver(sd, ip, (short)port);
 
 		//Free session data from this map server [Kevin]
-		unit_free_pc(sd);
+		unit->free_pc(sd);
 
 		return 0;
 	}
@@ -4959,7 +4961,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 	}
 
 	if(sd->bl.prev != NULL){
-		unit_remove_map_pc(sd,clrtype);
+		unit->remove_map_pc(sd,clrtype);
 		clif->changemap(sd,m,x,y); // [MouseJstr]
 	} else if(sd->state.active)
 		//Tag player for rewarping after map-loading is done. [Skotlex]
@@ -5007,8 +5009,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
  *	0 = fail or FIXME success (from pc->setpos)
  *	x(1|2) = fail
  *------------------------------------------*/
-int pc_randomwarp(struct map_session_data *sd, clr_type type)
-{
+int pc_randomwarp(struct map_session_data *sd, clr_type type) {
 	int x,y,i=0;
 	int16 m;
 
@@ -5019,13 +5020,13 @@ int pc_randomwarp(struct map_session_data *sd, clr_type type)
 	if (map[sd->bl.m].flag.noteleport) //Teleport forbidden
 		return 0;
 
-	do{
+	do {
 		x=rnd()%(map[m].xs-2)+1;
 		y=rnd()%(map[m].ys-2)+1;
-	}while(iMap->getcell(m,x,y,CELL_CHKNOPASS) && (i++)<1000 );
+	} while( iMap->getcell(m,x,y,CELL_CHKNOPASS) && (i++) < 1000 );
 
 	if (i < 1000)
-		return pc->setpos(sd,map[sd->bl.m].index,x,y,type);
+		return pc->setpos(sd,map_id2index(sd->bl.m),x,y,type);
 
 	return 0;
 }
@@ -5724,9 +5725,9 @@ int pc_follow_timer(int tid, unsigned int tick, int id, intptr_t data)
 	if (sd->bl.prev != NULL && tbl->prev != NULL &&
 		sd->ud.skilltimer == INVALID_TIMER && sd->ud.attacktimer == INVALID_TIMER && sd->ud.walktimer == INVALID_TIMER)
 	{
-		if((sd->bl.m == tbl->m) && unit_can_reach_bl(&sd->bl,tbl, AREA_SIZE, 0, NULL, NULL)) {
+		if((sd->bl.m == tbl->m) && unit->can_reach_bl(&sd->bl,tbl, AREA_SIZE, 0, NULL, NULL)) {
 			if (!check_distance_bl(&sd->bl, tbl, 5))
-				unit_walktobl(&sd->bl, tbl, 5, 0);
+				unit->walktobl(&sd->bl, tbl, 5, 0);
 		} else
 			pc->setpos(sd, map_id2index(tbl->m), tbl->x, tbl->y, CLR_TELEPORT);
 	}
@@ -5747,7 +5748,7 @@ int pc_stop_following (struct map_session_data *sd)
 	sd->followtarget = -1;
 	sd->ud.target_to = 0;
 
-	unit_stop_walking(&sd->bl, 1);
+	unit->stop_walking(&sd->bl, 1);
 	
 	return 0;
 }
@@ -5807,7 +5808,7 @@ int pc_checkbaselevelup(struct map_session_data *sd) {
 		sc_start(&sd->bl,iStatus->skill2sc(AL_BLESSING),100,10,600000);
 	}
 	clif->misceffect(&sd->bl,0);
-	npc_script_event(sd, NPCE_BASELVUP); //LORDALFA - LVLUPEVENT
+	npc->script_event(sd, NPCE_BASELVUP); //LORDALFA - LVLUPEVENT
 
 	if(sd->status.party_id)
 		party->send_levelup(sd);
@@ -5856,7 +5857,7 @@ int pc_checkjoblevelup(struct map_session_data *sd)
 	if (pc->checkskill(sd, SG_DEVIL) && !pc->nextjobexp(sd))
 		clif->status_change(&sd->bl,SI_DEVIL1, 1, 0, 0, 0, 1); //Permanent blind effect from SG_DEVIL.
 
-	npc_script_event(sd, NPCE_JOBLVUP);
+	npc->script_event(sd, NPCE_JOBLVUP);
 	return 1;
 }
 
@@ -6650,7 +6651,7 @@ void pc_respawn(struct map_session_data* sd, clr_type clrtype)
 {
 	if( !pc_isdead(sd) )
 		return; // not applicable
-	if( sd->bg_id && bg_member_respawn(sd) )
+	if( sd->bg_id && bg->member_respawn(sd) )
 		return; // member revived by battleground
 
 	pc->setstand(sd);
@@ -6694,7 +6695,7 @@ void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int h
 	}
 
 	if( sd->status.pet_id > 0 && sd->pd && battle_config.pet_damage_support )
-		pet_target_check(sd,src,1);
+		pet->target_check(sd,src,1);
 
 	if( sd->status.ele_id > 0 )
 		elemental->set_target(sd,src);
@@ -6720,13 +6721,13 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	if(sd->status.pet_id > 0 && sd->pd) {
 		struct pet_data *pd = sd->pd;
 		if( !map[sd->bl.m].flag.noexppenalty ) {
-			pet_set_intimate(pd, pd->pet.intimate - pd->petDB->die);
+			pet->set_intimate(pd, pd->pet.intimate - pd->petDB->die);
 			if( pd->pet.intimate < 0 )
 				pd->pet.intimate = 0;
 			clif->send_petdata(sd,sd->pd,1,pd->pet.intimate);
 		}
 		if( sd->pd->target_id ) // Unlock all targets...
-			pet_unlocktarget(sd->pd);
+			pet->unlocktarget(sd->pd);
 	}
 
 	if (sd->status.hom_id > 0){
@@ -6749,24 +6750,24 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	}
 
 	if (sd->npc_id && sd->st && sd->st->state != RUN)
-		npc_event_dequeue(sd);
+		npc->event_dequeue(sd);
 	
 	pc_setglobalreg(sd,"PC_DIE_COUNTER",sd->die_counter+1);
 	pc->setparam(sd, SP_KILLERRID, src?src->id:0);
 
 	if( sd->bg_id ) {/* TODO: purge when bgqueue is deemed ok */
-		struct battleground_data *bg;
-		if( (bg = bg_team_search(sd->bg_id)) != NULL && bg->die_event[0] )
-			npc_event(sd, bg->die_event, 0);
+		struct battleground_data *bgd;
+		if( (bgd = bg->team_search(sd->bg_id)) != NULL && bgd->die_event[0] )
+			npc->event(sd, bgd->die_event, 0);
 	}
 	
 	for( i = 0; i < sd->queues_count; i++ ) {
 		struct hQueue *queue;
 		if( (queue = script->queue(sd->queues[i])) && queue->onDeath[0] != '\0' )
-			npc_event(sd, queue->onDeath, 0);
+			npc->event(sd, queue->onDeath, 0);
 	}
 	
-	npc_script_event(sd,NPCE_DIE);
+	npc->script_event(sd,NPCE_DIE);
 		
 	// Clear anything NPC-related when you die and was interacting with one.
 	if (sd->npc_id || sd->npc_shopid) {
@@ -6811,7 +6812,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 			{
 				struct mob_data *md=(struct mob_data *)src;
 				if(md->target_id==sd->bl.id)
-					mob_unlocktarget(md,tick);
+					mob->unlocktarget(md,tick);
 				if(battle_config.mobs_level_up && md->status.hp &&
 					(unsigned int)md->level < pc->maxbaselv(sd) &&
 					!md->guardian_data && !md->special_state.ai// Guardians/summons should not level. [Skotlex]
@@ -6844,7 +6845,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	if (src && src->type == BL_PC) {
 		struct map_session_data *ssd = (struct map_session_data *)src;
 		pc->setparam(ssd, SP_KILLEDRID, sd->bl.id);
-		npc_script_event(ssd, NPCE_KILLPC);
+		npc->script_event(ssd, NPCE_KILLPC);
 
 		if (battle_config.pk_mode&2) {
 			ssd->status.manner -= 5;
@@ -6903,7 +6904,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 			if(battle_config.pc_invincible_time)
 				pc->setinvincibletimer(sd, battle_config.pc_invincible_time);
 			sc_start(&sd->bl,iStatus->skill2sc(MO_STEELBODY),100,1,skill->get_time(MO_STEELBODY,1));
-			if(map_flag_gvg(sd->bl.m))
+			if(map_flag_gvg2(sd->bl.m))
 				pc_respawn_timer(INVALID_TIMER, iTimer->gettick(), sd->bl.id, 0);
 			return 0;
 		}
@@ -6912,7 +6913,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	// changed penalty options, added death by player if pk_mode [Valaris]
 	if(battle_config.death_penalty_type
 		&& (sd->class_&MAPID_UPPERMASK) != MAPID_NOVICE	// only novices will receive no penalty
-		&& !map[sd->bl.m].flag.noexppenalty && !map_flag_gvg(sd->bl.m)
+		&& !map[sd->bl.m].flag.noexppenalty && !map_flag_gvg2(sd->bl.m)
 		&& !sd->sc.data[SC_BABY] && !sd->sc.data[SC_CASH_DEATHPENALTY])
 	{
 		unsigned int base_penalty =0;
@@ -7021,21 +7022,17 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 		}
 		if( sd->pvp_point < 0 )
 		{
-			iTimer->add_timer(tick+1000, pc_respawn_timer,sd->bl.id,0);
+			iTimer->add_timer(tick+1, pc_respawn_timer,sd->bl.id,0);
 			return 1|8;
 		}
 	}
 	//GvG
-	if( map_flag_gvg(sd->bl.m) )
-	{
-		iTimer->add_timer(tick+1000, pc_respawn_timer, sd->bl.id, 0);
+	if( map_flag_gvg2(sd->bl.m) ) {
+		iTimer->add_timer(tick+1, pc_respawn_timer, sd->bl.id, 0);
 		return 1|8;
-	}
-	else if( sd->bg_id )
-	{
-		struct battleground_data *bg = bg_team_search(sd->bg_id);
-		if( bg && bg->mapindex > 0 )
-		{ // Respawn by BG
+	} else if( sd->bg_id ) {
+		struct battleground_data *bgd = bg->team_search(sd->bg_id);
+		if( bgd && bgd->mapindex > 0 ) { // Respawn by BG
 			iTimer->add_timer(tick+1000, pc_respawn_timer, sd->bl.id, 0);
 			return 1|8;
 		}
@@ -8329,7 +8326,7 @@ static int pc_eventtimer(int tid, unsigned int tick, int id, intptr_t data)
 	{
 		sd->eventtimer[i] = INVALID_TIMER;
 		sd->eventcount--;
-		npc_event(sd,p,0);
+		npc->event(sd,p,0);
 	}
 	else
 		ShowError("pc_eventtimer: no such event timer\n");
@@ -8772,7 +8769,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 	//OnEquip script [Skotlex]
 	if (id) {
 		if (id->equip_script)
-			script->run(id->equip_script,0,sd->bl.id,fake_nd->bl.id);
+			script->run(id->equip_script,0,sd->bl.id,npc->fake_nd->bl.id);
 		if(itemdb_isspecial(sd->status.inventory[n].card[0]))
 			; //No cards
 		else {
@@ -8782,7 +8779,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 					continue;
 				if ( ( data = itemdb->exists(sd->status.inventory[n].card[i]) ) != NULL ) {
 					if( data->equip_script )
-						script->run(data->equip_script,0,sd->bl.id,fake_nd->bl.id);
+						script->run(data->equip_script,0,sd->bl.id,npc->fake_nd->bl.id);
 				}
 			}
 		}
@@ -8939,7 +8936,7 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 	//OnUnEquip script [Skotlex]
 	if (sd->inventory_data[n]) {
 		if (sd->inventory_data[n]->unequip_script)
-			script->run(sd->inventory_data[n]->unequip_script,0,sd->bl.id,fake_nd->bl.id);
+			script->run(sd->inventory_data[n]->unequip_script,0,sd->bl.id,npc->fake_nd->bl.id);
 		if(itemdb_isspecial(sd->status.inventory[n].card[0]))
 			; //No cards
 		else {
@@ -8950,7 +8947,7 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 
 				if ( ( data = itemdb->exists(sd->status.inventory[n].card[i]) ) != NULL ) {
 					if( data->unequip_script )
-						script->run(data->unequip_script,0,sd->bl.id,fake_nd->bl.id);
+						script->run(data->unequip_script,0,sd->bl.id,npc->fake_nd->bl.id);
 				}
 
 			}
@@ -9366,7 +9363,7 @@ int map_day_timer(int tid, unsigned int tick, int id, intptr_t data)
 	iMap->night_flag = 0; // 0=day, 1=night [Yor]
 	iMap->map_foreachpc(pc_daynight_timer_sub);
 	strcpy(tmp_soutput, (data == 0) ? msg_txt(502) : msg_txt(60)); // The day has arrived!
-	intif->broadcast(tmp_soutput, strlen(tmp_soutput) + 1, 0);
+	intif->broadcast(tmp_soutput, strlen(tmp_soutput) + 1, BC_DEFAULT);
 	return 0;
 }
 
@@ -9387,7 +9384,7 @@ int map_night_timer(int tid, unsigned int tick, int id, intptr_t data)
 	iMap->night_flag = 1; // 0=day, 1=night [Yor]
 	iMap->map_foreachpc(pc_daynight_timer_sub);
 	strcpy(tmp_soutput, (data == 0) ? msg_txt(503) : msg_txt(59)); // The night has fallen...
-	intif->broadcast(tmp_soutput, strlen(tmp_soutput) + 1, 0);
+	intif->broadcast(tmp_soutput, strlen(tmp_soutput) + 1, BC_DEFAULT);
 	return 0;
 }
 
@@ -9643,6 +9640,8 @@ void pc_read_skill_tree(void) {
 	const char *config_filename = "db/pre-re/skill_tree.conf"; // FIXME hardcoded name
 #endif
 	int i = 0, jnamelen = 0;
+	struct s_mapiterator *iter;
+	struct map_session_data *sd;
 	struct {
 		const char *name;
 		int id;
@@ -9887,6 +9886,11 @@ void pc_read_skill_tree(void) {
 	
 	config_destroy(&skill_tree_conf);
 
+    /* lets update all players skill tree */
+    iter = mapit_getallusers();
+    for( sd = (TBL_PC*)mapit->first(iter); mapit->exists(iter); sd = (TBL_PC*)mapit->next(iter) )
+        clif->skillinfoblock(sd);
+    mapit->free(iter);
 }
 #if defined(RENEWAL_DROP) || defined(RENEWAL_EXP)
 static bool pc_readdb_levelpenalty(char* fields[], int columns, int current)
@@ -9924,8 +9928,7 @@ static bool pc_readdb_levelpenalty(char* fields[], int columns, int current)
  * skill_tree.txt - skill tree for every class
  * attr_fix.txt   - elemental adjustment table
  *------------------------------------------*/
-int pc_readdb(void)
-{
+int pc_readdb(void) {
 	int i,j,k;
 	unsigned int count = 0;
 	FILE *fp;
@@ -9942,8 +9945,7 @@ int pc_readdb(void)
 		ShowError("can't read %s\n", line);
 		return 1;
 	}
-	while(fgets(line, sizeof(line), fp))
-	{
+	while(fgets(line, sizeof(line), fp)) {
 		int jobs[CLASS_COUNT], job_count, job, job_id;
 		int type;
 		unsigned int ui,maxlv;

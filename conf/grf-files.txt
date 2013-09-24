@@ -1,22 +1,12 @@
-//-----------------------------------------------
-// _________                                    
-// \_   ___ \_______  ____   ____  __ __  ______
-// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
-// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
-//  \______  /|__|   \____/|___|  /____//____  >
-//         \/                   \/           \/  
-//-----------------------------------------------
-// Traduzido para Português por Mara
 //-----------------------------------------
-// GRF List
+// GRF Files
+// Add as many as needed.
 //-----------------------------------------
-// Diretório para a sua 'data.grf'
-// ex. -> grf: C:\Program Files\Gravity\RO\data.grf
-// Você pode adicionar mais caso precise
-// grf: <caminho para a pasta data>
+//grf: C:\Program Files\Gravity\RO\rdata.grf
+//grf: C:\Program Files\Gravity\RO\data.grf
 
-//------ Outros ---------------------------
-
-// Diretório da pasta data (sem colocá-la no comando data_dir)
-//data_dir: C:\Program Files (x86)\LeveUp! Games\RagnarokOnline\data.grf
-//data_dir: C:\Program Files\LeveUp! Games\RagnarokOnline\data.grf
+//-----------------------------------------
+// Data Directory
+// Use the base folder, not the data\ path.
+//-----------------------------------------
+//data_dir: C:\Program Files\Gravity\RO\

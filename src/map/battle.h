@@ -5,6 +5,8 @@
 #ifndef _BATTLE_H_
 #define _BATTLE_H_
 
+#include "../common/cbasetypes.h"
+
 /**
  * Declarations
  **/
@@ -55,19 +57,21 @@ typedef enum damage_lv {
 } damage_lv;
 
 enum e_battle_check_target { //New definitions [Skotlex]
-	BCT_NOONE		=	0x000000,
-	BCT_SELF		=	0x010000,
-	BCT_ENEMY		=	0x020000,
-	BCT_PARTY		=	0x040000,
-	BCT_GUILD		=	0x080000,
-	BCT_NEUTRAL		=	0x100000,
-	BCT_SAMEGUILD	=	0x200000,	// No Guild Allies
-
-	BCT_NOGUILD		=	0x170000,	// This should be (~BCT_GUILD&BCT_ALL)
-	BCT_NOPARTY		=	0x1b0000,	// This should be (~BCT_PARTY&BCT_ALL)
-	BCT_NOENEMY		=	0x1d0000,	// This should be (~BCT_ENEMY&BCT_ALL)
+	BCT_NOONE       =   0x000000,
+	BCT_SELF        =   0x010000,
+	BCT_ENEMY       =   0x020000,
+	BCT_PARTY       =   0x040000,
+	BCT_GUILDALLY   =   0x080000,	// Only allies, NOT guildmates
+	BCT_NEUTRAL     =   0x100000,
+	BCT_SAMEGUILD   =   0x200000,   // No Guild Allies
 	
-	BCT_ALL			=	0x1f0000,	// Sum of BCT_NOONE to BCT_NEUTRAL
+	BCT_GUILD       =   0x280000,	// Guild AND allies (BCT_SAMEGUILD|BCT_GUILDALLY)
+	
+	BCT_NOGUILD     =   0x170000,	// This should be (~BCT_GUILD&BCT_ALL)
+	BCT_NOPARTY     =   0x3b0000,	// This should be (~BCT_PARTY&BCT_ALL)
+	BCT_NOENEMY     =   0x3d0000,	// This should be (~BCT_ENEMY&BCT_ALL)
+	
+	BCT_ALL         =   0x3f0000,	// Sum of BCT_NOONE to BCT_SAMEGUILD
 };
 
 /**
@@ -76,7 +80,7 @@ enum e_battle_check_target { //New definitions [Skotlex]
 
 // dammage structure
 struct Damage {
-	int damage,damage2; //right, left dmg
+	int64 damage,damage2; //right, left dmg
 	int type,div_; //chk clif_damage for type @TODO add an enum ? ;  nb of hit
 	int amotion,dmotion;
 	int blewcount; //nb of knockback
@@ -453,6 +457,8 @@ struct Battle_Config {
 	int gm_ignore_warpable_area;
 	
 	int client_accept_chatdori; // [Ai4rei/Mirei]
+	int snovice_call_type;
+	int guild_notice_changemap;
 	
 } battle_config;
 
@@ -476,41 +482,41 @@ struct battle_interface {
 	/* damage calculation */
 	struct Damage (*calc_attack) (int attack_type, struct block_list *bl, struct block_list *target, uint16 skill_id, uint16 skill_lv, int count);
 	/* generic final damage calculation */
-	int (*calc_damage) (struct block_list *src, struct block_list *bl, struct Damage *d, int damage, uint16 skill_id, uint16 skill_lv);
+	int64 (*calc_damage) (struct block_list *src, struct block_list *bl, struct Damage *d, int64 damage, uint16 skill_id, uint16 skill_lv);
 	/* gvg final damage calculation */
-	int (*calc_gvg_damage) (struct block_list *src, struct block_list *bl, int damage, int div_, uint16 skill_id, uint16 skill_lv, int flag);
+	int64 (*calc_gvg_damage) (struct block_list *src, struct block_list *bl, int64 damage, int div_, uint16 skill_id, uint16 skill_lv, int flag);
 	/* battlegrounds final damage calculation */
-	int (*calc_bg_damage) (struct block_list *src, struct block_list *bl, int damage, int div_, uint16 skill_id, uint16 skill_lv, int flag);
+	int64 (*calc_bg_damage) (struct block_list *src, struct block_list *bl, int64 damage, int div_, uint16 skill_id, uint16 skill_lv, int flag);
 	/* normal weapon attack */
 	enum damage_lv (*weapon_attack) (struct block_list *bl, struct block_list *target, unsigned int tick, int flag);
 	/* calculate weapon attack */
 	struct Damage (*calc_weapon_attack) (struct block_list *src,struct block_list *target,uint16 skill_id,uint16 skill_lv,int wflag);
 	/* delays damage or skills by a timer */
-	int (*delay_damage) (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects);
+	int (*delay_damage) (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects);
 	/* drain damage */
-	void (*drain) (struct map_session_data *sd, struct block_list *tbl, int rdamage, int ldamage, int race, int boss);
+	void (*drain) (struct map_session_data *sd, struct block_list *tbl, int64 rdamage, int64 ldamage, int race, int boss);
 	/* damage return/reflect */
-	int (*calc_return_damage) (struct block_list *bl, struct block_list *src, int *, int flag, uint16 skill_id, int*);
+	int64 (*calc_return_damage) (struct block_list *bl, struct block_list *src, int64 *, int flag, uint16 skill_id, int *);
 	/* attribute rate */
 	int (*attr_ratio) (int atk_elem, int def_type, int def_lv);
 	/* applies attribute modifiers */
-	int (*attr_fix) (struct block_list *src, struct block_list *target, int damage, int atk_elem, int def_type, int def_lv);
+	int64 (*attr_fix) (struct block_list *src, struct block_list *target, int64 damage, int atk_elem, int def_type, int def_lv);
 	/* applies card modifiers */
-	int (*calc_cardfix) (int attack_type, struct block_list *src, struct block_list *target, int nk, int s_ele, int s_ele_, int damage, int left, int flag);
+	int64 (*calc_cardfix) (int attack_type, struct block_list *src, struct block_list *target, int nk, int s_ele, int s_ele_, int64 damage, int left, int flag);
 	/* applies element modifiers */	
-	int (*calc_elefix) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int damage, int nk, int n_ele, int s_ele, int s_ele_, bool left, int flag);
+	int64 (*calc_elefix) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int64 damage, int nk, int n_ele, int s_ele, int s_ele_, bool left, int flag);
 	/* applies mastery modifiers */	
-	int (*calc_masteryfix) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int damage, int div, bool left, bool weapon);
-	/* applies skill modifiers */	
+	int64 (*calc_masteryfix) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int64 damage, int div, bool left, bool weapon);
+	/* applies skill modifiers */
 	int (*calc_skillratio) (int attack_type, struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int skillratio, int flag);
 	/* applies size modifiers */
-	int (*calc_sizefix) (struct map_session_data *sd, int damage, int type, int size,  bool ignore);
+	int64 (*calc_sizefix) (struct map_session_data *sd, int64 damage, int type, int size,  bool ignore);
 #ifdef RENEWAL
 	/* get weapon damage */
-	int (*calc_weapon_damage) (struct block_list *src, struct block_list *bl, uint16 skill_id, uint16 skill_lv, struct weapon_atk *watk, int nk, bool n_ele, short s_ele, short s_ele_, int size, int type, int flag, int flag2);
+	int64 (*calc_weapon_damage) (struct block_list *src, struct block_list *bl, uint16 skill_id, uint16 skill_lv, struct weapon_atk *watk, int nk, bool n_ele, short s_ele, short s_ele_, int size, int type, int flag, int flag2);
 #endif
 	/* applies defense reductions */
-	int (*calc_defense) (int attack_type, struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int damage, int flag, int pdef);
+	int64 (*calc_defense) (int attack_type, struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv, int64 damage, int flag, int pdef);
 	/* get master (who does this unit respond to?) */
 	struct block_list *(*get_master) (struct block_list *src);
 	/* returns a random unit who is targeting this unit */
@@ -536,7 +542,7 @@ struct battle_interface {
 	int (*blewcount_bonus) (struct map_session_data *sd, uint16 skill_id);
 	/* skill range criteria */
 	int (*range_type) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv);
-	int (*calc_base_damage)
+	int64 (*calc_base_damage)
 #ifdef RENEWAL
 		(struct block_list *src, struct block_list *bl, uint16 skill_id, uint16 skill_lv, int nk, bool n_ele, short s_ele, short s_ele_, int type, int flag, int flag2);
 #else
@@ -545,8 +551,8 @@ struct battle_interface {
 	struct Damage (*calc_misc_attack) (struct block_list *src,struct block_list *target,uint16 skill_id,uint16 skill_lv,int mflag);
 	struct Damage (*calc_magic_attack) (struct block_list *src,struct block_list *target,uint16 skill_id,uint16 skill_lv,int mflag);
 	int (*adjust_skill_damage) (int m, unsigned short skill_id);
-	int (*add_mastery) (struct map_session_data *sd,struct block_list *target,int dmg,int type);
-	int (*calc_drain) (int damage, int rate, int per);
+	int64 (*add_mastery) (struct map_session_data *sd,struct block_list *target,int64 dmg,int type);
+	int (*calc_drain) (int64 damage, int rate, int per);
 	/* - battle_config                           */
 	int (*config_read) (const char *cfgName);
 	void (*config_set_defaults) (void);

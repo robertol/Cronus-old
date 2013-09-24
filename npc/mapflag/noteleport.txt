@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Disable teleportation.
 //===== By: ==================================================
 //= Hercules Dev Team
@@ -403,6 +403,30 @@ que_lhz	mapflag	noteleport
 que_lhz	mapflag	monster_noteleport
 1@lhz	mapflag	noteleport
 1@lhz	mapflag	monster_noteleport
+ma_scene01	mapflag	noteleport
+ma_in01	mapflag	noteleport
+1@ma_h	mapflag	noteleport
+1@ma_h	mapflag	monster_noteleport
+1@ma_c	mapflag	noteleport
+1@ma_c	mapflag	monster_noteleport
+1@ma_b	mapflag	noteleport
+1@ma_b	mapflag	monster_noteleport
+ma_zif01	mapflag	noteleport
+ma_zif02	mapflag	noteleport
+ma_zif03	mapflag	noteleport
+ma_zif04	mapflag	noteleport
+ma_zif05	mapflag	noteleport
+ma_zif06	mapflag	noteleport
+ma_zif07	mapflag	noteleport
+ma_zif08	mapflag	noteleport
+ma_zif09	mapflag	noteleport
+ecl_in01	mapflag	noteleport
+ecl_in02	mapflag	noteleport
+ecl_in03	mapflag	noteleport
+ecl_in04	mapflag	noteleport
+1@ecl	mapflag	noteleport
+1@ecl	mapflag	monster_noteleport
+ecl_hub01	mapflag	noteleport
 
 //Orc's Memory ===================
 1@orcs	mapflag	noteleport

@@ -180,7 +180,9 @@ struct packet_dropflooritem {
 #if PACKETVER < 20091103
 struct packet_idle_unit2 {
 	short PacketType;
+#if PACKETVER >= 20071106
 	unsigned char objecttype;
+#endif
 	unsigned int GID;
 	short speed;
 	short bodyState;
@@ -210,7 +212,9 @@ struct packet_idle_unit2 {
 } __attribute__((packed));
 struct packet_spawn_unit2 {
 	short PacketType;
+#if PACKETVER >= 20071106
 	unsigned char objecttype;
+#endif
 	unsigned int GID;
 	short speed;
 	short bodyState;
@@ -231,7 +235,6 @@ struct packet_spawn_unit2 {
 	unsigned char PosDir[3];
 	unsigned char xSize;
 	unsigned char ySize;
-	short clevel;
 } __attribute__((packed));
 #endif
 struct packet_spawn_unit {
@@ -297,14 +300,14 @@ struct packet_unit_walking {
 #if PACKETVER >= 20091103
 	short PacketLength;
 #endif
-#if PACKETVER > 7
+#if PACKETVER > 20071106
 	unsigned char objecttype;
 #endif
 	unsigned int GID;
 	short speed;
 	short bodyState;
 	short healthState;
-#if PACKETVER < 20080102
+#if PACKETVER < 7
 	short effectState;
 #else
 	int effectState;

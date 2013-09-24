@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Disable Warp Portal memory.
 //===== By: ==================================================
 //= Hercules Dev Team
@@ -731,6 +731,33 @@ gld2_ald	mapflag	nomemo
 gld2_gef	mapflag	nomemo
 gld2_pay	mapflag	nomemo
 gld2_prt	mapflag	nomemo
+ma_scene01	mapflag	nomemo
+ma_in01	mapflag	nomemo
+ma_dun01	mapflag	nomemo
+1@ma_h	mapflag	nomemo
+1@ma_c	mapflag	nomemo
+1@ma_b	mapflag	nomemo
+ma_zif01	mapflag	nomemo
+ma_zif02	mapflag	nomemo
+ma_zif03	mapflag	nomemo
+ma_zif04	mapflag	nomemo
+ma_zif05	mapflag	nomemo
+ma_zif06	mapflag	nomemo
+ma_zif07	mapflag	nomemo
+ma_zif08	mapflag	nomemo
+ma_zif09	mapflag	nomemo
+eclage	mapflag	nomemo
+ecl_fild01	mapflag	nomemo
+ecl_in01	mapflag	nomemo
+ecl_in02	mapflag	nomemo
+ecl_in03	mapflag	nomemo
+ecl_in04	mapflag	nomemo
+1@ecl	mapflag	nomemo
+ecl_tdun01	mapflag	nomemo
+ecl_tdun02	mapflag	nomemo
+ecl_tdun03	mapflag	nomemo
+ecl_tdun04	mapflag	nomemo
+ecl_hub01	mapflag	nomemo
 moc_prydn1	mapflag	nomemo
 moc_prydn2	mapflag	nomemo
 

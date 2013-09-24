@@ -1,4 +1,4 @@
-//Nível da Guilda - Tabela com valores de experiência.
+// Guild LvUp experience value table
 100000
 400000
 900000

@@ -110,7 +110,7 @@ void duel_invite(const unsigned int did, struct map_session_data* sd, struct map
 	
 	// "Blue -- Player %s invites you to PVP duel (@accept/@reject) --"
 	sprintf(output, msg_txt(374), sd->status.name);
-	clif->broadcast((struct block_list *)target_sd, output, strlen(output)+1, 0x10, SELF);
+	clif->broadcast((struct block_list *)target_sd, output, strlen(output)+1, BC_BLUE, SELF);
 }
 
 static int duel_leave_sub(struct map_session_data* sd, va_list va)
@@ -187,9 +187,9 @@ void do_init_duel(void)
 *-------------------------------------*/
 void iDuel_defaults(void) {
 	iDuel = &iDuel_s;
-	/* vars */
+	/* vars */
 	iDuel->duel_count = 0;
-	/* funcs */
+	/* funcs */
 	//Duel functions // [LuzZza]
 	iDuel->create = duel_create;
 	iDuel->invite = duel_invite;

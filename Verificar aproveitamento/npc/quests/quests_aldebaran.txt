@@ -1,0 +1,112 @@
+//===== Cronus Script ========================================
+//= Quests de Al De Baran
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 1.4b CR / 1.3 eA
+//===== Compatível Com: ======================================
+//= rAthena, Hercules, Cronus
+//===== Descrição: ===========================================
+//= Quest:
+//=  - Espelho de Médico
+//=  - Chapéu com Pluma
+//=  - Máscara do Fantasma
+//=  - Chapéu Chinês
+//===== Comentários Adicionais: ==============================
+//= 1.1 Fixed Doctor Band items		[Lupus]
+//= 1.2 Removed Duplicates		[Silent]
+//= 1.3 Updated headgear NPC.		[L0ne_W0lf]
+//= 1.3a Traduzido o NPC.		[Dynasty]
+//= 1.4 Reestruturado o NPC.		[SoulBlaker]
+//= 1.4a Corrigido erros Ortograficos.	[Dynasty]
+//= 1.4b Revisado.			[RoM]
+//============================================================
+
+//========================================================================================//
+// 'Espelho de Médico', 'Chapéu com Pluma', 'Mascara do Fantasma', 'Chapéu Chinês' Quest
+//========================================================================================//
+aldeba_in,152,166,4	script	Comerciante#aldeq_01	86,{
+	mes "[Comerciante]";
+	mes "Muhahaha! Eu sou o comerciante mais enigmático de Rune-Midgard!";
+	mes "As minhas coisas são ÚNICAS NO MUNDO!!!!";
+	next;
+	mes "[Comerciante]";
+	mes " (1) ^3355FFEspelho de Médico^000000:";
+	mes "1 Faixa Marrom + 50 Ferros + 1 Diamante Rachado + 3500 Zenys";
+	mes " (2) ^3355FFChapéu com Pluma^000000:";
+	mes "1 Chapéu Romântico + 300 Plumas de Aves + 500 Zenys";
+	mes " (3) ^3355FFMáscara do Fantasma^000000:";
+	mes "20 Ferros + 1 Planta da Melodia + 5000 Zenys";
+	mes " (4) ^3355FFChapéu Chinês^000000:";
+	mes "120 Troncos + 10000 Zenys";
+	next;
+	switch(select("Espelho de Médico:Chapéu com Pluma:Máscara do Fantasma:Chapéu Chinês:Cancelar")){
+		case 1:
+			mes "[Comerciante]";
+			if ((countitem(2275) > 0) && (countitem(998) > 49) && (countitem(733) > 0) && (Zeny > 3499)){
+				delitem 2275,1; //Faixa Marrom
+				delitem 998,50; //Ferro
+				delitem 733,1; //Diamante Rachado
+				set Zeny,Zeny-3500;
+				mes "Hm... Você tem uma licença médica?";
+				emotion e_what;
+				next;
+				mes "[Comerciante]";
+				mes "Eu ouvi sobre um físico sem licensa 'Cuwaki'... Eu espero que ele não tenha pego....";
+				mes "Tudo bem, se você quer... aqui está!";
+				getitem 2273,1; //Espelho de Médico,
+				close;
+			}
+			break;
+		case 2:
+			mes "[Comerciante]";
+			if ((countitem(2247) > 0) && (countitem(916) > 299) && (Zeny > 499)){
+				delitem 2247,1; //Chapéu Romântico
+				delitem 916,300; //Plumas de Ave
+				set Zeny,Zeny-500;
+				mes "Umhahaha. Você está muito na moda! Eu sei que você gastou muito tempo coletando esse itens não é? Ok, você mereceu, aqui está.";
+				emotion e_heh;
+				getitem 5018,1; //Chapéu com Pluma,
+				close;
+			}
+			break;
+		case 3:
+			mes "[Comerciante]";
+			if ((countitem(998) > 19) && (countitem(707) > 0) && (Zeny > 4999)){
+				delitem 998,20; //Ferro
+				delitem 707,1; //Planta da Melodia
+				set Zeny,Zeny-5000;
+				mes "São itens muito bonitos. Hm... Eu acho que dá um pouco de 'Energia'. O que você acha?";
+				next;
+				mes "[Comerciante]";
+				mes "Você gostou não é? Aqui está!";
+				getitem 2281,1; //Máscara do Fantasma
+				close;
+			}
+			break;
+		case 4:
+			mes "[Comerciante]";
+			if ((countitem(1019) > 119) && (Zeny > 9999)){
+				delitem 1019,120; //Tronco
+				set Zeny,Zeny-10000;
+				mes "Tinha um cara que vendia Chapéu Chinês em Payon. Só que ele desapareceu, nunca mais vi ele.";
+				mes "Ele nunca vendeu um Chapéu Chinês, fora para mim.";
+				next;
+				mes "[Comerciante]";
+				mes "Porque somente eu realmente conheço a qualidade do Chapéu Chinês, é um dos itens mais raros, mas pena que agora está ficando tão popular!";
+				next;
+				mes "[Comerciante]";
+				mes "Pegue aqui!";
+				getitem 2280,1; //Chapéu Chinês,
+				close;
+			}
+			break;
+		case 5:
+			mes "[Comerciante]";
+			mes "Muito bem então, desfrute de sua viajem em Al De Baran.";
+			close;
+	}
+	mes "Seu tolo! Verifique os requirimentos novamente... Você tem mesmo cara de doido! Vamos!... Dê-me um tempo.";
+	emotion e_an;
+	close;
+}

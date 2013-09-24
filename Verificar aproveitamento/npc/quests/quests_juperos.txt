@@ -1,0 +1,5118 @@
+//===== Cronus Script =======================================
+//= Quest de Juperos
+//===== Por: ================================================
+//= MasterOfMuppets
+//===== Versão Atual: =======================================
+//= 1.7b CR / 1.7 eA
+//===== Compatível com: =====================================
+//= Cronus SVN
+//===== Descrição: ==========================================
+//= [Conversão parcial do Aegis]
+//= Juperos Ruins related Quests/Events
+//===== Comentários Adicionais: =============================
+//= 1.0 First version, partly implemented [MasterOfMuppets]
+//= 1.1 Added official Juperos Ruins History Quest. Thanks
+//= to Keplerk for his first version. [SinSloth]
+//= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.3 Removed semi-official core access NPCs, replaced with [L0ne_W0lf]
+//=	event-driven story progressive NPCs. Optimization needed.
+//= 1.3a Adjusted the elevafor timer. (132000 -> 142000) [L0ne_W0lf]
+//= 1.3b Minor updates to juperos elevator NPCs. [L0ne_W0lf]
+//= 1.4 Fixed Elevator not working after failing once. [L0ne_W0lf]
+//= 1.5 Lots of Fixes, missing stopnpctimers, cleanup. [Zephyrus]
+//= 1.6 Added missing close in "Popular Feats" [L0ne_W0lf]
+//= 1.7 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 1.7a Traduzido script do eAthena [Equipe RagnaDream]
+//= 1.7b Revisado script [Asus & Skan]
+//============================================================
+
+yuno_in04,190,125,4	script	Professora	700,{
+
+	switch(yuno_hist)
+	{
+		case 0:
+			mes "[Professora]";
+			mes "...Hm? ";
+			mes "...Sim?";
+			next;
+			mes "[Professora]";
+			mes "...";
+			mes "......";
+			mes "Talvez eu possa ajuda-lo?";
+			next;
+			switch( select( "Oh! N-Nada! "," Desculpe-me ..." ) )
+			{
+				case 1:
+					mes "[Professora]";
+					mes "...";
+					mes "......";
+					mes "Hmm?";
+					mes "...........";
+					mes "Hmpf.";
+					close;
+			
+				case 2:
+					mes "[Professora]";
+					mes "...";
+					mes "......";
+					mes "Hmm?";
+					mes "...........";
+					mes "Hmmm...";
+					next;
+					mes "[Professora]";
+					mes "Você parece estar perdido.";
+					mes "Esta é a seção de";
+					mes "pesquisas acadêmicas, você sabe,";
+					mes "que é um conteúdo que dificilmente irá";
+					mes "entender. Os romances populares e livros ilustrados estão em outro lugar.";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "...";
+					mes "......";
+					next;
+					mes "[Professora]";
+					mes "Por que você não vai remexer";
+					mes "através das prateleiras ?";
+					mes "Tenho certeza que você pode encontrar algum";
+					mes "livro lá que pode realizar o seu";
+					mes "interesse. Bem, dependendo de";
+					mes "sua real intenção...";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "(O que há de errado com ela?!";
+					mes "Ela tem uma atitude ou problema ou ela está apenas desdenhosa?)";
+					close;
+			}
+
+		case 1:
+			mes "[Professora]";
+			mes "...Hm? ";
+			mes "...Sim?";
+			next;
+			mes "[Professora]";
+			mes "...";
+			mes "......";
+			mes "Talvez eu posso ajuda-lo?";
+			next;
+			switch( select( "Oh! N-Nada!","Por acaso..." ) )
+			{
+				case 1:
+					mes "[Professora]";
+					mes "...";
+					mes "......";
+					mes "Hmm?";
+					mes "...........";
+					mes "Hmpf.";
+					close;
+			
+				case 2:
+					mes "["+strcharinfo(0)+"]";
+					mes "Por acaso...";
+					mes "Você está fazendo";
+					mes "uma pesquisa sobre Juperos?";
+					next;
+					mes "[Professora]";
+					mes "Sim, você está";
+					mes "correto. Mas como";
+					mes "você veio para aprender sobre";
+					mes "meu atual projeto de pesquisa?";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Oh, Eu consegui ler um";
+					mes "pedaço da tese entitulada,";
+					mes "''A queda de Juperos,'' e";
+					mes "pensei que nossos estilos e personalidades";
+					mes "parecem corresponder ";
+					mes "por algum motivo.";
+					next;
+					mes "[Professora]";
+					mes "Oh...! Você leu minha";
+					mes "tese? então o que";
+					mes "você achou sobre ela?";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Até agora, está tudo bem,";
+					mes "mas francamente, está incompleta.";
+					mes "Quero dizer, você não tem muito material";
+					mes "para suas suposições, muito";
+					mes "menos qualquer apoio de";
+					mes "evidencias para suas declarações.";
+					next;
+					mes "[Professora]";
+					mes "....";
+					mes "Me perdoe por ter sido";
+					mes "rude com você no princípio.";
+					mes "Como você sabe, meu nome é";
+					mes "Fayruz Khrhiyha. Posso perguntar";
+					mes "qual é o seu nome ?";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Eu "+strcharinfo(0)+",";
+					mes "sou um bravo aventureiro em";
+					mes "serviço de sua alteza real,";
+					mes "o sábio e benevolente";
+					mes "Rei Tristram III.";
+					set yuno_hist,2;
+					next;
+					mes "[Fayruz]";
+					mes "Bem, "+strcharinfo(0)+",";
+					mes "Eu entendo que para minha tese";
+					mes "irei precisar de mais evidências.";
+					mes "Mas eu preciso de alguns antigos";
+					mes "documentos de Juperos";
+					mes "para completar minha pesquisa...";
+					next;
+					mes "[Fayruz]";
+					mes "Se tiver que viajar";
+					mes "através de Juperos e achar";
+					mes "qualquer documento antigo, teria";
+					mes "como você trazê-los para mim ? Tendo";
+					mes "em vista que, eles iriam imensamente ajudar";
+					mes "na minha pesquisa. Obrigada...";
+					close;
+			}
+
+		case 2:
+			if((countitem(7352)) || (countitem(7353)) || (countitem(7354)) || (countitem(7355)))
+			{
+				mes "[Fayruz]";
+				mes "Ah, é você! Escute,";
+				mes "Eu encontrei um registro";
+				mes "de um aventureiro que explorou";
+				mes "Juperos. Aqui menciona";
+				mes "que uma estátua de pedra aqui";
+				mes "que poderá ser notável...";
+				next;
+				mes "[Fayruz]";
+				mes "Se você mesmo for";
+				mes "até Juperos e conseguir";
+				mes "encontrar a estátua";
+				mes "de pedra na entrada dessa";
+				mes "caverna pode ler a";
+				mes "mensagem gravada para mim ?";
+				next;
+				mes "[Fayruz]";
+				mes "De acordo com minhas anotações,";
+				mes "há um feitiço que vai fazer";
+				mes "o leitor gravar na sua memória ";
+				mes "essa mensagem, mesmo que você";
+				mes "não conheça a língua. então";
+				mes "venha até mim, se você conseguir lê-lo.";
+				close;
+			}
+			mes "[Fayruz]";
+			mes "Se você alguma vez tiver oportunidade";
+			mes "de viajar para Juperos,";
+			mes "deixe-me saber se você";
+			mes "encontrar alguma coisa que possa ajudar";
+			mes "na minha pesquisa? Eu seria";
+			mes "muito grata pela sua ajuda.";
+			close;
+
+		case 3:
+			mes "[Fayruz]";
+			mes "Bem, você parece";
+			mes "bastante satisfeito.";
+			mes "Eu me pergunto o que";
+			mes "aconteceu para ter essa";
+			mes "expressão em seu rosto?";
+			next;
+			switch( select( "Eu encontrei algo em Juperos.","Nada demais." ) )
+			{
+		
+				case 1:
+					mes "[" +strcharinfo(0)+"]";
+					mes "Eu fui para Juperos como";
+					mes "você pediu e encontrei aquela";
+					mes "estátua de pedra que você estava";
+					mes "falando. Assim como você disse, havia uma mensagem gravada nela.";
+					next;
+					mes "[Fayruz]";
+					mes "Fascinante!";
+					mes "Então é realmente encantado";
+					mes "assim ninguém pode memorizá-lo ?";
+					mes "O-O que a mensagem diz?";
+					next;
+					mes "^3355FFVocê recita a mensagem";
+					mes "gravada na estátua de";
+					mes "pedra, incapaz de interpretar";
+					mes "os sons que éstá proferindo,";
+					mes "mas estranhamente, você pode";
+					mes "facilmente recorda-los da memória.^000000";
+					next;
+					mes "[Fayruz]";
+					mes "Ah, Eu vejo! Espere,";
+					mes "me dê um momento para";
+					mes "traduzir corretamente isto...";
+					next;
+					mes "...";
+					mes "......";
+					mes ".........";
+					next;
+					mes "[Fayruz]";
+					mes "Está dizendo, ''Você deseja ver";
+					mes "o fim da loucura?";
+					mes "Ele está esperando que as três";
+					mes "colunas sejam destruídas, onde";
+					mes "duzentas ilusões vagam.''";
+					next;
+					mes "[Fayruz]";
+					mes "''Você irá vê-lo'', o que";
+					mes "era um vaidoso e extravagante,";
+					mes "com seus próprios olhos no local onde a luz atravessa.";
+					set yuno_hist,4;
+					next;
+					mes "[Fayruz]";
+					mes "Ah, descrições interessantes";
+					mes "como um vaidoso e extravagante";
+					mes "Se refere a um cientista louco que segundo rumores, viveu naquela";
+					mes "era antiga. Mas se isso for verdade, talvez eu tenha que refazer minha tese...";
+					next;
+					mes "[Fayruz]";
+					mes "Eu tenho outro pedido a fazer";
+					mes "para você. Se você achar outro";
+					mes "objeto de importância histórica em Juperos, você poderia trazer para";
+					mes "mim? Eu lhe recompensarei, é claro.";
+					next;
+					mes "[Fayruz]";
+					mes "Seria mais útil";
+					mes "se você pudesse encontrar mais";
+					mes "documentos que existiam desde aquela época. Felizmente,";
+					mes "eles fizeram todos os registros em um material mais resistente que o papel.";
+					close;
+
+				case 2:
+					mes "[Fayruz]";
+					mes "Nada, huh?";
+					mes "Minha vida também está";
+					mes "calma, mas por algum motivo";
+					mes "não me sinto contente.";
+					close;		
+			}
+
+		case 4:	
+			mes "[Fayruz]";
+			mes "Oh olá, "+strcharinfo(0)+".";
+			mes "Então, o que trás você aqui na";
+			mes "biblioteca de Juno hoje?";
+			next;
+			switch( select ( "Está fazendo um lindo dia, não é?","Eu achei algo em Juperos.","Nada importante.") )
+			{
+				case 1:
+					mes "[Fayruz]";
+					mes "Bem, eu não sei.";
+					mes "Está tarde para eu ir lá";
+					mes "fora, então sempre acontece de eu";
+					mes "perder a luz do Sol. Acho";
+					mes "que realmente eu perco bons tempos";
+					mes "as vezes, não é?";
+					close;
+			
+				case 2:
+					if((countitem(7352)) || (countitem(7353)) || (countitem(7354)) || (countitem(7355)))
+					{
+						mes "[Fayruz]";
+						mes "Oh, Sério?!";
+						mes "Isso é uma grande noticia!";
+						mes "O-O que você encontrou?";
+						next;
+						mes "^3355FFEm seu entusiasmo,";
+						mes "Fayruz começou a";
+						mes "remexer em suas";
+						mes "coisas antes de você";
+						mes "ter a oportunidade de responder a ela.^000000";
+						next;
+						mes "[Fayruz]";
+						mes "Oh, só pode ser isso!";
+						mes "Se importa se eu ficar com";
+						mes "o Prato Transparente para";
+						mes "minha pesquisa? Em troca, eu";
+						mes "vou contar algumas historias sobre";
+						mes "Juperos que eu aprendi.";
+						next;
+						switch( select ("Por favor, seja meu convidado.","Sem chance, você não pode tê-lo.") )
+						{
+							case 1:
+								if(countitem(7352)) callfunc "Func_JupHist",7352,1;
+								else if(countitem(7353)) callfunc "Func_JupHist",7353,2;
+								else if(countitem(7354)) callfunc "Func_JupHist",7354,4;
+								else if(countitem(7355)) callfunc "Func_JupHist",7352,8;
+
+		
+							case 2:
+								mes "[Fayruz]";
+								mes "Hm? Você está falando sério?";
+								mes "Esse objeto é muito valioso";
+								mes "para um pesquisador igual a mim, mas";
+								mes "eu não tenho ideia de qual seria";
+								mes "o uso para um aventureiro.";
+								mes "Bom, você tem suas razões...";
+								close;
+						}
+					}
+					mes "[Fayruz]";
+					mes "Oh, Sério?!";
+					mes "Isso é uma grande nóticia!";
+					mes "O-O que você encontrou ?";
+					next;
+					mes "^3355FFEm seu entusiasmo,";
+					mes "Fayruz começou a";
+					mes "remexer em suas";
+					mes "coisas antes de você";
+					mes "ter a oportunidade de responder a ela.^000000";
+					next;
+					mes "[Fayruz]";
+					mes "Oh. Não a nada aqui que";
+					mes "possa me ajudar em minha";
+					mes "pesquisa, mas obrigado mesmo assim.";
+					mes "Se você enconstrar mais alguma coisa";
+					mes "em Juperos, por favor volte e me mostre, certo?";
+					close;
+		
+				case 3:
+					mes "[Fayruz]";
+					mes "Ah, Eu entendo. Bom, já";
+					mes "que você está aqui, porque você não";
+					mes "lê alguma coisa ? Há muitos";
+					mes "livros com assuntos muito";
+					mes "interessantes, como a";
+					mes "economia de Schwaltzvalt...";
+					next;
+					mes "[Fayruz]";
+					mes "Oh, de qualquer forma, por favor";
+					mes "não se esqueça do favor que";
+					mes "lhe pedi. Se você encontrar algo";
+					mes "em Juperos de valor";
+					mes "histórico, Eu agradeceria muito ";
+					mes "se você trazê-lo de imediato.";
+					close;
+				
+			}
+
+		case 5:
+			mes "[Fayruz]";
+			mes "Oh, "+strcharinfo(0)+"!";
+			mes "Você voltou com ";
+			mes "alguma coisa de Juperos?";
+			mes "Eu tenho esperança que você veio";
+			mes "de lá com algo que possa";
+			mes "me ajudar em minha pesquisa!";
+			next;
+			switch( select( "Dê uma olhada nisto.","Oh, Eu sinto muito...") )
+			{
+				case 1:	
+					switch(jupe_hist)
+					{
+						case 1:
+							callfunc "Func_JupHist",7353,7354,7355,7352;
+
+						case 2:
+							callfunc "Func_JupHist",7352,7354,7355,7353;
+
+						case 4:
+							callfunc "Func_JupHist",7352,7353,7355,7354;
+
+						case 8:
+							callfunc "Func_JupHist",7352,7353,7354,7355;
+					}
+
+				case 2:
+					mes "[Fayruz]";
+					mes "Ah, Eu entendo. Bom, já";
+					mes "que você está aqui, porque você não";
+					mes "lê alguma coisa? Há muitos";
+					mes "livros com assuntos muito";
+					mes "interessantes, como...";
+					mes "como... Auto Honestidade (?).";
+				next;
+					mes "[Fayruz]";
+					mes "Oh, de qualquer forma, por favor";
+					mes "não se esqueça do favor que";
+					mes "lhe pedi. Se você encontrar algo";
+					mes "em Juperos de valor";
+					mes "histórico, Eu agradeceria muito ";
+					mes "se você trazê-lo de imediato.";
+					close;
+			}
+
+		case 6:
+			mes "[Fayruz]";	
+			mes "Oh, "+strcharinfo(0)+"!";
+			mes "O Prato Transparente";
+			mes "que você me trouxe na";
+			mes "última vez foi de grande ajuda";
+			mes "em minha pesquisa. Se você tiver";
+			mes "oportunidade de voltar lá, por favor me traga mais!";
+			set yuno_hist,7;
+			next;
+			mes "[Fayruz]";
+			mes "Esta nova informação que coloquei";
+			mes "está dando muito mais credibilidade para";
+			mes "minha tese. Oh, eu estarei com você";
+			mes "em um momento, deixe me terminar de ";
+			mes "traduzir essa pequena parte";
+			mes "em pouco tempo...";
+			close;
+
+		case 7:
+			mes "[Fayruz]";
+			mes "Olá, "+strcharinfo(0)+"~";
+			mes "Oh, você foi olhar em";
+			mes "Juperos por algo que possa ";
+			mes "me ajudar em minha pesquisa?";
+			next;
+			switch( select( "Sim, dê uma olhada nisso.","Não, Me desculpe...") )
+			{
+				case 1:
+					switch(jupe_hist)
+					{
+						case 3:
+							callfunc "Func_JupHist",7354,7355,7352,7353;
+
+						case 5:
+							callfunc "Func_JupHist",7353,7355,7352,7354;
+
+						case 6:
+							callfunc "Func_JupHist",7352,7355,7353,7354;
+
+						case 9:
+							callfunc "Func_JupHist",7353,7354,7352,7355;
+
+						case 10:
+							callfunc "Func_JupHist",7352,7354,7353,7355;
+
+						case 12:
+							callfunc "Func_JupHist",7352,7353,7354,7355;
+					}
+
+				case 2:
+					mes "[Fayruz]";
+					mes "Oh, está bem.";
+					mes "Além disso, eu realmente";
+					mes "não tenho um prazo para concluir";
+					mes "esse projeto de pesquisa. Mesmo assim,";
+					mes "eu so quero que você saiba que";
+					mes "realmente agradeço a sua ajuda.";
+					close;
+			}
+
+		case 8:
+			mes "[Fayruz]";
+			mes ""+strcharinfo(0)+"...";
+			mes "Eu estou tendo muita dificuldade para";
+			mes "traduzir aquele Prato";
+			mes "Transparente que você trouxe na";
+			mes "última vez. Estou tão frustado...";
+			next;
+			mes "[Fayruz]";
+			mes "Espere um minuto...";
+			mes "Isso aqui significa...";
+			mes "Tudo bem. Certo. Sim.";
+			mes "Sim! é claro, como";
+			mes "eu não vi isso antes!";
+			set yuno_hist,9;
+			next;
+			mes "[Fayruz]";
+			mes "Eu estarei com você";
+			mes "em apenas um segundo!";
+			mes "Acho que acabei de fazer";
+			mes "uma verdadeira através...!";
+			next;
+
+		case 9:
+			mes "[Fayruz]";
+			mes "Ah, eu estava";
+			mes "esperando você, "+strcharinfo(0)+".";
+			mes "Você foi para Juperos denovo? Eu realmente tenho esperanças que";
+			mes "você tenha encontrado algo de novo que possa me ajudar em minha pesquisa...";
+			next;
+			switch( select("Atualmente, Eu encontrei isso...","Me desculpe, Eu não...") )
+			{
+				case 1:
+					switch(jupe_hist)
+					{
+						case 7:
+							callfunc "Func_JupHist",7355,7352,7353,7354;
+
+						case 11:
+							callfunc "Func_JupHist",7354,7352,7353,7355;
+
+						case 13:
+							callfunc "Func_JupHist",7353,7352,7354,7355;
+
+						case 14:
+							callfunc "Func_JupHist",7352,7353,7354,7355;
+					}
+
+				case 2:
+					mes "[Fayruz]";
+					mes "Ah, entendo. Bom, já";
+					mes "que você está aqui, porque você não";
+					mes "lê alguma coisa? Há muitos";
+					mes "livros com assuntos muito";
+					mes "interessantes, como a";
+					mes "Historia da Aventura Moderna...";
+					next;
+					mes "[Fayruz]";
+					mes "Oh, de qualquer forma, por favor";
+					mes "não se esqueça do favor que";
+					mes "lhe pedi. Se você encontrar algo";
+					mes "em Juperos de valor";
+					mes "histórico, agradeceria muito ";
+					mes "se você trazê-lo de imediato.";
+					close;
+			}
+
+		case 10:
+			mes "[Fayruz]";
+			mes "Oh Olá, "+strcharinfo(0)+"...";
+			mes "O que exatamente o trás aqui";
+			mes "para a Biblioteca de Juno desta vez?";
+			next;
+			switch( select("Eu encontrei outro Prato Transparente.","Somente visitando, sério.") )
+			{
+				case 1:
+					if((countitem(7352)) || (countitem(7353)) || (countitem(7354)) || (countitem(7355)))
+					{
+						mes "[Fayruz]";
+						mes "Hmm, Bem, fizemos tudo";
+						mes "o progresso que podiamos";
+						mes "com o Prato Transparente";
+						mes "que você me trouxe, mas não";
+						mes "consegui encontrar nenhuma ";
+						mes "evidência para apoiar minhas teorias.";
+						next;
+						mes "[Fayruz]";
+						mes "Eu realmente aprecio ";
+						mes "seu esforço continuo";
+						mes "para me ajudar. Por favor, receba";
+						mes "isso é o meu jeito de ";
+						mes "dizer ''Obrigado?'' Você foi";
+						mes "ótimo, "+strcharinfo(0)+"...";
+						if(countitem(7352)) delitem 7352,1;
+						else if(countitem(7353)) delitem 7353,1;
+						else if(countitem(7354)) delitem 7354,1;
+						else delitem 7355,1;
+						getitem 644,1;
+						close;
+					}
+					mes "[Fayruz]";
+					mes "Mmm...?";
+					mes "Não me parece que";
+					mes "você trouxe outro";
+					mes "Prato Transparente.";
+					mes "Você tem certeza que";
+					mes "não se enganou?";
+					close;
+
+				case 2:
+					mes "[Fayruz]";
+					mes "Ah, Eu entendo. Bem,";
+					mes "obrigado pela sua ajuda,";
+					mes "Eu fiz um grande progresso";
+					mes "em minha tese.";
+					mes "Eu realmente aprecio o que ";
+					mes "você fez por mim, aventureiro.";
+					close;
+			}
+	}
+
+
+}
+
+function	script	Func_JupHist	{
+
+	switch(yuno_hist)
+	{
+		case 4:
+			mes "[Fayruz]";
+			mes "Muito obrigado,";
+			mes "você não sabe";
+			mes "o que isso significa para mim! Certo,";
+			mes "por favor relaxe e pegue uma";
+			mes "cadeira. Feche seus olhos enquanto";
+			mes "eu conto essa antiga história.";
+			next;
+			mes "^3355FFFayruz começa a";
+			mes "contar sobre um antigo conto";
+			mes "sobre Juperos que parece";
+			mes "típica para uma história clássica, mas o jeito como conta é";
+			mes "tão real, parece até uma experiência vivida por ela.^000000";
+			next;
+			mes "^3355FFVocê sente o protagonista de";
+			mes "glórias e tragédias como se";
+			mes "como se você estivesse realmente lá com";
+			mes "o herói em suas jornadas. O";
+			mes "conto eventualmente chega ao fim";
+			mes "e você desperta do transe,";
+			mes "trazido gentilmente de volta à realidade.^000000";
+			delitem getarg(0),1;
+			set yuno_hist,5;
+			set jupe_hist,getarg(1);
+			getexp 100000,0;
+			next;
+			mes "[Fayruz]";
+			mes "Todos podem falar a";
+			mes "respeito dessas clássicas";
+			mes "histórias. Eu espero que este conto";
+			mes "faça sentido para você assim";
+			mes "como pra mim da primeira vez que o ouvi.";
+			next;
+			mes "[Fayruz]";
+			mes "Se você puder encontrar";
+			mes "outro artefato de";
+			mes "Juperos, em troca contarei outro";
+			mes "conto para você. Agora";
+			mes "como é que esse som? Ok";
+			mes "então, te vejo em breve, aventureiro~";
+			close;
+
+		case 5:
+			if((countitem(getarg(0))) || (countitem(getarg(1))) || (countitem(getarg(2))))
+			{
+				mes "[Fayruz]";
+				mes "Oh, que inesperado.";
+				mes "Esse Prato Transparente";
+				mes "parece ter sido feito em ";
+				mes "uma época diferente do que";
+				mes "aquela que você me deu anteriormente.";
+				mes "Que intrigante...";
+				next;
+				mes "[Fayruz]";
+				mes "*Suspira* Eu realmente desejo";
+				mes "poder explorar Juperos";
+				mes "por mim mesmo, mas";
+				mes "eu não sou forte o suficiente.";
+				mes "De certa forma, eu tenho inveja de você. mas isso não ajuda em nada...";
+				next;
+				mes "[Fayruz]";
+				mes "Você sabe, isso me lembra";
+				mes "uma grande história";
+				mes "trágica de um herói que eu gostaria de";
+				mes "compartilhar com você. Deixe sua";
+				mes "mente vagar e eu contar essa eterna, e agridoce fábula...";
+				next;
+				mes "^3355FFFayruz conta a você uma história";
+				mes "com um inicio brilhante, cheia";
+				mes "de esperança que preenche você com";
+				mes "a bênção dos céus, mas depois";
+				mes "derrepente você cai em total desespero e tormentos do inferno.^000000";
+				next;
+				mes "^3355FFA história finalmente";
+				mes "chega ao fim";
+				mes "e você fica surpreso";
+				mes "de acordar sentado";
+				mes "dentro da Biblioteca de Juno.^000000";
+				next;
+				mes "[Fayruz]";
+				mes "Eu sei que essa é";
+				mes "uma história muito depressiva, mas";
+				mes "eu espero que tenha gostado.";
+				mes "Eu acho que você concorda qu ";
+				mes "ela contem uma verdade sobre";
+				mes "a humanidade que não pode ser ignorada";
+				if(countitem(getarg(0)))
+				{
+					delitem getarg(0),1;
+					if(getarg(0) == 7352) set jupe_hist,jupe_hist +1;
+					else set jupe_hist,jupe_hist +2;
+				}
+				else if(countitem(getarg(1)))
+				{
+					delitem getarg(1),1;
+					if(getarg(1) == 7353) set jupe_hist,jupe_hist +2;
+					else set jupe_hist,jupe_hist +4;
+				}
+				else
+				{
+					delitem getarg(2),1;
+					if(getarg(2) == 7354) set jupe_hist,jupe_hist +4;
+					else set jupe_hist,jupe_hist +8;
+				}
+				set yuno_hist,6;
+				getexp 100000,0;
+				next;
+				mes "[Fayruz]";
+				mes "Ate agora eu tenho certeza";
+				mes "que os pesonagens destes contos";
+				mes "clássicos são como experiências";
+				mes "condensadas, refinadas e";
+				mes "verdades imutáveis que";
+				mes "podemos ver em nossa própria realidade.";
+				next;
+				mes "[Fayruz]";
+				mes "Se você encontrar mais";
+				mes "desses Pratos";
+				mes "Transparentes em Juperos, ficarei";
+				mes "feliz em compartilhar outra";
+				mes "história com você, "+strcharinfo(0)+".";
+				close;
+			}
+			else if(countitem(getarg(3)))
+			{
+				mes "[Fayruz]";
+				mes "Oh, este parece";
+				mes "ter sido criado em";
+				mes "em uma época semelhante como";
+				mes "o que você me forneceu agora a pouco.";
+				mes "Eu não tenho certeza se isso";
+				mes "poderá fornecer novas informações...";
+				next;
+				mes "[Fayruz]";
+				mes "Ainda assim, tenho certeza que isso";
+				mes "vai ajudar em minha pesquisa. Eu só ";
+				mes "não sei se irei progredir tão";
+				mes "tão rapidamente como havia planejado.";
+				mes "Por favor, eu gostaria que você fique com isso como prova de minha gratidão.";
+				delitem getarg(3),1;
+				getitem 644,1;
+				next;
+				mes "[Fayruz]";
+				mes "Agora se ne der licença,";
+				mes "eu preciso voltar a";
+				mes "compilar minha pesquisa...";
+				mes "Muito obrigado";
+				mes "pela sua ajuda, "+strcharinfo(0)+".";
+				close;
+			}
+			else
+			{
+				mes "[Fayruz]";
+				mes "Oh. Não há nada";
+				mes "aqui que possa me ajudar em minha";
+				mes "pesquisa, mas de qualquer forma obrigado.";
+				mes "Se você achar alguma coisa enquanto";
+				mes "estiver em Juperos, por favor volte e me mostre, tudo bem?";
+				close;
+			}
+
+		case 7:
+			if((countitem(getarg(0))) || (countitem(getarg(1))))
+			{
+				mes "[Fayruz]";
+				mes "Este é outro";
+				mes "Prato Transparente?";
+				mes "Sim, este é muito diferente";
+				mes "daquele último que";
+				mes "que você me trouxe...";
+				mes "Isso é muito excitante!";
+				next;
+				mes "[Fayruz]";
+				mes "Oh. Você deve estar pensando";
+				mes "que sou uma completa viciada pela";
+				mes "biblioteca. Bem, minha vida poderia ser";
+				mes "um pouco mais calma, mas há";
+				mes "outras coisas para eu pensar!";
+				mes "Como, bem... é estranho mas...";
+				next;
+				mes "[Fayruz]";
+				mes "Como você vê, há uma";
+				mes "pessoa que eu gosto. Não tenho certeza";
+				mes "onde ele pode estar agora, mas";
+				mes "o nome dele é Nadim Amal. Ele";
+				mes "é um amigo de meu irmão que conheci";
+				mes "há 10 anos atrás. ^333333*Sigh...*^000000";
+				next;
+				mes "[Fayruz]";
+				mes "Recentemente, eu o vi";
+				mes "com sua irmã, meu";
+				mes "amigo de Morroc. É";
+				mes "estranho pensar em eu ter";
+				mes "esse tipo de sentimentos por ele depois";
+				mes "depois de todo esse tempo, não é? Oh...!";
+				next;
+				mes "[Fayruz]";
+				mes "Eu realmente preciso";
+				mes "restituir este Prato";
+				mes "Transparente. Por que não consigo contar";
+				mes "essa história assustadora que eu conheço?";
+				next;
+				mes "^3355FFFayruz começa a lhe contar";
+				mes "uma arrepiante história de horror que";
+				mes "que te faz tremer de medo";
+				mes "Você já ouviu outras histórias de";
+				mes "fantasmas, mas você nunca ficou";
+				mes "tão profundamente imerso em uma antes.^000000";
+				next;
+				mes "E apenas quando a";
+				mes "história chega ao fim e você retorna aos";
+				mes "sentidos, você percebe que está encharcado em suor frio.^000000";
+				next;
+				mes "[Fayruz]";
+				mes "Pode ser uma resposta";
+				mes "natural, mas todas as pessoas";
+				mes "temem o desconhecido de uma forma";
+				mes "ou de outra. Histórias assustadoras são";
+				mes "atraentes porque realmente nós";
+				mes "gostamos do estranho e grotesco.";
+				if(countitem(getarg(0)))
+				{
+					delitem getarg(0),1;
+					if(getarg(0) == 7352) set jupe_hist,jupe_hist +1;
+					else if(getarg(0) == 7353) set jupe_hist,jupe_hist +2;
+					else set jupe_hist,jupe_hist +4;
+				}
+				else if(countitem(getarg(1)))
+				{
+					delitem getarg(1),1;
+					if(getarg(1) == 7353) set jupe_hist,jupe_hist +2;
+					else if(getarg(1) == 7354) set jupe_hist,jupe_hist +4;
+					else set jupe_hist,jupe_hist +8;
+				}
+				set yuno_hist,8;
+				getexp 100000,0;
+				next;
+				mes "[Fayruz]";
+				mes "Bom... Está e somente minha";
+				mes "opinião. De qualquer forma, se você";
+				mes "encontrar qualquer coisa quando estiver em Juperos";
+				mes "que possa me ajudar em minha pesquisa,";
+				mes "por favor volte e venha";
+				mes "me mostrar, tudo bem? Te vejo depois~";
+				close;
+			}
+			else if((countitem(getarg(2))) || (countitem(getarg(3))))
+			{
+				mes "[Fayruz]";
+				mes "Oh, este parece";
+				mes "ter sido criado em";
+				mes "em uma época semelhante como";
+				mes "o que você me forneceu agora a pouco.";
+				mes "Eu não tenho certeza se isso";
+				mes "poderá fornecer novas informações...";
+				next;
+				mes "[Fayruz]";
+				mes "Ainda assim, tenho certeza que isso";
+				mes "vai ajudar em minha pesquisa. Eu só ";
+				mes "não sei se irei progredir tão";
+				mes "tão rapidamente como havia planejado.";
+				mes "Por favor, eu gostaria que você fique com isso como prova de minha gratidão.";
+				next;
+				mes "[Fayruz]";
+				mes "Agora se ne der licença,";
+				mes "eu preciso voltar a";
+				mes "compilar minha pesquisa...";
+				mes "Muito obrigada";
+				mes "pela sua ajuda, "+strcharinfo(0)+".";
+				if(countitem(getarg(2))) delitem getarg(2),1;
+				else if(countitem(getarg(3))) delitem getarg(3),1;
+				getitem 644,1;
+				close;
+			}
+			else
+			{
+				mes "[Fayruz]";
+				mes "Oh. Não há nada";
+				mes "aqui que possa me ajudar em minha";
+				mes "pesquisa, mas de qualquer forma obrigada.";
+				mes "Se você achar alguma coisa enquanto";
+				mes "estiver em Juperos, por favor volte e me mostre, tudo bem?";
+				close;
+			}
+
+		case 9:
+			if(countitem(getarg(0)))
+			{
+				mes "[Fayruz]";
+				mes "Oooh...! Este aqui é ";
+				mes "muito diferente daqueles";
+				mes "outros que você me trouxe";
+				mes "anteriormente. Isso deve fornecer";
+				mes "uma grande quantidade de novas informações";
+				mes "sobre a civilização de Juperos!";
+				next;
+				mes "[Fayruz]";
+				mes "Todos os Pratos";
+				mes "Transparentes que você me trouxe";
+				mes "deve conter mais dados";
+				mes "que o suficiente para";
+				mes "completar miha tese de investigação.";
+				mes "Mais uma vez, muito obrigado~";
+				next;
+				mes "[Fayruz]";
+				mes "Ainda assim, isso não significa que";
+				mes "irei parar de coletar daods para";
+				mes "minha pesquisa. Enfim, eu tenho um última história para lhe contar, sobre";
+				mes "um homem de coração puro escolhido pelos deuses para servir e proteger a humanidade.";
+				next;
+				mes "[Fayruz]";
+				mes "Pare esse propósito foi lhe dado uma";
+				mes "uma berrante armadura que continha";
+				mes "incríveis poderes, bem como um";
+				mes "livro detalhando as instruçoes";
+				mes "para sua utilização. No entanto, ele rapidamente";
+				mes "perdeu essas instruções...";
+				next;
+				mes "^3355FFEssa história fala sobre";
+				mes "o grande herói Juperioniano";
+				mes "que Fayruz diz a você que é muito";
+				mes "bem-humorada no inicio, mas depois ela";
+				mes "abrange todo o espectro";
+				mes "da emoção e da humanidade";
+				next;
+				mes "^3355FFA história acaba e você";
+				mes "fica com uma sensação";
+				mes "de infatigável";
+				mes "esperança e inspiração...";
+				mes "Você pode fazer isso se você tentar!^000000";
+				if(getarg(0) == 7352) set jupe_hist,jupe_hist+1;
+				else if(getarg(0) == 7353) set jupe_hist,jupe_hist+2;
+				else if(getarg(0) == 7354) set jupe_hist,jupe_hist+4;
+				else set jupe_hist,jupe_hist+8;
+				set yuno_hist,10;
+				delitem getarg(0),1;
+				getexp 100000,0;
+				next;
+				mes "[Fayruz]";
+				mes "Bem, essa foi a";
+				mes "última e melhor história";
+				mes "que eu tenho para compartilhar";
+				mes "com você. Talvez na próxima";
+				mes "vez, Vou encher-lhe sobre a";
+				mes "minha pesquisa em andamento~";
+				close;
+			}
+			else if((countitem(getarg(1))) || (countitem(getarg(2))) || (countitem(getarg(3))))
+			{
+				mes "[Fayruz]";
+				mes "Hmm...";
+				mes "Esta parece ser sido criada em um tempo similar";
+				mes "que a anterior.";
+				next;
+				mes "[Fayruz]";
+				mes "Mas não se preocupe.";
+				mes "Isto irá me ajudar em minha pesquisa é claro,";
+				mes "embora eu não acho que isso irá";
+				mes "me ajudar no avanço de minha pesquisa";
+				mes "com grande velocidade ao contrário daquela outra.";
+				next;
+				mes "[Fayruz]";
+				mes "Por favor fique com isso como prova de minha gratidão.";
+				next;
+				mes "[Fayruz]";
+				mes "Agora, se me der licença. Eu preciso voltar para minha pesquisa.";
+				if(countitem(getarg(1))) delitem getarg(1),1;
+				else if(countitem(getarg(2))) delitem getarg(2),1;
+				else delitem getarg(3),1;
+				getitem 644,1;
+				close;
+			}
+			else
+			{
+				mes "[Fayruz]";
+				mes "Oh. Não há nada";
+				mes "aqui que possa me ajudar em minha";
+				mes "pesquisa, mas de qualquer forma obrigada.";
+				mes "Se você achar alguma coisa enquanto";
+				mes "estiver em Juperos, por favor volte e me mostre, tudo bem?";
+				close;
+			}
+	}
+}
+
+yuno_in04,186,125,4	script	Monte de Arquivos	111,{
+
+	mes "^8B6914*Tese: A queda de Juperos*";
+	mes "Por Fayruz Khrhiyha";
+	mes "Castelo dos Sábios^000000";
+	next;
+	switch( select("Índice Remissivo.","Esqueça o Assunto.") )
+	{
+		case 1:
+			if(yuno_hist > 4)
+			{
+				mes "^8B6914 1. Prefácio";
+				mes " 2. Antecedentes de Juperos";
+				mes " 3. Teoria por trás de sua queda^000000";
+				next;
+				switch( select("Prefácio","Antecedentes de Juperos","Teoria por trás de sua queda","Esqueça o Assunto.") )
+				{
+					case 1:
+						mes "^8B6914Professores estão certos";
+						mes "que a civilização de Juperos";
+						mes "costumava ser locaizada acima do";
+						mes "solo, mas agora está enterrado";
+						mes "debaixo do Planalto de El Mes.";
+						mes "As razões para a";
+						if(yuno_hist < 9)
+						{
+							mes "ruína da cidade ainda são nebulosas...^000000";
+							next;
+							mes "^8B6914Há muitas especulações";
+							mes "sobre as razões da queda de";
+							mes "Juperos, mas qualquer documento";
+							mes "daquele período é";
+							mes "dificil de achar. Como por agora, qualquer evidência que temos em relação a";
+							mes "Juperos é inconclusivo.^000000";
+							next;
+							mes "^8B6914Apesar desta falta de dados";
+							mes "concretos ou empíricos";
+							mes "sobre a civilização de";
+							mes "Juperos, o nosso mundo moderno";
+							mes "pode ser capaz de aprender muito";
+							mes "daquelas ruínas da antiga cidade.";
+							mes "..................^000000";
+							if(yuno_hist < 7)
+							{
+								next;
+								mes "["+strcharinfo(0)+"]";
+								mes "Hmmm...";
+								mes "Um capítulo inteiro";
+								mes "dedicado a dizer,";
+								mes "''Nós sabemos absulutamente";
+								mes "nada sobre alguma coisa.''";
+								mes "Eu deveria escrever um livro~";
+							}
+							close;
+						}
+						mes "ruina ainda está em debate...^000000";
+						next;
+						mes "^8B6914No entanto, as novas descobertas";
+						mes "sobre a história de";
+						mes "Juperos nos permitiram";
+						mes "fazer algumas conclusões^000000";
+						close;			
+				
+					case 2:
+						if(yuno_hist < 9)
+						{
+							mes "^8B6914...";
+							mes "......";
+							mes "..........^000000";
+							next;
+							mes "["+strcharinfo(0)+"]";
+							mes "Isso tudo é apenas conjecturas";
+							mes "inúteis! Esse papel";
+							mes "ainda não está ainda suficiente desenvolvido";
+							mes "para ser uma verdadeira tese ...";
+							close;
+						}
+						else if(yuno_hist == 9)
+						{
+							mes "^8B6914Juperos foi construida a mais";
+							mes "de mil anos, em";
+							mes "uma era de paz, logo após";
+							mes "uma grande guerra. Contrariando uma";
+							mes "crença popular, não há qualquer";
+							mes "evidencia que prove que Juno pode";
+							mes "ter descendentes de Juperos.^000000";
+							next;
+							mes "^8B6914De fato, existe uma";
+							mes "forte possibilidade de uma";
+							mes "outra guerra, entre Juno";
+							mes "e Juperos, resultando na ";
+							mes "independência de Juno sobre Juperos e";
+							mes "a destruiçãode qualquer documentação";
+							mes "existente a partir daquela época.^000000";
+							next;
+							mes "["+strcharinfo(0)+"]";
+							mes "Sim... É claro!";
+							mes "Agora tudo está fazendo sentido!";
+							close;
+						}
+						mes "^8B6914Juperos foi constrúida ha";
+						mes "mais de mil anos atrás";
+						mes "em uma era de paz, logo após";
+						mes "uma grande guerra. Há agora";
+						mes "provas diretas ligando Juno";
+						mes "com Juperos provando que Juno";
+						mes "era uma parte de Juperos.^000000";
+						next;
+						mes "^8B6914Assim como Juno, Juperos";
+						mes "era uma sociedade que se orgulhavam";
+						mes "em seus avanços na ciência";
+						mes "que desenpenhou um papel";
+						mes "permeando a vida civilizada.";
+						mes "Ciência que foi responsável pela ascensão e queda de Juperos.";
+						close;
+
+					case 3:
+						if(yuno_hist < 10)
+						{
+							mes "^8B6914...";
+							mes "......";
+							mes "..........^000000";
+							next;				
+							mes "["+strcharinfo(0)+"]";
+							mes "Huh. Esse escritor continua";
+							mes "falando de teorias,";
+							mes "mas quanto mais eu leio, fica";
+							mes "menos claro sobre o que a";
+							mes "teoria realmente é.";
+							mes "Eu não acho que há uma...";
+							emotion 4,1;
+							close;
+						}
+						mes "^8B6914O que é mais intrigante";
+						mes "são as porvas recentes, incluindo";
+						mes "um escrito em primeira mão,";
+						mes "sobre um dos principais";
+						mes "cientistas de Juperos";
+						mes "naquela cidade da ascensão e queda.";
+						next;
+						mes "^8B6914Se esses escritos são";
+						mes "autênticos, o que realmente";
+						mes "aconteceu foi que ocorreu uma revolução";
+						mes "científica como resultado direto do";
+						mes "esforço de um cientista para manipular as energias de um";
+						mes "artefato conhecido como Coração de Ymir.";
+						next;
+						mes "^8B6914Esse homem e o Coração de";
+						mes "Ymir são creditados com";
+						mes "o sucesso e prosperidade da";
+						mes "civilização de Juperos";
+						mes "No entanto, existem varios fatores à queda de Juperos";
+						mes "detalhando seus trabalhos com Chimeras...^000000";
+						next;
+						mes "^8B6914Este cientista, supostamente";
+						mes "em benefício de sua paixão pelo seu";
+						mes "povo para encontrar um método";
+						mes "científico para a imortalidade usando";
+						mes "chimeras para testes, se dirigindo a ";
+						mes "insanidade. Ele experimentou";
+						mes "em si próprio com resultados desastrosos.^000000";
+						next;
+						mes "^8B6914Houve um erro na";
+						mes "calibragem de energia do Coração de";
+						mes "Ymir e o cientista foi";
+						mes "transformado em um monstro";
+						mes "que agora conhecemos como Quimera. Ele";
+						mes "e seu teste ficaram";
+						mes "perdidos na cidade de Juperos.^000000";
+						next;
+						mes "^8B6914Essas Quimeras imortais";
+						mes "arrasaram toda a cidade, matando";
+						mes "inumeras pessoas. Aparentemente,";
+						mes "uma equipe de cientistas foram capazes";
+						mes "de salvar um fragmento do Coração de";
+						mes "Ymir e o usaram para lançar uma parte";
+						mes "de Juperos para o céu.^000000";
+						next;
+						mes "^8B6914Essa parte de Juperos";
+						mes "eventualmente se desenvolveu na";
+						mes "cidade de Juno. Uma vez que os";
+						mes "que lançaram Juno para o céu todos morreram imediatamente";
+						mes "depois de uma causa desconhecida, não teve nenhuma documentação.^000000";
+						next;
+						mes "^8B6914A Quimera, e o";
+						mes "laboratório em que";
+						mes "foi criada, há rumores que";
+						mes "ainda permanecem debaixo das ruínas";
+						mes "da grande cidade de Juperos.^000000";
+						close;
+
+					case 4:
+						mes "["+strcharinfo(0)+"]";
+						mes "Ugh... Minha cabeça doi";
+						mes "demais da leitura";
+						mes "um livro para poucas pessoas.";
+						mes "Já sei! Eu vou jogar videogames!";
+						close;
+				}
+			}
+			switch( select( "Prefácio","Feche o arquivo") )
+			{
+				case 1:
+					mes "^8B6914Professores estão certos";
+					mes "de que a civilização de Juperos";
+					mes "costumava ser localizada acima do";
+					mes "solo, mas agora está enterrado";
+					mes "debaixo do Planalto de El Mes.";
+					mes "As razões para a ruína da cidade";
+					mes "ainda são nebulosas...^000000";
+					next;
+					mes "^8B6914Há muitas especulações";
+					mes "sobre as razões da queda de";
+					mes "Juperos, mas qualquer documento";
+					mes "daquele período é";
+					mes "dificil de achar. Como por agora, qualquer evidência que temos em relação a";
+					mes "Juperos é inconclusivo.^000000";
+					next;
+					mes "^8B6914Apesar desta falta de dados";
+					mes "concretos ou empíricos";
+					mes "sobre a civilização de";
+					mes "Juperos, o nosso mundo moderno";
+					mes "pode ser capaz de aprender muito";
+					mes "daquelas ruínas da antiga cidade.";
+					mes "..................^000000";
+					if(!yuno_hist) set yuno_hist,1;
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Isto...";
+					mes "Isto era para ser";
+					mes "uma tese de investigação?";
+					mes "Não há praticamente qualquer";
+					mes "investigação em que...";
+					close;
+				
+				case 2:
+					mes "["+strcharinfo(0)+"]";
+					mes "Hmm...";
+					mes "Isso não tem peso o";
+					mes "suficiente para ser um verdadeiro";
+					mes "trabalho acadêmico. Não deve";
+					mes "mesmo ter sido concluída ainda.";
+					close;
+			}
+		case 2:
+			if(yuno_hist < 5)
+			{		
+				mes "["+strcharinfo(0)+"]";
+				mes "Nah...";
+				mes "Eu estou cansado de ler.";
+				mes "Ironicamente suficiente";
+				close;
+			}
+			else if(yuno_hist < 7)
+			{
+				mes "["+strcharinfo(0)+"]";
+				mes "Eu não me sinto bem";
+				mes "lendo isso. Não";
+				mes "tem figuras...";
+				close;
+			}
+			else if(yuno_hist < 9)
+			{
+				mes "["+strcharinfo(0)+"]";
+				mes "Parece muito sofisticado...";
+				close;
+			}
+			else if(yuno_hist < 10)
+			{
+				mes "["+strcharinfo(0)+"]";
+				mes "Eu conheço esse livro...";
+				mes "Mas eu não tenho vontade de";
+				mes "ler ele agora.";
+				close;
+			}
+			else
+			{
+				mes "["+strcharinfo(0)+"]";
+				mes "Essa tese me";
+				mes "parece que está muito boa~";
+				mes "É claro, eu dei uma";
+				mes "uma mão para fazê-la...";
+				close;
+			}
+	}
+}
+
+yuno_in04,188,118,4	script	Livro#juperos	111,{
+
+	if(yuno_hist > 7)
+	{
+		mes "^8B6914*Auto Honestidade*";
+		mes "*'Beneficios Para' Vida!'*";
+		mes "Por Stephen Oyoung";
+		mes " ";
+		mes " ";
+		mes "Editora:";
+		mes "Wushu Publicações, Co.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "W-whoa!";
+		mes "Esse livro não estava";
+		mes "aqui antes! Parece";
+		mes "bastante interessante...";
+		close;
+	}
+	mes "["+strcharinfo(0)+"]";
+	mes "Quer saber";
+	mes "acho que vou apenas folhear";
+	mes "através de algumas páginas ";
+	mes "de um livro aleatório.";
+	mes "Hmmm, deixe-me ver...";
+	next;
+	mes "^8B6914''Almirante, os Kylorians ainda";
+	mes "estão avançando!'' Comandante";
+	mes "McKenrick anunciou sem";
+	mes "a sua usual bravata. ''Eles estão...";
+	mes "Eles não estão parando!'' Mas";
+	mes "os olhos do Admiral Leh's são frios e com uma,";
+	mes "insensível sombra de rigor.^000000";
+	next;
+	mes "^8B6914''Deixe que os malditos aliens";
+	mes "do espaço venham,'' disse Leh.";
+	mes "''Nos não temos nenhuma chance";
+	mes "sem a espada Zenoi";
+	mes "para invocar o poder do";
+	mes "GOD-POING. está... está";
+	mes "tudo acabado. maldição...''^000000";
+	next;
+	mes "^8B6914A porta explodiu e";
+	mes "Bucky voou para dentro da sala.";
+	mes "''A Espada Zenoi! A";
+	mes "Espada Zenoi! Alguém";
+	mes "a encontrou!'' o garoto gritou.";
+	mes "''Sério?! Nós precisamos nos apressar:";
+	mes "A Terra não tem muito tempo!''^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...";
+	mes "......";
+	mes "Whoa. Eu realmente";
+	mes "preciso ler";
+	mes "essa maravilha";
+	mes "desde o começo...";
+	close;
+}
+
+// Estátua de Bronze - juperos_01 99 112
+
+juperos_01,99,112,4	script	Estátua de Bronze#1	844,{
+
+	if(yuno_hist > 3)
+	{
+		mes "^3355FF''Você deseja ver";
+		mes "o fim da loucura?";
+		mes "Ele está esperando onde as três";
+		mes "colunas foram destruidas, onde";
+		mes "duzentas ilusões vagam.''^000000";
+		close;
+	}
+	else if(yuno_hist == 3)
+	{
+		mes "["+strcharinfo(0)+"]";
+		mes "É melhor eu ir";
+		mes "ver Fayruz na";
+		mes "Biblioteca de Juno e dizer";
+		mes "a ela sobre a inscrição.";
+		close;
+	}
+	else
+	{
+		mes "^3355FFHá uma gravura peculiar";
+		mes "engravada na";
+		mes "haste da Estátua de Bronze.^000000";
+		next;
+		switch( select( "Investigar","Ignorar" ) )
+		{
+			case 1 :
+				mes "^3355FFÉ uma inscrição que está";
+				mes "escrita em um antigo idioma";
+				mes "que você não pode compreender,";
+				mes "mas não tem problema de ler";
+				mes "e efetuar os sons";
+				mes "por alguma razão estranha.^000000";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Isto é assustador!";
+				mes "Eu sei que eu";
+				mes "não sou capaz";
+				mes "de ler isso, mas eu";
+				mes "estou aqui. Eu sei o que";
+				mes "todos os sons destas cartas fazem...";
+				next;
+				if(yuno_hist == 2)
+				{
+					mes "["+strcharinfo(0)+"]";
+					mes "Então novamente, Fayruz disse";
+					mes "que isso está encantado.";
+					mes "Ok, acho que irei voltar pra ";
+					mes "a Biblioteca de Juno e";
+					mes "dizer a ela o que eu encontrei.";
+					set yuno_hist,3;
+					close;
+				}
+				mes "["+strcharinfo(0)+"]";
+				mes "Huh. Apenas um Professor,";
+				mes "talvez alguém mesmo em ";
+				mes "Juno, poderia dar sentido ";
+				mes "o que isso pode dizer.";
+				close;
+			
+			case 2 : 
+				close;
+		}
+	}
+}
+
+yuno_in04,169,109,1	script	Hollgrehenn#jups	111,{
+
+	mes "*Hollgrehenn: O Ambicioso*";
+	mes "Por Aragham Caul*";
+	mes "";
+	mes "";
+	mes "";
+	mes "";
+	mes "Editora:";
+	mes "Livros Muha, Co.";
+	next;
+	mes "...";
+	mes "Ele não irá parar por nada";
+	mes "para ter a maior arma";
+	mes "do mundo em seu poder.";
+	mes "Ele se tornou um forjador para que ele";
+	mes "poder discenir quais";
+	mes "foram as armas mais poderosas...";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Isso é estranho...";
+	mes "A próxima página";
+	mes "foi arrancada";
+	close;
+}
+
+yuno_in04,174,111,1	script	A Pobreza Hollgrehenn	111,{
+
+	mes "^8B6914*A Pobreza Hollgrehenn*";
+	mes " * Pobreza Hollgrehenn * ";
+	mes "Por Hollgrehenn";
+	mes " ";
+	mes " ";
+	mes "Editora:";
+	mes "Livros Muha, Co.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Esse livro parece";
+	mes "um pedaço de lixo ";
+	mes "total. Eu teria";
+	mes "mais diversão tendo meus dentes";
+	mes "perfurados por um dentista";
+	mes "cego. Eu será que eu...?";
+	close;
+}
+
+yuno_in04,102,106,1	script	Comidas Típicas	111,{
+
+	mes "^8B6914*Comidas Típicas*";
+	mes "Por Comunidade do Repolho em Conserva";
+	mes " ";
+	mes " ";
+	mes " ";
+	mes "Editora:";
+	mes "Livros Muha, Co.^000000";
+	next;
+	switch( select( " 1. Caudas de Yoyo Fritas"," 14. Salada Poring"," 252. Sopa de Bico" ) )
+	{
+		case 1:
+			mes "^8B6914...";
+			mes "Se possível, tente";
+			mes "utilizar caudas cortadadas";
+			mes "de Yoyos vivos.";
+			mes "Agora, como esfolar...^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Um...";
+			mes "Vômito?";
+			close;
+
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Ei, esta página se foi!";
+			mes "Acho que a Salada Poring é";
+			mes "a comida mais popular";
+			mes "em todo esse livro.";
+			close;
+
+		case 3:
+			mes "^8B6914...";
+			mes "Frite os bicos cortados";
+			mes "usando óleo de hervas até";
+			mes "dourar. Então, coloque";
+			mes "as penas em um liquidificador...^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Hmm...";
+			mes "Soa um pouco";
+			mes "gourmet para meu";
+			mes "gosto. E por ''gourmet,''";
+			mes "quero dizer, ''totalmente bruto.''";
+			close;
+	}
+}
+
+yuno_in04,111,108,1	script	Hamerun, O Caça Ratos	111,{
+
+	mes "["+strcharinfo(0)+"]";
+	mes "Eu não...";
+	mes "posso alcançá-lo...!";
+	close;
+}
+
+yuno_in04,167,127,1	script	Livro Vermelho	111,{
+
+	mes "^3355FFVocê achou um livro";
+	mes "com uma capa vermelha.^000000";
+	next;
+	switch( select( "Ler.","Esqueça." ) )
+	{
+		case 1:
+			mes "^8B6914...^000000";
+			next;
+			mes "^8B6914...";
+			mes "......^000000";
+			next;
+			mes "^8B6914...";
+			mes "......";
+			mes ".........^000000";
+			next;
+			mes "^8B6914...";
+			mes "......";
+			mes ".........";
+			mes "............^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Isso é...";
+			mes "Uma compilação de";
+			mes "Shakespeare em ";
+			mes "formato de livro para colorir ?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Espere...";
+			mes "porque os fãs de";
+			mes "Shakespeare irão";
+			mes "querer um livro para colorir?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Hmm... Bem...";
+			mes "Suponho que crianças que";
+			mes "lerem Shakespeare iram";
+			mes "apreciar algo sobre isso.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Espere um pouco...";
+			mes "Será que existem crianças";
+			mes "que são capazes de lerem";
+			mes "obras de Shakespeare ?";
+			mes "Espero que não...";
+			close;
+
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Que estranho e";
+			mes "misterioso livro.";
+			mes "Eu nunca vou saber o que";
+			mes "está dentro sem ler!";
+			mes "Vamos lá! Não é possivel";
+			mes "que esse livro vermelho esconda algo?";
+			close;
+	}
+}
+
+yuno_in04,121,109,1	script	Pergaminho	111,{
+
+	mes "^3355FFVocê encontrou";
+	mes "um antigo pergaminho";
+	mes "que é recolhido com";
+	mes "uma fina camada de poeira.^000000";
+	next;
+	switch( select( "Examinar","Deixar para lá" ) )
+	{
+		case 1:
+			mes "^8B6914Introdução ao Aprimoramento de Item";
+			mes " ";
+			mes " ";
+			mes " ";
+			mes "1. Definição de aprimoramento de Item";
+			mes " ";
+			mes "A chave para o sucesso para";
+			mes "melhorar itens vem de um";
+			mes "unico lugar: Sua ''Mente.''";
+			mes " ";
+			mes " ";
+			mes " ";
+			mes "2. Poder de uma atitude positiva";
+			mes "Antes de tentar aprimorar";
+			mes "um item, planeje como";
+			mes "você fazer a atualização o quanto";
+			mes "você irá gastar antecipadamente.";
+			mes "Mas como todas as senhoras, a sorte";
+			mes "irá sorrir.^000000";
+			mes " ";
+			mes " ";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Espere, espere...";
+			mes "Essa coisa é antiga.";
+			mes "Quero dizer, obviamente";
+			mes "escrito a partir de uma";
+			mes "perspectiva patriarcal que promove";
+			mes "papéis de género bipartidarista.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Eu...";
+			mes "Estou tão ofendido.";
+			close;
+
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Esse pergaminho é muito";
+			mes "primitivo. Existe";
+			mes "todos os tipos de leitores";
+			mes "avançados tecnológicos que não posso";
+			mes "viver sem... Como páginas.";
+			close;
+	}
+}
+
+yuno_in04,118,116,4	script	Papel	111,{
+
+	mes "^3355FFÉ um pedaço";
+	mes "de papel que se";
+	mes "parece com uma carta pessoal.^000000";
+	next;
+	switch( select("Ler.","Deixar para lá.") )
+	{
+		case 1:
+			if(yuno_hist > 7)
+			{
+				mes "^8B6914P.S.";
+				mes "Por favor...";
+				mes "Volte para mim.";
+				mes " ";
+				mes " ";		  
+				mes "Amor,";
+				mes "Fayruz^000000";
+				close;
+			}
+			mes "^8B6914...";
+			mes "Eu não consigo esquecer o seu sorriso.";
+			mes "Não importa o que, mesmo se você";
+			mes "me odeie, sempre terei esse tipo";
+			mes "de sentimento por você. Você é";
+			mes "o que a única coisa de mais especial,";
+			mes "que significa a mais para meu coração.^000000";
+			next;
+			mes "^8B6914Eu sei que temos nossas";
+			mes "diferenças, mas por favor";
+			mes "não recuse meu amor. Por";
+			mes "suas mãos, tenho esperanças";
+			mes "que pode me perdoar por tudo.";
+			mes "- Amor, Fayruz^000000";
+			next;
+			if(getpartnerid())
+			{
+				mes "["+strcharinfo(0)+"]";
+				mes "Ahhhhhh~";
+				mes "O amor é tão bom!";
+				close;
+			}
+			mes "["+strcharinfo(0)+"]";
+			mes "Mas o q--?!";
+			mes "Booooooooo!";
+			mes "Amor fede!";
+			close;
+	
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Acho melhor eu não";
+			mes "ler isso.";
+			mes "quero dizer, poderia";
+			mes "me arrepender lendo isso.";
+			close;
+	}
+}
+
+juperos_01,123,92,4	script	Estátua de Pedra	844,{
+	
+	if(yuno_hist)
+	{
+		mes "^3355FFÉ uma estátua de pedra";
+		mes "que se parece exatamente";
+		mes "como as que existem na Biblioteca de Juno.";
+		mes "No entanto, há esculturas";
+		mes "de livros em vez das originais.^000000";
+		next;
+		mes "^3355FFÉ possivel que a";
+		mes "que está na Biblioteca de Juno";
+		mes "foi feita depois dessa.";
+		mes "mas quem pode ter certeza?^000000";
+		close;
+	}
+	mes "^3355FFÉ uma antiga";
+	mes "estátua esculpida";
+	mes "em pedra.^000000";
+	close;
+}
+
+juperos_01,99,71,4	script	Estátua de Bronze#2	844,{
+
+	mes "^3355FFÉ uma elaborada";
+	mes "estátua de bronze que tem";
+	mes "duas vezes o tamanho";
+	mes "de um ser humano normal.^000000";
+	close;
+}
+
+juperos_01,79,92,4	script	Escultura	844,{
+
+	mes "^3355FFÉ uma escultura que";
+	mes "lhe parece familiar.^000000";
+	close;
+}
+
+juperos_01,215,127,4	script	Estátua Mecânica	844,{
+
+	mes "^3355FFIsto é um busto de";
+	mes "uma máquina humanóide com";
+	mes "uma Peça de Crista";
+	mes "esculpida bem no meio.^000000";
+	next;
+	mes "^3355FFA estátua tem forma";
+	mes "inteiramente intelectual,";
+	mes "mas você conseguiu notar";
+	mes "que o braço dela está";
+	mes "estendido apontanado para o oeste.^000000";
+	close;
+}
+
+//============================================================
+// Jupers Core access Story Event
+//============================================================
+//============================================================
+// 1rd Floor -> 2nd Floor
+//============================================================
+juperos_01,100,91,0	script	jupe_goto#1	-1,2,2,{
+	end;
+
+OnTouch:
+	initnpctimer "jupe_goto#1",1;
+	mes "^777777["+ strcharinfo(0) +"]^000000";
+	mes "Essa luz...";
+	mes "Parece...";
+	mes "O seu calor é...";
+	mes "Está me envolvendo...";
+	next;
+	switch(select("Ah, isso é tão bom...:Não! Isso está errado!")) {
+	case 1:
+		mes "^777777["+ strcharinfo(0) +"]^000000";
+		mes "Ahhhh...";
+		mes "Parece que";
+		mes "estou flutuando...";
+		specialeffect2 EF_LIGHTSPHERE;
+		close2;
+		stopnpctimer;
+		warp "juperos_02",128,278;
+		break;
+	case 2:
+		mes "^777777["+ strcharinfo(0) +"]^000000";
+		mes "N-Não! Isto está";
+		mes "errado! Alguma coisa";
+		mes "de errado está acontecendo!";
+		mes "Eu tenho que fugir!";
+		close2;
+		stopnpctimer;
+		warp "juperos_01",96,91;
+		break;
+	}
+	end;
+
+OnTimer10000:
+	stopnpctimer;
+	warp "juperos_02",128,278;
+	donpcevent "jupe_goto#2::OnEnable";
+	end;
+}
+
+juperos_01,100,91,0	script	jupe_goto#2	-1,2,2,{
+OnInit:
+	disablenpc "jupe_goto#2";
+	end;
+
+OnEnable:
+	enablenpc "jupe_goto#2";
+	disablenpc "jupe_goto#1";
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "juperos_02",128,278;
+	end;
+
+OnTimer2000:
+	enablenpc "jupe_goto#1";
+	disablenpc "jupe_goto#2";
+	end;
+}
+
+//============================================================
+// 2nd Floor 
+//============================================================
+
+juperos_02,97,70,0	script	3F Gate Switch#jupe	-1,{
+OnInit:
+	initnpctimer;
+	end;
+
+Onreset:
+	killmonster "juperos_02","3F Gate Switch#jupe::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "3F Gate Switch#jupe";
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	set .MyMobs,3;
+	monster "juperos_02",24,275,"1º Interruptor do Portão",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",240,29,"2º Interruptor do Portão",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",282,183,"3º Interruptor do Portão",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs == 2)
+		mapannounce "juperos_02","Quem é você para vir aqui?",bc_map,"0xFF0000";
+	else if (.MyMobs == 1)
+		mapannounce "juperos_02","Você veio para encontrar Juperos?! Ela não existe mais...",bc_map,"0xFF0000";
+	else if (.MyMobs == 0) {
+		mapannounce "juperos_02","Você veio para me encontrar? Ótimo! Me encontre primeiro!",bc_map,"0xFF0000";
+		specialeffect2 563; // 563
+		soundeffectall "earth_quake.wav",0;
+		disablenpc "3F Gate Switch#jupe";
+		donpcevent "Área Restrita#jupe::OnEnable";
+	}
+	end;
+}
+
+
+juperos_02,130,149,0	script	Área Restrita#jupe	139,2,2,{
+OnInit:
+	disablenpc "Área Restrita#jupe";
+	end;
+
+OnEnable:
+	enablenpc "Área Restrita#jupe";
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "juperos_02","Vroom! Vroom!",bc_map,"0xE559A2";
+	end;
+
+OnTimer7000:
+	mapannounce "juperos_02","Atenção, visitantes.",bc_map,"0xE559A2";
+	end;
+
+OnTimer9000:
+	mapannounce "juperos_02","Você está autorizado a entrar na próxima área por um curto período de tempo. Por favor, use o portal no centro do mapa.",bc_map,"0xE559A2";
+	end;
+
+OnTimer9001:
+OnTimer23000:
+OnTimer46000:
+OnTimer69000:
+OnTimer92000:
+OnTimer115000:
+OnTimer161000:
+OnTimer184000:
+OnTimer207000:
+OnTimer230000:
+OnTimer253000:
+OnTimer276000:
+OnTimer299000:
+OnTimer322000:
+OnTimer345000:
+OnTimer368000:
+OnTimer391000:
+OnTimer414000:
+OnTimer460000:
+OnTimer483000:
+OnTimer506000:
+OnTimer529000:
+OnTimer552000:
+	specialeffect 561; //"Área Restrita#jupe" 561
+	end;
+
+OnTimer556000:
+	mapannounce "juperos_02","Atenção, visitantes. O portal para a próxima área será fechado em breve.",bc_map,"0xE559A2";
+	end;
+
+OnTimer561000:
+	mapannounce "juperos_02","1 minuto restante para o fechamento do portal. ",bc_map,"0xE559A2";
+	end;
+
+OnTimer598000:
+	specialeffect 561; //"Área Restrita#jupe" 561
+	end;
+
+OnTimer600000:
+	mapannounce "juperos_02","O portal está sendo fechado...",bc_map,"0xE559A2";
+	end;
+
+OnTimer603000:
+	mapannounce "juperos_02","Interruptores irão se reativar em breve.",bc_map,"0xE559A2";
+	end;
+
+OnTimer621000:
+	disablenpc "Área Restrita#jupe";
+	end;
+
+OnTimer1200000:
+	donpcevent "3F Gate Switch#jupe::OnEnable";
+	stopnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_gate",50,167;
+	end;
+}
+
+//============================================================
+// Security Checkpoint 1-1
+//============================================================
+jupe_area1,88,224,0	script	#hole#1-1	844,{
+	cutin "1",2;
+	if ($@JupreArea1InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "1",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir um Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7356) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "1-1",2;
+				next;
+				if ($@JupreArea1InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "1-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#1-1::OnEnable";
+					enablenpc "Red Alarm#1-1";
+					disablenpc "#hole#1-1";
+					close2;
+					cutin "1-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "1",255;
+				end;
+			}
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "1",255;
+			end;
+		}
+		close;
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "1",255;
+		end;
+	}
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#1-1";
+	disablenpc "Red Alarm#1-1";
+	end;
+}
+
+jupe_area1,83,221,0	script	Warp#1-1	139,2,2,{
+OnInit:
+	disablenpc "Warp#1-1";
+	end;
+
+OnEnable:
+	enablenpc "Warp#1-1";
+	specialeffect 561; //"Warp#1-1" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area1",47,259;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	disablenpc "Warp#1-1";
+	end;
+}
+
+jupe_area1,47,259,0	script	Red Alarm#1-1	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#1-1";
+	end;
+
+OnTouch:
+	donpcevent "Red Alarm On#1-1::OnEnable";
+	disablenpc "Red Alarm#1-1";
+	donpcevent "#hole#1-1::Onstop_timer";
+	set $@JupreArea1InUse,1;
+	disablenpc "#hole#1-1";
+	end;
+}
+
+-	script	Red Alarm On#1-1	-1,{
+OnInit:
+	disablenpc "Red Alarm On#1-1";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#1-1";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area1","Aqueles dentre vocês que vieram aqui...",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area1","Eu não tenho a intenção de para-los.",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area1","Mas eu creio que você está preparado para enfrentar os obstáculos...",bc_map,"0xFF0000";
+	donpcevent "Monster1#1-1::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area1","Afinal, você está se aventurando pela área proibida!",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#1-1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#1-1	-1,{
+OnInit:
+	disablenpc "Monster1#1-1";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#1-1";
+	killmonster "jupe_area1","Monster1#1-1::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster1#1-1";
+	initnpctimer;
+	set .MyMobs,8;
+	monster "jupe_area1",30,263,"Guarda de Segurança",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,262,"Guarda de Segurança",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,261,"Guarda de Segurança",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,260,"Guarda de Segurança",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,259,"Guarda de Segurança",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,258,"Guarda de Segurança",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,257,"Guarda de Segurança",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,256,"Guarda de Segurança",1669,1,"Monster1#1-1::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Você compriende que isto é uma alucinação?",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-1";
+	stopnpctimer;
+	donpcevent "Monster1#1-1::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#1-1::OnEnable";
+		disablenpc "Monster1#1-1";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#1-1	-1,{
+OnInit:
+	disablenpc "Monster2#1-1";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#1-1";
+	killmonster "jupe_area1","Monster2#1-1::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#1-1";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area1","E agora?",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area1","Deixe me ver...",bc_map,"0xFF0000";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area1","O quão forte você é!",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area1";
+	set .MyMobs,8;
+	monster "jupe_area1",30,238,"Guarda de Segurança",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",31,238,"Guarda de Segurança",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",32,238,"Guarda de Segurança",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",33,238,"Guarda de Segurança",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",34,238,"Guarda de Segurança",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",35,238,"Guarda de Segurança",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",36,238,"Guarda de Segurança",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",37,238,"Guarda de Segurança",1669,1,"Monster2#1-1::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Bwahaha! Você só é bom em fugir!",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-1";
+	stopnpctimer;
+	donpcevent "Monster2#1-1::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area1","Zzzzt. Zzzzt..... ",bc_map,"0xFF0000";
+		disablenpc "Monster2#1-1";
+		enablenpc "#hole#1-1";
+		set $@JupreArea1InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 1-2
+//============================================================
+jupe_area1,25,238,0	script	#hole#1-2	844,{
+	cutin "2",2;
+	if ($@JupreArea1InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "2",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7357) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "2-1",2;
+				next;
+				if ($@JupreArea1InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "2-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#1-2::OnEnable";
+					enablenpc "Red Alarm#1-2";
+					disablenpc "#hole#1-2";
+					close2;
+					cutin "2-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "2",255;
+				end;
+			}
+			break;
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "2",255;
+			end;
+		}
+		close;
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "2",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#1-2";
+	disablenpc "Red Alarm#1-2";
+	end;
+}
+
+jupe_area1,21,225,0	script	Warp#1-2	139,2,2,{
+OnInit:
+	disablenpc "Warp#1-2";
+	end;
+
+OnEnable:
+	enablenpc "Warp#1-2";
+	specialeffect 561; //"Warp#1-2" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area1",21,191;
+	end;
+
+OnTimer22500:
+	disablenpc "Warp#1-2";
+	end;
+}
+
+jupe_area1,21,191,0	script	Red Alarm#1-2	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#1-2";
+	end;
+
+OnTouch:
+	set $@JupreArea1InUse,1;
+	donpcevent "Red Alarm On#1-2::OnEnable";
+	disablenpc "Red Alarm#1-2";
+	disablenpc "#hole#1-2";
+	end;
+}
+
+-	script	Red Alarm On#1-2	-1,{
+OnInit:
+	disablenpc "Red Alarm On#1-2";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#1-2";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area1","Venha, venha!",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area1","Sim corra... Direto para minhas mãos!",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area1","Você quer saber quem sou eu?",bc_map,"0xFF0000";
+	donpcevent "Monster1#1-2::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area1","Você saberá, assim que derrotar todos os meus servos!",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#1-2";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#1-2	-1,{
+OnInit:
+	disablenpc "Monster1#1-2";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#1-2";
+	killmonster "jupe_area1","Monster1#1-2::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#1-2";
+	set .MyMobs,8;
+	monster "jupe_area1",30,176,"Guarda Avançado",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",31,176,"Guarda Avançado",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",32,176,"Guarda Avançado",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",33,176,"Guarda Avançado",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",34,176,"Guarda Avançado",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",35,176,"Guarda Avançado",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",36,176,"Guarda Avançado",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",37,176,"Guarda Avançado",1675,1,"Monster1#1-2::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Eu não posso acreditar quão covarde você é...",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-2";
+	stopnpctimer;
+	donpcevent "Monster1#1-2::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#1-2::OnEnable";
+		disablenpc "Monster1#1-2";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#1-2	-1,{
+OnInit:
+	disablenpc "Monster2#1-2";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#1-2";
+	killmonster "jupe_area1","Monster2#1-2::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#1-2";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area1","Eu era o chefe deste laboratório subterraneo.",bc_map,"0xFF0000";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area1","Mas isto foi a muito tempo atras, quando eu era apenas humano.",bc_map,"0xFF0000";
+	end;
+
+OnTimer6000:
+	mapannounce "jupe_area1","Eu era chamado Vesper Newton. Hahah, chamaram-me de louco na época.",bc_map,"0xFF0000";
+	set .MyMobs,13;
+	monster "jupe_area1",30,152,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",31,152,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",32,152,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",33,152,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",34,152,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",35,152,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",36,152,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",37,152,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",30,150,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",31,150,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",32,150,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",33,150,"Guarda de Segurança",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",34,150,"Guarda de Segurança",1669,1,"Monster2#1-2::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","...Ainda não.",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-2";
+	stopnpctimer;
+	donpcevent "Monster2#1-2::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area1","Ainda não!",bc_map,"0xFF0000";
+		disablenpc "Monster2#1-2";
+		enablenpc "#hole#1-2";
+		set $@JupreArea1InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 1-3
+//============================================================
+jupe_area1,36,146,0	script	#hole#1-3	844,{
+	cutin "3",2;
+	if ($@JupreArea1InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "3",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7358) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "3-1",2;
+				next;
+				if ($@JupreArea1InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "3-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#1-3::OnEnable";
+					enablenpc "Red Alarm#1-3";
+					disablenpc "#hole#1-3";
+					close2;
+					cutin "3-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "3",255;
+				end;
+			}
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "3",255;
+			end;
+		}
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "3",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#1-3";
+	disablenpc "Red Alarm#1-3";
+	end;
+}
+
+jupe_area1,33,137,0	script	Warp#1-3	139,2,2,{
+OnInit:
+	disablenpc "Warp#1-3";
+	end;
+
+OnEnable:
+	enablenpc "Warp#1-3";
+	specialeffect 561; //"Warp#1-3" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area1",33,105;
+	end;
+
+OnTimer22500:
+	disablenpc "Warp#1-3";
+	end;
+}
+
+jupe_area1,33,105,0	script	Red Alarm#1-3	-1,0,4,{
+OnInit:
+	disablenpc "Red Alarm#1-3";
+	end;
+
+OnTouch:
+	set $@JupreArea1InUse,1;
+	donpcevent "Red Alarm On#1-3::OnEnable";
+	disablenpc "Red Alarm#1-3";
+	disablenpc "#hole#1-3";
+	end;
+}
+
+-	script	Red Alarm On#1-3	-1,{
+OnInit:
+	disablenpc "Red Alarm On#1-3";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#1-3";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area1","Estes sistemas de segurança...",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area1","Não são realmente para proteção.",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area1","São apenas uma especie de hobby para passar o tempo...",bc_map,"0xFF0000";
+	donpcevent "Monster1#1-3::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area1","Ser imortal, me deixa com muito tempo livre...",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#1-3";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#1-3	-1,{
+OnInit:
+	disablenpc "Monster1#1-3";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#1-3";
+	killmonster "jupe_area1","Monster1#1-3::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#1-3";
+	set .MyMobs,8;
+	monster "jupe_area1",30,89,"Guarda de Segurança",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",31,89,"Guarda de Segurança",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",32,89,"Guarda de Segurança",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",33,89,"Guarda de Segurança",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",34,89,"Guarda de Segurança",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",35,89,"Guarda de Segurança",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",36,89,"Guarda de Segurança",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",37,89,"Guarda de Segurança",1669,1,"Monster1#1-3::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Zzzzt...Zzzzt....",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	donpcevent "Monster1#1-3::OnDisable";
+	enablenpc "#hole#1-3";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#1-3::OnEnable";
+		disablenpc "Monster1#1-3";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#1-3	-1,{
+OnInit:
+	disablenpc "Monster2#1-3";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#1-3";
+	killmonster "jupe_area1","Monster2#1-3::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster2#1-3";
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area1","Por que você veio?",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area1","Você deseja encontrar algo maravilhoso? Algo milagroso?",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_area1","Você esta enganado! Bem-vindo ao inferno!",bc_map,"0xFF0000";
+	set .MyMobs,15;
+	monster "jupe_area1",42,64,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",43,64,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",44,64,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",45,64,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",46,64,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",47,64,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",48,64,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",49,64,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",42,62,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",43,62,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",44,62,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",45,62,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",46,62,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",47,62,"Guarda de Segurança",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",48,62,"Guarda de Segurança",1669,1,"Monster2#1-3::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Você ainda tem coragem? Venha, prove.",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-3";
+	stopnpctimer;
+	donpcevent "Monster2#1-3::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area1","Você ainda tem coragem? Venha, prove.",bc_map,"0xFF0000";
+		disablenpc "Monster2#1-3";
+		enablenpc "#hole#1-3";
+		set $@JupreArea1InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 1-4
+//============================================================
+jupe_area1,50,49,0	script	#hole#1-4	844,{
+	cutin "4",2;
+	if ($@JupreArea1InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "4",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7359) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "4-1",2;
+				next;
+				if ($@JupreArea1InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "4-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#1-4::OnEnable";
+					donpcevent "Red Alarm#1-4::OnEnable";
+					disablenpc "#hole#1-4";
+					close2;
+					cutin "4-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFUInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "4",255;
+				end;
+			}
+			break;
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "4",255;
+			end;
+		}
+	}
+	else {
+		mes "^3355FFTEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "4",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer5000:
+	stopnpctimer;
+	enablenpc "#hole#1-4";
+	disablenpc "Red Alarm#1-4";
+	end;
+}
+
+jupe_area1,57,53,0	script	Warp#1-4	139,2,2,{
+OnInit:
+	disablenpc "Warp#1-4";
+	end;
+
+OnEnable:
+	enablenpc "Warp#1-4";
+	specialeffect 561; //"Warp#1-4" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area1",83,157;
+	end;
+
+OnTimer5000:
+	disablenpc "Warp#1-4";
+	end;
+}
+
+jupe_area1,83,157,0	script	Red Alarm#1-4	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#1-4";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm#1-4";
+	end;
+
+OnTouch:
+	set $@JupreArea1InUse,1;
+	donpcevent "Red Alarm On#1-4::OnEnable";
+	disablenpc "Red Alarm#1-4";
+	disablenpc "#hole#1-4";
+	end;
+}
+
+-	script	Red Alarm On#1-4	-1,{
+OnInit:
+	disablenpc "Red Alarm On#1-4";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#1-4";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area1","Venho esperando por alguém forte o suficiente para competir comigo.",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area1","Se você pode ouvir isto, desejo que seja o escolhido.",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area1","Talvez uma mera sombra do meu antigo eu...",bc_map,"0xFF0000";
+	donpcevent "Monster1#1-4::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area1","Está em algum lugar por aqui, divagando...",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	stopnpctimer;
+	disablenpc "Red Alarm On#1-4";
+	end;
+}
+
+-	script	Monster1#1-4	-1,{
+OnInit:
+	disablenpc "Monster1#1-4";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#1-4";
+	killmonster "jupe_area1","Monster1#1-4::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#1-4";
+	set .MyMobs,8;
+	monster "jupe_area1",92,154,"Guarda de Segurança",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",96,154,"Guarda de Segurança",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",100,154,"Guarda de Segurança",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",104,154,"Guarda de Segurança",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",92,161,"Guarda de Segurança",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",96,161,"Guarda de Segurança",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",100,161,"Guarda de Segurança",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",104,161,"Guarda de Segurança",1675,1,"Monster1#1-4::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area1","Zzzzt...Zzzzt....",bc_map,"0xFF0000";
+	set $@JupreArea1InUse,0;
+	end;
+
+OnTimer300002:
+	stopnpctimer;
+	enablenpc "#hole#1-4";
+	donpcevent "Monster1#1-4::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#1-4::OnEnable";
+		disablenpc "Monster1#1-4";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#1-4	-1,{
+OnInit:
+	disablenpc "Monster2#1-4";
+	end;
+
+OnDisable:
+	killmonster "jupe_area1","Monster2#1-4::OnMyMobDead";
+	disablenpc "Monster2#1-4";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#1-4";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area1","Eu nunca poderei descansar em paz...",bc_map,"0xFF0000";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area1","Eu vou esperar para sempre ou até que alguém acabe com meu sofrimento...",bc_map,"0xFF0000";
+	end;
+
+OnTimer6000:
+	mapannounce "jupe_area1","Eu vou esperar por você!",bc_map,"0xFF0000";
+	set .MyMobs,10;
+	monster "jupe_area1",104,161,"Guarda de Segurança",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",108,161,"Guarda de Segurança",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",111,161,"Guarda de Segurança",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",112,161,"Guarda de Segurança",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",115,161,"Guarda de Segurança",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",104,154,"Guarda de Segurança",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",108,154,"Guarda de Segurança",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",111,154,"Guarda de Segurança",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",112,154,"Guarda de Segurança",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",115,154,"Guarda de Segurança",1669,1,"Monster2#1-4::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	set $@JupreArea1InUse,0;
+	mapannounce "jupe_area1","É engraçado...Não é?",bc_map,"0xFF0000";
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#1-4";
+	donpcevent "Monster2#1-4::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area1","É engraçado... Não é?",bc_map,"0xFF0000";
+		disablenpc "Monster2#1-4";
+		enablenpc "#hole#1-4";
+		set $@JupreArea1InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Move to Elevator
+//============================================================
+jupe_area1,112,162,0	script	Alavanca#ufe	844,{
+	mes "^3355FFÉ uma alavanca,";
+	mes "cuja função não";
+	mes "é do seu conhecimento^000000";
+	next;
+	switch(select("Puxar.:Cancelar.")) {
+	case 1:
+		if($@JupreArea1InUse == 1) close;
+		initnpctimer;
+		donpcevent "LeverWarp#ufe::OnEnable";
+		disablenpc "Alavanca#ufe";
+		close;
+	case 2:
+		mes "[" + strcharinfo(0) + "]";
+		mes "Puxar esta alavanca?";
+		mes "Eu nem mesmo sei";
+		mes "o que vai acontecer...";
+		close;
+	}
+	close;
+
+OnTimer3000:
+	enablenpc "Alavanca#ufe";
+	stopnpctimer;
+	end;
+}
+
+jupe_area1,117,157,0	script	LeverWarp#ufe	139,2,2,{
+OnInit:
+	disablenpc "LeverWarp#ufe";
+	end;
+
+OnEnable:
+	enablenpc "LeverWarp#ufe";
+	specialeffect 561; //"LeverWarp#ufe" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_gate",28,30;
+	end;
+
+OnTimer3000:
+	stopnpctimer;
+	disablenpc "LeverWarp#ufe";
+	end;
+}
+
+//============================================================
+// Security Checkpoint 2-1
+//============================================================
+jupe_area2,74,224,0	script	#hole#2-1	844,{
+	cutin "1",2;
+	if ($@JupreArea2InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "1",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir o Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7356) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "1-1",2;
+				next;
+				if ($@JupreArea2InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "1-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#2-1::OnEnable";
+					enablenpc "Red Alarm#2-1";
+					disablenpc "#hole#2-1";
+					close2;
+					cutin "1-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "1",255;
+				end;
+			}
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "1",255;
+			end;
+		}
+		close;
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "1",255;
+		end;
+	}
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#2-1";
+	disablenpc "Red Alarm#2-1";
+	end;
+}
+
+jupe_area2,80,221,0	script	Warp#2-1	139,2,2,{
+OnInit:
+	disablenpc "Warp#2-1";
+	end;
+
+OnEnable:
+	enablenpc "Warp#2-1";
+	specialeffect 561; //"Warp#2-1" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area2",116,259;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	disablenpc "Warp#2-1";
+	end;
+}
+
+jupe_area2,116,259,0	script	Red Alarm#2-1	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#2-1";
+	end;
+
+OnTouch:
+	donpcevent "Red Alarm On#2-1::OnEnable";
+	disablenpc "Red Alarm#2-1";
+	donpcevent "#hole#2-1::Onstop_timer";
+	set $@JupreArea2InUse,1;
+	disablenpc "#hole#2-1";
+	end;
+}
+
+-	script	Red Alarm On#2-1	-1,{
+OnInit:
+	disablenpc "Red Alarm On#2-1";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#2-1";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area2","Aqueles dentre vocês que vieram aqui.",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area2","Eu não tenho a intenção de para-los.",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area2","Mas eu creio que você está preparado para enfrentar os obstáculos...",bc_map,"0xFF0000";
+	donpcevent "Monster1#2-1::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area2","Afinal, você está se aventurando pela área proibida!",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#2-1";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#2-1	-1,{
+OnInit:
+	disablenpc "Monster1#2-1";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#2-1";
+	killmonster "jupe_area2","Monster1#2-1::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster1#2-1";
+	initnpctimer;
+	set .MyMobs,8;
+	monster "jupe_area2",126,252,"Guarda de Segurança",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",127,252,"Guarda de Segurança",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",128,252,"Guarda de Segurança",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",129,252,"Guarda de Segurança",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",130,252,"Guarda de Segurança",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",131,252,"Guarda de Segurança",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",132,252,"Guarda de Segurança",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",133,252,"Guarda de Segurança",1675,1,"Monster1#2-1::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Você compriende que isto é uma alucinação?",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-1";
+	stopnpctimer;
+	donpcevent "Monster1#2-1::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#2-1::OnEnable";
+		disablenpc "Monster1#2-1";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#2-1	-1,{
+OnInit:
+	disablenpc "Monster2#2-1";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#2-1";
+	killmonster "jupe_area2","Monster2#2-1::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#2-1";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area2","E agora?",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area2","Deixe me ver...",bc_map,"0xFF0000";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area2","O quão forte você é!",bc_map,"0xFF0000";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	soundeffectall "jupe_warning.wav",0,"jupe_area2";
+	set .MyMobs,8;
+	monster "jupe_area2",126,236,"Guarda de Segurança",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",127,236,"Guarda de Segurança",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",128,236,"Guarda de Segurança",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",129,236,"Guarda de Segurança",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",130,236,"Guarda de Segurança",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",131,236,"Guarda de Segurança",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",132,236,"Guarda de Segurança",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",133,236,"Guarda de Segurança",1669,1,"Monster2#2-1::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Bwahaha! Você só é bom em fugir!",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-1";
+	stopnpctimer;
+	donpcevent "Monster2#2-1::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area2","Zzzzt. Zzzzt..... ",bc_map,"0xFF0000";
+		disablenpc "Monster2#2-1";
+		enablenpc "#hole#2-1";
+		set $@JupreArea2InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 2-2
+//============================================================
+jupe_area2,138,238,0	script	#hole#2-2	844,{
+	cutin "2",2;
+	if ($@JupreArea2InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "2",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7357) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "2-1",2;
+				next;
+				if ($@JupreArea2InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "2-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#2-2::OnEnable";
+					enablenpc "Red Alarm#2-2";
+					disablenpc "#hole#2-2";
+					close2;
+					cutin "2-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "2",255;
+				end;
+			}
+			break;
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "2",255;
+			end;
+		}
+		close;
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "2",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#2-2";
+	disablenpc "Red Alarm#2-2";
+	end;
+}
+
+jupe_area2,142,225,0	script	Warp#2-2	139,2,2,{
+OnInit:
+	disablenpc "Warp#2-2";
+	end;
+
+OnEnable:
+	enablenpc "Warp#2-2";
+	specialeffect 561; //"Warp#2-2" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area2",142,191;
+	end;
+
+OnTimer22500:
+	disablenpc "Warp#2-2";
+	end;
+}
+
+jupe_area2,142,191,0	script	Red Alarm#2-2	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#2-2";
+	end;
+
+OnTouch:
+	set $@JupreArea2InUse,1;
+	donpcevent "Red Alarm On#2-2::OnEnable";
+	disablenpc "Red Alarm#2-2";
+	disablenpc "#hole#2-2";
+	end;
+}
+
+-	script	Red Alarm On#2-2	-1,{
+OnInit:
+	disablenpc "Red Alarm On#2-2";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#2-2";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area2","Venha, venha!",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area2","Sim corra... Direto para minhas mãos",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area2","Você quer saber quem sou eu?",bc_map,"0xFF0000";
+	donpcevent "Monster1#2-2::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area2","Você saberá, assim que derrotar todos os meus servos!",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#2-2";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#2-2	-1,{
+OnInit:
+	disablenpc "Monster1#2-2";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#2-2";
+	killmonster "jupe_area2","Monster1#2-2::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#2-2";
+	set .MyMobs,8;
+	monster "jupe_area2",126,176,"Guarda Avançado",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",127,176,"Guarda Avançado",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",128,176,"Guarda Avançado",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",129,176,"Guarda Avançado",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",130,176,"Guarda Avançado",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",131,176,"Guarda Avançado",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",132,176,"Guarda Avançado",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",133,176,"Guarda Avançado",1675,1,"Monster1#2-2::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Eu não posso acreditar quão covarde você é...",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-2";
+	stopnpctimer;
+	donpcevent "Monster1#2-2::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#2-2::OnEnable";
+		disablenpc "Monster1#2-2";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#2-2	-1,{
+OnInit:
+	disablenpc "Monster2#2-2";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#2-2";
+	killmonster "jupe_area2","Monster2#2-2::OnMyMobDead";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#2-2";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area2","Eu era o chefe deste laboratório subterraneo..",bc_map,"0xFF0000";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area2","Mas isto foi a muito tempo atras, quando eu era apenas humano.",bc_map,"0xFF0000";
+	end;
+
+OnTimer6000:
+	mapannounce "jupe_area2","Eu era chamado Vesper Newton. Hahah, chamaram-me de louco na época",bc_map,"0xFF0000";
+	set .MyMobs,13;
+	monster "jupe_area2",126,156,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",127,156,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",128,156,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",129,156,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",130,156,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",131,156,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",132,156,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",133,156,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",133,156,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",127,152,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",129,152,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",130,152,"Guarda de Segurança",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",132,152,"Guarda de Segurança",1675,1,"Monster2#2-2::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","...Ainda não.",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-2";
+	stopnpctimer;
+	donpcevent "Monster2#2-2::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area2","Ainda não!",bc_map,"0xFF0000";
+		disablenpc "Monster2#2-2";
+		enablenpc "#hole#2-2";
+		set $@JupreArea2InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 2-3
+//============================================================
+jupe_area2,127,146,0	script	#hole#2-3	844,{
+	cutin "3",2;
+	if ($@JupreArea2InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "3",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisará inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7358) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "3-1",2;
+				next;
+				if ($@JupreArea2InUse == 1) {
+					mes "^3355FFNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "3-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#2-3::OnEnable";
+					enablenpc "Red Alarm#2-3";
+					disablenpc "#hole#2-3";
+					close2;
+					cutin "3-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico.^000000";
+				close2;
+				cutin "3",255;
+				end;
+			}
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "3",255;
+			end;
+		}
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "3",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer22500:
+	stopnpctimer;
+	enablenpc "#hole#2-3";
+	disablenpc "Red Alarm#2-3";
+	end;
+}
+
+jupe_area2,130,137,0	script	Warp#2-3	139,2,2,{
+OnInit:
+	disablenpc "Warp#2-3";
+	end;
+
+OnEnable:
+	enablenpc "Warp#2-3";
+	specialeffect 561; //"Warp#2-3" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area2",130,105;
+	end;
+
+OnTimer22500:
+	disablenpc "Warp#2-3";
+	end;
+}
+
+jupe_area2,130,105,0	script	Red Alarm#2-3	-1,0,4,{
+OnInit:
+	disablenpc "Red Alarm#2-3";
+	end;
+
+OnTouch:
+	set $@JupreArea2InUse,1;
+	donpcevent "Red Alarm On#2-3::OnEnable";
+	disablenpc "Red Alarm#2-3";
+	disablenpc "#hole#2-3";
+	end;
+}
+
+-	script	Red Alarm On#2-3	-1,{
+OnInit:
+	disablenpc "Red Alarm On#2-3";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#2-3";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area2","Estes sistemas de segurança...",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area2","Não são realmente para proteção.",bc_map,"0xFF0000";
+	disablenpc "#hole#2-3";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area2","São apenas uma especie de hobby para passar o tempo...",bc_map,"0xFF0000";
+	donpcevent "Monster1#2-3::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area2","Ser imortal, me deixa com muito tempo livre...",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	disablenpc "Red Alarm On#2-3";
+	stopnpctimer;
+	end;
+}
+
+-	script	Monster1#2-3	-1,{
+OnInit:
+	disablenpc "Monster1#2-3";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#2-3";
+	killmonster "jupe_area2","Monster1#2-3::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#2-3";
+	set .MyMobs,8;
+	monster "jupe_area2",126,89,"Guarda de Segurança",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",127,89,"Guarda de Segurança",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",128,89,"Guarda de Segurança",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",129,89,"Guarda de Segurança",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",130,89,"Guarda de Segurança",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",131,89,"Guarda de Segurança",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",132,89,"Guarda de Segurança",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",133,89,"Guarda de Segurança",1669,1,"Monster1#2-3::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Zzzzt...Zzzzt....",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	donpcevent "Monster1#2-3::OnDisable";
+	enablenpc "#hole#2-3";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#2-3::OnEnable";
+		disablenpc "Monster1#2-3";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#2-3	-1,{
+OnInit:
+	disablenpc "Monster2#2-3";
+	end;
+
+OnDisable:
+	disablenpc "Monster2#2-3";
+	killmonster "jupe_area2","Monster2#2-3::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster2#2-3";
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area2","Por que você veio?",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area2","Você deseja encontrar algo maravilhoso? Algo milagroso?",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_area2","Você esta enganado! Bem-vindo ao inferno!",bc_map,"0xFF0000";
+	set .MyMobs,16;
+	monster "jupe_area2",114,64,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",115,64,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",116,64,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",117,64,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",118,64,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",119,64,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",120,64,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",121,64,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",114,62,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",115,62,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",116,62,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",117,62,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",118,62,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",119,62,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",120,62,"Guarda de Segurança",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",121,62,"Guarda de Segurança",1669,1,"Monster2#2-3::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Você ainda tem coragem? Venha, prove.",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-3";
+	stopnpctimer;
+	donpcevent "Monster2#2-3::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area2","Você ainda tem coragem? Venha, prove.",bc_map,"0xFF0000";
+		disablenpc "Monster2#2-3";
+		enablenpc "#hole#2-3";
+		set $@JupreArea2InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Security Checkpoint 2-4
+//============================================================
+jupe_area2,113,49,0	script	#hole#2-4	844,{
+	cutin "4",2;
+	if ($@JupreArea2InUse == 1) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "4",255;
+		end;
+	}
+	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		next;
+		switch(select("Inserir Pedaço de Crista.:Cancelar.")) {
+		case 1:
+			if (countitem(7359) > 0) {
+				mes "^3355FFVocê pega seu";
+				mes "Pedaço de Crista e o coloca";
+				mes "na abertura onde";
+				mes "se encaixa perfeitamente.^000000";
+				specialeffect EF_TOPRANK;
+				cutin "4-1",2;
+				next;
+				if ($@JupreArea2InUse == 1) {
+					mes "^3355FFNNada acontece.";
+					mes "Talvez um alarme ou";
+					mes "alguma outra medida de segurança";
+					mes "foi ativada para impedir o";
+					mes "Pedaço de Crista de ativar";
+					mes "o dispositivo de transporte.";
+					mes "Você recupera o Pedaço de Crista.^000000";
+					close2;
+					cutin "4-1",255;
+					end;
+				}
+				else {
+					mes "^3355FFA abertura gira e o";
+					mes "Pedaço de Crista se move como";
+					mes "se fosse virar uma chave. Você";
+					mes "sente  um pequeno tremor quado";
+					mes "o Portal para o outro lado é";
+					mes "ativado. Você então recupera";
+					mes "seu Pedaço de Crista.^000000";
+					initnpctimer;
+					donpcevent "Warp#2-4::OnEnable";
+					donpcevent "Red Alarm#2-4::OnEnable";
+					disablenpc "#hole#2-4";
+					close2;
+					cutin "4-1",255;
+					end;
+				}
+			}
+			else {
+				mes "^3355FFInfelizmente, você não";
+				mes "está carrengando nada";
+				mes "que seja capaz de";
+				mes "encaixar na abertura e ativar";
+				mes "este dispositivo mecânico^000000";
+				close2;
+				cutin "4",255;
+				end;
+			}
+			break;
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmmm...";
+			mes "Não tenho nada que";
+			mes "possa fazer essa estranha";
+			mes "máquina funcionar?";
+			close2;
+			cutin "4",255;
+			end;
+		}
+	}
+	else {
+		mes "^3355FFEste parece ser";
+		mes "algum tipo de dispositivo";
+		mes "que permitirá que você";
+		mes "passe para o outro lado.";
+		mes "Existe uma abertura onde você";
+		mes "provavelmente precisa inserir";
+		mes "algum tipo de objeto...^000000";
+		close2;
+		cutin "4",255;
+		end;
+	}
+	end;
+
+Onstop_timer:
+	stopnpctimer;
+	end;
+
+OnTimer5000:
+	stopnpctimer;
+	enablenpc "#hole#2-4";
+	disablenpc "Red Alarm#2-4";
+	end;
+}
+
+jupe_area2,106,53,0	script	Warp#2-4	139,2,2,{
+OnInit:
+	disablenpc "Warp#2-4";
+	end;
+
+OnEnable:
+	enablenpc "Warp#2-4";
+	specialeffect 561; //"Warp#2-4" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_area2",80,157;
+	end;
+
+OnTimer5000:
+	disablenpc "Warp#2-4";
+	end;
+}
+
+jupe_area2,80,157,0	script	Red Alarm#2-4	-1,2,2,{
+OnInit:
+	disablenpc "Red Alarm#2-4";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm#2-4";
+	end;
+
+OnTouch:
+	set $@JupreArea2InUse,1;
+	donpcevent "Red Alarm On#2-4::OnEnable";
+	disablenpc "Red Alarm#2-4";
+	disablenpc "#hole#2-4";
+	end;
+}
+
+-	script	Red Alarm On#2-4	-1,{
+OnInit:
+	disablenpc "Red Alarm On#2-4";
+	end;
+
+OnEnable:
+	enablenpc "Red Alarm On#2-4";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "jupe_area2","Venho esperando por alguém forte o suficiente para competir comigo.",bc_map,"0xFF0000";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_area2","Se você pode ouvir isto, espero q seja o escolhido...",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_area2","Talvez uma mera sombra do meu antigo eu...",bc_map,"0xFF0000";
+	donpcevent "Monster1#2-4::OnEnable";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_area2","Está em algum lugar por aqui, divagando...",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	stopnpctimer;
+	disablenpc "Red Alarm On#2-4";
+	end;
+}
+
+-	script	Monster1#2-4	-1,{
+OnInit:
+	disablenpc "Monster1#2-4";
+	end;
+
+OnDisable:
+	disablenpc "Monster1#2-4";
+	killmonster "jupe_area2","Monster1#2-4::OnMyMobDead";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Monster1#2-4";
+	set .MyMobs,8;
+	monster "jupe_area2",75,161,"Guarda de Segurança",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",72,161,"Guarda de Segurança",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",71,161,"Guarda de Segurança",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",68,161,"Guarda de Segurança",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",75,154,"Guarda de Segurança",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",72,154,"Guarda de Segurança",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",71,154,"Guarda de Segurança",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",68,154,"Guarda de Segurança",1669,1,"Monster1#2-4::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	mapannounce "jupe_area2","Zzzzt...Zzzzt....",bc_map,"0xFF0000";
+	set $@JupreArea2InUse,0;
+	end;
+
+OnTimer300002:
+	stopnpctimer;
+	enablenpc "#hole#2-4";
+	donpcevent "Monster1#2-4::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Monster2#2-4::OnEnable";
+		disablenpc "Monster1#2-4";
+		stopnpctimer;
+	}
+	end;
+}
+
+-	script	Monster2#2-4	-1,{
+OnInit:
+	disablenpc "Monster2#2-4";
+	end;
+
+OnDisable:
+	killmonster "jupe_area2","Monster2#2-4::OnMyMobDead";
+	disablenpc "Monster2#2-4";
+	end;
+
+OnEnable:
+	enablenpc "Monster2#2-4";
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_area2","Eu nunca poderei descansar em paz...",bc_map,"0xFF0000";
+	end;
+
+OnTimer4000:
+	mapannounce "jupe_area2","Eu vou esperar para sempre ou até que alguém acabe com meu sofrimento...",bc_map,"0xFF0000";
+	end;
+
+OnTimer6000:
+	mapannounce "jupe_area2","Eu vou esperar por você!",bc_map,"0xFF0000";
+	set .MyMobs,12;
+	monster "jupe_area2",63,161,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",61,161,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",59,161,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",57,161,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",55,161,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",53,161,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",53,154,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",55,154,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",57,154,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",59,154,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",61,154,"Guarda de Segurança",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",63,154,"Guarda de Segurança",1669,1,"Monster2#2-4::OnMyMobDead";
+	end;
+
+OnTimer300000:
+	set $@JupreArea2InUse,0;
+	mapannounce "jupe_area2","É engraçado... Não é?",bc_map,"0xFF0000";
+	end;
+
+OnTimer300002:
+	enablenpc "#hole#2-4";
+	donpcevent "Monster2#2-4::OnDisable";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "jupe_area2","É engraçado... Não é?",bc_map,"0xFF0000";
+		disablenpc "Monster2#2-4";
+		enablenpc "#hole#2-4";
+		set $@JupreArea2InUse,0;
+		stopnpctimer;
+	}
+	end;
+}
+
+//============================================================
+// Move to Elevator
+//============================================================
+jupe_area2,51,162,0	script	Alavanca#ufe2	844,{
+	mes "^3355FFÉ uma alavanca,";
+	mes "cuja função não";
+	mes "é do seu conhecimento.^000000";
+	next;
+	switch(select("Puxar.:Cancelar")) {
+	case 1:
+		if($@JupreArea2InUse == 1) close;
+		initnpctimer;
+		donpcevent "LeverWarp#ufe2::OnEnable";
+		disablenpc "Alavanca#ufe2";
+		close;
+	case 2:
+		mes "[" + strcharinfo(0) + "]";
+		mes "Puxar esta alavanca?";
+		mes "Eu nem mesmo sei";
+		mes "o que vai acontecer...";
+		close;
+	}
+	close;
+
+OnTimer3000:
+	enablenpc "Alavanca#ufe2";
+	stopnpctimer;
+	end;
+}
+
+jupe_area2,46,157,0	script	LeverWarp#ufe2	139,2,2,{
+OnInit:
+	disablenpc "LeverWarp#ufe2";
+	end;
+
+OnEnable:
+	enablenpc "LeverWarp#ufe2";
+	specialeffect 561; //"LeverWarp#ufe2" 561
+	soundeffectall "jupe_warp.wav",0;
+	initnpctimer;
+	end;
+
+OnTouch:
+	warp "jupe_gate",71,29;
+	end;
+
+OnTimer3000:
+	stopnpctimer;
+	disablenpc "LeverWarp#ufe2";
+	end;
+}
+
+//============================================================
+// Elevator Reception Room
+//============================================================
+jupe_ele_r,51,98,0	script	Disjuntor#ufe	844,{
+	if ($@JupeElevatorInUse == 1) {
+		mes "^3355FFEsta alavanca ";
+		mes "parece já ter sido";
+		mes "puxada antes";
+		mes "por alguém.^000000";
+		close;
+	}
+	else {
+		cutin "5",2;
+		mes "^3355FFEsta alavanca está";
+		mes "localizada perto de";
+		mes "quatro aberturas vazias.^000000";
+		next;
+		switch(select("Puxar a alavanca.:Deixar como está.")) {
+		case 1:
+			mes "^3355FF*Snap Snap*^000000";
+			next;
+			mes "^3355FFVocê puxa a alavanca,";
+			mes "mas nada acontece.";
+			mes "Você provavelmente precisa";
+			mes "inserir os objetos nas";
+			mes "aberturas correspondentes";
+			mes "para a alavanca funcionar.^000000";
+			next;
+			if (countitem(7356) > 0 && countitem(7359) > 0 && countitem(7357) > 0 && countitem(7358) > 0) {
+				switch(select("Inserir todos os seus Pedaços de Crista")) {
+				case 1:
+					mes "^3300FF*Snap!*^000000";
+					mes "^3300FFCuriosamente, todos";
+					mes "os quatro Pedaços de";
+					mes "Crista encaixam perfeitamente";
+					mes "nas aberturas e começa a";
+					mes "emitir uma estranha luz.^000000";
+					cutin "5-1",2;
+					specialeffect EF_SPHERE;
+					delitem 7356,1; //Piece_Of_Crest1
+					delitem 7359,1; //Piece_Of_Crest4
+					delitem 7357,1; //Piece_Of_Crest2
+					delitem 7358,1; //Piece_Of_Crest3
+					next;
+					switch(select("Retirar os Pedaços de Crista.:Puxar a alavanca")) {
+					case 1:
+						cutin "5",2;
+						mes "^3355FFVocê retira todos";
+						mes "os Pedaços de Crista";
+						mes "que havia inserido";
+						mes "nas aberturas.^000000";
+						getitem 7356,1; //Piece_Of_Crest1
+						getitem 7359,1; //Piece_Of_Crest4
+						getitem 7357,1; //Piece_Of_Crest2
+						getitem 7358,1; //Piece_Of_Crest3
+						close2;
+						cutin "5",255;
+						end;
+					case 2:
+						if ($@JupeElevatorInUse == 1) {
+							mes "^3355FFÉ estranho, mas";
+							mes "esta alavanca parece";
+							mes "ter sido puxada antes.^000000";
+							close2;
+							cutin "5",255;
+							end;
+						}
+						else {
+							mes "^3355FFQuando você puxa a alavanca,";
+							mes "as aberturas fecham";
+							mes "de repente, ficando";
+							mes "irrecuperavel, e o chão";
+							mes "começa a tremer";
+							mes "violentamente. Isto não é normal!^000000";
+							next;
+							set $@JupeElevatorInUse,1;
+							disablenpc "Disjuntor#ufe";
+							enablenpc "Disjuntor Ligado#ufe";
+							initnpctimer;
+							specialeffect2 563; // 563
+							soundeffectall "earth_quake.wav",0;
+							close2;
+							cutin "5-1",255;
+							end;
+						}
+					}
+				}
+			}
+			else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
+				select("Inserir os Pedaços de Crista.");
+				mes "^3355FFAgora você não tem";
+				mes "Pedaços de Crista suficiente";
+				mes "para colocar nas quatro aberturas.";
+				mes "Você precisa encontrar e^FFFFFF ^3355FF Traze-los para que funcione.^000000";
+				close2;
+				cutin "5-1",255;
+				end;
+			}
+			else {
+				mes "^3355FFVocê tem que encontrar";
+				mes "algum tipo de objeto ";
+				mes "que caiba dentro";
+				mes "destas quatro aberturas...^000000";
+				close2;
+				cutin "5-1",255;
+				end;
+			}
+		case 2:
+			mes "^3355FFQuem sabe o que";
+			mes "esta alavanca pode fazer?";
+			mes "Você nunca saberá a menos";
+			mes "que tenha coragem de tentar.^000000";
+			close2;
+			cutin "5",255;
+			end;
+		}
+	}
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele_r","Meus descendentes...",bc_map,"0x66FF00";
+	end;
+
+OnTimer3000:
+	mapannounce "jupe_ele_r","Você quer saber porque esta cidade foi enterrada...?",bc_map,"0x66FF00";
+	end;
+
+OnTimer7000:
+	mapannounce "jupe_ele_r","Se quiser, siga minha voz...",bc_map,"0x66FF00";
+	end;
+
+OnTimer10000:
+	mapannounce "jupe_ele_r","Vou deixar você ver por si próprio o que deseja saber...",bc_map,"0x66FF00";
+	end;
+
+OnTimer17000:
+	mapannounce "jupe_ele_r","Ultrapassar todas as alucinações.",bc_map,"0xCC6600";
+	end;
+
+OnTimer20000:
+	mapannounce "jupe_ele_r","Abra seus olhos e veja além das mentiras.",bc_map,"0xFF0000";
+	end;
+
+OnTimer23000:
+	mapannounce "jupe_ele_r","Só posso manter esta visão para você por 20 minutos.",bc_map,"0xFF0000";
+	donpcevent "Elevator Guard1#ufe::OnEnable";
+	end;
+
+OnTimer27000:
+	mapannounce "jupe_ele_r","Olhe! E lembre-se!",bc_map,"0xFF0000";
+	stopnpctimer;
+	end;
+}
+
+jupe_ele_r,51,98,0	script	Disjuntor Ligado#ufe	844,{
+	mes "^3355FFParece que";
+	mes "alguém está";
+	mes "usando a máquina...^000000";
+	close;
+
+OnInit:
+	disablenpc "Disjuntor Ligado#ufe";
+	end;
+}
+
+//============================================================
+// Elevator Receptoin Guards
+//============================================================
+jupe_ele_r,10,50,0	script	Elevator Guard1#ufe	-1,{
+OnInit:
+	disablenpc "Elevator Guard1#ufe";
+	end;
+
+OnEnable:
+	set .MyMobs,9;
+	enablenpc "Elevator Guard1#ufe";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	monster "jupe_ele_r",44,99,"Guarda",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer1200:
+	monster "jupe_ele_r",55,99,"Guarda",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer1400:
+	monster "jupe_ele_r",45,84,"Guarda",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer1600:
+	monster "jupe_ele_r",54,84,"Guarda",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer1800:
+	monster "jupe_ele_r",45,99,"Guarda",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer2000:
+	monster "jupe_ele_r",54,99,"Guarda",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer2200:
+	monster "jupe_ele_r",48,84,"Guarda",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer2400:
+	monster "jupe_ele_r",52,84,"Guarda",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer2600:
+	monster "jupe_ele_r",50,84,"Chefe da Guarda",1684,1,"Elevator Guard1#ufe::OnMyMobDead";
+	end;
+
+OnTimer120000:
+	mapannounce "jupe_ele_r","É decepicionante ver que você é mesmo muito fraco para derrotar uma alucinação...",bc_map,"0x66FF00";
+	enablenpc "Disjuntor#ufe";
+	disablenpc "Disjuntor Ligado#ufe";
+	donpcevent "Annihilation#ufe::OnEnable";
+	set $@JupeElevatorInUse,0;
+	end;
+
+OnTimer120005:
+	killmonster "jupe_ele_r","Elevator Guard1#ufe::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		donpcevent "Elevator Safety#ufe::OnEnable";
+		stopnpctimer;
+	}
+	end;
+}
+
+jupe_ele_r,10,52,0	script	Elevator Safety#ufe	-1,{
+OnInit:
+	disablenpc "Elevator Safety#ufe";
+	end;
+
+OnEnable:
+	enablenpc "Elevator Safety#ufe";
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele_r","Aquele de Vós que derrotou a alucinação, um passo a frente.",bc_map,"0x66FF00";
+	soundeffectall "earth_quake.wav",0;
+	end;
+
+OnTimer8000:
+	donpcevent "Elevator On#ufe::OnEnable";
+	end;
+
+OnTimer10000:
+	disablenpc "Elevator Safety#ufe";
+	stopnpctimer;
+	end;
+}
+
+jupe_ele_r,50,89,0	script	Annihilation#ufe	-1,35,50,{
+OnInit:
+	disablenpc "Annihilation#ufe";
+	end;
+
+OnEnable:
+	enablenpc "Annihilation#ufe";
+	initnpctimer;
+	end;
+
+OnTouch:
+	percentheal -99,-100;
+	end;
+
+OnTimer1000:
+	mapwarp "jupe_ele_r", "jupe_gate",49,138;
+	end;
+
+OnTimer1600:
+	enablenpc "Elevator Escape#ufe";
+	end;
+
+OnTimer3000:
+	disablenpc "Annihilation#ufe";
+	disablenpc "Elevator Escape#ufe";
+	end;
+}
+
+jupe_ele_r,50,89,0	script	Elevator Escape#ufe	-1,35,50,{
+OnInit:
+	disablenpc "Elevator Escape#ufe";
+	end;
+
+OnTouch:
+	mapwarp "jupe_ele_r", "jupe_gate",49,138;
+	end;
+}
+
+jupe_ele_r,10,54,0	script	Elevator On#ufe	-1,{
+OnInit:
+	disablenpc "Elevator On#ufe";
+	end;
+
+OnEnable:
+	enablenpc "Elevator On#ufe";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapwarp "jupe_ele_r", "jupe_ele",42,47;
+	set $@JupeElevatorInUse2,0;
+	donpcevent "TimeOut#ufe::OnEnable";
+	donpcevent "Guarda-1#ufe::OnEnable";
+	end;
+
+OnTimer10000:
+	stopnpctimer;
+	disablenpc "Elevator On#ufe";
+	end;
+}
+
+//============================================================
+// Elevator NPCs
+//============================================================
+jupe_ele,14,6,1	script	TimeOut#ufe	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer59000:
+	if (getmapusers("jupe_ele") == 0) {
+		killmonsterall "jupe_ele";
+		donpcevent "Guarda-1#ufe::OnDisable";
+		donpcevent "Guarda-2#ufe::OnDisable";
+		donpcevent "Guarda-3#ufe::OnDisable";
+		donpcevent "Guarda-4#ufe::OnDisable";
+		stopnpctimer;
+		set $@JupeElevatorInUse2,0;
+		set $@JupeElevatorInUse,0;
+		disablenpc "Disjuntor Ligado#ufe";
+		enablenpc "Disjuntor#ufe";
+	}
+	end;
+
+OnTimer120000:
+	killmonsterall "jupe_ele";
+	donpcevent "Guarda-1#ufe::OnDisable";
+	donpcevent "Guarda-2#ufe::OnDisable";
+	donpcevent "Guarda-3#ufe::OnDisable";
+	donpcevent "Guarda-4#ufe::OnDisable";
+	mapannounce "jupe_ele","No final, você não pode superar o seu medo interior...",bc_map,"0xFF0000";
+	end;
+
+OnTimer122000:
+	mapannounce "jupe_ele","Você nunca encontrou o seu medo interior, não é?",bc_map,"0xFF0000";
+	end;
+
+OnTimer125000:
+	mapannounce "jupe_ele","Você esperava que este fosse o fim da alicinação?",bc_map,"0xFF0000";
+	end;
+
+OnTimer127000:
+	mapannounce "jupe_ele","A voz que você está ouvindo também é uma alucinação?",bc_map,"0xFF0000";
+	end;
+
+OnTimer129000:
+	mapannounce "jupe_ele","E seu você apenas estiver sonhando?",bc_map,"0xFF0000";
+	end;
+
+OnTimer131000:
+	mapannounce "jupe_ele","E se a existência desta cidade é uma mentira?",bc_map,"0xFF0000";
+	end;
+
+OnTimer133000:
+	mapannounce "jupe_ele","Você é mesmo real?",bc_map,"0xFF0000";
+	end;
+
+OnTimer134000:
+OnTimer135000:
+	mapwarp "jupe_ele", "jupe_gate",49,138;
+	end;
+
+OnTimer142000:
+	disablenpc "GuardEnd#ufe";
+	disablenpc "4F Enter#ufe";
+	donpcevent "TimeOut#ufe::OnDisable";
+	set $@JupeElevatorInUse2,0;
+	set $@JupeElevatorInUse,0;
+	disablenpc "Disjuntor Ligado#ufe";
+	enablenpc "Disjuntor#ufe";
+	stopnpctimer;
+	end;
+}
+
+jupe_ele,15,6,1	script	Guarda-1#ufe	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele","Eu admiro sua paciência.",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele","Vamos ver se tudo que você tem experimentado",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_ele","foram armadilhas para intrusos...",bc_map,"0xFF0000";
+	end;
+
+OnTimer12000:
+	set .MyMobs,8;
+	monster "jupe_ele",48,44,"Guarda",1675,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Guarda",1669,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Guarda",1675,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Guarda",1669,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Guarda",1675,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Guarda",1669,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Guarda",1675,1,"Guarda-1#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Guarda",1669,1,"Guarda-1#ufe::OnMyMobDead";
+	set $@JupeElevatorInUse2,1;
+	end;
+
+OnTimer30000:
+	if ($@JupeElevatorInUse2 == 1) {
+		donpcevent "Guarda-2#ufe::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		if ($@JupeElevatorInUse2 == 1) {
+			donpcevent "Guarda-2#ufe::OnEnable";
+			stopnpctimer;
+		} else if ($@JupeElevatorInUse2 == 4 && getvariableofnpc(.MyMobs,"Guarda-2#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-3#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-4#ufe") < 1) {
+			donpcevent "GuardEnd#ufe::OnEnable";
+			stopnpctimer;
+		}
+	}
+	end;
+}
+
+jupe_ele,16,6,1	script	Guarda-2#ufe	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele","Esta cidade não é",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele","tâo magnifica quanto você pensou.",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_ele","Este é um lugar onde todos os medos do homem florecem.",bc_map,"0xFF0000";
+	end;
+
+OnTimer11000:
+	mapannounce "jupe_ele","Sim. Ninguém sai vivo!",bc_map,"0xFF0000";
+	end;
+
+OnTimer12000:
+	set .MyMobs,8;
+	monster "jupe_ele",48,44,"Guarda",1683,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Guarda",1669,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Guarda",1683,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Guarda",1669,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Guarda",1683,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Guarda",1669,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Guarda",1683,1,"Guarda-2#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Guarda",1669,1,"Guarda-2#ufe::OnMyMobDead";
+	set $@JupeElevatorInUse2,2;
+	end;
+
+OnTimer30000:
+	if ($@JupeElevatorInUse2 == 2) {
+		donpcevent "Guarda-3#ufe::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		if ($@JupeElevatorInUse2 == 2) {
+			donpcevent "Guarda-3#ufe::OnEnable";
+			stopnpctimer;
+		} else if ($@JupeElevatorInUse2 == 4 && getvariableofnpc(.MyMobs,"Guarda-1#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-3#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-4#ufe") < 1) {
+			donpcevent "GuardEnd#ufe::OnEnable";
+			stopnpctimer;
+		}
+	}
+	end;
+}
+
+jupe_ele,17,6,1	script	Guarda-3#ufe	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele","O que você ve?",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele","Seus olhos estão realmente vendo algo?",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_ele","Ou você simplesmente acredita que está vendo?",bc_map,"0xFF0000";
+	end;
+
+OnTimer12000:
+	set .MyMobs,8;
+	monster "jupe_ele",48,44,"Guarda",1675,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Guarda",1669,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Guarda",1683,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Guarda",1675,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Guarda",1669,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Guarda",1683,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Guarda",1675,1,"Guarda-3#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Guarda",1669,1,"Guarda-3#ufe::OnMyMobDead";
+	set $@JupeElevatorInUse2,3;
+	end;
+
+OnTimer30000:
+	if ($@JupeElevatorInUse2 == 3) {
+		donpcevent "Guarda-4#ufe::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		if ($@JupeElevatorInUse2 == 3) {
+			donpcevent "Guarda-4#ufe::OnEnable";
+			stopnpctimer;
+		}
+		else if ($@JupeElevatorInUse2 == 4 && getvariableofnpc(.MyMobs,"Guarda-1#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-2#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-4#ufe") < 1) {
+			donpcevent "GuardEnd#ufe::OnEnable";
+			stopnpctimer;
+		}
+	}
+	end;
+}
+
+jupe_ele,18,6,1	script	Guarda-4#ufe	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele","Não se esqueça. Neste lugar você não é nada além de você mesmo.",bc_map,"0xFF0000";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele","Nada é o que você teme e você não tem nada a temer...",bc_map,"0xFF0000";
+	end;
+
+OnTimer8000:
+	set .MyMobs,8;
+	monster "jupe_ele",48,44,"Guarda",1684,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Guarda",1669,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Guarda",1684,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Guarda",1669,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Guarda",1675,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Guarda",1669,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Guarda",1683,1,"Guarda-4#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Guarda",1675,1,"Guarda-4#ufe::OnMyMobDead";
+	set $@JupeElevatorInUse2,4;
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		if(getvariableofnpc(.MyMobs,"Guarda-1#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-2#ufe") < 1 && getvariableofnpc(.MyMobs,"Guarda-3#ufe") < 1)
+		{
+			donpcevent "GuardEnd#ufe::OnEnable";
+			stopnpctimer;
+		}
+	}
+	end;
+}
+
+jupe_ele,19,6,1	script	GuardEnd#ufe	844,{
+OnInit:
+	disablenpc "GuardEnd#ufe";
+	end;
+
+OnEnable:
+	enablenpc "GuardEnd#ufe";
+	donpcevent "TimeOut#ufe::OnDisable";
+	initnpctimer;
+	end;
+
+OnDisable:
+	disablenpc "GuardEnd#ufe";
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "jupe_ele","Eu não vou te dizer nada.",bc_map,"0x66FF00";
+	end;
+
+OnTimer5000:
+	mapannounce "jupe_ele","Minha cidade, meu povo, agora são apenas memórias.",bc_map,"0x66FF00";
+	end;
+
+OnTimer8000:
+	mapannounce "jupe_ele","Tudo foi um engano. Nós não deviamos estar aqui.",bc_map,"0x66FF00";
+	end;
+
+OnTimer11000:
+	mapannounce "jupe_ele","Será este um lugar onde os humanos são proibidos?",bc_map,"0x66FF00";
+	end;
+
+OnTimer12000:
+	mapannounce "jupe_ele","Quer saber, não é? Vá em fente... Vá mais fundo.",bc_map,"0x66FF00";
+	enablenpc "4F Enter#ufe";
+	end;
+
+OnTimer22000:
+	mapannounce "jupe_ele","Não é real, de qualquer forma. Tudo isso é seguro, não pode machucá-lo ...",bc_map,"0x66FF00";
+	soundeffectall "earth_quake.wav",0;
+	disablenpc "4F Enter#ufe";
+	end;
+
+OnTimer24000:
+	mapwarp "jupe_ele","jupe_core",150,286;
+	end;
+
+OnTimer25000:
+	mapwarp "jupe_ele","jupe_core",151,286;
+	end;
+
+OnTimer26000:
+	set $@JupeElevatorInUse2,0;
+	set $@JupeElevatorInUse,0;
+	disablenpc "Disjuntor Ligado#ufe";
+	enablenpc "Disjuntor#ufe";
+	donpcevent "GuardEnd#ufe::OnDisable";
+}
+
+jupe_ele,41,33,0	script	4F Enter#ufe	45,4,4,{
+OnInit:
+	disablenpc "4F Enter#ufe";
+	end;
+
+OnTouch:
+	warp "jupe_core",rand(149,151),286;
+	end;
+}
+
+//============================================================
+// Warps
+//============================================================
+jupe_gate,50,173,0	script	gate#start	-1,2,3,{
+	end;
+
+OnTouch:
+	initnpctimer "gate#start",1;
+	mes "^3355FFÉ um Portal que";
+	mes "irá teleportar você ";
+	mes "para o andar anterior.^000000";
+	next;
+	switch(select("Usar.:Ignorar.")) {
+	case 1:
+		specialeffect2 EF_LIGHTSPHERE;
+		close2;
+		stopnpctimer;
+		warp "juperos_02",130,142;
+		break;
+	case 2:
+		mes "[" + strcharinfo(0) + "]";
+		mes "Agora não!";
+		mes "Eu não posso sair ainda!";
+		close2;
+		stopnpctimer;
+		warp "jupe_gate",50,168;
+		break;
+	}
+	end;
+
+OnTimer10000:
+	warp "juperos_02",128,278;
+	enablenpc "gate#start#2";
+	disablenpc "gate#start";
+	end;
+}
+
+jupe_gate,50,171,0	script	gate#start#2	-1,2,2,{
+OnInit:
+	disablenpc "gate#start#2";
+	end;
+
+OnTouch:
+	warp "juperos_02",130,142;
+	end;
+
+OnTimer2000:
+	enablenpc "gate#start";
+	disablenpc "gate#start#2";
+	end;
+}
+
+juperos_02,33,59,0	script	jupe_goto2F	45,2,2,{
+OnTouch:
+	switch(rand(1,4)) {
+	case 1: warp "juperos_01",120,72; end;
+	case 2: warp "juperos_01",120,112; end;
+	case 3: warp "juperos_01",79,112; end;
+	case 4: warp "juperos_01",79,72; end;
+	}
+	end;
+}

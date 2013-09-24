@@ -14,4 +14,4 @@
 
 // Onward to the New World
 //============================================================
-izlude,101,173,6	duplicate(Promotional Staff#iz)	Equipe Promocional#izlude	100
+izlude,101,173,6	duplicate(Promotional Staff#iz)	Promotional Staff#izlude	100

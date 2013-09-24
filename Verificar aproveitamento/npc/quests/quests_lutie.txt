@@ -1,0 +1,361 @@
+//===== Cronus Script =======================================
+//= Quest de NPCs relacionado a Lutie
+//===== By: ==================================================
+//= TonyMan & Samuray22
+//===== versão Atual: =====================================
+//= 1.4b CR / 1.4 eA
+//===== Compatible With: =====================================
+//= Cronus-Emulator
+//===== Description: =========================================
+//= Chapéu de fumacento, Chapéu de Esporo, Casca de Nóz,
+//= Casca de Ovo Colorida, Candura, Mestre-Cuca,
+//= Vela, Chapéu de Bolo
+//===== Additional Comments: =================================
+//= 1.1 Optizado [Lupus]
+//= 1.2 Fixado itens do Mestre-Cuca [Lupus]
+//= 1.3 Atualizado para o NPC Oficial. [Samuray22]
+//= 1.3a Trocado nome dos itens para as IDs. [Samuray22]
+//= 1.3b Removido " ao lado de delitem. [L0ne_W0lf]
+//= 1.4 Atualizado NPCs novamente. [L0ne_W0lf]
+//= 1.4a Traduzido completamente, itens igual ao bRO. [. kurono~]
+//= 1.4b Revisado e removido alguns erros [LEOzinn]
+//============================================================
+
+xmas,117,295,4	script	Titicupe	704,{
+	mes "[Titicupe]";
+	mes "Hmm...?";
+	mes "Eu, Titicupe, prezado gerente da Fábrica de Brinquedos e um inventor genial, fiz de novo! Eu apenas criei a mais sofisticada máquina de vendas do mundo!";
+	next;
+	switch(select("Fale sobre a Máquina de Vendas:Itens na Máquina de Vendas:Parar de falar")) {
+	case 1:
+		mes "[Titicupe]";
+		mes "Você pode ver o Boneco de Neve à minha esquerda? Pode? Se você olhar em sua boca, você irá ver que ela foi construído em grande proporção. Você deve dizer, um pouco maior que em escala normal...";
+		next;
+		mes "[Titicupe]";
+		mes "Você vê, aquele Boneco de Neve é na verdade uma espantosa máquina que eu inventei com meu sangue, suor, lágrimas e neve.";
+		next;
+		mes "[Titicupe]";
+		mes "Você pode colocar todos os tipos de coisas dentro de sua boca, e se você inserir os itens certos, você vai ter alguns chapéus em troca...";
+		next;
+		mes "[Titicupe]";
+		mes "Chapéis na moda que você sempre sonhou em usar. Bwahahahaha~!";
+		next;
+		mes "[Titicupe]";
+		mes "Oh, essa minha criação é tão maravilhosa!";
+		Emotion e_kis2;
+		next;
+		mes "[Titicupe]";
+		mes "E os chapéis--! Eu... eu não consigo me conter!";
+		next;
+		mes "^3355FFO Gerente da Fábrica de Brinquedos Titicupe saltou e pulou com alegria. Aparentemente, ele está insano, mas é possível que ele seja brilhante.^000000";
+		Emotion e_gasp;
+		close;
+	case 2:
+		mes "[Titicupe]";
+		mes "Ok! Você precisa saber que tipo de itens por na Máquina de Vendas para obter o que pretende, né? Vá em frente... Pergunte-me~";
+		Emotion e_ic;
+		next;
+		switch(select("Chapéu de Fumacento:Chapéu de Esporo:Casca de Noz:Casca de Ovo Colorida:Candura:Mestre-Cuca:Vela:Chapéu de Bolo:Terminar conversa")) {
+		case 1:
+			mes "[Titicupe]";
+			mes "Chapéu de Fumacento?";
+			mes "1 Orelha de Gato";
+			mes "20 Escamas de Dragão";
+			mes "200 Pedaços de Escama Dura";
+			mes "300 Peles de Lontra";
+			break;
+		case 2:
+			mes "[Titicupe]";
+			mes "Chapéu de Esporo?";
+			mes "850 Esporos Venenosos";
+			mes "300 Madeiras Queimadas";
+			mes "1 Língua";
+			break;
+		case 3:
+			mes "[Titicupe]";
+			mes "Casca de Noz?";
+			mes "1 Casca de Maça";
+			mes "500 Asas de Libélulas";
+			break;
+		case 4:
+			mes "[Titicupe]";
+			mes "Casca de Ovo Colorida?";
+			mes "1 Casca de Ovo";
+			mes "1 Tintura Azul";
+			mes "50 Garras de Lobo do Deserto";
+			break;
+		case 5:
+			mes "[Titicupe]";
+			mes "Candura?!";
+			mes "Você!";
+			mes "Você sabe algo...";
+			mes "Heh heh~ No entanto";
+			mes "100 Aventais de Alice";
+			break;
+		case 6:
+			mes "[Titicupe]";
+			mes "Mestre-Cuca?";
+			mes "120 Pedaços de Bolo";
+			mes "1 Tintura Branca";
+			mes "330 Plumas";
+			mes "450 Escamas de Dragão";
+			break;
+		case 7:
+			mes "[Titicupe]";
+			mes "Vela?";
+			mes "1 Pavio";
+			mes "50 Palito de Fósfoto";
+			mes "100 Geléia Real";
+			break;
+		case 8:
+			mes "[Titicupe]";
+			mes "Chapéu de Bolo?";
+			mes "10 Balas";
+			mes "5 Bengalas Doces";
+			mes "15 Biscoitos de Gengibre";
+			mes "20 Pedaços de Bolo";
+			mes "10 Aços";
+			break;
+		case 9:
+			mes "[Titicupe]";
+			mes "Pergunte-me a qualquer hora. Esses tipos de perguntas não são problemas para um gênio como eu!";
+		}
+		next;
+		mes "[Titicupe]";
+		mes "Estou tão feliz!!";
+		mes "Sou um gênio~!";
+		mes "Ho ho ho";
+		mes "Ho ho ho ho!";
+		close;
+	case 3:
+		mes "[Titicupe]";
+		mes "Algumas vezes, eu não posso acreditar como é incrível uma invenção como a minha...!";
+		next;
+		mes "[Titicupe]";
+		mes "Eu...";
+		mes "Eu te amo";
+		mes "Senhor Boneco de Neve";
+		mes "da Máquina de Vendas.";
+		Emotion e_kis2;
+		next;
+		mes "^3355FFO Gerente da Fábrica de Brinquedos Titicupe começa a pular e emitir gritos de felicidade. No momento, não é difícil de entender que ele é um insano, afinal ele é um gênio.";
+		close;
+	}
+}
+
+xmas,115,297,4	script	Máquina de Vendas	111,{
+	mes "[Audi]";
+	mes "^555555Excitante venda de itens. Inventado pelo grande Titicupe. Selecione o item desejado e coloque os itens pedidos na boca do Boneco de Neve.^000000";
+	next;
+	switch(select("^FF3355Atenção (Leia!)^000000:Chapéu de Fumacento:Chapéu de Esporo:Casca de Noz:Casca de Ovo Colorida:Candura:Mestre-Cuca:Vela:Chapéu de Bolo:Cancelar")) {
+	case 1:
+		mes "[Audi]";
+		mes "Olá~!";
+		mes "Eu preciso te falar uma coisa importante. Essa Máquina de Vendas não está programada para diferenciar itens.";
+		next;
+		mes "[Audi]";
+		mes "Então, se você usar um item que esteja ^FF3355Aperfeiçoado, ou com uma Carta equipada^000000, as cartas e os melhoramentos serão perdidos para a criação do novo Item.";
+		next;
+		mes "[Audi]";
+		mes "Então, na hora de criar o novo item, ponha todos os itens de valor que não serão usados no Armazém da Kafra.";
+		next;
+		mes "[Audi]";
+		mes "Por favor, fique ciente disso porque a Máquina de Vendas não permite qualquer tipo de retorno.";
+		next;
+		mes "[Audi]";
+		mes "Tenha um ótimo dia!";
+		mes "Obrigado!";
+		close;
+	case 2:
+		if ((countitem(2213) > 0) && (countitem(1036) > 19) && (countitem(7012) > 199) && (countitem(7065) > 299)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 2213,1;  //Cat_Hairband
+			delitem 1036,20;  //Dragon_Scale
+			delitem 7012,200;  //Tough_Scalelike_Stem
+			delitem 7065,300;  //Sea_Otter_Leather
+			Emotion e_Oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*^000000";
+			getitem 5033,1; // Smokie_Hat
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 3:
+		if ((countitem(7033) > 849) && (countitem(7068) > 299) && (countitem(1015) > 0)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 7033,850;  //Poison_Spore
+			delitem 7068,300;  //Burn_Tree
+			delitem 1015,1;  //Thin_N'_Long_Tongue
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*Wek Wek*^000000";
+			getitem 5029,1; // Spore_Hat
+			next;
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 4:
+		if ((countitem(5037) > 0) && (countitem(7064) > 499)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 5037,1;  //Fruit_Shell
+			delitem 7064,500;  //Dragon_Fly_Wing
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*BeepBoopBeepBoop*";
+			mes "*Beeeeeeoop*^000000";
+			Emotion e_oh;
+			getitem 5050,1; // Mystery_Fruit_Shell
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 5:
+		if ((countitem(5015) > 0) && (countitem(978) > 0) && (countitem(7030) > 49)){
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 5015,1;  //Egg_Shell
+			delitem 978,1;  //Cobaltblue_Dyestuffs
+			delitem 7030,50;  //Claw_Of_Desert_Wolf
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*OoooEeeeeeee~*^000000";
+			getitem 5039,1; // Mottled_Egg_Shell
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 6:
+		if (countitem(7047) > 99) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 7047,100;  //Alice's_Apron
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*ChoopChoop*";
+			mes "*Chaaawah!*^000000";
+			getitem 5040,1; // Blush
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			next;
+			mes "[Titicupe]";
+			mes "Você fez Candura?! Huh. Eu acho que você realmente parece estar glamuroso~! Eu acho que você realmente apreciou minha geniosidade, huh?";
+			close;
+		}
+		break;
+	case 7:
+		if ((countitem(539) > 119) && (countitem(982) > 0) && (countitem(949) > 329) && (countitem(1036) > 449)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 539,120;  //Piece_Of_Cake
+			delitem 982,1;  //White_Dyestuffs
+			delitem 949,330;  //Feather
+			delitem 1036,450;  //Dragon_Scale
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*Muuuuuuugeeee*^000000";
+			getitem 5026,1; // Hat_Of_Cook
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 8:
+		if ((countitem(2279) > 0) && (countitem(7035) > 49) && (countitem(526) > 99)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 2279,1;  //Bomb_Wick
+			delitem 7035,50;  //Matchstick
+			delitem 526,100;  //Royal_Jelly
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*^000000";
+			getitem 5028,1; // Candle
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 9:
+		if ((countitem(529) > 9) && (countitem(530) > 4) && (countitem(538) > 14) && (countitem(539) > 19) && (countitem(999) > 9)) {
+			mes "^3355FFVocê delicadamente coloca os itens na boca do boneco de neve.^000000";
+			next;
+			delitem 529,10;  //Candy
+			delitem 530,5;  //Candy_Striper
+			delitem 538,15;  //Well_Baked_Cookie
+			delitem 539,20;  //Piece_Of_Cake
+			delitem 999,10;  //Steel
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*^000000";
+			getitem 5024,1; // Hat_Of_Cake
+			next;
+			mes "[Audi]";
+			mes "^555555Obrigado por vir.";
+			mes "Por favor, volte quando quiser!";
+			mes "Oh, conte a um amigo!!^000000";
+			close;
+		}
+		break;
+	case 10:
+		mes "[Audi]";
+		mes "^555555Por favor...";
+		mes "Insira...";
+		mes "Itens.^000000";
+		close;
+	}
+	Emotion e_x;
+	mes "[Audi]";
+	mes "^555555Erro Erro!";
+	mes "Itens incorretos!^000000";
+	next;
+	mes "[Titicupe]";
+	mes "Eu...";
+	mes "Eu acho que muitas pessoas fariam o que pudessem para ter em mãos algumas Canduras.";
+	close;
+}

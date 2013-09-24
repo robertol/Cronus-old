@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Disable auto-save.
 //===== By: ==================================================
 //= Hercules Dev Team
@@ -34,7 +34,7 @@ job_sage	mapflag	nosave	SavePoint
 job_star	mapflag	nosave	SavePoint
 job_soul	mapflag	nosave	SavePoint
 job3_sha01	mapflag	nosave	SavePoint
-//job_ko	mapflag	nosave	SavePoint
+job_ko	mapflag	nosave	SavePoint
 // 3-1
 job3_arch01	mapflag	nosave	SavePoint
 job3_arch02	mapflag	nosave	SavePoint
@@ -310,6 +310,18 @@ arug_dun01	mapflag	nosave	SavePoint
 // Somatology Laboratory ===========
 que_lhz	mapflag	nosave	SavePoint
 1@lhz	mapflag	nosave	SavePoint
+
+// Bangungot Hospital F2 ===========
+1@ma_h	mapflag	nosave	SavePoint
+
+// Buwaya Cave ===========
+1@ma_c	mapflag	nosave	SavePoint
+
+// Bakonawa Hideout ===========
+1@ma_b	mapflag	nosave	SavePoint
+
+// Inside Eclage ===========
+1@ecl	mapflag	nosave	SavePoint
 
 //evt_zombie	mapflag	nosave	SavePoint
 

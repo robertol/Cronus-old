@@ -179,7 +179,7 @@ int instance_add_map(const char *name, int instance_id, bool usebasename, const 
 	memcpy( &map[im], &map[m], sizeof(struct map_data) ); // Copy source map
 	if( map_name != NULL ) {
 		snprintf(map[im].name, MAP_NAME_LENGTH, "%s", map_name);
-		map[im].cName = map[m].name;
+		map[im].custom_name = true;
 	} else
 		snprintf(map[im].name, MAP_NAME_LENGTH, (usebasename ? "%.3d#%s" : "%.3d%s"), instance_id, name); // Generate Name for Instance Map
 	map[im].index = mapindex_addmap(-1, map[im].name); // Add map index
@@ -297,7 +297,7 @@ int instance_map_npcsub(struct block_list* bl, va_list args) {
 	struct npc_data* nd = (struct npc_data*)bl;
 	int16 m = va_arg(args, int); // Destination Map
 
-	if ( npc_duplicate4instance(nd, m) )
+	if ( npc->duplicate4instance(nd, m) )
 		ShowDebug("instance_map_npcsub:npc_duplicate4instance failed (%s/%d)\n",nd->name,m);
 
 	return 1;
@@ -341,10 +341,10 @@ int instance_cleanup_sub(struct block_list *bl, va_list ap) {
 			iMap->quit((struct map_session_data *) bl);
 			break;
 		case BL_NPC:
-			npc_unload((struct npc_data *)bl,true);
+			npc->unload((struct npc_data *)bl,true);
 			break;
 		case BL_MOB:
-			unit_free(bl,CLR_OUTSIGHT);
+			unit->free(bl,CLR_OUTSIGHT);
 			break;
 		case BL_PET:
 			//There is no need for this, the pet is removed together with the player. [Skotlex]
@@ -377,7 +377,7 @@ void instance_del_map(int16 m) {
 	if( map[m].mob_delete_timer != INVALID_TIMER )
 		iTimer->delete_timer(map[m].mob_delete_timer, iMap->removemobs_timer);
 	
-	mapindex_removemap( map[m].index );
+	mapindex_removemap(map_id2index(m));
 
 	// Free memory
 	aFree(map[m].cell);

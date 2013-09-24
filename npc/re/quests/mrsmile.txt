@@ -1,16 +1,16 @@
-//===== Cronus Script ======================================= 
-//= Quest Dona Risadinha
-//===== Por: ================================================== 
+//===== Hercules Script ======================================
+//= Mr. Smile Quest
+//===== By: ================================================== 
 //= Daegaladh, Masao
-//===== Versão Atual: ===================================== 
+//===== Current Version: ===================================== 
 //= 1.0
-//===== Compatível Com: ===================================== 
-//= Cronus
-//===== Descrição: ========================================= 
+//===== Compatible With: ===================================== 
+//= Hercules
+//===== Description: ========================================= 
 //= [Aegis Conversion]
 //= Trade Clover, Fluff and Jellopy for a Mr. Smile mask.
-//===== Comentários Adicionais: ================================= 
+//===== Additional Comments: ================================= 
 //= 1.0 Updated to match the new Izlude Map. [Masao]
 //============================================================ 
 
-izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz2	92
+izlude,125,175,4	duplicate(SmileHelper)	Smile Assistance#iz	92

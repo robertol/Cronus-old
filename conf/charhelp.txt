@@ -1,37 +1,28 @@
-//-----------------------------------------------
-// _________                                    
-// \_   ___ \_______  ____   ____  __ __  ______
-// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
-// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
-//  \______  /|__|   \____/|___|  /____//____  >
-//         \/                   \/           \/  
-//-----------------------------------------------
-// Traduzido para Português por Mara
  40:--- CHARACTER CMD ---
- 40:#statsall <nome do jogador> - Exibe os status de todos os jogadores
- 40:#itemlist <nome do jogador> - Exibe todos os itens de um jogador.
- 40:#storagelist <nome do jogador> - Exibe todos os itens no armazém de um jogador.
- 40:#stats <nome do jogador> - Exibe os stats de um jogador.
- 60:#option <nome do jogador> <param1> <param2> <param3> <nome do jogador> - Semelhante ao @option porém direcionado a um jogador.
- 50:#mountpeco <nome do jogador> - Concede/remove a um jogador um PecoPeco (a profissão é obrigatória, porém a habilidade não).
- 50:#petrename <nome do jogador> - Possibilita o jogador a renomear seu Bicho de Estimação.
- 60:#save <nome do jogador> <mapa> <x> <y>  - Muda o ponto de retorno de um jogador.
- 60:#baselvl <nome do jogador> <#>  - Modifica o nível de base de um jogador.
- 60:#jlvl <nome do jogador> <#>  - Modifica o nível de classe de um jogador.
- 60:#job/#jobchange <nome do jogador> <ID da classe>  - Modifica a profissão de um jogador.
- 60:#zeny <nome do jogador> <quantidade> - Dá/retira zenys de um jogador.
- 60:#cash <nome do jogador> <quantidade> - Dá/retira pontos de cash de um jogador.
- 60:#points <nome do jogador> <quantidade> - Dá/retira pontos Kafra de um jogador.
- 60:#stpoint <nome do jogador> <quantidade> - Dá/retira pontos de atributo de um jogador.
- 60:#skpoint <nome do jogador> <quantidade> - Dá/retira pontos de habilidade de um jogador.
- 60:#skreset <nome do jogador> - Reseta as habilidades de um jogador.
- 60:#streset <nome do jogador> - Reseta os atributos de um jogador.
- 60:#reset <nome do jogador> - Resta os atributos E as habilidades de um jogador.
- 60:#questskill <nome do jogador> <#>  - Habilita uma habilidade de quest específica a um jogador.
- 60:#lostskill <nome do jogador> <#>  - Desabilita uma habilidade de quest específica de um jogador.
- 60:#delitem <nome do jogador> <nome_do_item/ID> <quantidade>  - Retira um item de um personagem.
- 50:#model <nome do jogador> <tipo de cabelo> <cor do cabelo> <cor de roupa>  - Modifica o estilo de um personagem.
- 60:#disguise <nome do jogador>  <nome_do_monstro/ID> - Disfarça um jogador.
- 60:#undisguise <nome do jogador> - Retira o disfarce de um jogador.
- 60:#changesex <nome do jogador> - Muda o sexo da conta do jogador.
- 60:#warp/#rura <nome do jogador> <mapa> <x> <y> <nome do jogador> - Move um jogador para certa localização.
+ 40:#statsall <char name> - Set all stats of a player to maximum.
+ 40:#itemlist <char name> - Displays all items of a player.
+ 40:#storagelist <char name> - Displays all items of a player's storage.
+ 40:#stats <char name> - Displays a characters stats.
+ 60:#option <char name> <param1> <param2> <param3> - Like @option command but only to target character.
+ 50:#mountpeco <char name> - Give/remove to a player a peco (Class is required, but not skill).
+ 50:#petrename <char name> - Re-enable pet rename to a player.
+ 60:#save <char name> <map> <x> <y> - Changes the target players respawn point.
+ 60:#baselvl/#blvl <char name> <#> - Change a characters base level.
+ 60:#joblvl/#jlvl <char name> <#> - Change a characters job level.
+ 60:#job/#jobchange <char name> <job ID> - Changes target characters job.
+ 60:#zeny <char name> <amount> - Give/take a players Zeny
+ 60:#cash <char name> <amount> - Give/take a player cash points
+ 60:#points <char name> <amount> - Give/take a player Kafra points
+ 60:#stpoint <char name> <amount> - Give/take a players stat points
+ 60:#skpoint <char name> <amount> - give/take a players skill points
+ 60:#skreset <char name> - Reset skills of a character.
+ 60:#streset <char name> - Reset stats of a character.
+ 60:#reset <char name> - Reset stats AND skills of a character.
+ 60:#questskill <char name> <#> - Gives to a player the specified quest skill.
+ 60:#lostskill <char name> <#> - Takes away the specified quest skill from the player.
+ 60:#delitem <char name> <item_name_or_ID> <quantity> - Remove items from a character
+ 50:#model <char name> <hair type> <hair color> <clothes color> - Changes a player's model
+ 60:#disguise <char name> <monster_name_or_monster_ID> - Changes disguise of a player
+ 60:#undisguise <char name> - Cancels disguise of a player
+ 60:#changesex <char name> - Changes sex of a player (all characters of the account)
+ 60:#warp/#rura+ <char name> <mapname> <x> <y> - Warps character to location of choice

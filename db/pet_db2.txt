@@ -1,60 +1,60 @@
-// Banco de Dados adicional para Pet.
+// Pet Additional Database
 //
-// Estrutura do banco:
-// ID do monstro, Nome, Apelido, ID da isca, ID do ovo, ID do acessorio, ID do alimento, Fullness, Atraso da fome, I_Aumentada, I_Diminuida, I_Inicial, I_Morte, Captura, Velocidade, E_Desempenho, talk_convert_class, attack_rate, defence_attack_rate, change_target_rate, pet_script, loyal_script
+// Structure of Database:
+// MobID,Name,JName,LureID,EggID,EquipID,FoodID,Fullness,HungryDelay,R_Hungry,R_Full,Intimate,Die,Capture,Speed,S_Performance,talk_convert_class,attack_rate,defence_attack_rate,change_target_rate,pet_script,loyal_script
 //
-// 01. ID do monstro          ID do monstro que será seu pet.
-// 02. Nome                   Nome do monstro que está definado no banco.
-// 03. Apelido                O nome apresentado quando o monstro for chocado.
-// 04. ID da isca             ID do item que domestica o pet.
-// 05. ID do ovo              ID do Ovo do pet.
-// 06. ID do acessorio        ID do acessório do pet.
-// 07. ID do alimento         ID do alimento do pet.
-// 08. Fullness               Quanto a fome diminui a cada [Atraso da Fome] segundo.
-// 09. Atraso da fome       	Quantidade de tempo que leverá para diminuir fome após da alimentação. (Padrão: 60 segundos)
-// 10. I_Aumentada        	 	Quantidade de intimidade que é aumentada quando alimentado.
-// 11. I_Diminuida            Quantidade de intimidade que é diminuída depois de alimentado.
-// 12. I_Inicial  	          Quantidade de intimidade com que o Pet começa.
-// 13. I_Morte	              Quantidade de intimidade que é diminuída quando o dono do animal morre.
-// 14. Captura	      	      Taxa de sucesso na captura (10000 = 100%)
-// 15. Velocidade	      	    Velocidade que o pet caminha. (Defaul: 150)
-// 16. E_Desempenho 	 	      Desempenho Especial. (Sim = 1, Não = 0)
-// 17. talk_convert_class	    Desativa conversa do pet (em vez de falar com eles emote /!).
-// 18. attack_rate		    	  Taxa de que o pet vai atacar (requer o minimo intimidade (pet_support_min_friendly)).
-// 19. defence_attack_rate  	Taxa de retaliação quando o mestre sofrer ataque. (requer o minimo de intimidade (pet_support_min_friendly)).
-// 20. change_target_rate	    Taxa na qual o pet mudará o alvo de ataque.
-// 21. pet_script		          Script executado quando o pet está chocado.
-// 22. loyal_script		        Script executado quando o pet está chocado (requer o minimo de intimidade (pet_equip_min_friendly), independente de (pet_script)).
-//NOTA: O valor Máximo (100%) da attack_rate, defense_rate & change_target_rate é 10000.
+// 01. MobID			Monster ID of the pet.
+// 02. Name			Name of the monster as defined in the database.
+// 03. JName			The display name of the monster when hatched.
+// 04. LureID			Pet Tame Item ID.
+// 05. EggID			Pet Egg ID.
+// 06. EquipID			Pet Accessory ID.
+// 07. FoodID			Pet Food ID.
+// 08. Fullness			The amount Hunger is decreased every [HungryDelay] seconds.
+// 09. HungryDelay		The amount of time it takes for hunger to decrease after feeding. (Default: 60 seconds)
+// 10. R_Hungry			Amount of Intimacy that is increased when fed.
+// 11. R_Full			Amount of Intimacy that is decreased when over-fed.
+// 12. Intimate			Amount of Intimacy the pet starts with.
+// 13. Die			Amount of Intimacy that is decreased when the pet owner dies.
+// 14. Capture			Capture succes rate (10000 = 100%)
+// 15. Speed			Pet's walk speed. (Defaul: 150)
+// 16. S_Performance		Special Performance. (Yes = 1, No = 0)
+// 17. talk_convert_class	Disables pet talk (instead of talking they emote  with /!.)
+// 18. attack_rate			Rate of which the pet will attack (requires at least pet_support_min_friendly intimacy).
+// 19. defence_attack_rate	Rate of which the pet will retaliate when master is being attacked (requires at least pet_support_min_friendly intimacy).
+// 20. change_target_rate	Rate of which the pet will change its attack target.
+// 21. pet_script		Script to execute when the pet is hatched.
+// 22. loyal_script		Script to execute when the pet is hatched (requires at least pet_equip_min_friendly intimacy, independent of pet_script).
+//NOTE: The max value (100%) of attack_rate, defense_rate & change_target_rate is 10000.
 
-//Em teoria, você pode usar qualquer script válido, mas é executado apenas uma sobre o pet após o
-//caregamento, por isso é recomendado que você utilize os scripts de pet específicos::
+//In theory you can use any valid script, but it is run only once upon pet
+//loading, so it is recommended you use the specific pet scripts:
 
 //petskillattack skillid, skilllv, rate, bonusrate
-//Habilidade de ataque que é utilizada quando o pet está atacando. Rate é a base de
-//chance de execução por ataque. Bonusrate é uma taxa de sucesso adicional quando
-//intimidade atinge o máximo.
+//Skill attack that triggers while the pet is attacking. Rate is the base
+//chance of execution per attack. Bonusrate is an additional success rate when
+//intimacy reaches max.
 
 //petskillattack2 skillid, damage, hits, rate, bonusrate
-//Igual ao petskillattack, mas o dano e o número de golpes é fixo
-//o dano especificado é total, não por golpes.
+//Same as petskillattack, but the damage and number of hits is fixed
+//the damage specified is total, not per hit.
 
 //petskillsupport skillid, skilllv, delay, hp%, sp%
-//Lança uma habilidade de suporte quando os níveis de saúde estão abaixo do hp% e sp% especificado.
-//Atraso é o tempo mínimo em segundos antes da habilidade pode ser castada novamente.
+//Casts a support skill when the health levels are below the specified hp% and
+//sp%. Delay is the minimum time in seconds before the skill can be cast again
 
 //petheal amount, delay, hp%, sp%
-//Similar ao petskillsupport, mas a habilidade para curar é fixa (28) e a
-//quantidade-curaheal-amount é fixado por um valor dado.
+//Similar to petskillsupport, but the skill is fixed to heal (28) and the
+//heal-amount is fixed to the value given.
 
-//petrecovery type, delay: Cura o "tipo" de efeito de estado após o "atraso" em segundos
+//petrecovery type, delay: Cures the "type" status effect after "delay" seconds
 
 //petskillbonus type, value, duration, delay
-//Estatísticas de bonus dado. Type é o status para aumentar (bStr, bLuk), value é a
-//quantidade de qual será aumentado, duration signals quanto tempo o bonus dura
-//delay é o tempo decorrido após o término de bônus e antes que comece novamente.
+//Gives bonus stats. Type is the stat to increase (bStr, bLuk), value is the
+//amount by which it is increased, duration signals how long the bonus lasts
+//delay is the time elapsed after the bonus ends and before it starts again.
 
-//Um único pet pode ter petloot, petskillbonus, petskillattack (ou
-//petskillattack2) e petskillsupport (ou petheal) ao mesmo tempo,
-//mas apenas um de cada.
+//A single pet can have petloot, petskillbonus, petskillattack (or
+//petskillattack2) and petskillsupport (or petheal) at the same time,
+//but only one of each.
 

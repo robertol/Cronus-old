@@ -1,0 +1,13 @@
+//===== Hercules Script ======================================
+//= Izlude Airport NPCs
+//===== By: ================================================== 
+//= Hercules Dev Team
+//===== Description: ========================================= 
+//= Izlude Airport NPCs
+//===== Additional Comments: ================================= 
+//= Official NPCs.
+//= Updated to match the new Izlude Map. [Masao]
+//= Updated to Official coordinates
+//============================================================ 
+
+izlude,202,75,3	duplicate(Airship_Staff_izlude)	Airship Staff#izlude	90

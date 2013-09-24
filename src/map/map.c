@@ -368,11 +368,11 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 		//		status_change_end(bl, SC_BLADESTOP, INVALID_TIMER); //Won't stop when you are knocked away, go figure...
 		status_change_end(bl, SC_NJ_TATAMIGAESHI, INVALID_TIMER);
 		status_change_end(bl, SC_MAGICROD, INVALID_TIMER);
-		if (sc->data[SC_PROPERTYWALK] &&
+		if (sc && sc->data[SC_PROPERTYWALK] &&
 			sc->data[SC_PROPERTYWALK]->val3 >= skill->get_maxcount(sc->data[SC_PROPERTYWALK]->val1,sc->data[SC_PROPERTYWALK]->val2) )
 			status_change_end(bl,SC_PROPERTYWALK,INVALID_TIMER);
 	} else if (bl->type == BL_NPC)
-		npc_unsetcells((TBL_NPC*)bl);
+		npc->unsetcells((TBL_NPC*)bl);
 
 	if (moveblock) iMap->delblock(bl);
 #ifdef CELL_NOSTACK
@@ -443,7 +443,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 			}
 		}
 	} else if (bl->type == BL_NPC)
-		npc_setcells((TBL_NPC*)bl);
+		npc->setcells((TBL_NPC*)bl);
 
 	return 0;
 }
@@ -810,7 +810,7 @@ static int bl_vgetall_inshootrange(struct block_list *bl, va_list args)
 	if (!check_distance_bl(center, bl, range))
 		return 0;
 #endif
-	if (!path_search_long(NULL, center->m, center->x, center->y, bl->x, bl->y, CELL_CHKWALL))
+	if (!path->search_long(NULL, center->m, center->x, center->y, bl->x, bl->y, CELL_CHKWALL))
 		return 0;
 	return 1;
 }
@@ -1039,7 +1039,7 @@ static int bl_vgetall_inpath(struct block_list *bl, va_list args)
 	if ( k < 0 || k > len_limit ) //Since more skills use this, check for ending point as well.
 		return 0;
 
-	if ( k > magnitude2 && !path_search_long(NULL, m, x0, y0, xi, yi, CELL_CHKWALL) )
+	if ( k > magnitude2 && !path->search_long(NULL, m, x0, y0, xi, yi, CELL_CHKWALL) )
 		return 0; //Targets beyond the initial ending point need the wall check.
 
 	//All these shifts are to increase the precision of the intersection point and distance considering how it's
@@ -1187,7 +1187,7 @@ int map_clearflooritem_timer(int tid, unsigned int tick, int id, intptr_t data)
 	}
 
 
-	if (search_petDB_index(fitem->item_data.nameid, PET_EGG) >= 0)
+	if (pet->search_petDB_index(fitem->item_data.nameid, PET_EGG) >= 0)
 		intif->delete_petdata(MakeDWord(fitem->item_data.card[1], fitem->item_data.card[2]));
 
 	clif->clearflooritem(fitem, 0);
@@ -1307,7 +1307,7 @@ int map_search_freecell(struct block_list *src, int16 m, int16 *x,int16 *y, int1
 
 		if (iMap->getcell(m,*x,*y,CELL_CHKREACH))
 		{
-			if(flag&2 && !unit_can_reach_pos(src, *x, *y, 1))
+			if(flag&2 && !unit->can_reach_pos(src, *x, *y, 1))
 				continue;
 			if(flag&4) {
 				if (spawn >= 100) return 0; //Limit of retries reached.
@@ -1534,13 +1534,13 @@ int map_quit(struct map_session_data *sd) {
 	}
 
 	if (sd->npc_timer_id != INVALID_TIMER) //Cancel the event timer.
-		npc_timerevent_quit(sd);
+		npc->timerevent_quit(sd);
 
 	if (sd->npc_id)
-		npc_event_dequeue(sd);
+		npc->event_dequeue(sd);
 
 	if( sd->bg_id && !sd->bg_queue.arena ) /* TODO: dump this chunk after bg_queue is fully enabled */
-		bg_team_leave(sd,1);
+		bg->team_leave(sd,1);
 
 	skill->cooldown_save(sd);
 	pc->itemcd_do(sd,false);
@@ -1548,7 +1548,7 @@ int map_quit(struct map_session_data *sd) {
 	for( i = 0; i < sd->queues_count; i++ ) {
 		struct hQueue *queue;
 		if( (queue = script->queue(sd->queues[i])) && queue->onLogOut[0] != '\0' ) {
-			npc_event(sd, queue->onLogOut, 0);
+			npc->event(sd, queue->onLogOut, 0);
 		}
 	}
 	/* two times, the npc event above may assign a new one or delete others */
@@ -1557,7 +1557,7 @@ int map_quit(struct map_session_data *sd) {
 			script->queue_remove(sd->queues[i],sd->status.account_id);
 	}
 
-	npc_script_event(sd, NPCE_LOGOUT);
+	npc->script_event(sd, NPCE_LOGOUT);
 
 	//Unit_free handles clearing the player related data,
 	//iMap->quit handles extra specific data which is related to quitting normally
@@ -1587,7 +1587,7 @@ int map_quit(struct map_session_data *sd) {
 	}
 
 	// Return loot to owner
-	if( sd->pd ) pet_lootitem_drop(sd->pd, sd);
+	if( sd->pd ) pet->lootitem_drop(sd->pd, sd);
 
 	if( sd->state.storage_flag == 1 ) sd->state.storage_flag = 0; // No need to Double Save Storage on Quit.
 
@@ -1595,7 +1595,7 @@ int map_quit(struct map_session_data *sd) {
 
 	if( sd->ed ) {
 		elemental->clean_effect(sd->ed);
-		unit_remove_map(&sd->ed->bl,CLR_TELEPORT);
+		unit->remove_map(&sd->ed->bl,CLR_TELEPORT,ALC_MARK);
 	}
 
 	if( hChSys.local && map[sd->bl.m].channel && idb_exists(map[sd->bl.m].channel->users, sd->status.char_id) ) {
@@ -1604,7 +1604,7 @@ int map_quit(struct map_session_data *sd) {
 
 	clif->chsys_quit(sd);
 
-	unit_remove_map_pc(sd,CLR_TELEPORT);
+	unit->remove_map_pc(sd,CLR_TELEPORT);
 
 	if( map[sd->bl.m].instance_id >= 0 ) { // Avoid map conflicts and warnings on next login
 		int16 m;
@@ -1622,11 +1622,15 @@ int map_quit(struct map_session_data *sd) {
 		}
 	}
 
+	if( sd->state.vending ) {
+		idb_remove(vending->db, sd->status.char_id);
+	}
+	
 	party->booking_delete(sd); // Party Booking [Spiria]
 	pc->makesavestatus(sd);
 	pc->clean_skilltree(sd);
 	chrif->save(sd,1);
-	unit_free_pc(sd);
+	unit->free_pc(sd);
 	return 0;
 }
 
@@ -2100,7 +2104,7 @@ void map_spawnmobs(int16 m)
 		if(map[m].moblist[i]!=NULL)
 		{
 			k+=map[m].moblist[i]->num;
-			npc_parse_mob2(map[m].moblist[i]);
+			npc->parse_mob2(map[m].moblist[i]);
 		}
 
 		if (battle_config.etc_log && k > 0)
@@ -2131,7 +2135,7 @@ int map_removemobs_sub(struct block_list *bl, va_list ap)
 	if( md->db->mexp > 0 )
 		return 0;
 
-	unit_free(&md->bl,CLR_OUTSIGHT);
+	unit->free(&md->bl,CLR_OUTSIGHT);
 
 	return 1;
 }
@@ -2240,7 +2244,7 @@ uint8 map_calc_dir(struct block_list* src, int16 x, int16 y)
 	if( dx == 0 && dy == 0 )
 	{	// both are standing on the same spot
 		//dir = 6; // aegis-style, makes knockback default to the left
-		dir = unit_getdir(src); // athena-style, makes knockback default to behind 'src'
+		dir = unit->getdir(src); // athena-style, makes knockback default to behind 'src'
 	}
 	else if( dx >= 0 && dy >=0 )
 	{	// upper-right
@@ -2292,7 +2296,7 @@ int map_random_dir(struct block_list *bl, int16 *x, int16 *y)
 		segment = (short)sqrt((float)(dist2 - segment*segment)); //The complement of the previously picked segment
 		yi = bl->y + segment*diry[j];
 	} while (
-		(iMap->getcell(bl->m,xi,yi,CELL_CHKNOPASS) || !path_search(NULL,bl->m,bl->x,bl->y,xi,yi,1,CELL_CHKNOREACH))
+		(iMap->getcell(bl->m,xi,yi,CELL_CHKNOPASS) || !path->search(NULL,bl->m,bl->x,bl->y,xi,yi,1,CELL_CHKNOREACH))
 		&& (++i)<100 );
 
 	if (i < 100) {
@@ -2357,7 +2361,7 @@ void map_cellfromcache(struct map_data *m) {
 		m->setcell  = map_setcell;
 
 		for(i = 0; i < m->npc_num; i++) {
-			npc_setcells(m->npc[i]);
+			npc->setcells(m->npc[i]);
 		}
 	}
 }
@@ -3163,7 +3167,7 @@ int map_readallmaps (void) {
 
 		map[i].index = mapindex_name2id(map[i].name);
 
-		if ( index2mapid[map[i].index] != -1 ) {
+		if ( index2mapid[map_id2index(i)] != -1 ) {
 			ShowWarning("Map %s already loaded!"CL_CLL"\n", map[i].name);
 			if (map[i].cell && map[i].cell != (struct mapcell *)0xdeadbeaf) {
 				aFree(map[i].cell);
@@ -3270,9 +3274,9 @@ int map_config_read(char *cfgName) {
 		else if (strcmpi(w1, "delmap") == 0)
 			iMap->map_num--;
 		else if (strcmpi(w1, "npc") == 0)
-			npc_addsrcfile(w2);
+			npc->addsrcfile(w2);
 		else if (strcmpi(w1, "delnpc") == 0)
-			npc_delsrcfile(w2);
+			npc->delsrcfile(w2);
 		else if (strcmpi(w1, "autosave_time") == 0) {
 			iMap->autosave_interval = atoi(w2);
 			if (iMap->autosave_interval < 1) //Revert to default saving.
@@ -3375,7 +3379,7 @@ void map_reloadnpc_sub(char *cfgName)
 		*ptr = '\0';
 
 		if (strcmpi(w1, "npc") == 0)
-			npc_addsrcfile(w2);
+			npc->addsrcfile(w2);
 		else if (strcmpi(w1, "import") == 0)
 			map_reloadnpc_sub(w2);
 		else
@@ -3388,12 +3392,12 @@ void map_reloadnpc_sub(char *cfgName)
 void map_reloadnpc(bool clear)
 {
 	if (clear)
-		npc_addsrcfile("clear"); // this will clear the current script list
+		npc->addsrcfile("clear"); // this will clear the current script list
 
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/re/scripts_renovacao.conf");
+	map_reloadnpc_sub("npc/re/scripts_main.conf");
 #else
-	map_reloadnpc_sub("npc/pre-re/scripts_pre-renovacao.conf");
+	map_reloadnpc_sub("npc/pre-re/scripts_main.conf");
 #endif
 }
 
@@ -3465,7 +3469,7 @@ int inter_config_read(char *cfgName) {
 		else if(strcmpi(w1,"log_db_db")==0)
 			strcpy(log_db_db, w2);
 		/* mapreg */
-		else if( mapreg_config_read(w1,w2) )
+		else if( mapreg->config_read(w1,w2) )
 			continue;
 		/* import */
 		else if(strcmpi(w1,"import")==0)
@@ -3559,7 +3563,7 @@ void map_zone_remove(int m) {
 			}
 		}
 
-		npc_parse_mapflag(map[m].name,empty,flag,params,empty,empty,empty);
+		npc->parse_mapflag(map[m].name,empty,flag,params,empty,empty,empty);
 		aFree(map[m].zone_mf[k]);
 		map[m].zone_mf[k] = NULL;
 	}
@@ -4283,7 +4287,7 @@ void map_zone_apply(int m, struct map_zone_data *zone, const char* start, const 
 		if( map_zone_mf_cache(m,flag,params) )
 			continue;
 
-		npc_parse_mapflag(map[m].name,empty,flag,params,start,buffer,filepath);
+		npc->parse_mapflag(map[m].name,empty,flag,params,start,buffer,filepath);
 	}
 }
 /* used on npc load and reload to apply all "Normal" and "PK Mode" zones */
@@ -4311,7 +4315,7 @@ void map_zone_init(void) {
 			if( map[j].zone == zone ) {
 				if( map_zone_mf_cache(j,flag,params) )
 					break;
-				npc_parse_mapflag(map[j].name,empty,flag,params,empty,empty,empty);
+				npc->parse_mapflag(map[j].name,empty,flag,params,empty,empty,empty);
 			}
 		}
 	}
@@ -4333,7 +4337,7 @@ void map_zone_init(void) {
 				if( map[j].zone == zone ) {
 					if( map_zone_mf_cache(j,flag,params) )
 						break;
-					npc_parse_mapflag(map[j].name,empty,flag,params,empty,empty,empty);
+					npc->parse_mapflag(map[j].name,empty,flag,params,empty,empty,empty);
 				}
 			}
 		}
@@ -4865,10 +4869,10 @@ int cleanup_sub(struct block_list *bl, va_list ap) {
 		iMap->quit((struct map_session_data *) bl);
 		break;
 	case BL_NPC:
-		npc_unload((struct npc_data *)bl,false);
+		npc->unload((struct npc_data *)bl,false);
 		break;
 	case BL_MOB:
-		unit_free(bl,CLR_OUTSIGHT);
+		unit->free(bl,CLR_OUTSIGHT);
 		break;
 	case BL_PET:
 		//There is no need for this, the pet is removed together with the player. [Skotlex]
@@ -4913,7 +4917,7 @@ void do_final(void)
 	mapit->free(iter);
 
 	/* prepares npcs for a faster shutdown process */
-	do_clear_npc();
+	npc->do_clear_npc();
 
 	// remove all objects on maps
 	for (i = 0; i < iMap->map_num; i++) {
@@ -4932,7 +4936,7 @@ void do_final(void)
 	chrif->do_final_chrif();
 	ircbot->final();/* before clif. */
 	clif->final();
-	do_final_npc();
+	npc->final();
 	script->final();
 	itemdb->final();
 	instance->final();
@@ -4940,14 +4944,14 @@ void do_final(void)
 	guild->final();
 	party->do_final_party();
 	pc->do_final_pc();
-	do_final_pet();
-	do_final_mob();
+	pet->final();
+	mob->final();
 	homun->final();
 	atcommand->final_msg();
 	skill->final();
 	iStatus->do_final_status();
-	do_final_unit();
-	do_final_battleground();
+	unit->final();
+	bg->final();
 	iDuel->do_final_duel();
 	elemental->do_final_elemental();
 	do_final_maps();
@@ -5037,9 +5041,12 @@ static void map_helpscreen(bool do_exit)
 * Map-Server Version Screen [MC Cameri]
 *------------------------------------------------------*/
 static void map_versionscreen(bool do_exit) {
-	const char *ver = versao();
-	ShowInfo(CL_WHITE"Versão do Cronus: %s" CL_RESET"\n", ver);
-	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://cronus-emulator.com/\n");
+	const char *svn = get_svn_revision();
+	const char *git = get_git_hash();
+	ShowInfo(CL_WHITE"Hercules version: %s" CL_RESET"\n", git[0] != HERC_UNKNOWN_VER ? git : svn[0] != HERC_UNKNOWN_VER ? svn : "Unknown");
+	ShowInfo(CL_GREEN"Website/Forum:"CL_RESET"\thttp://hercules.ws/\n");
+	ShowInfo(CL_GREEN"IRC Channel:"CL_RESET"\tirc://irc.rizon.net/#Hercules\n");
+	ShowInfo("Open "CL_WHITE"readme.txt"CL_RESET" for more information.\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -5161,8 +5168,16 @@ void map_hp_symbols(void) {
 	HPM->share(elemental,"elemental");
 	HPM->share(intif,"intif");
 	HPM->share(mercenary,"mercenary");
-
-
+	HPM->share(mob,"mob");
+	HPM->share(unit,"unit");
+	HPM->share(npc,"npc");
+	HPM->share(mapreg,"mapreg");
+	HPM->share(pet,"pet");
+	HPM->share(path,"path");
+	HPM->share(quest,"quest");
+#ifdef PCRE_SUPPORT
+	HPM->share(npc_chat,"npc_chat");
+#endif
 	/* partial */
 	HPM->share(mapit,"mapit");
 	/* sql link */
@@ -5207,6 +5222,15 @@ void map_load_defaults(void) {
 	elemental_defaults();
 	intif_defaults();
 	mercenary_defaults();
+	mob_defaults();
+	unit_defaults();
+	mapreg_defaults();
+	pet_defaults();
+	path_defaults();
+	quest_defaults();
+#ifdef PCRE_SUPPORT
+	npc_chat_defaults();
+#endif
 }
 int do_init(int argc, char *argv[])
 {
@@ -5395,24 +5419,24 @@ int do_init(int argc, char *argv[])
 	itemdb->init();
 	skill->init();
 	read_map_zone_db();/* read after item and skill initalization */
-	do_init_mob();
+	mob->init();
 	pc->do_init_pc();
 	iStatus->do_init_status();
 	party->do_init_party();
 	guild->init();
 	storage->init();
-	do_init_pet();
+	pet->init();
 	homun->init();
 	mercenary->init();
 	elemental->do_init_elemental();
-	do_init_quest();
-	do_init_npc();
-	do_init_unit();
-	do_init_battleground();
+	quest->init();
+	npc->init();
+	unit->init();
+	bg->init();
 	iDuel->do_init_duel();
 	vending->init();
 
-	npc_event_do_oninit();	// Init npcs (OnInit)
+	npc->event_do_oninit();	// Init npcs (OnInit)
 
 	if (battle_config.pk_mode)
 		ShowNotice("Server is running on '"CL_WHITE"PK Mode"CL_RESET"'.\n");

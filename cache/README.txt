@@ -1,15 +1,8 @@
-// _________                                    
-// \_   ___ \_______  ____   ____  __ __  ______
-// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
-// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
-//  \______  /|__|   \____/|___|  /____//____  >
-//         \/                   \/           \/  
-//-----------------------------------------------
-//
-//= Diretório de Armazenamento de arquivos em Cache
-//
-//===== Por: =====================================
-//= Hercules/Cronus Dev
-//================================================
-//= Os Arquivos são lidos e escritos pelo servidor 
-//= durante o tempo de execução sempre que for necessário.
+//============================================================
+//= Hercules Cache Folder Readme File
+//===== By: ==================================================
+//= Hercules Dev Team
+//============================================================
+
+No touching these folders or the files in them!
+they are read and written by the server during runtime when it feels it is wise.

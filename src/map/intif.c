@@ -139,7 +139,7 @@ int intif_rename(struct map_session_data *sd, int type, char *name)
 // GM Send a message
 int intif_broadcast(const char* mes, int len, int type)
 {
-	int lp = type ? 4 : 0;
+	int lp = (type|BC_COLOR_MASK) ? 4 : 0;
 
 	// Send to the local players
 	clif->broadcast(NULL, mes, len, type, ALL_CLIENT);
@@ -158,9 +158,9 @@ int intif_broadcast(const char* mes, int len, int type)
 	WFIFOW(inter_fd,10) = 0; // fontSize not used with standard broadcast
 	WFIFOW(inter_fd,12) = 0; // fontAlign not used with standard broadcast
 	WFIFOW(inter_fd,14) = 0; // fontY not used with standard broadcast
-	if (type == 0x10) // bc_blue
+	if( type|BC_BLUE )
 		WFIFOL(inter_fd,16) = 0x65756c62; //If there's "blue" at the beginning of the message, game client will display it in blue instead of yellow.
-	else if (type == 0x20) // bc_woe
+	else if( type|BC_WOE )
 		WFIFOL(inter_fd,16) = 0x73737373; //If there's "ssss", game client will recognize message as 'WoE broadcast'.
 	memcpy(WFIFOP(inter_fd,16 + lp), mes, len);
 	WFIFOSET(inter_fd, WFIFOW(inter_fd,2));
@@ -458,8 +458,7 @@ int intif_party_leave(int party_id,int account_id, int char_id)
 }
 
 // Request keeping party for new map ??
-int intif_party_changemap(struct map_session_data *sd,int online)
-{
+int intif_party_changemap(struct map_session_data *sd,int online) {
 	int16 m, mapindex;
 
 	if (intif->CheckForCharServer())
@@ -468,7 +467,7 @@ int intif_party_changemap(struct map_session_data *sd,int online)
 		return 0;
 
 	if( (m=iMap->mapindex2mapid(sd->mapindex)) >= 0 && map[m].instance_id >= 0 )
-		mapindex = map[map[m].instance_src_map].index;
+		mapindex = map_id2index(map[m].instance_src_map);
 	else
 		mapindex = sd->mapindex;
 
@@ -1278,7 +1277,7 @@ int intif_parse_GuildMasterChanged(int fd)
 // Request pet creation
 int intif_parse_CreatePet(int fd)
 {
-	pet_get_egg(RFIFOL(fd,2),RFIFOL(fd,7),RFIFOB(fd,6));
+	pet->get_egg(RFIFOL(fd,2),RFIFOL(fd,7),RFIFOB(fd,6));
 	return 0;
 }
 
@@ -1294,7 +1293,7 @@ int intif_parse_RecvPetData(int fd)
 	}
 	else{
 		memcpy(&p,RFIFOP(fd,9),sizeof(struct s_pet));
-		pet_recv_petdata(RFIFOL(fd,4),&p,RFIFOB(fd,8));
+		pet->recv_petdata(RFIFOL(fd,4),&p,RFIFOB(fd,8));
 	}
 
 	return 0;
@@ -1330,7 +1329,7 @@ int intif_parse_ChangeNameOk(int fd)
 	case 0: //Players [NOT SUPPORTED YET]
 		break;
 	case 1: //Pets
-		pet_change_name_ack(sd, (char*)RFIFOP(fd,12), RFIFOB(fd,11));
+		pet->change_name_ack(sd, (char*)RFIFOP(fd,12), RFIFOB(fd,11));
 		break;
 	case 2: //Hom
 		homun->change_name_ack(sd, (char*)RFIFOP(fd,12), RFIFOB(fd,11));
@@ -1419,7 +1418,7 @@ int intif_parse_questlog(int fd)
 	{
 		memcpy(&sd->quest_log[i], RFIFOP(fd, i*sizeof(struct quest)+8), sizeof(struct quest));
 
-		sd->quest_index[i] = quest_search_db(sd->quest_log[i].quest_id);
+		sd->quest_index[i] = quest->search_db(sd->quest_log[i].quest_id);
 
 		if( sd->quest_index[i] < 0 )
 		{
@@ -1434,7 +1433,7 @@ int intif_parse_questlog(int fd)
 			sd->avail_quests--;
 	}
 
-	quest_pc_login(sd);
+	quest->pc_login(sd);
 
 	return 0;
 }
@@ -2176,7 +2175,7 @@ int intif_parse(int fd)
 	switch(cmd){
 	case 0x3800:
 		if (RFIFOL(fd,4) == 0xFF000000) //Normal announce.
-			clif->broadcast(NULL, (char *) RFIFOP(fd,16), packet_len-16, 0, ALL_CLIENT);
+			clif->broadcast(NULL, (char *) RFIFOP(fd,16), packet_len-16, BC_DEFAULT, ALL_CLIENT);
 		else //Color announce.
 			clif->broadcast2(NULL, (char *) RFIFOP(fd,16), packet_len-16, RFIFOL(fd,4), RFIFOW(fd,8), RFIFOW(fd,10), RFIFOW(fd,12), RFIFOW(fd,14), ALL_CLIENT);
 		break;

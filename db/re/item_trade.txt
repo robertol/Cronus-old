@@ -1891,6 +1891,9 @@
 18107,507,100	// Malangdo Crab
 18108,507,100	// Zebra Eel
 
+// Malaya Port
+6519,507,100	// Collected_Samples
+
 // Cash Shop Related Items
 2841,507,100	// Caracas Ring
 17084,473,100	// Upg Katar Box

@@ -1,4 +1,4 @@
-//===== Hercules Script =======================================
+//===== Hercules Script ======================================
 //= Mapflag: Town.
 //===== By: ==================================================
 //= Epoque
@@ -36,3 +36,5 @@ dicastes01	mapflag	town
 mora	mapflag	town
 dewata	mapflag	town
 malangdo	mapflag	town
+malaya	mapflag	town
+eclage	mapflag	town

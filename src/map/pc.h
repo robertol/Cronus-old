@@ -167,6 +167,7 @@ struct map_session_data {
 		unsigned int prerefining : 1;
 		unsigned int workinprogress : 3; // 1 = disable skill/item, 2 = disable npc interaction, 3 = disable both
 		unsigned int hold_recalc : 1;
+		unsigned int snovice_call_flag : 3; //Summon Angel (stage 1~3)
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -644,8 +645,8 @@ enum equip_pos {
 // Rune Knight Dragon
 #define pc_isridingdragon(sd) ( (sd)->sc.option&OPTION_DRAGON )
 
-#define pc_stop_walking(sd, type) unit_stop_walking(&(sd)->bl, type)
-#define pc_stop_attack(sd) unit_stop_attack(&(sd)->bl)
+#define pc_stop_walking(sd, type) unit->stop_walking(&(sd)->bl, type)
+#define pc_stop_attack(sd) unit->stop_attack(&(sd)->bl)
 
 //Weapon check considering dual wielding.
 #define pc_check_weapontype(sd, type) ((type)&((sd)->status.weapon < MAX_WEAPON_TYPE? \
