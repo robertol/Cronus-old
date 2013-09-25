@@ -8,6 +8,7 @@
 #include "../common/strlib.h"
 #include "core.h"
 #include "../common/console.h"
+#include "../config/lang.h"
 
 #ifndef MINICORE
 	#include "../common/db.h"
@@ -269,8 +270,16 @@ const char *get_git_hash (void) {
 void usercheck(void) {
 #ifndef _WIN32
     if (geteuid() == 0) {
-		ShowWarning ("You are running Hercules with root privileges, it is not necessary.\n");
-    }
+		#ifdef ce_english
+			ShowWarning ("You are running Cronus with root privileges, it is not necessary.\n");
+		#endif
+		#ifdef ce_portuguese
+			ShowWarning ("Você está rodando Cronus com privilégios root, isto não é necessário.\n");
+		#endif
+		#ifdef ce_spanish
+			ShowWarning ("Está ejecutando Cronos con privilegios de root, no es necesario.\n");
+		#endif
+		}
 #endif
 }
 void core_defaults(void) {
