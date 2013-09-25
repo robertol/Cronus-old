@@ -179,8 +179,8 @@ void pc_setinvincibletimer(struct map_session_data* sd, int val) {
 	val += map[sd->bl.m].invincible_time_inc;
 	
 	if( sd->invincible_timer != INVALID_TIMER )
-		iTimer->delete_timer(sd->invincible_timer,pc_invincible_timer);
-	sd->invincible_timer = iTimer->add_timer(iTimer->gettick()+val,pc_invincible_timer,sd->bl.id,0);
+		timer->delete(sd->invincible_timer,pc_invincible_timer);
+	sd->invincible_timer = timer->add(timer->gettick()+val,pc_invincible_timer,sd->bl.id,0);
 }
 
 void pc_delinvincibletimer(struct map_session_data* sd)
@@ -189,9 +189,9 @@ void pc_delinvincibletimer(struct map_session_data* sd)
 
 	if( sd->invincible_timer != INVALID_TIMER )
 	{
-		iTimer->delete_timer(sd->invincible_timer,pc_invincible_timer);
+		timer->delete(sd->invincible_timer,pc_invincible_timer);
 		sd->invincible_timer = INVALID_TIMER;
-		skill->unit_move(&sd->bl,iTimer->gettick(),1);
+		skill->unit_move(&sd->bl,timer->gettick(),1);
 	}
 }
 
@@ -240,15 +240,15 @@ int pc_addspiritball(struct map_session_data *sd,int interval,int max)
 
 	if( sd->spiritball && sd->spiritball >= max ) {
 		if(sd->spirit_timer[0] != INVALID_TIMER)
-			iTimer->delete_timer(sd->spirit_timer[0],pc_spiritball_timer);
+			timer->delete(sd->spirit_timer[0],pc_spiritball_timer);
 		sd->spiritball--;
 		if( sd->spiritball != 0 )
 			memmove(sd->spirit_timer+0, sd->spirit_timer+1, (sd->spiritball)*sizeof(int));
 		sd->spirit_timer[sd->spiritball] = INVALID_TIMER;
 	}
 
-	tid = iTimer->add_timer(iTimer->gettick()+interval, pc_spiritball_timer, sd->bl.id, 0);
-	ARR_FIND(0, sd->spiritball, i, sd->spirit_timer[i] == INVALID_TIMER || DIFF_TICK(iTimer->get_timer(tid)->tick, iTimer->get_timer(sd->spirit_timer[i])->tick) < 0);
+	tid = timer->add(timer->gettick()+interval, pc_spiritball_timer, sd->bl.id, 0);
+	ARR_FIND(0, sd->spiritball, i, sd->spirit_timer[i] == INVALID_TIMER || DIFF_TICK(timer->get(tid)->tick, timer->get(sd->spirit_timer[i])->tick) < 0);
 	if( i != sd->spiritball )
 		memmove(sd->spirit_timer+i+1, sd->spirit_timer+i, (sd->spiritball-i)*sizeof(int));
 	sd->spirit_timer[i] = tid;
@@ -282,7 +282,7 @@ int pc_delspiritball(struct map_session_data *sd,int count,int type)
 
 	for(i=0;i<count;i++) {
 		if(sd->spirit_timer[i] != INVALID_TIMER) {
-			iTimer->delete_timer(sd->spirit_timer[i],pc_spiritball_timer);
+			timer->delete(sd->spirit_timer[i],pc_spiritball_timer);
 			sd->spirit_timer[i] = INVALID_TIMER;
 		}
 	}
@@ -484,7 +484,7 @@ int pc_inventory_rental_clear(struct map_session_data *sd)
 {
 	if( sd->rental_timer != INVALID_TIMER )
 	{
-		iTimer->delete_timer(sd->rental_timer, pc_inventory_rental_end);
+		timer->delete(sd->rental_timer, pc_inventory_rental_end);
 		sd->rental_timer = INVALID_TIMER;
 	}
 
@@ -519,7 +519,7 @@ void pc_inventory_rentals(struct map_session_data *sd)
 	}
 
 	if( c > 0 ) // min(next_tick,3600000) 1 hour each timer to keep announcing to the owner, and to avoid a but with rental time > 15 days
-		sd->rental_timer = iTimer->add_timer(iTimer->gettick() + min(next_tick,3600000), pc_inventory_rental_end, sd->bl.id, 0);
+		sd->rental_timer = timer->add(timer->gettick() + min(next_tick,3600000), pc_inventory_rental_end, sd->bl.id, 0);
 	else
 		sd->rental_timer = INVALID_TIMER;
 }
@@ -534,15 +534,15 @@ void pc_inventory_rental_add(struct map_session_data *sd, int seconds)
 	if( sd->rental_timer != INVALID_TIMER )
 	{
 		const struct TimerData * td;
-		td = iTimer->get_timer(sd->rental_timer);
-		if( DIFF_TICK(td->tick, iTimer->gettick()) > tick )
+		td = timer->get(sd->rental_timer);
+		if( DIFF_TICK(td->tick, timer->gettick()) > tick )
 		{ // Update Timer as this one ends first than the current one
 			pc->inventory_rental_clear(sd);
-			sd->rental_timer = iTimer->add_timer(iTimer->gettick() + tick, pc_inventory_rental_end, sd->bl.id, 0);
+			sd->rental_timer = timer->add(timer->gettick() + tick, pc_inventory_rental_end, sd->bl.id, 0);
 		}
 	}
 	else
-		sd->rental_timer = iTimer->add_timer(iTimer->gettick() + min(tick,3600000), pc_inventory_rental_end, sd->bl.id, 0);
+		sd->rental_timer = timer->add(timer->gettick() + min(tick,3600000), pc_inventory_rental_end, sd->bl.id, 0);
 }
 
 /**
@@ -633,7 +633,7 @@ int pc_setnewpc(struct map_session_data *sd, int account_id, int char_id, int lo
 	sd->client_tick  = client_tick;
 	sd->state.active = 0; //to be set to 1 after player is fully authed and loaded.
 	sd->bl.type      = BL_PC;
-	sd->canlog_tick  = iTimer->gettick();
+	sd->canlog_tick  = timer->gettick();
 	//Required to prevent homunculus copuing a base speed of 0.
 	sd->battle_status.speed = sd->base_status.speed = DEFAULT_WALK_SPEED;
 	return 0;
@@ -974,7 +974,7 @@ int pc_isequip(struct map_session_data *sd,int n)
  *------------------------------------------*/
 bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_time, int group_id, struct mmo_charstatus *st, bool changing_mapservers) {
 	int i;
-	unsigned long tick = iTimer->gettick();
+	unsigned long tick = timer->gettick();
 	uint32 ip = session[sd->fd]->client_addr;
 
 	sd->login_id2 = login_id2;
@@ -1323,7 +1323,7 @@ int pc_reg_received(struct map_session_data *sd)
 		map[sd->bl.m].users_pvp--;
 		
 		if( map[sd->bl.m].flag.pvp && !map[sd->bl.m].flag.pvp_nocalcrank && sd->pvp_timer != INVALID_TIMER ) {// unregister the player for ranking
-			iTimer->delete_timer( sd->pvp_timer, pc->calc_pvprank_timer );
+			timer->delete( sd->pvp_timer, pc->calc_pvprank_timer );
 			sd->pvp_timer = INVALID_TIMER;
 		}
 		clif->changeoption(&sd->bl);
@@ -1858,13 +1858,10 @@ static int pc_bonus_addeff(struct s_addeffect* effect, int max, enum sc_type id,
 	return 1;
 }
 
-static int pc_bonus_addeff_onskill(struct s_addeffectonskill* effect, int max, enum sc_type id, short rate, short skill, unsigned char target)
-{
+static int pc_bonus_addeff_onskill(struct s_addeffectonskill* effect, int max, enum sc_type id, short rate, short skill_id, unsigned char target) {
 	int i;
-	for( i = 0; i < max && effect[i].skill; i++ )
-	{
-		if( effect[i].id == id && effect[i].skill == skill && effect[i].target == target )
-		{
+	for( i = 0; i < max && effect[i].skill; i++ ) {
+		if( effect[i].id == id && effect[i].skill == skill_id && effect[i].target == target ) {
 			effect[i].rate += rate;
 			return 1;
 		}
@@ -1875,7 +1872,7 @@ static int pc_bonus_addeff_onskill(struct s_addeffectonskill* effect, int max, e
 	}
 	effect[i].id = id;
 	effect[i].rate = rate;
-	effect[i].skill = skill;
+	effect[i].skill = skill_id;
 	effect[i].target = target;
 	return 1;
 }
@@ -1929,8 +1926,7 @@ static int pc_bonus_item_drop(struct s_add_drop *drop, const short max, short id
 	return 1;
 }
 
-int pc_addautobonus(struct s_autobonus *bonus,char max,const char *script,short rate,unsigned int dur,short flag,const char *other_script,unsigned short pos,bool onskill)
-{
+int pc_addautobonus(struct s_autobonus *bonus,char max,const char *bonus_script,short rate,unsigned int dur,short flag,const char *other_script,unsigned short pos,bool onskill) {
 	int i;
 
 	ARR_FIND(0, max, i, bonus[i].rate == 0);
@@ -1960,7 +1956,7 @@ int pc_addautobonus(struct s_autobonus *bonus,char max,const char *script,short 
 	bonus[i].active = INVALID_TIMER;
 	bonus[i].atk_type = flag;
 	bonus[i].pos = pos;
-	bonus[i].bonus_script = aStrdup(script);
+	bonus[i].bonus_script = aStrdup(bonus_script);
 	bonus[i].other_script = other_script?aStrdup(other_script):NULL;
 	return 1;
 }
@@ -1987,7 +1983,7 @@ int pc_delautobonus(struct map_session_data* sd, struct s_autobonus *autobonus,c
 			}
 			else
 			{ // Logout / Unequipped an item with an activated bonus
-				iTimer->delete_timer(autobonus[i].active,pc->endautobonus);
+				timer->delete(autobonus[i].active,pc->endautobonus);
 				autobonus[i].active = INVALID_TIMER;
 			}
 		}
@@ -2015,7 +2011,7 @@ int pc_exeautobonus(struct map_session_data *sd,struct s_autobonus *autobonus)
 			script->run_autobonus(autobonus->other_script,sd->bl.id,sd->equip_index[j]);
 	}
 
-	autobonus->active = iTimer->add_timer(iTimer->gettick()+autobonus->duration, pc->endautobonus, sd->bl.id, (intptr_t)autobonus);
+	autobonus->active = timer->add(timer->gettick()+autobonus->duration, pc->endautobonus, sd->bl.id, (intptr_t)autobonus);
 	sd->state.autobonus |= autobonus->pos;
 	status_calc_pc(sd,0);
 
@@ -3647,13 +3643,12 @@ int pc_insert_card(struct map_session_data* sd, int idx_card, int idx_equip)
 /*==========================================
  * Update buying value by skills
  *------------------------------------------*/
-int pc_modifybuyvalue(struct map_session_data *sd,int orig_value)
-{
-	int skill,val = orig_value,rate1 = 0,rate2 = 0;
-	if((skill=pc->checkskill(sd,MC_DISCOUNT))>0)	// merchant discount
-		rate1 = 5+skill*2-((skill==10)? 1:0);
-	if((skill=pc->checkskill(sd,RG_COMPULSION))>0)	 // rogue discount
-		rate2 = 5+skill*4;
+int pc_modifybuyvalue(struct map_session_data *sd,int orig_value) {
+	int skill_lv,val = orig_value,rate1 = 0,rate2 = 0;
+	if((skill_lv=pc->checkskill(sd,MC_DISCOUNT))>0)   // merchant discount
+		rate1 = 5+skill_lv*2-((skill_lv==10)? 1:0);
+	if((skill_lv=pc->checkskill(sd,RG_COMPULSION))>0) // rogue discount
+		rate2 = 5+skill_lv*4;
 	if(rate1 < rate2) rate1 = rate2;
 	if(rate1)
 		val = (int)((double)orig_value*(double)(100-rate1)/100.);
@@ -3666,11 +3661,10 @@ int pc_modifybuyvalue(struct map_session_data *sd,int orig_value)
 /*==========================================
  * Update selling value by skills
  *------------------------------------------*/
-int pc_modifysellvalue(struct map_session_data *sd,int orig_value)
-{
-	int skill,val = orig_value,rate = 0;
-	if((skill=pc->checkskill(sd,MC_OVERCHARGE))>0)	//OverCharge
-		rate = 5+skill*2-((skill==10)? 1:0);
+int pc_modifysellvalue(struct map_session_data *sd,int orig_value) {
+	int skill_lv,val = orig_value,rate = 0;
+	if((skill_lv=pc->checkskill(sd,MC_OVERCHARGE))>0) //OverCharge
+		rate = 5+skill_lv*2-((skill_lv==10)? 1:0);
 	if(rate)
 		val = (int)((double)orig_value*(double)(100+rate)/100.);
 	if(val < 0) val = 0;
@@ -4086,7 +4080,7 @@ int pc_dropitem(struct map_session_data *sd,int n,int amount)
 int pc_takeitem(struct map_session_data *sd,struct flooritem_data *fitem)
 {
 	int flag=0;
-	unsigned int tick = iTimer->gettick();
+	unsigned int tick = timer->gettick();
 	struct map_session_data *first_sd = NULL,*second_sd = NULL,*third_sd = NULL;
 	struct party_data *p=NULL;
 
@@ -4340,7 +4334,7 @@ int pc_isUseitem(struct map_session_data *sd,int n)
  *	1 = success
  *------------------------------------------*/
 int pc_useitem(struct map_session_data *sd,int n) {
-	unsigned int tick = iTimer->gettick();
+	unsigned int tick = timer->gettick();
 	int amount, nameid, i;
 	struct script_code *item_script;
 
@@ -4760,9 +4754,8 @@ int pc_steal_item(struct map_session_data *sd,struct block_list *bl, uint16 skil
  *	0 = fail
  *	1 = success
  *------------------------------------------*/
-int pc_steal_coin(struct map_session_data *sd,struct block_list *target)
-{
-	int rate,skill;
+int pc_steal_coin(struct map_session_data *sd,struct block_list *target) {
+	int rate,skill_lv;
 	struct mob_data *md;
 	if(!sd || !target || target->type != BL_MOB)
 		return 0;
@@ -4775,10 +4768,9 @@ int pc_steal_coin(struct map_session_data *sd,struct block_list *target)
 		return 0;
 
 	// FIXME: This formula is either custom or outdated.
-	skill = pc->checkskill(sd,RG_STEALCOIN)*10;
-	rate = skill + (sd->status.base_level - md->level)*3 + sd->battle_status.dex*2 + sd->battle_status.luk*2;
-	if(rnd()%1000 < rate)
-	{
+	skill_lv = pc->checkskill(sd,RG_STEALCOIN)*10;
+	rate = skill_lv + (sd->status.base_level - md->level)*3 + sd->battle_status.dex*2 + sd->battle_status.luk*2;
+	if(rnd()%1000 < rate) {
 		int amount = md->level*10 + rnd()%100;
 
 		pc->getzeny(sd, amount, LOG_TYPE_STEAL, NULL);
@@ -4888,8 +4880,8 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 			if (sd->sc.data[SC_KNOWLEDGE]) {
 				struct status_change_entry *sce = sd->sc.data[SC_KNOWLEDGE];
 				if (sce->timer != INVALID_TIMER)
-					iTimer->delete_timer(sce->timer, iStatus->change_timer);
-				sce->timer = iTimer->add_timer(iTimer->gettick() + skill->get_time(SG_KNOWLEDGE, sce->val1), iStatus->change_timer, sd->bl.id, SC_KNOWLEDGE);
+					timer->delete(sce->timer, iStatus->change_timer);
+				sce->timer = timer->add(timer->gettick() + skill->get_time(SG_KNOWLEDGE, sce->val1), iStatus->change_timer, sd->bl.id, SC_KNOWLEDGE);
 			}
 			status_change_end(&sd->bl, SC_PROPERTYWALK, INVALID_TIMER);
 			status_change_end(&sd->bl, SC_CLOAKING, INVALID_TIMER);
@@ -5035,9 +5027,8 @@ int pc_randomwarp(struct map_session_data *sd, clr_type type) {
  * Records a memo point at sd's current position
  * pos - entry to replace, (-1: shift oldest entry out)
  *------------------------------------------*/
-int pc_memo(struct map_session_data* sd, int pos)
-{
-	int skill;
+int pc_memo(struct map_session_data* sd, int pos) {
+	int skill_lv;
 
 	nullpo_ret(sd);
 
@@ -5052,12 +5043,12 @@ int pc_memo(struct map_session_data* sd, int pos)
 		return 0; // invalid input
 
 	// check required skill level
-	skill = pc->checkskill(sd, AL_WARP);
-	if( skill < 1 ) {
+	skill_lv = pc->checkskill(sd, AL_WARP);
+	if( skill_lv < 1 ) {
 		clif->skill_memomessage(sd,2); // "You haven't learned Warp."
 		return 0;
 	}
-	if( skill < 2 || skill - 2 < pos ) {
+	if( skill_lv < 2 || skill_lv - 2 < pos ) {
 		clif->skill_memomessage(sd,1); // "Skill Level is not high enough."
 		return 0;
 	}
@@ -5731,7 +5722,7 @@ int pc_follow_timer(int tid, unsigned int tick, int id, intptr_t data)
 		} else
 			pc->setpos(sd, map_id2index(tbl->m), tbl->x, tbl->y, CLR_TELEPORT);
 	}
-	sd->followtimer = iTimer->add_timer(
+	sd->followtimer = timer->add(
 		tick + 1000,	// increase time a bit to loosen up map's load
 		pc_follow_timer, sd->bl.id, 0);
 	return 0;
@@ -5742,7 +5733,7 @@ int pc_stop_following (struct map_session_data *sd)
 	nullpo_ret(sd);
 
 	if (sd->followtimer != INVALID_TIMER) {
-		iTimer->delete_timer(sd->followtimer,pc_follow_timer);
+		timer->delete(sd->followtimer,pc_follow_timer);
 		sd->followtimer = INVALID_TIMER;
 	}
 	sd->followtarget = -1;
@@ -5762,7 +5753,7 @@ int pc_follow(struct map_session_data *sd,int target_id)
 		pc->stop_following(sd);
 
 	sd->followtarget = target_id;
-	pc_follow_timer(INVALID_TIMER, iTimer->gettick(), sd->bl.id, 0);
+	pc_follow_timer(INVALID_TIMER, timer->gettick(), sd->bl.id, 0);
 
 	return 0;
 }
@@ -5892,8 +5883,7 @@ static void pc_calcexp(struct map_session_data *sd, unsigned int *base_exp, unsi
 /*==========================================
  * Give x exp at sd player and calculate remaining exp for next lvl
  *------------------------------------------*/
-int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int base_exp,unsigned int job_exp,bool quest)
-{
+int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int base_exp,unsigned int job_exp,bool is_quest) {
 	float nextbp=0, nextjp=0;
 	unsigned int nextb=0, nextj=0;
 	nullpo_ret(sd);
@@ -5957,9 +5947,9 @@ int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int
 
 #if PACKETVER >= 20091027
 	if(base_exp)
-		clif->displayexp(sd, base_exp, SP_BASEEXP, quest);
+		clif->displayexp(sd, base_exp, SP_BASEEXP, is_quest);
 	if(job_exp)
-		clif->displayexp(sd, job_exp,  SP_JOBEXP, quest);
+		clif->displayexp(sd, job_exp,  SP_JOBEXP, is_quest);
 #endif
 	
 	if(sd->state.showexp) {
@@ -6700,7 +6690,7 @@ void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int h
 	if( sd->status.ele_id > 0 )
 		elemental->set_target(sd,src);
 
-	sd->canlog_tick = iTimer->gettick();
+	sd->canlog_tick = timer->gettick();
 }
 
 /*==========================================
@@ -6708,7 +6698,7 @@ void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int h
  *------------------------------------------*/
 int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	int i=0,j=0,k=0;
-	unsigned int tick = iTimer->gettick();
+	unsigned int tick = timer->gettick();
 
 	for(k = 0; k < 5; k++)
 		if (sd->devotion[k]){
@@ -6744,9 +6734,9 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 	// Leave duel if you die [LuzZza]
 	if(battle_config.duel_autoleave_when_die) {
 		if(sd->duel_group > 0)
-			iDuel->leave(sd->duel_group, sd);
+			duel->leave(sd->duel_group, sd);
 		if(sd->duel_invite > 0)
-			iDuel->reject(sd->duel_invite, sd);
+			duel->reject(sd->duel_invite, sd);
 	}
 
 	if (sd->npc_id && sd->st && sd->st->state != RUN)
@@ -6905,7 +6895,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 				pc->setinvincibletimer(sd, battle_config.pc_invincible_time);
 			sc_start(&sd->bl,iStatus->skill2sc(MO_STEELBODY),100,1,skill->get_time(MO_STEELBODY,1));
 			if(map_flag_gvg2(sd->bl.m))
-				pc_respawn_timer(INVALID_TIMER, iTimer->gettick(), sd->bl.id, 0);
+				pc_respawn_timer(INVALID_TIMER, timer->gettick(), sd->bl.id, 0);
 			return 0;
 		}
 	}
@@ -7022,18 +7012,18 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 		}
 		if( sd->pvp_point < 0 )
 		{
-			iTimer->add_timer(tick+1, pc_respawn_timer,sd->bl.id,0);
+			timer->add(tick+1, pc_respawn_timer,sd->bl.id,0);
 			return 1|8;
 		}
 	}
 	//GvG
 	if( map_flag_gvg2(sd->bl.m) ) {
-		iTimer->add_timer(tick+1, pc_respawn_timer, sd->bl.id, 0);
+		timer->add(tick+1, pc_respawn_timer, sd->bl.id, 0);
 		return 1|8;
 	} else if( sd->bg_id ) {
 		struct battleground_data *bgd = bg->team_search(sd->bg_id);
 		if( bgd && bgd->mapindex > 0 ) { // Respawn by BG
-			iTimer->add_timer(tick+1000, pc_respawn_timer, sd->bl.id, 0);
+			timer->add(tick+1000, pc_respawn_timer, sd->bl.id, 0);
 			return 1|8;
 		}
 	}
@@ -7041,7 +7031,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src) {
 
 	//Reset "can log out" tick.
 	if( battle_config.prevent_logout )
-		sd->canlog_tick = iTimer->gettick() - battle_config.prevent_logout;
+		sd->canlog_tick = timer->gettick() - battle_config.prevent_logout;
 	return 1;
 }
 
@@ -8347,7 +8337,7 @@ int pc_addeventtimer(struct map_session_data *sd,int tick,const char *name)
 	if( i == MAX_EVENTTIMER )
 		return 0;
 
-	sd->eventtimer[i] = iTimer->add_timer(iTimer->gettick()+tick, pc_eventtimer, sd->bl.id, (intptr_t)aStrdup(name));
+	sd->eventtimer[i] = timer->add(timer->gettick()+tick, pc_eventtimer, sd->bl.id, (intptr_t)aStrdup(name));
 	sd->eventcount++;
 
 	return 1;
@@ -8369,13 +8359,13 @@ int pc_deleventtimer(struct map_session_data *sd,const char *name)
 	// find the named event timer
 	ARR_FIND( 0, MAX_EVENTTIMER, i,
 		sd->eventtimer[i] != INVALID_TIMER &&
-		(p = (char *)(iTimer->get_timer(sd->eventtimer[i])->data)) != NULL &&
+		(p = (char *)(timer->get(sd->eventtimer[i])->data)) != NULL &&
 		strcmp(p, name) == 0
 	);
 	if( i == MAX_EVENTTIMER )
 		return 0; // not found
 
-	iTimer->delete_timer(sd->eventtimer[i],pc_eventtimer);
+	timer->delete(sd->eventtimer[i],pc_eventtimer);
 	sd->eventtimer[i] = INVALID_TIMER;
 	sd->eventcount--;
 	aFree(p);
@@ -8394,8 +8384,8 @@ int pc_addeventtimercount(struct map_session_data *sd,const char *name,int tick)
 
 	for(i=0;i<MAX_EVENTTIMER;i++)
 		if( sd->eventtimer[i] != INVALID_TIMER && strcmp(
-			(char *)(iTimer->get_timer(sd->eventtimer[i])->data), name)==0 ){
-				iTimer->addtick_timer(sd->eventtimer[i],tick);
+			(char *)(timer->get(sd->eventtimer[i])->data), name)==0 ){
+				timer->addtick(sd->eventtimer[i],tick);
 				break;
 		}
 
@@ -8416,8 +8406,8 @@ int pc_cleareventtimer(struct map_session_data *sd)
 
 	for(i=0;i<MAX_EVENTTIMER;i++)
 		if( sd->eventtimer[i] != INVALID_TIMER ){
-			char *p = (char *)(iTimer->get_timer(sd->eventtimer[i])->data);
-			iTimer->delete_timer(sd->eventtimer[i],pc_eventtimer);
+			char *p = (char *)(timer->get(sd->eventtimer[i])->data);
+			timer->delete(sd->eventtimer[i],pc_eventtimer);
 			sd->eventtimer[i] = INVALID_TIMER;
 			sd->eventcount--;
 			if (p) aFree(p);
@@ -8594,7 +8584,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 		return 0;
 	}
 
-	if( DIFF_TICK(sd->canequip_tick,iTimer->gettick()) > 0 )
+	if( DIFF_TICK(sd->canequip_tick,timer->gettick()) > 0 )
 	{
 		clif->equipitemack(sd,n,0,0);
 		return 0;
@@ -9091,7 +9081,7 @@ int pc_calc_pvprank_timer(int tid, unsigned int tick, int id, intptr_t data)
 	}
 
 	if( pc->calc_pvprank(sd) > 0 )
-		sd->pvp_timer = iTimer->add_timer(iTimer->gettick()+PVP_CALCRANK_INTERVAL,pc->calc_pvprank_timer,id,data);
+		sd->pvp_timer = timer->add(timer->gettick()+PVP_CALCRANK_INTERVAL,pc->calc_pvprank_timer,id,data);
 	return 0;
 }
 
@@ -9332,7 +9322,7 @@ int pc_autosave(int tid, unsigned int tick, int id, intptr_t data)
 	interval = iMap->autosave_interval/(iMap->usercount()+1);
 	if(interval < iMap->minsave_interval)
 		interval = iMap->minsave_interval;
-	iTimer->add_timer(iTimer->gettick()+interval,pc_autosave,0,0);
+	timer->add(timer->gettick()+interval,pc_autosave,0,0);
 
 	return 0;
 }
@@ -9388,7 +9378,7 @@ int map_night_timer(int tid, unsigned int tick, int id, intptr_t data)
 	return 0;
 }
 
-void pc_setstand(struct map_session_data *sd){
+void pc_setstand(struct map_session_data *sd) {
 	nullpo_retv(sd);
 
 	status_change_end(&sd->bl, SC_TENSIONRELAX, INVALID_TIMER);
@@ -9402,20 +9392,20 @@ void pc_setstand(struct map_session_data *sd){
  * Mechanic (MADO GEAR)
  **/
 void pc_overheat(struct map_session_data *sd, int val) {
-	int heat = val, skill,
+	int heat = val, skill_lv,
 		limit[] = { 10, 20, 28, 46, 66 };
 
 	if( !pc_ismadogear(sd) || sd->sc.data[SC_OVERHEAT] )
 		return; // already burning
 
-	skill = cap_value(pc->checkskill(sd,NC_MAINFRAME),0,4);
+	skill_lv = cap_value(pc->checkskill(sd,NC_MAINFRAME),0,4);
 	if( sd->sc.data[SC_OVERHEAT_LIMITPOINT] ) {
 		heat += sd->sc.data[SC_OVERHEAT_LIMITPOINT]->val1;
 		status_change_end(&sd->bl,SC_OVERHEAT_LIMITPOINT,INVALID_TIMER);
 	}
 
 	heat = max(0,heat); // Avoid negative HEAT
-	if( heat >= limit[skill] )
+	if( heat >= limit[skill_lv] )
 		sc_start(&sd->bl,SC_OVERHEAT,100,0,1000);
 	else
 		sc_start(&sd->bl,SC_OVERHEAT_LIMITPOINT,100,heat,30000);
@@ -9492,15 +9482,15 @@ int pc_add_charm(struct map_session_data *sd,int interval,int max,int type)
 	if( sd->charm[type] && sd->charm[type] >= max )
 	{
 		if(sd->charm_timer[type][0] != INVALID_TIMER)
-			iTimer->delete_timer(sd->charm_timer[type][0],pc_charm_timer);
+			timer->delete(sd->charm_timer[type][0],pc_charm_timer);
 		sd->charm[type]--;
 		if( sd->charm[type] != 0 )
 			memmove(sd->charm_timer[type]+0, sd->charm_timer[type]+1, (sd->charm[type])*sizeof(int));
 		sd->charm_timer[type][sd->charm[type]] = INVALID_TIMER;
 	}
 
-	tid = iTimer->add_timer(iTimer->gettick()+interval, pc_charm_timer, sd->bl.id, 0);
-	ARR_FIND(0, sd->charm[type], i, sd->charm_timer[type][i] == INVALID_TIMER || DIFF_TICK(iTimer->get_timer(tid)->tick, iTimer->get_timer(sd->charm_timer[type][i])->tick) < 0);
+	tid = timer->add(timer->gettick()+interval, pc_charm_timer, sd->bl.id, 0);
+	ARR_FIND(0, sd->charm[type], i, sd->charm_timer[type][i] == INVALID_TIMER || DIFF_TICK(timer->get(tid)->tick, timer->get(sd->charm_timer[type][i])->tick) < 0);
 	if( i != sd->charm[type] )
 		memmove(sd->charm_timer[type]+i+1, sd->charm_timer[type]+i, (sd->charm[type]-i)*sizeof(int));
 	sd->charm_timer[type][i] = tid;
@@ -9531,7 +9521,7 @@ int pc_del_charm(struct map_session_data *sd,int count,int type)
 
 	for(i = 0; i < count; i++) {
 		if(sd->charm_timer[type][i] != INVALID_TIMER) {
-			iTimer->delete_timer(sd->charm_timer[type][i],pc_charm_timer);
+			timer->delete(sd->charm_timer[type][i],pc_charm_timer);
 			sd->charm_timer[type][i] = INVALID_TIMER;
 		}
 	}
@@ -10138,7 +10128,7 @@ void pc_itemcd_do(struct map_session_data *sd, bool load) {
 			return;
 		}
 		for(i = 0; i < MAX_ITEMDELAYS; i++) {
-			if( cd->nameid[i] && DIFF_TICK(iTimer->gettick(),cd->tick[i]) < 0 ) {
+			if( cd->nameid[i] && DIFF_TICK(timer->gettick(),cd->tick[i]) < 0 ) {
 				sd->item_delay[cursor].tick = cd->tick[i];
 				sd->item_delay[cursor].nameid = cd->nameid[i];
 				cursor++;
@@ -10152,7 +10142,7 @@ void pc_itemcd_do(struct map_session_data *sd, bool load) {
 			idb_put( itemcd_db, sd->status.char_id, cd );
 		}
 		for(i = 0; i < MAX_ITEMDELAYS; i++) {
-			if( sd->item_delay[i].nameid && DIFF_TICK(iTimer->gettick(),sd->item_delay[i].tick) < 0 ) {
+			if( sd->item_delay[i].nameid && DIFF_TICK(timer->gettick(),sd->item_delay[i].tick) < 0 ) {
 				cd->tick[cursor] = sd->item_delay[i].tick;
 				cd->nameid[cursor] = sd->item_delay[i].nameid;
 				cursor++;
@@ -10181,17 +10171,17 @@ int do_init_pc(void) {
 
 	pc->readdb();
 
-	iTimer->add_timer_func_list(pc_invincible_timer, "pc_invincible_timer");
-	iTimer->add_timer_func_list(pc_eventtimer, "pc_eventtimer");
-	iTimer->add_timer_func_list(pc_inventory_rental_end, "pc_inventory_rental_end");
-	iTimer->add_timer_func_list(pc->calc_pvprank_timer, "pc->calc_pvprank_timer");
-	iTimer->add_timer_func_list(pc_autosave, "pc_autosave");
-	iTimer->add_timer_func_list(pc_spiritball_timer, "pc_spiritball_timer");
-	iTimer->add_timer_func_list(pc_follow_timer, "pc_follow_timer");
-	iTimer->add_timer_func_list(pc->endautobonus, "pc->endautobonus");
-	iTimer->add_timer_func_list(pc_charm_timer, "pc_charm_timer");
+	timer->add_func_list(pc_invincible_timer, "pc_invincible_timer");
+	timer->add_func_list(pc_eventtimer, "pc_eventtimer");
+	timer->add_func_list(pc_inventory_rental_end, "pc_inventory_rental_end");
+	timer->add_func_list(pc->calc_pvprank_timer, "pc->calc_pvprank_timer");
+	timer->add_func_list(pc_autosave, "pc_autosave");
+	timer->add_func_list(pc_spiritball_timer, "pc_spiritball_timer");
+	timer->add_func_list(pc_follow_timer, "pc_follow_timer");
+	timer->add_func_list(pc->endautobonus, "pc->endautobonus");
+	timer->add_func_list(pc_charm_timer, "pc_charm_timer");
 
-	iTimer->add_timer(iTimer->gettick() + iMap->autosave_interval, pc_autosave, 0, 0);
+	timer->add(timer->gettick() + iMap->autosave_interval, pc_autosave, 0, 0);
 
 	// 0=day, 1=night [Yor]
 	iMap->night_flag = battle_config.night_at_start ? 1 : 0;
@@ -10200,11 +10190,11 @@ int do_init_pc(void) {
 		int day_duration = battle_config.day_duration;
 		int night_duration = battle_config.night_duration;
 		// add night/day timer [Yor]
-		iTimer->add_timer_func_list(pc->map_day_timer, "pc->map_day_timer");
-		iTimer->add_timer_func_list(pc->map_night_timer, "pc->map_night_timer");
+		timer->add_func_list(pc->map_day_timer, "pc->map_day_timer");
+		timer->add_func_list(pc->map_night_timer, "pc->map_night_timer");
 
-		pc->day_timer_tid   = iTimer->add_timer_interval(iTimer->gettick() + (iMap->night_flag ? 0 : day_duration) + night_duration, pc->map_day_timer,   0, 0, day_duration + night_duration);
-		pc->night_timer_tid = iTimer->add_timer_interval(iTimer->gettick() + day_duration + (iMap->night_flag ? night_duration : 0), pc->map_night_timer, 0, 0, day_duration + night_duration);
+		pc->day_timer_tid   = timer->add_interval(timer->gettick() + (iMap->night_flag ? 0 : day_duration) + night_duration, pc->map_day_timer,   0, 0, day_duration + night_duration);
+		pc->night_timer_tid = timer->add_interval(timer->gettick() + day_duration + (iMap->night_flag ? night_duration : 0), pc->map_night_timer, 0, 0, day_duration + night_duration);
 	}
 
 	do_init_pc_groups();

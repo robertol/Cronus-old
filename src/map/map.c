@@ -17,6 +17,7 @@
 #include "../common/conf.h"
 #include "../common/console.h"
 #include "../common/HPM.h"
+#include "../config/lang.h"
 
 #include "map.h"
 #include "path.h"
@@ -483,7 +484,7 @@ int map_count_oncell(int16 m, int16 x, int16 y, int type)
 struct skill_unit* map_find_skill_unit_oncell(struct block_list* target,int16 x,int16 y,uint16 skill_id,struct skill_unit* out_unit, int flag) {
 	int16 m,bx,by;
 	struct block_list *bl;
-	struct skill_unit *unit;
+	struct skill_unit *su;
 	m = target->m;
 
 	if (x < 0 || y < 0 || (x >= map[m].xs) || (y >= map[m].ys))
@@ -497,11 +498,11 @@ struct skill_unit* map_find_skill_unit_oncell(struct block_list* target,int16 x,
 		if (bl->x != x || bl->y != y || bl->type != BL_SKILL)
 			continue;
 
-		unit = (struct skill_unit *) bl;
-		if( unit == out_unit || !unit->alive || !unit->group || unit->group->skill_id != skill_id )
+		su = (struct skill_unit *) bl;
+		if( su == out_unit || !su->alive || !su->group || su->group->skill_id != skill_id )
 			continue;
-		if( !(flag&1) || battle->check_target(&unit->bl,target,unit->group->target_flag) > 0 )
-			return unit;
+		if( !(flag&1) || battle->check_target(&su->bl,target,su->group->target_flag) > 0 )
+			return su;
 	}
 	return NULL;
 }
@@ -1204,7 +1205,7 @@ void map_clearflooritem(struct block_list *bl) {
 	struct flooritem_data* fitem = (struct flooritem_data*)bl;
 
 	if( fitem->cleartimer )
-		iTimer->delete_timer(fitem->cleartimer,iMap->clearflooritem_timer);
+		timer->delete(fitem->cleartimer,iMap->clearflooritem_timer);
 
 	clif->clearflooritem(fitem, 0);
 	iMap->deliddb(&fitem->bl);
@@ -1359,7 +1360,7 @@ int map_addflooritem(struct item *item_data,int amount,int16 m,int16 x,int16 y,i
 	}
 
 	fitem->first_get_charid = first_charid;
-	fitem->first_get_tick = iTimer->gettick() + (flags&1 ? battle_config.mvp_item_first_get_time : battle_config.item_first_get_time);
+	fitem->first_get_tick = timer->gettick() + (flags&1 ? battle_config.mvp_item_first_get_time : battle_config.item_first_get_time);
 	fitem->second_get_charid = second_charid;
 	fitem->second_get_tick = fitem->first_get_tick + (flags&1 ? battle_config.mvp_item_second_get_time : battle_config.item_second_get_time);
 	fitem->third_get_charid = third_charid;
@@ -1369,7 +1370,7 @@ int map_addflooritem(struct item *item_data,int amount,int16 m,int16 x,int16 y,i
 	fitem->item_data.amount=amount;
 	fitem->subx=(r&3)*3+3;
 	fitem->suby=((r>>2)&3)*3+3;
-	fitem->cleartimer=iTimer->add_timer(iTimer->gettick()+battle_config.flooritem_lifetime,iMap->clearflooritem_timer,fitem->bl.id,0);
+	fitem->cleartimer=timer->add(timer->gettick()+battle_config.flooritem_lifetime,iMap->clearflooritem_timer,fitem->bl.id,0);
 
 	iMap->addiddb(&fitem->bl);
 	iMap->addblock(&fitem->bl);
@@ -1935,44 +1936,40 @@ struct s_mapiterator
 /// @param flags Flags of the iterator
 /// @param type Target types
 /// @return Iterator
-struct s_mapiterator* mapit_alloc(enum e_mapitflags flags, enum bl_type types)
-{
-	struct s_mapiterator* mapit;
+struct s_mapiterator* mapit_alloc(enum e_mapitflags flags, enum bl_type types) {
+	struct s_mapiterator* iter;
 
-	mapit = ers_alloc(map_iterator_ers, struct s_mapiterator);
-	mapit->flags = flags;
-	mapit->types = types;
-	if( types == BL_PC )       mapit->dbi = db_iterator(pc_db);
-	else if( types == BL_MOB ) mapit->dbi = db_iterator(mobid_db);
-	else                       mapit->dbi = db_iterator(id_db);
-	return mapit;
+	iter = ers_alloc(map_iterator_ers, struct s_mapiterator);
+	iter->flags = flags;
+	iter->types = types;
+	if( types == BL_PC )       iter->dbi = db_iterator(pc_db);
+	else if( types == BL_MOB ) iter->dbi = db_iterator(mobid_db);
+	else                       iter->dbi = db_iterator(id_db);
+	return iter;
 }
 
 /// Frees the iterator.
 ///
-/// @param mapit Iterator
-void mapit_free(struct s_mapiterator* mapit)
-{
-	nullpo_retv(mapit);
+/// @param iter Iterator
+void mapit_free(struct s_mapiterator* iter) {
+	nullpo_retv(iter);
 
-	dbi_destroy(mapit->dbi);
-	ers_free(map_iterator_ers, mapit);
+	dbi_destroy(iter->dbi);
+	ers_free(map_iterator_ers, iter);
 }
 
 /// Returns the first block_list that matches the description.
 /// Returns NULL if not found.
 ///
-/// @param mapit Iterator
+/// @param iter Iterator
 /// @return first block_list or NULL
-struct block_list* mapit_first(struct s_mapiterator* mapit)
-{
+struct block_list* mapit_first(struct s_mapiterator* iter) {
 	struct block_list* bl;
 
-	nullpo_retr(NULL,mapit);
+	nullpo_retr(NULL,iter);
 
-	for( bl = (struct block_list*)dbi_first(mapit->dbi); bl != NULL; bl = (struct block_list*)dbi_next(mapit->dbi) )
-	{
-		if( MAPIT_MATCHES(mapit,bl) )
+	for( bl = (struct block_list*)dbi_first(iter->dbi); bl != NULL; bl = (struct block_list*)dbi_next(iter->dbi) ) {
+		if( MAPIT_MATCHES(iter,bl) )
 			break;// found match
 	}
 	return bl;
@@ -1981,17 +1978,15 @@ struct block_list* mapit_first(struct s_mapiterator* mapit)
 /// Returns the last block_list that matches the description.
 /// Returns NULL if not found.
 ///
-/// @param mapit Iterator
+/// @param iter Iterator
 /// @return last block_list or NULL
-struct block_list* mapit_last(struct s_mapiterator* mapit)
-{
+struct block_list* mapit_last(struct s_mapiterator* iter) {
 	struct block_list* bl;
 
-	nullpo_retr(NULL,mapit);
+	nullpo_retr(NULL,iter);
 
-	for( bl = (struct block_list*)dbi_last(mapit->dbi); bl != NULL; bl = (struct block_list*)dbi_prev(mapit->dbi) )
-	{
-		if( MAPIT_MATCHES(mapit,bl) )
+	for( bl = (struct block_list*)dbi_last(iter->dbi); bl != NULL; bl = (struct block_list*)dbi_prev(iter->dbi) ) {
+		if( MAPIT_MATCHES(iter,bl) )
 			break;// found match
 	}
 	return bl;
@@ -2000,20 +1995,18 @@ struct block_list* mapit_last(struct s_mapiterator* mapit)
 /// Returns the next block_list that matches the description.
 /// Returns NULL if not found.
 ///
-/// @param mapit Iterator
+/// @param iter Iterator
 /// @return next block_list or NULL
-struct block_list* mapit_next(struct s_mapiterator* mapit)
-{
+struct block_list* mapit_next(struct s_mapiterator* iter) {
 	struct block_list* bl;
 
-	nullpo_retr(NULL,mapit);
+	nullpo_retr(NULL,iter);
 
-	for( ; ; )
-	{
-		bl = (struct block_list*)dbi_next(mapit->dbi);
+	for( ; ; ) {
+		bl = (struct block_list*)dbi_next(iter->dbi);
 		if( bl == NULL )
 			break;// end
-		if( MAPIT_MATCHES(mapit,bl) )
+		if( MAPIT_MATCHES(iter,bl) )
 			break;// found a match
 		// try next
 	}
@@ -2023,20 +2016,18 @@ struct block_list* mapit_next(struct s_mapiterator* mapit)
 /// Returns the previous block_list that matches the description.
 /// Returns NULL if not found.
 ///
-/// @param mapit Iterator
+/// @param iter Iterator
 /// @return previous block_list or NULL
-struct block_list* mapit_prev(struct s_mapiterator* mapit)
-{
+struct block_list* mapit_prev(struct s_mapiterator* iter) {
 	struct block_list* bl;
 
-	nullpo_retr(NULL,mapit);
+	nullpo_retr(NULL,iter);
 
-	for( ; ; )
-	{
-		bl = (struct block_list*)dbi_prev(mapit->dbi);
+	for( ; ; ) {
+		bl = (struct block_list*)dbi_prev(iter->dbi);
 		if( bl == NULL )
 			break;// end
-		if( MAPIT_MATCHES(mapit,bl) )
+		if( MAPIT_MATCHES(iter,bl) )
 			break;// found a match
 		// try prev
 	}
@@ -2045,13 +2036,12 @@ struct block_list* mapit_prev(struct s_mapiterator* mapit)
 
 /// Returns true if the current block_list exists in the database.
 ///
-/// @param mapit Iterator
+/// @param iter Iterator
 /// @return true if it exists
-bool mapit_exists(struct s_mapiterator* mapit)
-{
-	nullpo_retr(false,mapit);
+bool mapit_exists(struct s_mapiterator* iter) {
+	nullpo_retr(false,iter);
 
-	return dbi_exists(mapit->dbi);
+	return dbi_exists(iter->dbi);
 }
 
 /*==========================================
@@ -2096,7 +2086,7 @@ void map_spawnmobs(int16 m)
 	int i, k=0;
 	if (map[m].mob_delete_timer != INVALID_TIMER)
 	{	//Mobs have not been removed yet [Skotlex]
-		iTimer->delete_timer(map[m].mob_delete_timer, iMap->removemobs_timer);
+		timer->delete(map[m].mob_delete_timer, iMap->removemobs_timer);
 		map[m].mob_delete_timer = INVALID_TIMER;
 		return;
 	}
@@ -2170,7 +2160,7 @@ void map_removemobs(int16 m)
 	if (map[m].mob_delete_timer != INVALID_TIMER) // should never happen
 		return; //Mobs are already scheduled for removal
 
-	map[m].mob_delete_timer = iTimer->add_timer(iTimer->gettick()+battle_config.mob_remove_delay, iMap->removemobs_timer, m, 0);
+	map[m].mob_delete_timer = timer->add(timer->gettick()+battle_config.mob_remove_delay, iMap->removemobs_timer, m, 0);
 }
 
 /*==========================================
@@ -2867,7 +2857,7 @@ void map_clean(int i) {
 	if(battle_config.dynamic_mobs) { //Dynamic mobs flag by [random]
 		int j;
 		if(map[i].mob_delete_timer != INVALID_TIMER)
-			iTimer->delete_timer(map[i].mob_delete_timer, iMap->removemobs_timer);
+			timer->delete(map[i].mob_delete_timer, iMap->removemobs_timer);
 		for (j=0; j<MAX_MOB_LIST_PER_MAP; j++)
 			if (map[i].moblist[j]) aFree(map[i].moblist[j]);
 	}
@@ -2920,7 +2910,7 @@ void do_final_maps(void) {
 		if(battle_config.dynamic_mobs) { //Dynamic mobs flag by [random]
 			int j;
 			if(map[i].mob_delete_timer != INVALID_TIMER)
-				iTimer->delete_timer(map[i].mob_delete_timer, iMap->removemobs_timer);
+				timer->delete(map[i].mob_delete_timer, iMap->removemobs_timer);
 			for (j=0; j<MAX_MOB_LIST_PER_MAP; j++)
 				if (map[i].moblist[j]) aFree(map[i].moblist[j]);
 		}
@@ -3394,10 +3384,28 @@ void map_reloadnpc(bool clear)
 	if (clear)
 		npc->addsrcfile("clear"); // this will clear the current script list
 
+#ifdef ce_english
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/re/scripts_main.conf");
+	map_reloadnpc_sub("npc/english/re/scripts_main.conf");
 #else
-	map_reloadnpc_sub("npc/pre-re/scripts_main.conf");
+	map_reloadnpc_sub("npc/english/pre-re/scripts_main.conf");
+#endif
+#endif
+
+#ifdef ce_portuguese
+#ifdef RENEWAL
+	map_reloadnpc_sub("npc/portugues/re/scripts_main.conf");
+#else
+	map_reloadnpc_sub("npc/portugues/pre-re/scripts_main.conf");
+#endif
+#endif
+
+#ifdef ce_spanish
+#ifdef RENEWAL
+	map_reloadnpc_sub("npc/espanol/re/scripts_main.conf");
+#else
+	map_reloadnpc_sub("npc/espanol/pre-re/scripts_main.conf");
+#endif
 #endif
 }
 
@@ -4491,8 +4499,8 @@ void read_map_zone_db(void) {
 				disabled_skills_count = config_setting_length(skills);
 				/* validate */
 				for(h = 0; h < config_setting_length(skills); h++) {
-					config_setting_t *skill = config_setting_get_elem(skills, h);
-					name = config_setting_name(skill);
+					config_setting_t *skillinfo = config_setting_get_elem(skills, h);
+					name = config_setting_name(skillinfo);
 					if( !map_zone_str2skillid(name) ) {
 						ShowError("map_zone_db: unknown skill (%s) in disabled_skills for zone '%s', skipping skill...\n",name,zone->name);
 						config_setting_remove_elem(skills,h);
@@ -4506,10 +4514,10 @@ void read_map_zone_db(void) {
 				/* all ok, process */
 				CREATE( zone->disabled_skills, struct map_zone_disabled_skill_entry *, disabled_skills_count );
 				for(h = 0, v = 0; h < config_setting_length(skills); h++) {
-					config_setting_t *skill = config_setting_get_elem(skills, h);
+					config_setting_t *skillinfo = config_setting_get_elem(skills, h);
 					struct map_zone_disabled_skill_entry * entry;
 					enum bl_type type;
-					name = config_setting_name(skill);
+					name = config_setting_name(skillinfo);
 
 					if( (type = map_zone_bl_type(config_setting_get_string_elem(skills,h),&subtype)) ) { /* only add if enabled */
 						CREATE( entry, struct map_zone_disabled_skill_entry, 1 );
@@ -4710,8 +4718,8 @@ void read_map_zone_db(void) {
 					for(j = 0; j < disabled_skills_count_i; j++) {
 						int k;
 						for(k = 0; k < disabled_skills_count; k++) {
-							config_setting_t *skill = config_setting_get_elem(skills, k);
-							if( map_zone_str2skillid(config_setting_name(skill)) == izone->disabled_skills[j]->nameid ) {
+							config_setting_t *skillinfo = config_setting_get_elem(skills, k);
+							if( map_zone_str2skillid(config_setting_name(skillinfo)) == izone->disabled_skills[j]->nameid ) {
 								break;
 							}
 						}
@@ -4952,7 +4960,7 @@ void do_final(void)
 	iStatus->do_final_status();
 	unit->final();
 	bg->final();
-	iDuel->do_final_duel();
+	duel->final();
 	elemental->do_final_elemental();
 	do_final_maps();
 	vending->final();
@@ -5164,7 +5172,7 @@ void map_hp_symbols(void) {
 	HPM->share(trade,"trade");
 	HPM->share(iStatus,"iStatus");
 	HPM->share(chat, "chat");
-	HPM->share(iDuel,"iDuel");
+	HPM->share(duel,"duel");
 	HPM->share(elemental,"elemental");
 	HPM->share(intif,"intif");
 	HPM->share(mercenary,"mercenary");
@@ -5218,7 +5226,7 @@ void map_load_defaults(void) {
 	trade_defaults();
 	status_defaults();
 	chat_defaults();
-	iDuel_defaults();
+	duel_defaults();
 	elemental_defaults();
 	intif_defaults();
 	mercenary_defaults();
@@ -5399,10 +5407,10 @@ int do_init(int argc, char *argv[])
 
 	map_readallmaps();
 
-	iTimer->add_timer_func_list(map_freeblock_timer, "map_freeblock_timer");
-	iTimer->add_timer_func_list(map_clearflooritem_timer, "map_clearflooritem_timer");
-	iTimer->add_timer_func_list(map_removemobs_timer, "map_removemobs_timer");
-	iTimer->add_timer_interval(iTimer->gettick()+1000, map_freeblock_timer, 0, 0, 60*1000);
+	timer->add_func_list(map_freeblock_timer, "map_freeblock_timer");
+	timer->add_func_list(map_clearflooritem_timer, "map_clearflooritem_timer");
+	timer->add_func_list(map_removemobs_timer, "map_removemobs_timer");
+	timer->add_interval(timer->gettick()+1000, map_freeblock_timer, 0, 0, 60*1000);
 
 	HPM->load_sub = HPM_map_plugin_load_sub;
 	HPM->symbol_defaults_sub = map_hp_symbols;
@@ -5433,7 +5441,7 @@ int do_init(int argc, char *argv[])
 	npc->init();
 	unit->init();
 	bg->init();
-	iDuel->do_init_duel();
+	duel->init();
 	vending->init();
 
 	npc->event_do_oninit();	// Init npcs (OnInit)

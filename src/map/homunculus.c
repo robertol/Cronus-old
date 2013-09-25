@@ -416,7 +416,7 @@ bool homunculus_evolve(struct homun_data *hd) {
 	status_calc_homunculus(hd,1);
 
 	if (!(battle_config.hom_setting&0x2))
-		skill->unit_move(&sd->hd->bl,iTimer->gettick(),1); // apply land skills immediately
+		skill->unit_move(&sd->hd->bl,timer->gettick(),1); // apply land skills immediately
 
 	return true;
 }
@@ -462,8 +462,8 @@ bool homunculus_mutate(struct homun_data *hd, int homun_id) {
 	hom->prev_class = prev_class;
 	status_calc_homunculus(hd,1);
 
-	if( !(battle_config.hom_setting&0x2) )
-		skill->unit_move(&sd->hd->bl,iTimer->gettick(),1); // apply land skills immediately
+	if (!(battle_config.hom_setting&0x2))
+		skill->unit_move(&sd->hd->bl,timer->gettick(),1); // apply land skills immediately
 
 	return true;
 }
@@ -647,14 +647,14 @@ int homunculus_hunger_timer(int tid, unsigned int tick, int id, intptr_t data) {
 	}
 
 	clif->send_homdata(sd,SP_HUNGRY,hd->homunculus.hunger);
-	hd->hungry_timer = iTimer->add_timer(tick+hd->homunculusDB->hungryDelay,homun->hunger_timer,sd->bl.id,0); //simple Fix albator
+	hd->hungry_timer = timer->add(tick+hd->homunculusDB->hungryDelay,homun->hunger_timer,sd->bl.id,0); //simple Fix albator
 	return 0;
 }
 
 void homunculus_hunger_timer_delete(struct homun_data *hd) {
 	nullpo_retv(hd);
 	if(hd->hungry_timer != INVALID_TIMER) {
-		iTimer->delete_timer(hd->hungry_timer,homun->hunger_timer);
+		timer->delete(hd->hungry_timer,homun->hunger_timer);
 		hd->hungry_timer = INVALID_TIMER;
 	}
 }
@@ -765,7 +765,7 @@ bool homunculus_create(struct map_session_data *sd, struct s_homunculus *hom) {
 
 void homunculus_init_timers(struct homun_data * hd) {
 	if (hd->hungry_timer == INVALID_TIMER)
-		hd->hungry_timer = iTimer->add_timer(iTimer->gettick()+hd->homunculusDB->hungryDelay,homun->hunger_timer,hd->master->bl.id,0);
+		hd->hungry_timer = timer->add(timer->gettick()+hd->homunculusDB->hungryDelay,homun->hunger_timer,hd->master->bl.id,0);
 	hd->regen.state.block = 0; //Restore HP/SP block.
 }
 
@@ -1127,11 +1127,11 @@ void homunculus_read_db(void) {
 	memset(homun->db,0,sizeof(homun->db));
 	for(i = 0; i<ARRAYLENGTH(filename); i++) {
 		if( i > 0 ) {
-			char path[256];
+			char filepath[256];
 
-			sprintf(path, "%s/%s", iMap->db_path, filename[i]);
+			sprintf(filepath, "%s/%s", iMap->db_path, filename[i]);
 
-			if( !exists(path) ) {
+			if( !exists(filepath) ) {
 				continue;
 			}
 		}
@@ -1235,7 +1235,7 @@ void do_init_homunculus(void) {
 	homun->exp_db_read();
 	homun->skill_db_read();
 	// Add homunc timer function to timer func list [Toms]
-	iTimer->add_timer_func_list(homun->hunger_timer, "homunculus_hunger_timer");
+	timer->add_func_list(homun->hunger_timer, "homunculus_hunger_timer");
 
 	//Stock view data for homuncs
 	memset(&homun->viewdb, 0, sizeof(homun->viewdb));
