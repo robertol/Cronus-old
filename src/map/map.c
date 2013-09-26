@@ -3372,10 +3372,28 @@ void map_reloadnpc(bool clear)
 	if (clear)
 		npc->addsrcfile("clear"); // this will clear the current script list
 
+#ifdef ce_english
 #ifdef RENEWAL
-	map_reloadnpc_sub("npc/re/scripts_main.conf");
+	map_reloadnpc_sub("npc/english/re/scripts_main.conf");
 #else
-	map_reloadnpc_sub("npc/pre-re/scripts_main.conf");
+	map_reloadnpc_sub("npc/english/pre-re/scripts_main.conf");
+#endif
+#endif
+
+#ifdef ce_portuguese
+#ifdef RENEWAL
+	map_reloadnpc_sub("npc/portugues/re/scripts_main.conf");
+#else
+	map_reloadnpc_sub("npc/portugues/pre-re/scripts_main.conf");
+#endif
+#endif
+
+#ifdef ce_spanish
+#ifdef RENEWAL
+	map_reloadnpc_sub("npc/espanol/re/scripts_main.conf");
+#else
+	map_reloadnpc_sub("npc/espanol/pre-re/scripts_main.conf");
+#endif
 #endif
 }
 

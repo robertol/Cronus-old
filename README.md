@@ -30,7 +30,7 @@ Equipe de Desenvolvimento
 ### Coordenadores
 - .twink	- Samuel Soares
 - MaatSF	- Matheus Silva
-- mkbu96	- Matheus Macabu
+- mkbu95	- Matheus Macabu
 
 ### Desenvolvedores
 - Golen Maker	- Ligleyson Warnielle
