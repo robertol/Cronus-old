@@ -1,13 +1,15 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
 
 #include "../common/nullpo.h"
 #include "../common/socket.h"
+
+#include "trade.h"
 #include "clif.h"
 #include "itemdb.h"
 #include "map.h"
 #include "path.h"
-#include "trade.h"
 #include "pc.h"
 #include "npc.h"
 #include "battle.h"
@@ -19,10 +21,6 @@
 
 #include <stdio.h>
 #include <string.h>
-
-
-//Max distance from traders to enable a trade to take place.
-#define TRADE_DISTANCE 2
 
 struct trade_interface trade_s;
 
@@ -57,7 +55,7 @@ void trade_traderequest(struct map_session_data *sd, struct map_session_data *ta
 	}
 
 	if ( sd->trade_partner != 0 ) { // If a character tries to trade to another one then cancel the previous one
-		struct map_session_data *previous_sd = iMap->id2sd(sd->trade_partner);
+		struct map_session_data *previous_sd = map->id2sd(sd->trade_partner);
 		if( previous_sd ){
 			previous_sd->trade_partner = 0;
 			clif->tradecancelled(previous_sd);
@@ -101,15 +99,14 @@ void trade_traderequest(struct map_session_data *sd, struct map_session_data *ta
  * Weird enough, the client should only send 3/4
  * and the server is the one that can reply 0~2
  *------------------------------------------*/
-void trade_tradeack(struct map_session_data *sd, int type)
-{
+void trade_tradeack(struct map_session_data *sd, int type) {
 	struct map_session_data *tsd;
 	nullpo_retv(sd);
 
 	if (sd->state.trading || !sd->trade_partner)
 		return; //Already trading or no partner set.
 
-	if ((tsd = iMap->id2sd(sd->trade_partner)) == NULL) {
+	if ((tsd = map->id2sd(sd->trade_partner)) == NULL) {
 		clif->tradestart(sd, 1); // character does not exist
 		sd->trade_partner=0;
 		return;
@@ -200,12 +197,12 @@ int impossible_trade_check(struct map_session_data *sd)
 		if (!sd->deal.item[i].amount)
 			continue;
 		index = sd->deal.item[i].index;
-		if (inventory[index].amount < sd->deal.item[i].amount)
-		{ // if more than the player have -> hack
+		if (inventory[index].amount < sd->deal.item[i].amount) {
+			// if more than the player have -> hack
 			sprintf(message_to_gm, msg_txt(538), sd->status.name, sd->status.account_id); // Hack on trade: character '%s' (account: %d) try to trade more items that he has.
-			intif->wis_message_to_gm(iMap->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
+			intif->wis_message_to_gm(map->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
 			sprintf(message_to_gm, msg_txt(539), inventory[index].amount, inventory[index].nameid, sd->deal.item[i].amount); // This player has %d of a kind of item (id: %d), and try to trade %d of them.
-			intif->wis_message_to_gm(iMap->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
+			intif->wis_message_to_gm(map->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
 			// if we block people
 			if (battle_config.ban_hack_trade < 0) {
 				chrif->char_ask_name(-1, sd->status.name, 1, 0, 0, 0, 0, 0, 0); // type: 1 - block
@@ -222,7 +219,7 @@ int impossible_trade_check(struct map_session_data *sd)
 				// message about the ban
 				strcpy(message_to_gm, msg_txt(508)); //  This player hasn't been banned (Ban option is disabled).
 
-			intif->wis_message_to_gm(iMap->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
+			intif->wis_message_to_gm(map->wisp_server_name, PC_PERM_RECEIVE_HACK_INFO, message_to_gm);
 			return 1;
 		}
 		inventory[index].amount -= sd->deal.item[i].amount; // remove item from inventory
@@ -320,8 +317,7 @@ int trade_check(struct map_session_data *sd, struct map_session_data *tsd)
 /*==========================================
  * Adds an item/qty to the trade window
  *------------------------------------------*/
-void trade_tradeadditem(struct map_session_data *sd, short index, short amount)
-{
+void trade_tradeadditem(struct map_session_data *sd, short index, short amount) {
 	struct map_session_data *target_sd;
 	struct item *item;
 	int trade_i, trade_weight;
@@ -331,7 +327,7 @@ void trade_tradeadditem(struct map_session_data *sd, short index, short amount)
 	if( !sd->state.trading || sd->state.deal_locked > 0 )
 		return; //Can't add stuff.
 
-	if( (target_sd = iMap->id2sd(sd->trade_partner)) == NULL )
+	if( (target_sd = map->id2sd(sd->trade_partner)) == NULL )
 	{
 		trade->cancel(sd);
 		return;
@@ -415,8 +411,7 @@ void trade_tradeaddzeny(struct map_session_data* sd, int amount)
 	if( !sd->state.trading || sd->state.deal_locked > 0 )
 		return; //Can't add stuff.
 
-	if( (target_sd = iMap->id2sd(sd->trade_partner)) == NULL )
-	{
+	if( (target_sd = map->id2sd(sd->trade_partner)) == NULL ) {
 		trade->cancel(sd);
 		return;
 	}
@@ -434,14 +429,13 @@ void trade_tradeaddzeny(struct map_session_data* sd, int amount)
 /*==========================================
  * 'Ok' button on the trade window is pressed.
  *------------------------------------------*/
-void trade_tradeok(struct map_session_data *sd)
-{
+void trade_tradeok(struct map_session_data *sd) {
 	struct map_session_data *target_sd;
 
 	if(sd->state.deal_locked || !sd->state.trading)
 		return;
 
-	if ((target_sd = iMap->id2sd(sd->trade_partner)) == NULL) {
+	if ((target_sd = map->id2sd(sd->trade_partner)) == NULL) {
 		trade->cancel(sd);
 		return;
 	}
@@ -454,12 +448,11 @@ void trade_tradeok(struct map_session_data *sd)
 /*==========================================
  * 'Cancel' is pressed. (or trade was force-cancelled by the code)
  *------------------------------------------*/
-void trade_tradecancel(struct map_session_data *sd)
-{
+void trade_tradecancel(struct map_session_data *sd) {
 	struct map_session_data *target_sd;
 	int trade_i;
 
-	target_sd = iMap->id2sd(sd->trade_partner);
+	target_sd = map->id2sd(sd->trade_partner);
 
 	if(!sd->state.trading)
 	{ // Not trade acepted
@@ -513,8 +506,7 @@ void trade_tradecancel(struct map_session_data *sd)
 /*==========================================
  * lock sd and tsd trade data, execute the trade, clear, then save players
  *------------------------------------------*/
-void trade_tradecommit(struct map_session_data *sd)
-{
+void trade_tradecommit(struct map_session_data *sd) {
 	struct map_session_data *tsd;
 	int trade_i;
 	int flag;
@@ -522,8 +514,8 @@ void trade_tradecommit(struct map_session_data *sd)
 	if (!sd->state.trading || !sd->state.deal_locked) //Locked should be 1 (pressed ok) before you can press trade.
 		return;
 
-	if ((tsd = iMap->id2sd(sd->trade_partner)) == NULL) {
-		trade_tradecancel(sd);
+	if ((tsd = map->id2sd(sd->trade_partner)) == NULL) {
+		trade->cancel(sd);
 		return;
 	}
 
@@ -603,7 +595,7 @@ void trade_tradecommit(struct map_session_data *sd)
 	clif->tradecompleted(tsd, 0);
 
 	// save both player to avoid crash: they always have no advantage/disadvantage between the 2 players
-	if (iMap->save_settings&1)
+	if (map->save_settings&1)
   	{
 		chrif->save(sd,0);
 		chrif->save(tsd,0);

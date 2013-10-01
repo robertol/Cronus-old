@@ -1,5 +1,6 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
+// Copyright (c) Hercules Dev Team, licensed under GNU GPL.
+// See the LICENSE file
+// Portions Copyright (c) Athena Dev Teams
 
 #include "../common/cbasetypes.h"
 #include "../common/malloc.h"
@@ -19,16 +20,16 @@
 #include <stdio.h>
 #include <string.h>
 
-
-int chat_triggerevent(struct chat_data *cd); // forward declaration
+struct chat_interface chat_s;
 
 /// Initializes a chatroom object (common functionality for both pc and npc chatrooms).
 /// Returns a chatroom object on success, or NULL on failure.
-static struct chat_data* chat_createchat(struct block_list* bl, const char* title, const char* pass, int limit, bool pub, int trigger, const char* ev, int zeny, int minLvl, int maxLvl)
+struct chat_data* chat_createchat(struct block_list* bl, const char* title, const char* pass, int limit, bool pub, int trigger, const char* ev, int zeny, int minLvl, int maxLvl)
 {
 	struct chat_data* cd;
 	nullpo_retr(NULL, bl);
 
+	/* Given the overhead and the numerous instances (npc allocatted or otherwise) wouldn't it be benefitial to have it use ERS? [Ind] */
 	cd = (struct chat_data *) aMalloc(sizeof(struct chat_data));
 
 	safestrncpy(cd->title, title, sizeof(cd->title));
@@ -44,20 +45,19 @@ static struct chat_data* chat_createchat(struct block_list* bl, const char* titl
 	cd->owner = bl;
 	safestrncpy(cd->npc_event, ev, sizeof(cd->npc_event));
 
-	cd->bl.id   = iMap->get_new_object_id();
+	cd->bl.id   = map->get_new_object_id();
 	cd->bl.m    = bl->m;
 	cd->bl.x    = bl->x;
 	cd->bl.y    = bl->y;
 	cd->bl.type = BL_CHAT;
 	cd->bl.next = cd->bl.prev = NULL;
 
-	if( cd->bl.id == 0 )
-	{
+	if( cd->bl.id == 0 ) {
 		aFree(cd);
 		cd = NULL;
 	}
 
-	iMap->addiddb(&cd->bl);
+	map->addiddb(&cd->bl);
 
 	if( bl->type != BL_NPC )
 		cd->kick_list = idb_alloc(DB_OPT_BASE);
@@ -85,15 +85,14 @@ int chat_createpcchat(struct map_session_data* sd, const char* title, const char
 		return 0; //Can't create chatrooms on this map.
 	}
 
-	if( iMap->getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOCHAT) )
-	{
+	if( map->getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOCHAT) ) {
 		clif->message (sd->fd, msg_txt(665));
 		return 0;
 	}
 
 	pc_stop_walking(sd,1);
 
-	cd = chat_createchat(&sd->bl, title, pass, limit, pub, 0, "", 0, 1, MAX_LEVEL);
+	cd = chat->create(&sd->bl, title, pass, limit, pub, 0, "", 0, 1, MAX_LEVEL);
 	if( cd ) {
 		cd->users = 1;
 		cd->usersd[0] = sd;
@@ -110,12 +109,11 @@ int chat_createpcchat(struct map_session_data* sd, const char* title, const char
 /*==========================================
  * join an existing chatroom
  *------------------------------------------*/
-int chat_joinchat(struct map_session_data* sd, int chatid, const char* pass)
-{
+int chat_joinchat(struct map_session_data* sd, int chatid, const char* pass) {
 	struct chat_data* cd;
 
 	nullpo_ret(sd);
-	cd = (struct chat_data*)iMap->id2bl(chatid);
+	cd = (struct chat_data*)map->id2bl(chatid);
 
 	if( cd == NULL || cd->bl.type != BL_CHAT || cd->bl.m != sd->bl.m || sd->state.vending || sd->state.buyingstore || sd->chatID || ((cd->owner->type == BL_NPC) ? cd->users+1 : cd->users) >= cd->limit )
 	{
@@ -158,7 +156,7 @@ int chat_joinchat(struct map_session_data* sd, int chatid, const char* pass)
     clif->addchat(cd, sd); //Reports To the person who already in the chat 
     clif->dispchat(cd, 0); //Reported number of changes to the people around 
 
-    chat_triggerevent(cd); //Event 
+    chat->trigger_event(cd); //Event
 
     return 0;
 }
@@ -167,17 +165,15 @@ int chat_joinchat(struct map_session_data* sd, int chatid, const char* pass)
 /*==========================================
  * leave a chatroom
  *------------------------------------------*/
-int chat_leavechat(struct map_session_data* sd, bool kicked)
-{
+int chat_leavechat(struct map_session_data* sd, bool kicked) {
 	struct chat_data* cd;
 	int i;
 	int leavechar;
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)iMap->id2bl(sd->chatID);
-	if( cd == NULL )
-	{
+	cd = (struct chat_data*)map->id2bl(sd->chatID);
+	if( cd == NULL ) {
 		pc_setchatid(sd, 0);
 		return 1;
 	}
@@ -201,15 +197,15 @@ int chat_leavechat(struct map_session_data* sd, bool kicked)
 
 	if( cd->users == 0 && cd->owner->type == BL_PC ) { // Delete empty chatroom
 		struct skill_unit* su;
-		struct skill_unit_group* group;	
+		struct skill_unit_group* group;
 
 		clif->clearchat(cd, 0);
 		db_destroy(cd->kick_list);
-		iMap->deliddb(&cd->bl);
-		iMap->delblock(&cd->bl);
-		iMap->freeblock(&cd->bl);
+		map->deliddb(&cd->bl);
+		map->delblock(&cd->bl);
+		map->freeblock(&cd->bl);
 		
-		su = iMap->find_skill_unit_oncell(&sd->bl, sd->bl.x, sd->bl.y, AL_WARP, NULL, 0);
+		su = map->find_skill_unit_oncell(&sd->bl, sd->bl.x, sd->bl.y, AL_WARP, NULL, 0);
 		group = (su != NULL) ? su->group : NULL;
 		if (group != NULL)
 			skill->unit_onplace(su, &sd->bl, group->tick);
@@ -217,21 +213,20 @@ int chat_leavechat(struct map_session_data* sd, bool kicked)
 		return 1;
 	}
 
-	if( leavechar == 0 && cd->owner->type == BL_PC )
-	{	// Set and announce new owner
+	if( leavechar == 0 && cd->owner->type == BL_PC ) {
+		// Set and announce new owner
 		cd->owner = (struct block_list*) cd->usersd[0];
 		clif->changechatowner(cd, cd->usersd[0]);
 		clif->clearchat(cd, 0);
 
 		//Adjust Chat location after owner has been changed.
-		iMap->delblock( &cd->bl );
+		map->delblock( &cd->bl );
 		cd->bl.x=cd->usersd[0]->bl.x;
 		cd->bl.y=cd->usersd[0]->bl.y;
-		iMap->addblock( &cd->bl );
+		map->addblock( &cd->bl );
 
 		clif->dispchat(cd,0);
-	}
-	else
+	} else
 		clif->dispchat(cd,0); // refresh chatroom
 
 	return 0;
@@ -240,15 +235,14 @@ int chat_leavechat(struct map_session_data* sd, bool kicked)
 /*==========================================
  * change a chatroom's owner
  *------------------------------------------*/
-int chat_changechatowner(struct map_session_data* sd, const char* nextownername)
-{
+int chat_changechatowner(struct map_session_data* sd, const char* nextownername) {
 	struct chat_data* cd;
 	struct map_session_data* tmpsd;
 	int i;
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)iMap->id2bl(sd->chatID);
+	cd = (struct chat_data*)map->id2bl(sd->chatID);
 	if( cd == NULL || (struct block_list*) sd != cd->owner )
 		return 1;
 
@@ -269,10 +263,10 @@ int chat_changechatowner(struct map_session_data* sd, const char* nextownername)
 	cd->usersd[0] = tmpsd;
 
 	// set the new chatroom position
-	iMap->delblock( &cd->bl );
+	map->delblock( &cd->bl );
 	cd->bl.x = cd->owner->x;
 	cd->bl.y = cd->owner->y;
-	iMap->addblock( &cd->bl );
+	map->addblock( &cd->bl );
 
 	// and display again
 	clif->dispchat(cd,0);
@@ -283,13 +277,12 @@ int chat_changechatowner(struct map_session_data* sd, const char* nextownername)
 /*==========================================
  * change a chatroom's status (title, etc)
  *------------------------------------------*/
-int chat_changechatstatus(struct map_session_data* sd, const char* title, const char* pass, int limit, bool pub)
-{
+int chat_changechatstatus(struct map_session_data* sd, const char* title, const char* pass, int limit, bool pub) {
 	struct chat_data* cd;
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)iMap->id2bl(sd->chatID);
+	cd = (struct chat_data*)map->id2bl(sd->chatID);
 	if( cd==NULL || (struct block_list *)sd != cd->owner )
 		return 1;
 
@@ -307,14 +300,13 @@ int chat_changechatstatus(struct map_session_data* sd, const char* title, const 
 /*==========================================
  * kick an user from a chatroom
  *------------------------------------------*/
-int chat_kickchat(struct map_session_data* sd, const char* kickusername)
-{
+int chat_kickchat(struct map_session_data* sd, const char* kickusername) {
 	struct chat_data* cd;
 	int i;
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data *)iMap->id2bl(sd->chatID);
+	cd = (struct chat_data *)map->id2bl(sd->chatID);
 	
 	if( cd==NULL || (struct block_list *)sd != cd->owner )
 		return -1;
@@ -328,7 +320,7 @@ int chat_kickchat(struct map_session_data* sd, const char* kickusername)
 	
 	idb_put(cd->kick_list,cd->usersd[i]->status.char_id,(void*)1);
 
-	chat->leavechat(cd->usersd[i],1);
+	chat->leave(cd->usersd[i],1);
 	return 0;
 }
 
@@ -348,7 +340,7 @@ int chat_createnpcchat(struct npc_data* nd, const char* title, int limit, bool p
 		return 0;
 	}
 
-	cd = chat_createchat(&nd->bl, title, "", limit, pub, trigger, ev, zeny, minLvl, maxLvl);
+	cd = chat->create(&nd->bl, title, "", limit, pub, trigger, ev, zeny, minLvl, maxLvl);
 
 	if( cd ) {
 		nd->chat_id = cd->bl.id;
@@ -359,20 +351,19 @@ int chat_createnpcchat(struct npc_data* nd, const char* title, int limit, bool p
 }
 
 /// Removes the chatroom from the npc.
-int chat_deletenpcchat(struct npc_data* nd)
-{
+int chat_deletenpcchat(struct npc_data* nd) {
 	struct chat_data *cd;
 	nullpo_ret(nd);
 
-	cd = (struct chat_data*)iMap->id2bl(nd->chat_id);
+	cd = (struct chat_data*)map->id2bl(nd->chat_id);
 	if( cd == NULL )
 		return 0;
 	
-	chat->npckickall(cd);
+	chat->npc_kick_all(cd);
 	clif->clearchat(cd, 0);
-	iMap->deliddb(&cd->bl);
-	iMap->delblock(&cd->bl);
-	iMap->freeblock(&cd->bl);
+	map->deliddb(&cd->bl);
+	map->delblock(&cd->bl);
+	map->freeblock(&cd->bl);
 	nd->chat_id = 0;
 	
 	return 0;
@@ -397,7 +388,7 @@ int chat_enableevent(struct chat_data* cd)
 	nullpo_ret(cd);
 
 	cd->trigger &= 0x7f;
-	chat_triggerevent(cd);
+	chat->trigger_event(cd);
 	return 0;
 }
 
@@ -416,7 +407,7 @@ int chat_npckickall(struct chat_data* cd)
 	nullpo_ret(cd);
 
 	while( cd->users > 0 )
-		chat->leavechat(cd->usersd[cd->users-1],0);
+		chat->leave(cd->usersd[cd->users-1],0);
 
 	return 0;
 }
@@ -428,18 +419,19 @@ int chat_npckickall(struct chat_data* cd)
 *-------------------------------------*/
 void chat_defaults(void) {
 	chat = &chat_s;
+	
 	/* funcs */
-	
-	chat->createpcchat = chat_createpcchat;
-	chat->joinchat = chat_joinchat;
-	chat->leavechat = chat_leavechat;
-	chat->changechatowner = chat_changechatowner;
-	chat->changechatstatus = chat_changechatstatus;
-	chat->kickchat = chat_kickchat;
-	
-	chat->createnpcchat = chat_createnpcchat;
-	chat->deletenpcchat = chat_deletenpcchat;
-	chat->enableevent = chat_enableevent;
-	chat->disableevent = chat_disableevent;
-	chat->npckickall = chat_npckickall;
+	chat->create_pc_chat = chat_createpcchat;
+	chat->join = chat_joinchat;
+	chat->leave = chat_leavechat;
+	chat->change_owner = chat_changechatowner;
+	chat->change_status = chat_changechatstatus;
+	chat->kick = chat_kickchat;
+	chat->create_npc_chat = chat_createnpcchat;
+	chat->delete_npc_chat = chat_deletenpcchat;
+	chat->enable_event = chat_enableevent;
+	chat->disable_event = chat_disableevent;
+	chat->npc_kick_all = chat_npckickall;
+	chat->trigger_event = chat_triggerevent;
+	chat->create = chat_createchat;
 }

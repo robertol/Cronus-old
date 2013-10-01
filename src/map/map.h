@@ -99,6 +99,7 @@ enum {
 	MAPID_BLACKSMITH,
 	MAPID_ASSASSIN,
 	MAPID_STAR_GLADIATOR,
+	MAPID_REBELLION = JOBL_2_1|0x09,
 	MAPID_KAGEROUOBORO = JOBL_2_1|0x0A,
 	MAPID_DEATH_KNIGHT = JOBL_2_1|0x0E,
 	//2-2 Jobs
@@ -214,10 +215,10 @@ enum {
 #define EVENT_NAME_LENGTH ( NAME_LENGTH * 2 + 3 )
 #define DEFAULT_AUTOSAVE_INTERVAL 5*60*1000
 // Specifies maps where players may hit each other
-#define map_flag_vs(m) (maplist[m].flag.pvp || maplist[m].flag.gvg_dungeon || maplist[m].flag.gvg || ((iMap->agit_flag || iMap->agit2_flag) && maplist[m].flag.gvg_castle) || maplist[m].flag.battleground)
+#define map_flag_vs(m) (maplist[m].flag.pvp || maplist[m].flag.gvg_dungeon || maplist[m].flag.gvg || ((map->agit_flag || map->agit2_flag) && maplist[m].flag.gvg_castle) || maplist[m].flag.battleground)
 // Specifies maps that have special GvG/WoE restrictions
-#define map_flag_gvg(m) (maplist[m].flag.gvg || ((iMap->agit_flag || iMap->agit2_flag) && maplist[m].flag.gvg_castle))
-// Specifies if the map is tagged as GvG/WoE (regardless of iMap->agit_flag status)
+#define map_flag_gvg(m) (maplist[m].flag.gvg || ((map->agit_flag || map->agit2_flag) && maplist[m].flag.gvg_castle))
+// Specifies if the map is tagged as GvG/WoE (regardless of map->agit_flag status)
 #define map_flag_gvg2(m) (maplist[m].flag.gvg || maplist[m].flag.gvg_castle)
 // No Kill Steal Protection
 #define map_flag_ks(m) (maplist[m].flag.town || maplist[m].flag.pvp || maplist[m].flag.gvg || maplist[m].flag.battleground)
@@ -432,7 +433,7 @@ typedef enum {
 
 } cell_t;
 
-// used by iMap->getcell()
+// used by map->getcell()
 typedef enum {
 	CELL_GETTYPE,		// retrieves a cell's 'gat' type
 
@@ -524,7 +525,7 @@ struct map_zone_skill_damage_cap_entry {
 #define MAP_ZONE_PK_NAME "PK Mode"
 #define MAP_ZONE_MAPFLAG_LENGTH 50
 
-//TODO place it in iMap
+//TODO place it in the map interface
 DBMap *zone_db;/* string => struct map_zone_data */
 
 struct map_zone_data {
@@ -840,21 +841,36 @@ struct map_interface {
 	const char* (*charid2nick) (int charid);
 	struct map_session_data* (*charid2sd) (int charid);
 
+	void (*vmap_foreachpc) (int (*func)(struct map_session_data* sd, va_list args), va_list args);
 	void (*map_foreachpc) (int (*func)(struct map_session_data* sd, va_list args), ...);
+	void (*vmap_foreachmob) (int (*func)(struct mob_data* md, va_list args), va_list args);
 	void (*map_foreachmob) (int (*func)(struct mob_data* md, va_list args), ...);
+	void (*vmap_foreachnpc) (int (*func)(struct npc_data* nd, va_list args), va_list args);
 	void (*map_foreachnpc) (int (*func)(struct npc_data* nd, va_list args), ...);
+	void (*vmap_foreachregen) (int (*func)(struct block_list* bl, va_list args), va_list args);
 	void (*map_foreachregen) (int (*func)(struct block_list* bl, va_list args), ...);
+	void (*vmap_foreachiddb) (int (*func)(struct block_list* bl, va_list args), va_list args);
 	void (*map_foreachiddb) (int (*func)(struct block_list* bl, va_list args), ...);
 
+	int (*vforeachinrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, va_list ap);
 	int (*foreachinrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, ...);
+	int (*vforeachinshootrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, va_list ap);
 	int (*foreachinshootrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int type, ...);
+	int (*vforeachinarea) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int type, va_list ap);
 	int (*foreachinarea) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int type, ...);
+	int (*vforcountinrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int count, int type, va_list ap);
 	int (*forcountinrange) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int count, int type, ...);
+	int (*vforcountinarea) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int count, int type, va_list ap);
 	int (*forcountinarea) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int count, int type, ...);
+	int (*vforeachinmovearea) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int type, va_list ap);
 	int (*foreachinmovearea) (int (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int type, ...);
+	int (*vforeachincell) (int (*func)(struct block_list*,va_list), int16 m, int16 x, int16 y, int type, va_list ap);
 	int (*foreachincell) (int (*func)(struct block_list*,va_list), int16 m, int16 x, int16 y, int type, ...);
+	int (*vforeachinpath) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int16 range, int length, int type, va_list ap);
 	int (*foreachinpath) (int (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int16 range, int length, int type, ...);
+	int (*vforeachinmap) (int (*func)(struct block_list*,va_list), int16 m, int type, va_list args);
 	int (*foreachinmap) (int (*func)(struct block_list*,va_list), int16 m, int type, ...);
+	int (*vforeachininstance)(int (*func)(struct block_list*,va_list), int16 instance_id, int type, va_list ap);
 	int (*foreachininstance)(int (*func)(struct block_list*,va_list), int16 instance_id, int type,...);
 
 	struct map_session_data * (*id2sd) (int id);
@@ -904,7 +920,7 @@ struct map_interface {
 	void (*do_shutdown) (void);
 };
 
-struct map_interface *iMap;
+struct map_interface *map;
 
 void map_defaults(void);
 
