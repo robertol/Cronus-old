@@ -22,5 +22,17 @@
 */
 //#define ce_spanish
 
+#if defined(ce_portuguese)
+#define LANG_CONF_PATH "conf/portugues/"
+#define LANG_DB_PATH "db/portugues/"
+#else
+#if defined(ce_english)
+#define LANG_CONF_PATH "conf/english/"
+#define LANG_DB_PATH "db/english/"
+#else
+#define LANG_CONF_PATH "conf/espanol/"
+#define LANG_DB_PATH "db/espanol/"
+#endif
+#endif
 
 #endif // _CONFIG_LANGUAGE_H_

@@ -10,6 +10,7 @@
 #include "../common/strlib.h"
 #include "../config/core.h"
 #include "../common/HPM.h"
+#include "../config/lang.h"
 #include "socket.h"
 
 #include <stdio.h>
@@ -1330,7 +1331,7 @@ int socket_getips(uint32* ips, int max)
 
 void socket_init(void)
 {
-	char *SOCKET_CONF_FILENAME = "conf/packet.conf";
+	char *SOCKET_CONF_FILENAME = LANG_CONF_PATH"packet.conf";
 	unsigned int rlim_cur = FD_SETSIZE;
 
 #ifdef WIN32

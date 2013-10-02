@@ -7,6 +7,7 @@
 #include "../common/malloc.h"
 #include "../common/strlib.h"
 #include "../common/db.h"
+#include "../config/lang.h"
 #include "mapindex.h"
 
 #include <string.h>
@@ -19,7 +20,7 @@ struct _indexes {
 
 int max_index = 0;
 
-char mapindex_cfgfile[80] = "db/map_index.txt";
+char mapindex_cfgfile[80] = LANG_DB_PATH"map_index.txt";
 
 #define mapindex_exists(id) (indexes[id].name[0] != '\0')
 /// Retrieves the map name from 'string' (removing .gat extension if present).

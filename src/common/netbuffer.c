@@ -24,6 +24,7 @@
 #include "../common/core.h"
 
 #include "../common/netbuffer.h"
+#include "../config/lang.h"
 
 
 // 
@@ -60,9 +61,9 @@ void netbuffer_init(){
 	}
 	
 	
-	conf = raconf_parse("conf/network.conf");
+	conf = raconf_parse(LANG_CONF_PATH"network.conf");
 	if(conf == NULL){
-		ShowFatalError("Failed to Parse required Configuration (conf/network.conf)");
+		ShowFatalError("Failed to Parse required Configuration ("LANG_CONF_PATH"network.conf)");
 		exit(EXIT_FAILURE);
 	}
 	

@@ -15,6 +15,7 @@
 #include "../common/ers.h"
 #include "../common/conf.h"
 #include "../common/HPM.h"
+#include "../config/lang.h"
 
 #include "map.h"
 #include "chrif.h"
@@ -2654,7 +2655,7 @@ void clif_guild_xy_remove(struct map_session_data *sd)
 void read_channels_config(void) {
 	config_t channels_conf;
 	config_setting_t *chsys = NULL;
-	const char *config_filename = "conf/channels.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_CONF_PATH"channels.conf"; // FIXME hardcoded name
 	
 	if (conf_read_file(&channels_conf, config_filename))
 		return;
@@ -17106,7 +17107,7 @@ void clif_parse_MoveItem(int fd, struct map_session_data *sd) {
 void clif_cashshop_db(void) {
 	config_t cashshop_conf;
 	config_setting_t *cashshop = NULL;
-	const char *config_filename = "db/cashshop_db.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_DB_PATH"cashshop_db.conf"; // FIXME hardcoded name
 	int i;
 	for( i = 0; i < CASHSHOP_TAB_MAX; i++ ) {
 		CREATE(clif->cs.data[i], struct hCSData *, 1);

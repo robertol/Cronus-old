@@ -21,6 +21,7 @@
 #include "int_auction.h"
 #include "int_quest.h"
 #include "int_elemental.h"
+#include "../config/lang.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -378,7 +379,7 @@ const char * geoip_countryname[253] = {"Unknown","Asia/Pacific Region","Europe",
 unsigned char *geoip_cache;
 void geoip_readdb(void){
 	struct stat bufa;
-	FILE *db=fopen("./db/GeoIP.dat","rb");
+	FILE *db=fopen("./"LANG_DB_PATH"GeoIP.dat","rb");
 	fstat(fileno(db), &bufa);
 	geoip_cache = (unsigned char *) malloc(sizeof(unsigned char) * bufa.st_size);
 	if(fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db) != bufa.st_size) { ShowError("geoip_cache reading didn't read all elements \n"); }
@@ -835,7 +836,7 @@ int inter_init_sql(const char *file)
 	inter_auction_sql_init();
 
 	geoip_readdb();
-	msg_config_read("conf/messages.conf");
+	msg_config_read(LANG_CONF_PATH"messages.conf");
 	return 0;
 }
 

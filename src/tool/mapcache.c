@@ -6,7 +6,7 @@
 #include "../common/malloc.h"
 #include "../common/mmo.h"
 #include "../common/showmsg.h"
-
+#include "../config/lang.h"
 #include "../config/renewal.h"
 
 #include <stdio.h>
@@ -19,8 +19,8 @@
 
 #define NO_WATER 1000000
 
-char grf_list_file[256] = "conf/grf-files.txt";
-char map_list_file[256] = "db/map_index.txt";
+char grf_list_file[256] = LANG_CONF_PATH"/grf-files.txt";
+char map_list_file[256] = LANG_DB_PATH"map_index.txt";
 char map_cache_file[256];
 int rebuild = 0;
 
@@ -258,7 +258,7 @@ int do_init(int argc, char** argv)
 	char name[MAP_NAME_LENGTH_EXT];
 
 	/* setup pre-defined, #define-dependant */
-	sprintf(map_cache_file,"db/%s/map_cache.dat",
+	sprintf(map_cache_file,LANG_DB_PATH"%s/map_cache.dat",
 #ifdef RENEWAL
 			"re"
 #else

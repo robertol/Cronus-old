@@ -17,6 +17,7 @@
 #include "../common/conf.h"
 #include "../common/console.h"
 #include "../common/HPM.h"
+#include "../config/lang.h"
 
 #include "map.h"
 #include "path.h"
@@ -4673,9 +4674,9 @@ void read_map_zone_db(void) {
 	config_setting_t *zones = NULL;
 	/* TODO: #ifndef required for re/pre-re */
 #ifdef RENEWAL
-	const char *config_filename = "db/re/map_zone_db.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_DB_PATH"re/map_zone_db.conf"; // FIXME hardcoded name
 #else
-	const char *config_filename = "db/pre-re/map_zone_db.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_DB_PATH"pre-re/map_zone_db.conf"; // FIXME hardcoded name
 #endif
 	if (conf_read_file(&map_zone_db, config_filename))
 		return;
@@ -5490,10 +5491,10 @@ int do_init(int argc, char *argv[])
 
 	map->map_num = 0;
 
-	sprintf(map->db_path ,"db");
-	sprintf(map->help_txt ,"conf/help.txt");
-	sprintf(map->help2_txt ,"conf/help2.txt");
-	sprintf(map->charhelp_txt ,"conf/charhelp.txt");
+	sprintf(map->db_path ,LANG_DB_PATH);
+	sprintf(map->help_txt ,LANG_CONF_PATH"help.txt");
+	sprintf(map->help2_txt ,LANG_CONF_PATH"help2.txt");
+	sprintf(map->charhelp_txt ,LANG_CONF_PATH"charhelp.txt");
 
 	sprintf(map->wisp_server_name ,"Server"); // can be modified in char-server configuration file
 
@@ -5518,14 +5519,14 @@ int do_init(int argc, char *argv[])
 	sprintf(map->mob_skill_db2_db, "mob_skill_db2");
 	sprintf(map->interreg_db, "interreg");
 
-	map->INTER_CONF_NAME="conf/inter-server.conf";
-	map->LOG_CONF_NAME="conf/logs.conf";
-	map->MAP_CONF_NAME = "conf/map-server.conf";
-	map->BATTLE_CONF_FILENAME = "conf/battle.conf";
-	map->ATCOMMAND_CONF_FILENAME = "conf/atcommand.conf";
-	map->SCRIPT_CONF_NAME = "conf/script.conf";
-	map->MSG_CONF_NAME = "conf/messages.conf";
-	map->GRF_PATH_FILENAME = "conf/grf-files.txt";
+	map->INTER_CONF_NAME=LANG_CONF_PATH"inter-server.conf";
+	map->LOG_CONF_NAME=LANG_CONF_PATH"logs.conf";
+	map->MAP_CONF_NAME = LANG_CONF_PATH"map-server.conf";
+	map->BATTLE_CONF_FILENAME = LANG_CONF_PATH"battle.conf";
+	map->ATCOMMAND_CONF_FILENAME = LANG_CONF_PATH"atcommand.conf";
+	map->SCRIPT_CONF_NAME = LANG_CONF_PATH"script.conf";
+	map->MSG_CONF_NAME = LANG_CONF_PATH"messages.conf";
+	map->GRF_PATH_FILENAME = LANG_CONF_PATH"grf-files.txt";
 	rnd_init();
 
 	for( i = 1; i < argc ; i++ ) {
@@ -5600,7 +5601,7 @@ int do_init(int argc, char *argv[])
 		char ip_str[16];
 		ip2str(addr_[0], ip_str);
 
-		ShowWarning("Not all IP addresses in /conf/map-server.conf configured, autodetecting...\n");
+		ShowWarning("Not all IP addresses in "LANG_CONF_PATH"map-server.conf configured, autodetecting...\n");
 
 		if (naddr_ == 0)
 			ShowError("Unable to determine your IP address...\n");

@@ -6,6 +6,7 @@
 
 #include "../common/mmo.h" // NAME_LENGTH,SEX_*
 #include "../common/core.h" // CORE_ST_LAST
+#include "../config/lang.h"
 
 enum E_LOGINSERVER_ST
 {
@@ -14,8 +15,8 @@ enum E_LOGINSERVER_ST
 	LOGINSERVER_ST_LAST
 };
 
-#define LOGIN_CONF_NAME "conf/login-server.conf"
-#define LAN_CONF_NAME "conf/subnet.conf"
+#define LOGIN_CONF_NAME LANG_CONF_PATH ## "login-server.conf"
+#define LAN_CONF_NAME LANG_CONF_PATH ## "subnet.conf"
 
 // supported encryption types: 1- passwordencrypt, 2- passwordencrypt2, 3- both
 #define PASSWORDENC 3

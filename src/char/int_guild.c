@@ -10,6 +10,7 @@
 #include "../common/showmsg.h"
 #include "../common/strlib.h"
 #include "../common/timer.h"
+#include "../config/lang.h"
 #include "char.h"
 #include "inter.h"
 #include "int_guild.h"
@@ -727,7 +728,7 @@ int inter_guild_sql_init(void)
 	castle_db = idb_alloc(DB_OPT_RELEASE_DATA);
 
 	//Read exp file
-	sv->readdb("db", DBPATH"exp_guild.txt", ',', 1, 1, 100, exp_guild_parse_row);
+	sv->readdb(LANG_DB_PATH, DBPATH"exp_guild.txt", ',', 1, 1, 100, exp_guild_parse_row);
 
 	timer->add_func_list(guild_save_timer, "guild_save_timer");
 	timer->add(timer->gettick() + 10000, guild_save_timer, 0, 0);

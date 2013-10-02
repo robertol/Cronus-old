@@ -16,6 +16,8 @@
 #include <string.h>// strlen/strnlen/memcpy/memset
 #include <stdlib.h>// strtoul
 
+#include "../config/lang.h"
+
 void hercules_mysql_error_handler(unsigned int ecode);
 
 int mysql_reconnect_type;
@@ -1094,7 +1096,7 @@ void Sql_HerculesUpdateSkip(Sql* self,const char *filename) {
 }
 
 void Sql_Init(void) {
-	Sql_inter_server_read("conf/inter-server.conf",true);
+	Sql_inter_server_read(LANG_CONF_PATH"inter-server.conf",true);
 }
 void sql_defaults(void) {
 	SQL = &sql_s;

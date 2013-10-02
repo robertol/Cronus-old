@@ -24,6 +24,7 @@
 #include "char.h"
 #include "inter.h"
 #include "pincode.h"
+#include "../config/lang.h"
 
 #include <sys/types.h>
 #include <time.h>
@@ -33,10 +34,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 // private declarations
-#define CHAR_CONF_NAME	"conf/char-server.conf"
-#define LAN_CONF_NAME	"conf/subnet.conf"
-#define SQL_CONF_NAME	"conf/inter-server.conf"
+#define CHAR_CONF_NAME	LANG_CONF_PATH ## "char-server.conf"
+#define LAN_CONF_NAME	LANG_CONF_PATH ## "subnet.conf"
+#define SQL_CONF_NAME	LANG_CONF_PATH ## "inter-server.conf"
 
 char char_db[256] = "char";
 char scdata_db[256] = "sc_data";
@@ -2178,7 +2180,7 @@ int parse_fromlogin(int fd) {
 					ShowError("Can not connect to login-server.\n");
 					ShowError("The server communication passwords (default s1/p1) are probably invalid.\n");
 					ShowError("Also, please make sure your login db has the correct communication username/passwords and the gender of the account is S.\n");
-					ShowError("The communication passwords are set in /conf/map-server.conf and /conf/char-server.conf\n");
+					ShowError("The communication passwords are set in /"LANG_CONF_PATH"map-server.conf and /"LANG_CONF_PATH"char-server.conf\n");
 					set_eof(fd);
 					return 0;
 				} else {
@@ -4991,7 +4993,7 @@ int do_init(int argc, char **argv) {
 	if (strcmp(userid, "s1")==0 && strcmp(passwd, "p1")==0) {
 		ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
 		ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
-		ShowNotice("And then change the user/password to use in conf/char-server.conf (or conf/import/char_conf.txt)\n");
+		ShowNotice("And then change the user/password to use in "LANG_CONF_PATH"char-server.conf (or conf/import/char_conf.txt)\n");
 	}
 	
 	inter_init_sql((argc > 2) ? argv[2] : inter_cfgName); // inter server configuration
