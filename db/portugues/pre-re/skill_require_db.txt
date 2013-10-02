@@ -1,26 +1,36 @@
-// Skill Requirements Database
-//
-// Structure of Database:
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados dos Requerimentos das Habilidades
+//---------------------------------------------------------
+// Estrutura do banco de dados:
 // SkillID,HPCost,MaxHPTrigger,SPCost,HPRateCost,SPRateCost,ZenyCost,RequiredWeapons,RequiredAmmoTypes,RequiredAmmoAmount,RequiredState,SpiritSphereCost,RequiredItemID1,RequiredItemAmount1,RequiredItemID2,RequiredItemAmount2,RequiredItemID3,RequiredItemAmount3,RequiredItemID4,RequiredItemAmount4,RequiredItemID5,RequiredItemAmount5,RequiredItemID6,RequiredItemAmount6,RequiredItemID7,RequiredItemAmount7,RequiredItemID8,RequiredItemAmount8,RequiredItemID9,RequiredItemAmount9,RequiredItemID10,RequiredItemAmount10
 //
-// If HP/SPratecost is positive, it is a percent of your current life, otherwise it is a percent of your max life.
+// Se HP/SPratecost È positiva, ser· uma porcentagem da vida atual, caso contr·rio ser· uma porcentagem da vida total.
 //
-// Legend for 'RequiredState' field:
-//  none = Nothing special
-//  move_enable = Requires to be able to move
-//  recover_weight_rate = Requires to be less than 50% weight
-//  water = Requires to be standing on a water cell
-//  cart = Requires a Pushcart
-//  riding = Requires to ride a Peco
-//  falcon = Requires a Falcon
+// Legenda para o campo 'RequiredState':
+//  none = Nada especial
+//  move_enable	= Exige que o personagem possa se mover
+//  recover_weight_rate = Exige que o peso do personagem seja menos que 50%
+//  water = Exige que o personagem esteja sob a ·gua
+//  cart = Exige que o personagem tenha um Carrinho
+//  riding = Exige que o personagem esteja montado num Peco
+//  falcon = Exige que o personagem tenha um Falc„o
 //  sight = Requires Sight skill activated
-//  hiding = Requires Hiding skill activated
-//  cloaking = Requires Cloaking skill activated
-//  explosionspirits = Requires Fury skill activated
-//  cartboost = Requires a Pushcart and Cart Boost skill activated
-//  shield = Requires a 0,shield equipped
-//  warg = Requires a Warg
-//  ridingwarg = Requires to ride a Warg
+//  hiding 	= Exige habilidade Esconderijo ativada
+//  cloaking = Exige habilidade Furtividade ativada
+//  explosionspirits = Exige habilidade F˙ria Interior ativada
+//  cartboost = Exige habilidade Impulso no Carrinho ativada
+//  shield = Exige que o personagem esteja equipando um escudo
+//	Peco = Requer um Peco
+//  warg = Requer um Warg
+//  ridingwarg = Requer que esteja montado em um Warg
+//---------------------------------------------------------
 
 5,0,0,8:8:8:8:8:15:15:15:15:15,0,0,0,0:1:2:3:4:5:6:7:8:9:10:12:13:14:15:16:17:18:19:20:21:22,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//SM_BASH#ÉoÉbÉVÉÖ#
 6,0,0,4:5:6:7:8:9:10:11:12:13,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//SM_PROVOKE#ÉvÉçÉ{ÉbÉN#
