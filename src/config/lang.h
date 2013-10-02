@@ -35,4 +35,6 @@
 #endif
 #endif
 
+#define pconcat(x,y) x ## y
+
 #endif // _CONFIG_LANGUAGE_H_

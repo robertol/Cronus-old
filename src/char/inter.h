@@ -20,7 +20,7 @@ int mapif_disconnectplayer(int fd, int account_id, int char_id, int reason);
 int inter_log(char *fmt,...);
 int inter_vlog(char *fmt, va_list ap);
 
-#define inter_cfgName LANG_CONF_PATH ## "inter-server.conf"
+#define inter_cfgName pconcat(LANG_CONF_PATH,"inter-server.conf")
 
 extern unsigned int party_share_level;
 
