@@ -36,9 +36,9 @@
 
 
 // private declarations
-#define CHAR_CONF_NAME	pconcat(LANG_CONF_PATH,"char-server.conf")
-#define LAN_CONF_NAME	pconcat(LANG_CONF_PATH,"subnet.conf")
-#define SQL_CONF_NAME	pconcat(LANG_CONF_PATH,"inter-server.conf")
+#define CHAR_CONF_NAME	LANG_CONF_PATH"char-server.conf"
+#define LAN_CONF_NAME	LANG_CONF_PATH"subnet.conf"
+#define SQL_CONF_NAME	LANG_CONF_PATH"inter-server.conf"
 
 char char_db[256] = "char";
 char scdata_db[256] = "sc_data";
