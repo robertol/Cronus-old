@@ -19,7 +19,7 @@
 
 #define NO_WATER 1000000
 
-char grf_list_file[256] = LANG_CONF_PATH"/grf-files.txt";
+char grf_list_file[256] = LANG_CONF_PATH"grf-files.txt";
 char map_list_file[256] = LANG_DB_PATH"map_index.txt";
 char map_cache_file[256];
 int rebuild = 0;
