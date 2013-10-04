@@ -1,3 +1,11 @@
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
 // Item Stacking Restriction File
 // Prevents an item to be stacked more than x times in given
 // inventory types. Generally used by 3rd class related skill items.
