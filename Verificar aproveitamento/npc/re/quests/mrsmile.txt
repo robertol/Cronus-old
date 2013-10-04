@@ -1,0 +1,16 @@
+//===== Cronus Script ======================================= 
+//= Quest Dona Risadinha
+//===== Por: ================================================== 
+//= Daegaladh, Masao
+//===== Versão Atual: ===================================== 
+//= 1.0
+//===== Compatível Com: ===================================== 
+//= Cronus
+//===== Descrição: ========================================= 
+//= [Aegis Conversion]
+//= Trade Clover, Fluff and Jellopy for a Mr. Smile mask.
+//===== Comentários Adicionais: ================================= 
+//= 1.0 Updated to match the new Izlude Map. [Masao]
+//============================================================ 
+
+izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz2	92

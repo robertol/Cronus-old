@@ -1,0 +1,171 @@
+//===== Cronus Script ======================================== 
+//= Guias de Geffen
+//===== Por: ================================================= 
+//= kobra_k88; L0ne_W0lf
+//===== Versão Atual: ======================================== 
+//= 1.4b
+//===== Compatível com: ====================================== 
+//= Cronus SVN
+//===== Changelog: =========================================== 
+//= Fully working.  Added a guide at every exit.
+//= v1.1 Now using duplicate command.
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.2a Small note that the BS guild moved to Einbroch [Poki#3]
+//= 1.3 Removed Duplicates [Silent]
+//= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.4a Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.4b Traduzido. [RoM]
+//============================================================
+
+geffen,203,116,0	script	Guia#gef::GefGuide	705,{
+	cutin "gef_soldier",2;
+	mes "[Guia de Geffen]";
+	mes "Bem-vindo a Geffen,";
+	mes "a Cidade da Magia. Se você";
+	mes "precisa de alguma dica sobre";
+	mes "a cidade, sinta-se à vontade para";
+	mes "me perguntar e eu farei o que puder para ajudá-lo.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("Indicações:Remover Indicações:Tutorial:Cancelar")) {
+		case 1:
+			mes "[Guia de Geffen]";
+			mes "Por favor selecione";
+			mes "uma localização no";
+			mes "menu a seguir.";
+			if (compass_check == 0) {
+				mes "Você gostaria que eu";
+				mes "marcasse as localizações";
+				mes "no seu Mini-Mapa?";
+				next;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while (.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("^FF0000Academia de Magia^000000:Loja de Forja:Loja de Armas:Loja de Utilidades:Bar:Estalagem:Torre de Geffen:Cancelar")) {
+				case 1:
+					mes "[Guia de Geffen]";
+					mes "A Academia de Magia ao";
+					mes "noroeste de Geffen é onde fica";
+					mes "a Mudança de Classe para a classe Mago.";
+					if (.@compass_check)
+						viewpoint 1,61,180,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Guia de Geffen]";
+					mes "A Loja de Forja é";
+					mes "localizada ao sudeste";
+					mes "do centro de Geffen.";
+					if (.@compass_check)
+						viewpoint 1,182,59,3,0x00FF00;
+					break;
+				case 3:
+					mes "[Guia de Geffen]";
+					mes "A Loja de Armas";
+					mes "pode ser encontrada ao noroeste";
+					mes "do centor de Geffen.";
+					if (.@compass_check)
+						viewpoint 1,99,140,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[Guia de Geffen]";
+					mes "Você pode encontrar a";
+					mes "Loja de Utilidades indo";
+					mes "para o sudoeste do";
+					mes "centro de Geffen.";
+					if (.@compass_check)
+						viewpoint 1,44,86,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[Guia de Geffen]";
+					mes "O Bar pode ser";
+					mes "encontrado ao nordeste";
+					mes "da Torre de Geffen.";
+					if (.@compass_check)
+						viewpoint 1,138,138,6,0xFF00FF;
+					break;
+				case 6:
+					mes "[Guia de Geffen]";
+					mes "A Estalagem pode ser";
+					mes "encontrada indo para";
+					mes "o nordeste do";
+					mes "centro de Geffen.";
+					if (.@compass_check)
+						viewpoint 1,172,174,7,0xFF00FF;
+					break;
+				case 7:
+					mes "[Guia de Geffen]";
+					mes "A Torre de Geffen é encontrada";
+					mes "no centro da cidade.";
+					mes "A Guilda dos Bruxos é no topo,";
+					mes "e também há um calabouço";
+					mes "abaixo dela. Há muito";
+					mes "mistério nessa torre...";
+					if (.@compass_check)
+						viewpoint 1,120,114,8,0x00FF00;
+					break;
+				case 8:
+					mes "[Guia de Geffen]";
+					mes "Por favor me peça para 'Remover";
+					mes "Indicações' se você não quiser";
+					mes "mais ter as indicações";
+					mes "mostradas no seu Mini-Mapa";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,2,0xFF0000;
+			viewpoint 2,237,41,3,0x00FF00;
+			viewpoint 2,46,345,4,0xFF00FF;
+			viewpoint 2,175,220,5,0xFF00FF;
+			viewpoint 2,134,221,6,0xFF00FF;
+			viewpoint 2,204,214,7,0xFF00FF;
+			viewpoint 2,204,214,8,0x00FF00;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Guia de Geffen]";
+			mes "Os avanços na magia e";
+			mes "tecnologia nos permitiu";
+			mes "atualizar nosso sistema";
+			mes "de informação que nos permite";
+			mes "marcar as localizações no seu";
+			mes "Mini-Mapa para uma navegação melhor.";
+			next;
+			mes "[Guia de Geffen]";
+			mes "Seu Mini-Mapa é localizado";
+			mes "no canto superior direito";
+			mes "da tela. Se você não puder vê-lo,";
+			mes "pressione as teclas 'Ctrl + Tab'";
+			mes "ou clique no botão 'Mapa' na sua Janela de Informações Básicas.";
+			next;
+			mes "[Guia de Geffen]";
+			mes "No seu Mini-Mapa,";
+			mes "clique nos símbolos '+' e '-'";
+			mes "para aumentar ou diminuir o";
+			mes "zoom do seu Mini-Mapa. Nós";
+			mes "esperamos que você aproveite sua";
+			mes "viajem aqui em Geffen, aventureiro.";
+			break;
+		case 4:
+			mes "[Guia de Geffen]";
+			mes "Tudo bem, aventureiro.";
+			mes "Eu desejo sua segurança";
+			mes "nas jornadas atravéz das";
+			mes "terras que você deverá viajar...";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "gef_soldier",255;
+	end;
+}
+
+geffen,118,62,0	duplicate(GefGuide)	Guia#2gef	705

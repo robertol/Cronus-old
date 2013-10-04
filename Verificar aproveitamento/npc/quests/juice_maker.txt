@@ -1,0 +1,307 @@
+//===== Cronus Script ========================================
+//= Quest do Criador de Suco
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 2.2
+//===== Compatible With: =====================================
+//= Cronus GIT
+//===== Description: =========================================
+//= Aprender como fazer Sucos
+//===== Additional Comments: =================================
+//= 1.1 fixed input number check [Lupus]
+//= 1.2 fixed misplaced Grape<->Carrot juices [Lupus]
+//= 1.3 added a loopless menu 'as many as possible' [Lupus]
+//= 1.3a Turned the juice making part of the Juicer npc into a subfunc.  Changed fruit amount needed to 1.[kobra_k88]
+//= Fixed exploits [Lupus]
+//= 1.6 fixed typo (where did @ipnut came from?) [Lance]
+//= 1.8 got rid of vars: 'MEAT',"MARIANNE","MORRISON"
+//= 	From now, all common quests start using bits of the
+//=	same variable MISC_QUEST [Lupus]
+//= 1.9 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Added tracking variables in, which are unset when complete.
+//= 2.0 Added missing checkweight. [L0ne_W0lf]
+//= 2.1 Fixed dialog for if your missing the needed items (He always said the dialog for grape juice). [Kisuka]
+//= 2.2 Traduzido e Otimizado. [Matheus]
+//============================================================
+
+prt_in,49,172,3	script	Marianne#juice	53,{
+	if (MISC_QUEST&1 || morison_meat == 15) {
+		mes "[Marianne]";
+		mes "Ai minha nossa senhora, eu não sei o que eu faço com esse menino! Ele só quer saber de comer carne!";
+		mes "Ele precisa comer frutas, mas diz que elas são duras demais... Será que ele comeria elas esmagadas?";
+		next;
+		set mother_marienu,0;
+		set morison_meat,0;
+		set MISC_QUEST,MISC_QUEST | 1;
+		mes "[Marianne]";
+		mes "Eu lembro que alguém disse que tem um moço que faz isso... Esmaga as frutas e tranforma elas em suco.";
+		mes "Mas que cabeça a minha, não consigo lembrar se era em Payon ou em Morroc...";
+		close;
+	}
+	if (mother_marienu == 1) {
+		mes "[Marianne]";
+		mes "Morrisson, meu filhinho, você precisa comer frutas!!";
+		mes "Se você comer só carnes vai virar um porquinho!";
+		next;
+		if ( select( "Conversar:Cancel" ) == 1 ) {
+			mes "[Marianne]";
+			mes "Você tá me achando com cara de quê hein, seu atrevido?";
+			mes "Eu aqui desesperda por que meu filho não come frutas,";
+			mes "E você deu uma carne pra ele? Seu retardado!";
+			next;
+			mes "[Mariana]";
+			mes "Nem ouse aparecer na minha frente de novo!";
+			close;
+		}
+		mes "[Mariana]";
+		mes "Morrisson, filhinho, por favor...";
+		close;
+	}
+	if (morison_meat > 0) {
+		mes "[Marianne]";
+		mes "Ai minha nossa senhora!!";
+		mes "Você deu carne pro meu filho! CARNE!!";
+		mes "Você quer acabar com os meus nervos, é isso né? Idiota!";
+		close;
+	}
+	mes "[Marianne]";
+	mes "Morrisson, meu filhinho, come uma frutinha, faz esse favor pra sua mamãezinha...";
+	mes "EU não aguento mais esse menino, ele só quer saber de carne!";
+	next;
+	if( select( "Conversar:Cancelar" ) == 1) {
+		mes "[Marianne]";
+		mes "Esse aqui é o Morrison, o meu filho.";
+		mes "Ele se recusa a comer frutas, olha só pra cara dele... Amarelada por falta de vitaminas...";
+		mes "Eu não consigo descobrir um jeito dele comer frutas e vegetais.";
+		close;
+	}
+	mes "[Marianne]";
+	mes "Morrisson!! Coma essa fruta ou eu te dou palmada!";
+	close;
+}
+
+prt_in,47,173,3	script	Morrison#juice	97,{
+	if (MISC_QUEST&1 || morison_meat == 15) {
+		mes "[Pequeno Morrisson]";
+		mes "Dá o fora, não dê ouvidos a minha mãe maluca.";
+		close;
+	}
+	if (morison_meat > 9) {
+		mes "[Pequeno Morrisson]";
+		mes "Ahh... Eu estou de barriga cheia agora.";
+		mes "Você não precisa me dar mais carne, aquela já foi o bastante.";
+		if (morison_meat == 10) {
+			next;
+			set morison_meat,morison_meat+1;
+			mes "[Pequeno Morrisson]";
+			mes "Olha, aqui, pode ficar com essas.";
+			mes "São as minhas balas favoritas, eu escondo elas da minha mãe. Hehhehehehe.";
+			close;
+			getitem 529,3; //Candy
+			getitem 530,1; //Candy_Striper
+		}
+		close;
+	}
+	mes "[Pequeno Morrisson]";
+	mes "Eu já disse, não quero comer essas frutas idiotas!.";
+	mes "Eu quero carne!!!";
+	next;
+	if (countitem(517) > 0) {
+		switch( select( "Conversar:Mostrar a Carne:Cancelar" ) ) {
+			case 1:
+				mes "[Pequeno Morrisson]";
+				mes "Que mãe idiota que eu tenho, fica me forçando a comer frutas.";
+				mes "Eu odeio frutas, elas são duras demais pros meus dentes!";
+				mes "Carnes são muito mais macias e saborosas.";
+				close;
+			case 2:
+				mes "[Pequeno Morrisson]";
+					mes "Aaahh!! Carne!";
+					mes "Hmm... Eu estou com tanta fome.. Você poderia me dar essa carne?";
+					next;
+				if (select("Dar a Carne para ele:Não dar a Carne para ele") == 1) {
+					delitem 517,1; //Meat
+					set morison_meat,morison_meat+1;
+					mes "[Pequeno Morrisson]";
+					mes "Finalmente! Minha mãe nunca me dá carne pra comer!";
+					mes "Muito obrigado!";
+					close;
+				}
+				set morison_meat,15;
+				mes "[Pequeno Morrisson]";
+				mes "Você é idiota como a minha mãe. Adultos, são todos iguais.";
+				close;
+			case 3:
+				mes "[Pequeno Morrisson]";
+				mes "Argh!!! Vegetais são tão nojentos!";
+				close;
+		}
+	}
+	if ( select( "Conversar:Cancelar" ) == 1 ) {
+		mes "[Pequeno Morrisson]";
+		mes "Que mãe idiota que eu tenho, fica me forçando a comer frutas.";
+		mes "Eu odeio frutas, elas são duras demais pros meus dentes!";
+		mes "Carnes são muito mais macias e saborosas.";
+		close;
+	}
+	mes "[Pequeno Morrisson]";
+	mes "Argh!!! Vegetais são tão nojentos!";
+	close;
+}
+
+payon_in03,188,146,5	script	Marx Hansen#juice	86,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Ei, espere aí !! -";
+		mes "- Você não pode receber mais itens -";
+		mes "Porque está carregando muitos itens. -";
+		mes "- Por favor, alivie um pouco a sua carga e tente de novo - ";
+		close;
+	}
+	if (MISC_QUEST&1) {
+		mes "[Marxhansens, o Mercador]";
+		mes "Bem-vindo. Você veio aqui fazer sucos?";
+		next;
+		switch( select( "Sim.:Instruções de como fazer sucos.:Cancelar." ) ) {
+			case 1:
+				mes "[Marxhansens, o Mercador]";
+				mes "Qual suco você quer fazer?";
+				next;
+				switch( select( "Suco de Maça.:Suco de Banana.:Suco de Cenoura.:Suco de Uva.:Cancelar" ) ) {
+					case 1:
+						set .@fruit,512;
+						set .@juice,531;
+						break;
+					case 2:
+						set .@fruit,513;
+						set .@juice,532;
+						break;
+					case 3:
+						set .@fruit,515;
+						set .@juice,534;
+						break;
+					case 4:
+						set .@fruit,514;
+						set .@juice,533;
+						break;
+					case 5:
+						mes "[Marxhansens, o Mercador]";											
+						mes "Até mais.";
+						close;
+				}
+				if (countitem(.@fruit) == 0 || countitem(713) == 0 || Zeny < 3) {
+					mes "[Merchant Marx Hansen]";
+					mes "Ah não...";
+					mes "Você não tem todos os materiais necessários.";
+					mes "Para fazer "+getitemname(.@juice)+" eu preciso de 1 "+getitemname(.@fruit)+", 1 Garrafa Vazia e 3 Zeny por Suco.";
+					next;
+					mes "[Merchant Marx Hansen]";
+					mes "Quando você tiver tudo preparado, eu irei lhe fazer o suco!";
+					close;
+				}
+
+				mes "[Marxhansens, o Mercador]";
+				mes "Quantas garrafas de suco você quer?";
+				next;
+				switch( select( "Tanto quanto for possível.:Eu quero definir a quantidade.:Desistir." ) ) {
+					case 1:
+						set .@make,countitem(.@fruit);
+						if (countitem(713) < .@make) set .@make, countitem(713);
+						if (Zeny/3 < .@make) set .@make, Zeny/3;
+						break;
+					case 2:
+						mes "[Merchant Marx Hansen]";
+						mes "[Marxhansens, o Mercador]";
+						mes "Defina um numero de 1 a 100, para cancelar digite '0'.";
+						mes "Você pode fazer até " + countitem(.@fruit) + " garrafas de suco.";
+						next;
+						while(1) {
+							input .@input;
+							if (.@input == 0) {
+								mes "[Marxhansens, o Mercador]";																									
+								mes "Até mais.";
+								close;
+							}
+							else if (.@input > 100) {
+								mes "[Marxhansens, o Mercador]";																									
+								mes "Você não pode fazer mais de 100 sucos de uma vez.";
+								next;
+							}
+							else {
+								break;
+							}
+						}
+						set .@make,.@input;
+						break;
+					case 3:
+						mes "[Marxhansens, o Mercador]";																									
+						mes "Até mais.";
+						close;	
+				}
+
+				set .@total_zeny,3 * .@make;
+
+				if (countitem(.@fruit) < .@make || countitem(713) < .@make || Zeny < .@total_zeny) {
+					mes "[Marxhansens, o Mercador]";
+					mes "Eu sinto muito, você não tem todos os materiais necessários.";
+					mes "Traga-os e eu farei os sucos.";
+					close;
+				}
+				delitem .@fruit,.@make;
+				delitem 713,.@make;
+				set zeny,zeny-.@total_zeny;
+				getitem .@juice,.@make;
+
+				mes "[Marxhansens, o Mercador]";
+				mes "Aqui está! Suco fresquinho!";
+				mes "Até mais.";
+				close;
+			case 2:
+				mes "[Marxhansens, o Mercador]";
+				mes "Quando os humanos ainda eram nômades, eles dependiam das frutas que achavam.";
+				mes "E com o tempo eles aprenderam fazer sucos com elas, para mante-las por mais tempo.";
+				next;
+				mes "[Marxhansens, o Mercador]";
+				mes "Agora, temos grandes hortas, e podemos ter todas as frutas que gostaríamos.";
+				mes "Mas os sucos continuam a ser muito importantes, por conterem apenas o que é bom da fruta.";
+				mes "Nos sucos, você pode aproveitar um sabor muito mais concentrado.";
+                next;
+				mes "Materiais pra se fazer Suco";
+				mes "Suco de Maçã";
+				mes "Maçã x 1, Garrafa Vazia x 1, 3 zeny.";
+				mes "";
+				mes "Suco de Banana";
+				mes "Banana x 1, Garrafa Vazia x 1, 3 zeny.";					
+				mes "";
+				mes "Suco de Cenoura";
+				mes "Cenoura x 1, Garrafa Vazia x 1, 3 zeny.";												
+				mes "";
+				mes "Suco de Uva";
+				mes "Uva x 1, Garrafa Vazia x 1, 3 zeny.";
+				close;
+			case 3:
+				mes "[Marxhansens, o Mercador]";
+				mes "Você veio até aqui por nada?";
+				close;
+		}
+	}
+	else {
+		mes "[Marxhansens, o Mercador]";
+		mes "Bem-vindo.";
+		next;
+		if (select("Conversar:Cancelar") == 1) {
+			mes "[Marxhansens, o Mercador]";
+			mes "Quando os humanos ainda eram nômades, eles dependiam das frutas que achavam.";
+			mes "E com o tempo eles aprenderam fazer sucos com elas, para mante-las por mais tempo.";
+			next;
+			mes "[Marxhansens, o Mercador]";
+			mes "Agora, temos grandes hortas, e podemos ter todas as frutas que gostaríamos.";
+			mes "Mas os sucos continuam a ser muito importantes, por conterem apenas o que é bom da fruta.";
+			mes "Nos sucos, você pode aproveitar um sabor muito mais concentrado.";
+			close;
+		}
+		mes "[Marxhansens, o Mercador]";
+		mes "Você veio até aqui por nada?";
+		close;
+	}
+}

@@ -1,0 +1,120 @@
+//===== Cronus Script ========================================== 
+//= Guia de Umbala
+//===== Por: =================================================== 
+//= Dizzy
+//===== Versão Atual: ========================================== 
+//= 1.6a
+//===== Comentarios Adicionais: ================================
+//= 1.1 Fixed location command format [Lupus]
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.6 Corrected activating ontouch. [L0ne_W0lf]
+//= 1.6a Traduzido. [RoM]
+//==============================================================
+
+umbala,128,94,4	script	Aventureira#um	702,{
+	mes "[Aventureira]";
+	mes "Este é um lugar muito estranho...";
+	mes "É subdesenvolvido, e aqui tem";
+	mes "varios caminhos complexos e perigosos...";
+	next;
+	mes "[Aventureira]";
+	mes "Contudo, desde que eu estou aqui";
+	mes "há meses, eu estou estou familiar com";
+	mes "esta área geográfica e dos pontos";
+	mes "interessantes desse vilarejo.";
+	mes "Você é bem-vindo para perguntar sobre";
+	mes "as localizações das construções.";
+	next;
+	switch(select("Indicações:Remover Indicações:Cancelar")) {
+	case 1:
+		mes "[Aventureira]";
+		mes "Então, sobre qual deseja saber?";
+		next;
+		switch(select("Casa do Chefe de Aldeia:Casa do Shaman da Aldeia:Loja de Armas:Loja de Utilidades:Local de Bungee Jump:Cancelar")) {
+		case 1:
+			mes "[Aventureira]";
+			mes "Eu fiz uma marca ^FF3355+^000000";
+			mes "no seu mini-mapa.";
+			next;
+			mes "[Aventureira]";
+			mes "Somente o Chefe da Aldeia sabe";
+			mes "linguagens estrangeiras. Seria bom";
+			mes "você ir visitá-lo antes de qualquer outro.";
+			viewpoint 1,66,250,2,0xFF3355;
+			break;
+		case 2:
+			mes "[Aventureira]";
+			mes "Eu fiz uma marca ^CE6300+^000000";
+			mes "no seu mini-mapa.";
+			next;
+			mes "[Aventureira]";
+			mes "O Shaman Utan tem alguns";
+			mes "poderes mágicos...";
+			mes "As pessoas dizem que ele pode criar";
+			mes "minérios de pedras encantadas, e dividir";
+			mes "pedras encantadas puras em minérios.";
+			viewpoint 1,217,186,3,0xCE6300;
+			break;
+		case 3:
+			mes "[Aventureira]";
+			mes "Eu fiz uma marca ^55FF33+^000000";
+			mes "no seu mini-mapa.";
+			next;
+			mes "[Aventureira]";
+			mes "Os Utan's estão sempre bem armados";
+			mes "e preparados para ataques de";
+			mes "seus inimigos. Aparentemente, eles";
+			mes "eles foram atacados pelos estrangeiros muitas vezes no passado.";
+			viewpoint 1,126,154,4,0x55FF33;
+			break;
+		case 4:
+			mes "[Aventureira]";
+			mes "Eu fiz uma marca ^3355FF+^000000";
+			mes "no seu mini-mapa.";
+			next;
+			mes "[Aventureira]";
+			mes "Você encontrará muitas coisas úteis para";
+			mes "viajar na Loja de Utilidades, então por que você não vai dar uma olhada?";
+			viewpoint 1,136,127,5,0x3355FF;
+			break;
+		case 5:
+			mes "[Aventureira]";
+			mes "Eu fiz uma marca ^00FF00+^000000";
+			mes "no seu mini-mapa.";
+			next;
+			mes "[Aventureira]";
+			mes "Umbala tem um local único chamado";
+			mes "de 'Local de Bungee Jump'.";
+			mes "Se você estiver interessado em testar";
+			mes "sua coragem, por que não vai";
+			mes "e participe você mesmo";
+			mes "desse ritual Utan?";
+			viewpoint 1,139,198,6,0x00FF00;
+			break;
+		case 6:
+			mes "[Aventureira]";
+			mes "Se você quiser remover as marcas de";
+			mes "localizações do seu mini-mapa, por favor";
+			mes "escola 'Remover Indicações.' no menu.";
+		}
+		break;
+	case 2:
+		viewpoint 2,66,250,2,0xFF3355;
+		viewpoint 2,217,186,3,0xCE6300;
+		viewpoint 2,126,154,4,0x55FF33;
+		viewpoint 2,136,127,5,0x3355FF;
+		viewpoint 2,139,198,6,0x00FF00;
+		mes "[Aventureira]";
+		mes "Eu removi todas as marcas do seu";
+		mes "mini-mapa. Sinta-se à vontade para me perguntar";
+		mes "novamente se você quiser que eu marque as localizações.";
+		break;
+	case 3:
+		mes "[Aventureira]";
+		mes "É legal aprender a cultura Utan. Cuide-se.";
+		break;
+	}
+	close;
+}

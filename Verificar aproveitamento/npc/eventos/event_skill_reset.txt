@@ -1,0 +1,113 @@
+//===== Cronus Script ======================================== 
+//= Evento Oficial de resetar skill (kRO & idRO)
+//===== Por: ================================================= 
+//= $ephiroth
+//===== Versão Atual: ======================================== 
+//= 1.3
+//===== Compatível com: ======================================
+//= Cronus
+//===== Descrição: =========================================== 
+//= Reset de habilidade com pagamento, BaseLevel minimo 60 para resetar as habilidade.
+//= Cada 1 BaseLevel precisa de 20.000 Zeny, e deve ter cuidado ao usar habilidade.
+//===== Comentários Adicionais: ==============================
+//= 2006 - Edição de Reset de Habilidades NPC
+//= 2006/11/16: 1.0 Lançamento de funcionamento total. [$ephiroth]
+//= 1.01 Checado, corrigidos problemas, agora usuarios MISC_QUEST var [Lupus]
+//= 1.02 Adicionado mensagem de ausente, comentário ,etc. [$ephiroth]
+//= 1.2a - Traduzido [Evanio]
+//= 1.2b - Revisado Script [Asus]
+//= 1.3 - Otimizado [Asus]
+//============================================================
+yuno,138,187,4	script	Professor de Hipnose	124,{
+	
+	mes "[^D5A500Hipnotisador^000000]";
+	if(MISC_QUEST & 1024){
+		mes "Eu já lhe disse que você só pode concluir este evento uma vez.";
+		close;
+	}
+	if(BaseLevel < 60) {
+		mes "Por favor, retorne quando você atingir o nível de base 60 ou superior.";
+		close;
+	}
+	if(SkillPoint != 0) {
+		mes "Você irá precisar de todos os pontos de habilidade se quiser que eu continue.";
+		mes "Por favor, venha novamente em breve!";
+		close;
+	}
+	if(Weight || checkfalcon() || checkcart() || checkriding()) {
+		mes "Deseja redefinir as habilidades especiais?";
+		mes "Me desculpe, mas...";
+		next;
+		mes "[^D5A500Hipnotisador^000000]";;
+		if(Weight) {
+			mes "Você não pode resetar as habilidades";
+			mes "quando você mantem";
+			mes "muitos itens contigo.";
+		} else if(checkcart())
+			mes "Por favor, se disfaça de seu carrinho para poder continuar.";
+		else if(checkfalcon())
+			mes "Por favor, livre-se de seu falcão para poder continuar.";
+		else if(checkriding())
+			mes "Por favor, livre-se de seu PecoPeco para poder continuar.";
+		next;
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Volte em breve!";
+		close;
+	}
+	mes "Olá, Eu sou o resetador de habilidades.";
+	mes "Seu nome é ^0080FF"+strcharinfo(0)+"^000000.";
+	mes "Em que posso ajuda-lo?";
+	next;
+	switch(select("^009500Informações sobre resete de habilidades.^000000:^00B6FFResetar Habilidades.^000000:^000088Nada^000000")) {	
+
+		case 1:
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Esse reset de habilidade NÃO É GRATUITO!!";
+		mes "A despesa para o reset das habilidades é ^D5A50020000 Zeny x Nível de base^000000.";
+		mes "Sim ... A cada nível de base custa 20000 Zeny para resetar as habilidades.";
+		next;
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Ah sim, mais uma coisa!";
+		mes "Qualquer carrinho, falcão ou PecoPeco que você tem equipado";
+		mes "serão removidos quando resetar as habilidades.";
+		next;
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Só poderá resetar as habilidades uma vez.";
+		mes "Cuidado com suas habilidades a partir daqui.";
+		close;
+
+		case 2:
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Antes de resetar as habilidades.";
+		mes "Você tem que me dizer o nível de seu nível de base."; 
+		next;
+		mes "^D5A500[" + strcharinfo(0) + "]^000000";
+		mes "Meu nível de base é ^AA00AALevel " + BaseLevel + ".^000000"; 
+		next;
+		set @zeny,BaseLevel*20000;
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "O total de zeny para a reposição da quantia das habilidades é ^529DFF" + @zeny + "Zeny^000000  para o serviço de resetação de habilidades.";
+		next;
+		if(Zeny < @zeny) {
+			mes "[^D5A500Hipnotisador^000000]";;
+			mes "Parece que você não tem dinheiro suficiente.";
+			mes "Além disso, aguardamos a oportunidade.";
+			emotion e_hmm;
+			close;
+		}
+		set Zeny, Zeny-@zeny;
+		set MISC_QUEST,MISC_QUEST | 1024;
+		resetskill;
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Obrigado.";
+		emotion e_thx;
+		logmes "SKILL RESET EVENT";
+		close;
+
+		case 3:
+		mes "[^D5A500Hipnotisador^000000]";;
+		mes "Você sabe onde me encontrar,";
+		mes "se quiser resetar suas habilidades!!"; 
+		close;
+	}
+}

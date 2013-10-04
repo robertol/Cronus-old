@@ -1,0 +1,439 @@
+//===== Cronus Script ========================================
+//= Quest para se tornar Taekwon
+//===== Por: =================================================
+//= Tsuyuki & Samuray22
+//===== Versão Atual: ========================================
+//= 1.2b
+//===== Comentários Adicionais: ==============================
+//= 1.0 Replaced previous TK Job Quest with this one [Tsuyuki]
+//= 1.1 Rewrote to the Aegis Standars. [Samuray22]
+//= 1.2 Fixed position the npc is facing. [Kisuka]
+//= 1.2a Traduzido e revisado de acordo com o bRO. [Mara]
+//= 1.2b Removido show	[Yum]
+//============================================================
+
+payon,157,141,5	script	Fênix#TKJobChange	753,{
+	if(Upper == 2) {
+		mes "[Fênix]";
+		mes "Olá, criança.";
+		close;
+	} else if(Class == Job_Taekwon) {
+		mes "[Fênix]";
+		mes "Como está indo";
+		mes "o seu treinamento? À medida que";
+		mes "suas técnicas se tornam mais";
+		mes "refinadas ou espetaculares,";
+		mes "nunca se esqueça que você";
+		mes "sempre poderá confiar no básico.";
+		close;
+	} else if(Class > Job_Novice) || (Class == Job_Novice && TK_Q == 0) {
+		mes "[Fênix]";
+		mes "Essa terra. Nosso mundo,";
+		mes "que já foi belo, tem sido	";
+		mes "arruinado pelo mal: existem";
+		mes "muitos homens corrompidos pelas";
+		mes "trevas, muitos monstros";
+		mes "ameaçando os inocentes...";
+		next;
+		mes "[Fênix]";
+		mes "A destruição que reina nesse";
+		mes "mundo é muito intensa para os";
+		mes "humanos normais, que não podem";
+		mes "se defender por conta própria";
+		mes "contra adversidades tão poderosas. Mesmo";
+		mes "assim, deve-se aspirar lutar contra as adversidades.";
+		next;
+		mes "[Fênix]";
+		mes "E por isso eu me dediquei";
+		mes "a me tornar mais forte. Eu tenho treinado para";
+		mes "alcança a iluminação, desenvolvendo";
+		mes "uma arte para educar a mente e o corpo, e que";
+		mes "eu desejo compartilhar com";
+		mes "o mundo.";
+		next;
+		mes "[Fênix]";
+		mes "Eu posso não estar apto a mudar";
+		mes "o mundo sozinho, mas eu nunca";
+		mes "irei parar de treinar";
+		mes "espiritualmente e fisicamente.";
+		mes "Eu sei que a resposta virá";
+		mes "com o tempo...";
+		next;
+		if (Class == Job_Novice && TK_Q == 0) {
+			goto L_change;
+		}
+		mes "[Fênix]";
+		mes "Nobre aventureiro:";
+		mes "se você conhece alguém que";
+		mes "ainda não tenha encontrado o seu caminho";
+		mes "na vida, por favor, mande-o";
+		mes "a mim. Se houver interesse,";
+		mes "eu posso ensinar minha arte...";
+		close;
+L_change:
+		mes "[Fênix]";
+		mes "Se você ainda não decidiu";
+		mes "que caminho seguir na vida";
+		mes "eu gostaria que considerasse";
+		mes "a opção de se tornar um praticante";
+		mes "de minha arte. Não será fácil,";
+		mes "mas irá te levar a";
+		mes "uma força maior...";
+		next;
+		if(select("Certo, eu vou me juntar a você.","Não, obrigado.") == 1) {
+			if(getskilllv("NV_BASIC") < 9) {
+				mes "[Fênix]";
+				mes "Mas que pena! Você";
+				mes "ainda não está pronto para";
+				mes "começar a treinar sobre";
+				mes "minha arte de ensinar com";
+				mes "o seu atual nível de classe.";
+				mes "Por favor, volte quando";
+				mes "alcançar nível 9 de classe.";
+				close;
+			}
+			mes "[Fênix]";
+			mes "Muito bem... Eu aceito você";
+			mes "como meu estudante. Ao começar";
+			mes "o treinamento, seu corpo físico";
+			mes "deve antes de tudo estar";
+			mes "condicionado para";
+			mes "poder executar as habilidades.";
+			mes "que você irá aprender.";
+			next;
+			if(BaseLevel > 19) {
+				mes "[Fênix]";
+				mes "Hm. Eu vi que você treinou";
+				mes "o suficiente seu físico";
+				mes "como Aprendiz. Muito bom. Então deixe-me preparar para seu";
+				mes "treinamento espiritual. Respire";
+				mes "profundamente, e fale comigo quando estiver pronto.";
+				set TK_Q, 2;
+				close;
+			}
+			mes "[Fênix]";
+			mes "A mente não está necessariamente";
+			mes "ligada aos limites do seu corpo,";
+			mes "mas você não irá nunca alcançar o seu";
+			mes "verdadeiro potencial sem integrar";
+			mes "mente e corpo. Vá, ganhe mais ^ff00001";
+			mes "Nível de Base^000000, e então retorne.";
+			next;
+			set TAEK_Q, BaseLevel;
+			set TK_Q, 1;
+			mes "[Fênix]";
+			mes "Eu entendo que essa não é";
+			mes "uma tarefa fácil para Aprendizes,";
+			mes "mas você deve se preparar para as";
+			mes "durezas dessa profissão. Eu espero";
+			mes "que você esteja mais forte";
+			mes "da próxima vez que nos";
+			mes "encontrarmos.";
+			close;
+		}
+			mes "[Fênix]";
+			mes "Eu entendo. A vida de alguém";
+			mes "pode tomar muitos caminhos, mas";
+			mes "você pode escolher viajar apenas por um deles";
+			mes "por vez. Eu espero que você";
+			mes "trabalhe para alcançar a iluminação em";
+			mes "seu próprio caminho, aventureiro.";
+			close;
+	}
+	switch(TK_Q) {
+	case 1:
+		if(BaseLevel > TAEK_Q) {
+			set TK_Q, 2;
+			mes "[Fênix]";
+			mes "Bom. Eu sinto que você";
+			mes "está mais sintonizado com sua";
+			mes "força interior. Esse é o";
+			mes "resultado natural do crescimento";
+			mes "Nós estamos prontos para";
+			mes "prosseguir";
+			mes "com a próxima parte de nosso";
+			mes "treinamento.";
+			close;
+		}
+			mes "[Fênix]";
+			mes "Você precisa ganhar mais ^ff00001";
+			mes "Nível de Base^000000 para";
+			mes "provar que você pode suportar";
+			mes "o difícil treinamento dessa";
+			mes "classe.";
+			close;
+	case 2:
+		mes "[Fênix]";
+		mes "Para o seu treinamento espiritual,";	
+		mes "eu vou lhe perguntar uma série de";
+		mes "questões para testar o seu espírito.";
+		mes "para testar seu espírito.";
+		mes "Relaxe. Responda da forma mais";
+		mes "honestamente que você puder.";
+		mes "Sua vontade e crença";
+		mes "serão testadas.";
+		next;
+		mes "[Fênix]";
+		mes "Como um praticante da minha";
+		mes "arte, a habilidade de tomar";
+		mes "rapidamente a melhor decisão";
+		mes "durante uma batalha, será necessária.";
+		mes "Agora, nós vamos começar";
+		mes "o interrogatório.";
+		next;
+		mes "[Fênix]";
+		mes "Quando você encontra";
+		mes "grandes dificuldades, como você";
+		mes "costuma geralmente reagir?";
+		next;
+		switch(select( "Eu encaro de cabeça erguida.:Evito-as de alguma maneira.:Me recomponho e analiso o problema.")) {
+		case 2:
+			mes "[Fênix]";
+			mes "Tolo! Como você espera";
+			mes "amadurecer se foge dos";
+			mes "desafios? O medo pode";
+			mes "ser uma reação saudável que até";
+			mes "pode salvar sua vida, mas a";
+			mes "verdadeira covardia é desprezível.";
+			next;
+			mes "[Fênix]";
+			mes "Me desaponta ouvir";
+			mes "você dizer isso. Nunca";
+			mes "diga tal coisa para mim.";
+			mes "Hmm. Contemple os significados";
+			mes "da coragem e covardia e então";
+			mes "venha falar comigo novamente.";
+			close;
+		case 3:
+			mes "[Fênix]";
+			mes "Recompor? É bom fazer isso";
+			mes "após você ter sido derrotado.";
+			mes "Mas é melhor enfrentar os";
+			mes "problemas";
+			mes "quando você se depara com eles.";
+			mes "Você não terá sempre o";
+			mes "luxo de se 'recompor'.";
+			next;
+			mes "[Fênix]";
+			mes "Os problemas podem ser antecipados";
+			mes "e analisados, mas eu acho";
+			mes "que recuar logo de início não é";
+			mes "sábio.";
+			mes "Contemple seus medos";
+			mes "assim como aquilo que você define como fracasso.";
+			mes "Então, volte até mim.";
+	close;
+		case 1:
+			mes "[Fênix]";
+			mes "Sim, essa é a resposta";
+			mes "que eu queria. Mesmo que você não possa";
+			mes "lidar com um problema no início, nós";
+			mes "só podemos nos beneficiar de";
+			mes "uma determinação tão forte. Não";
+			mes "deixe nenhum obstáculo";
+			mes "impedir você de progredir.";
+			next;
+			mes "[Fênix]";
+			mes "Mesmo se você fracasse, você";
+			mes "só terá a aprender com a";
+			mes "experiência de se dar";
+			mes "por inteiro. Tentativas pela";
+			mes "metade raramente geram";
+			mes "resultados frutíferos.";
+			next;
+			mes "[Fênix]";
+			mes "Observando como você já";
+			mes "entende a importância de";
+			mes "possuir força de vontade, nós agora prosseguiremos";
+			mes "para a próxima pergunta.";
+			next;
+		}
+		mes "[Fênix]";
+		mes "Em suas jornadas você irá";
+		mes "encontrar muitas pessoas";
+		mes "com histórias de vida";
+		mes "e pontos de vista diferentes.";
+		mes "Inevitavelmente, você irá";
+		mes "encontrar alguém cujo estilo de vida";
+		mes "você não poderá entender.";
+		next;
+		mes "[Fênix]";
+		mes "Da mesma maneira, essa pessoa não irá entender seu estilo de vida.";
+		mes "Quando seus dois pontos de vista";
+		mes "colidirem, causando um conflito intenso,";
+		mes "de vista se chocarem,";
+		mes "causando conflito, como";
+		mes "como você irá reagir?";
+		next;
+		switch( select("Insistir que estou certo, sem medo.:Não me importar em conflitar os pontos de vista.:Aceitar as diferenças e aprender com elas.")) {
+		case 1:
+		mes "[Fênix]";
+		mes "É importante possuir sua própria";
+		mes "opinião. Porém, você";
+		mes "deve reconhecer que você pode";
+		mes "estar errado e que um ponto de vista";
+		mes "oposto pode ter";
+		mes "seus méritos";
+		next;
+		mes "[Fênix]";
+		mes "Não há nenhuma resposta certa";
+		mes "e a luz da verdade pode ter";
+		mes "muitas nuances.";
+		mes "Assim é o caminho da natureza.";
+		mes "Forçar suas idéias sobre os outros";
+		mes "é uma prática opressiva.";
+		next;
+		mes "[Fênix]";
+		mes "Não limite-se";
+		mes "a um único ponto de vista e não";
+		mes "atrapalhe seu crescimento";
+		mes "concordando com uma única verdade.";
+		mes "Pense sobre isso e";
+		mes "depois venha falar comigo de novo.";
+		close;
+		case 2:
+			mes "[Fênix]";
+			mes "É importante se dar";
+			mes "bem com os outros, mas";
+			mes "você não trará nenhum";
+			mes "valor a esse mundo";
+			mes "sem suas próprias contribuições,";
+			mes "pensamentos e opiniões.";
+			next;
+			mes "[Fênix]";
+			mes "Um conflito de ideais,";
+			mes "quando conduzido com respeito por";
+			mes "si mesmo e pelos outros, é uma";
+			mes "grande oportunidade de ampliar";
+			mes "o seu entendimento sobre";
+			mes "o mundo como ele é";
+			mes "para os outros.";
+			next;
+			mes "[Fênix]";
+			mes "Medite sobre essa idéia de";
+			mes "estebelecer harmonia com";
+			mes "seu eu interior e harmonia com";
+			mes "outros indivíduos. Então, volte até mim.";
+	close;
+		case 3:
+			mes "[Fênix]";
+			mes "Bom. Você deve perceber";
+			mes "as diferenças pelo que elas";
+			mes "são de verdade. Você também deve";
+			mes "usar de autocrítica com suas próprias";
+			mes "visões das coisas com graça e";
+			mes "respeito sincero.";
+			next;
+			mes "[Fênix]";
+			mes "É impossível saber tudo";
+			mes "neste mundo.";
+			mes "É impossível entender";
+			mes "cada ponto de vista. Mas isso não";
+			mes "significa";
+			mes "que os pontos de vista que você não entende,";
+			mes "não tenham seus méritos.";
+			next;
+			mes "[Fênix]";
+			mes "Aquele com o quem você";
+			mes "discorda pode ter";
+			mes "a resposta que você não conhece.";
+			mes "Quando você estiver fraco,";
+			mes "essa pessoa poderá ser sua";
+			mes "maior ajuda. Lembre-se disso.";
+			next;
+		}
+		mes "[Fênix]";
+			mes "Eu estou satisfeito com";
+			mes "as respostas que você";
+			mes "me deu. Por favor,";
+			mes "reflita por um tempo";
+			mes "sobre o que discutimos.";
+			mes "Quando sua mente estiver calma,";
+			mes "volte e venha falar comigo.";
+		set TK_Q, 3;
+		close;
+	case 3:
+		mes "[Fênix]";
+		mes "Você esta se sentindo calmo";
+		mes "e em paz? Eu irei te perguntar";
+		mes "uma coisa muito importante.";
+		mes "Me dê uma resposta honesta.";
+		next;
+		mes "[Fênix]";
+		mes "^ff0000Você está pronto para se dedicar";
+		mes "à arte especial que";
+		mes "eu vou te ensinar e a manter";
+		mes "a dignidade de sua filosofia?^000000";
+		next;
+		if( select( "Sim.","Não.") == 1) {
+			mes "[Fênix]";
+			mes "Muito bem. Você não é mais";
+			mes "somente um aluno.";
+			mes "Agora lhe foram confiados";
+			mes "os poderes e as responsabilidades";
+			mes "de um discípulo do^ff0000Tae Kwon Do^000000.";
+			next;
+			mes "[Fênix]";
+			mes "'Tae Kwon' significa";
+			mes "'socar e chutar',";
+			mes "e 'Do' significa";
+			mes "'arte'. Essa arte marcial é";
+			mes "focada nas habilidades utilizando";
+			mes "os punhos e pés.";
+			next;
+			mes "[Fênix]";
+			mes "Por favor, use essa disciplina";
+			mes "para fortalecer seu corpo e mente,";
+			mes "além de aprender as habilidades que";
+			mes "se ajustam melhor a você";
+			mes "Nunca deixe de treinar e nunca traga";
+			mes "vergonha ao Tae Kwon Do.";
+			next;
+			callfunc "Job_Change",Job_Taekwon;
+			callfunc "F_ClearJobVar";
+			getitem 2101,1; // Guard[0]
+			mes "[Fênix]";
+			mes "Você ainda é jovem, então";
+			mes "eu acredito que você quer";
+			mes "um título. Nesse caso, você agora se chama";
+			if(Sex == 0) {
+				mes "^FF0000Garoto de Tae Kwon Do^000000.";
+			} else {
+				mes "^FF0000Garota de Tae Kwon Do^000000.";
+			}
+			mes "Sim, esse nome é bom. ";
+			next;
+			mes "[Fênix]";
+			mes "Por favor, pegue esse";
+			mes "uniforme de treinamento";
+			mes "e itens de defesa. Faça um";
+			mes "bom uso desses presentes.";
+			mes "Conforme você viaja e treina,";
+			mes "mostre aos outros sobre nossa";
+			mes "arte e aprenda o que puder";
+			mes "em retorno.";
+			next;
+			mes "[Fênix]";
+			mes "Agora está na hora de";
+			mes "embarcar na sua própria";
+			mes "jornada em busca de novos";
+			mes "desafios para desenvolver";
+			mes "sua força. Siga seu caminho";
+			mes "com orgulho, como um";
+			mes "praticante de Tae Kwon Do!";
+			next;
+			mes "[Fênix]";
+			mes "Muito bem. Eu lhe desejo sorte.";
+			mes "Espero vê-lo novamente em";
+			mes "breve, "+strcharinfo(0)+".";
+			close;
+		}
+			mes "[Fênix]";
+			mes "Hmmm, talvez você não esteja";
+			mes "tão preparado para progredir do";
+			mes "seu status de estudande para o de um discípulo completo.";
+			mes "Quando você se sentir preparado,";
+			mes "volte e venha falar comigo.";
+			close;
+	}
+}

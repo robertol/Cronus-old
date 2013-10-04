@@ -1,0 +1,516 @@
+//===== Hercules Script ======================================
+//= Official scripts for beginners from iRO
+//===== By: ==================================================
+//= MasterOfMuppets
+//===== Current Version: =====================================
+//= 1.9
+//===== Additional Comments: =================================
+//= 1.0 Added Alberta, Prontera, Izlude, Payon, Byalan Island,
+//= 	Archer Village, Payon Cave and Coal Mine
+//= 1.1 Geffen, Orc Dungeon
+//= 1.2 Added 5 more Boards [MasterOfMuppets]
+//= 1.3 Fixed spelling mistakes. [Nexon]
+//= 1.3a Fixed a missing close; [Nexon]
+//= 1.4 Added more BBS MasterOfMuppets
+//= 1.5 Added the last of the Quadro de Avisoss, I think... [MasterOfMuppets]
+//= 1.5a Fixed a small screw up with the color codes in the Glastheim BB [MasterOfMuppets]
+//= 1.5b Fixed another small screw up with the color codes in the Glastheim BB [Kayla]
+//= 1.6 Removed Duplicates [Silent]
+//= 1.7 Updated MOrroc NPCs to reflect episode 12.1 changes. [L0ne_W0lf]
+//= 1.8 Updated Payon Cave Bulletion Board Locations. [Masao]
+//=1.9 Traduzido conforme bRO. [Dojo]
+//============================================================
+
+alberta,111,59,5	script	Quadro de Avisos#1	837,{
+	mes "[Cidade Portuária, Alberta]";
+	mes "Bem-vindo à cidade portuária Alberta.";
+	mes "Alberta tem um bem desenvolvido comércio náutico.";
+	mes "Recentemente, as ligações comercias de Alberta se expandiram para";
+	mes "vários países estrangeiros.";
+	next;
+	mes "[Cidade Portuária, Alberta]";
+	mes "Há a Guilda dos Mercadores, onde é possível passar para a classe";
+	mes "Mercador e muitos representantes de países estrangeiros";
+	mes "se situam nas docas para direcionar os turistas aos seus países.";
+	next;
+	mes "[Cidade Portuária, Alberta]";
+	mes "Há um boato sobre uma ilha chamada 'Ilha da Tartaruga";
+	mes "entre os marinheiros, você pode tentar descobrir a verdade.";
+	mes "Além disso, há um navio naufragado descoberto perto de Alberta";
+	mes "que se tornou muito popular entre os aventureiros.";
+	next;
+	mes "[Cidade Portuária, Alberta]";
+	mes "Dessa cidade Payon se localiza a noroeste.";
+	mes "Você pode embarcar em um navio para visitar Izlude nas docas. Aproveite a sua viagem.";
+	close;
+}
+
+geffen,124,65,5	script	Quadro de Avisos#2	837,{
+	mes "[Cidade da Magia, Geffen]";
+	mes "Bem-vindo à Cidade da Magia, Geffen.";
+	mes "Geffen é conhecida por suas várias lendas relacionadas à magia.";
+	next;
+	mes "[Cidade da Magia, Geffen]";
+	mes "Como principais construções da cidade,";
+	mes "temos a Escola de Magia para os Magos";
+	mes "e a Torre de Geffen para os Bruxos.";
+	next;
+	mes "[Cidade da Magia, Geffen]";
+	mes "Nos subterrâneos da Torre de Geffen,";
+	mes "existe um calabouço que, dizem os boatos, é habitado por terríveis";
+	mes "monstros. Também há rumores de que uma cidade esquecida";
+	mes "chamada Geffenia, onde toda a sabedoria e história élficas estão guardadas,";
+	mes "está escondida dentro do calabouço.";
+	next;
+	mes "[Cidade da Magia, Geffen]";
+	mes "Dessa cidade a Vila dos Orcs se localiza ao sul,";
+	mes "Glast Heim a oeste,";
+	mes "Prontera a leste,";
+	mes "e o Monte Mjolnir está ao norte. Aproveite a sua viagem.";
+	close;
+}
+
+gef_fild10,69,340,5	script	Quadro de Avisos#3	837,{
+	mes "[Calabouço dos Orcs]";
+	mes "Cuidado! O Calabouço dos Orcs é formado por 2 níveis.";
+	mes "Monstros residentes do calabouço não são tão fortes individualmente,";
+	mes "porém, eles tendem a atacar em grupo. Então sugere-se cautela.";
+	next;
+	mes "[Calabouço dos Orcs]";
+	mes "Você só pode ver Orcs Esqueletos, Zenorcs e Orcs Zumbis";
+	mes "nesse calabouço.";
+	next;
+	mes "[Calabouço dos Orcs]";
+	mes "Armas com propriedade Sagrado o ajudarão muito nessa batalha,";
+	mes "já que a maioria dos monstros é do tipo morto-vivo.";
+	mes "Se você não tem uma arma Sagrada, é recomendado formar grupo com um Sacerdote, para que ele possa conjurar Aspersio em sua arma.";
+	close;
+}
+
+izlu2dun,104,92,5	script	Quadro de Avisos#4	837,{
+	mes "[Túnel Submarino]";
+	mes "Cuidado! O calabouço de Izlude é constituído de 5 níveis";
+	mes "Os primeiros níveis são ideais para novos aventureiros explorarem, mas, quanto mais níveis você descer, mais monstros fortes você encontrará.";
+	next;
+	mes "[Túnel Submarino]";
+	mes "A maioria dos monstros possui a propriedade Água,";
+	mes "por isso, armas com propriedade Vento o ajudarão muito na batalha.";
+	close;
+}
+	
+izlude,131,116,4	script	Quadro de Avisos#5	837,{
+	mes "[Izlude, a Cidade-Satélite]";
+	mes "Bem-vindo a Izlude, cidade-satélite de Prontera.";
+	mes "Izlude foi construída para assumir algumas responsabilidades de Prontera.";
+	next;
+	mes "[Izlude, a Cidade-Satélite]";
+	mes "Você pode se tornar um Espadachim no prédio da Associação dos Espadachins.";
+	mes "E você pode visitar a Arena ao norte de Izlude.";
+	mes "Viagens por mar até Alberta e às Ilhas Byalan podem ser marcadas nas docas.";
+	next;
+	mes "[Izlude, a Cidade-Satélite]";
+	mes "Dessa cidade Prontera se localiza a noroeste.";
+	mes "e Payon ao sul. Aproveite a sua viagem.";
+	close;
+}
+	
+payon,178,108,5	script	Quadro de Avisos#06	837,{
+	mes "[Cidade da Montanha, Payon]";
+	mes "Bem-vindo a Payon, cidade localizada nas florestas.";
+	mes "Essa cidade é conhecida como uma vila de arqueiros,";
+	mes "pois a população sobreviveu à base da caça";
+	mes "de animais e peles por muito tempo.";
+	mes "A fabricação e o treino com arcos também são muito desenvolvidos nessa cidade.";
+	next;
+	mes "[Cidade da Montanha, Payon]";
+	mes "Há um palácio no centro da vila.";
+	mes "Além disso, ao se dirigir ao norte, você encontrará a Vila dos Arqueiros,";
+	mes "onde é possível passar para a classe Arqueiro.";
+	mes "Recentemente, Payon foi renovada e reconstruída";
+	mes "então você verá ruas e construções limpas e bonitas.";
+	next;
+	mes "[Cidade da Montanha, Payon]";
+	mes "Perto da Vila dos Arqueiros, você encontrará a Caverna de Payon";
+	mes "onde monstros mortos-vivos residem.";
+	mes "Payon tem muitas armas e armaduras específicas";
+	mes "para a classe Arqueiro.";
+	mes "É recomendável se familiarizar com essa vila, se você quiser se tornar um Arqueiro.";
+	next;
+	mes "[Cidade da Montanha, Payon]";
+	mes "Dessa cidade Alberta se localiza a sudeste,";
+	mes "Morroc a oeste,";
+	mes "Prontera e Izlude ao norte.";
+	mes "Aproveite a sua viagem.";
+	close;
+}
+	
+pay_arche,79,31,5	script	Quadro de Avisos#archer	837,{
+	mes "[Vila dos Arqueiros]";
+	mes "Bem-vindo à Vila dos Arqueiros de Payon.";
+	mes "Você pode se tornar um Arqueiro nessa vila.";
+	mes "Também existem lojas que fornecem arcos e malhas";
+	mes "para seus clientes.";
+	next;
+	mes "[Vila dos Arqueiros]";
+	mes "É sugerido aos interessados em virar Arqueiro que conheçam bem essa vila.";
+	mes "Você pode atingir a Guilda dos Caçadores num mapa à direita da Vila de Payon.";
+	close;
+}
+
+pay_arche,39,134,5	script	Quadro de Avisos#paydun	837,{
+	mes "[Caverna de Payon]";
+	mes "Cuidado! A Caverna de Payon é formada por 5 níveis.";
+	mes "Existem muitos monstros mortos-vivos e sombrios aí dentro.";
+	mes "Sobretudo, recomenda-se cautela com grupos de Hidras";
+	mes "no terceiro e quarto níveis.";
+	next;
+	mes "[Caverna de Payon]";
+	mes "No quinto nível, há um terrível monstro disfarçado de garotinha";
+	mes "chamado Flor do Luar, que aparece de tempos em tempos.";
+	close;
+}
+	
+prontera,148,49,5	script	Quadro de Avisos#pron	837,{
+	mes "[Capital do Reino de Rune-Midgard, Prontera]";
+	mes "Bem-vindo a Prontera,";
+	mes "a capital de Rune-Midgard.";
+	mes "Prontera se localiza no centro do continente de Rune-Midgard";
+	mes "e é conhecida como uma cidade mercantil.";
+	next;
+	mes "[Capital do Reino de Rune-Midgard, Prontera]";
+	mes "Como principais construções da cidade,";
+	mes "temos a Igreja, onde é possível evoluir para as classes";
+ 	mes "Noviço e Sacerdote e onde os casamentos são celebrados.";
+	mes "Também temos o Castelo, onde é possível passar para a classe Templário.";
+	next;
+	mes "[Capital do Reino de Rune-Midgard, Prontera]";
+	mes "É aconselhável ao visitante observar bem os arredores,";
+	mes "existem muitas atrações turísticas na cidade.";
+	next;
+	mes "[Capital do Reino de Rune-Midgard, Prontera]";
+	mes "Quando precisar aprimorar sua armas e armaduras,";
+	mes "favor visitar um prédio a sudeste da fonte";
+	mes "localizada no centro da cidade.";
+	next;
+	mes "[Capital do Reino de Rune-Midgard, Prontera]";
+	mes "Dessa cidade Izlude se localiza a sudeste,";
+	mes "Payon ao sul,";
+	mes "Geffen a oeste,";
+	mes "Al De Baran ao norte. Aproveite a sua viagem.";
+	close;
+}
+
+mjolnir_02,76,362,5	script	Quadro de Avisos#10	837,{
+	mes "[Mina Abandonada de Mjolnir]";
+	mes "Cuidado! A Mina de Carvão é formada por 3 níveis.";
+	mes "Esse calabouço é ideal para aventureiros experientes e novatos.";
+	next;
+	mes "[Mina Abandonada de Mjolnir]";
+	mes "No caso do terceiro nível, os monstros tendem a atacar em grupo";
+	mes "Tome cuidado para não ser cercado pelos monstros.";
+	mes "Além disso, esse calabouço era uma mina, então há bastante minério lá dentro.";
+	close;
+}
+
+morocc,152,110,5	script	Quadro de Avisos#11	837,{
+	mes "[A fronteira, Morroc]";
+	mes "Bem-vindo a Morroc, a cidade do deserto.";
+	mes "Morroc foi construída em um oásis, então";
+	mes "muitos viajantes vão e vêm.";
+	next;
+	mes "[A fronteira, Morroc]";
+	mes "Há um castelo no centro da cidade.";
+	mes "A noroeste, temos o calabouço da Pirâmide, e";
+	mes "a oeste está localizado o calabouço da Esfinge.";
+	mes "Se você seguir no sentido nordeste, chegará em Prontera.";
+	mes "Dizem os boatos que, em algum lugar a sudeste, estão a Guilda dos Assassinos e o Formigueiro Infernal.";
+	close;
+}
+
+comodo,210,148,5	script	Quadro de Avisos#12	837,{
+	mes "[Cidade Litorânea, Comodo]";
+	mes "Bem-vindo a Comodo.";
+	mes "Comodo é cercada por muitas relíquias ancestrais";
+	mes "de uma era esquecida.";
+	next;
+	mes "[Cidade Litorânea, Comodo]";
+	mes "Temos a Guilda das Odaliscas e a Guilda dos Bardos, para as pessoas";
+	mes "que desejam se tornar Odaliscas e Bardos.";
+	mes "Você também pode visitar o cassino, a melhor atração turística da cidade.";
+	next;
+	mes "[Cidade Litorânea, Comodo]";
+	mes "Existem 3 cavernas nos arredores de Comodo.";
+	mes "Tenha consciência de que muitos monstros habitam";
+	mes "cada uma delas.";
+	mes "E você pode comprar o produto especial de Comodo, a Poção da Fúria Selvagem,";
+	mes "nos Vendedores de Utilidades.";
+	next;
+	mes "[Cidade Litorânea, Comodo]";
+	mes "Você pode ir a Morroc pela caverna ao leste e para Umbala pela caverna ao norte.";
+	mes "Há uma Guilda dos Arruaceiros perto do Farol de Pharos, a leste.";
+	mes "Aproveite a sua viagem.";
+	close;
+}
+
+umbala,137,94,5	script	Quadro de Avisos#13	837,{
+	mes "[Umbala, Vila Utan]";
+	mes "Bem-vindo a Umbala, a vila da tribo Utan.";
+	mes "Umbala foi recentemente descoberta por alguns aventureiros";
+	mes "e a tribo Utan possui sua própria linguagem.";
+	mes "Estudiosos consideram Umbala a fronteira entre este e o outro mundo.";
+	next;
+	mes "[Umbala, Vila Utan]";
+	mes "Como principais construções da cidade, temos a Casa do Chefe, a Casa do Xamã";
+	mes "e o local do Bungee Jump.";
+	mes "Sobretudo, existem milhares de turistas que vão até o Bungee Jump para testar sua coragem.";
+	next;
+	mes "[Umbala, Vila Utan]";
+	mes "Ao sul, se localiza Comodo.";
+	mes "Há um rumor de que, ao atravessar a árvore Yggdrasil, ao norte, você chegará ao outro mundo.";
+	mes "Aproveite a sua viagem.";
+	close;
+}
+
+gef_fild09,227,29,4	script	Quadro de Avisos::OrcsBoard	835,{
+	mes "[Vila dos Orcs]";
+	mes "Cuidado! Você está entrando na Vila dos Orcs.";
+	mes "Leve em conta que aqui existem";
+	mes "Guerreiros, Senhoras e Grand Orcs.";
+	mes "Existem 2 chefes que aparecem nesta vila de tempos em tempos, o Senhor dos Orcs e o Orc Herói.";
+	close;
+}
+
+gef_fild13,202,31,5	duplicate(OrcsBoard)	Quadro de Avisos#orc1	835
+
+gef_fild13,29,206,5	script	Quadro de Avisos::KoboldsBoard	836,{
+
+	mes "[Vila dos Kobolds]";
+	mes "Cuidado! Nesta vila você encontrará diversos Kobolds.";
+	mes "que costumam não receber muito bem os visitantes.";
+	close;
+}
+
+gef_fild08,211,24,5	duplicate(KoboldsBoard)	Quadro de Avisos#kb1	836
+
+gef_fild10,109,23,5	script	Quadro de Avisos#15	836,{
+
+	mes "[Vila dos Goblins]";
+	mes "Cuidado! Aqui você encontrará muitos Goblins";
+	mes "que se utilizam de diversas táticas de batalha para derrotar os invasores.";
+	close;
+}
+
+prt_fild05,278,220,5	script	Quadro de Avisos#16	837,{
+	mes "[Esgotos de Prontera]";
+	mes "Os Esgotos são formados por 4 níveis";
+	mes "e são bons como campo de treinamento para novos aventureiros.";
+	next;
+	mes "[Esgotos de Prontera]";
+	mes "Para ter acesso ao esgoto, você precisa se alistar";
+	mes "para o extermínio de monstros, na Cavalaria de Prontera.";
+	mes "Também tenha em mente que os monstros tendem a atacar em grupo.";
+	mes "Você verá um MVP chamado Besouro-Ladrão Dourado no quarto nível.";
+	close;
+}
+
+yuno,154,112,5	script	Quadro de Avisos#17	837,{
+	mes "[Capital da República de Schwartzvald]";
+	mes "Bem-vindo a Juno, a cidade dos Sábios.";
+	mes "Essa cidade flutua no ar com a ajuda do poder do Coração de Ymir.";
+	next;
+	mes "[Capital da República Schwartzvald, Juno]";
+	mes "Por favor, visite o Castelo dos Sábios se você deseja se tornar um Sábio.";
+	mes "Também existem diversos prédios importantes na cidade, como o Museu dos Monstros, a Escola de Magia e a Biblioteca.";
+	next;
+	mes "[Capital da República Schwartzvald, Juno]";
+	mes "Em algum lugar em Juno, há uma passagem secreta";
+	mes "para um mundo onde todas as pessoas nascem de novo.";
+	mes "A sudeste, há um calabouço chamado 'Calabouço de Magma'.";
+	mes "Aquele calabouço não tem boa reputação devido às criaturas agressivas";
+	mes "que o habitam. Então, tenha cuidado ao explorar essa área.";
+	next;
+	mes "[Capital da República Schwartzvald, Juno]";
+	mes "Ao sul se localiza Al De Baran, uma cidade do Reino de Rune-Midgard.";
+	mes "Tome cuidado na estrada, pois no caminho residem muitos monstros agressivos.";
+	close;
+}
+
+aldebaran,145,105,5	script	Quadro de Avisos#18	837,{
+	mes "[Cidade da Fronteira, Al De Baran]";
+	mes "Bem-vindo a Al De Baran, a fronteira do reino de Rune-Midgard.";
+	mes "Um grande canal que corre pela cidade e a Torre do Relógio são";
+	mes "os motivos de orgulho dessa cidade.";
+	next;
+	mes "[Cidade da Fronteira, Al De Baran]";
+	mes "Você pode ter acesso à Torre do Relógio no centro da cidade.";
+	mes "Também temos a central da corporação Kafra";
+	mes "e a Guilda dos Alquimistas, onde é possível passar para a classe";
+	mes "Alquimista.";
+	next;
+	mes "[Cidade da Fronteira, Al De Baran]";
+	mes "O Papai Noel está em algum lugar desta cidade";
+	mes "e pode te mandar para um lugar chamado 'Lutie'.";
+	mes "Se você tiver interessado, confira.";
+	next;
+	mes "[Cidade da Fronteira, Al De Baran]";
+	mes "Dessa cidade Juno se localiza ao norte e Prontera ao sul.";
+	close;
+}
+
+aldebaran,136,133,5	script	Quadro de Avisos#19	837,{
+	mes "[Torre do Relógio]";
+	mes "Cuidado! A Torre do Relógio é formada por um total de 8 níveis, 4 deles na superfície e o restante nos subterrâneos.";
+	mes "A entrada é limitada a aventureiros experientes.";
+	next;
+	mes "[Torre do Relógio]";
+	mes "Os principais monstros são Relógio, Alarme e Bathory.";
+	mes "Existem patrulheiros da Torre do Relógio vigiando, então esteja atento.";
+	mes "Os caminhos são complicados, então tome cuidado para não se perder.";
+	close;
+}
+
+moc_fild19,107,101,5	script	Quadro de Avisos#20	837,{
+	mes "[Esfinge]";
+	mes "Cuidado! A Esfinge é formada por 5 níveis.";
+	mes "Esse calabouço é ideal para aventureiros experientes.";
+	next;
+	mes "[Esfinge]";
+	mes "No quinto nível, um MVP chamado Faraó vai aparecer de tempos em tempos.";
+	mes "Existem muitos monstros agressivos dentro desse calabouço,";
+	mes "é aconselhável fugir em vez de confrontá-los quando você se encontrar cercado por eles.";
+	close;
+}
+
+gef_tower,55,142,5	script	Quadro de Avisos#21	837,{
+
+	mes "[Calabouço de Geffen]";
+	mes "Cuidado! O calabouço de Geffen é feito de 3 níveis";
+	mes "e é muito difícil para novos aventureiros se arriscarem.";
+	mes "Como principais monstros que aparecem constantemente,";
+	mes "temos a Mosca Caçadora, Pesadelo e Jakk.";
+	mes "Pesadelos e Jakks aparecem apenas nesse calabouço.";
+	next;
+	mes "[Calabouço de Geffen]";
+	mes "No segundo nível desse calabouço,";
+	mes "Tirfing, a criatura da espada amaldiçoada e Drácula,";
+	mes "um MVP, aparecem sem aviso.";
+	mes "No terceiro nível, Doppelganger, um dos mais fortes MVPs, aparece em certos momentos.";
+	close;
+}
+
+xmas_fild01,75,80,5	script	Quadro de Avisos#22	837,{
+
+	mes "[Cidade do Inverno, Lutie]";
+	mes "Bem-vindo a Lutie, a cidade do Natal.";
+	mes "Montar brinquedos na Fábrica de Brinquedos é a principal";
+	mes "atividade nessa cidade.";
+	next;
+	mes "[Cidade do Inverno, Lutie]";
+	mes "Você tem acesso ao calabouço da Fábrica de Brinquedos";
+	mes "ao norte de Lutie.";
+	mes "Lembre-se de visitar Lutie na época do Natal.";
+	mes "Há muitos eventos sendo celebrados com alegria.";
+	mes "Tome cuidado com o Hatii que anda por esta região. Nos calabouços da Fábrica de Brinquedos você pode encontrar o Angeling e o Cavaleiro da Tempestade.";
+	close;
+}
+
+xmas,147,311,5	script	Quadro de Avisos#23	837,{
+
+	mes "[Fábrica de Brinquedos]";
+	mes "Cuidado! A Fábrica de Brinquedos é formada por 2 níveis.";
+	mes "Esse calabouço não é muito difícil para novos aventureiros,";
+	mes "mas existe um MVP que aparece de vez em quando.";
+	next;
+	mes "[Fábrica de Brinquedos]";
+	mes "No primeiro nível, você vai encontrar alguns minichefes como o Angeling, o Mastering e o Chepet.";
+	mes "No segundo nível, você vai encontrar perigosos monstros";
+	mes "O Cavaleiro da Tempestade é o MVP do segundo nível, e é aconselhável muita cautela ao se aventurar nessa área.";
+	mes "Para sua referência, Presentes, Soldadinhos de Chumbo e Cookies só são encontrados aqui.";
+	close;
+}
+
+yuno_fild03,37,143,5	script	Quadro de Avisos#24	837,{
+
+	mes "[Calabouço de Magma, Nogg Road]";
+	mes "Cuidado! Nogg Road está cheio de criaturas perigosas.";
+	mes "A entrada não é recomendada para aventureiros inexperientes.";
+	next;
+	mes "[Calabouço de Magma, Nogg Road]";
+	mes "O principal monstro desse calabouço é o";
+	mes "Pesadelo Sombrio.";
+	mes "Esteja atento.";
+	close;
+}
+
+niflheim,200,191,5	script	Quadro de Avisos#25	837,{
+
+	mes "[Cidade dos Mortos, Nifflheim]";
+	mes "Bem-vindo a Nifflheim, a cidade dos mortos.";
+	mes "Nifflheim era conhecida como o outro mundo, para onde";
+	mes "você vai após a morte.";
+	mes "Porém, recentemente, pessoas descobriram um caminho secreto atrás de uma árvore misteriosa.";
+	mes "Então, você achará várias outras pessoas viajando por essa área.";
+	next;
+	mes "[Cidade dos Mortos, Nifflheim]";
+	mes "Como atração turística, o Castelo da Bruxa é sugerido.";
+	mes "Diferente das outras cidades, é proibido salvar o seu Ponto de Retorno ou";
+	mes "Ponto de Teleporte dentro de Nifflheim. Além disso, monstros surgem dentro da cidade.";
+	next;
+	mes "[Cidade dos Mortos, Nifflheim]";
+	mes "Sobretudo, esteja atento a um MVP";
+	mes "chamado Senhor dos Mortos.";
+	next;
+	mes "[Cidade dos Mortos, Nifflheim]";
+	mes "Se você seguir no sentido oeste, chegará ao Vale de Gyoll,";
+	mes "onde monstros poderosos e assustadores residem.";
+	mes "É recomendável aos aventureiros novatos e sem grupo que deixem essa área imediatamente.";
+	close;
+}
+
+/*
+moc_fild15,267,264,5	script	Quadro de Avisos#26	837,{
+
+	mes "[Formigueiro Infernal]";
+	mes "Cuidado! O Formigueiro Infernal é formado por 2 níveis.";
+	mes "Como o nome diz, esse calabouço está cheio de várias formigas";
+	mes "e é bom como campo de treinamento para novos aventureiros.";
+	next;
+	mes "[Formigueiro Infernal]";
+	mes "Porém, leve em conta que Maya Macho aparece no primeiro nível";
+	mes "e Maya aparece no segundo nível. Eles são o rei e rainha das formigas.";
+	mes "Além disso, no mapa onde você está,";
+	mes "um MVP chamado Freeoni vai aparecer de tempos em tempos.";
+	close;
+}
+*/
+
+moc_ruins,61,164,5	script	Quadro de Avisos#27	837,{
+
+	mes "[Pirâmide]";
+	mes "Cuidado! A Pirâmide é formada por um total de 7 níveis, 4 deles na superfície e o restante nos subterrâneos.";
+	mes "Os primeiros níveis são ideais para novos aventureiros explorarem, mas, quanto mais níveis você descer, mais monstros fortes você encontrará.";
+	next;
+	mes "[Pirâmide]";
+	mes "No primeiro nível, há a Guilda dos Gatunos, onde é possível tornar-se Gatuno.";
+	mes "No quarto nível, um MVP chamado Osíris vai aparecer de tempos em tempos.";
+	mes "No sétimo nível, Amon Rá aparecerá em certos momentos.";
+	close;
+}
+
+glast_01,369,308,5	script	Quadro de Avisos#28	837,{
+
+	mes "[Glast Heim]";
+	mes "Glast Heim é uma enorme cidade com inúmeros andares, que foi completamente destruída e que agora é povoada por mortos-vivos.";
+	mes "Glast Heim, definitivamente, não é para novatos ou experientes,";
+	mes "mas sim para especialistas.";
+	next;
+	mes "[Glast Heim]";
+	mes "É o lar de muitos monstros assustadores, como o Senhor das Trevas,";
+	mes "Barão e Duque Coruja, Ilusão das Trevas, Cavaleiro Sanguinário, Cavaleiro do Abismo, Quimera e vários tipos de espadas amaldiçoadas.";
+	next;
+	mes "[Glast Heim]";
+	mes "Porém, quanto mais difícil a expedição, melhor a recompensa.";
+	mes "Por isso, essa cidade é muito popular entre os especialistas.";
+	mes "Aproveite a sua expedição.";
+	close;
+}

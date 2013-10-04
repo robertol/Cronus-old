@@ -1,0 +1,15 @@
+//==============================================================
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/  _ \ /    \|  |  \/  ___/
+// \     \____|  | \(  <_> )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//           http://forum.cronus-emulator.com
+//==============================================================
+// 
+// executado quando qualquer personagem loga, que lhes são inerentes
+-	script	CronusMOTD	-1,{
+message strcharinfo(0),"Bem-vindo ao  Cronus! Divirta-se! Favor, relatar quaisquer bugs que você encontrar.";
+end;
+}

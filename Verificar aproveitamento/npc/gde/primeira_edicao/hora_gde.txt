@@ -1,0 +1,66 @@
+//===== Cronus Script ========================================
+//= Guerra do Emperium - Início Automático da GdE
+//===== Por: =================================================
+//= kalen (1.0)
+//= 1.1 by Akaru and ho|yAnge|
+//===== Versão Atual: ========================================
+//= 1.3
+//===== Compatível Com: ======================================
+//= Cronus GIT;
+//===== Descrição: ===========================================
+//= Início Automático da Guerra do Emperium
+//= Tempo de Início/Fim da GdE
+//= gettime(3): Horário (24 hrs)
+//= gettime(4): Dia da semana 1=Segunda, 2=Terça,
+//= 3=Quarta, 4=Quinta, 5=Sexta, 6=Sábado, 7=Domingo,
+//===== Comentários Adicionais: ==============================
+//= 2.1 Alterado announce conforme o oficial do bRO [Axl]
+//============================================================
+
+-	script	Agit_Event	-1,{
+	end;
+
+OnClock2100:	//Inicio da WoE na Terça(2), Quinta(4)
+OnClock2300:	//Término da WOE na Terça(2), Quinta(4)
+OnClock1600:	//Inicio da WoE no Sábado(6)
+OnClock1800:	//Término da WOE no Sábado(6)
+
+OnAgitInit:
+	// Checagem do Inicio da WoE
+	if((gettime(4)==2) && (gettime(3)>=21 && gettime(3)<23) ||
+	   (gettime(4)==4) && (gettime(3)>=21 && gettime(3)<23) ||
+	   (gettime(4)==6) && (gettime(3)>=16 && gettime(3)<18)) {
+		if (!agitcheck()) {
+			AgitStart;
+			callsub S_DisplayOwners;
+		}
+		end;
+	}
+
+	// Checagem do Término da WoE
+	if ((gettime(4)==2) && (gettime(3)==23) ||
+	    (gettime(4)==4) && (gettime(3)==23) ||
+	    (gettime(4)==6) && (gettime(3)==18)) { 
+		if (agitcheck()) {
+			AgitEnd;
+			callsub S_DisplayOwners;
+		}
+		end;
+	}
+	end;
+
+S_DisplayOwners:
+	setarray .@maps$[0],"aldeg_cas01","aldeg_cas02","aldeg_cas03","aldeg_cas04","aldeg_cas05";
+	setarray .@maps$[5],"gefg_cas01","gefg_cas02","gefg_cas03","gefg_cas04","gefg_cas05";
+	setarray .@maps$[10],"payg_cas01","payg_cas02","payg_cas03","payg_cas04","payg_cas05";
+	setarray .@maps$[15],"prtg_cas01","prtg_cas02","prtg_cas03","prtg_cas04","prtg_cas05";
+	for( set .@i, 0; .@i <= 19; set .@i, .@i+1 ) {
+		if (GetCastleData(.@maps$[.@i],1)) {
+			Announce "O Clã [" + GetGuildName(GetCastleData(.@maps$[.@i],1)) + "] conquistou o Castelo [" + GetCastleName(.@maps$[.@i]) + "].",bc_all|bc_woe;
+		}
+		else {
+			Announce "O Castelo de [" + GetCastleName(.@maps$[.@i]) + "] está totalmente desocupado.",bc_all|bc_woe;
+		}
+	}
+	end;
+}

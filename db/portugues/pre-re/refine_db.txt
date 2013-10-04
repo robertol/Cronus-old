@@ -1,0 +1,48 @@
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Versão Pre-renovação
+//
+// Tipo,Stats por nível,Bônus Inicial de Refinamento,Valor do Bônus,Chance+1:Bônus+1,Chance+2:Bônus+2,Chance+3:Bônus+3,...
+//
+// IMPORTANTE: Alterar o Número máximo de Refinamento requer a modificação do MAX_REFINE no status.h
+//
+// Para Armaduras, Valores de 100 adicionam 1 ponto de defesa para Armadura.
+// Para Aras, valores de 100 adicionam 1 ponto de ATK.
+//
+// Tipo:
+// 0 - Armaduras
+// 1 - Armas Nível 1
+// 2 - Armas Nível 2
+// 3 - Armas Nível 3
+// 4 - Armas Nível 4
+//
+// Stats por nível:
+// Esse valor é aplicado para cada nível de refinamento
+//
+// Bônus Inicial de Refinamento:
+// Este valor especifica o ponto de partida para aqueles níveis que dão Bônus Inicial.
+//
+// Valor do Bônus:
+// Um número aleatório entre 0 e (Bônus Inicial de Refinamento - Nível de Refinamento + 1) * o valor aplicado a todos os refinamentos anteriores
+// Bônus Inicial de Refinamento (normalmente o primeiro refinamento inseguro). Isso só é aplicada para armas, e não exibido no cliente.
+//
+// Chance:
+// 100 = 100%
+//---------------------------------------------------------
+
+// Armaduras
+0,66,0,0,100:0,100:0,100:0,100:0,60:0,40:0,40:0,20:0,20:0,10:0
+// Armas Nível 1
+1,200,8,300,100:0,100:0,100:0,100:0,100:0,100:0,100:0,60:0,40:0,20:0
+// Armas Nível 2
+2,300,7,500,100:0,100:0,100:0,100:0,100:0,100:0,60:0,40:0,20:0,20:0
+// Armas Nível 3
+3,500,6,800,100:0,100:0,100:0,100:0,100:0,60:0,50:0,20:0,20:0,20:0
+// Armas Nível 4
+4,700,5,1300,100:0,100:0,100:0,100:0,60:0,40:0,40:0,20:0,20:0,10:0

@@ -1,0 +1,29 @@
+// Banco de Dados dos pontos preservados por Estudo Arcano
+//
+// Estrutura do banco:
+// ID da Habilidade,Pontos Preservados,Livro Requerido
+//
+// Para adicionar mais entradas, aumentar MAX_SKILL_SPELLBOOK_DB em skill.h.
+
+//Mago
+14,7,6190  //Lanças de Gelo
+19,7,6189	//Lanças de Fogo
+20,7,6191	//Relâmpago
+21,9,6197	//Tempestade de Raios
+
+//Bruxo
+83,10,6194	//Chuva de Meteoro
+84,9,6198	//Trovão de Júpiter
+85,10,6193	//Ira de Thor
+86,9,6199	//Esfera D'Água
+89,10,6192	//Nevasca
+90,8,6201	//Coluna de Pedra
+91,9,6200	//Fúria da Terra
+
+//Arcano
+2210,8,6205	//Drenar Vida
+2211,12,6204	//Meteoro Escarlate
+2213,22,6195	//Cometa
+2214,12,6203	//Corrente Elétrica
+2216,12,6202	//Abalo Sísmico
+2217,22,6196	//Tetra Vortex

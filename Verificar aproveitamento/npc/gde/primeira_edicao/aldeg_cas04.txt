@@ -1,0 +1,139 @@
+//===== Cronus Script ========================================
+//= Guerra do Emperium (Al De baran)
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.3
+//===== Compatível Com: ======================================
+//= Cronus GIT;
+//===== Descrição: ===========================================
+//= NPCs referentes ao 4º Castelo de Al De baran
+//===== Comentários Adicionais: ==============================
+//= 1.3 Adicionado diálogos Oficiais do bRO. [Axl]
+//============================================================
+
+// Bandeira do Castelo (Fora do Castelo)
+//============================================================
+-	script	Rigel#1::OutsideFlagsA4	722,{
+
+	set .@GID, GetCastleData("aldeg_cas04",1);
+
+	if (.@GID == 0) {
+		mes " [[Decreto do Reino de Rune Midgard]]";
+		mes " ";
+		mes "1. Conforme o Pacto do Reino de Rune Midgard";
+		mes "e o Feudo de Luina,";
+		mes "declaro que este Castelo não possui um Senhor.";
+		mes " ";
+		mes "2. Ao Clã que for bravo o bastante";
+		mes "e, superarando os terríveis desafios,";
+		mes "quebrar o Emperium,";
+		mes "será dada a posse deste Castelo";
+		mes "apoiado pelo nosso Rei.";
+		close;
+	}
+	if (getcharid(2) == .@GID) {
+			mes "[ Voz Ecoante ]";
+			mes "Bravo guerreiro......";
+			mes "Deseja retornar ao seu lugar de glória?";
+			next;
+			if (select("Sim.: Não.") == 1) {
+			close2;
+			if (getcharid(2) == GetCastleData("aldeg_cas04",1)) {
+				warp "aldeg_cas04",116,217;
+				end;
+			}
+			end;
+		}
+		close;
+	}
+	mes "[Decreto do Reino de Rune Midgard]";
+	mes " ";
+	mes "1. Conforme o Pacto do Reino de Rune Midgard";
+	mes "e o Feudo de Luina,";
+	mes "declaro que este castelo pertence ao Clã ^ff0000" + GetGuildName(.@GID) + "^000000 .";
+	mes " ";
+	mes "2. O Líder do Clã ^ff0000"+ GetGuildName(.@GID) + "^000000 se chama";
+	mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+	mes "Se alguém se opõe a este decreto";
+	mes "desembainhe sua espada para fazer valer sua vontade.";
+	close;
+
+OnRecvCastleA04:
+	FlagEmblem GetCastleData("aldeg_cas04",1);
+	end;
+}
+
+alde_gld,239,246,2	duplicate(OutsideFlagsA4)	Rigel#1-2	722
+alde_gld,239,239,2	duplicate(OutsideFlagsA4)	Rigel#2	722
+
+// Bandeira do Castelo (Dentro do Castelo)
+//============================================================
+-	script	Rigel#3::InsideFlagsA4	722,{
+	end;
+
+OnRecvCastleA04:
+	FlagEmblem GetCastleData("aldeg_cas04",1);
+	end;
+}
+
+aldeg_cas04,167,61,2	duplicate(InsideFlagsA4)	Rigel#3-2	722
+aldeg_cas04,164,90,2	duplicate(InsideFlagsA4)	Rigel#4	722
+aldeg_cas04,129,193,2	duplicate(InsideFlagsA4)	Rigel#5	722
+aldeg_cas04,112,206,2	duplicate(InsideFlagsA4)	Rigel#6	722
+aldeg_cas04,113,212,2	duplicate(InsideFlagsA4)	Rigel#7	722
+aldeg_cas04,77,117,2	duplicate(InsideFlagsA4)	Rigel#8	722
+aldeg_cas04,186,42,2	duplicate(InsideFlagsA4)	Rigel#9	722
+aldeg_cas04,30,69,2	duplicate(InsideFlagsA4)	Rigel#10	722
+aldeg_cas04,55,97,2	duplicate(InsideFlagsA4)	Rigel#11	722
+aldeg_cas04,45,98,2	duplicate(InsideFlagsA4)	Rigel#12	722
+aldeg_cas04,33,116,2	duplicate(InsideFlagsA4)	Rigel#13	722
+aldeg_cas04,130,180,2	duplicate(InsideFlagsA4)	Rigel#14	722
+aldeg_cas04,129,193,2	duplicate(InsideFlagsA4)	Rigel#15	722
+aldeg_cas04,33,107,2	duplicate(InsideFlagsA4)	Rigel#16	722
+aldeg_cas04,133,220,2	duplicate(InsideFlagsA4)	Rigel#17	722
+aldeg_cas04,169,22,2	duplicate(InsideFlagsA4)	Rigel#18	722
+aldeg_cas04,169,15,2	duplicate(InsideFlagsA4)	Rigel#19	722
+
+// Bandeira do Castelo (Cidade)
+//============================================================
+aldebaran,131,97,4	duplicate(InsideFlagsA4)	Rigel#20	722
+
+// Serviço Kafra
+//============================================================
+aldeg_cas04,45,88,0	duplicate(guildkafra)	Kafra#aldeg_cas04	117
+
+// Administrador do Castelo
+//============================================================
+aldeg_cas04,67,116,0	duplicate(cm)	Brymhensen#aldeg_cas04	55
+
+// Saída da Sala do Mestre
+//============================================================
+aldeg_cas04,83,17,0	script	#lever_A04	111,{
+
+	mes " ";
+	mes "Há uma pequena alavanca, você deseja acioná-la?";
+	next;
+	if(select("Acionar.:Não acionar.") == 1) {
+		close2;
+		warp "aldeg_cas04",67,117;
+		end;
+	}
+	close;
+}
+
+// Mudanças nas Cavernas do Clã
+//============================================================
+aldeg_cas04,76,64,0	duplicate(gdlever)	#aldeg_cas04	111
+
+// Spawns do Tesouro do Clã
+//============================================================
+aldeg_cas04,84,13,0	duplicate(Gld_Trea_Spawn)	Treasure#aldeg_cas04	-1
+
+// Gerenciador Automático
+//============================================================
+aldeg_cas04,36,218,0	duplicate(Gld_Agit_Manager)	Agit#aldeg_cas04	-1
+
+// Guardiões
+//============================================================
+aldeg_cas04,67,116,0	duplicate(Gld_Guard_Template)	Guardian#aldeg_cas04	-1

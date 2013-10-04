@@ -1,0 +1,69 @@
+//===== Cronus Script ========================================
+//= Enfermeira
+//===== Por: =================================================
+//= Euphy
+//===== Versão Atual: ========================================
+//= 1.1
+//===== Compatível Com: ======================================
+//= Cronus
+//===== Descrição: ===========================================
+//= Script básico para restauração de HP/SP e Buffs.
+//===== Comentários Adicionais: ==============================
+//= 1.1 Realizado algumas alterações. [Cainho]
+//============================================================
+
+-	script	Enfermeira	-1,{
+	
+	set .@Price,0;	// Zeny requerido.
+	set .@Buffs,0;	// Buffar os jogadores? (1: sim / 0: não)
+	set .@Delay,0;	// Tempo de espera, em segundos.
+
+	callfunc "F_ClearGarbage",0;
+	if (@HD > gettimetick(2)) end;
+	if (.@Price) {
+		message strcharinfo(0),"Custo: "+.@Price+" Zeny.";
+		if (Zeny < .@Price) end;
+		if(select("^0055FFCurar^000000:^777777Sair^000000") == 2) close;
+		set Zeny, Zeny-.@Price;
+	}
+	specialeffect2 313; percentheal 100,100;
+	if (.@Buffs) {
+		specialeffect2 EF_INCAGILITY; sc_start SC_INC_AGI,240000,10;
+		specialeffect2 EF_BLESSING; sc_start SC_BLESSING,240000,10;
+	}
+	if (.@Delay) set @HD, gettimetick(2)+.@Delay;
+	end;
+}
+
+alberta,25,240,6	duplicate(Enfermeira)	Enfermeira#alb	67
+aldebaran,135,118,6	duplicate(Enfermeira)	Enfermeira#alde	67
+amatsu,200,79,4	duplicate(Enfermeira)	Enfermeira#ama	67
+ayothaya,207,169,6	duplicate(Enfermeira)	Enfermeira#ayo	67
+brasilis,194,221,6	duplicate(Enfermeira)	Enfermeira#bra	67
+comodo,184,158,6	duplicate(Enfermeira)	Enfermeira#com	67
+dewata,193,175,6	duplicate(Enfermeira)	Enfermeira#dew	67
+einbech,142,244,4	duplicate(Enfermeira)	Enfermeira#einbe	67
+einbroch,57,202,6	duplicate(Enfermeira)	Enfermeira#einbr	67
+dicastes01,201,194,4	duplicate(Enfermeira)	Enfermeira#dic	67
+geffen,115,72,6	duplicate(Enfermeira)	Enfermeira#gef	67
+gonryun,156,122,6	duplicate(Enfermeira)	Enfermeira#gon	67
+hugel,89,150,6	duplicate(Enfermeira)	Enfermeira#hug	67
+izlude,125,118,5	duplicate(Enfermeira)	Enfermeira#izl	67
+lighthalzen,149,103,6	duplicate(Enfermeira)	Enfermeira#li	67
+louyang,225,103,4	duplicate(Enfermeira)	Enfermeira#lou	67
+malangdo,226,188,4	duplicate(Enfermeira)	Enfermeira#mal	67
+manuk,256,176,6	duplicate(Enfermeira)	Enfermeira#man	67
+mid_camp,203,289,6	duplicate(Enfermeira)	Enfermeira#mid	67
+mora,106,100,6	duplicate(Enfermeira)	Enfermeira#mora	67
+morocc,153,97,6	duplicate(Enfermeira)	Enfermeira#mor	67
+moscovia,215,194,6	duplicate(Enfermeira)	Enfermeira#mos	67
+niflheim,188,180,5	duplicate(Enfermeira)	Enfermeira#nif	67
+payon,179,106,4	duplicate(Enfermeira)	Enfermeira#pay	67
+prontera,162,193,4	duplicate(Enfermeira)	Enfermeira#pront	67
+rachel,125,116,6	duplicate(Enfermeira)	Enfermeira#rac	67
+splendide,201,153,4	duplicate(Enfermeira)	Enfermeira#spl	67
+thor_camp,249,74,4	duplicate(Enfermeira)	Enfermeira#thor	67
+umbala,129,132,4	duplicate(Enfermeira)	Enfermeira#umb	67
+veins,217,121,4	duplicate(Enfermeira)	Enfermeira#ve	67
+xmas,143,136,6	duplicate(Enfermeira)	Enfermeira#xmas	67
+yuno,164,45,4	duplicate(Enfermeira)	Enfermeira#yuno	67

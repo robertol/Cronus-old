@@ -1,0 +1,1865 @@
+//===== Cronus Script ======================================== 
+//= Quest Sacerdote
+//===== Por: =================================================
+//= Translated By: Pgro Team (OwNaGe)(Aegis)
+//= Converted by: kobra_k88.
+//= Further bugfixed and tested by Lupus
+//===== Versão Atual: ======================================== 
+//= 2.4c
+//===== Compatível com: ====================================== 
+//= Cronus GIT
+//===== Descrição: =========================================== 
+//= [Conversão Aegis]
+//= Muda a classe para Sacerdote
+//===== Comentários Adicionais: ==============================
+//= Fully working.  Changed the way Priests enter the test room to help Acos.
+//= Must use this with the included Acolyte quest to work properely.
+//= 1.3 Added Baby Class support, fixed 3 wrong constants bugs [Lupus]
+//= 1.5 Fixed possible EXP abuse [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//= 2nd Job Quests again. It also guides adv classes where
+//= to go. [Lupus]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Merged JFunc [Lupus]
+//= 2.1a Fixed typo [KarLaeda]
+//= 2.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.3 Several bugfixes with the help of Barron-Monster. [L0ne_W0lf]
+//= 2.3a More bug fixes. [L0ne_W0lf]
+//= 2.4 Changed Marthilda to Mathilda. [L0ne_W0llf]
+//= 2.4a Deleted unused variables. [Samuray22]
+//= 2.4b Corrected a Typo error ";;". [Samuray22]
+//= 2.4c Tradução e Revisão do Script [Cronus-Emulator]
+//==========================================================
+
+prt_church,16,41,4	script	Bispo#prst	60,{
+	// Uncomment the following 'if' statement to allow High Priests to assist Acolytes with the job change quest.
+	// Officially High Priests are blocked from helping by an indiscriminate check if you are a transcended character.
+	//if (Class == Job_High_Priest) set .@AllowHPAssist,1;
+	if (Upper == 1 && .@AllowHPAssist != 1) {
+			mes "[Bispo Paulo]";
+			mes "Hm...?";
+			mes "Ah, eu sinto que você é um guerreiro que já esteve em Valhalla. Que já renasceu... Nós estamos aqui para cuidar de você..";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Não deixe o mal conquistar sua alma. Você tem coragem e poder suficientes para superar as situações difíceis. Que Deus o abençoe...";
+			close;
+	}
+	if (BaseJob != Job_Acolyte) {
+		if (BaseJob == Job_Priest) {
+			mes "[Bispo Paulo]";
+			mes "Ah...";
+			if (sex)
+				mes "É bom ver você novamente, Irmão " + strcharinfo(0) + ". Mais uma vez, a graça de Deus cruzou nossos caminhos.";
+			else
+				mes "É bom ver você novamente, Irmã " + strcharinfo(0) + ". A graça de Deus trouxe você novamente até mim.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Eu estou satisfeito por ver que você está continuando a liderar as crianças de Deus para o caminho certo. Há algo com que eu possa ajudá-lo hoje?";
+			next;
+			switch(select("Como está sua saúde?:Eu quero ajudar esse Noviço.:Padre, eu preciso de sua ajuda.")) {
+			case 1:
+				mes "[Bispo Paulo]";
+				mes "Agradeço por sua preocupação. Eu estou indo bem e tenho boa saúde. Por favor dê lembraças para seus irmãos e irmãs.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Fixe em sua mente que somos mensageiros de Deus nessa Terra. Sempre lembre-se que nós devemos sempre ajudar os outros.";
+				close;
+			case 2:
+				mes "[Bispo Paulo]";
+				mes "Ah, essa é uma boa idéia. Ajudar jovens Noviços deveria ser uma das prioridades de um Sacerdote.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Que seja, existem certas coisas que um Noviço deve fazer sozinho. Todos os Noviços devem completar seu teste divino sozinhos.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Eu espero que você irá ajudar seu amigo Noviço no segundo teste, o treinamento espiritual.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Você precisa me trazer ^0000FF1 Rosário^000000 como condição para acompanhar um Noviço no seu treinamento espiritual. Se você tem um desses, eu posso enviá-lo para a área de teste agora.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Você deseja ajudá-lo durante o treinamento espiritual?";
+				next;
+				if (select("Sim, eu quero.:Me dê um segundo.") == 1) {
+					if (countitem(2608) > 0) {
+						mes "[Bispo Paulo]";
+						mes "Eu irei enviá-lo agora para o lugar de treinamento dos Noviços. Por favor mande lembranças ao Irmão Pedro...";
+						next;
+						mes "[Bispo Paulo]";
+						mes "Eu espero que você possa ajudar esse Noviço a torna-se um Sacerdote.";
+						close2;
+						warp "job_prist",26,178;
+						end;
+					}
+					mes "[Bispo Paulo]";
+					mes "Infelizmente você não trouxe o ^0000FFRosário^000000. Você precisa de um desses como condição para estar na área de testes.";
+					close;
+				}
+				mes "[Bispo Paulo]";
+				mes "Entendo, leve o tempo que for necessário. Não esquece de trazer o ^0000FFRosário^000000...";
+				close;
+			case 3:
+				mes "[Bispo Paulo]";
+				mes "Você precisa ser forte. Tenha fé, como você é amado por Deus. Eu rezo para que as feridas do corpo sejam curadas logo...";
+				next;
+				percentheal 90,0;
+				mes "[Bispo Paulo]";
+				mes "Deus, por favor cuida dessas pobres crianças. Ajude elas superar suas dores e dificuldades. Dê energia para seus espíritos...";
+				next;
+				percentheal 0,90;
+				mes "[Bispo Paulo]";
+				mes "Espero que a minha invocação tenha aliviado sua dor. Agora por favor vá adiante e espalhe a mensagem de Deus. Que Deus esteja com você...";
+				close;
+			}
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "[Bispo Paulo]";
+			mes "Que Deus esteja";
+			if (sex)
+				mes "com você, irmão.";
+			else
+				mes "com você, irmã.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Você está dentro";
+			mes "do Santuário.";
+			mes "O que trouxe você aqui?";
+			next;
+			switch(select("Eu quero ser um Noviço.:Eu quero ser um Sacerdote.:Nada, de fato.")) {
+			case 1:
+				mes "[Bispo Paulo]";
+				mes "Ah, eu vejo...";
+				mes "Se você deseja se tornar um Noviço, por favor visite a outra sala.";
+				break;
+			case 2:
+				mes "[Bispo Paulo]";
+				mes "Ah, entendo. Que seja, você deve primeiro se tornar um Noviço antes de virar Sacerdote. Por favor visite a outra sala.";
+				break;
+			case 3:
+				mes "[Bispo Paulo]";
+				mes "Por favor se sinta em casa. Na Terra, nenhum lugar é seguro como esse Santuário.";
+				break;
+			}
+			next;
+			mes "[Bispo Paulo]";
+			mes "Que Deus lhe abençoe.";
+			close;
+		}
+		else {
+			mes "[Bispo Paulo]";
+			mes "Que Deus esteja";
+			if (sex)
+				mes "com você, irmão.";
+			else
+				mes "com você, irmã.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "O que trouxe você aqui";
+			mes "para o Santuário de Prontera?";
+			next;
+			switch(select("Informações sobre os Sacerdotes.:Nada.")) {
+			case 1:
+				mes "[Bispo Paulo]";
+				mes "Sacerdotes tem autoridade para efetuar e administrar rituais religiosos.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Você deve primeiro ser completamente disciplinado como um Noviço antes de poder ser promovido a posição de um Sacerdote.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Quando você alcançar o nível 40 de Classe, vocè estará pronto para aplicar-se ao teste de Sacerdote.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Se você passar no teste, você será capaz de usar habilidades mais poderosas que irão ser efetivas contra Demônios e Mortos-Vivos...";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Com toda sua habilidade, você poderá desempenhar um papel importante em cidades e calabouços.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Nosso dever e obrigação como Sacerdote é devotar-nos ajudando os outros sem esperar nenhuma recompensa.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "À medida que vamos ajudando os outros, não devemos esperar sermos tratados de forma semelhante. Ser um grande sacerdote é sua opção e responsabilidade, e não de ninguém mais.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "No entanto, aqueles que recebem ajuda devem ser educados. Você deve dar um exemplo ilustre, mas você também deve ter o seu limite como um humano.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Eu espero ter explicado o suficiente dessa classe. Por que você não vai lá fora e conversa com alguns outros Sacerdores se você quiser saber mais sobre seus estilos de vida?";
+				next;
+				break;
+			case 2:
+				mes "[Bispo Paulo]";
+				mes "Por favor se sinta em casa. Na Terra, nenhum lugar é seguro como esse Santuário.";
+				next;
+				break;
+			}
+			mes "[Bispo Paulo]";
+			mes "Bem...";
+			mes "Que Deus";
+			mes "abençoe você.";
+			close;
+		}
+	}
+	if (PRIEST_Q == 0) {
+		mes "[Bispo Paulo]";
+		mes "Que Deus abençoe";
+		if (sex)
+			mes "você, Irmão.";
+		else
+			mes "você, irmã.";
+		mes "O que você";
+		mes "traz para mim?";
+		next;
+		switch(select("Eu quero ser um Sacerdote.:Como vai você, Padre?")) {
+		case 1:
+			mes "[Bispo Paulo]";
+			mes "Entendo. Então você deseja ser um Sacerdote. Deus ficará satisfeito com a sua decisão e irá abençoar-te.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Eu sou o Bispo Paulo Cervantes, e estou no comando da Igreja de Prontera.";
+			mes "Eu estou satisfeito em encontrar uma pessoa tão interessada e devotada a Deus como você.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Se você está decidido a se tornar um Sacerdote, você deve realizar diversos testes. Somente Noviços que atingiram o nível 40 de classe estarão qualificados para os testes.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Se você satisfaz os requerimentos, sugiro que você se aplique para o primeiro trabalho de Sacerdote. Você deseja aplicar-se agora?";
+			next;
+			if (select("Sim, eu aceito.:Eu preciso de algum tempo para pensar sobre isso...") == 1) {
+				if (JobLevel < 40) {
+					mes "[Bispo Paulo]";
+					mes "Você não está qualificado ainda para ser um Sacerdote. Por favor vá afora pelo mundo e estenda suas experiências.";
+					next;
+					mes "[Bispo Paulo]";
+					mes "Ainda existem algumas coisas que você deve aprender como um Noviço. Entretanto, eu estou ansioso para vê-lo novamente em breve.";
+					close;
+				}
+				if (SkillPoint) {
+					mes "[Bispo Paulo]";
+					mes "Você tem pontos de habilidade sobrando.";
+					mes "Eu recomendo que você use todos esses pontos de habilidade antes de aplicar-se para o teste de Sacerdote.";
+					close;
+				}
+				set PRIEST_Q,1;
+					mes "[Bispo Paulo]";
+				if (sex)
+					mes "Agora eu vou explicar as Três Provas para o Sacerdócio. Estas atribulações irão lhe trazer muito sofrimento, mas eu espero que você possa completa-las, Irmão " + strcharinfo(0) + ".";
+				else
+					mes "Agora eu vou explicar as Três Provas para o Sacerdócio. Estas atribulações irão lhe trazer muito sofrimento, mas eu espero que você possa completa-las, Irmã " + strcharinfo(0) + ".";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Para a Primeira Prova, você deve fazer uma peregrinação, e visitar três sacerdotes ascéticos numa ordem específica.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "A Segunda Prova irá consistir um treinamento espiritual. Você deve resistir as tentações de Demônios e Mortos-Vivos.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Na Prova Final, você irá prometer sua devoção a Deus. Sua vontade de sacrificar a si mesmo também será questionada.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Noviços que alcançarem o Nível 50 de Classe estarão isentos da Primeira Prova, a peregrinação, já que demonstraram o seu entusiasmo e devoção.";
+				next;
+				if (JobLevel == 50) {
+					mes "[Bispo Paulo]";
+					mes "Eu posso ver o notável esforço que você fez para alcançar o Nível 50 de Classe. Você é um servo leal de Deus.";
+					next;
+					mes "[Bispo Paulo]";
+					mes "Agora, você poderá ir diretamente para a Segunda Prova: Treinamento Espiritual. Para esse treinamento, você pode trazer um Sacerdote com você.";
+					next;
+					mes "[Bispo Paulo]";
+					mes "Eu não tenho dúvidas que você fará um bom trabalho por si mesmo. Entretanto, será mais fácil com a ajuda de um Irmão ou Irmã que já tenha se tornado um Sacerdote.";
+					next;
+					set PRIEST_Q,5;
+					mes "[Bispo Paulo]";
+					mes "Bem, você está pronto para o Treinamento Espiritual?";
+					next;
+					if (select("Eu estou pronto.:Dê-me um minuto.") == 1) {
+						mes "[Bispo Paulo]";
+						mes "Ótimo. Eu irei envia-lo para o campo de treinamento. Quando você chegar lá, por favor fale com o Irmão Pedro que está comandando desse treinamento.";
+						next;
+						warp "job_prist",24,180;
+						end;
+					}
+					mes "[Bispo Paulo]";
+					mes "Sem problema, leve seu tempo.";
+					mes "Que Deus lhe dê a força para superar seus medos...";
+					close;
+				}
+				mes "[Bispo Paulo]";
+				mes "Bem, deixe lhe dizer a ordem dos sacerdotes ascéticos que você deve visitar na sua peregrinação.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Primeiro, por favor visite o Irmão";
+				mes "Simão que está a Nordeste";
+				mes "das Ruínas de Prontera.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Segundo, por favor visite Irmã Matilda. Ela está localizada em";
+				mes "uma área próxima a Morroc, Sudoeste de Prontera.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "O terceiro Sacerdote você deve visitar o Irmão Bartolomeu. Ele está em um campo a Noroeste de Prontera.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Bem então, desejo a você uma jornada segura. Se você tiver qualquer dúvida, por favor pergunte a Irmã Cecília.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Quando você retornar da sua peregrinação, eu deixarei você saber";
+				mes "do próximo teste.";
+				next;
+				mes "[Bispo Paulo]";
+				mes "Que Deus";
+				mes "abençoe você...";
+				close;
+			}
+			mes "[Bispo Paulo]";
+			mes "Por favor, leve o tempo necessário.";
+			mes "Você será sempre bem-vindo.";
+			mes "Que Deus abençoe você...";
+			close;
+		case 2:
+			mes "[Bispo Paulo]";
+			mes "Eu vejo...";
+			mes "Eu vou indo bem";
+			mes "e estou com boa saúde.";
+			mes "Obrigado por perguntar.";
+			next;
+			mes "[Bispo Paulo]";
+			if (sex)
+				mes "Eu espero que você continue em sua missão como servo de Deus, irmão.";
+			else
+				mes "Eu espero que você continue em sua missão como serva de Deus, irmã";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Esperançosamente, nossos caminhos";
+			mes "irão se cruzar novamente.";
+			mes "Que Deus lhe abençoe...";
+			close;
+		}
+	}
+	else if (PRIEST_Q == 1) {
+		mes "[Bispo Paulo]";
+		mes "Posso perguntar por que razão você ainda permanece por aqui? Você não esqueceu sua perigrinação, esqueceu?";
+		next;
+		if (select("Desculpe padre, eu preciso checar a ordem.:Não não não, de modo nenhum.") == 1) {
+			mes "[Bispo Paulo]";
+			mes "Ah, eu vejo. Eu irei permitir que você saiba a ordem de perigrinação novamente, and desejo que você tenha uma jornada segura.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Primeiro, encontre o Irmão Simão. Ele está a Nordeste das ruínas de Prontera.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Então, lembre-se de se encontrar com a Irmã Matilda. Ela está em alguma lugar perto da cidade de Morroc, Sudoeste de Prontera.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "E finalmente, por favor procure pelo Irmão Bartolomeu. Ele está em um campo Noroeste de Prontera.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Bem, então, eu vou rezar para que sua jornada seja segura. Se você quiser mais informações, por favor pergunte a Irmã Cecília.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Quando você voltar da sua perigrinação, eu deixarei você saber do seu próximo teste.";
+			next;
+			mes "[Bispo Paulo]";
+			mes "Que Deus lhe abençoe...";
+			close;
+		}
+		mes "[Bispo Paulo]";
+		mes "Eu vejo. Mas ainda, se você tiver qualquer pergunta, você poderá perguntar para a Irmã Cecília. Ela irá tratar de qualquer dúvida sua.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Bem, então, eu vou rezar para que sua jornada seja segura. Que Deus lhe abençoe...";
+		close;
+	}
+	else if (PRIEST_Q == 2) {
+		mes "[Bispo Paulo]";
+		mes "Eu vejo que você retornou do seu encontro com o Irmão Simão. Como ele está? Eu estou preocupado com a saúde dele, já que ele fica completamente sozinho... ";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Para a próxima tarefa, você deve encontrar-se com a Irmã Matilda. Eu estarei esperando pela sua volta em segurança.";
+		close;
+	}
+	else if (PRIEST_Q == 3) {
+		mes "[Bispo Paulo]";
+		mes "Eu vejo que você retornou da sua jornada para encontrar com a Irmã Matilda. Ela tem estado meditando no quente e seco deserto por muito tempo.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Finalmente, está na hora de você achar o Irmão Bartolomeu. Ele está fazendo penitência em algum lugar num campo próximo a Noroeste de Prontera. Por favor ache-o, e então retorne para mim.";
+		close;
+	}
+	else if (PRIEST_Q == 4) {
+		set PRIEST_Q,5;
+		mes "[Bispo Paulo]";
+		mes "Sua perigrinação";
+		mes "foi concluída.";
+		mes "Congratulações.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Agora está na hora de começar o seu treinamento espiritual. Como eu mencionei anteriormente, você pode trazer um Sacerdote para ajudá-lo durante esse treinamento.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Contudo você não poderá receber ajuda deles em todos os testes, eles podem ajudá-lo somente durante o treinamento espiritual.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Bem, você está pronto para";
+		mes "o treinamento espiritual?";
+		next;
+		if (select("Eu estou pronto.:Dê-me um minuto.") == 1) {
+			mes "[Bispo Paulo]";
+			mes "Ótimo. Eu irei enviá-lo para o centro de treinamento. Quando você chegar lá, por favor fale com o Irmão Pedro que está no comando desse treinamento.";
+			next;
+			warp "job_prist",24,180;
+			end;
+		}
+		mes "[Bispo Paulo]";
+		mes "Sem problema,";
+		mes "leve seu tempo.";
+		mes "Que Deus dê a você";
+		mes "a força para";
+		mes "superar seus medos...";
+		close;
+	}
+	else if (PRIEST_Q == 5) {
+		mes "[Bispo Paulo]";
+		mes "Você parece confiante com o treinamento espiritual. Podemos começar?";
+		next;
+		if (select("Eu estou pronto.:Dê-me um minuto.") == 1) {
+			mes "[Bispo Paulo]";
+			mes "Ótimo. Eu irei enviá-lo para o centro de treinamento. Quando você chegar lá, por favor fale com o Irmão Pedro que está no comando desse treinamento.";
+			next;
+			warp "job_prist",24,180;
+			end;
+		}
+		mes "[Bispo Paulo]";
+		mes "Sem problema,";
+		mes "leve seu tempo.";
+		mes "Que Deus dê a você";
+		mes "a força para";
+		mes "superar seus medos...";
+		close;
+	}
+	else if (PRIEST_Q == 6) {
+		mes "[Bispo Paulo]";
+		mes "Você parece cansado e exausto. No entanto, tem de suportar ainda mais sofrimento para você se tornar um Sacerdote.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Por favor suporte essas provas para o bem do seu sonho. Por que você não desafia o treinamento espiritual novamente?";
+		next;
+		if (select("Eu irei tentar denovo.:Dê-me um minuto.") == 1) {
+			mes "[Bispo Paulo]";
+			mes "Ótimo. Eu irei enviá-lo para o centro de treinamento. Por favor fale com o Irmão Pedro.";
+			next;
+			warp "job_prist",24,180;
+			end;
+		}
+		mes "[Bispo Paulo]";
+		mes "Sem problema,";
+		mes "leve seu tempo.";
+		mes "Que Deus dê a você";
+		mes "a força para";
+		mes "superar seus medos...";
+		close;
+	}
+	else if (PRIEST_Q == 7) {
+		mes "[Bispo Paulo]";
+		mes "Eu estou feliz por você concluir o seu treinamento espiritual. Congratulações. Agora você está qualificado para ser chamado de Sacerdote.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Agora, você deve ir e jurar sua devoção a Deus para a Irmã Cecília. Não fique nervoso...";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Apenas responda honestamente, e escute a voz de Deus que irá falar silenciosamente no seu coração.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Bem, então...";
+		mes "Eu estarei aqui";
+		mes "esperando por você.";
+		close;
+	}
+	else if (PRIEST_Q == 8) {
+		mes "[Bispo Paulo]";
+		mes "Hmm? Você não fez seus juramentos ainda...? Sem a convicção de um juramento a Deus, você pode ser tentado pelo mal a qualquer momento.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Você deve ir até a Irmã Cecília e prometer sua devoção a Deus. Retorne aqui com honra, e escute a voz de Deus que irá falar silenciosamente no seu coração.";
+		close;
+	}
+	else if (PRIEST_Q == 9) {
+		if (SkillPoint) {
+			mes "[Bispo Paulo]";
+			mes "Você ainda possui pontos de habilidade sobrando. Por favor use esses pontos para melhorar suas habilidades, e depois retorne para mim.";
+			close;
+		}
+		mes "[Bispo Paulo]";
+		mes "Congratulações, você completou as provas requeridas para todos os Sacerdotes. Deixe-me promover você para a posição de Sacerdote agora mesmo.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Deus, concede seu poder para esse servo diante de ti.";
+		if (sex)
+			mes "Permita ele enviar sua mensagem até os fins da Terra.";
+		else
+			mes "Permita ela enviar sua mensagem até os fins da Terra.";
+		next;
+		mes "[Bispo Paulo]";
+		mes "Faça desse servo seu instrumento para seu milagroso trabalho...";
+		next;
+		set .@joblvl,JobLevel;
+		callfunc "Job_Change",Job_Priest;
+		callfunc "F_ClearJobVar";		// clears all job variables for the current player
+		mes "[Bispo Paulo]";
+		mes "Agora você nasceu novamente como um Sacerdote. Eu lhe congratulo, e espero que você ajude outras pessoas pelo resto de sua vida.";
+		next;
+		mes "[Bispo Paulo]";
+		if (.@joblvl < 50) {
+			getitem 1550,1; //Book
+			mes "Esse livro é para você. Espero que ele ajude a espalhar a mensagem de Deus na Terra.";
+		}
+		else {
+			getitem 1551,1; //Bible
+			mes "Em comemoração a sua mudança de classe, eu estarei dando a você uma bíblia. Isto irá iluminá-lo para o caminho da retidão.";
+		}
+		next;
+		mes "[Bispo Paulo]";
+		mes "Você demonstrou grande esforço, e fez um admirável progresso na sua tarefa pessoal para a santidade. Por favor leve sua vida como um verdadeiro Sacerdote...";
+		close;
+	}
+}
+
+prt_church,27,24,1	script	Irmã Cecília	79,{
+	mes "[Irmã Cecília]";
+	if (BaseJob != Job_Acolyte) {
+		if (BaseJob == Job_Priest) {
+			if (sex)
+				mes "Que Deus abençõe você, irmão. Traz alegria ao meu coração em ver que você está trabalhando duro para cumprir as vontades do Senhor..";
+			else
+				mes "Que Deus abençõe você, irmã. Traz alegria ao meu coração em ver que você está trabalhando duro para cumprir as vontades do Senhor..";
+		}
+		else if (Class == Job_Novice) {
+			if (sex)
+				mes "Que Deus abençõe você, irmão.";
+			else
+				mes "Que Deus abençõe você, irmã.";
+			mes "A igreja de Prontera lhe dá boas-vindas.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Oh, você não escolheu uma classe ainda? Por que você não considera dedicar sua vida a Deus?";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Você pode ter uma vida realizada como um Noviço, ajudar as outras pessoas.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Se você estiver interessado, por favor pergunte ao Sacerdote na outra sala. Você nunca vai se arrepender de se tornar um Noviço.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Quando você chegar ao nível 40 de classe como um Noviço, você pode ser promovido para um Sacerdote.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Mas por favor...";
+			mes "Não tenha pressa, e decida qual classe será a melhor para você.";
+		}
+		else {
+			if (sex)
+				mes "Que Deus te abençoe, irmão.";
+			else
+				mes "Que Deus te abençoe, irmã.";
+			mes "Bem-vindo a igreja de Prontera. Como posso lhe ser útil?";
+			next;
+			if (select("Me fale mais sobre Sacerdotes.:Nada.") == 1) {
+				mes "[Irmã Cecília]";
+				mes "Mensageiros de Deus são normalmente conhecidos como Sacerdotes. Depois de se tornar um Noviço, você pode treinar com o objetivo de ser um Sacerdote.";
+				next;
+				mes "[Irmã Cecília]";
+				mes "Servos de Deus são proibidos de usar armas baseadas em lâminas. Para nós, o significado da batalha com monstros não é matar, mas no iluminamento das suas Almas.";
+				if (BaseJob == Job_Acolyte) {
+					next;
+					mes "[Irmã Cecília]";
+					mes "Bem, seria melhor se você encontrasse Sacerdotes e falasse com eles. Se você está pronto para se tornar um Sacerdote, fale com o Bispo Paulo nessa sala.";
+					next;
+					mes "[Irmã Cecília]";
+					mes "Eu acredito que ele possa te dar informações específicas de requerimentos da classe dos Sacerdotes. Sim, eu acho uma boa idéia.";
+					next;
+				}
+			}
+			mes "[Irmã Cecília]";
+			mes "Hmm. Bem, sinta-se livre para relaxar e se sentir em casa. Nenhum lugar na terra é mais seguro que o Santuário de Prontera.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Que Deus te abençoe...";
+			close;
+		}
+	}
+	if (PRIEST_Q == 0) {
+		if (sex)
+			mes "Que Deus te abençoe, irmão.";
+		else
+			mes "Que Deus te abençoe, irmã.";
+		mes "Posso perguntar o que tráz você aqui?";
+		next;
+		switch(select("Eu desejo me tornar um Sacerdote.:Nada.")) {
+		case 1:
+			mes "[Irmã Cecília]";
+			mes "Você dedicou sua vida a Deus. Muitos Noviços desejam ser Sacerdotes para continuar sua jornada pessoal em direção a santidade.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Deixe-me me apresentar. Eu sou Cecília Margarita, e eu estou no comando de parte do processo de troca de classe para Sacerdote.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Eu venho ajudado muitas pessoas a se tornarem Sacerdotes desde que eu entrei na Paróquia de Prontera. Essa é uma das minhas responsabilidades.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Para se tornar um Sacerdote, você deve completar 3 provações. Uma peregrinação, uma sessão de treinamento espiritual, e um juramento de devoção a Deus.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Se você deseja se tornar um servo de Deus, por favor se inscreva com o Bispo Paulo, e complete 3 desafios.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Se você experimentar um problema durante qualquer um das suas provações, sinta-se a vontade para me visitar. Eu vou te ajudar tanto quanto eu puder.";
+			close;
+		case 2:
+			mes "[Irmã Cecília]";
+			mes "Sinta-se em casa. Eu insisto que você se recupere e tire um descanço no santuário. Que deus abençoe você...";
+			close;
+		}
+	}
+	else if (PRIEST_Q == 1) {
+		mes "Ah, você começou sua peregrinação. Por favor dê o seu melhor para completar sua primeira tarefa.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "O primeiro Sacerdote que você deve encontrar é o Irmão Simão. Ele está nas ruinas ao nordeste de Prontera.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Vá para o Norte de Prontera, e então 3 campos para o Leste, e você chegará nas ruinas.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Claro, você também poder ir para o campo Leste de Prontera, então ir 1 Campo para o Norte, e então 2 campos para Leste...";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Irmão Simão estará na entrada das ruinas de Prontera. Seja cuidadoso. Aquele lugar está cheio de Chocos agressivos.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Depois de falar com Irmão Simão, por favor visite Irmã Matilda e Irmão Bartolomeu. Você pode checar o progresso da sua peregrinação comigo se você tiver qualquer perguntas.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Bem então, faça uma boa jornada. Por favor não desista por sofrimentos de pouca vida, e eu espero que você cumpra seus objetivos.";
+		close;
+	}
+	else if (PRIEST_Q == 2) {
+		mes "Oh, você encontrou Irmão Simão. Agora é hora de visitar Irmã Matilda. Ela está perto de uma cidade chamada Morroc.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Ela tem treinado sua disciplina religiosa em algum lugar no Norte de Morroc. Se você procurar por aquele lugar, você vai encontrá-la.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Claro, algumas vezes eu quero me dedicar ao treinamento como aqueles Sacerdotes, mas eu tenho minha tarefa de ajudar os Noviços a se tornarem Sacerdotes.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Mas eu acredito que essa é a vontade de Deus, e esse é o trabalho que ele pretenda que eu faço como sua serva. Faça uma jornada segura, e volte em segurança.";
+		close;
+	}
+	else if (PRIEST_Q == 3) {
+		mes "Agora, O último Sacerdote que você deve encontrar é Irmão Bartolomeu. Eu ouvi que ele está treinando perto de um lago localizado em Noroeste de Prontera.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "De Prontera, vá um campo Para o Norte, e então dois campos para o Oeste. Você também pode viajar dois campos para Oeste primeiro, e então viajar um campo para o Norte.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Apesar de ainda existirem 2 provações esperando por você, tenho fé que você será capaz de cumprir seu objetivo se tornando um Sacerdote...";
+		close;
+	}
+	else if (PRIEST_Q == 4) {
+		mes "Bem-vindo. Você demonstrou grande esforço para completer sua primeira provação. Agora, fale com Bipo Paulo para começar seu próximo teste no caminho do sacerdócio.";
+		next;
+		mes "[Irmã Cecília]";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +"...";
+		else
+			mes "Irmã "+ strcharinfo(0) +"...";
+		mes "O treinamento espiritual é muito mais difícil que a peregrinação, mas eu acredito em você.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Eu espero que você encontre alguém que já tenha se tornado Sacerdote para te ajudar durante o treinamento espiritual. Boa sorte, e tenha fé.";
+		close;
+	}
+	else if (PRIEST_Q == 5) {
+		mes "Oh, você não acabou o treinamento espiritual ainda?";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Eu não posso deixar os detalhes específicos, mas tão quanto você acreditar em você mesmo e tiver fé em tudo que é bom, você vai se sair bem.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Por favor fale com Irmão Pedro na sala de testes para mais detalhes. Ele é um amigo próximo ao Bispo Paulo e pode te dar algumas dicas úteis para o treinamento espiritual.";
+		close;
+	}
+	else if (PRIEST_Q == 6) {
+		mes "Sim, eu entendo que você passou por uma situação realmente difícil. Mas, não desista e sucumba a tentação. Você deve ser capaz de resistir ao mal para se tornar um Sacerdote.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Se você conhece alguém que já se tornou um Sacerdote, peça a eles para ajuda-los durante o treinamento espiritual.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Que Deus lhe guie e proteja. Quando você completar seu treinamento, por favor volte aqui.";
+		close;
+	}
+	else if (PRIEST_Q == 7) {
+		mes "Bem-vindo! Eu estou tão feliz que você tenha voltado! Agora, existe uma última tarefa para você completar.";
+		next;
+L_AskQuestions:
+		mes "[Irmã Cecília]";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +"...";
+		else
+			mes "Irmã "+ strcharinfo(0) +"...";
+		mes "Nós vamos agora começar seu Juramento formal para o Sacerdócio. Sinta-se confortável, e apenas responda com seu coração.";
+		next;
+		mes "[Irmã Cecília]";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +",";
+		else
+			mes "Irmã "+ strcharinfo(0) +",";
+		mes "Está disposto";
+		mes "a dar sua vida a Deus?";
+		next;
+		if (select("Sim.:Não!") == 2) {
+			mes "[Irmã Cecília]";
+			mes "Aw...? Como você pode me dar esse tipo de resposta? Eu presumo que você não está pronto para o teste ainda...";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Você deve refletir um pouco mais nos ensinamentos da santidade e voltar depois. Você não pode ser um Sacerdote se seu espírito é fraco.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você vai se aproveitar das habilidades sagradas dadas por Deus para fins egoístas, destrutivos ou ganaciosos?";
+		next;
+		if (select("Sim.:Não.") == 1) {
+			mes "[Irmã Cecília]";
+			mes "Aw...? Deus não vai te conceder o poder da santidade se seus objetivos não são justos e puros. Medite sobre os seus motivos por um tempo, e então volte aqui.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Pense sobre as qualidades que fazem um Sacerdote uma pessoa de respeito. Você não pode ser um Sacerdote se seu espírito não está em harmonia com Deus.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você vai ajudar os outros, mesmo completos estranhos, em batalha aliviando seus sofrimentos?";
+		next;
+		if (select("Sim.:Não.") == 2) {
+			mes "[Irmã Cecília]";
+			mes "Não, não. Você tem a idéia errada. Deus nos autoriza a usar o seus poderes para ajudar seus filhos. Você deve ajudar pessoas em perigo: É sua obrigação.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Vá e observe os aventureiros que estão lutando por paz nesse mundo. Eles vão te ensinar o quê você deve fazer para ajudá-los.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você está disposto a se sacrificar pelo bem dos outros?";
+		next;
+		if (select("Sim.:Não.") == 2) {
+			mes "[Irmã Cecília]";
+			mes "Como você pode dizer não...? Esse é um dos princípios básicos do Sacerdócio. Você deve valorizar o bem-estar dos outros mais que o sua própria segurança.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Vá e pense sobre o valor do sofrimento e o significado do sacrifício. Quando você pensar você vai entender mais sobre ajudar os necessitados, volte aqui.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você vai repetidamente dizer a mesma frase em público para enviar a mensagem de Deus aos seus filhos?";
+		next;
+		if (select("Sim.:Não.") == 1) {
+			mes "[Irmã Cecília]";
+			mes "Não não não... Você não entendeu. Apesar do motivo ser espalhar a mensagem de Deus, ninguém vai aceitar o que você diz quando você spama texto.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Lembre-se...";
+			mes "Você deve ser uma pessoal moral, e mostrar maturidade e respeito aos outros jogadores. Esse tipo de atitude se aplica a todas as classes,";
+			mes "eu acredito.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você vai atrair muitos monstros para ajudar seus parceiros a subirem de nível?";
+		next;
+		if (select("Sim.:Não.") == 1) {
+			mes "[Irmã Cecília]";
+			mes "Não, não vai. Atrair muitos monstros faz mais mal que bem. Não há exceção. Esse comportamento é totalmente inaceitável.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Mesmo que parece que você está ajudando seus amigos, essa ação resulta em um mal Karma. Por favor reflita nisso.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "Você vai seguir Deus, não importa o que aconteça, mesmo que ele mande você se matar?";
+		next;
+		if (select("Sim.:Não.") == 2) {
+			mes "[Irmã Cecília]";
+			mes "Com esse espírito, você não pode ser um Sacerdote. Se a vontade de Deus é que você se sacrifique por um bom propósito, você deve cumprir essa vontade como seu servo.";
+			next;
+			set PRIEST_Q,8;
+			mes "[Irmã Cecília]";
+			mes "Além disso, Deus também deu aos Sacerdotes o poder de ressucitação. Pense sobre o sentido da vida e da morte de novo, e então volte a mim.";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +"...";
+		else
+			mes "Irmã "+ strcharinfo(0) +"...";
+		mes "Você demonstrou sua devoção por Deus. Você vai prometer seguir os seus ensinamentos por toda sua vida?";
+		next;
+		if (select("Sim.:Não.") == 1) {
+			set PRIEST_Q,9;
+			changequest 8014,8015;
+			mes "[Irmã Cecília]";
+			mes "Agora, você completou seu juramento de Sacerdócio e completou todos os três testes para se tornar um Sacerdote.";
+			next;
+			mes "[Irmã Cecília]";
+			mes "Agora vá ao Bispo Paulo. E lembre-se, nós todos somos irmãos e irmãs nos olhos de Deus. Que a paz esteja com você...";
+			close;
+		}
+		mes "[Irmã Cecília]";
+		mes "...";
+		next;
+		mes "[Irmã Cecília]";
+		mes "...";
+		mes "......";
+		next;
+		set PRIEST_Q,8;
+		mes "[Irmã Cecília]";
+		mes "Você foi tão longe...";
+		mes "Por que você queria";
+		mes "jogar tudo isso fora...?";
+		close;
+	}
+	else if (PRIEST_Q == 8) {
+		mes "...";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Bem-vindo de volta.";
+		mes "Eu espero que você tenha refletido sobre o quê falou na última vez, e que agora você tem a atitude para se tornar um Sacerdote.";
+		next;
+		goto L_AskQuestions;
+	}
+	else if (PRIEST_Q == 9) {
+		mes "Parabéns.";
+		mes "Você completou todos os três testes requeridos para o Sacerdócio. Bispo Paulo está esperando por você.";
+		next;
+		mes "[Irmã Cecília]";
+		mes "Que a paz esteja com você...";
+		close;
+	}
+}
+
+// 2nd Test
+//==========================================================
+job_prist,24,187,4	script	Pedro S. Alberto	110,{
+	mes "[Irmão Pedro]";
+	if (BaseJob == Job_Priest) {
+		mes "Bem-vindo!";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +"!";
+		else
+			mes "Irmã "+ strcharinfo(0) +"!";
+		mes "Muito bom ver você de novo!";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Você está aqui para ajudar um amigo Noviço no treinamento espiritual? Isso é ótimo~ Eu acho que você vai fazer um ótimo trabalho.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Lembre-se, não importa quanto você quer ajudar esse Noviço, essa não é sua missão.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Você pode assistir e iluminar o fardo do seu amigo, mas você faz isso por você mesmo.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Então...";
+		mes "Você vai ajudá-lo agora mesmo?";
+		next;
+		switch(select("Sim, Eu vou.:Me dê um minuto.:Eu mudei de idéia.")) {
+		case 1:
+			mes "[Irmão Pedro]";
+			mes "Então vá! Assim que o Noviço entrar, o teste vai começar. Agora, eu vou te mandar para a arena de testes.";
+			close2;
+			warp "job_prist",24,44;
+			end;
+		case 2:
+			mes "[Irmão Pedro]";
+			mes "Hm...?";
+			mes "Para quê?";
+			mes "Bem, desde que você chegue a tempo de ajudar seu amigo, tudo bem.";
+			close;
+		case 3:
+			mes "[Irmão Pedro]";
+			mes "Oh...?";
+			mes "Então por favor,";
+			mes "vá em frente. Deus te abençoe";
+			mes "e tome cuidado!";
+			close2;
+			warp "prontera",234,318;
+			end;
+		}
+	}
+	if (PRIEST_Q == 5) {
+		mes "Bem-vindo~!";
+		mes "Eu te parabenizo";
+		mes "por passar no primeiro teste.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Meu nome é";
+		mes "Pedro S. Alberto.";
+		mes "Como está meu colega Paulo?";
+		mes "Ele está bem";
+		mes "nesses dias?";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Oh, eu me esqueço que ele foi promovido a Bispo. Eu acho que deveria chama-lo de Bispo Paulo, ou 'Sua Excelência.' Haha~";
+		next;
+		mes "[Irmão Pedro]";
+		mes "De qualquer jeito, deixe-me te dar uma curta explicação sobre o treinamento espiritual. Você está familiarizado com o quê o treinamento espiritual é para os Sacerdotes?";
+		next;
+		switch(select("Sim.:Desculpe...")) {
+		case 1:
+			mes "[Irmão Pedro]";
+			mes "Haha, Eu gosto de você! Mas nunca doi ter mais informações. Quanto mais informado você for, mais facilmente você passará no teste!";
+			next;
+			break;
+		case 2:
+			mes "[Irmão Pedro]";
+			mes "Oh, não precisa se desculpar. Eu estou aqui para dar as informações que você precisa. Então, não se preocupe.";
+			next;
+			break;
+		}
+		mes "[Irmão Pedro]";
+		mes "No treinamento espiritual, você vai derrotar criaturas más. Seres mortos-vivos e Demônios são todos maus. Ao escolher servir as sombras, eles são nossos inimigos!";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Existem muitas criaturas malignas que vagam nesse mundo contra a vontade de Deus. Inocentes sofrem como um resultado das suas maldades.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Nós, como Sacerdotes, somos obrigados a exterminar todas essas criaturas, deste modo espalhando amor e paz.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Esse treinamento vai testar sua habildade em eliminar o mal. Desde que essa prova é bem difícil de ser concluida sozinho,";
+		mes "Eu recomendo pedir ajuda para um Sacerdote se você puder.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Se vocÊ for próximo de um Sacerdote, é melhor pedi-lo para ajudar você durante essa prova. Agora, você está pronto?";
+		next;
+		switch(select("Eu estou pronto.:Por favor espere.:Eu quero voltar.")) {
+		case 1:
+			mes "[Irmão Pedro]";
+			mes "Agora, deixe o treinamento espiritual começar. É simples. Apenas mate todos. Não mostre misericórdia as criaturas da escuridão!";
+			next;
+			mes "[Irmão Pedro]";
+			mes "Agora...";
+			mes "Vá!";
+			close2;
+			warp "job_prist",24,44;
+			donpcevent "Zombie_Generator#prst::OnEnable";
+			donpcevent "Pedro S. Alberto::OnDisable";
+			donpcevent "Pedro S. Alberto#2::OnEnable";
+			end;
+		case 2:
+			set PRIEST_Q,6;
+			mes "[Irmão Pedro]";
+			mes "Hm? O que você precisa?";
+			mes "Bem, sem problemas. Você pode";
+			mes "tomar o tempo que quiser.";
+			close;
+		case 3:
+			set PRIEST_Q,6;
+			mes "[Irmão Pedro]";
+			mes "O quê...?";
+			mes "Você quer voltar??";
+			next;
+			mes "[Irmão Pedro]";
+			mes "Eu entendo. Eu suponho que você tenha uma razão importante ou negócios que você deve atender. Volte quando quiser.";
+			close2;
+			warp "prontera",234,318;
+			end;
+		}
+	}
+	else if (PRIEST_Q == 6) {
+		mes "Você está preparado desta vez?";
+		mes "Complete esta prova rápido,";
+		mes "e volte como um Sacerdote!";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Você está pronto então?";
+		next;
+		switch(select("Eu estou pronto.:Por favor, espere.:Eu quero voltar.")) {
+		case 1:
+			mes "[Irmão Pedro]";
+			mes "Agora, vamos iniciar a treinamento espiritual. Para a glória de Deus, para a paz na terra, e boa vontade com todos os homens...";
+			next;
+			mes "[Irmão Pedro]";
+			mes "Vamos...";
+			mes "Mate as";
+			mes "criaturas miseráveis!";
+			close2;
+			warp "job_prist",24,44;
+			donpcevent "Zombie_Generator#prst::OnEnable";
+			donpcevent "Pedro S. Alberto::OnDisable";
+			donpcevent "Pedro S. Alberto#2::OnEnable";
+			end;
+		case 2:
+			mes "[Irmão Pedro]";
+			mes "Hm? O que é que você precisa?";
+			mes "Ótimo, sem problema. Você pode";
+			mes "se dar ao luxo de gastar seu tempo.";
+			close;
+		case 3:
+			mes "[Irmão Pedro]";
+			mes "Como...?";
+			mes "Quer voltar??";
+			next;
+			mes "[Irmão Pedro]";
+			mes "Eu entendo. Eu suponho que você tenha algum motivo importante ou afazeres que deve comparecer. Volte sempre que puder.";
+			close2;
+			warp "prontera",234,318;
+			end;
+		}
+	}
+	else {
+		mes "Volte!";
+		close2;
+		warp "prontera",234,318;
+		end;
+	}
+
+OnEnable:
+	enablenpc "Pedro S. Alberto";
+	end;
+
+OnDisable:
+	disablenpc "Pedro S. Alberto";
+	end;
+}
+
+job_prist,23,187,1	script	Pedro S. Alberto#2	110,{
+	mes "[Irmão Pedro]";
+	if (BaseJob == Job_Priest) {
+		mes "Bem vindo!";
+		if (sex)
+			mes "Irmão "+ strcharinfo(0) +"!";
+		else
+			mes "Irmã "+ strcharinfo(0) +"!";
+		mes "Que bom te ver!";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Você está aqui para ajudar um amigo Noviço no treinamento espiritual? Que ótimo ~ Acho que você vai fazer um bom trabalho.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Ótimo, outro Noviço está em treinamento no campo agora. Você terá que esperar um pouco mais ...";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Volte um pouco mais tarde. Se o Noviço tiver terminado o treinamento, vou enviar-ló a área de treinamento.";
+		close;
+	}
+	if (PRIEST_Q == 5) {
+		mes "Por favor, espere um pouco. Outro Noviço está em treinamento no campo agora.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Se você quiser fazer o teste, por favor, aguarde um pouco e fale comigo novamente.";
+		close;
+	}
+	else if (PRIEST_Q == 6) {
+		mes "Por favor, espere um pouco. Outro Noviço está em treinamento no campo agora.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Se você quiser fazer o teste, por favor, aguarde um pouco e fale comigo novamente.";
+		close;
+	}
+	else {
+		mes "Paz...";
+		mes "Tenha com você.";
+		close2;
+		warp "prontera",234,318;
+		end;
+	}
+
+OnInit:
+	disablenpc "Pedro S. Alberto#2";
+	end;
+
+OnEnable:
+	enablenpc "Pedro S. Alberto#2";
+	end;
+
+OnDisable:
+	disablenpc "Pedro S. Alberto#2";
+	end;
+}
+
+-	script	Zombie_Generator#prst	110,{
+OnInit:
+	disablenpc "Zombie_Generator#prst";
+	end;
+
+OnEnable:
+	donpcevent "Zombie1_1::OnEnable";
+	donpcevent "Zombie2_1::OnEnable";
+	donpcevent "Zombie3_1::OnEnable";
+	donpcevent "Zombie4_1::OnEnable";
+	donpcevent "Zombie5_1::OnEnable";
+	initnpctimer;
+	end;
+
+Onm1:
+	set .MyMobs,13;
+	monster "job_prist",24,52,"Roubo",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,52,"Falta de Força",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,52,"Ciúmes",1015,1,"Z_C#prst::OnMyMobDead";
+	end;
+
+Onm2:
+	monster "job_prist",21,62,"Fúria",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",27,62,"Inveja",1015,1,"Z_C#prst::OnMyMobDead";
+	end;
+
+Onm3:
+	monster "job_prist",24,72,"Arrogância",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,72,"Adultério",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,72,"Preguiça",1015,1,"Z_C#prst::OnMyMobDead";
+	end;
+
+Onm4:
+	monster "job_prist",21,82,"Gula",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",27,82,"Ganância",1015,1,"Z_C#prst::OnMyMobDead";
+	end;
+
+Onm5:
+	monster "job_prist",24,92,"Aflição",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,92,"Desconfiança",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,92,"Medo",1015,1,"Z_C#prst::OnMyMobDead";
+	end;
+
+OnDisable:
+	disablenpc "Zombie_Generator#prst";
+	killmonsterall "job_prist";
+	end;
+
+OnTimer300000:
+	areawarp "job_prist",8,34,39,109,"prontera",234,318;
+	end;
+
+OnTimer300500:
+	donpcevent "Zombie_Generator#prst::OnDisable";
+	end;
+
+OnTimer301500:
+	donpcevent "Zombie_Generator#prst::OnDisable";
+	donpcevent "Pedro S. Alberto#2::OnDisable";
+	donpcevent "Pedro S. Alberto::OnEnable";
+	end;
+
+OnTimer302000:
+	stopnpctimer;
+	end;
+}
+
+-	script	Z_C#prst	-1,{
+	end;
+
+OnMyMobDead:
+	set getvariableofnpc(.MyMobs,"Zombie_Generator#prst"),getvariableofnpc(.MyMobs,"Zombie_Generator#prst") - 1;
+	end;
+}
+
+job_prist,24,44,0	script	Zombie Info	-1,1,1,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		mes "[Irmão Pedro]";
+		mes "Quando o noviço entrar, 5 minutos serão dados para completar essa tarefa. Proceda devagar e ajude seu Noviço.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Entre pelo portal no final do corredor, onde você será levado para a próxima sala de teste.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Lembre-se...";
+		mes "Essa tarefa deve ser";
+		mes "completada dentro de";
+		mes "5 minutos. Boa Sorte~";
+		close;
+	}
+	else if (BaseJob == Job_Acolyte){
+		mes "[Irmão Pedro]";
+		mes "Eu vou te dar exatamente 5 minutos! Você deve ir devagar e eliminar os Zumbis.";
+		next;
+		mes "[Irmão Pedro]";
+		mes "Mate todos os zumbis e passe pelo portal no final do corredor. Tenha certeza de ter matado todos.";
+		close;
+	}
+	end;
+}
+
+job_prist,24,52,0	script	Zombie1_1	-1,14,1,{
+OnInit:
+	disablenpc "Zombie1_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Zombie_Generator#prst::Onm1";
+		donpcevent "Zombie1_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Zombie1_1";
+	end;
+
+OnDisable:
+	disablenpc "Zombie1_1";
+	end;
+}
+
+job_prist,21,62,0	script	Zombie2_1	-1,17,1,{
+OnInit:
+	disablenpc "Zombie2_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Zombie_Generator#prst::Onm2";
+		donpcevent "Zombie2_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Zombie2_1";
+	end;
+
+OnDisable:
+	disablenpc "Zombie2_1";
+	end;
+}
+
+job_prist,24,72,0	script	Zumbi3_1	-1,14,1,{
+OnInit:
+	disablenpc "Zumbi3_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Gerador_Zumbi#prst::Onm3";
+		donpcevent "Zumbi3_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Zumbi3_1";
+	end;
+
+OnDisable:
+	disablenpc "Zumbi3_1";
+	end;
+}
+
+job_prist,21,82,0	script	Zumbi4_1	-1,17,1,{
+OnInit:
+	disablenpc "Zumbi4_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Gerador_Zumbi#prst::Onm4";
+		donpcevent "Zumbi4_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Zumbi4_1";
+	end;
+
+OnDisable:
+	disablenpc "Zumbi4_1";
+}
+
+job_prist,24,92,0	script	Zumbi5_1	-1,14,1,{
+OnInit:
+	disablenpc "Zumbi5_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Gerador_Zumbi#prst::Onm5";
+		donpcevent "Zumbi5_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Zumbi5_1";
+	end;
+
+OnDisable:
+	disablenpc "Zumbi5_1";
+}
+
+job_prist,24,109,4	script	prst1_1	45,3,3,{
+OnTouch:
+	set .@mobs,getvariableofnpc(.MyMobs,"Zombie_Generator#prst");
+	if (BaseJob == Job_Priest) warp "job_prist",168,17;
+	else if (BaseClass == Job_Acolyte && .@mobs < 1) {
+		warp "job_prist",168,17;
+		donpcevent "Zombie_Generator#prst::OnDisable";
+		donpcevent "Peter S. Alberto#2::OnDisable";
+		donpcevent "Peter S. Alberto::OnEnable";
+		donpcevent "Zombie_Generator#prst::OnDisable";
+	}
+	end;
+}
+
+// 3rd Test
+//==========================================================
+job_prist,168,45,4	script	Deviruchi#prst	1109,8,1,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		mes "[Deviruchi]";
+		mes "O queeeeee...?";
+		mes "O que você";
+		mes "está fazendo aqui atrás?";
+		next;
+		mes "[Deviruchi]";
+		mes "Bem, veja quem é ^660000OGCDC^000000 agora. Isso é '^660000G^000000rande ^660000C^000000ara ^660000D^000000o ^660000C^000000ampus,' caso você não saiba. Estava sendo sarcástico. Sabe, se você não notou.";
+		next;
+		mes "[Deviruchi]";
+		mes "Você realmente";
+		mes "é feliz sendo um Sacerdote?";
+		mes "Não tem como.";
+		next;
+		mes "[Deviruchi]";
+		mes "Certo, Certo, por questão de tempo, vou deixar você passar. Mas só dessa vez. Não deixe eu te pegar denovo! Está é a área do mal, sacou?!";
+		close;
+	}
+	if (BaseClass == Job_Acolyte) {
+		mes "[Deviruchi]";
+		mes "Porque...";
+		mes "Olá pequeno noviço.";
+		next;
+		mes "[Deviruchi]";
+		mes "Você têm que treinar duro para ser um Sacerdote. Engraçado, eu conheço um monte de servidores de Deus, atualmente. Eles me falam que é muito difícil servir Deus o tempo todo. Muito... muito ^666666cansativo^000000 mas ^666666sem Remuneração^000000.";
+		next;
+		mes "[Deviruchi]";
+		mes "Quero dizer, as pessoas estão sempre chorando por ajuda de Sacerdotes, não importa onde eles estão. e os Sacerdotes nunca ganham nada em troca...";
+		next;
+		mes "[Deviruchi]";
+		mes "É realmente trágico, como os Sacerdotes são pouco reconhecidos.";
+		mes "É tão claro que qualquer trabalho é melhor. Qualquer coisa...";
+		next;
+		mes "[Deviruchi]";
+		mes "Será que a vida não seria muito mais fácil se você não fosse um sacerdote? E isso seria tão fácil. Tudo que você tem a fazer é desistir agora...";
+		next;
+		if (select("Você está certo, eu desisto!:Sai da minha frente, demônio!") == 1) {
+			mes "[Deviruchi]";
+			mes "^660000SIM~!^000000 Eu sei...";
+			mes "Bom para você!";
+			next;
+			mes "[Deviruchi]";
+			mes "Oh...?";
+			mes "Olha a ^660000hora^000000.";
+			mes "É melhor ir andando.";
+			next;
+			mes "[Deviruchi]";
+			mes "BWAHAHAHAHAHAH!";
+			mes "GOSTOU DA PIADA!?";
+			close2;
+			warp "c_tower2",168,33;
+			end;
+		}
+		mes "[Deviruchi]";
+		mes "Sair da sua frente?";
+		mes "Acho que não sou";
+		mes "a coisa mais fofinha que";
+		mes "você já viu, hein?";
+		next;
+		mes "[Deviruchi]";
+		mes "Mas o que pensa sobre isto...? Agora, não parece atraente? Uma boa, e rara carta nova. Pense nisto. Você não conhece muitos que têm uma dessas. Mas acontece que tenho muuuuuitas, meus bolsos machucam.";
+		next;
+		cutin "¹Ì½ºÆ®·¹½ºÄ«µå.bmp",4;
+		mes "[Deviruchi]";
+		mes "Não acha que todos sonham em ter uma dessas? Pense sobre isto, ser um Sacerdote só lhe traz sofrimento...";
+		next;
+		if (select("Você está certo, vou pegar!:Silêncio!") == 1) {
+			mes "[Deviruchi]";
+			mes "Ótima escolha!";
+			mes "Esta carta";
+			mes "pode ser sua...";
+			next;
+			cutin "¹Ì½ºÆ®·¹½ºÄ«µå.bmp",255;
+			mes "[Deviruchi]";
+			mes "Teoricamente!";
+			mes "BWAHAHAHAHAHAHAHA!";
+			mes "Vá e consiga você mesmo!";
+			close2;
+			warp "mjolnir_05",200,200;
+			end;
+		}
+		cutin "¹Ì½ºÆ®·¹½ºÄ«µå.bmp",255;
+		mes "[Deviruchi]";
+		mes "Você...";
+		mes "Você acabou de me dizer";
+		mes "para calar a boca?";
+		mes "Oh meu Deus...";
+		next;
+		mes "[Deviruchi]";
+		mes "Desculpe...";
+		mes "Oh ^660000você^000000 é Deus.";
+		mes "Ótimo, já vou indo.";
+		mes "Mas você vai lamentar";
+		mes "sua decisão mais tarde!";
+		close;
+	}
+	end;
+}
+
+job_prist,168,80,4	script	Doppelganger#prst	1046,8,1,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		mes "[Doppelganger]";
+		mes "O que você está fazendo aqui? Você já fez sua escolha, não há como voltar atrás ... Sacerdote.";
+		next;
+		mes "[Doppelganger]";
+		mes "Além disso, isto não é da sua obrigação. Seja ou não, este Noviço se torna um Sacerdote não é com você. Agora sai daqui, antes que use a violenta.";
+		close;
+	}
+	else if (BaseClass == Job_Acolyte) {
+		mes "[Doppelganger]";
+		mes "Espere aí, sacristão.";
+		mes "Eu não gosto do Deviruchi,";
+		mes "então eu não poupo";
+		mes "palavras com você.";
+		next;
+		mes "[Doppelganger]";
+		mes "Agora, por que você quer se tornar um sacerdote? É um trabalho díficil, não compensa. Se você quiser, eu vou te dar a chance de se tornar um principiante. Então você pode se tornar algo muito melhor!";
+		next;
+		mes "[Doppelganger]";
+		mes "É claro, eu vou deixar você redistribuir seus pontos statos por base o seu nível. Agora, não é um bom negócio ...?";
+		next;
+		if (select("Negócio, Negócio!:Sem negociação... Doppelganger.") == 1) {
+			mes "[Doppelganger]";
+			mes "Boa escolha~";
+			mes "Vou devolver a sua";
+			mes "profissão para um principiante";
+			mes "como quiser.";
+			next;
+			mes "[Doppelganger]";
+			mes "Agora vamos!!";
+			mes "Nunca passo para";
+			mes "a luz novamente!";
+			close2;
+			warp "gef_dun02",210,177;
+			end;
+		}
+		mes "[Doppelganger]";
+		mes "Eu não acho que você tenha compreendido o que eu ofereci exatamente. Pense nisso novamente. Quer dizer, esta é a sua única chance de anular sua vida de erros. Quero dizer, se tornando um Noviço?";
+		next;
+		mes "[Doppelganger]";
+		mes "Apenas não se torne um Sacerdote. Não vou pedir-lhe mais de uma vez. Então você pode escolher uma profissão melhor ... talvez um Espadachim como eu.";
+		next;
+		if (select("Não quero ser um Sacerdote!:Eu nunca irei ouvir você!") == 1) {
+			mes "[Doppelganger]";
+			mes "Exelente escolha. Agora, nunca retorne para este local. Vou voltar você para ser um principiante como deseja.";
+			next;
+			mes "[Doppelganger]";
+			mes "Agora vamos!!";
+			mes "Nunca passo para";
+			mes "a luz novamente!";
+			close2;
+			warp "gef_dun02",210,177;
+			end;
+		}
+		mes "[Doppelganger]";
+		mes "Hmpf. Eu admiro";
+		mes "sua determinação.";
+		mes "Tudo bem, você pode passar.";
+		mes "Por agora.";
+		next;
+		mes "[Doppelganger]";
+		mes "Mas se por acaso nos encontrarmos novamente,";
+		mes "Te garanto... Você não vai ficar feliz em me ver.";
+		close;
+	}
+}
+
+job_prist,168,115,4	script	Lorde das Trevas#prst	1272,8,1,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		mes "[Lorde das Trevas]";
+		mes "^330033Tudo são ruínas, escuridão e desespero! Aqueles que o amam o trairão e tudo o que será deixado está magoando e enfurecendo!^000000";
+		next;
+		mes "[Lorde das Trevas]";
+		mes "^330033Escolher tornar-se um servo de Deus é escolher a dor eterna!";
+		mes "Eu enxergo desta forma, mortal.^000000";
+		close;
+	}
+	else if (BaseClass == Job_Acolyte) {
+		mes "[Lorde das Trevas]";
+		mes "^330033Pare, humano.";
+		mes "Quem o deixou";
+		mes "passar?^000000";
+		next;
+		mes "[Lorde das Trevas]";
+		mes "^330033Você ainda deseja se tornar um Sacerdote?! Idiota! Então, Eu não o deixarei passar. Volte. De outra forma, você não sobreviverá.^000000";
+		next;
+		mes "[Lorde das Trevas]";
+		mes "^330033Seria muito fácil para mim partir seu frágil corpo em dois, moer seus ossos e jogá-los ao vento.";
+		mes "Agora volte, mortal!^000000";
+		next;
+		if (select("Desculpe-me. Não me mate!:Deus me protegerá!") == 1) {
+			mes "[Lorde das Trevas]";
+			mes "^330033Nunca mais volte!^000000";
+			close2;
+			warp "gl_church",145,170;
+			end;
+		}
+		mes "[Lorde das Trevas]";
+		mes "^330033Não há porque simular força e coragem. Você está totalmente desprotegido contra mim. Suas habilidades me fazem rir e suas armas são meros brinquedos, comparados com meu poder.^000000";
+		next;
+		mes "[Lorde das Trevas]";
+		mes "^330033Com apenas uma onda de minha mão, você deixará de existir e ninguém se lembrará de você. Trema diante do meu ifinito poder!^000000";
+		next;
+		if (select("Eu te suplico, não...!:Vá embora, indigno amigo!") == 1) { // "Begone, vile fiend" - não faço idéia.
+			mes "[Lorde das Trevas]";
+			mes "^330033Não volte nunca mais!^000000";
+			close2;
+			warp "gl_church",145,170;
+			end;
+		}
+		mes "[Lorde das Trevas]";
+		mes "^330033Por que...";
+		mes "Por que você não me teme?!";
+		mes "Para um simples mortal, você";
+		mes "é um pouco estranho.^000000";
+		next;
+		mes "[Lorde das Trevas]";
+		mes "^330033Quando nos encontrarmos denovo, eu irei te levar para um local de sofrimento onde você passará anos imerso em imensurável dor.";
+		mes "Guarde minhas palavras...^000000";
+		close;
+	}
+}
+
+job_prist,168,150,4	script	Bafomé#prst	736,8,1,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		mes "[Bafomé]";
+		mes "Eu odeio";
+		mes "sacerdotes...";
+		next;
+		mes "[Bafomé]";
+		mes "Não tenho nada com você, servo de Deus. Apenas vá.";
+		close;
+	}
+	else if (BaseClass == Job_Acolyte) {
+		mes "[Bafomé]";
+		mes "Saudações.";
+		next;
+		mes "[Bafomé]";
+		mes "..."+ strcharinfo(0) +".";
+		next;
+		mes "[Bafomé]";
+		mes "Sim, humano,";
+		mes "eu sei quem você é.";
+		next;
+		mes "[Bafomé]";
+		mes "Eu também sei que Deviruchi, Doppelganger e o Lorde das Trevas falharam em convencer você a esquecer o sacerdócio.";
+		mes "Agora, sobra somente eu";
+		mes "para lhe propor uma coisa.";
+		next;
+		mes "[Bafomé]";
+		mes "Eu posso lhe garantir qualquer tesouro que você desejar e poder ifinito em suas mãos. Armas poderosas que humanos nunca viram antes...";
+		next;
+		mes "[Bafomé]";
+		mes "Montanhas de zeny que você nunca em sua vida poderá gastar. Entretanto, quem disse que sua vida precisa ser limitada? Fama, poder, imortalidade: tudo isso pode ser seu.";
+		next;
+		mes "[Bafomé]";
+		mes "Eu poderei ser chamado a qualquer momento. Todos os outros humanos temerão ao serem seus inimigos. Você se tornará a pessoa mais poderosa de toda a história!";
+		next;
+		mes "[Bafomé]";
+		mes "Acabe com essa idiotisse de buscar o sacerdócio. Faça um contrato comigo. O mundo inteiro será seu.";
+		next;
+		if (select("Contrato.:Não, Bafomé. Você perdeu!") == 1) {
+			mes "[Bafomé]";
+			mes "Então nós podemos formar um contrato. Você nunca se esquecerá deste momento...";
+			next;
+			mes "[Bafomé]";
+			mes "Siga-me.";
+			mes "Nós faremos o";
+			mes "contrato no meu";
+			mes "santuário de escuridão.";
+			close2;
+			warp "glast_01",200,203;
+			end;
+		}
+		mes "[Bafomé]";
+		mes "Humano tolo...";
+		mes "Você fez sua escolha. Eu o deixarei por agora, então. Entretanto, seu treinamento não será tão fácil como você pensa.";
+		next;
+		mes "[Bafomé]";
+		mes "Eu prepararei minhas tropas para você. O dia chegará quando eu apreciarei a agonia de sua alma enquanto meus amigos vagarozamente o devoram.";
+		close;
+	}
+}
+
+job_prist,168,180,4	script	prst2_1	45,3,3,{
+OnTouch:
+	if (BaseJob == Job_Priest) warp "job_prist",98,40;
+	else if (BaseClass == Job_Acolyte) {
+		warp "job_prist",98,40;
+		donpcevent "Mummy_Generator::OnEnable";
+	}
+	end;
+}
+
+// 4th Test
+//==========================================================
+job_prist,1,2,1	script	Mummy_Generator	110,1,1,{
+OnInit:
+	disablenpc "Mummy_Generator";
+	end;
+
+OnEnable:
+	donpcevent "Mummy1_1::OnEnable";
+	donpcevent "Mummy2_1::OnEnable";
+	donpcevent "Mummy3_1::OnEnable";
+	end;
+
+Onm1:
+	monster "job_prist",90,55,"Khamoz",1041,1;
+	monster "job_prist",105,55,"Amocsis",1041,1;
+	end;
+
+Onm2:
+	monster "job_prist",90,70,"Mentuhoteph",1041,1;
+	monster "job_prist",105,70,"Akenaten",1041,1;
+	end;
+
+Onm3:
+	monster "job_prist",90,85,"Mehnes",1041,1;
+	monster "job_prist",105,85,"Snepheru",1041,1;
+	end;
+
+OnDisable:
+	disablenpc "Mummy_Generator";
+	killmonsterall "job_prist";
+	end;
+}
+
+job_prist,90,55,0	script	Mummy1_1	-1,15,1,{
+OnInit:
+	disablenpc "Mummy1_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Mummy_Generator::Onm1";
+		donpcevent "Mummy1_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Mummy1_1";
+	end;
+
+OnDisable:
+	disablenpc "Mummy1_1";
+	end;
+}
+
+job_prist,90,70,0	script	Mummy2_1	-1,15,1,{
+OnInit:
+	disablenpc "Mummy2_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Mummy_Generator::Onm2";
+		donpcevent "Mummy2_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Mummy2_1";
+	end;
+
+OnDisable:
+	disablenpc "Mummy2_1";
+	end;
+}
+
+job_prist,90,85,0	script	Mummy3_1	-1,15,1,{
+OnInit:
+	disablenpc "Mummy3_1";
+	end;
+
+OnTouch:
+	if (BaseJob == Job_Acolyte) {
+		donpcevent "Mummy_Generator::Onm3";
+		donpcevent "Mummy3_1::OnDisable";
+	}
+	end;
+
+OnEnable:
+	enablenpc "Mummy3_1";
+	end;
+
+OnDisable:
+	disablenpc "Mummy3_1";
+	end;
+}
+
+job_prist,98,105,4	script	prst3_1	45,3,3,{
+OnTouch:
+	if (BaseJob == Job_Priest) {
+		warp "prt_church",15,36;
+		end; 
+	}
+	else if (BaseClass == Job_Acolyte) {
+		set PRIEST_Q,7;
+		warp "prt_church",16,37;
+		donpcevent "Mummy_Generator::OnDisable";
+	}
+	end;
+}
+
+// Functions
+//==========================================================
+function	script	F_FatherRub	{
+	if (PRIEST_Q != 0) {
+		if (PRIEST_Q == 1) {
+			mes "Ah sim, então você é o jovem Noviço que deseja se tornar um Sacerdote.";
+			next;
+			mes "[Irmão Simão]";
+			mes "Eu recebi a mensagem do Bispo Paulo. Uma vez que você fez a peregrinação, eu espero que você conclua seu objetivo de se tornar um Sacerdote.";
+			next;
+			mes "[Irmão Simão]";
+			mes "Além disso, se você tiver uma chance, por favor visite esta abadia novamente. É um lugar sagrado para a nossa igreja.";
+			next;
+			mes "[Irmão Simão]";
+			mes "Bem então, por favor dirija-se ao seu próximo destino de sua peregrinação. Esteja seguro em suas viagens.";
+			close2;
+			savepoint "prt_fild03",361,255;
+			set PRIEST_Q,2;
+			end;
+		}
+		else if (PRIEST_Q == 2) {
+			mes "Lembre-se de apressar-se para o próximo destino da sua peregrinação. Eu espero que você torne-se logo um Sacerdote.";
+			close;
+		}
+		mes "Posso perguntar por que você voltou? Por favor, volte e continue sua prática religiosa.";
+		close;
+	}
+	mes "Eu não faço idéia do que o trouxe aqui, mas por favor desculpe-me.";
+	close;
+}
+
+function	script	F_MotherMart	{
+	if (PRIEST_Q != 0) {
+		if (PRIEST_Q == 1) {
+			mes "Hmm...";
+			mes "Parece que você está";
+			mes "treinando para se tornar";
+			mes "um Sacerdote.";
+			next;
+			mes "[Irmã Matilda]";
+			mes "No entanto, neste momento da sua peregrinação, não sou a pessoa que deve visitar.";
+			next;
+			mes "[Irmã Matilda]";
+			mes "Talvez você deveria falar com o Bispo Paulo ou a Irmã Cecília mais uma vez. Bem, que Deus esteja com você...";
+			close;
+		}
+		else if (PRIEST_Q == 2) {
+			mes "Ah, você é";
+			mes "um estagiário de Sacerdote...?";
+			mes "Bem-vindo!";
+			next;
+			mes "[Irmã Matilda]";
+			mes "Nós Sacerdotes somos obrigados a espalhar a mensagem de Deus para";
+			mes "as pessoas na Terra.";
+			next;
+			mes "[Irmã Matilda]";
+			mes "Depois de se tornar um Sacerdote, suas viagens poderam levá-lo as Pirâmides de Morroc. Eu espero que você possa libertar os Mortos-vivos lá do mal a que estão vinculados.";
+			next;
+			mes "[Irmã Matilda]";
+			mes "Bem então...";
+			mes "Eu orarei a";
+			mes "Deus por segurança";
+			mes "em sua jornada.";
+			close2;
+			savepoint "moc_fild07",35,355;
+			set PRIEST_Q,3;
+			end;
+		}
+		else if (PRIEST_Q == 3) {
+			mes "Por favor, saia logo, e";
+			mes "continue seu treinamento.";
+			close;
+		}
+		mes "Posso perguntar-lhe a razão por que você voltou? Por favor, continue seu treinamento.";
+		close;
+	}
+	mes "Que Deus";
+	mes "esteja com você...";
+	close;
+}
+
+function	script	F_FatherYos	{
+	if (PRIEST_Q != 0) {
+		if (PRIEST_Q == 1) {
+			mes "Hmm...";
+			mes "Um estagiário de Sacerdote, hein?";
+			next;
+			mes "[Irmão Bartolomeu]";
+			mes "Bem, você pegou a pessoa errada. Se você supõe me encontrar, seria mais tarde.";
+			next;
+			mes "[Irmão Bartolomeu]";
+			mes "Mas é sua culpa.";
+			mes "Agora, volte para a igreja, filho.";
+			close;
+		}
+		else if (PRIEST_Q == 2) {
+			mes "Hmm...";
+			mes "Um estagiário de Sacerdote, hein?";
+			next;
+			mes "[Padre Yosuke]";
+			mes "Bem, você pegou a pessoa errada. Se você supõe me encontrar, seria mais tarde.";
+			next;
+			mes "[Padre Yosuke]";
+			mes "Mas é sua culpa. Volte para a Igreja.";
+			close;
+		}
+		else if (PRIEST_Q == 3) {
+			mes "Hmm.";
+			mes "Um estagiário";
+			mes "de Sacerdote, eh? ";
+			mes "Bem-vindo.";
+			next;
+			mes "[Padre Yosuke]";
+			mes "Eu não vou dizer";
+			mes "mais nada.";
+			mes "Apenas dedique sua";
+			mes "vida a Deus";
+			next;
+			mes "[Padre Yosuke]";
+			mes "Agora volte para a igreja.";
+			mes "Hereby, a primeira de";
+			mes "suas provas foi";
+			mes "concluída.";
+			close2;
+			savepoint "prt_fild00",206,230;
+			set PRIEST_Q,4;
+			end;
+		}
+		else if (PRIEST_Q == 4) {
+			mes "Eu disse para você voltar para a igreja.";
+			mes "Ou você quer viver aqui comigo para o resto da sua vida...?";
+			close;
+		}
+		mes "Basta ir ser um Sacerdote. Isso não é um parque para crianças.";
+		close;
+	}
+	mes "...Noviço, você não tem nenhum negócio comigo aqui.";
+	close;
+}

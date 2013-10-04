@@ -1,0 +1,50 @@
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Versão Renovação
+//
+// Tipo,Stats por nível,Bônus Inicial de Refinamento,Valor do Bônus,Chance+1:Bônus+1,Chance+2:Bônus+2,Chance+3:Bônus+3,...
+//
+// IMPORTANTE: Alterar o Número máximo de Refinamento requer a modificação do MAX_REFINE no status.h
+//
+// Para Armaduras, Valores de 100 adicionam 1 ponto de defesa para Armadura.
+// Para Aras, valores de 100 adicionam 1 ponto de ATK e MATK.
+//
+// Tipo:
+// 0 - Armaduras
+// 1 - Armas Nível 1
+// 2 - Armas Nível 2
+// 3 - Armas Nível 3
+// 4 - Armas Nível 4
+//
+// Stats por nível:
+// Esse valor é aplicado para cada nível de refinamento
+//
+// Bônus Inicial de Refinamento:
+// Este valor especifica o ponto de partida para aqueles níveis que dão Bônus Inicial.
+//
+// Valor do Bônus:
+// Um número aleatório entre 0 e (Bônus Inicial de Refinamento - Nível de Refinamento + 1) * o valor aplicado a todos os refinamentos anteriores
+// Bônus Inicial de Refinamento (normalmente o primeiro refinamento inseguro). Isso só é aplicada para armas, e não exibido no cliente.
+//
+// Chance:
+// 100 = 100%
+//
+// Nota: Chances para +11 e superiores não são verificadas - 10% é um rumor do iRO Wiki.
+// Uma nota sobre as Armaduras na renovação, talvez tenha ou não outro bônus, de acordo com o iRO Wiki: cada refinamento dá floor[( 3 + refinamento atual ) / 4] de DEF de equipamento)
+//---------------------------------------------------------
+
+0,0,0,0,100:100,100:100,100:100,100:100,60:200,40:200,40:200,20:200,20:300,10:300,100:300,100:300,100:400,100:400,90:400,60:400,60:500,30:500,30:500,10:500
+// Level 1 weapons
+1,200,8,300,100:0,100:0,100:0,100:0,100:0,100:0,100:0,60:0,40:0,20:0,100:0,100:0,100:0,100:0,100:0,100:300,100:300,90:300,60:300,20:300
+// Level 2 weapons
+2,300,7,500,100:0,100:0,100:0,100:0,100:0,100:0,60:0,40:0,20:0,20:0,100:0,100:0,100:0,100:0,100:0,100:600,90:600,60:600,30:600,20:600
+// Level 3 weapons
+3,500,6,800,100:0,100:0,100:0,100:0,100:0,60:0,50:0,20:0,20:0,20:0,100:0,100:0,100:0,100:0,100:0,90:900,75:900,30:900,30:900,20:900
+// Level 4 weapons
+4,700,5,1400,100:0,100:0,100:0,100:0,60:0,40:0,40:0,20:0,20:0,10:0,100:0,100:0,100:0,100:0,90:0,60:1200,60:1200,30:1200,30:1200,10:1200

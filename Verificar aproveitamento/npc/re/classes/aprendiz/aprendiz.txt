@@ -1,0 +1,17 @@
+//===== Hercules Script =======================================
+//= New Novice Training Grounds
+//===== By: ==================================================
+//= Streusel
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Hercules
+//===== Description: =========================================
+//= New Novice Training Grounds
+//= [Hand Scripted (No Programs or AEGIS Scripts)]
+//===== Additional Comments: =================================
+//= 1.0 First version. [Streusel]
+//============================================================
+
+iz_int01,100,91,4	duplicate(Captain_Carew)	Captain Carew#iz_int	873
+iz_int01,91,81,4	duplicate(Rumin)	Rumin#iz_int01	99

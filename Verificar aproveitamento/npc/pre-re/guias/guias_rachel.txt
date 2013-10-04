@@ -1,0 +1,115 @@
+//===== Cronus Script ======================================== 
+//= Guia de Rachel
+//===== Por: ================================================= 
+//= L0ne_W0lf
+//===== Versão Atual: ======================================== 
+//= 1.2d
+//===== Compatível com: ====================================== 
+//= Cronus SVN
+//===== Changelog: =========================================== 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Change the while loops a bit. [L0ne_W0lf]
+//= 1.2 Deleted an Unnecessary "next;" [Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.2a Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.2b Deleted a unnecessary "end". [Samuray22]
+//= 1.2c Revisado. [RoM]
+//= 1.2d Removido show	[Yum]
+//============================================================ 
+
+rachel,138,146,5	script	Guia de Rachel	934,{
+	mes "[Guia de Rachel]";
+	mes "Seja bem-vindo a capital de";
+	mes "Arunafeltz, Rachel. onde o";
+	mes "ar da Deusa Freya extende-se.";
+	mes "Se estás usando pela primeira vez";
+	mes "os serviços de um Guia, por que";
+	mes "não checar o menu 'Tutorial' primeiro?";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("Indicações:Remover Indicações:Tutorial:Cancelar")) {
+		case 1:
+			mes "[Guia de Rachel]";
+			mes "Posso lhe indicar qualquer construção de Rachel.";
+			mes "Então, onde você quer ir?";
+			if (.@compass_check == 0) {
+				mes "Quer que eu marque";
+				mes "as localizações";
+				mes "no seu Mini-Mapa?";
+				next;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("Cheshrumnir:Estalagem:Loja de Armas:Loja de Utilidades:Aeroporto:Cancelar")) {
+				case 1:
+					mes "[Guia de Rachel]";
+					mes "Cheshrumnir é o Solo Sagrado onde a Papisa, a encarnação da Deusa Freya vive.";
+					mes "Tome a rua norte para encontrar o prédio.";
+					if (.@compass_check == 1) viewpoint 1,150,249,1,0xFF0000;
+					break;
+				case 2:
+					mes "[Guia de Rachel]";
+					mes "Você pode descansar de suas aventuras na Estalagem.";
+					mes "O prédio á minha esquerda é a Estalagem de Rachel.";
+					if (.@compass_check == 1) viewpoint 1,115,149,2,0xFF00FF;
+					break;
+				case 3:
+					mes "[Guia de Rachel]";
+					mes "Quer conferir as armas que são vendidas em Rachel?";
+					mes "A Loja de Armas fica perto do portão ocidental.";
+					if (.@compass_check == 1) viewpoint 1,42,87,3,0x99FFFF;
+					break;
+				case 4:
+					mes "[Guia de Rachel]";
+					mes "A Loja de Utilidades de Rachel vende poções da melhor qualidade.";
+					mes "Está localizada próxima ao portão ocidental.";
+					if (.@compass_check == 1) viewpoint 1,83,78,4,0x0000FF;
+					break;
+				case 5:
+					mes "[Guia de Rachel]";
+					mes "O Aeroporto está localizado perto do portão oriental.";
+					if (.@compass_check == 1) viewpoint 1,273,125,5,0x00FF00;
+					break;
+				case 6:
+					mes "[Guia de Rachel]";
+					mes "Se você quiser que eu apague as indicações no seu mini-mapa,";
+					mes "me peça, escolhendo 'Remover Indicações' no menu.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+
+		case 2:
+			viewpoint 2,150,249,1,0xFF0000;
+			viewpoint 2,115,149,2,0xFF00FF;
+			viewpoint 2,42,87,3,0x99FFFF;
+			viewpoint 2,83,78,4,0x0000FF;
+			viewpoint 2,273,125,5,0x00FF00;
+			mes "[Guia de Rachel]";
+			mes "Ok, eu apaguei tudo. Se você quiser saber mais sobre algum local daqui, venha me procurar.";
+			break;
+		case 3:
+			mes "[Guia de Rachel]";
+			mes "Quando você está usando o Guia de 'Indicações',";
+			mes "tenha certeza de que eles estão aparecendo no canto superior direito de sua tela.";
+			mes "Se você não está vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botão 'Mapa' na sua Janela de Informações Básicas, ok?";
+			mes "Você ainda pode diminuir o zoom no mini-mapa apertando o botão '-' no caso de você não estar vendo o mapa da vila por inteiro.";
+			break;
+		case 4:
+			mes "[Guia de Rachel]";
+			mes "Espero que tenha uma maravilhosa jornada";
+			mes "em Arunafeltz.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	close;
+}

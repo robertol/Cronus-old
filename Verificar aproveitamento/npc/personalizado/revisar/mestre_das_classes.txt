@@ -1,0 +1,192 @@
+//===== Cronus Script ============================================
+//= Mestre das Classes
+//===== Por: =====================================================
+//= Euphy
+//===== Versão Atual: ============================================
+//= 1.4
+//===== Compatível Com: ==========================================
+//= Cronus SVN
+//===== Descrição: ===============================================
+//= Troca sua classe sem necessidade de quest.
+//===== Comentários Adicionais: ==================================
+//= 1.1 Fixed reset on Baby job change. [Euphy]
+//= 1.2 Added Expanded Super Novice support and initial Kagerou/Oboro support. [Euphy]
+//= 1.3 Kagerou/Oboro added. [Euphy]
+//= 1.4 Traduzido para Português. [Cainho]
+//================================================================
+
+prontera,153,193,6	script	Mestre das Classes	872,{
+function Job_Menu; function A_An;
+
+	mes "[Mestre das Classes]";
+	if (Class > 4049) {
+		mes "Não existem mais expansões para sua classe?";
+		close;
+	}
+	if (checkfalcon() || checkcart() || checkriding() || ismounting()) {
+		mes "Por favor remova seu "+((checkfalcon())?"falcão":"")+((checkcart())?"carrinho":"")+((checkriding())?"Peco":"")+((ismounting())?"montaria":"")+" para continuar.";
+		close;
+	}
+	if (.SkillPointCheck && SkillPoint) {
+		mes "Por favor use todos os seus pontos de habilidade para continuar.";
+		close;
+	}
+	
+
+	set .@eac, eaclass();
+	set .@i, ((.ThirdClass)?roclass(.@eac&EAJ_UPPERMASK):Class);
+	if (.@i > 6 && .@i < 22) {
+		if (BaseLevel < .Rebirth[0] || JobLevel < .Rebirth[1]) {
+			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .Rebirth[1]-JobLevel;
+			mes "Você precisa de mais "+((.@blvl>0)?.@blvl+" níveis de base e de mais "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" níveis de classe ":"")+"para continuar.";
+			close;
+		}
+		if (Class > 21) {
+			mes "Avançar para a Terceira Classe?";
+			next;
+			Job_Menu(roclass(.@eac|EAJL_THIRD));
+			close;
+		}
+		while(1) {
+			mes "Selecione uma opção.";
+			next;
+			set .@i, select(" ~ ^0055FFRenascer^000000:"+((.ThirdClass)?" ~ ^FF0000Terceira Classe^000000":"")+": ~ ^777777Sair^000000");
+			if (.@i==3) close;
+			mes "[Mestre das Classes]";
+			mes "Você tem certeza?";
+			next;
+			Job_Menu(((.@i==1)?4001:roclass(.@eac|EAJL_THIRD)));
+			mes "[Mestre das Classes]";
+		}
+	}
+	set .@j1, roclass(.@eac|EAJL_2_1); set .@j2,roclass(.@eac|EAJL_2_2);
+	if ((.@eac&EAJ_UPPERMASK) == EAJ_SUPER_NOVICE) setarray .@exp[0],roclass(.@eac|EAJL_THIRD),99;
+	if (Class == Job_Ninja) setarray .@exp[0],.@j1,70;
+	if (.@exp[0] && .ThirdClass) {
+		if (BaseLevel < .Rebirth[0] || JobLevel < .@exp[1]) {
+			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .@exp[1]-JobLevel;
+			mes "Você precisa de mais "+((.@blvl>0)?.@blvl+" níveis de base e de mais "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" níveis de classe ":"")+"para continuar.";
+			close;
+		}
+		mes "Mudar para "+jobname(.@exp[0])+"?";
+		next;
+		Job_Menu(.@exp[0]);
+		close;
+	}
+	if (.@eac&EAJL_2)
+		if (.@eac&(EAJL_UPPER|EAJL_BABY) || roclass(.@eac|EAJL_UPPER) == -1) {
+			mes "Não existem mais expansões para sua classe.";
+			close;
+		}
+	if ((.@eac&EAJ_BASEMASK) == EAJ_NOVICE) {
+		if (JobLevel < .JobReq[0])
+			mes "A job level of "+.JobReq[0]+" is required to change into the 1st Class.";
+		else if (Class == 4001 && .LastJob && lastJob) {
+			mes "Mudar de classe agora?";
+			next;
+			Job_Menu(roclass((eaclass(lastJob)&EAJ_BASEMASK)|EAJL_UPPER));
+		} else switch(Class) {
+			case 0: Job_Menu(1,2,3,4,5,6,23,4046,24,25,4023);
+			case 4001: Job_Menu(4002,4003,4004,4005,4006,4007);
+			case 4023: Job_Menu(4024,4025,4026,4027,4028,4029,4045);
+			default: mes "Ocorreu um erro."; break;
+		}
+		close;
+	}
+	if (roclass(.@eac|EAJL_2_1) == -1 || roclass(.@eac|EAJL_2_2) == -1)
+		mes "No more jobs are available.";
+	else if (!(.@eac&EAJL_2) && JobLevel < .JobReq[1])
+		mes "É necessário possuir nível de classe "+.JobReq[1]+" para mudar para a Segunda Classe.";
+	else if (.LastJob && lastJob && (.@eac&EAJL_UPPER)) {
+		mes "Mudar de classe agora?";
+		next;
+		Job_Menu(lastJob+4001);
+	} else
+		Job_Menu(.@j1,.@j2);
+	close;
+
+function Job_Menu {
+	while(1) {
+		if (getargcount() > 1) {
+			mes "Selecione uma classe.";
+			set .@menu$,"";
+			for(set .@i,0; .@i<getargcount(); set .@i,.@i+1)
+				set .@menu$, .@menu$+" ~ "+jobname(getarg(.@i))+":";
+			set .@menu$, .@menu$+" ~ ^777777Cancel^000000";
+			next;
+			set .@i, getarg(select(.@menu$)-1,0);
+			if (!.@i) close;
+			if ((.@i == 23 || .@i == 4045) && BaseLevel < .SNovice) {
+				mes "[Mestre das Classes]";
+				mes "É necessário possuir nível de classe "+.SNovice+" para tornar-se "+(Sex?"Um":"Uma")+" "+jobname(.@i)+".";
+				close;
+			}
+			mes "[Mestre das Classes]";
+			mes "Tem certeza?";
+			next;
+		} else
+			set .@i, getarg(0);
+		if (select(" ~ Mudar para ^0055FF"+jobname(.@i)+"^000000 class: ~ ^777777"+((getargcount() > 1)?"Voltar":"Sair")+"^000000") == 1) {
+			mes "[Mestre das Classes]";
+			mes "Agora você é "+(Sex?"Um":"Uma")+" "+A_An(jobname(.@i))+"!";
+			if (.@i==4001 && .LastJob) set lastJob, Class;
+			jobchange .@i;
+			if (.@i==4001 || .@i==4023) resetlvl(1);
+			specialeffect2 338; specialeffect2 432;
+			if (.Platinum) callsub Get_Platinum;
+			close;
+		}
+		if (getargcount() == 1) return;
+		mes "[Mestre das Classes]";
+	}
+	end;
+}
+
+function A_An {
+	setarray .@A$[0],"a","e","i","o","u";
+	set .@B$, "_"+getarg(0);
+	for(set .@i,0; .@i<5; set .@i,.@i+1)
+		if (compare(.@B$,"_"+.@A$[.@i])) return ""+(Sex?"Um":"Uma")+" "+getarg(0);
+	return ""+(Sex?"Um":"Uma")+" "+getarg(0);
+}
+
+Get_Platinum:
+	skill 142,1,0;
+	switch(BaseClass) {
+		case 0: if (Class !=23) skill 143,1,0; break;
+		case 1: skill 144,1,0; skill 145,1,0; skill 146,1,0; break;
+		case 2: skill 157,1,0; break;
+		case 3: skill 147,1,0; skill 148,1,0; break;
+		case 4: skill 156,1,0; break;
+		case 5: skill 153,1,0; skill 154,1,0; skill 155,1,0; break;
+		case 6: skill 149,1,0; skill 150,1,0; skill 151,1,0; skill 152,1,0; break;
+		default: break;
+	}
+	switch(BaseJob) {
+		case 7: skill 1001,1,0; break;
+		case 8: skill 1014,1,0; break;
+		case 9: skill 1006,1,0; break;
+		case 10: skill 1012,1,0; skill 1013,1,0; break;
+		case 11: skill 1009,1,0; break;
+		case 12: skill 1003,1,0; skill 1004,1,0; break;
+		case 14: skill 1002,1,0; break;
+		case 15: skill 1015,1,0; skill 1016,1,0; break;
+		case 16: skill 1007,1,0; skill 1008,1,0; skill 1017,1,0; skill 1018,1,0; skill 1019,1,0; break;
+		case 17: skill 1005,1,0; break;
+		case 18: skill 238,1,0; break;
+		case 19: skill 1010,1,0; break;
+		case 20: skill 1011,1,0; break;
+		default: break;
+	}
+	return;
+
+OnInit:
+	setarray .Rebirth[0],99,50;	// Minimum base level, job level to rebirth OR change to third class
+	setarray .JobReq[0],10,40;	// Minimum job level to turn into 1st class, 2nd class
+	set .ThirdClass,1;		// Enable third classes? (1: yes / 0: no)
+	set .SNovice,45;		// Minimum base level to turn into Super Novice
+	set .LastJob,1;			// Enforce linear class changes? (1: yes / 0: no)
+	set .SkillPointCheck,1;		// Force player to use up all skill points? (1: yes / 0: no)
+	set .Platinum,1;		// Get platinum skills automatically? (1: yes / 0: no)
+	end;
+}

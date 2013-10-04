@@ -1,0 +1,38 @@
+//===== Cronus Script ======================================= 
+//= God Item Seal Status
+//===== Por: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatível Com: ===================================== 
+//= Cronus
+//===== Descrição: ========================================= 
+//= Goid Item Seal Status.
+//===== Comentários Adicionais: ================================= 
+//= 1.0 Translated from the official. [L0ne_W0lf]
+//= 1.1 Now checks proper char vars. [L0ne_W0lf]
+//= 1.2 Cleaning. [Euphy]
+//= 1.3 Tradução. [RoM]
+//============================================================ 
+
+prontera,113,294,3	script	Quadro de Informações	837,{
+	mes "===== Status dos Selos Divinos =====";
+	setarray .@n$[1], "Sleipnir","Megingjard","Brisingamen","Mjolnir";
+	for(set .@i,1; .@i<5; set .@i,.@i+1) {
+		if (getd("$god"+.@i) == 0) mes "Selo de "+.@n$[.@i]+": Fechado";
+		else if (getd("$god"+.@i) < 50) mes "Selo de "+.@n$[.@i]+": Disponível";
+		else if (getd("$god"+.@i) < 100) mes "Selo de "+.@n$[.@i]+": Apareceu";
+		else mes .@n$[.@i]+" Selo: Liberado";
+	}
+	mes " ";
+	mes "===== Seu Status dos Selos ======";
+	if (god_sl_1 < 51) mes "^ff0000Selo de Sleipnir: Incompleto^000000";
+		else mes "^00ff00Selo de Sleipnir: Completo^000000";
+	if (god_eremes < 28) mes "^ff0000Selo de Megingjard: Incompleto^000000";
+		else mes "^00ff00Selo de Megingjard: Completo^000000";
+	if (god_brising < 50) mes "^ff0000Selo de Brisingamen: Incompleto^000000";
+		else mes "^00ff00Selo de Brisingamen: Completo^000000";
+	if (god_mjo_0 < 11) mes "^ff0000Selo de Mjolnir: Incompleto^000000";
+		else mes "^00ff00Selo de Mjolnir: Completo^000000";
+	close;
+}

@@ -1,0 +1,1453 @@
+//===== Cronus Script ========================================
+//= Izlude Party Arena 
+//===== Por: =================================================
+//= SinSloth
+//===== Versão Atual: ========================================
+//= 1.2
+//===== Comentários Adicionais: ==============================
+//= 1.0 First version.
+//= 1.0a Fixed a typo.
+//= 1.1 Replaced effect numerics with constants. [Samuray22]
+//= 1.1a Traduzido. [Sirius]
+//= 1.1b Revisado. [RoM]
+//= 1.2 Corrigido o "OnMobDeath" que não funcionava algumas vezes. [RoM]
+//============================================================
+
+arena_room,162,88,3	script	Ponox	124,{
+	end;
+	
+OnInit:
+	waitingroom "Batalha Contra o Tempo - Último Grupo!",11,"Ponox::OnStartArena",5;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	donpcevent "toarena#party::OnInit";
+	donpcevent "toout#party::OnInit";
+	warpwaitingpc "prt_are_in",73,78;
+	donpcevent "toout#party::OnTime";	
+	donpcevent "Ajudante#party::OnEnter";
+	disablewaitingroomevent;
+	end;
+
+Onstart:
+	enablewaitingroomevent;
+	end;
+}
+
+prt_are_in,76,87,3	script	Ajudante#party	 67,4,4,{
+
+	if($arn_partywait == 0)
+	{
+		set $arn_partywait,1;
+		emotion e_gasp,0;
+		mes "[Ajudante Iriff]";
+		mes "Bom dia, desafiantes!";
+		mes "Vocês estão na sala de espera da arena de grupo.";
+		next;
+		mes "[Ajudante Iriff]";
+		mes "Só é permitido uma pessoa por vez para ficar nesta sala de espera.";
+		mes "Você gostaria de começar a batalha agora?";
+		next;
+		switch(select("Não","Sim"))
+		{
+			case 1:
+				set $arn_partywait,0;
+				mes "[Ajudante Iriff]";
+				mes "Entendo.";
+				mes "Porém, se lembre que você tem um tempo limitado.";
+				close;
+		
+			case 2:
+				mes "[Ajudante Iriff]";
+				mes "Obrigado, deixe-me começar a batalha.";
+				mes "Um portal que levará para a sala da arena irá abrir.";
+				mes "Espero que você fique vivo até o final da batalha e marque seu nome na Lista da Honra.";
+				close2;
+				donpcevent "toarena#party::OnEnter";
+				donpcevent "Ajudante#party::OnStop";
+				donpcevent "arena_p::OnStart";
+				end;
+		}
+	}
+	else end;
+
+OnEnter:
+	enablenpc "Ajudante#party";
+	end;
+	
+OnStop:
+	disablenpc "Ajudante#party";
+	end;
+
+OnInit:
+	set $arn_partywait,0;
+	end;
+}
+
+prt_are_in,73,78,0	script	toarena#party	139,20,20,{
+
+OnInit:
+	disablenpc "toarena#party";
+	end;
+	
+OnTouch:
+	if(Zeny < 1000) warp "arena_room",100,75;
+	else
+	{
+		set Zeny,Zeny -1000;
+		set $arn_partywait,0;
+		donpcevent "toout#party::OnStop";
+		warp "force_1-2",99,26;
+	}
+	
+OnEnter:
+	enablenpc "toarena#party";
+	end;
+}
+
+prt_are_in,73,79,0	script	toout#party	139,20,20,{
+
+OnInit:
+	disablenpc "toout#party";
+	end;
+	
+OnTimer:
+	initnpctimer;
+	end;
+	
+OnTimer60000:
+	set $arn_partywait,0;
+	enablenpc "toout#party";
+	end;
+	
+OnTimer70000:
+	donpcevent "toout#party::OnStop";
+	donpcevent "Ponox::Onstart";
+	disablenpc "toout#party";
+
+OnTouch:
+	set $arn_partywait,0;
+	warp "arena_room",100,75;
+
+OnEnter:
+	enablenpc "toout#party";
+	end;
+
+OnStop:
+// 	broadcastinmap "toout turns off the timer."
+	stopnpctimer;
+	end;
+}
+
+prt_are_in,73,74,0	script	arena_out	139,1,1,{
+
+OnTouch:
+	set $arn_partywait,0;
+	warp "arena_room",100,75;
+	end;
+}
+
+force_1-2,99,31,4	script	Slipslowrun#party	124,{
+
+OnInit:
+	set $@mapcountpt,0;
+	end;
+
+OnStart:
+	initnpctimer;
+	set $arena_minptst,gettime(2);
+	set $arena_secptst,gettime(1);
+	end;
+	
+OnTimer2000:
+	mapannounce "force_1-2","Bom dia, me chamo Slipslowrun! Eu estou aqui para ajudar você na batalha da arena de grupo!",bc_all;
+	donpcevent "arena_compass::OnStart";
+	end;
+	
+OnTimer3000:
+	mapannounce "force_1-2","O objetivo dessa arena em grupo é elimitar todos os monstros em cada sala.",bc_all;
+	end;
+	
+OnTimer4000:
+	mapannounce "force_1-2","Não é permitido entrar em nenhuma das 3 salas nas 3 direções. Mas lembre que você irá eliminar todos os monstros em uma sala para ir para a proxima etapa.",bc_all;
+	end;
+
+OnTimer5000:
+	mapannounce "force_1-2","Você tem 10 minutos a partir de agora. Espero que você de o seu melhor!",bc_all;
+	end;
+	
+OnTimer60000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  9 minutos ",bc_all;
+	end;
+
+OnTimer120000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  8 minutos ",bc_all;
+	end;
+
+OnTimer180000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  7 minutos ",bc_all;
+	end;
+	
+OnTimer240000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  6 minutos ",bc_all;
+	end;
+
+OnTimer300000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  5 minutos ",bc_all;
+	end;
+
+OnTimer360000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  4 minutos ",bc_all;
+	end;
+
+OnTimer420000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  3 minutos ",bc_all;
+	end;
+
+OnTimer480000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  2 minutos ",bc_all;
+	end;
+
+OnTimer540000:
+	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
+	mapannounce "force_1-2","Tempo Restante :  1 minuto ",bc_all;
+	end;
+
+OnTimer600000:
+	mapannounce "force_1-2","Tempo esgotado! Por favor, veja se você não deixou nada antes de sair da arena.",bc_all;
+	end;
+	
+OnTimer605000:
+	donpcevent "arena_p::OnReset";
+	mapwarp "force_1-2","prt_are_in",177,138;
+	end;
+	
+OnTimer606000:
+OnTimer607000:
+OnTimer608000:
+OnTimer609000:
+OnTimer610000:
+OnTimer611000:
+OnTimer612000:
+OnTimer613000:
+	mapwarp "force_1-2","prt_are_in",177,138;
+	end;
+	
+OnTimer614000:
+	mapwarp "force_1-2","prt_are_in",177,138;
+	donpcevent "Slipslowrun#party::OnFail";
+	end;
+	
+OnFail:
+	donpcevent "Slipslowrun#party::OnTimeoff";
+	mapwarp "force_1-2","prt_are_in",177,138;
+	donpcevent "arena_p::OnReset";
+	donpcevent "alloff#party::OnInit";
+	donpcevent "Ponox::Onstart";
+	end;
+	
+OnTimeoff:
+	stopnpctimer;
+	end;
+
+On01_end:
+	mapannounce "force_1-2","Uma porta no lado leste está aberta!",bc_all;
+	end;
+
+On02_end:
+	mapannounce "force_1-2","Uma porta no oeste está aberta!",bc_all;
+	end;
+
+On03_end:
+	mapannounce "force_1-2","Uma porta no lado sul abriu!",bc_all;
+	end;
+
+On04_start:
+	mapannounce "force_1-2","A porta para a 4ª sala no lado leste está aberta!",bc_all;
+	end;
+
+On04_end1:
+	mapannounce "force_1-2","Um portal a oeste está aberto! Por favor, limpe a 5ª sala ao fim do saguão ao oeste!",bc_all;
+	end;
+
+On04_end2:
+	mapannounce "force_1-2","Um portal ao noroeste está aberta! ",bc_all;
+	end;
+
+On05_end1:
+	mapannounce "force_1-2","Uma porte para a sala do lado leste está aberta~",bc_all;
+	end;
+
+On05_end2:
+	mapannounce "force_1-2","Uma porte para a sala do lado norte está aberta~",bc_all;
+	end;
+
+On06_end:
+	mapannounce "force_1-2","Uma porte para a sala do lado leste está aberta~",bc_all;
+	end;
+
+On07_end:
+	mapannounce "force_1-2","Uma porte para a sala do lado norte está aberta~",bc_all;
+	end;
+
+On08_end:
+	mapannounce "force_1-2","Uma porta para o saguão oeste está aberta~",bc_all;
+	end;
+	
+On09_end:
+	mapannounce "force_1-2","Uma saída no lado oeste está aberta!",bc_all;
+	end;
+	
+On10_end:
+	mapannounce "force_1-2","Etapa do Chefe completa! Uma saída no lado leste está aberta! Obrigado.",bc_all;
+	end;
+}
+
+force_1-2,62,104,4	script	arena_p	111,1,1,{
+
+OnStart:
+	mapwarp "force_1-2","prt_are_in",177,138;
+	disablenpc "force_01_00";
+	disablenpc "force_02_00";
+	disablenpc "force_03_00";
+	disablenpc "force_03_05";
+	disablenpc "force_03_04";
+	disablenpc "force_04_03";
+	disablenpc "force_05_03";
+	disablenpc "force_05_06";
+	disablenpc "force_06_07";
+	disablenpc "force_07_08";
+	disablenpc "force_08_09";
+	disablenpc "force_09_10";
+	disablenpc "force_10_09";
+	disablenpc "force_09_exit";
+	enablenpc "force_01start#party";
+	enablenpc "force_02start#party";
+	enablenpc "force_03start#party";
+	disablenpc "force_04start#party";
+	disablenpc "force_05start#party";
+	disablenpc "force_06start#party";
+	disablenpc "force_07start#party";
+	disablenpc "force_08start#party";
+	disablenpc "force_09start#party";
+	disablenpc "force_10start#party";
+	disablenpc "force_exit#party";
+	donpcevent "force_01mob#party::OnReset";
+	donpcevent "force_02mob#party::OnReset";
+	donpcevent "force_03mob#party::OnReset";
+	donpcevent "force_04mob#party::OnReset";
+	donpcevent "force_05mob#party::OnReset";
+	donpcevent "force_06mob#party::OnReset";
+	donpcevent "force_07mob#party::OnReset";
+	donpcevent "force_08mob#party::OnReset";
+	donpcevent "force_09mob#party::OnReset";
+	donpcevent "force_10mob-1#party::OnReset";
+	donpcevent "force_10mob-2#party::OnReset";
+	donpcevent "force_exitmob#party::OnReset";
+	donpcevent "Slipslowrun#party::OnStart";
+	set $arn_partyc,0;
+	set $arn_partywait,0;
+	end;
+	
+On04_start:
+	enablenpc "force_03_04";
+	enablenpc "force_04start#party";
+	end;
+	
+On06_start:
+	enablenpc "force_05_06";
+	enablenpc "force_06start#party";
+	end;
+	
+On07_start:
+	enablenpc "force_06_07";
+	enablenpc "force_07start#party";
+	end;
+	
+On08_start:
+	enablenpc "force_07_08";
+	enablenpc "force_08start#party";
+	end;
+	
+On09_start:
+	enablenpc "force_08_09";
+	enablenpc "force_09start#party";
+	end;
+	
+On10_start:
+	enablenpc "force_09_10";
+	enablenpc "force_10start#party";
+	end;
+	
+Onexit:
+	enablenpc "force_10_09";
+	enablenpc "force_09_exit";
+	enablenpc "force_exit#party";
+	end;
+	
+OnReset:
+	donpcevent "force_01mob#party::OnReset";
+	donpcevent "force_02mob#party::OnReset";
+	donpcevent "force_03mob#party::OnReset";
+	donpcevent "force_04mob#party::OnReset";
+	donpcevent "force_05mob#party::OnReset";
+	donpcevent "force_06mob#party::OnReset";
+	donpcevent "force_07mob#party::OnReset";
+	donpcevent "force_08mob#party::OnReset";
+	donpcevent "force_09mob#party::OnReset";
+	donpcevent "force_10mob-1#party::OnReset";
+	donpcevent "force_10mob-2#party::OnReset";
+	donpcevent "force_exitmob#party::OnReset";
+	end;
+}
+
+force_1-2,85,26,1	script	force_00_01	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",37,26;
+	end;
+}
+
+force_1-2,114,26,1	script	force_00_02	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",162,26;
+	end;
+}
+
+force_1-2,99,40,1	script	force_00_03	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",99,66;
+	end;
+}
+
+force_1-2,41,26,1	script	force_01_00	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",89,26;
+	end;
+}
+
+force_1-2,158,26,1	script	force_02_00	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",110,26;
+	end;
+}
+
+force_1-2,99,63,1	script	force_03_00	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",99,36;
+	end;
+}
+
+force_1-2,84,78,1	script	force_03_05	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",37,78;
+	end;
+}
+
+force_1-2,115,78,1	script	force_03_04	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",162,78;
+	end;
+}
+force_1-2,158,77,1	script	force_04_03	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",110,78;
+	end;
+}
+
+force_1-2,41,77,1	script	force_05_03	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",37,78;
+	end;
+}
+
+force_1-2,25,93,1	script	force_05_06	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",26,118;
+	end;
+}
+
+force_1-2,49,130,1	script	force_06_07	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",91,125;
+	end;
+}
+
+force_1-2,107,145,1	script	force_07_08	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",173,118;
+	end;
+}
+
+force_1-2,158,178,1	script	force_08_09	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",133,178;
+	end;
+}
+
+force_1-2,55,178,1	script	force_09_10	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",29,178;
+	end;
+}
+
+force_1-2,33,178,1	script	force_10_09	45,1,1,{
+
+OnTouch:
+	warp "force_1-2",59,178;
+	end;
+}
+
+force_1-2,95,187,1	script	force_09_exit	45,1,1,{
+
+OnTouch:
+	set $arena_minptend,gettime(2);
+	set $arena_secptend,gettime(1);
+	warp "prt_are_in",73,139;
+	donpcevent "#arn_timer_pt::OnEnter";
+	donpcevent "arena_p::OnReset";
+	donpcevent "Slipslowrun#party::OnTimeoff";
+	end;
+}
+
+force_1-2,36,26,0	script	force_01start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_01mob#party::Onon";
+	disablenpc "force_01start#party";
+	end;
+}
+
+force_1-2,63,104,1	script	force_01mob#party	111,{
+
+Onon:
+	monster "force_1-2",15,35,"Penomena",1441,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",35,35,"Penomena",1441,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",15,15,"Penomena",1441,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",35,15,"Penomena",1441,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",15,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",17,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",19,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",21,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",15,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",17,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",19,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",21,25,"Relógio",1528,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",15,30,"Alarme",1476,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",17,22,"Alarme",1476,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",19,32,"Alarme",1476,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",21,22,"Alarme",1476,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",26,33,"Gerente",1527,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",26,33,"Gerente",1527,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",26,14,"Verme Ancião",1567,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",30,27,"Verme Ancião",1567,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",29,25,"Verme Ancião",1567,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",26,14,"Verme Ancião",1567,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",33,26,"Incubus",1580,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",29,28,"Incubus",1580,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",33,20,"Incubus",1580,1,"force_01mob#party::OnMobDeath";
+	monster "force_1-2",33,30,"Incubus",1580,1,"force_01mob#party::OnMobDeath";
+	set $force_01_pt,26;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_01mob#party::OnMobDeath";
+	end;
+
+OnMobDeath:
+	set $force_01_pt,$force_01_pt -1;
+	if($force_01_pt < 1)
+	{
+		enablenpc "force_01_00";
+		donpcevent "Slipslowrun#party::On01_end";
+		set $arn_partyc,$arn_partyc +1;
+		if($arn_partyc == 3)
+		{
+			donpcevent "Slipslowrun#party::On04_start";
+			enablenpc "force_03_04";
+			enablenpc "force_04start#party";
+		}
+	}
+	end;
+}
+
+force_1-2,162,26,0	script	force_02start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_02mob#party::Onon";
+	disablenpc "force_02start#party";
+	end;
+}
+
+force_1-2,63,103,1	script	force_02mob#party	111,{
+
+Onon:
+	monster "force_1-2",163,36,"Penomena",1441,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",184,36,"Penomena",1441,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",184,16,"Penomena",1441,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",163,16,"Penomena",1441,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",171,37,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",177,37,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",184,29,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",184,22,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",177,16,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",170,16,"Coringa",1437,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",169,28,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",171,28,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",173,28,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",175,28,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",177,28,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",177,23,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",175,23,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",173,23,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",171,23,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",169,23,"Bathory",1525,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,30,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,30,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,30,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,22,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,22,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",187,22,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",173,40,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",173,40,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",181,25,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	monster "force_1-2",181,25,"Arclouse",1477,1,"force_02mob#party::OnMobDeath";
+	set $force_02_pt,30;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_02mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_02_pt,$force_02_pt -1;
+	if($force_02_pt < 1)
+	{
+		enablenpc "force_02_00";
+		donpcevent "Slipslowrun#party::On02_end";
+		set $arn_partyc,$arn_partyc +1;
+		if($arn_partyc == 3)
+		{
+			donpcevent "Slipslowrun#party::On04_start";
+			enablenpc "force_03_04";
+			enablenpc "force_04start#party";
+		}
+	}
+	end;
+}
+
+force_1-2,99,66,0	script	force_03start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_03mob#party::Onon";
+	disablenpc "force_03start#party";
+	end;
+}
+
+force_1-2,63,102,1	script	force_03mob#party	111,{
+
+Onon:
+	monster "force_1-2",89,81,"Tritão",1451,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",90,81,"Tritão",1451,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",91,81,"Tritão",1451,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",92,81,"Tritão",1451,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",93,81,"Tritão",1451,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",96,85,"Xamã do Vento",1450,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",98,85,"Xamã do Vento",1450,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",100,85,"Xamã do Vento",1450,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",102,85,"Xamã do Vento",1450,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",104,85,"Xamã do Vento",1450,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",88,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",90,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",92,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",94,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",96,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",98,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",100,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",102,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",104,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",106,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",108,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",110,79,"Deviruchi",1433,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",91,86,"Andarilho",1490,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",108,86,"Andarilho",1490,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",91,69,"Andarilho",1490,1,"force_03mob#party::OnMobDeath";
+	monster "force_1-2",108,69,"Andarilho",1490,1,"force_03mob#party::OnMobDeath";
+	set $force_03_pt,26;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_03mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_03_pt,$force_03_pt -1;
+	if($force_03_pt < 1)
+	{
+		enablenpc "force_03_00";
+		donpcevent "Slipslowrun#party::On03_end";
+		set $arn_partyc,$arn_partyc +1;
+		if($arn_partyc == 3)
+		{
+			donpcevent "Slipslowrun#party::On04_start";
+			enablenpc "force_03_04";
+			enablenpc "force_04start#party";
+		}
+	}
+	end;
+}
+
+force_1-2,162,78,0	script	force_04start#party	139,3,3,{
+
+OnTouch:
+	donpcevent "force_04mob#party::Onon";
+	disablenpc "force_04start#party";
+	end;
+}
+
+force_1-2,63,101,1	script	force_04mob#party	111,{
+
+Onon:
+	monster "force_1-2",174,78,"Penomena",1441,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",184,78,"Penomena",1441,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",184,68,"Penomena",1441,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",174,68,"Penomena",1441,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",169,87,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",170,87,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",171,87,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",172,87,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",169,77,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",170,77,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",171,77,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",172,77,"Rideword",1478,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",183,83,"Aparição",1566,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",183,80,"Aparição",1566,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",183,73,"Aparição",1566,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",183,70,"Aparição",1566,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",179,77,"Aparição",1566,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",169,72,"Agressor",1364,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",171,72,"Agressor",1364,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",173,72,"Agressor",1364,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",175,72,"Agressor",1364,1,"force_04mob#party::OnMobDeath";
+	monster "force_1-2",177,72,"Agressor",1364,1,"force_04mob#party::OnMobDeath";
+	set $force_04_pt,22;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_04mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_04_pt,$force_04_pt -1;
+	if($force_04_pt < 1)
+	{
+		enablenpc "force_04_03";
+		enablenpc "force_03_05";
+		enablenpc "force_05start#party";
+		donpcevent "Slipslowrun#party::On04_end1";
+	}
+	end;
+}
+
+force_1-2,36,77,0	script	force_05start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_05mob#party::Onon";
+	disablenpc "force_05start#party";
+	end;
+}
+
+force_1-2,63,100,1	script	force_05mob#party	111,{
+
+Onon:
+	monster "force_1-2",25,68,"Penomena",1441,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",36,68,"Penomena",1441,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",16,88,"Penomena",1441,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",15,78,"Penomena",1441,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",33,88,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",29,87,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",25,81,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",25,78,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",25,72,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",29,70,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",21,70,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",19,76,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",19,83,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",23,89,"Sting",1489,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",22,85,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",23,85,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",24,85,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",23,86,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",22,86,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",22,71,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",22,72,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",23,71,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",23,72,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	monster "force_1-2",24,71,"Cãibra",1570,1,"force_05mob#party::OnMobDeath";
+	set $force_05_pt,24;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_05mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_05_pt,$force_05_pt -1;
+	if($force_05_pt < 1)
+	{
+		donpcevent "arena_p::On06_start";
+		donpcevent "Slipslowrun#party::On05_end2";
+	}
+	end;
+}
+
+force_1-2,26,118,0	script	force_06start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_06mob#party::Onon";
+	disablenpc "force_06start#party";
+	end;
+}
+
+force_1-2,63,99,1	script	force_06mob#party	111,{
+
+Onon:
+	monster "force_1-2",19,135,"Hermitão Maligno",1531,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",24,135,"Hermitão Maligno",1531,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",28,135,"Hermitão Maligno",1531,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",32,135,"Hermitão Maligno",1531,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",24,127,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",27,127,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",24,128,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",27,128,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",24,129,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",27,129,"Shinobi",1560,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,140,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,136,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,132,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,128,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,124,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,120,"Tengu",1563,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,140,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,136,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,132,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,128,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,124,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	monster "force_1-2",16,120,"Ninfa Perversa",1564,1,"force_06mob#party::OnMobDeath";
+	set $force_06_pt,22;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_06mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_06_pt,$force_06_pt -1;
+	if($force_06_pt < 1)
+	{
+		donpcevent "arena_p::On07_start";
+		donpcevent "Slipslowrun#party::On06_end";
+		set $arn_partyc,$arn_partyc +1;
+	}
+	end;
+}
+
+force_1-2,92,124,0	script	force_07start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_07mob#party::Onon";
+	disablenpc "force_07start#party";
+	end;
+}
+
+force_1-2,63,98,1	script	force_07mob#party	111,{
+
+Onon:
+	monster "force_1-2",104,134,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",104,136,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",104,137,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",104,139,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",111,134,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",111,136,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",111,137,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",111,139,"Guardião da Floresta",1541,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",98,122,"Khalitzburg",1438,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",90,119,"Khalitzburg",1438,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",98,122,"Executor",1487,1,"force_07mob#party::OnMobDeath";
+	monster "force_1-2",108,140,"Quimera",1456,1,"force_07mob#party::OnMobDeath";
+	set $force_07_pt,12;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_07mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_07_pt,$force_07_pt -1;
+	if($force_07_pt < 1)
+	{
+		donpcevent "arena_p::On08_start";
+		donpcevent "Slipslowrun#party::On07_end";
+		set $arn_partyc,$arn_partyc +1;
+	}
+	end;
+}
+
+force_1-2,173,118,0	script	force_08start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_08mob#party::Onon";
+	disablenpc "force_08start#party";
+	end;
+}
+
+force_1-2,63,97,1	script	force_08mob#party	111,{
+
+Onon:
+	monster "force_1-2",172,154,"Khalitzburg",1438,1,"force_08mob#party::OnMobDeath";
+	monster "force_1-2",174,145,"Ghostring",1576,1,"force_08mob#party::OnMobDeath";
+	monster "force_1-2",174,145,"Quimera",1456,1,"force_08mob#party::OnMobDeath";
+	set $force_08_pt,4;
+	if(.arn_injustice != 5)
+	{
+		monster "force_1-2",rand(162,184),rand(122,185),"Injustiçado",1446,1,"force_08mob#party::OnMobDeath";
+		set .arn_injustice,.arn_injustice +1;
+		set $force_08_pt,$force_08_pt +1;
+	}
+	monster "force_1-2",rand(162,184),rand(122,185),"Raydric Arqueiro",1453,1,"force_08mob#party::OnMobDeath";
+	if(.arn_terror != 5)
+	{
+		monster "force_1-2",rand(162,184),rand(122,185),"Pesadelo Noturno",1554,1,"force_08mob#party::OnMobDeath";
+		set .arn_terror,.arn_terror +1;
+		set $force_08_pt,$force_08_pt +1;
+	}
+	if(.arn_mummy != 6)
+	{
+		monster "force_1-2",rand(162,184),rand(122,185),"Múmia Anciã",1522,1,"force_08mob#party::OnMobDeath";
+		set .arn_mummy,.arn_mummy +1;
+		set $force_08_pt,$force_08_pt +1;
+	}
+	if(.arn_skel != 10)
+	{
+		monster "force_1-2",rand(162,184),rand(122,185),"Esqueleto Prisioneiro",1479,1,"force_08mob#party::OnMobDeath";
+		set .arn_skel,.arn_skel +1;
+		set $force_08_pt,$force_08_pt +1;
+	}
+	if(.arn_hunt != 5)
+	{
+		monster "force_1-2",rand(162,184),rand(122,185),"Mosca Caçadora",1422,1,"force_08mob#party::OnMobDeath";
+		set .arn_hunt,.arn_hunt +1;
+		set $force_08_pt,$force_08_pt +1;
+	}
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_08mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_08_pt,$force_08_pt -1;
+	if($force_08_pt < 1)
+	{
+		donpcevent "arena_p::On09_start";
+		donpcevent "Slipslowrun#party::On08_end";
+		set $arn_partyc,$arn_partyc +1;
+	}
+	end;
+}
+
+force_1-2,133,178,0	script	force_09start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_09mob#party::Onon";
+	disablenpc "force_09start#party";
+	end;
+}
+
+force_1-2,63,97,1	script	force_09mob#party	111,{
+
+Onon:
+	monster "force_1-2",86,180,"Ancião",1573,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",86,176,"Ancião",1573,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",95,183,"Ancião",1573,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",94,175,"Ancião",1573,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",76,178,"Ancião",1573,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",84,179,"Explosão",1532,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",74,181,"Explosão",1532,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",73,176,"Explosão",1532,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",62,178,"Explosão",1532,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",68,177,"Explosão",1532,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",122,177,"Golem de Lava",1549,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",112,179,"Golem de Lava",1549,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",122,178,"Anolian",1488,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",121,177,"Anolian",1488,1,"force_09mob#party::OnMobDeath";
+	monster "force_1-2",122,177,"Anolian",1488,1,"force_09mob#party::OnMobDeath";
+	set $force_09_pt,15;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_09mob#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_09_pt,$force_09_pt -1;
+	if($force_09_pt < 1)
+	{
+		donpcevent "arena_p::On10_start";
+		donpcevent "Slipslowrun#party::On09_end";
+		set $arn_partyc,$arn_partyc +1;
+	}
+	end;
+}
+
+force_1-2,29,178,0	script	force_10start#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_10mob-1#party::Onon1";
+	disablenpc "force_10start#party";
+	end;
+}
+
+force_1-2,63,95,1	script	force_10mob-1#party	111,{
+
+Onon1:
+	switch(rand(1,2))
+	{
+		case 1:
+			monster "force_1-2",16,179,"Serpente Suprema",1529,1,"force_10mob-1#party::OnMobDeath";
+			break;
+			
+		case 2:
+			monster "force_1-2",24,179,"Drácula",1530,1,"force_10mob-1#party::OnMobDeath";
+			break;
+	}
+	set $force_10_1_pt,1;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_10mob-1#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_10_1_pt,$force_10_1_pt -1;
+	if($force_10_1_pt < 1) donpcevent "force_10mob-2#party::Onon2";
+	end;
+}
+
+force_1-2,63,96,1	script	force_10mob-2#party	111,{
+
+Onon2:
+	monster "force_1-2",16,179,"Samurai Encarnado",1542,1,"force_10mob-2#party::OnMobDeath";
+	monster "force_1-2",16,179,"Shinobi",1560,1,"force_10mob-2#party::OnMobDeath";
+	monster "force_1-2",16,179,"Shinobi",1560,1,"force_10mob-2#party::OnMobDeath";
+	monster "force_1-2",16,179,"Shinobi",1560,1,"force_10mob-2#party::OnMobDeath";
+	monster "force_1-2",16,179,"Shinobi",1560,1,"force_10mob-2#party::OnMobDeath";
+	monster "force_1-2",16,179,"Shinobi",1560,1,"force_10mob-2#party::OnMobDeath";
+	set $force_10_2_pt,6;
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_10mob-2#party::OnMobDeath";
+	end;
+	
+OnMobDeath:
+	set $force_10_2_pt,$force_10_2_pt -1;
+	if($force_10_2_pt < 1)
+	{
+		donpcevent "arena_p::Onexit";
+		donpcevent "Slipslowrun#party::On10_end";
+		set $arn_partyc,0;
+	}
+	end;
+}
+
+force_1-2,59,178,0	script	force_exit#party	139,1,1,{
+
+OnTouch:
+	donpcevent "force_exitmob#party::Onon-1";
+	disablenpc "force_exit#party";
+	end;
+}
+
+force_1-2,63,94,1	script	force_exitmob#party	111,{
+
+Onon:
+	monster "force_1-2",95,177,"Até mais",1393,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Eu odeio você",1543,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Eu gosto de chocolate",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Você gosta disso, huh?",1472,1,"force_exitmob-#party::OnMobDeath";
+	monster "force_1-2",95,177,"Desculpe",1420,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Tristram II",1562,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Estou faminto",1468,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Adeus",1419,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Cuide-se",1394,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Corpo sexy",1578,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Pressão",1471,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Vá com calma",1491,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Você vai me machucar?",1555,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Mercador",1428,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Srta. Kim",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Artes Marciais",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Meio-tempo",1420,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Chefe",1562,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Velha Caixa Amarela",1474,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Morçego",1419,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Extra",1394,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Leiteiro",1578,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Querida",1471,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Oh não!",1491,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Eu não sou uma Aparição",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Mamãe Aparição",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Papai Aparição",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Livro[3]",1478,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Diário",1478,1,"force_exitmob#party::OnMobDeath";
+	end;
+	
+OnReset:
+	killmonster "force_1-2","force_exitmob#party::OnMobDeath";
+	end;
+}
+
+prt_are_in,181,135,3	script	Equipe#party-1	67,{
+
+	mes "[Equipe]";	
+	mes "Você fez um bom trabalho.";
+	mes "Mesmo que você tenha falhado em completar uma batlha de tempo, eu irei lhe recompensar com uma pequena quantidade de pontos de arena.";	
+	next;
+	if (arena_point == 30000) {	
+		mes "[Equipe]";	
+		mes "Uh huh!";	
+		mes "Você já tem pontos arena suficientes.";	
+		mes "Por favor, gaste algum desses pontos. Quando nos encontrarmos denovo, eu lhe darei os pontos.";
+		next;
+	}
+	else set arena_point, arena_point + 1;
+	mes "[Equipe]";	
+	mes "Deixe-me levá-lo para fora. Espero que você tenha se divertido.";
+	close2;
+	specialeffect2 EF_HIT5;
+	warp "arena_room",100,75;
+	end;
+}
+
+prt_are_in,77,135,3	script	Equipe#party-2	67,{
+
+	if($arena_minptend < $arena_minptst)
+	{
+		if($arena_secptend < $arena_secptst)
+		{
+			set @record_minpt,60 - $arena_minptst + $arena_minptend -1;
+			set @record_secpt,60 - $arena_secptst + $arena_secptend;
+		}
+		else
+		{
+			set @record_minpt,60 - $arena_minptst + $arena_minptend;
+			set @record_secpt,$arena_secptend - $arena_secptst;
+		}
+	}
+	else
+	{
+		if($arena_secptend < $arena_secptst)
+		{
+			set @record_minpt,$arena_minptend - $arena_minptst -1;
+			set @record_secpt,60 - $arena_secptst + $arena_secptend;
+		}
+		else
+		{
+			set @record_minpt,$arena_minptend - $arena_minptst;
+			set @record_secpt,$arena_secptend - $arena_secptst;
+		}
+	}
+	set @gappt,(60 * $top_ptmin + $top_ptsec) - (60 * @record_minpt + @record_secpt);
+	mes "[Equipe]";	
+	mes "Wow, você fez um bom trabalho~ ";	
+	mes "Seu nome é... ^3131FF" + strcharinfo(0) +"^000000, correto?";	
+	mes "^3131FF"+ strcharinfo(0) +"^000000, - tempo total gasto para completar a batalha";	
+	next;
+	mes "[Equipe]";	
+	mes "foi de "+@record_minpt+" minutos e "+@record_secpt+" segundos.";	
+	mes "Parabéns!";	
+	next;
+	mes "[Equipe]";	
+	mes "O grupo mais rápido entre que completou a arena de grupo no modo de tempo foi o grupo ^3131FF"+$arena_pttopn$+"^000000.";	
+	next;
+	mes "[Equipe]";	
+	mes "O tempo gasto do grupo foi de ^3131FF"+$arena_pttopn$+"^000000 foi de ^3131FF"+$top_ptmin+"^000000 minutos e ^3131FF"+$top_ptsec+"^000000 segundos.";	
+	next;
+	set .arn_party,getcharid(1);
+	if (@gappt < 0) {
+		mes "[Equipe]";	
+		mes "Apesar de você ter falhado em fazer um novo recorde, eu espero que você tenha mais sorte na próxima vez.";
+		next;
+		if (arena_point > 29980) {	
+			mes "[Equipe]";	
+			mes "Deixe-me recompensar você com alguns pontos.";	
+			mes "A quantidade de pontos que você tem excedeu o máximo permitido. Eu não posso lhe dar mais pontos se você não gastar alguns.";	
+			next;
+			mes "[Equipe]";	
+			mes "Você pode ver quantos pontos você tem na Sala de Espera.";
+			next;
+			mes "[Equipe]";	
+			mes "Espero que você tenha se divertido e deixe-me guiá-lo até a entrada da arena.";	
+			mes "Obrigado.";	
+			close2;
+		}
+		else
+		{
+			set arena_point, arena_point + 40;
+			mes "[Equipe]";	
+			mes "Deixe-me recompensá-lo com alguns pontos.";	
+			mes "Se você quiser ver quantos pontos você possui, fale com o ^3131FFVendigos^000000 na arena de entrada.";	
+			next;
+			mes "[Equipe]";	
+			mes "Deixe-me guiá-lo até a entrada da arena.";	
+			mes "Vejo você depois~";
+			close2;
+		}
+		if(getpartyleader(.arn_party,2) == getcharid(0))
+		{
+			donpcevent "#arn_timer_pt::Onstop";
+			donpcevent "alloff#pt::Onon";
+			donpcevent "Ponox::Onstart";
+		}
+		specialeffect2 EH_HIT5;
+ 		donpcevent "cast#pt::Onnomal1";
+		warp "arena_room",100,75;
+		end;
+	}
+	else
+	{
+		emotion e_omg;
+		mes "[Equipe]";	
+		mes "Wow! Você bateu o recorde! Ótimo trabalho!";	
+		next;
+		if(getpartyleader(.arn_party,2) == getcharid(0))
+		{
+			mes "[Equipe]";
+			mes "Você pode colocar o seu nome e o nome dos membros do seu grupo na ^FF0000Sala da Arena de Grupo da Batalha Contra o Tempo^000000.";
+			mes "Quando você digitar seu nome, ele vai ficar no topo até alguém bater o seu recorde...";
+			next;
+			mes "[Equipe]";
+			mes "Por favor, digite um nome com 10 letras que possa representar o seu nome e o nome dos membros do seu grupo.";
+			next;
+			switch(select("Ok.","Deixe-me pensar."))
+			{
+				case 1:
+					input .@arnparty$;
+					mes "[Equipe]";
+					mes "Você digitou ^3131FF"+.@arnparty$+"^000000. Está correto?";
+					next;
+					switch(select("Sim","Não"))
+					{
+						case 1:
+							set $top_ptmin, @record_minpt;
+							set $top_ptsec, @record_secpt;
+							set $arena_pttopn$,.@arnparty$;	
+							donpcevent "Vendigos::Onlinerec_pt";
+							mes "[Equipe]";
+							mes "Seu recorde foi gravado.";
+							next;
+							break;
+							
+						case 2:
+							mes "[Equipe]";
+							mes "Então dê uma pausa e pense em um nome legal.";
+							close;
+					}
+					break;
+
+				case 2:
+					mes "[Equipe]";
+					mes "Então dê uma pausa e pense em um nome legal.";
+					close;
+				
+			}
+		}
+		if (arena_point > 29900) {	
+			mes "[Equipe]";	
+			mes "Deixe-me recompensá-lo com alguns pontos.";	
+			mes "A quantidade de pontos que você tem excedeu o máximo permitido. Eu não posso lhe dar mais pontos se você não gastar alguns.";	
+			next;
+			mes "[Equipe]";	
+			mes "Você pode ver quantos pontos você tem na Sala de Espera.";
+			next;
+			mes "[Equipe]";	
+			mes "Espero que você tenha se divertido e deixe-me guiá-lo até a entrada da arena.";	
+			mes "Obrigado.";
+			close2;
+		}
+		else
+		{
+			mes "[Equipe]";
+			mes "Deixe-me recompensá-lo com alguns pontos.";	
+			mes "Como você também bateu o recorde, lhe darei uma quantidade extra de pontos.";	
+			next;
+			set arena_point, arena_point + 100;
+			mes "[Equipe]";	
+			mes "Se você quiser ver quantos pontos você possui, fale com o ^3131FFVendigos^000000 na arena de entrada.";	
+			next;
+			mes "[Equipe]";	
+			mes "Espero que você tenha se divertido e deixe-me guiá-lo até a entrada da arena.";	
+			mes "Obrigado.";	
+			close2;
+		}
+		if(getpartyleader(.arn_party,2) == getcharid(0))
+		{
+			donpcevent "#arn_timer_pt::Onstop";
+			donpcevent "alloff#pt::Onon";
+			donpcevent "Ponox::Onstart";
+		}
+		specialeffect2 EF_HIT5;
+		warp "arena_room",100,75;
+		end;
+	}
+}
+
+prt_are_in,66,143,3	script	#arn_timer_pt	139,{
+
+OnEnter:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "prt_are_in","Essa mensagem informa a restrição para a arena de grupo.",0,0xFFCE00;
+	end;
+
+OnTimer3000:
+	mapannounce "prt_are_in","Para um jogo tranquilo, o portal de saída será ativado em 1 minuto.",0,0xFFCE00;
+	end;
+
+OnTimer4000:
+	mapannounce "prt_are_in","Por favor, vá para a batalha o quanto antes para não ficar em desvantagem. Obrigado pela cooperação.",0,0xFFCE00;
+	end;
+
+OnTimer60000:
+ 	donpcevent "cast#pt::Ontimeover2";
+	donpcevent "arn_warp_pt::Onout";
+	donpcevent "#arn_timer_pt::Onstop";
+	donpcevent "alloff#pt::Onon";
+	donpcevent "Ponox::Onstart";
+	end;
+
+Onstop:
+	stopnpctimer;
+	end; 
+}
+
+prt_are_in,1,1,1	script	arn_warp_pt	-1,{
+
+Onout:
+	areawarp "prt_are_in",73,131,20,20,"arena_room",100,75;
+	end;
+}
+
+force_1-2,62,104,4	script	cast#pt	139,{
+
+Ontimeover1:
+	mapannounce "force_2-1","A arena será reativada devido a um erro ocorrido na batalha.",0,0xFFCE00;
+	end;
+
+Onnomal1:
+	mapannounce "force_2-1","A arena será reativada.",0,0xFFCE00;
+	end;
+
+Onnomal2:
+	mapannounce "force_2-1","A arena será reativada.",0,0xFFCE00;
+	end;
+
+Ontimeover2:
+	mapannounce "force_2-1","A arena será reativada devido a um erro ocorrido Sala de Espera.",0,0xFFCE00;
+	end;
+}
+
+force_1-2,100,60,3	script	alloff#pt	139,{
+
+Onon:
+	mapwarp "force_1-2","prt_are_in",126,139,0,0;
+	donpcevent "force_01mob#party::OnReset";
+	donpcevent "force_02mob#party::OnReset";
+	donpcevent "force_03mob#party::OnReset";
+	donpcevent "force_04mob#party::OnReset";
+	donpcevent "force_05mob#party::OnReset";
+	donpcevent "force_06mob#party::OnReset";
+	donpcevent "force_07mob#party::OnReset";
+	donpcevent "force_08mob#party::OnReset";
+	donpcevent "force_09mob#party::OnReset";
+	donpcevent "force_10-1mob#party::OnReset";
+	donpcevent "force_10-2mob#party::OnReset";
+	donpcevent "force_exitmob#party::OnReset";
+	//disablenpc "force_01mob#party";
+	//disablenpc "force_02mob#party";
+	//disablenpc "force_03mob#party";
+	//disablenpc "force_04mob#party";
+	//disablenpc "force_05mob#party";
+	//disablenpc "force_06mob#party";
+	//disablenpc "force_07mob#party";
+	//disablenpc "force_08mob#party";
+	//disablenpc "force_09mob#party";
+	//disablenpc "force_10mob-1#party";
+	//disablenpc "force_10mob-2#party";
+	enablenpc "force_01start#party";
+	enablenpc "force_02start#party";
+	enablenpc "force_03start#party";
+	disablenpc "force_04start#party";
+	disablenpc "force_05start#party";
+	disablenpc "force_06start#party";
+	disablenpc "force_07start#party";
+	disablenpc "force_08start#party";
+	disablenpc "force_09start#party";
+	disablenpc "force_10start#party";
+	disablenpc "force_exit#party";
+	disablenpc "force_01_00";
+	disablenpc "force_02_00";
+	disablenpc "force_03_00";
+	disablenpc "force_03_05";
+	disablenpc "force_03_04";
+	disablenpc "force_04_03";
+	disablenpc "force_05_03";
+	disablenpc "force_05_06";
+	disablenpc "force_06_07";
+	disablenpc "force_07_08";
+	disablenpc "force_08_09";
+	disablenpc "force_09_10";
+	disablenpc "force_10_09";
+	disablenpc "force_09_exit";
+	disablenpc "arena_p";
+	donpcevent "Slipslowrun#party::Ontimeroff";
+	disablenpc "Slipslowrun#party";
+	disablenpc "arn_warp_pt";
+	set $arn_partywait,0;
+	set $arn_partyc,0;
+	donpcevent "#arn_timer_pt::Onstop";
+	enablenpc "Slipslowrun#party";
+	enablenpc "arena_p";
+	end;
+
+OnInit:	
+	if(!$top_ptmin && !$top_ptsec) set $top_ptmin,10;
+	end;
+
+}

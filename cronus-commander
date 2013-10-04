@@ -1,0 +1,121 @@
+#!/bin/bash
+# Cronus-Commander
+# Este script foi criado originalmente por Raizen - carlos.lain@virtuati.com.br
+# Reestruturado e modificado por Roberto - roberto@forbrazil.com.br
+#
+# Changelog
+# - Correcao de bug ao desligar e adicionado uso de screen em ligar [jonimane]
+# - Otimizacoes e feita melhorias estruturais no script [Roberto]
+
+versao="2.1"
+
+case $1 in
+	'compilar') 
+		sh configure
+		make clean
+		if [ "$3" != "mapcache" ]; then
+			make all
+		fi
+	;;
+	'upgrade')
+		if [ -f /usr/bin/yum ]; then
+			yum update -y
+			yum upgrade -y
+		else
+			apt-get update -y
+		fi
+	;;
+	'mapcache') 
+		if [ ! -f Makefile ]; then
+			$0 compilar mapcache
+		fi
+		make tools
+		echo "Map Cache compilado com sucesso!"
+	;;
+	'versao')
+		echo "Cronus-Commander versao $versao"
+	;;
+	'ligar')
+#		loglogin=""
+#		logchar=""
+#		logmap=""
+#		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "0" ]; then
+#			if [ "$3" == "logando" ]; then
+#				loglogin="> $PWD/logs/login-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#				logchar="> $PWD/logs/char-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#				logmap="> $PWD/logs/map-server.$(date \"+%Y-%m-%d_%H-%M-%S\").log 2>&1 &"
+#			fi
+#			exec ./login-server $loglogin
+#			exec ./char-server $logchar
+#			exec ./map-server $logmap
+#		fi
+#		if [ "$(ps ax | grep *-server | grep -v grep | wc -l)" -eq "3" ]; then
+#			echo "Seu servidor parece estar ligado."
+#		fi*/
+		exec screen -d -m -S login ./login-server &
+		exec screen -d -m -S char ./char-server &
+		exec screen -d -m -S map ./map-server &
+	;;
+	'desligar')
+#		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | wc -l)" -gt "0" ]; then
+#			pkill -9 map-server
+#			pkill -9 char-server
+#			pkill -9 login-server
+#		fi
+		killall -9 map-server login-server char-server
+	;;
+	'reiniciar')
+		$0 desligar
+		$0 ligar
+	;;
+	'status')
+		pid=(${pid[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $2}'`)
+		cpu=(${cpu[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $3}'`)
+		mem=(${mem[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $4}'`)
+		data=(${data[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $9}'`)
+		proc=(${proc[@]} `ps auxwf | grep -E "map-server|char-server|login-server" | grep -v grep | awk '{print $16}'`)
+		
+		if [ "$(ps ax | grep -E "map-server|char-server|login-server" | grep -v grep | wc -l)" -gt "0" ]; then
+			echo "Players Online: $(netstat -tunap | grep map | grep -vE "grep|0.0.0.0|127.0.0.1" | awk '{print $5}' | wc -l)"
+			if [ "$2" == "players" ]; then
+					exit
+			fi
+			echo
+			echo "${proc[0]} (${pid[0]})"
+			echo "Uso da CPU: ${cpu[0]}%"
+			echo "Uso da Memoria: ${mem[0]}%"
+			echo "Ligado desde: ${data[0]}"
+			echo
+			echo "${proc[1]} (${pid[1]})"
+			echo "Uso da CPU: ${cpu[1]}%"
+			echo "Uso da Memoria: ${mem[1]}%"
+			echo "Ligado desde: ${data[1]}"
+			echo
+			echo "${proc[2]} (${pid[2]})"
+			echo "Uso da CPU: ${cpu[2]}%"
+			echo "Uso da Memoria: ${mem[2]}%"
+			echo "Ligado desde: ${data[2]}"
+			echo
+		else
+			echo "Seu servidor nao esta ligado."
+		fi
+	;;
+	'ajuda')
+		echo "Como usar:"
+		echo "$0 compilar       = Compila o Cronus-Emulator"
+		echo "$0 upgrade        = Atualiza seu Sistema Operacional Linux (Compativel com CentOS/RedHat ou Debian/Ubuntu)"
+		echo "$0 mapcache       = Compila o map-cache do Cronus-Emulator"
+		echo "$0 versao         = Confere a versao do Cronus-Commander"
+		echo "$0 ligar          = Liga seu Emulador Cronus"
+		echo "$0 ligar logando  = Liga seu Emulador Cronus com logs do console"
+		echo "$0 desligar       = Desliga seu Emulador Cronus"
+		echo "$0 reiniciar      = Reinicia seu Emulador Cronus"
+		echo "$0 status         = Status detalhado de seu Emulador Cronus, Players Online/CPU/Memoria/Uptime etc"
+		echo "$0 status players = Apenas status de Players Online"
+		echo
+		echo "Caso tenha qualquer duvida sobre este sistema, abra um topico de suporte em http://forum.cronus-emulator.com/"
+	;;
+	*)
+		$0 ajuda
+	;;
+esac

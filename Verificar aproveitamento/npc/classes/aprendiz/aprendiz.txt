@@ -1,0 +1,77 @@
+//===== Cronus Script =======================================
+//= Novo Treinamento para Novatos
+//===== Por: ==================================================
+//= Streusel
+//===== Versão Atual: =====================================
+//= 1.1
+//===== Compatível Com: =====================================
+//= Hercules, Cronus
+//===== Descrição: =========================================
+//= New Novice Training Grounds
+//= [Hand Scripted (No Programs or AEGIS Scripts)]
+//===== Comentários Adicionais: =================================
+//= 1.0 First version. [Streusel]
+//=     Credits to whoever made Sprakki.
+//= 1.1 Tradução [BOO]
+//============================================================
+
+// Sprakki (Stard of Novice Training Ground, Outside Castle)
+//============================================================
+-	script	::Captain_Carew	-1,{
+	if(job_novice_q < 1) {
+		mes "[Capitão Carew]";
+		mes "Olá! Bem Vindo ao Mundo de Ragnarok Online. Meu Nome é Capitão Carew, e eu sou o encarregado de lhe dar dicas básicas de jogabilidade.";
+		mes "Clique no botão [Próx] ou pressione [Enter] para continuar.";
+		next;
+		mes "[Capitão Carew]";
+		mes "Primeiro, você precisa aprender os controles básicos do seu personagem.";
+		mes "Para os ^4A4AFFmovimentos, seleção de itens, e ataques^000000 use o ^4A4AFFbotão esquerdo do seu mouse^000000.";
+		next;
+		cutin "tutorial01",3;
+		mes "-! Informação !-";
+		mes "Clique no chão para mover seu personagem.";
+		mes "Para atacar monstros ou conversar com as pessoas deste mundo, vocÊ pode simplismente clicar sobre eles.";
+		next;
+		cutin "",255;
+		mes "[Capitão Carew]";
+		mes "Para Começar, tente se mover.";
+		mes "Você vê a ponte de madeira a sua direita?";
+		next;
+		setquest 7117;
+		set job_novice_q,1;
+		mes "[Capitão Carew]";
+		mes "Ande sobre a ponte, e vá até o castelo que é usado como centro de treinamentos.";
+		mes "Eu estarei te esperando dentro do castelo.Por favor venha até o castelo por si mesmo.";
+		next;
+		cutin "tutorial02",3;
+		mes "-! Informação !-";
+		mes "VocÊ recebeu uma missão de Sprakki.";
+		mes "Você pode verificar o seu conteúdo na janela de Quests.";
+		next;
+		mes "[Capitão Carew]";
+		mes "Estarei te esperando no centro de treinamento, do outro lado da ponte.";
+		next;
+		mes "-! Informação !-";
+		mes "Você pode abrir a janela de Quests pressionando os botões ^4A4AFFALT + U^000000 ao mesmo tempo.";
+		next;
+		cutin "",255;
+		mes "[Capitão Carew]";
+		mes "Você verificou a sua Janela de Quests?";
+		mes "Estarei te esperando no Castelo no outro lado da Ponte.";
+		close;
+	}
+	mes "[Carew]";
+	mes "Eu não sei o que está acontecendo, eu sou muito tímido.";
+	mes "Encontre-me em Izlude Novamente.";
+	mes "";
+	next;
+	mes "[Carew]";
+	mes "Eu estou indo agora para o Porto de Izlude.";
+	mes "Agora, Dormir até chegarmos.";
+	close;
+}
+
+//Official view id 639
+iz_int01,91,81,4	script	::Rumin	99,{
+end;
+}

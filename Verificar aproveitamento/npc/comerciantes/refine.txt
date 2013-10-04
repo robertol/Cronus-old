@@ -1,0 +1,1271 @@
+// ===== Cronus Script ======================================
+// = Npc Refinador
+// ===== Por: ========================================= =========
+// = Syrus22 (1.1) dafide18 (1,4) Skotlex (1.5)
+// ===== Versão Atual: =====================================
+// = 3.2a
+// ===== Compatível com: =====================================
+// = Cronus Git
+// ===== Descrição: =========================================
+// = NPCs Refinadores e vendedores de metal.
+// ===== Comentários Adicionais: =================================
+// = 1.0 - por um monte de gente!
+// = Syrus22 - Completamente refez o roteiro usando funções ... também
+// = Adicionado a opção de auto refiNão seguro e refiNão múltipla.
+// = 1.1 - bug corrigido entrada negativa [Lupus]
+// = 1.2 - Adicionado reparimen adicionais em Morroc e Payon. Adicionado
+// = Christopher o ferreiro em Geffen. Editado algum diálogo [kobra_k88]
+// = 1.3 - Nãovos Locais Payon [Darkchild]
+// = Corrigido zeny subtração thx para jpnmania77. [Kobra_k88]
+// = 1.3a - Temporary corrigiu um exploit. Necessidade de verificar as fontes
+// = Para corrigir totalmente bug [Shinigami]
+// = Preços reparador fixos [shadowlady]
+// = Corrigido o erro que igNãora requisitos graças a sir_loon [massdriller]
+// Itemid = fixos de erro graças a vitamina [massdriller]
+// = 1.4 - verifique Nãovamente item processo de refiNão para evitar
+// = Hackers que podem alterar artigo [dafide18]
+// = 1.5 - Corrigido falhando devido a mal utilizado do callfunc [Skotlex]
+// - Lupus, não reversão deste importante correção de Nãovo! >. <
+// = 1.5a - Corrigido um callfunc desnecessários, fixou o anti-bot
+// = Explorar arruinando o laço segura refinar. [Skotlex]
+// = 1.5b - Os erros ortográficos fixos. [Nexon]
+// = 1.6 - Substituído todos os intervalos para fins conforme o Nãovo motor de script [Skotlex]
+// = 1.7 - Adicionado Refinadores Einbroch (Nãomes personalizados ^ ^ ;) e um duplicado BS Shop. [Poki # 3]
+// = 1.8 - Adicionado Refinadores Lighthalzen (Nãomes personalizados Nãovamente ^ ^ ;) [Poki # 3]
+// = 1.8a - Fixed indicação errônea graças a NeoSaro [Lupus]
+// = 1.9 - Reescrita reparador, removeu o aço do custo de reparação [DracoRPG]
+// = 2.0 - Corrigido falta de verificação presença equppment. Thx2 Coltaro [Lupus]
+// = 2.0a - peso adicional verifica graças a Neouni [Playtester]
+// = 2.0b - Corrigido os Nãomes de Lighthalzen e Einbroch refinarias graças a Maud_Dib [Kargha]
+// = 2.1 - Duplicatas Removido [Silêncio]
+// = 2.2 - Nãome alterado de "Emvertacons" para "Emveretarcons". [Samuray22]
+// - Graças a Barron-Monster.
+// = 2.2b - Nãome alterado de "Fracons" para "Phracon". [Samuray22]
+// - Graças a Barron-Monster.
+// = 2.3 Nãomes de NPC corrigidos a cair dentro de restrições adequadas. [L0ne_W0lf]
+// = 2.4 função Refiner Atualizado. mais limpo e meNãos datado. [L0ne_W0lf]
+// = 2.5 Bastante grande atualização para o fundidor e comerciantes. : D [L0ne_W0lf]
+// = 2.6 Corrigido alguns bugs com a criação de pedras puras. [L0ne_W0lf]
+// = 2.7 função Refiner aceita paramater adicional. [L0ne_W0lf]
+// = 0 = Sem características especiais; 1 = Nãovos recursos de refiNão
+// = Reparadores e função Atualizado. Não mostra menu.
+// = 2.7a Um casal touch-ups para a função de reparador. [L0ne_W0lf]
+// = 2.8 mudou a variável inexistente. @ Matname $ para getitemname (. @ Material). (Bugreport: 2340) [Samuray22]
+// = 2.8 Adicionado Fornecedor Blacksmith adequada para Einroch. [L0ne_W0lf]
+// = Atualizado recursos datados comentário para refletir o Nãovo uso.
+// = 2.8a pequeNão bugfix. (Bugreport: 2418) [Paradox924X]
+// = 2.9 Movido Morroc reparador para Morroc Ruins. [L0ne_W0lf]
+// = 3.0 Atualizado vários Nãomes de NPCs e locais. [Xantara]
+// - Adicionado mapa WoE Refinadores.
+// = 3.1 Adicionado o Nãovo refinamento e Ore criação do NPC para 11 e Refinamento acima. [Masao]
+// = 3.2 Movido alguns scripts para arquivo Renovação, outras pequenas alterações. [Euphy]
+// = 3.2a Adicionado comando 'disable_items ". [Euphy]
+//============================================================
+
+// Christopher: Geffen Blacksmith
+//============================================================
+geffen_in,110,172,0	script	Christopher#1	63,{
+	mes "[Christopher Guillenrow]";
+	mes "Bem-vindo à Oficina de Christopher. voçê pode obter todas as suas coisas para forjar aqui. que negócio";
+	mes "traz-vos para mim?";
+	next;
+	switch(select("Comprar bigorna:Comprar itens de forja:Comprar metal:Purificar minérios em bruto:cancelar")) {
+	case 1:
+		mes "[Christopher Guillenrow]";
+		mes "Uma melhor Bigorna dá-vos a oportunidade maior para fazer armas melhores, sabe? Mas eles vão custar-vos mais zeny. Basta chegar-lo na localização e comprar o que melhor se adapta às suas finalidades, senhora.";
+		next;
+		switch(select("Bigorna - 30,000 zeny:Bigorna de Oridecon - 120,000 zeny:Bigorna dourada - 300,000 zeny:Bigorna melhor do que os outros.:cancelar.")) {
+		case 1:
+			if (Zeny < 30000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendes. Eu não posso perder dinheiro por causa de vós.";
+				close;
+			}
+			getitem 986,1; // Anvil
+			set Zeny,Zeny-30000;
+			mes "[Christopher Guillenrow]";
+			mes "Este é o mais barato, mas eficiente o suficiente para forjar a maioria dos itens. Obrigado por fazer compras em meu workshop. Sinta-se livre para vir a qualquer momento, sempre que você precisar.";
+			close;
+		case 2:
+			if (Zeny < 120000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de vós.";
+				close;
+			}
+			getitem 987,1; // Oridecon_Anvil
+			set Zeny,Zeny-120000;
+			mes "[Christopher Guillenrow]";
+			mes "Sim, amigo vós tem um olho para a bigorna. Esta deve ser a bigorna apropriada para um ferreiro, hein? Graças a vós fez compras em minha oficina. Sinta-se livre para vir a qualquer momento, sempre que precisar de nós.";
+			close;
+		case 3:
+			if (Zeny < 300000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de vós.";
+				close;
+			}
+			getitem 988,1; // Golden_Anvil
+			set Zeny,Zeny-300000;
+			mes "[Christopher Guillenrow]";
+			mes "Este é o melhor entre todos os animais que fica na minha Oficina! Com isso, vocês podem governar o mundo Ferreiro! Graças a vós que fez compras em minha oficina. Sinta-se livre para vir a qualquer momento, sempre que precisar de nós.";
+			close;
+		case 4:
+			mes "[Christopher Guillenrow]";
+			mes "Bem,sinto muito. Mas eu não tenho nada mais difícil do que o Bigorna de Ouro.";
+			next;
+			mes "[Christopher Guillenrow]";
+			mes "Me acha 'Ringgel', o Bigorna Criador Legendario teria um. Mas, eu não acho que vocês podem encontrá-lo, apesar de ele estar em algum lugar neste mundo.";
+			close;
+		case 5:
+			mes "[Christopher Guillenrow]";
+			mes "Ok, fique à vontade para vir a qualquer momento, sempre que você precisar.";
+			close;
+		}
+	case 2:
+		mes "[Christopher Guillenrow]";
+		mes "Um ferreiro respeitável usa ferramentas finas. Você pode se tornar um daqueles comigo material. Escolha qualquer coisa vos quero.";
+		next;
+		switch(select("Mini-ForNão - 150 zeny:Martelo de Ferro - 1000 zeny:Martelo de Ouro - 3000 zeny:Martelo de Oridecon - 5000 zeny:cancelar.")) {
+		case 1:
+			mes "[Christopher Guillenrow]";
+			mes "É uma ferramenta muito necessária para a refinação do metal! Assim, como muitos não vos deseja comprar? Se vós quiser sair, basta digitar o número '0.'";
+			next;
+			while(1) {
+				input .@input;
+				if (.@input == 0) {
+					mes "[Christopher Guillenrow]";
+					mes "Sim, o negócio foi cancelarado.";
+					close;
+				}
+				else if ((.@input < 0) || (.@input > 500)) {
+					mes "[Christopher Guillenrow]";
+					mes "Você pode comprar o 500, ou meNãos.";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@sell,.@input * 150;
+			if (Zeny < .@sell) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de vocês.";
+				close;
+			}
+			if (checkweight(612,.@input) == 0) {
+				mes "[Christopher Guillenrow]";
+				mes "você não tem espaço suficiente em seu inventário. Colocar algumas coisas em sua Armazenamento Kafra, por que não vos?";
+				close;
+			}
+			getitem 612,.@input; // Portable_Furnace
+			set Zeny,Zeny-.@sell;
+			mes "[Christopher Guillenrow]";
+			mes "Obrigado por fazer compras em me oficina. Sinta-se livre para vir a qualquer momento, sempre que você precisar.";
+			close;
+		case 2:
+			if (Zeny < 1000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de voçês.";
+				close;
+			}
+			getitem 613,1; // Iron_Hammer
+			set Zeny,Zeny-1000;
+			mes "[Christopher Guillenrow]";
+			mes "obrigado por me fazer compras na minha oficina. Sinta-se livre para vir a qualquer momento, sempre que precisar de nós.";
+			close;
+		case 3:
+			if (Zeny < 3000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de voçês.";
+				close;
+			}
+			getitem 614,1; // Golden_Hammer
+			set Zeny,Zeny-3000;
+			mes "[Christopher Guillenrow]";
+			mes "obrigado por me fazer compras na minha oficina. Sinta-se livre para vir a qualquer momento, sempre que precisar de nós.";
+			close;
+		case 4:
+			if (Zeny < 5000) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu não acho que eu posso deixar você levar isto com o zeny entendeu. Eu não posso perder dinheiro por causa de voçês.";
+				close;
+			}
+			getitem 615,1; // Oridecon_Hammer
+			set Zeny,Zeny-5000;
+			mes "[Christopher Guillenrow]";
+			mes "obrigado por me fazer compras na minha oficina. Sinta-se livre para vir a qualquer momento, sempre que precisar de nós.";
+			close;
+		case 5:
+			mes "[Christopher Guillenrow]";
+			mes "Sinta-se livre para vir a qualquer momento, sempre que vocês precisam.";
+			close;
+		}
+	case 3:
+		mes "[Christopher Guillenrow]";
+		mes "Eu preparo todos os Metal, e só a alta qualidade os o'course. Agora, então, que se fazeis precisa?";
+		next;
+		switch(select("Phracon - 200z.:Emveretarcon - 1000z.:cancelar.")) {
+		case 1:
+			mes "[Christopher Guillenrow]";
+			mes "Então, Quantos você deseja comprar? Se você não quer nada, basta digitar o número '0.'";
+			next;
+			while(1) {
+				input .@input;
+				if (.@input == 0) {
+					mes "[Christopher Guillenrow]";
+					mes "negócio tem";
+					mes "foi cancelarada.";
+					mes "Bem vindos.";
+					close;
+				}
+				else if ((.@input < 0) || (.@input > 500)) {
+					mes "[Christopher Guillenrow]";
+					mes "Você pode comprar o 500, ou meNãos.";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@sell,.@input * 200;
+			if (Zeny < .@sell) {
+				mes "[Christopher Guillenrow]";
+				mes "Voçê não tem dinheiro suficiente. Vocês sabem que eu não posso vender isso a um preço mais baixo ... Você sabe como pagar em Zeny.";
+				close;
+			}
+			if (checkweight(1010,.@input) == 0) {
+				mes "[Christopher Guillenrow]";
+				mes "Voçê parece que você não tem o espaço para transportar qualquer coisa. Por que não vamos colocar algumas coisas em Kafra armazenamento.";
+				close;
+			}
+			getitem 1010,.@input; // Phracon
+			set Zeny,Zeny-.@sell;
+			mes "[Christopher Guillenrow]";
+			mes "Obrigado por fazer compras em minha oficina. Sinta-se livre para vir a qualquer momento, sempre que você precisar.";
+			close;
+		case 2:
+			mes "[Christopher Guillenrow]";
+			mes "Então, quantos você deseja comprar? Se você não quer nada, basta digitar o número '0.'";
+			next;
+			while(1) {
+				input .@input;
+				if (.@input == 0) {
+					mes "[Christopher Guillenrow]";
+					mes "negócio tem";
+					mes "foi cancelarada.";
+					mes "Bem vindos.";
+					close;
+				}
+				else if ((.@input < 0) || (.@input > 500)) {
+					mes "[Christopher Guillenrow]";
+					mes "Você pode comprar o 500, ou meNãos.";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@sell,.@input * 1000;
+			if (Zeny < .@sell) {
+				mes "[Christopher Guillenrow]";
+				mes "acho que não posso deixar você levar isto com o zeny entendeu. Eu não posso  perder dinheiro por causa de voçês.";
+				close;
+			}
+			if (checkweight(1011,.@input) == 0) {
+				mes "[Christopher Guillenrow]";
+				mes "Me amigo ... Parece-me que vocês não têm espaço Não inventário. Por favor colocar algumas coisas em Kafra Armazenamento primeiro?";
+				close;
+			}
+			getitem 1011,.@input; // Emveretarcon
+			set Zeny,Zeny-.@sell;
+			mes "[Christopher Guillenrow]";
+			mes "Obrigado por fazer compras em minha oficina. Sinta-se livre para vir a qualquer momento, sempre que você precisar, sempre que precisar.";
+			close;
+		case 3:
+			mes "[Christopher Guillenrow]";
+			mes "Sinta-se livre para vir a qualquer momento, sempre que você precisar.";
+			close;
+		}
+	case 4:
+		mes "[Christopher Guillenrow]";
+		mes "Eu posso purificar seu Oridecon e Elunium. Eu faço um minério refinado de 5 polegadas rugosas. Bem ... Qual delas vocês querem fazer?";
+		next;
+		switch(select("Make Oridecon:Make Elunium:cancelar.")) {
+		case 1:
+			if (countitem(756) < 5) {
+				mes "[Christopher Guillenrow]";
+				mes "te disse, eu preciso de 5 Oridecon. difícil para um Oridecon.";
+				close;
+			}
+			else {
+				delitem 756,5;  //Oridecon_Stone
+				getitem 984,1; // Oridecon
+				mes "[Christopher Guillenrow]";
+				mes "Aqui está um Oridecon de voçês. Vocês serão sempre bem-vindos aqui, eu estarei esperando por você.";
+				close;
+			}
+		case 2:
+			if (countitem(757) < 5) {
+				mes "[Christopher Guillenrow]";
+				mes "Eu te disse, eu preciso de 5 Elunium para um Elunium.";
+				close;
+			}
+			else {
+				delitem 757,5;  //Elunium_Stone
+				getitem 985,1; // Elunium
+				mes "[Christopher Guillenrow]";
+				mes "Aqui está um Elunium de voçês. Vocês serão sempre bem-vindos aqui, eu estarei esperando por você.";
+				close;
+			}
+		case 3:
+			mes "[Christopher Guillenrow]";
+			mes "Sinta-se livre para vir a qualquer momento, sempre que você precisar.";
+			close;
+		}
+	case 5:
+		mes "[Christopher Guillenrow]";
+		mes "Sinta-se livre para vir a qualquer momento, sempre que você precisar e quando quiser..";
+		close;
+	}
+}
+
+// Paul Spanner: Einbroch Blacksmith Fornecedor
+//============================================================
+ein_in01,38,29,0	script	Paul Spanner	63,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere um minuto !! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, tente Nãovamente -";
+		mes "- depois de perder algum peso. -";
+		close;
+	}
+	mes "[Paul Spanner]";
+	mes "Bem-vindo, meu amigo.";
+	mes "Em minha loja, você vai encontrar tudo que você precisa para forjar.";
+	mes "Diga-me o que você precisa.";
+	next;
+	switch(select("Comprar Bigorna.:Comprar itens de Forja.:Comprar Metal.:Processos de Minerios.:desistir.")) {
+	case 1:
+		mes "[Paul Spanner]";
+		mes "Bigorna é o item mais necessário para Ferreiros.";
+		mes "Uma vez que você vai usar uma bigorna mais de uma vez, é melhor você comprar uma agradável.";
+		next;
+		switch(select("Bigorna - 30,000z.:Bigorna de oridecon - 120,000z.:Bigorna de Ouro - 300,000z.:Eu preciso de uma bigorna melhor.:cancelar.")) {
+		case 1:
+			if (zeny < 30000) {
+				mes "[Paul Spanner]";
+				mes "Com tanto dinheiro, você não pode sequer comprar uma bigorna de brinquedo!";
+				close;
+			}
+			getitem 986,1; //Anvil
+			set zeny,zeny-30000;
+			mes "[Paul Spanner]";
+			mes "É o batente mais económico que tem a capacidade mais básica.";
+			mes "Obrigado por usar minha loja. Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		case 2:
+			if (zeny < 120000) {
+				mes "[Paul Spanner]";
+				mes "Com tanto dinheiro, você não pode sequer comprar uma bigorna de brinquedo!";
+				close;
+			}
+			getitem 987,1; //Oridecon_Anvil
+			set zeny,zeny-120000;
+			mes "[Paul Spanner]";
+			mes "Ah, você tem um olho para a bigorna. Um ferreiro precisa de uma bigorna, pelo meNãos tão bom como este.";
+			mes "Obrigado por usar minha loja. Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		case 3:
+			if (zeny < 300000) {
+				mes "[Paul Spanner]";
+				mes "Com tanto dinheiro, você não pode sequer comprar uma bigorna de brinquedo!";
+				close;
+			}
+			getitem 988,1; //Golden_Anvil
+			set zeny,zeny-300000;
+			mes "[Paul Spanner]";
+			mes "Eu posso dizer a sua ambição de se tornar um bom ferreiro só de olhar para você escolher este Bigorna de Ouro!";
+			mes "Esta bigorna certamente irá ajudá-lo a criar as melhores armas.";
+			close;
+		case 4:
+			mes "[Paul Spanner]";
+			mes "Sinto muito, mas eu não vendo bigornas melhores do que Bigorna de Ouro.";
+			mes "A meNãos que você encontrar a lendária bigorna de 'Linggell', eu não acho que você poderia encontrar um melhor do que Bigorna de Ouro em quaisquer outros lugares.";
+			close;
+		case 5:
+			mes "[Paul Spanner]";
+			mes "Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		}
+	case 2:
+		mes "[Paul Spanner]";
+		mes "Você precisa de vários materiais para processamento de minérios e de forjar armas.";
+		mes "Eu tenho tudo o que você precisa. Dê uma olhada.";
+		next;
+		switch(select("Mini forNão - 150z.:Martelo de Ferro - 1,000z.:Martelo de Ouro - 3,000z.:Martelo de Oridecon - 5,000z.:cancelar.")) {
+		case 1:
+			set .@item,612;
+			set .@item_cost,150;
+			set .@item_weight,200;
+			mes "[Paul Spanner]";
+			mes "Você definitivamente precisa deste forNão para criar minérios!";
+			next;
+			break;
+		case 2:
+			set .@item,613;
+			set .@item_cost,1000;
+			set .@item_weight,200;
+			break;
+		case 3:
+			set .@item,614;
+			set .@item_cost,3000;
+			set .@item_weight,300;
+			break;
+		case 4:
+			set .@item,615;
+			set .@item_cost,5000;
+			set .@item_weight,400;
+			break;
+		case 5:
+			mes "[Paul Spanner]";
+			mes "Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		}
+		mes "[Paul Spanner]";
+		mes "Então, quantos você precisa? Se você quiser Cancelar o comércio, digite '0'.";
+		next;
+		while(1) {
+			input .@input;
+			if (.@input == 0) {
+				mes "[Paul Spanner]";
+				mes "Você cancelou o comércio. Se você precisar de alguma coisa, é só me avisar.";
+				close;
+			}
+			else if ((.@input < 0) || (.@input > 500)) {
+				mes "[Paul Spanner]";
+				mes "Você só pode comprar 500 ou meNãos de cada vez.";
+				next;
+			}
+			else {
+				break;
+			}
+		}
+		set .@sell,.@input * .@item_cost;
+		if (zeny < .@sell) {
+			mes "[Paul Spanner]";
+			mes "Você não tem dinheiro suficiente. Desculpe, eu não posso vendê-los.";
+			close;
+		}
+		if (checkweight(.@item,.@input) == 0) {
+			mes "[Paul Spanner]";
+			mes "ei,você está pálida. Por que você não vai aliviar o seu peso em primeiro lugar.";
+			close;
+		}
+		set zeny,zeny-.@sell;
+		getitem .@item,.@input;
+		mes "[Paul Spanner]";
+		mes "Obrigado por usar minha loja. Se você precisar de alguma coisa, é só me avisar.";
+		close;
+	case 3:
+		mes "[Paul Spanner]";
+		mes "Tenho metal de alta qualidade.";
+		mes "Então, qual o metal que você gostaria de comprar?";
+		next;
+		switch(select("Phracon - 200z.:Emveretarcon - 1,000z.:desistir.")) {
+		case 1:
+			set .@item,1010;
+			set .@item_price,200;
+			break;
+		case 2:
+			set .@item,1011;
+			set .@item_price,1000;
+			break;
+		case 3:
+			mes "[Paul Spanner]";
+			mes "Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		}
+		mes "[Paul Spanner]";
+		mes "Então, quantos você precisa? Se você quiser Cancelar o comércio, digite '0'.";
+		next;
+		while(1) {
+			input .@input;
+			if (.@input == 0) {
+				mes "[Paul Spanner]";
+				mes "O comércio foi cancelada. Se você precisar de alguma coisa, é só me avisar.";
+				close;
+			}
+			else if ((.@input < 0) || (.@input > 500)) {
+				mes "[Paul Spanner]";
+				mes "Pode comprar 500 ou meNãos de uma vez.";
+				next;
+			}
+			else {
+				break;
+			}
+		}
+		set .@sell,.@input * .@item_price;
+		if (zeny < .@sell) {
+			mes "[Paul Spanner]";
+			mes "Você não tem dinheiro suficiente. Desculpe, eu não posso vendê-los.";
+			close;
+		}
+		if (checkweight(.@item,.@input) == 0) {
+			mes "[Paul Spanner]";
+			mes "Ei, você está pálida. Por que você não vai aliviar o seu peso em primeiro lugar?";
+			close;
+		}
+		getitem .@item,.@input;
+		set zeny,zeny-.@sell;
+		mes "[Paul Spanner]";
+		mes "Obrigado por usar minha loja. Se você precisar de alguma coisa, é só me avisar.";
+		close;
+	case 4:
+		mes "[Paul Spanner]";
+		mes "Eu posso criar Oridecon e Elunium para você.";
+		mes "Você precisa de 5 minérios para criar um Oridecon em Elunium.";
+		mes "Então, qual deles você deseja criar?";
+		switch(select("Oridecon:Elunium:desistir.")) {
+		case 1:
+			if (countitem(756) < 5) {
+				mes "[Paul Spanner]";
+				mes "Você precisa de 5 minérios para cria um Oridecon puro.";
+				close;
+			}
+			else {
+				delitem 756,5; //Oridecon_Stone
+				getitem 984,1; //Oridecon
+				mes "[Paul Spanner]";
+				mes "Lá vai você. Obrigado por usar o meu serviço.";
+				close;
+			}
+		case 2:
+			if (countitem(757) < 5) {
+				mes "[Paul Spanner]";
+				mes "Você precisa de 5 minérios para criar um Elunium puro.";
+				close;
+			}
+			else {
+				delitem 757,5; //Elunium_Stone
+				getitem 985,1; //Elunium
+				mes "[Paul Spanner]";
+				mes "Lá vai voçê. Obrigado por usar o meu serviço.";
+				close;
+			}
+		case 3:
+			mes "[Paul Spanner]";
+			mes "Se você precisar de alguma coisa, é só me avisar.";
+			close;
+		}
+	case 5:
+		mes "[Paul Spanner]";
+		mes "Se você precisar de alguma coisa, é só me avisar.";
+		close;
+	}
+}
+
+// Arma / armadura Refinadores
+//============================================================
+prt_in,63,60,0	script	Hollgrehenn	85,{
+	callfunc "refinemain","Hollgrehenn",0;
+	end;
+}
+morocc_in,73,38,6	script	Aragham	99,{
+	callfunc "refinemain","Aragham",0;
+	end;
+}
+payon,144,173,5	script	Antonio	88,{
+	callfunc "refinemain","Antonio",0;
+	end;
+}
+alberta_in,28,58,0	script	Fredrik	85,{
+	callfunc "refinemain","Fredrik",0;
+	end;
+}
+yuno_in01,171,21,4	script	Lambert	88,{
+	callfunc "refinemain","Lambert",0;
+	end;
+}
+ein_in01,24,87,5	script	Manthasman	826,{
+	callfunc "refinemain","Manthasman Pruhag",0;
+	end;
+}
+lhz_in02,282,20,7	script	Fulerr	869,{
+	callfunc "refinemain","Fulerr",0;
+	end;
+}
+
+//============================================================
+//= Função principal refinador
+//============================================================
+// = Para permitir a auto refiNão seguro / refiNão de múltipla definir o
+// = Segundo argumento para '1 'na chamada da função.
+// = Se você ativar esta função, certifique-se de editar o valor de
+// =@ Segura ao máximo seguro refinar em refine_db.txt bem.
+//============================================================
+function	script	refinemain	{
+	disable_items;
+	set .@features,getarg(1);
+	mes "[" + getarg(0) + "]";
+	mes "Eu sou o Armeiro.";
+	mes "pode refinar todos os tipos de armas, armaduras e equipamentos, então deixe-me";
+	mes "saber o que você quer que eu refine.";
+	next;
+
+	setarray .@position$[1], "Cabeça", "Armadura", "mão esquerda", "mão direita", "Capa", "Sapatos", "Acessório 1", "Acessório 2", "Cabeça 2", "Cabeça 3";
+	set .@menu$,"";
+	for(set .@i,1; .@i<=10; set .@i,.@i+1) {
+		if(getequipisequiped(.@i))
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
+		set .@menu$, .@menu$ + ":";
+	}
+	set .@part,select(.@menu$);
+	if(!getequipisequiped(.@part)) {
+		mes "[" + getarg(0) + "]";
+		mes "Você não está usando";
+		mes "nada há que";
+		mes "Eu posso refinar.";
+		emotion e_an;
+		close;
+	}
+	//Check if the item is refinable...
+	if(!getequipisenableref(.@part)) {
+		mes "[" + getarg(0) + "]";
+		mes "Eu não acho que eu posso";
+		mes "refinar este item em todos os...";
+		close;
+	}
+	//Verifique se o item é identificado... (Não sei por que isso é aqui ... mas manteve-o de qualquer maneira)
+	if(!getequipisidentify(.@part)) {
+		mes "[" + getarg(0) + "]";
+		mes "Você não pode refinar esta";
+		mes "se você não tiver avaliado";
+		mes "pela primeira vez Verifique se o seu.";
+		mes "o material é identificado antes";
+		mes "Eu posso refiná-lo.";
+		close;
+	}
+	//Verifique se os itens já é 10
+	if(getequiprefinerycnt(.@part) >= 10) {
+		mes "[" + getarg(0) + "]";
+		mes "Eu não posso aperfeiçoar este";
+		mes "mais. Isto é tão";
+		mes "refinadas como fica!";
+		close;
+	}
+	set .@refineitemid, getequipid(.@part); // salvar id do item
+	set .@refinerycnt, getequiprefinerycnt(.@part); // contar contagem refinaria 
+	switch(getequipweaponlv(.@part)){
+	case 0: 	//Refine arma
+		set .@price,2000;
+		set .@material,985;
+		set .@safe,4;
+		break;
+	case 1: 	//Refine Level 1 arma
+		set .@price,50;
+		set .@material,1010;
+		set .@safe,7; 
+		break;
+	case 2: 	//Refine Level 2 arma
+		set .@price,200;
+		set .@material,1011;
+		set .@safe,6; 
+		break;
+	case 3: 	//Refine Level 3 arma
+		set .@price,5000;
+		set .@material,984;
+		set .@safe,5; 
+		break;
+	case 4: 	//Refine Level 4 arma
+		set .@price,20000;
+		set .@material,984;
+		set .@safe,4; 
+		break;
+	case 5: 	//Refine outras coisas?
+		set .@price,2000;
+		set .@material,985;
+		set .@safe,4; 
+		break;
+	}
+	if(.@features != 1) {
+		mes "[" + getarg(0) + "]";
+		mes "Para refinar isso eu preciso";
+		mes "um ^003366"+getitemname(.@material)+"^000000 e";
+		mes "uma taxa de serviço " + .@price + " Zeny.";
+		mes "Você realmente deseja continuar?";
+		next;
+		if(select("Sim:Não") == 2){
+			mes "[" + getarg(0) + "]";
+			mes "Sim...";
+			mes "Não há necessidade de";
+			mes "apressado. Não tenha pressa.";
+			close;
+		}
+		if(getequippercentrefinery(.@part) < 100) {
+			mes "[" + getarg(0) + "]";
+			mes "Oh, não! Se eu continuar a";
+			mes "refinar isso, há um risco que poderia";
+			switch(.@material) {
+			case 985:
+				mes "ser destruído! Isso significa que ^FF0000este equipamento^000000, e ^FF0000qualquer carta^000000 ou propriedades especiais adicionados a esta armadura, ^FF0000terão desaparecido^000000.";
+				break;
+			default:
+				mes "ser destruído, e você ^FF0000perder a arma^000000, qualquer ^FF0000cartas na arma^000000,";
+				mes "ou qualquer adição de propriedades especiais.";
+				break;
+			}
+			next;
+			mes "["+getarg(0)+"]";
+			mes "Eu não posso torná-lo mais claro.";
+			mes "Uma vez que a arma é destruída,";
+			mes "não há como recuperá-lo.";
+			mes "Você realmente tem a chance de";
+			mes "^FF0000perder essa arma^000000 para sempre.";
+			mes "Você ainda quer refinar?";
+			next;
+			if(select("Sim:Não") == 2){
+				mes "[" + getarg(0) + "]";
+				mes "Concordo plenamente...";
+				mes "Eu poderia ser um grande refinador, mas às vezes até eu cometo erros.";
+				close;
+			}
+		}
+		if((countitem(.@material) < 1) || (Zeny < .@price)) {
+			mes "[" + getarg(0) + "]";
+			mes "Você não parece ter";
+			mes "eNãough ou Zeny "+getitemname(.@material)+"...";
+			mes "Vá pegar um pouco mais. Estarei";
+			mes "aqui o dia todo, se você precisar de mim.";
+			close;
+		}
+		set Zeny,Zeny-.@price;
+		delitem .@material,1;
+		if(getequipisequiped(.@part) == 0) { // hacker removeu o item (Naot mudado, por quê?)
+			mes "[" + getarg(0) + "]";
+			mes "Olha aqui ... você não tem nenhum item na...";
+			close;
+		}
+		if(getequiprefinerycnt(.@part) != .@refinerycnt || getequipid(.@part) != .@refineitemid) { // hacker mudou o item
+			mes "[" + getarg(0) + "]";
+			emotion e_an;
+			mes "Espere um segundo ...";
+			mes "Você acha que eu sou idiota?";
+			mes "Você trocou o item enquanto eu não estava olhando Saia daqui!";
+			close;
+		}
+		if(getequippercentrefinery(.@part) <= rand(100)) {
+			failedrefitem .@part;
+			mes "[" + getarg(0) + "]";
+			emotion (!rand(5))?e_cash:e_omg;
+			set .@lose,rand(1,3);
+			if (.@lose == 1) {
+				mes "OH! MEU DEUS!";
+				mes "Droga! Naot novamente!";
+				mes "Sinto muito, mas você kNãow prática faz perfeito.";
+				mes "Hum, certo? heh heh...";
+			} else if(.@lose == 2) {
+				mes "Nãooooooo!";
+				mes "ele quebrou!";
+				mes "Me desculpe!";
+			} else {
+				mes "Merda!";
+				mes "Ele não conseguia tirar";
+				mes "muito mais moderação";
+				mes "Desculpe por isso ...";
+			}
+			close;
+		}
+		mes "["+getarg(0)+"]";
+		successrefitem .@part;
+		emotion e_heh;
+		set .@win,rand(1,3);
+		if (.@win == 1) {
+			mes "Perfeito!";
+			mes "Heh heh!";
+			mes "Mais uma vez,";
+			mes "trabalho impecável";
+			mes "do mestre";
+		} else if(.@win == 2) {
+			mes "Sucesso ...";
+			mes "Mais uma vez, o meu incrível";
+			mes "talento verdadeiramente deslumbra";
+			mes "e brilha hoje.";
+		} else {
+			mes "Heh heh!";
+			mes "Eu sou tudo feito.";
+			mes "Não: Não dúvida, o meu trabalho é";
+			mes "a sua satisfação.";
+			mes "pura, total ~ perfeição";
+		}
+		close;
+	}
+
+// Novas Funções de Refino ========================
+	if(getequiprefinerycnt(.@part) < .@safe) {
+		mes "[" + getarg(0) + "]";
+		mes "Eu posso refinar este até o limite seguro ou um número de vezes desejado. A escolha é sua.";
+		next;
+		set .@menu2,select("Para o limite de segurança, por favor. "," Eu vou decidir quantas vezes. "," Eu mudei minha mente...");
+	} else
+		set .@menu2,2;
+	switch(.@menu2){
+	case 1: 
+		set .@refinecnt,.@safe - getequiprefinerycnt(.@part);
+		break;
+	case 2:
+		next;
+		mes "[" + getarg(0) + "]";
+		mes "Quantas vezes você gostaria que eu pudesse refinar seu item?";
+		next;
+		input .@refinecnt;
+		set .@refinecheck,.@refinecnt + getequiprefinerycnt(.@part);
+		if (.@refinecnt < 1 || .@refinecheck > 10) {
+			mes "[" + getarg(0) + "]";
+			mes "Eu não posso refinar este item  muitas vezes.";
+			close;
+		}
+		if(.@refinecheck > .@safe) {
+			set .@refinecheck,.@refinecheck - .@safe;
+			mes "[" + getarg(0) + "]";
+			mes "Este vai tentar refinar o equipamento " + .@refinecheck + " passado o limite de segurança. O seu equipamento pode ser destruído ... ok?";
+			next;
+			if(select("Yes...","No...") == 2){
+				mes "[" + getarg(0) + "]";
+				mes "Você disse isso ... Assim seja.";
+				close;
+			}
+		}
+		break;
+	case 3:
+		next;
+		mes "[" + getarg(0) + "]";
+		mes "Você disse isso ... Assim seja.";
+		close;
+	}
+	set .@fullprice,.@price * .@refinecnt;
+	mes "[" + getarg(0) + "]";
+	mes "Isso vai te custar " + .@refinecnt + " " + getitemname(.@material) + " and " + .@fullprice + " Zeny. É isso ok?";
+	next;
+	if(select("Sim","Não...") == 2){
+		mes "[" + getarg(0) + "]";
+		mes "Você disse isso ... Assim seja.";
+		close;
+	}
+	if(countitem(.@material) < .@refinecnt || Zeny < .@fullprice) {
+		mes "[" + getarg(0) + "]";
+		mes "É tudo que você tem? Infelizmente eu não posso trabalhar para você a um preço inferior. Tente se colocar no meu lugar.";
+		close;
+	}
+	set Zeny,Zeny - .@fullprice;
+	delitem .@material,.@refinecnt;
+	while(.@refinecnt){
+		if (getequipisequiped(.@part) == 0) {
+			mes "[" + getarg(0) + "]";
+			mes "Olha aqui ... você não tem nenhum item na...";
+			close;
+		}
+		if (getequipid(.@part) != .@refineitemid || (.@menu2 == 1 && getequippercentrefinery(.@part) < 100)) {
+			mes "[" + getarg(0) + "]";
+			mes "Tinido ... Não, mas você imaginava que eu poderia ser tão estúpido?";
+			mes "Você mudou ...";
+			mes "Saia antes que eu atordoar-lo com meu martelo!";
+			close;
+		} 
+		mes "Clang, clang!!!";
+		if(.@menu2 == 2 && getequippercentrefinery(.@part) <= rand(100)) {
+			failedrefitem .@part;
+			emotion e_omg;
+			mes "[" + getarg(0) + "]";
+			mes "WAHHHH Eu sinto muito ... Eu avisei que isso poderia acontecer ...!";
+			set .@refinecnt,.@refinecnt - 1;
+			if(.@refinecnt == 0) close;
+			mes "Aqui está o Zeny não utilizados e os materiais de volta ...";
+			getitem .@material,.@refinecnt;
+			set .@fullprice,.@refinecnt * .@price;
+			set Zeny,Zeny + .@fullprice;
+			close;
+		}
+		successrefitem .@part;
+		emotion e_no1;
+		set .@refinecnt,.@refinecnt - 1;
+		next;
+	}
+	mes "[" + getarg(0) + "]";
+	mes "Tudo terminou ... Volte em breve.";
+	close;
+}
+
+// Vendedor de material
+//============================================================
+prt_in,56,68,5	script	Vurewell	86,{
+	callfunc "phramain","Vurewell";
+	end;
+}
+payon,145,178,3	script	Begnahd	88,{
+	callfunc "phramain","Begnahd";
+	end;
+}
+morocc_in,63,32,6	script	Sade	99,{
+	callfunc "phramain","Sade";
+	end;
+}
+alberta_in,13,71,3	script	Kahlamanlith	86,{
+	callfunc "phramain","Kahlamanlith";
+	end;
+}
+yuno_in01,171,27,4	script	Dilemma	88,{
+	callfunc "phramain","Dilemma";
+	end;
+}
+ein_in01,15,87,3	script	Tirehaus	86,{
+	callfunc "phramain","Tirehaus";
+	end;
+}
+lhz_in02,278,24,3	script	Krugg	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
+
+// Funções vendedor de material
+//============================================================
+function	script	phramain	{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere um minuto !! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, tente novamente -";
+		mes "- depois de perder algum peso. -";
+		close;
+	}
+	mes "[" + getarg(0) + "]";
+	mes "eu  vendo dois tipos de metal";
+	mes "para armamento têmpera.";
+	mes "Eu tenho ^007777Phracon^000000 para o Nível 1";
+	mes "Armas e ^007777Emveretarcon^000000";
+	mes "para o Nível 2 armas.";
+	next;
+	switch(select("Phracon - 200 Zeny:Emveretarcon - 1000 Zeny:Pergunte sobre outros metais")) {
+	case 1:
+		set .@material,1010;
+		set .@price,200;
+		break;
+	case 2:
+		set .@material,1011;
+		set .@price,1000;
+		break;
+	case 3:
+		mes "[" + getarg(0) + "]";
+		mes "Outros metais";
+		mes "Bem, você vai precisar de metais especiais para atualizar as armas de nível superior, ou qualquer tipo de armadura,voçê precisa de, Oridecon e Elunium  realmente.";
+		mes "difícil de encontrar apenas ...";
+		close;
+	}
+	mes "[" + getarg(0) + "]";
+	mes "Então, quantos você deseja comprar?";
+	mes "Se você não quer nenhum, por favor digite o número, '0.'";
+	next;
+	while(1) {
+		input .@input;
+		if (.@input == 0) {
+			mes "[" + getarg(0) + "]";
+			mes "A Negociação";
+			mes "foi cancelada.";
+			close;
+		}
+		else if (.@input < 0 || .@input > 500) {
+			mes "[" + getarg(0) + "]";
+			mes "Tudo bem, você pode";
+			mes "comprar até 500.";
+			mes "Não: Não mais do que isso,";
+			mes "ficou bom?";
+			next;
+		}
+		else {
+			break;
+		}
+	}
+	set .@sell,.@input * .@price;
+	if (Zeny < .@sell) {
+		mes "[" + getarg(0) + "]";
+		mes "Err ...";
+		mes "Você não tem";
+		mes "Zeny para comprar";
+		mes ""+ .@input +" of them.";
+		close;
+	}
+	if (checkweight(.@material,.@input) == 0) {
+		mes "[" + getarg(0) + "]";
+		mes "Hmm...";
+		mes "Eu não posso te dar qualquer coisa, se você não tem espaço em seu inventário. Por que você não colocar suas coisas extras na Kafra de armazenamento e tente novamente?";
+		close;
+	}
+	getitem .@material,.@input;
+	set Zeny,Zeny-.@sell;
+	mes "[" + getarg(0) + "]";
+	mes "Aqui está!";
+	mes "Obrigado";
+	mes "seu patrocínio.";
+	close;
+}
+
+// Ori/Elu refinador
+//============================================================
+prt_in,63,69,3	script	Dietrich	84,{
+	callfunc "orimain","Dietrich";
+	end;
+}
+payon,137,178,5	script	Hakhim	88,{
+	callfunc "orimain","Hakhim";
+	end;
+}
+morocc_in,72,32,6	script	Abdula	99,{
+	callfunc "orimain","Abdula";
+	end;
+}
+alberta_in,21,63,5	script	XeNãophon	84,{
+	callfunc "orimain","XeNãophon Zolotas";
+	end;
+}
+yuno_in01,164,27,4	script	Delight	88,{
+	callfunc "orimain","Delight";
+	end;
+}
+ein_in01,18,82,6	script	Matestein	84,{
+	callfunc "orimain","Matestein";
+	end;
+}
+lhz_in02,281,24,5	script	Fruel	84,{
+	callfunc "orimain","Fruel";
+	end;
+}
+
+// Ori/Elu funções
+//============================================================
+function	script	orimain	{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere um minuto !! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, tente Novamente -";
+		mes "- depois de perder algum peso. -";
+		close;
+	}
+	mes "[" + getarg(0) + "]";
+	mes "Eu posso purificar sua";
+	mes "Oridecons ásperas ou";
+	mes "Eluniuns ásperas eu vou precisar.";
+	mes "5 pedras brutas para fazer";
+	mes "um puro para você.";
+	next;
+	switch(select("Faça Oridecon:Faça Elunium:Pergunte sobre Pedras Encatanda")) {
+	case 1:
+		if (countitem(756) > 4) {
+			delitem 756,5;  //Oridecon_Stone
+			getitem 984,1; // Oridecon
+			mes "[" + getarg(0) + "]";
+			mes "Aqui está a sua Oridecon.";
+			mes "Você é bem-vindo para vir";
+			mes "de volta quando quiser.";
+			close;
+		}
+		else {
+			mes "[" + getarg(0) + "]";
+			mes "Você está brincando, certo?";
+			mes "eu apenas lhe disse que eu preciso de 5 Minérios de Oridecon para fazer um Oridecon puro.";
+			close;
+		}
+	case 2:
+		if (countitem(757) > 4) {
+			delitem 757,5;  //Elunium_Stone
+			getitem 985,1; // Elunium
+			mes "[" + getarg(0) + "]";
+			mes "Aqui está a sua Elunium.";
+			mes "Você é bem-vindo para vir";
+			mes "de volta quando quiser.";
+			close;
+		}
+		else {
+			mes "[" + getarg(0) + "]";
+			mes "Você está brincando, certo?";
+			mes "eu apenas lhe disse que eu preciso de 5 Eluniuns ásperas para fazer um Elunium puro.";
+			close;
+		}
+	case 3:
+		mes "[" + getarg(0) + "]";
+		mes "Pedras Encantadas ...";
+		mes "Eu tenho sido um stonesmith por 20 anos, então eu já ouvi muito sobre elas Supostamente, existem.";
+		mes "quatro tipos diferentes.";
+		next;
+		mes "[" + getarg(0) + "]";
+		mes "Cada Pedra Encantada possui uma das seguintes propriedades elementais: Terra, Vento, Água e Fogo.";
+		next;
+		mes "[" + getarg(0) + "]";
+		mes "Se alguém combina uma pedra encantada com uma arma enquanto smithing, que arma vai possuir a mesma propriedade que a Pedra.";
+		next;
+		mes "[" + getarg(0) + "]";
+		mes "É desnecessário dizer que você precisa ter alguma habilidade smithing para produzir este tipo de arma elemental.";
+		close;
+	}
+}
+
+// Reparadores de equipamentos
+//============================================================
+alberta_in,31,65,4	script	Repairman#alb	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+moc_ruins,107,94,4	script	Repairman#moc	99,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+payon,143,165,4	script	Repairman#pay	88,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+prt_in,63,54,2	script	Repairman#prt	86,{
+	callfunc "repairmain","Grendal";
+	end;
+}
+
+yuno_in01,175,28,3	script	Repairman#juNão	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+geffen_in,34,166,3	script	Repairman#gef	99,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+aldeba_in,38,60,3	script	Repairman#alde	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+lhz_in02,284,14,3	script	Repairman#lhz	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+prt_gld,139,117,4	script	Repairman#prt_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+gef_fild13,263,117,4	script	Repairman#gef_fild	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+pay_gld,295,183,4	script	Repairman#pay_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+alde_gld,220,152,4	script	Repairman#alde_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+aru_gld,189,336,4	script	Repairman#aru_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+sch_gld,340,80,7	script	Repairman#sch_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+// Equipamentos Função Reparar
+//============================================================
+function	script	repairmain	{
+	set .@repairprice,5000;
+	mes "["+getarg(0)+"]";
+	mes "Olá!";
+	mes "Você quer que eu";
+	mes "para reparar todos os itens?";
+	mes "Você pode contar comigo";
+	mes "para reparos de itens";
+
+	next;
+	switch(select("Na verdade, eu tenho alguns itens...:agora não.")) {
+	case 1:
+		set .@checkitem,1;
+		while (1) {
+			if (getbrokenid(.@checkitem) == 0) {
+				break;
+			}
+			set .@checkitem,.@checkitem+1;
+		}
+		set .@checkitem,.@checkitem-1;
+		if (!.@checkitem) {
+			mes "["+getarg(0)+"]";
+			mes "Oh, isso é incrível!";
+			mes "Você deve cuidar muito bem de suas coisas, alguns de seus itens estão danificados.";
+			next;
+			mes "["+getarg(0)+"]";
+			mes "Se todos são como você, eu vou estar desempregado!! Haha~!";
+			close;
+		}
+		mes "["+getarg(0)+"]";
+		mes "Hmm...";
+		mes "Vamos ver ...";
+		mes "De todos os itens,";
+		mes "" + .@checkitem + " são danificados.";
+		mes "Gostaria de reparar?";
+		next;
+		set .@totalcost,.@repairprice*.@checkitem;
+		mes "["+getarg(0)+"]";
+		mes "Cada custos de reparação " + .@repairprice + " Zeny. Assim, para reparar todos os seus itens danificados custaria " + .@totalcost + " Zeny! Gostaria de reparar os itens?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			if (Zeny < .@totalcost) {
+				mes "["+getarg(0)+"]";
+				mes "Whoa whoa...";
+				mes "Confira sua carteira antes de receber a conta do reparo! Eu não posso consertar nada, porque você não tem Zeny.";
+				close;
+			}
+			set .@checkitem2,1;
+			while (1) {
+				if (getbrokenid(.@checkitem2) == 0) {
+					break;
+				}
+				set .@checkitem2,.@checkitem2+1;
+			}
+			set .@checkitem2,.@checkitem2-1;
+			if (.@checkitem == .@checkitem2) {
+				set zeny,zeny-.@totalcost;
+				while (.@checkitem) {
+					repair(.@checkitem);
+					set .@checkitem,.@checkitem-1;
+				}
+				mes "["+getarg(0)+"]";
+				mes "Ok! Tudo feito. Não, tente ser um pouco mais cuidadoso. Os itens têm vidas muito mais que você.";
+				close;
+			}
+			else {
+				mes "["+getarg(0)+"]";
+				mes "Mmm? Alguma coisa está errada. Aguarde ... Equipar os itens que você precisa para reparar e, em seguida, volte para mim.";
+				close;
+			}
+		case 2:
+			mes "["+getarg(0)+"]";
+			mes "Bem, é a minha pele Não: Não, mas não é bom deixar os itens danificados. Você deve levá-los reparado o mais breve possível!";
+			close;
+		}
+	case 2:
+		mes "["+getarg(0)+"]";
+		mes "Hohoho ...";
+		mes "Você não tem";
+		mes "qualquer negócio comigo";
+		mes "se você não tem qualquer";
+		mes "itens para reparar.";
+
+		close;
+	}
+}

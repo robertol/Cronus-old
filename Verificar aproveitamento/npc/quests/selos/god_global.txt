@@ -1,0 +1,108 @@
+//===== Cronus Script ======================================== 
+//= NPC para Gerenciamento das Variáveis da Quest dos Itens Divinos
+//===== Por: ================================================= 
+//= MasterOfMuppets
+//===== Versão Atual: ======================================== 
+//= 1.0b
+//===== Descrição: =========================================== 
+//= Use este NPC se as variáveis da quest dos Selos ficarem 
+//= esculhambadas.
+//===== Additional Comments: =================================
+// 1.0 Tradução para o pt-BR [Denis]
+//============================================================
+
+sec_in02,15,170,0	script	Controle da Quest	817,{
+
+	if(getgmlevel() > 98)
+	{
+	mes "[Gerenciador de Variáveis]";
+	mes "Bem vindo ao NPC Gerenciador Global das Variáveis da Quest dos Itens Divinos.";
+	next;
+	  while(1)
+	  {
+	menu "CHECAR os valores atuais das variáveis.",s_Values,"MUDAR os valores das variáveis.",s_Change,"Cancelar",-;
+	close;
+
+s_Change:
+	mes "[Gerenciador de Variáveis]";
+	mes "Qual variável você gostaria de mudar?";
+	next;
+	menu "$God1",-,"$God2",s_2,"$God3",s_3,"$God4",s_4;
+
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God1^000000 tem o valor atual ^FF0000" + $God1 + "^000000.";
+	mes "Qual valor você gostaria de dar a ela? (Insira 101 para cancelar).";
+	next;
+	input @temp;
+	if(@temp == 101)goto s_Canceled;
+	if(@temp < 0 || @temp > 100)goto s_BadValue;
+	set $God1,@temp;
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God1^000000 foi mudado para ^FF0000" + $God1 + "^000000.";
+	close;
+
+s_2:
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God2^000000 tem o valor atual de ^FF0000" + $God2 + "^000000.";
+	mes "Qual valor você gostaria de dar a ela? (Insira 101 para cancelar).";
+	next;
+	input @temp;
+	if(@temp == 101)goto s_Canceled;
+	if(@temp < 0 || @temp > 100)goto s_BadValue;
+	set $God2,@temp;
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God2^000000 foi mudado para ^FF0000" + $God2 + "^000000.";
+	close;
+
+s_3:
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God3^000000 tem o valor atual de ^FF0000" + $God3 + "^000000.";
+	mes "Qual valor você gostaria de dar a ela? (Insira 101 para cancelar).";
+	next;
+	input @temp;
+	if(@temp == 101)goto s_Canceled;
+	if(@temp < 0 || @temp > 100)goto s_BadValue;
+	set $God3,@temp;
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God3^000000 foi mudado para ^FF0000" + $God3 + "^000000.";
+	close;
+
+s_4:
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God4^000000 tem o valor atual de ^FF0000" + $God4 + "^000000.";
+	mes "Qual valor você gostaria de dar a ela? (Insira 101 para cancelar).";
+	next;
+	input @temp;
+	if(@temp == 101)goto s_Canceled;
+	if(@temp < 0 || @temp > 100)goto s_BadValue;
+	set $God4,@temp;
+	mes "[Gerenciador de Variáveis]";
+	mes "^0000FF$God4^000000 foi mudado para ^FF0000" + $God4 + "^000000.";
+	close;
+
+s_Canceled:
+	close;
+
+s_BadValue:
+	mes "[Gerenciador de Variáveis]";
+	mes "Por favor entre com um valor entre 0 e 100.";
+	close;
+
+s_Values:
+	mes "[Gerenciador de Variáveis]";
+	mes "Os valores atuais das variáveis são:";
+	mes "^0000FF$God1^000000 = ^FF0000" + $God1 + "^000000.";
+	mes "^0000FF$God2^000000 = ^FF0000" + $God2 + "^000000.";
+	mes "^0000FF$God3^000000 = ^FF0000" + $God3 + "^000000.";
+	mes "^0000FF$God4^000000 = ^FF0000" + $God4 + "^000000.";
+	next;
+	  }
+	}
+	else
+	{
+	mes "[Gerenciador de Variáveis]";
+	mes "Desculpe-me, mas você não tem a autorização necessária para usar este NPC";
+	close;
+	}
+
+}

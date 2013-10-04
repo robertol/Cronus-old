@@ -1,0 +1,65 @@
+//===== Cronus Script =========================================
+//= Controle de quantidade de itens no projeto
+//===== Por: ==================================================
+//= Cumbe
+//===== Versão Atual: =========================================
+//= 0.1
+//===== Description: ==========================================
+//= Script que mostra a quantidade exata de itens no projeto no
+//= momento, bastando colocar o id do item ao qual deseja saber.
+//= Existe a função para o admin deletar itens existentes
+//= no projeto usando o id do mesmo.
+//===== Comentários Adicionais: ===============================
+//= 0.1 Criação do Script [Cumbe]
+//===== Observações: ==========================================
+//= Para saber quantas cards Tao Gunka existe no projeto
+//= é só colocar o id da mesma que o sitema ira mostrar.
+//= se realmente existe e a quantidade.
+//= se ouver um acidente e os jogadores pegaram algum item que 
+//= indesejavel pela staff, o admin pode ir no npc, digitar o
+//= id e todos os itens sumiram.
+//=============================================================
+
+
+prontera,168,179,5  script	Registros	757,{
+	mes "Digite o ID do item o qual você quer saber a quantidade existente no servidor no momento.";
+	mes "Exemplo: ^0b85f8Rondel [1] (id: 13017).^000000";
+	mes "^0b85f8Chifres Místicos de Bafomé (id: 5518).^000000";
+	input .@item_id;
+	if( getitemname( .@item_id ) != "null" ){
+		for( set .@i,0; .@i < .sql_size; set .@i,.@i + 1 ){
+			query_sql( "SELECT SUM(`amount`) FROM `"+.sql_table$[.@i]+"` WHERE `nameid`='"+.@item_id+"'",.@amount );
+			query_sql( "SELECT COUNT(`card0`) FROM `"+.sql_table$[.@i]+"` WHERE `card0`='"+.@item_id+"'",.@card0 );
+			query_sql( "SELECT COUNT(`card1`) FROM `"+.sql_table$[.@i]+"` WHERE `card1`='"+.@item_id+"'",.@card1 );
+			query_sql( "SELECT COUNT(`card2`) FROM `"+.sql_table$[.@i]+"` WHERE `card2`='"+.@item_id+"'",.@card2 );
+			query_sql( "SELECT COUNT(`card3`) FROM `"+.sql_table$[.@i]+"` WHERE `card3`='"+.@item_id+"'",.@card3 );
+			set .@total,.@total + ( .@amount + .@card0 + .@card1 + .@card2 + .@card3 );
+		}
+		mes "Encontrado "+.@total+" x "+getitemname( .@item_id );
+		if ( getgmlevel() >= 99 && .@total ) {
+			next;
+			if ( select( "Sair", "Deletar item" ) == 2 ) {
+				for( set .@i,0; .@i < .sql_size; set .@i,.@i + 1 ) {
+					query_sql "delete from `"+.sql_table$[.@i]+"` WHERE ( `nameid`='"+.@item_id+"' or `card0`='"+.@item_id+"' or "+
+							"`card1`='"+.@item_id+"' or `card2`='"+.@item_id+"' or `card3`='"+.@item_id+"' )";
+				}
+				set .@count, query_sql( "select `account_id` from `char` where `online` = 1", .@account_id );
+				set .@origin, getcharid(3);
+				for( set .@i,0; .@i < .@count; set .@i,.@i + 1 ){
+					attachrid .@account_id;
+					set .@amount, countitem( .@item_id );
+					delitem .@item_id, .@amount;
+				}
+				attachrid .@origin;
+				mes "Pronto.";
+			}
+		}
+	}else{
+		mes "ID Item inválido";
+	}
+	close;
+OnInit:
+	setarray .sql_table$[0],"inventory","cart_inventory","guild_storage","storage","mail";
+	set .sql_size,getarraysize( .sql_table$ );
+	end;
+}

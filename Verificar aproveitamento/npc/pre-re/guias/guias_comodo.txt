@@ -1,0 +1,125 @@
+//===== Cronus Script ======================================== 
+//= Guia de Comodo
+//===== Por: ================================================= 
+//= kobra_k88; L0ne_W0lf
+//===== Versão Atual: ======================================== 
+//= 1.5a
+//===== Compatível com: ======================================
+//= Cronus SVN
+//===== Changelog: ===========================================
+//= Fully working v1.1 Now using duplicate command.
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks
+//=	to Muad_Dib [MasterOfMuppets]
+//= 1.4	Removed 3 guides, and converted to use functions.
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.5a Traduzido. [RoM]
+//============================================================ 
+
+comodo,322,178,4	script	Guia de Comodo#cmd::CmdGuide	700,{
+	callfunc "F_CmdGuide","Aborígene Kokomo";
+}
+
+comodo,176,350,4	script	Guia de Comodo#2cmd	700,{
+	callfunc "F_CmdGuide","Aborígene Nutcoco";
+}
+
+comodo,37,219,4	script	Guia#2cmd	700,{
+	callfunc "F_CmdGuide","Aborígene Papaya";
+}
+
+function	script	F_CmdGuide	{
+	mes "["+getarg(0)+"]";
+	mes "Bem-vindo a Comodo, a";
+	mes "cidade dos sonhos e fantasias,";
+	mes "onde a vida-noturna nunca acaba!";
+	mes "Eu conheço essa área muito bem,";
+	mes "então diga-me se precisar";
+	mes "de saber alguma coisa.";
+	next;
+	switch(select("Cassino:Show de Ula-Ula ^3355FF(Mudança de Classe de Odalisca)^000000:Loja de Armas e Armaduras:Loja de Utilidades:Loja de Turistas:Filial Ocidental da Co. Kafra:Casa do Prefeito:Bar:Acampamento:Cancelar")) {
+	case 1:
+		viewpoint 1,140,98,0,0xFF6633;
+		mes "Por favor dirija-se a marca";
+		mes "^FF6633+^000000, no seu Mini-Mapa para encontrar o";
+		mes "Cassino, um refúgio de descanso para";
+		mes "viajantes cansados e o coração da";
+		mes "vida-noturna de Comodo.";
+		close;
+	case 2:
+		viewpoint 1,188,168,1,0x0000FF;
+		mes "Por favor dirija-se a marca";
+		mes "^0000FF+^000000, no seu Mini-Mapa para encontrar o";
+		mes "Show de Ula-Ula, o lugar";
+		mes "onde as Arqueiras podem";
+		mes "mudar de classe para Odaliscas.";
+		close;
+	case 3:
+		viewpoint 1,266,70,2,0x00FFFF;
+		mes "Por favor dirija-se a marca";
+		mes "^00FFFF+^000000, no seu Mini-Mapa para encontrar a";
+		mes "Loja de Armaduras e armas. Não deixe";
+		mes "de ver esta loja, alguns";
+		mes "itens são únicos";
+		mes "de Comodo!";
+		close;
+	case 4:
+		viewpoint 1,86,128,3,0x515151;
+		mes "Por favor dirija-se a marca";
+		mes "^515151+^000000, no seu Mini-Mapa para encontrar a";
+		mes "Loja de Utilidades. Se você nunca esteve";
+		mes "lá antes, eu sugiro que dê uma olhada";
+		mes "e estoque utilidades que";
+		mes "você possa precisar depois.";
+		close;
+	case 5:
+		viewpoint 1,298,124,4,0x3355FF;
+		mes "Por favor dirija-se a marca";
+		mes "^3355FF+^000000, no seu Mini-Mapa para encontrar a";
+		mes "Loja de Turistas, você pode";
+		mes "comprar presentes que só podem ser encontrados na região de Comodo~";
+		close;
+	case 6:
+		viewpoint 1,136,202,5,0xFF5555;
+		mes "Por favor dirija-se a marca";
+		mes "^FF5555+^000000, no seu Mini-Mapa para encontrar a";
+		mes "Filial Ocidental da Co. Kafra.";
+		mes "Eles oferecem alguns serviços";
+		mes "muito importantes que você deveria checar depois.";
+		close;
+	case 7:
+		viewpoint 1,114,294,5,0xFF5555;
+		mes "Por favor dirija-se a marca";
+		mes "^FF5555+^000000, no seu Mini-Mapa para encontrar a";
+		mes "Casa do Prefeito. Você pode";
+		mes "visitá-lo, e ele sempre fica";
+		mes "muito feliz com visitantes.";
+		close;
+	case 8:
+		viewpoint 1,166,298,5,0xFF5555;
+		mes "Por favor dirija-se a marca";
+		mes "^FF5555+^000000, no seu Mini-Mapa para encontrar o";
+		mes "Bat. Lá, você pode encontrar";
+		mes "turistas, relaxar, e socializar";
+		mes "em um agradável ambiente~";
+		close;
+	case 9:
+		viewpoint 1,210,308,5,0xFF5555;
+		mes "Por favor dirija-se a marca";
+		mes "^FF5555+^000000, no seu Mini-Mapa para encontrar o";
+		mes "Acampamento. Traga com você sua";
+		mes "família e amigos, e curta o";
+		mes "churrasco especial do";
+		mes "acampamento de Comodo~";
+		close;
+	case 10:
+		mes "["+getarg(0)+"]";
+		mes "Na verdade, sempre parece";
+		mes "estar de noite em Comodo porque";
+		mes "ela é construída em uma grande";
+		mes "caverna. Nós não pegamos nenhuma luz";
+		mes "do sol aqui, mas a escuridão aqui é";
+		mes "excitante do que a claridade~";
+		close;
+	}
+}
