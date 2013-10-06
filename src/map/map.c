@@ -3519,15 +3519,19 @@ void map_reloadnpc_sub(char *cfgName)
 
 void map_reloadnpc(bool clear)
 {
-	if (clear)
-		npc->addsrcfile("clear"); // this will clear the current script list
+	  #ifdef RENEWAL
+	 char *CR = LANG_NPC_PATH"re/scripts_main.conf";
+      #else
+	 char *CR = LANG_NPC_PATH"pre-re/scripts_main.conf";
+      #endif
 
-#ifdef RENEWAL
-	map->reloadnpc_sub("npc/re/scripts_main.conf");
-#else
-	map->reloadnpc_sub("npc/pre-re/scripts_main.conf");
-#endif
+
+
+if (clear)
+npc->addsrcfile("clear"); // this will clear the current script list
+map->reloadnpc_sub(CR);
 }
+
 
 int inter_config_read(char *cfgName) {
 	char line[1024],w1[1024],w2[1024];

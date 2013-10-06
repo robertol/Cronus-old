@@ -25,13 +25,16 @@
 #if defined(ce_portuguese)
 #define LANG_CONF_PATH "conf/portugues/"
 #define LANG_DB_PATH "db/portugues/"
+#define LANG_NPC_PATH "npc/portugues/"
 #else
 #if defined(ce_english)
 #define LANG_CONF_PATH "conf/english/"
 #define LANG_DB_PATH "db/english/"
+#define LANG_NPC_PATH "npc/english/"
 #else
 #define LANG_CONF_PATH "conf/espanol/"
 #define LANG_DB_PATH "db/espanol/"
+#define LANG_NPC_PATH "npc/espanol/"
 #endif
 #endif
 

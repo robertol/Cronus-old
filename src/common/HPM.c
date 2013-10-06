@@ -14,6 +14,7 @@
 #include "../common/strlib.h"
 #include "../common/sql.h"
 #include "HPM.h"
+#include "../config/lang.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -246,7 +247,7 @@ void hplugin_unload(struct hplugin* plugin) {
 void hplugins_config_read(void) {
 	config_t plugins_conf;
 	config_setting_t *plist = NULL;
-	const char *config_filename = "conf/plugins.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_CONF_PATH"plugins.conf"; // FIXME hardcoded name
 	
 	if (conf_read_file(&plugins_conf, config_filename))
 		return;
