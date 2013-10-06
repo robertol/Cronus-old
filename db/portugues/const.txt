@@ -2,25 +2,20 @@
 // _________                                    
 // \_   ___ \_______  ____   ____  __ __  ______
 // /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
-// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
 //  \______  /|__|   \____/|___|  /____//____  >
 //         \/                   \/           \/  
 //---------------------------------------------------------
-// Script Constant Database
+// Banco de Dados de Constantes de Script
+//---------------------------------------------------------
+// Estrutura do banco de dados:
+// Identificador%TAB%Valor[%TAB%Tipo]
+// Alternativo: Identificador,Valor[,Tipo]
 //
-// Structure of Database:
-// Identifier	Value[	Type]
-//
-// Alternatively:
-// Identifier,Value[,Type]
-//
-// 01. Identifier	Unique name for the constant, must not have same name as script commands, functions or variables.
-// 02. Value		Value assigned to the constant. This value cannot be changed during the runtime of the server.
-// 03. Type			Specifies whether the identifier is a constant (0) or a parameter (1) (optional, defaults to 0).
-//
-// NOTE:			Parameters are special in that they retrieve certain runtime values depending on the specified ID
-//					in field Value. Depending on the implementation values assigned by scripts to parameters will affect
-//					runtime values, such as Zeny, as well (see pc_readparam/pc_setparam).
+// 01. Identificador   Valor único para a constante, não deve haver igual em comandos de script, funções nem variáveis.
+// 02. Valor           Valor destinado a constante. Não pode ser modificado enquanto o servidor estiver sendo executado.
+// 03. Tipo            Especifica se o identificador é constante (0) ou parâmetro (1) (opcional, o padrão é 0).
+//---------------------------------------------------------
 
 Job_Novice	0
 Job_Swordman	1
