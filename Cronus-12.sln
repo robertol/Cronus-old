@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mapcache", "vcproj-12\mapca
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin-sample", "vcproj-12\plugin-sample.vcxproj", "{E64C56D3-CDFB-483B-900B-A62D216B6D2F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin-HPMHooking", "vcproj-12\plugin-HPMHooking.vcxproj", "{F3FC1D94-6A9E-4299-905F-67FE23755CE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -36,6 +38,10 @@ Global
 		{E64C56D3-CDFB-483B-900B-A62D216B6D2F}.Debug|Win32.Build.0 = Debug|Win32
 		{E64C56D3-CDFB-483B-900B-A62D216B6D2F}.Release|Win32.ActiveCfg = Release|Win32
 		{E64C56D3-CDFB-483B-900B-A62D216B6D2F}.Release|Win32.Build.0 = Release|Win32
+		{F3FC1D94-6A9E-4299-905F-67FE23755CE1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F3FC1D94-6A9E-4299-905F-67FE23755CE1}.Debug|Win32.Build.0 = Debug|Win32
+		{F3FC1D94-6A9E-4299-905F-67FE23755CE1}.Release|Win32.ActiveCfg = Release|Win32
+		{F3FC1D94-6A9E-4299-905F-67FE23755CE1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
