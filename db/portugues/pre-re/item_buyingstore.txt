@@ -1,13 +1,22 @@
-// Buying Store Item List
-// List of items, that can be sold to buying stores.
-// Format: <item id>
-// Example:
-//  512  // Apple
-// Note:
-//  Items are in same order as data\buyingstoreitemlist.txt, which
-//  must be edited as well for the client to accept added items.
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados de itens que podem ser vendidos em npcs de vendas
+//---------------------------------------------------------
+// Formato <item id>
+// Exemplo:
+// 512 // Maçã
+// Nota:
+// Os itens estão na mesma ordem em data\buyingstoreitemlist.txt, que
+// deve ser editado, bem como para o cliente a aceitar os itens adicionados.
+//---------------------------------------------------------
 
-// items from 2011-11-02 update
+// itens da atualização de 2011-11-02
 714  // Emperium
 6381  // Field_Shovel
 6382  // Urn
