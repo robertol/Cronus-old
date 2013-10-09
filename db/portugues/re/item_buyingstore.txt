@@ -10,9 +10,9 @@
 // Lista de itens que podem ser vendidos em Loja de Compras.
 // Formato: <ID do Item>
 // Exemplo:
-//  512  // Ma√ß√£
+//  512  // MaÁ„
 // Nota:
-//  Itens est√£o na mesma ordem que data\buyingstoreitemlist.txt, a qual
+//  Itens est„o na mesma ordem que data\buyingstoreitemlist.txt, a qual
 //  deve ser editada para o cliente aceitar os itens.
 
 // Itens de 2011-11-02 atualizado

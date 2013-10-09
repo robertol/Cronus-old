@@ -6,7 +6,7 @@
 //  \______  /|__|   \____/|___|  /____//____  >
 //         \/                   \/           \/  
 //---------------------------------------------------------
-// Database de CombinaÃ§Ã£o de Itens
+// Database de Combinação de Itens
 //
 // Estrutura da Database:
 // ID:ID:ID:ID,{ Script }

@@ -12,9 +12,9 @@
 // Identificador%TAB%Valor[%TAB%Tipo]
 // Alternativo: Identificador,Valor[,Tipo]
 //
-// 01. Identificador   Valor √∫nico para a constante, n√£o deve haver igual em comandos de script, fun√ß√µes nem vari√°veis.
-// 02. Valor           Valor destinado a constante. N√£o pode ser modificado enquanto o servidor estiver sendo executado.
-// 03. Tipo            Especifica se o identificador √© constante (0) ou par√¢metro (1) (opcional, o padr√£o √© 0).
+// 01. Identificador   Valor ˙nico para a constante, n„o deve haver igual em comandos de script, funÁıes nem vari·veis.
+// 02. Valor           Valor destinado a constante. N„o pode ser modificado enquanto o servidor estiver sendo executado.
+// 03. Tipo            Especifica se o identificador È constante (0) ou par‚metro (1) (opcional, o padr„o È 0).
 //---------------------------------------------------------
 
 Job_Novice	0
