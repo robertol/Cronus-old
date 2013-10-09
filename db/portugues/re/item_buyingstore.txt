@@ -1,13 +1,21 @@
-// Buying Store Item List
-// List of items, that can be sold to buying stores.
-// Format: <item id>
-// Example:
-//  512  // Apple
-// Note:
-//  Items are in same order as data\buyingstoreitemlist.txt, which
-//  must be edited as well for the client to accept added items.
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Lista de Itens de Compra
+// Lista de itens que podem ser vendidos em Loja de Compras.
+// Formato: <ID do Item>
+// Exemplo:
+//  512  // Maçã
+// Nota:
+//  Itens estão na mesma ordem que data\buyingstoreitemlist.txt, a qual
+//  deve ser editada para o cliente aceitar os itens.
 
-// items from 2011-11-02 update
+// Itens de 2011-11-02 atualizado
 714  // Emperium
 6381  // Field_Shovel
 6382  // Urn
@@ -129,7 +137,7 @@
 //12700
 //12775
 
-// items from 2010-03-12 update
+// Itens de 2010-03-12 atualizado
 601  // Wing_Of_Fly
 602  // Wing_Of_Butterfly
 603  // Old_Blue_Box
