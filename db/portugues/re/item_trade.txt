@@ -1,19 +1,29 @@
-//Item Trading Restrictions File
-//Specify here special rules for item trading.
-//Item ID, TradeMask, Group-Level Override
-//Trading mask values:
-//1:Item can't be droped
-//2:Item can't be traded (nor vended)
-//4:Wedded partner can override restriction 2.
-//8:Item can't be sold to npcs
-//16:Item can't be placed in the cart
-//32:Item can't be placed in the storage
-//64:Item can't be placed in the guild storage
-//128:Item can't be attached to mail
-//256:Item can't be auctioned
-//Example:
-//1161,67,50 //Balmung: No drop, No trade, No Guild Store (1+2+64 =67),
-//only groups of group-level 50 and up can override the setting.
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados de Restrições de Itens Negociáveis
+//---------------------------------------------------------
+// Especifique aqui regras especiais para a negociação do item.
+// Item ID, TradeMask, nível de grupo
+// Negociação valores de máscara:
+// 1: Item não pode ser dropado
+// 2: Item não pode ser comercializado (nem vendido)
+// 4: parceiro conjugal pode substituir restrição 2.
+// 8: Item não pode ser vendido para NPCs
+// 16: Item não podem ser colocados no carrinho
+// 32: Item não pode ser colocado na armazém
+// 64: Item não pode ser colocado na armazém da guilda
+// 128: Item não pode ser anexado ao correio
+// 256: Item não pode ser leiloado
+// Exemplo:
+// 1161,67,50 // Balmung: Não dropa, Não aceita negociação por trade e Nem guardar no armazém da guilda (1 +2 +64 = 67),
+// Apenas os grupos de nível de grupo 50 ou mais pode substituir a configuração.
+//---------------------------------------------------------
 
 // Wedding Related items
 2634,507,100	// Wedding Ring

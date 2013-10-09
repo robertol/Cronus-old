@@ -1,17 +1,29 @@
-// Item Produce Database
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados de Produção de Itens
+//---------------------------------------------------------
+// Estrutura do banco de dados:
+// ProduceItemID,ItemLV,RequireSkill,RequireSkillLv,MaterialID1,MaterialAmount1,...
 //
-// Structure of Database:
-// ProduceItemID,ItemLV,RequireSkill,RequireSkillLv,MaterialID1,MaterialAmount1,......
+// 01. ProduceItemID	ID do item a ser produzido.
+// 02. ItemLV			Nível do item a ser produzido.
+// 03. RequireSkill		ID da habilidade exigida.
+// 04. RequireSkillLv	Nível da habilidade exigida.
+// 05. MaterialID		ID do material a ser usado.
+// 06. MaterialAmount	Quantidade do material a ser usado.
 //
-// Comments:
-// If MaterialAmount = 0, then you just need that item in your inventory (guides)
-// For example, Mine Bottle is 7138,32,228,7131,0,713,1,1050,1,1051,1
-// 7131 is the Guide needed to create mine bottles and the amount needed of this item is 0 (.. ,7131,0, ..).
+// NOTA: Se MaterialAmount = 0, então apenas será necessário ter o item no inventário (livros)
+//--------------------------------------------------------------
 
+//===== Armas === ItemLV=1~3 ==================
 
-//===== Weapon === ItemLV=1~3 ==================
-
-//---- One Handed Swords -----------------------
+//---- Espadas de uma Mão -----------------------
 //-- Sword <-- BS_SWORD & 2 Iron
 1101,1,99,1,998,2
 //-- Falchion <-- BS_SWORD & 30 Iron
@@ -34,7 +46,7 @@
 1129,3,99,3,984,16,724,1
 //----------------------------------------------
 
-//---- Daggers ---------------------------------
+//---- Adagas ---------------------------------
 //-- Knife <-- BS_DAGGER & 1 Iron, 10 Jellopies
 1201,1,98,1,998,1,909,10
 //-- Cutter <-- BS_DAGGER & 25 Iron
@@ -53,7 +65,7 @@
 1222,3,98,3,984,4,999,60,729,1
 //----------------------------------------------
 
-//---- Two Handed Swords -----------------------
+//---- Espadas de duas Mãos -----------------------
 //-- Katana <-- BS_TWOHANDSWORD & 35 Iron, 15 Horrendous Mouth
 1116,1,100,1,998,35,958,15
 //-- Slayer <-- BS_TWOHANDSWORD & 25 Steel, 20 Decayed Nail
@@ -68,7 +80,7 @@
 1163,3,100,3,984,16,999,20,733,1
 //----------------------------------------------
 
-//---- Axes ------------------------------------
+//---- Machados ------------------------------------
 //-- Axe <-- BS_AXE & 10 Iron
 1301,1,101,1,998,10
 //-- Battle Axe <-- BS_AXE & 110 Iron
@@ -81,7 +93,7 @@
 1360,3,101,3,984,8,999,10,719,1
 //----------------------------------------------
 
-//---- Maces -----------------------------------
+//---- Maças -----------------------------------
 //-- Club <-- BS_MACE & 3 Iron
 1501,1,102,1,998,3
 //-- Mace <-- BS_MACE & 30 Iron
@@ -100,7 +112,7 @@
 1522,3,102,3,999,120,968,1
 //----------------------------------------------
 
-//---- Knucklebracers --------------------------
+//---- Soqueiras --------------------------
 //-- Waghnakh <-- BS_KNUCKLE & 160 Iron, 1 Pearl
 1801,1,103,1,998,160,722,1
 //-- Knuckle Duster <-- BS_KNUCKLE & 50 Steel
@@ -115,7 +127,7 @@
 1811,3,103,3,984,4,727,10
 //----------------------------------------------
 
-//---- Spears ----------------------------------
+//---- Lanças ----------------------------------
 //-- Javelin <-- BS_SPEAR & 3 Iron
 1401,1,104,1,998,3
 //-- Spear <-- BS_SPEAR & 35 Iron
@@ -140,7 +152,7 @@
 
 
 //==============================================
-// COOKING RECIPES (LV= 11 -> 20)
+// Receitas de Culinária (LV= 11 -> 20)
 //==============================================
 
 //--------------------LEVEL 1-----------
@@ -296,7 +308,7 @@
 //==============================================
 
 
-//===== Stones and Metals === ItemLV=21 ========
+//===== Pedras e Metais === ItemLV=21 ========
 
 //---- Metals ----------------------------------
 //-- Iron <-- BS_IRON & 1 Iron Ore
@@ -306,7 +318,7 @@
 //----------------------------------------------
 
 
-//---- Enchanted Stones ------------------------
+//---- Pedras Encantadas ------------------------
 //-- Star Crumb <-- BS_ENCHANTSTONE & 10 Star Dust
 1000,21,96,1,1001,10
 //-- Flame Heart <-- BS_ENCHANTSTONE & 10 Red Blood
@@ -322,7 +334,7 @@
 //==============================================
 
 
-//===== Potions === ItemLV=22 ==================
+//===== Poções === ItemLV=22 ==================
 
 //---- Health Potions --------------------------
 //-- Red Potion <-- AM_PHARMACY & Potion Creation Guide & 1 Red Herb, 1 Empty Potion Bottle
@@ -341,7 +353,7 @@
 547,22,228,1,7133,0,504,1,1092,1,1061,1
 //----------------------------------------------
 
-//---- Skill-related Mixtures ------------------
+//---- Habilidades-Misturas relacionadas ------------------
 //-- Holy Water <-- AL_HOLYWATER & 1 Empty Bottle
 523,22,31,1,713,1
 //-- Deadly Poison Bottle <-- ASC_CDP & 1 Venom Canine, 1 Cactus Needle, 1 Bee Sting, 1 Poison Spore, 1 Karvodailnirol, 1 Berserk Potion, 1 Empty Bottle
@@ -358,7 +370,7 @@
 7139,22,228,1,7132,0,970,1,950,1,1044,1,713,1
 //----------------------------------------------
 
-//---- Elemental-resist Potions ----------------
+//---- Elementais-Poções ----------------
 //-- Resist Fire Potion <-- AM_PHARMACY & Elemental Potion Creation Guide & 2 Frill, 1 Red Gemstone, 1 Empty Potion Bottle
 12118,22,228,1,7434,0,1012,2,716,1,1093,1
 //-- Resist Water Potion <-- AM_PHARMACY & Elemental Potion Creation Guide & 3 Heart of Mermaid, 1 Blue Gemstone, 1 Empty Potion Bottle
@@ -369,7 +381,7 @@
 12121,22,228,1,7434,0,1057,3,717,1,1093,1
 //----------------------------------------------
 
-//---- Misc ------------------------------------
+//---- Váriados ------------------------------------
 //-- Anodyne <-- AM_PHARMACY & Potion Creation Guide & 1 Ment, 1 Alcohol, 1 Empty Bottle
 605,22,228,1,7144,0,708,1,970,1,713,1
 //-- Aloevera <-- AM_PHARMACY & Potion Creation Guide & 1 Aloe, 1 Honey, 1 Empty Bottle
@@ -383,7 +395,7 @@
 //==============================================
 
 
-//===== Elemental Converters === ItemLV=23 =====
+//===== Conversores Elementais === ItemLV=23 =====
 
 //-- Fire Elemental Converter <-- SA_CREATECON & 1 Blank Scroll, 3 Scorpion Tail
 12114,23,1007,1,7433,1,904,3
@@ -396,12 +408,12 @@
 
 //==============================================
 
-//===== Ancilla And Runes === ItemLV=24 ========
+//===== Ancilla e Runas === ItemLV=24 ========
 //---- Ancilla ---------------------------------
 //-- Ancilla <-- AB_ANCILLA & 1 Blue Gemstone
 12333,24,2039,1,717,1
 
-//---- Rune Stones -----------------------------
+//---- Runas de Pedras -----------------------------
 //-- Runstone Nosiege <-- RK_RUNEMASTERY Lv8, 1 Broken Armor Piece, 1 Old Magic Circle, 1 Light Granule, 1 Elder Branch
 12725,24,2010,8,7069,1,7099,1,7938,1,7939,1
 //-- Runstone Rhydo <-- RK_RUNEMASTERY Lv7, 1 Red Gemstone, 1 Light Granule, 1 Elder Branch
@@ -424,7 +436,7 @@
 22540,24,2010,10,969,3,7938,3
 //==============================================
 
-//===== Guillotine Cross Poisons === ItemLv=25 =
+//===== Guilhotina da Cruz Venenosa === ItemLv=25 =
 //-- Guillotine Antidote <-- GC_RESEARCHNEWPOISON Lv5, 1 White Herb, 1 Blue Herb, 2 Green Herb
 6128,25,2024,5,509,1,510,1,511,2
 //-- Poison Paralysis <-- GC_RESEARCHNEWPOISON Lv1, 1 Medicine Bowl, 20 Poison Toad's Skin, 1 Poison Kit, 1 Poison Herb Amoena
@@ -446,7 +458,7 @@
 //==============================================
 
 //==============================================
-// Genetic Foods And Potions  (LV= 26 -> 29)
+// Genética alimentos e Poções  (LV= 26 -> 29)
 //==============================================
 //----- Change Material ---- ItemLV=26 ---------
 //-- Sacred Masque <-- GN_CHANGEMATERIAL Lv1, 45 Grasshopper's Leg, 35 Yoyo Tail
@@ -601,7 +613,7 @@
 13283,26,2494,1,6297,10,12437,10
 //==============================================
 
-//---- Mix Cooking --- ItemLV=27 ---------------
+//---- Mix Culinária --- ItemLV=27 ---------------
 //-- Savage BBQ <-- GN_MIX_COOKING Lv1, Mix Cook Book, 1 Melange Pot, 1 Savage Meat, 1 Cooking Skewer, 1 Black Charcoal
 12429,27,2495,1,11022,0,6248,1,6249,1,6250,1,6251,1
 //-- Wug Blood Cocktail <-- GN_MIX_COOKING Lv1, Mix Cook Book, 1 Melange Pot, 3 Wolf Blood, 2 Cold Ice
@@ -615,7 +627,7 @@
 //-- Petti Tail Noodle <-- GN_MIX_COOKING Lv1, Mix Cook Book, 1 Melange Pot, 2 Petti Tail, 1 Fine Noodle, 1 Cool Gravy
 12434,27,2495,1,11022,0,6248,1,6260,2,6261,1,6262,1
 
-//---- Create Bomb --- ItemLV=28 ---------------
+//---- Criar Bomba --- ItemLV=28 ---------------
 //-- Apple Bomb <-- GN_MAKEBOMB Lv1, Apple Bomb CB, 1 Apple, 1 Scell, 1 Detonator, 1 Gun Powder
 13260,28,2496,1,6279,0,512,1,911,1,1051,1,6244,1
 //-- Coconut Bomb <-- GN_MAKEBOMB Lv1, Coconut Bomb CB, 1 Detonator, 1 Coconut Fruit, 2 Gun Powder
@@ -627,7 +639,7 @@
 //-- Banana Bomb <-- GN_MAKEBOMB Lv1, Banana Bomb CB, 1 Banana, 1 Detonator, 4 Gun Powder, 1 Mould Powder
 13264,28,2496,1,6283,0,513,1,1051,1,6244,4,7001,1
 
-//---- Special Pharmacy --- ItemLV=29 ----------
+//---- Farmácia especial --- ItemLV=29 ----------
 //-- Seed Of Horny Plant <-- GN_S_PHARMACY Lv1, Plant Genetic Grow, 10 Prickly Fruit
 6210,29,2497,1,6284,0,576,10
 //-- Bloodsuck Plant Seed <-- GN_S_PHARMACY Lv1, Plant Genetic Grow, 10 Root Of Maneater
