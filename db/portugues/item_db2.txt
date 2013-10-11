@@ -1,8 +1,17 @@
-// Items Additional Database
-//
-// Structure of Database:
-// ID,Name,Name,Type,Price,Sell,Weight,ATK,DEF,Range,Slot,Job,Upper,Gender,Loc,wLV,eLV,Refineable,View,{ Script },{ OnEquip_Script },{ OnUnequip_Script }
-//
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados de Itens
+//---------------------------------------------------------
+// Estrutura do banco de dados:
+// ID,AegisName,Nome,Tipo,Compra,Venda,Peso,ATQ,DEF,Alcance,Slots,Job,Upper,Sexo,Loc,wLV,eLV,Refinavel,View,{ Script },{ OnEquip_Script },{ OnUnequip_Script }
+//---------------------------------------------------------
+
 // THQ Quest Items
 //=============================================================
 //7950,THG_Membership,THG Membership,3,,10,10,,,,,,,,,,,,,{},{},{}

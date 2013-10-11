@@ -1,10 +1,18 @@
-// Item Usage Restriction Configuration File
-// Defines if an item cannot be used under certain circumstances
-// Syntax: <item_id>, <flag>, <group_id_override>
+//---------------------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//---------------------------------------------------------
+// Banco de Dados de Restrição de Uso de Itens
+//---------------------------------------------------------
+// Estrutura: <item_id>, <flag>, <group_id_override>
 // flag:
-//	1 = Cannot use item while sitting
-//  X = more to come soon [TODO]
-// group_id_override: group id necessary to override this setting
+//	1 = Não pode ser usado enquanto estiver sentado
+// group_id_override: ID de grupo necessário para burlar tal configuração
+//---------------------------------------------------------
 
 619,1,100  // Unripe_Apple
 620,1,100  // Orange_Juice
