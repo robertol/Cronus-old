@@ -6870,7 +6870,7 @@ ACMD(makehomun) {
 	homunid = atoi(message);
 	
 	if( homunid == -1 && sd->status.hom_id && !homun_alive(sd->hd) ) {
-		if( !sd->hd->homunculus.vaporize )
+		if( sd->hd->homunculus.vaporize )
 			homun->ressurect(sd, 100, sd->bl.x, sd->bl.y);
 		else
 			homun->call(sd);
@@ -7960,6 +7960,11 @@ ACMD(feelreset)
 ACMD(auction)
 {
 	nullpo_ret(sd);
+	
+if( !battle_config.feature_auction ) {
+		clif->colormes(sd->fd,COLOR_RED,msg_txt(1484));
+		return false;
+	}
 	
 	clif->auction_openwindow(sd);
 	

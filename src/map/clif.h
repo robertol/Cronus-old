@@ -414,6 +414,21 @@ enum BATTLEGROUNDS_QUEUE_NOTICE_DELETED {
 	BGQND_FAIL_NOT_QUEUING = 11,
 };
 
+enum e_BANKING_DEPOSIT_ACK {
+  BDA_SUCCESS  = 0x0,
+  BDA_ERROR    = 0x1,
+  BDA_NO_MONEY = 0x2,
+  BDA_OVERFLOW = 0x3,
+};
+
+enum e_BANKING_WITHDRAW_ACK {
+  BWA_SUCCESS       = 0x0,
+  BWA_NO_MONEY      = 0x1,
+  BWA_UNKNOWN_ERROR = 0x2,
+};
+
+
+
 /**
  * Structures
  **/
@@ -546,10 +561,8 @@ struct clif_interface {
 	int (*clearunit_delayed_sub) (int tid, unsigned int tick, int id, intptr_t data);
 	void (*set_unit_idle) (struct block_list* bl, struct map_session_data *tsd,enum send_target target);
 	void (*spawn_unit) (struct block_list* bl, enum send_target target);
-#if PACKETVER < 20091103
 	void (*spawn_unit2) (struct block_list* bl, enum send_target target);
 	void (*set_unit_idle2) (struct block_list* bl, struct map_session_data *tsd, enum send_target target);
-#endif
 	void (*set_unit_walking) (struct block_list* bl, struct map_session_data *tsd,struct unit_data* ud, enum send_target target);
 	int (*calc_walkdelay) (struct block_list *bl,int delay, int type, int damage, int div_);
 	void (*getareachar_skillunit) (struct map_session_data *sd, struct skill_unit *su);
@@ -904,14 +917,18 @@ struct clif_interface {
 	void (*PartyBookingUpdateNotify) (struct map_session_data* sd, struct party_booking_ad_info* pb_ad);
 	void (*PartyBookingDeleteNotify) (struct map_session_data* sd, int index);
 	void (*PartyBookingInsertNotify) (struct map_session_data* sd, struct party_booking_ad_info* pb_ad);
+    void (*PartyRecruitRegisterAck) (struct map_session_data *sd, int flag);
+    void (*PartyRecruitDeleteAck) (struct map_session_data* sd, int flag);
+    void (*PartyRecruitSearchAck) (int fd, struct party_booking_ad_info** results, int count, bool more_result);
+    void (*PartyRecruitUpdateNotify) (struct map_session_data* sd, struct party_booking_ad_info* pb_ad);
+    void (*PartyRecruitDeleteNotify) (struct map_session_data* sd, int index);
+    void (*PartyRecruitInsertNotify) (struct map_session_data* sd, struct party_booking_ad_info* pb_ad);
 	/* Group Search System Update */
-#ifdef PARTY_RECRUIT
 	void (*PartyBookingVolunteerInfo) (int index, struct map_session_data *sd);
 	void (*PartyBookingRefuseVolunteer) (unsigned long aid, struct map_session_data *sd);
 	void (*PartyBookingCancelVolunteer) (int index, struct map_session_data *sd);
 	void (*PartyBookingAddFilteringList) (int index, struct map_session_data *sd);
 	void (*PartyBookingSubFilteringList) (int gid, struct map_session_data *sd);
-#endif
 	/* buying store-related */
 	void (*buyingstore_open) (struct map_session_data* sd);
 	void (*buyingstore_open_failed) (struct map_session_data* sd, unsigned short result, unsigned int weight);
@@ -962,6 +979,9 @@ struct clif_interface {
 	void (*chsys_quitg) (struct map_session_data *sd);
 	void (*chsys_gjoin) (struct guild *g1,struct guild *g2);
 	void (*chsys_gleave) (struct guild *g1,struct guild *g2);
+	  /* Bank System [Yommy/Hercules] */
+  void (*bank_deposit) (struct map_session_data *sd, enum e_BANKING_DEPOSIT_ACK reason);
+  void (*bank_withdraw) (struct map_session_data *sd,enum e_BANKING_WITHDRAW_ACK reason);
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/
@@ -1060,6 +1080,10 @@ struct clif_interface {
 	void (*pPartyBookingSearchReq) (int fd, struct map_session_data* sd);
 	void (*pPartyBookingDeleteReq) (int fd, struct map_session_data* sd);
 	void (*pPartyBookingUpdateReq) (int fd, struct map_session_data* sd);
+    void (*pPartyRecruitRegisterReq) (int fd, struct map_session_data* sd);
+    void (*pPartyRecruitSearchReq) (int fd, struct map_session_data* sd);
+    void (*pPartyRecruitDeleteReq) (int fd, struct map_session_data* sd);
+    void (*pPartyRecruitUpdateReq) (int fd, struct map_session_data* sd);
 	void (*pCloseVending) (int fd, struct map_session_data* sd);
 	void (*pVendingListReq) (int fd, struct map_session_data* sd);
 	void (*pPurchaseReq) (int fd, struct map_session_data* sd);
@@ -1173,13 +1197,18 @@ struct clif_interface {
 	void (*pPartyTick) (int fd, struct map_session_data *sd);
 	void (*pGuildInvite2) (int fd, struct map_session_data *sd);
 	/* Group Search System Update */
-#ifdef PARTY_RECRUIT
 	void (*pPartyBookingAddFilter) (int fd, struct map_session_data *sd);
 	void (*pPartyBookingSubFilter) (int fd, struct map_session_data *sd);
 	void (*pPartyBookingReqVolunteer) (int fd, struct map_session_data *sd);
 	void (*pPartyBookingRefuseVolunteer) (int fd, struct map_session_data *sd);
 	void (*pPartyBookingCancelVolunteer) (int fd, struct map_session_data *sd);
-#endif
+  /* Bank System [Yommy/Hercules] */
+  void (*pBankDeposit) (int fd, struct map_session_data *sd);
+  void (*pBankWithdraw) (int fd, struct map_session_data *sd);
+  void (*pBankCheck) (int fd, struct map_session_data *sd);
+  void (*pBankOpen) (int fd, struct map_session_data *sd);
+  void (*pBankClose) (int fd, struct map_session_data *sd);
+
 };
 
 struct clif_interface *clif;

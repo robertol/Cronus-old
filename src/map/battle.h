@@ -461,6 +461,9 @@ struct Battle_Config {
 	int snovice_call_type;
 	int guild_notice_changemap;
 	
+	int feature_banking;
+	int feature_auction;
+	
 } battle_config;
 
 // Dammage delayed info

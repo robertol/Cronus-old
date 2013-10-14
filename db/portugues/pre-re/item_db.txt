@@ -66,7 +66,6 @@
 552,KETUPAT,Ketupat,0,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(70,90),rand(20,30); },{},{}
 553,Bun,Pão de Carne,0,1,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(35,70),0; },{},{}
 554,Mojji,Mochi,0,400,,80,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(105,145),0; sc_start SC_Stun,3000,0; if(rand(1000)<150) sc_start SC_Blind,2000,0; },{},{}
-554,Mojji,Mochi,0,400,,80,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(105,145),0; sc_start SC_Stun,3000,0; if(rand(1000)<150) sc_start SC_Blind,2000,0; },{},{}
 555,Rice_Cake,Bolinho de Arroz,0,100,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(105,145),0; },{},{}
 556,Long_Rice_Cake,Bolinho de Arroz no Palito,0,10,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(20,25),0; },{},{}
 557,Hash_Rice_Cake,Fatia de Bolo de Arroz,0,10,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(25,30),0; },{},{}
@@ -474,7 +473,6 @@
 1111,Lapier_,Florete,4,10000,,500,70,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
 1112,Lapier__,Florete,4,10000,,500,70,,1,0,0x000654E3,7,2,2,2,14,1,2,{},{},{}
 1113,Scimiter,Cimitarra,4,17000,,700,85,,1,2,0x000654E3,7,2,2,2,14,1,2,{},{},{}
-1114,Scimiter_,Cimitarra,4,17000,,700,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
 1114,Scimiter_,Cimitarra,4,17000,,700,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
 1115,Scimiter__,Cimitarra,4,17000,,700,85,,1,3,0x000654E3,7,2,2,2,14,1,2,{},{},{}
 1116,Katana,Kataná,4,2000,,1000,60,,1,3,0x00004082,7,2,34,1,4,1,3,{},{},{}
@@ -1360,7 +1358,6 @@
 2435,Battle_Greave,Grevas de Batalha,5,10,,0,,4,,1,0x026654E2,7,2,64,,80,1,0,{ bonus bMaxHP,100; bonus bMdef,1; bonus2 bSubRace,RC_DemiHuman,1; },{},{}
 2436,Combat_Boots,Botas de Combate,5,10,,0,,3,,1,0x00898B1C,7,2,64,,80,1,0,{ bonus bMaxHP,100; bonus bMdef,1; bonus2 bSubRace,RC_DemiHuman,1; },{},{}
 2437,Battle_Boots,Botas de Batalha,5,10,,0,,3,,1,0x01000000,7,2,64,,80,1,0,{ bonus bMaxHP,100; bonus bMdef,1; bonus2 bSubRace,RC_DemiHuman,1; },{},{}
-2438,Paw_Of_Cat,Cat's Paw,5,10,,300,,0,,0,0xFFFFFFFF,7,2,64,,80,1,0,{ bonus bFlee,5; bonus bAgi,1; },{},{}
 2438,Paw_Of_Cat,Cat Paw,5,10,,300,,0,,0,0xFFFFFFFF,7,2,64,,80,1,0,{ bonus bFlee,5; bonus bAgi,1; },{},{}
 2439,Refresh_Shoes,Sapatos Refrescantes [A],5,20,,0,,9,,0,0xFFFFFFFF,7,2,64,,0,0,0,{ bonus bMaxHPRate,17; bonus bMaxSPRate,8; bonus2 bHPRegenRate,20,10000; bonus2 bSPRegenRate,3,10000; },{},{}
 2440,Sprint_Shoes,Sapatos de Corrida,5,20,,300,,2,,1,0x00CFFF80,2,2,64,,70,1,0,{ bonus bAgi,1; bonus bSPrecovRate,5; },{},{}
@@ -2236,7 +2233,6 @@
 5054,Assasin_Mask,Máscara do Sicário,5,20,,100,,0,,0,0x00001100,7,2,1,,70,0,180,{},{},{}
 5055,Novice_Egg_Cap,Chapéu de Ovo do Aprendiz,5,1,,1,,3,,0,0x00000001,7,2,256,,0,0,101,{},{},{}
 5056,Love_Berry,Fruto do Amor,5,1,,100,,0,,0,0xFFFFFFFF,7,2,256,,0,0,140,{},{},{}
-5056,Love_Berry,Fruto do Amor,5,1,,100,,0,,0,0xFFFFFFFF,7,2,256,,0,0,140,{},{},{}
 5057,Ear_Of_Black_Cat,Orelhas de Gato Preto,5,16000,,200,,2,,0,0xFFFFFFFF,7,2,256,,45,1,141,{},{},{}
 5058,Drooping_Kitty,Chapéu de Gatinho Dorminhoco,5,250000,,500,,1,,0,0xFFFFFFFE,7,2,256,,0,1,142,{ bonus bMdef,15; bonus2 bResEff,Eff_Curse,3000; },{},{}
 5059,Brown_Bear_Cap,Chapéu de Ursinho,5,20,,800,,3,,0,0xFFFFFFFF,7,2,256,,50,1,143,{},{},{}
@@ -2279,7 +2275,6 @@
 5096,Assassin_Mask_,Máscara do Sicário,5,20,,100,,0,,0,0x00001100,7,2,1,,70,0,180,{},{},{}
 5097,Cone_Hat_,Chapéu de 1º Aniversário bRO,5,0,,400,,0,,0,0xFFFFFFFF,7,2,256,,0,1,144,{},{},{}
 5098,Tiger_Mask,Máscara de Tigre,5,20,,400,,2,,0,0xFFFFFFFF,7,2,768,,50,0,181,{ bonus bStr,3; bonus bMaxHP,100; },{},{}
-5099,Cat_Hat,Chapéu de Gatinho,5,20,,300,,1,,0,0xFFFFFFFF,7,2,256,,0,1,182,{ bonus bLuk,2; bonus bMdef,10; bonus2 bSubRace,RC_Brute,5; },{},{}
 5099,Cat_Hat,Chapéu de Gatinho,5,20,,300,,1,,0,0xFFFFFFFF,7,2,256,,0,1,182,{ bonus bLuk,2; bonus bMdef,10; bonus2 bSubRace,RC_Brute,5; },{},{}
 5100,Sales_Signboard,Placa de Promoção,5,20,,800,,0,,0,0xFFFFFFFF,7,2,256,,75,1,183,{ bonus bStr,1; bonus bAgi,1; bonus bLuk,1; },{},{}
 5101,Takius_Blindfold,Venda da Takius,5,20,,100,,0,,0,0xFFFFFFFF,7,2,512,,0,0,184,{},{},{}
@@ -2597,7 +2592,6 @@
 5413,Popcorn_Hat,Chapéu de Pipoca,5,20,,300,,2,,0,0xFFFFFFFF,7,2,256,,0,0,415,{ bonus2 bSubEle,Ele_Wind, 10; },{},{}
 5414,Campfire_Hat,Fogueira de São João,5,20,,300,,2,,0,0xFFFFFFFF,7,2,256,,0,0,416,{ bonus2 bSubEle,Ele_Fire, 10; bonus4 bAutoSpellWhenHit, MG_FIREBALL, 5, 100, 1; },{},{}
 5415,Poring_Cake_Cap,Chapéu de Bolo de Poring,5,20,,1000,,5,,0,0xFFFFFFFF,7,2,256,,40,1,417,{ bonus bMdef,5; bonus bCritical,5; bonus bFlee,5; bonus bFlee2,5; bonus bAspdRate,5; bonus bCastrate,-5; bonus bDelayRate,-5; },{},{}
-5416,Beer_Cap,Caneca de Guaraná,5,20,,600,,2,,0,0xFFFFFFFE,7,2,256,,18,1,418,{ bonus bFlee2,5; skill "SM_RECOVERY",3; skill "MG_SRECOVERY",3; },{},{}
 5416,Beer_Cap,Caneca de Guaraná,5,20,,600,,2,,0,0xFFFFFFFE,7,2,256,,18,1,418,{ bonus bFlee2,5; skill "SM_RECOVERY",3; skill "MG_SRECOVERY",3; },{},{}
 5417,Crown_Parrot,Crown Parrots,5,20,,200,,1,,1,0xFFFFFFFF,7,2,256,,0,0,419,{ bonus bInt,1; bonus2 bResEff,Eff_Silence,10000; bonus3 bAutoSpell,"DC_SCREAM",1,50; },{},{}
 5418,Soldier_Hat,Legionnaire Hat,5,20,,400,,4,,1,0xFFFFFFFF,7,2,256,,0,1,420,{ bonus bStr,1; bonus2 bAddRace,RC_NonBoss,3; bonus2 bAddRace,RC_Boss,3; bonus bUseSPrate,10; },{},{}
@@ -3146,10 +3140,8 @@
 6103,Report_On_Manuk,Relatório de Manuk,3,0,,0,,,,,,,,,,,,,{},{},{}
 6104,Big_Cell,Cristal Gigante,3,1000,,10,,,,,,,,,,,,,{},{},{}
 6105,Morning_Dew,Orvalho da Manhã,3,20,,10,,,,,,,,,,,,,{},{},{}
-6105,Morning_Dew,Orvalho da Manhã,3,20,,10,,,,,,,,,,,,,{},{},{}
 6106,Well_Ripened_Berry,Morango Maduro,3,20,,10,,,,,,,,,,,,,{},{},{}
 6107,Sunset_On_The_Rock,Coquetel de Verão,3,20,,10,,,,,,,,,,,,,{},{},{}
-6108,Apple_Pudding,Gelatina de Maçã,3,1000,,10,,,,,,,,,,,,,{},{},{}
 6108,Apple_Pudding,Gelatina de Maçã,3,1000,,10,,,,,,,,,,,,,{},{},{}
 6109,Plant_Neutrient,Adubo Delicioso,3,20,,10,,,,,,,,,,,,,{},{},{}
 6110,Vital_Flower,Flor Vívida,3,1000,,10,,,,,,,,,,,,,{},{},{}
@@ -3178,8 +3170,6 @@
 6133,Ticket_Miyabi_Ningyo,Ticket de Miyabi Ningyo,3,0,,0,,,,,,,,,,,,,{},{},{}
 6134,Ticket_Whisper,Giant Whisper Exchange Coupon,3,0,,0,,,,,,,,,,,,,{},{},{}
 6135,Ticket_Wicked_Nymph,Ticket de Ninfa Perversa,3,0,,0,,,,,,,,,,,,,{},{},{}
-6135,Ticket_Wicked_Nymph,Ticket de Ninfa Perversa,3,0,,0,,,,,,,,,,,,,{},{},{}
-6136,Ticket_Medusa,Ticket de Medusa,3,0,,0,,,,,,,,,,,,,{},{},{}
 6136,Ticket_Medusa,Ticket de Medusa,3,0,,0,,,,,,,,,,,,,{},{},{}
 6137,Ticket_Stoneshooter,Ticket do Atirador de Pedras,3,0,,0,,,,,,,,,,,,,{},{},{}
 6138,Ticket_Marionette,Marionette Exchange Coupon,3,0,,0,,,,,,,,,,,,,{},{},{}
@@ -3618,7 +3608,6 @@
 7178,Star's_Sob,Gema de Luz Estelar,3,0,,0,,,,,,,,,,,,,{},{},{}
 7179,Donation_Card,Prova de Caridade,3,0,,10,,,,,,,,,,,,,{},{},{}
 7180,Introduction_Of_Mr.Han,Ticket de Evento,3,0,,10,,,,,,,,,,,,,{},{},{}
-7181,Receipt_01,Nota Fiscal,3,0,,10,,,,,,,,,,,,,{},{},{}
 7181,Receipt_01,Receita,3,0,,10,,,,,,,,,,,,,{},{},{}
 7182,Cacao,Cacau,3,200,,20,,,,,,,,,,,,,{},{},{}
 7183,Sister_Letter,Carta da Irmã,3,0,,10,,,,,,,,,,,,,{},{},{}
@@ -3715,7 +3704,6 @@
 7274,Ancient_Translator,Língua Antiga Traduzida,3,0,,10,,,,,,,,,,,,,{},{},{}
 7275,Ancient_Document,Registro de Língua Antiga,3,0,,10,,,,,,,,,,,,,{},{},{}
 7276,Picture_Letter,Mensagem Rabiscada,3,0,,0,,,,,,,,,,,,,{},{},{}
-7277,Munak_Doll,Boneca de Munak,3,8900,,10,,,,,,,,,,,,,{},{},{}
 7277,Munak_Doll,Boneco de Munak,3,8900,,10,,,,,,,,,,,,,{},{},{}
 7278,Wellbeing_Letter,Carta à Esposa,3,0,,10,,,,,,,,,,,,,{},{},{}
 7279,Vita500_Lid,Vita500 Lid,3,10,,10,,,,,,,,,,,,,{},{},{}
@@ -3909,7 +3897,6 @@
 7468,BlueCard_P,Carta com a letra P,3,0,,10,,,,,,,,,,,,,{},{},{}
 7469,BlueCard_U,Carta com a letra U,3,0,,10,,,,,,,,,,,,,{},{},{}
 7470,BlueCard_W,Carta com a letra W,3,0,,10,,,,,,,,,,,,,{},{},{}
-7470,BlueCard_W,Carta Azul W,3,0,,10,,,,,,,,,,,,,{},{},{}
 7471,BlueCard_Y,Carta com a letra Y,3,0,,10,,,,,,,,,,,,,{},{},{}
 7472,Cookbook01,Livro de Culinária Nível 1,3,1000,,10,,,,,,,,,,,,,{},{},{}
 7473,Cookbook02,Livro de Culinária Nível 2,3,1000,,10,,,,,,,,,,,,,{},{},{}
@@ -3922,7 +3909,6 @@
 7480,Cookbook09,Livro de Culinária Nível 9,3,1000,,10,,,,,,,,,,,,,{},{},{}
 7481,Cookbook10,Livro de Culinária Nível 10,3,1000,,10,,,,,,,,,,,,,{},{},{}
 7482,Pot,Panela,3,200,,10,,,,,,,,,,,,,{},{},{}
-7483,Key_Of_Seal,Chave do Lacre,3,0,,0,,,,,,,,,,,,,{},{},{}
 7483,Key_Of_Seal,Chave do Selo,3,0,,0,,,,,,,,,,,,,{},{},{}
 7484,Warrior_Symbol,Símbolo do Guerreiro,3,0,,10,,,,,,,,,,,,,{},{},{}
 7485,2nd_Floor_Pass,Cloud General,3,0,,10,,,,,,,,,,,,,{},{},{}
@@ -4417,10 +4403,8 @@
 9045,Whisper_Egg,Ovo de Sussurro,7,20,,0,,,,,,,,,,,,,{},{},{}
 9046,Goblin_Leader_Egg,Ovo de Líder Goblin,7,20,,0,,,,,,,,,,,,,{},{},{}
 9047,Wicked_Nymph_Egg,Ovo de Ninfa Perversa,7,20,,0,,,,,,,,,,,,,{},{},{}
-9047,Wicked_Nymph_Egg,Ovo de Ninfa Perversa,7,20,,0,,,,,,,,,,,,,{},{},{}
 9048,Miyabi_Ningyo_Egg,Ovo de Miyabi Ningyo,7,20,,0,,,,,,,,,,,,,{},{},{}
 9049,Dullahan_Egg,Ovo de Dullahan,7,20,,0,,,,,,,,,,,,,{},{},{}
-9050,Medusa_Egg,Ovo de Medusa,7,20,,0,,,,,,,,,,,,,{},{},{}
 9050,Medusa_Egg,Ovo de Medusa,7,20,,0,,,,,,,,,,,,,{},{},{}
 9051,Stone_Shooter_Egg,Ovo do Atirador de Pedras,7,20,,0,,,,,,,,,,,,,{},{},{}
 9052,Incubus_Egg,Ovo de Incubus,7,20,,0,,,,,,,,,,,,,{},{},{}
@@ -4459,10 +4443,8 @@
 10027,Spirit_Chain_,Auréola Brilhante,8,20,,0,,,,,,,,,,,,,{},{},{}
 10028,Nice_Badge,Medalha de Flor,8,20,,0,,,,,,,,,,,,,{},{},{}
 10029,Jade_Trinket,Ornamento de Jade,8,20,,0,,,,,,,,,,,,,{},{},{}
-10029,Jade_Trinket,Ornamento de Jade,8,20,,0,,,,,,,,,,,,,{},{},{}
 10030,Summer_Fan,Leque de Verão,8,20,,0,,,,,,,,,,,,,{},{},{}
 10031,Death_Coil,Símbolo da Morte,8,20,,0,,,,,,,,,,,,,{},{},{}
-10032,Queen's_Coronet,Coroa Real,8,20,,0,,,,,,,,,,,,,{},{},{}
 10032,Queen's_Coronet,Coroa Real,8,20,,0,,,,,,,,,,,,,{},{},{}
 10033,Apro_Hair,Peruca do Atirador,8,20,,0,,,,,,,,,,,,,{},{},{}
 10034,Ball_Mask,Máscara de Baile,8,20,,0,,,,,,,,,,,,,{},{},{}
@@ -4470,10 +4452,9 @@
 10036,Hell_Horn,Horn Of Hell,8,20,,0,,,,,,,,,,,,,{},{},{}
 10037,Black_Butterfly_Mask,Black Butterfly Mask,8,20,,0,,,,,,,,,,,,,{},{},{}
 10038,Horn_Protector,Protetor de Chifre,8,20,,0,,,,,,,,,,,,,{},{},{}
-10038,Horn_Protector,Protetor de Chifre,8,20,,0,,,,,,,,,,,,,{},{},{}
 // Misc "Etc" Books
 //===================================================================
-11000,Prontera_Book_01,Livro da história de Prontera,3,8000,,10,,,,,,,,,,,,,{},{},{}
+
 11000,Prontera_Book_01,História de Prontera,3,8000,,10,,,,,,,,,,,,,{},{},{}
 11001,Adventure_Story01,Histórias de Aventura Vol.1,3,8000,,10,,,,,,,,,,,,,{},{},{}
 11002,Great_Chef_Orleans01,Mestre-Cuca Orleans Vol.1,3,8000,,10,,,,,,,,,,,,,{},{},{}
@@ -4710,7 +4691,6 @@
 12130,Cookie_Bag,Sacola de Biscoitos,2,2,,70,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem 12130,1; getrandgroupitem 12130,1; getrandgroupitem 12130,1; },{},{}
 12131,Lucky_Potion,Poção da Sorte,0,2,,100,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 12132,Red_Bag,Bolsa do Papai Noel,2,0,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_start SC_Xmas,600000,0; },{},{}
-12132,Red_Bag,Bolsa de Papai Noel,2,0,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_start SC_Xmas,600000,0; },{},{}
 12133,Ice_Cream_,Sorvete de Casquinha,0,0,,80,,,,,0xFFFFFFFF,7,2,,,,,,{ if(gettime(5)!=MDiceCone) { set MDiceCone,gettime(5); percentheal 50,50; } },{},{}
 12134,Red_Envelope,Envelope Vermelho,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ set Zeny,Zeny+rand(1000,10000); },{},{}
 12135,Green_Ale,Energético da Sorte,2,20,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 50,50; if(rand(100)>=90)sc_start SC_Confusion,10000,0; },{},{}
@@ -4763,9 +4743,7 @@
 12182,SpearMercenary_Scroll10,Pergaminho de Lanceiro 10,2,2,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ mercenary_create 6036,1800000; },{},{}
 12183,Holy_Arrow_Quiver,Aljave de Flechas Sagradas,2,2,,250,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 1772,500; },{},{}
 12184,Mercenary_Red_Potion,Poção Vermelha de Assistente,2,500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ mercenary_heal 1000,0; },{},{}
-12184,Mercenary_Red_Potion,Poção Vermelha de Ajudante,2,500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ mercenary_heal 1000,0; },{},{}
 12185,Mercenary_Blue_Potion,Poção Azul de Assistente,2,1000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ mercenary_heal 0,100; },{},{}
-12185,Mercenary_Blue_Potion,Poção Azul de Ajudante,2,1000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ mercenary_heal 0,100; },{},{}
 12186,Red_Box,Old Red Box,2,50000,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem 12186,1; },{},{}
 12187,Green_Box,Old Green Box,2,50000,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem 12187,1; },{},{}
 12188,Magical_Moon_Cake,Bolo Mágico Lunar,0,20,,300,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 50,50; },{},{}
@@ -4944,18 +4922,14 @@
 12363,Fit_Pipe,Caixão Tenebroso,2,0,,0,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1179; },{},{}
 12364,Staff_Of_Leader,Cajado do Líder,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1299; },{},{}
 12365,Charming_Lotus,Flor de Lótus,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1416; },{},{}
-12365,Charming_Lotus,Flor de Lótus,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1416; },{},{}
 12366,Gril_Doll,Bonequinha Oriental,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1404; },{},{}
 12367,Luxury_Whisky_Bottle,Garrafa de Bebida,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1504; },{},{}
-12368,Splendid_Mirror,Espelho de Mão,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1148; },{},{}
 12368,Splendid_Mirror,Espelho de Mão,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1148; },{},{}
 12369,Oilpalm_Coconut,Óleo de Coco,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1495; },{},{}
 12370,Gril's_Naivety,Carta de Amor,2,0,,0,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1374; },{},{}
 12371,Magical_Lithography,Magical Lithography,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1040; },{},{}
 12372,Hell_Contract,Hell Contract,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1379; },{},{}
 12373,Boy's_Naivety,Coração Puro,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1370; },{},{}
-12373,Boy's_Naivety,Coração Puro,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1370; },{},{}
-12374,Flaming_Ice,Chama Azulada,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1837; },{},{}
 12374,Flaming_Ice,Chama Azulada,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1837; },{},{}
 12375,Acaraje,Acarajé,2,0,,80,,,,,0xFFFFFFFF,7,2,,,,,,{ specialeffect2 EF_STEAL; sc_start SC_INCHITRATE,120000,5; },{},{}
 12376,Mysterious_Can2,Mysterious Can2,2,10,,100,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
@@ -4977,7 +4951,6 @@
 12392,RepairA,Reparador Leve,0,220,,70,,,,,0x00000400,8,2,,,,,,{/* madoheal rand(200,300),0; */},{},{}
 12393,RepairB,Reparador Moderado,0,500,,70,,,,,0x00000400,8,2,,,,,,{/* madoheal rand(300,400),0; */},{},{}
 12394,RepairC,Reparador Avançado,0,1100,,70,,,,,0x00000400,8,2,,,,,,{/* madoheal rand(400,500),0; */},{},{}
-12395,Tantanmen,Guloseima Recheada,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1519; },{},{}
 12395,Tantanmen,Guloseima Recheada,2,20,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ pet 1519; },{},{}
 12396,Fools_Day_Box,Caixa Surpresa,11,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ if(rand(1,10)==1) itemskill "AL_TELEPORT",1; else if(rand(1,10)==2) itemskill "AL_TELEPORT",3; else if(rand(1,10)==3) percentheal 50,0; else if(rand(1,10)==4) percentheal 0,50; else if(rand(1,10)==5) end; else if(rand(1,10)==6) getitem 512,1; else if(rand(1,10)==7) itemskill "ALL_REVERSEORCISH",1; else if(rand(1,10)==8) specialeffect2 247; else if(rand(1,10)==9) specialeffect2 338; else specialeffect2 10; },{},{}
 12397,Fools_Day_Box2,Caixa Surpresa,11,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ if(rand(1,10)==1) itemskill "TF_DETOXIFY",1; else if(rand(1,10)==2) itemskill "TF_PICKSTONE",1; else if(rand(1,10)==3) itemskill "BA_FROSTJOKER",1; else if(rand(1,10)==4) itemskill "DC_SCREAM",1; else if(rand(1,10)==5) end; else if(rand(1,10)==6) getitem 909,1; else if(rand(1,10)==7) itemskill "AL_RUWACH",1; else if(rand(1,10)==8) specialeffect2 328; else if(rand(1,10)==9) specialeffect2 68; else specialeffect2 196; },{},{}
@@ -5971,7 +5944,6 @@
 13934,Salamander_Box,Salamander Box,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 4380,4; },{},{}
 13935,Soul_Box,Soul Box,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 4388,4; },{},{}
 13936,Noum_Bpx,Gnome Box,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 4335,4; },{},{}
-13937,Robo_Eye_Box,Caixa de Olhos Biônicos,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 5325,1; },{},{}
 13937,Robo_Eye_Box,Caixa de Olhos Biônicos,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 5325,1; },{},{}
 13938,Twin_Ribbon_Box,Maiden's Twin Ribbon Box,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 5187,1; },{},{}
 //13939,Diadem_Box,Diadem Box,18,20,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ getitem 5313,1; },{},{}

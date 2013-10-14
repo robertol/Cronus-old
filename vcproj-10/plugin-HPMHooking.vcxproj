@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E64C56D3-CDFB-483B-900B-A62D216B6D2F}</ProjectGuid>
+    <ProjectGuid>{3BAD5104-8232-4805-BBE3-E022E99E7CE2}</ProjectGuid>
     <RootNamespace>plugin-HPMHooking</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>plugin-HPMHooking</ProjectName>
+    <ProjectName>HPMHooking</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

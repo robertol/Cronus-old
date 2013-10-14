@@ -229,9 +229,9 @@ struct npc_interface {
 	/**
 	 * For the Secure NPC Timeout option (check config/Secure.h) [RR]
 	 **/
-#ifdef SECURE_NPCTIMEOUT
+
 	int (*secure_timeout_timer) (int tid, unsigned int tick, int id, intptr_t data);
-#endif
+
 };
 
 struct npc_interface *npc;

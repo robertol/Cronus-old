@@ -72,6 +72,7 @@ char mercenary_owner_db[256] = "mercenary_owner";
 char ragsrvinfo_db[256] = "ragsrvinfo";
 char elemental_db[256] = "elemental";
 char interreg_db[32] = "interreg";
+char account_data_db[256] = "account_data";
 
 // show loading/saving messages
 int save_log = 1;
@@ -499,7 +500,13 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		} else
 			strcat(save_status, " status");
 	}
-
+if( p->bank_vault != cp->bank_vault ) {
+		if( SQL_ERROR == SQL->Query(sql_handle, "REPLACE INTO `%s` (`account_id`,`bank_vault`) VALUES ('%d','%d')",account_data_db,p->account_id,p->bank_vault) ) {
+			Sql_ShowDebug(sql_handle);
+			errors++;
+		} else
+			strcat(save_status, " bank");
+	}
 	//Values that will seldom change (to speed up saving)
 	if (
 		(p->hair != cp->hair) || (p->hair_color != cp->hair_color) || (p->clothes_color != cp->clothes_color) ||
@@ -1087,6 +1094,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	int hotkey_num;
 #endif
 	unsigned int opt;
+    int account_id;
 
 	memset(p, 0, sizeof(struct mmo_charstatus));
 
@@ -1176,6 +1184,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 		SQL->StmtFree(stmt);
 		return 0;
 	}
+    account_id = p->account_id;
 	p->last_point.map = mapindex_name2id(last_map);
 	p->save_point.map = mapindex_name2id(save_map);
 
@@ -1340,6 +1349,15 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	mercenary_owner_fromsql(char_id, p);
 	strcat(t_msg, " mercenary");
 
+//`account_data` (`account_id`,`bank_vault`)
+	if( SQL_ERROR == SQL->StmtPrepare(stmt, "SELECT `bank_vault` FROM `%s` WHERE `account_id`=? LIMIT 1", account_data_db)
+	   ||	SQL_ERROR == SQL->StmtBindParam(stmt, 0, SQLDT_INT, &account_id, 0)
+	   ||	SQL_ERROR == SQL->StmtExecute(stmt)
+	   ||	SQL_ERROR == SQL->StmtBindColumn(stmt, 0, SQLDT_INT, &p->bank_vault, 0, NULL, NULL) )
+		SqlStmt_ShowDebug(stmt);
+	
+	if( SQL_SUCCESS == SQL->StmtNextRow(stmt) )
+		strcat(t_msg, " bank");
 
 	if (save_log) ShowInfo("Loaded char (%d - %s): %s\n", char_id, p->name, t_msg);	//ok. all data load successfuly!
 	SQL->StmtFree(stmt);
@@ -1876,7 +1894,7 @@ int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p) {
 	offset += MAP_NAME_LENGTH_EXT;
 #endif
 #if PACKETVER >= 20100803
-	WBUFL(buf,124) = TOL(p->delete_date);
+	WBUFL(buf,124) = (int)p->delete_date;
 	offset += 4;
 #endif
 #if PACKETVER >= 20110111
@@ -3544,8 +3562,13 @@ void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date)
 	WFIFOW(fd,0) = 0x828;
 	WFIFOL(fd,2) = char_id;
 	WFIFOL(fd,6) = result;
-	WFIFOL(fd,10) = TOL(delete_date);
+#if PACKETVER >= 20130000
+  WFIFOL(fd,10) = (int)delete_date - time(NULL);
+#else
+  WFIFOL(fd,10) = (int)delete_date;
+#endif
 	WFIFOSET(fd,14);
+	
 }
 
 
@@ -4723,6 +4746,8 @@ void sql_config_read(const char* cfgName)
 			safestrncpy(elemental_db,w2,sizeof(elemental_db));
 		else if(!strcmpi(w1,"interreg_db"))
 			safestrncpy(interreg_db,w2,sizeof(interreg_db));
+        else if(!strcmpi(w1,"account_data_db"))
+            safestrncpy(account_data_db,w2,sizeof(account_data_db));
 		//support the import command, just like any other config
 		else if(!strcmpi(w1,"import"))
 			sql_config_read(w2);

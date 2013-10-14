@@ -6780,7 +6780,7 @@ BUILDIN(strnpcinfo) {
 }
 
 /*==========================================
- * GetEquipID(Pos);     Pos: 1-10
+ * GetEquipID(Pos);     Pos: 1-SCRIPT_EQUIP_TABLE_SIZE
  *------------------------------------------*/
 BUILDIN(getequipid)
 {
@@ -9564,47 +9564,86 @@ BUILDIN(homunculus_evolution)
 
 /*==========================================
  * [Xantara]
+ * Checks for vaporized morph state
+ * and deletes ITEMID_STRANGE_EMBRYO.
  *------------------------------------------*/
 BUILDIN(homunculus_mutate) {
 	int homun_id;
 	enum homun_type m_class, m_id;
 	TBL_PC *sd;
+	bool success = false;
+	
+	sd = script->rid2sd(st);
+	if( sd == NULL || sd->hd == NULL )
+		return true;
+		
+
+	if( sd->hd->homunculus.vaporize == HOM_ST_MORPH ) {
+		int i = pc->search_inventory(sd, ITEMID_STRANGE_EMBRYO);
+
+		if( script_hasdata(st,2) )
+			homun_id = script_getnum(st,2);
+		else
+			homun_id = 6048 + (rnd() % 4);
+		
+		m_class = homun->class2type(sd->hd->homunculus.class_);
+		m_id    = homun->class2type(homun_id);
+		
+		if( m_class == HT_EVO && m_id == HT_S &&
+			sd->hd->homunculus.level >= 99 && i >= 0 &&
+			!pc->delitem(sd, i, 1, 0, 0, LOG_TYPE_SCRIPT) ) {
+			sd->hd->homunculus.vaporize = HOM_ST_REST; // Remove morph state.
+			homun->call(sd); // Respawn homunculus.
+			homun->mutate(sd->hd, homun_id);
+			success = true;
+		} else
+			clif->emotion(&sd->hd->bl, E_SWT);
+	} else
+		clif->emotion(&sd->hd->bl, E_SWT);
+	
+	script_pushint(st,success?1:0);
+	return true;
+}
+
+/*==========================================
+ * Puts homunculus into morph state
+ * and gives ITEMID_STRANGE_EMBRYO.
+ *------------------------------------------*/
+BUILDIN(homunculus_morphembryo) {
+	enum homun_type m_class;
+	int i = 0;
+	TBL_PC *sd;
+	bool success = false;
 	
 	sd = script->rid2sd(st);
 	if( sd == NULL || sd->hd == NULL )
 		return true;
 	
-	if( script_hasdata(st,2) )
-		homun_id = script_getnum(st,2);
-	else
-		homun_id = 6048 + (rnd() % 4);
-	
 	if( homun_alive(sd->hd) ) {
 		m_class = homun->class2type(sd->hd->homunculus.class_);
-		m_id    = homun->class2type(homun_id);
 		
-		if( m_class != HT_INVALID && m_id != HT_INVALID && m_class == HT_EVO && m_id == HT_S && sd->hd->homunculus.level >= 99 )
-			homun->mutate(sd->hd, homun_id);
-		else
+		if ( m_class == HT_EVO && sd->hd->homunculus.level >= 99 ) {
+			struct item item_tmp;
+			
+			memset(&item_tmp, 0, sizeof(item_tmp));
+			item_tmp.nameid = ITEMID_STRANGE_EMBRYO;
+			item_tmp.identify = 1;
+			
+			if( (i = pc->additem(sd, &item_tmp, 1, LOG_TYPE_SCRIPT)) ) {
+				clif->additem(sd, 0, 0, i);
+				clif->emotion(&sd->hd->bl, E_SWT);
+			} else {
+				homun->vaporize(sd, HOM_ST_MORPH);
+				success = true;
+			}
+		} else
 			clif->emotion(&sd->hd->bl, E_SWT);
-	}
+	} else
+		clif->emotion(&sd->hd->bl, E_SWT);
+	
+	script_pushint(st, success?1:0);
 	return true;
 }
-
-// [Zephyrus]
-BUILDIN(homunculus_shuffle) {
-	TBL_PC *sd;
-	
-	sd=script->rid2sd(st);
-	if( sd == NULL )
-		return true;
-	
-	if(homun_alive(sd->hd))
-		homun->shuffle(sd->hd);
-	
-	return true;
-}
-
 /*==========================================
  * Check for homunculus state.
  * Return: -1 = No homunculus
@@ -9612,23 +9651,31 @@ BUILDIN(homunculus_shuffle) {
  *          1 = Homunculus is vaporized (rest)
  *          2 = Homunculus is in morph state
  *------------------------------------------*/
-BUILDIN(checkhomcall)
-{
+BUILDIN(homunculus_checkcall) {
+
 	TBL_PC *sd = script->rid2sd(st);
-	TBL_HOM *hd;
 
-	if( sd == NULL )
-		return false;
+	if( sd == NULL || !sd->hd )
 
-	hd = sd->hd;
-
-	if( !hd )
 		script_pushint(st, -1);
 	else
-		script_pushint(st, hd->homunculus.vaporize);
-
+		script_pushint(st, sd->hd->homunculus.vaporize);
+	
 	return true;
 }
+
+// [Zephyrus]
+BUILDIN(homunculus_shuffle) {
+	TBL_PC *sd;
+	sd=script->rid2sd(st);
+	if( sd == NULL )
+		return true;
+
+	if(homun_alive(sd->hd))
+		homun->shuffle(sd->hd);
+	return true;
+}
+
 
 //These two functions bring the eA MAPID_* class functionality to scripts.
 BUILDIN(eaclass)
@@ -9648,6 +9695,7 @@ BUILDIN(eaclass)
 	script_pushint(st,pc->jobid2mapid(class_));
 	return true;
 }
+
 
 BUILDIN(roclass)
 {
@@ -12166,12 +12214,13 @@ BUILDIN(getpetinfo)
 BUILDIN(gethominfo)
 {
 	TBL_PC *sd=script->rid2sd(st);
-	TBL_HOM *hd;
-	int type=script_getnum(st,2);
+
+	int type = script_getnum(st,2);
 	
-	hd = sd?sd->hd:NULL;
-	if(!homun_alive(hd))
-	{
+	if(!sd || !sd->hd) {
+
+
+
 		if (type == 2)
 			script_pushconststr(st,"null");
 		else
@@ -12180,13 +12229,13 @@ BUILDIN(gethominfo)
 	}
 	
 	switch(type){
-		case 0: script_pushint(st,hd->homunculus.hom_id); break;
-		case 1: script_pushint(st,hd->homunculus.class_); break;
-		case 2: script_pushstrcopy(st,hd->homunculus.name); break;
-		case 3: script_pushint(st,hd->homunculus.intimacy); break;
-		case 4: script_pushint(st,hd->homunculus.hunger); break;
-		case 5: script_pushint(st,hd->homunculus.rename_flag); break;
-		case 6: script_pushint(st,hd->homunculus.level); break;
+		case 0: script_pushint(st,sd->hd->homunculus.hom_id); break;
+		case 1: script_pushint(st,sd->hd->homunculus.class_); break;
+		case 2: script_pushstrcopy(st,sd->hd->homunculus.name); break;
+		case 3: script_pushint(st,sd->hd->homunculus.intimacy); break;
+		case 4: script_pushint(st,sd->hd->homunculus.hunger); break;
+		case 5: script_pushint(st,sd->hd->homunculus.rename_flag); break;
+		case 6: script_pushint(st,sd->hd->homunculus.level); break;
 		default:
 			script_pushint(st,0);
 			break;
@@ -14297,32 +14346,112 @@ BUILDIN(setitemscript)
 	return true;
 }
 
-/* Work In Progress [Lupus]
- BUILDIN(addmonsterdrop)
- {
- int class_,item_id,chance;
- class_=script_getnum(st,2);
- item_id=script_getnum(st,3);
- chance=script_getnum(st,4);
- if(class_>1000 && item_id>500 && chance>0) {
- script_pushint(st,1);
- } else {
- script_pushint(st,0);
- }
- }
- 
- BUILDIN(delmonsterdrop)
- {
- int class_,item_id;
- class_=script_getnum(st,2);
- item_id=script_getnum(st,3);
- if(class_>1000 && item_id>500) {
- script_pushint(st,1);
- } else {
- script_pushint(st,0);
- }
- }
- */
+/*=======================================================
+ * Temporarily add or update a mob drop
+ * Original Idea By: [Lupus], [Akinari]
+ *
+ * addmonsterdrop <mob_id or name>,<item_id>,<rate>;
+ *
+ * If given an item the mob already drops, the rate
+ * is updated to the new rate.  Rate must be in the range [1:10000]
+ * Returns 1 if succeeded (added/updated a mob drop)
+ *-------------------------------------------------------*/
+BUILDIN(addmonsterdrop) {
+  struct mob_db *monster;
+  int item_id, rate, i, c = MAX_MOB_DROP;
+
+  if( script_isstring(st,2) )
+    monster = mob->db(mob->db_searchname(script_getstr(st,2)));
+  else
+    monster = mob->db(script_getnum(st,2));
+
+  if( monster == mob->dummy ) {
+    if( script_isstring(st,2) ) {
+      ShowError("buildin_addmonsterdrop: invalid mob name: '%s'.\n", script_getstr(st,2));
+    } else {
+      ShowError("buildin_addmonsterdrop: invalid mob id: '%d'.\n", script_getnum(st,2));
+    }
+    return false;
+  }
+
+  item_id = script_getnum(st,3);
+  if( !itemdb->exists(item_id) ) {
+    ShowError("buildin_addmonsterdrop: Invalid item ID: '%d'.\n", item_id);
+    return false;
+  }
+
+  rate = script_getnum(st,4);
+  if( rate < 1 || rate > 10000 ) {
+    ShowWarning("buildin_addmonsterdrop: Invalid drop rate '%d'. Capping to the [1:10000] range.\n", rate);
+    rate = cap_value(rate,1,10000);
+  }
+
+  for( i = 0; i < MAX_MOB_DROP; i++ ) {
+    if( monster->dropitem[i].nameid == item_id ) // Item ID found
+      break;
+    if( c == MAX_MOB_DROP && monster->dropitem[i].nameid < 1 ) // First empty slot
+      c = i;
+  }
+  if( i < MAX_MOB_DROP ) // If the item ID was found, prefer it
+    c = i;
+
+  if( c < MAX_MOB_DROP ) {
+    // Fill in the slot with the item and rate
+    monster->dropitem[c].nameid = item_id;
+    monster->dropitem[c].p = rate;
+    script_pushint(st,1);
+  } else {
+    //No place to put the new drop
+    script_pushint(st,0);
+  }
+
+  return true;
+}
+
+/*=======================================================
+ * Temporarily remove a mob drop
+ * Original Idea By: [Lupus], [Akinari]
+ *
+ * delmonsterdrop <mob_id or name>,<item_id>;
+ *
+ * Returns 1 if succeeded (deleted a mob drop)
+ *-------------------------------------------------------*/
+BUILDIN(delmonsterdrop) {
+  struct mob_db *monster;
+  int item_id, i;
+
+  if( script_isstring(st,2) )
+    monster = mob->db(mob->db_searchname(script_getstr(st,2)));
+  else
+    monster = mob->db(script_getnum(st,2));
+
+  if( monster == mob->dummy ) {
+    if( script_isstring(st,2) ) {
+      ShowError("buildin_delmonsterdrop: invalid mob name: '%s'.\n", script_getstr(st,2));
+    } else {
+      ShowError("buildin_delmonsterdrop: invalid mob id: '%d'.\n", script_getnum(st,2));
+    }
+    return false;
+  }
+
+  item_id = script_getnum(st,3);
+  if( !itemdb->exists(item_id) ) {
+    ShowError("buildin_delmonsterdrop: Invalid item ID: '%d'.\n", item_id);
+    return false;
+  }
+
+  for( i = 0; i < MAX_MOB_DROP; i++ ) {
+    if( monster->dropitem[i].nameid == item_id ) {
+      monster->dropitem[i].nameid = 0;
+      monster->dropitem[i].p = 0;
+      script_pushint(st,1);
+      return true;
+    }
+  }
+  // No drop on that monster
+  script_pushint(st,0);
+  return true;
+}
 
 /*==========================================
  * Returns some values of a monster [Lupus]
@@ -17626,6 +17755,8 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(disguise,"i"), //disguise player. Lupus
 		BUILDIN_DEF(undisguise,""), //undisguise player. Lupus
 		BUILDIN_DEF(getmonsterinfo,"ii"), //Lupus
+		BUILDIN_DEF(addmonsterdrop,"vii"),
+        BUILDIN_DEF(delmonsterdrop,"vi"),
 		BUILDIN_DEF(axtoi,"s"),
 		BUILDIN_DEF(query_sql,"s*"),
 		BUILDIN_DEF(query_logsql,"s*"),
@@ -17655,8 +17786,9 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(warpportal,"iisii"),
 		BUILDIN_DEF2(homunculus_evolution,"homevolution",""),	//[orn]
 		BUILDIN_DEF2(homunculus_mutate,"hommutate","?"),
+        BUILDIN_DEF2(homunculus_morphembryo,"morphembryo",""),
+		BUILDIN_DEF2(homunculus_checkcall,"checkhomcall",""),
 		BUILDIN_DEF2(homunculus_shuffle,"homshuffle",""),	//[Zephyrus]
-		BUILDIN_DEF(checkhomcall,""),
 		BUILDIN_DEF(eaclass,"?"),	//[Skotlex]
 		BUILDIN_DEF(roclass,"i?"),	//[Skotlex]
 		BUILDIN_DEF(checkvending,"?"),
@@ -17738,6 +17870,7 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF2(cleanmap,"cleanarea","siiii"),
 		BUILDIN_DEF(npcskill,"viii"),
 		BUILDIN_DEF(itemeffect,"v"),
+		BUILDIN_DEF2(itemeffect,"consumeitem","v"), /* alias of itemeffect */
 		BUILDIN_DEF(delequip,"i"),
 		/**
 		 * @commands (script based)

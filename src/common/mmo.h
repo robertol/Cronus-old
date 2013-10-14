@@ -48,11 +48,11 @@
 // 20120307 - 2012-03-07aRagexeRE+ - 0x970
 
 #ifndef PACKETVER
-	#define PACKETVER 20120418
+	#define PACKETVER 20120716
 #endif
 
 // Comment the following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE).
-#define PACKETVER_RE
+//#define PACKETVER_RE
 
 // Client support for experimental RagexeRE UI present in 2012-04-10 and 2012-04-18
 #ifdef PACKETVER_RE
@@ -90,6 +90,8 @@
 //Max amount of a single stacked item
 #define MAX_AMOUNT 30000
 #define MAX_ZENY 1000000000
+//Official Limit: 2.1b ( the var that stores the money doesn't go much higher than this by default )
+#define MAX_BANK_ZENY 2147483657
 #define MAX_FAME 1000000000
 #define MAX_CART 100
 #define MAX_SKILL 1478
@@ -367,7 +369,8 @@ struct mmo_charstatus {
 
 	unsigned int base_exp,job_exp;
 	int zeny;
-
+    int bank_vault;
+	
 	short class_;
 	unsigned int status_point,skill_point;
 	int hp,max_hp,sp,max_sp;

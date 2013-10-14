@@ -66,6 +66,7 @@ static inline int itemtype(int type) {
 #if PACKETVER >= 20080827
 		case IT_WEAPON:	return IT_ARMOR;
 		case IT_ARMOR:
+        case IT_PETARMOR:
 #endif
 		case IT_PETEGG: return IT_WEAPON;
 		default:		return type;
@@ -861,9 +862,10 @@ static int clif_setlevel(struct block_list* bl) {
 	}
 	return lv;
 }
-#if PACKETVER < 20091103
+
 /* for 'packetver < 20091103' 0x78 non-pc-looking unit handling */
 void clif_set_unit_idle2(struct block_list* bl, struct map_session_data *tsd, enum send_target target) {
+#if PACKETVER < 20091103
 	struct map_session_data* sd;
 	struct status_change* sc = status->get_sc(bl);
 	struct view_data* vd = status->get_viewdata(bl);
@@ -908,8 +910,11 @@ void clif_set_unit_idle2(struct block_list* bl, struct map_session_data *tsd, en
 	p.clevel = clif_setlevel(bl);
 	
 	clif->send(&p,sizeof(p),tsd?&tsd->bl:bl,target);
-}
+#else
+return;
 #endif
+}
+
 /*==========================================
  * Prepares 'unit standing' packet
  *------------------------------------------*/
@@ -997,9 +1002,10 @@ void clif_set_unit_idle(struct block_list* bl, struct map_session_data *tsd, enu
 	}
 	
 }
-#if PACKETVER < 20091103
+
 /* for 'packetver < 20091103' 0x7c non-pc-looking unit handling */
 void clif_spawn_unit2(struct block_list* bl, enum send_target target) {
+#if PACKETVER < 20091103
 	struct map_session_data* sd;
 	struct status_change* sc = status->get_sc(bl);
 	struct view_data* vd = status->get_viewdata(bl);
@@ -1038,8 +1044,11 @@ void clif_spawn_unit2(struct block_list* bl, enum send_target target) {
 	p.xSize = p.ySize = (sd) ? 5 : 0;
 
 	clif->send(&p,sizeof(p),bl,target);
-}
+#else
+	return;
 #endif
+}
+
 void clif_spawn_unit(struct block_list* bl, enum send_target target) {
 	struct map_session_data* sd;
 	struct status_change* sc = status->get_sc(bl);
@@ -1375,7 +1384,7 @@ void clif_hominfo(struct map_session_data *sd, struct homun_data *hd, int flag) 
 	WBUFW(buf,0)=0x22e;
 	memcpy(WBUFP(buf,2),hd->homunculus.name,NAME_LENGTH);
 	// Bit field, bit 0 : rename_flag (1 = already renamed), bit 1 : homunc vaporized (1 = true), bit 2 : homunc dead (1 = true)
-	WBUFB(buf,26)=(battle_config.hom_rename?0:hd->homunculus.rename_flag) | (hd->homunculus.vaporize << 1) | (hd->homunculus.hp?0:4);
+	WBUFB(buf,26)=(battle_config.hom_rename && hd->homunculus.rename_flag ? 0x1 : 0x0) | (hd->homunculus.vaporize == HOM_ST_REST ? 0x2 : 0) | (hd->homunculus.hp > 0 ? 0x4 : 0);
 	WBUFW(buf,27)=hd->homunculus.level;
 	WBUFW(buf,29)=hd->homunculus.hunger;
 	WBUFW(buf,31)=(unsigned short) (hd->homunculus.intimacy / 100) ;
@@ -12187,7 +12196,6 @@ void clif_parse_PartyChangeLeader(int fd, struct map_session_data* sd) {
 	party->changeleader(sd, map->id2sd(RFIFOL(fd,2)));
 }
 
-#ifndef PARTY_RECRUIT
 /// Party Booking in KRO [Spiria]
 ///
 
@@ -12195,6 +12203,7 @@ void clif_parse_PartyChangeLeader(int fd, struct map_session_data* sd) {
 /// 0802 <level>.W <map id>.W { <job>.W }*6
 void clif_parse_PartyBookingRegisterReq(int fd, struct map_session_data* sd)
 {
+#ifndef PARTY_RECRUIT
 	short level = RFIFOW(fd,2);
 	short mapid = RFIFOW(fd,4);
 	short job[PARTY_BOOKING_JOBS];
@@ -12204,6 +12213,9 @@ void clif_parse_PartyBookingRegisterReq(int fd, struct map_session_data* sd)
 		job[i] = RFIFOB(fd,6+i*2);
 
 	party->booking_register(sd, level, mapid, job);
+#else
+	return;
+#endif
 }
 
 
@@ -12215,12 +12227,16 @@ void clif_parse_PartyBookingRegisterReq(int fd, struct map_session_data* sd)
 ///     2 = already registered
 void clif_PartyBookingRegisterAck(struct map_session_data *sd, int flag)
 {
+#ifndef PARTY_RECRUIT
 	int fd = sd->fd;
 
 	WFIFOHEAD(fd,packet_len(0x803));
 	WFIFOW(fd,0) = 0x803;
 	WFIFOW(fd,2) = flag;
 	WFIFOSET(fd,packet_len(0x803));
+#else
+	return;
+#endif
 }
 
 
@@ -12228,6 +12244,7 @@ void clif_PartyBookingRegisterAck(struct map_session_data *sd, int flag)
 /// 0804 <level>.W <map id>.W <job>.W <last index>.L <result count>.W
 void clif_parse_PartyBookingSearchReq(int fd, struct map_session_data* sd)
 {
+#ifndef PARTY_RECRUIT
 	short level = RFIFOW(fd,2);
 	short mapid = RFIFOW(fd,4);
 	short job = RFIFOW(fd,6);
@@ -12235,6 +12252,9 @@ void clif_parse_PartyBookingSearchReq(int fd, struct map_session_data* sd)
 	short resultcount = RFIFOW(fd,12);
 
 	party->booking_search(sd, level, mapid, job, lastindex, resultcount);
+#else
+	return;
+#endif
 }
 
 
@@ -12245,6 +12265,7 @@ void clif_parse_PartyBookingSearchReq(int fd, struct map_session_data* sd)
 ///     1 = yes
 void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, int count, bool more_result)
 {
+#ifndef PARTY_RECRUIT
 	int i, j;
 	int size = sizeof(struct party_booking_ad_info); // structure size (48)
 	struct party_booking_ad_info *pb_ad;
@@ -12264,6 +12285,9 @@ void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, 
 			WFIFOW(fd,i*size+41+j*2) = pb_ad->p_detail.job[j];
 	}
 	WFIFOSET(fd,WFIFOW(fd,2));
+#else
+	return;
+#endif
 }
 
 
@@ -12271,8 +12295,12 @@ void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, 
 /// 0806
 void clif_parse_PartyBookingDeleteReq(int fd, struct map_session_data* sd)
 {
+#ifndef PARTY_RECRUIT
 	if(party->booking_delete(sd))
 		clif->PartyBookingDeleteAck(sd, 0);
+#else
+	return;
+#endif
 }
 
 
@@ -12285,12 +12313,16 @@ void clif_parse_PartyBookingDeleteReq(int fd, struct map_session_data* sd)
 ///     3 = nothing registered
 void clif_PartyBookingDeleteAck(struct map_session_data* sd, int flag)
 {
+#ifndef PARTY_RECRUIT
 	int fd = sd->fd;
 
 	WFIFOHEAD(fd,packet_len(0x807));
 	WFIFOW(fd,0) = 0x807;
 	WFIFOW(fd,2) = flag;
 	WFIFOSET(fd,packet_len(0x807));
+#else
+	return;
+#endif
 }
 
 
@@ -12298,6 +12330,7 @@ void clif_PartyBookingDeleteAck(struct map_session_data* sd, int flag)
 /// 0808 { <job>.W }*6
 void clif_parse_PartyBookingUpdateReq(int fd, struct map_session_data* sd)
 {
+#ifndef PARTY_RECRUIT
 	short job[PARTY_BOOKING_JOBS];
 	int i;
 
@@ -12305,13 +12338,17 @@ void clif_parse_PartyBookingUpdateReq(int fd, struct map_session_data* sd)
 		job[i] = RFIFOW(fd,2+i*2);
 
 	party->booking_update(sd, job);
+#else
+	return;
+#endif
 }
 
 
 /// Notification about new party booking advertisment (ZC_PARTY_BOOKING_NOTIFY_INSERT).
 /// 0809 <index>.L <char name>.24B <expire time>.L <level>.W <map id>.W { <job>.W }*6
-void clif_PartyBookingInsertNotify(struct map_session_data* sd, struct party_booking_ad_info* pb_ad)
+void clif_PartyRecruitInsertNotify(struct map_session_data* sd, struct party_booking_ad_info* pb_ad)
 {
+#ifndef PARTY_RECRUIT
 	int i;
 	uint8 buf[38+PARTY_BOOKING_JOBS*2];
 
@@ -12327,6 +12364,9 @@ void clif_PartyBookingInsertNotify(struct map_session_data* sd, struct party_boo
 		WBUFW(buf,38+i*2) = pb_ad->p_detail.job[i];
 
 	clif->send(buf, packet_len(0x809), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 
@@ -12334,6 +12374,7 @@ void clif_PartyBookingInsertNotify(struct map_session_data* sd, struct party_boo
 /// 080a <index>.L { <job>.W }*6
 void clif_PartyBookingUpdateNotify(struct map_session_data* sd, struct party_booking_ad_info* pb_ad)
 {
+#ifndef PARTY_RECRUIT
 	int i;
 	uint8 buf[6+PARTY_BOOKING_JOBS*2];
 
@@ -12344,6 +12385,9 @@ void clif_PartyBookingUpdateNotify(struct map_session_data* sd, struct party_boo
 	for(i=0; i<PARTY_BOOKING_JOBS; i++)
 		WBUFW(buf,6+i*2) = pb_ad->p_detail.job[i];
 	clif->send(buf,packet_len(0x80a),&sd->bl,ALL_CLIENT); // Now UPDATE all client.
+#else
+	return;
+#endif
 }
 
 
@@ -12351,26 +12395,34 @@ void clif_PartyBookingUpdateNotify(struct map_session_data* sd, struct party_boo
 /// 080b <index>.L
 void clif_PartyBookingDeleteNotify(struct map_session_data* sd, int index)
 {
+#ifndef PARTY_RECRUIT
 	uint8 buf[6];
 
 	WBUFW(buf,0) = 0x80b;
 	WBUFL(buf,2) = index;
 
 	clif->send(buf, packet_len(0x80b), &sd->bl, ALL_CLIENT); // Now UPDATE all client.
+#else
+	return;
+#endif
 }
 
-#else
+
 /// Modified version of Party Booking System for 2012-04-10 or 2012-04-18 (RagexeRE).
 /// Code written by mkbu95, Spiria, Yommy and Ind
 
 /// Request to register a party booking advertisment (CZ_PARTY_RECRUIT_REQ_REGISTER).
 /// 08e5 <level>.W <notice>.37B
-void clif_parse_PartyBookingRegisterReq(int fd, struct map_session_data* sd)
+void clif_parse_PartyRecruitRegisterReq(int fd, struct map_session_data* sd)
 {
+#ifdef PARTY_RECRUIT
 	short level = RFIFOW(fd,2);
 	const char *notice = (const char*)RFIFOP(fd, 4);
 
-	party->booking_register(sd, level, notice);
+	party->recruit_register(sd, level, notice);
+#else
+	return;
+#endif
 }
 
 /// Party booking search results (ZC_PARTY_RECRUIT_ACK_SEARCH).
@@ -12378,8 +12430,9 @@ void clif_parse_PartyBookingRegisterReq(int fd, struct map_session_data* sd)
 /// more results:
 ///     0 = no
 ///     1 = yes
-void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, int count, bool more_result)
+void clif_PartyRecruitSearchAck(int fd, struct party_booking_ad_info** results, int count, bool more_result)
 {
+#ifdef PARTY_RECRUIT
 	int i;
 	int size = sizeof(struct party_booking_ad_info);
 	struct party_booking_ad_info *pb_ad;
@@ -12400,6 +12453,9 @@ void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, 
 	}
 
 	WFIFOSET(fd,WFIFOW(fd,2));
+#else
+	return;
+#endif
 }
 
 /// Result of request to register a party booking advertisment (ZC_PARTY_RECRUIT_ACK_REGISTER).
@@ -12408,34 +12464,46 @@ void clif_PartyBookingSearchAck(int fd, struct party_booking_ad_info** results, 
 ///     0 = success
 ///     1 = failure
 ///     2 = already registered
-void clif_PartyBookingRegisterAck(struct map_session_data *sd, int flag)
+void clif_PartyRecruitRegisterAck(struct map_session_data *sd, int flag)
 {
+#ifdef PARTY_RECRUIT
 	int fd = sd->fd;
 
 	WFIFOHEAD(fd, packet_len(0x8e6));
 	WFIFOW(fd, 0) = 0x8e6;
 	WFIFOW(fd, 2) = flag;
 	WFIFOSET(fd, packet_len(0x8e6));
+#else
+	return;
+#endif
 }
 
 /// Request to search for party booking advertisments (CZ_PARTY_RECRUIT_REQ_SEARCH).
 /// 08e7 <level>.W <map id>.W <last index>.L <result count>.W
-void clif_parse_PartyBookingSearchReq(int fd, struct map_session_data* sd)
+void clif_parse_PartyRecruitSearchReq(int fd, struct map_session_data* sd)
 {
+#ifdef PARTY_RECRUIT
 	short level = RFIFOW(fd, 2);
 	short mapid = RFIFOW(fd, 4);
 	unsigned long lastindex = RFIFOL(fd, 6);
 	short resultcount = RFIFOW(fd, 10);
 
-	party->booking_search(sd, level, mapid, lastindex, resultcount);
+	party->recruit_search(sd, level, mapid, lastindex, resultcount);
+#else
+	return;
+#endif
 }
 
 /// Request to delete own party booking advertisment (CZ_PARTY_RECRUIT_REQ_DELETE).
 /// 08e9
-void clif_parse_PartyBookingDeleteReq(int fd, struct map_session_data* sd)
+void clif_parse_PartyRecruitDeleteReq(int fd, struct map_session_data* sd)
 {
+#ifdef PARTY_RECRUIT
 	if(party->booking_delete(sd))
-		clif->PartyBookingDeleteAck(sd, 0);
+		clif->PartyRecruitDeleteAck(sd, 0);
+#else
+	return;
+#endif
 }
 
 /// Result of request to delete own party booking advertisment (ZC_PARTY_RECRUIT_ACK_DELETE).
@@ -12445,31 +12513,40 @@ void clif_parse_PartyBookingDeleteReq(int fd, struct map_session_data* sd)
 ///     1 = success (auto-removed expired ad)
 ///     2 = failure
 ///     3 = nothing registered
-void clif_PartyBookingDeleteAck(struct map_session_data* sd, int flag)
+void clif_PartyRecruitDeleteAck(struct map_session_data* sd, int flag)
 {
+#ifdef PARTY_RECRUIT
 	int fd = sd->fd;
 
 	WFIFOHEAD(fd, packet_len(0x8ea));
 	WFIFOW(fd, 0) = 0x8ea;
 	WFIFOW(fd, 2) = flag;
 	WFIFOSET(fd, packet_len(0x8ea));
+#else
+	return;
+#endif
 }
 
 /// Request to update party booking advertisment (CZ_PARTY_RECRUIT_REQ_UPDATE).
 /// 08eb <notice>.37B
-void clif_parse_PartyBookingUpdateReq(int fd, struct map_session_data *sd)
+void clif_parse_PartyRecruitUpdateReq(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	const char *notice;
 
 	notice = (const char*)RFIFOP(fd, 2);
 	
-	party->booking_update(sd, notice);
+	party->recruit_update(sd, notice);
+#else
+	return;
+#endif
 }
 
 /// Notification about new party booking advertisment (ZC_PARTY_RECRUIT_NOTIFY_INSERT).
 /// 08ec <index>.L <expire time>.L <char name>.24B <level>.W <notice>.37B
 void clif_PartyBookingInsertNotify(struct map_session_data* sd, struct party_booking_ad_info* pb_ad)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+6+24+4+37+1];
 
 	if (pb_ad == NULL)
@@ -12482,12 +12559,16 @@ void clif_PartyBookingInsertNotify(struct map_session_data* sd, struct party_boo
 	WBUFW(buf,34) = pb_ad->p_detail.level;
 	memcpy(WBUFP(buf, 36), pb_ad->p_detail.notice, PB_NOTICE_LENGTH);
 	clif->send(buf, packet_len(0x8ec), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// Notification about updated party booking advertisment (ZC_PARTY_RECRUIT_NOTIFY_UPDATE).
 /// 08ed <index>.L <notice>.37B
-void clif_PartyBookingUpdateNotify(struct map_session_data *sd, struct party_booking_ad_info* pb_ad)
+void clif_PartyRecruitUpdateNotify(struct map_session_data *sd, struct party_booking_ad_info* pb_ad)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+37+1];
 	
 	WBUFW(buf, 0) = 0x8ed;
@@ -12495,51 +12576,71 @@ void clif_PartyBookingUpdateNotify(struct map_session_data *sd, struct party_boo
 	memcpy(WBUFP(buf, 6), pb_ad->p_detail.notice, PB_NOTICE_LENGTH);
 
 	clif->send(buf, packet_len(0x8ed), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// Notification about deleted party booking advertisment (ZC_PARTY_RECRUIT_NOTIFY_DELETE).
 /// 08ee <index>.L
-void clif_PartyBookingDeleteNotify(struct map_session_data* sd, int index)
+void clif_PartyRecruitDeleteNotify(struct map_session_data* sd, int index)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+1];
 
 	WBUFW(buf, 0) = 0x8ee;
 	WBUFL(buf, 2) = index;
 
 	clif->send(buf, packet_len(0x8ee), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// Request to add to filtering list (PARTY_RECRUIT_ADD_FILTERLINGLIST).
 /// 08ef <index>.L
 void clif_parse_PartyBookingAddFilteringList(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	int index = RFIFOL(fd, 2);
 
 	clif->PartyBookingAddFilteringList(index, sd);
+#else
+	return;
+#endif
 }
 
 /// Request to remove from filtering list (PARTY_RECRUIT_SUB_FILTERLINGLIST).
 /// 08f0 <GID>.L
 void clif_parse_PartyBookingSubFilteringList(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	int gid = RFIFOL(fd, 2);
 
 	clif->PartyBookingSubFilteringList(gid, sd);
+#else
+	return;
+#endif
 }
 
 /// Request to recruit volunteer (PARTY_RECRUIT_REQ_VOLUNTEER).
 /// 08f1 <index>.L
 void clif_parse_PartyBookingReqVolunteer(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	int index = RFIFOL(fd, 2);
 
 	clif->PartyBookingVolunteerInfo(index, sd);
+#else
+	return;
+#endif
 }
 
 /// Request volunteer information (PARTY_RECRUIT_VOLUNTEER_INFO).
 /// 08f2 <AID>.L <job>.L <level>.W <char name>.24B
 void clif_PartyBookingVolunteerInfo(int index, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+4+4+2+24+1];
 	
 	WBUFW(buf, 0) = 0x8f2;
@@ -12549,6 +12650,9 @@ void clif_PartyBookingVolunteerInfo(int index, struct map_session_data *sd)
 	memcpy(WBUFP(buf, 12), sd->status.name, NAME_LENGTH);
 	
 	clif->send(buf, packet_len(0x8f2), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 #if 0 //Disabled for now. Needs more info.
@@ -12592,44 +12696,61 @@ void clif_PartyBookingFailedRecall(int fd, struct map_session_data *sd)
 /// 08f9 <refuse AID>.L
 void clif_parse_PartyBookingRefuseVolunteer(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned long aid = RFIFOL(fd, 2);
 
 	clif->PartyBookingRefuseVolunteer(aid, sd);
+#else
+	return;
+#endif
 }
 
 /// 08fa <index>.L
 void clif_PartyBookingRefuseVolunteer(unsigned long aid, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6];
 	
 	WBUFW(buf, 0) = 0x8fa;
 	WBUFL(buf, 2) = aid;
 	
 	clif->send(buf, packet_len(0x8fa), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// 08fb <index>.L
 void clif_parse_PartyBookingCancelVolunteer(int fd, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	int index = RFIFOL(fd, 2);
 
 	clif->PartyBookingCancelVolunteer(index, sd);
+#else
+	return;
+#endif
 }
 
 /// 0909 <index>.L
 void clif_PartyBookingCancelVolunteer(int index, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+1];
 	
 	WBUFW(buf, 0) = 0x909;
 	WBUFL(buf, 2) = index;
 	
 	clif->send(buf, packet_len(0x909), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// 090b <gid>.L <char name>.24B
 void clif_PartyBookingAddFilteringList(int index, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+24+1];
 
 	WBUFW(buf, 0) = 0x90b;
@@ -12637,11 +12758,15 @@ void clif_PartyBookingAddFilteringList(int index, struct map_session_data *sd)
 	memcpy(WBUFP(buf, 6), sd->status.name, NAME_LENGTH);
 	
 	clif->send(buf, packet_len(0x90b), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 /// 090c <gid>.L <char name>.24B
 void clif_PartyBookingSubFilteringList(int gid, struct map_session_data *sd)
 {
+#ifdef PARTY_RECRUIT
 	unsigned char buf[2+6+24+1];
 
 	WBUFW(buf, 0) = 0x90c;
@@ -12649,6 +12774,9 @@ void clif_PartyBookingSubFilteringList(int gid, struct map_session_data *sd)
 	memcpy(WBUFP(buf, 6), sd->status.name, NAME_LENGTH);
 	
 	clif->send(buf, packet_len(0x90c), &sd->bl, ALL_CLIENT);
+#else
+	return;
+#endif
 }
 
 #if 0
@@ -12662,7 +12790,6 @@ void clif_PartyBookingRefuseVolunteerToPM(struct map_session_data *sd)
 {
 }
 #endif //if 0
-#endif
 
 /// Request to close own vending (CZ_REQ_CLOSESTORE).
 /// 012e
@@ -14866,7 +14993,8 @@ void clif_Auction_openwindow(struct map_session_data *sd)
 
 	if( sd->state.storage_flag || sd->state.vending || sd->state.buyingstore || sd->state.trading )
 		return;
-
+if( !battle_config.feature_auction )
+		return;
 	WFIFOHEAD(fd,packet_len(0x25f));
 	WFIFOW(fd,0) = 0x25f;
 	WFIFOL(fd,2) = 0;
@@ -14956,6 +15084,9 @@ void clif_parse_Auction_setitem(int fd, struct map_session_data *sd)
 	int amount = RFIFOL(fd,4); // Always 1
 	struct item_data *item;
 
+if( !battle_config.feature_auction )
+		return;
+		
 	if( sd->auction.amount > 0 )
 		sd->auction.amount = 0;
 
@@ -15030,6 +15161,9 @@ void clif_parse_Auction_register(int fd, struct map_session_data *sd)
 {
 	struct auction_data auction;
 	struct item_data *item;
+
+if( !battle_config.feature_auction )
+		return;
 
 	auction.price = RFIFOL(fd,2);
 	auction.buynow = RFIFOL(fd,6);
@@ -15162,6 +15296,10 @@ void clif_parse_Auction_search(int fd, struct map_session_data* sd)
 	short type = RFIFOW(fd,2), page = RFIFOW(fd,32);
 	int price = RFIFOL(fd,4);  // FIXME: bug #5071
 
+	
+	if( !battle_config.feature_auction )
+		return;
+		
 	clif->pAuction_cancelreg(fd, sd);
 
 	safestrncpy(search_text, (char*)RFIFOP(fd,8), sizeof(search_text));
@@ -15177,6 +15315,10 @@ void clif_parse_Auction_search(int fd, struct map_session_data* sd)
 void clif_parse_Auction_buysell(int fd, struct map_session_data* sd)
 {
 	short type = RFIFOW(fd,2) + 6;
+	
+if( !battle_config.feature_auction )
+		return;
+
 	clif->pAuction_cancelreg(fd, sd);
 
 	intif->Auction_requestlist(sd->status.char_id, type, 0, "", 1);
@@ -17314,7 +17456,10 @@ void clif_parse_CashShopBuy(int fd, struct map_session_data *sd) {
 						
 						if( result != CSBR_SUCCESS )
 							pc->getcash(sd, clif->cs.data[tab][j]->price * get_count,0);
-					}
+
+
+					} else /* create_egg succeeded so mark as success */
+            result = CSBR_SUCCESS;
 				}
 			}
 		} else {
@@ -17602,9 +17747,83 @@ void clif_cart_additem_ack(struct map_session_data *sd, int flag) {
 	
 	p.PacketType = cart_additem_ackType;
 	p.result = (char)flag;
+	clif->send(&p,sizeof(p), &sd->bl, SELF);
+}
+
+/* Bank System [Yommy/Hercules] */
+void clif_parse_BankDeposit(int fd, struct map_session_data* sd) {
+	struct packet_banking_deposit_req *p = P2PTR(fd);
+	int money;
+	
+	if( !battle_config.feature_banking ) {
+		clif->colormes(fd,COLOR_RED,msg_txt(1483));
+		return;
+	}
+	
+	money = (int)cap_value(p->Money,0,INT_MAX);
+
+	pc->bank_deposit(sd,money);
+}
+
+void clif_parse_BankWithdraw(int fd, struct map_session_data* sd) {
+	struct packet_banking_withdraw_req *p = P2PTR(fd);
+	int money;
+	
+	if( !battle_config.feature_banking ) {
+		clif->colormes(fd,COLOR_RED,msg_txt(1483));
+		return;
+	}
+	
+	money = (int)cap_value(p->Money,0,INT_MAX);
+	
+	pc->bank_withdraw(sd,money);
+}
+
+void clif_parse_BankCheck(int fd, struct map_session_data* sd) {
+	struct packet_banking_check p;
+	
+	if( !battle_config.feature_banking ) {
+		clif->colormes(fd,COLOR_RED,msg_txt(1483));
+		return;
+	}
+	
+	p.PacketType = banking_checkType;
+	p.Money = (int)sd->status.bank_vault;
+	p.Reason = (short)0;
 	
 	clif->send(&p,sizeof(p), &sd->bl, SELF);
 }
+
+void clif_parse_BankOpen(int fd, struct map_session_data* sd) {
+	return;
+}
+
+void clif_parse_BankClose(int fd, struct map_session_data* sd) {
+	return;
+}
+
+void clif_bank_deposit(struct map_session_data *sd, enum e_BANKING_DEPOSIT_ACK reason) {
+	struct packet_banking_deposit_ack p;
+	
+	p.PacketType = banking_deposit_ackType;
+	p.Balance = sd->status.zeny;/* how much zeny char has after operation */
+	p.Money = (int64)sd->status.bank_vault;/* money in the bank */
+	p.Reason = (short)reason;
+	
+	clif->send(&p,sizeof(p), &sd->bl, SELF);
+}
+void clif_bank_withdraw(struct map_session_data *sd,enum e_BANKING_WITHDRAW_ACK reason) {
+	struct packet_banking_withdraw_ack p;
+	
+	p.PacketType = banking_withdraw_ackType;
+	p.Balance = sd->status.zeny;/* how much zeny char has after operation */
+	p.Money = (int64)sd->status.bank_vault;/* money in the bank */
+	p.Reason = (short)reason;
+	
+	clif->send(&p,sizeof(p), &sd->bl, SELF);
+}
+
+
 /* */
 unsigned short clif_decrypt_cmd( int cmd, struct map_session_data *sd ) {
 	if( sd ) {
@@ -17615,9 +17834,7 @@ unsigned short clif_decrypt_cmd( int cmd, struct map_session_data *sd ) {
 unsigned short clif_parse_cmd_normal( int fd, struct map_session_data *sd ) {
 	unsigned short cmd = RFIFOW(fd,0);
 
-	// filter out invalid / unsupported packets
-	if( cmd > MAX_PACKET_DB || cmd < MIN_PACKET_DB || packet_db[cmd].len == 0 )
-		return 0;
+	
 
 	return cmd;
 }
@@ -17626,9 +17843,7 @@ unsigned short clif_parse_cmd_decrypt( int fd, struct map_session_data *sd ) {
 
 	cmd = clif->decrypt_cmd(cmd, sd);
 
-	// filter out invalid / unsupported packets
-	if( cmd > MAX_PACKET_DB || cmd < MIN_PACKET_DB || packet_db[cmd].len == 0 )
-		return 0;
+	
 
 	return cmd;
 }
@@ -17704,7 +17919,10 @@ int clif_parse(int fd) {
 		else
 			parse_cmd_func = clif->parse_cmd;
 
-		if( !( cmd = parse_cmd_func(fd,sd) ) ) {
+		cmd = parse_cmd_func(fd,sd);
+
+		// filter out invalid / unsupported packets
+		if( cmd > MAX_PACKET_DB || cmd < MIN_PACKET_DB || packet_db[cmd].len == 0 ) {
 			ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x (0x%04x), %d bytes received), disconnecting session #%d.\n", cmd, RFIFOW(fd,0), RFIFOREST(fd), fd);
 #ifdef DUMP_INVALID_PACKET
 			ShowDump(RFIFOP(fd,0), RFIFOREST(fd));
@@ -17985,10 +18203,8 @@ void clif_defaults(void) {
 	clif->clearunit_delayed_sub = clif_clearunit_delayed_sub;
 	clif->set_unit_idle = clif_set_unit_idle;
 	clif->spawn_unit = clif_spawn_unit;
-#if PACKETVER < 20091103
 	clif->spawn_unit2 = clif_spawn_unit2;
 	clif->set_unit_idle2 = clif_set_unit_idle2;
-#endif
 	clif->set_unit_walking = clif_set_unit_walking;
 	clif->calc_walkdelay = clif_calc_walkdelay;
 	clif->getareachar_skillunit = clif_getareachar_skillunit;
@@ -18343,14 +18559,20 @@ void clif_defaults(void) {
 	clif->PartyBookingUpdateNotify = clif_PartyBookingUpdateNotify;
 	clif->PartyBookingDeleteNotify = clif_PartyBookingDeleteNotify;
 	clif->PartyBookingInsertNotify = clif_PartyBookingInsertNotify;
+    clif->PartyRecruitRegisterAck = clif_PartyRecruitRegisterAck;
+	clif->PartyRecruitDeleteAck = clif_PartyRecruitDeleteAck;
+	clif->PartyRecruitSearchAck = clif_PartyRecruitSearchAck;
+	clif->PartyRecruitUpdateNotify = clif_PartyRecruitUpdateNotify;
+	clif->PartyRecruitDeleteNotify = clif_PartyRecruitDeleteNotify;
+	clif->PartyRecruitInsertNotify = clif_PartyRecruitInsertNotify;
 	/* Group Search System Update */
-#ifdef PARTY_RECRUIT
+
 	clif->PartyBookingVolunteerInfo = clif_PartyBookingVolunteerInfo;
 	clif->PartyBookingRefuseVolunteer = clif_PartyBookingRefuseVolunteer;
 	clif->PartyBookingCancelVolunteer = clif_PartyBookingCancelVolunteer;
 	clif->PartyBookingAddFilteringList = clif_PartyBookingAddFilteringList;
 	clif->PartyBookingSubFilteringList = clif_PartyBookingSubFilteringList;
-#endif
+
 	/* buying store-related */
 	clif->buyingstore_open = clif_buyingstore_open;
 	clif->buyingstore_open_failed = clif_buyingstore_open_failed;
@@ -18401,6 +18623,9 @@ void clif_defaults(void) {
 	clif->chsys_quitg = clif_hercules_chsys_quitg;
 	clif->chsys_gjoin = clif_hercules_chsys_gjoin;
 	clif->chsys_gleave = clif_hercules_chsys_gleave;
+/* Bank System [Yommy/Hercules] */
+	clif->bank_deposit = clif_bank_deposit;
+	clif->bank_withdraw = clif_bank_withdraw;
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/ 
@@ -18499,6 +18724,10 @@ void clif_defaults(void) {
 	clif->pPartyBookingSearchReq = clif_parse_PartyBookingSearchReq;
 	clif->pPartyBookingDeleteReq = clif_parse_PartyBookingDeleteReq;
 	clif->pPartyBookingUpdateReq = clif_parse_PartyBookingUpdateReq;
+	clif->pPartyRecruitRegisterReq = clif_parse_PartyRecruitRegisterReq;
+	clif->pPartyRecruitSearchReq = clif_parse_PartyRecruitSearchReq;
+	clif->pPartyRecruitDeleteReq = clif_parse_PartyRecruitDeleteReq;
+	clif->pPartyRecruitUpdateReq = clif_parse_PartyRecruitUpdateReq;
 	clif->pCloseVending = clif_parse_CloseVending;
 	clif->pVendingListReq = clif_parse_VendingListReq;
 	clif->pPurchaseReq = clif_parse_PurchaseReq;
@@ -18614,11 +18843,16 @@ void clif_defaults(void) {
 	clif->pPartyTick = clif_parse_PartyTick;
 	clif->pGuildInvite2 = clif_parse_GuildInvite2;
 	/* Group Search System Update */
-#ifdef PARTY_RECRUIT
+
 	clif->pPartyBookingAddFilter = clif_parse_PartyBookingAddFilteringList;
 	clif->pPartyBookingSubFilter = clif_parse_PartyBookingSubFilteringList;
 	clif->pPartyBookingReqVolunteer = clif_parse_PartyBookingReqVolunteer;
 	clif->pPartyBookingRefuseVolunteer = clif_parse_PartyBookingRefuseVolunteer;
 	clif->pPartyBookingCancelVolunteer = clif_parse_PartyBookingCancelVolunteer;
-#endif
+/* Bank System [Yommy/Hercules] */
+	clif->pBankDeposit = clif_parse_BankDeposit;
+	clif->pBankWithdraw = clif_parse_BankWithdraw;
+	clif->pBankCheck = clif_parse_BankCheck;
+	clif->pBankOpen = clif_parse_BankOpen;
+    clif->pBankClose = clif_parse_BankClose;
 }

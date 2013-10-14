@@ -74,7 +74,7 @@
 1107,DESERT_WOLF_B,Filhote de Lobo do Deserto,628,9010,10003,537,80,60,40,100,250,20,1000,150,0,0,400,400,400,{ petskillattack "SM_PROVOKE",1,0,5;},{ bonus bInt,1; bonus bMaxSP,50; }
 1052,ROCKER,Rocker,629,9011,10014,537,80,60,30,100,250,20,1500,150,0,0,350,350,600,{ petskillbonus bAllStats,1,10,50; },{ bonus bHPrecovRate,5; bonus bMaxHP,25; }
 1014,SPORE,Esporo,630,9012,10017,537,80,60,30,100,250,20,1500,150,0,0,350,500,500,{ petrecovery SC_Poison,60; },{ bonus bHit,5; bonus bAtk,-2; }
-1077,POISON_SPORE,Esporo Venenoso,9013,10017,537,80,60,20,100,250,20,1000,150,0,0,600,200,400,{ petskillattack "NPC_POISON",20,0,10; },{ bonus bStr,1; bonus bInt,1; }
+1077,POISON_SPORE,Esporo Venenoso,631,9013,10017,537,80,60,20,100,250,20,1000,150,0,0,600,200,400,{ petskillattack "NPC_POISON",20,0,10; },{ bonus bStr,1; bonus bInt,1; }
 1019,PECOPECO,PecoPeco,632,9014,10010,537,80,60,30,100,250,20,1000,150,1,0,400,500,800,{ petskillbonus bSpeedRate,25,20,20; },{ bonus bMaxHP,150; bonus bMaxSP,-10; }
 1056,SMOKIE,Fumacento,633,9015,10019,537,80,60,30,100,250,20,1000,150,1,0,600,600,100,{ petskillbonus bPerfectHide,1,3600,0; },{ bonus bAgi,1; bonus bFlee2,1; }
 1057,YOYO,Yoyo,634,9016,10018,532,80,60,20,100,250,20,1000,150,1,0,300,800,400,{ petloot 20; },{ bonus bCritical,3; bonus bLuk,-1; }
