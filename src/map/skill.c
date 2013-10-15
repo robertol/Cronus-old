@@ -6567,9 +6567,15 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				skill->produce_mix(sd, skill_id, 7135, 0, 0, 0, 50);
 			}
 			break;
+			
 		case SA_DISPELL:
-			if (flag&1 || (i = skill->get_splash(skill_id, skill_lv)) < 1)
-			{
+			if (flag&1 || (i = skill->get_splash(skill_id, skill_lv)) < 1) {
+			
+			if( sd && dstsd && !map_flag_vs(sd->bl.m)
+						&& (sd->status.party_id == 0 || sd->status.party_id != dstsd->status.party_id) ) {
+					// Outside PvP it should only affect party members and no skill fail message.
+					break;
+				}
 				clif->skill_nodamage(src,bl,skill_id,skill_lv,1);
 				if((dstsd && (dstsd->class_&MAPID_UPPERMASK) == MAPID_SOUL_LINKER)
 					|| (tsc && tsc->data[SC_SOULLINK] && tsc->data[SC_SOULLINK]->val2 == SL_ROGUE) //Rogue's spirit defends againt dispel.
@@ -6582,13 +6588,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				if(status->isimmune(bl) || !tsc || !tsc->count)
 					break;
 				
-				if( sd && dstsd && !map_flag_vs(sd->bl.m)
-						&& (sd->status.party_id == 0 || sd->status.party_id != dstsd->status.party_id) ) {
-					// Outside PvP it should only affect party members
-					clif->skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
-					break;
-				}
-
 				for(i = 0; i < SC_MAX; i++) {
 					if ( !tsc->data[i] )
 							continue;
