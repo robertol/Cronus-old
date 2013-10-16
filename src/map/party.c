@@ -1135,7 +1135,7 @@ void party_recruit_register(struct map_session_data *sd, short level, const char
 	clif->PartyRecruitInsertNotify(sd, pb_ad); // Notice
 #else
   return;
-#endif;
+#endif
 }
 
 void party_booking_register(struct map_session_data *sd, short level, short mapid, short* job) {
