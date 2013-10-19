@@ -11309,6 +11309,31 @@ void HP_clif_PMIgnoreList(struct map_session_data *sd) {
 	}
 	return;
 }
+void HP_clif_ShowScript(struct block_list *bl, const char *message) {
+	int hIndex = 0;
+	if( HPMHooks.count.HP_clif_ShowScript_pre ) {
+		void (*preHookFunc) (struct block_list *bl, const char *message);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_clif_ShowScript_pre; hIndex++ ) {
+			preHookFunc = HPMHooks.list.HP_clif_ShowScript_pre[hIndex].func;
+			preHookFunc(bl, message);
+		}
+		if( *HPMforce_return ) {
+			*HPMforce_return = false;
+			return;
+		}
+	}
+	{
+		HPMHooks.source.clif.ShowScript(bl, message);
+	}
+	if( HPMHooks.count.HP_clif_ShowScript_post ) {
+		void (*postHookFunc) (struct block_list *bl, const char *message);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_clif_ShowScript_post; hIndex++ ) {
+			postHookFunc = HPMHooks.list.HP_clif_ShowScript_post[hIndex].func;
+			postHookFunc(bl, message);
+		}
+	}
+	return;
+}
 void HP_clif_traderequest(struct map_session_data *sd, const char *name) {
 	int hIndex = 0;
 	if( HPMHooks.count.HP_clif_traderequest_pre ) {
@@ -36446,6 +36471,32 @@ void HP_map_delblcell(struct block_list *bl) {
 	}
 	return;
 }
+int HP_map_get_new_bonus_id(void) {
+	int hIndex = 0;
+	int retVal___ = 0;
+	if( HPMHooks.count.HP_map_get_new_bonus_id_pre ) {
+		int (*preHookFunc) (void);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_map_get_new_bonus_id_pre; hIndex++ ) {
+			preHookFunc = HPMHooks.list.HP_map_get_new_bonus_id_pre[hIndex].func;
+			retVal___ = preHookFunc();
+		}
+		if( *HPMforce_return ) {
+			*HPMforce_return = false;
+			return retVal___;
+		}
+	}
+	{
+		retVal___ = HPMHooks.source.map.get_new_bonus_id();
+	}
+	if( HPMHooks.count.HP_map_get_new_bonus_id_post ) {
+		int (*postHookFunc) (int retVal___);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_map_get_new_bonus_id_post; hIndex++ ) {
+			postHookFunc = HPMHooks.list.HP_map_get_new_bonus_id_post[hIndex].func;
+			retVal___ = postHookFunc(retVal___);
+		}
+	}
+	return retVal___;
+}
 /* mapit */
 struct s_mapiterator* HP_mapit_alloc(enum e_mapitflags flags, enum bl_type types) {
 	int hIndex = 0;
@@ -58425,6 +58476,32 @@ int HP_skill_get_new_group_id(void) {
 		for(hIndex = 0; hIndex < HPMHooks.count.HP_skill_get_new_group_id_post; hIndex++ ) {
 			postHookFunc = HPMHooks.list.HP_skill_get_new_group_id_post[hIndex].func;
 			retVal___ = postHookFunc(retVal___);
+		}
+	}
+	return retVal___;
+}
+bool HP_skill_check_shadowform(struct block_list *bl, int64 damage, int hit) {
+	int hIndex = 0;
+	bool retVal___ = false;
+	if( HPMHooks.count.HP_skill_check_shadowform_pre ) {
+		bool (*preHookFunc) (struct block_list *bl, int64 *damage, int *hit);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_skill_check_shadowform_pre; hIndex++ ) {
+			preHookFunc = HPMHooks.list.HP_skill_check_shadowform_pre[hIndex].func;
+			retVal___ = preHookFunc(bl, &damage, &hit);
+		}
+		if( *HPMforce_return ) {
+			*HPMforce_return = false;
+			return retVal___;
+		}
+	}
+	{
+		retVal___ = HPMHooks.source.skill.check_shadowform(bl, damage, hit);
+	}
+	if( HPMHooks.count.HP_skill_check_shadowform_post ) {
+		bool (*postHookFunc) (bool retVal___, struct block_list *bl, int64 *damage, int *hit);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_skill_check_shadowform_post; hIndex++ ) {
+			postHookFunc = HPMHooks.list.HP_skill_check_shadowform_post[hIndex].func;
+			retVal___ = postHookFunc(retVal___, bl, &damage, &hit);
 		}
 	}
 	return retVal___;

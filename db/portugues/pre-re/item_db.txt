@@ -5138,7 +5138,7 @@
 12580,Vending_Search_Scroll,Catálogo de Vendas Prata,2,0,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ searchstores 10,0; },{},{}
 12581,Vending_Search_Scroll2,Catálogo de Vendas Ouro,2,0,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ searchstores 10,1; },{},{}
 12591,Uni_Catalog_Bz,Catálogo de Vendas Bronze,2,0,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ searchstores 10,1; },{},{}
-12622,Boarding_Halter,Rédea,11,20,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ setmounting(); },{},{}
+//12622,Boarding_Halter,Rédea,11,20,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ setmounting(); },{},{}
 12701,Old_Blue_Box_F,Old Blue Box,2,0,,10,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 12702,Old_Bleu_Box,Nova Velha Caixa Azul,2,0,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem 12702,1; getrandgroupitem 12702,1; },{},{}
 12703,Holy_Egg_2,Holy Egg,11,0,,50,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}

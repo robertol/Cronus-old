@@ -885,6 +885,8 @@ struct {
 	struct HPMHookPoint *HP_clif_wisall_post;
 	struct HPMHookPoint *HP_clif_PMIgnoreList_pre;
 	struct HPMHookPoint *HP_clif_PMIgnoreList_post;
+	struct HPMHookPoint *HP_clif_ShowScript_pre;
+	struct HPMHookPoint *HP_clif_ShowScript_post;
 	struct HPMHookPoint *HP_clif_traderequest_pre;
 	struct HPMHookPoint *HP_clif_traderequest_post;
 	struct HPMHookPoint *HP_clif_tradestart_pre;
@@ -2845,6 +2847,8 @@ struct {
 	struct HPMHookPoint *HP_map_addblcell_post;
 	struct HPMHookPoint *HP_map_delblcell_pre;
 	struct HPMHookPoint *HP_map_delblcell_post;
+	struct HPMHookPoint *HP_map_get_new_bonus_id_pre;
+	struct HPMHookPoint *HP_map_get_new_bonus_id_post;
 	struct HPMHookPoint *HP_mapit_alloc_pre;
 	struct HPMHookPoint *HP_mapit_alloc_post;
 	struct HPMHookPoint *HP_mapit_free_pre;
@@ -4509,6 +4513,8 @@ struct {
 	struct HPMHookPoint *HP_skill_maelstrom_suction_post;
 	struct HPMHookPoint *HP_skill_get_new_group_id_pre;
 	struct HPMHookPoint *HP_skill_get_new_group_id_post;
+	struct HPMHookPoint *HP_skill_check_shadowform_pre;
+	struct HPMHookPoint *HP_skill_check_shadowform_post;
 	struct HPMHookPoint *HP_status_init_pre;
 	struct HPMHookPoint *HP_status_init_post;
 	struct HPMHookPoint *HP_status_final_pre;
@@ -5760,6 +5766,8 @@ struct {
 	int HP_clif_wisall_post;
 	int HP_clif_PMIgnoreList_pre;
 	int HP_clif_PMIgnoreList_post;
+	int HP_clif_ShowScript_pre;
+	int HP_clif_ShowScript_post;
 	int HP_clif_traderequest_pre;
 	int HP_clif_traderequest_post;
 	int HP_clif_tradestart_pre;
@@ -7720,6 +7728,8 @@ struct {
 	int HP_map_addblcell_post;
 	int HP_map_delblcell_pre;
 	int HP_map_delblcell_post;
+	int HP_map_get_new_bonus_id_pre;
+	int HP_map_get_new_bonus_id_post;
 	int HP_mapit_alloc_pre;
 	int HP_mapit_alloc_post;
 	int HP_mapit_free_pre;
@@ -9384,6 +9394,8 @@ struct {
 	int HP_skill_maelstrom_suction_post;
 	int HP_skill_get_new_group_id_pre;
 	int HP_skill_get_new_group_id_post;
+	int HP_skill_check_shadowform_pre;
+	int HP_skill_check_shadowform_post;
 	int HP_status_init_pre;
 	int HP_status_init_post;
 	int HP_status_final_pre;

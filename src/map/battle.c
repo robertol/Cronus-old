@@ -2939,26 +2939,6 @@ int64 battle_calc_damage(struct block_list *src,struct block_list *bl,struct Dam
 		if( sc->data[SC__DEADLYINFECT] && damage > 0 && rnd()%100 < 65 + 5 * sc->data[SC__DEADLYINFECT]->val1 )
 			status->change_spread(bl, src); // Deadly infect attacked side
 
-		if( sc && sc->data[SC__SHADOWFORM] ) {
-			struct block_list *s_bl = map->id2bl(sc->data[SC__SHADOWFORM]->val2);
-			if( !s_bl || s_bl->m != bl->m ) { // If the shadow form target is not present remove the sc.
-				status_change_end(bl, SC__SHADOWFORM, INVALID_TIMER);
-			} else if( status->isdead(s_bl) || !battle->check_target(src,s_bl,BCT_ENEMY)) { // If the shadow form target is dead or not your enemy remove the sc in both.
-				status_change_end(bl, SC__SHADOWFORM, INVALID_TIMER);
-				if( s_bl->type == BL_PC )
-					((TBL_PC*)s_bl)->shadowform_id = 0;
-			} else {
-				if( (--sc->data[SC__SHADOWFORM]->val3) < 0 ) { // If you have exceded max hits supported, remove the sc in both.
-					status_change_end(bl, SC__SHADOWFORM, INVALID_TIMER);
-					if( s_bl->type == BL_PC )
-						((TBL_PC*)s_bl)->shadowform_id = 0;
-				} else {
-					status->damage(bl, s_bl, damage, 0, clif->damage(s_bl, s_bl, timer->gettick(), 500, 500, damage, -1, 0, 0), 0);
-					return ATK_NONE;
-				}
-			}
-		}
-
 	}
 
 	//SC effects from caster side.
@@ -4536,6 +4516,8 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 						ATK_ADDRATE(sd->bonus.atk_rate);
 					if(flag.cri && sd->bonus.crit_atk_rate)
 						ATK_ADDRATE(sd->bonus.crit_atk_rate);
+						if(flag.cri && sc && sc->data[SC_MTF_CRIDAMAGE])
+                        ATK_ADDRATE(25);// temporary it should be 'bonus.crit_atk_rate'
 #ifndef RENEWAL
 
 					if(sd->status.party_id && (temp=pc->checkskill(sd,TK_POWER)) > 0){
@@ -4723,6 +4705,8 @@ struct Damage battle_calc_weapon_attack(struct block_list *src,struct block_list
 	#ifdef RENEWAL
 			if( wd.flag&BF_LONG )
 				ATK_ADDRATE(sd->bonus.long_attack_atk_rate);
+				if( sc && sc->data[SC_MTF_RANGEATK] )
+                ATK_ADDRATE(25);// temporary it should be 'bonus.long_attack_atk_rate'
 	#endif	
 			if( (i=pc->checkskill(sd,AB_EUCHARISTICA)) > 0 &&
 				(tstatus->race == RC_DEMON || tstatus->def_ele == ELE_DARK) )
@@ -5474,6 +5458,9 @@ enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* t
 				return ATK_DEF;
 			return ATK_MISS;
 		}
+		if( tsc && tsc->data[SC_MTF_MLEATKED] && rnd()%100 < 20 )
+        clif->skill_nodamage(target, target, SM_ENDURE, 5,
+        sc_start(target, SC_ENDURE, 100, 5, skill->get_time(SM_ENDURE, 5)));
 	}
 
 	if(tsc && tsc->data[SC_KAAHI] && tsc->data[SC_KAAHI]->val4 == INVALID_TIMER && tstatus->hp < tstatus->max_hp)
@@ -5526,7 +5513,13 @@ enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* t
 	}
 	map->freeblock_lock();
 
-	battle->delay_damage(tick, wd.amotion, src, target, wd.flag, 0, 0, damage, wd.dmg_lv, wd.dmotion, true);
+	 if( skill->check_shadowform(target, damage, wd.div_) ){
+    if( !status->isdead(target) )
+      skill->additional_effect(src, target, 0, 0, wd.flag, wd.dmg_lv, tick);
+    if( wd.dmg_lv > ATK_BLOCK)
+      skill->counter_additional_effect(src, target, 0, 0, wd.flag,tick);
+  }else
+    battle->delay_damage(tick, wd.amotion, src, target, wd.flag, 0, 0, damage, wd.dmg_lv, wd.dmotion, true);
 	if( tsc ) {
 		if( tsc->data[SC_DEVOTION] ) {
 			struct status_change_entry *sce = tsc->data[SC_DEVOTION];
@@ -6478,6 +6471,7 @@ static const struct _battle_data {
 	{ "guild_notice_changemap",				&battle_config.guild_notice_changemap,			2,		0,		2,				},
 	{ "feature.banking",                    &battle_config.feature_banking,                 1,      0,      1,              },
     { "feature.auction",                    &battle_config.feature_auction,                 0,      0,      2,              },
+	{ "mon_trans_disable_in_gvg",           &battle_config.mon_trans_disable_in_gvg,        0,      0,      1,              },
 };
 #ifndef STATS_OPT_OUT
 /**

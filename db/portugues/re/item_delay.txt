@@ -9,8 +9,8 @@
 // Banco de Dados de Tempo de Atraso (delay) em Itens
 //---------------------------------------------------------
 // Estrutura: ItemID,Tempo_em_Milisegundos
-// NOTA: O m·ximo de entradas È definido em MAX_ITEMDELAYS
-//		 no arquivo itemdb.h
+// NOTA: O m√°ximo de entradas √© definido em MAX_ITEMDELAYS
+//                 no arquivo itemdb.h
 //---------------------------------------------------------
 
 //12202,60000	//Str_Dish10_
@@ -37,6 +37,14 @@
 //12580,0 // Vending_Search_Scroll
 //12581,0 // Vending_Search_Scroll2
 //12591,0 // Vending_Search_Scroll3
+
+12658, 10000 // Transformation Scroll(Deviruchi)
+12659, 10000 // Transformation Scroll(Raydric)
+12660, 10000 // Transformation Scroll(Mavka)
+12661, 10000 // Transformation Scroll(Marduk)
+12662, 10000 // Transformation Scroll(Banshee)
+12663, 10000 // Transformation Scroll(Poring)
+12664, 10000 // Transformation Scroll(Golem)
 
 12725,120000 // Runstone_Nosiege,Nauthiz Rune
 12726,30000 // Runstone_Rhydo,Raido Rune

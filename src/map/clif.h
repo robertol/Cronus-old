@@ -760,6 +760,7 @@ struct clif_interface {
 	bool (*process_message) (struct map_session_data* sd, int format, char** name_, int* namelen_, char** message_, int* messagelen_);
 	void (*wisexin) (struct map_session_data *sd,int type,int flag);
 	void (*wisall) (struct map_session_data *sd,int type,int flag);
+	void (*ShowScript) (struct block_list* bl, const char* message);
 	void (*PMIgnoreList) (struct map_session_data* sd);
 	/* trade handling */
 	void (*traderequest) (struct map_session_data* sd, const char* name);
