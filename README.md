@@ -30,16 +30,14 @@ Equipe de Desenvolvimento
 ### Coordenadores
 - .twink	- Samuel Soares
 - MaatSF	- Matheus Silva
-- mkbu95	- Matheus Macabu
+- Wilk Maia
 
 ### Desenvolvedores
+- mkbu95		- Matheus Macabu
 - Golen Maker	- Ligleyson Warnielle
 - BeckDeveloper	- Valderson Rodrigues
 - Schrwaizer	- Junior Backes
 - BOO			- José Filho
+- xChiron		- Diego da Silva Pinheiro
 - fetish		- Wesley Balena
 	
-### Estágiários/Aprendizes
-- Rayzir	- Guilherme Fontenele
-- Linne Ribeiro
-- iTBanner
