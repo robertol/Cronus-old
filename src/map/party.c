@@ -831,7 +831,7 @@ int party_skill_check(struct map_session_data *sd, int party_id, uint16 skill_id
 	return 0;
 }
 
-int party_send_xy_timer(int tid, unsigned int tick, int id, intptr_t data)
+int party_send_xy_timer(int tid, int64 tick, int id, intptr_t data)
 {
 	struct party_data* p;
 
@@ -1164,8 +1164,7 @@ void party_booking_register(struct map_session_data *sd, short level, short mapi
 		if(job[i] != 0xFF)
 			pb_ad->p_detail.job[i] = job[i];
 		else pb_ad->p_detail.job[i] = -1;
-	//safestrncpy(pb_ad->p_detail.notice, notice, PB_NOTICE_LENGTH);
-
+	
 	clif->PartyBookingRegisterAck(sd, 0);
 	clif->PartyBookingInsertNotify(sd, pb_ad); // Notice
 #else
@@ -1194,6 +1193,7 @@ void party_recruit_update(struct map_session_data *sd, const char *notice) {
 #else
 	return;
 #endif
+
 
 }
 

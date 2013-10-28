@@ -34,6 +34,7 @@ struct HookingPointData HookingPoints[] = {
 	{ HP_POP(atcommand->cmd_db_clear_sub, HP_atcommand_cmd_db_clear_sub) },
 	{ HP_POP(atcommand->doload, HP_atcommand_doload) },
 	{ HP_POP(atcommand->base_commands, HP_atcommand_base_commands) },
+	{ HP_POP(atcommand->add, HP_atcommand_add) },
 /* battle */
 	{ HP_POP(battle->init, HP_battle_init) },
 	{ HP_POP(battle->final, HP_battle_final) },
@@ -1064,11 +1065,15 @@ struct HookingPointData HookingPoints[] = {
 /* instance */
 	{ HP_POP(instance->init, HP_instance_init) },
 	{ HP_POP(instance->final, HP_instance_final) },
+	{ HP_POP(instance->reload, HP_instance_reload) },
 	{ HP_POP(instance->create, HP_instance_create) },
 	{ HP_POP(instance->add_map, HP_instance_add_map) },
 	{ HP_POP(instance->del_map, HP_instance_del_map) },
 	{ HP_POP(instance->map2imap, HP_instance_map2imap) },
 	{ HP_POP(instance->mapid2imapid, HP_instance_mapid2imapid) },
+	{ HP_POP(instance->mapname2imap, HP_instance_mapname2imap) },
+	{ HP_POP(instance->map_npcsub, HP_instance_map_npcsub) },
+	{ HP_POP(instance->init_npc, HP_instance_init_npc) },
 	{ HP_POP(instance->destroy, HP_instance_destroy) },
 	{ HP_POP(instance->start, HP_instance_start) },
 	{ HP_POP(instance->check_idle, HP_instance_check_idle) },
@@ -1446,6 +1451,8 @@ struct HookingPointData HookingPoints[] = {
 	{ HP_POP(map->addblcell, HP_map_addblcell) },
 	{ HP_POP(map->delblcell, HP_map_delblcell) },
 	{ HP_POP(map->get_new_bonus_id, HP_map_get_new_bonus_id) },
+	{ HP_POP(map->add_questinfo, HP_map_add_questinfo) },
+	{ HP_POP(map->remove_questinfo, HP_map_remove_questinfo) },
 /* mapit */
 	{ HP_POP(mapit->alloc, HP_mapit_alloc) },
 	{ HP_POP(mapit->free, HP_mapit_free) },
@@ -1923,6 +1930,8 @@ struct HookingPointData HookingPoints[] = {
 	{ HP_POP(pc->removecombo, HP_pc_removecombo) },
 	{ HP_POP(pc->bank_deposit, HP_pc_bank_deposit) },
 	{ HP_POP(pc->bank_withdraw, HP_pc_bank_withdraw) },
+	{ HP_POP(pc->rental_expire, HP_pc_rental_expire) },
+	{ HP_POP(pc->scdata_received, HP_pc_scdata_received) },
 /* pet */
 	{ HP_POP(pet->init, HP_pet_init) },
 	{ HP_POP(pet->final, HP_pet_final) },

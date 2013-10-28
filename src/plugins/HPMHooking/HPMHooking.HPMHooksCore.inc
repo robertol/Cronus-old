@@ -61,6 +61,8 @@ struct {
 	struct HPMHookPoint *HP_atcommand_doload_post;
 	struct HPMHookPoint *HP_atcommand_base_commands_pre;
 	struct HPMHookPoint *HP_atcommand_base_commands_post;
+	struct HPMHookPoint *HP_atcommand_add_pre;
+	struct HPMHookPoint *HP_atcommand_add_post;
 	struct HPMHookPoint *HP_battle_init_pre;
 	struct HPMHookPoint *HP_battle_init_post;
 	struct HPMHookPoint *HP_battle_final_pre;
@@ -2097,6 +2099,8 @@ struct {
 	struct HPMHookPoint *HP_instance_init_post;
 	struct HPMHookPoint *HP_instance_final_pre;
 	struct HPMHookPoint *HP_instance_final_post;
+	struct HPMHookPoint *HP_instance_reload_pre;
+	struct HPMHookPoint *HP_instance_reload_post;
 	struct HPMHookPoint *HP_instance_create_pre;
 	struct HPMHookPoint *HP_instance_create_post;
 	struct HPMHookPoint *HP_instance_add_map_pre;
@@ -2107,6 +2111,12 @@ struct {
 	struct HPMHookPoint *HP_instance_map2imap_post;
 	struct HPMHookPoint *HP_instance_mapid2imapid_pre;
 	struct HPMHookPoint *HP_instance_mapid2imapid_post;
+	struct HPMHookPoint *HP_instance_mapname2imap_pre;
+	struct HPMHookPoint *HP_instance_mapname2imap_post;
+	struct HPMHookPoint *HP_instance_map_npcsub_pre;
+	struct HPMHookPoint *HP_instance_map_npcsub_post;
+	struct HPMHookPoint *HP_instance_init_npc_pre;
+	struct HPMHookPoint *HP_instance_init_npc_post;
 	struct HPMHookPoint *HP_instance_destroy_pre;
 	struct HPMHookPoint *HP_instance_destroy_post;
 	struct HPMHookPoint *HP_instance_start_pre;
@@ -2849,6 +2859,10 @@ struct {
 	struct HPMHookPoint *HP_map_delblcell_post;
 	struct HPMHookPoint *HP_map_get_new_bonus_id_pre;
 	struct HPMHookPoint *HP_map_get_new_bonus_id_post;
+	struct HPMHookPoint *HP_map_add_questinfo_pre;
+	struct HPMHookPoint *HP_map_add_questinfo_post;
+	struct HPMHookPoint *HP_map_remove_questinfo_pre;
+	struct HPMHookPoint *HP_map_remove_questinfo_post;
 	struct HPMHookPoint *HP_mapit_alloc_pre;
 	struct HPMHookPoint *HP_mapit_alloc_post;
 	struct HPMHookPoint *HP_mapit_free_pre;
@@ -3787,6 +3801,10 @@ struct {
 	struct HPMHookPoint *HP_pc_bank_deposit_post;
 	struct HPMHookPoint *HP_pc_bank_withdraw_pre;
 	struct HPMHookPoint *HP_pc_bank_withdraw_post;
+	struct HPMHookPoint *HP_pc_rental_expire_pre;
+	struct HPMHookPoint *HP_pc_rental_expire_post;
+	struct HPMHookPoint *HP_pc_scdata_received_pre;
+	struct HPMHookPoint *HP_pc_scdata_received_post;
 	struct HPMHookPoint *HP_pet_init_pre;
 	struct HPMHookPoint *HP_pet_init_post;
 	struct HPMHookPoint *HP_pet_final_pre;
@@ -4942,6 +4960,8 @@ struct {
 	int HP_atcommand_doload_post;
 	int HP_atcommand_base_commands_pre;
 	int HP_atcommand_base_commands_post;
+	int HP_atcommand_add_pre;
+	int HP_atcommand_add_post;
 	int HP_battle_init_pre;
 	int HP_battle_init_post;
 	int HP_battle_final_pre;
@@ -6978,6 +6998,8 @@ struct {
 	int HP_instance_init_post;
 	int HP_instance_final_pre;
 	int HP_instance_final_post;
+	int HP_instance_reload_pre;
+	int HP_instance_reload_post;
 	int HP_instance_create_pre;
 	int HP_instance_create_post;
 	int HP_instance_add_map_pre;
@@ -6988,6 +7010,12 @@ struct {
 	int HP_instance_map2imap_post;
 	int HP_instance_mapid2imapid_pre;
 	int HP_instance_mapid2imapid_post;
+	int HP_instance_mapname2imap_pre;
+	int HP_instance_mapname2imap_post;
+	int HP_instance_map_npcsub_pre;
+	int HP_instance_map_npcsub_post;
+	int HP_instance_init_npc_pre;
+	int HP_instance_init_npc_post;
 	int HP_instance_destroy_pre;
 	int HP_instance_destroy_post;
 	int HP_instance_start_pre;
@@ -7730,6 +7758,10 @@ struct {
 	int HP_map_delblcell_post;
 	int HP_map_get_new_bonus_id_pre;
 	int HP_map_get_new_bonus_id_post;
+	int HP_map_add_questinfo_pre;
+	int HP_map_add_questinfo_post;
+	int HP_map_remove_questinfo_pre;
+	int HP_map_remove_questinfo_post;
 	int HP_mapit_alloc_pre;
 	int HP_mapit_alloc_post;
 	int HP_mapit_free_pre;
@@ -8668,6 +8700,10 @@ struct {
 	int HP_pc_bank_deposit_post;
 	int HP_pc_bank_withdraw_pre;
 	int HP_pc_bank_withdraw_post;
+	int HP_pc_rental_expire_pre;
+	int HP_pc_rental_expire_post;
+	int HP_pc_scdata_received_pre;
+	int HP_pc_scdata_received_post;
 	int HP_pet_init_pre;
 	int HP_pet_init_post;
 	int HP_pet_final_pre;

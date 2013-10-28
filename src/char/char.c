@@ -181,7 +181,7 @@ static DBMap* auth_db; // int account_id -> struct auth_node*
 // Online User Database
 //-----------------------------------------------------
 
-static int chardb_waiting_disconnect(int tid, unsigned int tick, int id, intptr_t data);
+static int chardb_waiting_disconnect(int tid, int64 tick, int id, intptr_t data);
 int delete_char_sql(int char_id);
 
 /**
@@ -741,7 +741,7 @@ int memitemdata_to_sql(const struct item items[], int max, int id, int tableswit
 	SQL->StmtBindColumn(stmt, 0, SQLDT_INT,       &item.id,          0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 1, SQLDT_SHORT,     &item.nameid,      0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 2, SQLDT_SHORT,     &item.amount,      0, NULL, NULL);
-	SQL->StmtBindColumn(stmt, 3, SQLDT_USHORT,    &item.equip,       0, NULL, NULL);
+	SQL->StmtBindColumn(stmt, 3, SQLDT_UINT,      &item.equip,       0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 4, SQLDT_CHAR,      &item.identify,    0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 5, SQLDT_CHAR,      &item.refine,      0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 6, SQLDT_CHAR,      &item.attribute,   0, NULL, NULL);
@@ -885,7 +885,7 @@ int inventory_to_sql(const struct item items[], int max, int id) {
 	SQL->StmtBindColumn(stmt, 0, SQLDT_INT,       &item.id,          0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 1, SQLDT_SHORT,     &item.nameid,      0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 2, SQLDT_SHORT,     &item.amount,      0, NULL, NULL);
-	SQL->StmtBindColumn(stmt, 3, SQLDT_USHORT,    &item.equip,       0, NULL, NULL);
+	SQL->StmtBindColumn(stmt, 3, SQLDT_UINT,    &item.equip,       0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 4, SQLDT_CHAR,      &item.identify,    0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 5, SQLDT_CHAR,      &item.refine,      0, NULL, NULL);
 	SQL->StmtBindColumn(stmt, 6, SQLDT_CHAR,      &item.attribute,   0, NULL, NULL);
@@ -1238,7 +1238,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 0, SQLDT_INT,       &tmp_item.id, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 1, SQLDT_SHORT,     &tmp_item.nameid, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 2, SQLDT_SHORT,     &tmp_item.amount, 0, NULL, NULL)
-	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 3, SQLDT_USHORT,    &tmp_item.equip, 0, NULL, NULL)
+	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 3, SQLDT_UINT,    &tmp_item.equip, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 4, SQLDT_CHAR,      &tmp_item.identify, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 5, SQLDT_CHAR,      &tmp_item.refine, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 6, SQLDT_CHAR,      &tmp_item.attribute, 0, NULL, NULL)
@@ -1269,7 +1269,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 0, SQLDT_INT,         &tmp_item.id, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 1, SQLDT_SHORT,       &tmp_item.nameid, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 2, SQLDT_SHORT,       &tmp_item.amount, 0, NULL, NULL)
-	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 3, SQLDT_USHORT,      &tmp_item.equip, 0, NULL, NULL)
+	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 3, SQLDT_UINT,      &tmp_item.equip, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 4, SQLDT_CHAR,        &tmp_item.identify, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 5, SQLDT_CHAR,        &tmp_item.refine, 0, NULL, NULL)
 	||	SQL_ERROR == SQL->StmtBindColumn(stmt, 6, SQLDT_CHAR,        &tmp_item.attribute, 0, NULL, NULL)
@@ -2094,7 +2094,7 @@ static void char_auth_ok(int fd, struct char_session_data *sd)
 	// continues when account data is received...
 }
 
-int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data);
+int send_accounts_tologin(int tid, int64 tick, int id, intptr_t data);
 void mapif_server_reset(int id);
 
 
@@ -2488,8 +2488,7 @@ int parse_fromlogin(int fd) {
 	return 0;
 }
 
-int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data);
-int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data);
+int check_connect_login_server(int tid, int64 tick, int id, intptr_t data);
 
 void do_init_loginif(void)
 {
@@ -2847,8 +2846,7 @@ int parse_frommap(int fd)
 					Sql_ShowDebug(sql_handle);
 					break;
 				}
-				if( SQL->NumRows(sql_handle) > 0 )
-				{
+				if( SQL->NumRows(sql_handle) > 0 ) {
 					struct status_change_data scdata;
 					int count;
 					char* data;
@@ -2869,8 +2867,7 @@ int parse_frommap(int fd)
 					}
 					if (count >= 50)
 						ShowWarning("Too many status changes for %d:%d, some of them were not loaded.\n", aid, cid);
-					if (count > 0)
-					{
+					if (count > 0) {
 						WFIFOW(fd,2) = 14 + count*sizeof(struct status_change_data);
 						WFIFOW(fd,12) = count;
 						WFIFOSET(fd,WFIFOW(fd,2));
@@ -2878,7 +2875,17 @@ int parse_frommap(int fd)
 						//Clear the data once loaded.
 						if( SQL_ERROR == SQL->Query(sql_handle, "DELETE FROM `%s` WHERE `account_id` = '%d' AND `char_id`='%d'", scdata_db, aid, cid) )
 							Sql_ShowDebug(sql_handle);
-					}
+					} 
+					
+					  } else { //no sc (needs a response)
+                     WFIFOHEAD(fd,14);
+                     WFIFOW(fd,0) = 0x2b1d;
+                     WFIFOW(fd,2) = 14;
+                     WFIFOL(fd,4) = aid;
+                     WFIFOL(fd,8) = cid;
+                     WFIFOW(fd,12) = 0;
+                     WFIFOSET(fd,WFIFOW(fd,2));
+
 				}
 				SQL->FreeResult(sql_handle);
 	#endif
@@ -3581,21 +3588,32 @@ void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date)
 /// 5 (0x71e): Date of birth do not match.
 /// Any (0x718): An unknown error has occurred.
 void char_delete2_accept_ack(int fd, int char_id, uint32 result)
-{// HC: <082a>.W <char id>.L <Msg:0-5>.L
+{
+// HC: <082a>.W <char id>.L <Msg:0-5>.L 
+#if PACKETVER >= 20130000 
+  if( result == 1 ) {
+    struct char_session_data* sd = (struct char_session_data*)session[fd]->session_data;
+    mmo_char_send099d(fd, sd);
+  }
+#endif
+  
+{
 	WFIFOHEAD(fd,10);
 	WFIFOW(fd,0) = 0x82a;
 	WFIFOL(fd,2) = char_id;
 	WFIFOL(fd,6) = result;
 	WFIFOSET(fd,10);
 }
-
+}
 
 /// @param result
 /// 1 (0x718): none/success, (if char id not in deletion process): An unknown error has occurred.
 /// 2 (0x719): A database error occurred.
 /// Any (0x718): An unknown error has occurred.
 void char_delete2_cancel_ack(int fd, int char_id, uint32 result)
-{// HC: <082c>.W <char id>.L <Msg:1-2>.L
+{
+	
+	// HC: <082c>.W <char id>.L <Msg:1-2>.L
 	WFIFOHEAD(fd,10);
 	WFIFOW(fd,0) = 0x82c;
 	WFIFOL(fd,2) = char_id;
@@ -4477,8 +4495,7 @@ int mapif_send(int fd, unsigned char *buf, unsigned int len)
 	return 0;
 }
 
-int broadcast_user_count(int tid, unsigned int tick, int id, intptr_t data)
-{
+int broadcast_user_count(int tid, int64 tick, int id, intptr_t data) {
 	uint8 buf[6];
 	int users = count_users();
 
@@ -4523,7 +4540,7 @@ static int send_accounts_tologin_sub(DBKey key, DBData *data, va_list ap)
 	return 0;
 }
 
-int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data)
+int send_accounts_tologin(int tid, int64 tick, int id, intptr_t data)
 {
 	if (login_fd > 0 && session[login_fd])
 	{
@@ -4541,7 +4558,7 @@ int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data)
 	return 0;
 }
 
-int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data)
+int check_connect_login_server(int tid, int64 tick, int id, intptr_t data)
 {
 	if (login_fd > 0 && session[login_fd] != NULL)
 		return 0;
@@ -4577,7 +4594,7 @@ int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data
 //Invoked 15 seconds after mapif_disconnectplayer in case the map server doesn't
 //replies/disconnect the player we tried to kick. [Skotlex]
 //------------------------------------------------
-static int chardb_waiting_disconnect(int tid, unsigned int tick, int id, intptr_t data)
+static int chardb_waiting_disconnect(int tid, int64 tick, int id, intptr_t data)
 {
 	struct online_char_data* character;
 	if ((character = (struct online_char_data*)idb_get(online_char_db, id)) != NULL && character->waiting_disconnect == tid)
@@ -4604,7 +4621,7 @@ static int online_data_cleanup_sub(DBKey key, DBData *data, va_list ap)
 	return 0;
 }
 
-static int online_data_cleanup(int tid, unsigned int tick, int id, intptr_t data)
+static int online_data_cleanup(int tid, int64 tick, int id, intptr_t data)
 {
 	online_char_db->foreach(online_char_db, online_data_cleanup_sub);
 	return 0;

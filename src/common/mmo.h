@@ -117,7 +117,7 @@
 #define MAX_GUILDSKILL	15      // Increased max guild skills because of new skills [Sara-chan]
 #define MAX_GUILDLEVEL 50
 #define MAX_GUARDIANS 8         // Local max per castle. [Skotlex]
-#define MAX_QUEST_DB 2662       // Max quests that the server will load
+#define MAX_QUEST_DB 2670       // Max quests that the server will load
 #define MAX_QUEST_OBJECTIVES 3  // Max quest objectives for a quest
 #define NPC_NAME_LENGTH 37		//Tamanho máximo do nome de NPCs [Raizen]
 #define MAX_START_ITEMS 32	    // Max number of items allowed to be given to a char whenever it's created. [mkbu95]
@@ -215,7 +215,7 @@ struct item {
 	int id;
 	short nameid;
 	short amount;
-	unsigned short equip; // Location(s) where item is equipped (using enum equip_pos for bitmasking).
+	unsigned int equip; // Location(s) where item is equipped (using enum equip_pos for bitmasking).
 	char identify;
 	char refine;
 	char attribute;
@@ -837,6 +837,14 @@ enum ammo_type {
 	A_THROWWEAPON	//9
 };
 
+/* packet size constant for itemlist */
+#if MAX_INVENTORY > MAX_STORAGE && MAX_INVENTORY > MAX_CART
+#define MAX_ITEMLIST MAX_INVENTORY
+#elif MAX_CART > MAX_INVENTORY && MAX_CART > MAX_STORAGE
+#define MAX_ITEMLIST MAX_CART
+#else
+#define MAX_ITEMLIST MAX_STORAGE
+#endif
 
 // sanity checks...
 #if MAX_ZENY > INT_MAX

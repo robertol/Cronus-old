@@ -279,7 +279,7 @@ int guild_payexp_timer_sub(DBKey key, DBData *data, va_list ap) {
 	return 0;
 }
 
-int guild_payexp_timer(int tid, unsigned int tick, int id, intptr_t data)
+int guild_payexp_timer(int tid, int64 tick, int id, intptr_t data)
 {
 	guild->expcache_db->clear(guild->expcache_db,guild->payexp_timer_sub);
 	return 0;
@@ -314,7 +314,7 @@ int guild_send_xy_timer_sub(DBKey key, DBData *data, va_list ap)
 }
 
 //Code from party_send_xy_timer [Skotlex]
-int guild_send_xy_timer(int tid, unsigned int tick, int id, intptr_t data)
+int guild_send_xy_timer(int tid, int64 tick, int id, intptr_t data)
 {
 	guild->db->foreach(guild->db,guild->send_xy_timer_sub,tick);
 	return 0;
@@ -1365,7 +1365,7 @@ void guild_block_skill(struct map_session_data *sd, int time)
 	uint16 skill_id[] = { GD_BATTLEORDER, GD_REGENERATION, GD_RESTORE, GD_EMERGENCYCALL };
 	int i;
 	for (i = 0; i < 4; i++)
-		skill->blockpc_start(sd, skill_id[i], time , true);
+		skill->blockpc_start(sd, skill_id[i], time);
 }
 
 /*====================================================

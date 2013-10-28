@@ -3333,8 +3333,8 @@ Return value will be 1 in case of success (the item was added or its drop rate
 was updated), and 0 otherwise (there were no free item drop slots).
 
 Example:
-  // Add Poring Doll (741) to the Poring's (1002) drops, with 1% (100) rate
-  addmonsterdrop(1002, 741, 100);
+	// Add Poring Doll (741) to the Poring's (1002) drops, with 1% (100) rate
+	addmonsterdrop(1002, 741, 100);
 
 ---------------------------------------
 
@@ -3348,11 +3348,10 @@ Return value will be 1 in case of success (the item was removed), and 0
 otherwise (the monster didn't have the specified item in its drop list).
 
 Example:
-  // Remove Jellopy (909) from the Poring's (1002) drops
-  delmonsterdrop(1002, 909);
+	// Remove Jellopy (909) from the Poring's (1002) drops
+	delmonsterdrop(1002, 909);
 
 ---------------------------------------
-
 
 *getmobdrops(<mob id>)
 
@@ -7427,7 +7426,7 @@ in the count parameter.
 Example:
 	replacestr("testing tester", "test", "dash"); //returns "dashing dasher"
 	replacestr("Donkey", "don", "mon", 0);	//returns "monkey"
-	replacestr("test test test test test", "yay", 0, 3); //returns "yay yay yay test test"
+	replacestr("test test test test test", "test", "yay", 0, 3); //returns "yay yay yay test test"
 
 ---------------------------------------
 
@@ -7861,15 +7860,81 @@ if (instance_check_party(getcharid(1),2,2,149)) {
 }
 
 ---------------------------------------
+*instance_set_respawn(<map_name>,<x>,<y>{,<instance_id>});
+
+Updates the 'reload spawn' position of a instance,
+that is where players in the instance are sent to upon @reloadscript,
+uses the npc instance (if any) when instance_id is not provided,
+handy to update a instance's progress so that when/if @reloadscript happens
+the damage to the players progress is reduced.
+It is most effective when used with instance variables (which are @reloadscript persistent)
+
+If a player warps into a instance before this command has been used,
+it will use the player's warp destination as the initial respawn point,
+it can of course be modified by using this script command at any point.
+
+---------------------------------------
+*instance_mapname("<map name>"{,<instance id>})
+
+Returns the unique name of the instanced map. If no instance ID is specified,
+the instance the script is attached to is used. If the script is not attached to
+an instance, the instance of the currently attached player's party is used. If
+that fails, the command returns an empty string instead.
 
 =========================
 |8.- Quest Log commands.|
 =========================
 ---------------------------------------
 
+*questinfo <Quest ID>, <Icon> {, <Map Mark Color>{, <Job Class>}};
+
+This is esentially a combination of checkquest and showevent. Use this only
+in an OnInit label. For the Quest ID, specify the quest ID that you want
+checked if it has been started yet.
+
+For Icon, use one of the following:
+
+No Icon		: QTYPE_NONE
+! Quest Icon	: QTYPE_QUEST
+? Quest Icon	: QTYPE_QUEST2
+! Job Icon	: QTYPE_JOB
+? Job Icon	: QTYPE_JOB2
+! Event Icon	: QTYPE_EVENT
+? Event Icon	: QTYPE_EVENT2
+Warg		: QTYPE_WARG
+Warg Face	: QTYPE_WARG2 (Only for packetver >= 20120410)
+
+Map Mark Color, when used, creates a mark in the user's mini map on the position of the NPC,
+the available color values are:
+
+0 - No Marker
+1 - Yellow Marker
+2 - Green Marker
+3 - Purple Marker
+
+When a user shows up on a map, each NPC is checked for questinfo that has been set.
+If questinfo is present, it will check if the quest has been started, if it has not, the bubble will appear.
+
+Optionally, you can also specify a Job Class if the quest bubble should only appear for a certain class.
+
+Example
+izlude,100,100,4	script	Test	844,{
+	mes "[Test]";
+	mes "Hello World.";
+	close;
+
+	OnInit:
+		questinfo 1001, QTYPE_QUEST, 0, Job_Novice;
+		end;
+}
+
+---------------------------------------
+
 *setquest <ID>;
 
 Place quest of <ID> in the users quest log, the state of which is "active".
+
+If *questinfo is set, and the same ID is specified here, the icon will be cleared when the quest is set.
 
 ---------------------------------------
 
@@ -7918,27 +7983,30 @@ If parameter "HUNTING" is supplied:
 
 ---------------------------------------
 
-*showevent <state>, <color>;
+*showevent <icon>{,<mark color>}
 
-Show a colored mark in the mini-map like "viewpoint" and an emotion on top 
-of a NPC. This is used to indicate that a NPC has a quest or an event to 
-certain player/s. 
+Show an emotion on top of a NPC, and optionally,
+a colored mark in the mini-map like "viewpoint".
+This is used to indicate that a NPC has a quest or an event to 
+a certain player. 
 
-state can be:
-	0 = disable ( Used to disable and remove the mark and the emotion from 
-		the NPC. )
-	1 = exclamation emotion ( Used to show an important quest event to 
-		certain player. )
-	2 = interrogation emotion ( Used to show an non-important quest event 
-		to certain player. )
-Other value may cause client crashes.
+Available Icons:
 
-color can be:
-	0 = yellow "Quest"
-	1 = orange "Job"
-	2 = green "Event"
-	3 = an MVP flag
-Other values show a transparent mark in the mini-map.
+Remove Icon	: QTYPE_NONE
+! Quest Icon	: QTYPE_QUEST
+? Quest Icon	: QTYPE_QUEST2
+! Job Icon	: QTYPE_JOB
+? Job Icon	: QTYPE_JOB2
+! Event Icon	: QTYPE_EVENT
+? Event Icon	: QTYPE_EVENT2
+Warg		: QTYPE_WARG
+Warg Face	: QTYPE_WARG2 (Only for packetver >= 20120410)
+
+Mark Color:
+0 - No Mark
+1 - Yellow Mark
+2 - Green Mark
+3 - Purple Mark
 
 ----------------------------------------
 

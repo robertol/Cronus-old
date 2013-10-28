@@ -3184,7 +3184,7 @@ void script_stop_instances(struct script_code *code) {
 /*==========================================
  * Timer function for sleep
  *------------------------------------------*/
-int run_script_timer(int tid, unsigned int tick, int id, intptr_t data) {
+int run_script_timer(int tid, int64 tick, int id, intptr_t data) {
 	struct script_state *st     = idb_get(script->st_db,(int)data);
 	if( st ) {
 		TBL_PC *sd = map->id2sd(st->rid);
@@ -5639,7 +5639,7 @@ BUILDIN(checkweight2)
 	int nb_it, nb_nb; //array size
 	
 	TBL_PC *sd = script->rid2sd(st);
-	nullpo_retr(1,sd);
+	nullpo_retr(false,sd);
 	
 	data_it = script_getdata(st, 2);
 	data_nb = script_getdata(st, 3);
@@ -7993,7 +7993,7 @@ BUILDIN(gettimetick) { /* Asgard Version */
 		case 0:
 		default:
 			//type 0:(System Ticks)
-			script_pushint(st,timer->gettick());
+			script_pushint(st,(unsigned int)timer->gettick());
 			break;
 	}
 	return true;
@@ -8821,7 +8821,7 @@ BUILDIN(getnpctimer) {
 	}
 	
 	switch( type ) {
-		case 0: val = npc->gettimerevent_tick(nd); break;
+		case 0: val = (int)npc->gettimerevent_tick(nd); break;
 		case 1:
 			if( nd->u.scr.rid ) {
 				sd = map->id2sd(nd->u.scr.rid);
@@ -8995,8 +8995,8 @@ BUILDIN(itemeffect) {
 	struct script_data *data;
 	struct item_data *item_data;
 	
-	nullpo_retr( 1, ( sd = script->rid2sd( st ) ) );
-	nullpo_retr( 1, ( nd = (TBL_NPC *)map->id2bl( sd->npc_id ) ) );
+	nullpo_retr( false, ( sd = script->rid2sd( st ) ) );
+	nullpo_retr( false, ( nd = (TBL_NPC *)map->id2bl( sd->npc_id ) ) );
 	
 	data = script_getdata( st, 2 );
 	script->get_val( st, data );
@@ -9505,7 +9505,7 @@ BUILDIN(getstatus)
 			
 			if( td ) {
 				// return the amount of time remaining
-				script_pushint(st, td->tick - timer->gettick());
+				script_pushint(st, (int)(td->tick - timer->gettick()));
 			}
 		}
 			break;
@@ -10404,6 +10404,7 @@ BUILDIN(removemapflag) {
 			case MF_BATTLEGROUND:       map->list[m].flag.battleground = 0; break;
 			case MF_RESET:              map->list[m].flag.reset = 0; break;
 			case MF_NOTOMB:             map->list[m].flag.notomb = 0; break;
+            case MF_NOCASHSHOP:         map->list[m].flag.nocashshop = 0; break;
 		}
 	}
 	
@@ -12691,7 +12692,7 @@ BUILDIN(summon)
 	const char *str,*event="";
 	TBL_PC *sd;
 	struct mob_data *md;
-	int tick = timer->gettick();
+	int64 tick = timer->gettick();
 	
 	sd=script->rid2sd(st);
 	if (!sd) return true;
@@ -14018,7 +14019,7 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 	
 	if( SQL_ERROR == SQL->QueryStr(handle, query) ) {
 		Sql_ShowDebug(handle);
-		script_pushint(st, 0);
+		st->state = END;
 		return false;
 	}
 	
@@ -14546,7 +14547,7 @@ BUILDIN(checkidle) {
 		sd = script->rid2sd(st);
 	
 	if (sd)
-		script_pushint(st, DIFF_TICK(last_tick, sd->idletime));
+		script_pushint(st, DIFF_TICK32(last_tick, sd->idletime));
 	else
 		script_pushint(st, 0);
 	
@@ -15459,10 +15460,63 @@ BUILDIN(readbook)
  Questlog script commands
  *******************/
 
+BUILDIN(questinfo)
+{
+	struct npc_data *nd = map->id2nd(st->oid);
+	int quest, icon, job, color = 0;
+	struct questinfo qi;
+
+	if( nd == NULL || nd->bl.m == -1 )
+		return true;
+
+	quest = script_getnum(st, 2);
+	icon = script_getnum(st, 3);
+	
+	#if PACKETVER >= 20120410
+		if(icon < 0 || (icon > 8 && icon != 9999) || icon == 7)
+			icon = 9999;	// Default to nothing if icon id is invalid.
+	#else
+		if(icon < 0 || icon > 7)
+			icon = 0;
+		else
+			icon = icon + 1;
+	#endif
+	
+	qi.quest_id = quest;
+	qi.icon = (unsigned char)icon;
+	qi.nd = nd;
+		
+	if( script_hasdata(st, 4) ) {
+		color = script_getnum(st, 4);
+		if( color < 0 || color > 3 ) {
+			ShowWarning("buildin_questinfo: invalid color '%d', changing to 0\n",color);
+			script->reportfunc(st);
+			color = 0;
+		}
+		qi.color = (unsigned char)color;
+	}
+	
+	qi.hasJob = false;
+	
+	if(script_hasdata(st, 5)) {
+		job = script_getnum(st, 5);
+	
+		if (!pcdb_checkid(job))
+			ShowError("buildin_questinfo: Nonexistant Job Class.\n");
+		else {
+			qi.hasJob = true;
+			qi.job = (unsigned short)job;
+		}
+	}
+	
+	map->add_questinfo(nd->bl.m,&qi);
+
+	return true;
+}
 BUILDIN(setquest)
 {
 	struct map_session_data *sd = script->rid2sd(st);
-	nullpo_ret(sd);
+	nullpo_retr(false,sd);
 	
 	quest->add(sd, script_getnum(st, 2));
 	return true;
@@ -15471,7 +15525,7 @@ BUILDIN(setquest)
 BUILDIN(erasequest)
 {
 	struct map_session_data *sd = script->rid2sd(st);
-	nullpo_ret(sd);
+	nullpo_retr(false,sd);
 	
 	quest->delete(sd, script_getnum(st, 2));
 	return true;
@@ -15480,7 +15534,7 @@ BUILDIN(erasequest)
 BUILDIN(completequest)
 {
 	struct map_session_data *sd = script->rid2sd(st);
-	nullpo_ret(sd);
+	nullpo_retr(false,sd);
 	
 	quest->update_status(sd, script_getnum(st, 2), Q_COMPLETE);
 	return true;
@@ -15489,7 +15543,7 @@ BUILDIN(completequest)
 BUILDIN(changequest)
 {
 	struct map_session_data *sd = script->rid2sd(st);
-	nullpo_ret(sd);
+	nullpo_retr(false,sd);
 	
 	quest->change(sd, script_getnum(st, 2),script_getnum(st, 3));
 	return true;
@@ -15500,7 +15554,7 @@ BUILDIN(checkquest)
 	struct map_session_data *sd = script->rid2sd(st);
 	quest_check_type type = HAVEQUEST;
 	
-	nullpo_ret(sd);
+	nullpo_retr(false,sd);
 	
 	if( script_hasdata(st, 3) )
 		type = (quest_check_type)script_getnum(st, 3);
@@ -15513,17 +15567,31 @@ BUILDIN(checkquest)
 BUILDIN(showevent) {
 	TBL_PC *sd = script->rid2sd(st);
 	struct npc_data *nd = map->id2nd(st->oid);
-	int state, color;
+	int icon, color;
 	
 	if( sd == NULL || nd == NULL )
 		return true;
-	state = script_getnum(st, 2);
+	icon = script_getnum(st, 2);
+if( script_hasdata(st, 3) ) {
 	color = script_getnum(st, 3);
 	
-	if( color < 0 || color > 3 )
-		color = 0; // set default color
+if( color < 0 || color > 3 ) {
+			ShowWarning("buildin_showevent: invalid color '%d', changing to 0\n",color);
+			script->reportfunc(st);
+			color = 0;
+		}
+	}
+#if PACKETVER >= 20120410
+		if(icon < 0 || (icon > 8 && icon != 9999) || icon == 7)
+			icon = 9999;	// Default to nothing if icon id is invalid.
+	#else
+		if(icon < 0 || icon > 7)
+			icon = 0;
+		else
+			icon = icon + 1;
+	#endif
 	
-	clif->quest_show_event(sd, &nd->bl, state, color);
+	clif->quest_show_event(sd, &nd->bl, icon, color);
 	return true;
 }
 
@@ -16949,6 +17017,7 @@ BUILDIN(npcskill) {
 /* Turns a player into a monster and grants SC attribute effect. [malufett/Hercules]
  * montransform <monster name/id>, <duration>, <sc type>, <val1>, <val2>, <val3>, <val4>; */
 BUILDIN(montransform) {
+
   int tick;
   enum sc_type type;
   struct block_list* bl;
@@ -17463,6 +17532,77 @@ BUILDIN(bg_match_over) {
 	
 	return true;
 }
+
+
+BUILDIN(instance_mapname) {
+  const char *map_name;
+  int m;
+  short instance_id = -1;
+  
+   map_name = script_getstr(st,2);
+  
+  if( script_hasdata(st,3) )
+    instance_id = script_getnum(st,3);
+  else
+    instance_id = st->instance_id;
+  
+  // Check that instance mapname is a valid map
+  if( instance_id == -1 || (m = instance->mapname2imap(map_name,instance_id)) == -1 )
+    script_pushconststr(st, "");
+  else
+    script_pushconststr(st, map->list[m].name);
+  
+  return true;
+}
+/* modify an instances' reload-spawn point */
+/* instance_set_respawn <map_name>,<x>,<y>{,<instance_id>} */
+/* returns 1 when successful, 0 otherwise. */
+
+BUILDIN(instance_set_respawn) {
+  const char *map_name;
+  short instance_id = -1;
+  short mid;
+  short x,y;
+  
+  map_name = script_getstr(st,2);
+  x = script_getnum(st, 3);
+  y = script_getnum(st, 4);
+  
+  if( script_hasdata(st, 5) )
+    instance_id = script_getnum(st, 5);
+  else
+    instance_id = st->instance_id;
+  
+  if( instance_id == -1 || !instance->valid(instance_id) )
+    script_pushint(st, 0);
+  else if( (mid = map->mapname2mapid(map_name)) == -1 ) {
+    ShowError("buildin_instance_set_respawn: unknown map '%s'\n",map_name);
+    script_pushint(st, 0);
+  } else {
+    int i;
+    
+    for(i = 0; i < instance->list[instance_id].num_map; i++) {
+      if( map->list[instance->list[instance_id].map[i]].m == mid ) {
+        instance->list[instance_id].respawn.map = map_id2index(mid);
+        instance->list[instance_id].respawn.x = x;
+        instance->list[instance_id].respawn.y = y;
+        break;
+      }
+    }
+    
+    if( i != instance->list[instance_id].num_map )
+      script_pushint(st, 1);
+    else {
+      ShowError("buildin_instance_set_respawn: map '%s' not part of instance '%s'\n",map_name,instance->list[instance_id].name);
+      script_pushint(st, 0);
+    }
+  }
+  
+  
+  return true;
+}
+
+
 // declarations that were supposed to be exported from npc_chat.c
 #ifdef PCRE_SUPPORT
 	BUILDIN(defpattern);
@@ -17928,6 +18068,8 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(has_instance,"s?"),
 		BUILDIN_DEF(instance_warpall,"sii?"),
 		BUILDIN_DEF(instance_check_party,"i???"),
+		BUILDIN_DEF(instance_mapname,"s?"),
+        BUILDIN_DEF(instance_set_respawn,"sii?"),
 		/**
 		 * 3rd-related
 		 **/
@@ -17965,7 +18107,7 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(completequest, "i"),
 		BUILDIN_DEF(checkquest, "i?"),
 		BUILDIN_DEF(changequest, "ii"),
-		BUILDIN_DEF(showevent, "ii"),
+		BUILDIN_DEF(showevent, "i?"),
 		
 		/**
 		 * hQueue [Ind/Hercules]

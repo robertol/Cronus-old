@@ -196,7 +196,7 @@ struct block_list* battle_getenemyarea(struct block_list *src, int x, int y, int
 	return bl_list[rnd()%c];
 }
 
-int battle_delay_damage_sub(int tid, unsigned int tick, int id, intptr_t data) {
+int battle_delay_damage_sub(int tid, int64 tick, int id, intptr_t data) {
 	struct delay_damage *dat = (struct delay_damage *)data;
 
 	if ( dat ) {
@@ -244,7 +244,7 @@ int battle_delay_damage_sub(int tid, unsigned int tick, int id, intptr_t data) {
 	return 0;
 }
 
-int battle_delay_damage (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects) {
+int battle_delay_damage (int64 tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects) {
 	struct delay_damage *dat;
 	struct status_change *sc;
 	nullpo_ret(src);
@@ -349,7 +349,7 @@ int64 battle_attr_fix(struct block_list *src, struct block_list *target, int64 d
 				y = sg->val3 & 0xffff;
 				skill->unitsetting(src,su->group->skill_id,su->group->skill_lv,x,y,1);
 				sg->val3 = -1;
-				sg->limit = DIFF_TICK(timer->gettick(),sg->tick)+300;
+				sg->limit = DIFF_TICK32(timer->gettick(),sg->tick)+300;
 			}
 		}
 	}
@@ -944,13 +944,13 @@ int64 battle_calc_cardfix(int attack_type, struct block_list *src, struct block_
 						break;
 					}
 				}
-				#ifndef RENEWAL
+#ifndef RENEWAL
 				//It was discovered that ranged defense also counts vs magic! [Skotlex]
 				if ( wflag&BF_SHORT )
 					cardfix = cardfix * ( 100 - tsd->bonus.near_attack_def_rate ) / 100;
 				else
 					cardfix = cardfix * ( 100 - tsd->bonus.long_attack_def_rate ) / 100;
-				#endif
+#endif
 
 				cardfix = cardfix * ( 100 - tsd->bonus.magic_def_rate ) / 100;
 
@@ -5271,13 +5271,13 @@ void battle_drain(TBL_PC *sd, struct block_list *tbl, int64 rdamage, int64 ldama
 }
 // Deals the same damage to targets in area. [pakpil]
 int battle_damage_area( struct block_list *bl, va_list ap) {
-	unsigned int tick;
+	int64 tick;
 	int amotion, dmotion, damage;
 	struct block_list *src;
 
 	nullpo_ret(bl);
 
-	tick=va_arg(ap, unsigned int);
+	tick=va_arg(ap, int64);
 	src=va_arg(ap,struct block_list *);
 	amotion=va_arg(ap,int);
 	dmotion=va_arg(ap,int);
@@ -5303,7 +5303,7 @@ int battle_damage_area( struct block_list *bl, va_list ap) {
 /*==========================================
  * Do a basic physical attack (call trough unit_attack_timer)
  *------------------------------------------*/
-enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* target, unsigned int tick, int flag) {
+enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* target, int64 tick, int flag) {
 	struct map_session_data *sd = NULL, *tsd = NULL;
 	struct status_data *sstatus, *tstatus;
 	struct status_change *sc, *tsc;
@@ -6471,6 +6471,7 @@ static const struct _battle_data {
 	{ "guild_notice_changemap",				&battle_config.guild_notice_changemap,			2,		0,		2,				},
 	{ "feature.banking",                    &battle_config.feature_banking,                 1,      0,      1,              },
     { "feature.auction",                    &battle_config.feature_auction,                 0,      0,      2,              },
+	{ "idletime_criteria",                  &battle_config.idletime_criteria,            0x25,      1,      INT_MAX,        },
 	{ "mon_trans_disable_in_gvg",           &battle_config.mon_trans_disable_in_gvg,        0,      0,      1,              },
 };
 #ifndef STATS_OPT_OUT
@@ -6616,7 +6617,7 @@ void Hercules_report(char* date, char *time_c) {
 
 #undef BFLAG_LENGTH
 }
-static int Hercules_report_timer(int tid, unsigned int tick, int id, intptr_t data) {
+static int Hercules_report_timer(int tid, int64 tick, int id, intptr_t data) {
 	if( chrif->isconnected() ) {/* char server relays it, so it must be online. */
 		Hercules_report(__DATE__,__TIME__);
 	}

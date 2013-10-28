@@ -454,6 +454,7 @@ struct Battle_Config {
 	int max_walk_path;
 	int item_enabled_npc;
 	int packet_obfuscation;
+    int idletime_criteria;
 	
 	int gm_ignore_warpable_area;
 	
@@ -466,6 +467,21 @@ struct Battle_Config {
 	int mon_trans_disable_in_gvg;
 	
 } battle_config;
+
+/* criteria for battle_config.idletime_critera */
+enum e_battle_config_idletime {
+  BCIDLE_WALK          = 0x001,
+  BCIDLE_USESKILLTOID  = 0x002,
+  BCIDLE_USESKILLTOPOS = 0x004,
+  BCIDLE_USEITEM       = 0x008,
+  BCIDLE_ATTACK        = 0x010,
+  BCIDLE_CHAT          = 0x020,
+  BCIDLE_SIT           = 0x040,
+  BCIDLE_EMOTION       = 0x080,
+  BCIDLE_DROPITEM      = 0x100,
+  BCIDLE_ATCOMMAND     = 0x200,
+};
+
 
 // Dammage delayed info
 struct delay_damage {
@@ -504,11 +520,11 @@ struct battle_interface {
 	/* battlegrounds final damage calculation */
 	int64 (*calc_bg_damage) (struct block_list *src, struct block_list *bl, int64 damage, int div_, uint16 skill_id, uint16 skill_lv, int flag);
 	/* normal weapon attack */
-	enum damage_lv (*weapon_attack) (struct block_list *bl, struct block_list *target, unsigned int tick, int flag);
+	enum damage_lv (*weapon_attack) (struct block_list *bl, struct block_list *target, int64 tick, int flag);
 	/* calculate weapon attack */
 	struct Damage (*calc_weapon_attack) (struct block_list *src,struct block_list *target,uint16 skill_id,uint16 skill_lv,int wflag);
 	/* delays damage or skills by a timer */
-	int (*delay_damage) (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects);
+	int (*delay_damage) (int64 tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects);
 	/* drain damage */
 	void (*drain) (struct map_session_data *sd, struct block_list *tbl, int64 rdamage, int64 ldamage, int race, int boss);
 	/* damage return/reflect */
@@ -552,7 +568,7 @@ struct battle_interface {
 	int (*get_targeted_sub) (struct block_list *bl, va_list ap);
 	int (*get_enemy_sub) (struct block_list *bl, va_list ap);
 	int (*get_enemy_area_sub) (struct block_list *bl, va_list ap);
-	int (*delay_damage_sub) (int tid, unsigned int tick, int id, intptr_t data);
+	int (*delay_damage_sub) (int tid, int64 tick, int id, intptr_t data);
 	int (*blewcount_bonus) (struct map_session_data *sd, uint16 skill_id);
 	/* skill range criteria */
 	int (*range_type) (struct block_list *src, struct block_list *target, uint16 skill_id, uint16 skill_lv);
