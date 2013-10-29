@@ -9236,7 +9236,7 @@ int pc_setsavepoint(struct map_session_data *sd, short mapindex,int x,int y)
 }
 
 /*==========================================
- * Save 1 player data  at autosave intervalle
+ * Save 1 player data  at autosave interval
  *------------------------------------------*/
 int pc_autosave(int tid, int64 tick, int id, intptr_t data)
 {

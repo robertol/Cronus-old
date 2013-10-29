@@ -7571,7 +7571,7 @@ ACMD(mapflag) {
 	SETFLAG(nojobexp);          SETFLAG(nomobloot);          SETFLAG(nomvploot);    SETFLAG(nightenabled);
 	SETFLAG(nodrop);            SETFLAG(novending);          SETFLAG(loadevent);
 	SETFLAG(nochat);            SETFLAG(partylock);          SETFLAG(guildlock);    SETFLAG(src4instance);
-	SETFLAG(notomb);
+	SETFLAG(notomb);            SETFLAG(nocashshop);
 	
 	clif->message(sd->fd,msg_txt(1314)); // Invalid flag name or flag.
 	clif->message(sd->fd,msg_txt(1312)); // Usage: "@mapflag monster_noteleport 1" (0=Off | 1=On)
@@ -7583,7 +7583,7 @@ ACMD(mapflag) {
 	clif->message(sd->fd,"nozenypenalty, notrade, noskill, nowarp, nowarpto, noicewall, snow, clouds, clouds2,");
 	clif->message(sd->fd,"fog, fireworks, sakura, leaves, nobaseexp, nojobexp, nomobloot,");
 	clif->message(sd->fd,"nomvploot, nightenabled, nodrop, novending, loadevent, nochat, partylock,");
-	clif->message(sd->fd,"guildlock, src4instance, notomb");
+	clif->message(sd->fd,"guildlock, src4instance, notomb,nocashshop");
 	
 #undef CHECKFLAG
 #undef SETFLAG
@@ -8317,7 +8317,7 @@ ACMD(delitem)
 ACMD(font)
 {
 	int font_id;
-	nullpo_retr(-1,sd);
+	
 	
 	font_id = atoi(message);
 	if( font_id == 0 )

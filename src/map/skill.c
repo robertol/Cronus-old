@@ -2779,7 +2779,7 @@ int skill_area_sub (struct block_list *bl, va_list ap) {
 	src=va_arg(ap,struct block_list *);
 	skill_id=va_arg(ap,int);
 	skill_lv=va_arg(ap,int);
-	tick=va_arg(ap,unsigned int);
+	tick=va_arg(ap,int64);
 	flag=va_arg(ap,int);
 	func=va_arg(ap,SkillFunc);
 
@@ -17025,8 +17025,9 @@ int skill_blockpc_end(int tid, int64 tick, int id, intptr_t data) {
  * @return  0 if successful, -1 otherwise
  */
 int skill_blockpc_start_(struct map_session_data *sd, uint16 skill_id, int tick) {
-	uint16 idx = skill->get_index(skill_id);
     struct skill_cd* cd = NULL;
+	
+	uint16 idx = skill->get_index(skill_id);
 	int64 now = timer->gettick();
 
 	nullpo_retr (-1, sd);
