@@ -3,7 +3,7 @@ What is the import folder for?
 
 The folder provides a way for you to change your config settings without having
 to update the files every time you update your server. You store your changes,
-and the rest is updated with Hercules (usually though GIT).
+and the rest is updated with Cronus (usually though GIT).
 
 How does this work?
 -------------------------------------------------------------------------------
