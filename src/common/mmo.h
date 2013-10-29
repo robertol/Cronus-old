@@ -107,7 +107,7 @@
 #define DEFAULT_WALK_SPEED 150
 #define MIN_WALK_SPEED 0
 #define MAX_WALK_SPEED 1000
-//Os números de storage devem ser no máximo 700 em Clients 2012 (Risco de perda de pacotes)
+//Os números de storage devem ser de no máximo 731 (Risco de Perda/Má Interpretação de Pacotes)
 #define MAX_STORAGE 600     
 #define MAX_GUILD_STORAGE 600 
 #define MAX_PARTY 12
