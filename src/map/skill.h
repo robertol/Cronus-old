@@ -1798,10 +1798,10 @@ typedef int (*SkillFunc)(struct block_list *src, struct block_list *target, uint
  * Skill.c Interface
  **/
 struct skill_interface {
-	int (*init) (void);
+	int (*init) ( bool );
 	int (*final) (void);
 	void (*reload) (void);
-	void (*read_db) (void);
+	void (*read_db) ( bool );
 	/* */
 	DBMap* cd_db; // char_id -> struct skill_cd
 	DBMap* name2id_db;

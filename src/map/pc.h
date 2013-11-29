@@ -166,6 +166,7 @@ struct map_session_data {
 		short pmap; // Previous map on Map Change
 		unsigned short autoloot;
 		unsigned short autolootid[AUTOLOOTITEM_SIZE]; // [Zephyrus]
+		unsigned short autoloottype;
 		unsigned int autolooting : 1; //performance-saver, autolooting state for @alootid
 		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
 		unsigned int gmaster_flag : 1;
@@ -741,7 +742,7 @@ struct pc_interface {
 	/* */
 	struct eri *sc_display_ers;
 	/* funcs */
-	void (*init) (void);
+	void (*init) ( bool );
 	void (*final) (void);
 	
 	struct map_session_data* (*get_dummy_sd) (void);
@@ -749,9 +750,10 @@ struct pc_interface {
 	int (*get_group_level) (struct map_session_data *sd);
 	//int (*getrefinebonus) (int lv,int type); FIXME: This function does not exist, nor it is ever called
 	bool (*can_give_items) (struct map_session_data *sd);
+	bool (*can_give_bounded_items) (struct map_session_data *sd);
 	
 	bool (*can_use_command) (struct map_session_data *sd, const char *command);
-	bool (*has_permission) (struct map_session_data *sd, enum e_pc_permission permission);
+	bool (*has_permission) (struct map_session_data *sd, unsigned int permission);
 	int (*set_group) (struct map_session_data *sd, int group_id);
 	bool (*should_log_commands) (struct map_session_data *sd);
 
@@ -784,6 +786,10 @@ struct pc_interface {
 	int (*additem) (struct map_session_data *sd,struct item *item_data,int amount,e_log_pick_type log_type);
 	int (*getzeny) (struct map_session_data *sd,int zeny, enum e_log_pick_type type, struct map_session_data *tsd);
 	int (*delitem) (struct map_session_data *sd,int n,int amount,int type, short reason, e_log_pick_type log_type);
+	
+	//Bound items
+	int (*bound_chk) (TBL_PC *sd,int type,int *idxlist);
+	
 	// Special Shop System
 	int (*paycash) (struct map_session_data *sd, int price, int points);
 	int (*getcash) (struct map_session_data *sd, int cash, int points);

@@ -3,12 +3,13 @@
 //===== By: ==================================================
 //= Hercules Dev Team
 //===== Current Version: =====================================
-//= 20130528
+//= 20131031
 //===== Description: =========================================
 //= Player group permissions, configured in /conf/groups.conf.
 //============================================================
 
 can_trade : Ability to trade or otherwise distribute items (drop, storage, vending etc...).
+can_trade_bound : Ability to trade or otherwise distribute bounded items (drop, storage, vending etc...).
 can_party : Ability to join parties.
 all_skill : Ability to use all skills.
 all_equipment : Ability to equip anything (can cause client errors).

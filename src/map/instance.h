@@ -45,7 +45,7 @@ struct instance_data {
 };
 
 struct instance_interface {
-	void (*init) (void);
+	void (*init) ( bool );
 	void (*final) (void);
 	void (*reload) (void);
 	/* start point */

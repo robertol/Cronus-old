@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `cart_inventory` (
   `card2` smallint(11) NOT NULL default '0',
   `card3` smallint(11) NOT NULL default '0',
   `expire_time` int(11) unsigned NOT NULL default '0',
+  `bound` tinyint(1) unsigned NOT NULL default '0',
   `unique_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `char_id` (`char_id`)
@@ -342,6 +343,7 @@ CREATE TABLE IF NOT EXISTS `guild_storage` (
   `card2` smallint(11) NOT NULL default '0',
   `card3` smallint(11) NOT NULL default '0',
   `expire_time` int(11) unsigned NOT NULL default '0',
+  `bound` tinyint(1) unsigned NOT NULL default '0',
   `unique_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `guild_id` (`guild_id`)
@@ -405,6 +407,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `card2` smallint(11) NOT NULL default '0',
   `card3` smallint(11) NOT NULL default '0',
   `expire_time` int(11) unsigned NOT NULL default '0',
+  `bound` tinyint(1) unsigned NOT NULL default '0',
   `favorite` tinyint(3) unsigned NOT NULL default '0',
   `unique_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
@@ -661,6 +664,7 @@ INSERT INTO `sql_updates` (`timestamp`) VALUES (1366078541);
 INSERT INTO `sql_updates` (`timestamp`) VALUES (1381354728);
 INSERT INTO `sql_updates` (`timestamp`) VALUES (1381423003);
 INSERT INTO `sql_updates` (`timestamp`) VALUES (1382892428);
+INSERT INTO `sql_updates` (`timestamp`) VALUES (1383162785);
 INSERT INTO `sql_updates` (`timestamp`) VALUES (1383167577);
 
 --
@@ -691,6 +695,7 @@ CREATE TABLE IF NOT EXISTS `storage` (
   `card2` smallint(11) NOT NULL default '0',
   `card3` smallint(11) NOT NULL default '0',
   `expire_time` int(11) unsigned NOT NULL default '0',
+  `bound` tinyint(1) unsigned NOT NULL default '0',
   `unique_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `account_id` (`account_id`)
@@ -715,6 +720,9 @@ INSERT INTO `interreg` (`varname`, `value`) VALUES
 CREATE TABLE IF NOT EXISTS `account_data` (
   `account_id` int(11) unsigned NOT NULL default '0',
   `bank_vault` int(11) unsigned NOT NULL default '0',
+  `base_exp` TINYINT( 4 ) UNSIGNED NOT NULL default '0',
+  `base_drop` TINYINT( 4 ) UNSIGNED NOT NULL default '0',
+  `base_death` TINYINT( 4 ) UNSIGNED NOT NULL default '0',
   PRIMARY KEY  (`account_id`)
 ) ENGINE=MyISAM; 
 

@@ -351,7 +351,9 @@ int quest_read_db(void) {
 	return 0;
 }
 
-void do_init_quest(void) {
+void do_init_quest( bool minimal ) {
+	if( minimal )
+		return;
 	quest->read_db();
 }
 

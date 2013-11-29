@@ -107,7 +107,8 @@ int compare_item(struct item *a, struct item *b)
 		a->identify == b->identify &&
 		a->refine == b->refine &&
 		a->attribute == b->attribute &&
-		a->expire_time == b->expire_time )
+		a->expire_time == b->expire_time &&
+		a->bound == b->bound )
 	{
 		int i;
 		for (i = 0; i < MAX_SLOTS && (a->card[i] == b->card[i]); i++);
@@ -137,6 +138,11 @@ int storage_additem(struct map_session_data* sd, struct item* item_data, int amo
 	if( !itemdb_canstore(item_data, pc->get_group_level(sd)) )
 	{	//Check if item is storable. [Skotlex]
 		clif->message (sd->fd, msg_txt(264));
+		return 1;
+	}
+	
+	if( (item_data->bound > 1) && !pc->can_give_bounded_items(sd) ) {
+		clif->message(sd->fd, msg_txt(294));
 		return 1;
 	}
 	
@@ -429,9 +435,14 @@ int guild_storage_additem(struct map_session_data* sd, struct guild_storage* sto
 		return 1;
 	}
 
-	if( !itemdb_canguildstore(item_data, pc->get_group_level(sd)) || item_data->expire_time )
+	if( !itemdb_canguildstore(item_data, pc->get_group_level(sd)) || item_data->expire_time || (item_data->bound && !pc->can_give_bounded_items(sd)) )
 	{	//Check if item is storable. [Skotlex]
 		clif->message (sd->fd, msg_txt(264));
+		return 1;
+	}
+	
+	if( (item_data->bound >= 1) && !pc->can_give_bounded_items(sd) ) {
+	    clif->message(sd->fd, msg_txt(294));
 		return 1;
 	}
 
@@ -717,7 +728,9 @@ int storage_guild_storage_quit(struct map_session_data* sd, int flag) {
 
 	return 0;
 }
-void do_init_gstorage(void) {
+void do_init_gstorage( bool minimal ) {
+	if( minimal )
+		return;
 	gstorage->db = idb_alloc(DB_OPT_RELEASE_DATA);
 }
 void do_final_gstorage(void) {

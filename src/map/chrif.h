@@ -63,7 +63,7 @@ struct chrif_interface {
 	int state;
 	/* */
 	int (*final) (void);
-	int (*init) (void);
+	void (*init) ( bool );
 	/* funcs */
 	void (*setuserid) (char* id);
 	void (*setpasswd) (char* pwd);

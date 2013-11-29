@@ -49,17 +49,18 @@
 
 #ifndef PACKETVER
 	#define PACKETVER 20120716
-#endif
+#endif // PACKETVER
 
 // Comment the following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE).
 //#define PACKETVER_RE
 
+// Uncomment the line below if you want your server NOT to have the Renewal formulas and behaviour
+//#define DISABLE_RENEWAL
+
 // Client support for experimental RagexeRE UI present in 2012-04-10 and 2012-04-18
-#ifdef PACKETVER_RE
-#if (PACKETVER == 20120410) || (PACKETVER == 20120418)
+#if defined(PACKETVER_RE) && ((PACKETVER == 20120410) || (PACKETVER == 20120418))
 	#define	PARTY_RECRUIT
-#endif
-#endif
+#endif // PACKETVER_RE && (PACKETVER == 20120410 || PACKETVER == 10120418)
 
 // Comment the following line to disable sc_data saving. [Skotlex]
 #define ENABLE_SC_SAVING
@@ -105,7 +106,7 @@
 //Should hold the max of GLOBAL/ACCOUNT/ACCOUNT2 (needed for some arrays that hold all three)
 #define MAX_REG_NUM 256
 #define DEFAULT_WALK_SPEED 150
-#define MIN_WALK_SPEED 0
+#define MIN_WALK_SPEED 20
 #define MAX_WALK_SPEED 1000
 //Os números de storage devem ser de no máximo 731 (Risco de Perda/Má Interpretação de Pacotes)
 #define MAX_STORAGE 600     
@@ -222,7 +223,7 @@ struct item {
 	char attribute;
 	short card[MAX_SLOTS];
 	unsigned int expire_time;
-	char favorite;
+	char favorite, bound;
 	uint64 unique_id;
 };
 
@@ -414,6 +415,9 @@ struct mmo_charstatus {
 	unsigned short slotchange;
 
 	time_t delete_date;
+	
+	/* `account_data` modifiers */
+	unsigned short mod_exp,mod_drop,mod_death;
 	
 	unsigned char font;
 };

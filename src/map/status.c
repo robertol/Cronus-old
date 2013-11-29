@@ -2000,12 +2000,12 @@ void status_calc_misc(struct block_list *bl, struct status_data *st, int level) 
 
 //Skotlex: Calculates the initial status for the given mob
 //first will only be false when the mob leveled up or got a GuardUp level.
-int status_calc_mob_(struct mob_data* md, bool first) {
+int status_calc_mob_(struct mob_data* md, enum e_status_calc_opt opt) {
 	struct status_data *mstatus;
 	struct block_list *mbl = NULL;
 	int flag=0;
 
-	if(first)
+	if(opt&SCO_FIRST)
 	{	//Set basic level on respawn.
 		if (md->level > 0 && md->level <= MAX_LEVEL && md->level != md->db->lv)
 			;
@@ -2037,7 +2037,7 @@ int status_calc_mob_(struct mob_data* md, bool first) {
 			aFree(md->base_status);
 			md->base_status = NULL;
 		}
-		if(first)
+		if(opt&SCO_FIRST)
 			memcpy(&md->status, &md->db->status, sizeof(struct status_data));
 		return 0;
 	}
@@ -2161,18 +2161,18 @@ int status_calc_mob_(struct mob_data* md, bool first) {
 			}
 	}
 
-	if( first ) //Initial battle status
+	if( opt&SCO_FIRST ) //Initial battle status
 		memcpy(&md->status, mstatus, sizeof(struct status_data));
 
 	return 1;
 }
 
 //Skotlex: Calculates the stats of the given pet.
-int status_calc_pet_(struct pet_data *pd, bool first)
+int status_calc_pet_(struct pet_data *pd, enum e_status_calc_opt opt)
 {
 	nullpo_ret(pd);
 
-	if (first) {
+	if (opt&SCO_FIRST) {
 		memcpy(&pd->status, &pd->db->status, sizeof(struct status_data));
 		pd->status.mode = MD_CANMOVE; // pets discard all modes, except walking
 		pd->status.speed = pd->petDB->speed;
@@ -2190,10 +2190,10 @@ int status_calc_pet_(struct pet_data *pd, bool first)
 		lv =sd->status.base_level*battle_config.pet_lv_rate/100;
 		if (lv < 0)
 			lv = 1;
-		if (lv != pd->pet.level || first) {
+		if (lv != pd->pet.level || opt&SCO_FIRST) {
 			struct status_data *bstat = &pd->db->status, *pstatus = &pd->status;
 			pd->pet.level = lv;
-			if (!first) //Lv Up animation
+			if (!opt&SCO_FIRST) //Lv Up animation
 				clif->misceffect(&pd->bl, 0);
 			pstatus->rhw.atk = (bstat->rhw.atk*lv)/pd->db->lv;
 			pstatus->rhw.atk2 = (bstat->rhw.atk2*lv)/pd->db->lv;
@@ -2215,10 +2215,10 @@ int status_calc_pet_(struct pet_data *pd, bool first)
 
 			status->calc_misc(&pd->bl, &pd->status, lv);
 
-			if (!first)	//Not done the first time because the pet is not visible yet
+			if (!opt&SCO_FIRST)	//Not done the first time because the pet is not visible yet
 				clif->send_petstatus(sd);
 		}
-	} else if (first) {
+	} else if (opt&SCO_FIRST) {
 		status->calc_misc(&pd->bl, &pd->status, pd->db->lv);
 		if (!battle_config.pet_lv_rate && pd->pet.level != pd->db->lv)
 			pd->pet.level = pd->db->lv;
@@ -2296,7 +2296,7 @@ unsigned int status_base_pc_maxsp(struct map_session_data* sd, struct status_dat
 
 //Calculates player data from scratch without counting SC adjustments.
 //Should be invoked whenever players raise stats, learn passive skills or change equipment.
-int status_calc_pc_(struct map_session_data* sd, bool first) {
+int status_calc_pc_(struct map_session_data* sd, enum e_status_calc_opt opt) {
 	static int calculating = 0; //Check for recursive call preemption. [Skotlex]
 	struct status_data *bstatus; // pointer to the player's base status
 	const struct status_change *sc = &sd->sc;
@@ -2318,7 +2318,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first) {
 
 	sd->max_weight = status->max_weight_base[pc->class2idx(sd->status.class_)]+sd->status.str*300;
 
-	if(first) {
+	if(opt&SCO_FIRST) {
 		//Load Hp/SP from char-received data.
 		sd->battle_status.hp = sd->status.hp;
 		sd->battle_status.sp = sd->status.sp;
@@ -2390,11 +2390,20 @@ int status_calc_pc_(struct map_session_data* sd, bool first) {
 		clif->sc_end(&sd->bl,sd->bl.id,SELF,SI_CLAIRVOYANCE);
 
 	memset(&sd->special_state,0,sizeof(sd->special_state));
-	memset(&bstatus->max_hp, 0, sizeof(struct status_data)-(sizeof(bstatus->hp)+sizeof(bstatus->sp)));
 
 	//FIXME: Most of these stuff should be calculated once, but how do I fix the memset above to do that? [Skotlex]
 	if (!sd->state.permanent_speed)
+	{
+		memset(&bstatus->max_hp, 0, sizeof(struct status_data)-(sizeof(bstatus->hp)+sizeof(bstatus->sp)));
 		bstatus->speed = DEFAULT_WALK_SPEED;
+	}
+	else
+	{
+		int pSpeed = bstatus->speed;
+		memset(&bstatus->max_hp, 0, sizeof(struct status_data)-(sizeof(bstatus->hp)+sizeof(bstatus->sp)));
+		bstatus->speed = pSpeed;
+	}
+	
 	//Give them all modes except these (useful for clones)
 	bstatus->mode = MD_MASK&~(MD_BOSS|MD_PLANT|MD_DETECTOR|MD_ANGRY|MD_TARGETWEAK);
 
@@ -2477,7 +2486,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first) {
 
 		bstatus->def += sd->inventory_data[index]->def;
 
-		if(first && sd->inventory_data[index]->equip_script)
+		if(opt&SCO_FIRST && sd->inventory_data[index]->equip_script)
 		{	//Execute equip-script on login
 			script->run(sd->inventory_data[index]->equip_script,0,sd->bl.id,0);
 			if (!calculating)
@@ -2620,7 +2629,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first) {
 				if( k < map->list[sd->bl.m].zone->disabled_items_count )
 					continue;
 
-				if(first && data->equip_script) {//Execute equip-script on login
+				if(opt&SCO_FIRST && data->equip_script) {//Execute equip-script on login
 					script->run(data->equip_script,0,sd->bl.id,0);
 					if (!calculating)
 						return 1;
@@ -3130,11 +3139,11 @@ int status_calc_pc_(struct map_session_data* sd, bool first) {
 	return 0;
 }
 
-int status_calc_mercenary_(struct mercenary_data *md, bool first) {
+int status_calc_mercenary_(struct mercenary_data *md, enum e_status_calc_opt opt) {
 	struct status_data *mstatus = &md->base_status;
 	struct s_mercenary *merc = &md->mercenary;
 
-	if( first ) {
+	if( opt&SCO_FIRST ) {
 		memcpy(mstatus, &md->db->status, sizeof(struct status_data));
 		mstatus->mode = MD_CANMOVE|MD_CANATTACK;
 		mstatus->hp = mstatus->max_hp;
@@ -3149,7 +3158,7 @@ int status_calc_mercenary_(struct mercenary_data *md, bool first) {
 	return 0;
 }
 
-int status_calc_homunculus_(struct homun_data *hd, bool first) {
+int status_calc_homunculus_(struct homun_data *hd, enum e_status_calc_opt opt) {
 	struct status_data *hstatus = &hd->base_status;
 	struct s_homunculus *hom = &hd->homunculus;
 	int skill_lv;
@@ -3162,7 +3171,7 @@ int status_calc_homunculus_(struct homun_data *hd, bool first) {
 	hstatus->int_ = hom->int_ / 10;
 	hstatus->luk = hom->luk / 10;
 
-	if (first) { //[orn]
+	if (opt&SCO_FIRST) { //[orn]
 		const struct s_homunculus_db *db = hd->homunculusDB;
 		hstatus->def_ele =  db->element;
 		hstatus->ele_lv = 1;
@@ -3202,7 +3211,7 @@ int status_calc_homunculus_(struct homun_data *hd, bool first) {
 	if((skill_lv = homun->checkskill(hd,HLIF_BRAIN)) > 0)
 		hstatus->max_sp += (1 +skill_lv/2 -skill_lv/4 +skill_lv/5) * hstatus->max_sp / 100;
 
-	if (first) {
+	if (opt&SCO_FIRST) {
 		hd->battle_status.hp = hom->hp;
 		hd->battle_status.sp = hom->sp;
 	}
@@ -3226,7 +3235,7 @@ int status_calc_homunculus_(struct homun_data *hd, bool first) {
 	return 1;
 }
 
-int status_calc_elemental_(struct elemental_data *ed, bool first) {
+int status_calc_elemental_(struct elemental_data *ed, enum e_status_calc_opt opt) {
 	struct status_data *estatus = &ed->base_status;
 	struct s_elemental *ele = &ed->elemental;
 	struct map_session_data *sd = ed->master;
@@ -3234,7 +3243,7 @@ int status_calc_elemental_(struct elemental_data *ed, bool first) {
 	if( !sd )
 		return 0;
 
-	if( first ) {
+	if( opt&SCO_FIRST ) {
 		memcpy(estatus, &ed->db->status, sizeof(struct status_data));
 		if( !ele->mode )
 			estatus->mode = EL_MODE_PASSIVE;
@@ -3265,13 +3274,13 @@ int status_calc_elemental_(struct elemental_data *ed, bool first) {
 	return 0;
 }
 
-int status_calc_npc_(struct npc_data *nd, bool first) {
+int status_calc_npc_(struct npc_data *nd, enum e_status_calc_opt opt) {
 	struct status_data *nstatus = &nd->status;
 
 	if (!nd)
 		return 0;
 
-	if (first) {
+	if (opt&SCO_FIRST) {
 		nstatus->hp = 1;
 		nstatus->sp = 1;
 		nstatus->max_hp = 1;
@@ -3679,7 +3688,7 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag) {
 		if (ud)
 			ud->state.change_walk_target = ud->state.speed_changed = 1;
 
-		if( bl->type&BL_PC && st->speed < battle_config.max_walk_speed )
+		if( bl->type&BL_PC && !(sd && sd->state.permanent_speed) && st->speed < battle_config.max_walk_speed )
 			st->speed = battle_config.max_walk_speed;
 
 		if( bl->type&BL_HOM && battle_config.hom_setting&0x8 && ((TBL_HOM*)bl)->master)
@@ -3858,14 +3867,18 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag) {
 /// Recalculates parts of an object's base status and battle status according to the specified flags.
 /// Also sends updates to the client wherever applicable.
 /// @param flag bitfield of values from enum scb_flag
-/// @param first if true, will cause status_calc_* functions to run their base status initialization code
-void status_calc_bl_(struct block_list *bl, enum scb_flag flag, bool first) {
+/// @param opt if SCO_FIRST, will cause status_calc_* functions to run their base status initialization code
+void status_calc_bl_(struct block_list *bl, enum scb_flag flag, enum e_status_calc_opt opt) {
 	struct status_data bst; // previous battle status
 	struct status_data *st; // pointer to current battle status
 
 	if( bl->type == BL_PC && ((TBL_PC*)bl)->delayed_damage != 0 ) {
-		((TBL_PC*)bl)->state.hold_recalc = 1;
-		return;
+		if( opt&SCO_FORCE )
+			((TBL_PC*)bl)->state.hold_recalc = 0;/* clear and move on */
+		else {
+			((TBL_PC*)bl)->state.hold_recalc = 1;/* flag and stop */
+			return;
+		}
 	}
 	
 	// remember previous values
@@ -3874,25 +3887,25 @@ void status_calc_bl_(struct block_list *bl, enum scb_flag flag, bool first) {
 
 	if( flag&SCB_BASE ) {// calculate the object's base status too
 		switch( bl->type ) {
-			case BL_PC:   status->calc_pc_(BL_CAST(BL_PC,bl), first);          break;
-			case BL_MOB:  status->calc_mob_(BL_CAST(BL_MOB,bl), first);        break;
-			case BL_PET:  status->calc_pet_(BL_CAST(BL_PET,bl), first);        break;
-			case BL_HOM:  status->calc_homunculus_(BL_CAST(BL_HOM,bl), first); break;
-			case BL_MER:  status->calc_mercenary_(BL_CAST(BL_MER,bl), first);  break;
-			case BL_ELEM: status->calc_elemental_(BL_CAST(BL_ELEM,bl), first); break;
-			case BL_NPC:  status->calc_npc_(BL_CAST(BL_NPC,bl), first);         break;
+			case BL_PC:   status->calc_pc_(BL_CAST(BL_PC,bl), opt);          break;
+			case BL_MOB:  status->calc_mob_(BL_CAST(BL_MOB,bl), opt);        break;
+			case BL_PET:  status->calc_pet_(BL_CAST(BL_PET,bl), opt);        break;
+			case BL_HOM:  status->calc_homunculus_(BL_CAST(BL_HOM,bl), opt); break;
+			case BL_MER:  status->calc_mercenary_(BL_CAST(BL_MER,bl), opt);  break;
+			case BL_ELEM: status->calc_elemental_(BL_CAST(BL_ELEM,bl), opt); break;
+			case BL_NPC:  status->calc_npc_(BL_CAST(BL_NPC,bl), opt);         break;
 		}
 	}
 
 	if( bl->type == BL_PET )
 		return; // pets are not affected by statuses
 
-	if( first && bl->type == BL_MOB )
+	if( opt&SCO_FIRST && bl->type == BL_MOB )
 		return; // assume there will be no statuses active
 
 	status->calc_bl_main(bl, flag);
 
-	if( first && bl->type == BL_HOM )
+	if( opt&SCO_FIRST && bl->type == BL_HOM )
 		return; // client update handled by caller
 
 	// compare against new values and send client updates
@@ -5046,11 +5059,8 @@ unsigned short status_calc_speed(struct block_list *bl, struct status_change *sc
 	TBL_PC* sd = BL_CAST(BL_PC, bl);
 	int speed_rate;
 
-	if( sc == NULL )
-		return cap_value(speed,10,USHRT_MAX);
-
-	if (sd && sd->state.permanent_speed)
-		return (short)cap_value(speed,10,USHRT_MAX);
+	if( sc == NULL || ( sd && sd->state.permanent_speed ) )
+		return (unsigned short)cap_value(speed,MIN_WALK_SPEED,MAX_WALK_SPEED);
 
 	if( sd && sd->ud.skilltimer != INVALID_TIMER && (pc->checkskill(sd,SA_FREECAST) > 0 || sd->ud.skill_id == LG_EXEEDBREAK) )
 	{
@@ -5223,7 +5233,7 @@ unsigned short status_calc_speed(struct block_list *bl, struct status_change *sc
 
 	}
 
-	return (short)cap_value(speed,10,USHRT_MAX);
+	return (unsigned short)cap_value(speed,MIN_WALK_SPEED,MAX_WALK_SPEED);
 }
 
 // flag&1 - fixed value [malufett]
@@ -9219,17 +9229,8 @@ int status_change_clear(struct block_list* bl, int type) {
 				}
 			}
 		}
-		if( type == 3 ) {
-			switch (i) {// TODO: This list may be incomplete
-			case SC_WEIGHTOVER50:
-			case SC_WEIGHTOVER90:
-			case SC_NOCHAT:
-			case SC_PUSH_CART:
-			case SC_JAILED:
-			case SC_ALL_RIDING:
-				continue;
-			}
-		}
+		if( type == 3 && status->get_sc_type(i)&SC_NO_CLEAR )
+			continue;
 
 		status_change_end(bl, (sc_type)i, INVALID_TIMER);
 
@@ -10374,7 +10375,7 @@ int status_change_timer(int tid, int64 tick, int id, intptr_t data) {
 				if (sd && !pc_issit(sd)) { //can't cast if sit
 					int mushroom_skill_id = 0, i;
 					unit->stop_attack(bl);
-					unit->skillcastcancel(bl,1);
+					unit->skillcastcancel(bl,0);
 					do {
 						i = rnd() % MAX_SKILL_MAGICMUSHROOM_DB;
 						mushroom_skill_id = skill->magicmushroom_db[i].skill_id;
@@ -10382,15 +10383,15 @@ int status_change_timer(int tid, int64 tick, int id, intptr_t data) {
 					while( mushroom_skill_id == 0 );
 
 					switch( skill->get_casttype(mushroom_skill_id) ) { // Magic Mushroom skills are buffs or area damage
-					case CAST_GROUND:
-						skill->castend_pos2(bl,bl->x,bl->y,mushroom_skill_id,1,tick,0);
-						break;
-					case CAST_NODAMAGE:
-						skill->castend_nodamage_id(bl,bl,mushroom_skill_id,1,tick,0);
-						break;
-					case CAST_DAMAGE:
-						skill->castend_damage_id(bl,bl,mushroom_skill_id,1,tick,0);
-						break;
+						case CAST_GROUND:
+							skill->castend_pos2(bl,bl->x,bl->y,mushroom_skill_id,1,tick,0);
+							break;
+						case CAST_NODAMAGE:
+							skill->castend_nodamage_id(bl,bl,mushroom_skill_id,1,tick,0);
+							break;
+						case CAST_DAMAGE:
+							skill->castend_damage_id(bl,bl,mushroom_skill_id,1,tick,0);
+							break;
 					}
 				}
 
@@ -11530,7 +11531,10 @@ int status_readdb(void)
 /*==========================================
 * Status db init and destroy.
 *------------------------------------------*/
-int do_init_status(void) {
+int do_init_status( bool minimal ) {
+	if( minimal )
+		return 0;
+		
 	timer->add_func_list(status->change_timer,"status_change_timer");
 	timer->add_func_list(status->kaahi_heal_timer,"status_kaahi_heal_timer");
 	timer->add_func_list(status->natural_heal_timer,"status_natural_heal_timer");

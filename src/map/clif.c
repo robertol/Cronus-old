@@ -1805,6 +1805,9 @@ void clif_selllist(struct map_session_data *sd)
 
 			if( sd->status.inventory[i].expire_time )
 				continue; // Cannot Sell Rental Items
+			
+			if( sd->status.inventory[i].bound && !pc->can_give_bounded_items(sd))
+				continue; // Cannot sell bound items
 
 			val=sd->inventory_data[i]->value_sell;
 			if( val < 0 )
@@ -2230,7 +2233,7 @@ void clif_additem(struct map_session_data *sd, int n, int amount, int fail) {
 		p.HireExpireDate = sd->status.inventory[n].expire_time;
 #endif
 #if PACKETVER >= 20071002
-		p.bindOnEquipType = 0; // unused
+		p.bindOnEquipType = sd->status.inventory[n].bound ? 2 : 0;
 #endif
 	}
 	p.result = (unsigned char)fail;
@@ -2339,6 +2342,7 @@ void clif_item_equip(short idx, struct EQUIPITEM_INFO *p, struct item *i, struct
 
 #if PACKETVER >= 20071002
 	p->HireExpireDate = i->expire_time;
+	p->bindOnEquipType = i->bound ? 2 : 0;
 #endif
 	
 #if PACKETVER >= 20080102
@@ -9205,7 +9209,9 @@ void clif_hercules_chsys_mjoin(struct map_session_data *sd) {
 /// Notification from the client, that it has finished map loading and is about to display player's character (CZ_NOTIFY_ACTORINIT).
 /// 007d
 void clif_parse_LoadEndAck(int fd,struct map_session_data *sd) {
+#if PACKETVER >= 20090218
 	int i;
+#endif
 
 	if(sd->bl.prev != NULL)
 		return;
@@ -9465,7 +9471,7 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd) {
 		}
 		
 		map->iwall_get(sd); // Updates Walls Info on this Map to Client
-		status_calc_pc(sd, false);/* some conditions are map-dependent so we must recalculate */
+		status_calc_pc(sd, SCO_NONE);/* some conditions are map-dependent so we must recalculate */
 		sd->state.changemap = false;
 		
 		if( hChSys.local && hChSys.local_autojoin && !map->list[sd->bl.m].flag.chsysnolocalaj ) {
@@ -15052,8 +15058,9 @@ void clif_parse_Auction_setitem(int fd, struct map_session_data *sd)
 	}
 
 	if( !pc->can_give_items(sd) || sd->status.inventory[idx].expire_time ||
-			!sd->status.inventory[idx].identify ||
-				!itemdb_canauction(&sd->status.inventory[idx],pc->get_group_level(sd)) ) { // Quest Item or something else
+		!sd->status.inventory[idx].identify ||
+		!itemdb_canauction(&sd->status.inventory[idx],pc->get_group_level(sd)) ||
+		(sd->status.inventory[idx].bound && !pc->can_give_bounded_items(sd)) ) { // Quest Item or something else
 		clif->auction_setitem(sd->fd, idx, true);
 		return;
 	}
@@ -15133,6 +15140,12 @@ void clif_parse_Auction_register(int fd, struct map_session_data *sd)
 	// Auction checks...
 	if( sd->status.zeny < (auction.hours * battle_config.auction_feeperhour) ) {
 		clif->auction_message(fd, 5); // You do not have enough zeny to pay the Auction Fee.
+		return;
+	}
+	
+	if( sd->status.inventory[sd->auction.index].bound && !pc->can_give_bounded_items(sd) ) {
+		clif->message(sd->fd, msg_txt(293));
+		clif->auction_message(fd, 2); // The auction has been canceled
 		return;
 	}
 
@@ -17564,8 +17577,6 @@ void clif_parse_bgqueue_register(int fd, struct map_session_data *sd) {
 		clif->bgqueue_ack(sd,BGQA_FAIL_BGNAME_INVALID,0);
 		return;
 	}
-	//debug
-	safestrncpy(arena->name, p->bg_name, sizeof(arena->name));
 	
 	switch( (enum bg_queue_types)p->type ) {
 		case BGQT_INDIVIDUAL:
@@ -17790,6 +17801,18 @@ void clif_bank_withdraw(struct map_session_data *sd,enum e_BANKING_WITHDRAW_ACK 
 	
 	clif->send(&p,sizeof(p), &sd->bl, SELF);
 }
+
+/* TODO: official response packet (tried 0x8cb/0x97b but the display was quite screwed up.) */
+ /* currently mimicing */
+ void clif_show_modifiers (struct map_session_data *sd) {
+	if( sd->status.mod_exp != 100 || sd->status.mod_drop != 100 || sd->status.mod_death != 100 ) {
+		char output[128];
+     
+		snprintf(output,128,"Base EXP : %d%% | Base Drop: %d%% | Base Death Penalty: %d%%",
+			sd->status.mod_exp,sd->status.mod_drop,sd->status.mod_death);
+		clif->broadcast2(&sd->bl,output, strlen(output) + 1, 0xffbc90, 0x190, 12, 0, 0, SELF);
+	}
+ }
 
 /* */
 unsigned short clif_decrypt_cmd( int cmd, struct map_session_data *sd ) {
@@ -18038,10 +18061,12 @@ void clif_bc_ready(void) {
 /*==========================================
  *
  *------------------------------------------*/
-int do_init_clif(void) {
+int do_init_clif( bool minimal ) {
 	const char* colors[COLOR_MAX] = { "0xFF0000", "0x00ff00", "0xffffff" };
 	int i;
 
+	if( minimal )
+		return 0;
 	/**
 	 * Setup Color Table (saves unnecessary load of strtoul on every call)
 	 **/
@@ -18589,6 +18614,8 @@ void clif_defaults(void) {
 	/* Bank System [Yommy/Hercules] */
 	clif->bank_deposit = clif_bank_deposit;
 	clif->bank_withdraw = clif_bank_withdraw;
+	/* */
+	clif->show_modifiers = clif_show_modifiers;
 	/*------------------------
 	 *- Parse Incoming Packet
 	 *------------------------*/ 

@@ -206,7 +206,7 @@ int battle_delay_damage_sub(int tid, int64 tick, int id, intptr_t data) {
 		if( !target || status->isdead(target) ) {/* nothing we can do */
 			if( dat->src_type == BL_PC && ( src = map->id2bl(dat->src_id) ) && --((TBL_PC*)src)->delayed_damage == 0 && ((TBL_PC*)src)->state.hold_recalc ) {
 				((TBL_PC*)src)->state.hold_recalc = 0;
-				status_calc_pc(((TBL_PC*)src),0);
+				status_calc_pc(((TBL_PC*)src), SCO_FORCE);
 			}
 			ers_free(battle->delay_damage_ers, dat);
 			return 0;
@@ -237,7 +237,7 @@ int battle_delay_damage_sub(int tid, int64 tick, int id, intptr_t data) {
 		
 		if( src && src->type == BL_PC && --((TBL_PC*)src)->delayed_damage == 0 && ((TBL_PC*)src)->state.hold_recalc ) {
 			((TBL_PC*)src)->state.hold_recalc = 0;
-			status_calc_pc(((TBL_PC*)src),0);
+			status_calc_pc(((TBL_PC*)src), SCO_FORCE);
 		}
 	}
 	ers_free(battle->delay_damage_ers, dat);
@@ -440,8 +440,13 @@ int64 battle_calc_weapon_damage(struct block_list *src, struct block_list *bl, u
 	if( sc && sc->count ){
 		if( sc->data[SC_ZENKAI] && watk->ele == sc->data[SC_ZENKAI]->val2 )
 			eatk += 200;
-	#ifdef RENEWAL_EDP	
+	#ifdef RENEWAL_EDP
 		if( sc->data[SC_EDP] && skill_id != AS_GRIMTOOTH && skill_id != AS_VENOMKNIFE && skill_id != ASC_BREAKER ){
+			eatk = eatk * sc->data[SC_EDP]->val4 / 100;
+			damage += damage * sc->data[SC_EDP]->val3 / 100;
+		}
+	#else
+		if( sc->data[SC_EDP] && skill_id != AS_VENOMKNIFE && skill_id != ASC_BREAKER ){
 			eatk = eatk * sc->data[SC_EDP]->val4 / 100;
 			damage += damage * sc->data[SC_EDP]->val3 / 100;
 		}
@@ -1807,13 +1812,13 @@ int battle_calc_skillratio(int attack_type, struct block_list *src, struct block
 					skillratio+= 40 * skill_lv;
 					break;
 				case AS_GRIMTOOTH:
-					skillratio += 20 * skill_lv;
+					skillratio += 100;
 					break;
 				case AS_POISONREACT:
 					skillratio += 30 * skill_lv;
 					break;
 				case AS_SONICBLOW:
-					skillratio += 300 + 40 * skill_lv;
+					skillratio += (300 + 40 * skill_lv)/8;
 					break;
 				case TF_SPRINKLESAND:
 					skillratio += 30;
@@ -6756,7 +6761,10 @@ int battle_config_read(const char* cfgName)
 	return 0;
 }
 
-void do_init_battle(void) {
+void do_init_battle( bool minimal ) {
+	if( minimal )
+		return;
+		
 	battle->delay_damage_ers = ers_new(sizeof(struct delay_damage),"battle.c::delay_damage_ers",ERS_OPT_CLEAR);
 	timer->add_func_list(battle_delay_damage_sub, "battle_delay_damage_sub");
 

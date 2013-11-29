@@ -508,7 +508,7 @@ struct battle_interface {
 	int attr_fix_table[4][ELE_MAX][ELE_MAX];
 	struct eri *delay_damage_ers; //For battle delay damage structures.
 	/* init */
-	void (*init) (void);
+	void (*init) ( bool );
 	/* final */
 	void (*final) (void);
 	/* damage calculation */

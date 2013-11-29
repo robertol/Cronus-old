@@ -265,6 +265,8 @@ foreach my $file (@files) { # Loop through the xml files
 		$key = "ircbot";
 	} elsif ($key =~ /log_interface/) {
 		$key = "logs";
+	} elsif ($key =~ /pc_groups_interface/) {
+		$key = "pcg";
 	} else {
 		$key =~ s/_interface//;
 	}
@@ -367,6 +369,7 @@ foreach my $file (@files) { # Loop through the xml files
 my %exportsymbols = map {
 	$_ => &{ sub ($) {
 		return 'battlegrounds' if $_ =~ /^bg$/;
+		return 'pc_groups' if $_ =~ /^pcg$/;
 		return $_;
 	}}($_);
 } @keys;
@@ -392,7 +395,7 @@ foreach my $key (@keys) {
 	foreach my $if (@{ $ifs{$key} }) {
 
 		print FH <<"EOF";
-	{ HP_POP($key\->$if->{name},$if->{hname})},
+	{ HP_POP($key\->$if->{name}, $if->{hname}) },
 EOF
 
 		$idx += 2;
@@ -565,4 +568,3 @@ EOF
 }
 
 close FH;
-

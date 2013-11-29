@@ -142,12 +142,8 @@ bool HPM_map_add_atcommand(char *name, AtCommandFunc func) {
 void HPM_map_atcommands(void) {
   unsigned int i;
   
-  for(i = 0; i < atcommand_list_items; i++) {
-    if( !atcommand->add(atcommand_list[i].name,atcommand_list[i].func) ) {
-      ShowDebug("HPM_map_atcommands: duplicate command '%s', skipping...\n", atcommand_list[i].name);
-      continue;
-    }
-  }
+  for(i = 0; i < atcommand_list_items; i++)
+    atcommand->add(atcommand_list[i].name,atcommand_list[i].func,true);
 }
 
 void HPM_map_do_final(void) {

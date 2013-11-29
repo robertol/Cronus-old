@@ -696,7 +696,9 @@ void do_final_instance(void) {
 	instance->instances = 0;
 }
 
-void do_init_instance(void) {
+void do_init_instance( bool minimal ) {
+	if( minimal )
+		return;
 	timer->add_func_list(instance->destroy_timer, "instance_destroy_timer");
 }
 
