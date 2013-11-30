@@ -6125,7 +6125,7 @@ int pc_setstat(struct map_session_data* sd, int type, int val)
 // Calculates the number of status points PC gets when leveling up (from level to level+1)
 int pc_gets_status_point(int level)
 {
-	if (battle_config.use_statpoint_table) //Use values from "db/statpoint.txt"
+	if (battle_config.use_statpoint_table) //Use values from LANG_DB_PATH"statpoint.txt"
 		return (pc->statp[level+1] - pc->statp[level]);
 	else //Default increase
 		return ((level+15) / 5);

@@ -8,6 +8,7 @@
 #include "../common/strlib.h"
 #include "../common/db.h"
 #include "mapindex.h"
+#include "../config/lang.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -19,7 +20,7 @@ struct _indexes {
 
 int max_index = 0;
 
-char mapindex_cfgfile[80] = "db/map_index.txt";
+char mapindex_cfgfile[80] = LANG_DB_PATH"map_index.txt";
 
 #define mapindex_exists_sub(id) (indexes[id].name[0] != '\0')
 
