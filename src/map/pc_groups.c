@@ -9,6 +9,7 @@
 #include "../common/nullpo.h"
 #include "../common/showmsg.h"
 #include "../common/strlib.h" // strcmp
+#include "../config/lang.h"
 
 #include "pc_groups.h"
 #include "atcommand.h" // atcommand->exists(), atcommand->load_groups()
@@ -46,7 +47,7 @@ static inline GroupSettings* name2group(const char* group_name)
 static void read_config(void) {
 	config_t pc_group_config;
 	config_setting_t *groups = NULL;
-	const char *config_filename = "conf/groups.conf"; // FIXME hardcoded name
+	const char *config_filename = LANG_CONF_PATH"groups.conf"; // FIXME hardcoded name
 	int group_count = 0;
 	
 	if (conf_read_file(&pc_group_config, config_filename))
