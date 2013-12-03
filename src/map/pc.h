@@ -750,7 +750,7 @@ struct pc_interface {
 	int (*get_group_level) (struct map_session_data *sd);
 	//int (*getrefinebonus) (int lv,int type); FIXME: This function does not exist, nor it is ever called
 	bool (*can_give_items) (struct map_session_data *sd);
-	bool (*can_give_bounded_items) (struct map_session_data *sd);
+	bool (*can_give_bound_items) (struct map_session_data *sd);
 	
 	bool (*can_use_command) (struct map_session_data *sd, const char *command);
 	bool (*has_permission) (struct map_session_data *sd, unsigned int permission);
@@ -786,9 +786,6 @@ struct pc_interface {
 	int (*additem) (struct map_session_data *sd,struct item *item_data,int amount,e_log_pick_type log_type);
 	int (*getzeny) (struct map_session_data *sd,int zeny, enum e_log_pick_type type, struct map_session_data *tsd);
 	int (*delitem) (struct map_session_data *sd,int n,int amount,int type, short reason, e_log_pick_type log_type);
-	
-	//Bound items
-	int (*bound_chk) (TBL_PC *sd,int type,int *idxlist);
 	
 	// Special Shop System
 	int (*paycash) (struct map_session_data *sd, int price, int points);
@@ -976,6 +973,8 @@ struct pc_interface {
     void (*bank_withdraw) (struct map_session_data *sd, int money);
     void (*rental_expire) (struct map_session_data *sd, int i);
     void (*scdata_received) (struct map_session_data *sd);
+
+	void (*bound_clear) (struct map_session_data *sd, enum e_item_bound_type type);
 	};
 
 struct pc_interface *pc;

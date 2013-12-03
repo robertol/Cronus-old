@@ -575,9 +575,9 @@ bool pc_can_give_items(struct map_session_data *sd)
 /**
  * Determines if player can give / drop / trade / vend bounded items
  */
-bool pc_can_give_bounded_items(struct map_session_data *sd)
+bool pc_can_give_bound_items(struct map_session_data *sd)
 {
-	return pc->has_permission(sd, PC_PERM_TRADE_BOUNDED);
+	return pc->has_permission(sd, PC_PERM_TRADE_BOUND);
 }
 
 /*==========================================
@@ -1003,10 +1003,6 @@ int pc_isequip(struct map_session_data *sd,int n)
  *------------------------------------------*/
 bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_time, int group_id, struct mmo_charstatus *st, bool changing_mapservers) {
 	int i;
-#ifdef BOUND_ITEMS
-	int j;
-	int idxlist[MAX_INVENTORY];
-#endif
 	int64 tick = timer->gettick();
 	uint32 ip = session[sd->fd]->client_addr;
 
@@ -1207,11 +1203,9 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	 **/
 	pc->itemcd_do(sd,true);
 	
-#ifdef BOUND_ITEMS
-	// Party bound item check
-	if(sd->status.party_id == 0 && (j = pc->bound_chk(sd,3,idxlist))) // Party was deleted while character offline
-		for(i=0;i<j;i++)
-			pc->delitem(sd,idxlist[i],sd->status.inventory[idxlist[i]].amount,0,1,LOG_TYPE_OTHER);
+#ifdef GP_BOUND_ITEMS
+	if( sd->status.party_id == 0 )
+		pc->bound_clear(sd,IBT_PARTY);
 #endif // BOUND_ITEMS
 	
 	/* [Ind/Hercules] */
@@ -3966,6 +3960,28 @@ int pc_additem(struct map_session_data *sd,struct item *item_data,int amount,e_l
 	if(sd->weight + w > sd->max_weight)
 		return 2;
 
+	if( item_data->bound ) {
+		switch( (enum e_item_bound_type)item_data->bound ) {
+			case IBT_CHARACTER:
+			case IBT_ACCOUNT:
+		        break; /* no restrictions */
+			case IBT_PARTY:
+		        if( !sd->status.party_id ) {
+					ShowError("pc_additem: can't add party_bound item to character without party!\n");
+					ShowError("pc_additem: %s - x%d %s (%d)\n",sd->status.name,amount,data->jname,data->nameid);
+					return 7;/* need proper code? */
+				}
+				break;
+			case IBT_GUILD:
+		        if( !sd->status.guild_id ) {
+					ShowError("pc_additem: can't add guild_bound item to character without guild!\n");
+					ShowError("pc_additem: %s - x%d %s (%d)\n",sd->status.name,amount,data->jname,data->nameid);
+					return 7;/* need proper code? */
+				}
+				break;
+		}
+	}
+
 	i = MAX_INVENTORY;
 
 	if( itemdb->isstackable2(data) && item_data->expire_time == 0 )
@@ -4524,7 +4540,7 @@ int pc_cart_additem(struct map_session_data *sd,struct item *item_data,int amoun
 		return 1;
 	}
 
-	if( !itemdb_cancartstore(item_data, pc->get_group_level(sd)) || (item_data->bound > 1 && !pc->can_give_bounded_items(sd)))
+	if( !itemdb_cancartstore(item_data, pc->get_group_level(sd)) || (item_data->bound > IBT_ACCOUNT && !pc->can_give_bound_items(sd)))
 	{ // Check item trade restrictions	[Skotlex]
 		clif->message (sd->fd, msg_txt(264));
 		return 1;/* TODO: there is no official response to this? */
@@ -4626,24 +4642,37 @@ int pc_putitemtocart(struct map_session_data *sd,int idx,int amount)
 	return flag;
 }
 
-/*==========================================
- * Bound Item Check
- * Type:
- * 1 Account Bound
- * 2 Guild Bound
- * 3 Party Bound
- * 4 Character Bound
- *------------------------------------------*/
-int pc_bound_chk(TBL_PC *sd,int type,int *idxlist)
-{
-	int i=0, j=0;
-	for(i=0;i<MAX_INVENTORY;i++){
-		if(sd->status.inventory[i].nameid > 0 && sd->status.inventory[i].amount > 0 && sd->status.inventory[i].bound == type) {
-			idxlist[j] = i;
-			j++;
+void pc_bound_clear(struct map_session_data *sd, enum e_item_bound_type type) {
+	int i;
+	switch( type ) {
+		/* both restricted to inventory */
+	    case IBT_PARTY:
+	    case IBT_CHARACTER:
+			for( i = 0; i < MAX_INVENTORY; i++ ){
+				if( sd->status.inventory[i].bound == type ) {
+					pc->delitem(sd,i,sd->status.inventory[i].amount,0,1,LOG_TYPE_OTHER);
+				}
+			}
+ 			break;
+		case IBT_ACCOUNT:
+			ShowError("Helllo! You reached pc_bound_clear for IBT_ACCOUNT, unfortunately no scenario was expected for this!\n");
+			break;
+		case IBT_GUILD:
+		{
+		    struct guild_storage *gstor = gstorage->id2storage(sd->status.guild_id);
+        
+			for( i = 0; i < MAX_INVENTORY; i++ ){
+				if(sd->status.inventory[i].bound == type) {
+					if( gstor )
+						gstorage->additem(sd,gstor,&sd->status.inventory[i],sd->status.inventory[i].amount);
+					pc->delitem(sd,i,sd->status.inventory[i].amount,0,1,gstor?LOG_TYPE_GSTORAGE:LOG_TYPE_OTHER);
+				}
+			}
+			if( gstor )
+				gstorage->close(sd);
+			break;
 		}
-	}
-	return j;
+    }
 }
 
 /*==========================================
@@ -6556,7 +6585,7 @@ int pc_resetskill(struct map_session_data* sd, int flag)
 			pc->setoption(sd, i);
 
 		if( homun_alive(sd->hd) && pc->checkskill(sd, AM_CALLHOMUN) )
-			homun->vaporize(sd, HOM_ST_ACTIVE);
+			homun->vaporize(sd, HOM_ST_REST);
 	}
 
 	for( i = 1; i < MAX_SKILL; i++ ) {
@@ -8030,7 +8059,7 @@ int pc_setmadogear(TBL_PC* sd, int flag)
  *------------------------------------------*/
 int pc_candrop(struct map_session_data *sd, struct item *item)
 {
-	if( item && (item->expire_time || (item->bound && !pc->can_give_bounded_items(sd))) )
+	if( item && (item->expire_time || (item->bound && !pc->can_give_bound_items(sd))) )
 		return 0;
 	if( !pc->can_give_items(sd) ) //check if this GM level can drop items
 		return 0;
@@ -10373,8 +10402,7 @@ void pc_defaults(void) {
 	pc->class2idx = pc_class2idx;
 	pc->get_group_level = pc_get_group_level;
 	pc->can_give_items = pc_can_give_items;
-	pc->bound_chk = pc_bound_chk;
-	pc->can_give_bounded_items = pc_can_give_bounded_items;
+	pc->can_give_bound_items = pc_can_give_bound_items;
 	
 	pc->can_use_command = pc_can_use_command;
 	pc->has_permission = pc_has_permission;
@@ -10607,5 +10635,6 @@ void pc_defaults(void) {
 	pc->rental_expire = pc_rental_expire;
     pc->scdata_received = pc_scdata_received;
 
+	pc->bound_clear = pc_bound_clear;
 
 }

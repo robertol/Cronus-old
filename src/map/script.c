@@ -858,12 +858,48 @@ const char* parse_variable(const char* p) {
 	return p;
 }
 
+/*
+ * Checks whether the gives string is a number literal
+ *
+ * Mainly necessary to differentiate between number literals and NPC name
+ * constants, since several of those start with a digit.
+ *
+ * All this does is to check if the string begins with an optional + or - sign,
+ * followed by a hexadecimal or decimal number literal literal and is NOT
+ * followed by a underscore or letter.
+ *
+ * @param p Pointer to the string to check
+ * @return Whether the string is a number literal
+ */
+bool is_number(const char *p) {
+	const char *np;
+	if (!p)
+		return false;
+	if (*p == '-' || *p == '+')
+		p++;
+	np = p;
+	if (*p == '0' && p[1] == 'x') {
+		p+=2;
+		np = p;
+		// Hexadecimal
+		while (ISXDIGIT(*np))
+			np++;
+	} else {
+		// Decimal
+		while (ISDIGIT(*np))
+			np++;
+	}
+	if (p != np && *np != '_' && !ISALPHA(*np)) // At least one digit, and next isn't a letter or _
+		return true;
+	return false;
+}
+
 /*==========================================
  * Analysis section
  *------------------------------------------*/
 const char* parse_simpleexpr(const char *p)
 {
-	long long i;
+	int i;
 	p=script->skip_space(p);
 
 	if(*p==';' || *p==',')
@@ -885,18 +921,19 @@ const char* parse_simpleexpr(const char *p)
 		if( *p != ')' )
 			disp_error_message("parse_simpleexpr: unmatched ')'",p);
 		++p;
-	} else if(ISDIGIT(*p) || ((*p=='-' || *p=='+') && ISDIGIT(p[1]))){
+	} else if( is_number( p ) ){
 		char *np;
+		long long lli;
 		while(*p == '0' && ISDIGIT(p[1])) p++;
-		i=strtoll(p,&np,0);
-		if( i < INT_MIN ) {
-			i = INT_MIN;
+		lli=strtoll(p,&np,0);
+		if( lli < INT_MIN ) {
+			lli = INT_MIN;
 			script->disp_warning_message("parse_simpleexpr: underflow detected, capping value to INT_MIN",p);
-		} else if( i > INT_MAX ) {
-			i = INT_MAX;
+		} else if( lli > INT_MAX ) {
+			lli = INT_MAX;
 			script->disp_warning_message("parse_simpleexpr: overflow detected, capping value to INT_MAX",p);
 		}
-		script->addi((int)i);
+		script->addi((int)lli);
 		p=np;
 	} else if(*p=='"'){
 		script->addc(C_STR);
@@ -1229,8 +1266,15 @@ const char* parse_syntax(const char* p)
 					disp_error_message("parse_syntax: expect space ' '",p);
 				}
 				// check whether case label is integer or not
-				v = strtol(p,&np,0);
-				if(np == p) { //Check for constants
+				if( is_number( p ) )
+				{ // Numeric value
+					v = strtol(p,&np,0);
+					if((*p == '-' || *p == '+') && ISDIGIT(p[1])) // pre-skip because '-' can not skip_word
+						++p;
+					p = script->skip_word(p);
+					if( np != p )
+						disp_error_message("parse_syntax: 'case' label is not an integer",np);
+				} else { // Check for constants
 					p2 = script->skip_word(p);
 					v = p2-p; // length of word at p2
 					memcpy(label,p,v);
@@ -1238,12 +1282,6 @@ const char* parse_syntax(const char* p)
 					if( !script->get_constant(label, &v) )
 						disp_error_message("parse_syntax: 'case' label is not an integer",p);
 					p = script->skip_word(p);
-				} else { //Numeric value
-					if((*p == '-' || *p == '+') && ISDIGIT(p[1]))	// pre-skip because '-' can not skip_word
-						p++;
-					p = script->skip_word(p);
-					if(np != p)
-						disp_error_message("parse_syntax: 'case' label is not an integer",np);
 				}
 				p = script->skip_space(p);
 				if(*p != ':')
@@ -3779,6 +3817,18 @@ int script_reload(void) {
 	return 0;
 }
 
+/* returns name of current function being run, from within the stack [Ind/Hercules] */
+const char *script_getfuncname(struct script_state *st) {
+	struct script_data *data;
+  
+	data = &st->stack->stack_data[st->start];
+  
+	if( data->type == C_NAME && script->str_data[data->u.num].type == C_FUNC )
+		return script->get_str(data->u.num);
+  
+	return NULL;
+}
+
 //-----------------------------------------------------------------------------
 // buildin functions
 //
@@ -5762,10 +5812,13 @@ BUILDIN(checkweight2)
 /*==========================================
  * getitem <item id>,<amount>{,<account ID>};
  * getitem "<item name>",<amount>{,<account ID>};
+ *
+ * getitembound <item id>,<amount>,<type>{,<account ID>};
+ * getitembound "<item id>",<amount>,<type>{,<account ID>};
  *------------------------------------------*/
 BUILDIN(getitem)
 {
-	int nameid,amount,get_count,i,flag = 0;
+	int nameid,amount,get_count,i,flag = 0, offset = 0;
 	struct item it;
 	TBL_PC *sd;
 	struct script_data *data;
@@ -5777,7 +5830,7 @@ BUILDIN(getitem)
 	{// "<item name>"
 		const char *name=script->conv_str(st,data);
 		if( (item_data = itemdb->search_name(name)) == NULL ){
-			ShowError("buildin_getitem: Nonexistant item %s requested.\n", name);
+			ShowError("buildin_%s: Nonexistant item %s requested.\n", script->getfuncname(st), name);
 			return false; //No item created.
 		}
 		nameid=item_data->nameid;
@@ -5789,11 +5842,11 @@ BUILDIN(getitem)
 			flag = 1;
 		}
 		if( nameid <= 0 || !(item_data = itemdb->exists(nameid)) ){
-			ShowError("buildin_getitem: Nonexistant item %d requested.\n", nameid);
+			ShowError("buildin_%s: Nonexistant item %d requested.\n", script->getfuncname(st), nameid);
 			return false; //No item created.
 		}
 	} else {
-		ShowError("buildin_getitem: invalid data type for argument #1 (%d).", data->type);
+		ShowError("buildin_%s: invalid data type for argument #1 (%d).", script->getfuncname(st), data->type);
 		return false;
 	}
 	
@@ -5808,6 +5861,20 @@ BUILDIN(getitem)
 	else
 		it.identify=itemdb->isidentified2(item_data);
 	
+	if( !strcmp(script->getfuncname(st),"getitembound") ) {
+		int bound = script_getnum(st,4);
+		if( bound < IBT_MIN || bound > IBT_MAX ) { //Not a correct bound type
+			ShowError("script_getitembound: Not a correct bound type! Type=%d\n",bound);
+			return false;
+		}
+		if( item_data->type == IT_PETEGG || item_data->type == IT_PETARMOR ) {
+			ShowError("script_getitembound: can't bind a pet egg/armor!\n",bound);
+			return false;
+		}
+		it.bound = (unsigned char)bound;
+		offset += 1;
+	}
+
 	if( script_hasdata(st,4) )
 		sd=map->id2sd(script_getnum(st,4)); // <Account ID>
 	else
@@ -5841,15 +5908,24 @@ BUILDIN(getitem)
  *------------------------------------------*/
 BUILDIN(getitem2)
 {
-	int nameid,amount,get_count,i,flag = 0;
-	int iden,ref,attr,c1,c2,c3,c4;
+	int nameid,amount,get_count,i,flag = 0, offset = 0;
+	int iden,ref,attr,c1,c2,c3,c4, bound = 0;
 	struct item_data *item_data;
 	struct item item_tmp;
 	TBL_PC *sd;
 	struct script_data *data;
 	
-	if( script_hasdata(st,11) )
-		sd=map->id2sd(script_getnum(st,11)); // <Account ID>
+	if( !strcmp(script->getfuncname(st),"getitembound2") ) {
+		bound = script_getnum(st,11);
+		if( bound < IBT_MIN || bound > IBT_MAX ) { //Not a correct bound type
+			ShowError("script_getitembound2: Not a correct bound type! Type=%d\n",bound);
+			return false;
+		}
+		offset += 1;
+	}
+
+	if( script_hasdata(st,11+offset) )
+		sd=map->id2sd(script_getnum(st,11+offset)); // <Account ID>
 	else
 		sd=script->rid2sd(st); // Attached player
 	
@@ -5876,6 +5952,11 @@ BUILDIN(getitem2)
 	c2=(short)script_getnum(st,8);
 	c3=(short)script_getnum(st,9);
 	c4=(short)script_getnum(st,10);
+
+	if( bound && (itemdb_type(nameid) == IT_PETEGG || itemdb_type(nameid) == IT_PETARMOR) ) {
+		ShowError("script_getitembound2: can't bind a pet egg/armor!\n",bound);
+		return false;
+	}
 	
 	if(nameid<0) { // Invalide nameid
 		nameid = -nameid;
@@ -5906,6 +5987,7 @@ BUILDIN(getitem2)
 			item_tmp.identify=0;
 		item_tmp.refine=ref;
 		item_tmp.attribute=attr;
+		item_tmp.bound=(unsigned char)bound;
 		item_tmp.card[0]=(short)c1;
 		item_tmp.card[1]=(short)c2;
 		item_tmp.card[2]=(short)c3;
@@ -17563,184 +17645,6 @@ BUILDIN(bg_join_team) {
 }
 
 /*==============[Mhalicot]==================
- * getitembound <item id>,<amount>,<type>{,<account ID>};
- * getitembound "<item id>",<amount>,<type>{,<account ID>};
- * Type:
- *	1 - Account Bound
- *	2 - Guild Bound
- *	3 - Party Bound
- *	4 - Character Bound
- *------------------------------------------*/
-BUILDIN(getitembound)
-{
-	int nameid, amount, i, flag;
-	struct item it;
-	struct script_data *data;
-	char bound = script_getnum(st,4);
-	TBL_PC *sd;
-
-	data = script_getdata(st,2);
-	get_val(st,data);
-	if( data_isstring(data) ) { // "<item name>"
-		const char *name = script->conv_str(st,data);
-		struct item_data *item_data = itemdb->search_name(name);
-		if( item_data == NULL ) {
-			ShowError("buildin_getitembound: Nonexistant item %s requested.\n", name);
-			return 1; //No item created.
-		}
-		nameid = item_data->nameid;
-	} else if( data_isint(data) ) { // <item id>
-		nameid = script->conv_num(st,data);
-		if( nameid <= 0 || !itemdb->exists(nameid) ) {
-			ShowError("buildin_getitembound: Nonexistant item %d requested.\n", nameid);
-			return 1; //No item created.
-		}
-	} else {
-		ShowError("buildin_getitembound: invalid data type for argument #1 (%d).", data->type);
-		return 1;
-	}
-
-	if( itemdb->isstackable(nameid) || itemdb_type(nameid) == IT_PETEGG ) {
-		ShowError("buildin_getitembound: invalid item type. Bound only work for non stackeable items (Item %d).", nameid);
-		return 1;
-	}
-
-	if( (amount = script_getnum(st,3)) <= 0)
-		return 0; //return if amount <=0, skip the useless iteration
-
-	memset(&it,0,sizeof(it));
-	it.nameid = nameid;
-	it.identify = 1;
-	it.bound = bound;
-	
-	if( bound < 1 || bound > 4) { //Not a correct bound type
-		ShowError("script_getitembound: Not a correct bound type! Type=%d\n",bound);
-		return 1;
-	}
-	
-	if( script_hasdata(st,5) )
-			sd=map->id2sd(script_getnum(st,5)); // Account ID
-		else
-			sd=script->rid2sd(st); // Attached player
-
-	if( sd == NULL ) // no target
-		return 0;
-
-	for( i = 0; i < amount; i++ ) {
-		if( (flag = pc->additem(sd, &it, 1, LOG_TYPE_SCRIPT)) ) {
-			clif->additem(sd, 0, 0, flag);
-			if( pc->candrop(sd,&it) )
-				map->addflooritem(&it,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0);
-		}
-	}
-
-	return 0;
-}
-
-/*==============[Mhalicot]==================
- * getitembound2 <item id>,<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,<bound type>; 
- * getitembound2 "<item name>",<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,<bound type>;
- *------------------------------------------*/
-BUILDIN(getitembound2)
-{
-	int nameid,amount,get_count,i,flag = 0;
-	int iden,ref,attr,c1,c2,c3,c4;
-	char bound=0;
-	struct item_data *item_data;
-	struct item item_tmp;
-	TBL_PC *sd;
-	struct script_data *data;
-	
-		bound = script_getnum(st,11);
-		if( bound < 1 || bound > 4) { //Not a correct bound type
-			ShowError("script_getitembound2: Not a correct bound type! Type=%d\n",bound);
-			return 1;
-		}
-		if( script_hasdata(st,12) )
-			sd=map->id2sd(script_getnum(st,12));
-		else
-			sd=script->rid2sd(st); // Attached player
-	
-	if( sd == NULL ) // no target
-		return true;
-	
-	data=script_getdata(st,2);
-	script->get_val(st,data);
-	if( data_isstring(data) ){
-		const char *name=script->conv_str(st,data);
-		struct item_data *item_data = itemdb->search_name(name);
-		if( item_data )
-			nameid=item_data->nameid;
-		else
-			nameid=UNKNOWN_ITEM_ID;
-	}else
-		nameid=script->conv_num(st,data);
-	
-	amount=script_getnum(st,3);
-	iden=script_getnum(st,4);
-	ref=script_getnum(st,5);
-	attr=script_getnum(st,6);
-	c1=(short)script_getnum(st,7);
-	c2=(short)script_getnum(st,8);
-	c3=(short)script_getnum(st,9);
-	c4=(short)script_getnum(st,10);
-	
-	if(nameid<0) { // Invalide nameid
-		nameid = -nameid;
-		flag = 1;
-	}
-	
-	if(nameid > 0) {
-		memset(&item_tmp,0,sizeof(item_tmp));
-		item_data=itemdb->exists(nameid);
-		if (item_data == NULL)
-			return -1;
-		if(item_data->type==IT_WEAPON || item_data->type==IT_ARMOR){
-			if(ref > MAX_REFINE) ref = MAX_REFINE;
-		}
-		else if(item_data->type==IT_PETEGG) {
-			iden = 1;
-			ref = 0;
-		}
-		else {
-			iden = 1;
-			ref = attr = 0;
-		}
-		
-		item_tmp.nameid=nameid;
-		if(!flag)
-			item_tmp.identify=iden;
-		else if(item_data->type==IT_WEAPON || item_data->type==IT_ARMOR)
-			item_tmp.identify=0;
-		item_tmp.refine=ref;
-		item_tmp.attribute=attr;
-		item_tmp.card[0]=(short)c1;
-		item_tmp.card[1]=(short)c2;
-		item_tmp.card[2]=(short)c3;
-		item_tmp.card[3]=(short)c4;
-		item_tmp.bound=bound;
-		
-		//Check if it's stackable.
-		if (!itemdb->isstackable(nameid))
-			get_count = 1;
-		else
-			get_count = amount;
-		
-		for (i = 0; i < amount; i += get_count) {
-			// if not pet egg
-			if (!pet->create_egg(sd, nameid)) {
-				if ((flag = pc->additem(sd, &item_tmp, get_count, LOG_TYPE_SCRIPT))) {
-					clif->additem(sd, 0, 0, flag);
-					if( pc->candrop(sd,&item_tmp) )
-						map->addflooritem(&item_tmp,get_count,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0);
-				}
-			}
-		}
-	}
-	
-	return true;
-}
-/*==============[Mhalicot]==================
  * countbound {<type>}; 
  * Creates an array of bounded item IDs
  * Returns amount of items found
@@ -17748,6 +17652,7 @@ BUILDIN(getitembound2)
  *	1 - Account Bound
  *	2 - Guild Bound
  *	3 - Party Bound
+ *  4 - Character Bound
  *------------------------------------------*/
 BUILDIN(countbound)
 {
@@ -18356,10 +18261,10 @@ void script_parse_builtin(void) {
 		BUILDIN_DEF(useatcmd, "s"),
 		
 		/**
-		 * Item bound [Mhalicot\Hercules]
+		 * Item bound [Xantara] [Akinari] [Mhalicot/Hercules]
 		 **/
-		BUILDIN_DEF(getitembound,"vii?"),
-		BUILDIN_DEF(getitembound2,"viiiiiiiii?"),
+		BUILDIN_DEF2(getitem,"getitembound","vii?"),
+		BUILDIN_DEF2(getitem2,"getitembound2","viiiiiiiii?"),
 		BUILDIN_DEF(countbound, "?"),
 		
 		//Quest Log System [Inkfish]
@@ -18652,6 +18557,7 @@ void script_defaults(void) {
 	script->buildin_mobuseskill_sub = buildin_mobuseskill_sub;
 	script->cleanfloor_sub = script_cleanfloor_sub;
 	script->run_func = run_func;
+	script->getfuncname = script_getfuncname;
 	
 	/* script_config base */
 	script->config.warn_func_mismatch_argtypes = 1;

@@ -1806,7 +1806,7 @@ void clif_selllist(struct map_session_data *sd)
 			if( sd->status.inventory[i].expire_time )
 				continue; // Cannot Sell Rental Items
 			
-			if( sd->status.inventory[i].bound && !pc->can_give_bounded_items(sd))
+			if( sd->status.inventory[i].bound && !pc->can_give_bound_items(sd))
 				continue; // Cannot sell bound items
 
 			val=sd->inventory_data[i]->value_sell;
@@ -2233,7 +2233,10 @@ void clif_additem(struct map_session_data *sd, int n, int amount, int fail) {
 		p.HireExpireDate = sd->status.inventory[n].expire_time;
 #endif
 #if PACKETVER >= 20071002
-		p.bindOnEquipType = sd->status.inventory[n].bound ? 2 : 0;
+		/* why restrict the flag to non-stackable? because this is the only packet allows stackable to,
+	     * show the color, and therefore it'd be inconsistent with the rest (aka it'd show yellow, you relog/refresh and boom its gone)
+	     */
+		p.bindOnEquipType = sd->status.inventory[n].bound && !itemdb->isstackable2(sd->inventory_data[n]) ? 2 : 0;
 #endif
 	}
 	p.result = (unsigned char)fail;
@@ -2342,7 +2345,6 @@ void clif_item_equip(short idx, struct EQUIPITEM_INFO *p, struct item *i, struct
 
 #if PACKETVER >= 20071002
 	p->HireExpireDate = i->expire_time;
-	p->bindOnEquipType = i->bound ? 2 : 0;
 #endif
 	
 #if PACKETVER >= 20080102
@@ -9266,6 +9268,16 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd) {
 
 	if( map->list[sd->bl.m].users++ == 0 && battle_config.dynamic_mobs )
 		map->spawnmobs(sd->bl.m);
+
+	if( map->list[sd->bl.m].instance_id >= 0 ) {
+		instance->list[map->list[sd->bl.m].instance_id].users++;
+		instance->check_idle(map->list[sd->bl.m].instance_id);
+	}
+	
+	if( pc->has_permission(sd,PC_PERM_VIEW_HPMETER) ) {
+		map->list[sd->bl.m].hpmeter_visible++;
+		sd->state.hpmeter_visible = 1;
+	}
 	
 	if( !(sd->sc.option&OPTION_INVISIBLE) ) { // increment the number of pvp players on the map
 		map->list[sd->bl.m].users_pvp++;
@@ -9458,16 +9470,6 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd) {
 			char output[128];
 			sprintf(output, "[ Kill Steal Protection Disabled. KS is allowed in this map ]");
 			clif->broadcast(&sd->bl, output, strlen(output) + 1, BC_BLUE, SELF);
-		}
-
-		if( map->list[sd->bl.m].instance_id >= 0 ) {
-			instance->list[map->list[sd->bl.m].instance_id].users++;
-			instance->check_idle(map->list[sd->bl.m].instance_id);
-		}
-		
-		if( pc->has_permission(sd,PC_PERM_VIEW_HPMETER) ) {
-			map->list[sd->bl.m].hpmeter_visible++;
-			sd->state.hpmeter_visible = 1;
 		}
 		
 		map->iwall_get(sd); // Updates Walls Info on this Map to Client
@@ -15059,8 +15061,8 @@ void clif_parse_Auction_setitem(int fd, struct map_session_data *sd)
 
 	if( !pc->can_give_items(sd) || sd->status.inventory[idx].expire_time ||
 		!sd->status.inventory[idx].identify ||
-		!itemdb_canauction(&sd->status.inventory[idx],pc->get_group_level(sd)) ||
-		(sd->status.inventory[idx].bound && !pc->can_give_bounded_items(sd)) ) { // Quest Item or something else
+		!itemdb_canauction(&sd->status.inventory[idx],pc->get_group_level(sd)) || // Quest Item or something else
+		(sd->status.inventory[idx].bound && !pc->can_give_bound_items(sd)) ) {
 		clif->auction_setitem(sd->fd, idx, true);
 		return;
 	}
@@ -15137,15 +15139,8 @@ void clif_parse_Auction_register(int fd, struct map_session_data *sd)
 		return;
 	}
 
-	// Auction checks...
 	if( sd->status.zeny < (auction.hours * battle_config.auction_feeperhour) ) {
-		clif->auction_message(fd, 5); // You do not have enough zeny to pay the Auction Fee.
-		return;
-	}
-	
-	if( sd->status.inventory[sd->auction.index].bound && !pc->can_give_bounded_items(sd) ) {
-		clif->message(sd->fd, msg_txt(293));
-		clif->auction_message(fd, 2); // The auction has been canceled
+	    clif_Auction_message(fd, 5); // You do not have enough zeny to pay the Auction Fee.
 		return;
 	}
 
@@ -15172,6 +15167,13 @@ void clif_parse_Auction_register(int fd, struct map_session_data *sd)
 	{ // Just in case
 		clif->auction_message(fd, 2); // The auction has been canceled
 		return;
+	}
+
+	// Auction checks...
+	if( sd->status.inventory[sd->auction.index].bound && !pc->can_give_bound_items(sd) ) {
+	    clif->message(sd->fd, msg_txt(293));
+	    clif->auction_message(fd, 2); // The auction has been canceled
+	     return;
 	}
 
 	safestrncpy(auction.item_name, item->jname, sizeof(auction.item_name));

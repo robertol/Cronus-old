@@ -1135,7 +1135,7 @@ ACMD(item)
 		sscanf(message, "%99s %d %d", item_name, &number, &bound) < 2 
 	))) {
 		clif->message(fd, msg_txt(295)); // Please enter an item name or ID (usage: @itembound <item name/ID> <quantity> <bound_type>).
-		return -1;
+		return false;
 	} else if (!message || !*message || (
 								  sscanf(message, "\"%99[^\"]\" %d", item_name, &number) < 1 &&
 								  sscanf(message, "%99s %d", item_name, &number) < 1
@@ -1154,7 +1154,7 @@ ACMD(item)
 		return false;
 	}
 	
-	if( bound < 0 || bound > 4 ) {
+	if(!strcmpi(command+1,"itembound") && !(bound >= IBT_MIN && bound <= IBT_MAX) ) {
 		clif->message(fd, msg_txt(298)); // Invalid bound type
 		return false;
 	}
@@ -1169,9 +1169,6 @@ ACMD(item)
 			return false;
 		}
 		get_count = 1;
-	} else if( bound ) {
-	    clif->message(fd, msg_txt(899)); // Cannot create bound stackable items.
-		return false;
 	}
 	
 	for (i = 0; i < number; i += get_count) {
@@ -1180,7 +1177,7 @@ ACMD(item)
 			memset(&item_tmp, 0, sizeof(item_tmp));
 			item_tmp.nameid = item_id;
 			item_tmp.identify = 1;
-			item_tmp.bound = bound;
+			item_tmp.bound = (unsigned char)bound;
 			
 			if ((flag = pc->additem(sd, &item_tmp, get_count, LOG_TYPE_COMMAND)))
 				clif->additem(sd, 0, 0, flag);
@@ -1226,7 +1223,7 @@ ACMD(item2)
 	if (number <= 0)
 		number = 1;
 		
-	if( bound < 0 || bound > 4 ) {
+	if( !strcmpi(command+1,"itembound2") && !(bound >= IBT_MIN && bound <= IBT_MAX) ) {
 		clif->message(fd, msg_txt(298)); // Invalid bind type
 		return -1;
 	}
@@ -1272,11 +1269,11 @@ ACMD(item2)
 			item_tmp.identify = identify;
 			item_tmp.refine = refine;
 			item_tmp.attribute = attr;
+			item_tmp.bound = (unsigned char)bound;
 			item_tmp.card[0] = c1;
 			item_tmp.card[1] = c2;
 			item_tmp.card[2] = c3;
 			item_tmp.card[3] = c4;
-			item_tmp.bound = bound;
 			if ((flag = pc->additem(sd, &item_tmp, get_count, LOG_TYPE_COMMAND)))
 				clif->additem(sd, 0, 0, flag);
 		}

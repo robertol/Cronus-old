@@ -868,7 +868,7 @@ int guild_member_withdraw(int guild_id, int account_id, int char_id, int flag, c
 	if(online_member_sd == NULL)
 		return 0; // noone online to inform
 
-#ifdef BOUND_ITEMS
+#ifdef GP_BOUND_ITEMS
 	//Guild bound item check
 	guild->retrieveitembound(char_id,account_id,guild_id);
 #endif
@@ -906,23 +906,12 @@ int guild_member_withdraw(int guild_id, int account_id, int char_id, int flag, c
 	return 0;
 }
 
-#ifdef BOUND_ITEMS
 void guild_retrieveitembound(int char_id,int aid,int guild_id)
 {
+#ifdef GP_BOUND_ITEMS
 	TBL_PC *sd = map->id2sd(aid);
 	if(sd){ //Character is online
-		int idxlist[MAX_INVENTORY];
-		int j,i;
-		j = pc->bound_chk(sd,2,idxlist);
-		if(j) {  
-			struct guild_storage *gstor = gstorage->id2storage(guild_id);
-			for(i=0;i<j;i++) { //Loop the matching items, guild_storage_additem takes care of opening storage
-				if(gstor)
-					gstorage->additem(sd,gstor,&sd->status.inventory[idxlist[i]],sd->status.inventory[idxlist[i]].amount);
-				pc->delitem(sd,idxlist[i],sd->status.inventory[idxlist[i]].amount,0,4,LOG_TYPE_GSTORAGE);
-			}
-				gstorage->close(sd); //Close and save the storage
-		}
+		pc->bound_clear(sd,IBT_GUILD);
 	}
 	else { //Character is offline, ask char server to do the job
 		struct guild_storage *gstor = gstorage->id2storage2(guild_id);
@@ -938,8 +927,8 @@ void guild_retrieveitembound(int char_id,int aid,int guild_id)
 		}
 		intif->itembound_req(char_id,aid,guild_id);
 	}
+#endif // GP_BOUND_ITEMS
 }
-#endif // BOUND_ITEMS
 
 int guild_send_memberinfoshort(struct map_session_data *sd,int online)
 { // cleaned up [LuzZza]
@@ -1855,10 +1844,6 @@ int guild_break(struct map_session_data *sd,char *name) {
 	struct guild *g;
 	struct unit_data *ud;
 	int i;
-#ifdef BOUND_ITEMS
-	int j;
-	int idxlist[MAX_INVENTORY];
-#endif
 
 	nullpo_ret(sd);
 
@@ -1902,11 +1887,9 @@ int guild_break(struct map_session_data *sd,char *name) {
 		}
 	}
 
-#ifdef BOUND_ITEMS
+#ifdef GP_BOUND_ITEMS
 	//Guild bound item check - Removes the bound flag
-	j = pc->bound_chk(sd,2,idxlist);
-	for(i=0;i<j;i++)
-		sd->status.inventory[idxlist[i]].bound = 0;
+	pc->bound_clear(sd,IBT_GUILD);
 #endif
 	
 	intif->guild_break(g->guild_id);
@@ -2381,4 +2364,5 @@ void guild_defaults(void) {
 	guild->check_member = guild_check_member;
 	guild->get_alliance_count = guild_get_alliance_count;
 	guild->castle_reconnect_sub = guild_castle_reconnect_sub;
+	guild->retrieveitembound = guild_retrieveitembound;
 }
