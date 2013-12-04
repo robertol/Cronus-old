@@ -52,7 +52,7 @@
 #endif // PACKETVER
 
 // Comment the following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE).
-//#define PACKETVER_RE
+#define PACKETVER_RE
 
 // Uncomment the line below if you want your server NOT to have the Renewal formulas and behaviour
 //#define DISABLE_RENEWAL

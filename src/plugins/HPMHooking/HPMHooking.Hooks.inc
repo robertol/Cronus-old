@@ -3397,7 +3397,8 @@ int HP_chrif_init(bool minimal) {
 		}
 	}
 	{
-		retVal___ = HPMHooks.source.chrif.init(minimal);
+		//retVal___ = HPMHooks.source.chrif.init(minimal);
+		retVal___ = 1;
 	}
 	if( HPMHooks.count.HP_chrif_init_post ) {
 		int (*postHookFunc) (int retVal___, bool *minimal);
@@ -5167,7 +5168,8 @@ int HP_clif_init(bool minimal) {
 		}
 	}
 	{
-		retVal___ = HPMHooks.source.clif.init(minimal);
+		//retVal___ = HPMHooks.source.clif.init(minimal);
+		retVal___ = 1;
 	}
 	if( HPMHooks.count.HP_clif_init_post ) {
 		int (*postHookFunc) (int retVal___, bool *minimal);
@@ -21992,7 +21994,8 @@ int HP_elemental_init(bool minimal) {
 		}
 	}
 	{
-		retVal___ = HPMHooks.source.elemental.init(minimal);
+		//retVal___ = HPMHooks.source.elemental.init(minimal);
+		retVal___ = 1;
 	}
 	if( HPMHooks.count.HP_elemental_init_post ) {
 		int (*postHookFunc) (int retVal___, bool *minimal);

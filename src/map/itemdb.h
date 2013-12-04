@@ -341,7 +341,6 @@ struct itemdb_interface {
 	void (*re_split_atoi) (char *str, int *atk, int *matk);
 	int (*readdb) (void);
 	int (*read_sqldb) (void);
-	void (*name_constants) (void);
 	uint64 (*unique_id) (int8 flag, int64 value);
 	int (*uid_load) ();
 	void (*read) ( bool );

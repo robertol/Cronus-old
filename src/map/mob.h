@@ -356,6 +356,7 @@ struct mob_interface {
 	bool (*readdb_itemratio) (char *str[], int columns, int current);
 	void (*load) ( bool );
 	void (*clear_spawninfo) ();
+	void (*name_constants) (void);
 };
 
 struct mob_interface *mob;
