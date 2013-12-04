@@ -4118,7 +4118,7 @@ S_BS_1:
 	return;
 }
 mosk_fild01,113,108,3	duplicate(Squirrel#mos_main)	Big Squirrel#mos	HIDDEN_NPC
-mosk_fild01,113,108,5	duplicate(Squirrel#mos_main)	#mos_sq	1104,2,2
+mosk_fild01,113,108,5	duplicate(Squirrel#mos_main)	#mos_sq	COCO,2,2
 
 // Banish Winter :: mos_nowinter
 //============================================================
@@ -11312,7 +11312,7 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 				mes "One! Two! Three!!";
 				next;
 				if (.@rucard_game01 == 1) {
-					cutin "Æ÷¸µÄ«µå",4; // Poring Card
+					cutin "Ç·ØµÄ«Ö¥",4; // Poring Card
 					emotion e_gasp;
 					emotion e_ic,1;
 					next;
@@ -11325,9 +11325,9 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 					next;
 				} else {
 					if (.@rucard_game01 == 2)
-						cutin "¿£Á©¸µÄ«µå",4; // Angeling Card
+						cutin "ß£iØµÄ«Ö¥",4; // Angeling Card
 					else
-						cutin "°í½ºÆ®¸µÄ«µå",4; // Ghostring Card
+						cutin "Ñ­ÝºÆ®ØµÄ«Ö¥",4; // Ghostring Card
 					emotion e_gasp;
 					emotion e_omg,1;
 					next;
@@ -11348,7 +11348,7 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 				mes "One! Two! Three!!";
 				next;
 				if (.@rucard_game01 == 2) {
-					cutin "°í½ºÆ®¸µÄ«µå",4; // Angeling Card
+					cutin "Ñ­ÝºÆ®ØµÄ«Ö¥",4; // Angeling Card
 					emotion e_gasp;
 					emotion e_ic,1;
 					next;
@@ -11361,9 +11361,9 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 					next;
 				} else {
 					if (.@rucard_game01 == 1)
-						cutin "Æ÷¸µÄ«µå",4; // Poring Card
+						cutin "Ç·ØµÄ«Ö¥",4; // Poring Card
 					else
-						cutin "°í½ºÆ®¸µÄ«µå",4; // Ghostring Card
+						cutin "Ñ­ÝºÆ®ØµÄ«Ö¥",4; // Ghostring Card
 					emotion e_gasp;
 					emotion e_omg,1;
 					next;
@@ -11384,7 +11384,7 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 				mes "One! Two! Three!!";
 				next;
 				if (.@rucard_game01 == 3) {
-					cutin "°í½ºÆ®¸µÄ«µå",4; // Ghostring Card
+					cutin "Ñ­ÝºÆ®ØµÄ«Ö¥",4; // Ghostring Card
 					emotion e_gasp;
 					emotion e_ic,1;
 					next;
@@ -11397,9 +11397,9 @@ mosk_dun02,57,220,0	script	House Ghost Jar#rus43	HIDDEN_NPC,{
 					next;
 				} else {
 					if (.@rucard_game01 == 1)
-						cutin "Æ÷¸µÄ«µå",4; // Poring Card
+						cutin "Ç·ØµÄ«Ö¥",4; // Poring Card
 					else
-						cutin "°í½ºÆ®¸µÄ«µå",4; // Angeling Card
+						cutin "Ñ­ÝºÆ®ØµÄ«Ö¥",4; // Angeling Card
 					emotion e_gasp;
 					emotion e_omg,1;
 					next;

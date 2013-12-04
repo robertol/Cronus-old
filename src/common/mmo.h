@@ -52,7 +52,7 @@
 #endif // PACKETVER
 
 // Comment the following line if your client is NOT ragexeRE (required because of conflicting packets in ragexe vs ragexeRE).
-//#define PACKETVER_RE
+#define PACKETVER_RE
 
 // Uncomment the line below if you want your server NOT to have the Renewal formulas and behaviour
 //#define DISABLE_RENEWAL
@@ -223,7 +223,8 @@ struct item {
 	char attribute;
 	short card[MAX_SLOTS];
 	unsigned int expire_time;
-	char favorite, bound;
+	char favorite;
+	unsigned char bound;
 	uint64 unique_id;
 };
 
@@ -248,6 +249,15 @@ enum e_mmo_charstatus_opt {
 	OPT_NONE		= 0x0,
 	OPT_SHOW_EQUIP	= 0x1,
 	OPT_ALLOW_PARTY	= 0x2,
+};
+
+enum e_item_bound_type {
+	IBT_MIN       = 0x1,
+	IBT_ACCOUNT   = 0x1,
+	IBT_GUILD     = 0x2,
+	IBT_PARTY     = 0x3,
+	IBT_CHARACTER = 0x4,
+	IBT_MAX       = 0x4,
 };
 
 struct s_skill {

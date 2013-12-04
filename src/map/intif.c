@@ -2011,8 +2011,8 @@ void intif_parse_MessageToFD(int fd) {
 /*==========================================
  * Item Bound System [Xantara][Mhalicot]
  *------------------------------------------*/
-#ifdef BOUND_ITEMS
 void intif_itembound_req(int char_id,int aid,int guild_id) {
+#ifdef GP_BOUND_ITEMS
 	struct guild_storage *gstor = gstorage->id2storage2(guild_id);
 	WFIFOHEAD(inter_fd,12);
 	WFIFOW(inter_fd,0) = 0x3056;
@@ -2022,17 +2022,20 @@ void intif_itembound_req(int char_id,int aid,int guild_id) {
 	WFIFOSET(inter_fd,12);
 	if(gstor)
 		gstor->lock = 1; //Lock for retrieval process
+#endif
 }
 
 //3856
 void intif_parse_Itembound_ack(int fd) {
+#ifdef GP_BOUND_ITEMS
 	struct guild_storage *gstor;
 	int guild_id = RFIFOW(fd,6);
   
 	gstor = gstorage->id2storage2(guild_id);
-	if(gstor) gstor->lock = 0; //Unlock now that operation is completed
-}
+	if(gstor)
+		gstor->lock = 0; //Unlock now that operation is completed
 #endif // BOUND_ITEMS
+}
 
 //-----------------------------------------------------------------
 // Communication from the inter server
@@ -2116,9 +2119,13 @@ int intif_parse(int fd)
 		case 0x3853:	intif->pAuctionClose(fd); break;
 		case 0x3854:	intif->pAuctionMessage(fd); break;
 		case 0x3855:	intif->pAuctionBid(fd); break;
-#ifdef BOUND_ITEMS
-		case 0x3856:  intif->pItembound_ack(fd); break; //Bound items
+#ifdef GP_BOUND_ITEMS
+		case 0x3856:
+			intif->pItembound_ack(fd);
+#else;
+			ShowWarning("intif_parse: Received 0x3856 with GP_BOUND_ITEMS disabled !!!\n");
 #endif //BOUND_ITEMS
+				break;
 		// Mercenary System
 		case 0x3870:	intif->pMercenaryReceived(fd); break;
 		case 0x3871:	intif->pMercenaryDeleted(fd); break;
@@ -2246,6 +2253,8 @@ void intif_defaults(void) {
 	/* */
 	intif->CheckForCharServer = CheckForCharServer;
 	/* */
+	intif->itembound_req = intif_itembound_req;
+	/* parse functions */
 	intif->pWisMessage = intif_parse_WisMessage;
 	intif->pWisEnd = intif_parse_WisEnd;
 	intif->pWisToGM_sub = mapif_parse_WisToGM_sub;

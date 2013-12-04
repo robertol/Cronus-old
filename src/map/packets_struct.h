@@ -211,7 +211,6 @@ struct NORMALITEM_INFO {
 #endif
 #if PACKETVER >= 20080102
   int HireExpireDate;
-  unsigned short bindOnEquipType;
 #endif
 #if PACKETVER >= 20120925
   struct {

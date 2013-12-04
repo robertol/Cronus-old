@@ -148,7 +148,7 @@ struct guild_interface {
 	/* guild aura */
 	void (*aura_refresh) (struct map_session_data *sd, uint16 skill_id, uint16 skill_lv);
 	/* item bound [Mhalicot]*/
-#ifdef BOUND_ITEMS
+#ifdef GP_BOUND_ITEMS
 	void (*retrieveitembound) (int char_id,int aid,int guild_id);
 #endif // BOUND_ITEMS
 	/* */
