@@ -237,10 +237,6 @@ int unit_walktoxy_timer(int tid, int64 tick, int id, intptr_t data) {
 				}
 			}
 		}
-		else
-		{
-			sd->hd->masterteleport_timer = 0;
-		}
 	} else if (md) {
 		if( map->getcell(bl->m,x,y,CELL_CHKNPC) ) {
 			if( npc->touch_areanpc2(md) ) return 0; // Warped
