@@ -3,7 +3,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 2.4
+//= 2.5
 //===== Description: =========================================
 //= [Official Conversion]
 //= Calabouço da torre sem fim.
@@ -69,9 +69,6 @@ alberta,214,77,6	script	Capitão Janssen	4_M_SEAMAN,{
 		next;
 		mes "[Capitão Janssen]";
 		mes "No, that's good enough. I may just have one small fishing vessel, but I used to be a captain that commanded a fleet.";
-		next;
-		mes "[Capitão Janssen]";
-		mes "Não, isso é bom o suficiente. Talvez eu só tenha uma pequena embarcação de pesca, mas eu costumava ser um capitão que comandou uma frota";
 		next;
 		mes "[Capitão Janssen]";
 		mes "Como você deve saber após algumas viagens marítimas, talvez muitas pessoas não tenham atravessado o oceano além do continente. Eu também falhei na conquista do oceano.";
@@ -809,8 +806,8 @@ function	script	F_Tower_Monster	{
 		areamonster .@map$,267,180,277,216,"Ancient Worm",1305,2,.@label$;
 		areamonster .@map$,267,180,277,216,"Caterpillar",1300,2,.@label$;
 		areamonster .@map$,267,180,277,216,"Creamy Fear",1293,2,.@label$;
-		areamonster .@map$,267,180,277,216,"Killer Louva-Deus",1294,2,.@label$;
-		areamonster .@map$,267,180,277,216,"Zangão Ferrãoante",1303,2,.@label$;
+		areamonster .@map$,267,180,277,216,"Louva-Deus",1294,2,.@label$;
+		areamonster .@map$,267,180,277,216,"Zangão Gigante",1303,2,.@label$;
 		break;
 	case 65:
 		areamonster .@map$,352,180,362,216,"Atros",1785,1,.@label$;
@@ -819,7 +816,7 @@ function	script	F_Tower_Monster	{
 	case 66:
 		areamonster .@map$,9,96,19,132,"Incubus",1374,20,.@label$;
 		areamonster .@map$,9,96,19,132,"Aliot",1736,20,.@label$;
-		areamonster .@map$,9,96,19,132,"Injustice",1257,10,.@label$;
+		areamonster .@map$,9,96,19,132,"Injustiçado",1257,10,.@label$;
 		break;
 	case 67:
 		areamonster .@map$,93,96,103,132,"Acidus",1716,10,.@label$;
@@ -885,7 +882,7 @@ function	script	F_Tower_Monster	{
 		areamonster .@map$,352,9,362,45,"Dark Illusion",1302,10,.@label$;
 		break;
 	case 76:
-		areamonster .@map$,9,351,19,387,"Abysmal Knight",1219,30,.@label$;
+		areamonster .@map$,9,351,19,387,"Cavaleiro do Abismo",1219,30,.@label$;
 		areamonster .@map$,9,351,19,387,"Nightmare Terror",1379,20,.@label$;
 		areamonster .@map$,9,351,19,387,"Nightmare",1061,10,.@label$;
 		break;
@@ -899,7 +896,7 @@ function	script	F_Tower_Monster	{
 	case 78:
 		areamonster .@map$,181,351,191,387,"Sword Master",1829,5,.@label$;
 		areamonster .@map$,181,351,191,387,"Bloody Knight",1268,10,.@label$;
-		areamonster .@map$,181,351,191,387,"Abysmal Knight",1219,5,.@label$;
+		areamonster .@map$,181,351,191,387,"Cavaleiro do Abismo",1219,5,.@label$;
 		areamonster .@map$,181,351,191,387,"Dullahan",1504,10,.@label$;
 		areamonster .@map$,181,351,191,387,"Raydric",1163,20,.@label$;
 		break;
@@ -988,7 +985,7 @@ function	script	F_Tower_Monster	{
 	case 93:
 		areamonster .@map$,181,96,191,132,"Seyren Windsor",1634,15,.@label$;
 		areamonster .@map$,181,96,191,132,"Bloody Knight",1268,10,.@label$;
-		areamonster .@map$,181,96,191,132,"Abysmal Knight",1219,10,.@label$;
+		areamonster .@map$,181,96,191,132,"Cavaleiro do Abismo",1219,10,.@label$;
 		areamonster .@map$,181,96,191,132,"Wanderer",1208,10,.@label$;
 		break;
 	case 94:
@@ -1055,7 +1052,7 @@ function	script	F_Tower_Monster	{
 			else if (.@mob_ran == 15) 
 				areamonster .@map$,267,9,277,45,"Bloody Knight",1268,10,.@label$;
 			else if (.@mob_ran == 16) 
-				areamonster .@map$,267,9,277,45,"Abysmal Knight",1219,10,.@label$;
+				areamonster .@map$,267,9,277,45,"Cavaleiro do Abismo",1219,10,.@label$;
 			else if (.@mob_ran == 17) 
 				areamonster .@map$,267,9,277,45,"Wanderer",1208,10,.@label$;
 			else if (.@mob_ran == 18) 
