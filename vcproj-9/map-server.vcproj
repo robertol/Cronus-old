@@ -540,10 +540,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\src\config\lang.h"
-				>
-			</File>
-			<File
 				RelativePath="..\src\map\date.c"
 				>
 			</File>

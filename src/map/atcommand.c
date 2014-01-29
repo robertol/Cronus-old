@@ -14,7 +14,6 @@
 #include "../common/strlib.h"
 #include "../common/utils.h"
 #include "../common/conf.h"
-#include "../config/lang.h"
 
 #include "atcommand.h"
 #include "battle.h"
@@ -3636,7 +3635,7 @@ ACMD(reloadskilldb)
 ACMD(reloadatcommand) {
 	config_t run_test;
 	
-	if (conf_read_file(&run_test, LANG_CONF_PATH"groups.conf")) {
+	if (conf_read_file(&run_test, "conf/groups.conf")) {
 		clif->message(fd, msg_txt(1036)); // Error reading groups.conf, reload failed.
 		return false;
 	}
