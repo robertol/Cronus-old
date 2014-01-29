@@ -28,16 +28,13 @@ Equipe de Desenvolvimento
 - Raizen	- Carlos Lain
 
 ### Coordenadores
-- .twink	- Samuel Soares
-- MaatSF	- Matheus Silva
-- Wilk Maia
+- Kooler
+- SoulBlaker	- Romulo
 
 ### Desenvolvedores
-- mkbu95		- Matheus Macabu
-- Golen Maker	- Ligleyson Warnielle
 - BeckDeveloper	- Valderson Rodrigues
-- Schrwaizer	- Junior Backes
 - BOO			- José Filho
-- xChiron		- Diego da Silva Pinheiro
-- fetish		- Wesley Balena
+- Tet
+- KyukE
+- Jota Gois
 	
