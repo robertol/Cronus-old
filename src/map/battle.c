@@ -12,7 +12,6 @@
 #include "../common/socket.h"
 #include "../common/strlib.h"
 #include "../common/utils.h"
-#include "../config/lang.h"
 
 #include "map.h"
 #include "path.h"
@@ -6689,28 +6688,28 @@ void battle_adjust_conf(void) {
 
 #if PACKETVER < 20100427
 	if( battle_config.feature_buying_store ) {
-		ShowWarning(LANG_CONF_PATH"battle/feature.conf buying_store is enabled but it requires PACKETVER 2010-04-27 or newer, disabling...\n");
+		ShowWarning("conf/battle/feature.conf buying_store is enabled but it requires PACKETVER 2010-04-27 or newer, disabling...\n");
 		battle_config.feature_buying_store = 0;
 	}
 #endif
 
 #if PACKETVER < 20100803
 	if( battle_config.feature_search_stores ) {
-		ShowWarning(LANG_CONF_PATH"battle/feature.conf search_stores is enabled but it requires PACKETVER 2010-08-03 or newer, disabling...\n");
+		ShowWarning("conf/battle/feature.conf search_stores is enabled but it requires PACKETVER 2010-08-03 or newer, disabling...\n");
 		battle_config.feature_search_stores = 0;
 	}
 #endif
 #if PACKETVER < 20130724
 	if( battle_config.feature_banking ) {
-		ShowWarning(LANG_CONF_PATH"battle/feature.conf banking is enabled but it requires PACKETVER 2013-07-24 or newer, disabling...\n");
+		ShowWarning("conf/battle/feature.conf banking is enabled but it requires PACKETVER 2013-07-24 or newer, disabling...\n");
 		battle_config.feature_banking = 0;
 	}
 #endif
 
 #if PACKETVER > 20120000 && PACKETVER < 20130515 /* exact date (when it started) not known */
 	if( battle_config.feature_auction == 1 ) {
-		ShowWarning(LANG_CONF_PATH"battle/feature.conf:feature.auction is enabled but it is not stable on PACKETVER "EXPAND_AND_QUOTE(PACKETVER)", disabling...\n");
-		ShowWarning(LANG_CONF_PATH"battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
+		ShowWarning("conf/battle/feature.conf:feature.auction is enabled but it is not stable on PACKETVER "EXPAND_AND_QUOTE(PACKETVER)", disabling...\n");
+		ShowWarning("conf/battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
 		battle_config.feature_auction = 0;
 	}
 #endif

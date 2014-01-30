@@ -14,7 +14,6 @@
 #include "../common/utils.h"
 #include "../common/conf.h"
 #include "../common/mmo.h" //NAME_LENGTH
-#include "../config/lang.h"
 
 #include "pc.h"
 #include "atcommand.h" // get_atcommand_level()
@@ -9723,9 +9722,9 @@ void pc_read_skill_tree(void) {
 	config_t skill_tree_conf;
 	config_setting_t *skt = NULL, *inherit = NULL, *skills = NULL, *sk = NULL;
 #ifdef RENEWAL
-	const char *config_filename = LANG_DB_PATH"re/skill_tree.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/re/skill_tree.conf"; // FIXME hardcoded name
 #else
-	const char *config_filename = LANG_DB_PATH"pre-re/skill_tree.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/pre-re/skill_tree.conf"; // FIXME hardcoded name
 #endif
 	int i = 0, jnamelen = 0;
 	struct s_mapiterator *iter;

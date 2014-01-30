@@ -135,7 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\config\lang.h" />
     <ClInclude Include="..\3rdparty\libconfig\grammar.h" />
     <ClInclude Include="..\3rdparty\libconfig\libconfig.h" />
     <ClInclude Include="..\3rdparty\libconfig\parsectx.h" />

@@ -10,7 +10,6 @@
 #include "../common/socket.h"
 #include "../common/strlib.h"
 #include "../common/conf.h"
-#include "../config/lang.h"
 
 #include "battleground.h"
 #include "battle.h"
@@ -257,7 +256,7 @@ int bg_send_xy_timer(int tid, int64 tick, int id, intptr_t data) {
 void bg_config_read(void) {
 	config_t bg_conf;
 	config_setting_t *data = NULL;
-	const char *config_filename = LANG_CONF_PATH"battlegrounds.conf"; // FIXME hardcoded name
+	const char *config_filename = "conf/battlegrounds.conf"; // FIXME hardcoded name
 	
 	if (conf_read_file(&bg_conf, config_filename))
 		return;

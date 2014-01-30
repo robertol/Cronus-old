@@ -1,5 +1,0 @@
-// run when any character logs in, attached to them.
--	script	CronusMOTD	-1,{
-message strcharinfo(0),"Welcome to Cronus! Enjoy! Please report any bugs you find.";
-end;
-}

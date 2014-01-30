@@ -9,7 +9,6 @@
 #include "../common/strlib.h"
 #include "../common/utils.h"
 #include "../common/conf.h"
-#include "../config/lang.h"
 #include "itemdb.h"
 #include "map.h"
 #include "battle.h" // struct battle_config
@@ -627,9 +626,9 @@ void itemdb_read_groups(void) {
 	config_t item_group_conf;
 	config_setting_t *itg = NULL, *it = NULL;
 #ifdef RENEWAL
-	const char *config_filename = LANG_DB_PATH"re/item_group.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/re/item_group.conf"; // FIXME hardcoded name
 #else
-	const char *config_filename = LANG_DB_PATH"pre-re/item_group.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/pre-re/item_group.conf"; // FIXME hardcoded name
 #endif
 	const char *itname;
 	int i = 0, count = 0, c;
@@ -913,9 +912,9 @@ void itemdb_read_packages(void) {
 	config_t item_packages_conf;
 	config_setting_t *itg = NULL, *it = NULL, *t = NULL;
 #ifdef RENEWAL
-	const char *config_filename = LANG_DB_PATH"re/item_packages.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/re/item_packages.conf"; // FIXME hardcoded name
 #else
-	const char *config_filename = LANG_DB_PATH"pre-re/item_packages.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/pre-re/item_packages.conf"; // FIXME hardcoded name
 #endif
 	const char *itname;
 	int i = 0, count = 0, c = 0, highest_gcount = 0;
@@ -1144,9 +1143,9 @@ void itemdb_read_chains(void) {
 	config_t item_chain_conf;
 	config_setting_t *itc = NULL, *entry = NULL;
 #ifdef RENEWAL
-	const char *config_filename = LANG_DB_PATH"re/item_chain.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/re/item_chain.conf"; // FIXME hardcoded name
 #else
-	const char *config_filename = LANG_DB_PATH"pre-re/item_chain.conf"; // FIXME hardcoded name
+	const char *config_filename = "db/pre-re/item_chain.conf"; // FIXME hardcoded name
 #endif
 	int i = 0, count = 0;
 	
