@@ -37,4 +37,4 @@ Equipe de Desenvolvimento
 - Tet
 - KyukE
 - Jota Gois
-	
+- Zephyrus
