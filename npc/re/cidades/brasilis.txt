@@ -18,7 +18,7 @@
 alberta,246,82,3	script	Crewman#bra2	100,{
 	mes "[Crewman]";
 	mes "Ei, você já ouviu falar de um lugar chamado Brasilis?";
-	mes "É uma cidade tropical que é tão quente quanto o deserto entretanto bastante chuvosa. É um lugar muito misterioso.";
+	mes "É uma cidade tropical que é tão quente quanto o deserto, entretanto bastante chuvosa. É um lugar muito misterioso.";
 	next;
 	mes "[Crewman]";
 	mes "Recentemente, encontramos uma nova rota oceânica para chegar lá fácilmente!";
@@ -87,7 +87,7 @@ brasilis,240,247,3	script	Signpost#bra3	858,{
 brasilis,303,309,3	script	Signpost#bra4	858,{
 	mes ":: Corda da Selva ::";
 	mes "";
-	mes "- Não recomendado para pessoas cardíacias -";
+	mes "- Não recomendado para pessoas cardíacas -";
 	close;
 }
 
