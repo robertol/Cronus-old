@@ -35,6 +35,7 @@ Equipe de Desenvolvimento
 - BeckDeveloper	- Valderson Rodrigues
 - BOO			- José Filho
 - Tet
-- KyukE
+- KyukE			- Thiago Gomes
 - Jota Gois
 - Zephyrus
+- Shermie
