@@ -1,22 +1,22 @@
-// ===== Script HÃ©rcules ======================================
+// ===== Script Hércules ======================================
 // = arruaceiro Quest
 // ===== Por: ========================================= =========
 // = Kobra_k88
-// ===== VersÃ£o Atual: =====================================
+// ===== Versão Atual: =====================================
 // = 2.9
-// ===== DescriÃ§Ã£o: =========================================
-// = [ ConversÃ£o Oficial]
+// ===== Descrição: =========================================
+// = [ Conversão Oficial]
 // = Busca de trabalho para as classes Ladino
-// ===== ComentÃ¡rios Adicionais: =================================
+// ===== Comentários Adicionais: =================================
 // = 2.4 reescritos para Aegis 10.3 stadards . [ L0ne_W0lf ]
-// = JÃ¡ nÃ£o usa a funÃ§Ã£o " F_BlockHigh "
-// = 2.4a ExcluÃ­dos variÃ¡veis ??nÃ£o utilizadas . [ Samuray22 ]
+// = Já não usa a função " F_BlockHigh "
+// = 2.4a Excluídos variáveis ??não utilizadas . [ Samuray22 ]
 // = 2.4b Mudou um problema com JobLevel o que fez
-// = ImpossÃ­vel obter uma Gladius [3] . ( bugreport : 481 ) [ Samuray22 ]
-// = 2.4c Corrigido um erro de digitaÃ§Ã£o "; ", e um erro de digitaÃ§Ã£o com " rouge". ( bugreport : 909) [ Samuray22 ]
+// = Impossível obter uma Gladius [3] . ( bugreport : 481 ) [ Samuray22 ]
+// = 2.4c Corrigido um erro de digitação "; ", e um erro de digitação com " rouge". ( bugreport : 909) [ Samuray22 ]
 // = 2.5 Adicionado dummy " OnMyMobDead" etiquetas. ( bugreport : 1100 ) [ L0ne_W0lf ]
 // = 2.6 Corrigido alguns bugs no Vampira da Guilda . [ L0ne_W0lf ]
-// = 2.7 Corrigido um bug em Markie questÃ£o 5, bugreport : 1600 [ Brainstorm ]
+// = 2.7 Corrigido um bug em Markie questão 5, bugreport : 1600 [ Brainstorm ]
 // = 2.8 movido " Thug " para Morroc Ruins. [ L0ne_W0lf ]
 // = 2.9 Adicionado comandos Quest Log . [ Kisuka ]
 // ================================================ ============
@@ -24,27 +24,27 @@
 moc_ruins,86,103,1	script	Thug#rg	2_M_THIEFMASTER,{
 	mes "[Thug]";
 	mes "*Sigh...*";
-	mes "O que Ã© a vida?";
+	mes "O que é a vida?";
 	mes "E qual utilidade";
-	mes "do dinheiro? ...MaldiÃ§Ã£o.";
-	mes "Que maldiÃ§Ã£o de vida!";
+	mes "do dinheiro? ...Maldição.";
+	mes "Que maldição de vida!";
 	next;
 	mes "[Thug]";
-	mes "Ei, crianÃ§a.";
+	mes "Ei, criança.";
 	mes "Para quem diabos";
-	mes "vocÃª estÃ¡ olhando?";
+	mes "você está olhando?";
 	next;
-	if (select("Eu? N-ninguÃ©m!':........") == 1) {
+	if (select("Eu? N-ninguém!':........") == 1) {
 		mes "[Thug]";
-		mes "EntÃ£o tire";
+		mes "Então tire";
 		mes "seu olho de mim!";
-		mes "VocÃª nÃ£o me ouviu?";
+		mes "Você não me ouviu?";
 		mes "Saia daqui!";
 		close;
 	}
 	mes "[Thug]";
 	mes "Hmmm...";
-	mes "Talvez eu dÃª um pulo na ^0000FFGuilda dos Arruaceiros^000000 na ^0000FFIlha do Farol^000000...";
+	mes "Talvez eu dê um pulo na ^0000FFGuilda dos Arruaceiros^000000 na ^0000FFIlha do Farol^000000...";
 	next;
 	mes "[Thug]";
 	mes "Preciso de meu dinheiro,";
@@ -55,16 +55,16 @@ moc_ruins,86,103,1	script	Thug#rg	2_M_THIEFMASTER,{
 in_rogue,363,122,4	script	Markie#rg	747,{
 	if (Upper == 1) {
 		mes "[Markie]";
-		mes "Eh? VocÃª...vocÃª...?!";
-		mes "Ei, eu jÃ¡ nÃ£o te vi antes?";
+		mes "Eh? Você...você...?!";
+		mes "Ei, eu já não te vi antes?";
 		next;
 		mes "[Markie]";
 		mes "..............";
-		mes "Awww, ^FF0000Me desculpe^000000! Acho que confundi vocÃª com alguÃ©m que eu conheÃ§o.";
+		mes "Awww, ^FF0000Me desculpe^000000! Acho que confundi você com alguém que eu conheço.";
 		next;
 		mes "[Markie]";
 		mes ".......";
-		mes "........Ã‰ estranho. Hmm.";
+		mes "........É estranho. Hmm.";
 		next;
 		mes "[Markie]";
 		mes "Eu nunca confundi as pessoas...oh bem, normal!";
@@ -73,100 +73,100 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 	if (BaseJob == Job_Thief) {
 		if (SkillPoint) {
 			mes "[Arruaceira da Guilda]";
-			mes "Cara, o que vocÃª estÃ¡ fazendo?!";
-			mes "VocÃª nÃ£o pode trocar de classe se tÃªm pontos de habilidade sobrando, gaste todos. Ã‰ melhor vocÃª conferir melhor antes que vocÃª se auto destrua.";
+			mes "Cara, o que você está fazendo?!";
+			mes "Você não pode trocar de classe se têm pontos de habilidade sobrando, gaste todos. É melhor você conferir melhor antes que você se auto destrua.";
 			close;
 		}
 		if (JobLevel > 39) {
 			if (ROGUE_Q == 0) {
 				mes "[Arruaceira da Guilda]";
-				mes "EntÃ£o o que uma crianÃ§a";
-				mes "igual a vocÃª estÃ¡ fazendo aqui?";
+				mes "Então o que uma criança";
+				mes "igual a você está fazendo aqui?";
 				if (sex == 1) {
 					mes "Oh, eu vou pegar agora...";
 					mes "O que o pivete quer";
 				}
 				else {
-					mes "Oh, jÃ¡ sei...";
+					mes "Oh, já sei...";
 					mes "O minininho quer ";
 				}
 				mes "ser um ^800000Arruaceiro^000000.";
 				next;
 				mes "[Arruaceira da Guilda]";
-				mes "Hmm, Ã© bom conhecer vocÃª, eu acho. Eu sou Markie, e eu trabalho para Guilda dos Arruaceiros, uma filantrÃ³-- *ahem* um ^800000filantrÃ³filo^000000 grupo, como vocÃª pode ver. Mas qual Ã© seu nome?";
+				mes "Hmm, é bom conhecer você, eu acho. Eu sou Markie, e eu trabalho para Guilda dos Arruaceiros, uma filantró-- *ahem* um ^800000filantrófilo^000000 grupo, como você pode ver. Mas qual é seu nome?";
 				next;
 				mes "[Markie]";
 				mes "..." + strcharinfo(0) + "?";
 				mes "Heh heh! Bom nome.";
-				mes "Para um idiota, nÃ³s";
-				mes "podemos fazer vocÃª mudar isso,";
-				mes "vocÃª tÃªm sorte.";
+				mes "Para um idiota, nós";
+				mes "podemos fazer você mudar isso,";
+				mes "você têm sorte.";
 				next;
 				mes "[Markie]";
-				mes "EntÃ£o porque vocÃª quer se juntar aos arruaceiros? Eu acho que vocÃª me deu seu nome verdadeiro, vocÃª deve ser um Arruaceiro honesto. NÃ£o hÃ¡ muitos por aÃ­, heh heh~";
+				mes "Então porque você quer se juntar aos arruaceiros? Eu acho que você me deu seu nome verdadeiro, você deve ser um Arruaceiro honesto. Não há muitos por aí, heh heh~";
 				next;
 				mes "[Markie]";
-				mes "Regra nÃºmero 1 para Arruaceiros...";
-				mes "Nunca dÃª a sua verdadeira identidade para a maioria das pessoas, sempre. Ã‰ uma pequena medida de seguranÃ§a que gostamos de usar.";
+				mes "Regra número 1 para Arruaceiros...";
+				mes "Nunca dê a sua verdadeira identidade para a maioria das pessoas, sempre. É uma pequena medida de segurança que gostamos de usar.";
 				next;
 				mes "[Markie]";
-				mes "Certo. Estou aceitando oficialmente a sua candidatura, agora vocÃª tem que realizar um teste. NÃ£o se preocupe, o primeiro Ã© realmente simples.";
+				mes "Certo. Estou aceitando oficialmente a sua candidatura, agora você tem que realizar um teste. Não se preocupe, o primeiro é realmente simples.";
 				next;
 				mes "[Markie]";
 				mes "Tudo bem...";
-				mes "Vamos comeÃ§ar!";
+				mes "Vamos começar!";
 				next;
 			}
 			else if (ROGUE_Q == 1) {
 				mes "[Markie]";
-				mes "VocÃª denovo?";
-				mes "Ok, vocÃª provavelmente estava nervoso e fez besteira da Ãºltima vez. Agora mantenha a calma e passe";
+				mes "Você denovo?";
+				mes "Ok, você provavelmente estava nervoso e fez besteira da última vez. Agora mantenha a calma e passe";
 				mes "neste teste, ok?";
 				next;
 			}
 			else if (ROGUE_Q == 2) {
 				mes "[Markie]";
-				mes "VÃ¡ falar com o Smith. Seu teste poderÃ¡ ser bastante difÃ­cil. Ele Ã© um dos caras que garante que as pessoas paguem as suas dÃ­vidas a nÃ³s. Fica esperto, ele poderÃ¡ ser um pouco exigente.";
+				mes "Vá falar com o Smith. Seu teste poderá ser bastante difícil. Ele é um dos caras que garante que as pessoas paguem as suas dívidas a nós. Fica esperto, ele poderá ser um pouco exigente.";
 				next;
 				mes "[Markie]";
 				mes "Beleza...";
-				mes "Este cara pode ser um pÃ© no saco, mais precisamos de gente como ele em nossa guilda. Entretanto, tome cuidado. Boa sorte para vocÃª, velho.";
+				mes "Este cara pode ser um pé no saco, mais precisamos de gente como ele em nossa guilda. Entretanto, tome cuidado. Boa sorte para você, velho.";
 				close;
 			}
 			else if (ROGUE_Q > 2 && ROGUE_Q < 16) {
 				mes "[Markie]";
 				mes "Ei cara...";
-				mes "FaÃ§a o seu melhor.";
+				mes "Faça o seu melhor.";
 				next;
 				mes "[Markie]";
 				mes "Heh heh...";
 				mes "Carne fresca. Isto vai ser uma presa";
-				mes "fÃ¡cil para--espere! Er, eu nÃ£o estava falando de vocÃª! Estava pensando em outra carne fresca~";
+				mes "fácil para--espere! Er, eu não estava falando de você! Estava pensando em outra carne fresca~";
 				close;
 			}
 			else if (ROGUE_Q == 16 || ROGUE_Q == 17) {
 				changequest 2026,2027;
 				mes "[Markie]";
 				if (ROGUE_Q == 16) {
-					mes "Oh ei, Ã© vocÃª!";
-					mes "VocÃª fez um bom trabalho, cara.";
+					mes "Oh ei, é você!";
+					mes "Você fez um bom trabalho, cara.";
 					mes "Agora, deixa eu trocar sua";
-					mes "sua classe para arruaceiro. VocÃª merece!";
+					mes "sua classe para arruaceiro. Você merece!";
 					next;
 					mes "[Markie]";
-					mes "ParabÃ©ns~!";
-					mes "VocÃª parece";
+					mes "Parabéns~!";
+					mes "Você parece";
 					mes "beeem dopado!";
 				}
 				else {
-					mes "Oh! Ã‰ vocÃª!";
-					mes "VocÃª foi realmente capaz de lidar com aquele cara? Boa! VocÃª passou muitos apertos para coletar todos os itens, eh?";
+					mes "Oh! É você!";
+					mes "Você foi realmente capaz de lidar com aquele cara? Boa! Você passou muitos apertos para coletar todos os itens, eh?";
 					next;
 					mes "[Markie]";
 					mes "Ei Ei~";
-					mes "ParabÃ©ns!";
-					mes "VocÃª";
-					mes "estÃ¡ fazendo um bom trabalho~";
+					mes "Parabéns!";
+					mes "Você";
+					mes "está fazendo um bom trabalho~";
 				}
 				set .@jlevel,JobLevel;
 				callfunc "Job_Change",Job_Rogue;
@@ -175,12 +175,12 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 				next;
 				mes "[Markie]";
 				mes "Agora...";
-				mes "Ã‰ hora";
+				mes "É hora";
 				mes "de eu te contar";
 				mes "uma coisa~ *Ahem*";
 				next;
 				mes "[Markie]";
-				mes "Aproveite sua liberdade como arruaceiro. Basta lembrar que vocÃª tem que ser livre e responsÃ¡vel, ao mesmo tempo. EntÃ£o, trate os outros do jeito que vocÃª quer ser tratado, beleza? Demorou, agente se esbarra por aÃ­.";
+				mes "Aproveite sua liberdade como arruaceiro. Basta lembrar que você tem que ser livre e responsável, ao mesmo tempo. Então, trate os outros do jeito que você quer ser tratado, beleza? Demorou, agente se esbarra por aí.";
 				close2;
 				if (.@jlevel == 50) {
 					getitem 1220,1; //Gladius_
@@ -194,28 +194,28 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 				mes "Preparado...?";
 				mes "Bom, bom.";
 				mes "Use seu precioso";
-				mes "tempo, porque vocÃª nÃ£o fez isso?"; //
-				mes "Mais anda rÃ¡pido";
+				mes "tempo, porque você não fez isso?"; //
+				mes "Mais anda rápido";
 				mes "e volte, beleza?";
 				close;
 			}
 			next;
 			mes "[Markie]";
-			mes "Preste muita atenÃ§Ã£o, e";
+			mes "Preste muita atenção, e";
 			mes "escolha a resposta certa.";
 			mes "Capiche? Agora, deixa eu";
-			mes "ler essas questÃµes...";
+			mes "ler essas questões...";
 			next;
 			switch(rand(1,3)) {
 			case 1:
 				mes "[Markie]";
-				mes "1. Que habilidade Ã© necessÃ¡ria para se aprender a Habilidade de Arruaceiro, ^880000TÃºnel de Fuga^000000?";
+				mes "1. Que habilidade é necessária para se aprender a Habilidade de Arruaceiro, ^880000Túnel de Fuga^000000?";
 				next;
-				if (select("^880000Esconderijo^000000:^880000Furto^000000:^880000PerÃ­cia em Esquiva^000000:^880000Golpe Fuminante^000000") == 1)
+				if (select("^880000Esconderijo^000000:^880000Furto^000000:^880000Perícia em Esquiva^000000:^880000Golpe Fuminante^000000") == 1)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "2. A habilidade de Arruaceiro ^880000Extorquir^000000 obtÃ©m quanto desconto a mais do que a habilidade ^880000Desconto^000000 dos Mercadores?";
+				mes "2. A habilidade de Arruaceiro ^880000Extorquir^000000 obtém quanto desconto a mais do que a habilidade ^880000Desconto^000000 dos Mercadores?";
 				next;
 				if (select("3 %:2 %:1 %:0 %") == 3)
 					set .@assassin_t,.@assassin_t+10;
@@ -227,43 +227,43 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "4. Quantas pessoas sÃ£o necessÃ¡rias pra que a habilidade ^880000Malandragem^000000 funcione?";
+				mes "4. Quantas pessoas são necessárias pra que a habilidade ^880000Malandragem^000000 funcione?";
 				next;
-				if (select("2 Arruaceiros:1 Gatuno + 2 Arruaceiros:4 Gatunos:2 Arruaceiros + 1 MercenÃ¡rio") == 4)
+				if (select("2 Arruaceiros:1 Gatuno + 2 Arruaceiros:4 Gatunos:2 Arruaceiros + 1 Mercenário") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "5. Que habilidade vocÃª pode aprender apÃ³s ^880000Remover Capacete^000000 NÃ­vel 5?";
+				mes "5. Que habilidade você pode aprender após ^880000Remover Capacete^000000 Nível 5?";
 				next;
-				if (select("^880000Envenenar^000000:^880000Recuar^000000:^880000ExplosÃ£o TÃ³xica^000000:^880000Remover Escudo^000000") == 4)
+				if (select("^880000Envenenar^000000:^880000Recuar^000000:^880000Explosão Tóxica^000000:^880000Remover Escudo^000000") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "6. Que habilidade faz com que vocÃª possa andar sem que ninguÃ©m te veja?";
+				mes "6. Que habilidade faz com que você possa andar sem que ninguém te veja?";
 				next;
-				if (select("^880000Esconderijo^000000:^880000Recuar^000000:^880000TÃºnel de Fuga^000000:^880000Chutar Areia^000000") == 3)
+				if (select("^880000Esconderijo^000000:^880000Recuar^000000:^880000Túnel de Fuga^000000:^880000Chutar Areia^000000") == 3)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
 				mes "7. Que carta aumenta sua chance de acerto num ataque?";
 				next;
-				if (select("Carta AndrÃ©.:Carta Familiar.:Carta MÃºmia.:Carta Poring.") == 3)
+				if (select("Carta André.:Carta Familiar.:Carta Múmia.:Carta Poring.") == 3)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "8. Se vocÃª usar uma arma equipada com a carta Vadon (20% de dano extra em monstros de propriedade fogo), qual desses monstros serÃ¡ mais fÃ¡cil de matar?";
+				mes "8. Se você usar uma arma equipada com a carta Vadon (20% de dano extra em monstros de propriedade fogo), qual desses monstros será mais fácil de matar?";
 				next;
-				if (select("Vadon:Deviruchi:Salgueiro AnciÃ£o:Baphomet") == 3)
+				if (select("Vadon:Deviruchi:Salgueiro Ancião:Baphomet") == 3)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "9. Quanto SP a habilidade ^880000Ataque Duplo^000000 gasta, se vocÃª estiver equipando uma adaga?";
+				mes "9. Quanto SP a habilidade ^880000Ataque Duplo^000000 gasta, se você estiver equipando uma adaga?";
 				next;
-				if (select("15: 0, pois Ã© uma habilidade passiva.:Habilidade Passiva, 10 SP:54") == 2)
+				if (select("15: 0, pois é uma habilidade passiva.:Habilidade Passiva, 10 SP:54") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "10. Que adaga com propriedades especiais Ã© mais Ãºtil no TÃºnel SubterrÃ¢neo de Byalan?";
+				mes "10. Que adaga com propriedades especiais é mais útil no Túnel Subterrâneo de Byalan?";
 				next;
 				if (select("Main-Gauche de Vento:Main-Gauche de Gelo:Main-Gauche de Terra:Main-Gauche de Fogo") == 1)
 					set .@assassin_t,.@assassin_t+10;
@@ -272,53 +272,53 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 				mes "[Markie]";
 				mes "1. Que monstro pode deixar cair um Gladius com vagas para cartas (slots)?";
 				next;
-				if (select("Besouro LadrÃ£o:Peco Peco:Lobo do Deserto:Kobold") == 4)
+				if (select("Besouro Ladrão:Peco Peco:Lobo do Deserto:Kobold") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
 				mes "2. Que monstro pode deixar cair uma Main Gauche com vagas para cartas (slots)?";
 				next;
-				if (select("ZangÃ£o:Lobo do Deserto:Marionete:LunÃ¡tico") == 1)
+				if (select("Zangão:Lobo do Deserto:Marionete:Lunático") == 1)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "3. Qual classe Ã© capaz de criar poÃ§Ãµes?";
+				mes "3. Qual classe é capaz de criar poções?";
 				next;
-				if (select("Mercador:Alquimista:Ferreiro:NoviÃ§o") == 2)
+				if (select("Mercador:Alquimista:Ferreiro:Noviço") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "4. Qual destes itens nÃ£o Ã© equipÃ¡vel por um Arruaceiro?";
+				mes "4. Qual destes itens não é equipável por um Arruaceiro?";
 				next;
 				if (select("Gakkung:Besta:Gladius:Katar") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "5. O 'Hode' Ã© um monstro de qual propriedade?";
+				mes "5. O 'Hode' é um monstro de qual propriedade?";
 				next;
-				if (select("Ãgua:Fogo:Vento:Terra") == 4)
+				if (select("Água:Fogo:Vento:Terra") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "6. Qual destes monstros nÃ£o pode ser um bichinho de estimaÃ§Ã£o?";
+				mes "6. Qual destes monstros não pode ser um bichinho de estimação?";
 				next;
 				if (select("Poporing:Creamy:Orc:Esporo Venenoso") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "7. Qual destes monstros Ã© mais resistente Ã  propriedade fogo?";
+				mes "7. Qual destes monstros é mais resistente à propriedade fogo?";
 				next;
-				if (select("Goblin (Adaga):Goblin (Mangual):Goblin (Machado):Goblin (MaÃ§a)") == 4)
+				if (select("Goblin (Adaga):Goblin (Mangual):Goblin (Machado):Goblin (Maça)") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "8. Escolha a cidade que nÃ£o tem nenhum Feudo.";
+				mes "8. Escolha a cidade que não tem nenhum Feudo.";
 				next;
 				if (select("Prontera:Al De Baran:Alberta:Payon") == 3)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "9. Escolha uma planta que dÃ¡ Ervas Azuis.";
+				mes "9. Escolha uma planta que dá Ervas Azuis.";
 				next;
 				switch(select("Planta Verde:Planta Amarela:Planta Azul:Planta Branca")) {
 				default:
@@ -331,52 +331,52 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 					break;
 				}
 				mes "[Markie]";
-				mes "10. Qual destes monstros nÃ£o Ã© AmaldiÃ§oado?";
+				mes "10. Qual destes monstros não é Amaldiçoado?";
 				next;
 				if (select("Zumbi:Megalodon:Familiar:Khalitzburg") == 3)
 					set .@assassin_t,.@assassin_t+10;
 				break;
 			case 3:
 				mes "[Markie]";
-				mes "1. Quanta esquiva a mais Ã© obtida maximizando a habilidade ^880000PerÃ­cia em Esquiva^000000?";
+				mes "1. Quanta esquiva a mais é obtida maximizando a habilidade ^880000Perícia em Esquiva^000000?";
 				next;
 				if (select("30:40:160:20") == 1)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "2. Qual destes monstros Ã© capaz de detectar um Gatuno usando a habilidade Esconderijo?";
+				mes "2. Qual destes monstros é capaz de detectar um Gatuno usando a habilidade Esconderijo?";
 				next;
-				if (select("Talo de Verme:Argos:MÃºmuia:Esqueleto OperÃ¡rio") == 2)
+				if (select("Talo de Verme:Argos:Múmuia:Esqueleto Operário") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "3. Onde fica a Guilda para a mudanÃ§a de classe para Arruaceiro?";
+				mes "3. Onde fica a Guilda para a mudança de classe para Arruaceiro?";
 				next;
 				if (select("Comodo:Praia Kokomo:Ilha Pharos:Morroc") == 3)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "4. Onde fica a Guilda para a mudanÃ§a de classe para Gatuno?";
+				mes "4. Onde fica a Guilda para a mudança de classe para Gatuno?";
 				next;
 				if (select("Comodo:Lutie:Alberta:Morroc") == 4)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "5. Qual destas cartas nÃ£o tem relaÃ§Ã£o com Destreza?";
+				mes "5. Qual destas cartas não tem relação com Destreza?";
 				next;
-				if (select("Carta Rocker:Carta MÃºmia:Carta Zerom:Carta Drops") == 2)
+				if (select("Carta Rocker:Carta Múmia:Carta Zerom:Carta Drops") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "6. Diga porque vocÃª gosta de Arruaceiros?";
+				mes "6. Diga porque você gosta de Arruaceiros?";
 				next;
-				select("Para ser Fera.:As roupas, o estilo.:Para falar assim com os outros: 'foo'':Excelente forÃ§a de ataque");
+				select("Para ser Fera.:As roupas, o estilo.:Para falar assim com os outros: 'foo'':Excelente força de ataque");
 				set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "7. Com qual nÃ­vel de classe um Gatuno pode se tornar um Arruaceiro?";
+				mes "7. Com qual nível de classe um Gatuno pode se tornar um Arruaceiro?";
 				next;
-				switch(select("Com nÃ­vel de classe 30:Com nÃ­vel de classe 35:Com nÃ­vel de classe 40:Com nÃ­vel de classe 50")) {
+				switch(select("Com nível de classe 30:Com nível de classe 35:Com nível de classe 40:Com nível de classe 50")) {
 				default:
 					break;
 				case 3:
@@ -387,13 +387,13 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 					break;
 				}
 				mes "[Markie]";
-				mes "8. Se vocÃª quiser pintar seu cabelo de azul, onde vocÃª deve levar sua tintura azul?";
+				mes "8. Se você quiser pintar seu cabelo de azul, onde você deve levar sua tintura azul?";
 				next;
 				if (select("Morroc, a nordeste do centro:Prontera,a nordeste do centro:Morroc, a nordeste do centro:Prontera, a nordeste do centro") == 2)
 					set .@assassin_t,.@assassin_t+10;
 
 				mes "[Markie]";
-				mes "9. Se um aprendiz quiser se tornar um Gatuno, que cogumelo terÃ¡ que colher?";
+				mes "9. Se um aprendiz quiser se tornar um Gatuno, que cogumelo terá que colher?";
 				next;
 				switch(select("Cogumelo Borrachento:Cogumelo Vermelho:Cogumelo Venenoso:Cogumelo Laranja")) {
 				default:
@@ -404,81 +404,81 @@ in_rogue,363,122,4	script	Markie#rg	747,{
 					break;
 				}
 				mes "[Markie]";
-				mes "10. Que carta Ã© inÃºtil para Arruaceiros?";
+				mes "10. Que carta é inútil para Arruaceiros?";
 				next;
-				if (select("Cata Sussurro:Carta Salgueiro AnciÃ£o:Carta Zerom:Carta Matyr") == 2)
+				if (select("Cata Sussurro:Carta Salgueiro Ancião:Carta Zerom:Carta Matyr") == 2)
 					set .@assassin_t,.@assassin_t+10;
 			}
 			mes "[Markie]";
 			mes "*Whew~*";
 			mes "Finalmente.";
-			mes "NÃ³s acabamos.";
+			mes "Nós acabamos.";
 			next;
 			mes "[Markie]";
 			mes "Vamos ver.";
-			mes "VocÃª conseguiu...";
+			mes "Você conseguiu...";
 			mes "" + .@assassin_t + " pontos.";
 			if (.@assassin_t > 80) {
 				set ROGUE_Q,2;
 				setquest 2017;
-				mes "Bom. VocÃª passou.";
-				mes "NÃ³s nÃ£o teremos que";
+				mes "Bom. Você passou.";
+				mes "Nós não teremos que";
 				mes "fazer isso denovo.";
 				next;
 				mes "[Markie]";
-				mes "Mais nÃ£o se afobe, vocÃª tÃªm mais uns testes. O prÃ³ximo vai ser do Smith.";
+				mes "Mais não se afobe, você têm mais uns testes. O próximo vai ser do Smith.";
 				next;
 				mes "[Markie]";
-				mes "EntÃ£o...";
-				mes "Vai procurar o Smith e termine este teste, beleza? Cuidado, o Smith Ã© um pÃ© no saco.";
+				mes "Então...";
+				mes "Vai procurar o Smith e termine este teste, beleza? Cuidado, o Smith é um pé no saco.";
 				close;
 			}
 			else {
 				set ROGUE_Q,1;
-				mes "Que merda... VocÃª se ferrou!";
+				mes "Que merda... Você se ferrou!";
 				next;
 				mes "[Markie]";
-				mes "Cara, VocÃª devia ter aprendido mais quando teve a chance. Obrigado por gastar meu tempo atoa.";
+				mes "Cara, Você devia ter aprendido mais quando teve a chance. Obrigado por gastar meu tempo atoa.";
 				next;
 				mes "[Markie]";
-				mes "*Sigh...* Deixa eu te falar umas paradas, beleza? Vou te dizer para vocÃª dar uma passadinha em ^990000ragnarok.com.br^000000 para te ajudar no que vocÃª precisa aprender.";
+				mes "*Sigh...* Deixa eu te falar umas paradas, beleza? Vou te dizer para você dar uma passadinha em ^990000ragnarok.com.br^000000 para te ajudar no que você precisa aprender.";
 				next;
 				mes "[Markie]";
-				mes "Claro, eu nÃ£o sei que diabos isso significa, mas se vocÃª perceber, ele provavelmente vai te ajudar muito.";
+				mes "Claro, eu não sei que diabos isso significa, mas se você perceber, ele provavelmente vai te ajudar muito.";
 				close;
 			}
 		}
 		else if (JobLevel < 40) {
 			mes "[Rogue Guildsman]";
-			mes "Whoa, calma noob. NÃ³s sÃ³ aceitamos Gatunos de nÃ­vel de classe 40. E nÃ£o vou me arriscar te ensinando sendo que vocÃª nÃ£o estÃ¡ pronto. Sacou?";
+			mes "Whoa, calma noob. Nós só aceitamos Gatunos de nível de classe 40. E não vou me arriscar te ensinando sendo que você não está pronto. Sacou?";
 			close;
 		}
 	}
 	else if (BaseJob == Job_Assassin) {
 		mes "[Arruaceira da Guilda]";
 		mes "Huh...?";
-		mes "O que um mercenÃ¡rio estÃ¡ fazendo aqui? Oh, vocÃª nÃ£o veio aqui pra matar alguÃ©m da Guilda dos Arruaceiros, ou veio?";
+		mes "O que um mercenário está fazendo aqui? Oh, você não veio aqui pra matar alguém da Guilda dos Arruaceiros, ou veio?";
 		next;
 		mes "[Arruaceira da Guilda]";
-		mes "De qualquer jeito, nÃ£o mexa com a gente! VocÃª nÃ£o pode me pegar... Eu sou uma boa criminosa!";
+		mes "De qualquer jeito, não mexa com a gente! Você não pode me pegar... Eu sou uma boa criminosa!";
 		next;
 		mes "[Arruaceira da Guilda]";
-		mes "NÃ£o entendeu, hÃ£? Ã‰ algo que eu sempre costumava dizer a Huey. Se vocÃª estiver na Guilda dos MercenÃ¡rios, vocÃª vai ter que conhecÃª-lo...";
+		mes "Não entendeu, hã? É algo que eu sempre costumava dizer a Huey. Se você estiver na Guilda dos Mercenários, você vai ter que conhecê-lo...";
 		close;
 	}
 	else if (BaseJob == Job_Rogue) {
 		mes "[Markie]";
 		mes "Ei Ei~";
-		mes "HÃ¡ quanto tempo.";
-		mes "Eh, certo agora nÃ£o temos";
+		mes "Há quanto tempo.";
+		mes "Eh, certo agora não temos";
 		mes "nenhuma tarefa da guilda";
-		mes "para vocÃª, portanto";
+		mes "para você, portanto";
 		mes "basta checar novamente mais tarde.";
 		close;
 	}
 	else {
 		mes "[Arruaceira da Guilda]";
-		mes "Ei vocÃª...";
+		mes "Ei você...";
 		mes "Tire seu traseiro";
 		mes "gordo da minha frente";
 		mes "ou eu vou redefinir";
@@ -493,40 +493,40 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 		mes "Seja bem vindo";
 		mes "a Guilda dos Arruaceiros.";
 		mes "A partir de agora, eu irei";
-		mes "verificar a sua qualificaÃ§Ã£o.";
+		mes "verificar a sua qualificação.";
 		next;
 		mes "[Sr. Smith]";
-		mes "Antes de nÃ³s comeÃ§armos,";
-		mes "Eu quero que vocÃª";
+		mes "Antes de nós começarmos,";
+		mes "Eu quero que você";
 		mes "saiba de algo...";
 		next;
 		mes "[Sr. Smith]";
-		mes "Todos os novos Arruaceiros sÃ£o obrigados a pagar uma taxa, entÃ£o eu espero que vocÃª cuide disso primeiro.";
+		mes "Todos os novos Arruaceiros são obrigados a pagar uma taxa, então eu espero que você cuide disso primeiro.";
 		next;
 		mes "[Sr. Smith]";
-		mes "O que vocÃª tem que entender Ã© que a Guilda dos Arruaceiros faz um monte de negÃ³cios, ^666666algumas vezes ilegais^000000, que necessita de apoio financeiro.";
+		mes "O que você tem que entender é que a Guilda dos Arruaceiros faz um monte de negócios, ^666666algumas vezes ilegais^000000, que necessita de apoio financeiro.";
 		next;
 		set .@item_need,rand(1,15);
-		if (.@item_need > 0 && .@item_need < 6) callsub S_Req,"10 Ossos","6 Ervas Azuis","10 Unhas Apodrecidas","10 MandÃ­bulas Horrendas",3;
+		if (.@item_need > 0 && .@item_need < 6) callsub S_Req,"10 Ossos","6 Ervas Azuis","10 Unhas Apodrecidas","10 Mandíbulas Horrendas",3;
 		else if (.@item_need > 5 && .@item_need < 11) callsub S_Req,"10 Ervas Verdes","10 Cascos de Caranguejo","10 Escamas de Cobra","10 Garletas",4;
 		else if (.@item_need > 10 && .@item_need < 15) callsub S_Req,"10 Ervas Amarelas","10 Cascas","10 Pernas de Gafanhoto","10 Patas de Urso",5;
 		else if (.@item_need == 15) {
 			mes "[Sr. Smith]";
-			mes "Eu vou deixar vocÃª saber...";
+			mes "Eu vou deixar você saber...";
 			set ROGUE_Q,6;
 			changequest 2017,2021;
 			next;
 			mes "[Sr. Smith]";
-			mes "Eu vou deixar vocÃª saber......";
+			mes "Eu vou deixar você saber......";
 			next;
 			mes "[Sr. Smith]";
-			mes "Eu vou deixar vocÃª saber........";
+			mes "Eu vou deixar você saber........";
 			mes "De qalquer forma.....";
 			next;
 			mes "[Sr. Smith]";
 			mes "Oh cara...";
-			mes "Isto Ã©...";
-			mes "MaldiÃ§Ã£o...";
+			mes "Isto é...";
+			mes "Maldição...";
 			mes "Que irritante!";
 			next;
 			mes "[Sr. Smith]";
@@ -542,58 +542,58 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 			mes ".........";
 			next;
 			mes "[Sr. Smith]";
-			mes "Hoje,eu nÃ£o estou com bom humor, hÃ£ sabe porque?! Eu nÃ£o coletei nenhuma conta! Deus! Gatunos idiotas vindo a mim a todo momento, querendo se tornar Arruaceiros!";
+			mes "Hoje,eu não estou com bom humor, hã sabe porque?! Eu não coletei nenhuma conta! Deus! Gatunos idiotas vindo a mim a todo momento, querendo se tornar Arruaceiros!";
 			next;
 			mes "[Sr. Smith]";
-			mes "Jesus! Agora eu entendo porque o nosso lÃ­der nos disse que trabalhar com o apoio ao cliente Ã© uma droga.";
+			mes "Jesus! Agora eu entendo porque o nosso líder nos disse que trabalhar com o apoio ao cliente é uma droga.";
 			next;
 			mes "[Sr. Smith]";
-			mes "Aquele maldito chefe da guilda me atribuiu essa porcaria de tarefa. Eu sou melhor que essa M#$%Â¨# de tarefa!";
+			mes "Aquele maldito chefe da guilda me atribuiu essa porcaria de tarefa. Eu sou melhor que essa M#$%¨# de tarefa!";
 			mapannounce "in_rogue","Aquele maldito chefe da guilda me atribuiu essa porcaria de tarefa! Aquele bastardo!",bc_map;
-			mes "Aquele bastardo tinha que ir para a P@#$$ que o P@#%&, Eu irei chutar o rabo daquele F@#$ da P#$%Â¨@! F#%k F#%k F#%k !!!";
-			mapannounce "in_rogue","Aquele bastardo tinha que ir para a P@#$$ que o P@#%&, Eu irei chutar o rabo daquele F@#$ da P#$%Â¨@!F#%k F#%k F#%k !!!",bc_map;
+			mes "Aquele bastardo tinha que ir para a P@#$$ que o P@#%&, Eu irei chutar o rabo daquele F@#$ da P#$%¨@! F#%k F#%k F#%k !!!";
+			mapannounce "in_rogue","Aquele bastardo tinha que ir para a P@#$$ que o P@#%&, Eu irei chutar o rabo daquele F@#$ da P#$%¨@!F#%k F#%k F#%k !!!",bc_map;
 			next;
 			mes "[Sr. Smith]";
-			mes "Aquele pedaÃ§o de lixo que tentou mudar sua profissÃ£o, um antes de vocÃª...";
-			mapannounce "in_rogue","Aquele pedaÃ§o de lixo que tentou mudar sua profissÃ£o, um antes de vocÃª...",bc_map;
-			mes "VocÃª sabe que P@#$%&* ele falou sobre mim?!?";
-			mapannounce "in_rogue","VocÃª sabe que P@#$%&* ele falou sobre mim?!?",bc_map;
+			mes "Aquele pedaço de lixo que tentou mudar sua profissão, um antes de você...";
+			mapannounce "in_rogue","Aquele pedaço de lixo que tentou mudar sua profissão, um antes de você...",bc_map;
+			mes "Você sabe que P@#$%&* ele falou sobre mim?!?";
+			mapannounce "in_rogue","Você sabe que P@#$%&* ele falou sobre mim?!?",bc_map;
 			mes "F#$@%#$*#$%@#$!!";
 			mapannounce "in_rogue","F#$@%#$*#$%@#$!!",bc_map;
 			next;
 			mes "[Sr. Smith]";
-			mes "Mas que--?! O que Ã© esse filtro de chat?! Pare de me #*!@$! seu estÃºpido F#$%*! Deixe me falar!!!";
-			mapannounce "in_rogue","Mas que--?! O que Ã© esse filtro de chat?! Pare de me #*!@$! seu estÃºpido F#$%*! Deixe-me falar!!!",bc_map;
+			mes "Mas que--?! O que é esse filtro de chat?! Pare de me #*!@$! seu estúpido F#$%*! Deixe me falar!!!";
+			mapannounce "in_rogue","Mas que--?! O que é esse filtro de chat?! Pare de me #*!@$! seu estúpido F#$%*! Deixe-me falar!!!",bc_map;
 			next;
 			mes "[Sr. Smith]";
-			mes "Mas que p#@$ vocÃª estÃ¡ olhando...? " + strcharinfo(0) + "? Qual Ã© o seu nome!?";
-			mapannounce "in_rogue","Mas que p#@k vocÃª estÃ¡ olhando...? " + strcharinfo(0) + "? Qual Ã© o seu nome!?",bc_map;
+			mes "Mas que p#@$ você está olhando...? " + strcharinfo(0) + "? Qual é o seu nome!?";
+			mapannounce "in_rogue","Mas que p#@k você está olhando...? " + strcharinfo(0) + "? Qual é o seu nome!?",bc_map;
 			mes " ";
 			mes "[" + strcharinfo(0) + "]";
 			mes "Umm...";
 			mes "Senhor...?";
-			mes "Eu nÃ£o queria te deixar chateado. Eu sÃ³ vim aqui para que eu pudesse me tornar um Arruaceiro.";
+			mes "Eu não queria te deixar chateado. Eu só vim aqui para que eu pudesse me tornar um Arruaceiro.";
 			next;
 			mes "[Sr. Smith]";
-			mes "P@#% M#$%@ em cima de um p#$, Mas que p#$k eu estava falando c@#$%Â¨$, seu imbecil!";
-			mapannounce "in_rogue","P@#% M#$%@ em cima de um p#$,  Mas que p#$k eu estava falando c@#$%Â¨$, seu imbecil!",bc_map;
+			mes "P@#% M#$%@ em cima de um p#$, Mas que p#$k eu estava falando c@#$%¨$, seu imbecil!";
+			mapannounce "in_rogue","P@#% M#$%@ em cima de um p#$,  Mas que p#$k eu estava falando c@#$%¨$, seu imbecil!",bc_map;
 			next;
 			mes "[Sr. Smith]";
 			mes "Apenas deixe-me em paz! Deixe-me em paz! Me deixe sozinho!";
 			mapannounce "in_rogue","Apenas deixe-me em paz! Deixe-me em paz! Me deixe sozinho!",bc_map;
 			next;
 			mes "[Sr. Smith]";
-			mes "FaÃ§a o que quiser, ok? FaÃ§a a p#$!@ que quiser...!!";
-			mapannounce "in_rogue","FaÃ§a o que quiser, ok? FaÃ§a a p#$!@ que quiser...!!",bc_map;
+			mes "Faça o que quiser, ok? Faça a p#$!@ que quiser...!!";
+			mapannounce "in_rogue","Faça o que quiser, ok? Faça a p#$!@ que quiser...!!",bc_map;
 			next;
 			mes "[Sr. Smith]";
 			mes "Sua taxa... ^FF000010,000 zeny^000000!!";
 			next;
 			mes "[Sr. Smith]";
-			mes "^FF00005 CrisÃ¡lidas^000000!";
+			mes "^FF00005 Crisálidas^000000!";
 			mes "^FF00005 Garrafas Vazias^000000!";
-			mes "^FF00005 MinÃ©rios de Ferro^000000!";
-			mes "^FF00005 CoraÃ§Ãµes de Pedra^000000!!";
+			mes "^FF00005 Minérios de Ferro^000000!";
+			mes "^FF00005 Corações de Pedra^000000!!";
 			next;
 			mes "[Sr. Smith]";
 			mes "^FF00005 Ervas Vermelhas^000000!";
@@ -602,11 +602,11 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 			next;
 			mes "[Sr. Smith]";
 			mes "^FF00005 Dentes de Morcego^000000!";
-			mes "^FF00005 Caudas de EscorpiÃ£o^000000!!";
+			mes "^FF00005 Caudas de Escorpião^000000!!";
 			mes "^FF00005 Caudas de Yoyo^000000!!";
 			next;
 			mes "[Sr. Smith]";
-			mes "^FF00005 RaÃ§Ã£o para Monstros^000000!";
+			mes "^FF00005 Ração para Monstros^000000!";
 			mes "^FF00005 Felpas^000000!!";
 			mes "^FF00005 Trevos^000000!!";
 			next;
@@ -616,36 +616,36 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 			mes "^FF00005 Ovas de Sapo^000000!!";
 			next;
 			mes "[Sr. Smith]";
-			mes "Nem pense em voltar sem trazer tudo senÃ£o eu irei te matar aqui mesmo.";
+			mes "Nem pense em voltar sem trazer tudo senão eu irei te matar aqui mesmo.";
 			next;
 			mes "[Sr. Smith]";
-			mes "Mas que P$@&? VocÃª acabou de dizer que eu estou te aborrecendo? Cale a boca, seu ingrato!";
+			mes "Mas que P$@&? Você acabou de dizer que eu estou te aborrecendo? Cale a boca, seu ingrato!";
 			next;
 			mes "[Sr. Smith]";
-			mes "Eu acabei de adicionar ^FF000010 Folhas de Fumacento^000000 na lista. Ã‰ melhor pegar!";
+			mes "Eu acabei de adicionar ^FF000010 Folhas de Fumacento^000000 na lista. É melhor pegar!";
 			next;
 			mes "[Sr. Smith]";
-			mes "P%$#*&#@$%#@$@#$%@$%&*u! Alguma vez vocÃª jÃ¡ pensou em como Ã© difÃ­cil ser um NPC!?!";
-			mapannounce "in_rogue","P%$#*&#@$%#@$@#$%@$%&*u! Alguma vez vocÃª jÃ¡ pensou em como Ã© difÃ­cil ser um NPC!?!",bc_map;
+			mes "P%$#*&#@$%#@$@#$%@$%&*u! Alguma vez você já pensou em como é difícil ser um NPC!?!";
+			mapannounce "in_rogue","P%$#*&#@$%#@$@#$%@$%&*u! Alguma vez você já pensou em como é difícil ser um NPC!?!",bc_map;
 			close;
 		}
 	}
 	else if (ROGUE_Q < 2) {
 		mes "[Sr. Smith]";
-		mes "TrÃªs mil, duzentos e setenta e dois. TrÃªs mil, duzentos e setenta e trÃªs. TrÃªs mil, duzentos e setenta e quatro...";
+		mes "Três mil, duzentos e setenta e dois. Três mil, duzentos e setenta e três. Três mil, duzentos e setenta e quatro...";
 		next;
 		mes "[Sr. Smith]";
 		mes "Uhh...";
-		mes "Que dor de cabeÃ§a...";
-		mes "isto Ã© muito";
+		mes "Que dor de cabeça...";
+		mes "isto é muito";
 		mes "zeny para contar.";
 		next;
 		mes "[Sr. Smith]";
 		mes "Uh...?";
-		mes "O que vocÃª estÃ¡ fazendo aqui? Se vocÃª quer falar sobre a troca de profissÃ£o, vocÃª precisa falar com aquele outro cara primeiro.";
+		mes "O que você está fazendo aqui? Se você quer falar sobre a troca de profissão, você precisa falar com aquele outro cara primeiro.";
 		next;
 		mes "[Sr. Smith]";
-		mes "...MaldiÃ§Ã£o!";
+		mes "...Maldição!";
 		mes "Eu perdi a conta!";
 		close;
 	}
@@ -682,58 +682,58 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 				set ROGUE_Q,8;
 				next;
 				mes "[Sr. Smith]";
-				mes "Wow, vocÃª trouxe cara coisa que eu lhe pedi para trazer. Bom trabalho... Eu lhe saÃºdo.";
+				mes "Wow, você trouxe cara coisa que eu lhe pedi para trazer. Bom trabalho... Eu lhe saúdo.";
 				next;
-				mes "^CCCCCC- Dedo MÃ©dio -^000000'";
+				mes "^CCCCCC- Dedo Médio -^000000'";
 				mes "*Grins*";
 				set ROGUE_Q,8;
 				changequest 2021,2025;
 				next;
 				mes "[Sr. Smith]";
-				mes "Desde que vocÃª mostrou esse seu grande esforÃ§o, irei escrever uma carta de recomendaÃ§Ã£o para vocÃª. Eu normalmente nÃ£o faÃ§o isso, vocÃª sabe.";
+				mes "Desde que você mostrou esse seu grande esforço, irei escrever uma carta de recomendação para você. Eu normalmente não faço isso, você sabe.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Mas acredito que vocÃª serÃ¡ um grande trunfo para a Guilda dos Arruaceiros. Hmm, nÃ£o tenho nenhum papel em branco aqui agora, entÃ£o pegue isso...";
-				getitem 1097,1; //PÃ¡gina Deteriorada
+				mes "Mas acredito que você será um grande trunfo para a Guilda dos Arruaceiros. Hmm, não tenho nenhum papel em branco aqui agora, então pegue isso...";
+				getitem 1097,1; //Página Deteriorada
 				next;
 				mes "[Sr. Smith]";
 				mes "*Sigh...*";
-				mes "Eu sei, Eu sei. Eu tenho que me controlar no local de trabalho. Como rebelde isso Ã© um mau hÃ¡bito...";
+				mes "Eu sei, Eu sei. Eu tenho que me controlar no local de trabalho. Como rebelde isso é um mau hábito...";
 				next;
 				mes "[Sr. Smith]";
 				mes "*Mumble mumble...*";
 				mes "Como foi que eu... *Mumble...*";
-				mes "Como Ã© que... Eu lembro...";
+				mes "Como é que... Eu lembro...";
 				mes "*Sigh* Foi tudo por causa do meu mau humor!";
 				next;
 				mes "[Sr. Smith]";
 				mes "Wah....!!!";
 				next;
-				mes "^3355FFAcho que Ã© uma boa";
-				mes "idÃ©ia eu voltar mais tarde.^000000";
+				mes "^3355FFAcho que é uma boa";
+				mes "idéia eu voltar mais tarde.^000000";
 				close;
 			}
 			mes "[Sr. Smith]";
-			mes "Preste atenÃ§Ã£o!";
-			mes "taxa de inscriÃ§Ã£o:";
+			mes "Preste atenção!";
+			mes "taxa de inscrição:";
 			mes "^FF000010000 zeny^000000,";
-			mes "^FF00005 CrisÃ¡lidas^000000!";
+			mes "^FF00005 Crisálidas^000000!";
 			mes "^FF00005 Garrafas Vazias^000000!";
-			mes "^FF00005 MinÃ©rios de Ferro^000000!";
+			mes "^FF00005 Minérios de Ferro^000000!";
 			next;
 			mes "[Sr. Smith]";
-			mes "^FF00005 CoraÃ§Ãµes de Pedra^000000!!";
+			mes "^FF00005 Corações de Pedra^000000!!";
 			mes "^FF00005 Ervas Vermelhas^000000!";
 			mes "^FF00005 Couro de Animal^000000!!";
 			mes "^FF00005 Gemas Amarelas^000000!!";
 			next;
 			mes "[Sr. Smith]";
 			mes "^FF00005 Dentes de Morcego^000000!";
-			mes "^FF00005 Caudas de EscorpiÃ£o^000000!!";
+			mes "^FF00005 Caudas de Escorpião^000000!!";
 			mes "^FF00005 Caudas de Yoyo^000000!!";
 			next;
 			mes "[Sr. Smith]";
-			mes "^FF00005 RaÃ§Ã£o para Animais^000000!";
+			mes "^FF00005 Ração para Animais^000000!";
 			mes "^FF00005 Felpas^000000!!";
 			mes "^FF00005 Trevos^000000!!";
 			next;
@@ -772,25 +772,25 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 				mes "de apenas um cara~!";
 				next;
 				mes "[Sr. Smith]";
-				mes "VÃ¡ visitar Aragham Junior que vive ao Sul da Fortaleza de Saint Darmain. Essa area Ã© localizada a um campo a leste daqui.";
+				mes "Vá visitar Aragham Junior que vive ao Sul da Fortaleza de Saint Darmain. Essa area é localizada a um campo a leste daqui.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ele Ã© um cara legal, vocÃª sabe. Ele trabalha duro e Ã© muito bom em coletar contas.";
+				mes "Ele é um cara legal, você sabe. Ele trabalha duro e é muito bom em coletar contas.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Antes dele se juntar a Guilda dos Arruaceiros, pessoas tem tentado a mata-lo por algo que o pai dele fez no passado. EntÃ£o, ele se tornou um fugitivo.";
+				mes "Antes dele se juntar a Guilda dos Arruaceiros, pessoas tem tentado a mata-lo por algo que o pai dele fez no passado. Então, ele se tornou um fugitivo.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Bem de qualquer modo, Ã© por isso que ele estÃ¡ com a gente. NÃ³s o ajudamos a se esconder de seus inimigos.";
+				mes "Bem de qualquer modo, é por isso que ele está com a gente. Nós o ajudamos a se esconder de seus inimigos.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ah, vocÃª terÃ¡ que lembrar da senha se vocÃª quiser conhecÃª-lo. Ele nÃ£o deixa ninguem entrar em sua casa sem a senha.";
+				mes "Ah, você terá que lembrar da senha se você quiser conhecê-lo. Ele não deixa ninguem entrar em sua casa sem a senha.";
 				next;
 				mes "[Sr. Smith]";
-				mes "A senha Ã© ^0000FFAragham nÃ£o roubou o material de forja^000000.";
+				mes "A senha é ^0000FFAragham não roubou o material de forja^000000.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Bem, lhe desejo sorte. O lugar nÃ£o Ã© tÃ£o longe daqui, entÃ£o volte o mais rÃ¡pido possivel. Seja ligeiro... Esse Ã© o espÃ­rito do Arruaceiro.";
+				mes "Bem, lhe desejo sorte. O lugar não é tão longe daqui, então volte o mais rápido possivel. Seja ligeiro... Esse é o espírito do Arruaceiro.";
 				close;
 			case 2:
 				set ROGUE_Q,10;
@@ -806,27 +806,27 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 				next;
 				mes "[Sr. Smith]";
 				mes "Hmm...";
-				mes "Esse cara serÃ¡";
-				mes "legal com vocÃª, mas...";
-				mes "ele Ã© um pouco perigoso.";
+				mes "Esse cara será";
+				mes "legal com você, mas...";
+				mes "ele é um pouco perigoso.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Eu quero que vocÃª conheÃ§a o Antonio Junior, filho de Antonio, o primeiro. Pela mesma razÃ£o, pessoas querem matÃ¡-lo por causa de algo que o pai dele fez no passado.";
+				mes "Eu quero que você conheça o Antonio Junior, filho de Antonio, o primeiro. Pela mesma razão, pessoas querem matá-lo por causa de algo que o pai dele fez no passado.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ele morava em Payon, mas ele estÃ¡ hospedado em uma casa vazia prÃ³xima a praia de Kokomo nesse momento";
+				mes "Ele morava em Payon, mas ele está hospedado em uma casa vazia próxima a praia de Kokomo nesse momento";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ouvi dizer que ultimamente ele tem reclamado muito sobre ruÃ­dos fora de sua casa, e ele teme uma tentativa de assasinato. De qualquer maneira...";
+				mes "Ouvi dizer que ultimamente ele tem reclamado muito sobre ruídos fora de sua casa, e ele teme uma tentativa de assasinato. De qualquer maneira...";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ele Ã© meio tenso, entÃ£o ele lanÃ§a uma faca em quem se aproximar de sua casa. Ele tem uma personalidade violenta.";
+				mes "Ele é meio tenso, então ele lança uma faca em quem se aproximar de sua casa. Ele tem uma personalidade violenta.";
 				next;
 				mes "[Sr. Smith]";
-				mes "No entanto, ele tem uma magnÃ­fica competÃªncia empresarial. E ele adora jogar. Depois de conhece-lo, ele irÃ¡ cuidar de seu treino de Arruaceiro muito bem.";
+				mes "No entanto, ele tem uma magnífica competência empresarial. E ele adora jogar. Depois de conhece-lo, ele irá cuidar de seu treino de Arruaceiro muito bem.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ah, vocÃª terÃ¡ que lembrar da senha para conhece-lo. A senha Ã© ^0000FFAntonio nÃ£o gosta de quebrar o material de forja^000000.";
+				mes "Ah, você terá que lembrar da senha para conhece-lo. A senha é ^0000FFAntonio não gosta de quebrar o material de forja^000000.";
 				close;
 			case 3:
 				set ROGUE_Q,11;
@@ -842,87 +842,87 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 				next;
 				mes "[Sr. Smith]";
 				mes "Hmm...";
-				mes "Esse cara serÃ¡";
-				mes "legal com vocÃª, mas...";
-				mes "Ele Ã© um pouco perigoso.";
+				mes "Esse cara será";
+				mes "legal com você, mas...";
+				mes "Ele é um pouco perigoso.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Seu nome Ã©";
+				mes "Seu nome é";
 				mes "Hollgrehenn Junior,";
-				mes "um genio da manipulaÃ§Ã£o.";
+				mes "um genio da manipulação.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Contudo, por causa de algo que seu pai fez no passado, as pessoas tem tentado a mata-lo. Por causa disso, ele Ã© muito desconfiado e irÃ¡ jogar facas em pessoas na qual ele nÃ£o confia.";
+				mes "Contudo, por causa de algo que seu pai fez no passado, as pessoas tem tentado a mata-lo. Por causa disso, ele é muito desconfiado e irá jogar facas em pessoas na qual ele não confia.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Nosso lÃ­der foi capaz de convence-lo a se juntar a nossa Guilda, e sua mente brilhante foi um trunfo para nÃ³s. Depois que vocÃª conhece-lo, ele irÃ¡ ele irÃ¡ cuidar de seu treino de Arruaceiro muito bem.";
+				mes "Nosso líder foi capaz de convence-lo a se juntar a nossa Guilda, e sua mente brilhante foi um trunfo para nós. Depois que você conhece-lo, ele irá ele irá cuidar de seu treino de Arruaceiro muito bem.";
 				next;
 				mes "[Sr. Smith]";
-				mes "Ah, vocÃª terÃ¡ que lembrar da senha para conhece-lo. A senha Ã© ^0000FFMeu pai nÃ£o roubou o material de forja^000000.";
+				mes "Ah, você terá que lembrar da senha para conhece-lo. A senha é ^0000FFMeu pai não roubou o material de forja^000000.";
 				close;
 			}
 		}
 		else if (ROGUE_Q == 8) {
 			mes "[Sr. Smith]";
-			mes "Muito bem... Agora que estou mais calmo, irei lhe informar o seu prÃ³ximo destino. *Whew*";
+			mes "Muito bem... Agora que estou mais calmo, irei lhe informar o seu próximo destino. *Whew*";
 			next;
 			mes "[Sr. Smith]";
-			mes "VÃ¡ e procure por Hermanthorn Junior, que estÃ¡ vivendo perto do ^0000FFPonto de inspeÃ§Ã£o da Ilha Pharos^000000, que estÃ¡ na fronteira entre Morroc e Comodo.";
+			mes "Vá e procure por Hermanthorn Junior, que está vivendo perto do ^0000FFPonto de inspeção da Ilha Pharos^000000, que está na fronteira entre Morroc e Comodo.";
 			next;
 			mes "[Sr. Smith]";
-			mes "Ah...antes que me esqueÃ§a, ponha em mente em nÃ£o mencionar nada sobre itens de forja. Isso Ã© muito importante.";
+			mes "Ah...antes que me esqueça, ponha em mente em não mencionar nada sobre itens de forja. Isso é muito importante.";
 			close;
 		}
 		else if (ROGUE_Q == 9) {
 			mes "[Sr. Smith]";
-			mes "O quÃª...?";
-			mes "VocÃª estÃ¡ querendo";
-			mes "me dizer que vocÃª jÃ¡ se";
+			mes "O quê...?";
+			mes "Você está querendo";
+			mes "me dizer que você já se";
 			mes "esqueceu para onde deve ir?";
 			next;
 			mes "[Sr. Smith]";
-			mes "Siga um campo a Leste e entre no edifÃ­cio que fica ao Sul da Fortaleza de Saint Darmain para conhecer Aragham Junior.";
+			mes "Siga um campo a Leste e entre no edifício que fica ao Sul da Fortaleza de Saint Darmain para conhecer Aragham Junior.";
 			next;
 			mes "[Sr. Smith]";
-			mes "A senha Ã© ^0000FFAragham nÃ£o roubou o material de forja^000000.";
+			mes "A senha é ^0000FFAragham não roubou o material de forja^000000.";
 			close;
 		}
 		else if (ROGUE_Q == 10) {
 			mes "[Sr. Smith]";
-			mes "O quÃª...?";
-			mes "VocÃª estÃ¡ querendo";
-			mes "me dizer que jÃ¡ se";
+			mes "O quê...?";
+			mes "Você está querendo";
+			mes "me dizer que já se";
 			mes "esqueceu para onde deve ir?";
 			next;
 			mes "[Sr. Smith]";
-			mes "VÃ¡ para o edifÃ­cio que ";
-			mes "estÃ¡ na praia de Kokomo,";
-			mes "que estÃ¡ a caminho";
+			mes "Vá para o edifício que ";
+			mes "está na praia de Kokomo,";
+			mes "que está a caminho";
 			mes "para Comodo por aqui, para conhecer";
 			mes "Antonio Junior.";
 			next;
 			mes "[Sr. Smith]";
-			mes "A senha Ã© ^0000FF'Antonio nÃ£o gosta de quebrar o material de forja'^000000.";
+			mes "A senha é ^0000FF'Antonio não gosta de quebrar o material de forja'^000000.";
 			close;
 		}
 		else if (ROGUE_Q == 11) {
 			mes "[Sr. Smith]";
 			mes "O que...?";
-			mes "VocÃª estÃ¡ querendo";
-			mes "me dizer que jÃ¡ se";
+			mes "Você está querendo";
+			mes "me dizer que já se";
 			mes "esqueceu para onde deve ir?";
 			next;
 			mes "[Sr. Smith]";
-			mes "VÃ¡ para o campo ao Sul da Fortaleza, que estÃ¡ a caminho de Morroc por aqui, para conhecer Hollgrehenn Junior.";
+			mes "Vá para o campo ao Sul da Fortaleza, que está a caminho de Morroc por aqui, para conhecer Hollgrehenn Junior.";
 			next;
 			mes "[Sr. Smith]";
-			mes "A senha Ã© ^0000FFMeu pai nÃ£o roubou o material de forja^000000.";
+			mes "A senha é ^0000FFMeu pai não roubou o material de forja^000000.";
 			close;
 		}
 		else if (ROGUE_Q > 11) {
 			mes "[Sr. Smith]";
 			mes "Hmmm...?";
-			mes "VocÃª nÃ£o tem";
+			mes "Você não tem";
 			mes "que ir para algum lugar para";
 			mes "completar o seu teste";
 			mes "para se tornar um Arruaceiro?";
@@ -934,12 +934,12 @@ in_rogue,376,23,1	script	Sr. Smith#rg	57,{
 S_Req:
 	mes "[Sr. Smith]";
 	mes "Primeiro, a";
-	mes "taxa de inscriÃ§Ã£o:";
+	mes "taxa de inscrição:";
 	mes "^FF000010,000 zeny^000000.";
 	next;
 	mes "[Sr. Smith]";
-	mes "NÃ³s tambem precisamos";
-	mes "que vocÃª traga:";
+	mes "Nós tambem precisamos";
+	mes "que você traga:";
 	mes "^FF0000"+getarg(0)+"^000000,";
 	mes "^FF0000"+getarg(1)+"^000000,";
 	mes "^FF0000"+getarg(2)+"^000000 e";
@@ -957,16 +957,16 @@ S_Req:
 	next;
 	mes "[Sr. Smith]";
 	mes "Hmm...?";
-	mes "O que Ã© isso?";
-	mes "VocÃª acabou de dizer que";
-	mes "vocÃª estÃ¡ disposto a doar";
+	mes "O que é isso?";
+	mes "Você acabou de dizer que";
+	mes "você está disposto a doar";
 	mes "mais para a guilda?";
 	next;
 	mes "[Sr. Smith]";
-	mes "Isso me soa tÃ£o bem~,";
+	mes "Isso me soa tão bem~,";
 	mes "eu apreciei isso.";
 	mes "Mas volte aqui quando";
-	mes "vocÃª estiver preparado.";
+	mes "você estiver preparado.";
 	close;
 
 
@@ -983,20 +983,20 @@ S_CheckItems:
 		next;
 		mes "[Sr. Smith]";
 		mes "Bom, bom...";
-		mes "Eu acho que vocÃª";
+		mes "Eu acho que você";
 		mes "trouxe tudo.";
 		set ROGUE_Q,7;
 		next;
 		mes "[Sr. Smith]";
 		mes "Muito bem, espere um momemto enquanto";
-		mes "eu preparo essas coisas. Deixe-me ver... Seu prÃ³ximo teste Ã©...";
+		mes "eu preparo essas coisas. Deixe-me ver... Seu próximo teste é...";
 		close;
 	}
 	mes "[Sr. Smith]";
-	mes "Mas que P$@&*!? VocÃª nÃ£o trouxe todos os itens necessÃ¡rios?! VocÃª estÃ¡ querendo me dizer que quer checar os itens pedidos novamente!?";
+	mes "Mas que P$@&*!? Você não trouxe todos os itens necessários?! Você está querendo me dizer que quer checar os itens pedidos novamente!?";
 	next;
 	mes "[Sr. Smith]";
-	mes "Agora preste atenÃ§Ã£o...!";
+	mes "Agora preste atenção...!";
 	mes "Traga ^FF000010,000 zeny^000000,";
 	mes "e os seguintes itens...";
 	next;
@@ -1005,16 +1005,16 @@ S_CheckItems:
 	mes "^FF0000 "+getarg(3)+" "+getitemname(getarg(2))+"^000000,";
 	mes "^FF0000 "+getarg(5)+" "+getitemname(getarg(4))+"^000000,";
 	mes "^FF0000 "+getarg(7)+" "+getitemname(getarg(6))+"^000000,";
-	mes "VocÃª entendeu desta vez?";
+	mes "Você entendeu desta vez?";
 	close;
 }
 
 cmd_fild09,106,195,0	script	Warp#1	45,1,1,{
 OnTouch:
 	mes "[???]";
-	mes "Quem estÃ¡ aÃ­?!";
+	mes "Quem está aí?!";
 	mes "Quem ousa";
-	mes "entrar em meu territÃ³rio?";
+	mes "entrar em meu território?";
 	next;
 	switch(select("Meu pai:Aragham:Aragon:Legolas")) {
 	case 1:
@@ -1035,11 +1035,11 @@ OnTouch:
 		mes "Legolas";
 		break;
 	}
-	switch(select("nÃ£o faz:nÃ£o gosta:nÃ£o:sempre")) {
-	case 1: mes "nÃ£o faz"; break;
-	case 2: mes "nÃ£o gosta"; break;
+	switch(select("não faz:não gosta:não:sempre")) {
+	case 1: mes "não faz"; break;
+	case 2: mes "não gosta"; break;
 	case 3:
-		mes "nÃ£o";
+		mes "não";
 		set .@rogue_t,.@rogue_t+10;
 		break;
 	case 4: mes "sempre"; break;
@@ -1082,9 +1082,9 @@ OnTouch:
 cmd_fild09,335,143,0	script	Warp#2	45,1,1,{
 OnTouch:
 	mes "[???]";
-	mes "Quem estÃ¡ aÃ­?!";
+	mes "Quem está aí?!";
 	mes "Quem ousa";
-	mes "entrar em meu territÃ³rio?";
+	mes "entrar em meu território?";
 	next;
 	switch(select("Meu pai:Aragham:Aragon:Legolas")) {
 	case 1:
@@ -1105,11 +1105,11 @@ OnTouch:
 		mes "Legolas";
 		break;
 	}
-	switch(select("nÃ£o:nem:nunca:jamais")) {
-	case 1: mes "nÃ£o faz"; break;
-	case 2: mes "nÃ£o gosta"; break;
+	switch(select("não:nem:nunca:jamais")) {
+	case 1: mes "não faz"; break;
+	case 2: mes "não gosta"; break;
 	case 3:
-		mes "nÃ£o";
+		mes "não";
 		set .@rogue_t,.@rogue_t+10;
 		break;
 	case 4: mes "sempre"; break;
@@ -1152,9 +1152,9 @@ OnTouch:
 cmd_fild04,304,180,0	script	Warp#3	45,1,1,{
 OnTouch:
 	mes "[???]";
-	mes "Quem estÃ¡ aÃ­?!";
+	mes "Quem está aí?!";
 	mes "Quem ousa";
-	mes "entrar em meu territÃ³rio?";
+	mes "entrar em meu território?";
 	next;
 	switch(select("Anntonio:Aragham:Antonio:Hollgrehenn")) {
 	case 1:
@@ -1175,14 +1175,14 @@ OnTouch:
 		mes "Hollgrehenn";
 		break;
 	}
-	switch(select("gosta:nÃ£o gosta:prefere:nÃ£o prefere")) {
+	switch(select("gosta:não gosta:prefere:não prefere")) {
 	case 1: mes "gosta"; break;
 	case 2:
-		mes "nÃ£o gosta";
+		mes "não gosta";
 		set .@rogue_t,.@rogue_t+10;
 		break;
 	case 3: mes "prefere"; break;
-	case 4: mes "nÃ£o prefere"; break;
+	case 4: mes "não prefere"; break;
 	}
 	switch(select("de danificar:de quebrar:de consertar:de forjar")) {
 	case 1: mes "de danificar"; break;
@@ -1193,7 +1193,7 @@ OnTouch:
 	case 3: mes "de consertar"; break;
 	case 4: mes "de forjar"; break;
 	}
-	switch(select("o item de forja.:os itens refinados.:o material de forja.:os itens aprimorados.:os itens reforÃ§ados.:os itens forjados.")) {
+	switch(select("o item de forja.:os itens refinados.:o material de forja.:os itens aprimorados.:os itens reforçados.:os itens forjados.")) {
 	case 1: mes "o item de forja."; break;
 	case 2: mes "os itens refinados."; break;
 	case 3:
@@ -1201,7 +1201,7 @@ OnTouch:
 		set .@rogue_t,.@rogue_t+10;
 		break;
 	case 4: mes "os itens aprimorados."; break;
-	case 5: mes "os itens reforÃ§ados."; break;
+	case 5: mes "os itens reforçados."; break;
 	case 6: mes "os itens forjados."; break;
 	}
 	next;
@@ -1223,68 +1223,68 @@ in_rogue,272,135,1	script	Hermanthorn Jr#rg	85,{
 	if (ROGUE_Q == 8) {
 		mes "[Hermanthorn Jr.]";
 		mes "Eu vejo...";
-		mes "VocÃª deve vindo da";
+		mes "Você deve vindo da";
 		mes "Guilda dos Arruaceiros.";
 		mes "Voce deve ser um dos";
-		mes "que Sr.Smith nÃ£o ficou";
+		mes "que Sr.Smith não ficou";
 		mes "muito feliz com...";
 		next;
 		mes "[Hermanthorn Jr.]";
-		mes "Ele jogou uma ajuste e vocÃª trouxe todos os itens que ele pediu, nÃ£o Ã© mesmo? Bem, eu posso ver que vocÃª continua muito ingÃªnuo. Hahaha~";
+		mes "Ele jogou uma ajuste e você trouxe todos os itens que ele pediu, não é mesmo? Bem, eu posso ver que você continua muito ingênuo. Hahaha~";
 		next;
 		mes "[Hermanthorn Jr.]";
-		mes "Eu suponho que ele lhe fez de idiota para buscar alguns itens, e depois ele passou vocÃª para mim. Triste, realmente.";
+		mes "Eu suponho que ele lhe fez de idiota para buscar alguns itens, e depois ele passou você para mim. Triste, realmente.";
 		next;
 		mes "[Hermanthorn Jr.]";
-		mes "Bem, depois de vocÃª ser torturado por ele, tentarei especialmente ser generoso com vocÃª. Meu teste para vocÃª vai ser simples, muito simples.";
+		mes "Bem, depois de você ser torturado por ele, tentarei especialmente ser generoso com você. Meu teste para você vai ser simples, muito simples.";
 		next;
 		mes "[Hermanthorn Jr.]";
-		mes "Tudo o que vocÃª tme que fazer e passar por um tÃºnel subterrÃ¢neo, e andar todo o caminho de volta para a Guilda dos Arruaceiros.";
+		mes "Tudo o que você tme que fazer e passar por um túnel subterrâneo, e andar todo o caminho de volta para a Guilda dos Arruaceiros.";
 		next;
 		mes "[Hermanthorn Jr.]";
-		mes "HÃ¡ uma coisa que eu deveria lhe dizer, no entanto. VocÃª deverÃ¡ ser muito cuidadoso lÃ¡ dentro, certo?";
+		mes "Há uma coisa que eu deveria lhe dizer, no entanto. Você deverá ser muito cuidadoso lá dentro, certo?";
 		next;
 		mes "[Hermanthorn Jr.]";
 		mes "Um bando de idiotas tem quebrado alguns galhos secos e castando Abracadabra por todo o lugar...";
 		next;
 		mes "[Hermanthorn Jr.]";
 		mes "Bem...";
-		mes "Apenas tente voltar para a Guilda dos Arruaceiros sÃ£o e salvo. Ã‰ tudo o que precisa fazer!";
+		mes "Apenas tente voltar para a Guilda dos Arruaceiros são e salvo. É tudo o que precisa fazer!";
 		set ROGUE_Q,12;
 		changequest 2025,2026;
 		close;
 	}
 	else if (ROGUE_Q == 12) {
 		mes "[Hermanthorn Jr.]";
-		mes "Oh certo. Isso Ã© realmente importante. VocÃª precisa de uma senha para entrar no tÃºnel. Para destrancar a porta, a combinaÃ§Ã£o de quatro nÃºmeros sÃ£o ^0000FF3019^000000.";
+		mes "Oh certo. Isso é realmente importante. Você precisa de uma senha para entrar no túnel. Para destrancar a porta, a combinação de quatro números são ^0000FF3019^000000.";
 		close;
 	}
 	else {
 		mes "[HermanthornJr.]";
 		mes "Huh...?";
 		mes "O que diabos";
-		mes "vocÃª estÃ¡ fazendo aqui.";
-		mes "DesapareÃ§a, por que vocÃª nÃ£o?";
+		mes "você está fazendo aqui.";
+		mes "Desapareça, por que você não?";
 		close;
 	}
 }
 
 in_rogue,270,130,0	script	he_to_rogue#rg	45,1,1,{
 OnTouch:
-	mes "^3355FFA porta estÃ¡ trancada. VocÃª deve inserir a combinaÃ§Ã£o de quatro nÃºmeros para abri-lÃ¡.^000000";
+	mes "^3355FFA porta está trancada. Você deve inserir a combinação de quatro números para abri-lá.^000000";
 	next;
 	input .@input;
 	if (.@input < 1 || .@input > 10000) {
 		if (ROGUE_Q == 12)
-			mes "^3355FFNÃ£o funcionou. Por favor redigite a combinaÃ§Ã£o de quatro dÃ­gitos.^000000";
+			mes "^3355FFNão funcionou. Por favor redigite a combinação de quatro dígitos.^000000";
 		else
-			mes "^3355FFPor favor digite a combinaÃ§Ã£o de quatro nÃºmeros.^000000";
+			mes "^3355FFPor favor digite a combinação de quatro números.^000000";
 		close;
 	}
 	else if (.@input == 3019) {
 		if (ROGUE_Q == 12) {
 			mes "^3355FFA porta";
-			mes "estÃ¡ aberta.^000000";
+			mes "está aberta.^000000";
 			close2;
 			warp "in_rogue",10,21;
 			set ROGUE_Q,12;
@@ -1293,7 +1293,7 @@ OnTouch:
 		else {
 			mes "[Hermanthorn Jr.]";
 			mes "Bem...";
-			mes "Eu nÃ£o lhe contei";
+			mes "Eu não lhe contei";
 			mes "que eu mudei a";
 			mes "senha? *Wink Wink*";
 			close;
@@ -1301,7 +1301,7 @@ OnTouch:
 	}
 	else {
 		mes "^3355FFA porta";
-		mes "ainda estÃ¡ trancada.^000000";
+		mes "ainda está trancada.^000000";
 		close;
 	}
 }
@@ -1330,7 +1330,7 @@ OnMyMobDead:
 in_rogue,100,389,0	script	gen_ro#2	-1,3,3,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",100,389,"MÃºmia",1041,1,"gen_ro#2::OnMyMobDead";
+		monster "in_rogue",100,389,"Múmia",1041,1,"gen_ro#2::OnMyMobDead";
 		donpcevent "gen_ro#1::OnDisable";
 	}
 	else
@@ -1349,7 +1349,7 @@ in_rogue,150,389,0	script	gen_ro#3	-1,3,3,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
 		monster "in_rogue",145,389,"Zumbi",1015,1,"gen_ro#3::OnMyMobDead";
-		monster "in_rogue",143,389,"MÃºmia",1041,1,"gen_ro#3::OnMyMobDead";
+		monster "in_rogue",143,389,"Múmia",1041,1,"gen_ro#3::OnMyMobDead";
 		donpcevent "gen_ro#2::OnDisable";
 	}
 	else
@@ -1393,34 +1393,34 @@ OnTouch:
 in_rogue,244,39,1	script	Aragham Junior#rg	99,{
 	if (ROGUE_Q == 9) {
 		mes "[Aragham Jr.]";
-		mes "Oh, vocÃª deve ter";
+		mes "Oh, você deve ter";
 		mes "vindo da Guilda dos Arruaceiros...";
 		next;
 		mes "[Aragham Jr.]";
-		mes "meu nome Ã©";
+		mes "meu nome é";
 		mes "Aragham Junior,";
 		mes "Arruaceiro do Deserto.";
-		mes "VocÃª estÃ¡ pronto para aprender";
+		mes "Você está pronto para aprender";
 		mes "como se tornar um Arruaceiro?";
 		next;
 		mes "[Aragham Jr.]";
-		mes "Veja, como um Arruaceiro, nosso lema Ã©, '^0000FFEvite o forte! Seja malicioso com o fraco!^000000' Essa regra Ã© especialmente verdadeira para os monstros.";
+		mes "Veja, como um Arruaceiro, nosso lema é, '^0000FFEvite o forte! Seja malicioso com o fraco!^000000' Essa regra é especialmente verdadeira para os monstros.";
 		next;
 		mes "[Aragham Jr.]";
 		mes "Evite o forte!";
 		mes "Seja malicioso com o fraco!";
-		mes "Ã‰ uma regra simples...";
+		mes "É uma regra simples...";
 		next;
 		mes "[Aragham Jr.]";
-		mes "Agora, lembre-se disso quando vocÃª passar pelo^0000FFtÃºnel subterrÃ¢neo^000000. Tente andar todo o caminho para a Guilda dos Arruaceiros.";
+		mes "Agora, lembre-se disso quando você passar pelo^0000FFtúnel subterrâneo^000000. Tente andar todo o caminho para a Guilda dos Arruaceiros.";
 		next;
 		mes "[Aragham Jr.]";
-		mes "HaverÃ¡ alguns monstros, mas nÃ£o se preocupe. Eu sei que vocÃª Ã© forte. Tudo bem, vocÃª estÃ¡ pronto para ir ou o que?";
+		mes "Haverá alguns monstros, mas não se preocupe. Eu sei que você é forte. Tudo bem, você está pronto para ir ou o que?";
 		next;
-		if (select("Sim, vamos lÃ¡.:Nah~") == 1) {
+		if (select("Sim, vamos lá.:Nah~") == 1) {
 			mes "[Aragham Jr.]";
 			mes "Tudo bem...";
-			mes "Boa sorte, entÃ£o.";
+			mes "Boa sorte, então.";
 			close2;
 			warp "in_rogue",15,105;
 			set ROGUE_Q,13;
@@ -1429,15 +1429,15 @@ in_rogue,244,39,1	script	Aragham Junior#rg	99,{
 		}
 		mes "[Aragham Jr.]";
 		mes "Tudo bem, tudo bem.";
-		mes "NÃ£o tenha presa,";
-		mes "entÃ£o volte aqui";
-		mes "quando vocÃª estiver pronto.";
+		mes "Não tenha presa,";
+		mes "então volte aqui";
+		mes "quando você estiver pronto.";
 		close;
 	}
 	else if (ROGUE_Q == 13) {
 		mes "[Aragham Jr.]";
-		mes "Oh, vocÃª voltou.";
-		mes "Acho que vocÃª estÃ¡ bem desta vez. Outro lema dos Arruaceiros Ã© '^0000FFFalha ensina o sucesso^000000.' Bem, entÃ£o novamente...";
+		mes "Oh, você voltou.";
+		mes "Acho que você está bem desta vez. Outro lema dos Arruaceiros é '^0000FFFalha ensina o sucesso^000000.' Bem, então novamente...";
 		next;
 		if (select("Re-Test:Cancel") == 1) {
 			mes "[Aragham Jr.]";
@@ -1448,30 +1448,30 @@ in_rogue,244,39,1	script	Aragham Junior#rg	99,{
 		}
 		mes "[Aragham Jr.]";
 		mes "Tudo bem, tudo bem.";
-		mes "NÃ£o tenha presa";
+		mes "Não tenha presa";
 		mes "e volte aqui";
-		mes "quando vocÃª estiver pronto.";
+		mes "quando você estiver pronto.";
 		close;
 	}
 	else if (BaseJob != Job_Rogue) {
 		mes "[Aragham Jr.]";
 		mes "Huh...?";
-		mes "Quem Ã© vocÃª?!";
-		mes "VocÃª nÃ£o Ã©";
+		mes "Quem é você?!";
+		mes "Você não é";
 		mes "da Guilda dos Arruaceiros!!";
 		next;
 		mes "[Aragham Jr.]";
-		mes "Se vocÃª veio para me matar, nÃ£o Ã© mesmo? N-nÃ£o! NÃ£o posso morrer ainda! Caia fora! Ou entÃ£o, Eu matarei vocÃª primeiro!";
+		mes "Se você veio para me matar, não é mesmo? N-não! Não posso morrer ainda! Caia fora! Ou então, Eu matarei você primeiro!";
 		close;
 	}
 	else {
 		mes "[Aragham Jr.]";
 		mes "Hey...";
 		mes "o que traz";
-		mes "vocÃª de volta aqui?";
-		mes "Porque vocÃª nÃ£o";
+		mes "você de volta aqui?";
+		mes "Porque você não";
 		mes "descansa um pouco";
-		mes "antes de vocÃª ir?";
+		mes "antes de você ir?";
 		close;
 	}
 }
@@ -1480,26 +1480,26 @@ in_rogue,160,34,1	script	Hollgrehenn Junior#rg	85,{
 	if (ROGUE_Q == 11) {
 		mes "[Hollgrehenn Jr.]";
 		mes "Hmm...";
-		mes "Do ClÃ£";
+		mes "Do Clã";
 		mes "dos Arruaceiros, certo?";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "Eu sou Hollgrehenn Junior. Eu cuido de muitos dos nossos negÃ³cios. EntÃ£o, estÃ¡ pronto para o meu teste?";
+		mes "Eu sou Hollgrehenn Junior. Eu cuido de muitos dos nossos negócios. Então, está pronto para o meu teste?";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "NÃ³s, arruaceiros, compartilhamos este lema: ^0000FFEvite os fortes! Seja mau com os fracos!^000000 Esta regra se aplica a qualquer ameaÃ§a, especialmente monstros.";
+		mes "Nós, arruaceiros, compartilhamos este lema: ^0000FFEvite os fortes! Seja mau com os fracos!^000000 Esta regra se aplica a qualquer ameaça, especialmente monstros.";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "Ã‰ fÃ¡cil de lembrar.";
-		mes "Apenas nÃ£o esqueÃ§a de por isso em prÃ¡tica, entendeu?";
+		mes "É fácil de lembrar.";
+		mes "Apenas não esqueça de por isso em prática, entendeu?";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "Para o meu teste, vocÃª irÃ¡ ao ^0000FFTÃºnel SubterrÃ¢neo^000000. Siga o caminho de volta ao ClÃ£ dos Arruaceiros.";
+		mes "Para o meu teste, você irá ao ^0000FFTúnel Subterrâneo^000000. Siga o caminho de volta ao Clã dos Arruaceiros.";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "HaverÃ¡ alguns monstros lÃ¡, mas serÃ¡ parte do seu treinamento. Agora, estÃ¡ pronto para ir ou nÃ£o?";
+		mes "Haverá alguns monstros lá, mas será parte do seu treinamento. Agora, está pronto para ir ou não?";
 		next;
-		if (select("Sim, estou.:NÃ£o.") == 1) {
+		if (select("Sim, estou.:Não.") == 1) {
 			mes "[Hollgrehenn Jr.]";
 			mes "Boa sorte.";
 			close2;
@@ -1517,7 +1517,7 @@ in_rogue,160,34,1	script	Hollgrehenn Junior#rg	85,{
 	else if (ROGUE_Q == 15) {
 		mes "[Hollgrehenn Jr.]";
 		mes "Hmm.";
-		mes "VocÃª falhou.";
+		mes "Você falhou.";
 		mes "Quer tentar novamente?";
 		next;
 		if (select("Novamente.:Cancelar.") == 1) {
@@ -1536,27 +1536,27 @@ in_rogue,160,34,1	script	Hollgrehenn Junior#rg	85,{
 	else if (BaseJob != Job_Rogue) {
 		mes "[Hollgrehenn Jr.]";
 		mes "Hmm...?";
-		mes "VocÃª nÃ£o Ã© do";
-		mes "ClÃ£ dos Arruaceiros...";
+		mes "Você não é do";
+		mes "Clã dos Arruaceiros...";
 		next;
 		mes "[Hollgrehenn Jr.]";
-		mes "VocÃª deveria sair";
+		mes "Você deveria sair";
 		mes "daqui agora";
-		mes "se souber o que Ã©";
-		mes "bom para vocÃª...";
+		mes "se souber o que é";
+		mes "bom para você...";
 		next;
 		mes "[Hollgrehenn Jr.]";
 		mes "Agora...";
 		mes "Aproveito antes que";
-		mes "eu mude de idÃ©ia e";
-		mes "decida matar vocÃª.";
+		mes "eu mude de idéia e";
+		mes "decida matar você.";
 		close;
 	}
 	else {
 		mes "[Hollgrehenn Jr.]";
 		mes "Ei...";
 		mes "Veio pessear?";
-		mes "NÃ³s Arruaceiros devemos";
+		mes "Nós Arruaceiros devemos";
 		mes "ficar juntos, certo?";
 		close;
 	}
@@ -1565,29 +1565,29 @@ in_rogue,160,34,1	script	Hollgrehenn Junior#rg	85,{
 in_rogue,177,109,1	script	Antonio Junior#rg	88,{
 	if (ROGUE_Q == 10) {
 		mes "[Antonio Jr.]";
-		mes "VocÃª Ã© do";
-		mes "ClÃ£ dos Arruaceiros?";
+		mes "Você é do";
+		mes "Clã dos Arruaceiros?";
 		mes "Se quiser aprender";
 		mes "sobre como ser um Arruaceiro,";
-		mes "entÃ£o cale-se e fique quieto.";
+		mes "então cale-se e fique quieto.";
 		next;
 		mes "[Antonio Jr.]";
-		mes "^0000FFEvite os fortes! Seja mau com os fracos!^000000 Esse Ã© nosso lema para combater monstros.";
+		mes "^0000FFEvite os fortes! Seja mau com os fracos!^000000 Esse é nosso lema para combater monstros.";
 		next;
 		mes "[Antonio Jr.]";
-		mes "NÃ£o demonstre piedade quando lugar com monstros mais fracos e tente manter distÃ¢ncia dos monstros fortes.";
+		mes "Não demonstre piedade quando lugar com monstros mais fracos e tente manter distância dos monstros fortes.";
 		next;
 		mes "[Antonio Jr.]";
-		mes "Agora, quero que vocÃª caminhe atÃ© o ClÃ£ dos Arruaceiros atravÃ©s deste ^0000FFTÃºnel SubterrÃ¢neo^000000.";
+		mes "Agora, quero que você caminhe até o Clã dos Arruaceiros através deste ^0000FFTúnel Subterrâneo^000000.";
 		next;
 		mes "[Antonio Jr.]";
-		mes "HÃ¡ monstros lÃ¡, mas se vocÃª evitar os fortes e for mau com os fracos, vocÃª se darÃ¡ bem.";
+		mes "Há monstros lá, mas se você evitar os fortes e for mau com os fracos, você se dará bem.";
 		next;
-		if (select("Vamos lÃ¡!:E-espere!") == 1) {
+		if (select("Vamos lá!:E-espere!") == 1) {
 			mes "[Antonio Jr.]";
-			mes "Espero que vocÃª";
-			mes "nÃ£o falhe neste teste.";
-			mes "VocÃª sÃ³ poderÃ¡ se tornar um";
+			mes "Espero que você";
+			mes "não falhe neste teste.";
+			mes "Você só poderá se tornar um";
 			mes "Arruaceiro se passar...";
 			close2;
 			warp "in_rogue",15,105;
@@ -1596,17 +1596,17 @@ in_rogue,177,109,1	script	Antonio Junior#rg	88,{
 			end;
 		}
 		mes "[Antonio Jr.]";
-		mes "NÃ£o tenho tempo";
+		mes "Não tenho tempo";
 		mes "para idiotices com";
-		mes "vocÃª. Apresse-se e fique";
-		mes "pronto, entÃ£o comece";
+		mes "você. Apresse-se e fique";
+		mes "pronto, então comece";
 		mes "o teste.";
 		close;
 	}
 	else if (ROGUE_Q == 14) {
 		mes "[Antonio Jr.]";
-		mes "VocÃª falhou...?";
-		mes "Isso Ã© a vida.";
+		mes "Você falhou...?";
+		mes "Isso é a vida.";
 		mes "Vai tentar novamente";
 		mes "ou o que?";
 		next;
@@ -1614,33 +1614,33 @@ in_rogue,177,109,1	script	Antonio Junior#rg	88,{
 			mes "[Antonio Jr.]";
 			mes "Lembre-se, estou lhe";
 			mes "fazendo um favor aqui...";
-			mes "Agora, nÃ£o volte atÃ© que";
-			mes "vocÃª seja um Arruaceiro.";
+			mes "Agora, não volte até que";
+			mes "você seja um Arruaceiro.";
 			close2;
 			warp "in_rogue",15,105;
 			end;
 		}
 		mes "[Antonio Jr.]";
-		mes "NÃ£o tenho tempo";
+		mes "Não tenho tempo";
 		mes "para idiotices com";
-		mes "vocÃª. Apresse-se e fique";
-		mes "pronto, entÃ£o comece";
+		mes "você. Apresse-se e fique";
+		mes "pronto, então comece";
 		mes "o teste.";
 		close;
 	}
 	else if (BaseJob != Job_Rogue) {
 		mes "Huh...?";
-		mes "Quem Ã© vocÃª?!";
-		mes "VocÃª nÃ£o Ã© do";
-		mes "ClÃ£ dos Arruaceiros!!";
+		mes "Quem é você?!";
+		mes "Você não é do";
+		mes "Clã dos Arruaceiros!!";
 		next;
 		mes "[Antonio Jr.]";
-		mes "VocÃª veio para me matar?! NÃ£o deixarei!! Vamos, dÃª-me seu melhor tiro! VocÃª nÃ£o poderÃ¡ lutar se eu arrancar seus olhos!";
+		mes "Você veio para me matar?! Não deixarei!! Vamos, dê-me seu melhor tiro! Você não poderá lutar se eu arrancar seus olhos!";
 		close;
 	}
 	else {
 		mes "[Antonio Jr.]";
-		mes "Ei, como estÃ¡ indo?";
+		mes "Ei, como está indo?";
 		mes "Acalme-se e relaxe";
 		mes "antes de sair.";
 		close;
@@ -1679,9 +1679,9 @@ OnMyMobDead:
 in_rogue,15,273,0	script	mob_rogue#2	-1,8,1,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",15,276,"MÃºmia",1041,1,"mob_rogue#2::OnMyMobDead";
-		monster "in_rogue",13,276,"MÃºmia",1041,1,"mob_rogue#2::OnMyMobDead";
-		monster "in_rogue",11,276,"MÃºmia",1041,1,"mob_rogue#2::OnMyMobDead";
+		monster "in_rogue",15,276,"Múmia",1041,1,"mob_rogue#2::OnMyMobDead";
+		monster "in_rogue",13,276,"Múmia",1041,1,"mob_rogue#2::OnMyMobDead";
+		monster "in_rogue",11,276,"Múmia",1041,1,"mob_rogue#2::OnMyMobDead";
 	}
 	else
 		warp "mag_dun02",181,176;
@@ -1721,10 +1721,10 @@ OnMyMobDead:
 in_rogue,39,341,0	script	mob_rogue#4	-1,1,8,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",39,341,"MÃºmia",1041,1,"mob_rogue#4::OnMyMobDead";
-		monster "in_rogue",40,341,"CarniÃ§al",1036,1,"mob_rogue#4::OnMyMobDead";
+		monster "in_rogue",39,341,"Múmia",1041,1,"mob_rogue#4::OnMyMobDead";
+		monster "in_rogue",40,341,"Carniçal",1036,1,"mob_rogue#4::OnMyMobDead";
 		monster "in_rogue",41,341,"Cavaleiro do Abismo",1219,1,"mob_rogue#4::OnMyMobDead";
-		monster "in_rogue",42,341,"MÃºmia",1041,1,"mob_rogue#4::OnMyMobDead";
+		monster "in_rogue",42,341,"Múmia",1041,1,"mob_rogue#4::OnMyMobDead";
 	}
 	else
 		warp "mag_dun02",181,176;
@@ -1837,7 +1837,7 @@ OnMyMobDead:
 in_rogue,197,249,0	script	mob_rogue#10	-1,1,8,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",176,211,"CarniÃ§al",1036,1,"mob_rogue#10::OnMyMobDead";
+		monster "in_rogue",176,211,"Carniçal",1036,1,"mob_rogue#10::OnMyMobDead";
 		monster "in_rogue",176,212,"Zumbi",1015,1,"mob_rogue#10::OnMyMobDead";
 		monster "in_rogue",176,213,"Zumbi",1015,1,"mob_rogue#10::OnMyMobDead";
 		monster "in_rogue",177,214,"Cavaleiro do Abismo",1219,1,"mob_rogue#10::OnMyMobDead";
@@ -1885,9 +1885,9 @@ OnTouch:
 in_rogue,86,187,0	script	mob_rogue#12	-1,1,8,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",90,187,"MÃºmia",1041,1,"mob_rogue#12::OnMyMobDead";
-		monster "in_rogue",90,183,"MÃºmia",1041,1,"mob_rogue#12::OnMyMobDead";
-		monster "in_rogue",90,190,"MÃºmia",1041,1,"mob_rogue#12::OnMyMobDead";
+		monster "in_rogue",90,187,"Múmia",1041,1,"mob_rogue#12::OnMyMobDead";
+		monster "in_rogue",90,183,"Múmia",1041,1,"mob_rogue#12::OnMyMobDead";
+		monster "in_rogue",90,190,"Múmia",1041,1,"mob_rogue#12::OnMyMobDead";
 	}
 	else
 		warp "mag_dun02",181,176;
@@ -1933,12 +1933,12 @@ OnTouch:
 in_rogue,244,319,0	script	mob_rogue#15	-1,1,8,{
 OnTouch:
 	if (BaseJob == Job_Thief) {
-		monster "in_rogue",240,319,"MÃºmia",1041,1,"mob_rogue#15::OnMyMobDead";
+		monster "in_rogue",240,319,"Múmia",1041,1,"mob_rogue#15::OnMyMobDead";
 		monster "in_rogue",259,319,"Esqueleto Arqueiro",1016,1,"mob_rogue#15::OnMyMobDead";
-		monster "in_rogue",259,320,"CarniÃ§al",1036,1,"mob_rogue#15::OnMyMobDead";
-		monster "in_rogue",240,319,"MÃºmia",1041,1,"mob_rogue#15::OnMyMobDead";
+		monster "in_rogue",259,320,"Carniçal",1036,1,"mob_rogue#15::OnMyMobDead";
+		monster "in_rogue",240,319,"Múmia",1041,1,"mob_rogue#15::OnMyMobDead";
 		monster "in_rogue",259,319,"Esqueleto Arqueiro",1016,1,"mob_rogue#15::OnMyMobDead";
-		monster "in_rogue",259,320,"CarniÃ§al",1036,1,"mob_rogue#15::OnMyMobDead";
+		monster "in_rogue",259,320,"Carniçal",1036,1,"mob_rogue#15::OnMyMobDead";
 	}
 	else
 		warp "mag_dun02",181,176;
@@ -1991,7 +1991,7 @@ OnInit:
 in_rogue,399,286,1	script	switch#rogreset	88,{
 	mes "^F08080Tah dah~";
 	mes "Monstros para a";
-	mes "MudanÃ§a de Classe para Arruaceiro";
+	mes "Mudança de Classe para Arruaceiro";
 	mes "foram resetados^000000.";
 	donpcevent "mob_rogue#1::OnDisable";
 	donpcevent "mob_rogue#2::OnDisable";

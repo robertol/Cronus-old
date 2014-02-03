@@ -32,134 +32,134 @@
 //= 3.3 Removed the need for use of 'goto.' [L0ne_W0lf]
 //============================================================
 
-//=============== Lider dos Templ√°rio: 1¬∫ Teste Recolher Itens============================
-prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
+//=============== Lider dos Templ·rio: 1∫ Teste Recolher Itens============================
+prt_castle,45,169,5	script	Lider dos Templ·rios	752,{
 	mes "[Michael Halig]";
-	if (Upper == 1) { //As classes baby est√£o totalmente bloqueadas... devido ao == 1
-		mes "V√° e treine para se preparar para a Guerra Santa que est√° chegando. A vit√≥ria estara nas m√£os dos que estiverem melhor preparados para recebe-la.";
+	if (Upper == 1) { //As classes baby est„o totalmente bloqueadas... devido ao == 1
+		mes "V· e treine para se preparar para a Guerra Santa que est· chegando. A vitÛria estara nas m„os dos que estiverem melhor preparados para recebe-la.";
 		next;
 		mes "[Michael Halig]";
-		mes "Voc√™ n√£o deve ficar aqui, meu amigo.";
+		mes "VocÍ n„o deve ficar aqui, meu amigo.";
 		mes "Aconselho-te a continuar praticando.";
 		close;
 	} 
 	else if(BaseJob != Job_Swordman) {
 		if(BaseJob == Job_Crusader) {
-			mes "V√° e treine para se preparar para a Guerra Santa que est√° chegando. A vit√≥ria estara nas m√£os dos que estiverem melhor preparados para recebe-la.";
+			mes "V· e treine para se preparar para a Guerra Santa que est· chegando. A vitÛria estara nas m„os dos que estiverem melhor preparados para recebe-la.";
 			next;
 			mes "[Michael Halig]";
-			mes "O Caos um dia surgir√° para abalar nosso pr√≠ncipios de paz, justi√ßa e ordem. Enquanto n√£o acabarmos com o mal e criarmos nosso mundo ideal n√≥s n√£o podemos parar de treinar.";
+			mes "O Caos um dia surgir· para abalar nosso prÌncipios de paz, justiÁa e ordem. Enquanto n„o acabarmos com o mal e criarmos nosso mundo ideal nÛs n„o podemos parar de treinar.";
 			close;
 		}
 		else if(BaseJob == Job_Novice) {
-			mes "N√≥s somos Templ√°rios,";
+			mes "NÛs somos Templ·rios,";
 			mes "guerreiros preparados";
 			mes "para lutar na Guerra Santa.";
 			next;
 			mes "[Michael Halig]";
-			mes "Se voc√™ deseja se juntar a n√≥s, primeiro voc√™ tem que ser um Espadachim e preparar-se...";
+			mes "Se vocÍ deseja se juntar a nÛs, primeiro vocÍ tem que ser um Espadachim e preparar-se...";
 			close;
 		}
-		mes "N√≥s somos Templ√°rios,";
+		mes "NÛs somos Templ·rios,";
 		mes "guerreiros preparados";
 		mes "para lutar na Guerra Santa.";
 		next;
 		mes "[Michael Halig]";
-		mes "Como aconteceu a mil anos atr√°s, as for√ßas do mal um dia ir√£o atacar, para tentar conquistar o mundo novamente.";
+		mes "Como aconteceu a mil anos atr·s, as forÁas do mal um dia ir„o atacar, para tentar conquistar o mundo novamente.";
 		close;
 	} 
 	else if(CRUS_Q <= 3 && countitem(1004) && countitem(1009)) {
 		mes "Ah...";
-		mes "Vejo que voc√™ foi convidado para se tornar um dos Templ√°rios. N√≥s entendemos sua vontade, mas temos que testar suas habilidades.";
+		mes "Vejo que vocÍ foi convidado para se tornar um dos Templ·rios. NÛs entendemos sua vontade, mas temos que testar suas habilidades.";
 		next;
 		mes "[Michael Halig]";
-		mes "Fale com Moorenak Miyol que esta treinando na caverna subterr√¢nea do Castelo de Prontera. V√°, e fale com ele primeiro.";
+		mes "Fale com Moorenak Miyol que esta treinando na caverna subterr‚nea do Castelo de Prontera. V·, e fale com ele primeiro.";
 		next;
 		delitem 1004, 1;
 		delitem 1009, 1;
 		set CRUS_Q,4;
 		mes "[Michael Halig]";
-		mes "Moorenak e outros como ele v√£o testar as suas habilidades e ajudar voc√™ a encontrar seu caminho. Volte aqui quando voc√™ tiver completado os testes deles...";
+		mes "Moorenak e outros como ele v„o testar as suas habilidades e ajudar vocÍ a encontrar seu caminho. Volte aqui quando vocÍ tiver completado os testes deles...";
 		close;
 	}
 	else if(CRUS_Q == 0) {
-		mes "N√≥s somos Templ√°rios, guerreiros preparados para a Guerra Santa.";
-		mes "O que traz voc√™";
+		mes "NÛs somos Templ·rios, guerreiros preparados para a Guerra Santa.";
+		mes "O que traz vocÍ";
 		mes "a este lugar?";
 		next;
 		if (select("Eu quero me preparar para a Guerra Santa!:Nada em particular.") == 1) {
 			mes "[Michael Halig]";
-			mes "Voc√™ deseja se tornar";
-			mes "um Templ√°rio...?";
-			mes "Se juntar a n√≥s n√£o √©";
-			mes "t√£o facil como parece.";
+			mes "VocÍ deseja se tornar";
+			mes "um Templ·rio...?";
+			mes "Se juntar a nÛs n„o È";
+			mes "t„o facil como parece.";
 			next;
 			mes "[Michael Halig]";
-			mes "Eu sou Michael Halig. Eu sou um dos muitos Templ√°rios que est√£o se preparando para a Guerra Santa. N√≥s continuamos treinando com f√© e lealdade infinita.";
+			mes "Eu sou Michael Halig. Eu sou um dos muitos Templ·rios que est„o se preparando para a Guerra Santa. NÛs continuamos treinando com fÈ e lealdade infinita.";
 			next;
 			mes "[Michael Halig]";
-			mes "N√≥s recrutamos Espadachins que expressem f√©, ou aqueles que nasceram como guerreiros";
+			mes "NÛs recrutamos Espadachins que expressem fÈ, ou aqueles que nasceram como guerreiros";
 			mes "por Odin.";
 			next;
 			mes "[Michael Halig]";
-			mes "Possuindo o ^3355FFEmblema da Cavalaria^000000 e a ^3355FFM√£o Divina^000000 √© o sinal de que voc√™ foi escolhido para se tornar um Templ√°rio.";
+			mes "Possuindo o ^3355FFEmblema da Cavalaria^000000 e a ^3355FFM„o Divina^000000 È o sinal de que vocÍ foi escolhido para se tornar um Templ·rio.";
 			next;
 			mes "[Michael Halig]";
-			mes "Ap√≥s obter os itens e passar em nossos testes, voc√™ estar√° pronto para se tornar um Templ√°rio.";
+			mes "ApÛs obter os itens e passar em nossos testes, vocÍ estar· pronto para se tornar um Templ·rio.";
 			next;
 			mes "[Michael Halig]";
-			mes "Eu n√£o sei que tipo de pessoa voc√™ √© ao certo. Mas";
-			mes "Vou testa-lo se desejar. Voc√™ esta pronto para suportar os testes de prepara√ß√£o para a Guerra Santa?";
+			mes "Eu n„o sei que tipo de pessoa vocÍ È ao certo. Mas";
+			mes "Vou testa-lo se desejar. VocÍ esta pronto para suportar os testes de preparaÁ„o para a Guerra Santa?";
 			next;
 			if (select("Sim, eu estou.:Gostaria de pensar sobre isso.") == 1) {
 				if(JobLevel < 40) {
 					mes "[Michael Halig]";
 					mes "Espere...";
-					mes "Voc√™ n√£o esta pronto.";
-					mes "Voc√™ precisa estar no";
+					mes "VocÍ n„o esta pronto.";
+					mes "VocÍ precisa estar no";
 					mes "Nivel de Classe 40 ou mais para se tornar";
-					mes "um Templ√°rio.";
+					mes "um Templ·rio.";
 					next;
 					mes "[Michael Halig]";
-					mes "Treine mais como um Espadachim e espere voc√™ ser chamado. Eu entendo sua inten√ß√£o, mas no momento, voc√™ n√£o pode se juntar a n√≥s.";
+					mes "Treine mais como um Espadachim e espere vocÍ ser chamado. Eu entendo sua intenÁ„o, mas no momento, vocÍ n„o pode se juntar a nÛs.";
 					close;
 				} 
 				if (Skillpoint) {
 					mes "[Michael Halig]";
-					mes "Voc√™ n√£o terminou de aprender tudo como Espadachim. Use todos os seus pontos de habilidade sobrando e retorne a mim.";
+					mes "VocÍ n„o terminou de aprender tudo como Espadachim. Use todos os seus pontos de habilidade sobrando e retorne a mim.";
 					close;
 				}
 				mes "[Michael Halig]";
-				mes "Ent√£o...";
-				mes "Vou testa-lo para ver se voc√™ esta pronto para se tornar um Templ√°rio.";
+				mes "Ent„o...";
+				mes "Vou testa-lo para ver se vocÍ esta pronto para se tornar um Templ·rio.";
 				next;
 				mes "[Michael Halig]";
-				mes "Seu nome √©";
+				mes "Seu nome È";
 				mes "" + strcharinfo(0) + "...?";
 				mes "Vamos ver...";
 				next;
 				if (countitem(1004) && countitem(1009)) {
 					mes "[Michael Halig]";
 					mes "Ah...";
-					mes "Vejo que voc√™ foi chamado para se tornar um Templ√°rio. Estamos certos de sua vontade, mas precisamos testar suas capacidades.";
+					mes "Vejo que vocÍ foi chamado para se tornar um Templ·rio. Estamos certos de sua vontade, mas precisamos testar suas capacidades.";
 					next;
 					mes "[Michael Halig]";
-					mes "Fale com Moorenak Miyol ele est√° treinando na caverna subterr√¢nea do Castelo de Prontera. V√°, e fale com ele primeiro.";
+					mes "Fale com Moorenak Miyol ele est· treinando na caverna subterr‚nea do Castelo de Prontera. V·, e fale com ele primeiro.";
 					next;
 					delitem 1004, 1;
 					delitem 1009, 1;
 					set CRUS_Q,4;
 					setquest 3009;
 					mes "[Michael Halig]";
-					mes "Moorenak e outros como ele querem testar o limite de suas capacidades e ajudar voc√™ a encontrar seu caminho. Retorne a mim quando tiver completado seus testes...";
+					mes "Moorenak e outros como ele querem testar o limite de suas capacidades e ajudar vocÍ a encontrar seu caminho. Retorne a mim quando tiver completado seus testes...";
 					close;
 				}
 				mes "[Michael Halig]";
-				mes "Mmm. Eu n√£o posso dizer se voc√™ tem ou n√£o o cora√ß√£o para se tornar um Templ√°rio. No entanto, se voc√™ tiver vontade, voc√™ conseguir√° o que √© preciso.";
+				mes "Mmm. Eu n„o posso dizer se vocÍ tem ou n„o o coraÁ„o para se tornar um Templ·rio. No entanto, se vocÍ tiver vontade, vocÍ conseguir· o que È preciso.";
 				next;
 				mes "[Michael Halig]";
 				mes "Agora...";
-				mes "O meu teste para voc√™. Traga-me os seguintes itens e mostre-me sua determina√ß√£o.";
+				mes "O meu teste para vocÍ. Traga-me os seguintes itens e mostre-me sua determinaÁ„o.";
 				next;
 				mes "[Michael Halig]";
 				set .@cru_m1,rand(1,3);
@@ -191,25 +191,25 @@ prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
 					next;
 				}
 				mes "[Michael Halig]";
-				mes "Mostre-me o seu poder, trazendo-me estes itens. Se voc√™ conseguir, voc√™ estar√° pronto para o proximo teste. Que Odin lhe proteja.";
+				mes "Mostre-me o seu poder, trazendo-me estes itens. Se vocÍ conseguir, vocÍ estar· pronto para o proximo teste. Que Odin lhe proteja.";
 				close;
 			}
 			mes "[Michael Halig]";
-			mes "Ningu√©m sabe quando a Guerra Santa come√ßar√°. Temos que nos preparar desde cedo, e n√£o podemos desistir";
+			mes "NinguÈm sabe quando a Guerra Santa comeÁar·. Temos que nos preparar desde cedo, e n„o podemos desistir";
 			mes "do nosso treinamento.";
 			next;
 			mes "[Michael Halig]";
-			mes "Se voc√™ achar que voc√™ foi escolhido para participar da Guerra Santa, por favor, volte imediatamente e fa√ßa o teste para se tornar";
-			mes "um Templ√°rio.";
+			mes "Se vocÍ achar que vocÍ foi escolhido para participar da Guerra Santa, por favor, volte imediatamente e faÁa o teste para se tornar";
+			mes "um Templ·rio.";
 			close;
 		}
 		mes "[Michael Halig]";
-		if (sex) mes "Se voc√™ tambem √© um homem da espada, treinar constantemente e preparar-se. Ningu√©m sabe quando a Guerra Santa come√ßar√°.";
-		else mes "Como uma mulher de espada, voc√™ deve treinar constantemente. Prepare-se, pois ningu√©m sabe quando a Guerra Santa ir√° come√ßar.";
+		if (sex) mes "Se vocÍ tambem È um homem da espada, treinar constantemente e preparar-se. NinguÈm sabe quando a Guerra Santa comeÁar·.";
+		else mes "Como uma mulher de espada, vocÍ deve treinar constantemente. Prepare-se, pois ninguÈm sabe quando a Guerra Santa ir· comeÁar.";
 		close;
 	}
 	else if(CRUS_Q >= 1 && CRUS_Q <= 3) {
-		mes "Voc√™ provou sua determina√ß√£o com o emblema que eu dei para voc√™, ou voc√™ possui os itens que provam que voc√™ recebeu seu chamado?";
+		mes "VocÍ provou sua determinaÁ„o com o emblema que eu dei para vocÍ, ou vocÍ possui os itens que provam que vocÍ recebeu seu chamado?";
 		next;
 		switch(CRUS_Q) {
 		case 1:
@@ -234,10 +234,10 @@ prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
 		if (countitem(@item1) > 9 && countitem(@item2) > 9 && countitem(@item3) > 9 && countitem(@item4) > 9) {
 			mes "[Michael Halig]";
 			mes "Ah, muito bem.";
-			mes "Voc√™ mostrou seu esfor√ßo e determina√ß√£o. Voc√™ est√° pronto para proceder para o pr√≥ximo teste.";
+			mes "VocÍ mostrou seu esforÁo e determinaÁ„o. VocÍ est· pronto para proceder para o prÛximo teste.";
 			next;
 			mes "[Michael Halig]";
-			mes "Fale com Moorenak Miyol ele est√° treinando no calabou√ßo subterr√¢neo do Castelo de Prontera. V√°, e fale com ele primeiro.";
+			mes "Fale com Moorenak Miyol ele est· treinando no calabouÁo subterr‚neo do Castelo de Prontera. V·, e fale com ele primeiro.";
 			next;
 			delitem @item1, 10;
 			delitem @item2, 10;
@@ -254,11 +254,11 @@ prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
 				changequest 3008,3009;
 			}
 			mes "[Michael Halig]";
-			mes "Moorenak e outros como ele v√£o testar suas capacidades e ajudar voc√™ a escolher seu caminho. Retorne a mim quando voc√™ tiver completado seus testes...";
+			mes "Moorenak e outros como ele v„o testar suas capacidades e ajudar vocÍ a escolher seu caminho. Retorne a mim quando vocÍ tiver completado seus testes...";
 			close;
 		}
 		mes "[Michael Halig]";
-		mes "Ah, Voc√™ ainda n√£o completou o teste que lhe dei. Traga-me os seguintes itens, e prove a mim que voc√™ pode se tornar um Templ√°rio...";
+		mes "Ah, VocÍ ainda n„o completou o teste que lhe dei. Traga-me os seguintes itens, e prove a mim que vocÍ pode se tornar um Templ·rio...";
 		next;
 		mes "[Michael Halig]";
 		mes "- 10 ^3355FF"+getitemname(@item1)+"^000000";
@@ -267,15 +267,15 @@ prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
 		mes "- 10 ^3355FF"+getitemname(@item4)+"^000000";
 		next;
 		mes "[Michael Halig]";
-		mes "Se voc√™ se esfor√ßar, voc√™ conseguir√° completar essa tarefa. Que Odin proteja sua jornada.";
+		mes "Se vocÍ se esforÁar, vocÍ conseguir· completar essa tarefa. Que Odin proteja sua jornada.";
 		close;
 	}
 	else if(CRUS_Q == 10) {
 		if(SkillPoint) {
-			mes "Voc√™ n√£o terminou de aprender tudo como Espadachim. Use todos os pontos de habilidade restantes, e ent√£o volte a falar comigo.";
+			mes "VocÍ n„o terminou de aprender tudo como Espadachim. Use todos os pontos de habilidade restantes, e ent„o volte a falar comigo.";
 			close;
 		}
-		mes "Parab√©ns por completar todos os seus testes. Voc√™ esta pronto para lutar ao nosso lado na Guerra Santa como um Templ√°rio.";
+		mes "ParabÈns por completar todos os seus testes. VocÍ esta pronto para lutar ao nosso lado na Guerra Santa como um Templ·rio.";
 		next;
 		mes "[Michael Halig]";
 		mes "Juntos, vamos vencer a Guerra Santa e derrotar o mal e a tirania!";
@@ -286,28 +286,28 @@ prt_castle,45,169,5	script	Lider dos Templ√°rios	752,{
 		callfunc "F_ClearJobVar";		//clears all job variables for the current player
 		mes "[Michael Halig]";
 		mes "Veja...!";
-		mes "Agora voc√™ √© um Templ√°rio!";
-		mes "Quando a Guerra Sagrada come√ßar, n√≥s estaremos do mesmo lado para derrotar o mal.";
+		mes "Agora vocÍ È um Templ·rio!";
+		mes "Quando a Guerra Sagrada comeÁar, nÛs estaremos do mesmo lado para derrotar o mal.";
 		next;
 		mes "[Michael Halig]";
-		mes "Agora voc√™ √©";
-		mes "um de n√≥s!";
-		if (sex) mes "...Irm√£o.";
-		else mes "...Irm√£.";
+		mes "Agora vocÍ È";
+		mes "um de nÛs!";
+		if (sex) mes "...Irm„o.";
+		else mes "...Irm„.";
 		next;
 		if(.@JobLevel != 50) getitem 504, 6;
 		else getitem 504, 12;
 		mes "[Michael Halig]";
-		mes "E use isso quando voc√™ estiver em perigo. Ele te dar√° for√ßas quando seus ferimentos forem graves.";
+		mes "E use isso quando vocÍ estiver em perigo. Ele te dar· forÁas quando seus ferimentos forem graves.";
 		next;
 		mes "[Michael Halig]";
-		mes "Nunca esque√ßa, a Guerra Sagrada est√° se aproximando. N√≥s precisamos nos preparar para a mar√© inevit√°vel do mal que varrera este mundo. Agora, v√° e lute pelos nossos princiopios de liberdade e justi√ßa!";
+		mes "Nunca esqueÁa, a Guerra Sagrada est· se aproximando. NÛs precisamos nos preparar para a marÈ inevit·vel do mal que varrera este mundo. Agora, v· e lute pelos nossos princiopios de liberdade e justiÁa!";
 		close;
 	}
-	mes "Parece que voc√™ n√£o completou todos os testes. Voc√™ n√£o estar√° pronto para se tornar um Templ√°rio enquanto n√£o tiver completado todos os testes.";
+	mes "Parece que vocÍ n„o completou todos os testes. VocÍ n„o estar· pronto para se tornar um Templ·rio enquanto n„o tiver completado todos os testes.";
 	next;
 	mes "[Michael Halig]";
-	mes "Retorne a mim quando voc√™ tiver completado todos os seus testes. Quando voc√™ tiver terminado, voc√™ poder√° se juntar ao grupo dos melhores Templ√°rios.";
+	mes "Retorne a mim quando vocÍ tiver completado todos os seus testes. Quando vocÍ tiver terminado, vocÍ poder· se juntar ao grupo dos melhores Templ·rios.";
 	close;
 }
 
@@ -316,106 +316,106 @@ prt_castle,164,32,1	script	Homem Angustiado	733,{
 	mes "[Murnak Mijoul]";
 	if(BaseJob != Job_Swordman) {
 		if (BaseJob == Job_Crusader) {
-			mes "N√£o fique passeando em lugaqr como esse e v√° descobrir at√© onde vai suas for√ßas. O dia que juntaremos nossas m√£os na batalha est√° se aproximando.";
+			mes "N„o fique passeando em lugaqr como esse e v· descobrir atÈ onde vai suas forÁas. O dia que juntaremos nossas m„os na batalha est· se aproximando.";
 			close;
 		}
 		else if(BaseJob == Job_Novice) {
 			mes "Um Aprendiz...?";
-			mes "T√£o novo, e ainda,";
+			mes "T„o novo, e ainda,";
 			mes "tem tanto potencial.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "Deixe-me explicar a voc√™ que n√£o sou criminoso. Estou aqui para treinar. Talvez, se voc√™ se tornar forte, entender√°.";
+			mes "Deixe-me explicar a vocÍ que n„o sou criminoso. Estou aqui para treinar. Talvez, se vocÍ se tornar forte, entender·.";
 			close;
 		}
-		mes "Hm. Voc√™ n√£o tem nada para fazer neste lugar. Por favor deixe-o, e n√£o interrompa meu treinamento.";
+		mes "Hm. VocÍ n„o tem nada para fazer neste lugar. Por favor deixe-o, e n„o interrompa meu treinamento.";
 		close;
 	}
 	else if(CRUS_Q >= 0 && CRUS_Q <= 3) {
-		mes "O que voc√™ quer...?";
-		mes "Se voc√™ n√£o nem nada neste lugar,";
-		mes "ent√£o por favor deixe-o. Um estado tranquilo na mente √© essencial para se treinar...";
+		mes "O que vocÍ quer...?";
+		mes "Se vocÍ n„o nem nada neste lugar,";
+		mes "ent„o por favor deixe-o. Um estado tranquilo na mente È essencial para se treinar...";
 		next;
 		mes "[Murnak Mijoul]";
-		mes "Desejo melhorar meu senso de serenidade no meu cora√ß√£o para me preparar para a Guerra Santa que est√° por vir. Ent√£o por favor, n√£o me pertube.";
+		mes "Desejo melhorar meu senso de serenidade no meu coraÁ„o para me preparar para a Guerra Santa que est· por vir. Ent„o por favor, n„o me pertube.";
 		close;
 	}
 	else if(CRUS_Q == 4) {
-		mes "O que √© isto...?";
-		mes "Voc√™ tem negocios aqui";
+		mes "O que È isto...?";
+		mes "VocÍ tem negocios aqui";
 		if (sex) mes "comigo, homem da espada?";
 		else mes "comigo, mulher da espada?";
 		next;
-		if (select("Eu gostaria de fazer o teste de Templ√°rio.:Nada.") == 1) {
+		if (select("Eu gostaria de fazer o teste de Templ·rio.:Nada.") == 1) {
 			mes "[Murnak Mijoul]";
-			mes "Voc√™ deseja se tornar um Templ√°rio...? Hm, lutar na Guerra Santa √© algo admir√°vel.";
+			mes "VocÍ deseja se tornar um Templ·rio...? Hm, lutar na Guerra Santa È algo admir·vel.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "Seu nome √©";
+			mes "Seu nome È";
 			mes "" + strcharinfo(0) + "...?";
 			mes "Deixe-me dar";
 			mes "uma olhada em seu rosto.";
 			next;
 			if(getequipid(7) != 2608 && getequipid(8) != 2608) {
 				mes "[Murnak Mijoul]";
-				mes "Hmm. Voc√™ deseja se tornar um Templ√°rio, mas n√£o usa um Ros√°rio? N√£o tenho assuntos com voc√™ se voc√™ n√£o usa nosso costume.";
+				mes "Hmm. VocÍ deseja se tornar um Templ·rio, mas n„o usa um Ros·rio? N„o tenho assuntos com vocÍ se vocÍ n„o usa nosso costume.";
 				close;
 			}
 			mes "[Murnak Mijoul]";
 			mes "Hmm...";
-			mes "Voc√™ parece 'mais-ou-menos', mas √© jovem e ambicioso. Ambi√ß√£o pode esta contra voc√™ se voc√™ n√£o agira com paci√™ncia.";
+			mes "VocÍ parece 'mais-ou-menos', mas È jovem e ambicioso. AmbiÁ„o pode esta contra vocÍ se vocÍ n„o agira com paciÍncia.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "N√£o me de raz√£o para duvidar de voc√™, e me mostre sua paci√™ncia. Voc√™ deve resistir ao meu teste com sua paci√™ncia se voc√™ deseja se tornar um Templ√°rio.";
+			mes "N„o me de raz„o para duvidar de vocÍ, e me mostre sua paciÍncia. VocÍ deve resistir ao meu teste com sua paciÍncia se vocÍ deseja se tornar um Templ·rio.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "Voc√™ pode fazer o teste agora. √â muito simples. Tudo que voc√™ tem que fazer √© andar at√© o fim do corredor.";
+			mes "VocÍ pode fazer o teste agora. … muito simples. Tudo que vocÍ tem que fazer È andar atÈ o fim do corredor.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "Por√©m...";
-			mes "Mas voc√™ tem que ter uma coisa em mente. Em nenhuma condi√ß√£o voc√™ poder√° matar os monstros.";
+			mes "PorÈm...";
+			mes "Mas vocÍ tem que ter uma coisa em mente. Em nenhuma condiÁ„o vocÍ poder· matar os monstros.";
 			next;
 			set CRUS_Q,5;
 			changequest 3009,3010;
 			mes "[Murnak Mijoul]";
-			mes "Ent√£o...";
+			mes "Ent„o...";
 			mes "Boa Sorte.";
 			close2;
 			warp "job_cru",98,40;
 			end;
 		}
 		mes "[Murnak Mijoul]";
-		mes "Parece que voc√™ tem bastante tempo em suas m√£os. Porque n√£o vai fazer algo mais produtivo, como pegar jellopys fora das ruas ou algo assim?";
+		mes "Parece que vocÍ tem bastante tempo em suas m„os. Porque n„o vai fazer algo mais produtivo, como pegar jellopys fora das ruas ou algo assim?";
 		close;
 	}
 	else if(CRUS_Q == 5) {
-		mes "O que √© isso...?";
-		mes "Voc√™ √© o Espadachim de antes. O que aconteceu, voc√™ falho?";
+		mes "O que È isso...?";
+		mes "VocÍ È o Espadachim de antes. O que aconteceu, vocÍ falho?";
 		next;
 		if (select("Deixe-me preparar o teste.:Que tipo de teste foi esse?!") == 1) {
 			mes "[Murnak Mijoul]";
-			mes "Eu deixarei voc√™ rafazer o teste quantas vezes quizer. Por√©m se voc√™ continuar falhando, tem um problema serio com seu";
+			mes "Eu deixarei vocÍ rafazer o teste quantas vezes quizer. PorÈm se vocÍ continuar falhando, tem um problema serio com seu";
 			mes "estado mental.";
 			next;
 			if(getequipid(7) != 2608 && getequipid(8) != 2608) {
 				mes "[Murnak Mijoul]";
 				mes "Espere...";
-				mes "Voc√™ perdeu seu Ros√°rio? Voc√™ n√£o pode deixa-lo em qualquer lugar. N√≥s somos guerreiros da santidade.";
+				mes "VocÍ perdeu seu Ros·rio? VocÍ n„o pode deixa-lo em qualquer lugar. NÛs somos guerreiros da santidade.";
 				next;
 				mes "[Murnak Mijoul]";
-				mes "Perder as coisas s√£o atitudes de meros Espadachins. Se voc√™ realmente quer refazer o teste, voc√™ precisa respeitar as tradi√ß√µes dos Templ√°rios.";
+				mes "Perder as coisas s„o atitudes de meros Espadachins. Se vocÍ realmente quer refazer o teste, vocÍ precisa respeitar as tradiÁıes dos Templ·rios.";
 				close;
 			}
 			mes "[Murnak Mijoul]";
-			mes "Seu problema √© o habito de atacar monstros no momento que ve um. Voc√™ tem que desenvolver a paci√™ncia e a resist√™ncia.";
+			mes "Seu problema È o habito de atacar monstros no momento que ve um. VocÍ tem que desenvolver a paciÍncia e a resistÍncia.";
 			next;
 			mes "[Murnak Mijoul]";
 			mes "Apenas concentre-se...";
-			mes "No seu objetivo apenas e ande at√© o fim do corredor. √â t√£o simples quanto voc√™ pensa";
+			mes "No seu objetivo apenas e ande atÈ o fim do corredor. … t„o simples quanto vocÍ pensa";
 			mes "sobre isso.";
 			next;
 			mes "[Murnak Mijoul]";
-			mes "N√£o emportar como voc√™ vai fazer, voc√™ n√£o pode matar nenhum monstro. Desta vez, voc√™ tem que pensar bem antes de sacar sua espada.";
+			mes "N„o emportar como vocÍ vai fazer, vocÍ n„o pode matar nenhum monstro. Desta vez, vocÍ tem que pensar bem antes de sacar sua espada.";
 			next;
 			set CRUS_Q,5;
 			mes "[Murnak Mijoul]";
@@ -425,101 +425,101 @@ prt_castle,164,32,1	script	Homem Angustiado	733,{
 			warp "job_cru",98,40;
 		}
 		mes "[Murnak Mijoul]";
-		mes "Como voc√™ pode dizer que n√£o sabe do teste? Com este tipo de atitude, voc√™ nunca se tornar√° um Templ√°rio.";
+		mes "Como vocÍ pode dizer que n„o sabe do teste? Com este tipo de atitude, vocÍ nunca se tornar· um Templ·rio.";
 		next;
 		mes "[Murnak Mijoul]";
-		mes "Eu entendo que voc√™ est√° um pouco frustrado, mas voc√™ tem que superar sua frustra√ß√£o para passar neste teste.";
+		mes "Eu entendo que vocÍ est· um pouco frustrado, mas vocÍ tem que superar sua frustraÁ„o para passar neste teste.";
 		close;
 	}
 	else if(CRUS_Q == 6) {
-		mes "Hmm, parece que voc√™ foi bem. N√£o deve ter sido muito dificil. Voc√™ n√£o tem mais neg√≥cios";
+		mes "Hmm, parece que vocÍ foi bem. N„o deve ter sido muito dificil. VocÍ n„o tem mais negÛcios";
 		mes "comigo.";
 		next;
 		mes "[Murnak Mijoul]";
-		mes "Para seu pr√≥ximo teste, v√° at√© Gabriel Valentine no Santu√°rio de Prontera. Bem, nos vemos por ai.";
+		mes "Para seu prÛximo teste, v· atÈ Gabriel Valentine no Santu·rio de Prontera. Bem, nos vemos por ai.";
 		close;
 	}
 	mes "Hmmm...";
-	mes "Voc√™ ainda tem testes para completar, para se tornar um Templ√°rio, n√£o tem?";
+	mes "VocÍ ainda tem testes para completar, para se tornar um Templ·rio, n„o tem?";
 	close;
 }
 
 //===================== Gabriel Valentine: 3rd Knowledge Test =================================
-prt_church,95,127,3	script	Templ√°rio	745,{
+prt_church,95,127,3	script	Templ·rio	745,{
 	mes "[Gabriel Valentine]";
 	if(BaseJob != Job_Swordman) {
 		if (BaseJob == Job_Crusader) {
-			mes "Bem vindo, colega Templ√°rio.";
+			mes "Bem vindo, colega Templ·rio.";
 			mes "Como vai seu treinamento";
 			mes "bem?";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "Voc√™ n√£o pode esquecer de treinar todos os dias, e preparar-se para o dia da Guerra Santa que est√° chegando.";
+			mes "VocÍ n„o pode esquecer de treinar todos os dias, e preparar-se para o dia da Guerra Santa que est· chegando.";
 			close;
 		}
 		else if(BaseJob == Job_Novice) {
-			mes "Bem vindo, eu sou um Templ√°rio.";
+			mes "Bem vindo, eu sou um Templ·rio.";
 			mes "Eu estou me preparando para";
 			mes "a Guerra Santa";
-			mes "que est√° por vir.";
+			mes "que est· por vir.";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "Se voc√™ estiver interessado em se tornar um Templ√°rio, voc√™ precisa primeiro treinar como um Espadachim. Venha nos visitar depois que voc√™ tiver aprendido o suficiente como um Espadachim...";
+			mes "Se vocÍ estiver interessado em se tornar um Templ·rio, vocÍ precisa primeiro treinar como um Espadachim. Venha nos visitar depois que vocÍ tiver aprendido o suficiente como um Espadachim...";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "N√≥s estamos localizados no Palacio Central de Prontera, ent√£o se voc√™ tiver tempo, n√£o teria problema passar por la.";
+			mes "NÛs estamos localizados no Palacio Central de Prontera, ent„o se vocÍ tiver tempo, n„o teria problema passar por la.";
 			close;
 		}
-		mes "Bem Vindo, n√≥s somos Templ√°rios.";
-		mes "N√≥s estamos nos preparando para";
+		mes "Bem Vindo, nÛs somos Templ·rios.";
+		mes "NÛs estamos nos preparando para";
 		mes "a Guerra Santa";
-		mes "que est√° por vir.";
+		mes "que est· por vir.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "Espero que voc√™ treine para se peparar para o futuro tamb√©m.";
+		mes "Espero que vocÍ treine para se peparar para o futuro tambÈm.";
 		close;
 	}
 	else if(CRUS_Q == 0) {
-		mes "Bem-vindo. N√≥s somos Templ√°rios.";
-		mes "N√≥s estamos nos preparando para a";
+		mes "Bem-vindo. NÛs somos Templ·rios.";
+		mes "NÛs estamos nos preparando para a";
 		mes "previsa Guerra Santa";
-		mes "que est√° por vir.";
+		mes "que est· por vir.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "Se voc√™ deseja se tornar um Templ√°rio, por favor fale com nosso lider no Palacio Central de Prontera.";
+		mes "Se vocÍ deseja se tornar um Templ·rio, por favor fale com nosso lider no Palacio Central de Prontera.";
 		close;
 	}
 	else if(CRUS_Q == 6) {
 		mes "Bem-vindo.";
-		mes "Voc√™ foi bem";
+		mes "VocÍ foi bem";
 		mes "nos dolorosos testes?";
 		mes "Eu vou lhe dar o proximo teste.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "Meu nome √© Gabriel Valentine. Eu, tamb√©m, estou me preparando para a Guerra Santa. Por enquanto, eu sou o guarda desta igreja.";
+		mes "Meu nome È Gabriel Valentine. Eu, tambÈm, estou me preparando para a Guerra Santa. Por enquanto, eu sou o guarda desta igreja.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "Vou testar voc√™ para ver se voc√™ tem o conhecimento necess√°rio para se tornar um Templ√°rio.";
-		mes "N√£o podemos ganhar a Guerra Santa apenas balan√ßando nossas espadas.";
+		mes "Vou testar vocÍ para ver se vocÍ tem o conhecimento necess·rio para se tornar um Templ·rio.";
+		mes "N„o podemos ganhar a Guerra Santa apenas balanÁando nossas espadas.";
 		next;
 		mes "[Gabriel Valentine]";
 		mes "Farei a";
-		mes "voc√™ 10 perguntas.";
+		mes "vocÍ 10 perguntas.";
 		mes "Responda-as corretamente.";
 		next;
 		goto C_Questions;
 	} 
 	else if(CRUS_Q == 7) {
 		mes "Bem vindo de volta~";
-		mes "Voc√™ se preparou";
+		mes "VocÍ se preparou";
 		mes "bem para esse teste?";
 		mes "Vamos tentar,";
 		mes "novamente...?";
 		next;
 		mes "[Gabriel Valentine]";
 		mes "Mai uma vez, eu vou";
-		mes "fazer 10 perguntas a voc√™";
-		mes "Ou√ßa com aten√ß√£o, e";
+		mes "fazer 10 perguntas a vocÍ";
+		mes "OuÁa com atenÁ„o, e";
 		mes "escolha a resposta correta.";
 		next;
 C_Questions:
@@ -532,46 +532,46 @@ C_Questions:
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "2. Se o monstro for um Morto-Vivo Nivel 2, quanto de dano a mais o ataque Sagrado dar√° em compara√ß√£o com o Fogo?";
+			mes "2. Se o monstro for um Morto-Vivo Nivel 2, quanto de dano a mais o ataque Sagrado dar· em comparaÁ„o com o Fogo?";
 			next;
 			if (select("25 %:50 %:75 %:100 %") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "3. Qual desses itens n√£o pode ser obtido de um Druida Maligno?";
+			mes "3. Qual desses itens n„o pode ser obtido de um Druida Maligno?";
 			next;
-			if (select("Chap√©u de Monge:Folha de Yggdrasil:Erva Branca:Amuleto ") == 1)
+			if (select("ChapÈu de Monge:Folha de Yggdrasil:Erva Branca:Amuleto ") == 1)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
 			mes "4. Qual monstro Morto-Vivo";
 			mes "tem mais HP?";
 			next;
-			if (select("Carni√ßal:Esqueleto Prisioneiro:Alma Penada:Zumbi Prisioneiro") == 4) 
+			if (select("CarniÁal:Esqueleto Prisioneiro:Alma Penada:Zumbi Prisioneiro") == 4) 
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
 			mes "5. Qual desses montros tem tamanho diferente que os outros?";
 			next;
-			if (select("Alma Penada:Khalitzburg:Drake:Druida Mal√≠gno") == 3)
+			if (select("Alma Penada:Khalitzburg:Drake:Druida MalÌgno") == 3)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "6. Qual dessas cartas garante a voc√™ tolerancia a ataques da propriedade Morto-Vivo?";
+			mes "6. Qual dessas cartas garante a vocÍ tolerancia a ataques da propriedade Morto-Vivo?";
 			next;
-			if (select("Carta Orc Esqueleto:Carta Orc Zumbi:Carta Carni√ßal:Carta Esqueleto Oper√°rio") == 2)
+			if (select("Carta Orc Esqueleto:Carta Orc Zumbi:Carta CarniÁal:Carta Esqueleto Oper·rio") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "7. Qual era a rela√ß√£o entre Munak e Bongun antes de falecerem?";
+			mes "7. Qual era a relaÁ„o entre Munak e Bongun antes de falecerem?";
 			next;
-			if (select("Grande Irm√£o e Pequena Irm√£:Amigos de Infancia da mesma vila:Meio-irm√£o e irm√£:Completamente estranhos") == 2)
+			if (select("Grande Irm„o e Pequena Irm„:Amigos de Infancia da mesma vila:Meio-irm„o e irm„:Completamente estranhos") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "8. Qual dos seguintes monstros n√£o √© agressivo?";
+			mes "8. Qual dos seguintes monstros n„o È agressivo?";
 			next;
-			if (select("Soldado Esqueleto:Orc Esqueleto:Esqueleto:Esqueleto Oper√°rio") == 3)
+			if (select("Soldado Esqueleto:Orc Esqueleto:Esqueleto:Esqueleto Oper·rio") == 3)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
@@ -581,39 +581,39 @@ C_Questions:
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "10. Qual desses monstros n√£o derrubam Esp√≥lio?";
+			mes "10. Qual desses monstros n„o derrubam EspÛlio?";
 			next;
-			if (select("Munak:Carni√ßal:Mumia:Soldado Esqueleto") == 1)
+			if (select("Munak:CarniÁal:Mumia:Soldado Esqueleto") == 1)
 				set .@cru_t,.@cru_t+10;
 		}
 		else if (.@cru_m == 2) {
 			mes "[Gabriel Valentine]";
 			mes "1. Qual dos seguintes monstros tem atributo diferente dos outros?";
 			next;
-			if (select("Carat:Xam√£ do Vento:Isis:Andarilho") == 3)
+			if (select("Carat:Xam„ do Vento:Isis:Andarilho") == 3)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
 
-			mes "2. Qual espada √© efetiva ao atacar um monstro Demonio?";
+			mes "2. Qual espada È efetiva ao atacar um monstro Demonio?";
 			next;
 			if (select("Tsurugi Exorcizante:Tsurugi Celestial:Tsurugi Abissal:Tsurugi Nocauteante") == 1)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "3. Qual desses itens N√ÉO √© derrubado pelo Dokebi?";
+			mes "3. Qual desses itens N√O È derrubado pelo Dokebi?";
 			next;
-			if (select("Min√©rio de Elunium:Martelo de Ouro:Ma√ßa Espada:Cajado do Poder") == 2)
+			if (select("MinÈrio de Elunium:Martelo de Ouro:MaÁa Espada:Cajado do Poder") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
 			mes "4. Qual monstro Demonio tem mais HP?";
 			next;
-			if (select("Giearth:Magn√≥lia:Dokebi:Marionette") == 4)
+			if (select("Giearth:MagnÛlia:Dokebi:Marionette") == 4)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "5. Qual desses monstros Demonio √© de um tamanho diferente dos outros?";
+			mes "5. Qual desses monstros Demonio È de um tamanho diferente dos outros?";
 			next;
 			if (select("Ghostring:Sussuro:Deviruchi:Baphomet Jr.") == 1)
 				set .@cru_t,.@cru_t+10;
@@ -621,17 +621,17 @@ C_Questions:
 			mes "[Gabriel Valentine]";
 			mes "6. Qual escudo reduz o dano de monstros Demonio?";
 			next;
-			if (select("Escudo do Para√≠so:Escudo do Inferno:Escudo Escarlate:Escudo Excelente") == 2)
+			if (select("Escudo do ParaÌso:Escudo do Inferno:Escudo Escarlate:Escudo Excelente") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "7. Qual desses atributos √© mais efetivo no Xam√£ do Vento?";
+			mes "7. Qual desses atributos È mais efetivo no Xam„ do Vento?";
 			next;
 			if (select("Agua:Terra:Fogo:Vento") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "8. Qual dos monstros √© diferente dos outros monstros Demonio?";
+			mes "8. Qual dos monstros È diferente dos outros monstros Demonio?";
 			next;
 			if (select("Sohee:Isis:Dokebi:Sussurro") == 4)
 				set .@cru_t,.@cru_t+10;
@@ -643,52 +643,52 @@ C_Questions:
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "10. Qual dessas √© uma maneira efetiva para agir ao encontrar um monstro Demonio?";
+			mes "10. Qual dessas È uma maneira efetiva para agir ao encontrar um monstro Demonio?";
 			next;
-			if (select("Gritar, 'Mal, va embora!':Oferecer sua alma e fazer um acordo.:Colocar Agua Benta na arma e atacar.:Colocar um chap√©u de Deviruchi.") == 3)
+			if (select("Gritar, 'Mal, va embora!':Oferecer sua alma e fazer um acordo.:Colocar Agua Benta na arma e atacar.:Colocar um chapÈu de Deviruchi.") == 3)
 				set .@cru_t,.@cru_t+10;
 		}
 		else {
 			mes "[Gabriel Valentine]";
-			mes "1. Qual o nivel de 'Prote√ß√£o Divina' √© necess√°rio para aprender 'Flage do Mal'?";
+			mes "1. Qual o nivel de 'ProteÁ„o Divina' È necess·rio para aprender 'Flage do Mal'?";
 			next;
 			if (select("Nivel 1:Nivel 2:Nivel 3:Nivel 4") == 3)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "2. Se sua INT for 30, incluindo bonus de INT dos equipamentos, no n√≠vel 55, quanto de HP a habilidade Cura Nivel 5 recupera?";
+			mes "2. Se sua INT for 30, incluindo bonus de INT dos equipamentos, no nÌvel 55, quanto de HP a habilidade Cura Nivel 5 recupera?";
 			next;
 			if (select("396:440:484:528") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "3. Com nivel 7 de Prote√ß√£o Divina, em quanto sua defesa √© almentada sobre Morto-Vivo?";
+			mes "3. Com nivel 7 de ProteÁ„o Divina, em quanto sua defesa È almentada sobre Morto-Vivo?";
 			next;
 			if (select("21:22:23:24") == 1)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "4. Qual dessas lan√ßas pode atacar o Pesadelo Sombrio, quando esta envolvido no atributo Fantasma?";
+			mes "4. Qual dessas lanÁas pode atacar o Pesadelo Sombrio, quando esta envolvido no atributo Fantasma?";
 			next;
-			if (select("Lan√ßa:Guisarme-Bico:Foice:Zephyrus") == 4)
+			if (select("LanÁa:Guisarme-Bico:Foice:Zephyrus") == 4)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "5. Qual o nivel de 'Cura' necess√°rio para aprender 'Medicar'?";
+			mes "5. Qual o nivel de 'Cura' necess·rio para aprender 'Medicar'?";
 			next;
 			if (select("Nivel 1:Nivel 2:Nivel 3:Nivel 4") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "6. Qual a velocidade de ataque quando Per√≠cia em Montario Nivel 3 √© aprendido?";
+			mes "6. Qual a velocidade de ataque quando PerÌcia em Montario Nivel 3 È aprendido?";
 			next;
 			if (select("70 % da velocidade normal:80 % da velocidade normal:90 % da velocidade normal:100 % da velocidade normal") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "7. Qual dos seguintes n√£o esta correto para a habilidade Flagelo do Mal?";
+			mes "7. Qual dos seguintes n„o esta correto para a habilidade Flagelo do Mal?";
 			next;
-			if (select("Aumenta o dano em Morto-Vivo:Apenas Novi√ßos podem aprender a habilidade:Quando master, + 30 aumenta:Habilidade Passiva") == 2)
+			if (select("Aumenta o dano em Morto-Vivo:Apenas NoviÁos podem aprender a habilidade:Quando master, + 30 aumenta:Habilidade Passiva") == 2)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
@@ -699,15 +699,15 @@ C_Questions:
 
 			mes "[Gabriel Valentine]";
 			mes "9. Qual destes status";
-			mes "n√£o pode ser curado com Medicar?";
+			mes "n„o pode ser curado com Medicar?";
 			next;
-			if (select("Maldi√ß√£o:Silenciamento:Caos:Cegueira") == 1)
+			if (select("MaldiÁ„o:Silenciamento:Caos:Cegueira") == 1)
 				set .@cru_t,.@cru_t+10;
 
 			mes "[Gabriel Valentine]";
-			mes "10. O que melhor descreve um Templ√°rio?";
+			mes "10. O que melhor descreve um Templ·rio?";
 			next;
-			if (select("Se preparando para o matrim√¥nio.:Se preparando para a Guerra Santa.:Se preparando para uma consuma√ß√£o.:Um preparador de po√ß√µes.") == 2)
+			if (select("Se preparando para o matrimÙnio.:Se preparando para a Guerra Santa.:Se preparando para uma consumaÁ„o.:Um preparador de poÁıes.") == 2)
 				set .@cru_t,.@cru_t+10;
 
 		}
@@ -717,42 +717,42 @@ C_Questions:
 		mes "dar uma olhada nos resultados.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes " A Pontua√ß√£o de " + strcharinfo(0) + "";
-		mes "√© " + .@cru_t + " pontos...";
+		mes " A PontuaÁ„o de " + strcharinfo(0) + "";
+		mes "È " + .@cru_t + " pontos...";
 		if(.@cru_t == 100) {
 			set CRUS_Q, 8;
 			changequest 3011,3013;
-			mes "Super! Agora, √© hora";
-			mes "de voc√™ pegar o proximo teste.";
+			mes "Super! Agora, È hora";
+			mes "de vocÍ pegar o proximo teste.";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "V√° para o Castelo de Prontera";
+			mes "V· para o Castelo de Prontera";
 			mes "e fale com Bliant Piyord.";
 			mes "Eu vou informa-lo";
-			mes "que ele far√° seu proximo teste.";
+			mes "que ele far· seu proximo teste.";
 			close;
 		}
 		else if(.@cru_t == 90) {
 			set CRUS_Q, 8;
 			changequest 3011,3013;
-			mes "Muito bem~ Agora, √© hora de";
-			mes "voc√™ pegar seu proximo teste.";
+			mes "Muito bem~ Agora, È hora de";
+			mes "vocÍ pegar seu proximo teste.";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "V√° para o Castelo de Prontera";
+			mes "V· para o Castelo de Prontera";
 			mes "e fale com Bliant Piyord.";
 			mes "Vou informa-lo que ele";
-			mes "far√° seu proximo teste.";
+			mes "far· seu proximo teste.";
 			close;
 		}
 		else if (.@cru_t == 80 && CRUS_Q == 7) {
 			set CRUS_Q,8;
 			changequest 3011,3013;
-			mes "Parece que voc√™ se preparou muito para o teste, ent√£o deixarei voc√™ passar desta vez.";
-			mes "V√° pegar seu proximo teste agora.";
+			mes "Parece que vocÍ se preparou muito para o teste, ent„o deixarei vocÍ passar desta vez.";
+			mes "V· pegar seu proximo teste agora.";
 			next;
 			mes "[Gabriel Valentine]";
-			mes "V√° para o Castelo de Prontera e fale com Bliant Piyord.";
+			mes "V· para o Castelo de Prontera e fale com Bliant Piyord.";
 			mes "Eu vou informa-lo para preparar seu proximo teste.";
 			close;
 		}
@@ -761,35 +761,35 @@ C_Questions:
 			changequest 3011,3012;
 		}
 		mes "Hmmm... Que pena.";
-		mes "V√° estudar mais e";
-		mes "fa√ßa este teste novamente, okay?";
+		mes "V· estudar mais e";
+		mes "faÁa este teste novamente, okay?";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "N√£o se estresse, voc√™ precisa saber muito para passar neste teste. De qualquer forma, Eu estarei esperando bem aqui. Quando voc√™ achar que esta pronto, volte aqui, esta bem?";
+		mes "N„o se estresse, vocÍ precisa saber muito para passar neste teste. De qualquer forma, Eu estarei esperando bem aqui. Quando vocÍ achar que esta pronto, volte aqui, esta bem?";
 		close;
 	}
 	else if(CRUS_Q == 8 || CRUS_Q == 9) {
-		mes "Pensei ter dito para, voc√™ ir ao Castelo de Prontera e falar com Bliant Piyord para pegar seu proximo teste. Boa sorte, e torne-se um Templ√°rio logo, esta bem?";
+		mes "Pensei ter dito para, vocÍ ir ao Castelo de Prontera e falar com Bliant Piyord para pegar seu proximo teste. Boa sorte, e torne-se um Templ·rio logo, esta bem?";
 		close;
 	}
 	else if(CRUS_Q == 10) {
-		mes "O que voc√™ esta fazendo aqui? Voc√™ ja completou todos os testes. V√° falar com nosso lider, voc√™ est√° pronto para se tornar um Templ√°rio agora.";
+		mes "O que vocÍ esta fazendo aqui? VocÍ ja completou todos os testes. V· falar com nosso lider, vocÍ est· pronto para se tornar um Templ·rio agora.";
 		next;
 		mes "[Gabriel Valentine]";
-		mes "Voc√™ logo estar√° pronto para se juntar a n√≥s para preparar para a Guerra Santa. Continue vivendo com f√© ap√≥s se tornar um Templ√°rio.";
+		mes "VocÍ logo estar· pronto para se juntar a nÛs para preparar para a Guerra Santa. Continue vivendo com fÈ apÛs se tornar um Templ·rio.";
 		close;
 	}
 	mes "Mmm...?";
-	mes "Parece que voc√™";
-	mes "esta se tornando um Templ√°rio...";
-	mes "Mas, n√£o √© minha vez";
+	mes "Parece que vocÍ";
+	mes "esta se tornando um Templ·rio...";
+	mes "Mas, n„o È minha vez";
 	mes "de testa-lo ainda.";
 	next;
 	mes "[Gabriel Valentine]";
-	mes "V√° e complete os outros testes,";
-	mes "e venha at√© mim ap√≥s termina-los.";
-	mes "Ent√£o,";
-	mes "Vejo voc√™ mais tarde~";
+	mes "V· e complete os outros testes,";
+	mes "e venha atÈ mim apÛs termina-los.";
+	mes "Ent„o,";
+	mes "Vejo vocÍ mais tarde~";
 	close;
 }
 
@@ -803,66 +803,66 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 			mes "seu treinamento?";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Desenvolva sua f√©. Atrav√©s da f√© nasce a for√ßa e a disciplina. Dia ap√≥s dia, treine para se tornar um grande Templ√°rio.";
+			mes "Desenvolva sua fÈ. AtravÈs da fÈ nasce a forÁa e a disciplina. Dia apÛs dia, treine para se tornar um grande Templ·rio.";
 			close;
 		}
 		else if(BaseJob == Job_Novice) {
-			mes "N√≥s somos Templ√°rio,";
-			mes "guerreiros sagrados preparados para a grande Guerra Santa que est√° vindo.";
+			mes "NÛs somos Templ·rio,";
+			mes "guerreiros sagrados preparados para a grande Guerra Santa que est· vindo.";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Voc√™ esta interessado";
-			mes "em se tornar um Templ√°rio?";
-			mes "N√≥s estamos sempre esperando";
+			mes "VocÍ esta interessado";
+			mes "em se tornar um Templ·rio?";
+			mes "NÛs estamos sempre esperando";
 			mes "por mais homem e mulheres";
-			mes "capazes de se juntar a n√≥s.";
+			mes "capazes de se juntar a nÛs.";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Treine como um Espadachim e fale com n√≥s quando achar que est√° pronto. Se voc√™ for chamado por Odin para se tornar um Templ√°rio, voc√™ se tornar√°.";
+			mes "Treine como um Espadachim e fale com nÛs quando achar que est· pronto. Se vocÍ for chamado por Odin para se tornar um Templ·rio, vocÍ se tornar·.";
 			close;
 		}
-		mes "N√≥s somos Templ√°rios,";
-		mes "guerreiros santos preparados para a grande Guerra Santa que est√° por vir.";
+		mes "NÛs somos Templ·rios,";
+		mes "guerreiros santos preparados para a grande Guerra Santa que est· por vir.";
 		next;
 		mes "[Bliant Piyord]";
-		mes "Neste tempo relativamente quieto, nosso treinamento √© incessante. N√≥s estamos prontos para o dia que as sombras aparecerem novamente...";
+		mes "Neste tempo relativamente quieto, nosso treinamento È incessante. NÛs estamos prontos para o dia que as sombras aparecerem novamente...";
 		close;
 	}
 	else if(CRUS_Q == 0) {
-		mes "N√≥s somos Templ√°rios,";
-		mes "guerreiros santos preparados para a grande Guerra Santa que est√° por vir.";
+		mes "NÛs somos Templ·rios,";
+		mes "guerreiros santos preparados para a grande Guerra Santa que est· por vir.";
 		next;
 		mes "[Bliant Piyord]";
-		mes "Voc√™ esta interessado";
-		mes "em se tornar um Templ√°rio?";
-		mes "N√≥s sempre estamos esperando";
+		mes "VocÍ esta interessado";
+		mes "em se tornar um Templ·rio?";
+		mes "NÛs sempre estamos esperando";
 		mes "por mais homens e mulheres";
-		mes "capazes de se juntar a n√≥s.";
+		mes "capazes de se juntar a nÛs.";
 		next;
 		mes "[Bliant Piyord]";
-		mes "Para se tornar um Templ√°rio, voc√™ precisa estar no Nivel de Classe 40. Para mais detalhes, por favor fale com nosso lider.";
+		mes "Para se tornar um Templ·rio, vocÍ precisa estar no Nivel de Classe 40. Para mais detalhes, por favor fale com nosso lider.";
 		next;
 		mes "[Bliant Piyord]";
 		mes "Que Odin";
-		mes "esteja com voc√™...";
+		mes "esteja com vocÍ...";
 		close;
 	}
 	else if(CRUS_Q == 8 || CRUS_Q == 9) {
 		if (CRUS_Q == 8) {
-			mes "√â bom";
-			mes "falar com voc√™.";
-			mes "Agora √© a hora";
+			mes "… bom";
+			mes "falar com vocÍ.";
+			mes "Agora È a hora";
 			mes "do seu teste final.";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Meu nome √© Bliant Piyord e eu tamb√©m, estou me preparando para a Guerra Santa. Deve ter sido muito dificil chegar at√© aqui";
+			mes "Meu nome È Bliant Piyord e eu tambÈm, estou me preparando para a Guerra Santa. Deve ter sido muito dificil chegar atÈ aqui";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Este teste, avalia suas habildiade em batalha. Apenas quem possui uma boa habilidade de luta pode se tornar um Templ√°rio.";
+			mes "Este teste, avalia suas habildiade em batalha. Apenas quem possui uma boa habilidade de luta pode se tornar um Templ·rio.";
 			next;
 			mes "[Bliant Piyord]";
 			mes "Para receber o teste de batalha, traga-me";
-			mes "1 ^3355FFAgua Benta^000000. Ser√° usada para purificar seu interior para receber o teste.";
+			mes "1 ^3355FFAgua Benta^000000. Ser· usada para purificar seu interior para receber o teste.";
 			if(checkquest(3013) != -1) {
 				changequest 3013,3014;
 			}
@@ -870,27 +870,27 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 			mes "[Bliant Piyord]";
 			mes "Muito bem...";
 			mes "Diga-me";
-			mes "est√° tudo bem?";
-			mes "Ou voc√™ precisa de tempo";
+			mes "est· tudo bem?";
+			mes "Ou vocÍ precisa de tempo";
 			mes "para se preparar?";
 		}
 		else {
-			mes "Voc√™ esta preparado";
+			mes "VocÍ esta preparado";
 			mes "para seu teste agora?";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Voc√™ quer fazer agora, ou quer esperar para se preparar?";
+			mes "VocÍ quer fazer agora, ou quer esperar para se preparar?";
 		}
 		next;
-		if (select("Eu quero come√ßar.:Me de um tempo para me preparar.") == 1) {
+		if (select("Eu quero comeÁar.:Me de um tempo para me preparar.") == 1) {
 			if(getequipid(7) != 2608 && getequipid(8) != 2608) {
 				mes "[Bliant Piyord]";
-				mes "Espere um segundo, voc√™ n√£o tem um Ros√°rio equipado. Um Templ√°rio, sempre tem que ter um Ros√°rio em sua pessoa.";
+				mes "Espere um segundo, vocÍ n„o tem um Ros·rio equipado. Um Templ·rio, sempre tem que ter um Ros·rio em sua pessoa.";
 				next;
 				mes "[Bliant Piyord]";
 				mes "Volte e pegue";
 				mes "seu teste quando tiver";
-				mes "um Ros√°rio.";
+				mes "um Ros·rio.";
 				close;
 			}
 			else if(countitem(523) < 1) {
@@ -900,14 +900,14 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 				next;
 				mes "[Bliant Piyord]";
 				mes "Pegue os preparativos e volte.";
-				mes "Estarei esperando por voc√™.";
+				mes "Estarei esperando por vocÍ.";
 				close;
 			}
 			delitem 523, 1; //Agua Benta
 			mes "[Bliant Piyord]";
 			mes "Bem, Vou iniciar";
-			mes "o teste. Voc√™";
-			mes "est√° purificado com a";
+			mes "o teste. VocÍ";
+			mes "est· purificado com a";
 			mes "Agua Benta que preparou.";
 			next;
 			mes "[Bliant Piyord]";
@@ -915,11 +915,11 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 			next;
 			mes "[Bliant Piyord]";
 			mes "Vamos la.";
-			mes "V√° e entre na sala";
+			mes "V· e entre na sala";
 			mes "de espera.";
 			mes "Derrote os monstros";
 			mes "que aparecerem";
-			mes "nos 4 est√°gios.";
+			mes "nos 4 est·gios.";
 			close2;
 			warp "job_cru",24,169;
 			end;
@@ -929,8 +929,8 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 		next;
 		mes "[Bliant Piyord]";
 		mes "Volte e pegue";
-		mes "o teste ap√≥s";
-		mes "voc√™ ter preparado";
+		mes "o teste apÛs";
+		mes "vocÍ ter preparado";
 		mes "1 Agua Benta.";
 		mes "Estarei aqui";
 		mes "esperando.";
@@ -938,31 +938,31 @@ prt_castle,35,151,5	script	Patron Knight	751,{
 	} 
 	else if(CRUS_Q == 10) {
 		mes "Muito Bem.";
-		mes "Voc√™ completou";
+		mes "VocÍ completou";
 		mes "todos os testes para";
-		mes "se tornar um Templ√°rio.";
+		mes "se tornar um Templ·rio.";
 		next;
 		mes "[Bliant Piyord]";
-		mes "V√° e fale com nosso";
+		mes "V· e fale com nosso";
 		mes "lider.";
-		mes "N√≥s damos boas vindas para voc√™";
+		mes "NÛs damos boas vindas para vocÍ";
 		mes "por se juntar a nos";
 		mes "para se preparar";
 		mes "para a Guerra Santa.";
 		close;
 	}
-	mes "Voc√™ n√£o √© o unico no teste para se tornar um Templ√°rio?";
+	mes "VocÍ n„o È o unico no teste para se tornar um Templ·rio?";
 	next;
 	mes "[Bliant Piyord]";
-	mes "Esta n√£o √© sua vez";
+	mes "Esta n„o È sua vez";
 	mes "de pegar o meu teste.";
 	mes "Volte quando fazer todos";
 	mes "os outros testes.";
 	next;
 	mes "[Bliant Piyord]";
-	mes "Vejo voc√™ depois.";
-	mes "Que Odin abe√ßoe";
-	mes "voc√™.";
+	mes "Vejo vocÍ depois.";
+	mes "Que Odin abeÁoe";
+	mes "vocÍ.";
 	close;
 }
 
@@ -1207,17 +1207,17 @@ OnTouch:
 job_cru,24,187,4	script	Patron Knight#2	751,{
 	mes "[Bliant Piyord]";
 	mes "Bem-vindo.";
-	mes "Voc√™ far√°";
+	mes "VocÍ far·";
 	mes "o ultimo teste aqui.";
-	mes "Quando voc√™ estiver pronto para";
+	mes "Quando vocÍ estiver pronto para";
 	mes "o teste, entre";
 	mes "na sala de espera.";
 	next;
 	mes "[Bliant Piyord]";
-	mes "Apenas uma pessoa por vez pode fazer o teste. Se alguem ja estiver sendo testado, por favor espere at√© que a area de teste esteja liberada novamente.";
+	mes "Apenas uma pessoa por vez pode fazer o teste. Se alguem ja estiver sendo testado, por favor espere atÈ que a area de teste esteja liberada novamente.";
 	next;
 	mes "[Bliant Piyord]";
-	mes "Cada pessoa tem 4 minutos para completar o teste. Se voc√™ quizer sair no meio do teste, por favor desconecte do game.";
+	mes "Cada pessoa tem 4 minutos para completar o teste. Se vocÍ quizer sair no meio do teste, por favor desconecte do game.";
 	close;
 }
 
@@ -1244,14 +1244,14 @@ OnStart:
 job_cru,168,17,0	script	Zombie Guide	-1,2,2,{
 OnTouch:
 	mes "[Bliant Piyord]";
-	mes "V√° em frente e derrote todos";
+	mes "V· em frente e derrote todos";
 	mes "os monstros que aparecerem.";
-	mes "Voc√™ n√ßao poder√° continuar se ainda";
+	mes "VocÍ nÁao poder· continuar se ainda";
 	mes "tiver algum sobrando.";
 	next;
 	mes "[Bliant Piyord]";
-	mes "Voc√™ tem";
-	mes "4 minutos. V√° em frente";
+	mes "VocÍ tem";
+	mes "4 minutos. V· em frente";
 	mes "e de o seu melhor...";
 	close;
 }

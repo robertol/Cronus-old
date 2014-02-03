@@ -24,19 +24,19 @@
 comodo,180,153,4	script	Sonotora#1	4_F_01,{
 	mes "[Athena Sonotora]";
 	mes "Dizem";
-	mes "que uma famosa escola de danÃ§a";
+	mes "que uma famosa escola de dança";
 	mes "aqui em Comodo";
 	mes "vai abrir em breve.";
 	next;
 	mes "[Athena Sonotora]";
 	mes "Aah...";
 	mes "Para ser como uma prima donna";
-	mes "no centro das atenÃ§Ãµes!";
+	mes "no centro das atenções!";
 	next;
 	mes "[Athena Sonotora]";
-	mes "Eu quero me inscrever tambÃ©m,";
-	mes "mais os requisitos sÃ£o muito";
-	mes "especÃ­ficos. Eu me pergunto";
+	mes "Eu quero me inscrever também,";
+	mes "mais os requisitos são muito";
+	mes "específicos. Eu me pergunto";
 	mes "se devo tentar mesmo assim...";
 	close;
 }
@@ -45,54 +45,54 @@ comodo,193,151,4	script	Bor Robin#1	86,{
 	mes "[Bor Robin]";
 	mes "Aah....";
 	mes "Uma prima donna";
-	mes "no centro das atenÃ§Ãµes!";
-	mes "Vou poder vÃª-las se transformarem em Odaliscas com meus prÃ³prios olhos...!";
+	mes "no centro das atenções!";
+	mes "Vou poder vê-las se transformarem em Odaliscas com meus próprios olhos...!";
 	next;
 	mes "[Bor Robin]";
-	mes "Como Ã© bom";
-	mes "ser homem neste dia! TrÃªs vivas para o teatro de Comodo!";
+	mes "Como é bom";
+	mes "ser homem neste dia! Três vivas para o teatro de Comodo!";
 	next;
 	mes "[Bor Robin]";
 	mes "Mm?";
-	mes "VocÃª quer";
-	mes "ir, tambÃ©m?";
-	mes "Ã‰ uma boa oportunidade de ver os testes para Odaliscas.";
+	mes "Você quer";
+	mes "ir, também?";
+	mes "É uma boa oportunidade de ver os testes para Odaliscas.";
 	next;
-	if (select("Vamos para a Ã¡rea de troca de classe:Cancelar") == 1) {
+	if (select("Vamos para a área de troca de classe:Cancelar") == 1) {
 		mes "[Bor Robin]";
 		mes "Yaay~~";
-		mes "Vamos lÃ¡!";
+		mes "Vamos lá!";
 		close2;
 		warp "job_duncer",70,49;
 		end;
 	}
 	mes "[Bor Robin]";
 	mes "Huh...";
-	mes "Bem, eu nÃ£o posso";
-	mes "ajudÃ¡-lo se vocÃª";
-	mes "nÃ£o quiser me acompanhar.";
+	mes "Bem, eu não posso";
+	mes "ajudá-lo se você";
+	mes "não quiser me acompanhar.";
 	close;
 }
 
 job_duncer,43,93,4	script	Aile#da	724,{
 	if (Upper == 1) {
 		mes "[Aile]";
-		mes "Um dois trÃªs quatro,";
-		mes "Dois dois trÃªs quatro,";
-		mes "trÃªs quatro, trÃªs quatro,";
-		mes "um dois trÃªs quatro.";
+		mes "Um dois três quatro,";
+		mes "Dois dois três quatro,";
+		mes "três quatro, três quatro,";
+		mes "um dois três quatro.";
 		mes "Um?";
 		next;
 		mes "[Aile]";
-		mes "Me desculpe, mais vocÃª estÃ¡ atrapalhando meus treinos olhando pra mim engraÃ§ado.";
+		mes "Me desculpe, mais você está atrapalhando meus treinos olhando pra mim engraçado.";
 		next;
 		mes "[Aile]";
 		mes ".......";
-		mes ".....Ei, eu jÃ¡ nÃ£o vi vocÃª antes?";
+		mes ".....Ei, eu já não vi você antes?";
 		next;
 		mes "[Aile]";
 		mes "Err...";
-		mes "Estranho, eu nÃ£o consigo me lembrar da onde conheÃ§o vocÃª.";
+		mes "Estranho, eu não consigo me lembrar da onde conheço você.";
 		close2;
 		cutin "",255;
 		end;
@@ -103,7 +103,7 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			mes "[Aile]";
 			mes "Bem-Vindo~!";
 			mes "Deixe me ver";
-			mes "se vocÃª possui novas mÃºsicas. Podemos sempre usar algumas mÃºsicas novas para complementar nossas performances.";
+			mes "se você possui novas músicas. Podemos sempre usar algumas músicas novas para complementar nossas performances.";
 			close2;
 			cutin "",255;
 			end;
@@ -112,7 +112,7 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			cutin "",2;
 			mes "[Aile]";
 			mes "Bem-Vindo~!";
-			mes "Como vocÃª estÃ¡ indo";
+			mes "Como você está indo";
 			mes "ultimamente?";
 			mes "Muitas pessoas admirando";
 			mes "suas performances?";
@@ -123,10 +123,10 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		cutin "job_dancer_eir03",2;
 		mes "[Aile]";
 		mes "Bem-Vin--hmm?";
-		mes "Ei, sÃ³ pessoas autorizadas podem vir aqui. Nenhuma outra pessoa pode entrar na Escola de DanÃ§a.";
+		mes "Ei, só pessoas autorizadas podem vir aqui. Nenhuma outra pessoa pode entrar na Escola de Dança.";
 		next;
 		mes "[Aile]";
-		mes "Se vocÃª quer assistir, porque vocÃª nÃ£o vai para o Palco de DanÃ§a na cidade?";
+		mes "Se você quer assistir, porque você não vai para o Palco de Dança na cidade?";
 		close2;
 		cutin "",255;
 		end;
@@ -135,45 +135,45 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		cutin "job_dancer_eir01",2;
 		mes "[Aire]";
 		mes "Bem-Vindo!";
-		mes "Esta Ã© a";
-		mes "'Escola de DanÃ§a de Comodo',";
-		mes "onde ensinamos vÃ¡rias danÃ§as de diferentes paÃ­ses. NÃ³s promovemos entretenimento para viajantes de todas as partes do mundo.";
+		mes "Esta é a";
+		mes "'Escola de Dança de Comodo',";
+		mes "onde ensinamos várias danças de diferentes países. Nós promovemos entretenimento para viajantes de todas as partes do mundo.";
 		next;
 		mes "[Aire]";
-		mes "NÃ³s tambem promovemos a oportunidade para aspirantes a Odaliscas se tornarem famosas por toda Rune-Midgard! DanÃ§ar no foco das atenÃ§Ãµes nÃ£o parece espetacular?"; // Na luz, no claro, no foco?! -> NÃ£o tenho certeza...
+		mes "Nós tambem promovemos a oportunidade para aspirantes a Odaliscas se tornarem famosas por toda Rune-Midgard! Dançar no foco das atenções não parece espetacular?"; // Na luz, no claro, no foco?! -> Não tenho certeza...
 		next;
 		mes "[Aire]";
-		mes "Eu acho melhor lhe dizer que nossa escola Ã© seletiva. EntÃ£o, nÃ£o aceitamos estudantes que nÃ£o parecem ter talento para se tornarem Odaliscas.";
+		mes "Eu acho melhor lhe dizer que nossa escola é seletiva. Então, não aceitamos estudantes que não parecem ter talento para se tornarem Odaliscas.";
 		next;
 		cutin "job_dancer_eir02",2;
 		mes "[Aire]";
 		mes "O que acha?";
-		mes "Quer se inscrever? VocÃª sÃ³ tem que preencher alguns desses formulÃ¡rios e vocÃª pode vir para nossas aulas uma vez ou duas e tentar.";
+		mes "Quer se inscrever? Você só tem que preencher alguns desses formulários e você pode vir para nossas aulas uma vez ou duas e tentar.";
 		next;
 		cutin "job_dancer_eir01",2;
 		mes "[Aire]";
-		mes "EntÃ£o, o que";
-		mes "vocÃª quer fazer?";
+		mes "Então, o que";
+		mes "você quer fazer?";
 		next;
-		if (select("Preencher os formulÃ¡rios.:Vou deixar.") == 1) {
+		if (select("Preencher os formulários.:Vou deixar.") == 1) {
 			if (JobLevel > 39) {
 				cutin "job_dancer_eir02",2;
 				mes "[Aire]";
 				mes "Boa escolha!!";
-				mes "Apenas preencha os formulÃ¡rios aqui...";
+				mes "Apenas preencha os formulários aqui...";
 				next;
 				mes "...";
 				next;
 				mes "...";
 				mes "......";
 				next;
-				mes "^3355FF*Shuffle Shuffle*^000000"; // OnomatopÃ©ias?
+				mes "^3355FF*Shuffle Shuffle*^000000"; // Onomatopéias?
 				next;
 				cutin "job_dancer_eir01",2;
 				mes "[Aire]";
-				mes "Seu nome Ã©";
+				mes "Seu nome é";
 				mes "" + strcharinfo(0) + "?";
-				mes "Oh! Que belo nome! Apenas um momento, tenho que mostrar isso ao diretor, entÃ£o volte daqui a pouco, certo?";
+				mes "Oh! Que belo nome! Apenas um momento, tenho que mostrar isso ao diretor, então volte daqui a pouco, certo?";
 				close2;
 				cutin "",255;
 				set DANC_Q,1;
@@ -185,11 +185,11 @@ job_duncer,43,93,4	script	Aile#da	724,{
 				mes "[Aire]";
 				mes "Hmm...";
 				mes "Parece que";
-				mes "vocÃª nÃ£o estÃ¡ qualificado para entrar em nossa escola ainda. VocÃª precisa estar, no mÃ­nimo, no nÃ­vel 40 de Classe.";
+				mes "você não está qualificado para entrar em nossa escola ainda. Você precisa estar, no mínimo, no nível 40 de Classe.";
 				next;
 				mes "[Aire]";
 				mes "Bem, espero";
-				mes "que vocÃª se inscreva";
+				mes "que você se inscreva";
 				mes "quando atingir";
 				mes "os requerimentos.";
 				close2;
@@ -201,8 +201,8 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		mes "[Aire]";
 		mes "Ahh!";
 		mes "Pense novamente.";
-		mes "NÃ£o se esqueÃ§a de voltar";
-		mes "se vocÃª mudar de idÃ©ia.";
+		mes "Não se esqueça de voltar";
+		mes "se você mudar de idéia.";
 		close2;
 		cutin "",255;
 		end;
@@ -211,12 +211,12 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		cutin "job_dancer_eir03",2;
 		mes "[Aire]";
 		mes "Bem-Vin...Hm?";
-		mes "Ei, este lugar Ã© somente para pessoal autorizado. Se quiser se inscrever, vocÃª deve procurar o Bardo.";
+		mes "Ei, este lugar é somente para pessoal autorizado. Se quiser se inscrever, você deve procurar o Bardo.";
 		next;
 		mes "[Aire]";
 		mes "Nem todos os Arqueiros";
 		mes "podem se tornar Odaliscas.";
-		mes "Pelo menos, nÃ£o sem uma troca de sexo...";
+		mes "Pelo menos, não sem uma troca de sexo...";
 		close2;
 		cutin "",255;
 		end;
@@ -225,37 +225,37 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		cutin "job_dancer_eir01",2;
 		mes "[Aire]";
 		mes "Bom.";
-		mes "Uma vez que vocÃª tenha se inscrito, lhe direi algumas coisas que vocÃª deverÃ¡ trazer para suas liÃ§Ãµes.";
+		mes "Uma vez que você tenha se inscrito, lhe direi algumas coisas que você deverá trazer para suas lições.";
 		next;
 		mes "[Aire]";
-		mes "NÃ£o pedimos suprimentos de sobra, pois vocÃª vai usÃ¡-los para si mesmo. Basta pensar nisso como parte da aula, portanto, nÃ£o se preocupe muito.";
+		mes "Não pedimos suprimentos de sobra, pois você vai usá-los para si mesmo. Basta pensar nisso como parte da aula, portanto, não se preocupe muito.";
 		next;
 		set .@item_nd,rand(1,10);
 		if (.@item_nd > 0 && .@item_nd < 3) {
 			set DANC_Q,2;
 			changequest 7000,7001;
 			mes "[Aire]";
-			mes "Primeiramente, hÃ¡ o custo inicial de ^CD688910,000 Zeny^000000. EntÃ£o, vocÃª deve trazer ^CD688920 Mucos Pegajosos^000000 para o polimento dos sapatos.";
+			mes "Primeiramente, há o custo inicial de ^CD688910,000 Zeny^000000. Então, você deve trazer ^CD688920 Mucos Pegajosos^000000 para o polimento dos sapatos.";
 			next;
 			mes "[Aire]";
-			mes "Depois, traga^CD68893 Jellopys^000000 e ^CD68895 PoÃ§Ãµes Vermelhas^000000 para usar como ornamento. E, Ã© claro, vocÃª precisarÃ¡ de um par de ^CD6889Sapatos^000000.";
+			mes "Depois, traga^CD68893 Jellopys^000000 e ^CD68895 Poções Vermelhas^000000 para usar como ornamento. E, é claro, você precisará de um par de ^CD6889Sapatos^000000.";
 			next;
 			mes "[Aire]";
-			mes "Novamente, sÃ£o";
+			mes "Novamente, são";
 			mes "^CD688910,000 Zeny^000000,";
 			mes "^CD688920 Mucos Pegajosos^000000,";
 			mes "^CD68893 Jellopys^000000,";
-			mes "^CD68895 PoÃ§Ãµes Vermelhas^000000 e";
+			mes "^CD68895 Poções Vermelhas^000000 e";
 			mes "^CD68891 Par de Sapatos^000000.";
 		}
 		else if (.@item_nd == 4) {
 			set DANC_Q,3;
 			changequest 7000,7002;
 			mes "[Aire]";
-			mes "Primeiramente, hÃ¡ um custo inicial de ^CD688910,000 Zeny^000000. EntÃ£o, traga ^CD68895 Peles de Minhocas^000000 para o polimento do chÃ£o e, Ã© claro, um par de ^CD6889Botas^000000.";
+			mes "Primeiramente, há um custo inicial de ^CD688910,000 Zeny^000000. Então, traga ^CD68895 Peles de Minhocas^000000 para o polimento do chão e, é claro, um par de ^CD6889Botas^000000.";
 			next;
 			mes "[Aire]";
-			mes "Novamente, sÃ£o:";
+			mes "Novamente, são:";
 			mes "^CD688910,000 Zeny^000000,";
 			mes "^CD68895 Peles de Minhocas^000000 e";
 			mes "^CD68891 Par de Botas^000000.";
@@ -264,22 +264,22 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			set DANC_Q,4;
 			changequest 7000,7003;
 			mes "[Aire]";
-			mes "Primeiramente, hÃ¡ um custo inicial de ^CD688910,000 Zeny^000000. EntÃ£o, traga ^CD68892 Cascos de Ostra^000000 para sua roupa, ^CD68895 PoÃ§Ãµes Amarelas^000000 e ^CD688920 Jellopys^000000 para cuidar de feridas nos pÃ©s.";
+			mes "Primeiramente, há um custo inicial de ^CD688910,000 Zeny^000000. Então, traga ^CD68892 Cascos de Ostra^000000 para sua roupa, ^CD68895 Poções Amarelas^000000 e ^CD688920 Jellopys^000000 para cuidar de feridas nos pés.";
 			next;
 			mes "[Aire]";
-			mes "VocÃª tambÃ©m precisarÃ¡ trazer ^CD688910 Cabelos Morenos^000000 para fazer perucas para suas atuaÃ§Ãµes e, claro, um par de ^CD6889SandÃ¡lias^000000. Novamente, sÃ£o:";
+			mes "Você também precisará trazer ^CD688910 Cabelos Morenos^000000 para fazer perucas para suas atuações e, claro, um par de ^CD6889Sandálias^000000. Novamente, são:";
 			next;
 			mes "[Aire]";
 			mes "^CD688910,000 Zeny^000000,";
 			mes "^CD68892 Cascos de Ostra^000000,";
-			mes "^CD68895 PoÃ§Ãµes Amarelas^000000,";
+			mes "^CD68895 Poções Amarelas^000000,";
 			mes "^CD688920 Jellopys^000000,";
 			mes "^CD688910 Cabelos Morenos^000000 e";
-			mes "^CD6889Par de SandÃ¡lias^000000.";
+			mes "^CD6889Par de Sandálias^000000.";
 		}
 		next;
 		mes "[Aire]";
-		mes "Uma vez que vocÃª tenha juntado tudo que precisa, volte para comeÃ§armos suas aulas, certo?";
+		mes "Uma vez que você tenha juntado tudo que precisa, volte para começarmos suas aulas, certo?";
 		close2;
 		cutin "",255;
 		end;
@@ -309,7 +309,7 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			cutin "job_dancer_eir02",2;
 			mes "[Aile]";
 			mes "Oh...!";
-			mes "VocÃª trouxe";
+			mes "Você trouxe";
 			mes "tudo!";
 			mes "Muito bem,";
 			mes "deixe me pegar sua";
@@ -318,7 +318,7 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			cutin "job_dancer_eir01",2;
 			set zeny,zeny-10000;
 			mes "[Aile]";
-			mes "Agora, vÃ¡ atÃ© ^CD6889Bijou^000000, aquela que estÃ¡ no comando das entrevistas. Ela precisa te perguntar algumas coisas.";
+			mes "Agora, vá até ^CD6889Bijou^000000, aquela que está no comando das entrevistas. Ela precisa te perguntar algumas coisas.";
 			set DANC_Q,5;
 			if(checkquest(7001) != -1) {
 				changequest 7001,7004;
@@ -337,11 +337,11 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			cutin "job_dancer_eir01",2;
 			mes "[Aile]";
 			mes "Mmm...?";
-			mes "VocÃª nÃ£o tem";
+			mes "Você não tem";
 			mes "nada ainda?";
-			mes "Deixe me lembrar a vocÃª";
-			mes "o que tÃªm que trazer";
-			mes "pois vocÃª precisarÃ¡ depois.";
+			mes "Deixe me lembrar a você";
+			mes "o que têm que trazer";
+			mes "pois você precisará depois.";
 			next;
 			mes "[Aile]";
 			mes "Traga...";
@@ -372,12 +372,12 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		cutin "job_dancer_eir01",2;
 		mes "[Aile]";
 		mes "Hmm...?";
-		mes "VocÃª estÃ¡ com dificuldades";
+		mes "Você está com dificuldades";
 		mes "para encontrar";
 		mes "^CD6889Bijou^000000?";
 		next;
 		mes "[Aile]";
-		mes "VocÃª tÃªm que falar com ela porque ela estÃ¡ a frente das entrevistas. NÃ£o se preocupe, ela deve estar em algum lugar na Escola de Odaliscas.";
+		mes "Você têm que falar com ela porque ela está a frente das entrevistas. Não se preocupe, ela deve estar em algum lugar na Escola de Odaliscas.";
 		close2;
 		cutin "",255;
 		end;
@@ -401,7 +401,7 @@ job_duncer,43,93,4	script	Aile#da	724,{
 		mes "entrar aqui.";
 		next;
 		mes "[Aile]";
-		mes "Se quiser assistir, fique quieto e nÃ£o perturbe as artistas. Todas aqui estÃ£o ocupadas praticando para que elas possam se tornar Ã³timas Odaliscas.";
+		mes "Se quiser assistir, fique quieto e não perturbe as artistas. Todas aqui estão ocupadas praticando para que elas possam se tornar ótimas Odaliscas.";
 		close2;
 		cutin "",255;
 		end;
@@ -411,8 +411,8 @@ job_duncer,43,93,4	script	Aile#da	724,{
 job_duncer,95,93,4	script	Bijou#da	101,{
 	if (SkillPoint) {
 		mes "[Bijou]";
-		mes "VocÃª nÃ£o pode mudar de profissÃ£o";
-		mes "se vocÃª ainda tiver pontos de habilidade";
+		mes "Você não pode mudar de profissão";
+		mes "se você ainda tiver pontos de habilidade";
 		mes "sobrando. Use o restante";
 		mes "e volte novamente mais tarde.";
 		close;
@@ -421,7 +421,7 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 		if (BaseJob == Job_Bard) {
 			mes "[Bijou]";
 			mes "Bem-Vindo~";
-			mes "Oh, um Bardo! Por acaso vocÃª teria uma nova mÃºsica para nos mostrar? NÃ³s sempre usamos algum acompanhamento musical para as nossas danÃ§as.";
+			mes "Oh, um Bardo! Por acaso você teria uma nova música para nos mostrar? Nós sempre usamos algum acompanhamento musical para as nossas danças.";
 			close;
 		}
 		else if (BaseJob == Job_Dancer) {
@@ -434,65 +434,65 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 			mes "nesses dias?";
 			mes "Muitas pessoas";
 			mes "adoraram assistir";
-			mes "sua danÃ§a. VocÃª estÃ¡";
+			mes "sua dança. Você está";
 			mes "se divertindo com os holofotes?";
 			close;
 		}
 		mes "[Bijou]";
 		mes "Oh querida~";
-		mes "VocÃª deve ter viajado de muito longe para assistir minha performance.";
+		mes "Você deve ter viajado de muito longe para assistir minha performance.";
 		next;
 		mes "[Bijou]";
-		mes "Desculpe, mas eu me aposentei. Agora eu estou me focando em treinar novas Odaliscas. Se vocÃª for para o Palco Central, vocÃª poderÃ¡ assistir minhas alunas~";
+		mes "Desculpe, mas eu me aposentei. Agora eu estou me focando em treinar novas Odaliscas. Se você for para o Palco Central, você poderá assistir minhas alunas~";
 		close;
 	}
 	else if (DANC_Q < 5) {
 		mes "[Bijou]";
 		mes "Oh minha nossa~";
-		mes "VocÃª quer se tornar";
+		mes "Você quer se tornar";
 		mes "uma Odalisca,";
-		mes "nÃ£o Ã© mesmo?";
+		mes "não é mesmo?";
 		next;
 		mes "[Bijou]";
-		mes "Eu sei que vocÃª estÃ¡ empolgada, mas o primeiro passo Ã© a aplicaÃ§Ã£o. VÃ¡ para o lado esquerdo do palco, onde Aile poderÃ¡ lhe ajudar com isso.";
+		mes "Eu sei que você está empolgada, mas o primeiro passo é a aplicação. Vá para o lado esquerdo do palco, onde Aile poderá lhe ajudar com isso.";
 		close;
 	}
 	else if (DANC_Q > 4 && DANC_Q < 7) {
 		if (DANC_Q == 5) {
 			mes "[Bijou]";
 			mes "Oh minha nossa~";
-			mes "VocÃª quer se tornar";
+			mes "Você quer se tornar";
 			mes "uma Odalisca,";
-			mes "nÃ£o Ã© mesmo?";
+			mes "não é mesmo?";
 			next;
 			mes "[Bijou]";
 			mes "D-Deuses!";
 			mes "Olhe para essa barriga gorda!";
-			mes "Bem, nÃ£o Ã© muito, entÃ£o vocÃª terÃ¡ que perder isso em pouco tempo. Especialmente que eu vou cuidar de seu treinamento~";
+			mes "Bem, não é muito, então você terá que perder isso em pouco tempo. Especialmente que eu vou cuidar de seu treinamento~";
 			next;
 			mes "[Bijou]";
-			mes "EntÃ£o...";
-			mes "A idÃ©ia de um";
+			mes "Então...";
+			mes "A idéia de um";
 			mes "corpo perfeito claro";
 			mes "vem mudado desde que";
 			mes "eu era jovem. De qualquer forma...";
 			next;
 			mes "[Bijou]";
-			mes "Vamos comeÃ§ar";
+			mes "Vamos começar";
 			mes "com a entrevista.";
 			mes "Eu somente irei perguntar";
 			mes "algumas coisas bem simples";
-			mes "entÃ£o nÃ£o se preocupe~";
+			mes "então não se preocupe~";
 			next;
 			mes "[Bijou]";
 			mes "Ok...";
-			mes "Vamos comeÃ§ar.";
+			mes "Vamos começar.";
 			next;
 		}
 		else {
 			mes "[Bijou]";
-			mes "Oh, vocÃª voltou~";
-			mes "VocÃª jÃ¡ estudou";
+			mes "Oh, você voltou~";
+			mes "Você já estudou";
 			mes "um pouco mais? Tente";
 			mes "passar desta vez, ok?";
 			next;
@@ -500,17 +500,17 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 		switch(rand(1,3)) {
 		case 1:
 			mes "[Bijou]";
-			mes "1. A danÃ§a da Odalisca, ^CD6889LBeijo da Sorte^000000,";
-			mes "aumenta qual das seguintes opÃ§Ãµes a seguir?";
+			mes "1. A dança da Odalisca, ^CD6889LBeijo da Sorte^000000,";
+			mes "aumenta qual das seguintes opções a seguir?";
 			next;
-			if (select("InteligÃªncia (INT):Destreza (DES):Vitalidade (VIT):Taxa de CrÃ­tico") == 4)
+			if (select("Inteligência (INT):Destreza (DES):Vitalidade (VIT):Taxa de Crítico") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "2. O que a seguir,";
-			mes "nÃ£o pode ser considerado";
-			mes "uma danÃ§a?";
+			mes "não pode ser considerado";
+			mes "uma dança?";
 			next;
-			switch(select("Tango:Sapateado:HIP-HOP:DanÃ§a do Ventre:RelÃ¢mpago")) {
+			switch(select("Tango:Sapateado:HIP-HOP:Dança do Ventre:Relâmpago")) {
 			default:
 				set .@da_score,.@da_score-10;
 				break;
@@ -522,31 +522,31 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 			mes "3. O que a seguir";
 			mes "descreve melhor uma Odalisca?";
 			next;
-			if (select("Pessoa que grita.:Uma pessoa barulhenta.:Uma pessoa que danÃ§a.:Uma pessoa que canta.") == 3)
+			if (select("Pessoa que grita.:Uma pessoa barulhenta.:Uma pessoa que dança.:Uma pessoa que canta.") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "4. O que a seguir";
-			mes "nÃ£o pode ser associado com Comodo?";
+			mes "não pode ser associado com Comodo?";
 			next;
-			if (select("Cidade da Praia.:MudanÃ§a de classe para Odaliscas.:Sempre escura como a noite.:CalabouÃ§os em 3 direÃ§Ãµes.:Um monte de Gatunos.") == 5)
+			if (select("Cidade da Praia.:Mudança de classe para Odaliscas.:Sempre escura como a noite.:Calabouços em 3 direções.:Um monte de Gatunos.") == 5)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "5. Antes de Comodo, qual Ã© o nome da regiÃ£o Nordeste da Ilha do Farol do FaraÃ³";
+			mes "5. Antes de Comodo, qual é o nome da região Nordeste da Ilha do Farol do Faraó";
 			next;
-			if (select("Planalto Elmeth:Praia de Comuko:Praia de Comodo:PÃ¢ntano Ginai") == 3)
+			if (select("Planalto Elmeth:Praia de Comuko:Praia de Comodo:Pântano Ginai") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "6. Quem Ã© a Odalisca";
+			mes "6. Quem é a Odalisca";
 			mes "mais bonita?";
 			next;
 			switch(select("" + strcharinfo(0) + ":Bijou:Aile:Bonjour")) {
 			case 1:
 				mes "[Bijou]";
 				mes "...";
-				mes "Isso estÃ¡...";
+				mes "Isso está...";
 				mes "^660000completamente errado^000000.";
-				mes "VocÃª nÃ£o viu as";
-				mes "outras opÃ§Ãµes?!";
+				mes "Você não viu as";
+				mes "outras opções?!";
 				mes "Ponto negativo...!";
 				set .@da_score,.@da_score-10;
 				next;
@@ -558,27 +558,27 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 				break;
 			}
 			mes "[Bijou]";
-			mes "7. Qual das opÃ§Ãµes a seguir,";
+			mes "7. Qual das opções a seguir,";
 			mes "pode fazer performances junto";
 			mes "com uma Odalisca?";
 			next;
-			if (select("Assassino:Bardo:Alquimista:SÃ¡bio") == 2)
+			if (select("Assassino:Bardo:Alquimista:Sábio") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "8. Qual das opÃ§Ãµes a seguir";
-			mes "nÃ£o Ã© uma especialidade de Comodo?";
+			mes "8. Qual das opções a seguir";
+			mes "não é uma especialidade de Comodo?";
 			next;
-			if (select("PoÃ§Ã£o da FÃºria Selvagem:Casco de Ostra:Casco de Caranguejo:Pedra Brilhante") == 4)
+			if (select("Poção da Fúria Selvagem:Casco de Ostra:Casco de Caranguejo:Pedra Brilhante") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "9. Quem Ã© o gerente";
+			mes "9. Quem é o gerente";
 			mes "do cassino de Comodo?";
 			next;
 			if (select("Yoo:Moo:Hoon:Roul") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "10. Quem aceita a";
-			mes "mudanÃ§a de classe para";
+			mes "mudança de classe para";
 			mes "Odalisca?";
 			next;
 			if (select("Bijou:Aile:Athena:Sonotora") == 2)
@@ -586,27 +586,27 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 			break;
 		case 2:
 			mes "[Bijou]";
-			mes "1. Qual Ã© o efeito";
+			mes "1. Qual é o efeito";
 			mes "da habilidade de Dueto,";
 			mes "^CD6889Banquete de Njord^000000?";
 			next;
-			if (select("Morte instantÃ¢nea do monstro.:Dobra o dano.:Aumento da experiÃªncia.:Aumento da velocidade de ataque.") == 3)
+			if (select("Morte instantânea do monstro.:Dobra o dano.:Aumento da experiência.:Aumento da velocidade de ataque.") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "2. O que Ã© considerado";
+			mes "2. O que é considerado";
 			mes "falta de etiqueta no palco";
-			mes "depois de uma danÃ§a?";
+			mes "depois de uma dança?";
 			next;
-			if (select("Agradecer o parceiro.:Elogiar o parceiro de danÃ§a.:Perguntar se pode danÃ§ar uma danÃ§a diferente.:Criticar seu parceiro.") == 4)
+			if (select("Agradecer o parceiro.:Elogiar o parceiro de dança.:Perguntar se pode dançar uma dança diferente.:Criticar seu parceiro.") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "3. O que nÃ£o Ã© uma";
+			mes "3. O que não é uma";
 			mes "resposta adequada";
 			mes "quando alguem comete";
 			mes "um erro enquanto";
-			mes "estiverem danÃ§ando juntos?";
+			mes "estiverem dançando juntos?";
 			next;
-			if (select("Sorria para o parceiro e continue danÃ§ando.:Aponte o erro.:Ignore se a danÃ§a nÃ£o se realizar.:DÃªem-lhes um sorriso.") == 2)
+			if (select("Sorria para o parceiro e continue dançando.:Aponte o erro.:Ignore se a dança não se realizar.:Dêem-lhes um sorriso.") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "4. Em qual cidade";
@@ -616,29 +616,29 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 			if (select("Cocomo:Sandarman:Comudo:Comodo") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "5. Quantos calabouÃ§os sÃ£o";
+			mes "5. Quantos calabouços são";
 			mes "conectados diretamente";
 			mes "com Comodo?";
 			next;
 			if (select("1:2:3:4") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "6. Qual das opÃ§Ãµes a seguir";
-			mes "nÃ£o Ã© um bichinho de estimaÃ§Ã£o?";
+			mes "6. Qual das opções a seguir";
+			mes "não é um bichinho de estimação?";
 			next;
 			if (select("Isis:Argiope:Dokebi:Deviruchi") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "7. Quem Ã© a Odalisca";
+			mes "7. Quem é a Odalisca";
 			mes "mais graciosa?";
 			next;
 			switch(select("" + strcharinfo(0) + ":Bijou:Isis:Mercy Bokou")) {
 			case 1:
 				mes "[Bijou]";
 				mes "...";
-				mes "Isso estÃ¡^660000completamente errado^000000.";
-				mes "VocÃª nÃ£o viu as";
-				mes "outras opÃ§Ãµes?!";
+				mes "Isso está^660000completamente errado^000000.";
+				mes "Você não viu as";
+				mes "outras opções?!";
 				mes "Ponto negativo...!";
 				set .@da_score,.@da_score-10;
 				next;
@@ -650,30 +650,30 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 				break;
 			}
 			mes "[Bijou]";
-			mes "8. Qual Ã© o";
+			mes "8. Qual é o";
 			mes "nome exato da";
-			mes "Kafra que estÃ¡ em Comodo?";
+			mes "Kafra que está em Comodo?";
 			next;
-	//nota		if (select("CorporaÃ§Ã£o Kafra:CorporaÃ§Ã£o Kafra do Oeste:SeviÃ§o Kafra:CorporaÃ§Ã£o Kafra: CorporaÃ§Ã£o Oeste") == 4)
+	//nota		if (select("Corporação Kafra:Corporação Kafra do Oeste:Seviço Kafra:Corporação Kafra: Corporação Oeste") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[......]";
-			mes "9. Qual Ã© o meu nome?";
+			mes "9. Qual é o meu nome?";
 			next;
 			if (select("Borjuis:Bourgeois:Bijou:Beruberu") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "10. Qual Ã©";
+			mes "10. Qual é";
 			mes "o efeito da habilidade^CD6889Cantiga de Ninar^000000?";
 			next;
-			if (select("Deixa o efeito de cegueira na Ã¡rea.:Deixa o efeito sono na Ã¡rea.:Deixa um efeito noturno na Ã¡rea.:Congela a Ã¡rea.") == 2)
+			if (select("Deixa o efeito de cegueira na área.:Deixa o efeito sono na área.:Deixa um efeito noturno na área.:Congela a área.") == 2)
 				set .@da_score,.@da_score+10;
 			break;
 		case 3:
 			mes "[Bijou]";
 			mes "1. Qual o efeito";
-			mes "da habilidade ^CD6889LiÃ§Ãµes de DanÃ§a^000000?";
+			mes "da habilidade ^CD6889Lições de Dança^000000?";
 			next;
-			switch(select("Aumenta a INT:Aumenta o efeito das habilidades de danÃ§a:Aumenta o dano da arma Chicote.:Inflige atordoamento em uma certa Ã¡rea em volta do conjurador.")) {
+			switch(select("Aumenta a INT:Aumenta o efeito das habilidades de dança:Aumenta o dano da arma Chicote.:Inflige atordoamento em uma certa área em volta do conjurador.")) {
 			default:
 				break;
 			case 2:
@@ -682,38 +682,38 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 				break;
 			}
 			mes "[Bijou]";
-			mes "2. Qual danÃ§a usa sapatos";
-			mes "que sÃ£o designados para fazer";
-			mes "sons quando o danÃ§arino pisa";
-			mes "com o pÃ© e o calcanhar";
-			mes "no chÃ£o para criar um ritmo?";
+			mes "2. Qual dança usa sapatos";
+			mes "que são designados para fazer";
+			mes "sons quando o dançarino pisa";
+			mes "com o pé e o calcanhar";
+			mes "no chão para criar um ritmo?";
 			next;
-			if (select("Sapateado:ConcentraÃ§Ã£o:Tango:Rajada de Flechas") == 1)
+			if (select("Sapateado:Concentração:Tango:Rajada de Flechas") == 1)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "3. O que a seguir";
-			mes "nÃ£o Ã© uma caracterÃ­stica de uma Odalisca?";
+			mes "não é uma característica de uma Odalisca?";
 			next;
-			if (select("Usar habilidades de danÃ§a.:Atacar a distÃ¢ncia.:Usar chicotes.:Usar espadas de duas mÃ£os.") == 4)
+			if (select("Usar habilidades de dança.:Atacar a distância.:Usar chicotes.:Usar espadas de duas mãos.") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "4. Qual cidade tÃªm";
+			mes "4. Qual cidade têm";
 			mes "a maioria das Odaliscas?";
 			next;
 			if (select("Al De Baran:Juno:Morroc:Comodo") == 4)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "5. Quem a seguir,";
-			mes "Ã© a Odalisca mais maravilhosa?";
+			mes "é a Odalisca mais maravilhosa?";
 			next;
 			switch(select("" + strcharinfo(0) + ":Bijou:Isis:Guton Tak")) {
 			case 1:
 				mes "[Bijou]";
 				mes "...";
-				mes "Isso estÃ¡...";
+				mes "Isso está...";
 				mes "^660000completamente errado^000000.";
-				mes "VocÃª nÃ£o viu as";
-				mes "outras opÃ§Ãµes?!";
+				mes "Você não viu as";
+				mes "outras opções?!";
 				mes "Ponto negativo...!";
 				set .@da_score,.@da_score-10;
 				next;
@@ -726,108 +726,108 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 			}
 			mes "[Bijou]";
 			mes "6. Porque a Odalisca";
-			mes "Ã© melhor que as";
+			mes "é melhor que as";
 			mes "outras classes?";
 			next;
-			if (select("Curar:Atuar :DanÃ§ar :MÃ¡gica ") == 3)
+			if (select("Curar:Atuar :Dançar :Mágica ") == 3)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "7. Quem Ã© o gerente";
+			mes "7. Quem é o gerente";
 			mes "do Cassino de Comodo?";
 			next;
 			if (select("Ryu:Moo:Roul:Hoon") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "8. Qual item nÃ£o pode";
+			mes "8. Qual item não pode";
 			mes "ser equipado por uma Odalisca?";
 			next;
-			if (select("Orelha de Gato:Espadas de 2 MÃ£os:SandÃ¡lias:Brincos") == 2)
+			if (select("Orelha de Gato:Espadas de 2 Mãos:Sandálias:Brincos") == 2)
 				set .@da_score,.@da_score+10;
 			mes "[Bijou]";
-			mes "9. VocÃª acha que";
-			mes "pode dizer que este teste Ã©";
+			mes "9. Você acha que";
+			mes "pode dizer que este teste é";
 			mes "frustante e irritante?";
 			next;
-			select("Sim:NÃ£o");
+			select("Sim:Não");
 			set .@da_score,.@da_score+10;
 			mes "[Bijou]";
 			mes "10. Quem a seguir";
-			mes "nÃ£o Ã© um mÃºsico de Jazz?";
+			mes "não é um músico de Jazz?";
 			next;
 			if (select("Art Blakey:Billie Holiday :Louis Armstrong :Bud Powell :Elder Willow ") == 5)
 				set .@da_score,.@da_score+10;
 		}
 		mes "[Bijou]";
 		mes "Bom trabalho~";
-		mes "Me parece que vocÃª";
+		mes "Me parece que você";
 		mes "respondeu todas as";
 		mes "perguntas~";
 		next;
 		mes "[Bijou]";
 		mes "Vamos ver...";
-		mes "Sua pontuaÃ§Ã£o foi";
+		mes "Sua pontuação foi";
 		mes "" + .@da_score + " pontos...";
 		if (.@da_score == 100) {
 			set DANC_Q,7;
 			mes "Muito bem feito!";
-			mes "Uma pontuaÃ§Ã£o perfeita!";
+			mes "Uma pontuação perfeita!";
 			next;
 			mes "[Bijou]";
-			mes "NÃ£o existe muitas pessoas que se candidatam para se tornar uma Odalisca com esse tipo de conhecimento. Me desculpe por te julgar por sua aparÃªncia~";
+			mes "Não existe muitas pessoas que se candidatam para se tornar uma Odalisca com esse tipo de conhecimento. Me desculpe por te julgar por sua aparência~";
 			next;
 			mes "[Bijou]";
 			mes "Ufa~";
-			mes "Agora sÃ³ resta para vocÃª o Teste de DanÃ§a. Enquanto nÃ³s preparamos o teste, por que vocÃª nÃ£o descansa um pouco? Ho ho ho~";
+			mes "Agora só resta para você o Teste de Dança. Enquanto nós preparamos o teste, por que você não descansa um pouco? Ho ho ho~";
 			close;
 		}
 		else if (.@da_score > 70) {
 			set DANC_Q,7;
-			mes "NÃ£o foi perfeito, mas vou lhe deixar passar.";
+			mes "Não foi perfeito, mas vou lhe deixar passar.";
 			close;
 		}
 		else {
 			set DANC_Q,6;
-			mes "VocÃª.. VocÃª falhou!";
+			mes "Você.. Você falhou!";
 			next;
 			mes "[Bijou]";
-			mes "Foi muito difÃ­cil?";
-			mes "Quando eu era jovem, todos sabiam pelo menos o suficiente para passar esse teste. VÃ¡ e estude um pouco mais antes de voltar, ok?";
+			mes "Foi muito difícil?";
+			mes "Quando eu era jovem, todos sabiam pelo menos o suficiente para passar esse teste. Vá e estude um pouco mais antes de voltar, ok?";
 			close;
 		}
 	}
 	else if (DANC_Q == 7) {
 		mes "[Bijou]";
 		mes "Ok...";
-		mes "VocÃª estÃ¡ pronta";
-		mes "para o Teste de DanÃ§a?";
-		mes "Se vocÃª quiser, Eu posso";
-		mes "explicar as instruÃ§Ãµes.";
+		mes "Você está pronta";
+		mes "para o Teste de Dança?";
+		mes "Se você quiser, Eu posso";
+		mes "explicar as instruções.";
 		next;
-		if (select("Ouvir as instruÃ§Ãµes.:Ir para a Ã¡rea de teste.") == 1) {
+		if (select("Ouvir as instruções.:Ir para a área de teste.") == 1) {
 			mes "[Bijou]";
-			mes "Primeiro de tudo, cada pessoa tÃªm ^CD68891 minuto^000000 para o teste, e todas danÃ§am ^CD6889uma de cada vez^000000. NÃ£o se preocupe se vocÃª nunca danÃ§ou antes~";
+			mes "Primeiro de tudo, cada pessoa têm ^CD68891 minuto^000000 para o teste, e todas dançam ^CD6889uma de cada vez^000000. Não se preocupe se você nunca dançou antes~";
 			next;
 			mes "[Bijou]";
-			mes "Depois de entrar na Ã¡rea de teste, vocÃª vai ver o palco. Primeiro, ^CD6889mude o seu angulo de cÃ¢mera para que vocÃª fique de frente^000000. IrÃ¡ provavelmente funcionar se vocÃª der um^CD6889duplo-clique no botÃ£o direito do mouse^000000.";
+			mes "Depois de entrar na área de teste, você vai ver o palco. Primeiro, ^CD6889mude o seu angulo de câmera para que você fique de frente^000000. Irá provavelmente funcionar se você der um^CD6889duplo-clique no botão direito do mouse^000000.";
 			next;
 			mes "[Bijou]";
-			mes "Se vocÃª nÃ£o resetar o seu Ã¢ngulo da cÃ¢mera, vocÃª irÃ¡ se confundir com os comandos ^CD6889Cima, Baixo, Esquerda, Direita^000000.";
+			mes "Se você não resetar o seu ângulo da câmera, você irá se confundir com os comandos ^CD6889Cima, Baixo, Esquerda, Direita^000000.";
 			next;
 			mes "[Bijou]";
-			mes "Espere a sua vez na^CD6889Sala de Espera^000000. Se a pessoa a sua frente falhar, se Ã© a sua vez na fila, seu teste irÃ¡ comeÃ§ar.";
+			mes "Espere a sua vez na^CD6889Sala de Espera^000000. Se a pessoa a sua frente falhar, se é a sua vez na fila, seu teste irá começar.";
 			next;
 			mes "[Bijou]";
-			mes "Se houver muitas pessoas, nem todos poderÃ£o caber na sala de espera. Se for esse o caso, basta criar uma fila ordenada~";
+			mes "Se houver muitas pessoas, nem todos poderão caber na sala de espera. Se for esse o caso, basta criar uma fila ordenada~";
 			next;
 			mes "[Bijou]";
-			mes "Quando o teste comeÃ§ar, a mÃºsica serÃ¡ transmitida, bem como a direÃ§Ã£o na qual vocÃª deverÃ¡ se mover. Apenas siga as instruÃ§Ãµes e mova suas pernas.";
+			mes "Quando o teste começar, a música será transmitida, bem como a direção na qual você deverá se mover. Apenas siga as instruções e mova suas pernas.";
 			next;
 			mes "[Bijou]";
-			mes "Lembre-se, ^CD6889vocÃª serÃ¡ desqualificada se vocÃª nÃ£o executar os passos com o tempo certo^000000. Tenha cuidado, o teste Ã© muito rigoroso~";
+			mes "Lembre-se, ^CD6889você será desqualificada se você não executar os passos com o tempo certo^000000. Tenha cuidado, o teste é muito rigoroso~";
 			close;
 		}
 		mes "[Bijou]";
-		mes "Muito bem entÃ£o~";
+		mes "Muito bem então~";
 		mes "Boa Sorte...!!";
 		changequest 7004,7005;
 		set DANC_Q,8;
@@ -838,9 +838,9 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 	else if (DANC_Q == 8) {
 		mes "[Bijou]";
 		mes "Oh minha nossa...";
-		mes "VocÃª falhou";
+		mes "Você falhou";
 		mes "desta vez?";
-		mes "NÃ£o se preocupe, apenas";
+		mes "Não se preocupe, apenas";
 		mes "tente sentir o ritmo~";
 		close2;
 		warp "job_duncer",105,109;
@@ -849,8 +849,8 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 	else if (DANC_Q == 9) {
 		if (SkillPoint) {
 			mes "[Bijou]";
-			mes "VocÃª nÃ£o poderÃ¡ mudar de classe";
-			mes "se vocÃª ainda tiver pontos de habilidades";
+			mes "Você não poderá mudar de classe";
+			mes "se você ainda tiver pontos de habilidades";
 			mes "sobrando. Use o restante";
 			mes "e volte novamente mais tarde.";
 			close;
@@ -858,14 +858,14 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 		mes "[Bijou]";
 		mes "Oh minha nossa...";
 		mes "Eu vi a sua";
-		mes "danÃ§a anterior.";
-		mes "VocÃª foi Ã³tima!";
+		mes "dança anterior.";
+		mes "Você foi ótima!";
 		next;
 		mes "[Bijou]";
-		mes "Sua performance me mostrou que vocÃª estÃ¡ qualificada para se tornar uma Odalisca. Muito bem entÃ£o, deixe me mudar sua classe.";
+		mes "Sua performance me mostrou que você está qualificada para se tornar uma Odalisca. Muito bem então, deixe me mudar sua classe.";
 		next;
 		mes "[Bijou]";
-		mes "Com a bÃªnÃ§Ã£o de nossa deusa, vocÃª ira renascer como uma Odalisca. A partir de agora, ninguÃ©m vai deixar a sua presenÃ§a sem um sorriso~";
+		mes "Com a bênção de nossa deusa, você ira renascer como uma Odalisca. A partir de agora, ninguém vai deixar a sua presença sem um sorriso~";
 		next;
 		set .@jlevel,JobLevel;
 		mes "[Bijou]";
@@ -873,12 +873,12 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 		callfunc "Job_Change",Job_Dancer;
 		callfunc "F_ClearJobVar";
 		mes "Ooh...!";
-		mes "VocÃª estÃ¡ Ã³tima";
+		mes "Você está ótima";
 		mes "como uma Odalisca~";
-		mes "ParabÃ©ns";
+		mes "Parabéns";
 		next;
 		mes "[Bijou]";
-		mes "Aqui estÃ¡ um pequeno";
+		mes "Aqui está um pequeno";
 		mes "presente.";
 		mes "Por favor, aceite.";
 		mes "Que a sua performance sempre traga alegria para seus espectadores~";
@@ -925,7 +925,7 @@ job_duncer,32,154,1	script	Sala de Espera#click	66,{
 	mes "Aqueles que";
 	mes "estiverem curiosos sobre";
 	mes "o teste podem assistir";
-	mes "por detrÃ¡s.";
+	mes "por detrás.";
 	close;
 }
 
@@ -941,7 +941,7 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "job_duncer","Certo, vamos comeÃ§ar. Agora relaxe, o teste demora 1 minuto.",bc_map;
+	mapannounce "job_duncer","Certo, vamos começar. Agora relaxe, o teste demora 1 minuto.",bc_map;
 	end;
 
 OnTimer5000:
@@ -957,7 +957,7 @@ OnTimer7000:
 	end;
 
 OnTimer8000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -975,7 +975,7 @@ OnTimer11000:
 	end;
 
 OnTimer12000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -993,7 +993,7 @@ OnTimer15000:
 	end;
 
 OnTimer16000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1011,7 +1011,7 @@ OnTimer19000:
 	end;
 
 OnTimer20000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1029,21 +1029,21 @@ OnTimer23000:
 	end;
 
 OnTimer23500:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	mapannounce "job_duncer","Fique parada!",bc_map;
 	end;
 
 OnTimer27000:
-	donpcevent "DanÃ§arina#1::OnSmile";
-	mapannounce "job_duncer","Espere e use 'ConcentraÃ§Ã£o'!",bc_map;
+	donpcevent "Dançarina#1::OnSmile";
+	mapannounce "job_duncer","Espere e use 'Concentração'!",bc_map;
 	end;
 
 OnTimer28500:
-	mapannounce "job_duncer","Preste atenÃ§Ã£o!",bc_map;
+	mapannounce "job_duncer","Preste atenção!",bc_map;
 	end;
 
 OnTimer30000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1061,7 +1061,7 @@ OnTimer34000:
 	end;
 
 OnTimer35000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1084,7 +1084,7 @@ OnTimer40000:
 	end;
 
 OnTimer43000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1102,7 +1102,7 @@ OnTimer49000:
 	end;
 
 OnTimer50000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1120,7 +1120,7 @@ OnTimer53000:
 	end;
 
 OnTimer54000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1138,7 +1138,7 @@ OnTimer60000:
 	end;
 
 OnTimer61000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1156,7 +1156,7 @@ OnTimer66000:
 	end;
 
 OnTimer67000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1174,7 +1174,7 @@ OnTimer69000:
 	end;
 
 OnTimer70000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1192,7 +1192,7 @@ OnTimer74000:
 	end;
 
 OnTimer75000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1210,7 +1210,7 @@ OnTimer80000:
 	end;
 
 OnTimer81000:
-	donpcevent "DanÃ§arina#1::OnSmile";
+	donpcevent "Dançarina#1::OnSmile";
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -1231,7 +1231,7 @@ OnTimer89000:
 
 job_duncer,69,110,0	script	dance#return	-1,1,4,{
 OnTouch:
-	mapannounce "job_duncer","Ã“timo! Muito bem, volte a falar com Bijou!",bc_map;
+	mapannounce "job_duncer","Ótimo! Muito bem, volte a falar com Bijou!",bc_map;
 	set DANC_Q,9;
 	changequest 7005,7006;
 	warp "comodo",188,162;
@@ -1286,8 +1286,8 @@ OnEnable:
 //============================================================
 -	script	dancestep::StepTrigger	-1,1,1,{
 OnTouch:
-	donpcevent "DanÃ§arina#1::OnOmg";
-	mapannounce "job_duncer"," " + strcharinfo(0) + ", vocÃª perdeu o ritmo... VocÃª se atrasou no ritmo!",bc_map;
+	donpcevent "Dançarina#1::OnOmg";
+	mapannounce "job_duncer"," " + strcharinfo(0) + ", você perdeu o ritmo... Você se atrasou no ritmo!",bc_map;
 	set DANC_Q,8;
 	donpcevent "Bijou#dance_timer::OnDisable";
 	donpcevent "Sala de Espera#dance::OnEnable";
@@ -1318,37 +1318,25 @@ OnDisable:
 
 // Backup Dancers
 //============================================================
-job_duncer,63,110,4	script	DanÃ§arina#1::BackDancer	724,{
+job_duncer,63,110,4	script	Dançarina#1::BackDancer	724,{
 	end;
 
 OnSmile:
 	Emotion e_no1;
-	donpcevent "DanÃ§arina#2::OnSmile";
-	donpcevent "DanÃ§arina#3::OnSmile";
-	donpcevent "DanÃ§arina#4::OnSmile";
+	donpcevent "Dançarina#2::OnSmile";
+	donpcevent "Dançarina#3::OnSmile";
+	donpcevent "Dançarina#4::OnSmile";
 	end;
 
 OnOmg:
 	Emotion e_omg;
-	donpcevent "DanÃ§arina#2::OnOmg";
-	donpcevent "DanÃ§arina#3::OnOmg";
-	donpcevent "DanÃ§arina#4::OnOmg";
+	donpcevent "Dançarina#2::OnOmg";
+	donpcevent "Dançarina#3::OnOmg";
+	donpcevent "Dançarina#4::OnOmg";
 	end;
 }
 
-job_duncer,66,113,4	script	DanÃ§arina#2	724,{
-	end;
-
-OnSmile:
-	Emotion e_no1;
-	end;
-
-OnOmg:
-	Emotion e_omg;
-	end;
-}
-
-job_duncer,72,113,4	script	DanÃ§arina#3	724,{
+job_duncer,66,113,4	script	Dançarina#2	724,{
 	end;
 
 OnSmile:
@@ -1360,7 +1348,19 @@ OnOmg:
 	end;
 }
 
-job_duncer,75,110,4	script	DanÃ§arina#4	724,{
+job_duncer,72,113,4	script	Dançarina#3	724,{
+	end;
+
+OnSmile:
+	Emotion e_no1;
+	end;
+
+OnOmg:
+	Emotion e_omg;
+	end;
+}
+
+job_duncer,75,110,4	script	Dançarina#4	724,{
 	end;
 
 OnSmile:
