@@ -79,4 +79,4 @@ valkyrie,44,55,5	script	Atirador Elite#Valkyrie	4_F_JOB_HUNTER,{
 	mes "Honre os guerreiros.";
 	close;
 }
-
+}
