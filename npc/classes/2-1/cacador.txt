@@ -54,7 +54,7 @@
 
 // Notices in the old Hunter Guild.
 //============================================================
-in_hunter,99,99,4	script	Caçador Informações#hnt::HntNotice	4_F_JOB_HUNTER,{
+in_hunter,99,99,4	script	Caçador Informações::Hnt	4_F_JOB_HUNTER,{
 mes "============ Notice ============";
 	mes "Gostaríamos de informar que o local para transforma-se em Caçador";
 	mes "foi movido para ^ff0000Hugel^000000 dentro da república de Schwaltzvalt.";
@@ -71,7 +71,7 @@ mes "============ Notice ============";
 	close;
 }
 
-pay_fild10,148,252,3	duplicate(HntNotice)	Job Change Location#hu	4_BOARD3
+pay_fild10,148,252,3	duplicate(Hnt)	Job Change Location#hu	4_BOARD3
 
 // Actual Job quest start
 //============================================================
