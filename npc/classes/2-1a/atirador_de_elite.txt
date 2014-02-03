@@ -19,31 +19,31 @@ valkyrie,44,55,5	script	Atirador Elite#Valkyrie	4_F_JOB_HUNTER,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Atirador de Elite]";
-			mes "ParabÃ©ns.";
+			mes "Parabéns.";
 			mes "Honre os guerreiros!";
 			close;
 		}
 		mes "[Atirador de Elite]";
 		mes "Um tiro.";
 		mes "Uma morte.";
-		mes "NÃ£o Ã© tÃ£o difÃ­cil";
+		mes "Não é tão difícil";
 		mes "depois de desenvolver a";
-		mes "visÃ£o para estilos";
+		mes "visão para estilos";
 		mes "de batalha.";
 		close;
 	} else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
 		mes "[Atirador de Elite]";
-		mes "O mundo estÃ¡";
+		mes "O mundo está";
 		mes "necessitando de Arqueiros poderosos";
-		mes "como vocÃª. VocÃª estÃ¡ pronto para";
+		mes "como você. Você está pronto para";
 		mes "essa responsabilidade?";
 		next;
 		mes "[Atirador de Elite]";
-		mes "VocÃª estÃ¡ disposto a";
-		mes "dar o prÃ³ximo passo e";
+		mes "Você está disposto a";
+		mes "dar o próximo passo e";
 		mes "se tornar um Atirador de Elite?";
 		next;
-		if (select("NÃ£o.:Sim.") == 1) {
+		if (select("Não.:Sim.") == 1) {
 			mes "[Atirador de Elite]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se a vontade para voltar.";
@@ -52,30 +52,30 @@ valkyrie,44,55,5	script	Atirador Elite#Valkyrie	4_F_JOB_HUNTER,{
 		}
 		if (SkillPoint) {
 			mes "[Atirador de Elite]";
-			mes "Ainda Ã© possÃ­vel que vocÃª aprenda mais habilidades. Por favor, use";
+			mes "Ainda é possível que você aprenda mais habilidades. Por favor, use";
 			mes "todos os seus Pontos de Habilidades antes de voltar a falar comigo.";
 			close;
 		}
 		jobchange Job_Sniper;
 		set ADVJOB,0;
 		mes "[Atirador de Elite]";
-		mes "ParabÃ©ns!";
+		mes "Parabéns!";
 		mes "Sendo um Atirador de Elite, eu acredito";
 		mes "que os servos do mal";
-		mes "nunca estarÃ£o seguros";
+		mes "nunca estarão seguros";
 		mes "enquanto estiverem sob seu campo";
-		mes "de visÃ£o!";
+		mes "de visão!";
 		close;
 	}
 	mes "[Atirador de Elite]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
-	mes "o SalÃ£o de Honras.";
+	mes "o Salão de Honras.";
 	next;
 	mes "[Atirador de Elite]";
 	mes "Por favor, sinta-se";
-	mes "confortÃ¡vel enquanto";
-	mes "vocÃª estiver aqui.";
+	mes "confortável enquanto";
+	mes "você estiver aqui.";
 	mes "Honre os guerreiros.";
 	close;
 }

@@ -18,31 +18,31 @@ if (ADVJOB == 0 || Upper != 1) {
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Sumo-Sacerdote]";
-			mes "ParabÃ©ns.";
+			mes "Parabéns.";
 			mes "Honre os guerreiros!";
 			close;
 		}
 		mes "[Sumo-Sacerdote]";
-		mes "AtravÃ©s do poder";
-		mes "da santidade, nÃ³s podemos";
-		mes "encontrar paz, forÃ§a";
-		mes "e proteÃ§Ã£o. Livra-nos";
-		mes "das forÃ§as do mal...";
+		mes "Através do poder";
+		mes "da santidade, nós podemos";
+		mes "encontrar paz, força";
+		mes "e proteção. Livra-nos";
+		mes "das forças do mal...";
 		close;
 	} else if (ADVJOB == Job_High_Priest && Class == Job_Acolyte_High && JobLevel > 39) {
 		mes "[Sumo-Sacerdote]";
-		mes "Nosso mundo estÃ¡";
+		mes "Nosso mundo está";
 		mes "precisando de pessoas com";
-		mes "talento e convicÃ§Ã£o.";
+		mes "talento e convicção.";
 		mes "Por favor continue com";
 		mes "seu bom trabalho assim como um";
-		mes "grande herÃ³i da santidade...";
+		mes "grande herói da santidade...";
 		next;
 		mes "[Sumo-Sacerdote]";
-		mes "VocÃª deseja se";
+		mes "Você deseja se";
 		mes "tornar um Sumo-Sacerdote?";
 		next;
-		if (select("NÃ£o.:Sim.") == 1) {
+		if (select("Não.:Sim.") == 1) {
 			mes "[Sumo-Sacerdote]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se a vontade para voltar.";
@@ -51,16 +51,16 @@ if (ADVJOB == 0 || Upper != 1) {
 		}
 		if (SkillPoint) {
 			mes "[Sumo-Sacerdote]";
-			mes "Ainda Ã© possÃ­vel que vocÃª aprenda mais habilidades. Por favor, use";
+			mes "Ainda é possível que você aprenda mais habilidades. Por favor, use";
 			mes "todos os seus Pontos de Habilidades antes de voltar a falar comigo.";
 			close;
 		}
 		jobchange Job_High_Priest;
 		set ADVJOB,0;
 		mes "[Sumo-Sacerdote]";
-		mes "ParabÃ©ns.";
+		mes "Parabéns.";
 		mes "Como um Sumo-Sacerdote,";
-		mes "eu acredito que vocÃª irÃ¡ guiar";
+		mes "eu acredito que você irá guiar";
 		mes "outros para o caminho";
 		mes "da santidade...";
 		close;
@@ -68,12 +68,12 @@ if (ADVJOB == 0 || Upper != 1) {
 	mes "[Sumo-Sacerdote]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
-	mes "o SalÃ£o de Honras.";
+	mes "o Salão de Honras.";
 	next;
 	mes "[Sumo-Sacerdote]";
 	mes "Por favor, sinta-se";
-	mes "confortÃ¡vel enquanto";
-	mes "vocÃª estiver aqui.";
+	mes "confortável enquanto";
+	mes "você estiver aqui.";
 	mes "Honre os guerreiros.";
 	close;
 }

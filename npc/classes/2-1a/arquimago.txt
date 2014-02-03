@@ -18,27 +18,27 @@ valkyrie,44,47,5	script	Arquimago#Valkyrie	4_M_JOB_WIZARD,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Arquimago]";
-			mes "ParabÃ©ns.";
+			mes "Parabéns.";
 			mes "Honre os guerreiros!";
 			close;
 		}
 		mes "[Arquimago]";
-		mes "NÃ³s Arquimagos temos";
+		mes "Nós Arquimagos temos";
 		mes "a responsabilidade de";
 		mes "usar nosso poder destrutivo";
 		mes "para o bem.";
 		next;
 		mes "[Arquimago]";
 		mes "Uma vida inteira de treinamento";
-		mes "Ã© necessÃ¡ria antes de se tornar";
-		mes "um Arquimago. VocÃª pode imaginar";
+		mes "é necessária antes de se tornar";
+		mes "um Arquimago. Você pode imaginar";
 		mes "o que aconteceria se o nosso poder";
-		mes "for colocado em mÃ£os erradas?!";
+		mes "for colocado em mãos erradas?!";
 		close;
 	} else if (ADVJOB == Job_High_Wizard && Class == Job_Mage_High && JobLevel > 39) {
 		mes "[Arquimago]";
 		mes "Chegou a hora.";
-		mes "E Rune-Midgard estÃ¡";
+		mes "E Rune-Midgard está";
 		mes "precisando daqueles que podem";
 		mes "exercer o poder da magia...";
 		next;
@@ -46,7 +46,7 @@ valkyrie,44,47,5	script	Arquimago#Valkyrie	4_M_JOB_WIZARD,{
 		mes "Gostaria de se";
 		mes "tornar um Arquimago?";
 		next;
-		if (select("NÃ£o.:Sim.") == 1) {
+		if (select("Não.:Sim.") == 1) {
 			mes "[Arquimago]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se livre para voltar.";
@@ -55,16 +55,16 @@ valkyrie,44,47,5	script	Arquimago#Valkyrie	4_M_JOB_WIZARD,{
 		}
 		if (SkillPoint) {
 			mes "[Arquimago]";
-			mes "Ainda Ã© possÃ­vel que vocÃª aprenda mais habilidades. Por favor, use";
+			mes "Ainda é possível que você aprenda mais habilidades. Por favor, use";
 			mes "todos os seus Pontos de Habilidades antes de voltar a falar comigo.";
 			close;
 		}
 		jobchange Job_High_Wizard;
 		set ADVJOB,0;
 		mes "[Arquimago]";
-		mes "ParabÃ©ns.";
+		mes "Parabéns.";
 		mes "Como um Arquimago,";
-		mes "espero que vocÃª use";
+		mes "espero que você use";
 		mes "seus poderes para gerar";
 		mes "paz aos necessitados.";
 		close;
@@ -72,12 +72,12 @@ valkyrie,44,47,5	script	Arquimago#Valkyrie	4_M_JOB_WIZARD,{
 	mes "[Arquimago]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
-	mes "o SalÃ£o de Honras.";
+	mes "o Salão de Honras.";
 	next;
 	mes "[Arquimago]";
 	mes "Por favor, sinta-se";
-	mes "confortÃ¡vel enquanto";
-	mes "vocÃª estiver aqui.";
+	mes "confortável enquanto";
+	mes "você estiver aqui.";
 	mes "Honre os guerreiros.";
 	close;
 }

@@ -18,33 +18,33 @@ valkyrie,44,39,5	script	Lorde#Valkyrie	1_M_KNIGHTMASTER,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Lorde]";
-			mes "ParabÃ©ns.";
+			mes "Parabéns.";
 			mes "Honra aos guerreiros!";
 			close;
 		}
 		mes "[Lorde]";
-		mes "NÃ³s Cavaleiros temos uma";
+		mes "Nós Cavaleiros temos uma";
 		mes "enorme responsabilidade...";
 		mes "Para servir e proteger.";
 		next;
 		mes "[Lorde]";
-		mes "Mesmo Ã  custa";
-		mes "de nossas prÃ³prias vidas,";
+		mes "Mesmo à custa";
+		mes "de nossas próprias vidas,";
 		mes "temos de preservar o";
 		mes "bem-estar de nossos companheiros.";
 		close;
 	} else if (ADVJOB == Job_Lord_Knight && Class == Job_Swordman_High && JobLevel > 39) {
 		mes "[Lorde]";
-		mes "Ã‰ chegada a hora!";
-		mes "O mundo precisa de vocÃª.";
-		mes "Por favor continue sua vÃ­da";
-		mes "de herÃ³i com uma nova aparÃªncia.";
+		mes "É chegada a hora!";
+		mes "O mundo precisa de você.";
+		mes "Por favor continue sua vída";
+		mes "de herói com uma nova aparência.";
 		next;
 		mes "[Lorde]";
-		mes "VocÃª gostaria de";
+		mes "Você gostaria de";
 		mes "se tornar um Lorde?";
 		next;
-		if (select("NÃ£o.:Sim.") == 1) {
+		if (select("Não.:Sim.") == 1) {
 			mes "[Lorde]";
 			mes "Quando estiver pronto,";
 			mes "sinta-se a vontade para voltar.";
@@ -53,29 +53,29 @@ valkyrie,44,39,5	script	Lorde#Valkyrie	1_M_KNIGHTMASTER,{
 		}
 		if (SkillPoint) {
 			mes "[Lorde]";
-			mes "Ainda Ã© possÃ­vel que vocÃª aprenda mais habilidades. Por favor, use";
+			mes "Ainda é possível que você aprenda mais habilidades. Por favor, use";
 			mes "todos os seus Pontos de Habilidades antes de voltar a falar comigo.";
 			close;
 		}
 		jobchange Job_Lord_Knight;
 		set ADVJOB,0;
 		mes "[Lorde]";
-    mes "ParabÃ©ns!";
+    mes "Parabéns!";
 		mes "Sendo um Lorde,";
-		mes "Eu acredito que vocÃª irÃ¡";
+		mes "Eu acredito que você irá";
 		mes "ser a frente da batalha,";
-		mes "e levar seus aliados para a vitÃ³ria!";
+		mes "e levar seus aliados para a vitória!";
 		close;
 	}
 	mes "[Lorde]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
-	mes "o SalÃ£o de Honras.";
+	mes "o Salão de Honras.";
 	next;
 	mes "[Lorde]";
 	mes "Por favor, sinta-se";
-	mes "confortÃ¡vel enquanto";
-	mes "vocÃª estiver aqui.";
+	mes "confortável enquanto";
+	mes "você estiver aqui.";
 	mes "Honre os guerreiros.";
 	close;
 }
