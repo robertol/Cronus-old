@@ -1255,7 +1255,8 @@ yuno_in03,169,180,3	script	Prof. de Exame Prático	755,{
 	}
 }
 
-yuno_in03,62,176,2	script	Professor História#sa	109,{
+
+yuno_in03,62,176,2	script	Professor de História#sa	109,{
 	mes "[Saphien Layless]";
 	if (BaseJob != Job_Mage) {
 		if (BaseJob == Job_Sage) {
