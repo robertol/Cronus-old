@@ -39,9 +39,7 @@
 // = 2.7 Adicionado comandos Quest Log . [ Kisuka ]
 // = 2.8 Removido a necessidade de uso de 'Goto '. [ L0ne_W0lf ]
 // ================================================ ==============
-
-ein_in01,18,28,4	script	Mestre ferreiro#BLS	4_M_JOB_BLACKSMITH,{
-	ein_in01,18,28,4	script	 Mestre Ferreiro#BLS	731,{
+ein_in01,18,28,4	script	Mestre Ferreiro#BLS	731,{
 	if (Upper == 1) {
 		mes "[Altiregen]";
 		mes "Ei ei. Eu não tenho tempo para papo furado, sou um cara muito ocupado. Há todos esses Mercadores trabalhando duro para se tornarem Ferreiros.";
