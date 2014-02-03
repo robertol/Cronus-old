@@ -36,6 +36,6 @@ Equipe de Desenvolvimento
 - BOO			- José Filho
 - Tet
 - KyukE			- Thiago Gomes
-- Jota Gois
+- Jota Gois		- José Goís
 - Zephyrus
 - Shermie

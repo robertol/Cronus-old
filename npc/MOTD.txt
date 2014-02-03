@@ -7,8 +7,8 @@
 //         \/                   \/           \/  
 //---------------------------------------------------------
 // 
-// executado quando qualquer personagem loga, que lhes são inerentes
+// Envia uma mensagem a todos que se conectarem ao Cronus GIT
 -	script	CronusMOTD	-1,{
-message strcharinfo(0),"Bem-vindo ao  Cronus! Divirta-se! Favor, relatar quaisquer bugs que você encontrar.";
+message strcharinfo(0),"Seja bem-vindo(a) à revisão do Cronus GIT! Divirta-se! Por favor reporte qualquer bug/erro que você encontrar em nosso site: www.cronus-emulator.com/forum";
 end;
 }
