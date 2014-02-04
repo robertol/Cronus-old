@@ -1,51 +1,55 @@
-//===== Hercules Script ======================================
-//= Prontera Sewers(Culvert) Dungeon Monster Spawn Script
-//===== By: ==================================================
+//===== Cronus Script =======================================
+//= Spawn Esgoto de Prontera
+//===== Por: ==================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
-//= 1.2
-//===== Additional Comments: =================================
+//===== Versão Atual: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= Athena, rAthena, Hercules. Cronus
+//===== Comentários Adicionais: =================================
 //= 1.1 Official kRO 10.1 spawns [Playtester]
 //= 1.2 Corrected MVP spawn variance. [L0ne_W0lf]
+//= 1.3 Tradução [BOO]
 //============================================================
 
+
 //==================================================
-// prt_sewb1 - Prontera Culvert F1
-//==================================================
-prt_sewb1,0,0,0,0	monster	Thief Bug Egg	1048,80,0,0,0
-prt_sewb1,0,0,0,0	monster	Thief Bug	1051,30,0,0,0
+// prt_sewb1 - Esgoto de Prontera
+//==================================================    
+prt_sewb1,0,0,0,0	monster	Ovo de Besouro-Ladrão	1048,80,0,0,0
+prt_sewb1,0,0,0,0	monster	Besouro-Ladrão	1051,30,0,0,0
 prt_sewb1,0,0,0,0	monster	Familiar	1005,10,0,0,0
 prt_sewb1,0,0,0,0	monster	Tarou	1175,10,0,0,0
 
 //==================================================
-// prt_sewb2 - Prontera Culvert F2
-//==================================================
-prt_sewb2,0,0,0,0	monster	Thief Bug Egg	1048,20,0,0,0
-prt_sewb2,0,0,0,0	monster	Thief Bug	1051,70,0,0,0
+// prt_sewb2 - Esgoto de Prontera
+//==================================================    
+prt_sewb2,0,0,0,0	monster	Ovo de Besouro-Ladrão	1048,20,0,0,0
+prt_sewb2,0,0,0,0	monster	Besouro-Ladrão	1051,70,0,0,0
 prt_sewb2,0,0,0,0	monster	Familiar	1005,10,0,0,0
-prt_sewb2,0,0,0,0	monster	Spore	1014,20,0,0,0
+prt_sewb2,0,0,0,0	monster	Esporo	1014,20,0,0,0
 prt_sewb2,0,0,0,0	monster	Plankton	1161,30,0,0,0
-prt_sewb2,0,0,0,0	monster	Thief Bug Female	1053,10,0,0,0
+prt_sewb2,0,0,0,0	monster	Besouro-Ladrão Fêmea	1053,10,0,0,0
 prt_sewb2,0,0,0,0	monster	Tarou	1175,60,0,0,0
 
 //==================================================
-// prt_sewb3 - Prontera Culvert F3
-//==================================================
-prt_sewb3,0,0,0,0	monster	Thief Bug Egg	1048,10,0,0,0
-prt_sewb3,0,0,0,0	monster	Thief Bug	1051,20,0,0,0
-prt_sewb3,0,0,0,0	monster	Thief Bug Female	1053,65,0,0,0
-prt_sewb3,0,0,0,0	monster	Thief Bug Male	1054,65,0,0,0
+// prt_sewb3 - Esgoto de Prontera
+//==================================================   
+prt_sewb3,0,0,0,0	monster	Ovo de Besouro-Ladrão	1048,10,0,0,0
+prt_sewb3,0,0,0,0	monster	Besouro-Ladrão	1051,20,0,0,0
+prt_sewb3,0,0,0,0	monster	Besouro-Ladrão Fêmea	1053,65,0,0,0
+prt_sewb3,0,0,0,0	monster	Besouro-Ladrão Macho	1054,65,0,0,0
 prt_sewb3,0,0,0,0	monster	Tarou	1175,15,0,0,0
-prt_sewb3,0,0,0,0	monster	Poison Spore	1077,15,0,0,0
+prt_sewb3,0,0,0,0	monster	Esporo Venenoso	1077,15,0,0,0
 prt_sewb3,0,0,0,0	monster	Familiar	1005,20,0,0,0
 
 //==================================================
-// prt_sewb4 - Prontera Culvert F4
-//==================================================
-prt_sewb4,0,0,0,0	monster	Thief Bug Egg	1048,10,0,0,0
-prt_sewb4,0,0,0,0	monster	Thief Bug	1051,20,0,0,0
-prt_sewb4,0,0,0,0	monster	Thief Bug Female	1053,20,0,0,0
-prt_sewb4,0,0,0,0	monster	Thief Bug Male	1054,70,0,0,0
+// prt_sewb4 - Esgoto de Prontera
+//==================================================     
+prt_sewb4,0,0,0,0	monster	Ovo de Besouro-Ladrão	1048,10,0,0,0
+prt_sewb4,0,0,0,0	monster	Besouro-Ladrão	1051,20,0,0,0
+prt_sewb4,0,0,0,0	monster	Besouro-Ladrão Fêmea	1053,20,0,0,0
+prt_sewb4,0,0,0,0	monster	Besouro-Ladrão Macho	1054,70,0,0,0
 prt_sewb4,0,0,0,0	monster	Drainliar	1111,20,0,0,0
-prt_sewb4,0,0,0,0	monster	Cramp	1209,5,0,0,0
-prt_sewb4,0,0,0,0	boss_monster	Golden Thief Bug	1086,1,3600000,600000,1
+prt_sewb4,0,0,0,0	monster	Cãibra	1209,5,0,0,0
+prt_sewb4,0,0,0,0	boss_monster	Besouro-Ladrão Dourado	1086,1,3600000,600000,1

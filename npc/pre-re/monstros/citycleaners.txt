@@ -1,18 +1,19 @@
-//===== Hercules Script ======================================
+//===== Cronuss Script ======================================
 //= City Cleaners Monster Spawn Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Euphy
-//===== Current Version: =====================================
-//= 1.0
-//===== Description: =========================================
+//===== Versão Atual: =====================================
+//= 1.0.1
+//===== Descrição: =========================================
 //= Spawns monsters to clean up cities.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version, Pre-Renewal spawns.
+//= 1.0.1 Traduzido [BOO]
 //============================================================
 
 //==================================================
-// Thief Bug City Spawns
+// Respawn de Besouro Ladrão nas Cidades
 //==================================================
-payon_in02,23,68,5,5	monster	Thief Bug	1051,7,1200000,600000,0
-jawaii_in,73,117,4,4	monster	Thief Bug	1051,1,5400000,3000000,0
-jawaii_in,83,117,5,5	monster	Thief Bug	1051,1,4800000,2400000,0
+payon_in02,23,68,5,5	monster	Besouro Ladrão	1051,7,1200000,600000,0
+jawaii_in,73,117,4,4	monster	Besouro Ladrão	1051,1,5400000,3000000,0
+jawaii_in,83,117,5,5	monster	Besouro Ladrão	1051,1,4800000,2400000,0
