@@ -35,16 +35,4 @@ gonryun,0,0,0,0	monster	Rosa Selvagem	1261,1,7200000,3600000,0
 louyang,0,0,0,0	monster	Rosa Selvagem	1261,1,7200000,3600000,0
 ayothaya,0,0,0,0	monster	Rosa Selvagem	1261,1,7200000,3600000,0
 moscovia,0,0,0,0	monster	Rosa Selvagem	1261,1,7200000,3600000,0
-brasilis,0,0,0,0	monster	Rosa Selvagem	1261,1,7200000,3600000,0
-
-//==================================================
-// einbech - Einbech, the Mining Village
-//==================================================
 einbech,0,0,0,0	monster	Rosa Selvagem	1261,1,3600000,3000000,0
-einbech,0,0,0,0	monster	Tarou	1175,5,1800000,1500000,0
-
-//==================================================
-// payon_in02 - Dentro de Payon
-//==================================================
-payon_in02,23,68,5,5	monster	Ovo de Besouro-Ladrão	1048,7,1200000,600000,0
-job3_war01,19,33,5,5	monster	Ovo de Besouro-Ladrão	1048,1,12,60,0
