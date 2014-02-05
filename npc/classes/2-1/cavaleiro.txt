@@ -1,187 +1,187 @@
-// ===== Script Hércules ======================================
+// ===== Script HÃ©rcules ======================================
 // = Cavaleiro Quest
 // ===== Por: ========================================= =========
 // = EQUIPE PGRO ( Aegis ) .
 // = Convertido por kobra_k88
-// = Além disso bugfixed e testado por lúpus
-// ===== Versão Atual: =====================================
+// = AlÃ©m disso bugfixed e testado por lÃºpus
+// ===== VersÃ£o Atual: =====================================
 // = 3,3
-// ===== Descrição: =========================================
-// = [ Conversão Oficial]
+// ===== DescriÃ§Ã£o: =========================================
+// = [ ConversÃ£o Oficial]
 // = Job Alterar busca da classe Knight.
-// ===== Comentários Adicionais: =================================
-// = 1.0 Funcionando . Por favor, comente qualquer teias pré- existentes para Quartos 
+// ===== ComentÃ¡rios Adicionais: =================================
+// = 1.0 Funcionando . Por favor, comente qualquer teias prÃ©- existentes para Quartos 
 // = teste em quaisquer outros arquivos de modo que os especificados aqui pode funcionar.
 // = 1.1 Corrigido um erro grave . Agora, usando o comando initnpctimer ,
-// = Donpcevent , e novos comandos de eventos waitingroom . Não mais addTIMER
-// = Spamming. Já não tem que falar com o NPC para fazer o teste . Apenas entrar na sala de chat.
-// = 1.2 mais correções de bugs. Mudou os nomes das variáveis ??globais para os únicos.
-// = Adicionado segundo conjunto de itens para primeiro teste. Adicionado potes Awake prêmio de mudança de emprego .
-// = 1.3 Adicionado suporte Bebê Classe [ Lupus ]
-// = 1.5 Corrigido um possível abuso EXP [ Lupus ]
-// = 1.6 Adicionado uma função que impedem classes avançadas que passam
-// = 2 Quests trabalho novamente. Ele também orienta aulas adv onde ir.[ Lupus ]
-// = 2.0 Mudou números constantes. [ Vicious ]
+// = Donpcevent , e novos comandos de eventos waitingroom . NÃ£o mais addTIMER
+// = Spamming. JÃ¡ nÃ£o tem que falar com o NPC para fazer o teste . Apenas entrar na sala de chat.
+// = 1.2 mais correÃ§Ãµes de bugs. Mudou os nomes das variÃ¡veis â€‹â€‹globais para os Ãºnicos.
+// = Adicionado segundo conjunto de itens para primeiro teste. Adicionado potes Awake prÃªmio de mudanÃ§a de emprego .
+// = 1.3 Adicionado suporte BebÃª Classe [ Lupus ]
+// = 1.5 Corrigido um possÃ­vel abuso EXP [ Lupus ]
+// = 1.6 Adicionado uma funÃ§Ã£o que impedem classes avanÃ§adas que passam
+// = 2 Quests trabalho novamente. Ele tambÃ©m orienta aulas adv onde ir.[ Lupus ]
+// = 2.0 Mudou nÃºmeros constantes. [ Vicious ]
 // = 2.1 mesclado JFunc [ Lupus ]
-// = 2.2 , reescritos a égide 10,3 padrões . [ L0ne_W0lf ]
-// = 2.3 Várias correções de bugs com a ajuda de Barron -Monster . [ L0ne_W0lf ]
-// = 2.4 Pequenas correções para temporizador # knt . [ L0ne_W0lf ]
+// = 2.2 , reescritos a Ã©gide 10,3 padrÃµes . [ L0ne_W0lf ]
+// = 2.3 VÃ¡rias correÃ§Ãµes de bugs com a ajuda de Barron -Monster . [ L0ne_W0lf ]
+// = 2.4 Pequenas correÃ§Ãµes para temporizador # knt . [ L0ne_W0lf ]
 // = 2.5 Corrige um pequeno bug com a tomada de claymores . [ L0ne_W0lf ]
 // = corrigida killmonster e killmonsterall .
-// = 2.6 Corrigido um destino areawarp imprópria. [ L0ne_W0lf ]
-// = 2.7 Excluídos variáveis ??não utilizadas . [ Samuray22 ]
-// = 2.7a Corrigido um erro de digitação "; ; " . [ Samuray22 ]
+// = 2.6 Corrigido um destino areawarp imprÃ³pria. [ L0ne_W0lf ]
+// = 2.7 ExcluÃ­dos variÃ¡veis â€‹â€‹nÃ£o utilizadas . [ Samuray22 ]
+// = 2.7a Corrigido um erro de digitaÃ§Ã£o "; ; " . [ Samuray22 ]
 // = 2.8 Agora usa ativar e desativar waitingroomevent . [ L0ne_W0lf ]
 // = 2.9 Adicionado comandos Quest Log . [ Kisuka ]
 // = 3.0 Removido a necessidade de uso de 'Goto '. [ L0ne_W0lf ]
-// = 3.1 Modificada a busca de renovação. [ ] Vali (graças a Muad_Dib para as informações necessárias ).
-// = 3.2 Mais atualizações renovação e alguma otimização . [ Euphy ]
-// = 3.3 Mudança Fixa. [ Joseph ]
+// = 3.1 Modificada a busca de renovaÃ§Ã£o. [ ] Vali (graÃ§as a Muad_Dib para as informaÃ§Ãµes necessÃ¡rias ).
+// = 3.2 Mais atualizaÃ§Ãµes renovaÃ§Ã£o e alguma otimizaÃ§Ã£o . [ Euphy ]
+// = 3.3 MudanÃ§a Fixa. [ Joseph ]
 // ================================================ ============
 
 prt_in,88,101,4	script	Chefe dos Cavaleiros#knt	1_M_KNIGHTMASTER,{
 	if (Upper == 1) {
-		mes "[Capitão Herman]";
-		mes "Hm? Você está... O que é isso que você tem? Tenho sido um honroso Cavaleiro durante muito tempo, mais não posso compreender este sentimento que vem de você...";
+		mes "[CapitÃ£o Herman]";
+		mes "Hm? VocÃª estÃ¡... O que Ã© isso que vocÃª tem? Tenho sido um honroso Cavaleiro durante muito tempo, mais nÃ£o posso compreender este sentimento que vem de vocÃª...";
 		next;
-		mes "[Capitão Herman]";
-		mes "Que Deus abençoe o seu corpo e alma, guerreiro. Eu espero que você mostre a sua coragem e proteja aqueles que são mais fracos que você.";
+		mes "[CapitÃ£o Herman]";
+		mes "Que Deus abenÃ§oe o seu corpo e alma, guerreiro. Eu espero que vocÃª mostre a sua coragem e proteja aqueles que sÃ£o mais fracos que vocÃª.";
 		close;
 	}
 	if (BaseJob != Job_Swordman) {
 		if (BaseJob == Job_Knight) {
-			mes "[Capitão Herman]";
+			mes "[CapitÃ£o Herman]";
 			mes "Ah, um membro da nossa Cavalaria.";
-			mes "Espero que você esteja vivendo de acordo com minhas expectativas. Juramos ser fortes pelo nosso reino, mesmo que a morte esteja sobre nós ...";
+			mes "Espero que vocÃª esteja vivendo de acordo com minhas expectativas. Juramos ser fortes pelo nosso reino, mesmo que a morte esteja sobre nÃ³s ...";
 			close;
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "[Capitão Herman]";
+			mes "[CapitÃ£o Herman]";
 			mes "Bem Vindo,";
-			mes "esta é";
+			mes "esta Ã©";
 			mes "a Cavalaria de Prontera.";
 			mes "O que te traz aqui?";
 			next;
-			switch(select("Eu quero me tornar um Espadachim.:Eu quero me tornar um Cavaleiro.:Só visitar.")) {
+			switch(select("Eu quero me tornar um Espadachim.:Eu quero me tornar um Cavaleiro.:SÃ³ visitar.")) {
 			case 1:
-				mes "[Capitão Herman]";
+				mes "[CapitÃ£o Herman]";
 				mes "A-ha~";
-				mes "Um espadachim, você diz?";
+				mes "Um espadachim, vocÃª diz?";
 				if (sex)
-					mes "Me descupe, rapaz, mas você";
+					mes "Me descupe, rapaz, mas vocÃª";
 				else
-					mes "Me descupe, moça, mas você";
+					mes "Me descupe, moÃ§a, mas vocÃª";
 				mes "veio ao lugar errado!";
 				next;
-				mes "[Capitão Herman]";
-				mes "Esta não é a Guilda dos Espadachim, esta é a Cavalaria de Prontera! Se você quiser ser um Espadachim, visite a Guilda dos Espadachim localizada em Izlude.";
+				mes "[CapitÃ£o Herman]";
+				mes "Esta nÃ£o Ã© a Guilda dos Espadachim, esta Ã© a Cavalaria de Prontera! Se vocÃª quiser ser um Espadachim, visite a Guilda dos Espadachim localizada em Izlude.";
 				close;
 			case 2:
-				mes "[Capitão Herman]";
-				mes "Ah, eu vejo que você têm uma ótima ambição. Mas você precisa se tornar um Espadachim antes de ser um";
+				mes "[CapitÃ£o Herman]";
+				mes "Ah, eu vejo que vocÃª tÃªm uma Ã³tima ambiÃ§Ã£o. Mas vocÃª precisa se tornar um Espadachim antes de ser um";
 				mes "Cavaleiro. Um passo de cada vez...";
 				next;
-				mes "[Capitão Herman]";
-				mes "Primeiro, visite a Guilda dos Espadachim em Izlude. Então, venha nos visitar denovo depois que você se tornar um experiente Espadachim.";
+				mes "[CapitÃ£o Herman]";
+				mes "Primeiro, visite a Guilda dos Espadachim em Izlude. EntÃ£o, venha nos visitar denovo depois que vocÃª se tornar um experiente Espadachim.";
 				close;
 			case 3:
-				mes "[Capitão Herman]";
+				mes "[CapitÃ£o Herman]";
 				mes "Aha~";
-				mes "Você deve ter muito tempo livre. Por que você não vai caçar alguns monstros em vez de vaguar sem rumo?";
+				mes "VocÃª deve ter muito tempo livre. Por que vocÃª nÃ£o vai caÃ§ar alguns monstros em vez de vaguar sem rumo?";
 				close;
 			}
 		}
 		else {
-			mes "[Capitão Herman]";
-			mes "Bem-vindo. Nós, os orgulhosos Cavaleiros da Cavalaria de  Prontera, damos nossa vida ao rei e ao país! Por favor aproveite a sua estadia.";
+			mes "[CapitÃ£o Herman]";
+			mes "Bem-vindo. NÃ³s, os orgulhosos Cavaleiros da Cavalaria de  Prontera, damos nossa vida ao rei e ao paÃ­s! Por favor aproveite a sua estadia.";
 			close;
 		}
 	}
 if (KNIGHT_Q == 0) {
-		mes "[Capitão Herman]";
-		mes "Bem-Vindo, esta é";
+		mes "[CapitÃ£o Herman]";
+		mes "Bem-Vindo, esta Ã©";
 		mes "a Cavalaria de Prontera.";
-		mes "O que traz você aqui?";
+		mes "O que traz vocÃª aqui?";
 		next;
-		if (select("Eu quero me tornar um Cavaleiro.:Só visitando.") == 1) {
-			mes "[Capitão Herman]";
+		if (select("Eu quero me tornar um Cavaleiro.:SÃ³ visitando.") == 1) {
+			mes "[CapitÃ£o Herman]";
 			mes "Ohh...";
 			if (sex)
 				mes "Um jovem rapaz deseja";
 			else
-				mes "Uma jovem moça deseja";
+				mes "Uma jovem moÃ§a deseja";
 			mes "ser um Cavaleiro!";
 			mes "Nossa Cavalaria de Prontera";
-			mes "irá ajudar você.";
+			mes "irÃ¡ ajudar vocÃª.";
 			next;
-			mes "[Capitão Herman]";
-			mes "Antes de tudo, eu sou o capitão da Cavalaria de Prontera, Herman Phon EfeSenhorsus. Tenho prazer em conhecer jovens que querem entrar para a Cavalaria de Prontera.";
+			mes "[CapitÃ£o Herman]";
+			mes "Antes de tudo, eu sou o capitÃ£o da Cavalaria de Prontera, Herman Phon EfeSenhorsus. Tenho prazer em conhecer jovens que querem entrar para a Cavalaria de Prontera.";
 			next;
-			mes "[Capitão Herman]";
-			mes "Nós só aceitamos Espadachim";
-			mes "que tenho pelo menos nível 40 de habilidade.";
-			mes "Não podemos considerar candidatos que ainda não são experientes o suficiente para se tornarem Cavaleiros.";
+			mes "[CapitÃ£o Herman]";
+			mes "NÃ³s sÃ³ aceitamos Espadachim";
+			mes "que tenho pelo menos nÃ­vel 40 de habilidade.";
+			mes "NÃ£o podemos considerar candidatos que ainda nÃ£o sÃ£o experientes o suficiente para se tornarem Cavaleiros.";
 			next;
-			mes "[Capitão Herman]";
+			mes "[CapitÃ£o Herman]";
 			mes "Depois de se inscrever, e acharmos";
-			mes "você elegível, nós vamos começar o procedimento de troca de classe. Você gostaria";
+			mes "vocÃª elegÃ­vel, nÃ³s vamos comeÃ§ar o procedimento de troca de classe. VocÃª gostaria";
 			mes "de se inscrever agora?";
 			next;
 			if (select("Sim, eu gostaria de me inscrever.:Eu gostaria de pensar nisto.") == 1) {
 				if (JobLevel < 40) {
-					mes "[Capitão Herman]";
-					mes "Ah, você ainda não está pronto para se tornar um Cavaleiro! Eu não mencionei a exigência de habilidade Nível 40?";
+					mes "[CapitÃ£o Herman]";
+					mes "Ah, vocÃª ainda nÃ£o estÃ¡ pronto para se tornar um Cavaleiro! Eu nÃ£o mencionei a exigÃªncia de habilidade NÃ­vel 40?";
 					next;
-					mes "[Capitão Herman]";
-					mes "Claro que eu entendo o seu forte desejo de se juntarem a nós, mas agora não é o momento. Vai lá fora e treine contra mais alguns monstros. Vamos ficar aqui esperando.";
+					mes "[CapitÃ£o Herman]";
+					mes "Claro que eu entendo o seu forte desejo de se juntarem a nÃ³s, mas agora nÃ£o Ã© o momento. Vai lÃ¡ fora e treine contra mais alguns monstros. Vamos ficar aqui esperando.";
 					close;
 				}
 				if (SkillPoint) {
-					mes "[Capitão Herman]";
+					mes "[CapitÃ£o Herman]";
 					mes "Ah...!";
-					mes "Você não pode mudar de classe enquanto estiver com pontos de habilidade sobrando. Volte quando tiver distribuido todos";
+					mes "VocÃª nÃ£o pode mudar de classe enquanto estiver com pontos de habilidade sobrando. Volte quando tiver distribuido todos";
 					mes "seus pontos de habilidade.";
 					close;
 				}
 				set KNIGHT_Q,1;
 				setquest 9000;
-				mes "[Capitão Herman]";
+				mes "[CapitÃ£o Herman]";
 				mes "Deixe-me ver...";
-				mes "Seu nome é";
+				mes "Seu nome Ã©";
 				mes "" + strcharinfo(0) + "...";
 				mes "Certo?";
 				next;
-				mes "[Capitão Herman]";
-				mes "Deixe-me explicar o processo de troca de classe. Você deve visitar uma série de cavaleiros e passar em";
+				mes "[CapitÃ£o Herman]";
+				mes "Deixe-me explicar o processo de troca de classe. VocÃª deve visitar uma sÃ©rie de cavaleiros e passar em";
 				mes "cada um de seus testes.";
 				next;
-				mes "[Capitão Herman]";
-				mes "Uma vez que todos os testes forem concluídos, todos os envolvidos no seu teste de Cavaleiro irão se reunir e discutir o seu desempenho.";
+				mes "[CapitÃ£o Herman]";
+				mes "Uma vez que todos os testes forem concluÃ­dos, todos os envolvidos no seu teste de Cavaleiro irÃ£o se reunir e discutir o seu desempenho.";
 				next;
-				mes "[Capitão Herman]";
-				mes "Os Cavaleiros devem aprovar por unanimidade para que você possa se juntar à Cavalaria de Prontera. Se apenas uma pessoa rejeitar, você";
-				mes "deve começar de novo.";
+				mes "[CapitÃ£o Herman]";
+				mes "Os Cavaleiros devem aprovar por unanimidade para que vocÃª possa se juntar Ã  Cavalaria de Prontera. Se apenas uma pessoa rejeitar, vocÃª";
+				mes "deve comeÃ§ar de novo.";
 				next;
-				mes "[Capitão Herman]";
-				mes "Mas acredito que, se persistir com um coração sincero, você será reconhecido pelos Cavaleiros e, finalmente, reconhecido como um membro da nossa cavalaria.";
+				mes "[CapitÃ£o Herman]";
+				mes "Mas acredito que, se persistir com um coraÃ§Ã£o sincero, vocÃª serÃ¡ reconhecido pelos Cavaleiros e, finalmente, reconhecido como um membro da nossa cavalaria.";
 				next;
-				mes "[Capitão Herman]";
-				mes "Então, não vamos perder mais tempo falando! Vá e encontre esses cavaleiros e inicie seus testes. Depois de ter completado todos os testes, volte até mim.";
+				mes "[CapitÃ£o Herman]";
+				mes "EntÃ£o, nÃ£o vamos perder mais tempo falando! VÃ¡ e encontre esses cavaleiros e inicie seus testes. Depois de ter completado todos os testes, volte atÃ© mim.";
 				close;
 			}
-			mes "[Capitão Herman]";
+			mes "[CapitÃ£o Herman]";
 			mes "Oh...!";
-			mes "Bem, eu não quero pressionar você. Tome o seu tempo e pense sobre isso. Retorne quando estiver pronto para";
+			mes "Bem, eu nÃ£o quero pressionar vocÃª. Tome o seu tempo e pense sobre isso. Retorne quando estiver pronto para";
 			mes "mudar de classe, e vamos estar esperando.";
 			close;
 		}
-		mes "[Capitão Herman]";
-		mes "Vamos parar para pensar, você não é um Espadachim? Parece que você já encontrou vários inimigos em batalhas.";
+		mes "[CapitÃ£o Herman]";
+		mes "Vamos parar para pensar, vocÃª nÃ£o Ã© um Espadachim? Parece que vocÃª jÃ¡ encontrou vÃ¡rios inimigos em batalhas.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Você deve considerar uma mudança de classe para Cavaleiro. Venha e fale comigo se tiver interessado.";
+		mes "[CapitÃ£o Herman]";
+		mes "VocÃª deve considerar uma mudanÃ§a de classe para Cavaleiro. Venha e fale comigo se tiver interessado.";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Por favor, tome";
 		mes "seu tempo para";
 		mes "dar uma volta.";
@@ -189,111 +189,111 @@ if (KNIGHT_Q == 0) {
 		close;
 	}
 	else if (KNIGHT_Q == 1) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes strcharinfo(0) + ",";
-		mes "o que eu posso fazer por você?";
-		mes "Ah, você não sabe";
+		mes "o que eu posso fazer por vocÃª?";
+		mes "Ah, vocÃª nÃ£o sabe";
 		mes "quem visitar?";
 		next;
-		mes "[Capitão Herman]";
-		mes "Creio que os Cavaleiros na carga de testes tenham definido uma ordem na qual você deva visitá-los. Suponho que isto ajude ao processo de testes.";
+		mes "[CapitÃ£o Herman]";
+		mes "Creio que os Cavaleiros na carga de testes tenham definido uma ordem na qual vocÃª deva visitÃ¡-los. Suponho que isto ajude ao processo de testes.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Primeiro, vá e visite";
-		mes "o Senhor Andrew para seu primeiro teste. Não fique muito nervoso, ele vai explicar tudo uma vez que você falar com ele.";
+		mes "[CapitÃ£o Herman]";
+		mes "Primeiro, vÃ¡ e visite";
+		mes "o Senhor Andrew para seu primeiro teste. NÃ£o fique muito nervoso, ele vai explicar tudo uma vez que vocÃª falar com ele.";
 		close;
 	}
 	else if (KNIGHT_Q == 2) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 3) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Hmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 4) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Ah~ Você não sabe";
+		mes "Como estÃ£o os testes?";
+		mes "Ah~ VocÃª nÃ£o sabe";
 		mes "quem visitar agora?";
 		next;
-		mes "[Capitão Herman]";
-		mes "Parece que você terminou um teste. Vamos ver. Senhor Andrew, quem este Espadachim deve visitar agora?";
+		mes "[CapitÃ£o Herman]";
+		mes "Parece que vocÃª terminou um teste. Vamos ver. Senhor Andrew, quem este Espadachim deve visitar agora?";
 		next;
 		mes "[Senhor Andrew]";
 		mes "Eu falei para";
 		mes "visitar o Senhor Senhoracuse.";
-		mes "Engraçado, pensei ter lhe dito.";
-		mes "Será que esqueci...?";
+		mes "EngraÃ§ado, pensei ter lhe dito.";
+		mes "SerÃ¡ que esqueci...?";
 		next;
-		mes "[Capitão Herman]";
-		mes "Você ouviu?";
-		mes "Vá ao Senhor Senhoracuse e fala seu teste. Uma vez que você o complete, não esqueça que você deve visitar o próximo também.";
+		mes "[CapitÃ£o Herman]";
+		mes "VocÃª ouviu?";
+		mes "VÃ¡ ao Senhor Senhoracuse e fala seu teste. Uma vez que vocÃª o complete, nÃ£o esqueÃ§a que vocÃª deve visitar o prÃ³ximo tambÃ©m.";
 		close;
 	}
 	else if (KNIGHT_Q == 5) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 6) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Ah~ Você não sabe";
+		mes "Como estÃ£o os testes?";
+		mes "Ah~ VocÃª nÃ£o sabe";
 		mes "quem visitar agora?";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Vamos ver...";
-		mes "Você completou dois testes.";
+		mes "VocÃª completou dois testes.";
 		mes "Senhor Senhoracuse, quem este Espadachim deve visitar agora?";
 		next;
 		mes "[Senhor Senhoracuse]";
 		mes "Oh...!";
-		mes "Um, quem é o próximo...?";
+		mes "Um, quem Ã© o prÃ³ximo...?";
 		mes "Certo! Senhor Windsor!";
 		next;
-		mes "[Capitão Herman]";
-		mes "Vá até o";
-		mes "Senhor Windows Benedict para seu próximo teste. Ouça cuidadosamente os Cavaleiros na carga de testes para não se sentir perdido, certo?";
+		mes "[CapitÃ£o Herman]";
+		mes "VÃ¡ atÃ© o";
+		mes "Senhor Windows Benedict para seu prÃ³ximo teste. OuÃ§a cuidadosamente os Cavaleiros na carga de testes para nÃ£o se sentir perdido, certo?";
 		close;
 	}
 	else if (KNIGHT_Q == 7) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 8) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Hmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Ah~ Você não sabe";
+		mes "Como estÃ£o os testes?";
+		mes "Ah~ VocÃª nÃ£o sabe";
 		mes "quem visitar agora?";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Senhor Windor...?";
 		mes "Quem este";
 		mes "Espadachim deve visitar";
@@ -309,29 +309,29 @@ if (KNIGHT_Q == 0) {
 		mes "[Senhor Windsor]";
 		mes "...Amy Beatrice.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Ah, vá e visite";
-		mes "a Senhora Amy e faça seu teste. Tenha certeza que você prestou atenção em quem você deve ir para seu próximo teste.";
+		mes "[CapitÃ£o Herman]";
+		mes "Ah, vÃ¡ e visite";
+		mes "a Senhora Amy e faÃ§a seu teste. Tenha certeza que vocÃª prestou atenÃ§Ã£o em quem vocÃª deve ir para seu prÃ³ximo teste.";
 		close;
 	}
 	else if (KNIGHT_Q == 9) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 10) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Ah~ Você não sabe";
+		mes "Como estÃ£o os testes?";
+		mes "Ah~ VocÃª nÃ£o sabe";
 		mes "quem visitar agora?";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Vamos ver...";
 		mes "Senhora Amy, quem";
 		mes "este Espadachim deve";
@@ -343,46 +343,46 @@ if (KNIGHT_Q == 0) {
 		mes "Senhor Edmond!";
 		mes "Tee hee~";
 		next;
-		mes "[Capitão Herman]";
-		mes "Agora, vá e fale";
-		mes "com o Senhor Edmond. Ele irá";
+		mes "[CapitÃ£o Herman]";
+		mes "Agora, vÃ¡ e fale";
+		mes "com o Senhor Edmond. Ele irÃ¡";
 		mes "estar na carga para seu";
-		mes "próximo teste.";
+		mes "prÃ³ximo teste.";
 		close;
 	}
 	else if (KNIGHT_Q == 11) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Mmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Isto pode ser difícil,";
-		mes "mas dê o seu melhor.";
+		mes "Como estÃ£o os testes?";
+		mes "Isto pode ser difÃ­cil,";
+		mes "mas dÃª o seu melhor.";
 		close;
 	}
 	else if (KNIGHT_Q == 12) {
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Hmm?";
 		mes "Espadachim " + strcharinfo(0) + ".";
-		mes "Como estão os testes?";
-		mes "Ah! Você não sabe";
+		mes "Como estÃ£o os testes?";
+		mes "Ah! VocÃª nÃ£o sabe";
 		mes "quem visitar agora?";
 		next;
-		mes "[Capitão Herman]";
-		mes "Você não precisa visitar mais uma pessoa apenas? O Cavaleiro";
+		mes "[CapitÃ£o Herman]";
+		mes "VocÃª nÃ£o precisa visitar mais uma pessoa apenas? O Cavaleiro";
 		mes "encarregado do teste final";
-		mes "é Senhor Gray Prospheiro.";
+		mes "Ã© Senhor Gray Prospheiro.";
 		next;
 		mes "[Senhor Edmond]";
 		mes "Este mundo opera de acordo";
 		mes "com a lei de causa e efeito.";
-		mes "Tudo será revelado no fim.";
+		mes "Tudo serÃ¡ revelado no fim.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Esteja alerta e faça";
+		mes "[CapitÃ£o Herman]";
+		mes "Esteja alerta e faÃ§a";
 		mes "o seu melhor, como se este";
-		mes "fosse ser o último teste.";
+		mes "fosse ser o Ãºltimo teste.";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Volte para mim";
 		mes "depois de ter";
 		mes "completado o";
@@ -390,33 +390,33 @@ if (KNIGHT_Q == 0) {
 		close;
 	}
 	else if (KNIGHT_Q == 13) {
-		mes "[Capitão Herman]";
-		mes "Termine o último teste.";
-		mes "Uma vez que esteja completo, todos os Cavaleiros envolvidos em seu teste vão, juntos, avaliar sua performance.";
+		mes "[CapitÃ£o Herman]";
+		mes "Termine o Ãºltimo teste.";
+		mes "Uma vez que esteja completo, todos os Cavaleiros envolvidos em seu teste vÃ£o, juntos, avaliar sua performance.";
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
 		if (SkillPoint) {
-			mes "[Capitão Herman]";
+			mes "[CapitÃ£o Herman]";
 			mes "Oh...!";
-			mes "Você não pode mudar de classe se você não usou todos os seus pontos de habilidades restantes. Volte quando tiver distribuído todos os pontos de habilidades.";
+			mes "VocÃª nÃ£o pode mudar de classe se vocÃª nÃ£o usou todos os seus pontos de habilidades restantes. Volte quando tiver distribuÃ­do todos os pontos de habilidades.";
 			close;
 		}
-		mes "[Capitão Herman]";
-		mes "Oh, você completou todos os testes? Mas nem todos que completam o teste podem";
+		mes "[CapitÃ£o Herman]";
+		mes "Oh, vocÃª completou todos os testes? Mas nem todos que completam o teste podem";
 		mes "se tornar Cavaleiros.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Durante o teste, nós vemos o quão leal, honrado e forte você é. Nós também vemos se você foi cortês e se você sabe o valor da modéstia e da reverência.";
+		mes "[CapitÃ£o Herman]";
+		mes "Durante o teste, nÃ³s vemos o quÃ£o leal, honrado e forte vocÃª Ã©. NÃ³s tambÃ©m vemos se vocÃª foi cortÃªs e se vocÃª sabe o valor da modÃ©stia e da reverÃªncia.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Através do processo, eu também observei suas ações. Todas as sete opiniões serão observadas na decisão de sua mudança de classe.";
+		mes "[CapitÃ£o Herman]";
+		mes "AtravÃ©s do processo, eu tambÃ©m observei suas aÃ§Ãµes. Todas as sete opiniÃµes serÃ£o observadas na decisÃ£o de sua mudanÃ§a de classe.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Então...";
-		mes "Nós devemos ouvir";
+		mes "[CapitÃ£o Herman]";
+		mes "EntÃ£o...";
+		mes "NÃ³s devemos ouvir";
 		mes "aos pensamentos de todos!";
-		mes "Andrew, o que você acha?";
+		mes "Andrew, o que vocÃª acha?";
 		next;
 		if (JobLevel == 50) {
 			mes "[Senhor Andrew]";
@@ -424,37 +424,37 @@ if (KNIGHT_Q == 0) {
 			mes "Eu aprovo!";
 			mes "Ter vivido como";
 			mes "um Espadachim";
-			mes "até agora";
-			mes "é suficiente.";
+			mes "atÃ© agora";
+			mes "Ã© suficiente.";
 		}
 		else {
 			mes "[Senhor Andrew]";
 			mes "Este aqui";
 			mes "coletou itens";
-			mes "que são um tanto";
+			mes "que sÃ£o um tanto";
 			mes "complicados de se obter. Eu aprovo!";
 			if (sex)
-				mes "Acredito que ele continuará sendo leal depois de virar Cavaleiro.";
+				mes "Acredito que ele continuarÃ¡ sendo leal depois de virar Cavaleiro.";
 			else
-				mes "Acredito que ela continuará sendo leal depois de virar Cavaleiro.";
+				mes "Acredito que ela continuarÃ¡ sendo leal depois de virar Cavaleiro.";
 		}
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Hmm.";
-		mes "Que bela análise.";
-		mes "Senhoracuse, o que você pensa?";
+		mes "Que bela anÃ¡lise.";
+		mes "Senhoracuse, o que vocÃª pensa?";
 		next;
 		mes "[Senhor Senhoracuse]";
-		mes "Heh, muito bem. Não exatamente o que";
-		mes "eu esperava, mas, com esperança, ficará melhor no futuro.";
+		mes "Heh, muito bem. NÃ£o exatamente o que";
+		mes "eu esperava, mas, com esperanÃ§a, ficarÃ¡ melhor no futuro.";
 		next;
 		mes "[Senhor Senhoracuse]";
-		mes "Depois de se tornar um Cavaleiro, você deve construir uma boa reputação com honra. Hmm... Eu aprovo.";
+		mes "Depois de se tornar um Cavaleiro, vocÃª deve construir uma boa reputaÃ§Ã£o com honra. Hmm... Eu aprovo.";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Ok...";
 		mes "Windsor,";
-		mes "e você?";
+		mes "e vocÃª?";
 		next;
 		mes "[Senhor Windsor]";
 		mes "...";
@@ -466,26 +466,26 @@ if (KNIGHT_Q == 0) {
 		mes "[Senhor Windsor]";
 		mes "....Aprovado.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Eu não acho que";
+		mes "[CapitÃ£o Herman]";
+		mes "Eu nÃ£o acho que";
 		mes "ele desaprove.";
-		mes "Então, ouçamos à";
-		mes "opinião de Amy.";
+		mes "EntÃ£o, ouÃ§amos Ã ";
+		mes "opiniÃ£o de Amy.";
 		next;
 		mes "[Senhora Amy]";
 		if (sex) {
-			mes "Hmm! Ele é tão culto!";
-			mes "Ele crescerá e se tornará um maravilhoso Cavaleiro. And he's got such cute widdle cheeeeks~ Hee hee!"; // boa sorte
+			mes "Hmm! Ele Ã© tÃ£o culto!";
+			mes "Ele crescerÃ¡ e se tornarÃ¡ um maravilhoso Cavaleiro. And he's got such cute widdle cheeeeks~ Hee hee!"; // boa sorte
 		}
 		else {
 			mes "Hmm! Ela deve ser boa!";
-			mes "Ela é muito cortês e também muito bonitinha, então alguns pontos mais! Hehe.";
-			mes "Eu não deveria dizer coisas assim!";
+			mes "Ela Ã© muito cortÃªs e tambÃ©m muito bonitinha, entÃ£o alguns pontos mais! Hehe.";
+			mes "Eu nÃ£o deveria dizer coisas assim!";
 		}
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Bem...";
-		mes "Uma revisão estranha,";
+		mes "Uma revisÃ£o estranha,";
 		mes "mas acredito que";
 		mes "ela aprove.";
 		mes "Edmond, fale";
@@ -493,59 +493,59 @@ if (KNIGHT_Q == 0) {
 		next;
 		mes "[Senhor Edmond]";
 		if (sex) {
-			mes "Ele parece um pouco bruto, mas algo brilha dentro dele. Com polimento e refinamento, seu verdadeiro valor brilhará";
+			mes "Ele parece um pouco bruto, mas algo brilha dentro dele. Com polimento e refinamento, seu verdadeiro valor brilharÃ¡";
 			mes "como o sol.";
 		}
 		else {
-			mes "É difícil de ver, mas há uma beleza espiritual dentro dela. Com polimento e refinamento, seu verdadeiro valor vai brilhar tão resplandecentemente";
+			mes "Ã‰ difÃ­cil de ver, mas hÃ¡ uma beleza espiritual dentro dela. Com polimento e refinamento, seu verdadeiro valor vai brilhar tÃ£o resplandecentemente";
 			mes "como a lua.";
 		}
 		next;
-		mes "[Capitão Herman]";
-		mes "Por último...";
+		mes "[CapitÃ£o Herman]";
+		mes "Por Ãºltimo...";
 		mes "Gray. Eu gostaria de";
-		mes "ouvir suas conclusões.";
+		mes "ouvir suas conclusÃµes.";
 		next;
 		mes "[Gray]";
 		if (sex)
-			mes "Um jovem de caráter vir aqui com determinação para ser um Cavaleiro é suficiente...";
+			mes "Um jovem de carÃ¡ter vir aqui com determinaÃ§Ã£o para ser um Cavaleiro Ã© suficiente...";
 		else
-			mes "Uma jovem de caráter vir aqui com determinação para ser uma Cavaleira é suficiente...";
+			mes "Uma jovem de carÃ¡ter vir aqui com determinaÃ§Ã£o para ser uma Cavaleira Ã© suficiente...";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Todos";
 		mes "aprovaram.";
-		mes "Ninguém se opôs.";
-		mes "Então irei te";
-		mes "dizer minha opinião.";
+		mes "NinguÃ©m se opÃ´s.";
+		mes "EntÃ£o irei te";
+		mes "dizer minha opiniÃ£o.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Minha decisão é...";
+		mes "[CapitÃ£o Herman]";
+		mes "Minha decisÃ£o Ã©...";
 		next;
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Eu aprovo.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Você pode não ter terminado todos os testes perfeitamente, mas você têm todas as qualidades necessárias para ser";
+		mes "[CapitÃ£o Herman]";
+		mes "VocÃª pode nÃ£o ter terminado todos os testes perfeitamente, mas vocÃª tÃªm todas as qualidades necessÃ¡rias para ser";
 		mes "um Cavaleiro.";
 		next;
 		completequest 9012;
 		callfunc "Job_Change",Job_Knight;
 		callfunc "F_ClearJobVar";		//deletar todas as variaveis de classe do personagem
-		mes "[Capitão Herman]";
+		mes "[CapitÃ£o Herman]";
 		mes "Eu lhe declaro";
-		mes "você um membro";
+		mes "vocÃª um membro";
 		mes "da Cavalaria de Prontera.";
 		mes "Proteger os mais fracos e";
 		mes "viver com honra.";
 		next;
-		getitem 656,7; //Poção do Despertar
-		mes "[Capitão Herman]";
+		getitem 656,7; //PoÃ§Ã£o do Despertar
+		mes "[CapitÃ£o Herman]";
 		mes "Oh...";
-		mes "Temos preparado um pequeno presente por você ter trocado de classe. Por favor use-a enquanto estiver em batalha honrosamente protegendo os outros.";
+		mes "Temos preparado um pequeno presente por vocÃª ter trocado de classe. Por favor use-a enquanto estiver em batalha honrosamente protegendo os outros.";
 		next;
-		mes "[Capitão Herman]";
-		mes "Vá!";
+		mes "[CapitÃ£o Herman]";
+		mes "VÃ¡!";
 		mes "O futuro de";
 		mes "Rune-Midgard";
 		mes "descansa sobre seus";
@@ -558,70 +558,70 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 	if (BaseJob != Job_Swordman) {
 		if (BaseJob == Job_Knight) {
 			mes "[Senhor Andrew]";
-			mes "Você deve ser";
+			mes "VocÃª deve ser";
 			mes "um membro da";
 			mes "Cavalaria.";
-			mes "Como vai você?";
+			mes "Como vai vocÃª?";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Você tem de trabalhar arduamente para recolher alimentos, bem como guardar zeny para comprar equipamentos. Pegue tudo o que você";
+			mes "VocÃª tem de trabalhar arduamente para recolher alimentos, bem como guardar zeny para comprar equipamentos. Pegue tudo o que vocÃª";
 			mes "achar na batalha, mesmo o menor Jellopy.";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Não é bom";
+			mes "NÃ£o Ã© bom";
 			mes "ser muito guloso.";
 			mes "Antes de tudo, nos somos Cavaleiros.";
 			close;
 		}
 		else if (BaseClass == Job_Novice) {
 			mes "[Senhor Andrew]";
-			mes "Ei você,";
+			mes "Ei vocÃª,";
 			mes "pequeno aprendiz.";
 			mes "Bem vindo a";
 			mes "Cavalaria de Prontera.";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Você pode estar";
+			mes "VocÃª pode estar";
 			mes "fraco agora, mais algum dia";
-			mes "você vai se tornar muito forte.";
+			mes "vocÃª vai se tornar muito forte.";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Sonhe com um futuro brilhante, e sempre siga em frente no caminho que você escolher tomar.";
+			mes "Sonhe com um futuro brilhante, e sempre siga em frente no caminho que vocÃª escolher tomar.";
 			close;
 		}
 		else {
 			mes "[Senhor Andrew]";
-			mes "Nós, os membros da";
+			mes "NÃ³s, os membros da";
 			mes "Cavalaria de Prontera, estamos fazendo o melhor para proteger a paz neste mundo.";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Mesmo durante as batalhas que enfrentamos todos os dias, nós sonhamos com";
-			mes "um futuro brilhante que está por vir.";
+			mes "Mesmo durante as batalhas que enfrentamos todos os dias, nÃ³s sonhamos com";
+			mes "um futuro brilhante que estÃ¡ por vir.";
 			close;
 		}
 	}
 	if (KNIGHT_Q == 0) {
 		mes "[Senhor Andrew]";
-		mes "Nós, os membros da";
-		mes "Cavalaria de Prontera estamos nos esforçando ao máximo para proteger a paz neste mundo.";
+		mes "NÃ³s, os membros da";
+		mes "Cavalaria de Prontera estamos nos esforÃ§ando ao mÃ¡ximo para proteger a paz neste mundo.";
 		next;
 		mes "[Senhor Andrew]";
-		mes "Mesmo durante as batalhas, nós encaramos a cada dia e todos os dias, o sonho de";
-		mes "que um futuro brilhante chegará.";
+		mes "Mesmo durante as batalhas, nÃ³s encaramos a cada dia e todos os dias, o sonho de";
+		mes "que um futuro brilhante chegarÃ¡.";
 		close;
 	}
 	else if (KNIGHT_Q == 1) {
 		mes "[Senhor Andrew]";
 		mes "Bom dia.";
-		mes "Posso ajudá-lo";
+		mes "Posso ajudÃ¡-lo";
 		mes "com algo?";
 		next;
 		if (select("Eu gostaria de fazer o teste.:Ah, nada.") == 1) {
 			mes "[Senhor Andrew]";
 			mes "Ah...";
-			mes "Você quer";
+			mes "VocÃª quer";
 			mes "se tornar um Cavaleiro.";
-			mes "Seu nome é";
+			mes "Seu nome Ã©";
 			mes "" + strcharinfo(0) + ",";
 			mes "certo?";
 			next;
@@ -633,35 +633,35 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 			mes "seu primeiro teste.";
 			next;
 			mes "[Senhor Andrew]";
-			mes "Eu testarei o seu senso de lealdade. Todo Cavaleiro precisa possuir esta virtude. Para este exame, você recolherá prêmios do";
+			mes "Eu testarei o seu senso de lealdade. Todo Cavaleiro precisa possuir esta virtude. Para este exame, vocÃª recolherÃ¡ prÃªmios do";
 			mes "campo de batalha.";
 			next;
 			if (JobLevel == 50) {
 				mes "[Senhor Andrew]";
 				mes "Hmm...?";
 				mes "Espere aqui.";
-				mes "Você parece ter";
+				mes "VocÃª parece ter";
 				mes "dominado a forma de";
 				mes "ser um Espadachim.";
 				next;
 				mes "[Senhor Andrew]";
 				mes "Impressionante...!";
 				mes "Pensando melhor,";
-				mes "não creio que sua";
+				mes "nÃ£o creio que sua";
 				mes "lealdade precise";
 				mes "ser testada.";
 				next;
 				mes "[Senhor Andrew]";
-				mes "Por favor, vá ao meu colega Cavaleiro, Senhor Senhoracuse, e ele lhe dará seu próximo teste. Parabén por ter dominado a classe Espadachim.";
+				mes "Por favor, vÃ¡ ao meu colega Cavaleiro, Senhor Senhoracuse, e ele lhe darÃ¡ seu prÃ³ximo teste. ParabÃ©n por ter dominado a classe Espadachim.";
 				set KNIGHT_Q,4;
 				changequest 9000,9003;
 				close;
 			}
 			mes "[Senhor Andrew]";
 			mes "Sem mais";
-			mes "rebuliço,";
-			mes "vamos começar!";
-			mes "Vá e junte os";
+			mes "rebuliÃ§o,";
+			mes "vamos comeÃ§ar!";
+			mes "VÃ¡ e junte os";
 			mes "seguintes itens...";
 			next;
 			mes "[Senhor Andrew]";
@@ -687,14 +687,14 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 			mes "[Senhor Andrew]";
 			mes "Eu estarei";
 			mes "esperando aqui por";
-			mes "você com os";
+			mes "vocÃª com os";
 			mes "itens que eu listei.";
 			mes "Veremo-nos logo!";
 			close;
 		}
 		else {
 			mes "[Senhor Andrew]";
-			mes "Bem, então...";
+			mes "Bem, entÃ£o...";
 			mes "Bom dia.";
 			close;
 		}
@@ -702,7 +702,7 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 	else if (KNIGHT_Q == 2 || KNIGHT_Q == 3) {
 		mes "[Senhor Andrew]";
 		mes "Bem Vindo novamente~";
-		mes "Você coletou";
+		mes "VocÃª coletou";
 		mes "todos os itens?";
 		mes "Deixe-me verificar...";
 		next;
@@ -714,7 +714,7 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 		}
 		if (countitem(.@items[0]) >= .@items[1] && countitem(.@items[2]) >= .@items[3] && countitem(.@items[4]) >= .@items[5] && countitem(.@items[6]) >= .@items[7] && countitem(.@items[8]) >= .@items[9] && countitem(.@items[10]) >= .@items[11]) {
 			mes "[Senhor Andrew]";
-			mes "Perfeito! Nós apreciamos os seus esforços ao coletar esses itens. Eles serão usados para dar suporte financeiro a Chivalry.";
+			mes "Perfeito! NÃ³s apreciamos os seus esforÃ§os ao coletar esses itens. Eles serÃ£o usados para dar suporte financeiro a Chivalry.";
 			next;
 			delitem .@items[0],.@items[1];
 			delitem .@items[2],.@items[3];
@@ -729,16 +729,16 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 			}
 			set KNIGHT_Q,4;
 			mes "[Senhor Andrew]";
-			mes "Por favor visite meu companheiro cavaleiro, Senhor Senhoracuse, e continue os testes com dedicação e lealdade que você demonstrou hoje.";
+			mes "Por favor visite meu companheiro cavaleiro, Senhor Senhoracuse, e continue os testes com dedicaÃ§Ã£o e lealdade que vocÃª demonstrou hoje.";
 			close;
 		}
 		mes "[Senhor Andrew]";
 		mes "Espere, espere...";
-		mes "Eu acho que você está";
+		mes "Eu acho que vocÃª estÃ¡";
 		mes "esquecendo de alguns";
-		mes "itens. No caso você";
+		mes "itens. No caso vocÃª";
 		mes "esqueceu, deixe-me";
-		mes "lembrar você...";
+		mes "lembrar vocÃª...";
 		next;
 		mes "[Senhor Andrew]";
 		mes "^236B8E"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
@@ -750,24 +750,24 @@ prt_in,75,107,4	script	Senhor Andrew#knt	65,{
 		next;
 		mes "[Senhor Andrew]";
 		mes "Agora, por favor leve este teste a serio e com sinceridade.";
-		mes "Agora, eu ficarem esperando que você";
-		mes "complete essa missão.";
+		mes "Agora, eu ficarem esperando que vocÃª";
+		mes "complete essa missÃ£o.";
 		close;
 	}
 	else if (KNIGHT_Q == 4) {
 		mes "[Senhor Andrew]";
-		mes "Tem alguma coisa que você queira perguntar para mim? Você precisa ir e fazer a proxima parte do teste. Apresse-se, Senhor Senhoracuse está esperando por você~";
+		mes "Tem alguma coisa que vocÃª queira perguntar para mim? VocÃª precisa ir e fazer a proxima parte do teste. Apresse-se, Senhor Senhoracuse estÃ¡ esperando por vocÃª~";
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
 		mes "[Senhor Andrew]";
-		mes "Você deve ter terminado todas as provas. Bom trabalho! Você deve ir ver o nosso capitão, para que todos possamos dar a nossa avaliação.";
+		mes "VocÃª deve ter terminado todas as provas. Bom trabalho! VocÃª deve ir ver o nosso capitÃ£o, para que todos possamos dar a nossa avaliaÃ§Ã£o.";
 		close;
 	}
 	else {
 		mes "[Senhor Andrew]";
-		mes "Tem alguma coisa que você queira perguntar para mim? Você deve ir e fazer o próximo teste. Faça o seu melhor.";
-		mes "Eu sei que você pode fazer isso!";
+		mes "Tem alguma coisa que vocÃª queira perguntar para mim? VocÃª deve ir e fazer o prÃ³ximo teste. FaÃ§a o seu melhor.";
+		mes "Eu sei que vocÃª pode fazer isso!";
 		close;
 	}
 }
@@ -776,39 +776,39 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 	if (BaseJob != Job_Swordman) {
 		if (BaseJob == Job_Knight) {
 			mes "[Senhor Senhoracuse]";
-			mes "Ei olá!";
-			mes "Como vai você?";
+			mes "Ei olÃ¡!";
+			mes "Como vai vocÃª?";
 			mes "A Cavalaria tem me";
 			mes "feito muito bem.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Nós temos";
+			mes "NÃ³s temos";
 			mes "testado novos membros,";
 			mes "mas nenhum deles tem";
-			mes "se mostrado tão promissor";
-			mes "quanto você.";
+			mes "se mostrado tÃ£o promissor";
+			mes "quanto vocÃª.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Eu espero que todos os novos recrutas comportem-se, e não";
+			mes "Eu espero que todos os novos recrutas comportem-se, e nÃ£o";
 			mes "tragam vergonha a Cavalaria.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Se você pegar qualquer um dos novatos agindo de um jeito que desonre um cavaleiro, escolte-o até mim por favor?";
+			mes "Se vocÃª pegar qualquer um dos novatos agindo de um jeito que desonre um cavaleiro, escolte-o atÃ© mim por favor?";
 			close;
 		}
 		else if (Baseclass == Job_Novice) {
 			mes "[Senhor Senhoracuse]";
-			mes "Hã?";
+			mes "HÃ£?";
 			mes "O que um Aprendiz";
 			mes "faz aqui?";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Vejo que está interessado em se tornar Cavaleiro? Você não pode apenas mudar de Aprendiz para Cavaleiro, entende.";
+			mes "Vejo que estÃ¡ interessado em se tornar Cavaleiro? VocÃª nÃ£o pode apenas mudar de Aprendiz para Cavaleiro, entende.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Primeiro, você tem";
+			mes "Primeiro, vocÃª tem";
 			mes "que adquirir uma boa";
-			mes "experiência como Espadachim";
+			mes "experiÃªncia como Espadachim";
 			mes "antes que possa considerar";
 			mes "tornar-se Cavaleiro.";
 			close;
@@ -819,11 +819,11 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 			mes "Existe uma maneira de ter os dois sem comprometer um ou o outro?";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Armas de Duas Mãos melhoram";
-			mes "significativamente o seu ataque, mas diminuem a sua defesa. Há algo que compense essa fraquesa?";
+			mes "Armas de Duas MÃ£os melhoram";
+			mes "significativamente o seu ataque, mas diminuem a sua defesa. HÃ¡ algo que compense essa fraquesa?";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Alguma arma ou técnica";
+			mes "Alguma arma ou tÃ©cnica";
 			mes "como essa deve ajudar";
 			mes "grandemente os Cavaleiros...";
 			close;
@@ -835,11 +835,11 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 		mes "Existe uma maneira de ter os dois sem comprometer um ou o outro?";
 		next;
 		mes "[Senhor Senhoracuse]";
-		mes "Armas de Duas Mãos melhoram";
-		mes "significativamente o seu ataque, mas diminuem a sua defesa. Há algo que compense essa fraquesa?";
+		mes "Armas de Duas MÃ£os melhoram";
+		mes "significativamente o seu ataque, mas diminuem a sua defesa. HÃ¡ algo que compense essa fraquesa?";
 		next;
 		mes "[Senhor Senhoracuse]";
-		mes "Alguma arma ou técnica";
+		mes "Alguma arma ou tÃ©cnica";
 		mes "como essa deve ajudar";
 		mes "grandemente os Cavaleiros...";
 		close;
@@ -847,15 +847,15 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 	else if (KNIGHT_Q == 1) {
 		mes "[Senhor Senhoracuse]";
 		mes "Sim?";
-		mes "Você tem";
+		mes "VocÃª tem";
 		mes "algo para";
 		mes "me perguntar?";
 		next;
-		if (select("Eu gostaria de fazer o teste de mudança de classe.:Não, nada.") == 1) {
+		if (select("Eu gostaria de fazer o teste de mudanÃ§a de classe.:NÃ£o, nada.") == 1) {
 			mes "[Senhor Senhoracuse]";
 			mes "Oh, para se tornar";
 			mes "um Cavaleiro? Deixe-me ver:";
-			mes "você não é";
+			mes "vocÃª nÃ£o Ã©";
 			if (sex)
 				mes "o garoto que";
 			else
@@ -868,17 +868,17 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 			mes "" + strcharinfo(0) + ".";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Mas, antes de vir para mim, você deve visitar os outros. Pelo que";
-			mes "vejo, você não provou que conhece o básico. Mas eu vou";
-			mes "reconsiderar se você";
+			mes "Mas, antes de vir para mim, vocÃª deve visitar os outros. Pelo que";
+			mes "vejo, vocÃª nÃ£o provou que conhece o bÃ¡sico. Mas eu vou";
+			mes "reconsiderar se vocÃª";
 			mes "passar pelo primeiro teste.";
 			close;
 		}
 		mes "[Senhor Senhoracuse]";
 		mes "Hmmm...?";
-		mes "Certo, então.";
-		mes "É só que";
-		mes "você tinha aquele";
+		mes "Certo, entÃ£o.";
+		mes "Ã‰ sÃ³ que";
+		mes "vocÃª tinha aquele";
 		mes "olhar em seu";
 		mes "rosto.";
 		close;
@@ -886,25 +886,25 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 	else if (KNIGHT_Q == 2 || KNIGHT_Q == 3) {
 		mes "[Senhor Senhoracuse]";
 		mes "Sim?";
-		mes "Você tem";
+		mes "VocÃª tem";
 		mes "algo para";
 		mes "me perguntar?";
 		next;
-		if (select("Eu gostaria de fazer o teste de mudança de classe.:Não, nada.") == 1) {
+		if (select("Eu gostaria de fazer o teste de mudanÃ§a de classe.:NÃ£o, nada.") == 1) {
 			mes "[Senhor Senhoracuse]";
 			mes "Hahaha!!";
-			mes "Você não deveria fazer o teste do Andrew? Você não pode simplesmente pulá-lo, você sabe! Todos os testes são importantes.";
+			mes "VocÃª nÃ£o deveria fazer o teste do Andrew? VocÃª nÃ£o pode simplesmente pulÃ¡-lo, vocÃª sabe! Todos os testes sÃ£o importantes.";
 			next;
 			mes "[Senhor Senhoracuse]";
 			mes "Fale com Senhor Andrew primeiro.";
-			mes "Meu teste com você vem depois de você terminar o teste com ele.";
+			mes "Meu teste com vocÃª vem depois de vocÃª terminar o teste com ele.";
 			close;
 		}
 		mes "[Senhor Senhoracuse]";
 		mes "Hmmm...?";
-		mes "Certo, então.";
-		mes "É só que";
-		mes "você tinha aquele";
+		mes "Certo, entÃ£o.";
+		mes "Ã‰ sÃ³ que";
+		mes "vocÃª tinha aquele";
 		mes "lolhar em seu";
 		mes "rosto.";
 		close;
@@ -912,183 +912,183 @@ prt_in,71,91,0	script	Senhor Senhoracuse#knt	65,{
 	else if (KNIGHT_Q == 4 || KNIGHT_Q == 5) {
 		mes "[Senhor Senhoracuse]";
 		mes "Sim?";
-		mes "Você tem";
+		mes "VocÃª tem";
 		mes "algo para";
 		mes "me perguntar?";
 		next;
-		if (select("Eu gostaria de fazer o teste de mudança de classe.:Não, nada.") == 1) {
+		if (select("Eu gostaria de fazer o teste de mudanÃ§a de classe.:NÃ£o, nada.") == 1) {
 			mes "[Senhor Senhoracuse]";
-			mes "Então, você passou pelo primeiro teste. Muito bem. Vou dar a você uma chance. Deixe que eu me apresente. Meu nome é James Senhoracuse.";
+			mes "EntÃ£o, vocÃª passou pelo primeiro teste. Muito bem. Vou dar a vocÃª uma chance. Deixe que eu me apresente. Meu nome Ã© James Senhoracuse.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Este teste medirá o quanto você sabe sobre os Cavaleiros. Mais importante, quero saber o que você pensa sobre honra.";
+			mes "Este teste medirÃ¡ o quanto vocÃª sabe sobre os Cavaleiros. Mais importante, quero saber o que vocÃª pensa sobre honra.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Não fique nervoso, não demorarei muito. Serão questões rápidas, pois você ainda deve ver os outros, certo?";
+			mes "NÃ£o fique nervoso, nÃ£o demorarei muito. SerÃ£o questÃµes rÃ¡pidas, pois vocÃª ainda deve ver os outros, certo?";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Bem, então";
-			mes "vamos começar.";
+			mes "Bem, entÃ£o";
+			mes "vamos comeÃ§ar.";
 			mes "Por favor, responda";
 			mes "rapidamente.";
 			next;
 L_AskQuestions:
 			mes "[Senhor Senhoracuse]";
-			mes "Um cavaleiro deve possuir muita força, defesa, agilidade e a habilidade para dominar a Rapidez com Duas mãos. Qual das seguintes armas não é afetada pela habilidade Rapidez com Duas Mãos?";
+			mes "Um cavaleiro deve possuir muita forÃ§a, defesa, agilidade e a habilidade para dominar a Rapidez com Duas mÃ£os. Qual das seguintes armas nÃ£o Ã© afetada pela habilidade Rapidez com Duas MÃ£os?";
 			next;
-			if (select("Kataná:Espada Matadora:Espada Larga:Flamberge") != 4) {
+			if (select("KatanÃ¡:Espada Matadora:Espada Larga:Flamberge") != 4) {
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
 				mes "Errado!";
-				mes "Esta é uma Espada de Duas Mãos!";
-				mes "Está certo de que deseja ser um Cavaleiro? Você nem mesmo sabe o básico...";
+				mes "Esta Ã© uma Espada de Duas MÃ£os!";
+				mes "EstÃ¡ certo de que deseja ser um Cavaleiro? VocÃª nem mesmo sabe o bÃ¡sico...";
 				next;
 				mes "[Senhor Senhoracuse]";
-				mes "Se você não está certo sobre nada, vá à cidade e pergunte a um Cavaleiro. Você precisa aprender mais sobre Cavaleiros antes de se inscrever para o teste!";
+				mes "Se vocÃª nÃ£o estÃ¡ certo sobre nada, vÃ¡ Ã  cidade e pergunte a um Cavaleiro. VocÃª precisa aprender mais sobre Cavaleiros antes de se inscrever para o teste!";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
-			mes "Bom, agora deixe-me perguntar sobre algumas habilidades. Qual das seguintes não é necessária para aprender Impacto e Tyr?";
+			mes "Bom, agora deixe-me perguntar sobre algumas habilidades. Qual das seguintes nÃ£o Ã© necessÃ¡ria para aprender Impacto e Tyr?";
 			next;
-			if (select("Perícia com Espada de Duas Mãos Lv.5:Impacto Explosivo Lv.3:Provocar Lv.10:Golpe Fulminante Lv.10") != 3) {
+			if (select("PerÃ­cia com Espada de Duas MÃ£os Lv.5:Impacto Explosivo Lv.3:Provocar Lv.10:Golpe Fulminante Lv.10") != 3) {
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
 				mes "Errado!";
-				mes "Você precisa disso para aprender Impacto de Tyr! Você deveria aprender mais sobre Cavaleiros, antes de se inscrever para o teste!";
+				mes "VocÃª precisa disso para aprender Impacto de Tyr! VocÃª deveria aprender mais sobre Cavaleiros, antes de se inscrever para o teste!";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
-			mes "Cavaleiros também podem usar lanças, ao contrário de outras classes, e têm habilidades relacionadas a lanças, por conseguinte. Quais habilidades não são necessárias para aprender Brandir Lança?";
+			mes "Cavaleiros tambÃ©m podem usar lanÃ§as, ao contrÃ¡rio de outras classes, e tÃªm habilidades relacionadas a lanÃ§as, por conseguinte. Quais habilidades nÃ£o sÃ£o necessÃ¡rias para aprender Brandir LanÃ§a?";
 			next;
-			if (select("Perfurar Lv.5:Estocada Lv.3:Lança Bomerangue Lv.3:Cavalgar Lv.1") != 3) {
+			if (select("Perfurar Lv.5:Estocada Lv.3:LanÃ§a Bomerangue Lv.3:Cavalgar Lv.1") != 3) {
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Errado! Você precisa aprender isso para aprender Brandir Lança! Como você pode não saber sobre Cavaleiros se deseja se tornar um?";
+				mes "Errado! VocÃª precisa aprender isso para aprender Brandir LanÃ§a! Como vocÃª pode nÃ£o saber sobre Cavaleiros se deseja se tornar um?";
 				next;
 				mes "[Senhor Senhoracuse]";
-				mes "Se não estiver certo sobre algo, vá para a cidade e peça ajuda a";
+				mes "Se nÃ£o estiver certo sobre algo, vÃ¡ para a cidade e peÃ§a ajuda a";
 				mes "algum Cavaleiro. Volte depois de ter aprendido mais sobre Cavaleiros.";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
-			mes "Algumas lanças também tem propriedades mágicas, como magias. Das seguintes, qual pode atacar um Pesadelo, que tem a propriedade Fantasma?";
+			mes "Algumas lanÃ§as tambÃ©m tem propriedades mÃ¡gicas, como magias. Das seguintes, qual pode atacar um Pesadelo, que tem a propriedade Fantasma?";
 			next;
-			if (select("Zéfiro:Lança:Guisarme-Bico:Foice") != 1) {
+			if (select("ZÃ©firo:LanÃ§a:Guisarme-Bico:Foice") != 1) {
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Errado! Você não fará o menor dano com esse tipo de lança! Volte depois de ter aprendido mais sobre Cavaleiros!";
+				mes "Errado! VocÃª nÃ£o farÃ¡ o menor dano com esse tipo de lanÃ§a! Volte depois de ter aprendido mais sobre Cavaleiros!";
 				next;
 				mes "[Senhor Senhoracuse]";
-				mes "Se você tivre alguma dúvida, pergunte a um Cavaleiro na cidade. Isto é conhecimento básico para nós!";
+				mes "Se vocÃª tivre alguma dÃºvida, pergunte a um Cavaleiro na cidade. Isto Ã© conhecimento bÃ¡sico para nÃ³s!";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
-			mes "Quando você se tornar um Cavaleiro, você poderá montar Pecos-Pecos. Entretanto, sua velocidade de ataque diminui quando você estpa montado em um Peco-Peco.";
+			mes "Quando vocÃª se tornar um Cavaleiro, vocÃª poderÃ¡ montar Pecos-Pecos. Entretanto, sua velocidade de ataque diminui quando vocÃª estpa montado em um Peco-Peco.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Mas, você pode anular esta diminuição de velocidade quando você aprende a habilidade Perícia em Montaria. Qual a porcentagem de sua velocidade de ataque normal quando você tem Pericia em Montaria no level 3?";
+			mes "Mas, vocÃª pode anular esta diminuiÃ§Ã£o de velocidade quando vocÃª aprende a habilidade PerÃ­cia em Montaria. Qual a porcentagem de sua velocidade de ataque normal quando vocÃª tem Pericia em Montaria no level 3?";
 			next;
 			if (select("70% da velocidade de ataque normal:80% da velocidade de ataque normal:90% da velocidade de ataque normal:100% da velocidade de ataque normal") != 2) {
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
 				mes "Errado!";
-				mes "Não se importe de montar um Peco-Peco se você não conhece Perícia em Montaria!";
+				mes "NÃ£o se importe de montar um Peco-Peco se vocÃª nÃ£o conhece PerÃ­cia em Montaria!";
 				next;
 				mes "[Senhor Senhoracuse]";
-				mes "É melhor você voltar quando tiver aprendido mais sobre Cavaleiros!";
+				mes "Ã‰ melhor vocÃª voltar quando tiver aprendido mais sobre Cavaleiros!";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
 			mes "Bom, bom...";
-			mes "Estou certo de que você sabe alguma coisa sobre Cavaleiros. Agora, deixe-me fazer perguntas pessoais sobre Cavaleiros.";
+			mes "Estou certo de que vocÃª sabe alguma coisa sobre Cavaleiros. Agora, deixe-me fazer perguntas pessoais sobre Cavaleiros.";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "O que você deveria fazer quando um Aprendiz pede ajuda na cidade?";
+			mes "O que vocÃª deveria fazer quando um Aprendiz pede ajuda na cidade?";
 			next;
-			switch(select("Diga a ele um bom lugar para upar.:Deixa o aprendiz bater enquanto você toma dano.:Dá ao aprendiz alguns itens e zeny.")) {
+			switch(select("Diga a ele um bom lugar para upar.:Deixa o aprendiz bater enquanto vocÃª toma dano.:DÃ¡ ao aprendiz alguns itens e zeny.")) {
 			case 1:
 				mes "[Senhor Senhoracuse]";
-				mes "Claro, mesmo um aprendiz precisa aprender como ser indepentende. Dar bons conselhos a aprendizes é uma das melhores coisas que podemos fazer.";
+				mes "Claro, mesmo um aprendiz precisa aprender como ser indepentende. Dar bons conselhos a aprendizes Ã© uma das melhores coisas que podemos fazer.";
 				next;
 				break;
 			case 2:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Você pensa da forma errada. Você realmente acha que isto é ajudar o aprendiz? Dê o peixe, que ele comerá por um dia. Ensine a pescar, que ele comerá por toda a vida!";
+				mes "VocÃª pensa da forma errada. VocÃª realmente acha que isto Ã© ajudar o aprendiz? DÃª o peixe, que ele comerÃ¡ por um dia. Ensine a pescar, que ele comerÃ¡ por toda a vida!";
 				close;
 			case 3:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Você realmente acha que isso é ajudar um pobre aprendiz? É generoso, mas ele não saberá o verdadeiro valor dos zeny e itens até que ganhe sozinho.";
+				mes "VocÃª realmente acha que isso Ã© ajudar um pobre aprendiz? Ã‰ generoso, mas ele nÃ£o saberÃ¡ o verdadeiro valor dos zeny e itens atÃ© que ganhe sozinho.";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
 			mes "Certo...";
-			mes "Agora, como você";
+			mes "Agora, como vocÃª";
 			mes "deveria agir em";
 			mes "um grupo?";
 			next;
-			switch(select("Proteger a todos na frente da batalha.:Juntar monstros e destruí-los de uma vez.:Pegar o máximo de itens a todo custo.")) {
+			switch(select("Proteger a todos na frente da batalha.:Juntar monstros e destruÃ­-los de uma vez.:Pegar o mÃ¡ximo de itens a todo custo.")) {
 			case 1:
 				mes "[Senhor Senhoracuse]";
-				mes "É isso! Nossa força e ataque são muito importantes em um grupo. Todos os Cavaleiros deveriam entrar em batalha com essa mentalidade.";
+				mes "Ã‰ isso! Nossa forÃ§a e ataque sÃ£o muito importantes em um grupo. Todos os Cavaleiros deveriam entrar em batalha com essa mentalidade.";
 				next;
 				break;
 			case 2:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Está louco? Não percebe a falha nesse modo de pensar? Você não pode lidar com muitos monstros. E se eles o matarem? Quem protegerá os inocentes?";
+				mes "EstÃ¡ louco? NÃ£o percebe a falha nesse modo de pensar? VocÃª nÃ£o pode lidar com muitos monstros. E se eles o matarem? Quem protegerÃ¡ os inocentes?";
 				close;
 			case 3:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Vejo sua ganância e isso não existe aqui! Parece que você não se importa com os outro de verdade!";
+				mes "Vejo sua ganÃ¢ncia e isso nÃ£o existe aqui! Parece que vocÃª nÃ£o se importa com os outro de verdade!";
 				mes "Saia!";
 				close;
 			}
 			mes "[Senhor Senhoracuse]";
 			mes "Finalmente...";
-			mes "qual é o mais";
+			mes "qual Ã© o mais";
 			mes "importante valor";
 			mes "para um Cavaleiro?";
 			next;
-			switch(select("Honra:Saúde:Fama")) {
+			switch(select("Honra:SaÃºde:Fama")) {
 			case 1:
 				mes "[Senhor Senhoracuse]";
-				mes "Certo, acima de tudo, Cavaleiros devem ser honrados! Nós vivemos e morremos por honra! Tenha sempre isso em mente.";
+				mes "Certo, acima de tudo, Cavaleiros devem ser honrados! NÃ³s vivemos e morremos por honra! Tenha sempre isso em mente.";
 				next;
 				break;
 			case 2:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Escória! Você quer se tornar um Cavaleiro para seu próprio bem? Saia! Não aceitaremos alguém como você na Cavalaria!";
+				mes "EscÃ³ria! VocÃª quer se tornar um Cavaleiro para seu prÃ³prio bem? Saia! NÃ£o aceitaremos alguÃ©m como vocÃª na Cavalaria!";
 				close;
 			case 3:
 				set KNIGHT_Q,5;
 				mes "[Senhor Senhoracuse]";
-				mes "Então você está tentando ficar famoso através da Cavalaria? É patético. Não aceitaremos alguém como você na Cavalaria!";
+				mes "EntÃ£o vocÃª estÃ¡ tentando ficar famoso atravÃ©s da Cavalaria? Ã‰ patÃ©tico. NÃ£o aceitaremos alguÃ©m como vocÃª na Cavalaria!";
 				close;
 			}
 			set KNIGHT_Q,6;
 			changequest 9003,9004;
 			mes "[Senhor Senhoracuse]";
-			mes "Bem, então";
-			mes "este é o";
+			mes "Bem, entÃ£o";
+			mes "este Ã© o";
 			mes "fim do meu teste.";
 			next;
 			mes "[Senhor Senhoracuse]";
 			mes "Para seu";
-			mes "próximo teste";
+			mes "prÃ³ximo teste";
 			mes "fale com Senhor Windsor.";
-			mes "Ele é muito calado,";
-			mes "mas não deixe que";
+			mes "Ele Ã© muito calado,";
+			mes "mas nÃ£o deixe que";
 			mes "isso o atinja.";
 			close;
 		}
 		mes "[Senhor Senhoracuse]";
 		mes "Hmmm...?";
 		mes "Certo.";
-		mes "É só que você";
+		mes "Ã‰ sÃ³ que vocÃª";
 		mes "tinha aquele";
 		mes "olhar em seu";
 		mes "rosto.";
@@ -1097,24 +1097,24 @@ L_AskQuestions:
 	else if (KNIGHT_Q == 5) {
 		mes "[Senhor Senhoracuse]";
 		mes "O que...";
-		mes "Você denovo?";
+		mes "VocÃª denovo?";
 		next;
-		if (select("Quero realizar o teste novamente.:Não, nada.") == 1) {
+		if (select("Quero realizar o teste novamente.:NÃ£o, nada.") == 1) {
 			mes "[Senhor Senhoracuse]";
-			mes "Está certo disso?";
-			mes "Está certo de que você está";
+			mes "EstÃ¡ certo disso?";
+			mes "EstÃ¡ certo de que vocÃª estÃ¡";
 			mes "preparado desta vez?";
 			next;
 			mes "[Senhor Senhoracuse]";
-			mes "Certo então,";
-			mes "aqui vamos nós denovo...";
+			mes "Certo entÃ£o,";
+			mes "aqui vamos nÃ³s denovo...";
 			next;
 			goto L_AskQuestions;
 		}
 		mes "[Senhor Senhoracuse]";
 		mes "Hmmm...?";
 		mes "Certo.";
-		mes "É só que você";
+		mes "Ã‰ sÃ³ que vocÃª";
 		mes "tinha aquele";
 		mes "olhar em seu";
 		mes "rosto.";
@@ -1123,20 +1123,20 @@ L_AskQuestions:
 	else if (KNIGHT_Q == 6) {
 		mes "[Senhor Senhoracuse]";
 		mes "Oh?";
-		mes "Você tem";
+		mes "VocÃª tem";
 		mes "algo para";
 		mes "me perguntar?";
 		next;
-		if (select("Eu gostaria de fazer o teste de mudança de classe.:Não, nada.") == 1) {
+		if (select("Eu gostaria de fazer o teste de mudanÃ§a de classe.:NÃ£o, nada.") == 1) {
 			mes "[Senhor Senhoracuse]";
 			mes "Ei...";
-			mes "Você já fez o meu teste, não? Você já acabou aqui. Você deveria visitar Senhor Windos agora...";
+			mes "VocÃª jÃ¡ fez o meu teste, nÃ£o? VocÃª jÃ¡ acabou aqui. VocÃª deveria visitar Senhor Windos agora...";
 			close;
 		}
 		mes "[Senhor Senhoracuse]";
 		mes "Hmmm...?";
 		mes "Certo.";
-		mes "É só que você";
+		mes "Ã‰ sÃ³ que vocÃª";
 		mes "tinha aquele";
 		mes "olhar em seu";
 		mes "rosto.";
@@ -1145,23 +1145,23 @@ L_AskQuestions:
 	else if (KNIGHT_Q == 14) {
 		mes "[Senhor Senhoracuse]";
 		mes "Hmm...?";
-		mes "Você terminou";
+		mes "VocÃª terminou";
 		mes "todos os outros";
 		mes "testes?";
 		next;
 		mes "[Senhor Senhoracuse]";
-		mes "Bem, então";
-		mes "vá falar com o";
-		mes "capitão. Estaremos todos";
+		mes "Bem, entÃ£o";
+		mes "vÃ¡ falar com o";
+		mes "capitÃ£o. Estaremos todos";
 		mes "aqui para avaliar";
 		mes "sua performance.";
 		close;
 	}
 	else {
 		mes "[Senhor Senhoracuse]";
-		mes "Olá denovo.";
-		mes "Você precisa de algo?";
-		mes "Desculpe, mas estou ocupado no momento. Você deveria terminar o resto dos seus testes.";
+		mes "OlÃ¡ denovo.";
+		mes "VocÃª precisa de algo?";
+		mes "Desculpe, mas estou ocupado no momento. VocÃª deveria terminar o resto dos seus testes.";
 		close;
 	}
 }
@@ -1181,8 +1181,8 @@ prt_in,79,94,4	script	Senhor Windsor#knt	733,{
 			close;
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "...Vá jogar";
-			mes "lá fora.";
+			mes "...VÃ¡ jogar";
+			mes "lÃ¡ fora.";
 			close;
 		}
 		else {
@@ -1197,7 +1197,7 @@ prt_in,79,94,4	script	Senhor Windsor#knt	733,{
 	else if (KNIGHT_Q >= 1 && KNIGHT_Q <= 5) {
 		mes "...O que?";
 		next;
-		if (select("Eu quero me inscrever no teste de mudança de classe.:Oh, nada.") == 1) {
+		if (select("Eu quero me inscrever no teste de mudanÃ§a de classe.:Oh, nada.") == 1) {
 			mes "[Senhor Windsor]";
 			mes "...";
 			next;
@@ -1206,7 +1206,7 @@ prt_in,79,94,4	script	Senhor Windsor#knt	733,{
 			mes "......";
 			next;
 			mes "[Senhor Windsor]";
-			mes "...Este não é meu turno.";
+			mes "...Este nÃ£o Ã© meu turno.";
 			close;
 		}
 		mes "[Senhor Windsor]";
@@ -1215,7 +1215,7 @@ prt_in,79,94,4	script	Senhor Windsor#knt	733,{
 	}
 	else if (KNIGHT_Q == 6 || KNIGHT_Q == 7) {
 		if (KNIGHT_Q == 6) {
-			set .@mes$,"O Senhor Senhoracuse me enviou até você.:Oh, nada.";
+			set .@mes$,"O Senhor Senhoracuse me enviou atÃ© vocÃª.:Oh, nada.";
 			mes ".....What?";
 			next;
 		}
@@ -1253,12 +1253,12 @@ prt_in,79,94,4	script	Senhor Windsor#knt	733,{
 	}
 	else if (KNIGHT_Q == 14) {
 		mes "...Fale com";
-		mes "o capitão.";
+		mes "o capitÃ£o.";
 		close;
 	}
 	else {
-		mes "...Você";
-		mes "está pronto para ir.";
+		mes "...VocÃª";
+		mes "estÃ¡ pronto para ir.";
 		close;
 	}
 }
@@ -1276,7 +1276,7 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 	mes "[Senhor Windsor]";
 	mes "...Perguntas?";
 	next;
-	switch(select("Que tipo de teste é esse?:O que preciso para fazer o teste?:Eu gostaria de sair.:Não.")) {
+	switch(select("Que tipo de teste Ã© esse?:O que preciso para fazer o teste?:Eu gostaria de sair.:NÃ£o.")) {
 	case 1:
 		mes "[Senhor Windsor]";
 		mes "...";
@@ -1286,7 +1286,7 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		mes "......";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Você luta com monstros.";
+		mes "...VocÃª luta com monstros.";
 		next;
 		mes "[Senhor Windsor]";
 		mes "...Mate eles todos.";
@@ -1295,12 +1295,12 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		mes "...";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Três estágios.";
+		mes "...TrÃªs estÃ¡gios.";
 		mes "Acabe com todos.";
 		next;
 		mes "[Senhor Windsor]";
 		mes "......3 minutos";
-		mes "para cada estágio.";
+		mes "para cada estÃ¡gio.";
 		next;
 		mes "[Senhor Windsor]";
 		mes "..........";
@@ -1314,22 +1314,22 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		mes "......";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Vá na";
+		mes "...VÃ¡ na";
 		mes "sala de espera.";
 		next;
 		mes "[Senhor Windsor]";
 		mes "...Em seguida";
-		mes "vai começar.";
+		mes "vai comeÃ§ar.";
 		next;
 		mes "[Senhor Windsor]";
 		mes "...";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Você tdeve esperar";
-		mes "se alguém estiver fazendo o teste.";
+		mes "...VocÃª tdeve esperar";
+		mes "se alguÃ©m estiver fazendo o teste.";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Você então poderá fazer";
+		mes "...VocÃª entÃ£o poderÃ¡ fazer";
 		mes "depois desta pessoa.";
 		next;
 		mes "[Senhor Windsor]";
@@ -1409,7 +1409,7 @@ OnMyMobDead:
 		next;
 		mes "[Senhor Windsor]";
 		mes "...Agora";
-		mes "para o próximo nível.";
+		mes "para o prÃ³ximo nÃ­vel.";
 		close2;
 		warp "job_knt",43,52;
 		donpcevent "Knight1::OnDisable";
@@ -1470,7 +1470,7 @@ OnMyMobDead:
 		mes "...Hmm.";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Um nível faltando.";
+		mes "...Um nÃ­vel faltando.";
 		close2;
 		warp "job_knt",143,152;
 		donpcevent "Knight2::OnDisable";
@@ -1529,7 +1529,7 @@ OnMyMobDead:
 		mes "...Muito bom.";
 		next;
 		mes "[Senhor Windsor]";
-		mes "...Vá falar com";
+		mes "...VÃ¡ falar com";
 		mes "Amy Beatrice agora.";
 		close2;
 		set KNIGHT_Q,8;
@@ -1566,18 +1566,18 @@ prt_in,69,107,6	script	Senhora Amy#knt	728,{
 			mes "[Senhora Amy]";
 			mes "Oh...!";
 			mes "Quero saber, por que";
-			mes "você veio";
+			mes "vocÃª veio";
 			mes "me visitar?";
 			next;
 			mes "[Senhora Amy]";
-			mes "Você não está tendo";
+			mes "VocÃª nÃ£o estÃ¡ tendo";
 			mes "problemas como Cavaleiro,";
-			mes "está? Bem, eu acho";
-			mes "que você está indo bem!";
+			mes "estÃ¡? Bem, eu acho";
+			mes "que vocÃª estÃ¡ indo bem!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Claro!";
-			mes "Você é um membro da";
+			mes "VocÃª Ã© um membro da";
 			mes "Cavalaria de Prontera!";
 			close;
 		}
@@ -1586,29 +1586,29 @@ prt_in,69,107,6	script	Senhora Amy#knt	728,{
 			mes "Ahh!";
 			mes "Que lindo";
 			mes "um aprendiz!";
-			mes "Tããããããão bonitinho!";
+			mes "TÃ£Ã£Ã£Ã£Ã£Ã£Ã£o bonitinho!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Heh heh...";
-			mes "Está interessado";
+			mes "EstÃ¡ interessado";
 			mes "em se tornar um cavaleiro";
-			mes "mais tarde? Você seria";
+			mes "mais tarde? VocÃª seria";
 			mes "um bom Cavaleiro!";
 			next;
 			mes "[Senhora Amy]";
-			mes "Lembre-se, você";
-			mes "será um Cavaleiro,";
+			mes "Lembre-se, vocÃª";
+			mes "serÃ¡ um Cavaleiro,";
 			mes "certo? Promete?";
 			close;
 		}
 		else {
 			mes "[Senhora Amy]";
 			mes "Bem-vindo";
-			mes "à Cavalaria de Prontera!";
+			mes "Ã  Cavalaria de Prontera!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Somos apenas Cavaleiros,";
-			mes "mas espero que você apreveite";
+			mes "mas espero que vocÃª apreveite";
 			mes "sua estadia aqui.";
 			mes "Heh heh!";
 			close;
@@ -1616,40 +1616,40 @@ prt_in,69,107,6	script	Senhora Amy#knt	728,{
 	}
 	if (KNIGHT_Q == 0) {
 		mes "[Senhora Amy]";
-		mes "Ooh, você é";
+		mes "Ooh, vocÃª Ã©";
 		mes "um espadachim...?";
-		mes "Você veio para";
+		mes "VocÃª veio para";
 		mes "se tornar um";
 		mes "Cavaleiro?";
 		next;
 		mes "[Senhora Amy]";
 		mes "Para se inscrever, fale";
-		mes "com o capitão";
-		mes "bem alí.";
+		mes "com o capitÃ£o";
+		mes "bem alÃ­.";
 		mes "Hee hee!";
 		close;
 	}
 	else if (KNIGHT_Q >= 1 && KNIGHT_Q <= 7) {
 		mes "[Senhora Amy]";
 		mes "Hmmm?";
-		mes "Por que você";
+		mes "Por que vocÃª";
 		mes "veio para Amy?";
 		next;
-		if (select("Gostaria de fazer o teste de mudança de classe.:Não, nada.") == 1) {
+		if (select("Gostaria de fazer o teste de mudanÃ§a de classe.:NÃ£o, nada.") == 1) {
 			mes "[Senhora Amy]";
 			mes "Hmm!";
-			mes "Você se inscreveu para mudar a classe! Ok! Você em breve será um cavaleiro com esta determinação!";
+			mes "VocÃª se inscreveu para mudar a classe! Ok! VocÃª em breve serÃ¡ um cavaleiro com esta determinaÃ§Ã£o!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Mas...";
-			mes "Você deverá ir";
+			mes "VocÃª deverÃ¡ ir";
 			mes "para os outros Cavaleiros";
 			mes "antes de falar com Amy.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Adoraria testá-lo";
-			mes "desde o começo,";
-			mes "mas não tenho permissão.";
+			mes "Adoraria testÃ¡-lo";
+			mes "desde o comeÃ§o,";
+			mes "mas nÃ£o tenho permissÃ£o.";
 			mes "Hee hee!";
 			close;
 		}
@@ -1661,43 +1661,43 @@ prt_in,69,107,6	script	Senhora Amy#knt	728,{
 	else if (KNIGHT_Q) == 8 {
 		mes "[Senhora Amy]";
 		mes "Hmmm?";
-		mes "Por que você";
-		mes "veio até Amy?";
+		mes "Por que vocÃª";
+		mes "veio atÃ© Amy?";
 		next;
-		if (select("O Senhor Windsor me pediu--:Oh, nada não.") == 1) {
+		if (select("O Senhor Windsor me pediu--:Oh, nada nÃ£o.") == 1) {
 			if(checkquest(9008) == -1) {
 				changequest 9007,9008;
 			}
 			mes "[Senhora Amy]";
 			mes "Oh!";
-			mes "Não precisa dizer";
+			mes "NÃ£o precisa dizer";
 			mes "mais nada.";
-			mes "Bem-vindo(a)! É hora";
+			mes "Bem-vindo(a)! Ã‰ hora";
 			mes "de fazer o teste da Amy!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Eu me chamo Amy Beatrice,";
-			mes "uma orgulhosa Cavaleira da Cavalaria de Prontera. O teste de Amy irá testar suas normas de comportamento como um Cavaleiro~";
+			mes "uma orgulhosa Cavaleira da Cavalaria de Prontera. O teste de Amy irÃ¡ testar suas normas de comportamento como um Cavaleiro~";
 			next;
 			mes "[Senhora Amy]";
-			mes "Eu vou lhe contar uma história e você escolherá uuma resposta quando";
-			mes "eu lhe fizer uma pergunta. Suas normas de comportamento serão julgadas pelas suas respostas.";
+			mes "Eu vou lhe contar uma histÃ³ria e vocÃª escolherÃ¡ uuma resposta quando";
+			mes "eu lhe fizer uma pergunta. Suas normas de comportamento serÃ£o julgadas pelas suas respostas.";
 			next;
 			mes "[Senhora Amy]";
 			mes "Portanto escute cuidadosamente";
-			mes "e responde como você já";
+			mes "e responde como vocÃª jÃ¡";
 			mes "fosse um Cavaleiro, ok?";
 			next;
 			mes "[Senhora Amy]";
-			mes "Então,";
-			mes "vamos começar!";
+			mes "EntÃ£o,";
+			mes "vamos comeÃ§ar!";
 			next;
 L_AskQuestions:
 			mes "[Senhora Amy]";
-			mes "Você é um Cavaleiro e está procurando por uma festa em Morroc.";
-			mes "O que você faria?";
+			mes "VocÃª Ã© um Cavaleiro e estÃ¡ procurando por uma festa em Morroc.";
+			mes "O que vocÃª faria?";
 			next;
-			switch(select("Gritaria que você estava procurando por uma festa.:Abriria um chat e esperaria.:Procuraria por pessoas que estivessem procurando por Cavaleiros.")) {
+			switch(select("Gritaria que vocÃª estava procurando por uma festa.:Abriria um chat e esperaria.:Procuraria por pessoas que estivessem procurando por Cavaleiros.")) {
 			case 2:
 			case 3:
 				set .@knight_t,.@knight_t+10;
@@ -1705,18 +1705,18 @@ L_AskQuestions:
 				break;
 			}
 			mes "[Senhora Amy]";
-			mes "Você formou um grupo com jogadores de leveis iguais. Há um Sacerdote, um Bruxo, um Caçador, um Mercenário, e um Ferreiro...";
+			mes "VocÃª formou um grupo com jogadores de leveis iguais. HÃ¡ um Sacerdote, um Bruxo, um CaÃ§ador, um MercenÃ¡rio, e um Ferreiro...";
 			next;
 			mes "[Senhora Amy]";
-			mes "Todos vocês decidem ir caçar nas Pirâmides.";
+			mes "Todos vocÃªs decidem ir caÃ§ar nas PirÃ¢mides.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Você vai para o";
-			mes "andar 4 das Pirâmides";
+			mes "VocÃª vai para o";
+			mes "andar 4 das PirÃ¢mides";
 			mes "com seu grupo.";
-			mes "O que você faria?";
+			mes "O que vocÃª faria?";
 			next;
-			switch(select("Checaria a área e planejar um tática.:Reuniria monstros para os integrantes do seu grupo.:Lideraria o grupo vagarosamente.")) {
+			switch(select("Checaria a Ã¡rea e planejar um tÃ¡tica.:Reuniria monstros para os integrantes do seu grupo.:Lideraria o grupo vagarosamente.")) {
 			case 1:
 			case 3:
 				set .@knight_t,.@knight_t+10;
@@ -1724,26 +1724,26 @@ L_AskQuestions:
 				break;
 			}
 			mes "[Senhora Amy]";
-			mes "Mas alguns jogadores arrogantes vieram com um grupo de monstros e depois desapareceram! O que você faria?";
+			mes "Mas alguns jogadores arrogantes vieram com um grupo de monstros e depois desapareceram! O que vocÃª faria?";
 			next;
-			if (select("Manteria os monstros a uma distância do grupo.:Defenderia enquanto o grupo recuava.:Correria com seu Peco Peco.") == 2)
+			if (select("Manteria os monstros a uma distÃ¢ncia do grupo.:Defenderia enquanto o grupo recuava.:Correria com seu Peco Peco.") == 2)
 				set .@knight_t,.@knight_t+10;
 			mes "[Senhora Amy]";
-			mes "Afortunadamente, vocês todos enfrentaram a crise. Mas enquanto você caminhava, você encontrou uma pessoa, que não era do seu grupo, morto no chão.";
+			mes "Afortunadamente, vocÃªs todos enfrentaram a crise. Mas enquanto vocÃª caminhava, vocÃª encontrou uma pessoa, que nÃ£o era do seu grupo, morto no chÃ£o.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Ela está pedindo educamente por ajuda. O que você faria?";
+			mes "Ela estÃ¡ pedindo educamente por ajuda. O que vocÃª faria?";
 			next;
 			if (select("Pediria para que o Sacerdote de seu grupo ajudasse.:Diria que ajudaria em troca de Zeny.:Ignoraria.") == 1)
 				set .@knight_t,.@knight_t+10;
 			mes "[Senhora Amy]";
-			mes "Você precisa se despedir dos membros de seu grupo, pois você precisa ir a um outro lugar.";
+			mes "VocÃª precisa se despedir dos membros de seu grupo, pois vocÃª precisa ir a um outro lugar.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Mas você achou";
+			mes "Mas vocÃª achou";
 			mes "um item raro durante";
 			mes "a batalha. O que";
-			mes "você faria?";
+			mes "vocÃª faria?";
 			next;
 			switch(select("Daria para aquele que mais o merece.:Fingiria que nada aconteceu e ficaria com ele.:Decidiria com o grupo quem ficaria com ele.")) {
 			case 1:
@@ -1753,31 +1753,31 @@ L_AskQuestions:
 				break;
 			}
 			mes "[Senhora Amy]";
-			mes "Você acabou ficando com o item e foi para Prontera vendê-lo. Há muitas pessoas vendendo itens com lojas e chats abertos.";
+			mes "VocÃª acabou ficando com o item e foi para Prontera vendÃª-lo. HÃ¡ muitas pessoas vendendo itens com lojas e chats abertos.";
 			next;
 			mes "[Senhora Amy]";
-			mes "O que você faria";
+			mes "O que vocÃª faria";
 			mes "para vender seu item?";
 			next;
-			if (select("Gritaria alto para todo mundo ouvir.:Abriria um chat e esperaria.:Perguntaria se teria alguém interessado.") == 3)
+			if (select("Gritaria alto para todo mundo ouvir.:Abriria um chat e esperaria.:Perguntaria se teria alguÃ©m interessado.") == 3)
 				set .@knight_t,.@knight_t+10;
 			mes "[Senhora Amy]";
-			mes "Enquanto você esperava,";
-			mes "alguém veio e começou a";
+			mes "Enquanto vocÃª esperava,";
+			mes "alguÃ©m veio e comeÃ§ou a";
 			mes "implorar por itens e zeny.";
-			mes "O que você faria?";
+			mes "O que vocÃª faria?";
 			next;
-			if (select("Daria a ele Zeny e itens.:Simplesmente o ignoraria.:Daria sugestões de lugares para ele caçar.") == 3)
+			if (select("Daria a ele Zeny e itens.:Simplesmente o ignoraria.:Daria sugestÃµes de lugares para ele caÃ§ar.") == 3)
 				set .@knight_t,.@knight_t+10;
 			mes "[Senhora Amy]";
-			mes "Agora você decidiu ir sozinho para o Templo Escondido. Você cavalgou alegremente no seu Peco Peco.";
+			mes "Agora vocÃª decidiu ir sozinho para o Templo Escondido. VocÃª cavalgou alegremente no seu Peco Peco.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Mas você encontrou no caminho";
-			mes "alguém que estava perdido.";
-			mes "O que você faria?";
+			mes "Mas vocÃª encontrou no caminho";
+			mes "alguÃ©m que estava perdido.";
+			mes "O que vocÃª faria?";
 			next;
-			switch(select("Diria como chegar a saída.:Levaria a pessoa até a saída.:Daria uma Asa de Borboleta.")) {
+			switch(select("Diria como chegar a saÃ­da.:Levaria a pessoa atÃ© a saÃ­da.:Daria uma Asa de Borboleta.")) {
 			case 1:
 			case 2:
 				set .@knight_t,.@knight_t+10;
@@ -1785,27 +1785,27 @@ L_AskQuestions:
 				break;
 			}
 			mes "[Senhora Amy]";
-			mes "Você já está caçando a um tempo e agora você está com pouco(a) HP(vida)!";
-			mes "Está vermelha(o) agora, o que é muito perigoso.";
+			mes "VocÃª jÃ¡ estÃ¡ caÃ§ando a um tempo e agora vocÃª estÃ¡ com pouco(a) HP(vida)!";
+			mes "EstÃ¡ vermelha(o) agora, o que Ã© muito perigoso.";
 			next;
 			mes "[Senhora Amy]";
 			mes "Ah, e um Sacerdote";
 			mes "acaba aparecendo.";
-			mes "Como você pediria ao";
+			mes "Como vocÃª pediria ao";
 			mes "Sacerdote para te curar?";
 			next;
-			if (select("Você poderia me curar, por favor?:Você pode me curar?:Cure, por favor!!") == 1)
+			if (select("VocÃª poderia me curar, por favor?:VocÃª pode me curar?:Cure, por favor!!") == 1)
 				set .@knight_t,.@knight_t+10;
 			mes "[Senhora Amy]";
-			mes "Você agora está muito";
-			mes "exausto e é hora";
+			mes "VocÃª agora estÃ¡ muito";
+			mes "exausto e Ã© hora";
 			mes "de voltar para a cidade.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Você então acha";
+			mes "VocÃª entÃ£o acha";
 			mes "um item raro";
 			mes "'jogado' na rua.";
-			mes "O que você";
+			mes "O que vocÃª";
 			mes "faria?";
 			next;
 			switch(select("Pegaria e ficaria com ele.:Perguntaria pelos arredores sobre o dono.:Ignoraria.")) {
@@ -1817,43 +1817,43 @@ L_AskQuestions:
 			}
 			mes "[Senhora Amy]";
 			mes "Ok,";
-			mes "esse é o";
+			mes "esse Ã© o";
 			mes "fim do meu teste!";
 			next;
 			if (.@knight_t == 100) {
 				set KNIGHT_Q,10;
 				changequest 9008,9009;
 				mes "[Senhora Amy]";
-				mes "Muito bem, é esse tipo de mentalidade necessária para um Cavaleiro! Para seu próximo teste, visite o Senhor Edmundo, por favor~";
+				mes "Muito bem, Ã© esse tipo de mentalidade necessÃ¡ria para um Cavaleiro! Para seu prÃ³ximo teste, visite o Senhor Edmundo, por favor~";
 				next;
 				mes "[Senhora Amy]";
-				mes "Eu farei bons comentários sobre você para o capitão. Vá bem nos próximos testes, ok?";
+				mes "Eu farei bons comentÃ¡rios sobre vocÃª para o capitÃ£o. VÃ¡ bem nos prÃ³ximos testes, ok?";
 				close;
 			}
 			else if (.@knight_t == 90) {
 				set KNIGHT_Q,10;
 				changequest 9008,9009;
 				mes "[Senhora Amy]";
-				mes "Bem, não foi perfeito,";
-				mes "mas eu acho que você sabe o suficiente";
+				mes "Bem, nÃ£o foi perfeito,";
+				mes "mas eu acho que vocÃª sabe o suficiente";
 				mes "sobre as normas de comportamento para ser";
-				mes "um magnífico Cavaleiro.";
+				mes "um magnÃ­fico Cavaleiro.";
 				next;
 				mes "[Senhora Amy]";
-				mes "Agora, é hora de você ir até o Senhor Edmundo para fazer o próximo teste. Vá bem nas suas próximas avaliações. É melhor você prometer~";
+				mes "Agora, Ã© hora de vocÃª ir atÃ© o Senhor Edmundo para fazer o prÃ³ximo teste. VÃ¡ bem nas suas prÃ³ximas avaliaÃ§Ãµes. Ã‰ melhor vocÃª prometer~";
 				close;
 			}
 			set KNIGHT_Q,9;
 			mes "[Senhora Amy]";
 			mes "Mmm...";
-			mes "Para falar a verdade, eu não acho que sua postura é suficiente para ser um Cavaleiro, no momento.";
+			mes "Para falar a verdade, eu nÃ£o acho que sua postura Ã© suficiente para ser um Cavaleiro, no momento.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Se você realmente agir desse modo, todo mundo pensará que os Cavaleiros são rudes! Pense sobre como você respondeu minhas perguntas e volte mais tarde.";
+			mes "Se vocÃª realmente agir desse modo, todo mundo pensarÃ¡ que os Cavaleiros sÃ£o rudes! Pense sobre como vocÃª respondeu minhas perguntas e volte mais tarde.";
 			next;
 			mes "[Senhora Amy]";
-			mes "Se você quiser,";
-			mes "você pode fazer";
+			mes "Se vocÃª quiser,";
+			mes "vocÃª pode fazer";
 			mes "o teste novamente, ok?";
 			close;
 		}
@@ -1865,28 +1865,28 @@ L_AskQuestions:
 	else if (KNIGHT_Q == 9) {
 		mes "[Senhora Amy]";
 		mes "Hmmm?";
-		mes "Por que você";
-		mes "veio até Amy?";
+		mes "Por que vocÃª";
+		mes "veio atÃ© Amy?";
 		next;
 		if (select("Eu quero fazer o teste para mudar de classe.:Oh, nada.") == 1) {
 			mes "[Senhora Amy]";
 			mes "Mmm~?";
-			mes "Você aprendeu";
+			mes "VocÃª aprendeu";
 			mes "com os seus erros";
-			mes "da última vez? Se você";
+			mes "da Ãºltima vez? Se vocÃª";
 			mes "falhar novamente, eu ficarei";
 			mes "muito irada!";
 			next;
 			mes "[Senhora Amy]";
 			mes "Escute cuidadosamente";
-			mes "e responda como você";
-			mes "já fosse um Cavaleiro.";
-			mes "Bem então";
-			mes "vamos começar!";
+			mes "e responda como vocÃª";
+			mes "jÃ¡ fosse um Cavaleiro.";
+			mes "Bem entÃ£o";
+			mes "vamos comeÃ§ar!";
 			next;
 			mes "[Senhora Amy]";
-			mes "Você é um Cavaleiro e está procurando por um grupo em Morroc.";
-			mes "O que você faria?";
+			mes "VocÃª Ã© um Cavaleiro e estÃ¡ procurando por um grupo em Morroc.";
+			mes "O que vocÃª faria?";
 			next;
 			goto L_AskQuestions;
 		}
@@ -1898,13 +1898,13 @@ L_AskQuestions:
 	else if (KNIGHT_Q == 10) {
 		mes "[Senhora Amy]";
 		mes "Hmmm?";
-		mes "Porque você";
-		mes "veio até Amy?";
+		mes "Porque vocÃª";
+		mes "veio atÃ© Amy?";
 		next;
 		mes "[Senhora Amy]";
-		mes "Você precisa ir até";
+		mes "VocÃª precisa ir atÃ©";
 		mes "o Senhor Edmundo para fazer";
-		mes "o próximo teste, ok?";
+		mes "o prÃ³ximo teste, ok?";
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
@@ -1916,7 +1916,7 @@ L_AskQuestions:
 		next;
 		mes "[Senhora Amy]";
 		mes "Vamos falar com nosso";
-		mes "capitão. Não se preocupe";
+		mes "capitÃ£o. NÃ£o se preocupe";
 		mes "tanto. Tudo deve";
 		mes "ocorrer bem.";
 		close;
@@ -1924,13 +1924,13 @@ L_AskQuestions:
 	else {
 		mes "[Senhora Amy]";
 		mes "Hmmm?";
-		mes "Por que você";
-		mes "veio até Amy?";
+		mes "Por que vocÃª";
+		mes "veio atÃ© Amy?";
 		next;
 		mes "[Senhora Amy]";
-		mes "Você ainda tem";
+		mes "VocÃª ainda tem";
 		mes "outros testes para fazer.";
-		mes "Apresse-se e faça-os~";
+		mes "Apresse-se e faÃ§a-os~";
 		close;
 	}
 }
@@ -1943,101 +1943,101 @@ prt_in,70,99,6	script	Senhor Edmundo#knt	734,{
 			mes "[Senhor Edmundo]";
 			mes "Pense em sua";
 			mes "mente como se ela";
-			mes "fosse água transbordando.";
+			mes "fosse Ã¡gua transbordando.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Água transbordante";
+			mes "Ãgua transbordante";
 			mes "se esquiva de obstaculos,";
 			mes "indo por seu caminho...";
 			next;
 			mes "[Senhor Edmundo]";
 			mes "Cavaleiro tem que";
 			mes "passar pelas coisas,";
-			mes "como águas calmas, em";
-			mes "qualquer situação.";
+			mes "como Ã¡guas calmas, em";
+			mes "qualquer situaÃ§Ã£o.";
 			close;
 		}
 		else if (BaseClass == Job_NOvice) {
 			mes "[Senhor Edmundo]";
-			mes "Árvores com raízes profundas não balançam com o vento. O fato de poderosas habilidades tem que ser construídas em bases fortes é imutável...";
+			mes "Ãrvores com raÃ­zes profundas nÃ£o balanÃ§am com o vento. O fato de poderosas habilidades tem que ser construÃ­das em bases fortes Ã© imutÃ¡vel...";
 			next;
 			mes "[Senhor Edmundo]";
 			mes "Seu futuro";
-			mes "pode ser até";
+			mes "pode ser atÃ©";
 			mes "decidido agora...";
 			close;
 		}
 		else {
 			mes "[Senhor Edmundo]";
-			mes "Tudo nesse mundo existe em harmonia. Vivendo sem romper essa harmonia é o jeito correto de se viver...";
+			mes "Tudo nesse mundo existe em harmonia. Vivendo sem romper essa harmonia Ã© o jeito correto de se viver...";
 			close;
 		}
 	}
 	if (KNIGHT_Q == 0) {
 		mes "[Senhor Edmundo]";
-		mes "Aqueles com pensamentos sinistros só irão sonhar com esses tipos de sonhos. É até melhor não ter sonhos do que ter aqueles de tristeza e desespero.";
+		mes "Aqueles com pensamentos sinistros sÃ³ irÃ£o sonhar com esses tipos de sonhos. Ã‰ atÃ© melhor nÃ£o ter sonhos do que ter aqueles de tristeza e desespero.";
 		close;
 	}
 	else if (KNIGHT_Q >= 1 && KNIGHT_Q <= 9) {
 		mes "[Senhor Edmundo]";
-		mes "O que é isso...";
+		mes "O que Ã© isso...";
 		mes "Delirante Espadachim?";
 		next;
 		if (select("Eu quero fazer o teste para trocar de classe.:Oh, nada.") == 1) {
 			mes "[Senhor Edmundo]";
 			mes "Uma semente primeiro tem que se achonchegar";
-			mes "na terra antes de ela germinar. Então, o broto dará folhagem antes de que se floresçam as flores...";
+			mes "na terra antes de ela germinar. EntÃ£o, o broto darÃ¡ folhagem antes de que se floresÃ§am as flores...";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Se não...";
-			mes "A flor ficará";
+			mes "Se nÃ£o...";
+			mes "A flor ficarÃ¡";
 			mes "incompleta.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Vá até os outros";
-			mes "primeiro, e então";
-			mes "deverá achar seu caminho...";
+			mes "VÃ¡ atÃ© os outros";
+			mes "primeiro, e entÃ£o";
+			mes "deverÃ¡ achar seu caminho...";
 			close;
 		}
 		mes "[Senhor Edmundo]";
-		mes "A vida que você";
-		mes "deseja estará em breve";
+		mes "A vida que vocÃª";
+		mes "deseja estarÃ¡ em breve";
 		mes "em frente aos seus olhos.";
-		mes "Tudo irá vir";
+		mes "Tudo irÃ¡ vir";
 		mes "em perfeita";
 		mes "ordem.";
 		close;
 	}
 	else if (KNIGHT_Q == 10) {
 		mes "[Senhor Edmundo]";
-		mes "O que é isso...";
+		mes "O que Ã© isso...";
 		mes "Delirante Espadachim.";
 		next;
 		if (select("Senhora Amy me enviou.:Oh, nada.") == 1) {
 			mes "[Senhor Edmundo]";
-			mes "Agora é hora de fazer meu teste. Por favor dê o seu melhor, como você deu nos outros testes.";
+			mes "Agora Ã© hora de fazer meu teste. Por favor dÃª o seu melhor, como vocÃª deu nos outros testes.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Meu nome é";
+			mes "Meu nome Ã©";
 			mes "Edmundo Groster.";
 			mes "Eu sou membro da";
 			mes "Cavalaria de Prontera.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Cavaleiros estão em posição para outros o seguirem. Então, você deverá modestamente pensar sobre as regras do mundo e ter personalidade para encaixar na função que você irá exercer.";
+			mes "Cavaleiros estÃ£o em posiÃ§Ã£o para outros o seguirem. EntÃ£o, vocÃª deverÃ¡ modestamente pensar sobre as regras do mundo e ter personalidade para encaixar na funÃ§Ã£o que vocÃª irÃ¡ exercer.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Você não deve tomar decisões descuidadas. A sua devem entortar como os canos ou ser firmes como uma pedra conforme a situação.";
+			mes "VocÃª nÃ£o deve tomar decisÃµes descuidadas. A sua devem entortar como os canos ou ser firmes como uma pedra conforme a situaÃ§Ã£o.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Você não deverá matar monstros sem razão e não deverá sentir prazer nisso. Tome tempo para pensar nisso sozinho...";
+			mes "VocÃª nÃ£o deverÃ¡ matar monstros sem razÃ£o e nÃ£o deverÃ¡ sentir prazer nisso. Tome tempo para pensar nisso sozinho...";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Então, nós devmos";
-			mes "começar o teste.";
+			mes "EntÃ£o, nÃ³s devmos";
+			mes "comeÃ§ar o teste.";
 			mes "Mantenha em mente";
 			mes "a qualidade da";
-			mes "reverência.";
+			mes "reverÃªncia.";
 			close2;
 			set KNIGHT_Q,11;
 			changequest 9009,9010;
@@ -2045,55 +2045,55 @@ prt_in,70,99,6	script	Senhor Edmundo#knt	734,{
 			end;
 		}
 		mes "[Senhor Edmundo]";
-		mes "A vida que você deseja";
-		mes "estará em breve em frente";
+		mes "A vida que vocÃª deseja";
+		mes "estarÃ¡ em breve em frente";
 		mes "a seus olhos.";
 		close;
 	}
 	else if (KNIGHT_Q == 11) {
 		mes "[Senhor Edmundo]";
-		mes "O que é isso...";
+		mes "O que Ã© isso...";
 		mes "Delirante Espadachim?";
 		next;
-		if (select("Me desculpe, eu não queria...:Oh, nada.") == 1) {
+		if (select("Me desculpe, eu nÃ£o queria...:Oh, nada.") == 1) {
 			mes "[Senhor Edmundo]";
-			mes "Você muito descuidado no último teste. A espada de um Cavaleiro existe para protejor os outros, não para atormentar monstros fracos.";
+			mes "VocÃª muito descuidado no Ãºltimo teste. A espada de um Cavaleiro existe para protejor os outros, nÃ£o para atormentar monstros fracos.";
 			next;
 			mes "[Senhor Edmundo]";
-			mes "Em um mundo onde tudo existe em haronia, você não pode ter humanos destruindo continuamente sem um propósito. Esse princípio se aplica ao mundo real, não só para esse teste.";
+			mes "Em um mundo onde tudo existe em haronia, vocÃª nÃ£o pode ter humanos destruindo continuamente sem um propÃ³sito. Esse princÃ­pio se aplica ao mundo real, nÃ£o sÃ³ para esse teste.";
 			next;
 			mes "[Senhor Edmundo]";
 			mes "O teste";
-			mes "deve começar.";
+			mes "deve comeÃ§ar.";
 			mes "Mostre-me sua";
-			mes "paciência...";
+			mes "paciÃªncia...";
 			close2;
 			warp "job_knt",143,57;
 			end;
 		}
 		mes "[Senhor Edmundo]";
-		mes "A vida que você";
-		mes "deseja estará em breve";
+		mes "A vida que vocÃª";
+		mes "deseja estarÃ¡ em breve";
 		mes "a frente de seus olhos.";
-		mes "Tudo virá em";
+		mes "Tudo virÃ¡ em";
 		mes "perfeita";
 		mes "ordem.";
 		close;
 	}
 	else if (KNIGHT_Q == 12 || KNIGHT_Q == 13) {
 		mes "[Senhor Edmundo]";
-		mes "Eu já vi seu caráter pessoalmente. Agora é hora de fazer o último teste. Vá e fale";
+		mes "Eu jÃ¡ vi seu carÃ¡ter pessoalmente. Agora Ã© hora de fazer o Ãºltimo teste. VÃ¡ e fale";
 		mes "com o Senhor Gray...";
 		close;
 	}
 	else {
 		mes "[Senhor Edmundo]";
-		mes "Vá e fale";
-		mes "com nossa capitão.";
+		mes "VÃ¡ e fale";
+		mes "com nossa capitÃ£o.";
 		mes "A hora chegou";
-		mes "para todos nós";
+		mes "para todos nÃ³s";
 		mes "evoluirmos nossa";
-		mes "atuação.";
+		mes "atuaÃ§Ã£o.";
 		close;
 	}
 }
@@ -2120,10 +2120,10 @@ OnEnable:
 	monster "job_knt",145,57,"Poring",1002,1,"Timer#knt::OnMyMobDead";
 	monster "job_knt",143,55,"Poring",1002,1,"Timer#knt::OnMyMobDead";
 	monster "job_knt",143,59,"Poring",1002,1,"Timer#knt::OnMyMobDead";
-	monster "job_knt",141,55,"Lunático",1063,1,"Timer#knt::OnMyMobDead";
-	monster "job_knt",141,59,"Lunático",1063,1,"Timer#knt::OnMyMobDead";
-	monster "job_knt",145,55,"Lunático",1063,1,"Timer#knt::OnMyMobDead";
-	monster "job_knt",145,59,"Lunático",1063,1,"Timer#knt::OnMyMobDead";
+	monster "job_knt",141,55,"LunÃ¡tico",1063,1,"Timer#knt::OnMyMobDead";
+	monster "job_knt",141,59,"LunÃ¡tico",1063,1,"Timer#knt::OnMyMobDead";
+	monster "job_knt",145,55,"LunÃ¡tico",1063,1,"Timer#knt::OnMyMobDead";
+	monster "job_knt",145,59,"LunÃ¡tico",1063,1,"Timer#knt::OnMyMobDead";
 	monster "job_knt",139,57,"Chonchon",1011,1,"Timer#knt::OnMyMobDead";
 	monster "job_knt",147,57,"Chonchon",1011,1,"Timer#knt::OnMyMobDead";
 	monster "job_knt",143,53,"Chonchon",1011,1,"Timer#knt::OnMyMobDead";
@@ -2165,7 +2165,7 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 		if (BaseJob == Job_Knight) {
 			mes "[Senhor Gray]";
 			mes "O brilho da luz";
-			mes "que reflete para fora desta lâmina não pode ser colocada em espadas. Esta é a arma que cada Cavaleiro deve ter.";
+			mes "que reflete para fora desta lÃ¢mina nÃ£o pode ser colocada em espadas. Esta Ã© a arma que cada Cavaleiro deve ter.";
 			next;
 			mes "[Senhor Gray]";
 			mes "Sim...";
@@ -2176,24 +2176,24 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 			switch(select("Sobre ^3355FFClaymore^000000:Comprar Claymore:Cancelar")) {
 			case 1:
 				mes "[Senhor Gray]";
-				mes "Claymore, uma das melhores dentre as famosas espadas que você pode obter em Prontera!! Não existe valor para ela quando considerada por um Cavaleiro.";
+				mes "Claymore, uma das melhores dentre as famosas espadas que vocÃª pode obter em Prontera!! NÃ£o existe valor para ela quando considerada por um Cavaleiro.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Agora, a Cavalaria de Prontera está fazendo estas fabulosas Claymores. Para Cavaleiros, elas custam apenas ^3355FF74,000^000000 Zeny.";
+				mes "Agora, a Cavalaria de Prontera estÃ¡ fazendo estas fabulosas Claymores. Para Cavaleiros, elas custam apenas ^3355FF74,000^000000 Zeny.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Mas não é apenas isto, você precisa de";
-				mes "1 ^3355FFAço^000000 para as características da Claymore. Se você gostar, eu posso criar uma para você. Pela honra da Cavalaria de Prontera!";
+				mes "Mas nÃ£o Ã© apenas isto, vocÃª precisa de";
+				mes "1 ^3355FFAÃ§o^000000 para as caracterÃ­sticas da Claymore. Se vocÃª gostar, eu posso criar uma para vocÃª. Pela honra da Cavalaria de Prontera!";
 				close;
 			case 2:
 				set .@now_weight,MaxWeight-Weight;
 				if (.@now_weight < 1800) {
 					mes "[Senhor Gray]";
-					mes "Ah não...";
-					mes "Parece que você está carregando muita coisa. Você não tem espaço o suficiente para uma pesada Claymore no seu inventário.";
+					mes "Ah nÃ£o...";
+					mes "Parece que vocÃª estÃ¡ carregando muita coisa. VocÃª nÃ£o tem espaÃ§o o suficiente para uma pesada Claymore no seu inventÃ¡rio.";
 					next;
 					mes "[Senhor Gray]";
-					mes "Por que você";
+					mes "Por que vocÃª";
 					mes "vai e organiza";
 					mes "seus itens primeiro?";
 					close;
@@ -2201,55 +2201,55 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 				else {
 					if (Zeny > 73999 && countitem(999) > 0 && BaseJob == Job_Knight) {
 						mes "[Senhor Gray]";
-						mes "Você está pronto!";
-						mes "Você deve saber o";
+						mes "VocÃª estÃ¡ pronto!";
+						mes "VocÃª deve saber o";
 						mes "real valor de";
 						mes "uma Claymore!";
-						mes "Eu devo fazê-la";
+						mes "Eu devo fazÃª-la";
 						mes "agora mesmo!!";
 						next;
 						mes "[Senhor Gray]";
 						mes "A base de se";
 						mes "fazer uma Claymore";
-						mes "é fácil. Veja~!";
+						mes "Ã© fÃ¡cil. Veja~!";
 						next;
 						mes "^3355FF*Stir Stir*^000000";
 						mes "^3355FF*Ooncha Ooncha*^000000";
 						next;
 						mes "[Senhor Gray]";
-						mes "Okay, está pronta!";
+						mes "Okay, estÃ¡ pronta!";
 						mes "O orgulho de cada Cavaleiro:";
-						mes "uma ótima ^3355FFClaymore^000000.";
-						mes "Você agora tem um item muito bom.";
-						mes "Ela será uma boa companhia em suas aventuras.";
-						delitem 999,1; //Aço
+						mes "uma Ã³tima ^3355FFClaymore^000000.";
+						mes "VocÃª agora tem um item muito bom.";
+						mes "Ela serÃ¡ uma boa companhia em suas aventuras.";
+						delitem 999,1; //AÃ§o
 						set zeny,zeny-74000;
 						getitem 1163,1; //Claymore
 						close;
 					}
 					mes "[Senhor Gray]";
-					mes "Eu percebi que você quer mesmo uma Claymore, mas eu não posso fazê-la sem os materiais.";
-					mes "^3355FF74,000 zeny^000000 e ^3355FF1 Aço!^000000.";
+					mes "Eu percebi que vocÃª quer mesmo uma Claymore, mas eu nÃ£o posso fazÃª-la sem os materiais.";
+					mes "^3355FF74,000 zeny^000000 e ^3355FF1 AÃ§o!^000000.";
 					next;
 					mes "[Senhor Gray]";
 					mes "Volte quando";
-					mes "você tiver tudo";
+					mes "vocÃª tiver tudo";
 					mes "pronto. Eu devo";
 					mes "estar esperando...";
 					close;
 				}
 			case 3:
 				mes "[Senhor Gray]";
-				mes "Todo Cavaleiro deve ser capaz de empunhar uma Claymore como se ela fosse uma extensão do seu corpo. Eu já esperei anciosamente para brandir minha Claymore em uma batalha...";
+				mes "Todo Cavaleiro deve ser capaz de empunhar uma Claymore como se ela fosse uma extensÃ£o do seu corpo. Eu jÃ¡ esperei anciosamente para brandir minha Claymore em uma batalha...";
 				close;
 			}
 		}
 		else if (BaseClass == Job_Novice) {
 			mes "[Senhor Gray]";
 			mes "Acredite ou";
-			mes "não, Certa";
-			mes "vez eu já fui";
-			mes "um Aprendiz também.";
+			mes "nÃ£o, Certa";
+			mes "vez eu jÃ¡ fui";
+			mes "um Aprendiz tambÃ©m.";
 			next;
 			mes "[Senhor Gray]";
 			mes "Eu nunca planejei realmente em me tornar um Cavaleiro, mas eu decidi em me tornar uma pessoa forte. De algum jeito, ao longo de minhas jornadas, eu acabei me juntando a Cavalaria de Prontera. Ha ha ha!";
@@ -2261,7 +2261,7 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 		mes "sabiamente.";
 		next;
 		mes "[Senhor Gray]";
-		mes "Não há porque";
+		mes "NÃ£o hÃ¡ porque";
 		mes "guardar ressentimentos";
 		mes "uma vez que o tempo passou.";
 		close;
@@ -2273,7 +2273,7 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 		mes "sabiamente.";
 		next;
 		mes "[Senhor Gray]";
-		mes "Não há porque";
+		mes "NÃ£o hÃ¡ porque";
 		mes "guardar ressentimentos";
 		mes "uma vez que o tempo passou.";
 		close;
@@ -2283,19 +2283,19 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 		mes "Oh...";
 		mes "Um jovem Espadachim.";
 		mes "Sim, o que eu";
-		mes "posso fazer por você?";
+		mes "posso fazer por vocÃª?";
 		next;
 		if (select("Eu gostaria de fazer o teste para trocar de classe.:Oh, nada.") == 1) {
 			mes "[Senhor Gray]";
 			mes "Hoho, eu vejo.";
-			mes "Então você já";
+			mes "EntÃ£o vocÃª jÃ¡";
 			mes "fez o teste de todos";
 			mes "os outros?";
 			next;
 			mes "[Senhor Gray]";
-			mes "Então devemos";
-			mes "começar o meu?";
-			mes "Não é realmente";
+			mes "EntÃ£o devemos";
+			mes "comeÃ§ar o meu?";
+			mes "NÃ£o Ã© realmente";
 			mes "um teste na verdade.";
 			next;
 			mes "[Senhor Gray]";
@@ -2305,75 +2305,75 @@ prt_in,87,92,4	script	Senhor Gray#knt	119,{
 			next;
 			mes "[Senhor Gray]";
 			mes "Primeiro...";
-			mes "Por que você";
+			mes "Por que vocÃª";
 			mes "decidiu se tornar";
 			mes "um Cavaleiro?";
 			next;
 L_AskQuestions:
-			switch(select("Para me tornar forte...:Para ajudar meu clã...:Porque estou insatisfeito comigo no momento...")) {
+			switch(select("Para me tornar forte...:Para ajudar meu clÃ£...:Porque estou insatisfeito comigo no momento...")) {
 			case 1:
 				mes "[Senhor Gray]";
-				mes "Para se tornar forte, você diz?";
-				mes "Sim, Cavaleiros são fortes.";
-				mes "Mas para quê ganhar força?";
+				mes "Para se tornar forte, vocÃª diz?";
+				mes "Sim, Cavaleiros sÃ£o fortes.";
+				mes "Mas para quÃª ganhar forÃ§a?";
 				next;
 				mes "[Senhor Gray]";
-				mes "É para aparecer para os outros? Para atrair fama? Ou você tem alguma razão diferente? O que você acha que é tão bom sobre ganhar força como um Cavaleiro?";
+				mes "Ã‰ para aparecer para os outros? Para atrair fama? Ou vocÃª tem alguma razÃ£o diferente? O que vocÃª acha que Ã© tÃ£o bom sobre ganhar forÃ§a como um Cavaleiro?";
 				next;
 				switch(select("Ganhar riqueza e fama.:Para que eu possa me proteger.:Para que eu possa proteger os outros.")) {
 				case 1:
 					set .@knight_t,.@knight_t+10;
 					mes "[Senhor Gray]";
-					mes "É claro, riqueza e fama têm seus lugares no mundo. Mas nós como Cavaleiros devemos viver para virtudes maiores.";
+					mes "Ã‰ claro, riqueza e fama tÃªm seus lugares no mundo. Mas nÃ³s como Cavaleiros devemos viver para virtudes maiores.";
 					next;
 					break;
 				case 2:
 					mes "[Senhor Gray]";
-					mes "Bom pensamento. Você deve primeiro ser capaz de se proteger para poder proteger os outros. Para isto, você deve treinar constantemente, e nunca cair na preguiça.";
+					mes "Bom pensamento. VocÃª deve primeiro ser capaz de se proteger para poder proteger os outros. Para isto, vocÃª deve treinar constantemente, e nunca cair na preguiÃ§a.";
 					next;
 					break;
 				case 3:
 					mes "[Senhor Gray]";
-					mes "Ah, uma idéia maravilhosa. A força de um Cavaleiro deve ser usada para proteger os fracos e defender os corretos.";
+					mes "Ah, uma idÃ©ia maravilhosa. A forÃ§a de um Cavaleiro deve ser usada para proteger os fracos e defender os corretos.";
 					next;
 					mes "[Senhor Gray]";
-					mes "Infelizmente, há alhuns Cavaleiros que nos envergonham por esquecer os ideiais que deveriam ser básicos para os Cavaleiros...";
+					mes "Infelizmente, hÃ¡ alhuns Cavaleiros que nos envergonham por esquecer os ideiais que deveriam ser bÃ¡sicos para os Cavaleiros...";
 					next;
 					break;
 				}
 				break;
 			case 2:
 				mes "[Senhor Gray]";
-				mes "Ah, para ajudar seu clã, ou talvez seu grupo. Nosso sábio e benevolente Rei Tristam III nos disse essas palavras de ouro...";
+				mes "Ah, para ajudar seu clÃ£, ou talvez seu grupo. Nosso sÃ¡bio e benevolente Rei Tristam III nos disse essas palavras de ouro...";
 				next;
 				mes "[Senhor Gray]";
-				mes "^8B7500Por tráz de um calmo rio, se esconde uma cachoeira perigosa. Portanto, você deve sempre estar preparado para tudo...^000000";
+				mes "^8B7500Por trÃ¡z de um calmo rio, se esconde uma cachoeira perigosa. Portanto, vocÃª deve sempre estar preparado para tudo...^000000";
 				next;
 				mes "[Senhor Gray]";
-				mes "Então como você";
+				mes "EntÃ£o como vocÃª";
 				mes "acha que pode";
-				mes "ajudar o seu clã?";
+				mes "ajudar o seu clÃ£?";
 				next;
-				switch(select("Meu clã precisa de mim.:Eu posso ajudar a arrecadar fundos para o meu clã.:Eu posso proteger os membros do meu clã.")) {
+				switch(select("Meu clÃ£ precisa de mim.:Eu posso ajudar a arrecadar fundos para o meu clÃ£.:Eu posso proteger os membros do meu clÃ£.")) {
 				case 1:
 					mes "[Senhor Gray]";
 					mes "Qualquer um, em qualquer lugar deste mundo,";
-					mes "tem um lugar onde eles são necessários. Nunca negue a alguém que precisa de ajuda, mesmo se ele não for um membro do seu clã.";
+					mes "tem um lugar onde eles sÃ£o necessÃ¡rios. Nunca negue a alguÃ©m que precisa de ajuda, mesmo se ele nÃ£o for um membro do seu clÃ£.";
 					next;
 					break;
 				case 2:
 					set .@knight_t,.@knight_t+10;
 					mes "[Senhor Gray]";
-					mes "É claro que riqueza é importante.";
-					mes "Mas nós Cavaleiros devemos viver para virtudes maiores.";
+					mes "Ã‰ claro que riqueza Ã© importante.";
+					mes "Mas nÃ³s Cavaleiros devemos viver para virtudes maiores.";
 					next;
 					break;
 				case 3:
 					mes "[Senhor Gray]";
-					mes "Ah, uma idéia maravilhosa. A força de um Cavaleiro deve ser usada para proteger os fracos e defender os corretos.";
+					mes "Ah, uma idÃ©ia maravilhosa. A forÃ§a de um Cavaleiro deve ser usada para proteger os fracos e defender os corretos.";
 					next;
 					mes "[Senhor Gray]";
-					mes "Infelizmente, há alhuns Cavaleiros que nos envergonham por esquecer os ideiais que deveriam ser básicos para os Cavaleiros...";
+					mes "Infelizmente, hÃ¡ alhuns Cavaleiros que nos envergonham por esquecer os ideiais que deveriam ser bÃ¡sicos para os Cavaleiros...";
 					next;
 					break;
 				}
@@ -2381,100 +2381,100 @@ L_AskQuestions:
 			case 3:
 				set .@knight_t,.@knight_t+5;
 				mes "[Senhor Gray]";
-				mes "Satisfação, você diz.";
-				mes "Parece que você já";
-				mes "é um bom Espadachim.";
-				mes "Há alguma razão em particular para você querer se tornar um Cavaleiro?";
+				mes "SatisfaÃ§Ã£o, vocÃª diz.";
+				mes "Parece que vocÃª jÃ¡";
+				mes "Ã© um bom Espadachim.";
+				mes "HÃ¡ alguma razÃ£o em particular para vocÃª querer se tornar um Cavaleiro?";
 				next;
 				mes "[Senhor Gray]";
-				mes "Eu não sei dos";
-				mes "Espadachins, mas Cavaleiros não aceitam auto-indulgência. Há aqueles que são tão obcecados em ganhar força que eles não conseguem se controlar.";
+				mes "Eu nÃ£o sei dos";
+				mes "Espadachins, mas Cavaleiros nÃ£o aceitam auto-indulgÃªncia. HÃ¡ aqueles que sÃ£o tÃ£o obcecados em ganhar forÃ§a que eles nÃ£o conseguem se controlar.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Então...";
-				mes "Com que parte de você";
-				mes "que você não está";
+				mes "EntÃ£o...";
+				mes "Com que parte de vocÃª";
+				mes "que vocÃª nÃ£o estÃ¡";
 				mes "satisfeito no momento?";
 				next;
-				switch(select("Habilidades.:Objetivo.:Aparência.")) {
+				switch(select("Habilidades.:Objetivo.:AparÃªncia.")) {
 				case 1:
 					set .@knight_t,.@knight_t+5;
 					mes "[Senhor Gray]";
-					mes "Habilidade é algo que você ganha com experiência como um Cavaleiro. Isto não pode ser o seu maior objetivo. Ou então, você nunca estará satisfeito como um Cavaleiro.";
+					mes "Habilidade Ã© algo que vocÃª ganha com experiÃªncia como um Cavaleiro. Isto nÃ£o pode ser o seu maior objetivo. Ou entÃ£o, vocÃª nunca estarÃ¡ satisfeito como um Cavaleiro.";
 					next;
 					break;
 				case 2:
 					set .@knight_t,.@knight_t-5;
 					mes "[Senhor Gray]";
 					mes "Eu vejo...";
-					mes "Sempre ter um objetivo é muito importante. Você deve ser cheio de idéias sobre se tornar um Cavaleiro, mas isto deve mudar com o tempo.";
+					mes "Sempre ter um objetivo Ã© muito importante. VocÃª deve ser cheio de idÃ©ias sobre se tornar um Cavaleiro, mas isto deve mudar com o tempo.";
 					next;
 					break;
 				case 3:
 					set .@knight_t,.@knight_t+5;
 					mes "[Senhor Gray]";
-					mes "Ah não...";
-					mes "O que você vê não é o que realmente importa. Um Espadachim pode ser mais forte do que um Cavaleiro, e mesmo um Cavaleiro pode crescer fraco se ele se tornar um preguiçoso.";
+					mes "Ah nÃ£o...";
+					mes "O que vocÃª vÃª nÃ£o Ã© o que realmente importa. Um Espadachim pode ser mais forte do que um Cavaleiro, e mesmo um Cavaleiro pode crescer fraco se ele se tornar um preguiÃ§oso.";
 					next;
 					break;
 				}
 				break;
 			}
 			mes "[Senhor Gray]";
-			mes "Eu entendo suas dúvidas,";
-			mes "mas há aqueles que decidem";
+			mes "Eu entendo suas dÃºvidas,";
+			mes "mas hÃ¡ aqueles que decidem";
 			mes "se tornar um Cavaleiro sem pensar.";
 			next;
 			mes "[Senhor Gray]";
-			mes "Estes são aqueles que instigam problemas e envergonham a honra dos Cavaleiros, trazendo resultados irreversíveis.";
+			mes "Estes sÃ£o aqueles que instigam problemas e envergonham a honra dos Cavaleiros, trazendo resultados irreversÃ­veis.";
 			next;
 			mes "[Senhor Gray]";
-			mes "O mesmo serve para você. Uma vez que você se torna um Cavaleiro, você nunca mais pode se tornar um Espadachim novamente. A responsabilidade de um Cavaleiro sempre estará com você.";
+			mes "O mesmo serve para vocÃª. Uma vez que vocÃª se torna um Cavaleiro, vocÃª nunca mais pode se tornar um Espadachim novamente. A responsabilidade de um Cavaleiro sempre estarÃ¡ com vocÃª.";
 			next;
 			mes "[Senhor Gray]";
-			mes "Se você se tornar um Cavaleiro, o que você irá fazer primeiro?";
+			mes "Se vocÃª se tornar um Cavaleiro, o que vocÃª irÃ¡ fazer primeiro?";
 			next;
-			switch(select("Eu irei direto para uma batalha.:Há pessoas esperando por mim.:Eu irei aprender mais sobre Cavaleiros.")) {
+			switch(select("Eu irei direto para uma batalha.:HÃ¡ pessoas esperando por mim.:Eu irei aprender mais sobre Cavaleiros.")) {
 			case 1:
 				mes "[Senhor Gray]";
 				mes "Batalhar...?";
-				mes "E então?";
+				mes "E entÃ£o?";
 				next;
-				switch(select("Eu irei crescer em um pequeno período de tempo.:Eu gostaria de testar minhas habilidades como um Cavaleiro.:Eu gostaria de ir para lugares mais desafiantes.")) {
+				switch(select("Eu irei crescer em um pequeno perÃ­odo de tempo.:Eu gostaria de testar minhas habilidades como um Cavaleiro.:Eu gostaria de ir para lugares mais desafiantes.")) {
 				case 1:
 					set .@knight_t,.@knight_t+10;
 					mes "[Senhor Gray]";
-					mes "Não seja muito apressado para ficar forte. Mesmo se você se tornar";
-					mes "um Cavaleiro, você continua sendo você mesmo.";
+					mes "NÃ£o seja muito apressado para ficar forte. Mesmo se vocÃª se tornar";
+					mes "um Cavaleiro, vocÃª continua sendo vocÃª mesmo.";
 					next;
 					break;
 				case 2:
 					mes "[Senhor Gray]";
-					mes "Testar você mesmo é uma boa coisa. É normal ficar feliz sobre como você mudou, mas não esqueça das qualidades de ser um Cavaleiro.";
+					mes "Testar vocÃª mesmo Ã© uma boa coisa. Ã‰ normal ficar feliz sobre como vocÃª mudou, mas nÃ£o esqueÃ§a das qualidades de ser um Cavaleiro.";
 					next;
 					break;
 				case 3:
 					mes "[Senhor Gray]";
-					mes "Mesmo se você se tornar um Cavaleiro, você não estará mudando o seu interior. Não precisa de sobrecarregar você mesmo.";
-					mes "Relaxe e vá fazendo as coisas passo-a-passo.";
+					mes "Mesmo se vocÃª se tornar um Cavaleiro, vocÃª nÃ£o estarÃ¡ mudando o seu interior. NÃ£o precisa de sobrecarregar vocÃª mesmo.";
+					mes "Relaxe e vÃ¡ fazendo as coisas passo-a-passo.";
 					next;
 					break;
 				}
 				break;
 			case 2:
 				mes "[Senhor Gray]";
-				mes "Quem está";
-				mes "esperando por você?";
+				mes "Quem estÃ¡";
+				mes "esperando por vocÃª?";
 				next;
-				switch(select("Meus amigos.:Os membros do meu clã.:Meu amor.")) {
+				switch(select("Meus amigos.:Os membros do meu clÃ£.:Meu amor.")) {
 				case 1:
 					mes "[Senhor Gray]";
-					mes "Eu vejo, eles gostariam de compartilhar suas conquistas. Nunca perca o seu coração generoso, e sempre ajude o seus amigos.";
+					mes "Eu vejo, eles gostariam de compartilhar suas conquistas. Nunca perca o seu coraÃ§Ã£o generoso, e sempre ajude o seus amigos.";
 					next;
 					break;
 				case 2:
 					mes "[Senhor Gray]";
-					mes "Aqueles que gostariam de compartilhar sua felicidade. Como um Cavaleiro, você deve sempre protegê-los.";
+					mes "Aqueles que gostariam de compartilhar sua felicidade. Como um Cavaleiro, vocÃª deve sempre protegÃª-los.";
 					next;
 					break;
 				case 3:
@@ -2487,13 +2487,13 @@ L_AskQuestions:
 					else
 						mes "Sempre proteja ele...";
 					mes "Mesmo que tenha que";
-					mes "sacrificar sua própria vida!";
+					mes "sacrificar sua prÃ³pria vida!";
 					next;
 					mes "[Senhor Gray]";
-					mes "Também...";
+					mes "TambÃ©m...";
 					mes "Ame-os para sempre.";
-					mes "Afeição sincera";
-					mes "é difícil de se encontrar.";
+					mes "AfeiÃ§Ã£o sincera";
+					mes "Ã© difÃ­cil de se encontrar.";
 					next;
 					break;
 				}
@@ -2501,26 +2501,26 @@ L_AskQuestions:
 			case 3:
 				mes "[Senhor Gray]";
 				mes "Bela atitude...";
-				mes "O que você planeja";
+				mes "O que vocÃª planeja";
 				mes "aprender?";
 				next;
-				switch(select("Lugares confortáveis para Cavaleiros irem...:Os diferentes caminhos de um Cavaleiro...:Maneiras de conseguir mais dinheiro como um Cavaleiro...")) {
+				switch(select("Lugares confortÃ¡veis para Cavaleiros irem...:Os diferentes caminhos de um Cavaleiro...:Maneiras de conseguir mais dinheiro como um Cavaleiro...")) {
 				case 1:
 					set .@knight_t,.@knight_t+5;
 					mes "[Senhor Gray]";
-					mes "Há muitos lugares que são confortáveis ou inconfortáveis neste mundo. De qualquer jeito Cavaleiros devem";
+					mes "HÃ¡ muitos lugares que sÃ£o confortÃ¡veis ou inconfortÃ¡veis neste mundo. De qualquer jeito Cavaleiros devem";
 					mes "ser capazes de sobreviver em qualquer lugar.";
 					next;
 					break;
 				case 2:
 					mes "[Senhor Gray]";
-					mes "Há muitos Cavaleiros similares à fora pelo mundo. Pense neles como seus mestres e pergunte muito.";
+					mes "HÃ¡ muitos Cavaleiros similares Ã  fora pelo mundo. Pense neles como seus mestres e pergunte muito.";
 					next;
 					break;
 				case 3:
 					set .@knight_t,.@knight_t+15;
 					mes "[Senhor Gray]";
-					mes "Oh não. Você tem a riqueza como uma prioridade em se tornar um Cavaleiro? Você não deveria ser deste jeito. Volte quando você tiver";
+					mes "Oh nÃ£o. VocÃª tem a riqueza como uma prioridade em se tornar um Cavaleiro? VocÃª nÃ£o deveria ser deste jeito. Volte quando vocÃª tiver";
 					mes "pensado mais sobre isto...";
 					next;
 					break;
@@ -2528,65 +2528,65 @@ L_AskQuestions:
 				break;
 			}
 			mes "[Senhor Gray]";
-			mes "Oh não, nós ficamos";
+			mes "Oh nÃ£o, nÃ³s ficamos";
 			mes "conversando muito tempo...";
-			mes "Eu peço desculpas por";
-			mes "manter você aqui por";
+			mes "Eu peÃ§o desculpas por";
+			mes "manter vocÃª aqui por";
 			mes "tanto tempo.";
 			next;
 			if (.@knight_t == 0) {
 				set KNIGHT_Q,14;
 				mes "[Senhor Gray]";
-				mes "Eu gostei de conversar com você. Você me lembra de como eu era quando era um jovem recruta. Nós devemos falar com o capitão e decidir";
-				mes "a sua mudança de classe?";
+				mes "Eu gostei de conversar com vocÃª. VocÃª me lembra de como eu era quando era um jovem recruta. NÃ³s devemos falar com o capitÃ£o e decidir";
+				mes "a sua mudanÃ§a de classe?";
 				next;
 				mes "[Senhor Gray]";
-				mes "Não se preocupe muito,";
-				mes "Eu tenho uma opnião muito";
-				mes "boa sobre você.";
-				mes "Agora, vá~";
+				mes "NÃ£o se preocupe muito,";
+				mes "Eu tenho uma opniÃ£o muito";
+				mes "boa sobre vocÃª.";
+				mes "Agora, vÃ¡~";
 				close;
 			}
 			else if (.@knight_t == 5) {
 				set KNIGHT_Q,14;
 				mes "[Senhor Gray]";
-				mes "Eu gostei de conversar com você. Você pode pensar sobre os princípios dos Cavaleiros uma vez que você se tornar um Cavaleiro.";
+				mes "Eu gostei de conversar com vocÃª. VocÃª pode pensar sobre os princÃ­pios dos Cavaleiros uma vez que vocÃª se tornar um Cavaleiro.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Então, nós devemos ir até o capitão e decidir sobre sua mudança de classe? Não se preocupe muito. Você é bom o suficiente para se tornar um Cavaleiro!";
+				mes "EntÃ£o, nÃ³s devemos ir atÃ© o capitÃ£o e decidir sobre sua mudanÃ§a de classe? NÃ£o se preocupe muito. VocÃª Ã© bom o suficiente para se tornar um Cavaleiro!";
 				close;
 			}
 			else if (.@knight_t == 10) {
 				set KNIGHT_Q,14;
 				changequest 9011,9012;
 				mes "[Senhor Gray]";
-				mes "Eu gostei de conversar com você. Apesar de ter algumas coisas";
+				mes "Eu gostei de conversar com vocÃª. Apesar de ter algumas coisas";
 				mes "que me aborreceram...";
 				next;
 				mes "[Senhor Gray]";
-				mes "Você deve ir falar";
-				mes "com o capitão";
-				mes "para que nós possamos";
-				mes "pensar na sua mudança de classe.";
+				mes "VocÃª deve ir falar";
+				mes "com o capitÃ£o";
+				mes "para que nÃ³s possamos";
+				mes "pensar na sua mudanÃ§a de classe.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Não se preocupe muito, vir fazer o meu teste significa que os outros o conheceram bem.";
-				mes "Vá agora...!";
+				mes "NÃ£o se preocupe muito, vir fazer o meu teste significa que os outros o conheceram bem.";
+				mes "VÃ¡ agora...!";
 				close;
 			}
 			else {
 				set KNIGHT_Q,13;
 				mes "[Senhor Gray]";
 				mes "Conversar com";
-				mes "jovens é sempre";
+				mes "jovens Ã© sempre";
 				mes "muito interessante...";
 				next;
 				mes "[Senhor Gray]";
-				mes "Mas parece que o seu sonho está em outro lugar, ou que seu foco é diferente. Fique mais tempo como um Espadachim, e volte";
+				mes "Mas parece que o seu sonho estÃ¡ em outro lugar, ou que seu foco Ã© diferente. Fique mais tempo como um Espadachim, e volte";
 				mes "para falar comigo depois.";
 				next;
 				mes "[Senhor Gray]";
-				mes "Se você quer realmente se tornar um Cavaleiro, você deve mudar o seu pensamento primeiro. Então, nós veremos.";
+				mes "Se vocÃª quer realmente se tornar um Cavaleiro, vocÃª deve mudar o seu pensamento primeiro. EntÃ£o, nÃ³s veremos.";
 				close;
 			}
 		}
@@ -2596,24 +2596,24 @@ L_AskQuestions:
 	}
 	else if (KNIGHT_Q == 13) {
 		mes "[Senhor Gray]";
-		mes "Ah, você novamente.";
-		mes "O que tráz você";
-		mes "até mim?";
+		mes "Ah, vocÃª novamente.";
+		mes "O que trÃ¡z vocÃª";
+		mes "atÃ© mim?";
 		next;
 		if (select("Eu estive pensando muito.:Oh, nada.") == 1) {
 			mes "[Senhor Gray]";
-			mes "É isto então...";
+			mes "Ã‰ isto entÃ£o...";
 			mes "Eu fico pensando se";
 			mes "esteve realmente...";
 			next;
 			mes "[Senhor Gray]";
-			mes "Então...";
-			mes "Como da última vez,";
+			mes "EntÃ£o...";
+			mes "Como da Ãºltima vez,";
 			mes "Eu irei perguntar de novo...";
 			next;
 			mes "[Senhor Gray]";
 			mes "Primeiro...";
-			mes "Por que você";
+			mes "Por que vocÃª";
 			mes "decidiu se tornar";
 			mes "um Cavaleiro?";
 			next;
@@ -2621,47 +2621,47 @@ L_AskQuestions:
 		}
 		mes "[Senhor Gray]";
 		mes "Se cuide!";
-		mes "Saúde é";
+		mes "SaÃºde Ã©";
 		mes "o tesouro";
 		mes "de cada homem!";
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
 		mes "[Senhor Gray]";
-		mes "Eu disse para você";
-		mes "ir até o";
-		mes "capitão.";
+		mes "Eu disse para vocÃª";
+		mes "ir atÃ© o";
+		mes "capitÃ£o.";
 		next;
 		mes "[Senhor Gray]";
-		mes "Cada um irá";
+		mes "Cada um irÃ¡";
 		mes "cuidadosamente fazer";
-		mes "sua decisão,";
-		mes "então vá agora!";
+		mes "sua decisÃ£o,";
+		mes "entÃ£o vÃ¡ agora!";
 		close;
 	}
 	else {
 		mes "[Senhor Gray]";
 		mes "Oh...";
 		mes "Um jovem Espadachim.";
-		mes "O que eu posso fazer por você?";
+		mes "O que eu posso fazer por vocÃª?";
 		next;
 		if (select("Eu gostaria de fazer o teste para mudar de classe.:Oh, nada.") == 1) {
 			mes "[Senhor Gray]";
 			mes "Hoho~";
-			mes "Há muitos outros";
+			mes "HÃ¡ muitos outros";
 			mes "jovens Cavaleiros";
 			mes "por aqui.";
 			next;
 			mes "[Senhor Gray]";
-			mes "Se você falar";
+			mes "Se vocÃª falar";
 			mes "com todos eles,";
 			mes "eu irei fazer";
-			mes "seu teste também.";
+			mes "seu teste tambÃ©m.";
 			close;
 		}
 		mes "[Senhor Gray]";
 		mes "Se cuide!";
-		mes "Saúde é";
+		mes "SaÃºde Ã©";
 		mes "o tesouro";
 		mes "de cada homem!";
 		close;

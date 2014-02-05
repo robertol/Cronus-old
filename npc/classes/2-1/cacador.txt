@@ -1,73 +1,73 @@
-// ===== Script Hércules ======================================
-// = Caçador Quest
+// ===== Script HÃ©rcules ======================================
+// = CaÃ§ador Quest
 // ===== Por: ========================================= =========
 // = Eremes O CANIVALIZER ( Aegis ) Traduzido por YOSHIKI ( Aegis )
 // = Convertido por kobra_k88
-// = Além disso bugfixed e testado por lúpus
-// ===== Versão Atual: =====================================
+// = AlÃ©m disso bugfixed e testado por lÃºpus
+// ===== VersÃ£o Atual: =====================================
 // = 3,7
-// ===== Descrição: =========================================
-// = [ Conversão Oficial]
+// ===== DescriÃ§Ã£o: =========================================
+// = [ ConversÃ£o Oficial]
 // = Job Alterar busca pela classe Hunter.
-// ===== Comentários Adicionais: =================================
+// ===== ComentÃ¡rios Adicionais: =================================
 // = 0.5 Funcionando .
-// = 0.6 mudou os nomes de variáveis ??globais para os únicos.
-// = 0,7-0,8 Atualizações para rAthena + Knight2 , Crusader2 correção
+// = 0.6 mudou os nomes de variÃ¡veis ??globais para os Ãºnicos.
+// = 0,7-0,8 AtualizaÃ§Ãµes para rAthena + Knight2 , Crusader2 correÃ§Ã£o
 // = 0.9 Corrigido itens busca garfo bug [ Lupus ]
-// = 1.0 itens fixos busca bug : adicionado condição adicional [ Lupus ]
+// = 1.0 itens fixos busca bug : adicionado condiÃ§Ã£o adicional [ Lupus ]
 // = 1.1 skillpoints fixos verificar bug [ Lupus ]
-// = 1.2 Corrigido um exploit, graças a NONOX [ Celest ]
-// = 1.3 Adicionado suporte Bebê Classe [ Lupus ]
-// = 1.5 Corrigido um possível abuso EXP [ Lupus ]
-// = 1.6 Adicionado uma função que impedem classes avançadas que passam
-// = 2 Quests trabalho novamente. Ele também orienta aulas adv onde
+// = 1.2 Corrigido um exploit, graÃ§as a NONOX [ Celest ]
+// = 1.3 Adicionado suporte BebÃª Classe [ Lupus ]
+// = 1.5 Corrigido um possÃ­vel abuso EXP [ Lupus ]
+// = 1.6 Adicionado uma funÃ§Ã£o que impedem classes avanÃ§adas que passam
+// = 2 Quests trabalho novamente. Ele tambÃ©m orienta aulas adv onde
 // = Ir. [ Lupus ]
-// = 1.6A Infinitas Setas explorar correção ( thanx para Lorky , que
+// = 1.6A Infinitas Setas explorar correÃ§Ã£o ( thanx para Lorky , que
 // = Reportou o bug ) [ Lupus ]
 // = 1.7 movido a Quest de Hugel [ Poki # 3]
-// = 2.0 Mudou números constantes. [ Vicious ]
-// = 2.1 duplicatas removidas [ Silêncio]
-// = 2.2 mesclado JFunc , diálogos falta fixos [ Lupus ]
+// = 2.0 Mudou nÃºmeros constantes. [ Vicious ]
+// = 2.1 duplicatas removidas [ SilÃªncio]
+// = 2.2 mesclado JFunc , diÃ¡logos falta fixos [ Lupus ]
 // = 2.2a fixa redefinir o conjunto de itens teste2 [ Lupus ]
 // = 2.3a 7 jogos oficiais do Demon Hunter , thx para Dr.Evil [ Lupus ]
-// = 2.4a Adicionado faltando próximo ; , faltando nomes de NPC [ Lupus ]
+// = 2.4a Adicionado faltando prÃ³ximo ; , faltando nomes de NPC [ Lupus ]
 // = 2.5 " strcharinfo " - > " strcharinfo ( 0 ) " [ FlavioJS ]
 // = 2.6 3 Teste fixo . [ Samuray22 ]
 // -Changed 3-1 minuto.
 // -Changed " Job Alterar Monsters" .
-// - Graças a ultradamage .
-// = 2,7 , reescritos a égide 10,3 padrões . [ L0ne_W0lf ]
-// = 2.8 Várias correções de bugs com a ajuda de Barron -Monster . [ L0ne_W0lf ]
-// = 2.9 Corrigido nomes de NPCs cair dentro de restrições adequadas. [ L0ne_W0lf ]
-// = 2.9a Excluídos variáveis ??não utilizadas . [ Samuray22 ]
-// = 3.0 Corrigido um pequeno erro de digitação, "jo" em vez de " Job" . [ L0ne_W0lf ]
-// = 3.0a Corrigido um erro de digitação "; ; " . [ Samuray22 ]
+// - GraÃ§as a ultradamage .
+// = 2,7 , reescritos a Ã©gide 10,3 padrÃµes . [ L0ne_W0lf ]
+// = 2.8 VÃ¡rias correÃ§Ãµes de bugs com a ajuda de Barron -Monster . [ L0ne_W0lf ]
+// = 2.9 Corrigido nomes de NPCs cair dentro de restriÃ§Ãµes adequadas. [ L0ne_W0lf ]
+// = 2.9a ExcluÃ­dos variÃ¡veis ??nÃ£o utilizadas . [ Samuray22 ]
+// = 3.0 Corrigido um pequeno erro de digitaÃ§Ã£o, "jo" em vez de " Job" . [ L0ne_W0lf ]
+// = 3.0a Corrigido um erro de digitaÃ§Ã£o "; ; " . [ Samuray22 ]
 // = 3.1 Agora usa ativar e desativar waitingroomevent . [ L0ne_W0lf ]
-// = 3.2 corrige um bug em que o cronômetro foi parado fazendo com que o [ L0ne_W0lf ]
+// = 3.2 corrige um bug em que o cronÃ´metro foi parado fazendo com que o [ L0ne_W0lf ]
 // = Teste para congelar. ( bugreport : 1099 )
 // = 3.3 Adicionado faltando seguinte. [ L0ne_W0lf ]
 // = 3.4 Corrigido alguns problemas com a sala de espera . ( bugreport : 1890) [ Samuray22 ]
-// = Deleted um desnecessários Next; sobre Hunter Guildsman # hnt . ( relatos de erros : 1665,2239,2179 )
+// = Deleted um desnecessÃ¡rios Next; sobre Hunter Guildsman # hnt . ( relatos de erros : 1665,2239,2179 )
 // = 3.5 Adicionado comandos Quest Log . [ Kisuka ]
 // = 3.6 Removido a necessidade de uso de 'Goto '. [ L0ne_W0lf ]
-// = 3.7 Modificada a busca de renovação. [ ] Vali (graças a Muad_Dib para as informações necessárias ).
+// = 3.7 Modificada a busca de renovaÃ§Ã£o. [ ] Vali (graÃ§as a Muad_Dib para as informaÃ§Ãµes necessÃ¡rias ).
 
 // Notices in the old Hunter Guild.
 //============================================================
-in_hunter,99,99,4	script	Caçador Informações::Hnt	4_F_JOB_HUNTER,{
+in_hunter,99,99,4	script	CaÃ§ador InformaÃ§Ãµes::Hnt	4_F_JOB_HUNTER,{
 mes "============ Notice ============";
-	mes "Gostaríamos de informar que o local para transforma-se em Caçador";
-	mes "foi movido para ^ff0000Hugel^000000 dentro da república de Schwaltzvalt.";
+	mes "GostarÃ­amos de informar que o local para transforma-se em CaÃ§ador";
+	mes "foi movido para ^ff0000Hugel^000000 dentro da repÃºblica de Schwaltzvalt.";
 	next;
-	mes "Você pode usar as linhas aérias de Hungel, por favor use também o dirigível para visitar Hugel.";
+	mes "VocÃª pode usar as linhas aÃ©rias de Hungel, por favor use tambÃ©m o dirigÃ­vel para visitar Hugel.";
 	next;
-	mes "Você irá encontrar o novo local em ^ff0000 Hugel 208 222 ^000000.";
+	mes "VocÃª irÃ¡ encontrar o novo local em ^ff0000 Hugel 208 222 ^000000.";
 	next;
-	mes "^804000(Você encontrou a pequena linha escrita no final da notícia.)^000000";
+	mes "^804000(VocÃª encontrou a pequena linha escrita no final da notÃ­cia.)^000000";
 	mes " ";
 	mes " ";
 	mes " ";
-	mes "Eu, o criador de Falcão, me mudei.";
+	mes "Eu, o criador de FalcÃ£o, me mudei.";
 	close;
 }
 
@@ -75,392 +75,392 @@ pay_fild10,148,252,3	duplicate(Hnt)	Job Change Location#hu	4_BOARD3
 
 // Actual Job quest start
 //============================================================
-hu_in01,386,373,4	script	Caçadora#hnt	727,{
+hu_in01,386,373,4	script	CaÃ§adora#hnt	727,{
 	if (Upper == 1) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Oh, como você tem andando? Tem sido um longo tempo, não?";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Oh, como vocÃª tem andando? Tem sido um longo tempo, nÃ£o?";
 		next;
-		mes "[Dejiko, a Caçadora]";
+		mes "[Dejiko, a CaÃ§adora]";
 		mes "...Espere.";
-		mes "Ops! Me desculpe, eu poderia jurar que já nos vimos antes. Huh. Que estranho.";
+		mes "Ops! Me desculpe, eu poderia jurar que jÃ¡ nos vimos antes. Huh. Que estranho.";
 		close;
 	}
 	if (BaseJob == Job_Archer && JobLevel < 40) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Eh? Você não tem treinamento suficiente como um Arqueiro ainda. Para virar um Caçador, você deve adquirir um certo nível de experiência como um Arqueiro primeiro.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Eh? VocÃª nÃ£o tem treinamento suficiente como um Arqueiro ainda. Para virar um CaÃ§ador, vocÃª deve adquirir um certo nÃ­vel de experiÃªncia como um Arqueiro primeiro.";
 		next;
-		mes "[Dejiko, a Caçadora]";
-		mes "Vá embora e treine um pouco mais. Você precisará ter pelo menos Nível 40 de Job antes de estar pronto para se tornar um caçador. É claro, você pode treinar mais do que precisa.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "VÃ¡ embora e treine um pouco mais. VocÃª precisarÃ¡ ter pelo menos NÃ­vel 40 de Job antes de estar pronto para se tornar um caÃ§ador. Ã‰ claro, vocÃª pode treinar mais do que precisa.";
 		next;
-		mes "[Dejiko, a Caçadora]";
-		mes "Vejo você depois~";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Vejo vocÃª depois~";
 		close;
 	}
 	if (SkillPoint) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Você não pode mudar de classe sem usar todos seus pontos de habilidade. Por favor, use todos os pontos de habilidades antes de mudar sua profissão.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "VocÃª nÃ£o pode mudar de classe sem usar todos seus pontos de habilidade. Por favor, use todos os pontos de habilidades antes de mudar sua profissÃ£o.";
 		close;
 	}
 	if (BaseClass == Job_Novice) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Você deve ser...";
-		mes "Um aprendiz? Wow, você tem um longo caminho pela frente. Eu acredito que você não possa fazer muito aqui.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "VocÃª deve ser...";
+		mes "Um aprendiz? Wow, vocÃª tem um longo caminho pela frente. Eu acredito que vocÃª nÃ£o possa fazer muito aqui.";
 		close;
 	}
 	else if (BaseClass == Job_Swordman) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Você escolheu o caminho da espada. Posso respeitar a força de sua lâmina. Claro que, de longe, você não pode realmente dar ao luxo de atirar a sua espada no inimigos, ou pode?";	  
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "VocÃª escolheu o caminho da espada. Posso respeitar a forÃ§a de sua lÃ¢mina. Claro que, de longe, vocÃª nÃ£o pode realmente dar ao luxo de atirar a sua espada no inimigos, ou pode?";	  
 		close;
 	}
 	else if (BaseClass == Job_Mage) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Você lida com magia? Deve se sentir ótimo por ser capaz de exercer poder místico.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "VocÃª lida com magia? Deve se sentir Ã³timo por ser capaz de exercer poder mÃ­stico.";
 		close;
 	}
 	else if (BaseClass == Job_Acolyte) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Oh, uma pessoa que serve a Deus! Prazer em conhecê-lo. Não há muitas pessoas para você visitar neste lugar ~ Hehe.";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Oh, uma pessoa que serve a Deus! Prazer em conhecÃª-lo. NÃ£o hÃ¡ muitas pessoas para vocÃª visitar neste lugar ~ Hehe.";
 		close;
 	}
 	else if (Baseclass == Job_Merchant) {
-		mes "[Dejiko, a Caçadora]";
+		mes "[Dejiko, a CaÃ§adora]";
 		mes "Oh...";
-		mes "Como vai seus negócios?";
+		mes "Como vai seus negÃ³cios?";
 		close;
 	}
 	else if (BaseClass == Job_Thief) {
-		mes "[Dejiko, a Caçadora]";
+		mes "[Dejiko, a CaÃ§adora]";
 		mes "Agh?!";
-		mes "Este lugar não tem nada que vale a pena roubar ou matar, ninguém merece!";
+		mes "Este lugar nÃ£o tem nada que vale a pena roubar ou matar, ninguÃ©m merece!";
 		close;
 	}
 	else if (BaseJob == Job_Dancer || BaseJob == Job_Bard) {
-		mes "[Dejiko, a Caçadora]";
-		mes "Phew... às vezes é muito difícil ser um caçador, você sabe ...";
-		mes "Então, você gosta de sua vida boémia? Sim, eu tenho inveja de você por ter tanta liberdade ...";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Phew... Ã s vezes Ã© muito difÃ­cil ser um caÃ§ador, vocÃª sabe ...";
+		mes "EntÃ£o, vocÃª gosta de sua vida boÃ©mia? Sim, eu tenho inveja de vocÃª por ter tanta liberdade ...";
 		close;
 	}
 	else if (BaseJob == Job_Hunter) {
-		mes "[Dejiko, a Caçadora]";
+		mes "[Dejiko, a CaÃ§adora]";
 		mes "Oh~ " + strcharinfo(0) + "!!";
-		mes "A quanto tempo não o vejo~ O que o traz aqui? Seu falcão fugiu ou algo do tipo?";
+		mes "A quanto tempo nÃ£o o vejo~ O que o traz aqui? Seu falcÃ£o fugiu ou algo do tipo?";
 		next;
-		mes "[Dejiko, a Caçadora]";
-		mes "Eu realmente não tem nenhum anúncio oficial da guilda no momento, então espero que você não tenha vindo até aqui só para isto ...";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Eu realmente nÃ£o tem nenhum anÃºncio oficial da guilda no momento, entÃ£o espero que vocÃª nÃ£o tenha vindo atÃ© aqui sÃ³ para isto ...";
 		close;
 	}
 	else if (BaseJob == Job_Archer) {
 		if (SkillPoint) {
-			mes "[Dejiko, a Caçadora]";
-			mes "Você não pode mudar de profissão se ainda não utilizadou seus pontos de habilidades... use o restante primeiro.";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "VocÃª nÃ£o pode mudar de profissÃ£o se ainda nÃ£o utilizadou seus pontos de habilidades... use o restante primeiro.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) == 0) {
-			mes "[Dejiko, a Caçadora]";
-			mes "Hmm... Eu fui informado que você passou no teste. Mas você não tem o 'Colar da Sabedoria', necessário para provar seu desempenho.";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Hmm... Eu fui informado que vocÃª passou no teste. Mas vocÃª nÃ£o tem o 'Colar da Sabedoria', necessÃ¡rio para provar seu desempenho.";
 			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Eu mudarei você de profissão, mas você precisa trazer até mim um 'Colar da Sabedoria', não importa o que precisar.";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Eu mudarei vocÃª de profissÃ£o, mas vocÃª precisa trazer atÃ© mim um 'Colar da Sabedoria', nÃ£o importa o que precisar.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) > 0 && JobLevel > 39) {
-			mes "[Dejiko, a Caçadora]";
+			mes "[Dejiko, a CaÃ§adora]";
 			mes "Oh...?";
-			mes "Você passou";
+			mes "VocÃª passou";
 			mes "no teste?!";
-			mes "Parabéns~!!";
+			mes "ParabÃ©ns~!!";
 			next;
-			mes "[Dejiko, a Caçadora]";
+			mes "[Dejiko, a CaÃ§adora]";
 			mes "Pois bem,";
 			mes "Eu mudarei agora";
-			mes "sua profissão para Caçador~";
+			mes "sua profissÃ£o para CaÃ§ador~";
 			next;
 			delitem 1007,1; //Colar da Sabedoria
-			mes "[Dejiko, a Caçadora]";
-			mes "Parabéns! Você está";
-			mes "ótimo no visual de Caçador!!";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "ParabÃ©ns! VocÃª estÃ¡";
+			mes "Ã³timo no visual de CaÃ§ador!!";
 			set .@joblvl,joblevel;
 			callfunc "Job_Change",Job_Hunter;
-			callfunc "F_ClearJobVar";		// Limpa todas as variáveis de classe do jogador
+			callfunc "F_ClearJobVar";		// Limpa todas as variÃ¡veis de classe do jogador
 			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Torne-se uma nobre pessoa e um digno representante de nossa Guilda de Caçadores. Mostre seu amor pela natureza como um Caçador ~";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Torne-se uma nobre pessoa e um digno representante de nossa Guilda de CaÃ§adores. Mostre seu amor pela natureza como um CaÃ§ador ~";
 			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "E também, aqui está uma pequena recompensa por todos seus esforços. De mim, é claro~";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "E tambÃ©m, aqui estÃ¡ uma pequena recompensa por todos seus esforÃ§os. De mim, Ã© claro~";
 			if (.@joblvl > 49)
-				getitem 1718,1; //Arco de Caça
+				getitem 1718,1; //Arco de CaÃ§a
 			else
 				getitem 1710,1; //Besta
 			close;
 		}
 		else if (JobLevel > 39 && HNTR_Q == 0) {
-			mes "[Dejiko, a Caçadora]";
-			mes "Oh, você é um Arqueiro! Parece que você tem treinou bastante como um Arqueiro... Você veio aqui para torna-se um Caçador, correto?";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Oh, vocÃª Ã© um Arqueiro! Parece que vocÃª tem treinou bastante como um Arqueiro... VocÃª veio aqui para torna-se um CaÃ§ador, correto?";
 			next;
-			switch(select("Sim, por isso estou aqui.:Quero saber os requerimentos:...Não quero mudar ainda.")) {
+			switch(select("Sim, por isso estou aqui.:Quero saber os requerimentos:...NÃ£o quero mudar ainda.")) {
 			case 1:
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Hehe~";
-				mes "Tinha razão! Deixe-me colocá-lo na lista de candidatos. Vamos ver~*";
+				mes "Tinha razÃ£o! Deixe-me colocÃ¡-lo na lista de candidatos. Vamos ver~*";
 				next;
-				mes "[Dejiko, a Caçadora]";
-				mes "Hmm... vamos começar com a entrevista. Espere e relaxe um momento. Não precisa preocupar-se, prepararei tudo~";
+				mes "[Dejiko, a CaÃ§adora]";
+				mes "Hmm... vamos comeÃ§ar com a entrevista. Espere e relaxe um momento. NÃ£o precisa preocupar-se, prepararei tudo~";
 				next;
-				mes "^3355FF*Reúne e vira através de documentos*^000000";
+				mes "^3355FF*ReÃºne e vira atravÃ©s de documentos*^000000";
 				next;
 				mes "^3355FF*Remexe Remexe*^000000";
 				next;
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Ah!";
-				mes "Aqui estão: As questões da entrevista~ Antes de tudo, meu nome é 'Dejiko.' prazer em conhecê-lo!";
+				mes "Aqui estÃ£o: As questÃµes da entrevista~ Antes de tudo, meu nome Ã© 'Dejiko.' prazer em conhecÃª-lo!";
 				next;
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Pois bem,";
-				mes "Devemos começar?";
+				mes "Devemos comeÃ§ar?";
 				next;
-				if (select("Sim~ Vamos começar agora.:Não, voltarei depois.") == 1) {
-					mes "[Dejiko, a Caçadora]";
-					mes "Preste atenção cuidadosamente nos senários que eu descreverei. Quando eu fizer uma pergunta, opte por uma resposta. Bastante simples, não acha?";
+				if (select("Sim~ Vamos comeÃ§ar agora.:NÃ£o, voltarei depois.") == 1) {
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Preste atenÃ§Ã£o cuidadosamente nos senÃ¡rios que eu descreverei. Quando eu fizer uma pergunta, opte por uma resposta. Bastante simples, nÃ£o acha?";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Eu só quero saber como você pensa sobre a vida, e porquê você quer torna-se um Caçador, portanto não há necessidade de estar nervoso.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Eu sÃ³ quero saber como vocÃª pensa sobre a vida, e porquÃª vocÃª quer torna-se um CaÃ§ador, portanto nÃ£o hÃ¡ necessidade de estar nervoso.";
 					next;
 L_AskQuestions:
-					mes "[Dejiko, a Caçadora]";
+					mes "[Dejiko, a CaÃ§adora]";
 					mes "Pois bem,";
-					mes "Vamos começar.";
+					mes "Vamos comeÃ§ar.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Você é um Arqueiro, e não sabe onde deve ir à caça. O que você faz?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "VocÃª Ã© um Arqueiro, e nÃ£o sabe onde deve ir Ã  caÃ§a. O que vocÃª faz?";
 					next;
-					switch(select("Grito por ajuda até me cansar.:Me informo com outras pessoas:Vou procurar por mim mesmo")) {
+					switch(select("Grito por ajuda atÃ© me cansar.:Me informo com outras pessoas:Vou procurar por mim mesmo")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Então você decidiu um lugar para caçar. Você está indo caçar os monstros conhecidos como Hodes no Deserto de Sograt.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "EntÃ£o vocÃª decidiu um lugar para caÃ§ar. VocÃª estÃ¡ indo caÃ§ar os monstros conhecidos como Hodes no Deserto de Sograt.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Mas você está em Payon!!";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Mas vocÃª estÃ¡ em Payon!!";
 					mes "Como fazer para ir ao deserto?";
 					next;
-					switch(select("Peço um portal de graça.:Uso teleporte da Kafra.:Ando até lá com um amigo.")) {
+					switch(select("PeÃ§o um portal de graÃ§a.:Uso teleporte da Kafra.:Ando atÃ© lÃ¡ com um amigo.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Lá não tem um Sarcedote para pedir um Portal, e está sem um amigo parar andar com você. Você deve usar os serviços da Kafra, mas está sem Zenys!";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "LÃ¡ nÃ£o tem um Sarcedote para pedir um Portal, e estÃ¡ sem um amigo parar andar com vocÃª. VocÃª deve usar os serviÃ§os da Kafra, mas estÃ¡ sem Zenys!";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Como é que vai";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Como Ã© que vai";
 					mes "fazer o Zeny";
-					mes "que você precisa?";
+					mes "que vocÃª precisa?";
 					next;
-					switch(select("Eu peço esmola:Vendo coisas inúteis:Mato monstros e vendo os itens.")) {
+					switch(select("Eu peÃ§o esmola:Vendo coisas inÃºteis:Mato monstros e vendo os itens.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Então finalmente você chegou ao Deserto de Sograt, que está cheio de Hodes. Porém você está exausto e sem muito HP.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "EntÃ£o finalmente vocÃª chegou ao Deserto de Sograt, que estÃ¡ cheio de Hodes. PorÃ©m vocÃª estÃ¡ exausto e sem muito HP.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Qual é a sua";
-					mes "solução para esta";
-					mes "situação?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Qual Ã© a sua";
+					mes "soluÃ§Ã£o para esta";
+					mes "situaÃ§Ã£o?";
 					next;
-					if (select("Você atira neles de cima de uma colina:Senta e descança:Você ataca um Hode que já está sendo atacado") == 2)
+					if (select("VocÃª atira neles de cima de uma colina:Senta e descanÃ§a:VocÃª ataca um Hode que jÃ¡ estÃ¡ sendo atacado") == 2)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Dejiko, a Caçadora]";
-					mes "Vamos dizer que você estava tendo muita dificuldade para caçar Hodes e retornou à cidade. Agora você está sem HP e um sacerdote está por perto. Como você iria pedir uma Cura?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Vamos dizer que vocÃª estava tendo muita dificuldade para caÃ§ar Hodes e retornou Ã  cidade. Agora vocÃª estÃ¡ sem HP e um sacerdote estÃ¡ por perto. Como vocÃª iria pedir uma Cura?";
 					next;
 					if (select("Por favor, me cure:Me Cure:Me Cure agora") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Dejiko, a Caçadora]";
-					mes "Desta vez, você encontrou um raro item enquanto estava observando seu inventário. Você sai para vender o item, e há muitas pessoas com lojas abertas e Salas de Bate-Papo.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Desta vez, vocÃª encontrou um raro item enquanto estava observando seu inventÃ¡rio. VocÃª sai para vender o item, e hÃ¡ muitas pessoas com lojas abertas e Salas de Bate-Papo.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Qual é a";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Qual Ã© a";
 					mes "melhor mandeira de";
 					mes "vender seu item?";
 					next;
-					switch(select("Anuncio ele aos berros.:Abro um chat anunciando-o e espero:Procuro uma pessoa que queria comprá-lo")) {
+					switch(select("Anuncio ele aos berros.:Abro um chat anunciando-o e espero:Procuro uma pessoa que queria comprÃ¡-lo")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Enquanto você está esperando, alguém está implorando por itens e Zeny. O que você deve fazer?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Enquanto vocÃª estÃ¡ esperando, alguÃ©m estÃ¡ implorando por itens e Zeny. O que vocÃª deve fazer?";
 					next;
 					if (select("Dou alguns itens e Zeny.:Ignoro-o:Mostro pra ele monstros que ele pode matar.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Dejiko, a Caçadora]";
-					mes "Por agora, você decide ir ao labirinto sozinho.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Por agora, vocÃª decide ir ao labirinto sozinho.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Mas em seu caminho, você corre";
-					mes "dentro de lá, alguém está perdido.";
-					mes "O que você deve fazer?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Mas em seu caminho, vocÃª corre";
+					mes "dentro de lÃ¡, alguÃ©m estÃ¡ perdido.";
+					mes "O que vocÃª deve fazer?";
 					next;
-					switch(select("Diga a ele que caminho a percorrer.:Guiá-lo para seu destino:Ignorá-lo.")) {
+					switch(select("Diga a ele que caminho a percorrer.:GuiÃ¡-lo para seu destino:IgnorÃ¡-lo.")) {
 					case 1:
 					case 2:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Depois de ajudar a pessoa perdida, você decide voltar a caçar. Então, você encontra alguém atacando um monstro Chefe!";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Depois de ajudar a pessoa perdida, vocÃª decide voltar a caÃ§ar. EntÃ£o, vocÃª encontra alguÃ©m atacando um monstro Chefe!";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "O que você deve fazer";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "O que vocÃª deve fazer";
 					next;
-					if (select("Fico olhando e ajudo se for preciso.:Ataco o Chefão:Vou embora") == 1)
+					if (select("Fico olhando e ajudo se for preciso.:Ataco o ChefÃ£o:Vou embora") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Dejiko, a Caçadora]";
-					mes "Você está muito exausto após o dia da caça. Está na hora de voltar para à cidade.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "VocÃª estÃ¡ muito exausto apÃ³s o dia da caÃ§a. EstÃ¡ na hora de voltar para Ã  cidade.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Mas o que é isto! Você encontrou um item caro no chão! O que você deve fazer com ele?";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Mas o que Ã© isto! VocÃª encontrou um item caro no chÃ£o! O que vocÃª deve fazer com ele?";
 					next;
-					switch(select("Pego e fico com ele.:Tento achar dono.:Deixo ele no chão.")) {
+					switch(select("Pego e fico com ele.:Tento achar dono.:Deixo ele no chÃ£o.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Dejiko, a Caçadora]";
-					mes "Tudo bem, este é o final do teste.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Tudo bem, este Ã© o final do teste.";
 					next;
 					if (.@hunter_t == 100) {
 						set HNTR_Q,2;
-						mes "[Dejiko, a Caçadora]";
-						mes "Perfeito! Suas respostas mostram que você tem uma visão correta sobre a vida. Você certamente tem o boas qualidades para se tornar um Caçador ~";
+						mes "[Dejiko, a CaÃ§adora]";
+						mes "Perfeito! Suas respostas mostram que vocÃª tem uma visÃ£o correta sobre a vida. VocÃª certamente tem o boas qualidades para se tornar um CaÃ§ador ~";
 						next;
-						mes "[Dejiko, a Caçadora]";
-						mes "Estou feliz em dizer que você passou na entrevista ~ Agora, vá para a pessoa no canto e confirme o que é necessário para mudar o sua profissão ~";
+						mes "[Dejiko, a CaÃ§adora]";
+						mes "Estou feliz em dizer que vocÃª passou na entrevista ~ Agora, vÃ¡ para a pessoa no canto e confirme o que Ã© necessÃ¡rio para mudar o sua profissÃ£o ~";
 						close;
 					}
 					else if (.@hunter_t == 90) {
 						set HNTR_Q,2;
-						mes "[Dejiko, a Caçadora]";
-						mes "Bem, eu estou olhando suas respostas e sua pontuação não é perfeita. Mas eu vou deixar você passar de qualquer maneira. Eu não sei o que o nosso Guildmaster vai pensar, no entanto.";
+						mes "[Dejiko, a CaÃ§adora]";
+						mes "Bem, eu estou olhando suas respostas e sua pontuaÃ§Ã£o nÃ£o Ã© perfeita. Mas eu vou deixar vocÃª passar de qualquer maneira. Eu nÃ£o sei o que o nosso Guildmaster vai pensar, no entanto.";
 						next;
-						mes "[Dejiko, a Caçadora]";
-						mes "Basta lembrar-se de manter sempre em mente a base ética. Tente severamente seguir o que disse nos testes e me faça feliz, ok?";
+						mes "[Dejiko, a CaÃ§adora]";
+						mes "Basta lembrar-se de manter sempre em mente a base Ã©tica. Tente severamente seguir o que disse nos testes e me faÃ§a feliz, ok?";
 						close;
 					}
 					set HNTR_Q,1;
-					mes "[Dejiko, a Caçadora]";
-					mes "Humm ... Eu não acho que isto vai funcionar. Você não pode se tornar um caçador sem saber a base ética.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Humm ... Eu nÃ£o acho que isto vai funcionar. VocÃª nÃ£o pode se tornar um caÃ§ador sem saber a base Ã©tica.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Pense em como você responde às perguntas mais uma vez. De forma a valorizar a natureza, valorizar a sua relação com os outros primeiro.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "Pense em como vocÃª responde Ã s perguntas mais uma vez. De forma a valorizar a natureza, valorizar a sua relaÃ§Ã£o com os outros primeiro.";
 					next;
-					mes "[Dejiko, a Caçadora]";
-					mes "Então, você vai estar mais em sintonia com a natureza e com outras pessoas. É este tipo de harmonia que torna o melhor dos Caçadores.";
+					mes "[Dejiko, a CaÃ§adora]";
+					mes "EntÃ£o, vocÃª vai estar mais em sintonia com a natureza e com outras pessoas. Ã‰ este tipo de harmonia que torna o melhor dos CaÃ§adores.";
 					close;
 				}
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Tudo bem...";
 				mes "Volte";
 				mes "quando estiver pronto ~";
 				close;
 			case 2:
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Requerimentos";
 				mes "para mudar de classe?";
 				mes "Primeiro...";
-				mes "Você precisa ser um Arqueiro.";
+				mes "VocÃª precisa ser um Arqueiro.";
 				next;
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Segundo...";
-				mes "Você deve ter";
-				mes "pelo menos 40 nível de classe."; 
+				mes "VocÃª deve ter";
+				mes "pelo menos 40 nÃ­vel de classe."; 
 				next;
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Terceiro...";
-				mes "Você deve trazer todos os itens que serão solicitados pela guilda. Você pode se preocupar com isso mais tarde.";
+				mes "VocÃª deve trazer todos os itens que serÃ£o solicitados pela guilda. VocÃª pode se preocupar com isso mais tarde.";
 				next;
-				mes "[Dejiko, a Caçadora]";
+				mes "[Dejiko, a CaÃ§adora]";
 				mes "Quarto...";
-				mes "Você tem que passar no teste administrado pela corporação. Se você tem uma boa formação como um Arqueiro, deve ser capaz de passar no teste ~";
+				mes "VocÃª tem que passar no teste administrado pela corporaÃ§Ã£o. Se vocÃª tem uma boa formaÃ§Ã£o como um Arqueiro, deve ser capaz de passar no teste ~";
 				break;
 			case 3:
-				mes "[Dejiko, a Caçadora]";
-				mes "Tudo bem então,";
-				mes "Vejo você na próxima~";
+				mes "[Dejiko, a CaÃ§adora]";
+				mes "Tudo bem entÃ£o,";
+				mes "Vejo vocÃª na prÃ³xima~";
 				close;
 			}
 		}
 		else if (JobLevel > 39 && HNTR_Q == 1) {
-			mes "[Dejiko, a Caçadora]";
+			mes "[Dejiko, a CaÃ§adora]";
 			mes "Bem vindo novamente...!";
-			mes "Bem, vamos começar com a entrevista. Desta vez, pense cuidadosamente sobre as respostas para cada pergunta.";
+			mes "Bem, vamos comeÃ§ar com a entrevista. Desta vez, pense cuidadosamente sobre as respostas para cada pergunta.";
 			next;
 			goto L_AskQuestions;
 		}
 		else if (HNTR_Q > 2 && HNTR_Q < 10) {
-			mes "[Dejiko, a Caçadora]";
-			mes "Basta dar o item para o Caçador de Demônios, o cara que está no caminho à esquerda deste local ~";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Basta dar o item para o CaÃ§ador de DemÃ´nios, o cara que estÃ¡ no caminho Ã  esquerda deste local ~";
 			next;
-			mes "[Dejiko, a Caçadora]";
+			mes "[Dejiko, a CaÃ§adora]";
 			if (sex)
-				mes "Se você decidir se tornar um Caçador, prometa vir me visitar. Quero ver você como um Caçador. Você seria ótimo!";
+				mes "Se vocÃª decidir se tornar um CaÃ§ador, prometa vir me visitar. Quero ver vocÃª como um CaÃ§ador. VocÃª seria Ã³timo!";
 			else
-				mes "Se você decidir se tornar uma Caçadora, venha me visitar, ok? Você é bonita, mas ... ficaria ainda mais bonita como uma Caçadora. Hehe ~";
+				mes "Se vocÃª decidir se tornar uma CaÃ§adora, venha me visitar, ok? VocÃª Ã© bonita, mas ... ficaria ainda mais bonita como uma CaÃ§adora. Hehe ~";
 			close;
 		}
 		else if (HNTR_Q == 2) {
-			mes "[Dejiko, a Caçadora]";
+			mes "[Dejiko, a CaÃ§adora]";
 			mes "????";
 			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Você não foi capaz de encontrar o Caçador Demônio? Esse cara fica só para a esquerda! Hehe ~";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "VocÃª nÃ£o foi capaz de encontrar o CaÃ§ador DemÃ´nio? Esse cara fica sÃ³ para a esquerda! Hehe ~";
 			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Eu quero ver você se tornar um caçador ...! Waaah ~ Acho que você está ótimo, por isso, depressa!";
+			mes "[Dejiko, a CaÃ§adora]";
+			mes "Eu quero ver vocÃª se tornar um caÃ§ador ...! Waaah ~ Acho que vocÃª estÃ¡ Ã³timo, por isso, depressa!";
 			close;
 		}
-		mes "[Dejiko, a Caçadora]";
-		mes "Hmm, eu presumo que você deve visitar alguém, não eu. Tal como o nosso Mestre da Guilda quem está fora dos seus afazeres, você sabia?";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Hmm, eu presumo que vocÃª deve visitar alguÃ©m, nÃ£o eu. Tal como o nosso Mestre da Guilda quem estÃ¡ fora dos seus afazeres, vocÃª sabia?";
 		next;
-		mes "[Dejiko, a Caçadora]";
-		mes "Ouvi dizer que ele está em Palácio Central de Payon... Ou na Vila dos Arqueiros, um desses dois lugares. Experimente visitar os lugares e encontrá-lo, ok?";
+		mes "[Dejiko, a CaÃ§adora]";
+		mes "Ouvi dizer que ele estÃ¡ em PalÃ¡cio Central de Payon... Ou na Vila dos Arqueiros, um desses dois lugares. Experimente visitar os lugares e encontrÃ¡-lo, ok?";
 		close;
 	}
-	mes "[Dejiko, a Caçadora]";
-	mes "Eh? Você não treinado suficiente como um Arqueiro. Para se tornar um caçador, você precisa ganhar mais experiência como um Arqueiro primeiro.";
+	mes "[Dejiko, a CaÃ§adora]";
+	mes "Eh? VocÃª nÃ£o treinado suficiente como um Arqueiro. Para se tornar um caÃ§ador, vocÃª precisa ganhar mais experiÃªncia como um Arqueiro primeiro.";
 	next;
-	mes "[Dejiko, a Caçadora]";
-	mes "Ótimo então, vá treinar mais. Você deve ter pelo menos 40 nível de Classe para ser exato. Claro, você sempre pode ir mais alto. Vejo você na próxima vez ~";
+	mes "[Dejiko, a CaÃ§adora]";
+	mes "Ã“timo entÃ£o, vÃ¡ treinar mais. VocÃª deve ter pelo menos 40 nÃ­vel de Classe para ser exato. Claro, vocÃª sempre pode ir mais alto. Vejo vocÃª na prÃ³xima vez ~";
 	close;
 }
 
 hu_in01,382,382,4	script	Recepcionista#hnt	732,{
 	if (HNTR_Q == 2) {
-		mes "[Recepcionista do Teste de Caçador]";
-		mes "Saudações. Eles me chamam de... ^660000O Demônio Caçador^000000. Eu organizo o processo de inscrição. Seu nome é ... " + strcharinfo(0) + ", correto?";
+		mes "[Recepcionista do Teste de CaÃ§ador]";
+		mes "SaudaÃ§Ãµes. Eles me chamam de... ^660000O DemÃ´nio CaÃ§ador^000000. Eu organizo o processo de inscriÃ§Ã£o. Seu nome Ã© ... " + strcharinfo(0) + ", correto?";
 		next;
-		if (select("Sim, está correto.:Não~~(heeheehee)") == 1) {
+		if (select("Sim, estÃ¡ correto.:NÃ£o~~(heeheehee)") == 1) {
 L_GiveQuestItems:
-			mes "[Demônio Caçador]";
-			mes "Ok. Estes são os itens que você vai precisar. Já que provemos as flechas que você vai usar nesse teste, nós precisamos dos materiais para fazê-las.";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Ok. Estes sÃ£o os itens que vocÃª vai precisar. JÃ¡ que provemos as flechas que vocÃª vai usar nesse teste, nÃ³s precisamos dos materiais para fazÃª-las.";
 			next;
-			mes "[Demônio Caçador]";
-			mes "Hum, Nós estamos com um problema financeiro. Vejamos, nós temos poucos...";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Hum, NÃ³s estamos com um problema financeiro. Vejamos, nÃ³s temos poucos...";
 			next;
 			switch(rand(1,7)) {
 			//Claw_Of_Desert_Wolf, Wooden_Block, White_Herb
@@ -478,32 +478,32 @@ L_GiveQuestItems:
 			//Porcupine_Spike, Yoyo_Tailm Acorn
 			case 7: setarray .@items[0], 1027,2, 942,1, 1026,1, 9; break;
 			}
-			mes "[Demônio Caçador]";
+			mes "[DemÃ´nio CaÃ§ador]";
 			mes "Hmm. ^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000 para usar na ponta das flechas. ^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 para usar aqui e ali. E ^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000 por favor.";
 			set HNTR_Q,.@items[6];
 			next;
-			mes "[Demônio Caçador]";
-			mes "Certo. Nosso líder saiu em uma viajem oficial ao centro do Palácio de Payon. Você deve visitá-lo pois ele é quem administra o teste.";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Certo. Nosso lÃ­der saiu em uma viajem oficial ao centro do PalÃ¡cio de Payon. VocÃª deve visitÃ¡-lo pois ele Ã© quem administra o teste.";
 			next;
-			mes "[Demônio Caçador]";
-			mes "Certo então, volte quando tiver todos os itens~";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Certo entÃ£o, volte quando tiver todos os itens~";
 			close;
 		}
-		mes "[Demônio Caçador]";
-		mes "Ei, pare bagunçar.";
-		mes "Seu nome é " + strcharinfo(0) + ", certo?";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "Ei, pare bagunÃ§ar.";
+		mes "Seu nome Ã© " + strcharinfo(0) + ", certo?";
 		next;
-		if (select("Sim...:Hehehe. Eu continuo falando, Não é~~") == 1) {
-			mes "[Demônio Caçador]";
-			mes "Ok, então. Estes são os itens que você precisa para o teste. Já que provemos todas as flechas necessárias, nós precisamos dos materiais para faze-las.";
+		if (select("Sim...:Hehehe. Eu continuo falando, NÃ£o Ã©~~") == 1) {
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Ok, entÃ£o. Estes sÃ£o os itens que vocÃª precisa para o teste. JÃ¡ que provemos todas as flechas necessÃ¡rias, nÃ³s precisamos dos materiais para faze-las.";
 			next;
-			mes "[Demônio Caçador]";
-			mes "Hum, Nós estamos com um problema financeiro. Vejamos, nós temos poucos...";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "Hum, NÃ³s estamos com um problema financeiro. Vejamos, nÃ³s temos poucos...";
 			next;
 			goto L_GiveQuestItems;
 		}
-		mes "[Demônio Caçador]";
-		mes "Saia se pretende me enganar com esses seus truques. Você não percebeu que está brincando com ^660000O Demônio Caçador^000000?!'";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "Saia se pretende me enganar com esses seus truques. VocÃª nÃ£o percebeu que estÃ¡ brincando com ^660000O DemÃ´nio CaÃ§ador^000000?!'";
 		close2;
 		warp "hugel",208,223;
 		end;
@@ -525,24 +525,24 @@ L_GiveQuestItems:
 		//Porcupine_Spike, Yoyo_Tailm Acorn
 		case 9: setarray .@items[0], 1027,2, 942,1, 1026,1, 11; break;
 		}
-		mes "[Demônio Caçador]";
+		mes "[DemÃ´nio CaÃ§ador]";
 		mes "Hmm?";
 		next;
 		if (countitem(.@items[0]) >= .@items[1] && countitem(.@items[2]) >= .@items[3] && countitem(.@items[4]) >= .@items[5]) {
-			mes "[Demônio Caçador]";
-			mes "Você trouxe todos os materiais necessários... Você pode pegar direções para a área de testes com o nosso Líder que está no Palácio central de Payon.";
+			mes "[DemÃ´nio CaÃ§ador]";
+			mes "VocÃª trouxe todos os materiais necessÃ¡rios... VocÃª pode pegar direÃ§Ãµes para a Ã¡rea de testes com o nosso LÃ­der que estÃ¡ no PalÃ¡cio central de Payon.";
 			set HNTR_Q,.@items[6];
 			delitem .@items[0],.@items[1];
 			delitem .@items[2],.@items[3];
 			delitem .@items[4],.@items[5];
 			close;
 		}
-		mes "[Demônio Caçador]";
-		mes "Você não tem todos os";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "VocÃª nÃ£o tem todos os";
 		mes "materiais que eu pedi...";
 		next;
-		mes "[Demônio Caçador]";
-		mes "Os itens que você precisa são";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "Os itens que vocÃª precisa sÃ£o";
 		mes "^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
 		mes "^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 e";
 		mes "^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000.";
@@ -551,65 +551,65 @@ L_GiveQuestItems:
 		close;
 	}
 	else if (HNTR_Q > 9 && HNTR_Q < 17) {
-		mes "[Demônio Caçador]";
-		mes "Hmm? Você não foi até o Líder no Palácio Central de Payon ou na Guilda dos Arqueiros? Ele deve estar em um desses dois lugares, então vá procurar por ele.";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "Hmm? VocÃª nÃ£o foi atÃ© o LÃ­der no PalÃ¡cio Central de Payon ou na Guilda dos Arqueiros? Ele deve estar em um desses dois lugares, entÃ£o vÃ¡ procurar por ele.";
 		close;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Demônio Caçador]";
-		mes "Ooh. Você passou no teste. Parabéns~ Você deve falar com Dejiko agora.";
+		mes "[DemÃ´nio CaÃ§ador]";
+		mes "Ooh. VocÃª passou no teste. ParabÃ©ns~ VocÃª deve falar com Dejiko agora.";
 		close;
 	}
 	else {
 		mes "[Recepcionista]";
-		mes "Se você quiser virar um Caçador, você deve se registrar primeiro.";
+		mes "Se vocÃª quiser virar um CaÃ§ador, vocÃª deve se registrar primeiro.";
 		close;
 	}
 }
 
-payon_in03,131,7,3	script	Caçador#htnGM	59,{
+payon_in03,131,7,3	script	CaÃ§ador#htnGM	59,{
 	if (HNTR_Q == 10) {
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Hmpf. Você deve estar aqui para o teste de Caçador. Deixe-me lhe dizer sobre os procedimentos do teste. O que você gostaria de saber?";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Hmpf. VocÃª deve estar aqui para o teste de CaÃ§ador. Deixe-me lhe dizer sobre os procedimentos do teste. O que vocÃª gostaria de saber?";
 		next;
-		switch(select("O que é o Teste?:Quais são os requerimentos para passar:Alguma advertência?:Começar Teste.")) {
+		switch(select("O que Ã© o Teste?:Quais sÃ£o os requerimentos para passar:Alguma advertÃªncia?:ComeÃ§ar Teste.")) {
 		case 1:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Você tem que caçar alguns monstros com um nome específico, mas você deve evitar todas as armadilhas aqui ao mesmo tempo.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "VocÃª tem que caÃ§ar alguns monstros com um nome especÃ­fico, mas vocÃª deve evitar todas as armadilhas aqui ao mesmo tempo.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Trata-se de testar a sua capacidade de avançar rapidamente e localizar alvos em diversas situações.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Trata-se de testar a sua capacidade de avanÃ§ar rapidamente e localizar alvos em diversas situaÃ§Ãµes.";
 			close;
 		case 2:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Dentro de um determinado tempo, você começará direção equivalente às 6 horas do relógio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irá aparecer no centro do mapa.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Dentro de um determinado tempo, vocÃª comeÃ§arÃ¡ direÃ§Ã£o equivalente Ã s 6 horas do relÃ³gio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irÃ¡ aparecer no centro do mapa.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Você irá passar se estiver capacitado a escapar pela direção equivalente às 12 horas do relógio no mapa quando a alavanca estiver ativada.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "VocÃª irÃ¡ passar se estiver capacitado a escapar pela direÃ§Ã£o equivalente Ã s 12 horas do relÃ³gio no mapa quando a alavanca estiver ativada.";
 			close;
 		case 3:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Hum. Advertências... Ótimo, se você cair em uma armadilha, você terá que começar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Hum. AdvertÃªncias... Ã“timo, se vocÃª cair em uma armadilha, vocÃª terÃ¡ que comeÃ§ar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Eu irei enviá-lo para o local do teste. Lá estará a sala de espera, mas se outra pessoa estiver pego o teste, você deve esperar na janela de conversa.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Eu irei enviÃ¡-lo para o local do teste. LÃ¡ estarÃ¡ a sala de espera, mas se outra pessoa estiver pego o teste, vocÃª deve esperar na janela de conversa.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Se a pessoa que estiver fazendo o teste passar ou não, a próxima pessoa que está esperando na janela de conversa é enviada para a zona do teste. Se ninguém estiver esperando, o teste é iniciado assim que entrar na janela de conversa.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Se a pessoa que estiver fazendo o teste passar ou nÃ£o, a prÃ³xima pessoa que estÃ¡ esperando na janela de conversa Ã© enviada para a zona do teste. Se ninguÃ©m estiver esperando, o teste Ã© iniciado assim que entrar na janela de conversa.";
 			close;
 		case 4:
 			if (.@a0) {
-				mes "[Líder da Guilda dos Caçadores]";
-				mes "... Certo. Vou enviá-lo para a zona do teste agora. Não me culpe se você perder ou ficar confuso, pois você não ouviu a explicação.";
+				mes "[LÃ­der da Guilda dos CaÃ§adores]";
+				mes "... Certo. Vou enviÃ¡-lo para a zona do teste agora. NÃ£o me culpe se vocÃª perder ou ficar confuso, pois vocÃª nÃ£o ouviu a explicaÃ§Ã£o.";
 				next;
 			}
-			mes "[Líder da Guilda dos Caçadores]";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
 			mes "Ok, melhor dar sorte.";
 			mes "Vou envia-lo agora.";
 			next;
 		}
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Bem, suas flexas provavelmente ainda estão a ser feitas, assim você pode usar para ter no meu teste.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Bem, suas flexas provavelmente ainda estÃ£o a ser feitas, assim vocÃª pode usar para ter no meu teste.";
 		set HNTR_Q,12;
 		getitem 1751,200; //Silver_Arrow
 		close2;
@@ -617,160 +617,160 @@ payon_in03,131,7,3	script	Caçador#htnGM	59,{
 		end;
 	}
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
-		mes "[Líder da Guilda dos Caçadores]";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
 		mes "Hum...?";
 		mes "Porque um Arqueiro";
-		mes "está me visitando?";
+		mes "estÃ¡ me visitando?";
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Não fui notificado pelo Guilda dos Caçadores de nada. Você não está tentando saltar no meio do teste de Caçador, está?";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "NÃ£o fui notificado pelo Guilda dos CaÃ§adores de nada. VocÃª nÃ£o estÃ¡ tentando saltar no meio do teste de CaÃ§ador, estÃ¡?";
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Pare de uma vez você tem que juntar todos os itens necessários para o teste.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Pare de uma vez vocÃª tem que juntar todos os itens necessÃ¡rios para o teste.";
 		close;
 	}
 	else if (HNTR_Q == 11) {
 		mes "[Hunter]";
-		mes "Hmm? Posso ajudá-lo? Se você deseja mudar de classe, você deve visitar uma pessoa na Guilda dos Arqueiros, não eu.";
+		mes "Hmm? Posso ajudÃ¡-lo? Se vocÃª deseja mudar de classe, vocÃª deve visitar uma pessoa na Guilda dos Arqueiros, nÃ£o eu.";
 		close;
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Hum? Você não é o Arqueiro que desistiu da última vez? Agora você está pronto, certo? Então eu enviar-lhe a área da mudança de classe agora.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Hum? VocÃª nÃ£o Ã© o Arqueiro que desistiu da Ãºltima vez? Agora vocÃª estÃ¡ pronto, certo? EntÃ£o eu enviar-lhe a Ã¡rea da mudanÃ§a de classe agora.";
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Se você ainda tem perguntas,";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Se vocÃª ainda tem perguntas,";
 		mes "sinta-se livre para perguntar.";
 		next;
-		switch(select("O que é o teste?:Quais são os requisitos para passar?:Alguma advertência?:Começar o teste.")) {
+		switch(select("O que Ã© o teste?:Quais sÃ£o os requisitos para passar?:Alguma advertÃªncia?:ComeÃ§ar o teste.")) {
 		case 1:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Você tem que caçar alguns monstros com um nome específico, mas você deve evitar todas as armadilhas aqui ao mesmo tempo. Trata-se de testar a sua capacidade de avançar rapidamente e localizar alvos em diversas situações.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "VocÃª tem que caÃ§ar alguns monstros com um nome especÃ­fico, mas vocÃª deve evitar todas as armadilhas aqui ao mesmo tempo. Trata-se de testar a sua capacidade de avanÃ§ar rapidamente e localizar alvos em diversas situaÃ§Ãµes.";
 			close;
 		case 2:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Dentro de um determinado tempo, você começará direcção equivalente às 6 horas do relógio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irá aparecer no centro do mapa.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Dentro de um determinado tempo, vocÃª comeÃ§arÃ¡ direcÃ§Ã£o equivalente Ã s 6 horas do relÃ³gio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irÃ¡ aparecer no centro do mapa.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Você irá passar se estiver capacitado a escapar pela direção equivalente às 12 horas do relógio no mapa quando a alavanca estiver ativada.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "VocÃª irÃ¡ passar se estiver capacitado a escapar pela direÃ§Ã£o equivalente Ã s 12 horas do relÃ³gio no mapa quando a alavanca estiver ativada.";
 			close;
 		case 3:
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Hum. Advertências... Ótimo, se você cair em uma armadilha, você terá que começar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Hum. AdvertÃªncias... Ã“timo, se vocÃª cair em uma armadilha, vocÃª terÃ¡ que comeÃ§ar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Eu irei enviá-lo para o local do teste. Lá estará a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Eu irei enviÃ¡-lo para o local do teste. LÃ¡ estarÃ¡ a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
 			next;
-			mes "[Líder da Guilda dos Caçadores]";
-			mes "Se a pessoa que estiver fazendo o teste passar ou não, a próxima pessoa que está esperando na janela de conversa é enviada para a zona do teste. Se ninguém estiver esperando, o teste é iniciado assim que entrar na janela de conversa.";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
+			mes "Se a pessoa que estiver fazendo o teste passar ou nÃ£o, a prÃ³xima pessoa que estÃ¡ esperando na janela de conversa Ã© enviada para a zona do teste. Se ninguÃ©m estiver esperando, o teste Ã© iniciado assim que entrar na janela de conversa.";
 			close;
 		case 4:
-			mes "[Líder da Guilda dos Caçadores]";
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
 			mes "Tudo bem, boa sorte.";
-			mes "Irei enviá-lo agora.";
+			mes "Irei enviÃ¡-lo agora.";
 			next;
 		}
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Eh? Por que não vou te dar Flecha de Prata? Bem, você não deve esperar para obter alguma coisa quando você nem sequer trouxe os materiais.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Eh? Por que nÃ£o vou te dar Flecha de Prata? Bem, vocÃª nÃ£o deve esperar para obter alguma coisa quando vocÃª nem sequer trouxe os materiais.";
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "De qualquer jeito, eu acredito que você está pronto. Vamos começar.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "De qualquer jeito, eu acredito que vocÃª estÃ¡ pronto. Vamos comeÃ§ar.";
 		next;
-		if (select("Tudo bem, vamos começar....:Ah, espere um segundo.") == 1) {
-			mes "[Líder da Guilda dos Caçadores]";
+		if (select("Tudo bem, vamos comeÃ§ar....:Ah, espere um segundo.") == 1) {
+			mes "[LÃ­der da Guilda dos CaÃ§adores]";
 			mes "Tudo bem!! Eu espero";
-			mes "que você passe no tempo!";
+			mes "que vocÃª passe no tempo!";
 			close2;
 			set HNTR_Q,12;
 			warp "job_hunte",176,22;
 			end;
 		}
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Então se apresse e termine";
-		mes "todas suas preparações.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "EntÃ£o se apresse e termine";
+		mes "todas suas preparaÃ§Ãµes.";
 		close;
 	}
 	else if (HNTR_Q == 16) {
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Wow, você voltou em pedaços!";
-		mes "Quero dizer, bom trabalho. Pois bem, eu vou te dar o item que serve como prova de que você passou no teste.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Wow, vocÃª voltou em pedaÃ§os!";
+		mes "Quero dizer, bom trabalho. Pois bem, eu vou te dar o item que serve como prova de que vocÃª passou no teste.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
 		getitem 1007,1; //Colar da Sabedoria
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Ok, aqui está. Agora, volte para o Guilda dos Caçadores. Tenho mais alguns negócios para terminar aqui, mas eu espero que você possa se tornar um caçador em breve.";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Ok, aqui estÃ¡. Agora, volte para o Guilda dos CaÃ§adores. Tenho mais alguns negÃ³cios para terminar aqui, mas eu espero que vocÃª possa se tornar um caÃ§ador em breve.";
 		close;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Vejo que você não está com pressa de tornar-se um Caçador. Eu estava correndo por aí com alegria, selvagemente brandindo meu arco no primeiro mês eu me tornei um caçador. Hehe~";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Vejo que vocÃª nÃ£o estÃ¡ com pressa de tornar-se um CaÃ§ador. Eu estava correndo por aÃ­ com alegria, selvagemente brandindo meu arco no primeiro mÃªs eu me tornei um caÃ§ador. Hehe~";
 		next;
-		mes "[Líder da Guilda dos Caçadores]";
-		mes "Agora, você precisa voltar para Guilda dos Caçadores~";
+		mes "[LÃ­der da Guilda dos CaÃ§adores]";
+		mes "Agora, vocÃª precisa voltar para Guilda dos CaÃ§adores~";
 		close;
 	}
 	else {
 		mes "[Hunter]";
 		mes "...Can I help you?";
-		mes "O que você quer? Eu estou em uma viagem oficial e estou ocupado no momento. Agora, se você me der lincença...";
+		mes "O que vocÃª quer? Eu estou em uma viagem oficial e estou ocupado no momento. Agora, se vocÃª me der lincenÃ§a...";
 		close;
 	}
 }
 
-payon_in02,21,31,1	script	Caçador#htnGM2	59,{
+payon_in02,21,31,1	script	CaÃ§ador#htnGM2	59,{
 	cutin "job_huntermaster",2;
 	if (HNTR_Q == 11) {
-		mes "[Caçador]";
-		mes "Hum. Vejo que você está aqui para teste de Caçador. Deixe-me explicar o processo do teste. O que você gostaria de saber?";
+		mes "[CaÃ§ador]";
+		mes "Hum. Vejo que vocÃª estÃ¡ aqui para teste de CaÃ§ador. Deixe-me explicar o processo do teste. O que vocÃª gostaria de saber?";
 		next;
-		switch(select("O que é o teste?:Quais são os requisitos para passar?:Alguma advertência?:Começar o teste.")) {
+		switch(select("O que Ã© o teste?:Quais sÃ£o os requisitos para passar?:Alguma advertÃªncia?:ComeÃ§ar o teste.")) {
 		case 1:
-			mes "[Caçador]";
-			mes "Você tem que caçar alguns monstros com um nome específico, mas você deve evitar todas as armadilhas aqui ao mesmo tempo.";
+			mes "[CaÃ§ador]";
+			mes "VocÃª tem que caÃ§ar alguns monstros com um nome especÃ­fico, mas vocÃª deve evitar todas as armadilhas aqui ao mesmo tempo.";
 			next;
-			mes "[Caçador]";
-			mes "Trata-se de testar a sua capacidade de avançar rapidamente e localizar alvos em diversas situações.";
+			mes "[CaÃ§ador]";
+			mes "Trata-se de testar a sua capacidade de avanÃ§ar rapidamente e localizar alvos em diversas situaÃ§Ãµes.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 2:
-			mes "[Caçador]";
-			mes "Dentro de um determinado tempo, você começará direcção equivalente às 6 horas do relógio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irá aparecer no centro do mapa.";
+			mes "[CaÃ§ador]";
+			mes "Dentro de um determinado tempo, vocÃª comeÃ§arÃ¡ direcÃ§Ã£o equivalente Ã s 6 horas do relÃ³gio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irÃ¡ aparecer no centro do mapa.";
 			next;
-			mes "[Caçador]";
-			mes "Você irá passar se estiver capacitado a escapar pela direção equivalente às 12 horas do relógio no mapa quando a alavanca estiver ativada.";
+			mes "[CaÃ§ador]";
+			mes "VocÃª irÃ¡ passar se estiver capacitado a escapar pela direÃ§Ã£o equivalente Ã s 12 horas do relÃ³gio no mapa quando a alavanca estiver ativada.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 3:
-			mes "[Caçador]";
-			mes "Hum. Advertências... Ótimo, se você cair em uma armadilha, você terá que começar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
+			mes "[CaÃ§ador]";
+			mes "Hum. AdvertÃªncias... Ã“timo, se vocÃª cair em uma armadilha, vocÃª terÃ¡ que comeÃ§ar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
 			next;
-			mes "[Caçador]";
-			mes "Eu irei enviá-lo para o local do teste. Lá estará a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[CaÃ§ador]";
+			mes "Eu irei enviÃ¡-lo para o local do teste. LÃ¡ estarÃ¡ a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
 			next;
-			mes "[Caçador]";
-			mes "Se a pessoa que estiver fazendo o teste passar ou não, a próxima pessoa que está esperando na janela de conversa é enviada para a zona do teste. Se ninguém estiver esperando, o teste é iniciado assim que entrar na janela de conversa.";
+			mes "[CaÃ§ador]";
+			mes "Se a pessoa que estiver fazendo o teste passar ou nÃ£o, a prÃ³xima pessoa que estÃ¡ esperando na janela de conversa Ã© enviada para a zona do teste. Se ninguÃ©m estiver esperando, o teste Ã© iniciado assim que entrar na janela de conversa.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 4:
 			if (.@a0) {
-				mes "[Caçador]";
-				mes "... Certo. Vou enviá-lo para a zona do teste agora. Não me culpe se você perder ou ficar confuso, pois você não ouviu a explicação.";
+				mes "[CaÃ§ador]";
+				mes "... Certo. Vou enviÃ¡-lo para a zona do teste agora. NÃ£o me culpe se vocÃª perder ou ficar confuso, pois vocÃª nÃ£o ouviu a explicaÃ§Ã£o.";
 				next;
 			}
-			mes "[Caçador]";
+			mes "[CaÃ§ador]";
 			mes "Ok, melhor dar sorte.";
 			mes "Vou envia-lo agora.";
 			next;
 		}
-		mes "[Caçador]";
-		mes "Bem, suas flexas provavelmente ainda estão a ser feitas, assim você pode usar para ter no meu teste.";
+		mes "[CaÃ§ador]";
+		mes "Bem, suas flexas provavelmente ainda estÃ£o a ser feitas, assim vocÃª pode usar para ter no meu teste.";
 		getitem 1751,200; //Flecha de Prata
 		next;
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "Boa sorte.";
 		set HNTR_Q,12;
 		warp "job_hunte",176,22;
@@ -778,16 +778,16 @@ payon_in02,21,31,1	script	Caçador#htnGM2	59,{
 		end;
 	}
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "Hum...?";
 		mes "Porque um Arqueiro";
-		mes "está me visitando?";
+		mes "estÃ¡ me visitando?";
 		next;
-		mes "[Caçador]";
-		mes "Não fui notificado pelo Guilda dos Caçadores de nada. Você não está tentando saltar no meio do teste de Caçador, está?";
+		mes "[CaÃ§ador]";
+		mes "NÃ£o fui notificado pelo Guilda dos CaÃ§adores de nada. VocÃª nÃ£o estÃ¡ tentando saltar no meio do teste de CaÃ§ador, estÃ¡?";
 		next;
-		mes "[Caçador]";
-		mes "Pare de uma vez você tem que juntar todos os itens necessários para o teste.";
+		mes "[CaÃ§ador]";
+		mes "Pare de uma vez vocÃª tem que juntar todos os itens necessÃ¡rios para o teste.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
@@ -795,74 +795,74 @@ payon_in02,21,31,1	script	Caçador#htnGM2	59,{
 	else if (HNTR_Q == 10) {
 		mes "[Hunter]";
 		mes "Hum?";
-		mes "Posso ajudá-lo";
+		mes "Posso ajudÃ¡-lo";
 		mes "com algo?";
-		mes "Oh, você deve ser";
-		mes "um caçador candidato.";
+		mes "Oh, vocÃª deve ser";
+		mes "um caÃ§ador candidato.";
 		next;
 		mes "[Hunter]";
-		mes "Se você deseja mudar de classe, eu acho que você precisa visitar a pessoa no Palácio Central de Payon.";
+		mes "Se vocÃª deseja mudar de classe, eu acho que vocÃª precisa visitar a pessoa no PalÃ¡cio Central de Payon.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
-		mes "[Caçador]";
-		mes "Hum? Você não é o Arqueiro que desistiu da última vez? Agora você está pronto, certo? Então eu enviar-lhe a área da mudança de classe agora.";
+		mes "[CaÃ§ador]";
+		mes "Hum? VocÃª nÃ£o Ã© o Arqueiro que desistiu da Ãºltima vez? Agora vocÃª estÃ¡ pronto, certo? EntÃ£o eu enviar-lhe a Ã¡rea da mudanÃ§a de classe agora.";
 		next;
-		mes "[Caçador]";
-		mes "Se você ainda";
+		mes "[CaÃ§ador]";
+		mes "Se vocÃª ainda";
 		mes "tem perguntas,";
 		mes "sinta-se livre para perguntar.";
 		next;
-		switch(select("O que é o teste?:Quais são os requisitos para passar?:Alguma advertência?:Começar o teste.")) {
+		switch(select("O que Ã© o teste?:Quais sÃ£o os requisitos para passar?:Alguma advertÃªncia?:ComeÃ§ar o teste.")) {
 		case 1:
-			mes "[Caçador]";
-			mes "Você tem que caçar alguns monstros com um nome específico, mas você deve evitar todas as armadilhas aqui ao mesmo tempo.";
+			mes "[CaÃ§ador]";
+			mes "VocÃª tem que caÃ§ar alguns monstros com um nome especÃ­fico, mas vocÃª deve evitar todas as armadilhas aqui ao mesmo tempo.";
 			next;
-			mes "[Caçador]";
-			mes "Trata-se de testar a sua capacidade de avançar rapidamente e localizar alvos em diversas situações.";
+			mes "[CaÃ§ador]";
+			mes "Trata-se de testar a sua capacidade de avanÃ§ar rapidamente e localizar alvos em diversas situaÃ§Ãµes.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 2:
-			mes "[Caçador]";
-			mes "Dentro de um determinado tempo, você começará direcção equivalente às 6 horas do relógio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irá aparecer no centro do mapa.";
+			mes "[CaÃ§ador]";
+			mes "Dentro de um determinado tempo, vocÃª comeÃ§arÃ¡ direcÃ§Ã£o equivalente Ã s 6 horas do relÃ³gio no mapa, cace os monstros do objetivo, e atire na alavanca de escape que irÃ¡ aparecer no centro do mapa.";
 			next;
-			mes "[Caçador]";
-			mes "Você irá passar se estiver capacitado a escapar pela direção equivalente às 12 horas do relógio no mapa quando a alavanca estiver ativada.";
+			mes "[CaÃ§ador]";
+			mes "VocÃª irÃ¡ passar se estiver capacitado a escapar pela direÃ§Ã£o equivalente Ã s 12 horas do relÃ³gio no mapa quando a alavanca estiver ativada.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 3:
-			mes "[Caçador]";
-			mes "Hum. Advertências... Ótimo, se você cair em uma armadilha, você terá que começar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
+			mes "[CaÃ§ador]";
+			mes "Hum. AdvertÃªncias... Ã“timo, se vocÃª cair em uma armadilha, vocÃª terÃ¡ que comeÃ§ar o teste do inicio. E somente uma pessoa pode fazer o teste por vez.";
 			next;
-			mes "[Caçador]";
-			mes "Eu irei enviá-lo para o local do teste. Lá estará a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[CaÃ§ador]";
+			mes "Eu irei enviÃ¡-lo para o local do teste. LÃ¡ estarÃ¡ a sala de espera, but if someone else is taking the test, you must wait in the chatroom.";
 			next;
-			mes "[Caçador]";
-			mes "Se a pessoa que estiver fazendo o teste passar ou não, a próxima pessoa que está esperando na janela de conversa é enviada para a zona do teste. Se ninguém estiver esperando, o teste é iniciado assim que entrar na janela de conversa.";
+			mes "[CaÃ§ador]";
+			mes "Se a pessoa que estiver fazendo o teste passar ou nÃ£o, a prÃ³xima pessoa que estÃ¡ esperando na janela de conversa Ã© enviada para a zona do teste. Se ninguÃ©m estiver esperando, o teste Ã© iniciado assim que entrar na janela de conversa.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 4:
-			mes "[Caçador]";
+			mes "[CaÃ§ador]";
 			mes "Tudo bem, boa sorte.";
-			mes "Irei enviá-lo agora.";
+			mes "Irei enviÃ¡-lo agora.";
 			next;
 		}
-		mes "[Caçador]";
-		mes "Eh? Por que não vou te dar Silver Arrows? Bem, você não deve esperar para obter alguma coisa quando você nem sequer trouxe os materiais.";
+		mes "[CaÃ§ador]";
+		mes "Eh? Por que nÃ£o vou te dar Silver Arrows? Bem, vocÃª nÃ£o deve esperar para obter alguma coisa quando vocÃª nem sequer trouxe os materiais.";
 		next;
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "Bem...";
 		mes "Eu acredito";
-		mes "que você está pronto.";
-		mes "Vamos começar.";
+		mes "que vocÃª estÃ¡ pronto.";
+		mes "Vamos comeÃ§ar.";
 		next;
-		if (select("Sim, vamos começar.:Ah, espere um momento.") == 1) {
-			mes "[Caçador]";
+		if (select("Sim, vamos comeÃ§ar.:Ah, espere um momento.") == 1) {
+			mes "[CaÃ§ador]";
 			mes "Tudo bem!! agora...";
 			mes "Passe esse tempo!";
 			close2;
@@ -871,47 +871,47 @@ payon_in02,21,31,1	script	Caçador#htnGM2	59,{
 			warp "job_hunte",176,22;
 			end;
 		}
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "*Sigh...*";
 		mes "Volte quando";
-		mes "você estiver pronto";
+		mes "vocÃª estiver pronto";
 		mes "com os preparativos.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 16) {
-		mes "[Caçador]";
-		mes "Wow. Você voltou em pedaços!";
-		mes "Quero dizer, bom trabalho. Pois bem, eu vou te dar o item que serve como prova de que você passou no teste.";
+		mes "[CaÃ§ador]";
+		mes "Wow. VocÃª voltou em pedaÃ§os!";
+		mes "Quero dizer, bom trabalho. Pois bem, eu vou te dar o item que serve como prova de que vocÃª passou no teste.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
 		getitem 1007,1; //Colar da Sabedoria
 		next;
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "Bem...";
-		mes "Lá vai você.";
-		mes "Agora volte as pressas para Guilda dos caçadores, e junte-se a nós ~";
+		mes "LÃ¡ vai vocÃª.";
+		mes "Agora volte as pressas para Guilda dos caÃ§adores, e junte-se a nÃ³s ~";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Caçador]";
-		mes "Vejo que você não está com pressa de tornar-se um Caçador. Eu estava correndo por aí com alegria, selvagemente brandindo meu arco no primeiro mês eu me tornei um caçador. Hehe~";
+		mes "[CaÃ§ador]";
+		mes "Vejo que vocÃª nÃ£o estÃ¡ com pressa de tornar-se um CaÃ§ador. Eu estava correndo por aÃ­ com alegria, selvagemente brandindo meu arco no primeiro mÃªs eu me tornei um caÃ§ador. Hehe~";
 		next;
-		mes "[Caçador]";
+		mes "[CaÃ§ador]";
 		mes "Agora depressa~";
-		mes "Eles estão esperando";
+		mes "Eles estÃ£o esperando";
 		mes "pela sua volta";
-		mes "na Guilda dos Caçadores.";
+		mes "na Guilda dos CaÃ§adores.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else {
-		mes "[Caçador]";
-		mes "O que você quer? Eu estou em uma viagem oficial e estou ocupado no momento. Agora, se você me der lincença.";
+		mes "[CaÃ§ador]";
+		mes "O que vocÃª quer? Eu estou em uma viagem oficial e estou ocupado no momento. Agora, se vocÃª me der lincenÃ§a.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
@@ -922,42 +922,42 @@ job_hunte,178,32,1	script	Guia#hnt	107,5,2,{
 OnTouch:
 	if (HNTR_Q == 12) {
 		mes "[Guia]";
-		mes "Bom dia. Seja bem-vindo ao local de Teste de Caçador. O teste dará início quando você entrar na próxima porta.";
+		mes "Bom dia. Seja bem-vindo ao local de Teste de CaÃ§ador. O teste darÃ¡ inÃ­cio quando vocÃª entrar na prÃ³xima porta.";
 		next;
 		mes "[Guia]";
-		mes "Como dito anteriormente, caçe 4 ou mais monstros chamados ^3355FFMonstro Alvo^000000. Depois disso, um interruptor aparecerá no centro do mapa.";
+		mes "Como dito anteriormente, caÃ§e 4 ou mais monstros chamados ^3355FFMonstro Alvo^000000. Depois disso, um interruptor aparecerÃ¡ no centro do mapa.";
 		next;
 		mes "[Guia]";
-		mes "Quando você destruir o interruptor, a saída aparecerá na 12 direção do mapa. Faça tudo antes que o tempo acabe e fuja.";
+		mes "Quando vocÃª destruir o interruptor, a saÃ­da aparecerÃ¡ na 12 direÃ§Ã£o do mapa. FaÃ§a tudo antes que o tempo acabe e fuja.";
 		next;
 		mes "[Guia]";
-		mes "Se durante o teste você morrer, cair em uma armadilha, ou passar do tempo limite, você irá falhar. E terá que refazer o teste.";
+		mes "Se durante o teste vocÃª morrer, cair em uma armadilha, ou passar do tempo limite, vocÃª irÃ¡ falhar. E terÃ¡ que refazer o teste.";
 		next;
 		mes "[Guia]";
-		mes "Nós vamos providenciar flechas, por isso, certifique-se de trazer um arco. Bem, então. Por favor, avise quando estiver pronto.";
+		mes "NÃ³s vamos providenciar flechas, por isso, certifique-se de trazer um arco. Bem, entÃ£o. Por favor, avise quando estiver pronto.";
 		savepoint "job_hunte",176,22;
 		close;
 	}
 	else if (HNTR_Q > 12 && HNTR_Q < 16) {
 		mes "[Guia]";
 		mes "Hmm...";
-		mes "Você fez besteira?";
+		mes "VocÃª fez besteira?";
 		mes "Vou recuperar seu";
 		mes "HP e SP agora.";
 		percentheal 100,100;
 		next;
 		mes "[Guia]";
-		mes "Se for muito difícil, não faria mal nenhum tentar em uma próxima vez. Quer desistir por enquanto?";
+		mes "Se for muito difÃ­cil, nÃ£o faria mal nenhum tentar em uma prÃ³xima vez. Quer desistir por enquanto?";
 		next;
 		switch(select("Continuar Tentanto.:Ceder.")) {
 		case 1:
 			mes "[Guia]";
-			mes "Ok. Faça seu melhor e se torne um grande caçador. Por favor vá para a sala de espera. Se alguém estiver fazendo o teste, você vai ter que esperar esta pessoa terminar.";
+			mes "Ok. FaÃ§a seu melhor e se torne um grande caÃ§ador. Por favor vÃ¡ para a sala de espera. Se alguÃ©m estiver fazendo o teste, vocÃª vai ter que esperar esta pessoa terminar.";
 			close;
 		case 2:
-			mapannounce "job_hunte",strcharinfo(0)+ " desistiu. O próximo, por favor entre.",bc_map;
+			mapannounce "job_hunte",strcharinfo(0)+ " desistiu. O prÃ³ximo, por favor entre.",bc_map;
 			mes "[Guia]";
-			mes "Muito bem. Vou te enviar para payon. Espero te ver de novo. Não esqueça de salvar quando você sair.";
+			mes "Muito bem. Vou te enviar para payon. Espero te ver de novo. NÃ£o esqueÃ§a de salvar quando vocÃª sair.";
 			// donpcevent "Sala de Espera#hnt::OnStart";
 			close2;
 			set HNTR_Q,13;
@@ -967,7 +967,7 @@ OnTouch:
 	}
 	else if (HNTR_Q > 15) {
 		mes "[Guia]";
-		mes "Você não deveria estar aqui. Que tal encontrar o item requerido para trocar de classe primeiro??";
+		mes "VocÃª nÃ£o deveria estar aqui. Que tal encontrar o item requerido para trocar de classe primeiro??";
 		close2;
 		savepoint "payon",104,99;
 		warp "payon_in02",21,27;
@@ -1037,10 +1037,10 @@ OnEnable:
 	monster "job_hunte",112,139,"Rex",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",112,139,"Anselmo",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",90,91,"Anolian",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Demonstração de Monstro",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Eu não",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"DemonstraÃ§Ã£o de Monstro",1002,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Eu nÃ£o",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",77,112,"Me ajude",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Não me ataque",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"NÃ£o me ataque",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",108,103,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
 	end;
 
@@ -1053,12 +1053,12 @@ OnMyMobDead:
 		donpcevent "Manager#hnt::OnDisable";
 	}
 	else {
-		mapannounce "job_hunte","Ok~ Você está quase lá!!",bc_map;
+		mapannounce "job_hunte","Ok~ VocÃª estÃ¡ quase lÃ¡!!",bc_map;
 	}
 	end;
 
 OnMyMobDead2:
-	mapannounce "job_hunte",strcharinfo(0)+ "!! Você cometeu um erro... Por favor tente novamente.",bc_map;
+	mapannounce "job_hunte",strcharinfo(0)+ "!! VocÃª cometeu um erro... Por favor tente novamente.",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";
@@ -1074,23 +1074,23 @@ OnDisable:
 	end;
 
 OnTimer1000:
-	mapannounce "job_hunte","O teste vai começar agora.",bc_map;
+	mapannounce "job_hunte","O teste vai comeÃ§ar agora.",bc_map;
 	end;
 
 OnTimer3000:
-	mapannounce "job_hunte","Como mencionado anteriormente, só caçe os monstro nomeados de 'Monstro Alvo'.",bc_map;
+	mapannounce "job_hunte","Como mencionado anteriormente, sÃ³ caÃ§e os monstro nomeados de 'Monstro Alvo'.",bc_map;
 	end;
 
 OnTimer5000:
-	mapannounce "job_hunte","***** Tenha cuidado com as armadilhas enquanto caça. *****",bc_map;
+	mapannounce "job_hunte","***** Tenha cuidado com as armadilhas enquanto caÃ§a. *****",bc_map;
 	end;
 
 OnTimer7000:
-	mapannounce "job_hunte","Depois de caçar 4 'Monstro Alvo' o interruptor no centro começara a funcionar.",bc_map;
+	mapannounce "job_hunte","Depois de caÃ§ar 4 'Monstro Alvo' o interruptor no centro comeÃ§ara a funcionar.",bc_map;
 	end;
 
 OnTimer9000:
-	mapannounce "job_hunte","Quando você ativar o interruptor de saída, saia da área de teste pelo portal na 12 direção.",bc_map;
+	mapannounce "job_hunte","Quando vocÃª ativar o interruptor de saÃ­da, saia da Ã¡rea de teste pelo portal na 12 direÃ§Ã£o.",bc_map;
 	end;
 
 OnTimer11000:
@@ -1098,7 +1098,7 @@ OnTimer11000:
 	end;
 
 OnTimer13000:
-	mapannounce "job_hunte","Você terá 3 minutos a partir de agora. Você será notificado a cada minuto que passa.",bc_map;
+	mapannounce "job_hunte","VocÃª terÃ¡ 3 minutos a partir de agora. VocÃª serÃ¡ notificado a cada minuto que passa.",bc_map;
 	end;
 
 OnTimer14000:
@@ -1157,27 +1157,27 @@ OnTimer197000:
 
 job_hunte,93,101,1	script	Alavanca#hnt	723,1,1,{
 OnTouch:
-	mes "^3355FFHá 3 botões";
+	mes "^3355FFHÃ¡ 3 botÃµes";
 	mes "na alavanca de escape.^000000";
 	set HNTR_Q,15;
 	next;
 	switch(select("Escapar:Cancelar:Re-fazer Teste")) {
 	case 1:
 		mes "^3355FFO Portal de Escape";
-		mes "agora está ativado.^000000";
+		mes "agora estÃ¡ ativado.^000000";
 		close2;
-		mapannounce "job_hunte"," !! Ativação do Portal de Escape completa. !! ",bc_map;
-		enablenpc "Saída#hnttest";
+		mapannounce "job_hunte"," !! AtivaÃ§Ã£o do Portal de Escape completa. !! ",bc_map;
+		enablenpc "SaÃ­da#hnttest";
 		end;
 	case 2:
 		mes "^3355FFCanceling";
 		mes "Operation.^000000";
 		close2;
-		mapannounce "job_hunte"," !! A operação foi cancelada. !! ",bc_map;
+		mapannounce "job_hunte"," !! A operaÃ§Ã£o foi cancelada. !! ",bc_map;
 		end;
 	case 3:
-		mapannounce "job_hunte"," !! Ativando cancelação do portal... !! ",bc_map;
-		mes "^3355FFVocê logo estará";
+		mapannounce "job_hunte"," !! Ativando cancelaÃ§Ã£o do portal... !! ",bc_map;
+		mes "^3355FFVocÃª logo estarÃ¡";
 		mes "de volta para a";
 		mes "sala de espera.^000000";
 		close2;
@@ -1189,7 +1189,7 @@ OnTouch:
 	}
 
 OnDisable:
-	disablenpc "Saída#hnttest";
+	disablenpc "SaÃ­da#hnttest";
 	disablenpc "Alavanca#hnt";
 	end;
 
@@ -1198,9 +1198,9 @@ OnEnable:
 	end;
 }
 
-job_hunte,89,139,0	script	Saída#hnttest	45,2,2,{
+job_hunte,89,139,0	script	SaÃ­da#hnttest	45,2,2,{
 OnInit:
-	disablenpc "Saída#hnttest";
+	disablenpc "SaÃ­da#hnttest";
 	end;
 
 OnTouch:
@@ -1219,137 +1219,137 @@ job_hunte,52,140,0	script	1-1::HntTrap	-1,0,1,{
 OnTouch:
 	switch(rand(200)) {
 	default:
-	case 1: mapannounce "job_hunte",strcharinfo(0) + ", você caiu em uma armadilha. Você irá retornar para o ponto de partida.",bc_map; break;
-	case 2: mapannounce "job_hunte",strcharinfo(0) + ", sim você! Volte e comece de novo!",bc_map; break;
-	case 3: mapannounce "job_hunte",strcharinfo(0) + " falhou!...bem...você irá se você não tentar novamente...",bc_map; break;
-	case 4: mapannounce "job_hunte",strcharinfo(0) + ", falhou comigo! Volte para onde você começou!",bc_map; break;
-	case 5: mapannounce "job_hunte",strcharinfo(0) + ", você tropeçou em uma armadilha. Me desculpe, mas agora, VOCÊ PERDEU.",bc_map; break;
-	case 6: mapannounce "job_hunte",strcharinfo(0) + ", o que você está fazendo!? Volte e tente mais uma vez!",bc_map; break;
-	case 7: mapannounce "job_hunte",strcharinfo(0) + ", vamos lá! Você pode fazer melhor que isso!! Tente de novo!",bc_map; break;
-	case 8: mapannounce "job_hunte",strcharinfo(0) + ", caiu em uma armadilha... mais uma vez. Mas não se preocupe, você está ficando melhor.",bc_map; break;
-	case 9: mapannounce "job_hunte",strcharinfo(0) + ", não, não, não... Volte para onde você começou!",bc_map; break;
-	case 10: mapannounce "job_hunte",strcharinfo(0) + "... aww~ Tente novamente! Você pode fazer isso!",bc_map; break;
-	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ e você pretende ser o quê? Caçador? Volte aqui!",bc_map; break;
-	case 12: mapannounce "job_hunte",strcharinfo(0) + " foi derrotado pelas forças do mal. Não desista, herói!",bc_map; break;
-	case 13: mapannounce "job_hunte","Eu coloquei um feitiço em você " + strcharinfo(0) + " e agora você é meu! Vá fazer tudo de novo.",bc_map; break;
-	case 14: mapannounce "job_hunte",strcharinfo(0) + ". Bom dia amigo, bem-vindo as terras lá de baixo. Como um presente, vou te mandar para o início...",bc_map; break;
-	case 15: mapannounce "job_hunte","Este é o meu ninho " + strcharinfo(0) + "! Não pise lá, squawk~ Recomece.",bc_map; break;
+	case 1: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª caiu em uma armadilha. VocÃª irÃ¡ retornar para o ponto de partida.",bc_map; break;
+	case 2: mapannounce "job_hunte",strcharinfo(0) + ", sim vocÃª! Volte e comece de novo!",bc_map; break;
+	case 3: mapannounce "job_hunte",strcharinfo(0) + " falhou!...bem...vocÃª irÃ¡ se vocÃª nÃ£o tentar novamente...",bc_map; break;
+	case 4: mapannounce "job_hunte",strcharinfo(0) + ", falhou comigo! Volte para onde vocÃª comeÃ§ou!",bc_map; break;
+	case 5: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª tropeÃ§ou em uma armadilha. Me desculpe, mas agora, VOCÃŠ PERDEU.",bc_map; break;
+	case 6: mapannounce "job_hunte",strcharinfo(0) + ", o que vocÃª estÃ¡ fazendo!? Volte e tente mais uma vez!",bc_map; break;
+	case 7: mapannounce "job_hunte",strcharinfo(0) + ", vamos lÃ¡! VocÃª pode fazer melhor que isso!! Tente de novo!",bc_map; break;
+	case 8: mapannounce "job_hunte",strcharinfo(0) + ", caiu em uma armadilha... mais uma vez. Mas nÃ£o se preocupe, vocÃª estÃ¡ ficando melhor.",bc_map; break;
+	case 9: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o, nÃ£o, nÃ£o... Volte para onde vocÃª comeÃ§ou!",bc_map; break;
+	case 10: mapannounce "job_hunte",strcharinfo(0) + "... aww~ Tente novamente! VocÃª pode fazer isso!",bc_map; break;
+	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ e vocÃª pretende ser o quÃª? CaÃ§ador? Volte aqui!",bc_map; break;
+	case 12: mapannounce "job_hunte",strcharinfo(0) + " foi derrotado pelas forÃ§as do mal. NÃ£o desista, herÃ³i!",bc_map; break;
+	case 13: mapannounce "job_hunte","Eu coloquei um feitiÃ§o em vocÃª " + strcharinfo(0) + " e agora vocÃª Ã© meu! VÃ¡ fazer tudo de novo.",bc_map; break;
+	case 14: mapannounce "job_hunte",strcharinfo(0) + ". Bom dia amigo, bem-vindo as terras lÃ¡ de baixo. Como um presente, vou te mandar para o inÃ­cio...",bc_map; break;
+	case 15: mapannounce "job_hunte","Este Ã© o meu ninho " + strcharinfo(0) + "! NÃ£o pise lÃ¡, squawk~ Recomece.",bc_map; break;
 	case 16: mapannounce "job_hunte",strcharinfo(0) + ", outro arqueiro caiu. Mais 3 para ir!",bc_map; break;
-	case 17: mapannounce "job_hunte",strcharinfo(0) + ", você tem o que é preciso? Então tente novamente.",bc_map; break;
-	case 18: mapannounce "job_hunte","Ai, " + strcharinfo(0) + ", você tem caído na mais temida das armadilhas. A temida bomba fedida! Fuja fuja fuja!",bc_map; break;
+	case 17: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª tem o que Ã© preciso? EntÃ£o tente novamente.",bc_map; break;
+	case 18: mapannounce "job_hunte","Ai, " + strcharinfo(0) + ", vocÃª tem caÃ­do na mais temida das armadilhas. A temida bomba fedida! Fuja fuja fuja!",bc_map; break;
 	case 19: mapannounce "job_hunte",strcharinfo(0) + " tinha muito suco de ameixa pra beber hoje. Volte para o ponto de partida~",bc_map; break;
-	case 20: mapannounce "job_hunte","Não.... " + strcharinfo(0) + ", você caiu em uma armadilha. Você irá retornar para o ponto de partida.",bc_map; break;
-	case 21: mapannounce "job_hunte","Miau *garras* veja só, teremos um" + strcharinfo(0) + "ensopado. Volte para o início se você não quiser ser ensopado!",bc_map; break;
-	case 22: mapannounce "job_hunte","Desculpe " + strcharinfo(0) + ", mas você realmente encontrou um MAU segredo. Você irá retornar para o início.",bc_map; break;
-	case 23: mapannounce "job_hunte",strcharinfo(0) + ", Arqueiro burro...sua tenacidade está a tocar. Mas volte para o começo...",bc_map; break;
-	case 24: mapannounce "job_hunte",strcharinfo(0) + ", você caiu e não pode se levantar. Você será transportado até o começo.",bc_map; break;
-	case 25: mapannounce "job_hunte","Passe um turno " + strcharinfo(0) + ", volte para o início.",bc_map; break;
-	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, heh heh heh. Você voltará para o ponto de partida.",bc_map; break;
-	case 27: mapannounce "job_hunte","Acabou a brincadeira " + strcharinfo(0) + ". Dessa vez é sério.",bc_map; break;
-	case 28: mapannounce "job_hunte",strcharinfo(0) + ", está é uma corrida por um Jellopy... Sai fora! Vá para o início se quer continuar.",bc_map; break;
-	case 29: mapannounce "job_hunte","Desconectado do sevidor. " + strcharinfo(0) + ", você tem que começar de novo.",bc_map; break;
-	case 30: mapannounce "job_hunte",strcharinfo(0) + ", o que esse botão faz...oops! Estou receoso de que tenha que começar de novo.",bc_map; break;
-	case 31: mapannounce "job_hunte",strcharinfo(0) + ", você entro em um round bonus! Eeeeeee, você perdeu. Você retornará para o ponto de partida.",bc_map; break;
-	case 32: mapannounce "job_hunte","Ah, não " + strcharinfo(0) + ", você pisou em um enxame de abelhas. Escapou por pouco, mas vai voltar para o início.",bc_map; break;
-	case 33: mapannounce "job_hunte",strcharinfo(0) + ", espere espere. Isto é uma armadilha! Ah espere, isso é um cachorro. . . .",bc_map; break;
-	case 34: mapannounce "job_hunte","Pare " + strcharinfo(0) + "! Para pisar nessa armadilha, eu vou punir você!",bc_map; break;
-	case 35: mapannounce "job_hunte",strcharinfo(0) + ", Eu vou voltar. . . eu espero que você também.",bc_map; break;
-	case 36: mapannounce "job_hunte",strcharinfo(0) + ", Venha comigo se você quer viver. . para o ponto de partida.",bc_map; break;
-	case 37: mapannounce "job_hunte",strcharinfo(0) + ", meu... precioso! Volte para o início.",bc_map; break;
-	case 38: mapannounce "job_hunte","Siga a estrada de tijolos amarelos... Não espere, " + strcharinfo(0) + "!! Não por ai...Volte para o ponto de partida.",bc_map; break;
-	case 39: mapannounce "job_hunte",strcharinfo(0) + ", você realmente vai para pegar o jeito da 'sintonia com a natureza'. Agora, você está perdido!",bc_map; break;
-	case 40: mapannounce "job_hunte",strcharinfo(0) + ", é só uma história...não são reais. Mas você vai voltar para o ponto de partida.",bc_map; break;
-	case 41: mapannounce "job_hunte",strcharinfo(0) + ", você caiu em uma armadilha. E a armadilha...caiu em você. Retornando para o início.",bc_map; break;
-	case 42: mapannounce "job_hunte","Não tenha medo " + strcharinfo(0) + ", você também, deve aprender os poderes do lado negro. Você agora vai voltar par o início.",bc_map; break;
-	case 43: mapannounce "job_hunte",strcharinfo(0) + ", caiu em uma armadilha. Muito fácil também, estou com medo. Mas esse herói não será batido facilmente!",bc_map; break;
-	case 44: mapannounce "job_hunte"," Dica do dia: Não pise nas armadilhas. Você retornará para o ponto de partida.",bc_map; break;
-	case 45: mapannounce "job_hunte",strcharinfo(0) + " caiu em uma armadilha. Mais uma vez, para o bem da clareza, o nome é " + strcharinfo(0) + ".",bc_map; break;
-	case 46: mapannounce "job_hunte","Oy oy, " + strcharinfo(0) + ".. eu sempre vejo Porings cegos obterem mais! Volte para o início.",bc_map; break;
-	case 47: mapannounce "job_hunte","MEUS OLHOS!! " + strcharinfo(0) + ", você... você.. pisou neles. Vá tentar denovo... Eu deveria chorar por você se eu pudesse...",bc_map; break;
-	case 48: mapannounce "job_hunte",strcharinfo(0) + ", onde está você? Certo...NÃO no lugar onde deveria se tivesse passado no teste.",bc_map; break;
-	case 49: mapannounce "job_hunte"," Wow, eles atualmente pagam um cara para pensar nesse comentários. " + strcharinfo(0) + ", você pode voltar para o ponto de partida.",bc_map; break;
-	case 50: mapannounce "job_hunte"," Minha palavra, " + strcharinfo(0) + "! Você precariamente caiu em uma armadilha! Você retornará para o início. Adeus~!",bc_map; break;
-	case 51: mapannounce "job_hunte",strcharinfo(0) + ", você tem alguma idéia de onde você está indo? Vamos de novo *sigh*.",bc_map; break;
-	case 52: mapannounce "job_hunte",strcharinfo(0) + ", você gosta de sorvete de chá verde? Não? Volte para o início...*hmph*",bc_map; break;
-	case 53: mapannounce "job_hunte","Ah, não.. " + strcharinfo(0) + ", você está machucado? Vamos agora, vamos voltar para o ponto de partida.",bc_map; break;
-	case 54: mapannounce "job_hunte","Oi " + strcharinfo(0) + ", como está você? Tenho um presente pra você~ um portal grátis! Volte para o início.",bc_map; break;
-	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... você sabia que isso era um armadilha? Espero que sim, caso contrário, acho que você estaria muito envergonhado.",bc_map; break;
-	case 56: mapannounce "job_hunte",strcharinfo(0) + ", o que você acha do design interior? Eu trabalhei duro nele... e está adorável característica que te leva de volta para o início.",bc_map; break;
-	case 57: mapannounce "job_hunte","BOOM BAM BOOM! " + strcharinfo(0) + ", você caiu na minha armadilha! Mas eu não vou te matar...só...humilhar você...",bc_map; break;
-	case 58: mapannounce "job_hunte","Ah, " + strcharinfo(0) + ".. Você pode fazer melhor. Tente novamente!",bc_map; break;
-	case 59: mapannounce "job_hunte","Olá, essa é a Kafra local... " + strcharinfo(0) + ", sua mãe está esperando você na saída.",bc_map; break;
-	case 60: mapannounce "job_hunte",strcharinfo(0) + ", se você fizer bem. Vou ter um belo presente esperando por você... O que é? Você vai ver se passar~ Tente novamente agora!",bc_map; break;
-	case 61: mapannounce "job_hunte",strcharinfo(0) + " falhoooooooooooooouu.. Hehe, bricandeira. Você irá voltar para o ponto de partida, então pode tentar mais uma vez!",bc_map; break;
-	case 62: mapannounce "job_hunte",strcharinfo(0) + ", você caiu em uma armadilha. Você precisa olhar mais para onde anda. O quê? Invisível? Pare de conversa mole! Agora tente novamente!",bc_map; break;
-	case 63: mapannounce "job_hunte"," Desculpe, " + strcharinfo(0) + ", você caiu em uma armadilha. Mas eu vou ser legal e te mandar para o ponto de partida.",bc_map; break;
-	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! Eu não posso acreditar que você caiu nessa!",bc_map; break;
-	case 65: mapannounce "job_hunte",strcharinfo(0) + ", eu estava prestes a te falar sobre uma...mas, eu não disse? Volte para o início.",bc_map; break;
-	case 66: mapannounce "job_hunte",strcharinfo(0) + "...me desculpe amigo, mas você perdeu. Mas não se preocupe, essa mensagem não é transmitida nem nada.",bc_map; break;
-	case 67: mapannounce "job_hunte",strcharinfo(0) + ", não estou certo de que você se qualifica pra isso... Tente de novo e me prove o contrário.",bc_map; break;
-	case 68: mapannounce "job_hunte",strcharinfo(0) + ", OW...agora você se machucou. Volte para o início~",bc_map; break;
-	case 69: mapannounce "job_hunte",strcharinfo(0) + ", acho sua falta de fé perturbadora... Vamos começar de novo.",bc_map; break;
-	case 70: mapannounce "job_hunte",strcharinfo(0) + ", seus olhos podem te enganar. Não confie neles. Exageram seus sentimentos. Tente de novo agora.",bc_map; break;
-	case 71: mapannounce "job_hunte",strcharinfo(0) + ", se você entrar no caminho das trevas, ele sempre irá dominar o seu destino. Você irá voltar para o ponto de partida.",bc_map; break;
-	case 72: mapannounce "job_hunte",strcharinfo(0) + ", tamanho não importa. Mas, o número de armadilhas que pegaram você. Tente novamente e vença dessa vez!",bc_map; break;
-	case 73: mapannounce "job_hunte",strcharinfo(0) + ", não tente. Fazer ou não fazer. Não existe nenhuma tentativa.",bc_map; break;
-	case 74: mapannounce "job_hunte",strcharinfo(0) + ", é por isso que você falhou. Agora tente de novo!",bc_map; break;
-	case 75: mapannounce "job_hunte",strcharinfo(0) + ", olhe. Se é feito de metal e se parece com dentes, você não deve por seu pé dentro. Tão simples, não?!",bc_map; break;
-	case 76: mapannounce "job_hunte",strcharinfo(0) + ", você está derrotado. É inútil resistir.",bc_map; break;
-	case 77: mapannounce "job_hunte",strcharinfo(0) + ", estou ansioso para completar seu treinamento. Com o tempo você vai me chamar de Mestre.",bc_map; break;
-	case 78: mapannounce "job_hunte",strcharinfo(0) + ", seu excesso de confiança é sua fraqueza.",bc_map; break;
+	case 20: mapannounce "job_hunte","NÃ£o.... " + strcharinfo(0) + ", vocÃª caiu em uma armadilha. VocÃª irÃ¡ retornar para o ponto de partida.",bc_map; break;
+	case 21: mapannounce "job_hunte","Miau *garras* veja sÃ³, teremos um" + strcharinfo(0) + "ensopado. Volte para o inÃ­cio se vocÃª nÃ£o quiser ser ensopado!",bc_map; break;
+	case 22: mapannounce "job_hunte","Desculpe " + strcharinfo(0) + ", mas vocÃª realmente encontrou um MAU segredo. VocÃª irÃ¡ retornar para o inÃ­cio.",bc_map; break;
+	case 23: mapannounce "job_hunte",strcharinfo(0) + ", Arqueiro burro...sua tenacidade estÃ¡ a tocar. Mas volte para o comeÃ§o...",bc_map; break;
+	case 24: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª caiu e nÃ£o pode se levantar. VocÃª serÃ¡ transportado atÃ© o comeÃ§o.",bc_map; break;
+	case 25: mapannounce "job_hunte","Passe um turno " + strcharinfo(0) + ", volte para o inÃ­cio.",bc_map; break;
+	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, heh heh heh. VocÃª voltarÃ¡ para o ponto de partida.",bc_map; break;
+	case 27: mapannounce "job_hunte","Acabou a brincadeira " + strcharinfo(0) + ". Dessa vez Ã© sÃ©rio.",bc_map; break;
+	case 28: mapannounce "job_hunte",strcharinfo(0) + ", estÃ¡ Ã© uma corrida por um Jellopy... Sai fora! VÃ¡ para o inÃ­cio se quer continuar.",bc_map; break;
+	case 29: mapannounce "job_hunte","Desconectado do sevidor. " + strcharinfo(0) + ", vocÃª tem que comeÃ§ar de novo.",bc_map; break;
+	case 30: mapannounce "job_hunte",strcharinfo(0) + ", o que esse botÃ£o faz...oops! Estou receoso de que tenha que comeÃ§ar de novo.",bc_map; break;
+	case 31: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª entro em um round bonus! Eeeeeee, vocÃª perdeu. VocÃª retornarÃ¡ para o ponto de partida.",bc_map; break;
+	case 32: mapannounce "job_hunte","Ah, nÃ£o " + strcharinfo(0) + ", vocÃª pisou em um enxame de abelhas. Escapou por pouco, mas vai voltar para o inÃ­cio.",bc_map; break;
+	case 33: mapannounce "job_hunte",strcharinfo(0) + ", espere espere. Isto Ã© uma armadilha! Ah espere, isso Ã© um cachorro. . . .",bc_map; break;
+	case 34: mapannounce "job_hunte","Pare " + strcharinfo(0) + "! Para pisar nessa armadilha, eu vou punir vocÃª!",bc_map; break;
+	case 35: mapannounce "job_hunte",strcharinfo(0) + ", Eu vou voltar. . . eu espero que vocÃª tambÃ©m.",bc_map; break;
+	case 36: mapannounce "job_hunte",strcharinfo(0) + ", Venha comigo se vocÃª quer viver. . para o ponto de partida.",bc_map; break;
+	case 37: mapannounce "job_hunte",strcharinfo(0) + ", meu... precioso! Volte para o inÃ­cio.",bc_map; break;
+	case 38: mapannounce "job_hunte","Siga a estrada de tijolos amarelos... NÃ£o espere, " + strcharinfo(0) + "!! NÃ£o por ai...Volte para o ponto de partida.",bc_map; break;
+	case 39: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª realmente vai para pegar o jeito da 'sintonia com a natureza'. Agora, vocÃª estÃ¡ perdido!",bc_map; break;
+	case 40: mapannounce "job_hunte",strcharinfo(0) + ", Ã© sÃ³ uma histÃ³ria...nÃ£o sÃ£o reais. Mas vocÃª vai voltar para o ponto de partida.",bc_map; break;
+	case 41: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª caiu em uma armadilha. E a armadilha...caiu em vocÃª. Retornando para o inÃ­cio.",bc_map; break;
+	case 42: mapannounce "job_hunte","NÃ£o tenha medo " + strcharinfo(0) + ", vocÃª tambÃ©m, deve aprender os poderes do lado negro. VocÃª agora vai voltar par o inÃ­cio.",bc_map; break;
+	case 43: mapannounce "job_hunte",strcharinfo(0) + ", caiu em uma armadilha. Muito fÃ¡cil tambÃ©m, estou com medo. Mas esse herÃ³i nÃ£o serÃ¡ batido facilmente!",bc_map; break;
+	case 44: mapannounce "job_hunte"," Dica do dia: NÃ£o pise nas armadilhas. VocÃª retornarÃ¡ para o ponto de partida.",bc_map; break;
+	case 45: mapannounce "job_hunte",strcharinfo(0) + " caiu em uma armadilha. Mais uma vez, para o bem da clareza, o nome Ã© " + strcharinfo(0) + ".",bc_map; break;
+	case 46: mapannounce "job_hunte","Oy oy, " + strcharinfo(0) + ".. eu sempre vejo Porings cegos obterem mais! Volte para o inÃ­cio.",bc_map; break;
+	case 47: mapannounce "job_hunte","MEUS OLHOS!! " + strcharinfo(0) + ", vocÃª... vocÃª.. pisou neles. VÃ¡ tentar denovo... Eu deveria chorar por vocÃª se eu pudesse...",bc_map; break;
+	case 48: mapannounce "job_hunte",strcharinfo(0) + ", onde estÃ¡ vocÃª? Certo...NÃƒO no lugar onde deveria se tivesse passado no teste.",bc_map; break;
+	case 49: mapannounce "job_hunte"," Wow, eles atualmente pagam um cara para pensar nesse comentÃ¡rios. " + strcharinfo(0) + ", vocÃª pode voltar para o ponto de partida.",bc_map; break;
+	case 50: mapannounce "job_hunte"," Minha palavra, " + strcharinfo(0) + "! VocÃª precariamente caiu em uma armadilha! VocÃª retornarÃ¡ para o inÃ­cio. Adeus~!",bc_map; break;
+	case 51: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª tem alguma idÃ©ia de onde vocÃª estÃ¡ indo? Vamos de novo *sigh*.",bc_map; break;
+	case 52: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª gosta de sorvete de chÃ¡ verde? NÃ£o? Volte para o inÃ­cio...*hmph*",bc_map; break;
+	case 53: mapannounce "job_hunte","Ah, nÃ£o.. " + strcharinfo(0) + ", vocÃª estÃ¡ machucado? Vamos agora, vamos voltar para o ponto de partida.",bc_map; break;
+	case 54: mapannounce "job_hunte","Oi " + strcharinfo(0) + ", como estÃ¡ vocÃª? Tenho um presente pra vocÃª~ um portal grÃ¡tis! Volte para o inÃ­cio.",bc_map; break;
+	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... vocÃª sabia que isso era um armadilha? Espero que sim, caso contrÃ¡rio, acho que vocÃª estaria muito envergonhado.",bc_map; break;
+	case 56: mapannounce "job_hunte",strcharinfo(0) + ", o que vocÃª acha do design interior? Eu trabalhei duro nele... e estÃ¡ adorÃ¡vel caracterÃ­stica que te leva de volta para o inÃ­cio.",bc_map; break;
+	case 57: mapannounce "job_hunte","BOOM BAM BOOM! " + strcharinfo(0) + ", vocÃª caiu na minha armadilha! Mas eu nÃ£o vou te matar...sÃ³...humilhar vocÃª...",bc_map; break;
+	case 58: mapannounce "job_hunte","Ah, " + strcharinfo(0) + ".. VocÃª pode fazer melhor. Tente novamente!",bc_map; break;
+	case 59: mapannounce "job_hunte","OlÃ¡, essa Ã© a Kafra local... " + strcharinfo(0) + ", sua mÃ£e estÃ¡ esperando vocÃª na saÃ­da.",bc_map; break;
+	case 60: mapannounce "job_hunte",strcharinfo(0) + ", se vocÃª fizer bem. Vou ter um belo presente esperando por vocÃª... O que Ã©? VocÃª vai ver se passar~ Tente novamente agora!",bc_map; break;
+	case 61: mapannounce "job_hunte",strcharinfo(0) + " falhoooooooooooooouu.. Hehe, bricandeira. VocÃª irÃ¡ voltar para o ponto de partida, entÃ£o pode tentar mais uma vez!",bc_map; break;
+	case 62: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª caiu em uma armadilha. VocÃª precisa olhar mais para onde anda. O quÃª? InvisÃ­vel? Pare de conversa mole! Agora tente novamente!",bc_map; break;
+	case 63: mapannounce "job_hunte"," Desculpe, " + strcharinfo(0) + ", vocÃª caiu em uma armadilha. Mas eu vou ser legal e te mandar para o ponto de partida.",bc_map; break;
+	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! Eu nÃ£o posso acreditar que vocÃª caiu nessa!",bc_map; break;
+	case 65: mapannounce "job_hunte",strcharinfo(0) + ", eu estava prestes a te falar sobre uma...mas, eu nÃ£o disse? Volte para o inÃ­cio.",bc_map; break;
+	case 66: mapannounce "job_hunte",strcharinfo(0) + "...me desculpe amigo, mas vocÃª perdeu. Mas nÃ£o se preocupe, essa mensagem nÃ£o Ã© transmitida nem nada.",bc_map; break;
+	case 67: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o estou certo de que vocÃª se qualifica pra isso... Tente de novo e me prove o contrÃ¡rio.",bc_map; break;
+	case 68: mapannounce "job_hunte",strcharinfo(0) + ", OW...agora vocÃª se machucou. Volte para o inÃ­cio~",bc_map; break;
+	case 69: mapannounce "job_hunte",strcharinfo(0) + ", acho sua falta de fÃ© perturbadora... Vamos comeÃ§ar de novo.",bc_map; break;
+	case 70: mapannounce "job_hunte",strcharinfo(0) + ", seus olhos podem te enganar. NÃ£o confie neles. Exageram seus sentimentos. Tente de novo agora.",bc_map; break;
+	case 71: mapannounce "job_hunte",strcharinfo(0) + ", se vocÃª entrar no caminho das trevas, ele sempre irÃ¡ dominar o seu destino. VocÃª irÃ¡ voltar para o ponto de partida.",bc_map; break;
+	case 72: mapannounce "job_hunte",strcharinfo(0) + ", tamanho nÃ£o importa. Mas, o nÃºmero de armadilhas que pegaram vocÃª. Tente novamente e venÃ§a dessa vez!",bc_map; break;
+	case 73: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o tente. Fazer ou nÃ£o fazer. NÃ£o existe nenhuma tentativa.",bc_map; break;
+	case 74: mapannounce "job_hunte",strcharinfo(0) + ", Ã© por isso que vocÃª falhou. Agora tente de novo!",bc_map; break;
+	case 75: mapannounce "job_hunte",strcharinfo(0) + ", olhe. Se Ã© feito de metal e se parece com dentes, vocÃª nÃ£o deve por seu pÃ© dentro. TÃ£o simples, nÃ£o?!",bc_map; break;
+	case 76: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª estÃ¡ derrotado. Ã‰ inÃºtil resistir.",bc_map; break;
+	case 77: mapannounce "job_hunte",strcharinfo(0) + ", estou ansioso para completar seu treinamento. Com o tempo vocÃª vai me chamar de Mestre.",bc_map; break;
+	case 78: mapannounce "job_hunte",strcharinfo(0) + ", seu excesso de confianÃ§a Ã© sua fraqueza.",bc_map; break;
 	case 79: mapannounce "job_hunte",strcharinfo(0) + ", olhe seus passos. Este lugar pode ser um pouco duro.",bc_map; break;
 	case 80: mapannounce "job_hunte",strcharinfo(0) + ", ah eu disse que aqui era perigoso.",bc_map; break;
-	case 81: mapannounce "job_hunte",strcharinfo(0) + ", tudo está acontecendo como eu já previa.",bc_map; break;
-	case 82: mapannounce "job_hunte",strcharinfo(0) + ", você não deve mais voltar.",bc_map; break;
-	case 83: mapannounce "job_hunte",strcharinfo(0) + ", existem alternativas para o combate. Mas não para perder este teste. Agora tente de novo!",bc_map; break;
-	case 84: mapannounce "job_hunte",strcharinfo(0) + ", agora este é um nome que eu nunca ouvi enquanto...espero não ter que escutar isso denovo~!",bc_map; break;
-	case 85: mapannounce "job_hunte",strcharinfo(0) + ", nós não treinamos para sermos misericordiosos, misericórdia é para os fracos!",bc_map; break;
-	case 86: mapannounce "job_hunte",strcharinfo(0) + ", derrota não existe aqui, não é isso?!",bc_map; break;
+	case 81: mapannounce "job_hunte",strcharinfo(0) + ", tudo estÃ¡ acontecendo como eu jÃ¡ previa.",bc_map; break;
+	case 82: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª nÃ£o deve mais voltar.",bc_map; break;
+	case 83: mapannounce "job_hunte",strcharinfo(0) + ", existem alternativas para o combate. Mas nÃ£o para perder este teste. Agora tente de novo!",bc_map; break;
+	case 84: mapannounce "job_hunte",strcharinfo(0) + ", agora este Ã© um nome que eu nunca ouvi enquanto...espero nÃ£o ter que escutar isso denovo~!",bc_map; break;
+	case 85: mapannounce "job_hunte",strcharinfo(0) + ", nÃ³s nÃ£o treinamos para sermos misericordiosos, misericÃ³rdia Ã© para os fracos!",bc_map; break;
+	case 86: mapannounce "job_hunte",strcharinfo(0) + ", derrota nÃ£o existe aqui, nÃ£o Ã© isso?!",bc_map; break;
 	case 87: mapannounce "job_hunte",strcharinfo(0) + ", concentrece. Foque seus poderes!",bc_map; break;
 	case 88: mapannounce "job_hunte",strcharinfo(0) + ", estou interpretando mal, ou as palavras estam pensando em sair da sua boca?",bc_map; break;
-	case 89: mapannounce "job_hunte",strcharinfo(0) + ", você está só fracassando agora.",bc_map; break;
-	case 90: mapannounce "job_hunte",strcharinfo(0) + ", a vida nem sempre é justa.",bc_map; break;
-	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh...isso não é culpa NOSSA....",bc_map; break;
-	case 92: mapannounce "job_hunte",strcharinfo(0) + ", a sobrevivência tem prioridade.",bc_map; break;
-	case 93: mapannounce "job_hunte",strcharinfo(0) + ", as pessoas têm a força para superar seus obstáculos...todo mundo pode.",bc_map; break;
+	case 89: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª estÃ¡ sÃ³ fracassando agora.",bc_map; break;
+	case 90: mapannounce "job_hunte",strcharinfo(0) + ", a vida nem sempre Ã© justa.",bc_map; break;
+	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh...isso nÃ£o Ã© culpa NOSSA....",bc_map; break;
+	case 92: mapannounce "job_hunte",strcharinfo(0) + ", a sobrevivÃªncia tem prioridade.",bc_map; break;
+	case 93: mapannounce "job_hunte",strcharinfo(0) + ", as pessoas tÃªm a forÃ§a para superar seus obstÃ¡culos...todo mundo pode.",bc_map; break;
 	case 94: mapannounce "job_hunte",strcharinfo(0) + ", there is happiness for those who accept their fate, and there is glory for those who resist their fate.",bc_map; break;	
-	case 95: mapannounce "job_hunte",strcharinfo(0) + ", algumas coisas são reais e outra são falsas. Você não poderia dizer a diferença?",bc_map; break;
-	case 96: mapannounce "job_hunte",strcharinfo(0) + ", nós estamos nos divertindo não estamos? Todo dia aqui é como um sonho. Eu realmente espero que seja assim para sempre.",bc_map; break;
+	case 95: mapannounce "job_hunte",strcharinfo(0) + ", algumas coisas sÃ£o reais e outra sÃ£o falsas. VocÃª nÃ£o poderia dizer a diferenÃ§a?",bc_map; break;
+	case 96: mapannounce "job_hunte",strcharinfo(0) + ", nÃ³s estamos nos divertindo nÃ£o estamos? Todo dia aqui Ã© como um sonho. Eu realmente espero que seja assim para sempre.",bc_map; break;
 	case 97: mapannounce "job_hunte",strcharinfo(0) + ", vou lhe dar apenas um pequeno conselho... morrer doe como o inferno.",bc_map; break;
-	case 98: mapannounce "job_hunte",strcharinfo(0) + ", não desista do fantasma! Basta ter mais cuidado...",bc_map; break;
-	case 99: mapannounce "job_hunte",strcharinfo(0) + ", a morte é um presente dado no momento do nascimento. Mas, estas armadilhas não vão matar você.",bc_map; break;
-	case 100: mapannounce "job_hunte",strcharinfo(0) + ", eu tava contando com você desde o começo. Mas acho que você vai me fazer esperar mais...",bc_map; break;
-	case 101: mapannounce "job_hunte",strcharinfo(0) + ", sempre com o fim vem esperança e renascimento. Mas é voltar para o começo para você~",bc_map; break;
-	case 102: mapannounce "job_hunte",strcharinfo(0) + ", já te falei do poder que tem uma simples lágrima? Tudo bem se soltar uma agora... eu sei como você deu duro.",bc_map; break;
-	case 103: mapannounce "job_hunte",strcharinfo(0) + ", a felicidade muitas vezes sai por uma porta que você nem sabia que à deixou aberta. Classifique como...armadilhas escondidas!",bc_map; break;
+	case 98: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o desista do fantasma! Basta ter mais cuidado...",bc_map; break;
+	case 99: mapannounce "job_hunte",strcharinfo(0) + ", a morte Ã© um presente dado no momento do nascimento. Mas, estas armadilhas nÃ£o vÃ£o matar vocÃª.",bc_map; break;
+	case 100: mapannounce "job_hunte",strcharinfo(0) + ", eu tava contando com vocÃª desde o comeÃ§o. Mas acho que vocÃª vai me fazer esperar mais...",bc_map; break;
+	case 101: mapannounce "job_hunte",strcharinfo(0) + ", sempre com o fim vem esperanÃ§a e renascimento. Mas Ã© voltar para o comeÃ§o para vocÃª~",bc_map; break;
+	case 102: mapannounce "job_hunte",strcharinfo(0) + ", jÃ¡ te falei do poder que tem uma simples lÃ¡grima? Tudo bem se soltar uma agora... eu sei como vocÃª deu duro.",bc_map; break;
+	case 103: mapannounce "job_hunte",strcharinfo(0) + ", a felicidade muitas vezes sai por uma porta que vocÃª nem sabia que Ã  deixou aberta. Classifique como...armadilhas escondidas!",bc_map; break;
 	case 104: mapannounce "job_hunte",strcharinfo(0) + ", ....Chii?",bc_map; break;
 	case 105: mapannounce "job_hunte",strcharinfo(0) + ", Meu! Meu! Meu! Meu!",bc_map; break;
-	case 106: mapannounce "job_hunte",strcharinfo(0) + ", está na hora do duelo!",bc_map; break;
-	case 107: mapannounce "job_hunte",strcharinfo(0) + ", eu escolho você!...espere... uagh...não você!...",bc_map; break;
-	case 108: mapannounce "job_hunte",strcharinfo(0) + ", este não é o momento de cumprimentar-lo!",bc_map; break;
+	case 106: mapannounce "job_hunte",strcharinfo(0) + ", estÃ¡ na hora do duelo!",bc_map; break;
+	case 107: mapannounce "job_hunte",strcharinfo(0) + ", eu escolho vocÃª!...espere... uagh...nÃ£o vocÃª!...",bc_map; break;
+	case 108: mapannounce "job_hunte",strcharinfo(0) + ", este nÃ£o Ã© o momento de cumprimentar-lo!",bc_map; break;
 	case 109: mapannounce "job_hunte",strcharinfo(0) + "... Ah muito bem, o que mais poderia dar errado hoje?",bc_map; break;
-	case 110: mapannounce "job_hunte",strcharinfo(0) + ", não se precoupe, eu sempre mantenho uma reserva. Nossas armadilhas não vão acabar nem tão cedo...",bc_map; break;
-	case 111: mapannounce "job_hunte",strcharinfo(0) + ", quando coisas ruins acontecem, não desista. Vai chegar o dia em que você vai olha pra trás e rir de si mesmo. Mas não hoje.",bc_map; break;
-	case 112: mapannounce "job_hunte",strcharinfo(0) + ", não se preocupe. Nós somos bons em perder batalhas, lembra?",bc_map; break;
-	case 113: mapannounce "job_hunte",strcharinfo(0) + ", você lembra de quando se sentiu realmente habilidoso? Essa sensação não vai voltar por um tempo...",bc_map; break;
-	case 114: mapannounce "job_hunte",strcharinfo(0) + ", você deve esquecer seu passado para sua própria felicidade.",bc_map; break;
-	case 115: mapannounce "job_hunte",strcharinfo(0) + ", se você pode enganar seus amigos, você pode enganar seus inimigos.",bc_map; break;
-	case 116: mapannounce "job_hunte",strcharinfo(0) + ", este mundo é feito de amor e de paz!",bc_map; break;
-	case 117: mapannounce "job_hunte",strcharinfo(0) + ", se você falhar, você deve beber isso.....*sorriso maldoso*",bc_map; break;
-	case 118: mapannounce "job_hunte",strcharinfo(0) + ", não diga que eu não lhe avisei!",bc_map; break;
-	case 119: mapannounce "job_hunte",strcharinfo(0) + ", a curiosidade matou o gato. Sorte minha eu não ser um gato. Ah, e hm, você também claro.",bc_map; break;
+	case 110: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o se precoupe, eu sempre mantenho uma reserva. Nossas armadilhas nÃ£o vÃ£o acabar nem tÃ£o cedo...",bc_map; break;
+	case 111: mapannounce "job_hunte",strcharinfo(0) + ", quando coisas ruins acontecem, nÃ£o desista. Vai chegar o dia em que vocÃª vai olha pra trÃ¡s e rir de si mesmo. Mas nÃ£o hoje.",bc_map; break;
+	case 112: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o se preocupe. NÃ³s somos bons em perder batalhas, lembra?",bc_map; break;
+	case 113: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª lembra de quando se sentiu realmente habilidoso? Essa sensaÃ§Ã£o nÃ£o vai voltar por um tempo...",bc_map; break;
+	case 114: mapannounce "job_hunte",strcharinfo(0) + ", vocÃª deve esquecer seu passado para sua prÃ³pria felicidade.",bc_map; break;
+	case 115: mapannounce "job_hunte",strcharinfo(0) + ", se vocÃª pode enganar seus amigos, vocÃª pode enganar seus inimigos.",bc_map; break;
+	case 116: mapannounce "job_hunte",strcharinfo(0) + ", este mundo Ã© feito de amor e de paz!",bc_map; break;
+	case 117: mapannounce "job_hunte",strcharinfo(0) + ", se vocÃª falhar, vocÃª deve beber isso.....*sorriso maldoso*",bc_map; break;
+	case 118: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o diga que eu nÃ£o lhe avisei!",bc_map; break;
+	case 119: mapannounce "job_hunte",strcharinfo(0) + ", a curiosidade matou o gato. Sorte minha eu nÃ£o ser um gato. Ah, e hm, vocÃª tambÃ©m claro.",bc_map; break;
 	case 120: mapannounce "job_hunte",strcharinfo(0) + ", ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!ESTUDE!",bc_map; break;
-	case 121: mapannounce "job_hunte",strcharinfo(0) + ", como você gosta de mim agora? Está certo, esta é MINHA armadilha!",bc_map; break;
+	case 121: mapannounce "job_hunte",strcharinfo(0) + ", como vocÃª gosta de mim agora? EstÃ¡ certo, esta Ã© MINHA armadilha!",bc_map; break;
 	case 122: mapannounce "job_hunte",strcharinfo(0) + "...brilhante...absolutamente...genial. Desculpa, eu estava falando sobre todas essas armadilhas malucas.",bc_map; break;
-	case 123: mapannounce "job_hunte",strcharinfo(0) + ", tá na hora que sumir com essa armadilha, no estilo Houdini! Ei, espere...volte!",bc_map; break;
-	case 124: mapannounce "job_hunte",strcharinfo(0) + ", parecia realmente que você estava em apuros desta vez...não se preocupe, é só tentar de novo!",bc_map; break;
-	case 125: mapannounce "job_hunte",strcharinfo(0) + "...não é fácil, cara. Tenta de novo, mais uma vez!",bc_map; break;
-	case 126: mapannounce "job_hunte",strcharinfo(0) + ", parecia que você realmente estava em apuros. Volte para o ínicio...",bc_map; break;
-	case 127: mapannounce "job_hunte",strcharinfo(0) + ", apenas pense como se fosse culpa do destino. Um dia, você mesmo irá preparar suas armadilhas...",bc_map; break;
-	case 128: mapannounce "job_hunte",strcharinfo(0) + ", más notícias cara... outra armadilha. Um dia você vai pegar o jeito, eu acredito em você!",bc_map; break;
-	case 129: mapannounce "job_hunte",strcharinfo(0) + ", não desista! O mundo ainda precisa de você!",bc_map; break;
-	case 130: mapannounce "job_hunte",strcharinfo(0) + ", pode chorar. Só não chora muito alto.",bc_map; break;
-	case 131: mapannounce "job_hunte",strcharinfo(0) + "...ah cara. Cansa preparar todas essas armadilhas. Você tem que parar de cair nelas!",bc_map; break;
+	case 123: mapannounce "job_hunte",strcharinfo(0) + ", tÃ¡ na hora que sumir com essa armadilha, no estilo Houdini! Ei, espere...volte!",bc_map; break;
+	case 124: mapannounce "job_hunte",strcharinfo(0) + ", parecia realmente que vocÃª estava em apuros desta vez...nÃ£o se preocupe, Ã© sÃ³ tentar de novo!",bc_map; break;
+	case 125: mapannounce "job_hunte",strcharinfo(0) + "...nÃ£o Ã© fÃ¡cil, cara. Tenta de novo, mais uma vez!",bc_map; break;
+	case 126: mapannounce "job_hunte",strcharinfo(0) + ", parecia que vocÃª realmente estava em apuros. Volte para o Ã­nicio...",bc_map; break;
+	case 127: mapannounce "job_hunte",strcharinfo(0) + ", apenas pense como se fosse culpa do destino. Um dia, vocÃª mesmo irÃ¡ preparar suas armadilhas...",bc_map; break;
+	case 128: mapannounce "job_hunte",strcharinfo(0) + ", mÃ¡s notÃ­cias cara... outra armadilha. Um dia vocÃª vai pegar o jeito, eu acredito em vocÃª!",bc_map; break;
+	case 129: mapannounce "job_hunte",strcharinfo(0) + ", nÃ£o desista! O mundo ainda precisa de vocÃª!",bc_map; break;
+	case 130: mapannounce "job_hunte",strcharinfo(0) + ", pode chorar. SÃ³ nÃ£o chora muito alto.",bc_map; break;
+	case 131: mapannounce "job_hunte",strcharinfo(0) + "...ah cara. Cansa preparar todas essas armadilhas. VocÃª tem que parar de cair nelas!",bc_map; break;
 	}
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
@@ -1586,7 +1586,7 @@ job_hunte,65,92,0	duplicate(HntTrap)	57-3	-1,0,0
 
 job_hunte,65,93,0	script	57-4::HntTrap2	-1,{
 OnTouch:
-	mapannounce "job_hunte",strcharinfo(0) + ", falhou! Volte para onde começou!",bc_map;
+	mapannounce "job_hunte",strcharinfo(0) + ", falhou! Volte para onde comeÃ§ou!",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";

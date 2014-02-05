@@ -18,7 +18,7 @@ valkyrie,44,58,5	script	Algoz#Valkyrie	4_F_JOB_ASSASSIN,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Algoz]";
-			mes "Parabéns...";
+			mes "ParabÃ©ns...";
 			next;
 			mes "[Algoz]";
 			mes "...";
@@ -35,27 +35,27 @@ valkyrie,44,58,5	script	Algoz#Valkyrie	4_F_JOB_ASSASSIN,{
 			close;
 		}
 		mes "[Algoz]";
-		mes "Nós somos guerreiros";
-		mes "do deserto. Ninguém";
-		mes "nos vê se não de baixo.";
-		mes "Ninguém...";
+		mes "NÃ³s somos guerreiros";
+		mes "do deserto. NinguÃ©m";
+		mes "nos vÃª se nÃ£o de baixo.";
+		mes "NinguÃ©m...";
 		close;
 	} else if (ADVJOB == Job_Assassin_Cross && Class == Job_Thief_High && JobLevel > 39) {
 		mes "[Algoz]";
 		mes "O momento chegou.";
-		mes "O mundo precisa de você...";
+		mes "O mundo precisa de vocÃª...";
 		mes "Mais do que nunca.";
 		next;
 		mes "[Algoz]";
-		mes "Eu peço que você continue vivendo nas sombras, mas como um bom assassino e com ainda mais aparência.";
+		mes "Eu peÃ§o que vocÃª continue vivendo nas sombras, mas como um bom assassino e com ainda mais aparÃªncia.";
 		next;
 		mes "[Algoz]";
-		mes "Você deseja se tornar";
+		mes "VocÃª deseja se tornar";
 		mes "um Algoz?";
 		next;
-		if (select("Não.:Sim.") == 1) {
+		if (select("NÃ£o.:Sim.") == 1) {
 			mes "[Algoz]";
-			mes "Quando você estiver";
+			mes "Quando vocÃª estiver";
 			mes "pronto, volte aqui.";
 			next;
 			mes "[Algoz]";
@@ -65,8 +65,8 @@ valkyrie,44,58,5	script	Algoz#Valkyrie	4_F_JOB_ASSASSIN,{
 		}
 		if (SkillPoint) {
 			mes "[Algoz]";
-			mes "Você ainda não aprendeu";
-			mes "tudo que é necessário";
+			mes "VocÃª ainda nÃ£o aprendeu";
+			mes "tudo que Ã© necessÃ¡rio";
 			mes "para aprender.";
 			next;
 			mes "[Algoz]";
@@ -78,20 +78,20 @@ valkyrie,44,58,5	script	Algoz#Valkyrie	4_F_JOB_ASSASSIN,{
 		jobchange Job_Assassin_Cross;
 		set ADVJOB,0;
 		mes "[Algoz]";
-		mes "Parabéns.";
+		mes "ParabÃ©ns.";
 		mes "Como Algoz,";
-		mes "espero que você lute por um futuro melhor da escuridão.";
+		mes "espero que vocÃª lute por um futuro melhor da escuridÃ£o.";
 		close;
 	}
 	mes "[Algoz]";
 	mes "Bem-vindo";
 	mes "a Valhalla,";
-	mes "o Salão de Honras.";
+	mes "o SalÃ£o de Honras.";
 	next;
 	mes "[Algoz]";
 	mes "Por favor, sinta-se";
-	mes "confortável enquanto";
-	mes "você estiver aqui.";
+	mes "confortÃ¡vel enquanto";
+	mes "vocÃª estiver aqui.";
 	mes "Honre os guerreiros.";
 	close;
 }

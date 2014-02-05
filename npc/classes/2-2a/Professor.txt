@@ -13,7 +13,7 @@
 //= 1.3 Now saves/restores all the quest skills [Lupus]
 //============================================================
 
-valkyrie,53,47,3	script	Scholar#Valkyrie	2_M_SAGE_OLD,{
+valkyrie,53,47,3	script	Professor#Valkyrie	2_M_SAGE_OLD,{
 	if (ADVJOB == 0 || Upper != 1) {
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
@@ -37,8 +37,12 @@ valkyrie,53,47,3	script	Scholar#Valkyrie	2_M_SAGE_OLD,{
 		mes "N„o existe fim no";
 		mes "processo de aprendizagem...";
 		close;
+<<<<<<< HEAD
 	}
 	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
+=======
+	} else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
+>>>>>>> Revis√£o e tradu√ß√£o npc/classes
 		mes "[Professor]";
 		mes "Rune-Midgard n„o";
 		mes "tem Professores suficientes";
@@ -61,8 +65,13 @@ valkyrie,53,47,3	script	Scholar#Valkyrie	2_M_SAGE_OLD,{
 		}
 		if (SkillPoint) {
 			mes "[Professor]";
+<<<<<<< HEAD
 			mes "Ainda È possÌvel para vocÍ aprender mais algumas habilidades. Por favor";
 			mes "use todos seus pontos de habilidade restantes antes de voltar aqui.";
+=======
+			mes "VocÍ ainda tem pontos de habilidade. Por favor,";
+			mes "use todos os pontos de habilidade restantes.";
+>>>>>>> Revis√£o e tradu√ß√£o npc/classes
 			close;
 		}
 		jobchange Job_Professor;
