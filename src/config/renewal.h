@@ -19,7 +19,7 @@
 /// (disable by commenting the line)
 ///
 /// leave this line to enable renewal specific support such as renewal formulas
-#define RENEWAL
+//#define RENEWAL
 
 /// renewal cast time
 /// (disable by commenting the line)
@@ -29,7 +29,7 @@
 /// example:
 ///  on a skill whos cast time is 10s, only 8s may be reduced. the other 2s are part of a
 ///  "fixed cast time" which can only be reduced by specialist items and skills
-#define RENEWAL_CAST
+//#define RENEWAL_CAST
 
 /// renewal drop rate algorithms
 /// (disable by commenting the line)
@@ -37,20 +37,20 @@
 /// leave this line to enable renewal item drop rate algorithms
 /// while enabled a special modified based on the difference between the player and monster level is applied
 /// based on the http://irowiki.org/wiki/Drop_System#Level_Factor table
-#define RENEWAL_DROP
+//#define RENEWAL_DROP
 
 /// renewal exp rate algorithms
 /// (disable by commenting the line)
 ///
 /// leave this line to enable renewal item exp rate algorithms
 /// while enabled a special modified based on the difference between the player and monster level is applied
-#define RENEWAL_EXP
+//#define RENEWAL_EXP
 
 /// renewal level modifier on damage
 /// (disable by commenting the line)
 ///
 // leave this line to enable renewal base level modifier on skill damage (selected skills only)
-#define RENEWAL_LVDMG
+//#define RENEWAL_LVDMG
 
 /// renewal enchant deadly poison algorithm
 ///
@@ -59,7 +59,7 @@
 ///  - damage is NOT increased by 400%
 ///  - it does NOT affect grimtooth
 ///  - weapon and status ATK are increased
-#define RENEWAL_EDP
+//#define RENEWAL_EDP
 
 /// renewal ASPD [malufett]
 /// (disable by commenting the line)
@@ -69,7 +69,7 @@
 /// - AGI has a greater factor in ASPD increase
 /// - there is a change in how skills/items give ASPD
 /// - some skill/item ASPD bonuses won't stack
-#define RENEWAL_ASPD
+//#define RENEWAL_ASPD
 
 #endif // DISABLE_RENEWAL
 
