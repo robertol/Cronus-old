@@ -1,32 +1,33 @@
-//===== Hercules Script ======================================
-//= Bifrost Field Monster Spawn Script
+//===== Cronus Script ======================================
+//= Spawn dos campos de bifrost
 //===== By: ==================================================
 //= Chilly
-//===== Current Version: =====================================
-//= 1.1
-//===== Description: =========================================
+//===== Versão atual: =====================================
+//= 1.2
+//===== Descrição: =========================================
 //= Official kRO monster spawns
-//===== Additional Comments: =================================
+//===== Comentários adicionais: =================================
 //= 1.0 First Release
 //= 1.1 Renewal spawn update. [Euphy]
+//= 1.2 Tradução PT-BR. [ADM Kakaroto]
 //============================================================
 
 //==================================================
 // bif_fild01 - Bifrost South
 //==================================================
-bif_fild01,0,0,0,0	monster	Luciola Vespa	1994,29,5000,0,0
+bif_fild01,0,0,0,0	monster	Vespa Vagalume	1994,29,5000,0,0
 bif_fild01,0,0,0,0	monster	Cornus	1992,17,5000,0,0
 bif_fild01,0,0,0,0	monster	Miming	2137,58,5000,0,0
-bif_fild01,0,0,0,0	monster	Little Fatum	2136,34,5000,0,0
-bif_fild01,0,0,0,0	monster	Angra Mantis	2133,5,5000,0,0
-bif_fild01,0,0,0,0	monster	Pom Spider	2132,5,5000,0,0
+bif_fild01,0,0,0,0	monster	Pequeno Fatum	2136,34,5000,0,0
+bif_fild01,0,0,0,0	monster	Louva-a-Deus Angra	2133,5,5000,0,0
+bif_fild01,0,0,0,0	monster	Aranha Pom	2132,5,5000,0,0
 
 //==================================================
 // bif_fild02 - Bifrost North
 //==================================================
-bif_fild02,0,0,0,0	monster	Luciola Vespa	1994,27,5000,0,0
+bif_fild02,0,0,0,0	monster	Vespa Vagalume	1994,27,5000,0,0
 bif_fild02,0,0,0,0	monster	Cornus	1992,16,5000,0,0
 bif_fild02,0,0,0,0	monster	Miming	2137,33,5000,0,0
-bif_fild02,0,0,0,0	monster	Little Fatum	2136,55,5000,0,0
-bif_fild02,0,0,0,0	monster	Angra Mantis	2133,5,5000,0,0
-bif_fild02,0,0,0,0	monster	Pom Spider	2132,5,5000,0,0
+bif_fild02,0,0,0,0	monster	Pequeno Fatum	2136,55,5000,0,0
+bif_fild02,0,0,0,0	monster	Louva-a-Deus Angra	2133,5,5000,0,0
+bif_fild02,0,0,0,0	monster	Aranha Pom	2132,5,5000,0,0
