@@ -11,7 +11,7 @@
 //= 1.0a Revisado. [KyukE]
 //============================================================ 
 
-payon_in02,64,71,4	script	Guia dos Arqueiros#arqueiro	85,{
+payon_in02,64,71,4	script	Guia dos Arqueiros#pay	85,{
 	if (Upper == 1) {
 		if (Class == Job_Novice_High && (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy)) {
 			mes "[Guia dos Arqueiros]";

@@ -405,7 +405,7 @@ moc_prydb1,42,133,2	script	Camarada	118,{
 		mes "um total de...";
 		next;
 		mes "[Camarada]";
-		mes "Hmmm. " + .@total_thief + "  graus, multiplicados pela velocidade da luz, dividida pelo integral de pi vezes o peso extra do valor absoluto dos políticos..."";
+		mes "Hmmm. " + .@total_thief + "  graus, multiplicados pela velocidade da luz, dividida pelo integral de pi vezes o peso extra do valor absoluto dos políticos...";
 		next;
 		mes "[Camarada]";
 		mes "Ok!";
