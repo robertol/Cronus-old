@@ -1,21 +1,22 @@
-//===== Hercules Script ======================================
+//===== Cronus Script =========================================
 //= Moscovia Fields Monster Spawn Script
-//===== By: ==================================================
+//===== By: ===================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
-//= 1.2
-//===== Additional Comments: =================================
+//===== Versão atual: =========================================
+//= 1.3
+//===== Comentários adicionais: ===============================
 //= 1.0 Added spawns [Playtester]
 //= 1.1 Updated to Renewal Spawns [Kisuka]
 //= 1.2 Updated Renewal Spawns. [Streusel]
+//= 1.3 Tradução PT-BR. [ADM Kakaroto]
 //============================================================
 
 //==================================================
 // mosk_fild02 - Okrestnosti of Moscovia
 //==================================================
-mosk_fild02,0,0,0,0	monster	Side Winder	1037,40,5000,0,0
+mosk_fild02,0,0,0,0	monster	Sorrateiro	1037,40,5000,0,0
 mosk_fild02,0,0,0,0	monster	Argiope	1099,30,5000,0,0
-mosk_fild02,0,0,0,0	monster	Mantis	1139,10,5000,0,0
-mosk_fild02,0,0,0,0	monster	Geographer	1368,5,5000,0,0
-mosk_fild02,0,0,0,0	monster	Yellow Plant	1081,5,10000,0,1
-mosk_fild02,0,0,0,0	monster	White Plant	1082,5,10000,0,1
+mosk_fild02,0,0,0,0	monster	Louva-a-Deus	1139,10,5000,0,0
+mosk_fild02,0,0,0,0	monster	Planta Carnívora	1368,5,5000,0,0
+mosk_fild02,0,0,0,0	monster	Planta Amarela	1081,5,10000,0,1
+mosk_fild02,0,0,0,0	monster	Planta Branca	1082,5,10000,0,1
