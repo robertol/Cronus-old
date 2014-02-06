@@ -15,7 +15,7 @@
 //=     Thanks to Myllena.
 //============================================================
 
-valkyrie,53,54,3	script	Menestrel#Valkyrie	2_M_BARD_ORIENT,{
+valkyrie,53,54,3	script	Menestrel#Valk	2_M_BARD_ORIENT,{
 	if (ADVJOB == 0 || Upper != 1) {
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
