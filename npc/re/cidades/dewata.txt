@@ -13,7 +13,7 @@
 //= 1.1 Standardized. [Euphy]
 //= 1.2 Fixed Zeny check. [Joseph]
 //= 1.3 Updated to match the official script. [Lemongrass/Euphy]
-//= 1.4 Traduzido para PT-BR [Zephyrus]
+//= 1.4 Traduzido para PT-BR. [Zephyrus]
 //==============================================================
 
 dewata,221,237,5	script	Jovem#dew-1	536,{
