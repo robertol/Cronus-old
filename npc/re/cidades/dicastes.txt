@@ -1,715 +1,716 @@
-//===== Hercules Script ======================================
-//= El Dicastes Town
-//===== By: ==================================================
+//===== Hercules Script =========================================
+//= Cidade de El Dicastes
+//===== Por: ====================================================
 //= Gennosuke Kouga, Muad_Dib
-//===== Current Version: =====================================
+//===== Versรฃo Atual: ===========================================
 //= 1.3
-//===== Description: =========================================
+//===== Descriรงรฃo: ==============================================
 //= [Official Conversion]
-//= El Dicastes Town Script
-//===== Additional Comments: =================================
+//= Script da Cidade de El Dicastes
+//===== Comentรกrios Adicionais: =================================
 //= 1.0 First version.
 //= 1.1 Standardized. [Euphy]
 //= 1.2 Updated to match the official script. [Joseph]
-//= 1.2a Moved Guide to a separate file. [Euphy]
+//= 1.2a Moved Guia to a separate file. [Euphy]
 //= 1.3 Updated to match official script. [SkittleNugget]
-//============================================================
+//= 1.4 Traduzido para PT-BR. [Zephyrus]
+//===============================================================
 
 dicastes01,194,159,5	script	Excited Galten#a	4_MAN_GALTUN1,{
 	mes "[Excited Galten]";
 	if (isequipped(2782)) {
-		mes "I can't get beautiful";
-		mes "Ahat's image out of my head.";
+		mes "Nรฃo consigo tirar";
+		mes "a linda imagem de Ahat da miha cabeรงa.";
 		emotion e_lv;
-		mes "As long as we have him,";
-		mes "it will only be a matter of time before Sapha";
-		mes "will rule this land.";
+		mes "Enquanto tivermos ele,";
+		mes "serรก apenas uma questรฃo de tempo para que Sapha";
+		mes "governe esta terra.";
 		close; 
 	}
-	mes "ก๘ขฒขฃ กะ ก๒ก๐ก๐";
-	mes "ก๗ก๘ก๑ กü กü";
-	mes "ก๙ขฒขณ ขฒ";
-	mes "ก๓ก๕ก๔ ขฃ กะก๛กü ก๒ ก๐ก๖ขฃ";
-	mes "ขคก๕กþ ก๗ ก๑";
+	mes "ยกรธยขยฒยขยฃ ยกร ยกรฒยกรฐยกรฐ";
+	mes "ยกรทยกรธยกรฑ ยกรผ ยกรผ";
+	mes "ยกรนยขยฒยขยณ ยขยฒ";
+	mes "ยกรณยกรตยกรด ยขยฃ ยกรยกรปยกรผ ยกรฒ ยกรฐยกรถยขยฃ";
+	mes "ยขยคยกรตยกรพ ยกรท ยกรฑ";
 	close;
 }
 
-dicastes01,202,86,3	script	Sentinel#a	4_MAN_GALTUN1,{
-	mes "[Sentinel]";
+dicastes01,202,86,3	script	Sentinela#a	4_MAN_GALTUN1,{
+	mes "[Sentinela]";
 	if (isequipped(2782)) {
-		mes "El Dicastes, the";
-		mes "capital city of Sapha.";
-		mes "The land is pretty";
-		mes "rough so many outsiders can't get in. Ha ha";
+		mes "El Dicastes, a";
+		mes "capital de Sapha.";
+		mes "A terra รฉ bem";
+		mes "acidentada entรฃo muitos forasteiros nรฃo podem entrar. Ha ha";
 		next;
-		mes "[Sentinel]";
+		mes "[Sentinela]";
 		mes "...";
 		next;
-		mes "[Sentinel]";
-		mes "Hey, you are an outsider!";
+		mes "[Sentinela]";
+		mes "Ei, vocรช รฉ de fora tambรฉm!";
 		close; 
 	}
-	mes "ก๔ขฑขฑ ก๛ ก๓กะก๑ ขฃ ขคก๚";
-	mes "ก๘ก๓ขฒ ขค ";
-	mes "ก๕ก๓กะ ขณ กะก๕ขฃ ก๛ ก๚ก๏";
+	mes "ยกรดยขยฑยขยฑ ยกรป ยกรณยกรยกรฑ ยขยฃ ยขยคยกรบ";
+	mes "ยกรธยกรณยขยฒ ยขยค ";
+	mes "ยกรตยกรณยกร ยขยณ ยกรยกรตยขยฃ ยกรป ยกรบยกรฏ";
 	next;
-	mes "[Sentinel]";
-	mes "ก๙";
+	mes "[Sentinela]";
+	mes "ยกรน";
 	next;
-	mes "[Sentinel]";
-	mes "ก๑ก๖ก๏ ก๚ ก๓ขณก๔";
+	mes "[Sentinela]";
+	mes "ยกรฑยกรถยกรฏ ยกรบ ยกรณยขยณยกรด";
 	close;	
 }
 
-dicastes01,194,95,5	script	Sentinel#b	4_MAN_GALTUN,{
-	mes "[Sentinel]";
+dicastes01,194,95,5	script	Sentinela#b	4_MAN_GALTUN,{
+	mes "[Sentinela]";
 	if (isequipped(2782)) {
-		mes "I permit your entry.";
-		mes "But if you dare to cause trouble";
-		mes "you won't know what hit you. Beware!";
+		mes "Eu permito a sua entrada.";
+		mes "Mas se causar problemas,";
+		mes "nรฃo vai saber o que lhe atingiu. Cuidado!";
 		close; 
 	}
-	mes "ก๘ก๔กü ก๘ ก๓";
-	mes "ก๘ก๏ก๛ ก๓ ก๛ขคขฒ ก๗ ขฃ";
-	mes "ขคก๔ก๘ ขณ ก๗ก๛ก๖ ก๕ ก๘";
+	mes "ยกรธยกรดยกรผ ยกรธ ยกรณ";
+	mes "ยกรธยกรฏยกรป ยกรณ ยกรปยขยคยขยฒ ยกรท ยขยฃ";
+	mes "ยขยคยกรดยกรธ ยขยณ ยกรทยกรปยกรถ ยกรต ยกรธ";
 	close;
 }
 
-dicastes01,234,158,0	script	Training Galten#a	4_MAN_GALTUN,{
-	mes "[Training Galten]";
+dicastes01,234,158,0	script	Galten Treinando#a	4_MAN_GALTUN,{
+	mes "[Galten Treinando]";
 	if (isequipped(2782)) {
-		mes "I'll be ready for anything";
-		mes "if I keep up with my training every day.";
+		mes "Estarei pronto para qualquer coisa";
+		mes "se continuar treinando diariamente.";
 		close;
 	}
-	mes "๘ก๔กü กก๘ก๔กü ก๘";
-	mes "๔ ก๘";
+	mes "รธยกรดยกรผ ยกยกรธยกรดยกรผ ยกรธ";
+	mes "รด ยกรธ";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
-dicastes01,244,166,0	script	Training Galten#b	4_MAN_GALTUN,{
-	mes "[Training Galten]";
+dicastes01,244,166,0	script	Galten Treinando#b	4_MAN_GALTUN,{
+	mes "[Galten Treinando]";
 	if (isequipped(2782)) {
-		mes "I wonder if Ahat knows how";
-		mes "hard I am training.";
+		mes "Penso se Ahat sabe o quรฃo";
+		mes "duramente estou treinando.";
 		close; 
 	}
-	mes "ก๘ก๔กü ก๘";
-	mes "ก๘ก๔กü ก๘ ก๘ก๔กü ก๘ ก๘ก๔กü ก๘";
+	mes "ยกรธยกรดยกรผ ยกรธ";
+	mes "ยกรธยกรดยกรผ ยกรธ ยกรธยกรดยกรผ ยกรธ ยกรธยกรดยกรผ ยกรธ";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
-dicastes01,272,166,0	script	Training Galten#c	4_MAN_GALTUN,{
-	mes "[Training Galten]";
+dicastes01,272,166,0	script	Galten Treinando#c	4_MAN_GALTUN,{
+	mes "[Galten Treinando]";
 	if (isequipped(2782)) {
-		mes "[Training Galten]";
-		mes "I am a Sapha warrior.";
-		mes "I am never lazy with my training.";
+		mes "[Galten Treinando]";
+		mes "Sou um guerreiro de Sapha.";
+		mes "Nunca tenho preguiรงa com meu treino.";
 		close;
 	}
-	mes "ก๘ก๔กü ก๘ ก๘ก๔กü ก๘";
-	mes "ก๘ก๔กü ก๘";
+	mes "ยกรธยกรดยกรผ ยกรธ ยกรธยกรดยกรผ ยกรธ";
+	mes "ยกรธยกรดยกรผ ยกรธ";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
-dicastes01,248,129,0	script	Training Galten#d	4_MAN_GALTUN,{
-	mes "[Training Galten]";
+dicastes01,248,129,0	script	Galten Treinando#d	4_MAN_GALTUN,{
+	mes "[Galten Treinando]";
 	if (isequipped(2782)) {
-		mes "[Training Galten]";
-		mes "I heard this isn't training";
-		mes "equipment but a massager";
-		mes "for trainees like me.";
+		mes "[Galten Treinando]";
+		mes "Eu soube que isto nรฃo รฉ equipamento de treinamento, mas";
+		mes "um massageador";
+		mes "para um estagiรกrio como eu.";
 		close; 
 	}
-	mes "ก๘ก๔กü ก๘ ก๘ก๔กü";
-	mes "ก๘ก๔กü ก๘ก ๘ก๔กü ก๘";
+	mes "ยกรธยกรดยกรผ ยกรธ ยกรธยกรดยกรผ";
+	mes "ยกรธยกรดยกรผ ยกรธยก รธยกรดยกรผ ยกรธ";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
 /*
-dicastes01,271,152,0	script	Training Galten#e	4_MAN_GALTUN,{
-	mes "[Training Galten]";
+dicastes01,271,152,0	script	Galten Treinando#e	4_MAN_GALTUN,{
+	mes "[Galten Treinando]";
 	if (isequipped(2782)) {
-		mes "I will get great results";
-		mes "if I do my best, right?";
+		mes "Terei grandes resultados";
+		mes "se der o meu melhor, certo?";
 		close;
 	}
-	mes "ก๘ขฒก๛ ก๔ ขฃขณก๔";
-	mes "กüก๔";
+	mes "ยกรธยขยฒยกรป ยกรด ยขยฃยขยณยกรด";
+	mes "ยกรผยกรด";
 	close;
 }
 */
 
-dic_in01,349,282,4	script	Waiting Galten#in_1	4_MAN_GALTUN1,{
+dic_in01,349,282,4	script	Galten Aguardando#in_1	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Waiting Galten]";
-		mes "Here is the Battle Station.";
-		mes "We are all tensed up to be ready for action.";
+		mes "[Galten Aguardando]";
+		mes "Aqui รฉ a Estaรงรฃo de Batalha.";
+		mes "Estamos todos tensos para comeรงar a batalha.";
 		close;	 
 	}
-	mes "[ขฒกะก๛ ก๙ กะ]";
-	mes "ก๑ก๕กü ขฃ ก๓";
-	mes "ขคก๓ก๕ ขฃ ขฃก๒ก๔ ก๖ ก๚ขคก๚ ขค ก๒ก๖ก๕ ขค ";
+	mes "[ยขยฒยกรยกรป ยกรน ยกร]";
+	mes "ยกรฑยกรตยกรผ ยขยฃ ยกรณ";
+	mes "ยขยคยกรณยกรต ยขยฃ ยขยฃยกรฒยกรด ยกรถ ยกรบยขยคยกรบ ยขยค ยกรฒยกรถยกรต ยขยค ";
 	close;
 }
 
-dic_in01,370,261,1	script	Waiting Galten#in_2	4_MAN_GALTUN1,{
+dic_in01,370,261,1	script	Galten Aguardando#in_2	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Waiting Galten]";
-		mes "Boring.";
+		mes "[Galten Aguardando]";
+		mes "Que tรฉdio.";
 		close; 
 	}
-	mes "[ขฒกะก๛ ก๙ กะ]";
-	mes "ก๙ขคขฑ";
+	mes "[ยขยฒยกรยกรป ยกรน ยกร]";
+	mes "ยกรนยขยคยขยฑ";
 	close;
 }
 
-dic_in01,381,261,1	script	Waiting Galten#in_3	4_MAN_GALTUN1,{
+dic_in01,381,261,1	script	Galten Aguardando#in_3	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Waiting Galten]";
+		mes "[Galten Aguardando]";
 		mes "Zzzzz...";
 		close; 
 	}
-	mes "[ขฒกะก๛ ก๙ กะ]";
-	mes "ก๚ก๔";
+	mes "[ยขยฒยกรยกรป ยกรน ยกร]";
+	mes "ยกรบยกรด";
 	close;
 }
 
-dic_in01,370,282,4	script	Waiting Galten#in_4	4_MAN_GALTUN1,{
+dic_in01,370,282,4	script	Galten Aguardando#in_4	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Waiting Galten]";
-		mes "El Dicastes is the most peaceful place in this world as long as I am here.";
+		mes "[Galten Aguardando]";
+		mes "El Dicastes รฉ o lugar mais pacรญfico do mundo enquanto eu estiver aqui.";
 		close; 
 	}
-	mes "[ขฒกะก๛ ก๙ กะ]";
-	mes "ก๏ก๏ขณ กþ ก๖ขณขฃ ขฑ ขณก๛ก๕ ก๘ กþก๏ก๏ ก๘ ก๛";
+	mes "[ยขยฒยกรยกรป ยกรน ยกร]";
+	mes "ยกรฏยกรฏยขยณ ยกรพ ยกรถยขยณยขยฃ ยขยฑ ยขยณยกรปยกรต ยกรธ ยกรพยกรฏยกรฏ ยกรธ ยกรป";
 	close;
 }
 
-dic_in01,354,219,4	script	Resting Galten#in_5	4_MAN_GALTUN1,{
+dic_in01,354,219,4	script	Galten Descansando#in_5	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Resting Galten]";
-		mes "Resting is always so sweet.";
+		mes "[Galten Descansando]";
+		mes "Descansar รฉ sempre tรฃo bom.";
 		close; 
 	}
-	mes "[ก๕ก๘ก๒ กü ขค]";
-	mes "ก๏ก๕ก๙ ก๖ ก๒ก๐ขฒ ขณ ก๖";
+	mes "[ยกรตยกรธยกรฒ ยกรผ ยขยค]";
+	mes "ยกรฏยกรตยกรน ยกรถ ยกรฒยกรฐยขยฒ ยขยณ ยกรถ";
 	close;
 }
 
-dic_in01,365,197,1	script	Resting Galten#in_6	4_MAN_GALTUN1,{
+dic_in01,365,197,1	script	Galten Descansando#in_6	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Resting Galten]";
-		mes "Galten can also rest while standing up like this.";
+		mes "[Galten Descansando]";
+		mes "Os Galten tambรฉm podem descansar enquanto ficam em pรฉ assim.";
 		next;
-		mes "[Resting Galten]";
-		mes "You say I don't look like I'm resting? But I'm already used to this.";
+		mes "[Galten Descansando]";
+		mes "Disse que nรฃo pareรงoe star descansando? Mas eu jรก estou acostumado com isso.";
 		close; 
 	}
-	mes "[ก๕ก๘ก๒ กü ขค]";
-	mes "ก๔ก๏ขค ก๖ ก๙ก๐ก๑ กü ก๓ก๛ก๛";
-	mes "ก๏ขฃก๓ ก๙ ขณก๔ก๐ ขฃ กะก๛ก๔ ก๔ กะก๚ก๙ ก๔ ก๓";
+	mes "[ยกรตยกรธยกรฒ ยกรผ ยขยค]";
+	mes "ยกรดยกรฏยขยค ยกรถ ยกรนยกรฐยกรฑ ยกรผ ยกรณยกรปยกรป";
+	mes "ยกรฏยขยฃยกรณ ยกรน ยขยณยกรดยกรฐ ยขยฃ ยกรยกรปยกรด ยกรด ยกรยกรบยกรน ยกรด ยกรณ";
 	close;
 }
 
-dic_in01,87,102,5	script	Resting Piom#01	4_MAN_PIOM,{
+dic_in01,87,102,5	script	Piom Descansando#01	4_MAN_PIOM,{
 	end;
 }
 
-dic_in01,29,119,4	script	Resting Piom#04	4_MAN_PIOM6,{
+dic_in01,29,119,4	script	Piom Descansando#04	4_MAN_PIOM6,{
 	if (isequipped(2782)) {
-		mes "[Resting Piom]";
-		mes "Why is it so noisy when I'm trying to get rest?";
+		mes "[Piom Descansando]";
+		mes "Porque รฉ tรฃo barulhento enquanto estou descansandot?";
 		close; 
 	}
-	mes "[ขฃก๙ก๒ ขค ก๙]";
-	mes "กüขฒก๐ กะ ก๒ก๘ขฒ ก๔ ขฒก๕";
+	mes "[ยขยฃยกรนยกรฒ ยขยค ยกรน]";
+	mes "ยกรผยขยฒยกรฐ ยกร ยกรฒยกรธยขยฒ ยกรด ยขยฒยกรต";
 	close;
 }
 
-dic_in01,91,113,5	script	Suspicious Piom#a	4_MAN_PIOM6,{
-	mes "[Suspicious Piom]";
+dic_in01,91,113,5	script	Piom Suspeito#a	4_MAN_PIOM6,{
+	mes "[Piom Suspeito]";
 	if (isequipped(2782)) {
-		mes "Have you heard of the";
-		mes "rumor about Ahat?";
+		mes "Jรก ouviu";
+		mes "os rumores sobre Ahat?";
 		next;
-		if(select("Nope!:You first.") == 1) {
-			mes "[Suspicious Piom]";
+		if(select("Nรฃo!:Vocรช primeiro.") == 1) {
+			mes "[Piom Suspeito]";
 			mes "Never mind.";
 			close; 
 		}
-		mes "[Suspicious Piom]";
-		mes "Oh, you do seem to know?";
-		mes "I need to collect information.";
-		mes "You first.";
-		mes "You heard of the rumor, right?";
+		mes "[Piom Suspeito]";
+		mes "Oh, vocรช parece saber?";
+		mes "Preciso coletar informaรงรตes.";
+		mes "Vocรช primeiro.";
+		mes "Vocรช ouviu os rumores, certo?";
 		next;
-		if(select("Something is fishy?:If you're not going to spill it, me neither!") == 1) {
-			mes "[Suspicious Piom]";
-			mes "I'm only a very curious";
-			mes "ordinary Piom.";
+		if(select("Algo duvidoso?:Se vocรช nรฃo vai falar, eu tambรฉm nรฃo!") == 1) {
+			mes "[Piom Suspeito]";
+			mes "Eu sou somente um";
+			mes "Piom muito curioso.";
 			close; 
 		}
-		mes "[Suspicious Piom]";
-		mes "I am not going to say anything, either!";
+		mes "[Piom Suspeito]";
+		mes "Nรฃo irei dizer nada tambรฉm!";
 		close; 
 	}
-	mes "ก๓ขณก๓ ก๓ ก๓กþก๖";
-	mes "ก๕ ขณขฒก๗ ก๓ก๓";
+	mes "ยกรณยขยณยกรณ ยกรณ ยกรณยกรพยกรถ";
+	mes "ยกรต ยขยณยขยฒยกรท ยกรณยกรณ";
 	next;
-	if(select("Can't tell what it means:Is it a curse??") == 2) {
-		mes "[Suspicious Piom]";
-		mes "Too bad.";
+	if(select("Nรฃo posso dizer o que significa:ร uma maldiรงรฃo??") == 2) {
+		mes "[Piom Suspeito]";
+		mes "Que pena.";
 		close; 
 	}
-	mes "[Suspicious Piom]";
-	mes "Be on your";
-	mes "way, shoo";
+	mes "[Piom Suspeito]";
+	mes "Saia";
+	mes "daqui, shoo";
 	close;
 }
 
-dic_in01,168,116,5	script	Tired Piom#c	4_MAN_PIOM5,{
-	mes "[Tired Piom]";
+dic_in01,168,116,5	script	Piom Cansado#c	4_MAN_PIOM5,{
+	mes "[Piom Cansado]";
 	if (isequipped(2782)) {
-		mes "If you need any";
-		mes "information, you'd have better";
-		mes "luck with the Cat Merchant than wandering around here.";
-		mes "But of course you'll have to pay the price.";
+		mes "Se precisar de alguma";
+		mes "informaรงรฃo, terรก mais";
+		mes "sorte com o Gato Mercador que vagabundando por aqui.";
+		mes "Mas, claro, terรก que pagar o preรงo.";
 		close; 
 	}
-	mes "กþก๕ก๐ ขณ ขณกþ";
-	mes "กþก๘ก๐ ก๖ ก๑ก๚ก๐ ก๒";
-	mes "ก๏ก๑ก๚ ก๔ ก๖ก๖ก๒ ก๛ ก๓ขคก๘ ก๘ ขฒ ก๘";
-	mes "ขคขฒก๘ ก๒ ก๚ก๓ขฑ";
+	mes "ยกรพยกรตยกรฐ ยขยณ ยขยณยกรพ";
+	mes "ยกรพยกรธยกรฐ ยกรถ ยกรฑยกรบยกรฐ ยกรฒ";
+	mes "ยกรฏยกรฑยกรบ ยกรด ยกรถยกรถยกรฒ ยกรป ยกรณยขยคยกรธ ยกรธ ยขยฒ ยกรธ";
+	mes "ยขยคยขยฒยกรธ ยกรฒ ยกรบยกรณยขยฑ";
 	close;
 }
 
-dic_in01,149,104,5	script	Tired Piom#b	4_MAN_PIOM2,{
-	mes "[Tired Piom]";
+dic_in01,149,104,5	script	Piom Cansado#b	4_MAN_PIOM2,{
+	mes "[Piom Cansado]";
 	if (isequipped(2782)) {
-		mes "I feel so stiff...";
-		mes "I will need another dose of Bradium.";
-		mes "I think the effects are weaker than before,";
-		mes "or is it just me?";
+		mes "Me sinto com tanta sede...";
+		mes "Vou precisar de uma outra dose de Bradium.";
+		mes "Eu acho que os efeitos estรฃo mais fracos que antes,";
+		mes ou sou eu?";
 		emotion e_what;
 		close; 
 	}
-	mes "ก๐กะก๚ ก๘ ขฒ";
-	mes "ก๖ก๕ก๓ ขค ก๒ก๒ขณ ก๔ ก๔ก๓ก๑";
-	mes "ขฃก๑กþ กü ขฒก๛ก๓ ก๒ ก๐กþ";
-	mes "ก๖ก๚ก๑ ขณ";
+	mes "ยกรฐยกรยกรบ ยกรธ ยขยฒ";
+	mes "ยกรถยกรตยกรณ ยขยค ยกรฒยกรฒยขยณ ยกรด ยกรดยกรณยกรฑ";
+	mes "ยขยฃยกรฑยกรพ ยกรผ ยขยฒยกรปยกรณ ยกรฒ ยกรฐยกรพ";
+	mes "ยกรถยกรบยกรฑ ยขยณ";
 	emotion e_what;
 	close;
 }
 
-dic_in01,341,113,3	script	Tired Piom#a	4_MAN_PIOM5,{
-	mes "[Tired Piom]";
+dic_in01,341,113,3	script	Piom Cansado#a	4_MAN_PIOM5,{
+	mes "[Piom Cansado]";
 	if (isequipped(2782)) {
-		mes "[Tired Piom]";
-		mes "I think I look better in";
-		mes "robes than in leather.";
-		mes "I may have to change to knitting.";
-		mes "But mining does seem to suit me.";
+		mes "[Piom Cansado]";
+		mes "Eu acho que fico melhor";
+		mes "mantos do que em couro.";
+		mes "Acho que vou trocar por tricรด.";
+		mes "Mas minerar me parece mais convencional.";
 		next;
-		mes "[Tired Piom]";
+		mes "[Piom Cansado]";
 		mes "...";
 		next;
 		emotion e_swt;
-		mes "[Tired Piom]";
-		mes "I'll be rejected again, right?";
+		mes "[Piom Cansado]";
+		mes "Serei rejeitado de novo, nรฉ?";
 		close; 
 	}
-	mes "ก๗ก๒ก๛ ก๓ ก๓กะขฑ";
-	mes "ก๓ก๕ก๙ กþ ก๒ขฑก๑ ก๕ ขฃ";
-	mes "กüก๐ขค ก๙ ก๒ก๔ก๕ ก๒ ก๑";
-	mes "ขณก๚ขณ กะ ก๑ก๕ก๙ ก๗ ก๗ขฑ";
+	mes "ยกรทยกรฒยกรป ยกรณ ยกรณยกรยขยฑ";
+	mes "ยกรณยกรตยกรน ยกรพ ยกรฒยขยฑยกรฑ ยกรต ยขยฃ";
+	mes "ยกรผยกรฐยขยค ยกรน ยกรฒยกรดยกรต ยกรฒ ยกรฑ";
+	mes "ยขยณยกรบยขยณ ยกร ยกรฑยกรตยกรน ยกรท ยกรทยขยฑ";
 	next;
-	mes "[Tired Piom]";
-	mes "กþ";
+	mes "[Piom Cansado]";
+	mes "ยกรพ";
 	next;
 	emotion e_swt;
-	mes "[Tired Piom]";
-	mes "ก๘ก๚ก๘ ขฑ ก๖ก๒";
+	mes "[Piom Cansado]";
+	mes "ยกรธยกรบยกรธ ยขยฑ ยกรถยกรฒ";
 	close;
 }
 
-dic_in01,252,103,3	script	Eating Adventurer#tre	4_F_05,{
-	mes "[Eating Adventurer]";
-	mes "Hey, do you have any emergency rations on you from Midgard?";
+dic_in01,252,103,3	script	Aventureiro Comendo#tre	4_F_05,{
+	mes "[Aventureiro Comendo]";
+	mes "Ei, vocรช tem alguma daquelas raรงรตes de emergรชncia de Midgard?";
 	next;
-	mes "[Eating Adventurer]";
-	mes "I came all the way here with a hungry stomach because I heard there was a Midgard pub but I've never tasted this food anywhere in Midgard.";
+	mes "[Aventureiro Comendo]";
+	mes "Eu vim atรฉ aqui de estรดmago vazio porque ouvi que havia um bar de Midgard mas nunca provei esta comida em nenhum lugar de Midgard.";
 	next;
-	mes "[Eating Adventurer]";
-	mes "No, I'm sure nobody in Midgard would want to try this.";
+	mes "[Aventureiro Comendo]";
+	mes "Nรฃo, tenho certeza de que ninguรฉm em Midgard gostaria de provar isto.";
 	next;
-	mes "[Eating Adventurer]";
-	mes "I really would like a nice hot meal.";
-	mes "I go to this great little restaurant in Geffen often and I really miss that place now.";
+	mes "[Aventureiro Comendo]";
+	mes "Eu realmente gostaria de uma boa comida quente.";
+	mes "Eu vou frequentemente a um pequeno restaurante em Geffen e eu realmente sinto falta daquele lugar.";
 	close;
 }
 
 dic_in01,32,54,5	script	Venknick#el_01	4_MAN_BENKUNI,{
 	if (isequipped(2782)) {
 		mes "[Venknick]";
-		mes "Oh feels so refreshed.";
-		mes "The refined Bradium was the best ever. Do you want to try some?";
+		mes "Oh! Sinto um alรญvio!";
+		mes "O Bradium refinado รฉ o melhor. Quer provar um pouco?";
 		close; 
 	}
-	mes "[ก๓ก๒ก๐]";
-	mes "ก๙ก๓ขค ขฑ ขฃ";
-	mes "ก๕กþก๏ ขฃ ก๗ก๗ขค ก๚ ก๓ก๑ก๖ ขฒ กþขฒขค ขฒ ขฃ?";
+	mes "[ยกรณยกรฒยกรฐ]";
+	mes "ยกรนยกรณยขยค ยขยฑ ยขยฃ";
+	mes "ยกรตยกรพยกรฏ ยขยฃ ยกรทยกรทยขยค ยกรบ ยกรณยกรฑยกรถ ยขยฒ ยกรพยขยฒยขยค ยขยฒ ยขยฃ?";
 	close;
 }
 
-dic_in01,372,116,3	script	Thrilled Piom#a	4_MAN_PIOM4,{
-	mes "[Thrilled Piom]";
+dic_in01,372,116,3	script	Piom Entusiasmado#a	4_MAN_PIOM4,{
+	mes "[Piom Entusiasmado]";
 	if (isequipped(2782)) {
-		mes "Ahat is the one";
-		mes "and only Sapha pride.";
-		mes "We have plenty of Bradium";
-		mes "because of him!";
+		mes "Ahat รฉ o รบnico";
+		mes "orgulho de Sapha.";
+		mes "Nรณs temos muito Bradium";
+		mes "por conta dele!";
 		next;
-		mes "[Thrilled Piom]";
+		mes "[Piom Entusiasmado]";
 		mes "...";
 		next;
-		mes "[Thrilled Piom]";
-		mes "You don't feel his";
-		mes "blessing?";
+		mes "[Piom Entusiasmado]";
+		mes "Vocรช nรฃo sente sua";
+		mes "benรงรฃo?";
 		close;
 	}
-	mes "ก๒ก๕ขณ ก๕ ก๔";
-	mes "ขฃก๓ก๘ ขฒ ก๔ก๗";
-	mes "ก๒ก๔ขณ ก๙ ขฑก๓ขฑ ก๕";
-	mes "ก๓กüกะ ก๘ ขฒกüกะ ก๕ ก๏";
+	mes "ยกรฒยกรตยขยณ ยกรต ยกรด";
+	mes "ยขยฃยกรณยกรธ ยขยฒ ยกรดยกรท";
+	mes "ยกรฒยกรดยขยณ ยกรน ยขยฑยกรณยขยฑ ยกรต";
+	mes "ยกรณยกรผยกร ยกรธ ยขยฒยกรผยกร ยกรต ยกรฏ";
 	next;
-	mes "[Thrilled Piom]";
-	mes "ขฃ";
+	mes "[Piom Entusiasmado]";
+	mes "ยขยฃ";
 	next;
-	mes "[Thrilled Piom]";
-	mes "กะขคก๙ ขฃ ก๓ก๓";
-	mes "ก๙ก๓ก๗ ก๛ กþก๔";
+	mes "[Piom Entusiasmado]";
+	mes "ยกรยขยคยกรน ยขยฃ ยกรณยกรณ";
+	mes "ยกรนยกรณยกรท ยกรป ยกรพยกรด";
 	close;
 }
 
-dic_in01,360,125,5	script	Serious Venknicka	4_MAN_BENKUNI,{
-	mes "[Serious Venknick]";
+dic_in01,360,125,5	script	Venknick Pensativo	4_MAN_BENKUNI,{
+	mes "[Venknick Pensativo]";
 	if (isequipped(2782)) {
-		mes "A sudden increase in Bradium production.";
-		mes "Why?";
-		mes "I will have to get more factory lines running.";
+		mes "Um sรบbito aumento na produรงรฃo de Bradium.";
+		mes "Porquรช?";
+		mes "Vou ter que aumentar a linha de produรงรฃo.";
 		close; 
 	}
-	mes "ก๛ก๕ก๑ ขฒ ขฒขคกะ ขฒ กüก๑ก๕";
-	mes "กþก๓ก๖ ขฒ";
-	mes "ก๖ก๗ก๛ ก๚ ก๗กะขณ ขณ";
+	mes "ยกรปยกรตยกรฑ ยขยฒ ยขยฒยขยคยกร ยขยฒ ยกรผยกรฑยกรต";
+	mes "ยกรพยกรณยกรถ ยขยฒ";
+	mes "ยกรถยกรทยกรป ยกรบ ยกรทยกรยขยณ ยขยณ";
 	close;
 }
 
-dic_in01,42,250,5	script	Guide#diel_1	4_MAN_PIOM6,{
+dic_in01,42,250,5	script	Guia#diel_1	4_MAN_PIOM6,{
 	if (isequipped(2782)) {
 		if (ep13_3_invite > 5) {		
-			mes "[Guide]";
-			mes "I'm Dior, your kind guide for El Dicastes.";
-			mes "How can I help you?";
+			mes "[Guia]";
+			mes "Sou Dior, seu amรกvel guia em El Dicastes.";
+			mes "Como posso ajudar?";
 			next;
-			mes "[Guide]";
-			mes "You may submit your civil complaints here.";
-			mes "Civil services and El Dicastes zones are managed in the Situation Room upstairs.";
+			mes "[Guia]";
+			mes "Vocรช deve apresentar suas acusaรงรตes civis aqui.";
+			mes "Serviรงos civis e as zonas de El Dicastes  are managed in the Situation Room upstairs.";
 			next;
-			mes "[Guide]";
+			mes "[Guia]";
 			mes "The Administrative Office is located on the top floor and handles very important matters.";
 			mes "The Archive Room is in the lower level where you can obtain a vast amount of information.";
 			next;
-			mes "[Guide]";
-			mes "By the way, you may use the elevator in the back to go to the other floors.";
+			mes "[Guia]";
+			mes "Aliรกs, vocรช deve usar o elevador ali atrรกs para acessar os outros andares.";
 			next;
-			mes "[Guide]";
-			mes "Oh, you didn't ask?";
-			mes "But since I'm Dior, the kind guide. He he.";
+			mes "[Guia]";
+			mes "Oh, vocรช nรฃo perguntou?";
+			mes "Mas jรก que sou Dior, o amรกvel Guia. He he.";
 			close; 
 		}
-		mes "- The guide looks at you with an alert expression. -";
+		mes "- O Guia olha pra vocรช com uma expressรฃo de alerta. -";
 		close;
 	}
-	mes "[ขณก๑]";
-	mes "ก๕ขฃก๓ กะ ก๕ก๑ก๒ ขค ก๘ก๘ขฃ ขฑ ขฒขณก๗ ขฑ";
-	mes "ก๖ก๒ก๐ ก๓ ก๔ก๔?";
+	mes "[ยขยณยกรฑ]";
+	mes "ยกรตยขยฃยกรณ ยกร ยกรตยกรฑยกรฒ ยขยค ยกรธยกรธยขยฃ ยขยฑ ยขยฒยขยณยกรท ยขยฑ";
+	mes "ยกรถยกรฒยกรฐ ยกรณ ยกรดยกรด?";
 	next;
-	mes "[ขณก๑]";
-	mes "กะก๙ก๓ ก๙ กüขฒกะ ขฑ ก๗ก๖กþ";
-	mes "ก๑กþขฒ ก๘ ก๓ก๏ก๏ ก๙ ก๐ก๑กะ ก๙ ขณก๒กþ ก๙ ก๘ก๐ก๕ ก๕ ขค";
+	mes "[ยขยณยกรฑ]";
+	mes "ยกรยกรนยกรณ ยกรน ยกรผยขยฒยกร ยขยฑ ยกรทยกรถยกรพ";
+	mes "ยกรฑยกรพยขยฒ ยกรธ ยกรณยกรฏยกรฏ ยกรน ยกรฐยกรฑยกร ยกรน ยขยณยกรฒยกรพ ยกรน ยกรธยกรฐยกรต ยกรต ยขยค";
 	next;
-	mes "[ขณก๑]";
-	mes "ก๛ก๙ก๔ ก๘ ก๐กþก๗ ขณ กþก๙ก๑ ก๚ กüขคก๒ ก๚ ก๔ขฃ";
-	mes "ก๗ก๒ขค ก๘ ก๛ขณ";
+	mes "[ยขยณยกรฑ]";
+	mes "ยกรปยกรนยกรด ยกรธ ยกรฐยกรพยกรท ยขยณ ยกรพยกรนยกรฑ ยกรบ ยกรผยขยคยกรฒ ยกรบ ยกรดยขยฃ";
+	mes "ยกรทยกรฒยขยค ยกรธ ยกรปยขยณ";
 	next;
-	mes "[ขณก๑]";
-	mes "ก๔ก๐ก๑ ขค ก๓ก๗ขณ กþ ก๓ก๕ก๗ ก๖ ก๓ ก๖";
+	mes "[ยขยณยกรฑ]";
+	mes "ยกรดยกรฐยกรฑ ยขยค ยกรณยกรทยขยณ ยกรพ ยกรณยกรตยกรท ยกรถ ยกรณ ยกรถ";
 	next;
-	mes "[ขณก๑]";
-	mes "ก๒ก๔ก๘ ก๗ ก๕ก๘ก๐ ก๓ ขคกะก๔ ก๘ ก๑ก๑ก๑ ก๘ ก๚ก๖ก๘ กü";
-	mes "ก๏ขณก๐ ขค ก๐ก๖ขฃ ขฑ ก๔ก๘";
+	mes "[ยขยณยกรฑ]";
+	mes "ยกรฒยกรดยกรธ ยกรท ยกรตยกรธยกรฐ ยกรณ ยขยคยกรยกรด ยกรธ ยกรฑยกรฑยกรฑ ยกรธ ยกรบยกรถยกรธ ยกรผ";
+	mes "ยกรฏยขยณยกรฐ ยขยค ยกรฐยกรถยขยฃ ยขยฑ ยกรดยกรธ";
 	close;
 }
 
-dic_in01,335,34,5	script	Talkative Piom#a	4_MAN_PIOM4,{
-	mes "[Talkative Piom]";
+dic_in01,335,34,5	script	Piom Tagarela#a	4_MAN_PIOM4,{
+	mes "[Piom Tagarela]";
 	if (isequipped(2782)) {	
-		mes "At my factory";
-		mes "we not only refine Bradium,";
-		mes "but we also produce various";
-		mes "tools for daily use.";
-		mes "We manufacture war supplies";
-		mes "here too.";
+		mes "Na minha fรกbrica";
+		mes "nรณs nรฃo sรณ refinamos Bradium,";
+		mes "como tambรฉm produzimos vรกrias";
+		mes "ferramentas para o uso diรกrio.";
+		mes "Nรณs manufaturamos suprimentos de guerra";
+		mes "aqui tambรฉm.";
 		close; 
 	}
-	mes "กüก๙ขฑ ขณ";
-	mes "ก๗ก๘ก๏ กþ ก๓ก๓";
-	mes "ก๑ก๕ก๒ ก๓ ก๗กüก๙ ก๖";
-	mes "ก๑ก๘กü ก๚ ก๔";
-	mes "กþก๚ก๒ ขฑ ก๛ก๒ก๒ ก๙ ก๗";
-	mes "ขณก๒ก๒ ก๙ ขฑขฃก๒";
+	mes "ยกรผยกรนยขยฑ ยขยณ";
+	mes "ยกรทยกรธยกรฏ ยกรพ ยกรณยกรณ";
+	mes "ยกรฑยกรตยกรฒ ยกรณ ยกรทยกรผยกรน ยกรถ";
+	mes "ยกรฑยกรธยกรผ ยกรบ ยกรด";
+	mes "ยกรพยกรบยกรฒ ยขยฑ ยกรปยกรฒยกรฒ ยกรน ยกรท";
+	mes "ยขยณยกรฒยกรฒ ยกรน ยขยฑยขยฃยกรฒ";
 	close;
 }
 
-dic_in01,387,30,1	script	Manuk Piom#a	4_MAN_PIOM,{
-	mes "[Manuk Piom]";
+dic_in01,387,30,1	script	Piom de Manuk#a	4_MAN_PIOM,{
+	mes "[Piom de Manuk]";
 	if (isequipped(2782)) {
-		mes "You! We met in Manuk, didn't we?";
-		mes "I've come to pick up the weapon I ordered.";
+		mes "Vocร! Nos encontramos em Manuk, nรฃo รฉ?";
+		mes "Eu vim pegar uma arma que eu pedi.";
 		close; 
 	}
-	mes "กüก๓กþ ก๓ ก๏ก๐ขค กü ก๐ขฑ";
-	mes "ก๙ก๔ก๏ ก๚ ก๑ก๙ขณ ก๓ ก๒ก๖ก๓ ก๔ก๔";
+	mes "ยกรผยกรณยกรพ ยกรณ ยกรฏยกรฐยขยค ยกรผ ยกรฐยขยฑ";
+	mes "ยกรนยกรดยกรฏ ยกรบ ยกรฑยกรนยขยณ ยกรณ ยกรฒยกรถยกรณ ยกรดยกรด";
 	close;
 }
 
-dicastes01,282,210,4	script	Free Knit#a	4_MAN_NITT,{
-	mes "[Free Knit]";
+dicastes01,282,210,4	script	Knit Livre#a	4_MAN_NITT,{
+	mes "[Knit Livre]";
 	if (isequipped(2782)) {
-		mes "As long as we have a steady";
-		mes "supply of Bradium";
-		mes "Saphas can live forever.";
-		mes "Our childhood lasts 10 years,";
-		mes "which is short.";
+		mes "Enquanto tivermos um imenso";
+		mes "suprimento de Bradium";
+		mes "os Saphas podem viver para sempre.";
+		mes "Nossa infรขncia dura 10 anos,";
+		mes "o que รฉ muito pouco.";
 		close; 
 	}
-	mes "ก๑กþก๐ ก๓ กüก๒ก๖ ก๗";
-	mes "ขณก๐ก๏ ขฃ ก๙ก๔ก๒ ก๔ ก๓กþก๑ ขฒ ก๑ก๛ขฃ ขฒ";
-	mes "ก๔ก๓ก๐ กþ ขฃก๐ขค ก๕ ก๛ขณกü";
-	mes "ก๓ขณก๒ ขฑ ก๔ขฃขฒ ก๗ ก๗ก๑";
-	mes "ก๒ขฒก๏ ขฃ ก๖ก๖";
+	mes "ยกรฑยกรพยกรฐ ยกรณ ยกรผยกรฒยกรถ ยกรท";
+	mes "ยขยณยกรฐยกรฏ ยขยฃ ยกรนยกรดยกรฒ ยกรด ยกรณยกรพยกรฑ ยขยฒ ยกรฑยกรปยขยฃ ยขยฒ";
+	mes "ยกรดยกรณยกรฐ ยกรพ ยขยฃยกรฐยขยค ยกรต ยกรปยขยณยกรผ";
+	mes "ยกรณยขยณยกรฒ ยขยฑ ยกรดยขยฃยขยฒ ยกรท ยกรทยกรฑ";
+	mes "ยกรฒยขยฒยกรฏ ยขยฃ ยกรถยกรถ";
 	close;
 }
 
-dicastes01,246,210,3	script	Free Venknick#a	4_MAN_BENKUNI,{
-	mes "[Free Venknick]";
+dicastes01,246,210,3	script	Venknick Livre#a	4_MAN_BENKUNI,{
+	mes "[Venknick]";
 	if (isequipped(2782)) {
-		mes "At least we have plenty of Bradium.";
-		mes "Look,";
-		mes "You can see Bradium";
-		mes "everywhere you go.";
+		mes "Ao menos temos muito Bradium.";
+		mes "Veja,";
+		mes "vocรช pode ver Bradium";
+		mes "em todos os lugares.";
 		next;
-		mes "[Free Venknick]";
+		mes "[Venknick Livre]";
 		mes "?";
 		next;
-		mes "[Free Venknick]";
-		mes "The thing rolling around is a gem,";
-		mes "but why are you interested in it?";
+		mes "[Venknick Livre]";
+		mes "Isso que estรก rolando รฉ uma gema,";
+		mes "mas porque tem interesse nisso?";
 		close; 
 	}
-	mes "ก๔ก๏ขฃ ขค ก๗ก๕ขฑ กü ก๑ก๕";
-	mes "กüขณ";
-	mes "ก๖ก๙ขค ขฒ ก๙ก๓ก๔";
-	mes "กüขฃขณ ก๘ ก๛ก๐กü ก๕";
+	mes "ยกรดยกรฏยขยฃ ยขยค ยกรทยกรตยขยฑ ยกรผ ยกรฑยกรต";
+	mes "ยกรผยขยณ";
+	mes "ยกรถยกรนยขยค ยขยฒ ยกรนยกรณยกรด";
+	mes "ยกรผยขยฃยขยณ ยกรธ ยกรปยกรฐยกรผ ยกรต";
 	next;
-	mes "[Free Venknick]";
-	mes "ก๙";
+	mes "[Venknick Livre]";
+	mes "ยกรน";
 	next;
-	mes "[Free Venknick]";
-	mes "กþขคขฃ ขฑ ก๓ก๒ขณ กü ก๑ก๐";
-	mes "ขฑก๛ขฃ ก๖ กüก๒ก๗ ก๛ ก๕ก๒ก๗ ขฒขฒ";
+	mes "[Venknick Livre]";
+	mes "ยกรพยขยคยขยฃ ยขยฑ ยกรณยกรฒยขยณ ยกรผ ยกรฑยกรฐ";
+	mes "ยขยฑยกรปยขยฃ ยกรถ ยกรผยกรฒยกรท ยกรป ยกรตยกรฒยกรท ยขยฒยขยฒ";
 	close;
 }
 
-dicastes01,235,245,4	script	Excited Piom#a	4_MAN_PIOM4,{
+dicastes01,235,245,4	script	Piom Animado#a	4_MAN_PIOM4,{
 	if (isequipped(2782)) {
-		mes "[Excited Piom]";
-		mes "Have you seen Ahat?";
+		mes "[Piom Animado]";
+		mes "Vocรช jรก viu Ahat?";
 		emotion e_ho;
-		mes "His popularity here in El Discastes is phenomenal!";
+		mes "Sua popularidade aqui em El Discastes รฉ fenomenal!";
 		close; 
 	}
-	mes "[Excited Piom]";
-	mes "ก๚กþก๓ ขณ กüขฒก๑ ขฑ";
+	mes "[Piom Animado]";
+	mes "ยกรบยกรพยกรณ ยขยณ ยกรผยขยฒยกรฑ ยขยฑ";
 	emotion e_ho;
-	mes "ขณก๓ก๑ ก๕ ก๐ก๔กþ ก๗ ก๚ก๒ก๕ ก๘ ขฒ ก๘";
+	mes "ยขยณยกรณยกรฑ ยกรต ยกรฐยกรดยกรพ ยกรท ยกรบยกรฒยกรต ยกรธ ยขยฒ ยกรธ";
 	close;
 }
 
-dicastes01,284,262,3	script	Favorable Knit#a	4_MAN_NITT,{
-	mes "[Favorable Knit]";
+dicastes01,284,262,3	script	Knit Gentil#a	4_MAN_NITT,{
+	mes "[Knit Gentil]";
 	if (isequipped(2782)) {
-		mes "Unlike the Raphine, we Saphas";
-		mes "are a very close community.";
-		mes "We start by living together in common facilities after we are born.";
-		mes "That is why all Saphas are like family.";
-		mes "We never have any quarrels between classes.";
+		mes "Diferente dos Raphine, nรณs Saphas";
+		mes "somos uma comunidade muito fechada.";
+		mes "Nรณs comeรงamos a viver juntos em instalaรงรตes comuns depois de nascermos.";
+		mes "ร por isso que todos os Saphas sรฃo famรญlia.";
+		mes "Nรณs nunca temos nenhuma briga entre classes.";
 		close; 
 	}
-	mes "ก๔ขฑก๓ ก๕ ก๚ก๗กะ ก๕";
-	mes "กüก๏กะ ก๕ ก๔ก๓กü ก๓ ขณ";
-	mes "ก๑ก๔กü กþ ขคก๑ขค ก๔ ก๛ก๏ก๙";
-	mes "ก๚ก๖ก๔ ก๓ ขฃก๚กþ ก๘ ก๘ก๒";
-	mes "ขฒขณก๛ ขค ก๚ก๑ก๙ ก๛ ขณก๒ก๘ ก๕ก๕";
+	mes "ยกรดยขยฑยกรณ ยกรต ยกรบยกรทยกร ยกรต";
+	mes "ยกรผยกรฏยกร ยกรต ยกรดยกรณยกรผ ยกรณ ยขยณ";
+	mes "ยกรฑยกรดยกรผ ยกรพ ยขยคยกรฑยขยค ยกรด ยกรปยกรฏยกรน";
+	mes "ยกรบยกรถยกรด ยกรณ ยขยฃยกรบยกรพ ยกรธ ยกรธยกรฒ";
+	mes "ยขยฒยขยณยกรป ยขยค ยกรบยกรฑยกรน ยกรป ยขยณยกรฒยกรธ ยกรตยกรต";
 	close;
 }
 
-dicastes01,164,180,4	script	Limpy Piom#a	4_MAN_PIOM6,{
-	mes "[Limpy Piom]";
+dicastes01,164,180,4	script	Piom Manco#a	4_MAN_PIOM6,{
+	mes "[Piom Manco]";
 	if (isequipped(2782)) {
-		mes "They say there is a";
-		mes "war going on with the Splendide in Manuk.";
-		mes "I hope everything goes well.";
-		mes "I hope it doesn't come all";
-		mes "the way to the capital city here.";
+		mes "Eles dizem que hรก uma";
+		mes "guerra acontecendo entre Splendide e Manuk.";
+		mes "Espero que tudo esteja bem.";
+		mes "Espero que nรฃo chegue";
+		mes "atรฉ esta capital.";
 		emotion e_dots;
 		close; 
 	}
-	mes "ขฒก๔กþ ก๙ ก๕กะ";
-	mes "ขณก๔ก๛ ก๚ ก๘";
-	mes "ขณกþขค ก๓ ก๕ก๗กะ";
-	mes "ก๑ก๒กü กü ก๙กþขฑ";
-	mes "ขคก๒กþ ขค ขฃก๑ ขค ขฃก๑";
+	mes "ยขยฒยกรดยกรพ ยกรน ยกรตยกร";
+	mes "ยขยณยกรดยกรป ยกรบ ยกรธ";
+	mes "ยขยณยกรพยขยค ยกรณ ยกรตยกรทยกร";
+	mes "ยกรฑยกรฒยกรผ ยกรผ ยกรนยกรพยขยฑ";
+	mes "ยขยคยกรฒยกรพ ยขยค ยขยฃยกรฑ ยขยค ยขยฃยกรฑ";
 	emotion e_dots;
 	close;
 }
 
-dicastes01,191,202,4	script	Complaining Galten#fihs	4_MAN_GALTUN,{
+dicastes01,191,202,4	script	Galten Reclamando#fihs	4_MAN_GALTUN,{
 	if (isequipped(2782)) {
-		mes "[Complaining Galten]";
-		mes "That crazy Vanknick always";
-		mes "talks about the legend of that statue.";
+		mes "[Galten Reclamando]";
+		mes "Aquele Vanknick maluco sempre";
+		mes "fala sobre a lenda daquela estรกtua.";
 		next;
-		mes "[Complaining Galten]";
-		mes "Have you ever talked";
-		mes "to him?";
+		mes "[Galten Reclamando]";
+		mes "Vocรช jรก conversou";
+		mes "com ele?";
 		next;
-		if(select("No:Yes") == 1) {
-			mes "[Complaining Galten]";
-			mes "Then you don't know about the legend behind the statue?";
-			mes "Then, I don't know what to talk about with you.";
+		if(select("Nรฃo:Sim") == 1) {
+			mes "[Galten Reclamando]";
+			mes "Entรฃo vocรช nรฃo sabe sobre a lenda por trรกs da estรกtua?";
+			mes Entรฃo, eu nรฃo sei o que falar com vocรช.";
 			close; 
 		}
-		emotion e_gg,0,"Crazy Venknick#fihsing1";
-		mes "[Complaining Galten]";
-		mes "You also fell for that crazy man.";
+		emotion e_gg,0,"Venknick Maluco#fihsing1";
+		mes "[Galten Reclamando]";
+		mes "Vocร tambรฉm caiu na daquele louco.";
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "Yes";
+		mes "Sim";
 		emotion e_sob,1;
 		next;
-		mes "[Complaining Galten]";
-		mes "Just forget about it quickly for your own good.";
+		mes "[Galten Reclamando]";
+		mes "Esqueรงa rรกpido disso, pelo seu prรณprio bem.";
 		close;
 	}
-	mes "[ก๕ขฃก๖ ก๚ ]";
-	mes "ก๕ก๒ก๛ ก๒ ขฃก๛ก๗ ก๗ ";
-	mes "ก๛ก๙ก๛ ก๗ กüกþก๛ ขณ ก๓";
+	mes "[ยกรตยขยฃยกรถ ยกรบ ]";
+	mes "ยกรตยกรฒยกรป ยกรฒ ยขยฃยกรปยกรท ยกรท ";
+	mes "ยกรปยกรนยกรป ยกรท ยกรผยกรพยกรป ยขยณ ยกรณ";
 	next;
-	mes "[ก๕ขฃก๖ ก๚ ]";
-	mes "ก๐ขฑกü ก๛ ก๕ก๗ขค";
-	mes "ขคกþก๘ ขฒ ก๗";
+	mes "[ยกรตยขยฃยกรถ ยกรบ ]";
+	mes "ยกรฐยขยฑยกรผ ยกรป ยกรตยกรทยขยค";
+	mes "ยขยคยกรพยกรธ ยขยฒ ยกรท";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
-dicastes01,202,197,4	script	Crazy Venknick#fihsing1	4_MAN_BENKUNI,{
+dicastes01,202,197,4	script	Venknick Maluco#fihsing1	4_MAN_BENKUNI,{
 	if (isequipped(2782)) {
-		mes "[Crazy Venknick]";
-		mes "At only 5000 Zeny";
-		mes "I will tell you the sad legend behind that statue.";
+		mes "[Venknick Maluco]";
+		mes "Por 5000 Zeny";
+		mes "Eu vou lhe contar sobre a lenda por trรกs da estรกtua.";
 		next;
-		if(select("Give 5000 Zeny.:Don't give 5000 Zeny.") == 2) {
-			mes "[Crazy Venknick]";
-			mes "Don't come back with regrets.";
+		if(select("Dar 5000 Zeny.:Nรฃo dar 5000 Zeny.") == 2) {
+			mes "[Venknick Maluco]";
+			mes "Nรฃo volte com arrependimentos.";
 			close; 
 		}
 		if (Zeny < 5000) {
-			mes "[Crazy Venknick]";
-			mes "I have";
-			mes "no legend to share with";
-			mes "the poor.";
+			mes "[Venknick Maluco]";
+			mes "Eu nรฃo tenho";
+			mes "lendas para compartilhar com";
+			mes os pobres.";
 			close;
 			close; 
 		}
 		set Zeny, Zeny-5000;
-		mes "[Crazy Venknick]";
-		mes "Thanks.";
-		emotion e_gg,0,"Complaining Galten#fihs";
+		mes "[Venknick Maluco]";
+		mes "Obrigado.";
+		emotion e_gg,0,"Galten Reclamando#fihs";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "What is the sad legend?";
+		mes "Qual รฉ a triste lenda?";
 		next;
 		emotion e_dots;
 		mes "["+strcharinfo(0)+"]";
-		mes "I asked what the sad legend is about!";
+		mes "Eu perguntei do que se trata esta lenda!";
 		next;
-		mes "[Crazy Venknick]";
-		mes "I don't believe in legends.";
+		mes "[Venknick Maluco]";
+		mes "Eu nรฃo acredito em lendas.";
 		next;
 		emotion e_dots,1;
 		mes "["+strcharinfo(0)+"]";
-		mes "Was I tricked?";
+		mes "Me enganou?";
 		sc_start SC_BLIND,20000,0;
 		next;
-		mes "You feel outraged at being tricked.";
+		mes "Vocรช sente indignaรงรฃo por toda essa farsa.";
 		close; 
 	}
-	mes "[ก๖ก๚ก๙ ขณ ]";
-	mes "ขฒก๛ก๓ ก๓ ก๙ขคก๘";
-	mes "ขคก๐ขฒ ขฑ ก๑ก๖ขฒ ก๘ ก๏ก๖กü";
+	mes "[ยกรถยกรบยกรน ยขยณ ]";
+	mes "ยขยฒยกรปยกรณ ยกรณ ยกรนยขยคยกรธ";
+	mes "ยขยคยกรฐยขยฒ ยขยฑ ยกรฑยกรถยขยฒ ยกรธ ยกรฏยกรถยกรผ";
 	next;
-	mes "Don't know what it means.";
+	mes "Nรฃo sei o que significa.";
 	close;
 }
 
-dic_in01,98,110,5	script	Worried Piom#a	4_MAN_PIOM6,{
+dic_in01,98,110,5	script	Piom Preocupado#a	4_MAN_PIOM6,{
 	if (isequipped(2782)) {
-		mes "[Worried Piom]";
-		mes "I haven't seen my friends for the last few hours.";
-		mes "It's about time for them to have";
-		mes "their Bradium. Hmm..";
+		mes "[Piom Preocupado]";
+		mes "~Eu nรฃo vi meus amigos nas รบltimas horas.";
+		mes "Jรก รฉ hora deles pegarem";
+		mes "seus Bradiums. Hmm..";
 		close;
 	}
-	mes "[Worried Piom]";
-	mes "ก๛ขฑก๗ ขฒ ก๏กþก๒ กü ก๏ก๛ขฒ";
-	mes "ก๏ก๗ขค กะ ก๏ก๏กะ ขค ขฃ";
-	mes "ก๗กþก๐ ก๓ ก๑";
+	mes "[Piom Preocupado]";
+	mes "ยกรปยขยฑยกรท ยขยฒ ยกรฏยกรพยกรฒ ยกรผ ยกรฏยกรปยขยฒ";
+	mes "ยกรฏยกรทยขยค ยกร ยกรฏยกรฏยกร ยขยค ยขยฃ";
+	mes "ยกรทยกรพยกรฐ ยกรณ ยกรฑ";
 	close;
 }
 
-dic_in01,98,96,3	script	Lost Galten#a	4_MAN_GALTUN1,{
+dic_in01,98,96,3	script	Galten Perdido#a	4_MAN_GALTUN1,{
 	if (isequipped(2782)) {
-		mes "[Lost Galten]";
-		mes "I've been living as a Piom for too long";
-		mes "now it's like a bad habit.";
-		mes "and I find myself here all the time.";
+		mes "[Galten Perdido]";
+		mes "Eu tenho vivido como um Piom por muito tempo.";
+		mes "Agora รฉ um mau hรกbito.";
+		mes "e eu me deparo aqui o tempo todo.";
 		close;
 	}
-	mes "[Lost Galten]";
-	mes "ก๓ก๔ก๏ ก๛ ขณก๚";
-	mes "กüก๘ก๑ ขฃ ";
-	mes "ก๖ก๏ขฒ ก๛ ก๖ก๓";
+	mes "[Galten Perdido]";
+	mes "ยกรณยกรดยกรฏ ยกรป ยขยณยกรบ";
+	mes "ยกรผยกรธยกรฑ ยขยฃ ";
+	mes "ยกรถยกรฏยขยฒ ยกรป ยกรถยกรณ";
 	close;
 }
