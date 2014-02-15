@@ -38,7 +38,7 @@ dicastes01,194,159,5	script	Excited Galten#a	4_MAN_GALTUN1,{
 dicastes01,202,86,3	script	Sentinela#a	4_MAN_GALTUN1,{
 	mes "[Sentinela]";
 	if (isequipped(2782)) {
-		mes "El Dicastes, a";
+		mes "El Dicastes, é a";
 		mes "capital de Sapha.";
 		mes "A terra é bem";
 		mes "acidentada então muitos forasteiros não podem entrar. Ha ha";
