@@ -3,7 +3,7 @@
 //===== Por: ================================================== 
 //= kobra_k88, Akaru
 //===== Versão Atual: ===================================== 
-//= 1.5
+//= 1.5a
 //===== Compatível Com: ===================================== 
 //= rAthena, Hercules, Cronus
 //===== Descrição: ========================================= 
@@ -13,6 +13,7 @@
 //= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.4a Fixed a little Typo error in duplicates. (bugreport:749) [Samuray22]
 //= 1.5 Tradução [Matheus]
+//= 1.5a Pequena correção nas duplicates [KyukE]
 //============================================================ 
 
 -	script	Dona Risadinha::SmileHelper	4_F_03,{
@@ -102,7 +103,6 @@
 alberta,113,53,4	duplicate(SmileHelper)	Dona Risadinha#alb	4_F_03
 aldebaran,136,135,4	duplicate(SmileHelper)	Dona Risadinha#alde	4_F_03
 geffen,119,107,4	duplicate(SmileHelper)	Dona Risadinha#gef	4_F_03
-izlude,125,175,4	duplicate(SmileHelper)	Dona Risadinha#iz	4_F_03
 moc_ruins,59,154,3	duplicate(SmileHelper)	Dona Risadinha#moc	4_F_03
 payon,186,104,5	duplicate(SmileHelper)	Dona Risadinha#pay	4_F_03
 prontera,157,187,4	duplicate(SmileHelper)	Dona Risadinha#prt	4_F_03
