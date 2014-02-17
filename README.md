@@ -29,7 +29,7 @@ Equipe de Desenvolvimento
 
 ### Coordenadores
 - Kooler
-- SoulBlaker	- Romulo
+- Portalcake » Amanda Gonçalo
 
 ### Desenvolvedores
 - BeckDeveloper	- Valderson Rodrigues
