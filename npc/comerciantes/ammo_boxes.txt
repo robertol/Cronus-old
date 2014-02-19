@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
-//= Magazine Dealers
-//===== By: ==================================================
+//===== Cronus Script ======================================
+//= Negociante de Projéteis Kenny
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
-//= 1.5
-//===== Description: =========================================
-//= Turns bullets into magazines/packs.
-//===== Additional Comments: =================================
+//===== Versão Atual: =====================================
+//= 1.6
+//===== Descrição: =========================================
+//= Negocia Pacotes e Carregadores
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [SinSloth]
 //= 1.1 Optimized version - Reduced to only one function [SinSloth]
 //= 1.2 Optimized^2, corrected npc's name [ultramage]
@@ -14,18 +14,19 @@
 //= 1.3 Updated to match AEGIS script. [Kisuka]
 //= 1.4 Updated to match AEGIS script again. [Masao]
 //= 1.5 Moved Izlude duplicate to pre-re/re paths. [Euphy]
+//= 1.6 Tradução/Revisão [RoM]/[BOO]
 //============================================================
 
 alberta,118,157,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 	if (BaseJob == Job_Gunslinger) {
 		mes "[Kenny]";
-		mes "Welcome to my Magazine Shop.";
-		mes "As you may know, large numbers";
-		mes "of bullets can be carried more";
-		mes "easily when they're in Magazines. Now, can I interest you in";
-		mes "anything in particular?";
+		mes "Bem vindo à minha Loja de Carregadores.";
+		mes "Como você deve saber, grandes quantidades";
+		mes "de projéteis podem ser carregadas mais";
+		mes "facilmente quando estão em Carregadores. Precisa";
+		mes "de algo em particular?";
 		next;
-		switch(select("Wind Sphere Pack:Shadow Sphere Pack:Poison Sphere Pack:Water Sphere Pack:Fire Sphere Pack:Cartridge:Blood Cartridge:Silver Cartridge:Cancel")) {
+		switch(select("Pacote de Esferas de Relâmpago:Pacote de Esferas Cegantes:Pacote de Esferas Venenosas:Pacote de Esferas Congelantes:Pacote de Esferas de Chamas:Carregador:Carregador Sanguinário:Carregador de Prata:Cancelar")) {
 		case 1: callfunc "Func_Casing",13204,12144; break;
 		case 2: callfunc "Func_Casing",13206,12145; break;
 		case 3: callfunc "Func_Casing",13205,12146; break;
@@ -36,77 +37,77 @@ alberta,118,157,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 		case 8: callfunc "Func_Casing",13201,12151; break;
 		case 9:
 			mes "[Kenny]";
-			mes "Well, if you ever find";
-			mes "that you have too many";
-			mes "bullets, come and see me.";
-			mes "It's a smart idea to store";
-			mes "bullets with my Magazines.";
+			mes "Bem, se achar";
+			mes "que tem muitos";
+			mes "projéteis, venha me ver.";
+			mes "É uma boa ideia armazenar";
+			mes "projéteis em meus carregadores.";
 			close;
 		}
 	}
 	mes "[Kenny]";
-	mes "Welcome to my shop.";
-	mes "Here, I provide Magazines";
-	mes "and Cartridges for Gunslingers.";
-	mes "Sorry, but it doesn't look like";
-	mes "my services would be of any";
-	mes "use to you, adventurer.";
+	mes "Bem vindo à minha loja.";
+	mes "Forneço Carregadores";
+	mes "e Carregadores para Justiceiros de toda Midgard.";
+	mes "Desculpe-me, mas parece que";
+	mes "meus serviços não terão nenhuma";
+	mes "utilidade para você, aventureiro.";
 	next;
 	mes "[Kenny]";
-	mes "Eh, but if you happen to";
-	mes "know any Gunslingers, send";
-	mes "them my way. You can never";
-	mes "have too many bullets.";
+	mes "Heh, mas se você, por acaso,";
+	mes "conhecer algum Justiceiro,";
+	mes "mande-o para mim. Ninguém pode";
+	mes "carregar muitos projéteis.";
 	close;
 }
 
 function	script	Func_Casing	{
 	mes "[Kenny]";
-	mes "Now, you can trade";
+	mes "Agora, você pode trocar";
 	mes "500 "+getitemname(getarg(0))+"s";
-	mes "and 500 zeny for 1 "+getitemname(getarg(1))+", so make sure";
-	mes "you have sufficient bullets";
-	mes "and zeny for this exchange.";
+	mes "e 500 zeny por 1 "+getitemname(getarg(1))+", então tenha certeza";
+	mes "que você tem projéteis e zeny";
+	mes "suficientes para a troca.";
 	next;
 	mes "[Kenny]";
-	mes "You can exchange 500 "+getitemname(getarg(0))+"s and 500 zeny";
-	mes "with 1 "+getitemname(getarg(1))+".";
+	mes "Você pode trocar 500 "+getitemname(getarg(0))+"s e 500 zeny";
+	mes "Por 1 "+getitemname(getarg(1))+".";
 	next;
 	mes "[Kenny]";
-	mes "Remember that I can't give";
-	mes "you more than 50 Magazines";
-	mes "at a time. Now please enter";
-	mes "the number of Magazines you";
-	mes "want to receive. If you want to cancel, then just enter ''0.''";
+	mes "Lembre-se que eu não posso dar-lhe";
+	mes "mais que 50 Carregadores";
+	mes "de uma vez. Agora, por favor, digite";
+	mes "o número de Carregadores que você";
+	mes "quer receber. Se quiser cancelar, apenas digite ''0.''";
 	next;
 	input .@amount;
 	if (.@amount > 50 || .@amount == 0) {
 		mes "[Kenny]";
-		mes "Hey, I can't give you";
-		mes "that many Magazines.";
-		mes "Please try again, and";
-		mes "enter a number no";
-		mes "greater than 50.";
+		mes "Ei, não posso dar-lhe";
+		mes "tantos Carregadores.";
+		mes "Por favor, tente novamente e";
+		mes "digite um número";
+		mes "menor que 50.";
 		close;
 	}
 	if (countitem(getarg(0)) >= (500*.@amount)) {
 		if (Zeny >= (500*.@amount)) {
 			if (checkweight(getarg(1),.@amount) == 0) {
 				mes "[Kenny]";
-				mes "Hey, you've got a lot";
-				mes "of junk crammed in your";
-				mes "Inventory. Free up some";
-				mes "space, and then come back";
-				mes "and trade your bullets for";
-				mes "some Magazines later, okay?";
+				mes "Ei, você tem muito";
+				mes "lixo amontoado no seu";
+				mes "inventário. Libere algum";
+				mes "espaço e então volte";
+				mes "para trocar seus projéteis por";
+				mes "alguns Carregadores depois, certo?";
 				close;
 			}else{
 				mes "[Kenny]";
-				mes "Alright, here are";
-				mes "your Magazines. Thanks";
-				mes "for visiting my shop, and";
-				mes "I hope that you use all";
-				mes "of your ammo wisely.";
+				mes "Certo, aqui estão";
+				mes "seus Carregadores. Obrigado";
+				mes "por visitar minha loja.";
+				mes "Espero que use sua";
+				mes "munição com sabedoria.";
 				set Zeny,Zeny-500*.@amount;
 				delitem getarg(0),500*.@amount;
 				getitem getarg(1),.@amount;
@@ -114,22 +115,22 @@ function	script	Func_Casing	{
 			}
 		} else {
 			mes "[Kenny]";
-			mes "Sorry, but you don't";
-			mes "have enough zeny for";
-			mes "this Magazine exchange.";
-			mes "Come back to my shop";
-			mes "after you've saved up";
-			mes "some more money.";
+			mes "Desculpe, mas você não";
+			mes "tem zeny suficiente para";
+			mes "esta troca.";
+			mes "Volte à minha loja";
+			mes "depois de ter economizado";
+			mes "um pouco mais.";
 			close;
 		}
 	} else {
 		mes "[Kenny]";
-		mes "Sorry, but you don't";
-		mes "have enough bullets for";
-		mes "this Magazine exchange.";
-		mes "Maybe you should double";
-		mes "check your Inventory, and";
-		mes "then come back to me later.";
+		mes "Desculpe, mas você não";
+		mes "tem projéteis suficientes para";
+		mes "esta troca.";
+		mes "Cheque novamente";
+		mes "seu inventário e então";
+		mes "volte mais tarde.";
 		close;
 	}
 }
