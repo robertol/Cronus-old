@@ -123,7 +123,7 @@ S_BuyQuiver:
 			mes "[Inventor Jaax]";
 			mes "Você mudou de idéia?";
 			mes "Quando a glória de possuir";
-			mes "um Aljave estava tão perto?"
+			mes "um Aljave estava tão perto?";
 			close;
 		case 2:
 			if (Zeny > getarg(2)) {
@@ -145,7 +145,7 @@ S_BuyQuiver:
 			else {
 				mes "[Inventor Jaax]";
 				mes "Você não tem sequer";
-				show getarg(2)+" Zeny?";
+				mes getarg(2)+" Zeny?";
 				mes "Me desculpe. Eu não";
 				mes "tinha idéia que você era";
 				mes "^333333desprovido^000000.";
