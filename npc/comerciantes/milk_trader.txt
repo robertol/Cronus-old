@@ -43,7 +43,6 @@ prontera,73,140,0	script	leiteiro	4_M_04,{
 		set .@total_cost,.@bottles * 15;
 		if (Zeny < .@Total_cost) {
 			mes "[leiteiro]";
-			mes "[Leiteiro]";
 			mes "Er... Você não tem a quantia";
 			mes "Você precisa ter";
 			mes "pelo menos " + .@total_cost + " zeny.";
