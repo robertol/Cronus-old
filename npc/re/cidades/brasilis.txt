@@ -1,13 +1,13 @@
 //===== Hercules Script ======================================
-//= Brasilis Town
-//===== By: ================================================== 
+//= Cidade de Brasilis
+//===== Por: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.3
-//===== Description: ========================================= 
+//= 1.4
+//===== Descrição: ========================================= 
 //= [Aegis Conversion]
-//= Brasilis Town Script
-//===== Additional Comments: ================================= 
+//= Scrip da Cidade de Brasilis
+//===== Comentários Adicionais: ================================= 
 //= 1.0 First version. Transportation and Basic NPCs.
 //= 1.1 Fixed Zeny not being removed for payment. [Kisuka]
 //= 1.2 Updated dialog, added Ice Cream Maker. [L0ne_W0lf]
@@ -15,17 +15,17 @@
 //= 1.4 Traduzido para PT-BR. [Zephyrus]
 //============================================================ 
 
-/* Pre-Renewal coordinates: alberta,247,115,3 */
+/* Pre-Renewal coordenadas: alberta,247,115,3 */
 alberta,246,82,3	script	Crewman#bra2	100,{
 	mes "[Crewman]";
-	mes "Ei, voc� j� ouviu falar de um lugar chamado Brasilis?";
-	mes "� uma cidade tropical que � t�o quente quanto o deserto, entretanto bastante chuvosa. � um lugar muito misterioso.";
+	mes "Ei, você já ouviu falar de um lugar chamado Brasilis?";
+	mes "É uma cidade tropical que é tão quente quanto o deserto, entretanto bastante chuvosa. É um lugar muito misterioso.";
 	next;
 	mes "[Crewman]";
-	mes "Recentemente, encontramos uma nova rota oce�nica para chegar l� f�cilmente!";
-	mes "A viagem custa a bagatela de 10,000 zeny! Ent�o, gostaria de embarcar?";
+	mes "Recentemente, encontramos uma nova rota oceânica para chegar lá fácilmente!";
+	mes "A viagem custa a bagatela de 10,000 zeny! Então, gostaria de embarcar?";
 	next;
-	switch(select("Leve-me at� Brasilis!:Ficarei aqui.")) {
+	switch(select("Leve-me até Brasilis!:Ficarei aqui.")) {
 	case 1:
 		if (Zeny > 9999) {
 			mes "[Crewman]";
@@ -42,16 +42,16 @@ alberta,246,82,3	script	Crewman#bra2	100,{
 		}
 	case 2:
 		mes "[Crewman]";
-		mes "Bom, se mudar de ideia, diga-me. Estarei sempre � disposi��o.";
+		mes "Bom, se mudar de ideia, diga-me. Estarei sempre à disposição.";
 		close;
 	}
 }
 
 brasilis,316,57,3	script	Crewman#bra1	100,{
 	mes "[Crewman]";
-	mes "Meu navio est� partindo de volta para Alberta, gostaria de se juntar a n�s?";
+	mes "Meu navio está partindo de volta para Alberta, gostaria de se juntar a nós?";
 	next;
-	switch(select("Voltar para Alberta.:Ainda n�o~.")) {
+	switch(select("Voltar para Alberta.:Ainda não~.")) {
 	case 1:
 		mes "[Crewman]";
 		mes "Sinto falta do meu lar.";
@@ -63,36 +63,36 @@ brasilis,316,57,3	script	Crewman#bra1	100,{
 		end;
 	case 2:
 		mes "[Crewman]";
-		mes "Ok, v� se preparar. Nos veremos quando retornar.";
+		mes "Ok, vá se preparar. Nos veremos quando retornar.";
 		close;
 	}
 }
 
-brasilis,155,165,3	script	Signpost#bra1	858,{
+brasilis,155,165,3	script	Poste Sinalizador#bra1	858,{
 	mes ":: Museu de Arte ::";
 	close;
 }
 
-brasilis,195,231,3	script	Signpost#bra2	858,{
+brasilis,195,231,3	script	Poste Sinalizador#bra2	858,{
 	mes ":: Monumento de Verass ::";
 	close;
 }
 
-brasilis,240,247,3	script	Signpost#bra3	858,{
+brasilis,240,247,3	script	Poste Sinalizador#bra3	858,{
 	mes ":: Mercado ::";
 	mes " ";
-	mes "- Para suas Po��es e Armamento -";
+	mes "- Para suas Poções e Armamento -";
 	close;
 }
 
-brasilis,303,309,3	script	Signpost#bra4	858,{
+brasilis,303,309,3	script	Poste Sinalizador#bra4	858,{
 	mes ":: Corda da Selva ::";
 	mes "";
-	mes "- N�o recomendado para pessoas card�acas -";
+	mes "- Não recomendado para pessoas cardíacas -";
 	close;
 }
 
-brasilis,278,137,3	script	Signpost#bra5	858,{
+brasilis,278,137,3	script	Poste Sinalizador#bra5	858,{
 	mes ":: Hotel de Brasilis ::";
 	close;
 }
@@ -100,16 +100,16 @@ brasilis,278,137,3	script	Signpost#bra5	858,{
 brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 	mes "[Vendedor de Sorvetes]";
 	mes "Venha~venha~";
-	mes "Sorvete � o aperitivo perfeito para um dia quente~";
+	mes "Sorvete é o aperitivo perfeito para um dia quente~";
 	mes "Custa somente ^3355FF100 Zeny^000000~";
 	mes "Sorvetes~";
 	mes "Peguem seus sorvetes!";
 	next;
-	switch(select("D�-me um!:Sorvete?:Cancelar.")) {
+	switch(select("Dê-me um!:Sorvete?:Cancelar.")) {
 	case 1:
 		mes "[Vendedor de Sorvetes]";
-		mes "J� que h� muitas pessoas querendo um delicioso sorvete, voc� poder� comprar apenas 5 de cada vez.";
-		mes "Ent�o, quantos ir� querer?";
+		mes "Já que há muitas pessoas querendo um delicioso sorvete, você poderá comprar apenas 5 de cada vez.";
+		mes "Então, quantos irá querer?";
 		next;
 		while(1) {
 			input .@input; //,1,5;
@@ -122,8 +122,8 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 			else if ((.@input < 0) || (.@input > 5)) {
 				mes "[Vendedor de Sorvetes]";
 				mes "Uau.";
-				mes "Voc� pediu demais.";
-				mes "Se comer mais que 5, poder� ter uma indigest�o. Muita calma nessa hora.";
+				mes "Você pediu demais.";
+				mes "Se comer mais que 5, poderá ter uma indigestão. Muita calma nessa hora.";
 				next;
 			}
 			else
@@ -132,13 +132,13 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 		set .@icecream_hap,.@input*100;
 		if (Zeny < .@icecream_hap) {
 			mes "[Vendedor de Sorvetes]";
-			mes "Cara~! Voc� n�o tem dinheiro suficiente.";
-			mes "S�o somente ^3355FF100 Zeny^000000~ S�rio!";
+			mes "Cara~! Você não tem dinheiro suficiente.";
+			mes "São somente ^3355FF100 Zeny^000000~ Sério!";
 			close;
 		}
 		if (!checkweight(536,.@input)) {
 			mes "[Vendedor de Sorvetes]";
-			mes "Parece que voc� carrega muitas coisas.";
+			mes "Parece que você carrega muitas coisas.";
 			mes "Alivie um pouco sua bagagem antes de comprar isto.";
 			close;
 		}
@@ -147,19 +147,19 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 		close;
 	case 2:
 		mes "[Vendedor de Sorvetes]";
-		mes "'Sorvete �...";
-		mes "Espera.. Voc� n�o sabe..";
-		mes "O que � um sorvete?";
+		mes "'Sorvete é...";
+		mes "Espera.. Você não sabe..";
+		mes "O que é um sorvete?";
 		mes "Em que caverna..";
-		mes "Voc� t�m vivido?";
+		mes "Você têm vivido?";
 		next;
 		mes "[Vendedor de Sorvetes]";
-		mes "N�o vou nem come�ar a dizer o quanto isso � esquisito.";
-		mes "De qualquer forma, pegue seu sorvete bem aqui enquanto est� bom e geladinho.";
+		mes "Não vou nem começar a dizer o quanto isso é esquisito.";
+		mes "De qualquer forma, pegue seu sorvete bem aqui enquanto está bom e geladinho.";
 		close;
 	case 3:
 		mes "[Vendedor de Sorvetes]";
-		mes "N�o perca a chance de tomar o melhor sorvete do mundo~!";
+		mes "Não perca a chance de tomar o melhor sorvete do mundo~!";
 		close;
 	}
 }
