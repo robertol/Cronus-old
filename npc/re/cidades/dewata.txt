@@ -434,7 +434,7 @@ dewata,89,191,6	script	Pequeno Santuário#dew1	844,{
 
 		setarray .@wishes$[0],
 			"Energia","Força", //1
-			"Mais Rápido","Velocidade","Rapidez,"Agilidade", //2
+			"Mais Rápido","Velocidade","Rapidez","Agilidade", //2
 			"Mãos Habilidosas","Des", //4
 			"Saudável","Em Forma","Vital", //8
 			"Inteligência","Cérebro","Estudo","Int","1º Lugar", //16
@@ -514,19 +514,19 @@ dewata,89,191,6	script	Pequeno Santuário#dew1	844,{
 
 L_Wish:
 	mes "Misteriosas energias emanam do santuário.";
-	specialeffect EF_FLASHER,AREA,"Small Shrine#dew1";
-	specialeffect EF_FLASHER,AREA,"Small Shrine#dew2";
-	specialeffect EF_FLASHER,AREA,"Small Shrine#dew3";
-	specialeffect EF_FLASHER,AREA,"Small Shrine#dew4";
+	specialeffect EF_FLASHER,AREA,"Pequeno Santuário#dew1";
+	specialeffect EF_FLASHER,AREA,"Pequeno Santuário#dew2";
+	specialeffect EF_FLASHER,AREA,"Pequeno Santuário#dew3";
+	specialeffect EF_FLASHER,AREA,"Pequeno Santuário#dew4";
 	next;
 	mes "Você recebeu a bênção do santuário.";
 	specialeffect2 EF_BLESSING;
 	next;
 	return;
 }
-dewata,89,212,6	duplicate(Small Shrine#dew1)	Small Shrine#dew2	844
-dewata,68,212,6	duplicate(Small Shrine#dew1)	Small Shrine#dew3	844
-dewata,68,191,6	duplicate(Small Shrine#dew1)	Small Shrine#dew4	844
+dewata,89,212,6	duplicate(Pequeno Santuário#dew1)	Pequeno Santuário#dew2	844
+dewata,68,212,6	duplicate(Pequeno Santuário#dew1)	Pequeno Santuário#dew3	844
+dewata,68,191,6	duplicate(Pequeno Santuário#dew1)	Pequeno Santuário#dew4	844
 
 dewata,75,122,6	script	Monge#dewt1	834,{
 	mes "[Monge]";
@@ -780,7 +780,7 @@ OnTouch:
 	close;
 }
 
-dewata,278,100,4	script	Criança Desaparecida#dew	703,2,3,{
+dewata,278,100,4	script	Criança Desaparecida#dw	703,2,3,{
 OnTouch:
 	mes "[Ukki]";
 	mes "WaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaa~";
@@ -1014,7 +1014,7 @@ dewata,204,230,6	script	Mulher de Dieta#dew	537,{
 		close;
 	}
 	mes "[Mulher de Dieta]";
-	mes "Este;
+	mes "Este";
 	mes "^006400Satay^000000 de dar água na boca é pra mim?";
 	next;
 	switch(select("Sim, quer um pedaço?:Não, é pra mim!")) {
@@ -1063,7 +1063,7 @@ dewata,117,156,6	script	Garotinho Sonhador#dew	538,{
 	close;
 }
 
-dewata,144,216,4	script	Garotinho Energético#dew	538,{
+dewata,144,216,4	script	Garotinho Energético#de	538,{
 	mes "[Garotinho Energético]";
 	mes "Meus pais me contavam...";
 	next;
