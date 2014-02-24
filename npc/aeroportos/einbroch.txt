@@ -6,6 +6,7 @@
 //= Funcionários do Aeroporto de Einbroch
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 airport,143,43,5	script	Funcionária#airport1a::airport1	4_F_01,{
@@ -86,8 +87,8 @@ airport,143,49,3	script	Funcionária#airport2a::airport2	4_F_01,{
 airport,126,51,3	duplicate(airport2)	Funcionária#airport2b	4_F_01
 airport,158,50,3	duplicate(airport2)	Funcionária#airport2c	4_F_01
 
-einbroch,94,267,3	script	Funcionário#ein01	4_F_02,{
-	mes "[Funcionário]";
+einbroch,94,267,3	script	Funcionária#ein01	4_F_02,{
+	mes "[Funcionária]";
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Einbroch.";
 	mes "Porfavor use essa porta para";
@@ -95,7 +96,7 @@ einbroch,94,267,3	script	Funcionário#ein01	4_F_02,{
 	mes "sobre Juno, Lighthalzen e";
 	mes "Hugel na República de Schwaltzvalt.";
 	next;
-	mes "[Funcionário]";
+	mes "[Funcionária]";
 	mes "Caso contrário, se Einbroch é";
 	mes "seu destino pretendido,";
 	mes "porfavor desça as escadas";
