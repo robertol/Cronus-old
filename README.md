@@ -32,9 +32,7 @@ Equipe de Desenvolvimento
 - Portalcake » Amanda Gonçalo
 
 ### Desenvolvedores
-- BeckDeveloper	- Valderson Rodrigues
 - BOO			- José Filho
-- Tet
 - KyukE			- Thiago Gomes
 - Jota Gois		- José Goís
 - Zephyrus
