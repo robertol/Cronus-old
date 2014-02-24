@@ -1,22 +1,23 @@
-//===== Hercules Script ======================================
-//= Hugel Airport NPCs
-//===== By: ==================================================
+//===== Cronus Script ===========================================
+//= NPCs do Aeroporto de Hugel
+//===== Por: ====================================================
 //= Hercules Dev Team
-//===== Description: =========================================
-//= Hugel Airport NPCs
-//===== Additional Comments: =================================
+//===== Descrição: ==============================================
+//= NPCs do Aeroporto de Hugel
+//===== Comentários Adicionais: =================================
 //= Official NPCs.
-//============================================================
+//= Traduzido para pt-BR. [Evanio]
+//===============================================================
 
 hugel,178,142,0	script	toairplane#hugel	WARPNPC,1,1,{
 	end;
 OnTouch:
-	mes "To use the airship, you are required to pay 1,200 zeny or a Free Airship Ticket.";
-	mes "Would you like to use the service?";
+	mes "Para usar o dirigível, é necessário pagar 1.200 zeny ou obter um Bilhete para Aeroplano.";
+	mes "Gostaria de usar o serviço?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("Sim:Não") == 1) {
 		if (countitem(7311) > 0) {
-			delitem 7311,1; //Free_Flying_Ship_Ticket
+			delitem 7311,1; //Bilherte_para_Aeroplano
 			warp "airplane",244,58;
 			end;
 		}
@@ -25,10 +26,10 @@ OnTouch:
 			warp "airplane",244,58;
 			end;
 		}
-		mes "I am sorry, but you do not have enough money.";
-		mes "Please remember, you are required to pay 1,200 zeny to use the service.";
+		mes "Sinto muito, mas você não tem dinheiro suficiente.";
+		mes "Lembre-se, é necessário pagar 1.200 zeny para usar o serviço.";
 		close;
 	}
-	mes "Thank you, please come again.";
+	mes "Obrigado, volte sempre.";
 	close;
 }
