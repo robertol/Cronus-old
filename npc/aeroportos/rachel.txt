@@ -6,6 +6,7 @@
 //= NPCs do Aeroporto de Rachel
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 ra_fild12,295,208,0	script	toairplane#rachel	WARPNPC,1,1,{
