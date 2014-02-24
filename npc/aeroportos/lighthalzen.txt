@@ -1,30 +1,33 @@
-//===== Hercules Script ======================================
-//= Lighthalzen Airport Staff
-//===== By: ==================================================
+//===== Cronus Script ===========================================
+//= Funcionários do Aeroporto de Lighthalzen
+//===== Por: ====================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Description: =========================================
-//= Lighthalzen Airport Staff
-//===== Additional Comments: =================================
+//===== Descrição: ==============================================
+//= Funcionários do Aeroporto de Lighthalzen
+//===== Comentários Adicionais: =================================
 //= Official NPCs.
-//============================================================
+//= Traduzido para pt-BR. [Evanio]
+//===============================================================
 
-lhz_airport,143,43,5	script	Airport Staff#lhz_air1a::lhz_airport1	4_F_01,{
-	mes "[Airport Staff]";
-	mes "Welcome to the";
-	mes "Lighthalzen Airport,";
-	mes "where we offer nonstop";
-	mes "flights to Einbroch, Juno and Hugel.";
+lhz_airport,143,43,5	script	Funcionária#lhz_air1a::lhz_airport1	4_F_01,{
+	mes "[Funcionária]";
+	mes "Bem-vindo ao";
+	mes "Aeroporto de Lighthalzen,";
+	mes "onde nós oferecemos vôos";
+	mes "diretos para as cidades de";
+	mes "Einbroch, Juno e Hugel.";
 	next;
-	if (select("Board the Airship.:Cancel.") == 1) {
-		mes "[Airport Staff]";
-		mes "The boarding fee is";
-		mes "1,200 zeny, but you can";
-		mes "waive the fee if you redeem";
-		mes "a Free Ticket for Airship.";
+	if (select("Embarcar no dirigível:Cancelar") == 1) {
+		mes "[Funcionária]";
+		mes "A taxa de embarque no dirigível";
+		mes "é de 1,200 zeny, mas se você";
+		mes "tiver um Bilhete para Aeroplano,";
+		mes "a taxa não será cobrada.";
+		mes "Gostaria de embarcar no dirigível?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sim:Não") == 1) {
 			if (countitem(7311) > 0) {
-				delitem 7311,1; //Free_Flying_Ship_Ticket
+				delitem 7311,1; //Bilhete_para_Aeroplano
 				warp "lhz_airport",148,51;
 				end;
 			}
@@ -33,49 +36,53 @@ lhz_airport,143,43,5	script	Airport Staff#lhz_air1a::lhz_airport1	4_F_01,{
 				warp "lhz_airport",148,51;
 				end;
 			}
-			mes "[Airship Staff]";
-			mes "I'm sorry, but you don't";
-			mes "have 1,200 zeny to pay";
-			mes "for the boarding fee.";
+			mes "[Funcionária]";
+			mes "Me desculpe, mas você não";
+			mes "possui um Bilhete para";
+			mes "Aeroplano e também não possui";
+			mes "nenhum Zeny para embarcar";
+			mes "no dirigível. Lembre-se, a";
+			mes "taxa de embarque custa 1,200 zeny.";
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "Thank you and";
-	mes "please come again.";
-	mes "Have a good day~";
+	mes "[Funcionária]";
+	mes "Obrigada e";
+	mes "tenha um ótimo dia.";
 	close;
 }
 
-lhz_airport,158,43,5	duplicate(lhz_airport1)	Airship Staff#lhz_air1b	4_F_01
-lhz_airport,126,43,5	duplicate(lhz_airport1)	Airship Staff#lhz_air1c	4_F_01
+lhz_airport,158,43,5	duplicate(lhz_airport1)	Funcionária#lhz_air1b	4_F_01
+lhz_airport,126,43,5	duplicate(lhz_airport1)	Funcionária#lhz_air1c	4_F_01
 
-lhz_airport,143,49,3	script	Arrival Staff#lhz_air2a::lhz_airport2	4_F_01,{
-	mes "[Arrival Staff]";
-	mes "Welcome to Lighthalzen Airport.";
-	mes "Please let me guide you to the";
-	mes "main terminal if you are arriving from your flight. Otherwise, please";
-	mes "board the departing Airship to reach your intended destination.";
+lhz_airport,143,49,3	script	Funcionária#lhz_air2a::lhz_airport2	4_F_01,{
+	mes "[Funcionária]";
+	mes "Bem-vindo ao Aeroporto de Einbroch.";
+	mes "Se você estiver chegando do seu";
+	mes "vôo, deixe-me guia-lo para o";
+	mes "terminal principal. Caso contrário, porfavor embarque no dirigível que";
+	mes "partirá para Juno, Lighthalzen e Hugel.";
 	next;
-	if (select("Exit to main terminal.:Cancel.") == 1) {
-		mes "[Arrival Staff]";
-		mes "Once you're in the main terminal, you will need to pay the fee again";
-		mes "to board an Airship. You should";
-		mes "only exit if Lighthalzen is your intended destination. Shall we";
-		mes "proceed to the main terminal?";
+	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
+		mes "[Funcionária]";
+		mes "Uma vez que você for para o terminal principal, você terá que";
+		mes "pagar a taxa novamente quando embarcar em outro dirigível.";
+		mes "Você deve sair para a cidade de Einbroch somente se";
+		mes "este for realmente seu destino.";
+		mes "Ir para o terminal principal?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sim:Não") == 1) {
 			warp "lhz_airport",142,40;
 			end;
 		}
 	}
-	mes "[Arrival Staff]";
-	mes "Alright, thank you";
-	mes "for your patronage";
-	mes "and I hope you have";
-	mes "a pleasant flight~";
+	mes "[Funcionária]";
+	mes "Tudo bem, obrigado";
+	mes "por seu apoio e";
+	mes "espero que você tenha";
+	mes "um vôo agradável~";
 	close;
 }
 
-lhz_airport,126,51,3	duplicate(lhz_airport2)	Arrival Staff#lhz_air2b	4_F_01
-lhz_airport,158,50,3	duplicate(lhz_airport2)	Arrival Staff#lhz_air2c	4_F_01
+lhz_airport,126,51,3	duplicate(lhz_airport2)	Funcionária#lhz_air2b	4_F_01
+lhz_airport,158,50,3	duplicate(lhz_airport2)	Funcionária#lhz_air2c	4_F_01
