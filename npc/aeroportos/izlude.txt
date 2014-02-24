@@ -6,6 +6,7 @@
 //= NPCs do Aeroporto de Izlude
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 -	script	::Airship_Staff_izlude	-1,{
