@@ -6,6 +6,7 @@
 //= Funcionários do Aeroporto de Lighthalzen
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 lhz_airport,143,43,5	script	Funcionária#lhz_air1a::lhz_airport1	4_F_01,{
