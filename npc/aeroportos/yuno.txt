@@ -6,6 +6,7 @@
 //= Funcionários do Aeroporto de Juno
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 y_airport,143,43,5	script	Funcionária#y_air1a::y_airport1	4_F_01,{
