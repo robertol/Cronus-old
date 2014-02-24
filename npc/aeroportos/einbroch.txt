@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ===========================================
 //= Funcionários do Aeroporto de Einbroch
-//===== Por: ==================================================
+//===== Por: ====================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Descrição: =========================================
+//===== Descrição: ==============================================
 //= Funcionários do Aeroporto de Einbroch
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
-//============================================================
+//===============================================================
 
 airport,143,43,5	script	Funcionária#airport1a::airport1	4_F_01,{
 	mes "[Funcionária]";
@@ -16,13 +16,13 @@ airport,143,43,5	script	Funcionária#airport1a::airport1	4_F_01,{
 	mes "diretos para as cidades de";
 	mes "Juno, Lighthalzen e Hugel.";
 	next;
-	if (select("Embarcar no Dirigível:Cancelar") == 1) {
+	if (select("Embarcar no dirigível:Cancelar") == 1) {
 		mes "[Funcionária]";
-		mes "A taxa de embarque no Dirigível";
+		mes "A taxa de embarque no dirigível";
 		mes "é de 1,200 zeny, mas se você";
 		mes "tiver um Bilhete para Aeroplano,";
 		mes "a taxa não será cobrada.";
-		mes "Você vai embarcar no Dirigível?";
+		mes "Gostaria de embarcar no dirigível?";
 		next;
 		if (select("Sim:Não") == 1) {
 			if (countitem(7311) > 0) {
@@ -37,10 +37,10 @@ airport,143,43,5	script	Funcionária#airport1a::airport1	4_F_01,{
 			}
 			mes "[Funcionária]";
 			mes "Me desculpe, mas você não";
-			mes "tem um Bilhete para";
+			mes "possui um Bilhete para";
 			mes "Aeroplano e também não possui";
 			mes "nenhum Zeny para embarcar";
-			mes "no Dirigível. Lembre-se, a";
+			mes "no dirigível. Lembre-se, a";
 			mes "taxa de embarque custa 1,200 zeny.";
 			close;
 		}
@@ -65,7 +65,7 @@ airport,143,49,3	script	Funcionária#airport2a::airport2	4_F_01,{
 	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
 		mes "[Funcionária]";
 		mes "Uma vez que você for para o terminal principal, você terá que";
-		mes "pagar a taxa novamente quando embarcar em outro Dirigível.";
+		mes "pagar a taxa novamente quando embarcar em outro dirigível.";
 		mes "Você deve sair para a cidade de Einbroch somente se";
 		mes "este for realmente seu destino.";
 		mes "Ir para o terminal principal?";
@@ -91,7 +91,7 @@ einbroch,94,267,3	script	Funcionário#ein01	4_F_02,{
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Einbroch.";
 	mes "Porfavor use essa porta para";
-	mes "embarcar no Dirigível que paira";
+	mes "embarcar no dirigível que paira";
 	mes "sobre Juno, Lighthalzen e";
 	mes "Hugel na República de Schwaltzvalt.";
 	next;
