@@ -6,6 +6,7 @@
 //= NPCs do Aeroporto de Hugel
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
+//= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 hugel,178,142,0	script	toairplane#hugel	WARPNPC,1,1,{
