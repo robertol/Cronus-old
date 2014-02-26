@@ -1,4 +1,4 @@
-//===== Cronus Script ===========================================
+﻿//===== Cronus Script ===========================================
 //= NPCs do Aeroporto de Hugel
 //===== Por: ====================================================
 //= Hercules Dev Team
@@ -17,7 +17,7 @@ OnTouch:
 	next;
 	if (select("Sim:Não") == 1) {
 		if (countitem(7311) > 0) {
-			delitem 7311,1; //Bilherte_para_Aeroplano
+			delitem 7311,1; //Bilhete para Aeroplano
 			warp "airplane",244,58;
 			end;
 		}
