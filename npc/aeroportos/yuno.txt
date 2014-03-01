@@ -1,28 +1,28 @@
 //===== Cronus Script ===========================================
-//= Funcion√°rios do Aeroporto de Juno
+//= Funcion·rios do Aeroporto de Juno
 //===== Por: ====================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Descri√ß√£o: ==============================================
-//= Funcion√°rios do Aeroporto de Juno
-//===== Coment√°rios Adicionais: =================================
+//===== DescriÁ„o: ==============================================
+//= Funcion·rios do Aeroporto de Juno
+//===== Coment·rios Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
-y_airport,143,43,5	script	Funcion√°ria#y_air1a::y_airport1	4_F_01,{
-	mes "[Funcion√°ria]";
-	mes "Bem-vindo ao Aeroporto de Juno, onde oferecemos v√¥os dom√©sticos para Einbroch, Lighthalzen e Hugel,";
-	mes "e os v√¥os internacionais para Izlude e Rachel.";
-	mes "Como posso ser √∫til?";
+y_airport,143,43,5	script	Funcion·ria#y_air1a::y_airport1	4_F_01,{
+	mes "[Funcion·ria]";
+	mes "Bem-vindo ao Aeroporto de Juno, onde oferecemos vÙos domÈsticos para Einbroch, Lighthalzen e Hugel,";
+	mes "e os vÙos internacionais para Izlude e Rachel.";
+	mes "Como posso ser ˙til?";
 	next;
-	if (select("Embarcar no dirig√≠vel.:Cancelar.") == 1) {
-		mes "[Funcion√°ria]";
+	if (select("Embarcar no dirigÌvel.:Cancelar.") == 1) {
+		mes "[Funcion·ria]";
 		mes "A taxa de embarque para todos";
-		mes "os v√¥os √© de 1,200 zeny. Voc√™";
+		mes "os vÙos È de 1,200 zeny. VocÍ";
 		mes "pode usar um Bilhete para Aeroplano,";
-		mes "e a taxa de embarque n√£o ser√° cobrada. Ent√£o, gostaria de partir?";
+		mes "e a taxa de embarque n„o ser· cobrada. Ent„o, gostaria de partir?";
 		next;
-		if (select("Sim:N√£o") == 1) {
+		if (select("Sim:N„o") == 1) {
 			if (countitem(7311) > 0) {
 				delitem 7311,1; //Bilhete_para_Aeroplano
 				warp "y_airport",148,51;
@@ -33,126 +33,126 @@ y_airport,143,43,5	script	Funcion√°ria#y_air1a::y_airport1	4_F_01,{
 				warp "y_airport",148,51;
 				end;
 			}
-			mes "[Funcion√°ria]";
-			mes "Sinto muito, mas voc√™ n√£o";
+			mes "[Funcion·ria]";
+			mes "Sinto muito, mas vocÍ n„o";
 			mes "possui 1,200 zeny para pagar";
 			mes "a taxa de embarque.";
 			close;
 		}
 	}
-	mes "[Funcion√°ria]";
+	mes "[Funcion·ria]";
 	mes "Obrigado e";
-	mes "tenha um √≥timo dia.";
+	mes "tenha um Ûtimo dia.";
 	close;
 }
 
-y_airport,158,43,5	duplicate(y_airport1)	Funcion√°ria#y_air1b	4_F_01
-y_airport,126,43,5	duplicate(y_airport1)	Funcion√°ria#y_air1c	4_F_01
+y_airport,158,43,5	duplicate(y_airport1)	Funcion·ria#y_air1b	4_F_01
+y_airport,126,43,5	duplicate(y_airport1)	Funcion·ria#y_air1c	4_F_01
 
-y_airport,143,49,3	script	Funcion√°ria#y_air2a::y_airport2	4_F_01,{
-	mes "[Funcion√°ria]";
-	mes "Bem-vindo ao Aeroporto de Juno. Se voc√™ estiver chegando do seu";
-	mes "v√¥o, deixe-me guia-lo para o terminal principal. Caso contr√°rio,";
-	mes "embarque no dirig√≠vel para chegar ao seu destino pretendido.";
+y_airport,143,49,3	script	Funcion·ria#y_air2a::y_airport2	4_F_01,{
+	mes "[Funcion·ria]";
+	mes "Bem-vindo ao Aeroporto de Juno. Se vocÍ estiver chegando do seu";
+	mes "vÙo, deixe-me guia-lo para o terminal principal. Caso contr·rio,";
+	mes "embarque no dirigÌvel para chegar ao seu destino pretendido.";
 	next;
 	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
-		mes "[Funcion√°ria]";
-		mes "Uma vez que voc√™ for para o terminal principal, voc√™ ter√° que";
-		mes "pagar a taxa novamente quando embarcar em outro dirig√≠vel.";
-		mes "Voc√™ deve sair para a cidade de Juno somente se";
+		mes "[Funcion·ria]";
+		mes "Uma vez que vocÍ for para o terminal principal, vocÍ ter· que";
+		mes "pagar a taxa novamente quando embarcar em outro dirigÌvel.";
+		mes "VocÍ deve sair para a cidade de Juno somente se";
 		mes "este for realmente seu destino.";
 		mes "Ir para o terminal principal?";
 		next;
-		if (select("Sim:N√£o") == 1) {
+		if (select("Sim:N„o") == 1) {
 			warp "y_airport",142,40;
 			end;
 		}
 	}
-	mes "[Funcion√°ria]";
+	mes "[Funcion·ria]";
 	mes "Tudo bem, obrigado";
 	mes "por seu apoio e";
-	mes "espero que voc√™ tenha";
-	mes "um v√¥o agrad√°vel~";
+	mes "espero que vocÍ tenha";
+	mes "um vÙo agrad·vel~";
 	close;
 }
 
-y_airport,126,51,3	duplicate(y_airport2)	Funcion√°ria#y_air2b	4_F_01
-y_airport,158,50,3	duplicate(y_airport2)	Funcion√°ria#y_air2c	4_F_01
+y_airport,126,51,3	duplicate(y_airport2)	Funcion·ria#y_air2b	4_F_01
+y_airport,158,50,3	duplicate(y_airport2)	Funcion·ria#y_air2c	4_F_01
 
-y_airport,145,63,5	script	Embarque Dom√©stico	4_F_02,{
-	mes "[Funcion√°ria de Embarque]";
+y_airport,145,63,5	script	Embarque DomÈstico	4_F_02,{
+	mes "[Funcion·ria de Embarque]";
 	mes "Gostaria de embarcar no";
-	mes "dirig√≠vel com destino para Einbroch,";
+	mes "dirigÌvel com destino para Einbroch,";
 	mes "Lighthalzen e Hugel? Se sim,";
-	mes "por favor deixe-me gui√°-lo para a";
-	mes "√°rea de embarque do dirig√≠vel.";
+	mes "por favor deixe-me gui·-lo para a";
+	mes "·rea de embarque do dirigÌvel.";
 	next;
-	if (select("Sim:N√£o") == 1) {
+	if (select("Sim:N„o") == 1) {
 		warp "yuno",59,244;
 		end;
 	}
-	mes "[Funcion√°ria de Embarque]";
-	mes "Muito bem ent√£o.";
+	mes "[Funcion·ria de Embarque]";
+	mes "Muito bem ent„o.";
 	mes "Obrigado por seu";
-	mes "apoio, e espero que voc√™";
-	mes "tenha um v√¥o agrad√°vel~";
+	mes "apoio, e espero que vocÍ";
+	mes "tenha um vÙo agrad·vel~";
 	close;
 }
 
 y_airport,140,63,5	script	Embarque Internacional	4_F_02,{
 
-	mes "[Funcion√°ria de Embarque]";
+	mes "[Funcion·ria de Embarque]";
 	mes "Gostaria de embarcar no";
-	mes "dirig√≠vel com destino para Juno,";
+	mes "dirigÌvel com destino para Juno,";
 	mes "Izlude e Rachel? Se sim,";
-	mes "por favor deixe-me gui√°-lo para a";
-	mes "√°rea de embarque do dirig√≠vel.";
+	mes "por favor deixe-me gui·-lo para a";
+	mes "·rea de embarque do dirigÌvel.";
 	next;
-	if (select("Sim:N√£o") == 1) {
+	if (select("Sim:N„o") == 1) {
 		warp "yuno",47,244;
 		end;
 	}
-	mes "[Funcion√°ria de Embarque]";
-	mes "Muito bem ent√£o.";
+	mes "[Funcion·ria de Embarque]";
+	mes "Muito bem ent„o.";
 	mes "Obrigado por seu";
-	mes "apoio, e espero que voc√™";
-	mes "tenha um v√¥o agrad√°vel~";
+	mes "apoio, e espero que vocÍ";
+	mes "tenha um vÙo agrad·vel~";
 	close;
 }
 
-yuno,14,262,5	script	Funcion√°ria#yuno01	4_F_02,{
-	mes "[Funcion√°ria]";
+yuno,14,262,5	script	Funcion·ria#yuno01	4_F_02,{
+	mes "[Funcion·ria]";
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Juno.";
 	mes "Porfavor use essa porta para";
-	mes "embarcar no dirig√≠vel que paira";
+	mes "embarcar no dirigÌvel que paira";
 	mes "sobre Izlude no Reino de Rune-Midgarts e";
-	mes "para Rachel na Rep√∫blica de Arunafeltz.";
+	mes "para Rachel na Rep˙blica de Arunafeltz.";
 	next;
-	mes "[Funcion√°ria]";
-	mes "Caso contr√°rio, se Juno √©";
+	mes "[Funcion·ria]";
+	mes "Caso contr·rio, se Juno È";
 	mes "seu destino pretendido,";
-	mes "porfavor des√ßa as escadas e pe√ßa";
-	mes "aos Funcion√°rios de Chegada para lhe";
+	mes "porfavor desÁa as escadas e peÁa";
+	mes "aos Funcion·rios de Chegada para lhe";
 	mes "guiar ao terminal principal.";
 	mes "Obrigado, e desfrute de suas viagens.";
 	close;
 }
 
-yuno,88,263,3	script	Funcion√°ria#yuno02	4_F_02,{
-	mes "[Funcion√°ria]";
+yuno,88,263,3	script	Funcion·ria#yuno02	4_F_02,{
+	mes "[Funcion·ria]";
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Juno.";
 	mes "Porfavor use essa porta para";
-	mes "embarcar no dirig√≠vel que paira";
+	mes "embarcar no dirigÌvel que paira";
 	mes "sobre Einbroch, Lighthalzen e";
-	mes "Hugel na Rep√∫blica de Schwaltzvalt.";
+	mes "Hugel na Rep˙blica de Schwaltzvalt.";
 	next;
-	mes "[Funcion√°ria]";
-	mes "Caso contr√°rio, se Juno √©";
+	mes "[Funcion·ria]";
+	mes "Caso contr·rio, se Juno È";
 	mes "seu destino pretendido,";
-	mes "porfavor des√ßa as escadas e pe√ßa";
-	mes "aos Funcion√°rios de Chegada para lhe";
+	mes "porfavor desÁa as escadas e peÁa";
+	mes "aos Funcion·rios de Chegada para lhe";
 	mes "guiar ao terminal principal.";
 	mes "Obrigado, e desfrute de suas viagens.";
 	close;

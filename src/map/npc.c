@@ -1555,7 +1555,7 @@ int npc_buylist(struct map_session_data* sd, int n, unsigned short* item_list) {
 int npc_selllist_sub(struct map_session_data* sd, int n, unsigned short* item_list, struct npc_data* nd)
 {
 	char npc_ev[EVENT_NAME_LENGTH];
-	char card_slot[NAME_LENGTH];
+	char card_slot[NPC_NAME_LENGTH];
 	int i, j, idx;
 	int key_nameid = 0;
 	int key_amount = 0;
@@ -1937,27 +1937,27 @@ void npc_delsrcfile(const char* name)
 void npc_parsename(struct npc_data* nd, const char* name, const char* start, const char* buffer, const char* filepath) {
 	const char* p;
 	struct npc_data* dnd;// duplicate npc
-	char newname[NAME_LENGTH];
+	char newname[NPC_NAME_LENGTH];
 
 	// parse name
 	p = strstr(name,"::");
 	if( p ) { // <Display name>::<Unique name>
 		size_t len = p-name;
-		if( len > NAME_LENGTH ) {
-			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH ) {
+			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 			safestrncpy(nd->name, name, sizeof(nd->name));
 		} else {
 			memcpy(nd->name, name, len);
 			memset(nd->name+len, 0, sizeof(nd->name)-len);
 		}
 		len = strlen(p+2);
-		if( len > NAME_LENGTH )
-			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if (len > NPC_NAME_LENGTH)
+			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer, start - buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->exname, p+2, sizeof(nd->exname));
 	} else {// <Display name>
 		size_t len = strlen(name);
-		if( len > NAME_LENGTH )
-			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH )
+			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line '%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer, start - buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->name, name, sizeof(nd->name));
 		safestrncpy(nd->exname, name, sizeof(nd->exname));
 	}
@@ -2951,7 +2951,7 @@ void npc_parse_mob2(struct spawn_data* mobspawn)
 const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath) {
 	int num, class_, m,x,y,xs,ys, i,j;
 	int mob_lv = -1, ai = -1, size = -1;
-	char mapname[32], mobname[NAME_LENGTH];
+	char mapname[32], mobname[NPC_NAME_LENGTH];
 	struct spawn_data mobspawn, *data;
 	struct mob_db* db;
 
@@ -3961,8 +3961,8 @@ int do_init_npc( bool minimal )
 		npc_viewdb2[i - MAX_NPC_CLASS2_START].class_ = i;
 
 	npc->ev_db = stridb_alloc(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA, EVENT_NAME_LENGTH);
-	npc->ev_label_db = stridb_alloc(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA, NAME_LENGTH);
-	npc->name_db = strdb_alloc(DB_OPT_BASE, NAME_LENGTH);
+	npc->ev_label_db = stridb_alloc(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA, NPC_NAME_LENGTH);
+	npc->name_db = strdb_alloc(DB_OPT_BASE, NPC_NAME_LENGTH);
 	npc->path_db = strdb_alloc(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA, 0);
 
 	npc_last_npd = NULL;
