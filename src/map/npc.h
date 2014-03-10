@@ -16,7 +16,7 @@ struct npc_timerevent_list {
 	int timer,pos;
 };
 struct npc_label_list {
-	char name[NAME_LENGTH];
+	char name[NPC_NAME_LENGTH];
 	int pos;
 };
 struct npc_item_list {
@@ -31,8 +31,8 @@ struct npc_data {
 	struct npc_data *master_nd;
 	short class_;
 	short speed;
-	char name[NAME_LENGTH+1];// display name
-	char exname[NAME_LENGTH+1];// unique npc name
+	char name[NPC_NAME_LENGTH+1];// display name
+	char exname[NPC_NAME_LENGTH+1];// unique npc name
 	int chat_id;
 	int touching_id;
 	int64 next_walktime;
@@ -71,7 +71,7 @@ struct npc_data {
 		struct {
 			struct mob_data *md;
 			time_t kill_time;
-			char killer_name[NAME_LENGTH];
+			char killer_name[NPC_NAME_LENGTH];
 		} tomb;
 	} u;
 };

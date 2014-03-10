@@ -1,31 +1,31 @@
 //===== Cronus Script ===========================================
-//= Funcion√°rios do Aeroporto de Einbroch
+//= Funcion·rios do Aeroporto de Einbroch
 //===== Por: ====================================================
 //= L0ne_W0lf, Muad_Dib
-//===== Descri√ß√£o: ==============================================
-//= Funcion√°rios do Aeroporto de Einbroch
-//===== Coment√°rios Adicionais: =================================
+//===== DescriÁ„o: ==============================================
+//= Funcion·rios do Aeroporto de Einbroch
+//===== Coment·rios Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
-airport,143,43,5	script	Funcion√°ria#airport1a::airport1	4_F_01,{
-	mes "[Funcion√°ria]";
+airport,143,43,5	script	Funcion·ria#airport1a::airport1	4_F_01,{
+	mes "[Funcion·ria]";
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Einbroch,";
-	mes "onde n√≥s oferecemos v√¥os";
+	mes "onde nÛs oferecemos vÙos";
 	mes "diretos para as cidades de";
 	mes "Juno, Lighthalzen e Hugel.";
 	next;
-	if (select("Embarcar no dirig√≠vel:Cancelar") == 1) {
-		mes "[Funcion√°ria]";
-		mes "A taxa de embarque no dirig√≠vel";
-		mes "√© de 1,200 zeny, mas se voc√™";
+	if (select("Embarcar no dirigÌvel:Cancelar") == 1) {
+		mes "[Funcion·ria]";
+		mes "A taxa de embarque no dirigÌvel";
+		mes "È de 1,200 zeny, mas se vocÍ";
 		mes "tiver um Bilhete para Aeroplano,";
-		mes "a taxa n√£o ser√° cobrada.";
-		mes "Gostaria de embarcar no dirig√≠vel?";
+		mes "a taxa n„o ser· cobrada.";
+		mes "Gostaria de embarcar no dirigÌvel?";
 		next;
-		if (select("Sim:N√£o") == 1) {
+		if (select("Sim:N„o") == 1) {
 			if (countitem(7311) > 0) {
 				delitem 7311,1; //Bilhete_para_Aeroplano
 				warp "airport",148,51;
@@ -36,71 +36,71 @@ airport,143,43,5	script	Funcion√°ria#airport1a::airport1	4_F_01,{
 				warp "airport",148,51;
 				end;
 			}
-			mes "[Funcion√°ria]";
-			mes "Me desculpe, mas voc√™ n√£o";
+			mes "[Funcion·ria]";
+			mes "Me desculpe, mas vocÍ n„o";
 			mes "possui um Bilhete para";
-			mes "Aeroplano e tamb√©m n√£o possui";
+			mes "Aeroplano e tambÈm n„o possui";
 			mes "nenhum Zeny para embarcar";
-			mes "no dirig√≠vel. Lembre-se, a";
+			mes "no dirigÌvel. Lembre-se, a";
 			mes "taxa de embarque custa 1,200 zeny.";
 			close;
 		}
 	}
-	mes "[Funcion√°ria]";
+	mes "[Funcion·ria]";
 	mes "Obrigada e";
-	mes "tenha um √≥timo dia.";
+	mes "tenha um Ûtimo dia.";
 	close;
 }
 
-airport,158,43,5	duplicate(airport1)	Funcion√°ria#airport1b	4_F_01
-airport,126,43,5	duplicate(airport1)	Funcion√°ria#airport1c	4_F_01
+airport,158,43,5	duplicate(airport1)	Funcion·ria#airport1b	4_F_01
+airport,126,43,5	duplicate(airport1)	Funcion·ria#airport1c	4_F_01
 
-airport,143,49,3	script	Funcion√°ria#airport2a::airport2	4_F_01,{
-	mes "[Funcion√°ria]";
+airport,143,49,3	script	Funcion·ria#airport2a::airport2	4_F_01,{
+	mes "[Funcion·ria]";
 	mes "Bem-vindo ao Aeroporto de Einbroch.";
-	mes "Se voc√™ estiver chegando do seu";
-	mes "v√¥o, deixe-me guia-lo para o";
-	mes "terminal principal. Caso contr√°rio, porfavor embarque no dirig√≠vel que";
-	mes "partir√° para Juno, Lighthalzen e Hugel.";
+	mes "Se vocÍ estiver chegando do seu";
+	mes "vÙo, deixe-me guia-lo para o";
+	mes "terminal principal. Caso contr·rio, porfavor embarque no dirigÌvel que";
+	mes "partir· para Juno, Lighthalzen e Hugel.";
 	next;
 	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
-		mes "[Funcion√°ria]";
-		mes "Uma vez que voc√™ for para o terminal principal, voc√™ ter√° que";
-		mes "pagar a taxa novamente quando embarcar em outro dirig√≠vel.";
-		mes "Voc√™ deve sair para a cidade de Einbroch somente se";
+		mes "[Funcion·ria]";
+		mes "Uma vez que vocÍ for para o terminal principal, vocÍ ter· que";
+		mes "pagar a taxa novamente quando embarcar em outro dirigÌvel.";
+		mes "VocÍ deve sair para a cidade de Einbroch somente se";
 		mes "este for realmente seu destino.";
 		mes "Ir para o terminal principal?";
 		next;
-		if (select("Sim:N√£o") == 1) {
+		if (select("Sim:N„o") == 1) {
 			warp "airport",142,40;
 			end;
 		}
 	}
-	mes "[Funcion√°ria]";
+	mes "[Funcion·ria]";
 	mes "Tudo bem, obrigado";
 	mes "por seu apoio";
-	mes "e espero que voc√™ tenha";
-	mes "um v√¥o agrad√°vel~";
+	mes "e espero que vocÍ tenha";
+	mes "um vÙo agrad·vel~";
 	close;
 }
 
-airport,126,51,3	duplicate(airport2)	Funcion√°ria#airport2b	4_F_01
-airport,158,50,3	duplicate(airport2)	Funcion√°ria#airport2c	4_F_01
+airport,126,51,3	duplicate(airport2)	Funcion·ria#airport2b	4_F_01
+airport,158,50,3	duplicate(airport2)	Funcion·ria#airport2c	4_F_01
 
-einbroch,94,267,3	script	Funcion√°ria#ein01	4_F_02,{
-	mes "[Funcion√°ria]";
+einbroch,94,267,3	script	Funcion·ria#ein01	4_F_02,{
+	mes "[Funcion·ria]";
 	mes "Bem-vindo ao";
 	mes "Aeroporto de Einbroch.";
 	mes "Porfavor use essa porta para";
-	mes "embarcar no dirig√≠vel que paira";
+	mes "embarcar no dirigÌvel que paira";
 	mes "sobre Juno, Lighthalzen e";
-	mes "Hugel na Rep√∫blica de Schwaltzvalt.";
+	mes "Hugel na Rep˙blica de Schwaltzvalt.";
 	next;
-	mes "[Funcion√°ria]";
-	mes "Caso contr√°rio, se Einbroch √©";
+	mes "[Funcion·ria]";
+	mes "Caso contr·rio, se Einbroch È";
 	mes "seu destino pretendido,";
-	mes "porfavor des√ßa as escadas";
-	mes "e pe√ßa aos Funcion√°rios de Chegada para lhe guiar";
+	mes "porfavor desÁa as escadas";
+	mes "e peÁa aos Funcion·rios de Chegada para lhe guiar";
 	mes "ao terminal principal. Obrigado,";
 	mes "e desfrute de suas viagens.";
 	close;

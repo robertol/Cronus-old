@@ -2,29 +2,29 @@
 //= NPCs do Aeroporto de Izlude
 //===== Por: ====================================================
 //= Hercules Dev Team
-//===== Descri√ß√£o: ==============================================
+//===== DescriÁ„o: ==============================================
 //= NPCs do Aeroporto de Izlude
-//===== Coment√°rios Adicionais: =================================
+//===== Coment·rios Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
 //===============================================================
 
 -	script	::Airship_Staff_izlude	-1,{
-	mes "[Funcion√°rio]";
+	mes "[Funcion·rio]";
 	mes "Bem-vindo! Gostaria";
-	mes "de embarcar no dirig√≠vel que";
-	mes "sa√≠ra em v√¥o com destinos √†";
+	mes "de embarcar no dirigÌvel que";
+	mes "saÌra em vÙo com destinos ‡";
 	mes "Juno e Rachel?";
 	next;
-	if (select("Ebarcar no dirig√≠vel para Juno/Rachel.:Cancelar.") == 1) {
-		mes "[Funcion√°rio]";
-		mes "A taxa de embarque √© de";
+	if (select("Ebarcar no dirigÌvel para Juno/Rachel.:Cancelar.") == 1) {
+		mes "[Funcion·rio]";
+		mes "A taxa de embarque È de";
 		mes "1,200 zeny. No entanto, esta";
-		mes "taxa √© dispensada se voc√™ possuir";
+		mes "taxa È dispensada se vocÍ possuir";
 		mes "o Bilhete para Aeroplano.";
-		mes "Ent√£o, gostaria de embarcar?";
+		mes "Ent„o, gostaria de embarcar?";
 		next;
-		if (select("Sim:N√£o") == 1) {
+		if (select("Sim:N„o") == 1) {
 			if (countitem(7311) > 0) {
 				delitem 7311,1; //Bilhete_para_Aeroplano
 				warp "airplane_01",244,58;
@@ -35,16 +35,16 @@
 				warp "airplane_01",244,58;
 				end;
 			}
-			mes "[Funcion√°rio]";
-			mes "Sinto muito, mas voc√™ n√£o";
+			mes "[Funcion·rio]";
+			mes "Sinto muito, mas vocÍ n„o";
 			mes "possui 1,200 zeny para pagar";
 			mes "a taxa de embarque.";
 			close;
 		}
 	}
-	mes "[Funcion√°rio]";
+	mes "[Funcion·rio]";
 	mes "Obrigado e pofavor";
 	mes "volte sempre.";
-	mes "Tenha um √≥timo dia~";
+	mes "Tenha um Ûtimo dia~";
 	close;
 }
