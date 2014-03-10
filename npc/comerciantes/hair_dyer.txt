@@ -17,47 +17,47 @@
 
 prt_in,243,168,4	script	Jovovich	4_F_02,{
 	mes "[Hairdresser Jovovich]";
-	mes "Welcome~!";
-	mes "How may I help you?";
+	mes "Sejam Bem Vindos~!";
+	mes "Como posso ajudá-lo?";
 	next;
 	mes "[Hairdresser Jovovich]";
-	if (Sex) mes "Oh, no! Your hair is damaged. It seems as if you may need professional treatment. Come sit over here, please. Come.";
+	if (Sex) mes "Oh, não! O teu cabelo está danificado. Parece que você pode precisar de tratamento profissional. Venha sentar-se aqui, por favor.";
 	else {
 		if (rand(20) > 11) {
-			mes "Eh!? Oh my! Oh no no no no! Your hair is sooo damaged! It's not good if you leave your hair like this.";
+			mes "Eh!? Oh meu Deus! Oh, não, não, não, não! Seu cabelo está muuuito danificado! Não é bom se você deixar seu cabelo assim.";
 			next;
 			mes "[Hairdresser Jovovich]";
-			mes "Would you let me treat your hair? Please?";
+			mes "Será que você deixe-me tratar o seu cabelo? Por favor?";
 		}
-		else mes "Wow! Your hair would be perfect once it's dyed~ How about dying your hair for a change?";
+		else mes "Opá!Seu cabelo seria perfeito uma vez que é tingido.Como sobre a morte de seu cabelo para uma mudança?";
 	}
 	next;
 	while(1) {
-		switch(select("Dye Hair:Tips and Information:Cancel")) {
+		switch(select("tintura de cabelo:Dicas e Informações:Cancelar")) {
 		case 1:
 			mes "[Hairdresser Jovovich]";
-			mes "Yes yes, good choice~";
-			mes "Well then, this is your chance for a make-over, your chance to blossom in beauty! Choose the color you would like.";
+			mes "Sim, sim, uma boa escolha~";
+			mes "Pois bem, esta é sua chance para um mudança, a sua chance de florescer em beleza! Escolha a cor que você gostaria.";
 			next;
 			while(1) {
 				if (.@choose_success == 1) {
 					mes "[Hairdresser Jovovich]";
-					mes "What do you think? Did you want a different color?";
+					mes "O que você acha? Você quer uma cor diferente?";
 					next;
-					if (select("Yes:No") == 1) {
+					if (select("Sim:Não") == 1) {
 						mes "[Hairdresser Jovovich]";
-						mes "Okay! Choose the color that you would like.";
+						mes "Ok! Escolha a cor que você gostaria.";
 						next;
 					}
 					else  {
 						mes "[Hairdresser Jovovich]";
-						mes "Hmm, I'm sort of disappointed. I wanted to do a better job. But I promise I'll do it better next time. Please come again~";
+						mes "Hmm, eu estou meio decepcionado. Eu queria fazer um trabalho melhor. Mas eu prometo que vou fazer melhor da próxima vez. Por favor, volte~";
 						close;
 					}
 				}
 
 				while(1) {
-					switch(select("Red, please.:Yellow, please.:Violet, please.:Orange, please.:Green, please.:Blue, please.:White, please.:Black, please.:Actually, I like my hair as it is.")) {
+					switch(select("Vermelho, por favor.:Amarelo, por favor.:Violeta, por favor.:Laranja, por favor.:verde, por favor.:Azul, por favor.:Branco, por favor.:Preto, por favor.: Na verdade, eu gosto do meu cabelo como ele é.")) {
 					case 1: set .@headpalette,8; break;
 					case 2: set .@headpalette,1; break;
 					case 3: set .@headpalette,2; break;
@@ -69,33 +69,33 @@ prt_in,243,168,4	script	Jovovich	4_F_02,{
 					case 9:
 						if (.@choose_success != 0) {
 							mes "[Hairdresser Jovovich]";
-							mes "You must like your hair color~";
+							mes "Você deve gostar de sua cor de cabelo~";
 							close;
 						}
 						mes "[Hairdresser Jovovich]";
-						mes "Eehh~? You're not going to dye your hair? I'm a little sad...";
+						mes "Eehh~? Você não vai pintar o cabelo? Estou um pouco triste...";
 						close;
 					}
 
 					if (.@headpalette == getlook(VAR_HEADPALETTE)) {
 						mes "[Hairdresser Jovovich]";
-						mes "Eh? But that's the hair color you already have. Please choose a different color.";
+						mes "Eh? Mas essa é a cor do cabelo que você já tem. Por favor, escolha uma cor diferente.";
 						next;
 					}
 					else {
 						switch(.@headpalette) {
-						case 1: callsub S_NoDye,976,"yellow"; break;
-						case 2: callsub S_NoDye,978,"violet"; break;
-						case 3: callsub S_NoDye,980,"orange"; break;
-						case 4: callsub S_NoDye,979,"green"; break;
-						case 5: callsub S_NoDye,981,"blue"; break;
-						case 6: callsub S_NoDye,982,"white"; break;
-						case 7: callsub S_NoDye,983,"black"; break;
-						case 8: callsub S_NoDye,975,"red"; break;
+						case 1: callsub S_NoDye,976,"Amarelo"; break;
+						case 2: callsub S_NoDye,978,"Violeta"; break;
+						case 3: callsub S_NoDye,980,"Laranja"; break;
+						case 4: callsub S_NoDye,979,"Verde"; break;
+						case 5: callsub S_NoDye,981,"Azul"; break;
+						case 6: callsub S_NoDye,982,"Branco"; break;
+						case 7: callsub S_NoDye,983,"Preto"; break;
+						case 8: callsub S_NoDye,975,"Vermelho"; break;
 						}
 						if (Zeny < 1000) {
 							mes "[Hairdresser Jovovich]";
-							mes "The fee is 1000 zeny. Do you not have enough...?";
+							mes "A taxa é de 1000 zeny. Você não tem o suficiente...?";
 							close;
 						}
 
@@ -121,24 +121,24 @@ prt_in,243,168,4	script	Jovovich	4_F_02,{
 
 		case 2:
 			mes "[Hairdresser Jovovich]";
-			mes "When you're feeling down , when you get dumped, when you want to impress someone, or even when you just want to stand out...";
+			mes "Quando você está se sentindo para baixo, quando você levar um fora, quando você quer impressionar alguém, ou mesmo quando você simplesmente quer se destacar...";
 			next;
 			mes "[Hairdresser Jovovich]";
-			mes "For that special place and time, wouldn't you want a hairstyle of your very own? As long as you have the appropriate dyestuffs, I will make your hair look wonderful.";
+			mes "Para aquele lugar especial e do tempo, que você não quer um penteado do seu próprio? Contanto que você tem os corantes apropriados, vou fazer o seu cabelo está maravilhosa.";
 			next;
 			mes "[Hairdresser Jovovich]";
-			mes "And try not to worry too much about the fee. Acquiring beauty is the same as acquiring everything. Hehe~";
+			mes "E tente não se preocupar muito com a taxa. Aquisição de beleza é o mesmo que adquirir tudo. Hehe~";
 			next;
 			mes "[Hairdresser Jovovich]";
-			mes "* Fees and Information *";
-			mes "- 1 Dyestuffs item of the color of hair you want.";
-			mes "- 1000 zeny fee.";
+			mes "* Taxas e Informações *";
+			mes "- 1 Dyestuffs ponto da cor do cabelo que você quer.";
+			mes "- 1000 taxa de zeny.";
 			break;
 
 		case 3:
 			mes "[Hairdresser Jovovich]";
-			mes "Men or Women...";
-			mes "Everyone has the right and obligation to be beautiful.";
+			mes "Homens ou Mulheres...";
+			mes "Todo mundo tem o direito e a obrigação de ser bonita.";
 			close;
 		}
 
@@ -147,7 +147,7 @@ prt_in,243,168,4	script	Jovovich	4_F_02,{
 S_NoDye:
 	if (countitem(getarg(0)) == 0) {
 		mes "[Hairdresser Jovovich]";
-		mes "Eh?! But you need the item '"+getitemname(getarg(0))+"' to dye your hair "+getarg(1)+"...";
+		mes "Eh! Mas você precisa do item '"+getitemname(getarg(0))+"' pintar o cabelo "+getarg(1)+"...";
 		close;
 	}
 	return;
@@ -157,58 +157,59 @@ S_NoDye:
 lhz_in02,100,134,3	script	Hair Dyer#lich	4_F_EINWOMAN,{
 	mes "[Rossa]";
 	if (Sex == 1) {
-		mes "Welcome, come in~";
-		mes "Oh, I see that you take";
-		mes "much better care of your";
-		mes "hair than those other boys.";
-		mes "Now would you like to dye";
-		mes "your hair another color?";
+		mes "Bem-vindo, venha!"; 
+		mes "Oh, eu vejo que você tome"; 
+		mes "muito melhor cuidado de seu"; 
+		mes "cabelo do que os outros meninos."; 
+		mes "Agora você gostaria de tingir"; 
+		mes "o cabelo de outra cor?";
+
 	}
 	else {
-		mes "Oh, wow~ Where did";
-		mes "you get your hair styled?";
-		mes "I love it! But... It would";
-		mes "be even more beautiful if";
-		mes "you dyed your hair. What";
-		mes "do you think about that?";
+		mes "Oh, opá ~ onde veio"; 
+		mes "você começa o seu cabelo?"; 
+		mes "Eu adoro isso, mas ... Seria!"; 
+		mes "ser ainda mais bonito se"; 
+		mes "você tingiu seu cabelo que."; 
+		mes "que você acha sobre isso?";
 	}
 	while (.@choose_success != 2) {
 		next;
-		switch(select("Dye Hair:Coloring Information:Cancel")) {
+		switch(select("tintura de cabelo:Dicas e Informações:Cancelar")) {
 		case 1:
 			mes "[Rossa]";
-			mes "Ho ho ho ho~";
-			mes "So which color would";
-			mes "you like to try? Something";
-			mes "vivid or dark? Sexy or cute?";
+			mes "Ho ho ho ho!"; 
+			mes "Então, qual cor seria"; 
+			mes "Você gostaria de tentar algo?"; 
+			mes "vivas ou escura sexy ou bonito?";
 			next;
 			while (.@choose_success != 2) {
 				if (.@choose_success == 1) {
 					mes "[Rossa]";
-					mes "Ooh, I like this color!";
-					mes "But would you like to";
-					mes "try a different one?";
+					mes "Ooh, eu gosto dessa cor!"; 
+					mes "Mas você gostaria de"; 
+					mes "tentar um diferente?";
 					next;
-					switch(select("Yes:No")) {
+					switch(select("Sim:Não")) {
 					case 1:
 						mes "[Rossa]";
-						mes "Please select";
-						mes "another color~";
+						mes "Por favor, selecione"; 
+						mes "outra cor";
 						next;
 						break;
 					case 2:
 						mes "[Rossa]";
-						mes "An excellent choice~";
-						mes "Alright then, thank you";
-						mes "for using my service and";
-						mes "I hope you come by again!";
+						mes "Uma excelente escolha!"; 
+						mes "Tudo bem então, obrigado"; 
+						mes "para usar o meu serviço e"; 
+						mes "Espero que você passar por aqui de novo!";
 						close2;
 						set .@choose_success,2;
 						break;
 					}
 				}
 				while (.@choose_success != 2) {
-					switch(select("Red, please.:Yellow, please.:Purple, please.:Orange, please.:Green, please.:Blue, please.:White, please.:Dark Brown, please.:I like my hair color.")) {
+					switch(select("Vermelho, por favor.:Amarelo, por favor.:Violeta, por favor.:Laranja, por favor.:verde, por favor.:Azul, por favor.:Branco, por favor.:Preto, por favor.: Na verdade, eu gosto do meu cabelo como ele é.")) {
 					case 1:
 						set .@headpalette,8;
 						break;
@@ -236,20 +237,20 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	4_F_EINWOMAN,{
 					case 9:
 						if (.@choose_success != 0) {
 							mes "[Rossa]";
-							mes "Are you sure?";
-							mes "Alright then, you";
-							mes "know what's best for";
-							mes "your beauty and to tell";
-							mes "the truth, I agree with you~";
+							mes "Tem certeza?"; 
+							mes "Tudo bem então, você"; 
+							mes "saber o que é melhor para"; 
+							mes "a sua beleza e lhe dizer"; 
+							mes "a verdade, eu concordo com você";
 							close2;
 							set .@choose_success,2;
 						}
 						else {
 							mes "[Rossa]";
-							mes "Oh, I see. Still, I can't";
-							mes "help but feel so disappointed.";
-							mes "You'd look so good if you dyed";
-							mes "your hair a different color~";
+							mes "Oh, eu vejo Mesmo assim, eu não posso."; 
+							mes "ajuda, mas me sinto tão desapontado."; 
+							mes "Você ficaria tão bom se você tingido"; 
+							mes "o seu cabelo de uma cor diferente";
 							close2;
 							set .@choose_success,2;
 						}
@@ -257,104 +258,104 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	4_F_EINWOMAN,{
 					}
 					if (getlook(VAR_HEADPALETTE) == .@headpalette) {
 						mes "[Rossa]";
-						mes "Hmm, your hair color";
-						mes "is still fine, so there's";
-						mes "no need to dye it the same";
-						mes "color again, if that's what";
-						mes "you're worried about.";
+						mes "Hmm, sua cor de cabelo"; 
+						mes "ainda está bem, então não há"; 
+						mes "não há necessidade de tingi-lo da mesma"; 
+						mes "cor de novo, se é isso o que"; 
+						mes "você está preocupado.";
+
 						next;
 					}
 					else {
 						if ((.@headpalette == 8) && (countitem(975) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Scarlet Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,"; 
+							mes "mas eu não posso pintar o"; 
+							mes "cabelo se você não trouxe"; 
+							mes "Corantes Scarlet com você ...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 1) && (countitem(976) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Lemon Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,"; 
+							mes "mas eu não posso pintar o"; 
+							mes "cabelo se você não trouxe"; 
+							mes "Corantes Limão com você ...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 2) && (countitem(981) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Violet Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,"; 
+							mes "mas eu não posso pintar o"; 
+							mes "cabelo se você não trouxe"; 
+							mes "Corantes violetas com você...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 3) && (countitem(980) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Orange Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,"; 
+							mes "mas eu não posso pintar o"; 
+							mes "cabelo se você não trouxe"; 
+							mes "Corantes alaranjadas com você...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 4) && (countitem(979) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Darkgreen Dyestuffs";
-							mes "with you. Would you come";
-							mes "back after you get some?";
+							mes "Oh, Sinto muito querida,"; 
+							mes "mas eu não posso pintar o"; 
+							mes "Seu cabelo, se você não trouxe"; 
+							mes "Corantes verde Escuro"; 
+							mes "Com você que você viria"; 
+							mes "de volta depois que você começa um pouco?";
+
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 5) && (countitem(978) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Cobaltblue Dyestuffs";
-							mes "with you. Would you come";
-							mes "back after you get some?";
+						mes "Oh, Sinto muito querida,";
+							mes "mas eu não posso pintar o";
+							mes "Seu cabelo, se você não trouxe";
+							mes "Corantes Azul Colbato com você...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 6) && (countitem(982) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "White Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,";
+							mes "mas eu não posso pintar o";
+							mes "Seu cabelo, se você não trouxe";
+							mes "Corantes brancos com você...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 7) && (countitem(983) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Black Dyestuffs with you...";
+							mes "Oh, Sinto muito querida,";
+							mes "mas eu não posso pintar o";
+							mes "Seu cabelo, se você não trouxe";
+							mes "Corantes pretos com você...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						if (Zeny < 1000) {
 							mes "[Rossa]";
-							mes "Oh, I'm so sorry dear,";
-							mes "but my service fee is";
-							mes "1,000 zeny. Did you forget";
-							mes "to bring your money with you?";
+							mes "Oh, Sinto muito querida,";
+							mes "mas a minha taxa de serviço é";
+							mes "1.000 zeny. Você se esqueceu";
+							mes "de trazer o seu dinheiro com você?";
 							close2;
 							set .@choose_success,2;
 							break;
@@ -377,29 +378,29 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	4_F_EINWOMAN,{
 			break;
 		case 2:
 			mes "[Rossa]";
-			mes "When you're feeling";
-			mes "down, when you just want";
-			mes "to look nice for the one you";
-			mes "love, or when you just want";
-			mes "a different look, why don't";
-			mes "you dye your hair?";
+			mes "Quando você está sentindo"; 
+			mes "para baixo, quando você quer apenas"; 
+			mes "uma boa aparência"; 
+			mes "ou quando você quer apenas"; 
+			mes "um olhar diferente"; 
+			mes "você quer tingir seu cabelo?";
 			next;
 			mes "[Rossa]";
-			mes "All you need is one";
-			mes "Dyestuffs item of the";
-			mes "color that you want to";
-			mes "dye your hair, as well as";
-			mes "a 1,000 zeny service fee.";
-			mes "I'm here for your beauty needs~";
+			mes "Tudo que você precisa é de um"; 
+			mes "Item de corantes de"; 
+			mes "cor que você quiser"; 
+			mes "pintar o cabelo, assim como"; 
+			mes "uma taxa de serviço 1.000 zeny."; 
+			mes "Estou aqui para as suas necessidades de beleza";
 			break;
 		case 3:
 			mes "[Rossa]";
-			mes "You know, when you";
-			mes "put some effort into";
-			mes "your appearance, you'll";
-			mes "not only look better, but";
-			mes "you'll feel better about";
-			mes "yourself. Makes sense, right?";
+			mes "Você sabe, quando você"; 
+			mes "colocar algum esforço em"; 
+			mes "sua aparência, você vai"; 
+			mes "não só olhar melhor, mas"; 
+			mes "você vai se sentir melhor sobre"; 
+			mes "si mesmo. Faz sentido, certo?";
 			close;
 		}
 	}
