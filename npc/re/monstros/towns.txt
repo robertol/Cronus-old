@@ -1,27 +1,28 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Town Monster Spawn Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Euphy
-//===== Current Version: =====================================
-//= 1.0
-//===== Description: =========================================
+//===== Versão Atual: =====================================
+//= 1.1
+//===== Descrição: =========================================
 //= Spawns monsters in towns.
 //===== Additional Comments: =================================
 //= 1.0 First version, Renewal spawns.
+//= 1.1 Traduzido [BOO]
 //============================================================
 
 //==================================================
-// Brasilis, Strange Hydras
+// Brasilis, Hidras
 //==================================================
-brasilis,283,88,6,6	monster	Strange Hydra	2081,5,5000,0,0
-brasilis,284,104,6,6	monster	Strange Hydra	2081,4,5000,0,0
-brasilis,215,80,6,6	monster	Strange Hydra	2081,4,5000,0,0
-brasilis,96,50,8,8	monster	Strange Hydra	2081,5,5000,0,0
+brasilis,283,88,6,6	monster	Hidra	2081,5,5000,0,0
+brasilis,284,104,6,6	monster	Hidra	2081,4,5000,0,0
+brasilis,215,80,6,6	monster	Hidra	2081,4,5000,0,0
+brasilis,96,50,8,8	monster	Hidra	2081,5,5000,0,0
 
 //==================================================
 // Alberta Ship, Swapping the Deck
 //==================================================
-alb_ship,0,0,0,0	monster	Strange Mouse	2057,25,0,0,0
+alb_ship,0,0,0,0	monster	Rainha Scaraba	2057,25,0,0,0
 
 //==================================================
 // Prontera, Training Dummy Area
