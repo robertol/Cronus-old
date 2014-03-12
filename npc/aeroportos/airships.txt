@@ -756,7 +756,7 @@ airplane_01,250,58,2	script	Assist. do Aeroplano#airplane01	1_F_02,{
 	}
 }
 
-airplane_01,50,66,5	script	AMercador de Maçãs#air01	4_M_04,{
+airplane_01,50,66,5	script	Mercador de Maçãs#air01	4_M_04,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Wait a minute !! -";
 		mes "- Currently you're carrying -";

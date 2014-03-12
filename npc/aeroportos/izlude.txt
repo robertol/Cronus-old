@@ -16,7 +16,7 @@
 	mes "saíra em vôo com destinos à";
 	mes "Juno e Rachel?";
 	next;
-	if (select("Ebarcar no dirigível para Juno/Rachel.:Cancelar.") == 1) {
+	if (select("Embarcar no dirigível para Juno/Rachel.:Cancelar.") == 1) {
 		mes "[Funcionário]";
 		mes "A taxa de embarque é de";
 		mes "1,200 zeny. No entanto, esta";
