@@ -16,12 +16,12 @@
 
 // Hair Dresser Veronica
 // ============================================================
-alberta_in,55,142,7	script	Hair Dresser	4_F_02,{
+alberta_in,55,142,7	script	Cabeleleira	4_F_02,{
 	mes "[Veronica]";
 	mes "Bem-Vindo ao Veronicas Salão de Beleza.";
 	mes "Como posso lhe ajudar?";
 	next;
-	switch(select("Olhar estilos de cabelo.:Mudar estilo de Cabelo.:Terminar conversa.")) {
+	switch(select("Ver estilos de cabelo.:Mudar estilo de Cabelo.:Terminar conversa.")) {
 	case 1:
 		mes "[Veronica]";
 		mes "Nós temos um total de 19 estilos, do número 1 ao 19.";
