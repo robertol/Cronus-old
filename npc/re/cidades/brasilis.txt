@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Cidade de Brasilis
 //===== Por: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: =====================================
 //= 1.4
-//===== Descri√ß√£o: ========================================= 
+//===== DescriÁ„o: ========================================= 
 //= [Aegis Conversion]
 //= Scrip da Cidade de Brasilis
-//===== Coment√°rios Adicionais: ================================= 
+//===== Coment·rios Adicionais: ================================= 
 //= 1.0 First version. Transportation and Basic NPCs.
 //= 1.1 Fixed Zeny not being removed for payment. [Kisuka]
 //= 1.2 Updated dialog, added Ice Cream Maker. [L0ne_W0lf]
@@ -16,16 +16,16 @@
 //============================================================ 
 
 /* Pre-Renewal coordenadas: alberta,247,115,3 */
-alberta,246,82,3	script	Crewman#bra2	100,{
+alberta,246,82,3	script	Crewman#bra2	4W_SAILOR,{
 	mes "[Crewman]";
-	mes "Ei, voc√™ j√° ouviu falar de um lugar chamado Brasilis?";
-	mes "√â uma cidade tropical que √© t√£o quente quanto o deserto, entretanto bastante chuvosa. √â um lugar muito misterioso.";
+	mes "Ei, vocÍ j· ouviu falar de um lugar chamado Brasilis?";
+	mes "… uma cidade tropical que È t„o quente quanto o deserto, entretanto bastante chuvosa. … um lugar muito misterioso.";
 	next;
 	mes "[Crewman]";
-	mes "Recentemente, encontramos uma nova rota oce√¢nica para chegar l√° f√°cilmente!";
-	mes "A viagem custa a bagatela de 10,000 zeny! Ent√£o, gostaria de embarcar?";
+	mes "Recentemente, encontramos uma nova rota oce‚nica para chegar l· f·cilmente!";
+	mes "A viagem custa a bagatela de 10,000 zeny! Ent„o, gostaria de embarcar?";
 	next;
-	switch(select("Leve-me at√© Brasilis!:Ficarei aqui.")) {
+	switch(select("Leve-me atÈ Brasilis!:Ficarei aqui.")) {
 	case 1:
 		if (Zeny > 9999) {
 			mes "[Crewman]";
@@ -42,16 +42,16 @@ alberta,246,82,3	script	Crewman#bra2	100,{
 		}
 	case 2:
 		mes "[Crewman]";
-		mes "Bom, se mudar de ideia, diga-me. Estarei sempre √† disposi√ß√£o.";
+		mes "Bom, se mudar de ideia, diga-me. Estarei sempre ‡ disposiÁ„o.";
 		close;
 	}
 }
 
-brasilis,316,57,3	script	Crewman#bra1	100,{
+brasilis,316,57,3	script	Crewman#bra1	4W_SAILOR,{
 	mes "[Crewman]";
-	mes "Meu navio est√° partindo de volta para Alberta, gostaria de se juntar a n√≥s?";
+	mes "Meu navio est· partindo de volta para Alberta, gostaria de se juntar a nÛs?";
 	next;
-	switch(select("Voltar para Alberta.:Ainda n√£o~.")) {
+	switch(select("Voltar para Alberta.:Ainda n„o~.")) {
 	case 1:
 		mes "[Crewman]";
 		mes "Sinto falta do meu lar.";
@@ -63,53 +63,53 @@ brasilis,316,57,3	script	Crewman#bra1	100,{
 		end;
 	case 2:
 		mes "[Crewman]";
-		mes "Ok, v√° se preparar. Nos veremos quando retornar.";
+		mes "Ok, v· se preparar. Nos veremos quando retornar.";
 		close;
 	}
 }
 
-brasilis,155,165,3	script	Poste Sinalizador#bra1	858,{
+brasilis,155,165,3	script	Poste Sinalizador#bra1	4_BULLETIN_BOARD2,{
 	mes ":: Museu de Arte ::";
 	close;
 }
 
-brasilis,195,231,3	script	Poste Sinalizador#bra2	858,{
+brasilis,195,231,3	script	Poste Sinalizador#bra2	4_BULLETIN_BOARD2,{
 	mes ":: Monumento de Verass ::";
 	close;
 }
 
-brasilis,240,247,3	script	Poste Sinalizador#bra3	858,{
+brasilis,240,247,3	script	Poste Sinalizador#bra3	4_BULLETIN_BOARD2,{
 	mes ":: Mercado ::";
 	mes " ";
-	mes "- Para suas Po√ß√µes e Armamento -";
+	mes "- Para suas PoÁıes e Armamento -";
 	close;
 }
 
-brasilis,303,309,3	script	Poste Sinalizador#bra4	858,{
+brasilis,303,309,3	script	Poste Sinalizador#bra4	4_BULLETIN_BOARD2,{
 	mes ":: Corda da Selva ::";
 	mes "";
-	mes "- N√£o recomendado para pessoas card√≠acas -";
+	mes "- N„o recomendado para pessoas cardÌacas -";
 	close;
 }
 
-brasilis,278,137,3	script	Poste Sinalizador#bra5	858,{
+brasilis,278,137,3	script	Poste Sinalizador#bra5	4_BULLETIN_BOARD2,{
 	mes ":: Hotel de Brasilis ::";
 	close;
 }
 
-brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
+brasilis,137,77,5	script	Vendedor de Sorvetes	4_M_03,{
 	mes "[Vendedor de Sorvetes]";
 	mes "Venha~venha~";
-	mes "Sorvete √© o aperitivo perfeito para um dia quente~";
+	mes "Sorvete È o aperitivo perfeito para um dia quente~";
 	mes "Custa somente ^3355FF100 Zeny^000000~";
 	mes "Sorvetes~";
 	mes "Peguem seus sorvetes!";
 	next;
-	switch(select("D√™-me um!:Sorvete?:Cancelar.")) {
+	switch(select("DÍ-me um!:Sorvete?:Cancelar.")) {
 	case 1:
 		mes "[Vendedor de Sorvetes]";
-		mes "J√° que h√° muitas pessoas querendo um delicioso sorvete, voc√™ poder√° comprar apenas 5 de cada vez.";
-		mes "Ent√£o, quantos ir√° querer?";
+		mes "J· que h· muitas pessoas querendo um delicioso sorvete, vocÍ poder· comprar apenas 5 de cada vez.";
+		mes "Ent„o, quantos ir· querer?";
 		next;
 		while(1) {
 			input .@input; //,1,5;
@@ -122,8 +122,8 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 			else if ((.@input < 0) || (.@input > 5)) {
 				mes "[Vendedor de Sorvetes]";
 				mes "Uau.";
-				mes "Voc√™ pediu demais.";
-				mes "Se comer mais que 5, poder√° ter uma indigest√£o. Muita calma nessa hora.";
+				mes "VocÍ pediu demais.";
+				mes "Se comer mais que 5, poder· ter uma indigest„o. Muita calma nessa hora.";
 				next;
 			}
 			else
@@ -132,13 +132,13 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 		set .@icecream_hap,.@input*100;
 		if (Zeny < .@icecream_hap) {
 			mes "[Vendedor de Sorvetes]";
-			mes "Cara~! Voc√™ n√£o tem dinheiro suficiente.";
-			mes "S√£o somente ^3355FF100 Zeny^000000~ S√©rio!";
+			mes "Cara~! VocÍ n„o tem dinheiro suficiente.";
+			mes "S„o somente ^3355FF100 Zeny^000000~ SÈrio!";
 			close;
 		}
 		if (!checkweight(536,.@input)) {
 			mes "[Vendedor de Sorvetes]";
-			mes "Parece que voc√™ carrega muitas coisas.";
+			mes "Parece que vocÍ carrega muitas coisas.";
 			mes "Alivie um pouco sua bagagem antes de comprar isto.";
 			close;
 		}
@@ -147,19 +147,19 @@ brasilis,137,77,5	script	Vendedor de Sorvetes	85,{
 		close;
 	case 2:
 		mes "[Vendedor de Sorvetes]";
-		mes "'Sorvete √©...";
-		mes "Espera.. Voc√™ n√£o sabe..";
-		mes "O que √© um sorvete?";
+		mes "'Sorvete È...";
+		mes "Espera.. VocÍ n„o sabe..";
+		mes "O que È um sorvete?";
 		mes "Em que caverna..";
-		mes "Voc√™ t√™m vivido?";
+		mes "VocÍ tÍm vivido?";
 		next;
 		mes "[Vendedor de Sorvetes]";
-		mes "N√£o vou nem come√ßar a dizer o quanto isso √© esquisito.";
-		mes "De qualquer forma, pegue seu sorvete bem aqui enquanto est√° bom e geladinho.";
+		mes "N„o vou nem comeÁar a dizer o quanto isso È esquisito.";
+		mes "De qualquer forma, pegue seu sorvete bem aqui enquanto est· bom e geladinho.";
 		close;
 	case 3:
 		mes "[Vendedor de Sorvetes]";
-		mes "N√£o perca a chance de tomar o melhor sorvete do mundo~!";
+		mes "N„o perca a chance de tomar o melhor sorvete do mundo~!";
 		close;
 	}
 }

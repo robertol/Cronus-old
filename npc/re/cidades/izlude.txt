@@ -1,25 +1,26 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Izlude Town Renewal
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Masao
-//===== Current Version: =====================================
-//= 1.2
+//===== Versão Atual: =====================================
+//= 1.2a
 //===== Description: =========================================
 //= [Official Conversion]
 //= Izlude town NPCs.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version. Still missing many new NPCs and their dialogues. [Masao]
 //= 1.1 Updated to match the official script. [Euphy]
 //= 1.2 Added Channel Warper and Izlude duplicates. [Euphy]
+//= 1.2a Traduzido [BOO]
 //============================================================
 
 // Izlude
 //============================================================
-izlude,197,205,1	duplicate(Sailor_izlude)	Sailor#izlude	4W_SAILOR
-izlude_a,197,205,1	duplicate(Sailor_izlude)	Sailor#izlude_a	4W_SAILOR
-izlude_b,197,205,1	duplicate(Sailor_izlude)	Sailor#izlude_b	4W_SAILOR
-izlude_c,197,205,1	duplicate(Sailor_izlude)	Sailor#izlude_c	4W_SAILOR
-izlude_d,197,205,1	duplicate(Sailor_izlude)	Sailor#izlude_d	4W_SAILOR
+izlude,197,205,1	duplicate(Sailor_izlude)	Marinheiro#izlude	4W_SAILOR
+izlude_a,197,205,1	duplicate(Sailor_izlude)	Marinheiro#izlude_a	4W_SAILOR
+izlude_b,197,205,1	duplicate(Sailor_izlude)	Marinheiro#izlude_b	4W_SAILOR
+izlude_c,197,205,1	duplicate(Sailor_izlude)	Marinheiro#izlude_c	4W_SAILOR
+izlude_d,197,205,1	duplicate(Sailor_izlude)	Marinheiro#izlude_d	4W_SAILOR
 
 izlude,71,92,2	duplicate(Bonne_izlude)	Bonne#izlude	4_F_01
 izlude_a,71,92,2	duplicate(Bonne_izlude)	Bonne#izlude_a	4_F_01
@@ -63,33 +64,33 @@ izlude_b,55,159,2	duplicate(Cebalis_izlude)	Cebalis#izlude_b	4W_M_02
 izlude_c,55,159,2	duplicate(Cebalis_izlude)	Cebalis#izlude_c	4W_M_02
 izlude_d,55,159,2	duplicate(Cebalis_izlude)	Cebalis#izlude_d	4W_M_02
 
-izlude,165,156,2	duplicate(Soldier_izlude)	Soldier#izlude	8W_SOLDIER
-izlude_a,165,156,2	duplicate(Soldier_izlude)	Soldier#izlude_a	8W_SOLDIER
-izlude_b,165,156,2	duplicate(Soldier_izlude)	Soldier#izlude_b	8W_SOLDIER
-izlude_c,165,156,2	duplicate(Soldier_izlude)	Soldier#izlude_c	8W_SOLDIER
-izlude_d,165,156,2	duplicate(Soldier_izlude)	Soldier#izlude_d	8W_SOLDIER
+izlude,165,156,2	duplicate(Soldier_izlude)	Soldado#izlude	8W_SOLDIER
+izlude_a,165,156,2	duplicate(Soldier_izlude)	Soldado#izlude_a	8W_SOLDIER
+izlude_b,165,156,2	duplicate(Soldier_izlude)	Soldado#izlude_b	8W_SOLDIER
+izlude_c,165,156,2	duplicate(Soldier_izlude)	Soldado#izlude_c	8W_SOLDIER
+izlude_d,165,156,2	duplicate(Soldier_izlude)	Soldado#izlude_d	8W_SOLDIER
 
 -	script	::Guard_izlude	-1,{
-	mes "[Izlude Guard]";
-	mes "Welcome to Izlude.";
+	mes "[Guarda de Izlude]";
+	mes "Bem Vindo a Izlude.";
 	close;
 }
-prt_fild08,350,219,4	duplicate(Guard_izlude)	Guard#izlude	8W_SOLDIER
-prt_fild08a,350,219,4	duplicate(Guard_izlude)	Guard#izlude_a	8W_SOLDIER
-prt_fild08b,350,219,4	duplicate(Guard_izlude)	Guard#izlude_b	8W_SOLDIER
-prt_fild08c,350,219,4	duplicate(Guard_izlude)	Guard#izlude_c	8W_SOLDIER
-prt_fild08d,350,219,4	duplicate(Guard_izlude)	Guard#izlude_d	8W_SOLDIER
+prt_fild08,350,219,4	duplicate(Guard_izlude)	Guarda#izlude	8W_SOLDIER
+prt_fild08a,350,219,4	duplicate(Guard_izlude)	Guarda#izlude_a	8W_SOLDIER
+prt_fild08b,350,219,4	duplicate(Guard_izlude)	Guarda#izlude_b	8W_SOLDIER
+prt_fild08c,350,219,4	duplicate(Guard_izlude)	Guarda#izlude_c	8W_SOLDIER
+prt_fild08d,350,219,4	duplicate(Guard_izlude)	Guarda#izlude_d	8W_SOLDIER
 
 // Channel Warper
 //============================================================
 function	script	F_IzludeChannel	{
-	mes "[Izlude Copy Warper]";
-	mes "Izlude is a verly lively place is it not?";
-	mes "I am here to help make Izlude feel more smooth!";
-	mes "I can send you to another copy of Izlude.";
-	mes "Do you want to go to another copy?";
+	mes "[Teleporte Cópia de Izlude]";
+	mes "Izlude é um lugar muito animado, não é?";
+	mes "Estou aqui para ajudar a tornar Izlude mais tranquila!";
+	mes "Eu posso lhe enviar para outra cópia de Izlude.";
+	mes "Você quer ir para outra cópia?";
 	next;
-	set .@i, select(getarg(0)+":Never mind");
+	set .@i, select(getarg(0)+":Não Importa");
 	if (.@i < 6) {
 		setarray .@maps$[1],"izlude","izlude_a","izlude_b","izlude_c","izlude_d";
 		savepoint .@maps$[.@i],128,98;
@@ -98,8 +99,8 @@ function	script	F_IzludeChannel	{
 	}
 	close;
 }
-izlude,122,105,5	script	Izlude Copy Warper	1_M_WIZARD,{ callfunc "F_IzludeChannel",":Go to copy 2:Go to copy 3:Go to copy 4:Go to copy 5"; }
-izlude_a,122,105,5	script	Izlude Copy Warper#_a	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1::Go to copy 3:Go to copy 4:Go to copy 5"; }
-izlude_b,122,105,5	script	Izlude Copy Warper#_b	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Go to copy 2::Go to copy 4:Go to copy 5"; }
-izlude_c,122,105,5	script	Izlude Copy Warper#_c	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Go to copy 2:Go to copy 3::Go to copy 5"; }
-izlude_d,122,105,5	script	Izlude Copy Warper#_d	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Go to copy 2:Go to copy 3:Go to copy 4:"; }
+izlude,122,105,5	script	Telep. Cópia de Izlude	1_M_WIZARD,{ callfunc "F_IzludeChannel",":Ir para Cópia 2:Ir para Cópia 3:Ir para Cópia 4:Ir para Cópia 5"; }
+izlude_a,122,105,5	script	Telep. Cópia de Izlude#_a	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1::Ir para Cópia 3:Ir para Cópia 4:Ir para Cópia 5"; }
+izlude_b,122,105,5	script	Telep. Cópia de Izlude#_b	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Ir para Cópia 2::Ir para Cópia 4:Ir para Cópia 5"; }
+izlude_c,122,105,5	script	Telep. Cópia de Izlude#_c	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Ir para Cópia 2:Ir para Cópia 3::Ir para Cópia 5"; }
+izlude_d,122,105,5	script	Telep. Cópia de Izlude#_d	1_M_WIZARD,{ callfunc "F_IzludeChannel","Go to copy 1:Ir para Cópia 2:Ir para Cópia 3:Ir para Cópia 4:"; }
