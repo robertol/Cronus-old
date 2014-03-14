@@ -685,11 +685,11 @@ prt_church,100,128,4	script	Bispo#w	1_M_PASTOR,{
 										//Call Wedding effect
 										wedding;
 										//Dá o anel para a Noiva, e muda o espirito de casamento.
-										sc_start SC_Wedding,3600000000,1;
+										sc_start SC_Wedding,3600000,1;
 										getitem 2635,1; //Bride_Ring
 										//Dá o anel ao Noivo, e muda o espirito de casamento.
 										attachrid(getcharid(3,$@wed_groom$));
-										sc_start SC_Wedding,3600000000,1;
+										sc_start SC_Wedding,3600000,1;
 										getitem 2634,1; //Bridegroom_Ring
 										detachrid;
 										//Switch Script progression back to Bride
