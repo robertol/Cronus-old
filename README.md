@@ -32,8 +32,8 @@ Equipe de Desenvolvimento
 - Portalcake » Amanda Gonçalo
 
 ### Desenvolvedores
-- BOO			- José Filho
-- KyukE			- Thiago Gomes
-- Jota Gois		- José Goís
+- BOO			       -  José Filho
+- KyukE		    	 -  Thiago Gomes
+- sreskimo/Eski	 -  Alexandre Firmino
 - Zephyrus
 - Shermie
