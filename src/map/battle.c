@@ -1818,7 +1818,7 @@ int battle_calc_skillratio(int attack_type, struct block_list *src, struct block
 					skillratio += 30 * skill_lv;
 					break;
 				case AS_SONICBLOW:
-					skillratio += (300 + 40 * skill_lv)/8;
+					skillratio += 300 + 40 * skill_lv;
 					break;
 				case TF_SPRINKLESAND:
 					skillratio += 30;
