@@ -1,0 +1,20 @@
+//===== Cronus Script ===========================================
+//= Negociadores de Projéteis
+//===== Por =====================================================
+//= Euphy
+//===== Versão ==================================================
+//= 1.2
+//===== Descrição ===============================================
+//= Negociadores de Projéteis.
+//===== Comentários =============================================
+//= 1.0 First version, Renewal duplicates.
+//= 1.1 Added Izlude duplicates. [Euphy]
+//= 1.2 Traduções. [Evanio]
+//===============================================================
+
+que_ng,187,156,3	duplicate(bdt)	Vendedor de Projéteis#f	4_M_04
+izlude,77,104,3	duplicate(bdt)	Vendedor de Projéteis#g	4_M_04	//Oficial: (74,106) -> na água
+izlude_a,77,104,3	duplicate(bdt)	Vendedor de Projéteis#a	4_M_04
+izlude_b,77,104,3	duplicate(bdt)	Vendedor de Projéteis#b	4_M_04
+izlude_c,77,104,3	duplicate(bdt)	Vendedor de Projéteis#c	4_M_04
+izlude_d,77,104,3	duplicate(bdt)	Vendedor de Projéteis#d	4_M_04
