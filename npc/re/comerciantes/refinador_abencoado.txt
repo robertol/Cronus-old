@@ -1,0 +1,172 @@
+//===== Cronus Script ===========================================
+//= Refinador Abençoado
+//===== Por: ====================================================
+//= Euphy
+//===== Versão Atual: ===========================================
+//= 1.1
+//===== Descrição: ==============================================
+// = [Conversão Oficial] 
+// = Refinadores que usam Omni-Oridecon para refinar o equipamento. 
+// = Em caso de falha, o equipamento não é destruído. 
+// = A Taxa é idêntica ao dos minérios enriquecidos. 
+// = - "Ferreiro DISTER" apenas refina à partir de 6 ~ 12. 
+// = NOTA: Este NPC está desativado nos servidores oficiais.
+//===== Comentários Adicionais: =================================
+//= 1.0 First version. [Euphy]
+//= 1.1 Tradução [Evanio]
+//===============================================================
+
+-	script	::BlacksmithDister	-1,{
+	disable_items;
+	mes "[Ferreiro Dister]";
+	mes "Nessa sociedade altamente competitiva, temos que procurar a diferença, para sobreviver!";
+	mes "Eu refino somente itens do +6 ao +12.";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Eu preciso de ^ff9999Omni-Oridecon Arma^000000 para armas, e ^ff9999Omni-Oridecon Armadura^000000 para armaduras.";
+	mes "Refinamentos que não forem bem sucedidos ^FF0000não irão quebrar ou reduzir o nível e refinamento^000000.";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Que tal? Você quer refinar?";
+	next;
+	setarray .@position$[1],"Cabeça","Corpo","Mão esquerda","Mão direita","Capa","Calçados","Acessório 1","Acessório 2","Cabeça 2","Cabeça 3";
+	set .@menu$,"";
+	for(set .@i,1; .@i<=10; set .@i,.@i+1)
+		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Unequipped]")+":";
+	set .@part, select(.@menu$);
+	if (!getequipisequiped(.@part)) {
+		mes "[Ferreiro Dister]";
+		switch(.@part) {
+		case 1:
+			mes "Eu sou um Ferreiro, não um Cabeleleiro.";
+			break;
+		case 2:
+			mes "Com meu martelo, vou fazer você uma estrela do céu.";
+			break;
+		case 3:
+		case 4:
+			mes "Fazer mãos artificiais não é minha especialidade.";
+			break;
+		case 5:
+			mes "Traga-me o item para que eu possa refiná-lo!";
+			break;
+		case 6:
+			mes "De onde vem esse cheiro estranho?";
+			break;
+		case 7:
+		case 8:
+			mes "Isso é um acessório?";
+			break;
+		case 9:
+			mes "O que você quer que eu refine?";
+			break;
+		case 10:
+			mes "Huh? O que você quer que eu faça?";
+			break;
+		}
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[Ferreiro Dister]";
+		mes "Este item não pode ser refinado.";
+		close;
+	}
+	set .@equip_refine, getequiprefinerycnt(.@part);
+	if (.@equip_refine < 6 || .@equip_refine > 12) {
+		mes "[Ferreiro Dister]";
+		mes "Este equipamento foi refinado para "+.@equip_refine+". Eu só trabalho com itens com o refino +6 ao +12!";
+		close;
+	}
+	set .@equip_lv, getequipweaponlv(.@part);
+	switch(.@equip_lv) {
+	default:
+	case 0:
+		set .@price,20000;
+		set .@material,6439; //Unbreakable_Def
+		set .@type$,"Armadura";
+		break;
+	case 1:
+		set .@price,1000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 2:
+		set .@price,2000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 3:
+		set .@price,20000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 4:
+		set .@price,40000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	}
+	set .@ore$,"^ff9999Omni-Oridecon "+.@type$+"^000000";
+	mes "[Ferreiro Dister]";
+	mes "Essa "+.@type$+" foi refinada para "+.@equip_refine+". Para refiná-la, eu preciso de "+.@ore$+" e uma taxa de"+(.@price/1000)+",000 zeny.";
+	mes "Você deseja continuar?";
+	next;
+	if(select("Sim:Não") == 2) {
+		mes "[Ferreiro Dister]";
+		mes "Eu estou ocupado, não brinque comigo!";
+		close;
+	}
+	if (getequippercentrefinery(.@part) < 100) {
+		mes "[Ferreiro Dister]";
+		mes "Essa "+.@type$+" já foi refinada muitas vezes. Embora não irá desaparecer em caso de falha, o "+.@ore$+" irá desaparecer!";
+		next;
+		mes "[Ferreiro Dister]";
+		mes "Certo, a taxa de refinamento não será devolvida! Você quer continuar?";
+		next;
+		if(select("Sim:Não") == 2) {
+			mes "[Ferreiro Dister]";
+			mes "Bom. Eu ficaria triste se o refinamento fosse um fracasso.";
+			close;
+		}
+	}
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Ferreiro Dister]";
+		mes "Materiais insuficientes.";
+		mes "Para refinar uma "+((.@equip_lv)?"arma nível "+.@equip_lv+"":"armadura")+", Eu preciso de "+.@ore$+" e "+(.@price/1000)+",000 zeny de taxa para refinamento.";
+		close;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+	mes "[Ferreiro Dister]";
+	mes "Tac! Tac! Tac!";
+	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+		specialeffect EF_BLESSING;
+		successrefitem .@part;
+		next;
+		mes "[Ferreiro Dister]";
+		mes "Hahahahahaha!!!";
+		next;
+		mes "[Ferreiro Dister]";
+		mes "O refinamento foi um sucesso~ Hahaha!";
+		close;
+	}
+	specialeffect EF_CURSEATTACK;
+	specialeffect2 EF_SUI_EXPLOSION;
+	next;
+	emotion (!rand(5))?e_ag:e_omg;
+	mes "[Ferreiro Dister]";
+	mes "Oh meu Deus!!!!";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Oh! Apesar de ter sido abençoado pelo "+.@ore$+" para conservar o equipamento...";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Meu humor piora quando eu falho!!";
+	close;
+}
+prt_in,52,56,3	duplicate(BlacksmithDister)	Ferreiro Dister#prt	4_M_DWARF
+payon,148,172,3	duplicate(BlacksmithDister)	Ferreiro Dister#pay	4_M_DWARF
+alberta_in,20,56,3	duplicate(BlacksmithDister)	Ferreiro Dister#alb	4_M_DWARF
+yuno_in01,175,18,3	duplicate(BlacksmithDister)	Ferreiro Dister#yuno	4_M_DWARF
+ein_in01,26,82,3	duplicate(BlacksmithDister)	Ferreiro Dister#ein	4_M_DWARF
+lhz_in02,280,15,3	duplicate(BlacksmithDister)	Ferreiro Dister#lhz	4_M_DWARF

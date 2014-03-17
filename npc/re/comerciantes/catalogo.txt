@@ -1,25 +1,26 @@
-//===== Hercules Script ======================================
-//= Catalog Magician
-//===== By: ==================================================
+//===== Cronus Script ===========================================
+//= Catálogo Mágico
+//===== Por: ====================================================
 //= skyiing, Scriptor
-//===== Current Version: =====================================
-//= 1.1
-//===== Description: =========================================
+//===== Versão Atual: ===========================================
+//= 1.2
+//===== Descrição: ==============================================
 //= [Official Conversion]
 //= Catalogs allow players to easily search for items in-game,
 //= and to buy/sell directly from the catalog interface.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Moved from root directory. [Euphy]
 //= 1.1 Updated dialogue. [Euphy]
-//============================================================
+//= 1.2 Tradução [Evanio]
+//===============================================================
 
-moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
+moc_para01,22,16,5	script	Catálogo Mágico#catal01	4_M_BIBI,{
 	if (!checkweight(1301,3)) {
-		mes "- You have too many items. Please make space. -";
+		mes "- Você tem muitos itens, por favor, esvazie seu inventário. -";
 		close;
 	}
 	set .@ticket_cost, 200;
-	mes "[Catalog Magician]";
+	mes "[Catálogo Mágico]";
 	mes "Look... the Magic Academy";
 	mes "in Geffen is now directly";
 	mes "selling the brand new";
@@ -30,7 +31,7 @@ moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
 	mes "He seems too busy";
 	mes "to look at you.";
 	next;
-	mes "[Catalog Magician]";
+	mes "[Catálogo Mágico]";
 	mes "A brand new catalog";
 	mes "has just come out!";
 	mes "You can check";
@@ -38,20 +39,20 @@ moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
 	mes "and what items are on sale";
 	mes "from the vendor.";
 	next;
-	mes "[Catalog Magician]";
+	mes "[Catálogo Mágico]";
 	mes "The ^007777Universal Catalog Silver^000000";
 	mes "costs only 200z!";
 	mes "You can buy up to 50 pieces at once!";
 	next;
 	switch(select("Buy a ^007777Universal Catalog Silver^000000:I don't need it!:You don't look like a vendor!")) {
 	case 1:
-		mes "[Catalog Magician]";
+		mes "[Catálogo Mágico]";
 		mes "You... want all 50 pieces?";
 		mes "Or how many do you need?";
 		next;
 		while (1) {
 			input .@input;
-			mes "[Catalog Magician]";
+			mes "[Catálogo Mágico]";
 			if (.@input == 0) {
 				mes "The trade has been stopped!";
 				mes "I don't know what to do next...";
@@ -78,7 +79,7 @@ moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
 		getitem 12580,.@input; //Vending_Search_Scroll
 		close;
 	case 2:
-		mes "[Catalog Magician]";
+		mes "[Catálogo Mágico]";
 		mes "Argh... you really need this";
 		mes "item... Do you want me to";
 		mes "explain again? I don't know";
@@ -87,7 +88,7 @@ moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
 		emotion e_swt2,1;
 		close;
 	case 3:
-		mes "[Catalog Magician]";
+		mes "[Catálogo Mágico]";
 		mes "My real job is a magician.";
 		mes "I was going to ask the merchant";
 		mes "guild to sell them, but they were";
@@ -95,7 +96,7 @@ moc_para01,22,16,5	script	Catalog Magician#catal01	4_M_BIBI,{
 		mes "into broom sales. That's why";
 		mes "I'm selling these by myself.";
 		next;
-		mes "[Catalog Magician]";
+		mes "[Catálogo Mágico]";
 		mes "There are many adventurers";
 		mes "here who come and go.";
 		mes "I'm pretty sure that I can sell to all of them soon.";
