@@ -10,6 +10,7 @@
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
 //= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
 //= 1.2 Partially rewrote Script. [Masao]
+//= 1.3 Tradução [Shermie]
 //============================================================
 
 // Guild Flags (Outside Castle)
@@ -19,25 +20,24 @@
 	set .@GID, GetCastleData("aldeg_cas01",1);
 
 	if (.@GID == 0) {
-		mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
+		mes "[ Decreto do Reino de Rune-Midgard ]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Conforme a ordem do Reino de Rune-Midgard,";
+		mes "declaro que não há nenhum";
+		mes "dono formal deste castelo.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Se o seu Clã conseguir";
+		mes "passar por todos os desafios";
+		mes "e destruír o Emperium deste castelo,";
+		mes "você será nomeado como o dono deste castelo.";
 		close;
 	}
 	if (getcharid(2) == .@GID) {
 		mes "[ Echoing Voice ]";
-		mes "Brave ones...";
-		mes "Do you wish to return to your honorable place?";
+		mes "Bravo guerreiro...";
+		mes "Você quer retornar ao seu honorável lugar?";
 		next;
-		if(select("Return to the guild castle.:Quit.") == 1) {
+		if (select("Voltar ao castelo do seu Clã:Cancelar") == 1) {
 			close2;
 			if (getcharid(2) == GetCastleData("aldeg_cas01",1)) {
 				warp "aldeg_cas01",218,170;
@@ -47,16 +47,16 @@
 		}
 		close;
 	}
-	mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
-	mes " ";
-	mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-	mes "we approve that this place is in";
-	mes "the private prossession of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild.";
-	mes " ";
-	mes "2. The guild Master of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild is";
-	mes "^ff0000"+GetGuildMaster(.@GID)+"^000000";
-	mes "If there is anyone who objects to this,";
-	mes "prove your strength and honor with a steel blade in your hand.";
+	mes "[ Decreto do Reino de Rune-Midgard ]";
+		mes " ";
+		mes "1. Conforme o Pacto do Reino de Rune-Midgard,";
+		mes "declaro que este castelo pertence";
+		mes "ao Clã ^ff0000" + GetGuildName(.@GID) + "^000000.";
+		mes " ";
+		mes "2. O Líder do Clã ^ff0000"+ GetGuildName(.@GID) + "^000000 se chama";
+		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000.";
+		mes "Se alguém se opõe a este decreto";
+		mes "que prove sua força e honra com uma espada em suas mãos.";
 	close;
 
 OnRecvCastleA01:
@@ -115,9 +115,9 @@ aldeg_cas01,218,175,0	duplicate(cm)	Alfredo#aldeg_cas01	1_M_JOBTESTER
 aldeg_cas01,123,223,0	script	#lever_A01	HIDDEN_NPC,{
 
 	mes " ";
-	mes "There's a small lever. Will you pull it?";
+	mes "Existe uma pequena alavanca. Deseja puxá-la?";
 	next;
-	if(select("Pull.:Do not.") == 1) {
+	if(select("Puxar:Não puxar") == 1) {
 		close2;
 		warp "aldeg_cas01",218,176;
 		end;
