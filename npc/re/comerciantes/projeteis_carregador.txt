@@ -1,0 +1,20 @@
+//===== Cronus Script ===========================================
+//= Magazine Dealers
+//===== Por: ====================================================
+//= Euphy
+//===== Versão Atual: ===========================================
+//= 1.2
+//===== Descrição: ==============================================
+//= Turns bullets into magazines/packs.
+//===== Comentários Adicionais: =================================
+//= 1.0 First version, Renewal duplicates.
+//= 1.1 Added Izlude duplicates. [Euphy]
+//= 1.2 Tradução [Evanio]
+//===============================================================
+
+que_ng,187,149,3	duplicate(mdk)	Carregador de Projéteis#f	4_M_01
+izlude,74,104,3	duplicate(mdk)	Carregador de Projéteis#g	4_M_01
+izlude_a,74,104,3	duplicate(mdk)	Carregador de Projéteis#a	4_M_01
+izlude_b,74,104,3	duplicate(mdk)	Carregador de Projéteis#b	4_M_01
+izlude_c,74,104,3	duplicate(mdk)	Carregador de Projéteis#c	4_M_01
+izlude_d,74,104,3	duplicate(mdk)	Carregador de Projéteis#d	4_M_01

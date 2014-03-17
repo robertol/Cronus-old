@@ -1,0 +1,118 @@
+//===== Cronus Script ===========================================
+//= Loja de Alquimista
+//===== Por: ====================================================
+//= rAthena Dev Team
+//===== Versão Atual: ===========================================
+//= 1.1
+//===== Descrição: ==============================================
+//= [Conversação Oficial]
+//= Mercador de Manuais e Materiais para Alquimistas.
+//===== Comentários Adicionais: =================================
+//= 1.0 Split Geneticist shop from main file. [Euphy]
+//=     Updated dialogue to match the official script.
+//= 1.1 Tradução [Evanio]
+//===============================================================
+
+alde_alche,31,186,3	script	Vendedor de Livros#alde	4_M_ALCHE_D,{
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Bem-vindo.";
+	mes "Estou aqui vendendo";
+	mes "^0000FFlivros de criação especiais^000000 para Genéticos.";
+	next;
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Os Genéticos tem algumas habilidades";
+	mes "que necessitam de livros de criação para ativa-las.";
+	next;
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Quanto mais livros de criação você tiver,";
+	mes "mais habilidades você poderá usar.";
+	next;
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Por favor, entenda que";
+	mes "eu me especializei na venda desses livros especiais e";
+	mes "eu ^FF0000não vendo outros itens^000000.";
+	next;
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Gostaria de dar uma olhada em meus livros de criação?";
+	next;
+	if(select("Com certeza.:Não.") == 2) {
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Obrigado por visitar minha loja.";
+		mes "Tenha uma boa jornada.";
+		close;
+	}
+	if (checkweight(1201,1) == 0) {
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Desculpe, mas seu inventário está muito cheio.";
+		mes "Tente esvazia-lo primeiro.";
+		close;
+	}
+	if (MaxWeight - Weight < 2500) {
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Por favor, esvazie seu inventário primeiro.";
+		close;
+	}
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Ok, então, aqui está a lista de livros artesanais disponíveis";
+	next;
+	switch(select("[Livro de Bombas de Maçã] 100,000 zeny:[Livro de Bombas de Abacaxi] 100,000 zeny:[Livro de Bombas de Coco] 100,000 zeny:[Livro de Bombas de Melão] 100,000 zeny:[Livro de Bombas de Banana] 100,000 zeny:[Livro de Genética Vegetal] 100,000 zeny:[Livro de Farmacologia] 100,000 zeny:[Livro de Culinária Avançada] 100,000 zeny:[Como Aumentar sua Força] 100,000 zeny:[Como Aumentar sua Energia] 100,000 zeny:Fechar")){
+	case 1: set .@item,6279; break;
+	case 2: set .@item,6280; break;
+	case 3: set .@item,6281; break;
+	case 4: set .@item,6282; break;
+	case 5: set .@item,6283; break;
+	case 6: set .@item,6284; break;
+	case 7: set .@item,6285; break;
+	case 8: set .@item,11022; break;
+	case 9: set .@item,11023; break;
+	case 10: set .@item,11024; break;
+	case 11:
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Obrigado por seu patrocínio.";
+		mes "Volte sempre.";
+		close;
+	}
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "^0000FF["+getitemname(.@item)+"] custa";
+	mes "100,000 zeny.";
+	mes "Você gostaria de compra-lo?";
+	next;
+	input .@amount;
+	if (.@amount == 0) {
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Gostaria de ver alguns livros diferentes?";
+		close;
+	}
+	if (.@amount < 1 || .@amount > 99 ){
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Você não pode comprar mais que 100 ao mesmo tempo.";
+		close;
+	}
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Você escolheu "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 para ser comprado.";
+	mes "Você gostaria de continuar?";
+	next;
+	if (select("Yes:No") == 1) {
+		set .@total, .@amount * 100000;
+		if (Zeny < .@total) {
+			mes "[Vendedor de Livros de Alquímia]";
+			mes "Desculpe, mas você não possui dinheiro suficiente.";
+			close;
+		}
+		if (checkweight(.@item,.@amount) == 0){
+			mes "[Vendedor de Livros de Alquímia]";
+			mes "Parece que você não pode carregar tudo.";
+			mes "Por favor, confira o espaço no seu inventário.";
+			close;
+		}
+		mes "[Vendedor de Livros de Alquímia]";
+		mes "Obrigado pelo seu patrocínio.";
+		set Zeny,Zeny - .@total;
+		getitem .@item,.@amount;
+		close;
+	}
+	mes "[Vendedor de Livros de Alquímia]";
+	mes "Por favor, tome seu tempo";
+	mes "antes de tomar sua decisão.";
+	close;
+}

@@ -1,0 +1,197 @@
+//===== Cronus Script ===========================================
+//= Refinador Avançado
+//===== Por: ====================================================
+//= Euphy
+//===== Versão Atual: ===========================================
+//= 1.0
+//===== Descrição: ==============================================
+// = [Conversão Oficial] 
+// = Refinador que utiliza minérios enriquecidos para aumentar o sucesso de refinamento.
+// = Depois de uma conversa com Doddler, tem sido estabelecido que 
+// = Refinador avançado funciona de forma semelhante ao item "Bubble Gum". 
+// = A porcentagem de sucesso não é "aumentada" no entanto, se ele falhar 
+// = Você ganha uma segunda tentativa. Isto tenta duas vezes ao mesmo tempo, 
+// = Efetivamente dando-lhe uma "re-rolagem" em sua tentativa.
+//===== Comentários Adicionais: =================================
+// = 1.0 Added Malangdo Refiner "Holink". [Euphy]
+// = 1.1 Tradução [Evanio]
+//===============================================================
+
+malangdo,221,174,6	script	Holink#mal_cash	4_CAT_ADV1,{
+	disable_items;
+	mes "[Holink]";
+	mes "Eu sou o Miau~ Ferreiro Holink~";
+	mes "Mestre de refinamento, Holink~";
+	mes "Eu sou o gato especial Holink que aprendi em Morroc~";
+	mes "Minha filha está tão orgulhosa de mim, Holink~";
+	mes "O que temos Holink~ para refinar hoje?";
+	next;
+	setarray .@position$[1],"Cabeça","Corpo","Mão esquerda","Mão direita","Capa","Calçados","Acessório 1","Acessório 2","Cabeça 2","Cabeça 3";
+	set .@menu$,"";
+	for(set .@i,1; .@i<=10; set .@i,.@i+1)
+		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Empty]")+":";
+	set .@part, select(.@menu$);
+	if (!getequipisequiped(.@part)) {
+		mes "[Holink]";
+		switch(.@part) {
+		case 1:
+			mes "Meu professor Aragam falou Miau~";
+			mes "Não há cura para estupidez...";
+			break;
+		case 2:
+			mes "Não há nada para ver aqui, Miau!!";
+			break;
+		case 3:
+			mes "Miau? O que você quer que eu faça com essa mão esquerda...?";
+			break;
+		case 4:
+			mes "Miau? O que você quer que eu faça com essa mão direita...?";
+			break;
+		case 5:
+			mes "Miau? Você não tem nada aí.";
+			break;
+		case 6:
+			mes "Kyang~! Não mexa com meu olfato sensível, Miau~.";
+			break;
+		case 7:
+		case 8:
+			mes "Miau? Isto é um acessório?";
+			break;
+		case 9:
+		case 10:
+			mes "Miau? Você está falando sobre outras partes da cabeça, Miau?~";
+			break;
+		}
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[Holink]";
+		mes "Até mesmo Aragam não pode refinar uma coisa dessa, Miau.";
+		close;
+	}
+	if (getequiprefinerycnt(.@part) >= 10) {
+		mes "[Holink]";
+		mes "Miau~ Refinamento perfeito. Será que Aragam já fez isso, Miau?~";
+		close;
+	}
+	mes "[Holink]";
+	switch(getequipweaponlv(.@part)) {
+	default:
+	case 0: // Armadura
+		set .@price,15000;
+		set .@material,7619; //Enriched_Elunium
+		set .@type$,"armor";
+		mes "Você escolheu uma armadura, Miau~";
+		break;
+	case 1: // Arma Nível 1
+		set .@price,500;
+		set .@material,7620; //Enriched_Oridecon
+		set .@type$,"weapon";
+		mes "Uma arma nível 1...?";
+		break;
+	case 2: // Arma Nível 2
+		set .@price,2000;
+		set .@material,7620; //Enriched_Oridecon
+		set .@type$,"weapon";
+		mes "Miau, uma arma nível 2...?";
+		break;
+	case 3: // Arma Nível 3
+		set .@price,20000;
+		set .@material,7620; //Enriched_Oridecon
+		set .@type$,"weapon";
+		mes "Miau Miau~~ Uma arma nível 3~~";
+		break;
+	case 4: // Arma Nível 4
+		set .@price,50000;
+		set .@material,7620; //Enriched_Oridecon
+		set .@type$,"weapon";
+		mes "Mi-Miau!... Uma arma nível 4...!";
+		mes "Eu só vi duas vezes equanto";
+		mes "aprendia com Aragam... Mi-Miau!!";
+		break;
+	}
+	mes "Você precisa de ^ff9999"+getitemname(.@material)+"^000000 e ^ff9999"+.@price+"^000000 Zeny para este refinamento, Miau~";
+	mes "Quer continuar, Miau?~";
+	next;
+	if(select("Sim!!:Não!!") == 2) {
+		mes "[Holink]";
+		mes "Kyack!!";
+		mes "Você não acredita no mestre refinador Holink, Miau?~";
+		close;
+	}
+	if (getequippercentrefinery(.@part) < 100) {
+		mes "[Holink]";
+		mes "Miau!!";
+		if (.@type$ == "armor")
+			mes "Esta armadura já foi refinada muitas vezes, Miau.";
+		else {
+			mes "Perigo. Perigo~";
+			mes "Esta arma já foi muito refinada, Miau~";
+			next;
+			mes "[Holink]";
+		}
+		mes "Há uma boa chance de falha se você continuar";
+		mes "no processo de aperfeiçoamento, Miau.";
+		next;
+		mes "[Holink]";
+		mes "Uma vez que "+.@type$+" é quebrado, você";
+		mes "nunca poderá usá-lo novamente, Miau. Lembrando que... todas as";
+		mes "^ff0000cartas e encantamentos irão desaparecer^000000.";
+		mes "Você ainda quer tentar, Miau~?";
+		next;
+		if(select("Sim, eu sei!!:Esqueça isso!!") == 2) {
+			mes "[Holink]";
+			mes "Miau! Sábia escolha, Miau.";
+			mes "Mas!!";
+			mes "Eu não estou feliz em vê-lo duvidar do mestre refinador Holink, Miau~";
+			close;
+		}
+	}
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Holink]";
+		mes "Você não tem os ingredientes.";
+		mes "Você precisa de ^ff9999"+getitemname(.@material)+"^000000 e ^ff9999"+.@price+"^000000 Zeny, Miau~";
+		mes "Vá busca-los, Miau~";
+		close;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+		successrefitem .@part;
+		mes "[Holink]";
+		mes "Eu~ Eu~ Miau! Diversão, diversão refinando~";
+		next;
+		emotion e_kis;
+		mes "[Holink]";
+		mes "Perfeito!! Perfeito, Miau!!";
+		mes "Eu sou o discípulo do mago refinador Aragam~";
+		mes "Holink!!";
+		mes "Mais um dia de sucesso, Miau!!";
+		close;
+	}
+	failedrefitem .@part;
+	mes "[Holink]";
+	mes "Meo~ Miau~ Kyaaak!!";
+	next;
+	switch(rand(1,5)) {
+		case 1: emotion e_sob; break;
+		case 2: emotion e_swt2; break;
+		case 3: emotion e_wah; break;
+		case 4: emotion e_hmm; break;
+		case 5: emotion e_lv2; break;
+	}
+	mes "[Holink]";
+	mes "Miau!! Aaaaakk~~!!!!";
+	mes "Kyaaak!! Eu falhei, Miau!!";
+	next;
+	mes "[Holink]";
+	mes "......";
+	mes "......";
+	mes "Todos~ Tudo~ Quebrou, Miau...";
+	next;
+	mes "[Holink]";
+	mes "Miau.... Mestre Aragam disse uma vez,";
+	mes "aprenda com as suas falhas...";
+	mes "Humano, esse fracasso será o início do seu sucesso no futuro.";
+	close;
+}
