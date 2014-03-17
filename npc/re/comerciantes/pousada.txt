@@ -1,0 +1,53 @@
+//===== Cronus Script ===========================================
+//= Inn Npcs
+//===== Por: ====================================================
+//= c, L0ne_W0lf
+//===== Versão Atual: ===========================================
+//= 1.2
+//===== Descrição: ==============================================
+//= Npcs da Pousada, Salva e Cura
+//===== Comentários Adicionais: =================================
+//= 1.0 Added Brasilis inn receptionist. [c]
+//= 1.1 Updated dialog for Brasilis inn. [L0ne_W0lf]
+//= 1.2 Tradução [Evanio]
+//===============================================================
+
+// Brasilis
+//===============================================================
+bra_in01,27,24,3	script	Recepcionista#bra1	4_F_BRZ_WOMAN,{
+	mes "[Recepcionista]";
+	mes "Bem-vindo ao maravilhoso Hotel de Brasilis.";
+	next;
+	switch(select("Salvar:Descansar -5000 zeny")) {
+	case 1:
+		mes "[Recepcionista]";
+		mes "Você deseja salvar aqui no Hotel de Brasilis?";
+		next;
+		switch(select("Não, agradeço.:Claro.")) {
+		case 1:
+			mes "[Recepcionista]";
+			mes "Ok então, aproveite a sua estadia.";
+			close;
+		case 2:
+			mes "[Recepcionista]";
+			mes "Seu ponto de retorno foi salvo aqui no Hotel. Eu espero que você aproveite sua estadia aqui em Brasilis.";
+			savepoint "bra_in01",144,69;
+			close;
+		}
+	case 2:
+		if (Zeny > 4999) {
+			mes "[Recepcionista]";
+			mes "Eu irei lhe mostrar um ótimo quarto.";
+			close2;
+			set Zeny, Zeny-5000;
+			percentheal 100,100;
+			warp "bra_in01",144,69;
+			end;
+		}
+		else {
+			mes "[Recepcionista]";
+			mes "Desculpe, mas a taxa de serviço é 5,000 zeny por noite.";
+			close;
+		}
+	}
+}

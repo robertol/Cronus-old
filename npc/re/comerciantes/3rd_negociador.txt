@@ -1,0 +1,281 @@
+//===== Cronus Script ===========================================
+//= Vendedor de itens 3rd
+//===== Por: ====================================================
+//= Masao, Mercurial
+//===== Versão Atual: ===========================================
+//= 1.6
+//===== Descrição: ==============================================
+//= [Conversação Oficial]
+//= Vendas de itens relacionados as Classes 3rd:
+//= - Ervas Envenenadas, Runas, Ervas Raras, Pontos
+//===== Comentários Adicionais: =================================
+//= 1.0 First Version.
+//= 1.1 Optimized Poison Herb Salesman NPC
+//= 1.2 Optimized and standardized. [Euphy]
+//= 1.3 Added Malangdo/Mora Points NPC. [Euphy]
+//= 1.4 Updated to match the official scripts. [Euphy]
+//= 1.5 Added Izlude duplicates. [Euphy]
+//= 1.6 Tradução [Evanio]
+//===============================================================
+
+// Mercadoras de Ervas Venenosas (Sicário)
+//===============================================================
+-	script	::phs	-1,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "- Espere um minuto! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, volte novamente -";
+		mes "- apos deixar alguns itens no Armazém. -";
+		close;
+	}
+	mes "[Vendedora de Ervas]";
+	mes "Eu sou uma vendedora profissional";
+	mes "de Ervas Envenenadas.";
+	mes "O preço de qualquer Erva é 4,000 zeny.";
+	mes "Qual delas você deseja?";
+	next;
+	set .@i, select("Nerium:Lantana:Makulrata:Celatom:Scoforia:Amoena:Kit de Veneno:Cancelar")-1;
+	mes "[Vendedora de Ervas]";
+	if (.@i < 6) {
+		set .@item,7932+.@i;
+		set .@price,4000;
+		set .@max,2000;
+		set .@max$,"2,000";
+	} else if (.@i == 6) {
+		set .@item,7931;
+		set .@price,5000;
+		set .@max,500;
+		set .@max$,"500";
+		mes "O Kit de Veneno custa 5,000 zeny.";
+	} else {
+		mes "Tudo bem. Volte sempre~!";
+		close;
+	}
+	mes "Quantas você quer?";
+	mes "Você pode comprar no máximo '"+.@max+"'.";
+	mes "Digite '0' se desejar cancelar.";
+	next;
+	input .@amount;
+	if (.@amount == 0) {
+		mes "[Vendedora de Ervas]";
+		mes "Você cancelou a negociação.";
+		close;
+	}
+	if (.@amount > .@max) {
+		mes "[Vendedora de Ervas]";
+		mes "O número deve ser inferior a "+.@max$+"!";
+		close;
+	}
+	set .@total, .@amount * .@price;
+	if (Zeny < .@total) {
+		mes "[Vendedora de Ervas]";
+		mes "Você não tem dinheiro suficiente.";
+		mes "Verifique quanto dinheiro você tem primeiro.";
+		close;
+	}
+	set Zeny, Zeny - .@total;
+	getitem .@item, .@amount;
+	mes "[Vendedora de Ervas]";
+	mes "Obrigada. Volte sempre~!";
+	close;
+}
+job3_guil01,79,96,3	duplicate(phs)	Vendedora de Ervas	4_F_YUNYANG
+morocc,191,94,4	duplicate(phs)	Vendedora de Ervas#moc	4_F_YUNYANG	//Oficial: (190,96) -> na parede
+lhz_in02,16,205,4	duplicate(phs)	Vendedora de Ervas#lhz	4_F_YUNYANG
+
+// Mercadores de Runas (Cavaleiro Rúnico)
+//============================================================
+-	script	::runesale	-1,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "- Espere um minuto! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, volte novamente -";
+		mes "- apos deixar alguns itens no Armazém. -";
+		close;
+	}
+	mes "[Vendedor de Runas]";
+	mes "Eiii, você precisa de Runas?!";
+	mes "Eu vendo todos os tipos de Runas!";
+	mes "Qual você deseja?";
+	next;
+	set .@i, select("Comprar Runa Bruta Forte.:Comprar Runa Bruta Comum.");
+	mes "[Vendedor de Runas]";
+	if (.@i == 1) {
+		mes "Runa Bruta Forte!";
+		mes "Irá custar 2,500 zeny cada!";
+		set .@item,12734; //Runstone_Quality
+		set .@price,2500;
+	} else {
+		mes "Runa Bruta Comum?";
+		mes "Irá custar 1,000 zeny cada!";
+		set .@item,12737; //Runstone_Ordinary
+		set .@price,1000;
+		setarray .@rune[0],12737,1000;
+	}
+	mes "Diga-me quantas você quer,";
+	mes "e lembre-se, você só pode";
+	mes "comprar um máximo de '2000'.";
+	next;
+	input .@amount;
+	if (.@amount == 0) {
+		mes "[Vendedor de Runas]";
+		mes "Você não está comprando? Porfavor se retire!";
+		close;
+	}
+	if (.@amount > 2000) {
+		mes "[Vendedor de Runas]";
+		mes "A quantidade máxima é de 2,000!";
+		close;
+	}
+	set .@total, .@amount * .@price;
+	if (Zeny < .@total) {
+		mes "[Vendedor de Runas]";
+		mes "Zeny! Zeny!";
+		mes "Você não tem dinheiro suficiente.";
+		mes "Confira seu dinheiro primeiro.";
+		close;
+	}
+	if (!checkweight(.@item,.@amount)) {
+		mes "[Vendedor de Runas]";
+		mes "Parece que você não é capaz de carregar tudo isso.";
+		close;
+	}
+	set Zeny, Zeny - .@total;
+	getitem .@item, .@amount;
+	mes "[Vendedor de Runas]";
+	mes "Obrigado.";
+	mes "Porfavor, volte sempre~!";
+	close;
+}
+job3_rune01,90,62,3	duplicate(runesale)	Vendedor de Runas#job3	4_M_YURI
+prontera,168,228,3	duplicate(runesale)	Vendedor de Runas#prt	4_M_YURI
+
+// Mercador de Ervas Raras (Sicário)
+//============================================================
+job3_guil01,91,93,3	script	Coletor de Ervas Raras	1_M_03,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "- Espere um minuto! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, volte novamente -";
+		mes "- apos deixar alguns itens no Armazém. -";
+		close;
+	}
+	if (Class == Job_Guillotine_Cross || Class == Job_Guillotine_Cross_T || Class == Job_Baby_Cross) {
+		mes "[Coletor de Ervas Raras]";
+		mes "Eu ando ao redor do mundo e recolho ervas venenosas raras. Recentemente, comecei a lidar com uma erva chamada Izidor. Se você estiver interessado, você pode comprá-la.";
+		next;
+		set .@i, select("Como posso comprá-la?:Trocá-la por um Sangue de Animal:Trocá-la por uma Erva Amarga:Trocá-la por uma Erva Letal:Trocá-la por uma Rosa de Gelo:Trocá-la por uma Menta:Trocá-la por uma Hinalle")-2;
+		if (.@i == -1) {
+			mes "[Coletor de Ervas Raras]";
+			mes "Você pode comprá-la por 10,000 zeny e um desses itens raros: Sangue de Animal, Erva Amarga, Erva Letal, Rosa de Gelo, Menta ou Hinalle.";
+			next;
+			mes "[Coletor de Ervas Raras]";
+			mes "Por que eu peço dinheiro? Isso é apenas para pagar um pouco de respeito para um colecionador como eu. Ha ha ha ...";
+			close;
+		} else {
+			setarray .@exchange[0],702,621,631,749,605,703;
+			set .@item, .@exchange[.@i];
+			set .@price, 10000;
+
+			mes "[Coletor de Ervas Raras]";
+			mes "Quantas você precisa?";
+			mes "Você pode comprar no máximo '2000'.";
+			mes "Digite '0' se desejar cancelar.";
+			next;
+			input .@amount;
+			if (.@amount == 0) {
+				mes "[Coletor de Ervas Raras]";
+				mes "Você cancelou a negociação.";
+				close;
+			}
+			if (.@amount > 2000) {
+				mes "[Coletor de Ervas Raras]";
+				mes "O máximo que posso negociar é 2,000!";
+				close;
+			}
+			set .@total, .@amount * .@price;
+			if (countitem(.@item) < .@amount || Zeny < .@total) {
+				mes "[Coletor de Ervas Raras]";
+				mes "Opa, acho que você não tem todos os requerimentos necessários para a negociação...";
+				close;
+			}
+			mes "[Coletor de Ervas Raras]";
+			mes "Excelente. Recebi o dinheiro e o item especial.";
+			delitem .@item, .@amount;
+			set Zeny, Zeny - .@total;
+			getitem 709, .@amount; //Izidor
+			close;
+		}
+	}
+	mes "[Coletor de Ervas Raras]";
+	mes "Eu ando ao redor do mundo e recolho ervas venenosas raras. Mas eu não posso vender minhas ervas para uma pessoa como você... Ha ha ha...";
+	close;
+}
+
+// Mercadoras de Pontos (Feiticeiro)
+//============================================================
+-	script	::pss	-1,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "- Espere um minuto! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, volte novamente -";
+		mes "- apos deixar alguns itens no Armazém. -";
+		close;
+	}
+	mes "[Vendedora de Pontos]";
+	mes "Olá. Estou vendendo um catalizador chamado de ^FF0000Pontos^000000 para Feiticeiros. Qual deseja ter?";
+	next;
+	set .@i, select("Pontos Vermelhos - 200z:Pontos Verdes-limão - 200z:Pontos Índigo - 200z:Pontos Desejos Amarelos - 200z:Cancelar")-1;
+	mes "[Vendedora de Pontos]";
+	if (.@i == 4) {
+		mes "Você não encontrou o que precisava?";
+		close;
+	}
+	setarray .@itemid[0],6360,6363,6361,6362;
+	setarray .@color$[0],"Vermelho","Verde-limão","Índigo","Desejo Amarelo";
+	mes "Você escolheu Ponto "+.@color$[.@i]+".";
+	mes "Você precisa de quantos?";
+	mes "Se desejar cancelar, digite 0.";
+	next;
+	input .@amount;
+	mes "[Vendedora de Pontos]";
+	if (.@amount == 0) {
+		mes "Você cancelou a negociação.";
+		close;
+	}
+	if (Zeny < .@amount*200) {
+		mes "Você não tem dinheiro suficiente.";
+		close;
+	}
+	if (!checkweight(.@itemid[.@i],.@amount)) {
+		mes "Você não tem espaço suficiente no seu inventário para comprar essa quantidade.";
+		close;
+	}
+	set Zeny, Zeny-(.@amount*200);
+	getitem .@itemid[.@i],.@amount;
+	mes "Muito orbigada. Te vejo por aí ~!";
+	close;
+}
+gef_tower,105,172,5	duplicate(pss)	Vendedora de Pontos#Sor	8_F_GIRL
+prt_in,131,66,0	duplicate(pss)	Vendedora de Pontos#Prt	8_F_GIRL
+alberta,105,52,7	duplicate(pss)	Vendedora de Pontos#Alb	8_F_GIRL
+aldebaran,133,114,5	duplicate(pss)	Vendedora de Pontos#Ald	8_F_GIRL
+comodo,193,159,5	duplicate(pss)	Vendedora de Pontos#Cmd	8_F_GIRL
+geffen,129,49,5	duplicate(pss)	Vendedora de Pontos#Gef	8_F_GIRL
+izlude,138,163,5	duplicate(pss)	Vendedora de Pontos#Iz	8_F_GIRL	// Coordenadas antigas: izlude (135,121)
+izlude_a,138,163,5	duplicate(pss)	Vendedora de Pontos#Iza	8_F_GIRL
+izlude_b,138,163,5	duplicate(pss)	Vendedora de Pontos#Izb	8_F_GIRL
+izlude_c,138,163,5	duplicate(pss)	Vendedora de Pontos#Izc	8_F_GIRL
+izlude_d,138,163,5	duplicate(pss)	Vendedora de Pontos#Izd	8_F_GIRL
+malangdo,214,163,5	duplicate(pss)	Vendedora de Pontos#Mal	8_F_GIRL
+mora,115,118,3	duplicate(pss)	Vendedora de Pontos#Mor	8_F_GIRL
+ra_in01,256,273,3	duplicate(pss)	Vendedora de Pontos#Ra	8_F_GIRL
+veins,202,128,5	duplicate(pss)	Vendedora de Pontos#Ve	8_F_GIRL
+dicastes01,207,200,5	duplicate(pss)	Vendedora de Pontos#Di	8_F_GIRL
+manuk,261,206,3	duplicate(pss)	Vendedora de Pontos#Man	8_F_GIRL
+splendide,207,160,5	duplicate(pss)	Vendedora de Pontos#Spl	8_F_GIRL
+mid_camp,224,237,3	duplicate(pss)	Vendedora de Pontos#Mid	8_F_GIRL
