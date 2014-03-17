@@ -1,14 +1,14 @@
 //===== Cronus Script ===========================================
-//= Negociadores de Proj√©teis
+//= Negociadores de ProjÈteis
 //===== Por =====================================================
 //= Euphy
-//===== Vers√£o ==================================================
+//===== Vers„o ==================================================
 //= 1.0
-//===== Descri√ß√£o ===============================================
-//= Negociadores de Proj√©teis.
-//===== Coment√°rios =============================================
+//===== DescriÁ„o ===============================================
+//= Negociadores de ProjÈteis.
+//===== Coment·rios =============================================
 //= 1.0 First version, Renewal duplicates.
 //= 1.0b Nome traduzido (Portalcake).
 //===============================================================
 
-izlude,171,133,3	duplicate(bdt)	Vendedor de Proj√©teis#f	4_M_04
+izlude,171,133,3	duplicate(bdt)	Vendedor de ProjÈteis#f	4_M_04
