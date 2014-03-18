@@ -39,3 +39,4 @@ Equipe de Desenvolvimento
 - Zephyrus
 - Shermie
 - SynGates
+- Perfectz
