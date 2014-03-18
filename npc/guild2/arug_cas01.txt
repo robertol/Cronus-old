@@ -18,7 +18,7 @@
 -	duplicate(RL#template)	RL2#arug_cas01	-1
 -	duplicate(RL#template)	RL3#arug_cas01	-1
 
-arug_cas01,92,380,3	duplicate(Steward#template)	Mordomo#ar01	1_M_JOBTESTER
+arug_cas01,92,380,3	duplicate(Mordomo#template)	Mordomo#ar01	1_M_JOBTESTER
 arug_cas01,112,193,1	duplicate(Guardian#template)	Brace#ar01	4_M_LGTGUARD
 arug_cas01,31,362,3	duplicate(Kafra#template)	Funcionária Kafra#ar01	4_F_KAFRA1
 arug_cas01,211,234,0	duplicate(Guardian Stone#template)	1ª Runa Guardiã#ar01	CLEAR_NPC

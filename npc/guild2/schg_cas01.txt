@@ -1,11 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium SE - Himinn
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Euphy
-//===== Current Version: =====================================
-//= 1.0
-//===== Additional Comments: =================================
+//===== Versão Atual: =====================================
+//= 1.0a
+//===== Comentários Adicionais: =================================
 //= 1.0 Merged to template file.
+//= 1.0a Tradução [BOO]
 //============================================================
 
 -	duplicate(Manager#template)	Manager#schg_cas01	-1
@@ -18,16 +19,16 @@
 -	duplicate(RL#template)	RL2#schg_cas01	-1
 -	duplicate(RL#template)	RL3#schg_cas01	-1
 
-schg_cas01,247,305,3	duplicate(Steward#template)	Steward#sc01	1_M_JOBTESTER
+schg_cas01,247,305,3	duplicate(Mordomo#template)	Mordomo#sc01	1_M_JOBTESTER
 schg_cas01,123,306,3	duplicate(Guardian#template)	Ef#sc01	4_M_LGTGUARD
-schg_cas01,300,287,5	duplicate(Kafra#template)	Kafra Employee#sc01	4_F_KAFRA1
-schg_cas01,27,36,0	duplicate(Guardian Stone#template)	1st Guardian Stone#sc01	CLEAR_NPC
-schg_cas01,208,75,0	duplicate(Guardian Stone#template)	2nd Guardian Stone#sc01	CLEAR_NPC
-schg_cas01,124,52,0	duplicate(Control#template)	Control Device01#sc01	HIDDEN_NPC
-schg_cas01,128,157,0	duplicate(Control#template)	Control Device02#sc01	HIDDEN_NPC
-schg_cas01,109,247,0	duplicate(Control#template)	Control Device03#sc01	HIDDEN_NPC
+schg_cas01,300,287,5	duplicate(Kafra#template)	Funcionária Kafra#sc01	4_F_KAFRA1
+schg_cas01,27,36,0	duplicate(Guardian Stone#template)	1ª Runa Guardiã#sc01	CLEAR_NPC
+schg_cas01,208,75,0	duplicate(Guardian Stone#template)	2ª Runa Guardiã#sc01	CLEAR_NPC
+schg_cas01,124,52,0	duplicate(Control#template)	Controle01#sc01	HIDDEN_NPC
+schg_cas01,128,157,0	duplicate(Control#template)	Controle02#sc01	HIDDEN_NPC
+schg_cas01,109,247,0	duplicate(Control#template)	Controle03#sc01	HIDDEN_NPC
 schg_cas01,391,391,0	duplicate(Switch#template)	 #sch01_switch	HIDDEN_NPC
-schg_cas01,280,391,3	duplicate(Sunflower#template)	Mysterious Sunflower#01	4_BLUE_FLOWER
+schg_cas01,280,391,3	duplicate(Sunflower#template)	Girassol Misterioso#01	4_BLUE_FLOWER
 
 schg_cas01,106,302,0	script	LF-01#schg_cas01	HIDDEN_NPC,{ callfunc "LinkFlag","First Gate House",19,26,"Second Gate House",219,90; }
 schg_cas01,109,302,0	script	LF-02#schg_cas01	HIDDEN_NPC,{ callfunc "LinkFlag","Defense Area 1-1",89,43,"Defense Area 1-2",141,45; }
