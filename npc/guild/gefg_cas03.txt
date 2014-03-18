@@ -96,7 +96,7 @@ geffen,120,132,8	duplicate(InsideFlagsG3)	Ruaden#15	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-gefg_cas03,116,89,5	duplicate(guildkafra)	Kafra#gefg_cas03	4_F_KAFRA1
+gefg_cas03,116,89,5	duplicate(guildkafra)	Kafra Staff#gefg_cas03	4_F_KAFRA1
 
 // Steward
 //============================================================

@@ -100,7 +100,7 @@ aldebaran,128,97,4	duplicate(InsideFlagsA5)	Acrux#19	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-aldeg_cas05,31,190,0	duplicate(guildkafra)	Kafra#aldeg_cas05	4_F_KAFRA1
+aldeg_cas05,31,190,0	duplicate(guildkafra)	Kafra Staff#aldeg_cas05	4_F_KAFRA1
 
 // Steward
 //============================================================

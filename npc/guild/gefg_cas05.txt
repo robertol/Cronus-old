@@ -92,7 +92,7 @@ geffen,131,123,6	duplicate(InsideFlagsG5)	Arima#11	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-gefg_cas05,61,52,5	duplicate(guildkafra)	Kafra#gefg_cas05	4_F_KAFRA1
+gefg_cas05,61,52,5	duplicate(guildkafra)	Kafra Staff#gefg_cas05	4_F_KAFRA1
 
 // Steward
 //============================================================

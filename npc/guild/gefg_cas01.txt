@@ -92,7 +92,7 @@ geffen,109,123,2	duplicate(InsideFlagsG1)	Arsulf#11	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-gefg_cas01,83,47,3	duplicate(guildkafra)	Kafra#gefg_cas01	4_F_KAFRA1
+gefg_cas01,83,47,3	duplicate(guildkafra)	Kafra Staff#gefg_cas01	4_F_KAFRA1
 
 // Steward
 //============================================================
@@ -100,7 +100,7 @@ gefg_cas01,40,48,5	duplicate(cm)	Gnahcher#gefg_cas01	1_M_JOBTESTER
 
 // Treasure Room Exit
 //============================================================
-gefg_cas01,152,4_F_KAFRA1,0	script	#lever_G01	HIDDEN_NPC,{
+gefg_cas01,152,117,0	script	#lever_G01	HIDDEN_NPC,{
 
 	mes " ";
 	mes "Há uma pequena alavanca, você deseja acioná-la?";
