@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Hugel City
-//===== By: ==================================================
+//===== Por: ==================================================
 //= vicious_pucca, Poki#3, erKURITA, Munin, and everybody in the
 //= comments
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= NPC's for the City of Hugel.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Cords and Sprites are 100% Correct, but the names are not.
 //= Plus no one knows what the NPCs are talking right now :/ [Poki#3]
 //= Note: Not all the sprites were correct :P [erKURITA]

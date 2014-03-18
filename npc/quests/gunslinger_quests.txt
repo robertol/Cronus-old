@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Gunslinger quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Playtester
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Gunslinger guns and bullet quests
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Only Garrison Gun done yet [Playtester]
 //= 1.1 Added Garrison[2] [Playtester]
 //= 1.2 Added Drifter, Destroyer and Inferno [Playtester]

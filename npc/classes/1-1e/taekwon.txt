@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Taekwon Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Tsuyuki & Samuray22
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Official iRO TaeKwon Job Change Quest
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Replaced previous TK Job Quest with this one [Tsuyuki]
 //= 1.1 Rewrote to the Aegis Standars. [Samuray22]
 //= 1.2 Fixed position the npc is facing. [Kisuka]

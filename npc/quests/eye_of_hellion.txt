@@ -1,17 +1,17 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= The Eye of Hellion Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= MasterOfMuppets
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quest for getting a Nile Rose
 //= There are two versions of this quest.
 //= Version 1 (not implemented) was used on iRO as an event
 //= for its anniversary, while version 2 (this version)
 //= is the one that remained active on main servers.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //=     Tracking variable is not backwards compatable meaning
 //=     you can again repeat this quest from the start.

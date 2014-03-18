@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Einbech Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Muad_Dib
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //=
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.1  Started writing Einbech npc's. [Muad_Dib]
 //= 0.1a Conversion to eA format [MasterOfMuppets]
 //= 0.1b Added missing tabs. [Mass Zero] 0.1c more missing tabs [Lupus]

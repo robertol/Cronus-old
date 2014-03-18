@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Alchemist Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= nestor_zulueta (Fusion), converted by Darkchild
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job quest for Alchemist classes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //=     No longer uses function "F_BlockHigh"
 //= 2.6 Corrected a bug in advanced class checking. [L0ne_W0lf]

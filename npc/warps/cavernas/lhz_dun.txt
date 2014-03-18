@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Lighthalzen Dungeon Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Sara-chan (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Lighthalzen Dungeon
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Added temp restriction by Azazel [Lupus]
 //= 1.2 Optimized [Lupus]
 //=     and fixed 005 and 005a warps coords, thanks to Justin84 

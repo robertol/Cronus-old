@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Official Skill Resetter Event in Yuno (kRO & idRO)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= $ephiroth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.02
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= 2006 - Edition Skill Reset NPC
 //= 2006/11/16: 1.0 Release and fully working. [$ephiroth]
 //= 1.01 Checked, fixed typos, now uses MISC_QUEST var [Lupus]
 //= 1.02 Added missing message,comment,etc. [$ephiroth]
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Skill Reset with payment, minimum BaseLv.60 to reset skill.
 //= Each 1 BaseLv need 20.000 Zeny, so be careful to use skill.
 //============================================================

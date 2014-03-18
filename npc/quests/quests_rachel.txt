@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Rachel Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Collection of Rachel Quests 
 //= Lost Child Quest:
 //= - End of quest coincides with opening the Sanctuary.
@@ -23,7 +23,7 @@
 //= - Variable in use: Once completed MISC_QUEST bit 8192 is set
 //= - Variable in use: ra_have_donated (0 no/1 yes)
 //= - Variable in use: $rachel_donate (max 10000)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 3.0 Large reordering of Zhed, and Peace to the Arunafeltz addition. [L0ne_W0lf]
 //=     Some more numeric conversion, and some other cleanup.
 //= 3.1 Updated Ice Necklace quest, added missing checks. [L0ne_W0lf]

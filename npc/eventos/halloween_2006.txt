@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= 2006 Halloween Event
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Brainstorm
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Event 1: Redeem "Pumpkin Mojo" for pumpkin headgear.
 //= Event 2: Create "Pumpkin Pie" item.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First semi-working conversion. [Brainstorm]
 //= 1.1 Refined Brainstorm's conversion. [L0ne_W0lf]
 //= 1.1a Minor fixes. (Screwed up weight checks somehow) [L0ne_W0lf]

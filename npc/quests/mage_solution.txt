@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mage Solutions
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Traders for Morroc Solution and Payon Solution, used in
 //= the Sage skill quests and the Pre-Renewal Mage job quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Split from Pre-Renewal Mage job quest. [Zopokx]
 //============================================================
 

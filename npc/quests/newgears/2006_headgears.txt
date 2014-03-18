@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= 2006 Headgear
-//===== By: ==================================================
+//===== Por: ==================================================
 //= DiviniaRO members, cleaned by reddozen
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Censor Bar, Feather Beret, Valk. Helm, Hahoe Mask,
 //= Mythical Lion Mask, Bride Mask, Magistrate Hat and Ayam
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= NPC id's and dialog are custom, please replace
 //= 1.0a fixed typos, added missing names, more cleaned and
 //=     standartized stuff a bit [Lupus]

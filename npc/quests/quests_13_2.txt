@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Collection of episode 13.2 quests.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Cat Hand Addition. (Leads to 13.2 areas)
 //= Two Tribes
@@ -19,7 +19,7 @@
 //= - Alfheim Perfume
 //= Secret note of Bazett
 //= Yggdrasil Dungeon Floor 2 puzzle.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version
 //= 1.1 Fixed unidentified_coin -> unidentified_mineral. (bugreport:4086)
 //= 1.2 Fixed Half-buried Gem#1 not re-enabling. (bugreport:4129)

@@ -1,12 +1,12 @@
-//===== Hercules Script =======================================
+//===== Cronus Script =======================================
 //= Monster Tamers
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88, Darkchild, x[tsk]
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Cute pet quest items
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= May not have all of the Monster Tamers, but the ones here are fully working.
 //= 1.1 Fixed exploits [Lupus]
 //= 1.2 Removed Duplicates [Silent]

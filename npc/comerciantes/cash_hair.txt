@@ -4,9 +4,9 @@
 //= Kisuka
 //===== Versão Atual: ===================================== 
 //= 1.1
-//===== Description: ========================================= 
+//===== Descrição: ========================================= 
 //= Troca item de cash, New_Style_Coupon, por novos estilos de cabelo.
-//===== Additional Comments: ================================= 
+//===== Comentários Adicionais: ================================= 
 //= 1.0 First Version. [Kisuka]
 //= 1.1 Tradução e Revisão [Wilk Maia][Keoy]
 //============================================================

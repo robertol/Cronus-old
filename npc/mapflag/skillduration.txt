@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mapflag: Adjust Skill Duration.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= This mapflag allows you to control the duration of unit
 //= skills in any map.
 //= Example (1):
@@ -17,6 +17,6 @@
 //===== Disclaimer: ==========================================
 //= Be aware that some skill units have their visual effect 
 //= durations not controlled by the server (e.g. Storm Gust).
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 - Initial script.
 //============================================================

@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Guild Castles Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Al de Baran, Payon, Prontera, Geffen,
 //= and Juno Guild Castles
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Split off npc_warp.txt
 //= fixed aldg504-1 warp [Lupus]
 //= 2.0 Added Novice Guilds warps, optimized aldg408r warp [Lupus]

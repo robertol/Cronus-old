@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Rachel Sanctuary Dungeon Warp Script
 //===== By ===================================================
 //= Playtester
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points For Rachel Sanctuary Dungeon
 //===== Additional Comment: ==================================
 //= 1.1 Added $ephiroth's warps [Playtester]

@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Grade A and Grade S weapon quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Vicious_Pucca, Reddozen & MasterOfMuppets
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Grade A and Grade S weapon quests
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version, Credits goes to Vicious_Pucca for converting [MasterOfMuppets]
 //=     the quest from aegis format to eA format. Also thanks to 
 //=     reddozen for fixing bugs.

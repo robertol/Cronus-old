@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Comodo Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Comodo Town NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Not complete.
 //= 1.1 Rolled back from the wrong Kashy's fix
 //= Implemented the 'Cheese'/Stone of Awakening quest.  Re-organized stuff. [kobra_k88]

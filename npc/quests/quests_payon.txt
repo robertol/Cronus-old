@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Payon
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Pretend Murder, Ear Muffs, Oxygen, Derivuchi Cap, Helm of Angel Quests.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Helm of Angel bug fixed [Lupus]
 //= 1.2 Fixed skirt of virgin [Lupus]
 //= 1.3 Fixed exploits [Lupus]

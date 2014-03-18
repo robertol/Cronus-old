@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Party Relay Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Party Relay Quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Fixed a couple typos, npcs check area for PCs. [L0ne_W0lf]
 //= 1.2 Updated RE/Pre-RE EXP. [Euphy]

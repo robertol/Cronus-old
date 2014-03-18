@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mapflag: Jail.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= pvp: Turns on PvP mode
 //= pvp_noparty: Can't attack player in same party
 //= nobranch: No Dead Branching allowed.
@@ -13,7 +13,7 @@
 //= nosave: No saving respawn point allowed. Use SavePoint to use the
 //=                players previous savepoint, or choose one manually.
 //= noteleport: No Teleporting allowed.  No fly wings or butterfly wings.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 - Initial script.
 //============================================================
 

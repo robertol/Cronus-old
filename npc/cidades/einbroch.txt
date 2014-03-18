@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Einbroch Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Everybody mentioned in the comments
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //=
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.2 Added some NPCs [MasterOfMuppets]
 //= 0.3 Added a few npcs by reddozen [MasterOfMuppets]
 //= 0.4 Added a crappy quest, have fun guys... [MasterOfMuppets]

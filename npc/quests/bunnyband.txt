@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Bunny Band Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quest to obtain a Bunny Band headgear.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //	Changed @BUNYBAN back to BUNYBND, it should be this way.
 //	Removed duplicates. NPC is ALberta-only.

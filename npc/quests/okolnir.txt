@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Falicious Okolnir (Valfreja & Nidhoggr)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Joseph
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= God Item SE Creation script (Asprika & Brynhild)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.x Previous author: L0ne_W0lf
 //= 1.0 Merged Okolnir. [Joseph]
 //= 1.1 Some bug fixes. [Toshiro90/Euphy]

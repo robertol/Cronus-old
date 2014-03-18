@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Prontera Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Athena (1.0)
 //= Nana (1.2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Prontera
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.3 prt19 warp fix [shadow]
 //= 1.4 Added warps for the sign quest [MasterOfMuppets]
 //= 1.5 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]

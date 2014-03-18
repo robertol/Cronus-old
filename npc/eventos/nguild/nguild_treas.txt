@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium Treasure Rooms for NGuild Guild Castles
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //=
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Based off existing guild scripts.  Do not know if it is accurate.[kobra_k88]
 //= 1.2 Official treasure spawn [Lupus]
 //= 1.3 Added F_GldTreas function. (bugreport:1788) [L0ne_W0lf]

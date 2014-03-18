@@ -1,4 +1,4 @@
-// ===== Script Hércules ======================================
+// ===== Cronus Script ======================================
 // = Caçador Quest
 // ===== Por: ========================================= =========
 // = Eremes O CANIVALIZER ( Aegis ) Traduzido por YOSHIKI ( Aegis )

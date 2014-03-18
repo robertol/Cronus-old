@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Archer Class Tutorial and Job Specific Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fix up by Jukka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Archer training quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Fully working
 //= 1.1 optimized [Lupus]
 //= 1.2 fixed Weight check

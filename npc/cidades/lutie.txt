@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Lutie Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Lutie - City NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Edited some text and updated/enabled some triggers
 //=     for the quest.[kobra_k88]
 //= 1.2 Fixed exploit. Checked for Bard Job Quest compatibility [Lupus]

@@ -1,17 +1,17 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Wandering Minstrel Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Riotblade and L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Help the bard remember how his song goes.
 //===== Comments: ============================================
 //= [Official Conversion]
 //= Needs optimizing.
 //= Reconverted with iRO Dialogs.
 //= Possible NPC conflict with "Representative"
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version, needs testing. [L0ne_W0lf]
 //= 1.1 Fixed bug, optimized. Not yet final version [Lupus]
 //=

@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Crusader Job Quest
-//===== By: ==================================================
-//= Made by: Black Dragon
-//= Converted by: Shin
-//===== Current Version: =====================================
+//===== Por: ==================================================
+//= Made Por: Black Dragon
+//= Converted Por: Shin
+//===== Versão Atual: =====================================
 //= 3.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job quest for Crusader classes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.2 Updated All NPCs to the officials one [Samuray22]
 //=     -Based on the ASB 4.0 Package.
 //=-Maybe need be checked the monsters in the test 2 and 4.

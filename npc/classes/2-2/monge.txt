@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Monk Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Dino9021, Edited / Translated by Celest
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job quest for Monk classes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.2 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //=     No longer uses function "F_BlockHigh"
 //= 2.3 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]

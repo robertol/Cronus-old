@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Moscovia Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Moscovia Town Script
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version. [Kisuka]
 //= 1.1 Removed villagers (they are part of a quest). [Kisuka]
 //= 1.2 Moved Alberta NPC to pre-re/re paths. [Euphy]

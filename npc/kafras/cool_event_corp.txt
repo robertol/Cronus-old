@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Cool Event Corp. Staff
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Gepard
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Cool Event Corp. Staff (Save, Storage & Pushcart Service)
 //= in Arunafeltz Region.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version, iRO Sakray X.4 [Gepard]
 //= 1.1 Optimized, fixed a conditional bug [Lupus]
 //= 1.1a Redo back. It wasn't a bug [Lupus]

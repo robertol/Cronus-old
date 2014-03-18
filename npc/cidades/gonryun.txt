@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Kunlun Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= x[tsk], KarLaeda
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Kunlun Town Script
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //=     Moved Lost Knife mini-quest to quest file.
 //= 1.6 Moved Alberta NPC to pre-re/re paths. [Euphy]

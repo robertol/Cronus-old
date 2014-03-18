@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Dandelion's Request / Morocc Invasion quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= A Morroc quest that is no longer used.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Fixed a small bug in Dandelion's Request. [SinSloth]
 //= 1.2 Moved Dandelion's Request to its own file.
 //= 1.3 Added GM management function. [Euphy]

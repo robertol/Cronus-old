@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Prontera Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= NPCs in Prontera
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= +AntiNovice exploit fix [Lupus] 1.2 added baby novice check
 //= Spellchecked [massdriller]

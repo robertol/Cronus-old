@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Lunar New Year Event (2008)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= iRO Lunar New Year event; Year of the Rat. (2008)
 //= Kill Cramps, Taruus, and Matrins to retrieve "Rice Pouches"
 //= in return for various rice-themed foods, envelopes, and
@@ -17,7 +17,7 @@
 //= standard in kRO's data files. If you're having problems
 //= or are unsure if your client supports that sprite, an
 //= alternate NPC header has been included.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Added missing checkweights. [L0ne_W0lf]
 //============================================================

@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Umbala
-//===== By: ==================================================
+//===== Por: ==================================================
 //= sabernet09 & rAthena Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Umbalian Language Quest, Umbala Skeletal Gate Quest,
 //= Umbala Event, Create Essence/Dismantle Stone
@@ -21,7 +21,7 @@
 //= Umbala Domestic Dispute?
 //= - This quest is only avaliable if you have not done language quest.
 //= - Variables in use: um_wind, MISC_QUEST (Bit 32768)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= fixed by x[tsk], Lupus, PoW
 //= Quest completion is now registered
 //= 1.1 fixed Poporing Egg ID -> Poring Egg, fixed condition

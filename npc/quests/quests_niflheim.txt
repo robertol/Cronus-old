@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Niflheim
-//===== By: ==================================================
+//===== Por: ==================================================
 //= The rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Piano Key Ouest
 //= - Escape from Niflheim
@@ -12,7 +12,7 @@
 //= Message Delivery Quest
 //= - Deliver a message to Erious' departed wife.
 //= - Variables in use: nif_revive, MISC_QUEST (Bit 16384)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Initial release, moved Book of Devil and Piano quest
 //=     from npc/cities/niflheim.txt [Evera]
 //= 1.1 Optimized Book of Devil quest. used bit-wise var,

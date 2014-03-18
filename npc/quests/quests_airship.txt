@@ -1,17 +1,17 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Airship Related Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Samuray22
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest from the airplane to einbroch and einbech.
 //= Reward: -Free Ticket for Flyship.
 //=	    -Free System to Repair.
 //= Quest about how work the airship
 //= Reward: -Base Experience 200,000
 //=	    -Job Experience 10,000
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Beta.
 //= 1.1 Added Heart Fragment quest. [SinSloth]
 //= 1.2 Change the laboratory code text to make it easier to

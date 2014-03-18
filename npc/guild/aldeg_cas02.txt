@@ -6,7 +6,7 @@
 //= 1.3
 //===== Descrição: ===========================================
 //= NPCs referentes ao 2º Castelo de Al De baran
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
 //= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
 //= 1.2 Partially rewrote Script. [Masao]

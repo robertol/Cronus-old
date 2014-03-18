@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Assassin Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quests for skills: Venom Knife, Sonic Acceleration
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
 //============================================================

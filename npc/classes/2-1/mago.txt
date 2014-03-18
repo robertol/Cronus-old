@@ -1,4 +1,4 @@
-// ===== Script Hércules ======================================
+// ===== Cronus Script ======================================
 // = Assistente Quest
 // ===== Por: ========================================= =========
 // = ( Aegis ) Traduzido por yoshiki , convertido por kobra_k88

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Odin Temple Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= birkiczd  (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Odin Temple
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Move the Saylor from Hugel.txt here. [Poki#3]
 //=     Hako's Sprite, cords and price is official. The text is not.
 //= 1.2 Removed Duplicates [Silent]

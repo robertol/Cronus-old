@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Clothes Dyer
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Usnul
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Clothes dyer with standard palletes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= 2.1 Shortened some labels to make this script loading,
 //= Added Black+White Colors desc [Lupus]

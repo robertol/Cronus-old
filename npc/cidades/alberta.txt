@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Alberta Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= DZeroX
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Town-specific Alberta NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Converted from Aegis 10.4 [DZeroX]
 //= 1.1 Optimized, missing next, REMOVED .GATs! again [Lupus]
 //= 1.2 Implemented progression fixes provided by $ephiroth. [L0ne_W0lf]

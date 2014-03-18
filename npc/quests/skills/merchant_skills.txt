@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Merchant Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quests for skills: Crazy Uproar, Change Cart, Cart Revolution
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 1.6 Updated to latest available official file. [Masao]
 //= 1.7 Fixed JobLevel requirements. [Euphy]

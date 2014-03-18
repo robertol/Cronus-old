@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Hugel Bingo script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Hugel Bingo game
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. Please report bugs you find out. [SinSloth]
 //= 1.1 Fixed a minor bug. [SinSloth]
 //= 1.2 Added some Bingo Staff NPCs. [SinSloth]

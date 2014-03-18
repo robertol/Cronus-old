@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Gemstone Trader
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Trade various colors of gemstones for other color gemstones.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //=     Any notes pertaining to the prior trader may be found
 //=     in the cities/payon.txt

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Kiel Warp Script (Kiel Buildings)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Playtester; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for all Kiel Buildings
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Added Kiel warps thanks to Celestria [Playtester]
 //= 1.1 Added more warps thanks to Celestria [Playtester]
 //= 1.2 Added warps according to Kiel quest [Playtester]

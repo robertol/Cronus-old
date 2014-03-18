@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Splendid Field Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Warp Points for Splendide
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version.
 //= 1.1 Fixed misplaced warp. [L0ne_W0lf]
 //= 1.2 Updated warps positions. [L0ne_W0lf]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= God Item Quest - Mjolnir Seal
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest for breaking the seal of Mjolnir.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. Thanks to SinSloth for scripting it. [MasterOfMuppets]
 //= 1.1 Fixed wrong label names [Luups]
 //= 1.1a Corrected a a typo error ";;". [Samuray22]

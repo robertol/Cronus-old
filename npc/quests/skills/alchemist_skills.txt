@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Alchemist Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen, Samuray22
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quests for item: Elemental_Create_Book
 //= Quest for skill: Bioethics
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.9 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 2.0 Rescripted (and re-added) Bio Ethics quest. [L0ne_W0lf]
 //= 2.1 Fixed a Resurrection -> Homunculus Resurrection. [L0ne_W0lf]

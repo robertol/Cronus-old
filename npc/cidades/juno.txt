@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Juno City
-//===== By: ==================================================
+//===== Por: ==================================================
 //= KitsuneStarwind, kobra_k88, L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= NPCs for the City of Juno
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Added additional npcs.  Added Metto quest. [kobra_k88]
 //= Moved item quest to quest folder. Re-edited a majority of the npcs. [kobra_k88]
 //=a Removed duplicate npcs already found in the sage quest.

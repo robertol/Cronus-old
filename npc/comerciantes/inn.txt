@@ -1,11 +1,11 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Inn Npcs
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Darkchild (1.1)
 //= Playtester (1.2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.9a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Inn Npcs, Save and Heal
 //============================================================
 //= variables:
@@ -14,7 +14,7 @@
 //= arg2 - map to save at
 //= arg3, arg4 - x and y cord. to save at
 //= @cost - cost of renting a room
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Blind Effect By Kobra_k88 (Taken from his old script)
 //= I added it to all of them though [Darkchild]
 //= 1.1a Minor bug fixes and optimizations. Switched from @variables 

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Acolyte Skill Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest for skills: Holy Light
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
 //= 1.7 Updated to latest available official file. [Masao]

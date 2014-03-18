@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Assassin Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job Change quest for Assassin class.
-//===== Additional Comments: =================================
-//= 1.0 Used some dialogue from the aegis Assassin script translated By: Pgro Team (OwNaGe)
+//===== Comentários Adicionais: =================================
+//= 1.0 Used some dialogue from the aegis Assassin script translated Por: Pgro Team (OwNaGe)
 //=     Also converted the booby traps from the aegis script.[kobra_k88]
 //= 1.1 Made adjustments to ontouch npcs to work with the new "ontouch" functionality.
 //=     Fixed some duplicate npc names.  Added missing waitingroom triggers.

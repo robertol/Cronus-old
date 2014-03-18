@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Scriptt ======================================
 //= Sealed Shrine
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Seal away the Great Demon Baphomet.
-//===== Additional Comments: =================================
+//===== Comentários Adiconais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Added setquest for instance cooldown. [L0ne_W0lf]
 //= 1.2 Fixed Torch#12 not being disabled. (bugreport:4044) [L0ne_w0lf]

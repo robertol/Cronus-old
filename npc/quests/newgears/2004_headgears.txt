@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= 2004 Headgear Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Dj-Yhn
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= 2004 New Headgears. Official Quests
 //= 1) Black Cat Ears (payon 115 131)
@@ -27,7 +27,7 @@
 //=     Blue Fish
 //= 16) Kitsune Mask (pay_dun03 48 84)
 //= 17) Orc Hero Helm (in_orcs01 31 93 & 162 33)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.5 Vito'd function call for checkweight. [L0ne_W0lf]
 //= 1.6 Replaced effect numerics with constants. [L0ne_W0lf]

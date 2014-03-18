@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Sage Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quests for skills: Create Converter, Elemental Change
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.4 Rescripted to Aegis 10.3 standards. [5511]
 //= 1.5 Optimized. [Euphy]
 //============================================================
@@ -482,7 +482,7 @@ yuno_in03,176,24,3	script	Mischna	4_M_SAGE_C,{
 
 //============================================================
 // Old changelog
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 for fully working skills only [Lupus]
 //= 1.1 Added more new skill quests for more classes [Lupus]
 //= Somehow eA engine doesn't let you keep learn't skill V_V'

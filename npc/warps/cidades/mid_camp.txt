@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Another World Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Warp Points for Another World
 //= Warp points to and from fild22b and mid_camp are temporary.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version.
 //= 1.1 Fixed a small bug by brianlew, bugreport:1824 [Brainstorm]
 //= 1.2 Corrected the observatory warp portal, thanks to Ziu. [brianluau]

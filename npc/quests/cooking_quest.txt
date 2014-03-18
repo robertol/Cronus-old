@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Cooking Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Reddozen; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Official Cooking Quest (10.3)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Fixed wrong item ID, added missing ";, optimized [Lupus]
 //= 1.1a minor bugfix, thx 2 Irmin [Lupus]
 //= 1.2 Fixed exploit, some typos [Lupus]

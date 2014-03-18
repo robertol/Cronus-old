@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Moscovia Dungeon Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka, $ephiroth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Moscovia Dungeon
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Initial version [$ephiroth]
 //= 1.1, 1.2 Updated from jA [$ephiroth]
 //= 1.3 Added warp npcs. Removed place holder warps. [Kisuka]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= God Item Quest - Megingjard Seal
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest for breaking the seal of Megingjard.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. Thanks to SinSloth for scripting it. [MasterOfMuppets]
 //= 1.1 fixed exploit [Lupus]
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]

@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Ayotaya Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= MasterOfMuppets
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Ayotaya Town Script
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.7 Fixed character's anme bugs [Lupus]
 //= 1.8 Moved Alberta NPC to pre-re/re paths. [Euphy]

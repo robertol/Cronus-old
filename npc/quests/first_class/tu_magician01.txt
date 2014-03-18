@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Magician Class Tutorial and Job Specific Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fix up by Jukka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Magician training quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Fully working
 //= 1.1 Optimized [Lupus]
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]

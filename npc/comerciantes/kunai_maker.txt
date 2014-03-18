@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Kunai Merchant Kashin
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Trades a few shurikens + ninja stones for elemental kunai.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Added the npc. It uses a function that sends the item 
 //=     id of the 2 required items plus the amount. Can trade
 //=     up to 500 units (5,000 kunais) at once. [erKURITA]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mt. Mjolnir Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Nana (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Mt. Mjolnir
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 updating according to jA [Lupus]
 //= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 1.2a Corrected a broken warp point. (bugreport:497) [Samuray22]

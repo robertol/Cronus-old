@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Abyss Cave Warper
-//===== By: ==================================================
+//===== Por: ==================================================
 //= erKURITA
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warper to Abyss Cave. and warper out
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Added by Nexon [Nexon]
 //= 1.1 Removed Duplicates [Silent]
 //= 1.2 Fixed tab - missing pillar's appeared [Lupus]

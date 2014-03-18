@@ -9,7 +9,7 @@
 //===== Descrição: ========================================= 
 //= [Aegis Conversion]
 //= Trade Clover, Fluff and Jellopy for a Mr. Smile mask.
-//===== Additional Comments: ================================= 
+//===== Comentários Adicionais: ================================= 
 //= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.4a Fixed a little Typo error in duplicates. (bugreport:749) [Samuray22]
 //= 1.5 Tradução [Matheus]

@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Dungeon Teleport Service
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Evera
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Cool Event Corp NPCs vs. Kafra Dungeon Teleport Service and voting system.
 //= This is a special event on official servers where there's a
@@ -23,7 +23,7 @@
 // For Detailed information on what each varibale does, see
 // the "Vote Globalvar Girl#yuno" NPC at the end of the file.
 // Character Variable in use: lhz_vote (how many times player has voted, keeps htem from re-voting.)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Initial release [Evera]
 //= 1.1 SVN release, removed from major town (found true info after research),
 //=     put more arg(2) parameters, fixed a few bugs [Evera]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Buying Shop Scripts
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Buying Shop licenses.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [Kisuka]
 //= 1.1 Added Catalog Magician. [Euphy]
 //= 1.1a Moved Catalog Magician to Renewal path. [Euphy]

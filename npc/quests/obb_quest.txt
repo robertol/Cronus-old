@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Old Blue Box Quest
 //===== By ===================================================
 //= Celesta, Lupus
 //===== Version ==============================================
 //= 2.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 // [Official Conversion]
 //= Old Blue Box quest (?)
 //= Officially this quest gave an OBB in exhange for a the
@@ -13,7 +13,7 @@
 //= The exact purpose of this quest is undetermined, but
 //= Gravity claimed that another quest would eventually
 //= branch from this one.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.7 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.8 Added missing checkweights. [L0ne_W0lf]
 //= 1.9 Moved Morroc NPCs to Morroc Ruins. [L0ne_W0lf]

@@ -12,7 +12,7 @@
 //= Arg (1): Como muitos de cada 'getarg (0)' seta por quiver
 //= Arg (2): O custo de fazer um "getarg (0) 'quiver.
 //= Arg (3): A quiver dada pelo NPC. (Item ID)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 07/06/05 : Added 1st Version. [Muad_Dib]
 //= Converted to rAthena format by Dr.Evil
 //= added prize to quest - 500 Zeny

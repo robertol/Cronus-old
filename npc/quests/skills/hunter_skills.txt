@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Hunter Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen, Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quests for skills: Phantasmic Arrow
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 for fully working skills only [Lupus]
 //= 1.1 Added more new skill quests for more classes [Lupus]
 //=     Somehow eA engine doesn't let you keep learn't skill V_V'

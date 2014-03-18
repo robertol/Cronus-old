@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Thanatos Tower Warps
-//===== By: ==================================================
+//===== Por: ==================================================
 //= [Ishizu-chan]
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1 Beta
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Thanatos Tower
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 - First Release [Ishizu-chan]
 //= 1.1 - Added Entrance Warp Guard
 //= 1.2 - Updated warps to official and moved Entrance Guard

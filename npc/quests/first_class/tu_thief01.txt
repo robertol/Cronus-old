@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Thief Class Tutorial and Job Specific Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fix up by Jukka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Thief training quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Fully working
 //= 1.1 optimized [Lupus]
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]

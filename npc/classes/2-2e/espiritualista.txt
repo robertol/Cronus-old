@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+	//===== Cronus Script ======================================
 //= Soul Linker Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Celestria & Samuray22
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job quest for Soul Linker class.
 //= [Vars Used]
 //= SOUL_Q = Job Change Phase. (Max 4)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.2 Rescripted to Aegis 10.3 standards. [Samuray22]
 //= 1.3 Slight updates and fixes to the script. [L0ne_W0lf]
 //=     Removes the use of labels, and corrects other errors.

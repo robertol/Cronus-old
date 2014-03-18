@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Official Gonryun Power Arena
-//===== By: ==================================================
+//===== Por: ==================================================
 //= KarLaeda
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= [Official Conversion]
 //= 1.1 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 1.2 Cleaning. [Euphy]

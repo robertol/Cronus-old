@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Juno
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Metto Quest:
 //= - Not really sure exaclty what it's for. :P
@@ -17,7 +17,7 @@
 //= - Part 1: Found in Quests_Comodo.txt
 //= - Part 3: Found in Doomed_Swords.txt
 //= - Variable in use dmdswrd_Q (Max 45)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Re-did the text and re-organized the script.  Corrected some items. [kobra_k88]
 //= 1.2 Added part to Bro's for alchemist quest [Darkchild]
 //= 1.3 fixed that part of Alch Job Quest. [Lupus]

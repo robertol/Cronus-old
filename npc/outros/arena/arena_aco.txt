@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Izlude Arena Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Izlude Acolyte Battle Arena
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version.
 //= 1.1 Corrected variable typos. (bugreport:4374) [L0ne_w0lf]
 //= 1.2 Updated 'waitingroom' to support required zeny/lvl. [Kisuka]

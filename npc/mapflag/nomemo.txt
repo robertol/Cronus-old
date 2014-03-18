@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mapflag: Disable Warp Portal memory.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Prevents players from using /memo on a map.
 //= Also disables marriage warp skills.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.6a - Added up to Hugel maps. [Lupus]
 //= 1.6b - Added job_knt map. [Samuray22]
 //= 1.7 - Added all novice maps. [L0ne_W0lf]

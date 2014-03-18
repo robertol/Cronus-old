@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mercenary related NPCs
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Sells Lancer, Sword, and Archer mercenaries,
 //= along with related mercenary items.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Optimization. [Zephyrus]
 //= 1.2 Removed redundent input. [L0ne_W0lf]

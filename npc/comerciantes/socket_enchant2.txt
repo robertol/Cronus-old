@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Episode 12 Socket Enchant NPC
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Gepard
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Adds slots to selected weapons and armor.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version.
 //= 1.1 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
 //= 1.1a Added 'disable_items' command. [Euphy]

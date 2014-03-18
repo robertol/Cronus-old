@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Gonryun
-//===== By: ==================================================
+//===== Por: ==================================================
 //= KarLaeda
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Broken Sword Quest (Kept old mechanics)
 //= Lost Knife Quest
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
 //= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //=     Added Lost Knife, updated dialog for Broken Sword

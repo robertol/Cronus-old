@@ -1,12 +1,12 @@
-//===== Hercules Script =======================================
+//===== Cronus Script =======================================
 //= Prontera Arena & PvP Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Athena (any)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Prontera Arena and PvP Maps
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Split off npc_warp.txt
 //= 1.1 Fixed Prontera Arena warp [Yor]
 //= 1.2 Added addition warps for PvP Nightmare Mode maps.

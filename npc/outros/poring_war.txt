@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Poring War
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Join a team in battle between Angeling and Deviling.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [Kisuka][5511]
 //= 1.1 Fixed some typos/bugs. [CalciumKid]
 //= 1.1a Fixed Waiting rooms witht he default MAX_LEVEL [Slim]

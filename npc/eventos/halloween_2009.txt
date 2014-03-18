@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= iRO Halloween (2009)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= iRO Halloween (2009)
 //= Quest for Weird Pumpkin Hat.
 //= Exchange treats for buffs.
@@ -13,7 +13,7 @@
 //= You must enable the event items in item_db2.
 //= You must enable the event mobs in mob_db2, mob_avail, and
 //= their skills in mob_skill_db2.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [Kisuka]
 //= 1.1 Fixed even exploit, fixed mobs overlap. [Lupus]
 //============================================================

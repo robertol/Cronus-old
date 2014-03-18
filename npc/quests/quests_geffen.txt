@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Geffen
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88 & Samuray22
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Welding Mask and Headset Quests.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Fixed exploits [Lupus]
 //= 1.2 Removed Duplicates [Silent]
 //= 1.3 Updated "Welding Mask" Quest to the Official one. [Samuray22]

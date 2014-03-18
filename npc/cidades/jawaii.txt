@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Jawaii (The Lovers' Paradise) Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= jAthena (1.0)
 //= DNett123 (1.1 - 1.5)
 //= L0ne_w0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Jawaii Town NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Done By jAthena
 //= 1.1 Rough Translation [DNett123]
 //= 1.2 Started Grammer Corrections [DNett123]

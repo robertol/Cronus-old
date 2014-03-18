@@ -1,16 +1,16 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Divorcing Deviruchi
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Perkka, Scriptor, LightFighter
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Official Divorce script.
 //= Added isloggedin() check, even though Aegis doesn't do it;
 //= should be able to divorce even when the spouse is not online.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Both players should be online to get divorced
 //= Fixed menu [Lupus]
 //= 1.1 Added check if the patner's online, added effects [Lupus]

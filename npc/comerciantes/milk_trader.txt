@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Comerciante de Leite
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Trades bottles for milk
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= 1.1 Negative input bug fixed [Lupus]
 //= 1.2 Raised the price to close zeny exploit [Lupus]

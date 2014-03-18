@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Refining NPCs
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Syrus22 (1.1) dafide18 (1.4) Skotlex (1.5)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Refining NPCs and Metal Salesmen.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 by A bunch of people!
 //=     Syrus22 - Completely redid the script using functions... also
 //=     added the option for auto safe refining and multiple refining.

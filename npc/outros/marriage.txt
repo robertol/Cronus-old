@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Player Marriage
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Official Marriage script.
 //= Added isloggedin() check, even though Aegis doesn't do it.
@@ -13,7 +13,7 @@
 //= - Variable in use: wedding_sign (max 1)
 //= - Variable in use: $@wedding (max 1) 
 //= - Variable in use: $@wed_groom$ $@wed_bride$
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Fixed a missing ")" [L0ne_W0lf]
 //= 1.2 Corrected duration of Wedding status. [L0ne_W0lf]

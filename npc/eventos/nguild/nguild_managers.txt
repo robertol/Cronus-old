@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium Managers for N Guild Castles
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //=
 //==============================================
 //= Break down of arguments used in the function:
@@ -13,7 +13,7 @@
 //=   arg(2): x1 coordinate for warp to treasure room
 //=   arg(3): y1 coordinate for warp to treasure room
 //=   arg(4): guild script suffix for kafra, etc.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Based off existing guild scripts.  Do not know if it is accurate.[kobra_k88]
 //= 1.1 Added modified guild manager function. [L0ne_W0lf]
 //= 	Removed guardian summoning.

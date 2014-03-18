@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Einbroch and Einbech
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Evera and The rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Oridecon/Mineral Quest
 //= - Variable in use: ein_gear1 (max 2)
@@ -18,7 +18,7 @@
 //= - Variable in use: Shinokas_Quest (max 11)
 //= Lovers Quest
 //= - Variable in use: EIN_LOVERQ (max 17)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Initial Release [Evera]
 //= 1.1 Added more quests [Evera]
 //= 1.2 Added quest bits from Einbech and renamed file to

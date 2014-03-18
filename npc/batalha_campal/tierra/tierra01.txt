@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 // BattleGround System - Tierra Gorge
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Tierra Gorge Battleground.
 //= - Winning Team: 3 badges
 //= - Losing Team: 1 badge
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version.
 //= 1.1 Corrected setwalls for barricades. [L0ne_W0lf]
 //= 1.2 Updated 'waitingroom' to support required zeny/lvl. [Kisuka]

@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Moscovia Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quests for Moscovia.
 //= The Moving Island, Help Mikhail, Acorn Exchange,
 //= Banish Winter, Shafka Hat, Koshei the Immortal.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [Kisuka]
 //= 1.1 Small fixes on The Moving Island. [Kisuka]
 //= 1.2 Fixed a "player not attached" error. [brianluau]

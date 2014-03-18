@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Ash-Vacuum
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Contains Quests:
 //= Onward to the Other World
@@ -18,7 +18,7 @@
 //= Part Time Work
 //= Report from the New World
 //= Persuing Rayan Moore
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 3.0 Fixed a missing variable check. [Joseph]
 //= 3.1 Updated RE/Pre-RE EXP. [Euphy]
 //= 3.2 Updated ep13_start and dialog to match official script. [Joseph]

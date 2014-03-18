@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Job Quest Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Job Quest Maps
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Split off npc_warp.txt
 //= Commented some warps because new Job quests have correct
 //= ones! Added missing warps for Thief/Hunter/Swordman [Lupus]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Novice's Guild Castles War of Emperium Usher NPC
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //=
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Now you have access to 4 N Guild castles. They don't have
 //= dungeons. And 2nd Classes can't seize these Castles.
 //= These new castles need a new strategy. It would bring some

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Lighthalzen City
-//===== By: ==================================================
+//===== Por: ==================================================
 //=  erKURITA, Au{R}oN (Translated by Alan), $ephiroth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Lighthalzen NPCs (Temporal names for now) [erKURITA]
-//===== Additional Comments: ==================================
+//===== Comentários Adicionais: ==================================
 //= 2.0 Added missing Lab Staff#amano08 NPC. (bugreport:4319) [Gepard]
 //= 2.1 Commented out Duplicate NPCs. (bugreport:4555)
 //= 2.2 Added missing NPC found in AEGIS files. [L0ne_W0lf]

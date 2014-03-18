@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= The Sign Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth, MasterOfMuppets, Kargha
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 3.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quest for opening the doors to Geffenia.
 //= This script uses sign_01.bmp - sign_04.bmp, these will be
 //= found in the language of your client.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 3.0 Rewritten based on most recent Aegis script. [L0ne_W0lf]
 //=     Due to the incompatabity of the old script with this
 //=     version, variables will attmept to be translated to the

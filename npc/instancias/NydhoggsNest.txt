@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Scriptt ======================================
 //= Nidhoggr's Nest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf, various sources
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Nidhoggr's Nest Instance
-//===== Additional Comments: =================================
+//===== Comentários Adiconais: =================================
 //= 1.0 First version.
 //= 1.1 Minor dialog updates.
 //= 1.2 No longer glitches when anyone but party leader talks to the first NPC.

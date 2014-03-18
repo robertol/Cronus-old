@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Episode 11.1 Socket Enchant NPC
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Adds slots to selected weapons and armor.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.1a added missing L_No: to 2 funcs [Lupus]
 //= 0.1b Removed duplicates [Toms]
 //= 0.2 Added missing next;'s [Evera]

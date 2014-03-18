@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Morroc Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Morroc Town NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= Fixed Lapidary sprite, Implemented ANTHELL trigger
 //= (in both NPC/Warps) [Lupus]. Removed it from NPC and put in Warp

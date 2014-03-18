@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Guild dungeon event, Schwaltzvalt.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Guild dungeon event, Schwaltzvalt. Retrieve Morestone's
 //= pickaxe from Kublin.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version
 //= 1.1 Changed spawn timer to 1 hour. [L0ne_w0lf]
 //= 1.2 Added GM management function. [Euphy]

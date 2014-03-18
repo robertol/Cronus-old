@@ -1,16 +1,16 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Turbo Track
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Joseph
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Turbo Track Course: 
 //= - Solo Mode/Time Attack
 //= - Normal (Non-PVP) - 4/8/16 Person
 //= - Expert (PVP) - 4/8/16 Person
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.x Previous authors: L0ne_W0lf, Kisuka, Elias
 //= 1.0 Merged Turbo Track. [Joseph]
 //= 1.1 Updated RE/Pre-RE EXP. [Euphy]

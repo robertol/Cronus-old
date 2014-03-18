@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Counteragent and Mixture Quest(Morgenstein)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
 //= added some dialogs for Morgenstein by Komurka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.2b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Counteragent and Mixtures for making dyes & Alchemist Job Quest
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 2.2a A few minor fixes. (bugreport:1122) [L0ne_W0lf]
 //= 2.2b Follow up fixes to bugreport:1122 [L0ne_W0lf]

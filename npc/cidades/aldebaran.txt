@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Al De Baran Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Dev Team; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Al De Baran Town NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Added RS125 NPC.  Added another Kafra Reserve points agent.
 //=     The 2nd reserve points agent is not complete yet.
 //= 1.2 Lottery input number fix [Lupus], 1.2a - label typo fixed

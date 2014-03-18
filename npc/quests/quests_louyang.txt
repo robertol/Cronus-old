@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Louyang
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Evera and The rAthena Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Soup Quest
 //= - Variable in use: che_tre (max 5)
@@ -14,7 +14,7 @@
 //= - Variable in use: ch_poison (max 20)
 //= Revolution Quest
 //= - Variable in use: QL_REVO (max 9)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Initial Release [Evera]
 //= 1.1 Fixed double levelup bug [Lupus]
 //= 1.2 Added Revolution Quest. [SinSloth]

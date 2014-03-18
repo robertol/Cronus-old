@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Umbala Dungeon (Yggdrasil Cave) Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Darkchild (1.0vA); Athena (1.0vB)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4 (Akaru)
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Warp Points for Umbala Dungeon (Yggdrasil Cave)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 1.3 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.4 Commented out warp from Umbala, should be pre-re only. [Euphy]

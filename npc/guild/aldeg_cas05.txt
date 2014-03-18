@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium (Al De Baran)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= NPCs that relate to Al De Baran Guild Castle 5
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
 //= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
 //= 1.2 Partially rewrote Script. [Masao]

@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= PvP NPCs
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf, Elias (og2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= PvP NPCs that are found in the Inns in major cities.
 //= Includes Yoyo Mode, Nightmare Mode, and Event Mode.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.0 Narrators/GateKeepers,etc. Translated from the Official 2011 [Elias]
 //= 2.1 Changed PVP Narrator and GateKeeper to Floating NPC [Elias]
 //= 2.2 Some cleaning. [Euphy]

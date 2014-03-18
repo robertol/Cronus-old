@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Payon City
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Muad Dib (1.0) Darkchild (1.1) Muad Dib (1.2)
 //= Darkchild (1.3) DracoRPG (1.5) L0ne_W0lf (2.1)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1c
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Payon City Npcs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Most Credits To Muad Dib, Some Stuff By Me
 //= 1.4 Corrected a few typos
 //= 1.5 Rescripted old NPCs + scripted new ones (from iRO Sak) [DracoRPG]

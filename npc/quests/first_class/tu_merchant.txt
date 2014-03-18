@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Merchant Class Tutorial and Job Specific Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fix up by Jukka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Merchant training quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Fully working
 //= 1.1 Fixed bugs, optimized [Lupus]
 //= 1.2 fixed Weight check

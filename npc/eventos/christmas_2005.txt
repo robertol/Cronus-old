@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= 2005 ChristMas Event
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Brainstorm
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Event 1: Louise's Kim creates Louise's Santa Hat.
 //= Event 2: Enjoy Happymerry Chistmas Event summons monsters.
@@ -16,7 +16,7 @@
 //=	arg(2) Map name of originating NPC
 //=	arg(3) Coordinate X to be teleported to
 //=	arg(4) Coordinate Y to be teleported to
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First semi-working conversion. [Brainstorm]
 //= 1.1 Refined Brainstorm's conversion. [L0ne_W0lf]
 //= 1.2 Replaced effect numerics with constants. [L0ne_W0lf]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Hair Dyer
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Hair Dyer with standard palletes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= 1.1 Bugfix: fixed missing menu label LEnd->M_End [Lupus]
 //= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]

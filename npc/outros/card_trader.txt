@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Card Trader
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Elias (og2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Card and Points Trader
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Translated from the Official [Elias]
 //= 1.1 Fixed variables and optimized script [Elias]
 //= 1.2 Fixed char being stuck with breaks [Elias] (bugreport:5374)

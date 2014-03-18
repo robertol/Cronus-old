@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Hair Dresser
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Muad_Dib, Samuray22, Kisuka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Allows you to change your hairstyle.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.2 Rescripted to the Aegis 10.3 Standards. [Samuray22]
 //= 1.3 Updated to match AEGIS script. [Kisuka]
 //= 1.4 Added Lighthalzen Hair Dresser. [L0ne_W0lf]

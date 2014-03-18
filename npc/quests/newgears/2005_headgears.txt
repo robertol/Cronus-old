@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= 2005 Headgear Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= MasterOfMuppets
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.3a
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= 2005 Headgears Official Quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version, converted from the official aegis script. [MasterOfMuppets]
 //= 1.1 Updated item ids in the zealotus mask npc, now requires a whip [ultramage]
 //= 1.2 Replaced effect numerics with constants. [L0ne_W0lf]

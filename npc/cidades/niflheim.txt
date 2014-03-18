@@ -1,11 +1,11 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Niflheim Script 
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fyrien, Dizzy, PKGINGO
 //= Official NPCs translated and re-edited by Celest
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Official NPC's for Niflheim
 //= 1.01 Splitted file(guides, shops). Fixed rand() bugs,
 //=      missing labels bugs, optimization [Lupus]

@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Juperos Dungeon Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Muad-Dib (1.0)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Juperos Dungeon
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Converted by Dr.Evil [Lupus]
 //= 1.1 More temp warps to Juperos by Justin84 [Lupus]
 //= 1.2 Justin84's fixed elevator scripts

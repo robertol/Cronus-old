@@ -1,16 +1,16 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mapflag: Nightmare mode.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Players drop items/equipment on death.
 //= pvp_nightmaredrop	id,type,percent
 //=   id: Drop a specific item ID or "random"
 //=   type: "inventory", "equip", or "all"
 //=   percent: Rate of item drop.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 - Initial script.
 //============================================================
 

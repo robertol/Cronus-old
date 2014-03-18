@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Acolyte Class Tutorial and Job Specific Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Fix up by Jukka
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.9
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Acolyte training quest.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Fully working
 //= 1.1 optimized [Lupus]
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]

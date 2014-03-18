@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Quest NPCs related to Comodo
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.5b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Headgear Quests 1 [Official Conversion]:
 //= - 'Cross Hat', 'Bulb Hairband'
 //= - 'Striped Hairband', 'Blue Hairband'
@@ -16,7 +16,7 @@
 //= - Part 2: Found in Quests_Yuno.txt
 //= - Part 3: Found in Doomed_Swords.txt
 //= - Variable in use: dmdswrd_Q (Max 45)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 Fixed exploits [Lupus]
 //= 1.2 Added more quest from cities/comodo.txt [Evera]
 //= 1.2a missing label [Lupus]

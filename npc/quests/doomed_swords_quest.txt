@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Doomed Swords Quest Part 3
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= - Creation of Doomed Swords: Grimtooth, Mysteltain, and
 //=   Executioner.
@@ -12,7 +12,7 @@
 //= - Part 1: Found in Quests_Comodo.txt
 //= - Part 2: Found in Quests_Yuno.txt
 //= - Variable in use: dmdswrd_Q (Max 45)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //============================================================
 

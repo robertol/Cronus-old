@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium Kafras for N Guild Castles
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Provides Kafra services for guild members of NGuild Castles.
 //= Used in conjuction with function F_Kafra.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Based off existing guild scripts.  Do not know if it is accurate.[kobra_k88]
 //= 1.1 All N Guild Kafras teleport to Prontera only! [Lupus]
 //= 1.2 Added Kafra function. [L0ne_W0lf]

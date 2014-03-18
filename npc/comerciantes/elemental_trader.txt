@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Elemental Stone Trader
-//===== By: ==================================================
+//===== Por: ==================================================
 //= rAthena Team & MasterOfMuppets
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Trade impure types of elemental stones for pure ones.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.1 Optimized. [Euphy]
 //= 1.2 Tradução [Shermie]

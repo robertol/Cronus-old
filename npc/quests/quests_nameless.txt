@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Nameless Island Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Collection of Nameless Island Quests
 //= Nameless Island:
@@ -32,7 +32,7 @@
 //= Rogue Guild Investigation Assistance:
 //- - Assist the Rogue Guild with their investigations.
 //= - Variable in use: rumour_nd (Max: 22)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Made quest accessable to "Failed" gaebolg quest. [L0ne_W0lf]
 //= 1.1a Touch up to other Gaebolg fail-points. [L0ne_W0lf]

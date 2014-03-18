@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Jawaii Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Muad Dib (1.0)
 //= Darkchild (1.1)
 //= MasterOfMuppets (1.2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Jawaii
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Split off npc_warp.txt
 //= 1.2a Added a missing warp, thanks to Zoc [MasterOfMuppets]
 //= 1.2b Added a missing warp [Komurka]

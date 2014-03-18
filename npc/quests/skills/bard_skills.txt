@@ -1,14 +1,14 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Bard Skill Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen; L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Official quest for the Bard skill "Pang Voice"
 //= Prerequisite: Geffen Bard Quest
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 for fully working skills only [Lupus]
 //= 1.1 Added more new skill quests for more classes [Lupus]
 //=     Somehow eA engine doesn't let you keep learn't skill

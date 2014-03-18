@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Einbroch Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Sara-chan (1.3), SSUNNY@YOUNG(1.7), erKURITA (1.8)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Einbroch
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.4 Moved all airports to Airplane Warps [Lupus]
 //= 1.5 Commented out some warps which are not in the official servers [MasterOfMuppets]
 //= 1.6	Removed some duplicate warps [MasterOfMuppets]

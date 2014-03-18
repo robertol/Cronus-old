@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Sage Job Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= jAthena (0.9) - I guess
 //= Unknown Translator (1.0)
 //= Darkchild (1.2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Job quest for Sage classes
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 2.1 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //=     No longer uses function "F_BlockHigh"
 //= 2.2 Small bug fix (== -> !=) thanks to Saithis. [L0ne_W0lf]

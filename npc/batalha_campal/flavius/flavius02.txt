@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 // BattleGround System - Flavius Second
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.6
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Flavius Battleground.
 //= - Winning Team: 9 badges
 //= - Losing Team: 3 badge
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version.
 //= 1.1 Fixed NPCs being called for waiting rooms. (bugreport:4395)
 //= 1.2 Fixed pink crystal spawning as blue. [L0ne_W0lf]

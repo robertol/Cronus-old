@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Kiel Hyre Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf (Script), DZeroX (Timer)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 4.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest for opening Robot Factory first and second floors.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 4.0 A whole bunch-a-updates to various npcs. [L0ne_W0lf]
 //=     Corrected condition checks throughout the quest.
 //=     Npcs no longer make use of the goto command.

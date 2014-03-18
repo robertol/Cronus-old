@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Geffen Town
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Everybody mentioned in the comments
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Geffen Town NPCs
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= Fully working
 //= 1.1 Spell Checked [massdriller]
 //= 1.2 Fixed more typos [Nexon]

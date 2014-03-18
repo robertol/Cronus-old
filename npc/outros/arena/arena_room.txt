@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Izlude Arena Room
-//===== By: ==================================================
+//===== Por: ==================================================
 //= SinSloth
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.4
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Izlude Battle Arena Main Room
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First version.
 //= 1.1 Fixed a small reward typo (was giving potato.) [L0ne_W0lf]
 //= 1.2 Label standardization, disabled GM NPCs. [Euphy]

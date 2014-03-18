@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Archer Skill Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.7
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Quest for skills: Arrow Crafting, Arrow Repel
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 1.6 Updated to latest available official file.
 //=     also fixed Item issue [bugreport:5607]. [Masao]

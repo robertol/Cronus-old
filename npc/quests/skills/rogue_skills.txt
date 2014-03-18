@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Rogue Skills Quests
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Lupus, Reddozen
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.8
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Quests for skills: CLose Confine
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //= 1.5 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
 //= 1.6 Bug fixes as pointed out by Brainstorm in bugreport:351 [L0ne_W0lf]

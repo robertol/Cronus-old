@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Juice Maker Quest
-//===== By: ==================================================
+//===== Por: ==================================================
 //= kobra_k88
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [Official Conversion]
 //= Learn where to turn apples, bananas, carrots, and grapes
 //= into juice.
 //= Condition if done: (MISC_QUEST & 1)
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.9 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //=     Added tracking variables in, which are unset when complete.
 //= 2.0 Added missing checkweight. [L0ne_W0lf]

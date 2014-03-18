@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Kafras (Cities/Dungeons/Fields)
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Joseph
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.1b
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Argument settings for callfunc "F_Kafra":
 //=  arg(0): 0 - Default Kafra message
 //=          1 - Niflhiem Kafra message
@@ -13,7 +13,7 @@
 //=  arg(2): 1 - Disable info menu
 //=  arg(3): Cost of Storage service
 //=  arg(4): Cost of Rent a Pushcart service
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 0.x Previous Authors: 
 //=     - L0ne_W0lf, kobra_k88, Samuray22, Evera, Lupus
 //= 1.0 Merged and cleaned up Kafras. [Joseph]

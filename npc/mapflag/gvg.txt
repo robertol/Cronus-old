@@ -1,15 +1,15 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Mapflag: Guild versus Guild mode.
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Hercules Dev Team
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Players can attack other guilds, and will have their guild
 //= icons shown. WoE damage reductions will also take place.
 //= gvg: Turns on GvG mode
 //= gvg_castle: Describes castle maps for WoE.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.1 - Added Novice Guild Castles.
 //= 1.2 - Updated with new meanings of gvg and gvg_castle.
 //============================================================

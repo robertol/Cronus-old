@@ -1,12 +1,12 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= Einbroch Field Warp Script
-//===== By: ==================================================
+//===== Por: ==================================================
 //= Sara-chan (1.0), SSUNNY@YOUNG(1.2)
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.2
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warp Points for Lighthalzen Field
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 // Field update - Einbroch and Lhztargen by Sara - Version 1.0
 // 1.1 moved field warps from town warps [Lupus]
 // 1.2 Updated Warps, work done by SSUNNY@YOUNG in Korean eA site [Vicious]
