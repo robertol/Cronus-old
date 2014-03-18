@@ -1,0 +1,83 @@
+//===== Cronus Script =======================================
+//= Guias de Kunlun
+//===== Por: ==================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.3
+//===== Descrição: ===========================================
+//= [Conversação Oficial]
+//= Guias da cidade de Kunlun
+//===== Comentários Adicionais: ==============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Otimizado. [Euphy]
+//= 1.2 Atualização do Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//============================================================
+
+gonryun,163,60,4	script	Guia de Kunlun#01gonryun	8_M_TWSOLDIER,{
+	mes "[He Yuen Zhe]";
+	mes "Ni Hao!";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" a Kunlun, uma cidade cheia de paixão e energia!";
+	mes "Dê um passeio e conheça a nossa antiga história, tradições e nossos hábitos.";
+	next;
+	mes "[He Yuen Zhe]";
+	mes "Eu sou o responsável por responder suas dúvidas sobre a cidade.";
+	mes "Por favor, sinta-se à vontade para perguntar.";
+	F_Navi("[He Yuen Zhe]");
+	while (1) {
+		next;
+		switch(select("[ Funcionária Kafra ]:[ Residência do Chefe ]:[ Vendedor de Utilidades ]:[ Vendedor de Armas ]:[ Vendedor de Armaduras ]:[ Fabricante de Vinho ]:[ Embaixador de Kunlun ]:Remover indicações do mini-mapa:Cancelar")) {
+		case 1:
+			callsub L_Mark, "^0000FFFuncionária Kafra^000000";
+			viewpoint 1,159,122,0,0x0A82FF;
+			break;
+		case 2:
+			callsub L_Mark, F_Navi("Residência do Chefe","gonryun,110,131","^006400");
+			viewpoint 1,110,131,1,0xAAFF00;
+			break;
+		case 3:
+			callsub L_Mark, F_Navi("Vendedor de Utilidades","gonryun,147,84","^D8BFD8");
+			viewpoint 1,147,84,2,0xD8BFD8;
+			break;
+		case 4:
+			callsub L_Mark, F_Navi("Vendedor de Armas","gonryun,174,101","^FF1493");
+			viewpoint 1,174,101,3,0xFF1493;
+			break;
+		case 5:
+			callsub L_Mark, F_Navi("Vendedor de Armaduras","gonryun,173,84","^8B4513");
+			viewpoint 1,173,84,4,0x8B4513;
+			break;
+		case 6:
+			callsub L_Mark, F_Navi("Fabricante de Vinho","gonryun,213,115","^9400D3");
+			viewpoint 1,213,115,5,0x9400D3;
+			break;
+		case 7:
+			callsub L_Mark, F_Navi("Embaixador de Kunlun","gonryun,161,11","^00BFFF");
+			viewpoint 1,161,11,6,0x00BFFF;
+			break;
+		case 8:
+			mes "[He Yuen Zhe]";
+			mes "Irei remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,1,1,0,0xFFFFFF;
+			viewpoint 2,1,1,1,0xFFFFFF;
+			viewpoint 2,1,1,2,0xFFFFFF;
+			viewpoint 2,1,1,3,0xFFFFFF;
+			viewpoint 2,1,1,4,0xFFFFFF;
+			viewpoint 2,1,1,5,0xFFFFFF;
+			viewpoint 2,1,1,6,0xFFFFFF;
+			break;
+		case 9:
+			mes "[He Yuen Zhe]";
+			mes "Bon voyage!";
+			close;
+		}
+	}
+	end;
+L_Mark:
+	mes "[He Yuen Zhe]";
+	mes getarg(0)+" está marcado no seu mini-mapa.";
+	mes "Verifique seu mini-mapa.";
+	mes "Há mais alguma coisa que eu possa fazer por você?";
+	return;
+}

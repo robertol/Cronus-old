@@ -1,0 +1,140 @@
+//===== Cronus Script ======================================
+//= Guias de Al de baran
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.2
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias das cidade Al de baran
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Atualização no Sistema de Navegação. [Euphy]
+//=		Otimizado
+//= 1.2 Traduzido para pt-BR [Eski]
+//==========================================================
+
+aldebaran,139,63,4	script	Guia#01aldebaran::GuideAldearan	8W_SOLDIER,{
+	cutin "prt_soldier",2;
+	mes "[Guia de Al De Baran]";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" à ^8B4513Al De Baran^000000, a cidade fronteira.";
+	mes "Você precisa de ajuda para explorar a cidade?";
+	F_Navi("[Guia de Al De Baran]");
+	next;
+	set .@str$,"Gostaria de verificar outras localizações?";
+	while (1) {
+		switch(select("[ Principais Lugares ]:[ Lojas & Ajudantes ]:Remover marcadores do mini-mapa:Cancelar")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Central da Kafra Corp. ]:[ Guilda dos Alquimistas ]:[ Torre do Relógio ]:[ Hospedaria & Loja de Utilidades ]:[ Reparador & Venda de Equipamentos ]:[ Taverna ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Central da Kafra Corp.","aldebaran,61,229","^B9062F");
+					mes .@str$;
+					viewpoint 1,61,229,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Guilda dos Alquimistas","aldebaran,60,60","^0000FF");
+					mes .@str$;
+					viewpoint 1,60,60,1,0x0A82FF;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Torre do Relógio","aldebaran,139,133","^FF5400");
+					mes .@str$;
+					viewpoint 1,139,133,2,0xFFB400;
+					next;
+					break;
+				case 4:
+					mes "[Guia de Al De Baran]";
+					mes "Deixe-me marcar para você a localização da"+ F_Navi("Hospedaria & Loja de Utilidades","aldebaran,197,70","^006400")+" no seu mini-mapa";
+					mes .@str$;
+					viewpoint 1,197,70,3,0xAAFF00;
+					next;
+					break;
+				case 5:
+					mes "[Guia de Al De Baran]";
+					mes "Se você gostaria de"+ F_Navi("Comprar ou Reparar um Equipamento","aldebaran,197,70","^7F3300")+"então esse é um lugar que você vai querer visitar.";
+					mes .@str$;
+					viewpoint 1,72,197,4,0xD2691E;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Taverna","aldebaran,231,106","^800080");
+					viewpoint 1,231,106,5,0xDA70D6;
+					next;
+					break;
+				case 7:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Oficial de Teleporte do Éden ]:[ Funcionária Kafra ]:[ Sr. Claus ]:[ Cozinheiro Auxiliar ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Oficial de Teleporte do Éden","aldebaran,133,119","^B9062F");
+					mes .@str$;
+					viewpoint 1,133,119,6,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, "^0000FFFuncionária Kafra^000000";
+					viewpoint 1,143,119,7,0x0A82FF;
+					next;
+					break;
+				case 3:
+					mes "[Guia de Al De Baran]";
+					mes "Sr. Klaus pode teleportar você para "+F_Navi("Lutie","aldebaran,168,168","^006400")+". Vou marcar a localização dele em seu mini-mapa.";
+					mes .@str$;
+					viewpoint 1,168,168,8,0xAAFF00;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Cozinheiro Auxiliar","aldebaran,165,107","^7F3300");
+					mes .@str$;
+					viewpoint 1,165,107,9,0xD2691E;
+					next;
+					break;
+				case 5:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Al De Baran]";
+			mes "Claro, vou remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,1,1,0,0xFFFF00;
+			viewpoint 2,1,1,1,0x000000;
+			viewpoint 2,1,1,2,0xFF0000;
+			viewpoint 2,1,1,3,0xFFFF00;
+			viewpoint 2,1,1,4,0xFFFF00;
+			viewpoint 2,1,1,5,0xFFFF00;
+			viewpoint 2,1,1,6,0xFFFF00;
+			viewpoint 2,1,1,7,0xFFFF00;
+			viewpoint 2,1,1,8,0xFFFF00;
+			viewpoint 2,1,1,9,0xFFFF00;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Al De Baran]";
+			mes "Ok então, aproveite sua estadia.";
+			close2;
+			cutin "prt_soldier",255;
+			end;
+		}
+	}
+	end;
+L_Mark:
+	mes "[Guia de Al De Baran]";
+	mes "Deixe-me marcar para você a localização do(a)"+ getarg (0)+"em seu mini-mapa";
+	return;
+}
+aldebaran,243,143,2	duplicate(GuideAldearan)	Guia#02aldebaran	8W_SOLDIER
+aldebaran,135,243,4	duplicate(GuideAldearan)	Guia#03aldebaran	8W_SOLDIER
+aldebaran,36,135,6	duplicate(GuideAldearan)	Guia#04aldebaran	8W_SOLDIER

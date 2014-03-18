@@ -1,0 +1,170 @@
+//===== Cronus Script ======================================
+//= Guias de Comodo
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.3
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias da cidade de Comodo.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Revisado e Otimizado. [Euphy]
+//= 1.2 Atualização do Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//==========================================================
+
+comodo,322,178,4	script	Guia de Comodo#01comodo::GuideComodo	8_F_GIRL,{
+	mes "[Guia de Comodo]";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" à ^8B4513Comodo^000000, a cidade litorânea do Reino de Rune-Midgards.";
+	mes "Você precisa de ajuda para navegar pela cidade?";
+	F_Navi("[Guia de Comodo]");
+	next;
+	while (1) {
+		switch(select("[ Instalações Principais ]:[ Lojas & Ajudantes ]:Remover indicações do mini-mapa:Cancelar:Sobre ^8B4513Comodo^000000")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Taverna ]:[ Cassino ]:[ Loja de Armas & Armaduras ]:[ Loja de Utilidades ]:[ Acampamento ]:[ Vendedor de Lembranças ]:[ Mao, a Caverna do Leste ]:[ Karu, a Caverna do Oeste ]:[ Ruanda, a Caverna do Norte ]:[ Palco de Dança Hula ]:[ Filial Oeste das Kafras ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Taverna","comodo,161,315","^FF0000");
+					viewpoint 1,166,298,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Cassino","comodo,140,111","^FFA500");
+					viewpoint 1,140,98,1,0xFFA500;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Loja de Armas & Armaduras","comodo,266,74","^FF4500");
+					viewpoint 1,266,70,2,0xFF4500;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Loja de Utilidades","comodo,92,128","^B8860B");
+					viewpoint 1,86,128,3,0xB8860B;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Acampamento","comodo,209,308","^32CD32");
+					viewpoint 1,210,308,4,0x32CD32;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Vendedor de Lembranças","comodo,293,125","^6B8E23");
+					viewpoint 1,298,124,5,0x6B8E23;
+					next;
+					break;
+				case 7:
+					callsub L_Mark, F_Navi("Mao, a Caverna do Leste","comodo,333,175","^008B8B");
+					viewpoint 1,333,175,6,0x008B8B;
+					next;
+					break;
+				case 8:
+					callsub L_Mark, F_Navi("Karu, a Caverna do Oeste","comodo,24,214","^1E90FF");
+					viewpoint 1,24,214,7,0x1E90FF;
+					next;
+					break;
+				case 9:
+					callsub L_Mark, F_Navi("Ruanda, a Caverna do Norte","comodo,176,358","^0000CD");
+					viewpoint 1,176,358,8,0x0000CD;
+					next;
+					break;
+				case 10:
+					callsub L_Mark, F_Navi("Palco de Dança Hula","comodo,188,168","^C71585");
+					viewpoint 1,188,168,9,0xC71585;
+					next;
+					break;
+				case 11:
+					mes "[Guia de Comodo]";
+					mes "Deixe-me marcar a localização da "+F_Navi("Filial Oeste das Kafras","comodo,131,195","^DB7093")+" no seu mini-mapa";
+					mes "Você gostaria de verificar algum outro local?";
+					viewpoint 1,136,202,10,0xDB7093;
+					next;
+					break;
+				case 12:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Casa do Chefe ]:[ Bor Robin ]:[ Funcionária Kafra ]:[ Bardo Andarilho ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Casa do Chefe","comodo,115,290","^6495ED");
+					viewpoint 1,114,294,11,0x6495ED;
+					next;
+					break;
+				case 2:
+					mes "[Guia de Comodo]";
+					mes F_Navi("Bor Robin^000000 ajuda aventureiras a se tornarem ^228B22Odaliscas^000000.","comodo,193,151","^228B22");
+					mes "Você gostaria de verificar algum outro local?";
+					viewpoint 1,193,151,12,0x228B22;
+					next;
+					break;
+				case 3:
+					callsub L_Mark,"^1E90FFFuncionária Kafra^000000";
+					viewpoint 1,195,149,13,0x1E90FF;
+					next;
+					break;
+				case 4:
+					mes "[Guia de Comodo]";
+					mes "O "+F_Navi("Bardo Andarilho","comodo,211,155","^DB7093")+" ajuda aventureiros a se tornarem ^DB7093Bardos^000000.";
+					mes "Você gostaria de verificar algum outro local?";
+					viewpoint 1,211,155,14,0xDB7093;
+					next;
+					break;
+				case 5:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Comodo]";
+			mes "Claro, vou remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,166,298,0,0xFFFFFF;
+			viewpoint 2,140,98,1,0xFFFFFF;
+			viewpoint 2,266,70,2,0xFFFFFF;
+			viewpoint 2,86,128,3,0xFFFFFF;
+			viewpoint 2,210,308,4,0xFFFFFF;
+			viewpoint 2,298,124,5,0xFFFFFF;
+			viewpoint 2,333,175,6,0xFFFFFF;
+			viewpoint 2,24,214,7,0xFFFFFF;
+			viewpoint 2,176,358,8,0xFFFFFF;
+			viewpoint 2,188,168,9,0xFFFFFF;
+			viewpoint 2,136,202,10,0xFFFFFF;
+			viewpoint 2,114,294,11,0xFFFFFF;
+			viewpoint 2,193,151,12,0xFFFFFF;
+			viewpoint 2,195,149,13,0xFFFFFF;
+			viewpoint 2,211,155,14,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Comodo]";
+			mes "Aproveite sua estadia.";
+			close;
+		case 5:
+			mes "[Guia de Comodo]";
+			mes "^8B4513Comodo^000000 é localizada dentro de uma caverna e nunca pode ser atingida pela luz do sol.";
+			next;
+			mes "[Guia de Comodo]";
+			mes "Os aldeões de ^8B4513Comodo^00000 tem superado seus ambientes naturais pobres para criar um local turístico popular.";
+			mes "Há mais alguma coisa que eu possa fazer por você?";
+			next;
+			break;
+		}
+	}
+	end;
+L_Mark:
+	mes "[Guia de Comodo]";
+	mes "Deixe-me marcar a localização do(a) "+getarg(0)+"^000000 no seu mini-mapa.";
+	return;
+}
+comodo,181,347,4	duplicate(GuideComodo)	Guia de Comodo#02comodo	8_F_GIRL
+comodo,197,149,3	duplicate(GuideComodo)	Guia de Comodo#03comodo	8_F_GIRL
+comodo,37,219,4	duplicate(GuideComodo)	Guia de Comodo#04comodo	8_F_GIRL

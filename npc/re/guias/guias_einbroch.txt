@@ -1,0 +1,231 @@
+//===== Cronus Script ======================================
+//= Guias de Einbroch e Einbech 
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.2
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias das cidades de Einbroch e Einbech.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Atualização no Sistema de Navegação. [Euphy]
+//= 1.2 Traduzido para pt-BR [Eski]
+//==========================================================
+
+einbroch,72,202,4	script	Guia de Einbroch#ein01::GuideEinbroch	4_M_EIN_SOLDIER,{
+	cutin "ein_soldier",2;
+	mes "[Guia de Einbroch]";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" a ^8B4513Einbroch^000000, a Cidade do Aço.";
+	mes "Por favor me pergunte caso você queira saber alguma informação.";
+	F_Navi("[Guia de Einbroch]");
+	next;
+	while (1) {
+		switch(select("[ Principais Lugares ]:[ Lojas & Ajudantes ]:Remover marcadores do mini-mapa:Cancelar")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Aeroporto ]:[ Fábrica ]:[ Praça ]:[ Hotel ]:[ Estação de Trem ]:[ Loja de Armas ]:[ Laboratório ]:[ Monumento ]:[ Guilda dos Ferreiros ]:[ Guilda de Justiceiros ]:Menu Anterior")) {
+				case 1:
+					mes "[Guia de Einbroch]";
+					mes "O "+F_Navi("Aeroporto","einbroch,64,204","^FF0000")+" está localizado a parte noroeste da cidade.";
+					mes "Lá você pode ver a causa de nosso orgulho e da nossa alegria, o dirigível.";
+					mes "Lembre-se que você deve pagar a entrada de bordo do dirigível.";
+					viewpoint 1,64,204,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					mes "A "+F_Navi("Fábrica","einbroch,129,79")+", talvez seja a mais importante utilidade de Einbroch, ela está localizada na parte sul da cidade.";
+					viewpoint 1,129,79,1,0xFF4500;
+					next;
+					break;
+				case 3:
+					mes "[Guia de Einbroch]";
+					mes "A "+F_Navi("Praça","einbroch,129,79")+", é nosso maior distrito de shopping, você pode encontrá-la ao lado leste no centro de Einbroch.";
+					viewpoint 1,254,199,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					mes "[Guia de Einbroch]";
+					mes "O "+F_Navi("Hotel","einbroch,254,199")+" está localizado a leste da Praça e oferece uma alta comodidade.";
+					mes "Lá, você pode desfrutar do maior conforto de Einbroch~";
+					viewpoint 1,254,199,3,0x008000;
+					next;
+					break;
+				case 5:
+					mes "[Guia de Einbroch]";
+					mes "A "+F_Navi("Estação de Trem","einbroch,232,272")+" está localizada na parte nordeste de Einbroch.";
+					mes "Os trens trafegam de Eibroch a Einbech o dia inteiro e todos os dias.";
+					viewpoint 1,232,272,4,0x0000FF;
+					next;
+					break;
+				case 6:
+					mes "A "+F_Navi("Loja de Armas","einbroch,216,211")+" está localizada ao norte da Praça.";
+					mes "Lá você pode adquirir armas para uso pessoal.";
+					viewpoint 1,216,211,5,0x000080;
+					next;
+					break;
+				case 7:
+					mes "[Guia de Einbroch]";
+					mes "O "+F_Navi("Laboratório","einbroch,55,52")+" está anexado a Fábrica e está localizado ao sudoeste de Einbroch.";
+					viewpoint 1,55,52,6,0x800080;
+					next;
+					break;
+				case 8:
+					mes "[Guia de Einbroch]";
+					mes "Deixe-me marcar a localização para o "+F_Navi("Monumento","einbroch,178,173","^808080")+" em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					viewpoint 1,178,173,7,0x808080;
+					next;
+					break;
+				case 9:
+					mes "[Guia de Einbroch]";
+					mes "A "+F_Navi("Guilda dos Ferreiros","einbroch,255,110")+" está localizada na parte sudeste de Einbroch.";
+					mes "Você pode aprimorar seus equipamentos utilizando os serviços deles.";
+					viewpoint 1,255,110,8,0x556B2F;
+					next;
+					break;
+				case 10:
+					mes "[Guia de Einbroch]";
+					mes "Deixe-me marcar a localização para o "+F_Navi("Guilda dos Justiceiros","einbroch,130,197","^008080")+" em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					viewpoint 1,130,197,9,0x008080;
+					next;
+					break;
+				case 11:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Armeiro ]:[ Funcionárias Kafra ]:[ Oficial do Éden ]:Menu Anterior")) {
+				case 1:
+					mes "[Guia de Einbroch]";
+					mes "Você pode ir no ^FF1493Manthasman^000000, o ^FF1493Armeiro^000000 no 1º piso do porão na Guilda dos Ferreiros.";
+					viewpoint 1,255,110,10,0xFF1493;
+					next;
+					mes "[Guia de Einbroch]";
+					mes "Deixe-me marcar a localização do "+F_Navi("Armeiro","einbroch,255,110","^FF1493")+" em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					next;
+					break;
+				case 2:
+					mes "Deixe-me marcar a localização para as ^DA70D6Funcionárias Kafra^000000 em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					viewpoint 1,242,205,11,0xDA70D6;
+					viewpoint 1,59,203,12,0xDA70D6;
+					next;
+					break;
+				case 3:
+					mes "[Guia de Einbroch]";
+					mes "Você pode encontrar o ^CD1039Oficial do Éden^000000 no 1° andar da Guilda de Justiceiros.";
+					viewpoint 1,130,197,13,0xCD1039;
+					next;
+					mes "Deixe-me marcar a localização para o "+F_Navi("Oficial do Éden","einbroch,130,197","^CD1039")+" em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					next;
+					break;
+				case 4:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Einbroch]";
+			mes "Irei remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,64,204,0,0xFFFFFF;
+			viewpoint 2,129,79,1,0xFFFFFF;
+			viewpoint 2,254,199,2,0xFFFFFF;
+			viewpoint 2,254,199,3,0xFFFFFF;
+			viewpoint 2,232,272,4,0xFFFFFF;
+			viewpoint 2,216,211,5,0xFFFFFF;
+			viewpoint 2,55,52,6,0xFFFFFF;
+			viewpoint 2,178,173,7,0xFFFFFF;
+			viewpoint 2,255,110,8,0xFFFFFF;
+			viewpoint 2,130,197,9,0xFFFFFF;
+			viewpoint 2,255,110,10,0xFFFFFF;
+			viewpoint 2,242,205,11,0xFFFFFF;
+			viewpoint 2,59,203,12,0xFFFFFF;
+			viewpoint 2,130,197,13,0xDA70D6;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Einbroch]";
+			mes "Tenha uma jornada segura!";
+			close2;
+			cutin "ein_soldier",255;
+			end;
+		}
+	}
+}
+einbroch,155,43,4	duplicate(GuideEinbroch)	Guia de Einbroch#ein02	4_M_EIN_SOLDIER
+einbroch,162,317,4	duplicate(GuideEinbroch)	Guia de Einbroch#ein03	4_M_EIN_SOLDIER
+einbroch,252,320,3	duplicate(GuideEinbroch)	Guia de Einbroch#ein04	4_M_EIN_SOLDIER
+
+einbech,67,37,4	script	Guia de Einbech#einbech01::GuideEinbech	4_M_EIN_SOLDIER,{
+	cutin "ein_soldier",2;
+	mes "Bem-vind"+((Sex) ? "o":"a")+" a Einbech, nós estamos aqui para ajudar os turistas, então por favor sinta-se a vontade para fazer as perguntas que quiser.";
+	F_Navi("[Guia de Einbech]");
+	next;
+	while (1) {
+		switch(select("[ Taverna ]:[ Loja de Utilidades ]:[ Estação de Trem ]:[ Mina ]:[ Funcionária Kafra ]:Remover marcadores do mini-mapa:Cancelar")) {
+		case 1:
+			mes "[Guia de Einbech]";
+			mes "A "+F_Navi("Taverna","einbech,157,106")+" está localizada na parte sul de Einbech.";
+			mes "É um ótimo lugar para relaxar após um dia longo.";
+			viewpoint 1,157,106,0,0x497649;
+			next;
+			break;
+		case 2:
+			mes "[Guia de Einbech]";
+			mes "Você pode encontrar a "+F_Navi("Loja de Utilidades","einbech,177,133")+" no centro de Einbech.";
+			mes "Lá, você pode adquirir algumas utilidades que talvez necessite em suas jornadas.";
+			viewpoint 1,177,133,1,0xFA8072;
+			next;
+			break;
+		case 3:
+			mes "[Guia de Einbech]";
+			mes "As "+F_Navi("Estações de Trem","einbech,39,215")+" estão localizadas ao noroeste e na parte do nordeste de Einbech.";
+			mes "Lá, você pode pegar um trem para Eibroch.";
+			viewpoint 1,39,215,2,0xCD1039;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Einbech]";
+			mes "A "+F_Navi("Mina","einbech,137,248")+", que está em Eibech, é a maior indústria, e está localizada na parte norte dessa cidade.";
+			mes "É onde estão todos os nossos minérios, embora monstros também possuam essa forma na mina.";
+			viewpoint 1,137,248,3,0xDA70D6;
+			next;
+			break;
+		case 5:
+			mes "Deixe-me marcar a localização da ^FF1493Funcionária Kafra^000000 em seu mini-mapa.";
+			mes "Gostaria de verificar outras localizações?";
+			viewpoint 1,181,132,4,0xFF1493;
+			next;
+			break;
+		case 6:
+			mes "[Guia de Einbech]";
+			mes "Irei remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,157,106,0,0xFFFFFF;
+			viewpoint 2,177,133,1,0xFFFFFF;
+			viewpoint 2,39,215,2,0xFFFFFF;
+			viewpoint 2,137,248,3,0xFFFFFF;
+			viewpoint 2,181,132,4,0xFFFFFF;
+			next;
+			break;
+		case 7:
+			mes "[Guia de Einbech]";
+			mes "Tenha uma jornada segura!";
+			close2;
+			cutin "ein_soldier",255;
+			end;
+		}
+	}
+}
+einbech,48,214,4	duplicate(GuideEinbech)	Guia de Einbech#einbech02	4_M_EIN_SOLDIER

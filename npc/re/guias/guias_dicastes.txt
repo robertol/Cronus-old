@@ -1,0 +1,89 @@
+//===== Cronus Script ======================================
+//= Guias de El Discates
+//===== Por: ===============================================
+//= Muad_Dib
+//===== Versão Atual: ======================================
+//= 1.3
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias das cidade de El Discates.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão. [Joseph]
+//= 1.1 Resolvido sintaxe do viewpoint. [Euphy]
+//= 1.2 Atualização no Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//==========================================================
+
+dicastes01,181,191,5	script	Viajante Ichack#info	4_M_SHADOWCHASER,2,2,{
+	mes "[Viajante Ichack]";
+	mes " Oh!! Você é um"+((Sex) ? " estrangeiro":"a estrangeira")+"!";
+	mes "Sou Ichack, o primeiro aventureiro que chegou aqui em El Dicastes!";
+	next;
+	mes "[Viajante Ichack]";
+	mes "Havia alguém na equipe de expedição alegando que foi o primeiro a chegar aqui, mas fui eu. Certo!?";
+	next;
+	mes "[Viajante Ichack]";
+	mes "É por isso que eu presto um serviço orientação para aventureiros de Rune-Midgard.";
+	mes "O que você gostaria de saber?";
+	F_Navi("[Viajante Ichack]");
+	next;
+	switch(select("Diel:Área Residencial:Sala de Treinamento:Mineradora:Bar:Agência Pata de Gato")) {
+	case 1:
+		mes "[Viajante Ichack]";
+		mes "Ah~ É uma linda construção.";
+		mes "Lá são discutidas coisas muito importantes...";
+		next;
+		mes "[Viajante Ichack]";
+		mes "Por favor, certifique-se de estar registrado no "+F_Navi("Diel","dicastes01,198,351")+", caso contrário você estará em apuros.";
+		mes "Vá diretamente para o norte e lá você encontrará o Diel.";
+		viewpoint 1,198,351,0,0x00FF00;
+		close;
+	case 2:
+		mes "[Viajante Ichack]";
+		mes "A tribo Sapha é tão estranha. Como podem dormir lá?";
+		next;
+		mes "[Viajante Ichack]";
+		mes "Você não está entendendo?";
+		mes "Você não vão acreditar até ver! Vá e veja você mesmo!";
+		next;
+		mes "[Viajante Ichack]";
+		mes "A área residencial é divivida em 2 áreas.";
+		mes "A "+F_Navi("área da residência inferior","dicastes01,136,106")+" têm como referência o ponteiro 7 do relógio, e a "+F_Navi("área superior","dicastes01,280,283")+" tem como referência o ponteiro 1 do relógio.";
+		viewpoint 1,280,283,1,0x01FF01;
+		viewpoint 1,136,106,2,0x0066FF;
+		close;
+	case 3:
+		mes "[Viajante Ichack]";
+		mes "Devido aos perigos, precisamos de mais segurança...";
+		mes "Você já foi a "+F_Navi("sala de treinamento","dicastes01,255,172")+"? Os guardas parecem que nunca dormem!";
+		viewpoint 1,255,172,3,0xFFCCCC;
+		close;
+	case 4:
+		mes "[Viajante Ichack]";
+		mes "Esta é uma das razões mais importantes pelas quais eles vivem aqui.";
+		mes "Se você for para a "+F_Navi("Mineradora","dicastes01,97,256")+", você poderá ver o Brádium recentemente refinado.";
+		viewpoint 1,97,256,4,0x0066FF;
+		close;
+	case 5:
+		mes "[Viajante Ichack]";
+		mes "Embora eu tenha chegado aqui como o primeiro aventureiro, o dono do Bar foi o primeiro habitante de El Dicastes.";
+		mes "O "+F_Navi("Bar de Bumen Florine","dicastes01,136,106")+" está localizado abaixo da área residencial inferior.";
+		mes "Ele pode ter algumas informações valiosas para você.";
+		viewpoint 1,136,106,5,0xFF3300;
+		close;
+	case 6:
+		mes "[Viajante Ichack]";
+		mes "Os "+F_Navi("gatos","dicastes01,199,39")+" parecem não possuir um bom relacionamento com os Sapha, assim como nós.";
+		mes "Talvez seja porque uma negociação esteja ocorrendo.";
+		mes "Pobres gatos. Eles devem estar tremendo de frio lá.";
+		next;
+		mes "[Viajante Ichack]";
+		mes "Você pode encontrar a agência do lado externo dos portões.";
+		viewpoint 1,199,39,6,0x9933FF;
+		close;
+	}
+OnTouch:
+	if (ep13_3_invite == 6) 
+		emotion e_gasp,0;
+	end;
+}

@@ -1,0 +1,160 @@
+//===== Cronus Script ======================================
+//= Guias de Juno
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.3
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias da cidade de Juno.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Revisado e Otimizado. [Euphy]
+//= 1.2 Atualização do Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//==========================================================
+
+yuno,59,212,4	script	Guia de Juno#yuno01::GuideJuno	8_F_GIRL,{
+	mes "[Guia de Juno]";
+	mes "Um lugar que tem a visão do futuro, e lhe dá forma no presente.";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" a cidade de ^8B4513Juno^000000!";
+	F_Navi("[Guia de Juno]");
+	next;
+	while (1) {
+		switch(select("[ Principais Lugares ]:[ Lojas & Ajudantes ]:Remover indicações do mini-mapa:Cancelar")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Loja de Utilidades ]:[ Forja ]:[ Aeroporto ]:[ Prédio do Governo ]:[ Rua das Livrarias ]:[ Bar & Hospedaria ]:[ Castelo dos Sábios ]:[ Academia de Monstros ]:[ Biblioteca da República ]:[ Loja de Armas & Armaduras ]:[ Praça de Juperos ]:[ Museu de Monstros ]:[ Academia Mágica de Schweicherbil ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Loja de Utilidades","yuno,194,140","^FF0000");
+					viewpoint 1,194,140,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Forja","yuno,120,137","^FF4500");
+					viewpoint 1,120,137,1,0xFF4500;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Aeroporto","yuno,16,261","^DAA520");
+					viewpoint 1,16,261,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Prédio do Governo","yuno,157,317","^008000");
+					viewpoint 1,157,317,3,0x008000;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Rua das Livrarias","yuno,172,100","^0000FF");
+					viewpoint 1,172,100,4,0x0000FF;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Bar & Hospedaria","yuno,51,105","^000080");
+					viewpoint 1,51,105,5,0x000080;
+					next;
+					break;
+				case 7:
+					callsub L_Mark, F_Navi("Castelo dos Sábios","yuno,90,318","^800080");
+					viewpoint 1,90,318,6,0x800080;
+					next;
+					break;
+				case 8:
+					callsub L_Mark, F_Navi("Academia de Monstros","yuno,95,184","^834683");
+					viewpoint 1,95,184,7,0x834683;
+					next;
+					break;
+				case 9:
+					callsub L_Mark, F_Navi("Biblioteca da República","yuno,338,203","^4B0082");
+					viewpoint 1,338,203,8,0x4B0082;
+					next;
+					break;
+				case 10:
+					callsub L_Mark, F_Navi("Loja de Armas & Armaduras","yuno,120,137","^008080");
+					viewpoint 1,120,137,9,0x008080;
+					next;
+					break;
+				case 11:
+					callsub L_Mark, F_Navi("Praça de Juperos","yuno,115,57","^FF1493");
+					viewpoint 1,115,157,10,0xFF1493;
+					next;
+					break;
+				case 12:
+					callsub L_Mark, F_Navi("Museu de Monstros","yuno,278,290","^DA70D6");
+					viewpoint 1,278,290,11,0xDA70D6;
+					next;
+					break;
+				case 13:
+					mes "[Guia de Juno]";
+					mes "Deixe-me marcar a localização da "+F_Navi("Academia Mágica de Schweicherbil","yuno,323,280","^CD1039")+" no seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?"; 
+					viewpoint 1,323,280,12,0xCD1039;
+					next;
+					break;
+				case 14:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Funcionárias Kafra ]:[ Oficial do Éden ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, "^FA8072Funcionárias Kafra^000000";
+					viewpoint 1,152,187,13,0xFA8072;
+					viewpoint 1,277,221,14,0xFA8072;
+					viewpoint 1,327,108,15,0xFA8072;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Oficial do Éden","yuno,144,189","^803232");
+					viewpoint 1,144,189,16,0x803232;
+					next;
+					break;
+				case 3:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Juno]";
+			mes "Claro, vou remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,194,140,0,0xFFFFFF;
+			viewpoint 2,120,137,1,0xFFFFFF;
+			viewpoint 2,16,261,2,0xFFFFFF;
+			viewpoint 2,157,317,3,0xFFFFFF;
+			viewpoint 2,172,100,4,0xFFFFFF;
+			viewpoint 2,51,105,5,0xFFFFFF;
+			viewpoint 2,90,318,6,0xFFFFFF;
+			viewpoint 2,95,184,7,0xFFFFFF;
+			viewpoint 2,338,203,8,0xFFFFFF;
+			viewpoint 2,120,137,9,0xFFFFFF;
+			viewpoint 2,115,157,10,0xFFFFFF;
+			viewpoint 2,278,290,11,0xFFFFFF;
+			viewpoint 2,323,280,12,0xFFFFFF;
+			viewpoint 2,152,187,13,0xFFFFFF;
+			viewpoint 2,277,221,14,0xFFFFFF;
+			viewpoint 2,327,108,15,0xFFFFFF;
+			viewpoint 2,144,189,16,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[Juno Guide]";
+			mes "Divirta-se em suas aventuras!";
+			close;
+		}
+	}
+	end;
+L_Mark:
+	mes "[Guia de Juno]";
+	mes "Marcarei a localização de "+getarg(0)+" no seu mini-mapa.";
+	mes "Gostaria de verificar outras localizações?";
+	return;
+}
+yuno,153,47,4	duplicate(GuideJuno)	Guia de Juno#yuno02	8_F_GIRL

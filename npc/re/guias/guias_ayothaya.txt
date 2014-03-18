@@ -1,0 +1,89 @@
+//===== Cronus Script ======================================
+//= Guias de Ayothaya
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.3
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias da cidade de Ayothaya.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Revisado. [Euphy]
+//= 1.2 Atualização do Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//==========================================================
+
+ayothaya,203,169,4	script	Guia de Ayothaya Noi#01ay	4_F_THAIGIRL,{
+	if (strnpcinfo(0) == "Guia de Ayothaya Noi#01ay")
+		set .@n$, "[Noi]";
+	else
+		set .@n$, "[Noa]";
+	mes .@n$;
+	mes "Olá Bem-vind"+((Sex) ? "o":"a")+" à ^8B4513Ayothaya^000000.";
+	mes "Esta cidade está ligada a um rio que atravessa a floresta selvagem.";
+	mes "É um país muito calmo. Tire um tempo para olhar em volta.";
+	F_Navi(.@n$);
+	while (1) {
+		next;
+		switch(select("[ Loja de Armas ]:[ Loja de Utilidades ]:[ Taverna ]:[ Santuário ]:[ Local de Pesca ]:[ Aibakthing ]:Remover indicações do mini-mapa:Cancelar")) {
+		case 1:
+			mes .@n$;
+			mes "A "+F_Navi("Loja de Armas","ayothaya,163,90","^0000FF")+" em Ayothaya tem armas especiais.";
+			mes "Você pode achar ótimas armas lá.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 1,163,90,0,0x0A82FF;
+			break;
+		case 2:
+			mes .@n$;
+			mes "Nossos cidadãos compram muitos produtos na "+F_Navi("Loja de Utilidades","ayothaya,131,86","^006400")+".";
+			mes "Certifique-se de comprar tudo o que precisa lá.";
+			mes "Você precisa de mais algo?";
+			viewpoint 1,131,86,1,0xAAFF00;
+			break;
+		case 3:
+			mes .@n$;
+			mes "Parte da aventura é coletar informações.";
+			mes "A "+F_Navi("Taverna","ayothaya,229,72","^008080")+" está lotada com muitos viajantes aonde você pode conseguir informações úteis.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 1,229,72,2,0x008080;
+			break;
+		case 4:
+			mes .@n$;
+			mes "Para acalmar seu coração, vá ao "+F_Navi("Santuário","ayothaya,208,280","^FF1493")+" e faça uma oração.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 1,208,280,3,0xFF1493;
+			break;
+		case 5:
+			mes .@n$;
+			mes "Ayothaya fica próxima a praia, então a maioria das pessoas apreciam pescar.";
+			mes "Eles realmente adoram pescar.";
+			mes "Vá "+F_Navi("pescar","ayothaya,255,99","^8B4513")+" e tente apanhar um peixe grande.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 1,255,99,4,0x8B4513;
+			break;
+		case 6:
+			mes .@n$;
+			mes "Se quiser retornar para casa encontre "+F_Navi("Aibakthing","ayothaya,151,68","^00BFFF")+" e peça para ele te mandar de volta.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 1,151,68,5,0x00BFFF;
+			break;
+		case 7:
+			mes .@n$;
+			mes "Irei remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,1,1,0,0xFFFFFF;
+			viewpoint 2,1,1,1,0xFFFFFF;
+			viewpoint 2,1,1,2,0xFFFFFF;
+			viewpoint 2,1,1,3,0xFFFFFF;
+			viewpoint 2,1,1,4,0xFFFFFF;
+			viewpoint 2,1,1,5,0xFFFFFF;
+			break;
+		case 8:
+			mes .@n$;
+			mes "Aproveite sua viagem~!";
+			close;
+		}
+	}
+}
+ayothaya,146,86,4	duplicate(Guia de Ayothaya Noi#01ay)	Guia de Ayothaya Noa#02ay	4_F_THAIGIRL

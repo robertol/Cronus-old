@@ -1,0 +1,159 @@
+//===== Cronus Script ======================================
+//= Guias de Geffen
+//===== Por: ===============================================
+//= L0ne_W0lf
+//===== Versão Atual: ======================================
+//= 1.3
+//===== Descrição: =========================================
+//= [Conversação Oficial]
+//= Guias da cidade de Geffen.
+//===== Comentários Adicionais: ============================
+//= 1.0 Primeira versão, guia da renovação.
+//= 1.1 Revisado e Otimizado. [Euphy]
+//= 1.2 Atualização do Sistema de Navegação. [Euphy]
+//= 1.3 Traduzido para pt-BR [Eski]
+//==========================================================
+
+geffen,203,116,4	script	Guia#01geffen::GuideGeffen	4_M_GEF_SOLDIER,{
+	cutin "gef_soldier",2;
+	mes "[Guia de Geffen]";
+	mes "Bem-vind"+((Sex) ? "o":"a")+" a ^8B4513Geffen^000000, a Cidade da Magia.";
+	mes "Você precisa de ajuda para explorar a cidade?";
+	F_Navi("[Guia de Geffen]");
+	next;
+	while (1) {
+		switch(select("[ Principais Lugares ]:[ Lojas & Ajudantes ]:Remover marcadores do mini-mapa:Cancelar")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Academia de Magia ]:[ Torre de Geffen ]:[ Fonte ]:[ Loja de Utilidades ]:[ Compra & Reparação de Equipamentos ]:[ Hotel ]:[ Taverna ]:[ Forjador Christopher ]:Menu Anterior")) {
+				case 1:
+					mes "[Guia de Geffen]";
+					mes "A "+F_Navi("Academia de Magia","geffen,61,180","^B9062F")+" trata de todos os assuntos relacionados a magia, incluindo as mudanças de classe.";
+					mes "Deixe-me marcar sua localização em seu mini-mapa.";
+					mes "Gostaria de verificar outras localizações?";
+					viewpoint 1,61,180,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Torre de Geffen","geffen,120,114","^0000FF");
+					viewpoint 1,120,114,1,0x0000FF;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Fonte","geffen,126,48","^FF5400");
+					viewpoint 1,126,48,2,0xFFB400;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Loja de Utilidades","geffen,44,86","^006400");
+					viewpoint 1,44,86,3,0xAAFF00;
+					next;
+					break;
+				case 5:
+					mes "[Guia de Geffen]";
+					mes "Se você desejar "+F_Navi("Comprar ou Reparar Equipamentos","geffen,99,140","^7F3300")+", então este é o lugar que você deve visitar.";
+					mes "Deixe-me marcar sua localização em seu mini-mapa. Gostaria de verificar outras localizações?";
+					viewpoint 1,99,140,4,0xD2691E;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Hotel","geffen,172,174","^800080");
+					viewpoint 1,172,174,5,0xDA70D6;
+					next;
+					break;
+				case 7:
+					callsub L_Mark, F_Navi("Taverna","geffen,138,138","^B9062F");
+					viewpoint 1,138,138,6,0xFF0000;
+					next;
+					break;
+				case 8:
+					mes "[Guia de Geffen]";
+					mes "A "+F_Navi("Forjador Christopher","geffen,182,59","^0000FF")+" é o lugar onde você pode adquirir materiais de Refinamento.";
+					mes "Lá costumava ser a antiga Guilda dos Ferreiros.";
+					viewpoint 1,182,59,6,0x0000FF;
+					next;
+					break;
+				case 9:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Oficial do Éden ]:[ Funcionária Kafra ]:[ Loja de Bichinhos ]:[ Cozinheiro Auxiliar ]:[ Guia Arcano de Dimensões ]:Menu Anterior")) {
+				case 1:
+					callsub L_Mark, F_Navi("Oficial do Éden","geffen,132,66","^B9062F");
+					viewpoint 1,61,180,7,0xFF0000;
+					viewpoint 1,132,66,8,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, "^FF5400Funcionária Kafra^000000";
+					viewpoint 1,203,123,10,0xFFB400;
+					viewpoint 1,120,62,11,0xFFB400;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Loja de Bichinhos","geffen,193,152","^006400");
+					viewpoint 1,193,152,12,0xAAFF00;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Cozinheiro Auxiliar","geffen,196,111","^7F3300");
+					viewpoint 1,196,111,13,0xD2691E;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Guia Arcano de Dimensões","geffen,140,196","^800080");
+					viewpoint 1,140,196,14,0xDA70D6;
+					next;
+					break;
+				case 6:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Geffen]";
+			mes "Claro, vou remover todas as indicações do seu mini-mapa.";
+			mes "Há mais algo que eu possa fazer por você?";
+			viewpoint 2,1,1,0,0xFFFF00;
+			viewpoint 2,1,1,1,0x000000;
+			viewpoint 2,1,1,2,0xFF0000;
+			viewpoint 2,1,1,3,0xFFFF00;
+			viewpoint 2,1,1,4,0xFFFF00;
+			viewpoint 2,1,1,5,0xFFFF00;
+			viewpoint 2,1,1,6,0xFFFF00;
+			viewpoint 2,1,1,7,0xFFFF00;
+			viewpoint 2,1,1,8,0xFFFF00;
+			viewpoint 2,1,1,9,0xFFFF00;
+			viewpoint 2,1,1,10,0xFFFF00;
+			viewpoint 2,1,1,11,0xFFFF00;
+			viewpoint 2,1,1,12,0xFFFF00;
+			viewpoint 2,1,1,13,0xFFFF00;
+			viewpoint 2,1,1,14,0xFFFF00;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Geffen]";
+			mes "Aproveite a sua estadia.";
+			close2;
+			cutin "gef_soldier",255;
+			end;
+		}
+	}
+	end;
+L_Mark:
+	mes "[Guia de Geffen]";
+	mes "Deixe-me marcar para você a localização para"+getarg(0)+"^000000 em seu mini-mapa.";
+	mes "Gostaria de verificar outras localizações?";
+	return;
+}
+
+geffen,118,62,0	duplicate(GuideGeffen)	Guia#02geffen	4_M_GEF_SOLDIER
+geffen,36,123,6	duplicate(GuideGeffen)	Guia#03geffen	4_M_GEF_SOLDIER
+geffen,123,203,4	duplicate(GuideGeffen)	Guia#04geffen	4_M_GEF_SOLDIER
