@@ -2,11 +2,11 @@
 //= Bullet Dealers
 //===== Por =====================================================
 //= Playtester, Paradox924X
-//===== Versão ==================================================
+//===== Versï¿½o ==================================================
 //= 1.7
-//===== Descrição ===============================================
-//= Negociador de Projéteis.
-//===== Comentários =============================================
+//===== Descriï¿½ï¿½o ===============================================
+//= Negociador de Projï¿½teis.
+//===== Comentï¿½rios =============================================
 //= 1.0 First version [Playtester]
 //= 1.1 Converted from Aegis [Paradox924X]
 //= 1.2 More optimized conversion [Legionaire]
@@ -15,17 +15,17 @@
 //= 1.4 Updated to match AEGIS script. [Kisuka]
 //= 1.5 Updated to match AEGIS script again. [Masao]
 //= 1.6 Moved Izlude duplicate to pre-re/re paths. [Euphy]
-//= 1.7 Tradução [Shermie]
+//= 1.7 Traduï¿½ï¿½o [Shermie]
 //===============================================================
 
-alberta,118,160,3	script	Vendedor de Projéteis#e::bdt	4_M_04,{
+alberta,118,160,3	script	Vendedor de Projï¿½teis#e::bdt	4_M_04,{
 	if (BaseJob == Job_Gunslinger) {
 		mes "[Tony]";
-		mes "Eu sou Tony, o negociador de projéteis.";
-		mes "Venha a mim sempre que precisar de munições.";
-		mes "Apenas me traga os materiais, e eu irei lhe fazer os projéteis que precisar.";
+		mes "Eu sou Tony, o negociador de projï¿½teis.";
+		mes "Venha a mim sempre que precisar de muniï¿½ï¿½es.";
+		mes "Apenas me traga os materiais, e eu irei lhe fazer os projï¿½teis que precisar.";
 		next;
-		switch(select("Esfera Venenosa:Esfera de Chamas:Esfera de Relâmpagos:Esfera Cegante:Esfera Congelante:Cancelar")) {
+		switch(select("Esfera Venenosa:Esfera de Chamas:Esfera de Relï¿½mpagos:Esfera Cegante:Esfera Congelante:Cancelar")) {
 		case 1: callfunc "Bullet_Trade",937,10,13205; break;
 		case 2: callfunc "Bullet_Trade",7097,2,13203; break;
 		case 3: callfunc "Bullet_Trade",7053,3,13204; break;
@@ -35,20 +35,20 @@ alberta,118,160,3	script	Vendedor de Projéteis#e::bdt	4_M_04,{
 			mes "[Tony]";
 			mes "Hmm. Ok.";
 			mes "Volte quando desejar!";
-			mes "Eu, Tony, o Negociador de Projéteis!";
+			mes "Eu, Tony, o Negociador de Projï¿½teis!";
 			mes "Sempre estarei aqui~!!!";
 			close;
 		}
 	}
 	mes "[Tony]";
-	mes "Ei, meu nome é Tony.";
-	mes "Eu sou responsável pela distribuição e fabricação";
-	mes "de projéteis para Justiceiros.";
+	mes "Ei, meu nome ï¿½ Tony.";
+	mes "Eu sou responsï¿½vel pela distribuiï¿½ï¿½o e fabricaï¿½ï¿½o";
+	mes "de projï¿½teis para Justiceiros.";
 	next;
 	mes "[Tony]";
-	mes "Lamento se você veio";
-	mes "até aqui para comprar munição.";
-	mes "Eu só posso negociar com Justiceiros credenciados.";
+	mes "Lamento se vocï¿½ veio";
+	mes "atï¿½ aqui para comprar muniï¿½ï¿½o.";
+	mes "Eu sï¿½ posso negociar com Justiceiros credenciados.";
 	close;
 }
 
@@ -56,35 +56,35 @@ function	script	Bullet_Trade	{
 	mes "[Tony]";
 	mes "Para cada conjunto de";
 	mes "30 "+getitemname(getarg(2))+"s,";
-	mes "você tem que me dar";
+	mes "vocï¿½ tem que me dar";
 	mes "1 Emveretarcon,";
 	mes "1 Phracon, e";
 	mes ""+getarg(1)+" "+getitemname(getarg(0))+".";
 	next;
 	mes "[Tony]";
-	mes "Lembre que só posso entregar um máximo de 500 caixas de 30 projéteis por negociação.";
-	mes "Por favor entre com o número de caixas de projéteis que você gostaria.";
-	mes "Caso queira parar a negociação, apenas digite '0'.";
+	mes "Lembre que sï¿½ posso entregar um mï¿½ximo de 500 caixas de 30 projï¿½teis por negociaï¿½ï¿½o.";
+	mes "Por favor entre com o nï¿½mero de caixas de projï¿½teis que vocï¿½ gostaria.";
+	mes "Caso queira parar a negociaï¿½ï¿½o, apenas digite '0'.";
 	next;
 	input .@amount;
 	if (.@amount < 1 || .@amount > 500) {
 		mes "[Tony]";
-		mes "Ei, não posso lhe dar tantos projéteis.";
-		mes "Não esqueça de digitar um número menor que 500 se você quiser trocar alguns itens por alguns projéteis.";
+		mes "Ei, nï¿½o posso lhe dar tantos projï¿½teis.";
+		mes "Nï¿½o esqueï¿½a de digitar um nï¿½mero menor que 500 se vocï¿½ quiser trocar alguns itens por alguns projï¿½teis.";
 		close;
 	}
 	if (countitem(1010) >= .@amount && countitem(1011) >= .@amount && countitem(getarg(0)) >= (.@amount*getarg(1))) {
 		if (checkweight(getarg(2),.@amount * 30) == 0) {
 			mes "[Tony]";
-			mes "Nossa! Seu inventário não possui espaço o suficiente para esta quantia de projéteis.";
-			mes "Volte quando tiver mais espaço no inventário.";
-			mes "Tente guardar algumas coisas no Armazém da Kafra.";
+			mes "Nossa! Seu inventï¿½rio nï¿½o possui espaï¿½o o suficiente para esta quantia de projï¿½teis.";
+			mes "Volte quando tiver mais espaï¿½o no inventï¿½rio.";
+			mes "Tente guardar algumas coisas no Armazï¿½m da Kafra.";
 			close;
 		} else {
 			mes "[Tony]";
 			mes "Muito bom, tudo parece estar em ordem.";
-			mes "Deixe-me pegar esses materiais, e aqui estão seus projéteis.";
-			mes "Foi um prazer negociar com você~";
+			mes "Deixe-me pegar esses materiais, e aqui estï¿½o seus projï¿½teis.";
+			mes "Foi um prazer negociar com vocï¿½~";
 			delitem 1010,.@amount;
 			delitem 1011,.@amount;
 			delitem getarg(0),.@amount * getarg(1);
@@ -93,7 +93,7 @@ function	script	Bullet_Trade	{
 		}
 	} else {
 		mes "[Tony]";
-		mes "Você não possui";
+		mes "Vocï¿½ nï¿½o possui";
 		mes "os itens que";
 		mes "eu necessito.";
 		mes "Prepara-os e volte.";
