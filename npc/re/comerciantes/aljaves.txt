@@ -1,0 +1,121 @@
+//===== Cronus Script ===========================================
+//= Arrow Quivers
+//===== Por: ====================================================
+//= Muad_Dib (Prometheus Project); L0ne_W0lf
+//===== Versão Atual: ===========================================
+//= 1.2
+//===== Descrição: ==============================================
+//= [Official Conversion]
+//= Turns arrows into Arrow Quivers.
+//= Breakdown of Subroutine "S_BuyQuiver"
+//= arg(0): Type of Arrow to be packaged (item ID).
+//= arg(1): How many of each 'getarg(0)' arrow per quiver.
+//= arg(2): The cost of making a 'getarg(0)' quiver.
+//= arg(3): The quiver given by the NPC (item ID).
+//===== Comentários Adicionais: =================================
+//= 1.0 Added Mora NPC. [Euphy]
+//= 1.1 Updated to match the official scripts. [Euphy]
+//= 1.2 Tradução [Evanio]
+//===============================================================
+
+mora,106,117,3	script	Criador de Aljaves#mora	4_M_RAFLE_GR,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Criador de Aljaves]";
+		mes "Você está carregando muitas coisas consigo.";
+		mes "Libere um pouco de espaço no seu inventário. Volte com espaço livre que eu irei te dizer algo interessante.";
+		close;
+	}
+	if (MaxWeight - Weight < 2000) {
+		mes "[Criador de Aljaves]";
+		mes "Você parece estar esgotado com todas essas cargas.";
+		mes "Libere um pouco de espaço no seu inventário. Volte com espaço livre que eu irei te dizer algo interessante.";
+		close;
+	}
+	mes "[Criador de Aljaves]";
+	mes "Os Cidadões de Mora sempre perguntam sobre o que é uma aljave. Eles simplesmente não sabem como o mundo funciona.";
+	mes "Não é de admirar que eles não sabem de nada sobre aljaves - ficam espalhados sobre as folhas durante o dia todo.";
+	next;
+	switch(select("Por favor, faça-me uma aljave.:O que é uma aljave?")) {
+	case 1:
+		mes "[Criador de Aljaves]";
+		mes "Finalmente alguém aprecia uma aljave!";
+		mes "Eu posso fazer Aljave de Felchas Élficas e Aljave de Flechas de Caça.";
+		mes "Qual desses você precisa?";
+		next;
+		switch(select("Aljave de Felchas Élficas:Aljave de Flechas de Caça:Eu não preciso de uma Aljave.")) {
+		case 1: callsub S_BuyQuiver,1773,500,500,12575; //Arrow_Of_Elf_Cntr
+		case 2: callsub S_BuyQuiver,1774,500,500,12576; //Hunting_Arrow_Cntr
+		case 3:
+			mes "[Criador de Aljaves]";
+			mes "Você pode comprar as flechas com o comerciante aqui do meu lado.";
+			close;
+		}
+	case 2:
+		mes "[Criador de Aljaves]";
+		mes "Uma flecha pode ser fina e leve, mas levando centenas e milhares de flechas é como carregar um registro inteiro.";
+		next;
+		mes "[Criador de Aljaves]";
+		mes "Mas quando você tem uma aljave, você pode colocar flechas nela e economizar peso e espaço.";
+		mes "Se você estiver interessado em uma, eu posso faze-la para você.";
+		close;
+	}
+	end;
+
+S_BuyQuiver:
+	if (countitem(getarg(0)) < getarg(1)) {
+		mes "[Criador de Aljaves]";
+		mes "Traga mais de "+getarg(1)+" "+getitemname(getarg(0))+" e eu farei uma aljave pra você.";
+		close;
+	}
+	mes "[Criador de Aljaves]";
+	mes "Oh, vejo que você tem "+getitemname(getarg(0))+" em suas mãos!";
+	mes "Está interessado em usar em uma aljave? Será muito conveniente!";
+	mes "Se você estiver interessado, posso negociar "+getarg(1)+" daquelas flechas para uma dessas aljaves por ^FF3131"+getarg(2)+" zeny^000000.";
+	next;
+	switch(select("Trocar todas as flechas que tenho:Obter apenas uma aljave:Não trocar")) {
+	case 1:
+		set .@arrows, countitem(getarg(0));
+		set .@quiver, .@arrows / getarg(1);
+		set .@arrows_used, .@quiver * getarg(1);
+		set .@arrow_zeny01, .@quiver * getarg(2);
+		mes "Você possui : ^3131FF"+.@arrows+"^000000 flechas.";
+		mes "Estão disponíveis : ^3131FF"+.@quiver+"^000000 aljaves.";
+		mes "Você precisará de : ^3131FF"+.@arrow_zeny01+" zeny^000000";
+		next;
+		mes "Completar troca?";
+		next;
+		if(select("Trocar:Não trocar") == 2) {
+			mes "[Criador de Aljaves]";
+			mes "Eiii, você não está duvidando das minhas habilidades não é?";
+			close;
+		}
+		break;
+	case 2:
+		set .@quiver, 1;
+		set .@arrows_used, getarg(1);
+		set .@arrow_zeny01, getarg(2);
+		set .@zeny_mes,1;
+		break;
+	case 3:
+		mes "[Criador de Aljaves]";
+		mes "Eiii, você não está duvidando das minhas habilidades não é?";
+		close;
+	}
+	if (Zeny < .@arrow_zeny01) {
+		mes "[Criador de Aljaves]";
+		if (.@zeny_mes == 1)
+			mes "Eu disse que ia aceitar moedas de humanos apenas de você, e você ainda não quer gastar o dinheiro?";
+		else
+			mes "Você realmente não espera conseguir em suas mãos uma obra-prima por nada, não é?";
+		close;
+	}
+	mes "[Criador de Aljaves]";
+	mes "Eii, você está aqui.";
+	mes "Isto ^3131FFnão é algo que você precisa saber^000000 - tente lembrar disso.";
+	mes "^FF0000Você não pode usar aljaves quando o seu peso é superior a 70%.^000000";
+	mes "É melhor manter isso em mente, ou você poderá ficar em apuros depois.";
+	set Zeny, Zeny-.@arrow_zeny01;
+	delitem getarg(0),.@arrows_used;
+	getitem getarg(3),.@quiver;
+	close;
+}
