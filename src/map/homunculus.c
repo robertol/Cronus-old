@@ -1207,7 +1207,7 @@ void homunculus_exp_db_read(void) {
 			return;
 		}
 		while(fgets(line, sizeof(line), fp) && j < MAX_LEVEL) {
-			if(line[0] == '/' && line[1] == '/')
+			if((line[0] == '/' && line[1] == '/') || line[0] == '\0' || line[0] == '\n' || line[0] == '\r')
 				continue;
 
 			if (!(homun->exptable[j++] = strtoul(line, NULL, 10)))
