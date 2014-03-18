@@ -1,13 +1,13 @@
-//===== Hercules Script ======================================
-//= Treasure Room Protection
-//===== By: ==================================================
+//===== Cronus Script ======================================= 
+//= Proteção da Sala Do Tesouro
+//===== Por: ================================================== 
 //= Masao
-//===== Current Version: =====================================
+//===== Versão Atual: ===================================== 
 //= 1.1
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= Warps every Player out of the Treasure Room except for the
 //= Guildleader.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 Converted from the official script.
 //= 1.1 Reverted back and optimized. [Daegaladh]
 //============================================================

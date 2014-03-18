@@ -1,17 +1,15 @@
-//===== Hercules Script ======================================
-//= War of Emperium (Prontera)
-//===== By: ==================================================
+//===== Cronus Script ========================================
+//= Guerra do Emperium (Prontera)
+//===== Por: =================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.4
-//===== Description: =========================================
-//= NPCs that relate to Prontera Guild Castle 5
-//===== Additional Comments: =================================
-//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
-//= 1.1 Corrected flag-in spawn point. [L0ne_W0lf]
-//= 1.2 Corrected treasure room switch coordinates. [L0ne_W0lf]
-//= 1.3 Removed dialog from interior flags. [L0ne_W0lf]
-//= 1.4 Partially rewrote Script. [Masao]
+//===== Versão Atual: ========================================
+//= 1.5
+//===== Compatível Com: ======================================
+//= Cronus GIT;
+//===== Descrição: ===========================================
+//= NPCs referentes ao 5º Castelo de Prontera
+//===== Comentários Adicionais: ==============================
+//= 1.5 Adicionado diálogos Oficiais do bRO. [Axl]
 //============================================================
 
 // Guild Flags (Outside Castle)
@@ -21,25 +19,25 @@
 	set .@GID, GetCastleData("prtg_cas05",1);
 
 	if (.@GID == 0) {
-		mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
+		mes " [Decreto do Reino de Rune Midgard]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Conforme o Pacto do Reino de Rune Midgard";
+		mes "e o Feudo das Valquírias,";
+		mes "declaro que este Castelo não possui um Senhor.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Ao Clã que for bravo o bastante";
+		mes "e, superarando os terríveis desafios,";
+		mes "quebrar o Emperium,";
+		mes "será dada a posse deste Castelo";
+		mes "apoiado pelo nosso Rei.";
 		close;
 	}
 	if (getcharid(2) == .@GID) {
-		mes "[ Echoing Voice ]";
-		mes "Brave ones...";
-		mes "Do you wish to return to your honorable place?";
-		next;
-		if(select("Return to the guild castle.:Quit.") == 1) {
+			mes "[ Voz Ecoante ]";
+			mes "Bravo guerreiro......";
+			mes "Deseja retornar ao seu lugar de glória?";
+			next;
+			if (select("Sim.: Não.") == 1) {
 			close2;
 			if (getcharid(2) == GetCastleData("prtg_cas05",1)) {
 				warp "prtg_cas05",52,41;
@@ -49,16 +47,16 @@
 		}
 		close;
 	}
-	mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
+	mes "[Decreto do Reino de Rune Midgard]";
 	mes " ";
-	mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-	mes "we approve that this place is in";
-	mes "the private prossession of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild.";
+	mes "1. Conforme o Pacto do Reino de Rune Midgard";
+	mes "e o Feudo das Valquírias,";
+	mes "declaro que este castelo pertence ao Clã ^ff0000" + GetGuildName(.@GID) + "^000000 .";
 	mes " ";
-	mes "2. The guild Master of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild is";
-	mes "^ff0000"+GetGuildMaster(.@GID)+"^000000";
-	mes "If there is anyone who objects to this,";
-	mes "prove your strength and honor with a steel blade in your hand.";
+	mes "2. O Líder do Clã ^ff0000"+ GetGuildName(.@GID) + "^000000 se chama";
+	mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+	mes "Se alguém se opõe a este decreto";
+	mes "desembainhe sua espada para fazer valer sua vontade.";
 	close;
 
 OnRecvCastlePt05:
@@ -96,7 +94,7 @@ prontera,165,194,5	duplicate(InsideFlagsPR5)	Gondul#13	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-prtg_cas05,52,41,4	duplicate(guildkafra)	Kafra Staff#prtg_cas05	4_F_KAFRA1
+prtg_cas05,52,41,4	duplicate(guildkafra)	Kafra#prtg_cas05	4_F_KAFRA1
 
 // Steward
 //============================================================
@@ -105,11 +103,10 @@ prtg_cas05,36,37,4	duplicate(cm)	Raynor#prtg_cas05	1_M_JOBTESTER
 // Treasure Room Exit
 //============================================================
 prtg_cas05,281,176,0	script	#Lever_PR05	HIDDEN_NPC,{
-
 	mes " ";
-	mes "There's a small lever. Will you pull it?";
+	mes "Há uma pequena alavanca, você deseja acioná-la? ";
 	next;
-	if(select("Pull.:Do not.") == 1) {
+	if(select("Acionar.:Não acionar.") == 1) {
 		close2;
 		warp "prtg_cas05",36,38;
 		end;

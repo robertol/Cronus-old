@@ -1,15 +1,16 @@
-//===== Hercules Script ======================================
-//= War of Emperium (Al De Baran)
-//===== By: ==================================================
+//===== Cronus Script ========================================
+//= Guerra do Emperium (Al De baran)
+//===== Por: =================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.2
+//===== Versão Atual: ========================================
+//= 1.3
 //===== Description: =========================================
-//= NPCs that relate to Al De Baran Guild Castle 3
+//= NPCs referentes ao 3º Castelo de Al De baran
 //===== Additional Comments: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
 //= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
 //= 1.2 Partially rewrote Script. [Masao]
+//= 1.3 Adicionado diálogos Oficiais do bRO. [Axl]
 //============================================================
 
 // Guild Flag (Outside Castle)
@@ -19,26 +20,26 @@
 	set .@GID, GetCastleData("aldeg_cas03",1);
 
 	if (.@GID == 0) {
-		mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
+		mes "[Decreto do Reino de Rune Midgard]]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Conforme o Pacto do Reino de Rune Midgard";
+		mes "e o Feudo de Luina,";
+		mes "declaro que este Castelo não possui um Senhor.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Ao Clã que for bravo o bastante";
+		mes "e, superarando os terríveis desafios,";
+		mes "quebrar o Emperium,";
+		mes "será dada a posse deste Castelo";
+		mes "apoiado pelo nosso Rei.";
 		close;
 	}
 	if (getcharid(2) == .@GID) {
-		mes "[ Echoing Voice ]";
-		mes "Brave ones...";
-		mes "Do you wish to return to your honorable place?";
+		mes "[ Voz Ecoante ]";
+		mes "Bravo guerreiro......";
+		mes "Deseja retornar ao seu lugar de glória?";
 		next;
-		if(select("Return to the guild castle.:Quit.") == 1) {
-			close2;
+		if (select("Sim.: Não.") == 1) {
+		close2;
 			if (getcharid(2) == GetCastleData("aldeg_cas03",1)) {
 				warp "aldeg_cas03",205,186;
 				end;

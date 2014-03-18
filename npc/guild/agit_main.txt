@@ -1,10 +1,10 @@
-//===== Hercules Script ======================================
+//===== Cronus Script ======================================
 //= War of Emperium Guild Template File
-//===== By: ==================================================
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 2.0
-//===== Description: =========================================
+//===== Descrição: =========================================
 //= [ Aegis Conversion]
 //= ----------------------------------------------------------
 //= - THIS FILE IS REQUIRED FOR GUILD CASTLES TO FUNCTION.
@@ -29,7 +29,7 @@
 //=   Chests will NOT be saved anymore in the event of crashes.
 //=   Treasures will NOT spawn on a location that already has
 //=   treasure chest spawned.
-//===== Additional Comments: =================================
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
 //= 1.1 Daily investement will now be reset. [L0ne_W0lf]
 //=     Template will no longer try to spawn chests.
@@ -102,7 +102,7 @@ OnAgitBreak:
 	set .@GID,getcharid(2);
 	// Exibição do log de erro caso um personagem sem Clã quebra um Emperium (Isso nunca deve ocorrer em padrões oficiais).
 	if (.@GID <= 0) {
-		set .@notice$,"O personagem "+strcharinfo(0)+" ("+getcharid(0)+") quebrou o Emperium do Castelo:: "+strnpcinfo(2)+" sem um Clã. Nenhum dado será salvo e o Emperium retornará.";
+		set .@notice$,"O Jogador "+strcharinfo(0)+" ("+getcharid(0)+") quebrou o Emperium do Castelo:: "+strnpcinfo(2)+" sem um Clã. Nenhum dado será salvo e o Emperium retornará.";
  		logmes .@notice$; debugmes .@notice$;
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 		end;
@@ -120,7 +120,7 @@ OnAgitBreak:
 	SetCastleData strnpcinfo(2),1, .@GID;
 
 	// Anúncio de Destruição do Emperium e sua nova Clã ocupante.
-	mapannounce strnpcinfo(2),"The emperium has been destroyed.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
+	mapannounce strnpcinfo(2),"O Emperium Foi Destruido.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
 	MapRespawnGuildID strnpcinfo(2),.@GID,6;
 
 	// Repara os dados do Castelo, Desabilita a Kafra e Investimentos do Castelo.
@@ -140,7 +140,7 @@ OnAgitBreak:
 	if( agitcheck() )
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 	sleep 7000;
-	announce "O castelo [" + getcastlename(strnpcinfo(2)) + "] foi conquistado pelo Clã [" + getguildName(.@GID) + "].",bc_all|bc_woe;
+	announce "O Castelo de [" + getcastlename(strnpcinfo(2)) + "] foi conquistado pelo Clã [" + getguildName(.@GID) + "].",bc_all|bc_woe;
 	end;
 
 // Término da Guerra do Emperium.
@@ -162,7 +162,7 @@ OnGuildBreak:
 	SetCastleData strnpcinfo(2),1,0;
 	// Aguarda o salvamento de informação da Guilda.
 	sleep 7000;
-	announce "O castelo [" + getcastlename(strnpcinfo(2)) + "] foi abandonado.",0;
+	announce "O Castelo de [" + getcastlename(strnpcinfo(2)) + "] foi abandonado.",0;
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
 	end;
 
