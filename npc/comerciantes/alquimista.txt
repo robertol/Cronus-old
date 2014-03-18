@@ -2,11 +2,11 @@
 //= Loja de Alquimia
 //===== Por: ====================================================
 //= rAthena Dev Team
-//===== Versão Atual: ===========================================
+//===== Versï¿½o Atual: ===========================================
 //= 1.9
-//===== Descrição: ==============================================
+//===== Descriï¿½ï¿½o: ==============================================
 //= Mercador para Materiais de Alquimistas e Manuais.
-//===== Comentários Adicionais: =================================
+//===== Comentï¿½rios Adicionais: =================================
 //= 1.1 fixed Medicine Bowl issue, thanx 2 MasterOfMuppets
 //= 1.2 Reddozen's fixes of typos. added optional Elemental
 //=     Potion Guide. [Lupus]
@@ -16,44 +16,44 @@
 //= 1.6 Corrected canceling purchase. [L0ne_W0lf]
 //= 1.7 Updated to match AEGIS script. [Masao]
 //= 1.8 Moved Craft Book Merchant to Renewal path. [Euphy]
-//= 1.9 Tradução [Shermie]
+//= 1.9 Traduï¿½ï¿½o [Shermie]
 //===============================================================
 
 alde_alche,24,188,3	script	Comerciante da Guilda	2_M_ALCHE,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Espere um minuto! -";
-		mes "- Atualmente você está carregando -";
-		mes "- muitos itens com você. -";
+		mes "- Atualmente vocï¿½ estï¿½ carregando -";
+		mes "- muitos itens com vocï¿½. -";
 		mes "- Por favor, volte novamente -";
-		mes "- apos deixar alguns itens no Armazém da Kafra. -";
+		mes "- apos deixar alguns itens no Armazï¿½m da Kafra. -";
 		close;
 	}
 	mes "[Gever Al Sharp]";
-	mes "Bem-vindo à";
-	mes "União dos Alquimistas.";
-	mes "Como posso ajudá-lo?";
+	mes "Bem-vindo ï¿½";
+	mes "Uniï¿½o dos Alquimistas.";
+	mes "Como posso ajudï¿½-lo?";
 	next;
-	switch(select("Comprar materiais.:Comprar manual de produção.:Cancelar.")) {
+	switch(select("Comprar materiais.:Comprar manual de produï¿½ï¿½o.:Cancelar.")) {
 	case 1:
 		mes "[Gever Al Sharp]";
-		mes "O que você gostaria de comprar?";
+		mes "O que vocï¿½ gostaria de comprar?";
 		next;
 		if (select("Vasilha de Mistura - 8 Zeny:Cancelar.") == 1) {
 			mes "[Gever Al Sharp]";
-			mes "Quantas você deseja?";
-			mes "Digite '0' se você deseja cancelar.";
+			mes "Quantas vocï¿½ deseja?";
+			mes "Digite '0' se vocï¿½ deseja cancelar.";
 			next;
 			while(1) {
 				input .@input,0,2001;
 				if (.@input == 0) {
 					mes "[Gever Al Sharp]";
-					mes "A operação foi cancelada.";
+					mes "A operaï¿½ï¿½o foi cancelada.";
 					mes "Volte sempre.";
 					close;
 				}
 				else if (.@input < 1 || .@input > 2000) {
 					mes "[Gever Al Sharp]";
-					mes "O número deve";
+					mes "O nï¿½mero deve";
 					mes "ser inferior a 2000.";
 					next;
 				}
@@ -65,18 +65,18 @@ alde_alche,24,188,3	script	Comerciante da Guilda	2_M_ALCHE,{
 			set .@item_weight,.@input * 10;
 			if (Zeny < .@sell) {
 				mes "[Gever Al Sharp]";
-				mes "Vejo que você não";
+				mes "Vejo que vocï¿½ nï¿½o";
 				mes "tem a quantidade de zeny";
 				mes "suficiente. Verifique";
-				mes "quanto você tem de zeny primeiro.";
+				mes "quanto vocï¿½ tem de zeny primeiro.";
 				close;
 			}
 			if ((MaxWeight - Weight) < .@item_weight) {
 				mes "[Gever Al Sharp]";
-				mes "Me parece que você não";
+				mes "Me parece que vocï¿½ nï¿½o";
 				mes "pode carregar tudo.";
-				mes "Verifique o espaço";
-				mes "em seu iventário.";
+				mes "Verifique o espaï¿½o";
+				mes "em seu iventï¿½rio.";
 				close;
 			}
 			set Zeny, Zeny-.@sell;
@@ -95,10 +95,10 @@ alde_alche,24,188,3	script	Comerciante da Guilda	2_M_ALCHE,{
 		close;
 	case 2:
 		mes "[Gever Al Sharp]";
-		mes "Do que você precisa?";
-		mes "Os manuais geralmente custam 100,000 zeny. Mas há vários manuais especiais que irão custar muito mais.";
+		mes "Do que vocï¿½ precisa?";
+		mes "Os manuais geralmente custam 100,000 zeny. Mas hï¿½ vï¿½rios manuais especiais que irï¿½o custar muito mais.";
 		next;
-		switch(select("Manual de Criação de Poções:Manual de Criação de Álcool:Manual de Criação de Fogo Grego:Manual de Criação de Pote de Ácido:Manual de Criação de Plantas:Manual de Criação de Esfera Marinha:Manual de Criação de Revestimentos:Manual de Criação de Poções Condensadas:Cancelar")) {
+		switch(select("Manual de Criaï¿½ï¿½o de Poï¿½ï¿½es:Manual de Criaï¿½ï¿½o de ï¿½lcool:Manual de Criaï¿½ï¿½o de Fogo Grego:Manual de Criaï¿½ï¿½o de Pote de ï¿½cido:Manual de Criaï¿½ï¿½o de Plantas:Manual de Criaï¿½ï¿½o de Esfera Marinha:Manual de Criaï¿½ï¿½o de Revestimentos:Manual de Criaï¿½ï¿½o de Poï¿½ï¿½es Condensadas:Cancelar")) {
 		case 1:
 			callsub S_SellManual,7144,100000; //Normal_Potion_Book
 			break;
@@ -126,14 +126,14 @@ alde_alche,24,188,3	script	Comerciante da Guilda	2_M_ALCHE,{
 		case 9:
 			mes "[Gever Al Sharp]";
 			mes "Pois bem...";
-			mes "Volte caso você tenha";
+			mes "Volte caso vocï¿½ tenha";
 			mes "nescessidade de comprar";
-			mes "um manual de produção.";
+			mes "um manual de produï¿½ï¿½o.";
 			close;
 		}
 	case 3:
 		mes "[Gever Al Sharp]";
-		mes "Certo, então";
+		mes "Certo, entï¿½o";
 		mes "tenha um bom dia.";
 		close;
 	}
@@ -141,9 +141,9 @@ alde_alche,24,188,3	script	Comerciante da Guilda	2_M_ALCHE,{
 S_SellManual:
 	if (Zeny < getarg(1)) {
 		mes "[Gever Al Sharp]";
-		mes "Vejo que você não";
+		mes "Vejo que vocï¿½ nï¿½o";
 		mes "tem zeny suficiente.";
-		mes "Verifique quanto você";
+		mes "Verifique quanto vocï¿½";
 		mes "tem de zeny primeiro.";
 		close;
 	}
