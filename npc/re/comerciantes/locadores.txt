@@ -1,0 +1,209 @@
+//===== Cronus Script ===========================================
+//= Locadores
+//===== Por: ====================================================
+//= Hercules Dev Team
+//===== Versão Atual: ===========================================
+//= 2.3
+//===== Descrição: ==============================================
+//= [Official Conversion]
+//= Renewal-specific breeder NPCs.
+//===== Comentários Adicionais: =================================
+//= 2.1 Moved some renters to a separate renewal file. [Daegaladh]
+//= 2.2 Updated to match the official scripts. [Euphy]
+//= 2.3 Tradução [Evanio]
+//===============================================================
+
+// Criador de Dragões
+//===============================================================
+job3_rune01,88,62,5	script	Criador de Dragões	8W_SOLDIER,{
+	mes "[Criador de Dragões]";
+	if (Class == Job_Rune_Knight || Class == Job_Rune_Knight_T || Class == Job_Baby_Rune) {
+		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			//if (!getskilllv("RK_DRAGONTRAINING")) {
+			if (!getskilllv("KN_RIDING")) {
+				mes "[Criador de Dragões]";
+				mes "Por favor, aprenda como Adestrar um Dragão primeiro.";
+				close;
+			}
+			else if (checkriding()) {
+				mes "[Criador de Dragões]";
+				mes "Você já tem um Dragão.";
+				close;
+			}
+			else if(ismounting()) {
+				mes "[Criador de Dragões]";
+				mes "Por favor, remova sua montaria antes.";
+				close;
+			}
+			setdragon;
+			close;
+		case 2:
+			mes "[Criador de Dragões]";
+			mes "Está bem, tenha um bom dia.";
+			close;
+		}
+	}
+	mes "O que você está fazendo aqui?";
+	mes "Somente Cavaleiros Rúnicos podem alugar um Dragão.";
+	close;
+}
+
+// Mestre de Dragão/Grifo
+//============================================================
+prontera,130,213,5	script	Domador de Feras	8W_SOLDIER,{
+	mes "[Domador de Feras]";
+	if (Class == Job_Rune_Knight || Class == Job_Rune_Knight_T || Class == Job_Baby_Rune) {
+		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			//if (!getskilllv("RK_DRAGONTRAINING")) {
+			if (!getskilllv("KN_RIDING")) {
+				mes "[Domador de Feras]";
+				mes "Por favor, aprenda como Adestrar um Dragão primeiro.";
+				close;
+			}
+			else if (checkriding()) {
+				mes "[Domador de Feras]";
+				mes "Você já tem um Dragão.";
+				close;
+			}
+			else if(ismounting()) {
+				mes "[Domador de Feras]";
+				mes "Por favor, remova sua montaria antes.";
+				close;
+			}
+			setdragon;
+			close;
+		case 2:
+			mes "[Domador de Feras]";
+			mes "Está bem, tenha um bom dia.";
+			close;
+		}
+	}
+	if (Class == Job_Royal_Guard || Class == Job_Royal_Guard_T || Class == Job_Baby_Guard) {
+		mes "Bem-vindo. Você gostaria de alugar um Grifo?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			if(!getskilllv("KN_RIDING")) {
+				mes "[Domador de Feras]";
+				mes "Por favor, aprenda como montar em um Grifo primeiro.";
+				close;
+			}
+			else if (checkriding()) {
+				mes "[Domador de Feras]";
+				mes "Você já tem um Grifo.";
+				close;
+			}
+			else if(ismounting()) {
+				mes "[Domador de Feras]";
+				mes "Por favor, remova sua montaria antes.";
+				close;
+			}
+			setriding;
+			close;
+		case 2:
+			mes "[Domador de Feras]";
+			mes "Está bem, tenha um bom dia.";
+			close;
+		}
+	}
+	mes "Estou aqui para ensinar aos Cavaleiros Rúnicos e Guardiões Reais a como andar em criaturas.";
+	close;
+}
+
+// NPC de remoção de Peco
+//============================================================
+prontera,125,208,5	script	Removedor de PecoPecos	8W_SOLDIER,{
+	mes "[Soldado]";
+	mes "Se você não está conseguindo desmontar de um Peco Peco";
+	mes "por alguma razão desconhecida,";
+	mes "por favor, sinta-se livre para usar os meus serviços.";
+	if (checkriding()) {
+		next;
+		mes "[Soldado]";
+		mes "Você está montado em um Peco Peco.";
+		mes "Gostaria de desmotar dele?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			setriding 0;
+			mes "[Soldado]";
+			mes "Diga-me, como é a sensação de";
+			mes "pisar no chão com os seus próprios";
+			mes "pés novamente?";
+			close;
+		case 2:
+			mes "[Soldado]";
+			mes "Entendo. Por favor, sinta-se livre para falar";
+			mes "comigo se mudar de ideia.";
+			close;
+		}
+	}
+	close;
+}
+
+// Magic Gear Renter
+//============================================================
+-	script	::mgm	-1,{
+	mes "[Mestre de Artilharia]";
+	if (Class == Job_Mechanic || Class == Job_Mechanic_T || Class == Job_Baby_Mechanic) {
+		mes "Bem-vindo, Mecânico.";
+		mes "Você gostaria de alugar um Carrinho";
+		mes "ou um M.E.C.H.A.?";
+		next;
+		switch(select("Alugar Carrinho:Alugar um M.E.C.H.A.:Cancelar")) {
+		case 1:
+			if (checkcart()) {
+				mes "[Mestre de Artilharia]";
+				mes "Desculpe, mas você já tem";
+				mes "um Carrinho.";
+				close;
+			}
+			setcart;
+			mes "[Mestre de Artilharia]";
+			mes "Pronto!";
+			close;
+		case 2:
+			if (checkmadogear()) {
+				mes "[Mestre de Artilharia]";
+				mes "Desculpe, mas você já está";
+				mes "em um M.E.C.H.A.";
+				close;
+			}
+			else if (!getskilllv("NC_MADOLICENCE")) {
+				mes "[Mestre de Artilharia]";
+				mes "Por favor, aprenda a habilidade 'Licença de Pilotagem' primeiro.";
+				close;
+			}
+			else if(ismounting()) {
+				mes "[Mestre de Artilharia]";
+				mes "Por favor, remova sua montaria.";
+				close;
+			}
+			setmadogear;
+			mes "[Mestre de Artilharia]";
+			mes "Divirta-se, e volte quando quiser!";
+			close;
+		case 3:
+			close;
+		}
+	}
+	mes "Como posso ajudá-lo?";
+	mes "M.E.C.H.A.s estão disponíveis apenas para Mecânicos.";
+	close;
+}
+prontera,163,178,3	duplicate(mgm)	Mestre de Artilharia#pr	8W_SOLDIER
+geffen,103,55,5	duplicate(mgm)	Mestre de Artilharia#ge	8W_SOLDIER
+payon,166,106,5	duplicate(mgm)	Mestre de Artilharia#pa	8W_SOLDIER
+aldebaran,133,112,5	duplicate(mgm)	Mestre de Artilharia#al	8W_SOLDIER
+yuno,167,187,3	duplicate(mgm)	Mestre de Artilharia#yu	8W_SOLDIER
+rachel,106,134,5	duplicate(mgm)	Mestre de Artilharia#ra	8W_SOLDIER
+dicastes01,187,207,3	duplicate(mgm)	Mestre de Artilharia#di	8W_SOLDIER
+manuk,273,212,5	duplicate(mgm)	Mestre de Artilharia#ma	8W_SOLDIER
+splendide,180,174,5	duplicate(mgm)	Mestre de Artilharia#sp	8W_SOLDIER
+mid_camp,242,243,3	duplicate(mgm)	Mestre de Artilharia#mi	8W_SOLDIER
