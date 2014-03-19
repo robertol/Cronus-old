@@ -93,7 +93,7 @@ payon,166,177,3	duplicate(InsideFlagsPA1)	Palácio do Sol#12	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-payg_cas01,128,58,3	duplicate(guildkafra)	Kafra#payg_cas01	4_F_KAFRA1
+payg_cas01,128,58,3	duplicate(guildkafra)	Kafra Staff#payg_cas01	4_F_KAFRA1
 
 // Steward
 //============================================================

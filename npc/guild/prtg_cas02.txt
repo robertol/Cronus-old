@@ -98,7 +98,7 @@ prontera,146,194,3	duplicate(InsideFlagsPR2)	Hrist#17	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-prtg_cas02,71,36,4	duplicate(guildkafra)	Kafra#prtg_cas02	4_F_KAFRA1
+prtg_cas02,71,36,4	duplicate(guildkafra)	Kafra Staff#prtg_cas02	4_F_KAFRA1
 
 // Steward
 //============================================================

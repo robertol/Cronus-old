@@ -92,11 +92,11 @@ prtg_cas01,45,46,4	duplicate(InsideFlagsPR1)	Kriemhild#14	GUILD_FLAG
 
 // Guild Flag (Town)
 //============================================================
-prontera,11_M_JOBTESTER,190,4	duplicate(InsideFlagsPR1)	Kriemhild#15	GUILD_FLAG
+prontera,155,190,4	duplicate(InsideFlagsPR1)	Kriemhild#15	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-prtg_cas01,96,173,0	duplicate(guildkafra)	Kafra#prtg_cas01	4_F_KAFRA1
+prtg_cas01,96,173,0	duplicate(guildkafra)	Kafra Staff#prtg_cas01	4_F_KAFRA1
 
 // Steward
 //============================================================

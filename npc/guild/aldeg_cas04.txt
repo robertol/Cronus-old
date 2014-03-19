@@ -102,7 +102,7 @@ aldebaran,131,97,4	duplicate(InsideFlagsA4)	Rigel#20	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-aldeg_cas04,45,88,0	duplicate(guildkafra)	Kafra#aldeg_cas04	4_F_KAFRA1
+aldeg_cas04,45,88,0	duplicate(guildkafra)	Kafra Staff#aldeg_cas04	4_F_KAFRA1
 
 // Steward
 //============================================================

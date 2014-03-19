@@ -94,7 +94,7 @@ prontera,165,194,5	duplicate(InsideFlagsPR5)	Gondul#13	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-prtg_cas05,52,41,4	duplicate(guildkafra)	Kafra#prtg_cas05	4_F_KAFRA1
+prtg_cas05,52,41,4	duplicate(guildkafra)	Kafra Staff#prtg_cas05	4_F_KAFRA1
 
 // Steward
 //============================================================

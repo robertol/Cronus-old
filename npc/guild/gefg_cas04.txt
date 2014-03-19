@@ -92,7 +92,7 @@ geffen,127,130,7	duplicate(InsideFlagsG4)	Saffran#11	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-gefg_cas04,59,70,3	duplicate(guildkafra)	Kafra#gefg_cas04	4_F_KAFRA1
+gefg_cas04,59,70,3	duplicate(guildkafra)	Kafra Staff#gefg_cas04	4_F_KAFRA1
 
 // Steward
 //============================================================

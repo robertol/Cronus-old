@@ -96,7 +96,7 @@ prontera,143,203,2	duplicate(InsideFlagsPR3)	Brynhildr#15	GUILD_FLAG
 
 // Kafra Employee
 //============================================================
-prtg_cas03,181,215,4	duplicate(guildkafra)	Kafra#prtg_cas03	4_F_KAFRA1
+prtg_cas03,181,215,4	duplicate(guildkafra)	Kafra Staff#prtg_cas03	4_F_KAFRA1
 
 // Steward
 //============================================================
