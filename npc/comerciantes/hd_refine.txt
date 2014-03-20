@@ -3,17 +3,18 @@
 //===== Por: ==================================================
 //= Euphy
 //===== Versão Atual: =====================================
-//= 1.0
+//= 1.0b
 //===== Descrição: =========================================
 //= [Official Conversion]
 //= Refiners that use HD ores to refine equipment. Upon
 //= failure, the equipment is not destroyed; rather, its
 //= refine level decreases by 1. The success rate is identical
 //= to that for Enriched ores.
-//= - "Ferreiro Hammer" only refines from +7~9.
+//= - "Blacksmith Mighty Hammer" only refines from +7~9.
 //= - "Basta" only refines from +10 and up.
 //===== Comentários Adicionais: =================================
 //= 1.0 First version. [Euphy]
+//= 1.0b Revisado [BOO]
 //============================================================
 
 // Ferreiro Hammer (+7~9)
@@ -21,14 +22,14 @@
 -	script	::MightyHammer	-1,{
 	disable_items;
 	mes "[Ferreiro Hammer]";
-	mes "Ao contrário de outros, eu sou um ferreiro que refina um número muito limitado de itens.";
+	mes "Ao contrário dos outros, eu sou um ferreiro que refina um número muito limitado de itens.";
 	mes "Eu refino equipamentos em nível ^CC0000+7 até +9^000000.";
 	next;
 	mes "[Ferreiro Hammer]";
-	mes "Minha especialidade é o mesmo que o meu refino de falhar, o grau de refino diminui em 1 sem perder o equipamento.";
+	mes "Minha especialidade é que mesmo quando o refinamento falhar, o nível de refinamento cai 1 ponto, mas não perde o item!";
 	next;
 	mes "[Ferreiro Hammer]";
-	mes "So lets kick this into overdrive, what d' ya say? What item do you want to refine?";
+	mes "Então vamos lá, o que me diz? Qual item você quer refinar?";
 	next;
 	setarray .@position$[1],"Cabeça Topo","Corpo","Mão Esquerda","Mão direita","Capa","Sapatos","Acessório 1","Acessório 2","Cabeça Meio","Cabeça Baixo";
 	set .@menu$,"";
@@ -39,10 +40,10 @@
 		mes "[Ferreiro Hammer]";
 		switch(.@part) {
 	case 1:
-			mes "Sou um ferreiro, não um cabeleireiro.";
+			mes "Sou um ferreiro, não um estilista.";
 			break;
 		case 2:
-			mes "Com meu martelo, Farei você uma estrela do céu.";
+			mes "Com meu martelo, Farei de você, uma estrela do céu.";
 			break;
 		case 3:
 		case 4:
@@ -97,7 +98,7 @@
 		break;
 	}
 	mes "[Ferreiro Hammer]";
-	mes "Ta afim de aperfeiçoar o equipamento que você selecionou o que você precisa ^ff9999"+getitemname(.@material)+"^000000 e uma taxa de 20.000 zeny.";
+	mes "Gostaria de aperfeiçoar o equipamento que você selecionou? Você precisaá de ^ff9999"+getitemname(.@material)+"^000000 e uma taxa de 20.000 zeny.";
 	mes "Você tem eles prontos?";
 	next;
 	if(select("Sim:Não") == 2) {
@@ -108,18 +109,18 @@
 	if (getequiprefinerycnt(.@part) < 100) {
 		mes "[Ferreiro Hammer]";
 		mes "Parece que este item provavelmente vai deixar de ser refinado."; 
-		mes "Bem, mesmo se ele falhar, ele só diminui em 1 grau de refino."; 
+		mes "Bem, mesmo se ele falhar, ele só diminuirá em 1 grau de refino."; 
 		mes "Gostaria de continuar o refino?";
 		next;
 		if(select("Sim:Não") == 2) {
 			mes "[Ferreiro Hammer]";
-			mes "Somente aqueles que superar o medo do fracasso obterá uma obra-prima.";
+			mes "Somente aqueles que superarem o medo do fracasso, poderão obter uma obra-prima.";
 			close;
 		}
 	}
 	if (countitem(.@material) == 0 || Zeny < .@price) {
 		mes "[Ferreiro Hammer]";
-		mes "Você não acabou de dizer que você tinha tudo pronto?";
+		mes "Você não acabou de dizer que tinha tudo pronto?";
 		close;
 	}
 	delitem .@material,1;
@@ -131,7 +132,7 @@
 		next;
 		emotion e_no1;
 		mes "[Ferreiro Hammer]";
-		mes "O refino foi um grande sucesso!";
+		mes "O refinamento foi um grande sucesso!";
 		close;
 	}
 	downrefitem .@part;
@@ -161,9 +162,9 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 -	script	::Basta	-1,{
 	disable_items;
 	mes "[Basta]";
-	mes "Eu sou o melhor ferreiro em todo o mundo, Basta.";
+	mes "Eu sou Basta. O melhor ferreiro em todo o mundo.";
 	mes "Mas eu não forneço um serviço normal de refino.";
-	mes "Eu só refino equipamentos ^CC0000mais +10^000000.";
+	mes "Eu só refino equipamentos ^CC0000Acima de +10^000000.";
 	next;
 	mes "[Basta]";
 	mes "Qual o equipamento que você quer refinar?";
@@ -177,20 +178,20 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 		mes "[Basta]";
 		switch(.@part) {
 		case 1:
-			mes "Is your head an equipment?";
+			mes "E sua Cabeça é um Equipamento?";
 			break;
 		case 2:
 			mes "O que você quer que eu faça?";
 			break;
 		case 3:
 		case 4:
-			mes "Fazendo mãos artificiais não é a minha especialidade.";
+			mes "Refinar mãos artificiais não é a minha especialidade.";
 			break;
 		case 5:
 			mes "Você sabe mesmo o que é uma capa?";
 			break;
 		case 6:
-			mes "Se você quiser refinar seus pés, não venha para mim, tentar correr uma maratona.";
+			mes "Se você quiser refinar seus pés, não venha para mim, tente correr uma maratona.";
 			break;
 		case 7:
 		case 8:
@@ -207,12 +208,12 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	}
 	if (!getequipisenableref(.@part)) {
 		mes "[Basta]";
-		mes "Mesmo eu não posso refinar este item. Não há nenhuma maneira.";
+		mes "Nem eu posso refinar este item. Não há nenhuma maneira.";
 		close;
 	}
 	if (!getequipisidentify(.@part)) {
 		mes "[Basta]";
-		mes "Eu não posso fazer nada sobre itens não-identificados.";
+		mes "Eu não posso fazer nada com itens não-identificados.";
 		close;
 	}
 	if (getequiprefinerycnt(.@part) < 10) {
@@ -222,7 +223,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	}
 	if (getequiprefinerycnt(.@part) == 20) {
 		mes "[Basta]";
-		mes "Esta arma é perfeita, não há necessidade de refiná-lo mais~";
+		mes "Esta arma é perfeita, não há necessidade de refiná-la mais~";
 		close;
 	}
 	switch(getequipweaponlv(.@part)) {
@@ -242,9 +243,9 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 		break;
 	}
 	mes "[Basta]";
-	mes "Hmm ... isso é o que você quer para refinar?"; 
+	mes "Hmm ... isso é o que você quer refinar?"; 
 	mes "Para refinar este equipamento, eu preciso de um^ FF9999" + getitemname (@ material.) + "^ 000000 e uma taxa de 100,000 zeny."; 
-	mes "Você realmente quer para refinar isso?";
+	mes "Você realmente quer refinar isso?";
 	next;
 	if(select("Sim:Não") == 2) {
 		mes "[Basta]";
@@ -253,12 +254,12 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	}
 	if (getequiprefinerycnt(.@part) < 100) {
 		mes "[Basta]";
-		mes "This "+.@type$+" has already been refined pretty high.";
-		mes "Se você tentar refiná-lo mais, o grau de refino pvai diminuir.";
+		mes "Esse "+.@type$+" já está em um nível de refino muito elevado.";
+		mes "Se você tentar refiná-lo mais, o grau de refino vai diminuir.";
 		next;
 		mes "[Basta]";
 		mes "Eu sou diferente dos ferreiros de outros lugares."; 
-		mes "É impossível que o grau de refino irá cair por, digamos, 3 ou 4 ... isso soa assustador né."; 
+		mes "É impossível que o grau de refino cair por, digamos, 3 ou 4 ... isso soa assustador né."; 
 		mes "Aqui, só pode diminuir em 1 nível.";
 		next;
 		mes "[Basta]";
@@ -268,7 +269,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 		if(select("Sim:Não") == 2) {
 			mes "[Basta]";
 			mes "Bem ~"; 
-			mes "Não desafiando a todos também poderia ser uma espécie de sabedoria na vida.";
+			mes "Não desafiar a todos também poderia ser uma espécie de sabedoria na vida.";
 			close;
 		}
 	}
@@ -286,7 +287,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 		next;
 		emotion e_no1;
 		mes "[Basta]";
-		mes "Ótimo Muito bem feito!"; 
+		mes "Ótimo! Bom trabalho!""; 
 		mes "Eu realmente sou o melhor ferreiro do mundo inteiro!";
 		close;
 	}
@@ -298,9 +299,9 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	next;
 	mes "[Basta]";
 	mes "Droga!"; 
-	mes "Nível de refino falhou e se refino diminuiu!"; 
-	mes "Mesmo o melhor ferreiro do mundo não garante 100% de sucesso!"; 
-	mes "Muito ruim.";
+	mes "O refinamento falhou, e seu refino diminuiu!"; 
+	mes "Nem mesmo o melhor ferreiro do mundo não garante 100% de sucesso!"; 
+	mes "Que Pena.";
 	next;
 	mes "[Basta]";
 	mes "Eu vou fazer melhor da próxima vez! Não se preocupe!";
