@@ -1,10 +1,10 @@
-//===== Cronus Script ======================================
+//===== Cronus Script ===========================================
 //= HD Refiners
-//===== Por: ==================================================
+//===== Por: ====================================================
 //= Euphy
-//===== Versão Atual: =====================================
+//===== Versão Atual: ===========================================
 //= 1.0b
-//===== Descrição: =========================================
+//===== Descrição: ==============================================
 //= [Official Conversion]
 //= Refiners that use HD ores to refine equipment. Upon
 //= failure, the equipment is not destroyed; rather, its
@@ -15,10 +15,10 @@
 //===== Comentários Adicionais: =================================
 //= 1.0 First version. [Euphy]
 //= 1.0b Revisado [BOO]
-//============================================================
+//===============================================================
 
 // Ferreiro Hammer (+7~9)
-//============================================================
+//===============================================================
 -	script	::MightyHammer	-1,{
 	disable_items;
 	mes "[Ferreiro Hammer]";
@@ -34,7 +34,7 @@
 	setarray .@position$[1],"Cabeça Topo","Corpo","Mão Esquerda","Mão direita","Capa","Sapatos","Acessório 1","Acessório 2","Cabeça Meio","Cabeça Baixo";
 	set .@menu$,"";
 	for(set .@i,1; .@i<=10; set .@i,.@i+1)
-		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Not equipped]")+":";
+		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Desequipado]")+":";
 	set .@part, select(.@menu$);
 	if (!getequipisequiped(.@part)) {
 		mes "[Ferreiro Hammer]";
@@ -145,17 +145,17 @@
 	mes "Estou certo de que uma pessoa como você nunca iria me culpar por uma diminuição no nível refinar por 1. Hmm.";
 	close;
 }
-prt_in,59,54,3	duplicate(MightyHammer)	Mighty Hammer#prt	4_M_DWARF
-morocc_in,65,30,3	duplicate(MightyHammer)	Mighty Hammer#morocc	4_M_DWARF
-payon,148,176,3	duplicate(MightyHammer)	Mighty Hammer#pay	4_M_DWARF
-alberta_in,16,56,3	duplicate(MightyHammer)	Mighty Hammer#alb	4_M_DWARF
-yuno_in01,171,18,3	duplicate(MightyHammer)	Mighty Hammer#yuno	4_M_DWARF
-ein_in01,22,82,3	duplicate(MightyHammer)	Mighty Hammer#ein	4_M_DWARF
-lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
+prt_in,59,54,3	duplicate(MightyHammer)	Ferreiro Hammer#prt	4_M_DWARF
+morocc_in,65,30,3	duplicate(MightyHammer)	Ferreiro Hammer#morocc	4_M_DWARF
+payon,148,176,3	duplicate(MightyHammer)	Ferreiro Hammer#pay	4_M_DWARF
+alberta_in,16,56,3	duplicate(MightyHammer)	Ferreiro Hammer#alb	4_M_DWARF
+yuno_in01,171,18,3	duplicate(MightyHammer)	Ferreiro Hammer#yuno	4_M_DWARF
+ein_in01,22,82,3	duplicate(MightyHammer)	Ferreiro Hammer#ein	4_M_DWARF
+lhz_in02,280,19,3	duplicate(MightyHammer)	Ferreiro Hammer#lhz	4_M_DWARF
 
-// iRO NPC locations:
-// moc_para01,38,185,4	duplicate(MightyHammer)	Mighty Hammer#ed	4_M_DWARF
-// payon,174,133,4	duplicate(MightyHammer)	Mighty Hammer#im	4_M_DWARF
+// Locais dos NPCs no iRO:
+// moc_para01,38,185,4	duplicate(MightyHammer)	Ferreiro Hammer#ed	4_M_DWARF
+// payon,174,133,4	duplicate(MightyHammer)	Ferreiro Hammer#im	4_M_DWARF
 
 // Basta (+10 and up)
 //============================================================
@@ -172,7 +172,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	setarray .@position$[1],"Cabeça","Corpo","Mão Esquerda","Mão Direita","Capa","Sapatos","Acessório 1","Acessório 2","Cabeça 2","Cabeça 3";
 	set .@menu$,"";
 	for(set .@i,1; .@i<=10; set .@i,.@i+1)
-		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Unequipped]")+":";
+		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Desequipado]")+":";
 	set .@part, select(.@menu$);
 	if (!getequipisequiped(.@part)) {
 		mes "[Basta]";
@@ -231,7 +231,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	case 0:
 		set .@price,100000;
 		set .@material,6225; //HD_Carnium
-		set .@type$,"armor";
+		set .@type$,"armadura";
 		break;
 	case 1:
 	case 2:
@@ -239,12 +239,12 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 	case 4:
 		set .@price,100000;
 		set .@material,6226; //HD_Bradium
-		set .@type$,"weapon";
+		set .@type$,"arma";
 		break;
 	}
 	mes "[Basta]";
 	mes "Hmm ... isso é o que você quer refinar?"; 
-	mes "Para refinar este equipamento, eu preciso de um^ FF9999" + getitemname (@ material.) + "^ 000000 e uma taxa de 100,000 zeny."; 
+	mes "Para refinar este equipamento, eu preciso de um^ FF9999" + getitemname (.@material) + "^ 000000 e uma taxa de 100,000 zeny."; 
 	mes "Você realmente quer refinar isso?";
 	next;
 	if(select("Sim:Não") == 2) {
@@ -287,7 +287,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	4_M_DWARF
 		next;
 		emotion e_no1;
 		mes "[Basta]";
-		mes "Ótimo! Bom trabalho!""; 
+		mes "Ótimo! Bom trabalho!"; 
 		mes "Eu realmente sou o melhor ferreiro do mundo inteiro!";
 		close;
 	}
