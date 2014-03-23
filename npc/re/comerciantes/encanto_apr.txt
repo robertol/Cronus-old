@@ -1,0 +1,265 @@
+//===== Cronus Script ===========================================
+//= Encantador de Armas
+//===== Por: ====================================================
+//= Skorm
+//===== Versão Atual: ===========================================
+//= 1.2
+//===== Descrição: ==============================================
+//= [Official Conversion]
+//= Adds enchantments to Upgrade weapons.
+//===== Comentários Adicionais: =================================
+//= 1.0 First version.
+//= 1.1 Standardizing, grammar and bug fixes. [Euphy]
+//= 1.2 Tradução [Evanio]
+//===============================================================
+
+prt_in,28,73,3	script	Mestre de Encantamento#p	1_M_SMITH,{
+	disable_items;
+	if (checkweight(1201,1) == 0) {
+		mes "Você está carregando muitos itens, por favor, esvazie seu inventário!";
+		close;
+	}
+	if (MaxWeight - Weight < 10000) {
+		mes "Você está acima do peso permitido, por favor, esvazie seu inventário!";
+		close;
+	}
+	mes "[Mestre de Encantamento]";
+	mes "Sim?";
+	mes "Você está olhando para mim?";
+	next;
+	switch(select("Esta é a primeira vez que te vejo!:Ouvi dizer que você é o melhor:Por favor, inicie um encantamento.")) {
+	case 1:
+		mes "[Mestre de Encantamento]";
+		mes "Ha ha ha~ Claro, eu não sou o tipo de pessoa que simplesmente lida com outras pessoas.";
+		next;
+		mes "[Mestre de Encantamento]";
+		mes "Inclusive você! Mesmo se você me oferecer muito dinheiro, eu não vou simplesmente encantar algo para você!";
+		next;
+		mes "[Mestre de Encantamento]";
+		mes "Você já viu o meu título? Poucas pessoas têm esse título por uma razão!";
+		next;
+		mes "[Mestre de Encantamento]";
+		mes "Só irei encantar se você tiver um ^0000ffEnchant Book^000000!";
+		next;
+		mes "[Mestre de Encantamento]";
+		mes "Senão, eu não irei encantar nada para você....";
+		close;
+	case 2:
+		if (!countitem(6484)) {
+			mes "[Mestre de Encantamento]";
+			mes "Está me ouvindo? Só vou fazer algo por você, se você estiver com o Enchant Book!";
+			close;
+		}
+		set .@select,1;
+		break;
+	case 3:
+		mes "[Mestre de Encantamento]";
+		if (Zeny < 100000) {
+			mes "Inicialmente irá custar 100.000 zeny. Parece que você não tem zeny suficiente...";
+			close;
+		}
+		mes "Inicialmente irá custar 100.000 zeny e confirme se a arma está encantada!";
+		next;
+		if (select("Deixe-me pensar sobre isso.:Incie agora!") == 1) {
+			mes "[Mestre de Encantamento]";
+			mes "Volte quando tiver confirmado!";
+			close;
+		}
+		set .@select,2;
+		break;
+	}
+	set .@part, EQI_HAND_R;
+
+	mes "[Mestre de Encantamento]";
+	if (!getequipisequiped(.@part)) {
+		mes "Você está tentando remover o encanto do equipamento?";
+		close;
+	}
+	setarray .@equip_card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+	if (!getequipisequiped(.@part)) {
+		mes "É perigoso remover o equipamento durante o processo de encantar!";
+		close;
+	}
+	set .@equip_id, getequipid(.@part);
+	set .@item$, "|1292|1394|1491|1585|2015|13071|13115|16019|18112|21000|";
+	if (!compare(.@item$,"|"+.@equip_id+"|")) {
+		mes "Eu não quero tocar no seu equipamento agora!";
+		close;
+	}
+	set .@equip_refine, getequiprefinerycnt(.@part);
+
+	if (.@select == 1) {
+		if (!countitem(6484)) {
+			mes "Está me ouvindo? Só vou fazer algo por você, se você estiver com o Enchant Book!";
+			close;
+		}
+		mes "Qual o tipo de efeito que você quer encantar?";
+		next;
+		switch(select("Irei pensar sobre isso.:Efeitos de Ataque:Efeitos Mágicos")) {
+		case 1:
+			mes "[Mestre de Encantamento]";
+			mes "Volte se você mudar de ideia!";
+			close;
+		case 2:
+			set .@enc_type,1;
+			break;
+		case 3:
+			set .@enc_type,2;
+			break;
+		}
+		mes "[Mestre de Encantamento]";
+		if (.@equip_card[3]) {
+			mes "Este equipamento já foi encantado! Você precisa retirar o encantamento primeiro para poder encanta-lo novamente.";
+			close;
+		}
+		mes "O processo de encantamento pode falhar, e ^ff0000ele vai reduzir o nível de refinamento parcial^000000, mas o espaço de carta e arma não serão quebrados! Tem certeza de que deseja continuar?";
+		next;
+		if (select("Outra hora!:Inicie agora!") == 1) {
+			mes "[Mestre de Encantamento]";
+			mes "Volte quando tiver decidido!";
+			close;
+		}
+		if (.@equip_card[3]) {
+			mes "[Mestre de Encantamento]";
+			mes "Parece que há um problema, deixe-me dar uma olhada.";
+			close;
+		}
+
+		if (.@enc_type == 1) { // Efeitos de Ataque
+			set .@i, rand(1,1300);
+			     if (.@i < 51)    set .@enchant,4734; //Agilidade5
+			else if (.@i < 76)    set .@enchant,4735; //Agilidade6
+			else if (.@i < 88)    set .@enchant,4736; //Agilidade7
+			else if (.@i < 93)    set .@enchant,4737; //Agilidade8
+			else if (.@i < 95)    set .@enchant,4738; //Agilidade9
+			else if (.@i < 96)    set .@enchant,4739; //Agilidade10
+			else if (.@i < 146)   set .@enchant,4724; //Destreza5
+			else if (.@i < 171)   set .@enchant,4725; //Destreza6
+			else if (.@i < 183)   set .@enchant,4726; //Destreza7
+			else if (.@i < 188)   set .@enchant,4727; //Destreza8
+			else if (.@i < 190)   set .@enchant,4728; //Destreza9
+			else if (.@i < 191)   set .@enchant,4729; //Destreza10
+			else if (.@i < 291)   set .@enchant,4704; //Força5
+			else if (.@i < 341)   set .@enchant,4705; //Força6
+			else if (.@i < 366)   set .@enchant,4706; //Força7
+			else if (.@i < 378)   set .@enchant,4707; //Força8
+			else if (.@i < 383)   set .@enchant,4708; //Força9
+			else if (.@i < 384)   set .@enchant,4709; //Força10
+			else if (.@i < 434)   set .@enchant,4754; //Sorte5
+			else if (.@i < 459)   set .@enchant,4755; //Sorte6
+			else if (.@i < 471)   set .@enchant,4756; //Sorte7
+			else if (.@i < 476)   set .@enchant,4757; //Sorte8
+			else if (.@i < 478)   set .@enchant,4758; //Sorte9
+			else if (.@i < 479)   set .@enchant,4759; //Sorte10
+			else if (.@i < 679)   set .@enchant,4744; //Vitalidade5
+			else if (.@i < 779)   set .@enchant,4745; //Vitalidade6
+			else if (.@i < 829)   set .@enchant,4746; //Vitalidade7
+			else if (.@i < 854)   set .@enchant,4747; //Vitalidade8
+			else if (.@i < 866)   set .@enchant,4748; //Vitalidade9
+			else if (.@i < 867)   set .@enchant,4749; //Vitalidade10
+			else if (.@i < 967)   set .@enchant,4808; //Espirito_do_Lutador4
+			else if (.@i < 992)   set .@enchant,4820; //Espirito_do_Lutador5
+			else if (.@i < 1092)  set .@enchant,4835; //Arqueiro_Experiente4
+			else if (.@i < 1117)  set .@enchant,4836; //Arqueiro_Experiente5
+			else if (.@i < 1217)  set .@enchant,4835; //Arqueiro_Experiente4
+			else if (.@i < 1242)  set .@enchant,4836; //Arqueiro_Experiente5
+			else set .@enchant,0;
+		} else if (.@enc_type == 2) { // Magical Series
+			set .@i, rand(1,1200);
+			     if (.@i < 51)    set .@enchant,4714; //Inteligencia5
+			else if (.@i < 76)    set .@enchant,4715; //Inteligencia6
+			else if (.@i < 88)    set .@enchant,4716; //Inteligencia7
+			else if (.@i < 93)    set .@enchant,4717; //Inteligencia8
+			else if (.@i < 95)    set .@enchant,4718; //Inteligencia9
+			else if (.@i < 96)    set .@enchant,4719; //Inteligencia10
+			else if (.@i < 146)   set .@enchant,4724; //Destreza5
+			else if (.@i < 171)   set .@enchant,4725; //Destreza6
+			else if (.@i < 183)   set .@enchant,4726; //Destreza7
+			else if (.@i < 188)   set .@enchant,4727; //Destreza8
+			else if (.@i < 190)   set .@enchant,4728; //Destreza9
+			else if (.@i < 191)   set .@enchant,4729; //Destreza10
+			else if (.@i < 291)   set .@enchant,4734; //Agilidade5
+			else if (.@i < 341)   set .@enchant,4735; //Agilidade6
+			else if (.@i < 366)   set .@enchant,4736; //Agilidade7
+			else if (.@i < 378)   set .@enchant,4737; //Agilidade8
+			else if (.@i < 383)   set .@enchant,4738; //Agilidade9
+			else if (.@i < 384)   set .@enchant,4739; //Agilidade10
+			else if (.@i < 484)   set .@enchant,4754; //Sorte5
+			else if (.@i < 534)   set .@enchant,4755; //Sorte6
+			else if (.@i < 559)   set .@enchant,4756; //Sorte7
+			else if (.@i < 571)   set .@enchant,4757; //Sorte8
+			else if (.@i < 576)   set .@enchant,4758; //Sorte9
+			else if (.@i < 577)   set .@enchant,4759; //Sorte10
+			else if (.@i < 777)   set .@enchant,4744; //Vitalidade5
+			else if (.@i < 877)   set .@enchant,4745; //Vitalidade6
+			else if (.@i < 927)   set .@enchant,4746; //Vitalidade7
+			else if (.@i < 952)   set .@enchant,4747; //Vitalidade8
+			else if (.@i < 964)   set .@enchant,4748; //Vitalidade9
+			else if (.@i < 969)   set .@enchant,4749; //Vitalidade10
+			else if (.@i < 1069)  set .@enchant,4812; //conjuracao4
+			else if (.@i < 1094)  set .@enchant,4826; //conjuracao5
+			else if (.@i < 1119)  set .@enchant,4761; //Matq2
+			else if (.@i < 1124)  set .@enchant,4806; //Matq3
+			else set .@enchant,0;
+		} else {
+			mes "[Mestre de Encantamento]";
+			mes "Hmm! Isto é um problema, por favor, irei checar novamente!";
+			close;
+		}
+		mes "[Mestre de Encantamento]";
+		if (.@equip_card[3]) {
+			mes "Este item foi encantado!";
+			close;
+		}
+		if (!countitem(6484)) {
+			mes "Está me ouvindo? Só vou fazer algo por você, se você estiver com o Enchant Book!";
+			close;
+		}
+		if (.@enchant == 0) {
+			specialeffect EF_SHIELDCHARGE;
+			mes "Oh! Inacreditável!! Eu falhei!! Volte novamente!";
+			set .@lost_refine, rand(0,.@equip_refine);
+			set .@equip_refine, .@equip_refine - .@lost_refine;
+		} else {
+			specialeffect EF_REPAIRWEAPON;
+			mes "O espaço ^9900004^000000 foi encantado!";
+		}
+		delitem 6484,1; //Enchant_Book
+		delequip .@part;
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@enchant
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@enchant;
+
+		if (.@lost_refine) {
+			next;
+			mes "[Mestre de Encantamento]";
+			mes "O fracasso reduziu o refinamento em "+.@lost_refine+" "+((.@lost_refine == 1)?"nível":"níveis")+"! Não fique deprimido!";
+		}
+		close;
+	} else if (.@select == 2) {
+		if (Zeny < 100000) {
+			mes "Você precisa trazer algum dinheiro para inicializar!!";
+			close;
+		}
+		if (.@equip_card[3] < 4700) { // Sistema de Encantamento de Armadura
+			mes "Este item não pode ser encantado!";
+			close;
+		}
+		if (!getequipisequiped(.@part)) {
+			mes "Você está desequipado agora?";
+			close;
+		}
+		specialeffect EF_REPAIRWEAPON;
+		mes "Eu inicializei os efeitos de encantamento.";
+		set Zeny, Zeny - 100000;
+		delequip .@part;
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] 0
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],0;
+
+		close;
+	} else {
+		mes "Você escolheu a classe errada?";
+		close;
+	}
+}
