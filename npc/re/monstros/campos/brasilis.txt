@@ -2,11 +2,11 @@
 //= Spawn dos campos de Brasilis
 //===== By: ==================================================
 //= Kisuka
-//===== Vers√£o atual: =====================================
+//===== Vers„o atual: =====================================
 //= 1.1
-//===== Coment√°rios adicionais: =================================
+//===== Coment·rios adicionais: =================================
 //= 1.0 Official spawns from Aegis [Kisuka]
-//= 1.0 Tradu√ß√£o PT-BR. [ADM Kakaroto]
+//= 1.0 TraduÁ„o PT-BR. [ADM Kakaroto]
 //============================================================
 
 //==================================================
@@ -15,7 +15,7 @@
 bra_fild01,0,0,0,0	monster	Curupira	2074,50,5000,0,0
 bra_fild01,0,0,0,0	monster	Dokebi	1110,10,5000,0,0
 bra_fild01,0,0,0,0	monster	Selvagem	1166,5,5000,0,0
-bra_fild01,0,0,0,0	monster	Esp√≠rito do Vento	2071,40,5000,0,0
+bra_fild01,0,0,0,0	monster	EspÌrito do Vento	2071,40,5000,0,0
 bra_fild01,0,0,0,0	monster	Cogumelo Vermelho	1085,5,5000,0,0
-bra_fild01,0,0,0,0	monster	Esp√≠rito da Terra	2072,55,5000,0,0
-bra_fild01,0,0,0,0	monster	Esp√≠rito do Ar	2073,60,5000,0,0
+bra_fild01,0,0,0,0	monster	EspÌrito da Terra	2072,55,5000,0,0
+bra_fild01,0,0,0,0	monster	EspÌrito do Ar	2073,60,5000,0,0

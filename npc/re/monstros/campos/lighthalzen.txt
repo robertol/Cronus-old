@@ -2,9 +2,9 @@
 //= Spawn dos campos de Lighthalzen
 //===== By: ==================================================
 //= Muad_Dib, Hercules Dev Team
-//===== Vers√£o atual: =====================================
+//===== Vers„o atual: =====================================
 //= 1.7
-//===== Coment√°rios adicionais: =================================
+//===== Coment·rios adicionais: =================================
 //= 1.0 by Muad_Dib (Prometheus Project)
 //= 1.1 Added Porcellio by MasterOfMuppets
 //= 1.2 Corrected monsters. Many thanks to vicious_pucca for
@@ -13,7 +13,7 @@
 //= 1.4 Fully updated X.4 spawns [Playtester]
 //= 1.5 More accurate spawns [Playtester]
 //= 1.6 Updated to Renewal Spawns [Kisuka]
-//= 1.7 Tradu√ß√£o PT-BR. [ADM Kakaroto]
+//= 1.7 TraduÁ„o PT-BR. [ADM Kakaroto]
 //============================================================
 
 //==================================================

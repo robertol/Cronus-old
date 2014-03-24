@@ -2,16 +2,16 @@
 //= Spawn Monstros das Cidades
 //===== Por: ==================================================
 //= massdriller
-//===== Vers√£o Atual: =====================================
+//===== Vers„o Atual: =====================================
 //= 1.2
-//===== Descri√ß√£o: =========================================
+//===== DescriÁ„o: =========================================
 //= Spawns monsters to clean up city. Apparently spawning
 //= occured in iRO and kRO. Enable this if you want. 
 //= 0.1a Added a few more towns to spawn Wild rose [MasterOfMuppets]
 //= 0.1b And even more from Poki#3 [Komurka]
 //= 1.0 Removed unofficial city cleaners [Playtester]
 //= 1.1 Added other city spawns [Playtester]
-//= 1.2 Tradu√ß√£o [BOO]
+//= 1.2 TraduÁ„o [BOO]
 //============================================================
 
 //==================================================

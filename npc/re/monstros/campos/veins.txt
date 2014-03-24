@@ -2,9 +2,9 @@
 //= Spawn dos campos de Veins
 //===== By: ==================================================
 //= $ephiroth
-//===== Vers√£o atual: ========================================
+//===== Vers„o atual: ========================================
 //= 2.0
-//===== Coment√°rios adicionais: ==============================
+//===== Coment·rios adicionais: ==============================
 //= 1.0 Temp. monster spawn in Veins Field. [$ephiroth]
 //= 1.1 Updated monster spawn based on kRO website. [$ephiroth]
 //= 1.2 Updated mobs based on info jAthena. [$ephiroth]
@@ -15,7 +15,7 @@
 //= 1.7 Corrected MVP spawn variance. [Gepard]
 //= 1.8 Updated to Renewal Spawns. [Kisuka]
 //= 1.9 Updated Renewal Spawns. [Streusel]
-//= 2.0 Tradu√ß√£o PT-BR. [ADM Kakaroto]
+//= 2.0 TraduÁ„o PT-BR. [ADM Kakaroto]
 //============================================================
 
 //==================================================
