@@ -177,7 +177,7 @@ function	script	F_Kafra	{
 		} else if (@K_Menu0$[.@j] == "Alugar Carrinho") {
 			if(callfunc("F_KafCart",getarg(0),getarg(4)) == 1) 
 			next;
-		} else if (@K_Menu0$[.@j] == "Checar Outra Informaçõe") {
+		} else if (@K_Menu0$[.@j] == "Checar Outra Informação") {
 			callfunc "F_KafInfo",getarg(2);
 		} else if (@K_Menu0$[.@j] == "Cancel"){
 			callfunc "F_KafEnd",getarg(0),0;
