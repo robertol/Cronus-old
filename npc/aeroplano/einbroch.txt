@@ -7,101 +7,77 @@
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
+//= Revisado de acordo com o bRO. [Portalcake]
 //===============================================================
 
-airport,143,43,5	script	Funcionária#airport1a::airport1	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao";
-	mes "Aeroporto de Einbroch,";
-	mes "onde nós oferecemos vôos";
-	mes "diretos para as cidades de";
-	mes "Juno, Lighthalzen e Hugel.";
+airport,143,43,5	script	Assistente do Aeroporto#airport1a::airport1	4_F_01,{
+	mes "[Assistente do Aeroporto]";
+	mes "Bem-vindo ao aeroporto. Em que posso ajudar?";
 	next;
-	if (select("Embarcar no dirigível:Cancelar") == 1) {
-		mes "[Funcionária]";
-		mes "A taxa de embarque no dirigível";
-		mes "é de 1,200 zeny, mas se você";
-		mes "tiver um Bilhete para Aeroplano,";
-		mes "a taxa não será cobrada.";
-		mes "Gostaria de embarcar no dirigível?";
+	if (select("Entrar no Aeroporto.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroporto]";
+		mes "A taxa de entrada é de 1.200 Zenys.";
+		mes "Se tiver um bilhete para o Aeroplano, pode entrar de graça.";
+		mes "Gostaria de entrar?";
 		next;
 		if (select("Sim:Não") == 1) {
 			if (countitem(7311) > 0) {
-				delitem 7311,1; //Bilhete_para_Aeroplano
+				delitem 7311,1;
 				warp "airport",148,51;
 				end;
 			}
 			if (Zeny >= 1200) {
-				set Zeny, Zeny - 1200;
+				Zeny -= 1200;
 				warp "airport",148,51;
 				end;
 			}
-			mes "[Funcionária]";
-			mes "Me desculpe, mas você não";
-			mes "possui um Bilhete para";
-			mes "Aeroplano e também não possui";
-			mes "nenhum Zeny para embarcar";
-			mes "no dirigível. Lembre-se, a";
-			mes "taxa de embarque custa 1,200 zeny.";
+			mes "[Assistente do Aeroporto]";
+			mes "Desculpe, mas você não tem dinheiro suficiente.";
+			mes "A taxa de entrada é de 1.200 Zenys.";
+			mes "Obrigado.";
 			close;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Obrigada e";
-	mes "tenha um ótimo dia.";
+	mes "[Assistente do Aeroporto]";
+	mes "Obrigado.";
 	close;
 }
 
-airport,158,43,5	duplicate(airport1)	Funcionária#airport1b	4_F_01
-airport,126,43,5	duplicate(airport1)	Funcionária#airport1c	4_F_01
+airport,158,43,5	duplicate(airport1)	Assistente do Aeroporto#airport1b	4_F_01
+airport,126,43,5	duplicate(airport1)	Assistente do Aeroporto#airport1c	4_F_01
 
-airport,143,49,3	script	Funcionária#airport2a::airport2	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao Aeroporto de Einbroch.";
-	mes "Se você estiver chegando do seu";
-	mes "vôo, deixe-me guia-lo para o";
-	mes "terminal principal. Caso contrário, porfavor embarque no dirigível que";
-	mes "partirá para Juno, Lighthalzen e Hugel.";
+airport,143,49,3	script	Assistente do Aeroporto#airport2a::airport2	4_F_01,{
+	mes "[Assistente do Aeroporto]";
+	mes "Bem-vindo ao aeroporto. Em que posso ajudar?";
 	next;
-	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
-		mes "[Funcionária]";
-		mes "Uma vez que você for para o terminal principal, você terá que";
-		mes "pagar a taxa novamente quando embarcar em outro dirigível.";
-		mes "Você deve sair para a cidade de Einbroch somente se";
-		mes "este for realmente seu destino.";
-		mes "Ir para o terminal principal?";
+	if (select("Sair do Aeroporto.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroporto]";
+		mes "Por favor, lembre-se de que terá de pagar a taxa de entrada para entrar no aeroporto novamente.";
+		mes "Quer sair agora?";
 		next;
 		if (select("Sim:Não") == 1) {
 			warp "airport",142,40;
 			end;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Tudo bem, obrigado";
-	mes "por seu apoio";
-	mes "e espero que você tenha";
-	mes "um vôo agradável~";
+	mes "[Assistente do Aeroporto]";
+	mes "Volte sempre. Obrigado.";
 	close;
 }
 
-airport,126,51,3	duplicate(airport2)	Funcionária#airport2b	4_F_01
-airport,158,50,3	duplicate(airport2)	Funcionária#airport2c	4_F_01
+airport,126,51,3	duplicate(airport2)	Assistente do Aeroporto#airport2b	4_F_01
+airport,158,50,3	duplicate(airport2)	Assistente do Aeroporto#airport2c	4_F_01
 
-einbroch,94,267,3	script	Funcionária#ein01	4_F_02,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao";
-	mes "Aeroporto de Einbroch.";
-	mes "Porfavor use essa porta para";
-	mes "embarcar no dirigível que paira";
-	mes "sobre Juno, Lighthalzen e";
-	mes "Hugel na República de Schwaltzvalt.";
+einbroch,94,267,3	script	Assistente do Aeroplano#ein01	4_F_02,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao Aeroporto de Einbroch";
+	mes "Por favor, use essa porta para Embarcar no Aeroplano com escalas";
+	mes "em Lighthalzen, Juno e Hugel";
 	next;
-	mes "[Funcionária]";
-	mes "Caso contrário, se Einbroch é";
-	mes "seu destino pretendido,";
-	mes "porfavor desça as escadas";
-	mes "e peça aos Funcionários de Chegada para lhe guiar";
-	mes "ao terminal principal. Obrigado,";
-	mes "e desfrute de suas viagens.";
+	mes "[Assistente do Aeroplano]";
+	mes "Ou, se Einbroch for seu destino final, por favor, desça as escadas";
+	mes "e pergunte ao Assistente de Desembarque o caminho para o";
+	mes "terminal principal. Obrigada";
+	mes "e aproveite a viagem.";
 	close;
 }

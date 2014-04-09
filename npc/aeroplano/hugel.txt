@@ -7,29 +7,31 @@
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
+//= Revisado de acordo com o bRO. [Portalcake]
 //===============================================================
 
 hugel,178,142,0	script	toairplane#hugel	WARPNPC,1,1,{
 	end;
 OnTouch:
-	mes "Para usar o dirigível, é necessário pagar 1.200 zeny ou obter um Bilhete para Aeroplano.";
-	mes "Gostaria de usar o serviço?";
+	mes "Para usar o Aeroplano, você precisa de 1.200 zeny, ou um Vale";
+	mes "Transporte de Aeroplano.";
+	mes "Você gostaria de usar nossos serviços?";
 	next;
 	if (select("Sim:Não") == 1) {
 		if (countitem(7311) > 0) {
-			delitem 7311,1; //Bilhete para Aeroplano
+			delitem 7311,1;
 			warp "airplane",244,58;
 			end;
 		}
 		if (Zeny >= 1200) {
-			set Zeny, Zeny - 1200;
+			Zeny -= 1200;
 			warp "airplane",244,58;
 			end;
 		}
-		mes "Sinto muito, mas você não tem dinheiro suficiente.";
-		mes "Lembre-se, é necessário pagar 1.200 zeny para usar o serviço.";
+		mes "Desculpe-me, mas você não tem dinheiro suficiente.";
+		mes "Por favor, lembre-se de que você precisa de 1.200 Zenys para usar o serviço.";
 		close;
 	}
-	mes "Obrigado, volte sempre.";
+	mes "Obrigado e volte sempre.";
 	close;
 }

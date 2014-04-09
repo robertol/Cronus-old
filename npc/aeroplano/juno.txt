@@ -7,153 +7,133 @@
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
+//= Revisado de acordo com o bRO. [Portalcake]
 //===============================================================
 
-y_airport,143,43,5	script	Funcionária#y_air1a::y_airport1	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao Aeroporto de Juno, onde oferecemos vôos domésticos para Einbroch, Lighthalzen e Hugel,";
-	mes "e os vôos internacionais para Izlude e Rachel.";
-	mes "Como posso ser útil?";
+y_airport,143,43,5	script	Assistente do Aeroporto#y_air1a::y_airport1	4_F_01,{
+	mes "[Assistente do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Aqui você pode ir para Einbroch, Lighthalzen ou Hugel";
 	next;
-	if (select("Embarcar no dirigível.:Cancelar.") == 1) {
-		mes "[Funcionária]";
-		mes "A taxa de embarque para todos";
-		mes "os vôos é de 1,200 zeny. Você";
-		mes "pode usar um Bilhete para Aeroplano,";
-		mes "e a taxa de embarque não será cobrada. Então, gostaria de partir?";
+	if (select("Embarcar.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroporto]";
+		mes "A passagem custa 1.200 zeny.";
+		mes "Deseja comprar uma?";
 		next;
 		if (select("Sim:Não") == 1) {
 			if (countitem(7311) > 0) {
-				delitem 7311,1; //Bilhete_para_Aeroplano
+				delitem 7311,1;
 				warp "y_airport",148,51;
 				end;
 			}
 			if (Zeny >= 1200) {
-				set Zeny, Zeny - 1200;
+				Zeny -= 1200;
 				warp "y_airport",148,51;
 				end;
 			}
-			mes "[Funcionária]";
-			mes "Sinto muito, mas você não";
-			mes "possui 1,200 zeny para pagar";
-			mes "a taxa de embarque.";
+			mes "[Assistente do Aeroporto]";
+			mes "Me desculpe, mas você não possui 1.200 zeny!";
+			mes "Você não pode embarcar.";
 			close;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Obrigado e";
-	mes "tenha um ótimo dia.";
+	mes "[Assistente do Aeroporto]";
+	mes "Muito Obrigada!";
+	mes "Volte sempre.";
 	close;
 }
 
-y_airport,158,43,5	duplicate(y_airport1)	Funcionária#y_air1b	4_F_01
-y_airport,126,43,5	duplicate(y_airport1)	Funcionária#y_air1c	4_F_01
+y_airport,158,43,5	duplicate(y_airport1)	Assistente do Aeroporto#y_air1b	4_F_01
+y_airport,126,43,5	duplicate(y_airport1)	Assistente do Aeroporto#y_air1c	4_F_01
 
-y_airport,143,49,3	script	Funcionária#y_air2a::y_airport2	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao Aeroporto de Juno. Se você estiver chegando do seu";
-	mes "vôo, deixe-me guia-lo para o terminal principal. Caso contrário,";
-	mes "embarque no dirigível para chegar ao seu destino pretendido.";
+y_airport,143,49,3	script	Assistente do Aeroporto#y_air2a::y_airport2	4_F_01,{
+	mes "[Assistente do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Deixe-me te ajudar a chegar no terminal principal!";
+	mes "Caso deseje ir para Einbroch, Lighthalzen, Hugel, Izlude ou";
+	mes "Rachel por favor embarque novamente no Aeroplano";
 	next;
-	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
-		mes "[Funcionária]";
-		mes "Uma vez que você for para o terminal principal, você terá que";
-		mes "pagar a taxa novamente quando embarcar em outro dirigível.";
-		mes "Você deve sair para a cidade de Juno somente se";
-		mes "este for realmente seu destino.";
-		mes "Ir para o terminal principal?";
+	if (select("Sair ao terminal.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroporto]";
+		mes "Uma vez no terminal principal, você terá que pagar novamente para embarcar a outra cidade.";
+		mes "Apenas saia caso esteja seguro da decisão!";
+		mes "Deseja continuar?";
 		next;
 		if (select("Sim:Não") == 1) {
 			warp "y_airport",142,40;
 			end;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Tudo bem, obrigado";
-	mes "por seu apoio e";
-	mes "espero que você tenha";
-	mes "um vôo agradável~";
+	mes "[Assistente do Aeroporto]";
+	mes "Muito bem, obrigada pela atenção!";
+	mes "Caso deseje voltar, por favor é só me procurar";
 	close;
 }
 
-y_airport,126,51,3	duplicate(y_airport2)	Funcionária#y_air2b	4_F_01
-y_airport,158,50,3	duplicate(y_airport2)	Funcionária#y_air2c	4_F_01
+y_airport,126,51,3	duplicate(y_airport2)	Assistente do Aeroporto#y_air2b	4_F_01
+y_airport,158,50,3	duplicate(y_airport2)	Assistente do Aeroporto#y_air2c	4_F_01
 
-y_airport,145,63,5	script	Embarque Doméstico	4_F_02,{
-	mes "[Funcionária de Embarque]";
-	mes "Gostaria de embarcar no";
-	mes "dirigível com destino para Einbroch,";
-	mes "Lighthalzen e Hugel? Se sim,";
-	mes "por favor deixe-me guiá-lo para a";
-	mes "área de embarque do dirigível.";
+y_airport,145,63,5	script	Aux. Vôos Domésticos	4_F_02,{
+	mes "[Aux. de Vôos Domésticos]";
+	mes "Gostaria de embarcar no Aeroplano";
+	mes "que vai para Einbroch, Lighthalzen ou Hugel?";
+	mes "Se sim, deixe-me te indicar a área de embarque.";
 	next;
 	if (select("Sim:Não") == 1) {
 		warp "yuno",59,244;
 		end;
 	}
-	mes "[Funcionária de Embarque]";
-	mes "Muito bem então.";
-	mes "Obrigado por seu";
-	mes "apoio, e espero que você";
-	mes "tenha um vôo agradável~";
+	mes "[Aux. de Vôos Domésticos]";
+	mes "Muito bem.";
+	mes "Obrigada pela sua atenção, caso";
+	mes "mude de ideia basta me procurar.";
 	close;
 }
 
-y_airport,140,63,5	script	Embarque Internacional	4_F_02,{
+y_airport,140,63,5	script	Aux. Vôos Internacionais	4_F_02,{
 
-	mes "[Funcionária de Embarque]";
-	mes "Gostaria de embarcar no";
-	mes "dirigível com destino para Juno,";
-	mes "Izlude e Rachel? Se sim,";
-	mes "por favor deixe-me guiá-lo para a";
-	mes "área de embarque do dirigível.";
+	mes "[Aux. Vôos Internacionais]";
+	mes "Gostaria de embarcar no Aeroplano";
+	mes "que vai para Juno, Izlude e Rachel?";
+	mes "Se sim, deixe-me te indicar a área de embarque.";
 	next;
 	if (select("Sim:Não") == 1) {
 		warp "yuno",47,244;
 		end;
 	}
-	mes "[Funcionária de Embarque]";
-	mes "Muito bem então.";
-	mes "Obrigado por seu";
-	mes "apoio, e espero que você";
-	mes "tenha um vôo agradável~";
+	mes "[Aux. Vôos Internacionais]";
+	mes "Muito bem.";
+	mes "Obrigada pela sua atenção, caso";
+	mes "mude de ideia basta me procurar.";
 	close;
 }
 
-yuno,14,262,5	script	Funcionária#yuno01	4_F_02,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao";
-	mes "Aeroporto de Juno.";
-	mes "Porfavor use essa porta para";
-	mes "embarcar no dirigível que paira";
-	mes "sobre Izlude no Reino de Rune-Midgarts e";
-	mes "para Rachel na República de Arunafeltz.";
+yuno,14,262,5	script	Assistente do Aeroplano#yuno01	4_F_02,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao aeroporto de Juno.";
+	mes "Por favor, use essa porta para";
+	mes "embarcar no Aeroplano que irá";
+	mes "fazer o vôo até Izlude";
+	mes "no reino de Rune-Midgard.";
 	next;
-	mes "[Funcionária]";
-	mes "Caso contrário, se Juno é";
-	mes "seu destino pretendido,";
-	mes "porfavor desça as escadas e peça";
-	mes "aos Funcionários de Chegada para lhe";
-	mes "guiar ao terminal principal.";
-	mes "Obrigado, e desfrute de suas viagens.";
+	mes "[Assistente do Aeroplano]";
+	mes "Ou, se Juno for seu destino final, por favor, desça as escadas";
+	mes "e pergunte ao Assistente de Desembarque o caminho para o";
+	mes "terminal principal. Obrigada";
+	mes "e aproveite a viagem.";
 	close;
 }
 
-yuno,88,263,3	script	Funcionária#yuno02	4_F_02,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao";
-	mes "Aeroporto de Juno.";
-	mes "Porfavor use essa porta para";
-	mes "embarcar no dirigível que paira";
-	mes "sobre Einbroch, Lighthalzen e";
-	mes "Hugel na República de Schwaltzvalt.";
+yuno,88,263,3	script	Assistente do Aeroplano#yuno02	4_F_02,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao aeroporto de Juno.";
+	mes "Por favor, use essa porta para Embarcar no Aeroplano com escalas";
+	mes "em Einbroch, Lighthalzen ou Hugel.";
 	next;
-	mes "[Funcionária]";
-	mes "Caso contrário, se Juno é";
-	mes "seu destino pretendido,";
-	mes "porfavor desça as escadas e peça";
-	mes "aos Funcionários de Chegada para lhe";
-	mes "guiar ao terminal principal.";
-	mes "Obrigado, e desfrute de suas viagens.";
+	mes "[Assistente do Aeroplano]";
+	mes "Ou, se Juno for seu destino final, por favor, desça as escadas";
+	mes "e pergunte ao Assistente de Desembarque o caminho para o";
+	mes "terminal principal. Obrigada";
+	mes "e aproveite a viagem.";
 	close;
 }

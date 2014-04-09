@@ -7,82 +7,67 @@
 //===== Comentários Adicionais: =================================
 //= Official NPCs.
 //= Traduzido para pt-BR. [Evanio]
+//= Revisado de acordo com o bRO. [Portalcake]
 //===============================================================
 
-lhz_airport,143,43,5	script	Funcionária#lhz_air1a::lhz_airport1	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao";
-	mes "Aeroporto de Lighthalzen,";
-	mes "onde nós oferecemos vôos";
-	mes "diretos para as cidades de";
-	mes "Einbroch, Juno e Hugel.";
+lhz_airport,143,43,5	script	Assistente do Aeroporto#lhz_air1a::lhz_airport1	4_F_01,{
+	mes "[Assistente do Aeroporto]";
+	mes "Bem-vindo ao aeroporto de Lighthalzen!";
+	mes "Aqui você pode ir para Einbroch, Juno ou Hugel!";
 	next;
-	if (select("Embarcar no dirigível:Cancelar") == 1) {
-		mes "[Funcionária]";
-		mes "A taxa de embarque no dirigível";
-		mes "é de 1,200 zeny, mas se você";
-		mes "tiver um Bilhete para Aeroplano,";
-		mes "a taxa não será cobrada.";
-		mes "Gostaria de embarcar no dirigível?";
+	if (select("Embarcar.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroporto]";
+		mes "A passagem custa 1.200 zeny.";
+		mes "Deseja comprar uma?";
 		next;
 		if (select("Sim:Não") == 1) {
 			if (countitem(7311) > 0) {
-				delitem 7311,1; //Bilhete_para_Aeroplano
+				delitem 7311,1;
 				warp "lhz_airport",148,51;
 				end;
 			}
 			if (Zeny >= 1200) {
-				set Zeny, Zeny - 1200;
+				Zeny -= 1200;
 				warp "lhz_airport",148,51;
 				end;
 			}
-			mes "[Funcionária]";
-			mes "Me desculpe, mas você não";
-			mes "possui um Bilhete para";
-			mes "Aeroplano e também não possui";
-			mes "nenhum Zeny para embarcar";
-			mes "no dirigível. Lembre-se, a";
-			mes "taxa de embarque custa 1,200 zeny.";
+			mes "[Assistente do Aeroporto]";
+			mes "Me desculpe, mas você não possui 1.200 zeny!";
+			mes "Você não pode embarcar.";
 			close;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Obrigada e";
-	mes "tenha um ótimo dia.";
+	mes "[Assistente do Aeroporto]";
+	mes "Muito obrigada!";
+	mes "Volte sempre.";
 	close;
 }
 
-lhz_airport,158,43,5	duplicate(lhz_airport1)	Funcionária#lhz_air1b	4_F_01
-lhz_airport,126,43,5	duplicate(lhz_airport1)	Funcionária#lhz_air1c	4_F_01
+lhz_airport,158,43,5	duplicate(lhz_airport1)	Assistente do Aeroporto#lhz_air1b	4_F_01
+lhz_airport,126,43,5	duplicate(lhz_airport1)	Assistente do Aeroporto#lhz_air1c	4_F_01
 
-lhz_airport,143,49,3	script	Funcionária#lhz_air2a::lhz_airport2	4_F_01,{
-	mes "[Funcionária]";
-	mes "Bem-vindo ao Aeroporto de Einbroch.";
-	mes "Se você estiver chegando do seu";
-	mes "vôo, deixe-me guia-lo para o";
-	mes "terminal principal. Caso contrário, porfavor embarque no dirigível que";
-	mes "partirá para Juno, Lighthalzen e Hugel.";
+lhz_airport,143,49,3	script	Assistente do Desembarque#lhz_air2a::lhz_airport2	4_F_01,{
+	mes "[Assistente do Desembarque]";
+	mes "Bem-vindo ao Aeroporto de Lighthalzen.";
+	mes "Deixe-me te ajudar a chegar no terminal principal!";
+	mes "Caso deseje ir para Einbroch, Juno, Rachel, Izlude ou Hugel, por favor embarque novamente no Aeroplano.";
 	next;
-	if (select("Sair para o terminal principal.:Cancelar.") == 1) {
-		mes "[Funcionária]";
-		mes "Uma vez que você for para o terminal principal, você terá que";
-		mes "pagar a taxa novamente quando embarcar em outro dirigível.";
-		mes "Você deve sair para a cidade de Einbroch somente se";
-		mes "este for realmente seu destino.";
-		mes "Ir para o terminal principal?";
+	if (select("Sair ao terminal.:Cancelar.") == 1) {
+		mes "[Assistente do Desembarque]";
+		mes "Uma vez no terminal principal, você terá que pagar novamente para embarcar a outra cidade.";
+		mes "Apenas saia caso esteja seguro da decisão!";
+		mes "Deseja continuar?";
 		next;
 		if (select("Sim:Não") == 1) {
 			warp "lhz_airport",142,40;
 			end;
 		}
 	}
-	mes "[Funcionária]";
-	mes "Tudo bem, obrigado";
-	mes "por seu apoio e";
-	mes "espero que você tenha";
-	mes "um vôo agradável~";
+	mes "[Assistente do Desembarque]";
+	mes "Muito bem, obrigada pela atenção!";
+	mes "Caso deseje voltar, por favor é só me procurar.";
 	close;
 }
 
-lhz_airport,126,51,3	duplicate(lhz_airport2)	Funcionária#lhz_air2b	4_F_01
-lhz_airport,158,50,3	duplicate(lhz_airport2)	Funcionária#lhz_air2c	4_F_01
+lhz_airport,126,51,3	duplicate(lhz_airport2)	Assistente do Desembarque#lhz_air2b	4_F_01
+lhz_airport,158,50,3	duplicate(lhz_airport2)	Assistente do Desembarque#lhz_air2c	4_F_01
