@@ -39,3 +39,4 @@ Equipe de Desenvolvimento
 - Shermie
 - SynGates
 - Perfectz
+- KyukE - Thiago Gomes
