@@ -2,9 +2,9 @@
 //= Guia de Lighthalzen
 //===== Por: ====================================================
 //= MasterOfMuppets; L0ne_W0lf
-//===== VersÃ£o Atual: =========================================== 
+//===== Versão Atual: =========================================== 
 //= 1.2e
-//===== CompatÃ­vel Com: ======================================
+//===== Compatível Com: ======================================
 //= Cronus SVN
 //===== Changelog: ============================================== 
 //= 1.0 First Version [MasterOfMuppets]
@@ -14,27 +14,27 @@
 //= 1.2b Revisado [Page]
 //= 1.2c Re-revisado. [RoM]
 //= 1.2d Removido show	[Yum]
-//= 1.2e Revisado	[KyukE]
+//= 1.2e Revisão e alteração das view_ids. [KyukE]
 //===============================================================
 
 lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 	cutin "ein_soldier",2;
 	mes "[Guia de Lighthalzen]";
 	mes "Bem-vindo a Lighthalzen,";
-	mes "a CorporaÃ§Ã£o Cidade-Estado.";
-	mes "Se vocÃª precisar de orientaÃ§Ã£o";
-	mes "pela cidade, sinta-se Ã  vontade";
+	mes "a Corporação Cidade-Estado.";
+	mes "Se você precisar de orientação";
+	mes "pela cidade, sinta-se à vontade";
 	mes "para me perguntar e eu farei meu";
-	mes "melhor para ajudÃ¡-lo.";
+	mes "melhor para ajudá-lo.";
 	set .@loop1,1;
 	while (.@loop1) {
 		next;
-		switch(select("IndicaÃ§Ãµes","Limpar IndicaÃ§Ãµes","Tutorial","Cancelar")) {
+		switch(select("Indicações","Limpar Indicações","Tutorial","Cancelar")) {
 		case 1:
 			mes "[Guia de Lighthalzen]";
 			mes "Por favor fique avisado que eu";
 			mes "estou no comando de promover";
-			mes "informaÃ§Ãµes do Distrito do Leste";
+			mes "informações do Distrito do Leste";
 			mes "de Lighthalzen. Agora, por favor";
 			mes "selecione o local que";
 			mes "deseja saber mais sobre.";
@@ -42,43 +42,43 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 				next;
 				mes "[Guia de Lighthalzen]";
 				mes "Mas antes disso,";
-				mes "vocÃª gostaria que eu";
-				mes "marcasse as localizaÃ§Ãµes";
+				mes "você gostaria que eu";
+				mes "marcasse as localizações";
 				mes "no seu mini-mapa?";
 				next;
-				if (select("Sim:NÃ£o") == 1) set .@compass_check,1;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
 			}
 			set .@loop2,1;
 			while(.@loop2) {
 				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
 				else next;
 
-				switch(select("^FF0000CorporaÃ§Ã£o Rekenber^000000:EstaÃ§Ã£o de Trem:Distrito Policial:Banco:Hotel:Aeroporto:Guilda dos Mercadores:Loja de JÃ³ias:Loja de Armas:Loja de Departamento:Cancelar")) {
+				switch(select("^FF0000Corporação Rekenber^000000:Estação de Trem:Distrito Policial:Banco:Hotel:Aeroporto:Guilda dos Mercadores:Loja de Jóias:Loja de Armas:Loja de Departamento:Cancelar")) {
 				case 1:
 					mes "[Guia de Lighthalzen]";
-					mes "CorporaÃ§Ã£o Rekenber,";
+					mes "Corporação Rekenber,";
 					mes "a maior compania na";
-					mes "RepÃºblica Schwartzwald,";
-					mes "estÃ¡ localizada na parte Noroeste";
-					mes "de Lighthalzen. VocÃª nÃ£o pode perder";
-					mes "o prÃ©dio do Quartel General.";
+					mes "República Schwartzwald,";
+					mes "está localizada na parte Noroeste";
+					mes "de Lighthalzen. Você não pode perder";
+					mes "o prédio do Quartel General.";
 					if (.@compass_check)
 						viewpoint 1,102,247,2,0xFF0000;
 					break;
 				case 2:
 					mes "[Guia de Lighthalzen]";
-					mes "A EstaÃ§Ã£o de Trem fica";
+					mes "A Estação de Trem fica";
 					mes "localizada no centro da";
 					mes "da cidade,onde temos";
-					mes "uma ferrovia direto Ã  Einbroch.";
+					mes "uma ferrovia direto à Einbroch.";
 					if (.@compass_check)
 						viewpoint 1,233,164,3,0xFF00FF;
 					break;
 				case 3:
 					mes "[Guia de Lighthalzen]";
-					mes "Nosso Distrito de PolÃ­cia fica";
+					mes "Nosso Distrito de Polícia fica";
 					mes "ao norte do centro da cidade.";
-					mes "Por favor, nÃ£o hesite em reportar";
+					mes "Por favor, não hesite em reportar";
 					mes "qualquer atividade ou pessoa";
 					mes "suspeita, ou se tiver";
 					mes "algum problema.";
@@ -89,19 +89,19 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 					mes "[Guia de Lighthalzen]";
 					mes "O Banco esta localizado";
 					mes "exatamente oposto ao";
-					mes "Distrito de PolÃ­cia de Lighthalzen,";
-					mes "o que Ã© uma Ã³tima idÃ©ia";
+					mes "Distrito de Polícia de Lighthalzen,";
+					mes "o que é uma ótima idéia";
 					mes "quando eu penso nisso, na verdade.";
 					if (.@compass_check)
 						viewpoint 1,198,257,5,0x0000FF;
 					break;
 				case 5:
 					mes "[Guia de Lighthalzen]";
-					mes "Nosso Hotel estÃ¡ localizado";
+					mes "Nosso Hotel está localizado";
 					mes "no centro do Plaza Sul.";
-					mes "Com seus serviÃ§os exelentes e";
-					mes "luxuosas acomodaÃ§Ãµes, esse";
-					mes "hotel Ã© extremamente popular.";
+					mes "Com seus serviços exelentes e";
+					mes "luxuosas acomodações, esse";
+					mes "hotel é extremamente popular.";
 					if (.@compass_check)
 						viewpoint 1,159,133,6,0x00FF00;
 					break;
@@ -109,8 +109,8 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 					mes "[Guia de Lighthalzen]";
 					mes "O Aeroporto fica em nosso extremo";
 					mes "oeste da Central de Passeios";
-					mes "VocÃª pode viajar para qualquer lugar na";
-					mes "RepÃºblica Schwartzwald em um";
+					mes "Você pode viajar para qualquer lugar na";
+					mes "República Schwartzwald em um";
 					mes "de nossos Aeroplanos.";
 					if (.@compass_check)
 						viewpoint 1,267,75,7,0x00FF00;
@@ -125,7 +125,7 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 					break;
 				case 8:
 					mes "[Guia de Lighthalzen]";
-					mes "A Loja de JÃ³ias estÃ¡";
+					mes "A Loja de Jóias está";
 					mes "localizada bem no oeste";
 					mes "do Plaza Sul.";
 					if (.@compass_check)
@@ -134,19 +134,19 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 				case 9:
 					mes "[Guia de Lighthalzen]";
 					mes "A Loja de Armas";
-					mes "estÃ¡ localizada no fim da";
+					mes "está localizada no fim da";
 					mes "Central de Passeios.";
 					mes "Vale a pena dar uma olhada";
-					mes "se vocÃª quer ter uma";
+					mes "se você quer ter uma";
 					mes "aventura por aqui.";
 					if (.@compass_check)
 						viewpoint 1,196,46,10,0x330033;
 					break;
 				case 10:
 					mes "[Guia de Lighthalzen]";
-					mes "A Ã‡oja de Departamento";
-					mes "estÃ¡ localizada no meio de";
-					mes "Lighthalzen e Ã© o maior";
+					mes "A Çoja de Departamento";
+					mes "está localizada no meio de";
+					mes "Lighthalzen e é o maior";
 					mes "e mais conveniente lugar para";
 					mes "comprar praticamente tudo.";
 					if (.@compass_check)
@@ -154,10 +154,10 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 					break;
 				case 11:
 					mes "[Guia de Lighthalzen]";
-					mes "Por favor, me peÃ§a para 'Remover";
-					mes "IndicaÃ§Ãµes' se vocÃª";
-					mes "nÃ£o deseja mais ter as";
-					mes "localizaÃ§Ãµes marcadas";
+					mes "Por favor, me peça para 'Remover";
+					mes "Indicações' se você";
+					mes "não deseja mais ter as";
+					mes "localizações marcadas";
 					mes "no seu Mini-Mapa.";
 					set .@loop2,0;
 				}
@@ -178,31 +178,31 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 			break;
 		case 3:
 			mes "[Guia de Lighthalzen]";
-			mes "AvanÃ§os em magia e";
+			mes "Avanços em magia e";
 			mes "tecnologia nos permite";
 			mes "modernizar nosso sistema de";
-			mes "informaÃ§Ã£o, permitindo que marquemos";
-			mes "as localizaÃ§Ãµes no seu Mini-Mapa";
-			mes "para uma orientaÃ§Ã£o mais fÃ¡cil.";
+			mes "informação, permitindo que marquemos";
+			mes "as localizações no seu Mini-Mapa";
+			mes "para uma orientação mais fácil.";
 			next;
 			mes "[Guia de Lighthalzen]";
 			mes "Seu Mini-Mapa esta localizado";
 			mes "na parte superior direita";
-			mes "da tela. Se vocÃª nÃ£o consegue";
-			mes "vÃª-la, pressione 'Ctrl + Tab'";
-			mes "ou clique no botÃ£o 'Mapa'";
-			mes "Na sua Janela de InformaÃ§Ã£o BÃ¡sica.";
+			mes "da tela. Se você não consegue";
+			mes "vê-la, pressione 'Ctrl + Tab'";
+			mes "ou clique no botão 'Mapa'";
+			mes "Na sua Janela de Informação Básica.";
 			next;
 			mes "[Guia de Lighthalzen]";
 			mes "No seu Mini-Mapa,";
-			mes "clique nos sÃ­mbolos";
+			mes "clique nos símbolos";
 			mes "'+' e '-' para aproximar";
-			mes "e afastar a visÃ£o no Mini-Mapa.";
+			mes "e afastar a visão no Mini-Mapa.";
 			mes "Esperamos que aproveite sua viagem";
 			mes "aqui em Lighthalzen.";
 		case 4:
 			mes "[Guia de Lighthalzen]";
-			mes "Lighthalzen Ã© divido em";
+			mes "Lighthalzen é divido em";
 			mes "Distritos do Leste e Oeste.";
 			mes "cortados por uma ferrovia";
 			mes "que passa pelo meio.";
@@ -210,9 +210,9 @@ lighthalzen,207,310,5	script	Guia#lhz::LhzGuide	4_M_EIN_SOLDIER,{
 			mes "assegurar a paz no local.";
 			next;
 			mes "[Guia de Lighthalzen]";
-			mes "Por favor, nÃ£o hesite";
+			mes "Por favor, não hesite";
 			mes "em reportar atividades";
-			mes "ou pessoas suspeitas a nÃ³s.";
+			mes "ou pessoas suspeitas a nós.";
 			mes "Esperamos que aproveite";
 			mes "nossa cidade justa, aventureiro.";
 			close2;

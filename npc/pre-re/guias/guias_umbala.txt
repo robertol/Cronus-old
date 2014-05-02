@@ -2,7 +2,7 @@
 //= Guia de Umbala
 //===== Por: =================================================== 
 //= Dizzy
-//===== VersÃ£o Atual: ========================================== 
+//===== Versão Atual: ========================================== 
 //= 1.6b
 //===== Comentarios Adicionais: ================================
 //= 1.1 Fixed location command format [Lupus]
@@ -11,27 +11,27 @@
 //= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.6 Corrected activating ontouch. [L0ne_W0lf]
 //= 1.6a Traduzido. [RoM]
-//= 1.6b Revisado. [KyukE]
+//= 1.6b Revisão e alteração das view_ids. [KyukE]
 //==============================================================
 
 umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 	mes "[Aventureira]";
-	mes "Este Ã© um lugar muito estranho...";
-	mes "Ã‰ subdesenvolvido, e aqui tem";
+	mes "Este é um lugar muito estranho...";
+	mes "É subdesenvolvido, e aqui tem";
 	mes "varios caminhos complexos e perigosos...";
 	next;
 	mes "[Aventureira]";
 	mes "Contudo, desde que eu estou aqui";
-	mes "hÃ¡ meses, eu estou estou familiar com";
-	mes "esta Ã¡rea geogrÃ¡fica e dos pontos";
+	mes "há meses, eu estou estou familiar com";
+	mes "esta área geográfica e dos pontos";
 	mes "interessantes desse vilarejo.";
-	mes "VocÃª Ã© bem-vindo para perguntar sobre";
-	mes "as localizaÃ§Ãµes das construÃ§Ãµes.";
+	mes "Você é bem-vindo para perguntar sobre";
+	mes "as localizações das construções.";
 	next;
-	switch(select("IndicaÃ§Ãµes:Remover IndicaÃ§Ãµes:Cancelar")) {
+	switch(select("Indicações:Remover Indicações:Cancelar")) {
 	case 1:
 		mes "[Aventureira]";
-		mes "EntÃ£o, sobre qual deseja saber?";
+		mes "Então, sobre qual deseja saber?";
 		next;
 		switch(select("Casa do Chefe de Aldeia:Casa do Shaman da Aldeia:Loja de Armas:Loja de Utilidades:Local de Bungee Jump:Cancelar")) {
 		case 1:
@@ -42,7 +42,7 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 			mes "[Aventureira]";
 			mes "Somente o Chefe da Aldeia sabe";
 			mes "linguagens estrangeiras. Seria bom";
-			mes "vocÃª ir visitÃ¡-lo antes de qualquer outro.";
+			mes "você ir visitá-lo antes de qualquer outro.";
 			viewpoint 1,66,250,2,0xFF3355;
 			break;
 		case 2:
@@ -52,10 +52,10 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 			next;
 			mes "[Aventureira]";
 			mes "O Shaman Utan tem alguns";
-			mes "poderes mÃ¡gicos...";
+			mes "poderes mágicos...";
 			mes "As pessoas dizem que ele pode criar";
-			mes "minÃ©rios de pedras encantadas, e dividir";
-			mes "pedras encantadas puras em minÃ©rios.";
+			mes "minérios de pedras encantadas, e dividir";
+			mes "pedras encantadas puras em minérios.";
 			viewpoint 1,217,186,3,0xCE6300;
 			break;
 		case 3:
@@ -64,7 +64,7 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 			mes "no seu mini-mapa.";
 			next;
 			mes "[Aventureira]";
-			mes "Os Utan's estÃ£o sempre bem armados";
+			mes "Os Utan's estão sempre bem armados";
 			mes "e preparados para ataques de";
 			mes "seus inimigos. Aparentemente, eles";
 			mes "eles foram atacados pelos estrangeiros muitas vezes no passado.";
@@ -76,8 +76,8 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 			mes "no seu mini-mapa.";
 			next;
 			mes "[Aventureira]";
-			mes "VocÃª encontrarÃ¡ muitas coisas Ãºteis para";
-			mes "viajar na Loja de Utilidades, entÃ£o por que vocÃª nÃ£o vai dar uma olhada?";
+			mes "Você encontrará muitas coisas úteis para";
+			mes "viajar na Loja de Utilidades, então por que você não vai dar uma olhada?";
 			viewpoint 1,136,127,5,0x3355FF;
 			break;
 		case 5:
@@ -86,19 +86,19 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 			mes "no seu mini-mapa.";
 			next;
 			mes "[Aventureira]";
-			mes "Umbala tem um local Ãºnico chamado";
+			mes "Umbala tem um local único chamado";
 			mes "de 'Local de Bungee Jump'.";
-			mes "Se vocÃª estiver interessado em testar";
-			mes "sua coragem, por que nÃ£o vai";
-			mes "e participe vocÃª mesmo";
+			mes "Se você estiver interessado em testar";
+			mes "sua coragem, por que não vai";
+			mes "e participe você mesmo";
 			mes "desse ritual Utan?";
 			viewpoint 1,139,198,6,0x00FF00;
 			break;
 		case 6:
 			mes "[Aventureira]";
-			mes "Se vocÃª quiser remover as marcas de";
-			mes "localizaÃ§Ãµes do seu mini-mapa, por favor";
-			mes "escola 'Remover IndicaÃ§Ãµes.' no menu.";
+			mes "Se você quiser remover as marcas de";
+			mes "localizações do seu mini-mapa, por favor";
+			mes "escola 'Remover Indicações.' no menu.";
 		}
 		break;
 	case 2:
@@ -109,12 +109,12 @@ umbala,128,94,4	script	Aventureira#um	4_F_GON,{
 		viewpoint 2,139,198,6,0x00FF00;
 		mes "[Aventureira]";
 		mes "Eu removi todas as marcas do seu";
-		mes "mini-mapa. Sinta-se Ã  vontade para me perguntar";
-		mes "novamente se vocÃª quiser que eu marque as localizaÃ§Ãµes.";
+		mes "mini-mapa. Sinta-se à vontade para me perguntar";
+		mes "novamente se você quiser que eu marque as localizações.";
 		break;
 	case 3:
 		mes "[Aventureira]";
-		mes "Ã‰ legal aprender a cultura Utan. Cuide-se.";
+		mes "É legal aprender a cultura Utan. Cuide-se.";
 		break;
 	}
 	close;

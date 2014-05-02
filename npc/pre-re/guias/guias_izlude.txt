@@ -2,9 +2,9 @@
 //= Guias da Cidade de Izlude
 //===== Por: =================================================
 //= kobra_k88; L0ne_W0lf
-//===== VersÃ£o Atual: ========================================
+//===== Versão Atual: ========================================
 //= 1.5e
-//===== CompatÃ­vel Com: ======================================
+//===== Compatível Com: ======================================
 //= Cronus SVN
 //===== Changelog: ===========================================
 //= Fully working
@@ -18,77 +18,77 @@
 //= 1.5b Traduzido. [SoulBlaker]
 //= 1.5c Revisado. [RoM]
 //= 1.5d Removido show	[Yum]
-//= 1.5e Revisado.	[KyukE]
+//= 1.5e Revisão e alteração das view_ids. [KyukE]
 //============================================================
 
 izlude,121,87,6	script	Guia#iz	8W_SOLDIER,{
 	cutin "prt_soldier",2;
 	mes "[Guia de Izlude]";
 	mes "Bem-vindo a Izlude, a";
-	mes "cidade-satÃ©lite de Prontera.";
-	mes "NÃ³s estamos aqui para ajudar os";
-	mes "visitantes da cidade. Se vocÃª tem";
-	mes "alguma dÃºvida, consulte-nos.";
+	mes "cidade-satélite de Prontera.";
+	mes "Nós estamos aqui para ajudar os";
+	mes "visitantes da cidade. Se você tem";
+	mes "alguma dúvida, consulte-nos.";
 	set .@loop1,1;
 	while(.@loop1) {
 		next;
-		switch(select("IndicaÃ§Ãµes:Limpar IndicaÃ§Ãµes:Tutorial:Cancelar")){
+		switch(select("Indicações:Limpar Indicações:Tutorial:Cancelar")){
 		case 1:
 			mes "[Guia de Izlude]";
 			mes "Por favor selecione";
-			mes "uma localizaÃ§Ã£o no";
+			mes "uma localização no";
 			mes "menu a seguir.";
 			if (.@compass_check == 0) {
 				mes "Quer que eu marque";
-				mes "as localizaÃ§Ãµes";
+				mes "as localizações";
 				mes "no seu Mini-Mapa?";
 				next;
-				if (select("Sim:NÃ£o") == 1) set .@compass_check,1;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
 			}
 			set .@loop2,1;
 			while(.@loop2) {
 				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
 				else next;
 
-				switch(select("^FF0000AssociaÃ§Ã£o dos Espadachins^000000:Sede dos Espadachins:Arena:Marina de Izlude:Loja de Armas:Loja de Utilidades:Cancelar")){
+				switch(select("^FF0000Associação dos Espadachins^000000:Sede dos Espadachins:Arena:Marina de Izlude:Loja de Armas:Loja de Utilidades:Cancelar")){
 				case 1:
 					mes "[Guia de Izlude]";
-					mes "A AssociaÃ§Ã£o de Espadachins";
-					mes "Ã© localizada em uma ilha";
-					mes "no oeste de Izlude. Se vocÃª estÃ¡ pensando em se tornar um Espadachim,";
-					mes "vocÃª deveria ir lÃ¡.";
+					mes "A Associação de Espadachins";
+					mes "é localizada em uma ilha";
+					mes "no oeste de Izlude. Se você está pensando em se tornar um Espadachim,";
+					mes "você deveria ir lá.";
 					if (.@compass_check)
 						viewpoint 1,52,140,0,0xFF0000;
 					break;
 				case 2:
 					mes "[Guia de Izlude]";
 					mes "A Sede dos Espadachins";
-					mes "Ã© localizada na ilha ao leste";
-					mes "que estÃ¡ conenctada Ã  Izlude.";
+					mes "é localizada na ilha ao leste";
+					mes "que está conenctada à Izlude.";
 					if (.@compass_check)
 						viewpoint 1,214,130,1,0x00FF00;
 					break;
 				case 3:
 					mes "[Guia de Izlude]";
 					mes "A famosa Arena de Izlude";
-					mes "Ã© localizada ao extremo";
+					mes "é localizada ao extremo";
 					mes "norte de Izlude.";
 					if (.@compass_check)
 						viewpoint 1,128,225,2,0x00FF00;
 					break;
 				case 4:
 					mes "[Guia de Izlude]";
-					mes "VocÃª pode encontrar";
+					mes "Você pode encontrar";
 					mes "a Marina na parte";
-					mes "nordeste de Izlude. LÃ¡, vocÃª";
+					mes "nordeste de Izlude. Lá, você";
 					mes "pode pegar um barco para";
-					mes "Alberta ou Ã  Ilha Byalan.";
+					mes "Alberta ou à Ilha Byalan.";
 					if (.@compass_check)
 						viewpoint 1,200,180,3,0xFF0000;
 					break;
 				case 5:
 					mes "[Guia de Izlude]";
-					mes "VocÃª pode facilmente";
+					mes "Você pode facilmente";
 					mes "encontrar a Loja de Armas";
 					mes "ao noroeste de Izlude.";
 					if (.@compass_check)
@@ -96,17 +96,17 @@ izlude,121,87,6	script	Guia#iz	8W_SOLDIER,{
 					break;
 				case 6:
 					mes "[Guia de Izlude]";
-					mes "A Loja de Ferramentas nÃ£o deve";
-					mes "ser muito difÃ­cil de se encontrar";
+					mes "A Loja de Ferramentas não deve";
+					mes "ser muito difícil de se encontrar";
 					mes "ao nordeste de Izlude.";
 					if (.@compass_check)
 						viewpoint 1,148,148,5,0xFF00FF;
 					break;
 				case 7:
 					mes "[Guia de Izlude]";
-					mes "Se vocÃª deseja apagar as indicaÃ§Ãµes";
+					mes "Se você deseja apagar as indicações";
 					mes "do seu mini-mapa, por favor";
-					mes "selecione 'Limpar indicaÃ§Ãµes'.";
+					mes "selecione 'Limpar indicações'.";
 					set .@loop2,0;
 					break;
 				}
@@ -123,26 +123,26 @@ izlude,121,87,6	script	Guia#iz	8W_SOLDIER,{
 			break;
 		case 3:
 			mes "[Guia de Izlude]";
-			mes "NÃ³s fomos exaustivamente treinados";
+			mes "Nós fomos exaustivamente treinados";
 			mes "para servi-lo da melhor maneira";
-			mes "possÃ­vel e sem falhas.";
-			mes "Assim vocÃª tem a garantia das";
-			mes "melhores indicaÃ§Ãµes possÃ­veis.";
+			mes "possível e sem falhas.";
+			mes "Assim você tem a garantia das";
+			mes "melhores indicações possíveis.";
 			next;
 			mes "[Guia de Izlude]";
-			mes "As indicaÃ§Ãµes que lhe daremos podem";
+			mes "As indicações que lhe daremos podem";
 			mes "ser marcadas no seu mini-mapa.";
 			mes "Para visualizar o seu mini-mapa,";
 			mes "aperte 'Ctrl + Tab', ou clique no";
-			mes "botÃ£o 'Mapa' no menu principal.";
+			mes "botão 'Mapa' no menu principal.";
 			mes "Controle o seu 'zoom' no mini-mapa";
-			mes "por meio dos sÃ­mbolos '+' e '-'.";
+			mes "por meio dos símbolos '+' e '-'.";
 			break;
 		case 4:
 			mes "[Guia de Izlude]";
-			mes "Sinta-se Ã  vontade";
+			mes "Sinta-se à vontade";
 			mes "para me consultar";
-			mes "se vocÃª estiver perdido";
+			mes "se você estiver perdido";
 			mes "em Izlude, certo?";
 			close2;
 			set .@loop1,0;

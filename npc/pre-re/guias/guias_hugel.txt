@@ -2,9 +2,9 @@
 //= Guias de Hugel
 //===== Por: =================================================
 //= erKURITA; L0ne_W0lf
-//===== VersÃ£o Atual: ========================================
+//===== Versão Atual: ========================================
 //= 1.2c
-//===== CompatÃ­vel com: ======================================
+//===== Compatível com: ======================================
 //= Cronus SVN
 //===== Changelog: ===========================================
 //= 1.0 Started the script. [erKURITA]
@@ -12,114 +12,114 @@
 //= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
 //= 1.2a Traduzido. [RoM]
 //= 1.2b Removido show	[Yum]
-//= 1.2c Revisado	[KyukE]
+//= 1.2c Revisão e alteração das view_ids. [KyukE]
 //============================================================
 
-hugel,98,56,3	script	VovÃ³ Guia de Hugel#huge	4_F_LGTGRAND,0,0,{
-	mes "[VovÃ³ Guia de Hugel]";
-	mes "Ah, olÃ¡~ vocÃª Ã© um aventureiro cheio de energia.";
-	mes "Bem-vindo a Hugel. Eu estou honrada de guiÃ¡-lo nesta bela cidade.";
-	mes "Se for a primeira vez que vocÃª utiliza o serviÃ§o de um guia, seria bom dar uma olhada no menu ''Tutorial'' primeiro.";
+hugel,98,56,3	script	Vovó Guia de Hugel#huge	4_F_LGTGRAND,0,0,{
+	mes "[Vovó Guia de Hugel]";
+	mes "Ah, olá~ você é um aventureiro cheio de energia.";
+	mes "Bem-vindo a Hugel. Eu estou honrada de guiá-lo nesta bela cidade.";
+	mes "Se for a primeira vez que você utiliza o serviço de um guia, seria bom dar uma olhada no menu ''Tutorial'' primeiro.";
 	while(1) {
 		next;
-		switch(select("IndicaÃ§Ãµes:Remover IndicaÃ§Ãµes do Mini-Mapa:Tutorial:Cancelar")) {
+		switch(select("Indicações:Remover Indicações do Mini-Mapa:Tutorial:Cancelar")) {
 		case 1:
-			mes "[VovÃ³ Guia de Hugel]";
-			mes "Posso lhe indicar qualquer construÃ§Ã£o de Hugel.";
-			mes "EntÃ£o, onde vocÃª quer ir?";
+			mes "[Vovó Guia de Hugel]";
+			mes "Posso lhe indicar qualquer construção de Hugel.";
+			mes "Então, onde você quer ir?";
 			if (.@compass_check == 0) {
 				mes "Quer que eu marque";
-				mes "as localizaÃ§Ãµes";
+				mes "as localizações";
 				mes "no seu Mini-Mapa?";
 				next;
-				if (select("Sim.:NÃ£o.") == 1) set .@compass_check,1;
+				if (select("Sim.:Não.") == 1) set .@compass_check,1;
 			}
 			set .@loop,1;
 			while(.@loop) {
 				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
 				else next;
 
-				switch(select("Igreja:Estalagem:Bar:Aeroporto:Loja de Armas:Loja de Utilidades:Loja de Artigos para Festas:^3131FFLocal de MudanÃ§a de Classe para CaÃ§ador^000000:^3131FFLocal da ExpediÃ§Ã£o para o Templo^000000:Arena da Corrida de Monstros:Sala do Jogo de Bingo:Cancelar")) {
+				switch(select("Igreja:Estalagem:Bar:Aeroporto:Loja de Armas:Loja de Utilidades:Loja de Artigos para Festas:^3131FFLocal de Mudança de Classe para Caçador^000000:^3131FFLocal da Expedição para o Templo^000000:Arena da Corrida de Monstros:Sala do Jogo de Bingo:Cancelar")) {
 				case 1:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Bem, para mim, esta Igreja Ã© mais um lugar para velhos tolos como eu, vocÃª sabe...";
+					mes "[Vovó Guia de Hugel]";
+					mes "Bem, para mim, esta Igreja é mais um lugar para velhos tolos como eu, você sabe...";
 					if (.@compass_check)
 						viewpoint 1,156,116,2,0xFF0000;
 					break;
 				case 2:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Ã‰ melhor vocÃª desfazer as malas antes de comeÃ§ar olhar por aÃ­ na cidade.";
-					mes "Ã‰ esta construÃ§Ã£o ao meu lado direito.";
+					mes "[Vovó Guia de Hugel]";
+					mes "É melhor você desfazer as malas antes de começar olhar por aí na cidade.";
+					mes "É esta construção ao meu lado direito.";
 					if (.@compass_check)
 						viewpoint 1,104,79,3,0xFF00FF;
 					break;
 				case 3:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Sim, quando vocÃª viaja, vocÃª deseja ir a um bar para fazer novos amigos.";
-					mes "VÃ¡ para o leste daqui, entÃ£o vocÃª encontrarÃ¡ o bar.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Sim, quando você viaja, você deseja ir a um bar para fazer novos amigos.";
+					mes "Vá para o leste daqui, então você encontrará o bar.";
 					if (.@compass_check)
 						viewpoint 1,129,66,4,0x99FFFF;
 					break;
 				case 4:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "HÃ¡ pouco, estranhos vieram para a cidade e construÃ­ram este tipo aeroporto estranho...";
+					mes "[Vovó Guia de Hugel]";
+					mes "Há pouco, estranhos vieram para a cidade e construíram este tipo aeroporto estranho...";
 					mes "Como eles chamam isto? Aeroplano?";
 					if (.@compass_check)
 						viewpoint 1,178,146,5,0x0000FF;
 					break;
 				case 5:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Bem, nÃ³s temos uma loja de armas no centro da cidade.";
-					mes "Mas eu nÃ£o sei se vocÃª encontrarÃ¡ alguma arma Ãºtil lÃ¡.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Bem, nós temos uma loja de armas no centro da cidade.";
+					mes "Mas eu não sei se você encontrará alguma arma útil lá.";
 					if (.@compass_check)
 						viewpoint 1,70,158,6,0x00FF00;
 					break;
 				case 6:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Sim, eu amo as PoÃ§Ãµes Vermelhas de Hugel. Eu nunca provei PoÃ§Ãµes Vermelhas de outros lugares ainda...hehehe. ";
-					mes "A loja de utilidades Ã© localizada no centro da cidade.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Sim, eu amo as Poções Vermelhas de Hugel. Eu nunca provei Poções Vermelhas de outros lugares ainda...hehehe. ";
+					mes "A loja de utilidades é localizada no centro da cidade.";
 					if (.@compass_check)
 						viewpoint 1,93,167,7,0x00FF00;
 					break;
 				case 7:
-					mes "[VovÃ³ Guia de Hugel]";
+					mes "[Vovó Guia de Hugel]";
 					mes "A loja de artigos para festas fica perto do centro da cidade.";
-					mes "Mas nÃ£o use nenhum fogo de artifÃ­cio perto de outras pessoas, porque Ã© muito perigoso, vocÃª sabia?";
+					mes "Mas não use nenhum fogo de artifício perto de outras pessoas, porque é muito perigoso, você sabia?";
 					if (.@compass_check)
 						viewpoint 1,91,105,8,0xFF99FF;
 					break;
 				case 8:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Ah, vocÃª Ã© um aspirante de CaÃ§ador?";
-					mes "EntÃ£o vÃ¡ em direÃ§Ã£o ao nordeste seguindo a praia, entÃ£o vocÃª encontrarÃ¡ o local de mudanÃ§a de classe para CaÃ§ador.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Ah, você é um aspirante de Caçador?";
+					mes "Então vá em direção ao nordeste seguindo a praia, então você encontrará o local de mudança de classe para Caçador.";
 					if (.@compass_check)
 						viewpoint 1,206,228,9,0xFF9900;
 					break;
 				case 9:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Eu ouvi dizer que a expediÃ§Ã£o para o templo estÃ¡ sendo organizada em uma casa ao oeste.";
-					mes "Eles colocaram um tipo de placa no centro da cidade, entÃ£o eu acho que eles estÃ£o recrutando pessoas para alguma coisa...";
-					mes "Eu fico me perguntando o que eles estÃ£o fazendo lÃ¡...hmmm.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Eu ouvi dizer que a expedição para o templo está sendo organizada em uma casa ao oeste.";
+					mes "Eles colocaram um tipo de placa no centro da cidade, então eu acho que eles estão recrutando pessoas para alguma coisa...";
+					mes "Eu fico me perguntando o que eles estão fazendo lá...hmmm.";
 					if (.@compass_check)
 						viewpoint 1,52,91,10,0xFFFFFF;
 					break;
 				case 10:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Eu tambÃ©m gosto de jogar na Corrida de Monstros. Ã‰ bem legal, nÃ£o acha?";
-					mes "Ah, vocÃª ainda nÃ£o tentou? EntÃ£o Ã© melhor vocÃª ir lÃ¡ checar. Confie em mim, vocÃª irÃ¡ gostar.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Eu também gosto de jogar na Corrida de Monstros. É bem legal, não acha?";
+					mes "Ah, você ainda não tentou? Então é melhor você ir lá checar. Confie em mim, você irá gostar.";
 					if (.@compass_check)
 						viewpoint 1,58,72,11,0xFF9900;
 					break;
 				case 11:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "VocÃª gosta de jogos de bingo? Se gostar, visite a Sala de Bingo Euklan.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Você gosta de jogos de bingo? Se gostar, visite a Sala de Bingo Euklan.";
 					if (.@compass_check)
 						viewpoint 1,55,209,12,0x66FFFF;
 					break;
 				case 12:
-					mes "[VovÃ³ Guia de Hugel]";
-					mes "Se vocÃª quiser que eu apague as indicaÃ§Ãµes no seu mini-mapa,";
-					mes "me peÃ§a, escolhendo 'Remover IndicaÃ§Ãµes' no menu.";
+					mes "[Vovó Guia de Hugel]";
+					mes "Se você quiser que eu apague as indicações no seu mini-mapa,";
+					mes "me peça, escolhendo 'Remover Indicações' no menu.";
 					set .@loop,0;
 				}
 			}
@@ -137,19 +137,19 @@ hugel,98,56,3	script	VovÃ³ Guia de Hugel#huge	4_F_LGTGRAND,0,0,{
 			viewpoint 2,58,72,11,0xFF9900;
 			viewpoint 2,55,209,12,0x66FFFF;
 			set .@compass_check,0;
-			mes "[VovÃ³ Guia de Hugel]";
-			mes "Ok, eu apaguei tudo. Se vocÃª quiser saber mais sobre algum local daqui, venha me procurar.";
+			mes "[Vovó Guia de Hugel]";
+			mes "Ok, eu apaguei tudo. Se você quiser saber mais sobre algum local daqui, venha me procurar.";
 			break;
 		case 3:
-			mes "[VovÃ³ Guia de Hugel]";
-			mes "Quando vocÃª estÃ¡ usando o Guia de 'IndicaÃ§Ãµes',";
-			mes "tenha certeza de que eles estÃ£o aparecendo no canto superior direito de sua tela.";
-			mes "Se vocÃª nÃ£o estÃ¡ vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botÃ£o 'Mapa' na sua Janela de InformaÃ§Ãµes BÃ¡sicas, ok?";
-			mes "VocÃª ainda pode diminuir o zoom no mini-mapa apertando o botÃ£o '-' no caso de vocÃª nÃ£o estar vendo o mapa da vila por inteiro.";
+			mes "[Vovó Guia de Hugel]";
+			mes "Quando você está usando o Guia de 'Indicações',";
+			mes "tenha certeza de que eles estão aparecendo no canto superior direito de sua tela.";
+			mes "Se você não está vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botão 'Mapa' na sua Janela de Informações Básicas, ok?";
+			mes "Você ainda pode diminuir o zoom no mini-mapa apertando o botão '-' no caso de você não estar vendo o mapa da vila por inteiro.";
 			break;
 		case 4:
-			mes "[VovÃ³ Guia de Hugel]";
-			mes "Este trabalho de Guia Ã© tÃ£o excitante. Hohoho~";
+			mes "[Vovó Guia de Hugel]";
+			mes "Este trabalho de Guia é tão excitante. Hohoho~";
 			close;
 		}
 	}

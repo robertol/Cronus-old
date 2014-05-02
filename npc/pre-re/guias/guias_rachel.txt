@@ -2,9 +2,9 @@
 //= Guia de Rachel
 //===== Por: ================================================= 
 //= L0ne_W0lf
-//===== VersÃ£o Atual: ======================================== 
+//===== Versão Atual: ======================================== 
 //= 1.2e
-//===== CompatÃ­vel com: ====================================== 
+//===== Compatível com: ====================================== 
 //= Cronus SVN
 //===== Changelog: =========================================== 
 //= 1.0 First version. [L0ne_W0lf]
@@ -16,7 +16,7 @@
 //= 1.2b Deleted a unnecessary "end". [Samuray22]
 //= 1.2c Revisado. [RoM]
 //= 1.2d Removido show	[Yum]
-//= 1.2e Revisado.	[KyukE]
+//= 1.2e Revisão e alteração das view_ids. [KyukE]
 //============================================================ 
 
 rachel,138,146,5	script	Guia de Rachel	4_M_RASWORD,{
@@ -24,23 +24,23 @@ rachel,138,146,5	script	Guia de Rachel	4_M_RASWORD,{
 	mes "Seja bem-vindo a capital de";
 	mes "Arunafeltz, Rachel. onde o";
 	mes "ar da Deusa Freya extende-se.";
-	mes "Se estÃ¡s usando pela primeira vez";
-	mes "os serviÃ§os de um Guia, por que";
-	mes "nÃ£o checar o menu 'Tutorial' primeiro?";
+	mes "Se estás usando pela primeira vez";
+	mes "os serviços de um Guia, por que";
+	mes "não checar o menu 'Tutorial' primeiro?";
 	set .@loop1,1;
 	while(.@loop1) {
 		next;
-		switch(select("IndicaÃ§Ãµes:Remover IndicaÃ§Ãµes:Tutorial:Cancelar")) {
+		switch(select("Indicações:Remover Indicações:Tutorial:Cancelar")) {
 		case 1:
 			mes "[Guia de Rachel]";
-			mes "Posso lhe indicar qualquer construÃ§Ã£o de Rachel.";
-			mes "EntÃ£o, onde vocÃª quer ir?";
+			mes "Posso lhe indicar qualquer construção de Rachel.";
+			mes "Então, onde você quer ir?";
 			if (.@compass_check == 0) {
 				mes "Quer que eu marque";
-				mes "as localizaÃ§Ãµes";
+				mes "as localizações";
 				mes "no seu Mini-Mapa?";
 				next;
-				if (select("Sim:NÃ£o") == 1) set .@compass_check,1;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
 			}
 			set .@loop2,1;
 			while(.@loop2) {
@@ -50,37 +50,37 @@ rachel,138,146,5	script	Guia de Rachel	4_M_RASWORD,{
 				switch(select("Cheshrumnir:Estalagem:Loja de Armas:Loja de Utilidades:Aeroporto:Cancelar")) {
 				case 1:
 					mes "[Guia de Rachel]";
-					mes "Cheshrumnir Ã© o Solo Sagrado onde a Papisa, a encarnaÃ§Ã£o da Deusa Freya vive.";
-					mes "Tome a rua norte para encontrar o prÃ©dio.";
+					mes "Cheshrumnir é o Solo Sagrado onde a Papisa, a encarnação da Deusa Freya vive.";
+					mes "Tome a rua norte para encontrar o prédio.";
 					if (.@compass_check == 1) viewpoint 1,150,249,1,0xFF0000;
 					break;
 				case 2:
 					mes "[Guia de Rachel]";
-					mes "VocÃª pode descansar de suas aventuras na Estalagem.";
-					mes "O prÃ©dio Ã¡ minha esquerda Ã© a Estalagem de Rachel.";
+					mes "Você pode descansar de suas aventuras na Estalagem.";
+					mes "O prédio á minha esquerda é a Estalagem de Rachel.";
 					if (.@compass_check == 1) viewpoint 1,115,149,2,0xFF00FF;
 					break;
 				case 3:
 					mes "[Guia de Rachel]";
-					mes "Quer conferir as armas que sÃ£o vendidas em Rachel?";
-					mes "A Loja de Armas fica perto do portÃ£o ocidental.";
+					mes "Quer conferir as armas que são vendidas em Rachel?";
+					mes "A Loja de Armas fica perto do portão ocidental.";
 					if (.@compass_check == 1) viewpoint 1,42,87,3,0x99FFFF;
 					break;
 				case 4:
 					mes "[Guia de Rachel]";
-					mes "A Loja de Utilidades de Rachel vende poÃ§Ãµes da melhor qualidade.";
-					mes "EstÃ¡ localizada prÃ³xima ao portÃ£o ocidental.";
+					mes "A Loja de Utilidades de Rachel vende poções da melhor qualidade.";
+					mes "Está localizada próxima ao portão ocidental.";
 					if (.@compass_check == 1) viewpoint 1,83,78,4,0x0000FF;
 					break;
 				case 5:
 					mes "[Guia de Rachel]";
-					mes "O Aeroporto estÃ¡ localizado perto do portÃ£o oriental.";
+					mes "O Aeroporto está localizado perto do portão oriental.";
 					if (.@compass_check == 1) viewpoint 1,273,125,5,0x00FF00;
 					break;
 				case 6:
 					mes "[Guia de Rachel]";
-					mes "Se vocÃª quiser que eu apague as indicaÃ§Ãµes no seu mini-mapa,";
-					mes "me peÃ§a, escolhendo 'Remover IndicaÃ§Ãµes' no menu.";
+					mes "Se você quiser que eu apague as indicações no seu mini-mapa,";
+					mes "me peça, escolhendo 'Remover Indicações' no menu.";
 					set .@loop2,0;
 					break;
 				}
@@ -94,14 +94,14 @@ rachel,138,146,5	script	Guia de Rachel	4_M_RASWORD,{
 			viewpoint 2,83,78,4,0x0000FF;
 			viewpoint 2,273,125,5,0x00FF00;
 			mes "[Guia de Rachel]";
-			mes "Ok, eu apaguei tudo. Se vocÃª quiser saber mais sobre algum local daqui, venha me procurar.";
+			mes "Ok, eu apaguei tudo. Se você quiser saber mais sobre algum local daqui, venha me procurar.";
 			break;
 		case 3:
 			mes "[Guia de Rachel]";
-			mes "Quando vocÃª estÃ¡ usando o Guia de 'IndicaÃ§Ãµes',";
-			mes "tenha certeza de que eles estÃ£o aparecendo no canto superior direito de sua tela.";
-			mes "Se vocÃª nÃ£o estÃ¡ vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botÃ£o 'Mapa' na sua Janela de InformaÃ§Ãµes BÃ¡sicas, ok?";
-			mes "VocÃª ainda pode diminuir o zoom no mini-mapa apertando o botÃ£o '-' no caso de vocÃª nÃ£o estar vendo o mapa da vila por inteiro.";
+			mes "Quando você está usando o Guia de 'Indicações',";
+			mes "tenha certeza de que eles estão aparecendo no canto superior direito de sua tela.";
+			mes "Se você não está vendo seu mini-mapa, aperte 'Ctrl + Tab' ou clique no botão 'Mapa' na sua Janela de Informações Básicas, ok?";
+			mes "Você ainda pode diminuir o zoom no mini-mapa apertando o botão '-' no caso de você não estar vendo o mapa da vila por inteiro.";
 			break;
 		case 4:
 			mes "[Guia de Rachel]";

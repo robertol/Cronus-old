@@ -2,9 +2,9 @@
 //= Guias de Juno
 //===== Por: =================================================
 //= KitsuneStarwind, usul, kobra_k88; L0ne_W0lf
-//===== VersÃ£o Atual: ========================================
+//===== Versão Atual: ========================================
 //= 1.7d
-//===== CompatÃ­vel Com: ======================================
+//===== Compatível Com: ======================================
 //= Cronus SVN
 //===== Changelog: ===========================================
 //= Edited Miss Yoon text. Added town soldiers by usul. Edited town soldiers
@@ -19,15 +19,15 @@
 //= 1.7a Traduzido e Adaptado para o Cronus [Pudim]
 //= 1.7b Revisado. [MaxDragon]
 //= 1.7c Re-revisado. [RoM]
-//= 1.7d Revisado. [KyukE]
+//= 1.7d Revisão e alteração das view_ids. [KyukE]
 //============================================================
 
 yuno,153,47,4	script	Guia de Juno#yuno	8_F_GIRL,{
 	mes "[Srta. Yoon]";
-	mes "Um lugar que leva a visÃ£o do futuro, e dÃ¡ sua forma no presente. Bem-vindo Ã ";
+	mes "Um lugar que leva a visão do futuro, e dá sua forma no presente. Bem-vindo à";
 	mes "cidade de Juno!";
 	next;
-	switch(select("Loja de Armas:Loja de Utilidades:Castelo dos SÃ¡bios (Local de MudanÃ§a de Classe para SÃ¡bios):Rua das Lojas de Livros:Juphero Plaza:Biblioteca da RepÃºblica:Academia de Magia de Schwheicherbil:Museu dos Monstros:Casa de Forja:Aeroporto:Cancelar")) {
+	switch(select("Loja de Armas:Loja de Utilidades:Castelo dos Sábios (Local de Mudança de Classe para Sábios):Rua das Lojas de Livros:Juphero Plaza:Biblioteca da República:Academia de Magia de Schwheicherbil:Museu dos Monstros:Casa de Forja:Aeroporto:Cancelar")) {
 	case 1:
 		viewpoint 1,120,138,0,0xFF3355;
 		mes "[Srta. Yoon]";
@@ -51,8 +51,8 @@ yuno,153,47,4	script	Guia de Juno#yuno	8_F_GIRL,{
 		mes "[Srta. Yoon]";
 		mes "Por favor olhe";
 		mes "no mini-mapa.";
-		mes "^33FF55+^000000 -> Castelo dos SÃ¡bios";
-		mes "(Local de MudanÃ§a de Classe para SÃ¡bios)";
+		mes "^33FF55+^000000 -> Castelo dos Sábios";
+		mes "(Local de Mudança de Classe para Sábios)";
 		mes "Obrigada, tenha um bom dia.";
 		close;
 	case 4:
@@ -77,7 +77,7 @@ yuno,153,47,4	script	Guia de Juno#yuno	8_F_GIRL,{
 		mes "[Srta. Yoon]";
 		mes "Por favor olhe";
 		mes "no mini-mapa.";
-		mes "^33FF55+^000000 -> Biblioteca da RepÃºblica";
+		mes "^33FF55+^000000 -> Biblioteca da República";
 		mes "Obrigada, tenha um bom dia.";
 		close;
 	case 7:

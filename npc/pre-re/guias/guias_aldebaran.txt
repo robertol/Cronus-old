@@ -2,9 +2,9 @@
 //= Guia de Al De Baran (Oficial do bRo)
 //===== Por: =================================================
 //= kobra_k88; L0ne_W0lf
-//===== Vers√£o Atual: ========================================
+//===== Vers„o Atual: ========================================
 //= 1.7b
-//===== Compat√≠vel Com: ======================================
+//===== CompatÌvel Com: ======================================
 //= Cronus SVN
 //===== Changelog: ===========================================
 //= Corrected building locations and descriptions
@@ -17,17 +17,17 @@
 //= 1.6a Changed some "close"s to "close2"s. [Samuray22]
 //= 1.6b Traduzido o script de acordo com o bRo [Asus]
 //= 1.6c Revisado e atualizado. [RoM]
-//= 1.7 Corrigido as coordenadas das indica√ß√µes. [RoM]
+//= 1.7 Corrigido as coordenadas das indicaÁıes. [RoM]
 //= 1.7a Removido show	[Yum]
-//= 1.7b Revisado	[KyukE]
+//= 1.7b Revis„o e alteraÁ„o das view_ids. [KyukE]
 //============================================================
 
 aldebaran,139,63,4	script	Soldado#alde	8W_SOLDIER,{
 	cutin "prt_soldier",2;
 	mes "[Guarda de Al De Baran]";
-	mes "Eu n√£o sou um guarda comum que protege vilarejos.";
-	mes "Sou um membro da Guarda de Al de Baran. Sou respons√°vel por guiar os turistas.";
-	mes "Ent√£o, deixa me mostr√°-lo o mapa da cidade.";
+	mes "Eu n„o sou um guarda comum que protege vilarejos.";
+	mes "Sou um membro da Guarda de Al de Baran. Sou respons·vel por guiar os turistas.";
+	mes "Ent„o, deixa me mostr·-lo o mapa da cidade.";
 	next;
 	if (select("Ver o mapa:Sair") == 1) {
 		viewpoint 1,61,229,0,0xFF6633;
@@ -56,8 +56,8 @@ aldebaran,139,63,4	script	Soldado#alde	8W_SOLDIER,{
 aldebaran,133,108,4	script	Soldado#2alde	8W_SOLDIER,{
 	cutin "prt_soldier",2;
 	mes "[Guarda de Al De Baran]";
-	mes "Eu n√£o sou um guarda comum que protege vilarejos.";
-	mes "Sou um membro da Guarda de Al de Baran. Sou respons√°vel por guiar os turistas.";
+	mes "Eu n„o sou um guarda comum que protege vilarejos.";
+	mes "Sou um membro da Guarda de Al de Baran. Sou respons·vel por guiar os turistas.";
 	next;
 	switch(select("Central das Kafras:Loja de Armas:Guilda dos Magos:Bar:Loja de Utilidades:Guilda dos Alquimistas:Sair")) {
 	case 1:
