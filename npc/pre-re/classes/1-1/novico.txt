@@ -1,15 +1,15 @@
 //===== Cronus Script ========================================
-//= Quest de Classe - NoviÃ§o
+//= Quest de Classe - Noviço
 //===== Por: =================================================
 //= kobra_k88; L0ne_W0lf
-//===== VersÃ£o Atual: ========================================
+//===== Versão Atual: ========================================
 //= 2.3
-//===== CompatÃ­vel Com: ======================================
+//===== Compatível Com: ======================================
 //= Cronus SVN
-//===== DescriÃ§Ã£o: ===========================================
-//= [ConversÃ£o Aegis]
-//= Quest para se tornar NoviÃ§o
-//===== ComentÃ¡rios Adicionais: ==============================
+//===== Descrição: ===========================================
+//= [Conversão Aegis]
+//= Quest para se tornar Noviço
+//===== Comentários Adicionais: ==============================
 //= v1.0 Fully working.
 //= v1.1 Added function calls for Priest Quest.
 //= v1.2 Fixed Marthilda, Yosuke bugs. [Lupus]
@@ -29,27 +29,27 @@
 //= 2.1 Traduzido e revisado. [.zuport]
 //= 2.2 Adicionados comandos do Quest Log. [LEOzinn]
 //= 2.3 Fixado problema ao completar a quests [Asus]
-//= 2.3a Revisado [KyukE]
+//= 2.3a Revisão e atualização view_id [KyukE]
 //============================================================
 
-prt_church,184,41,4	script	Sacerdote#aco	60,{
+prt_church,184,41,4	script	Sacerdote#aco	1_M_PASTOR,{
 	if (Upper == 1) {
 		if (ADVJOB == Job_High_Priest || ADVJOB == Job_Champion) {
 			if (Class == Job_Novice_High) {
 				mes "[Bispo Tomas Cerbantes]";
 				mes "Ah, eu sinto que tenha sofrido";
-				mes "uma experiÃªncia de vida passada. VocÃª deve ter aprendido muitas coisas antes de entrar em Valhalla.";
+				mes "uma experiência de vida passada. Você deve ter aprendido muitas coisas antes de entrar em Valhalla.";
 				next;
 				if (getskilllv("NV_BASIC") < 9) {
 					mes "[Bispo Tomas Cerbantes]";
-					mes "Infelizmente, acho que vocÃª ainda nÃ£o estÃ¡ pronto para se tornar um NoviÃ§o. Por favor termine de aprender todas Habilidades BÃ¡sicas primeiro.";
+					mes "Infelizmente, acho que você ainda não está pronto para se tornar um Noviço. Por favor termine de aprender todas Habilidades Básicas primeiro.";
 					next;
 					mes "[Bispo Tomas Cerbantes]";
 					mes "Entretanto,";
-					mes "eu o esperarei atÃ©";
+					mes "eu o esperarei até";
 					mes "que esteja pronto.";
 					mes "Que Deus esteja";
-					mes "com vocÃª.";
+					mes "com você.";
 					close;
 				}
 				mes "[Bispo Tomas Cerbantes]";
@@ -73,115 +73,115 @@ prt_church,184,41,4	script	Sacerdote#aco	60,{
 		}
 		else {
 			mes "[Bispo Tomas Cerbantes]";
-			mes "Eu sinto que vocÃª jÃ¡ teve uma experiÃªncia de vida passada. VocÃª deve ter aprendido muitas coisas antes de entrar em Valhalla.";
+			mes "Eu sinto que você já teve uma experiência de vida passada. Você deve ter aprendido muitas coisas antes de entrar em Valhalla.";
 			next;
 			mes "[Bispo Tomas Cerbantes]";
-			mes "Entretanto, eu posso te dizer que vocÃª nÃ£o se adequa para ser um NoviÃ§o. Por favor relembre quem vocÃª foi na sua vida passada e ache seu caminho.";
+			mes "Entretanto, eu posso te dizer que você não se adequa para ser um Noviço. Por favor relembre quem você foi na sua vida passada e ache seu caminho.";
 			close;
 		}
 	}
 	mes "[Bispo Tomas Cerbantes]";
-	mes "O que vocÃª deseja?";
+	mes "O que você deseja?";
 	next;
-	switch(select("Padre, eu quero ser um NoviÃ§o.:Os requerimentos.:Apenas olhando por aÃ­.")) {
+	switch(select("Padre, eu quero ser um Noviço.:Os requerimentos.:Apenas olhando por aí.")) {
 	case 1:
 		mes "[Bispo Tomas Cerbantes]";
 		if (BaseJob == Job_Acolyte) {
-			mes "VocÃª estÃ¡ se sentindo bem hoje? Eu posso dizer pelo seu vestuÃ¡rio que vocÃª jÃ¡ Ã© um NoviÃ§o. VocÃª estÃ¡ apenas brincando, nÃ£o estÃ¡?";
+			mes "Você está se sentindo bem hoje? Eu posso dizer pelo seu vestuário que você já é um Noviço. Você está apenas brincando, não está?";
 			close;
 		}
 		else if (BaseJob != Job_Novice) {
-			mes "Desculpe, mas nÃ³s sÃ³ podemos aceitar Aprendizes como candidatos a NoviÃ§o.";
+			mes "Desculpe, mas nós só podemos aceitar Aprendizes como candidatos a Noviço.";
 			close;
 		}
 		if (job_acolyte_q == 0) {
-			mes "VocÃª realmente";
+			mes "Você realmente";
 			mes "deseja se tornar";
 			mes "um servo de Deus?";
 			next;
-			if (select("Sim Padre, eu quero.:NÃ£o, eu menti.") == 1) {
+			if (select("Sim Padre, eu quero.:Não, eu menti.") == 1) {
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ã“timo. Eu aceito que vocÃª, " + strcharinfo(0) + " se tornarÃ¡ um NoviÃ§o. VocÃª compreende que vocÃª deverÃ¡ fazer uma missÃ£o antes de se tornar um servo de Deus, certo?";
+				mes "Ótimo. Eu aceito que você, " + strcharinfo(0) + " se tornará um Noviço. Você compreende que você deverá fazer uma missão antes de se tornar um servo de Deus, certo?";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
 				mes "Bem, eu te direi";
-				mes "a missÃ£o...";
+				mes "a missão...";
 				switch(rand(3)) {
 				default:
 					set job_acolyte_q,2;
-					mes "Por favor visite ^000077IrmÃ£o SimÃ£o^000000, um membro da parÃ³quia de Prontera e volte aqui. Ele estÃ¡ praticando devotismo nas ^000077RelÃ­quias ao nordeste da Cidade de Prontera^000000.";
+					mes "Por favor visite ^000077Irmão Simão^000000, um membro da paróquia de Prontera e volte aqui. Ele está praticando devotismo nas ^000077Relíquias ao nordeste da Cidade de Prontera^000000.";
 					setquest 1001;
 					break;
 				case 1:
 					set job_acolyte_q,3;
-					mes "Por favor visite ^000077IrmÃ£ Matilda^000000 e entÃ£o volte aqui. Ela estÃ¡ praticando devotismo prÃ³ximo Ã  ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
+					mes "Por favor visite ^000077Irmã Matilda^000000 e então volte aqui. Ela está praticando devotismo próximo à ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
 					setquest 1002;
 					break;
 				case 2:
 					set job_acolyte_q,4;
-					mes "Por favor visite ^000077IrmÃ£o Bartolomeu^000000 e volte aqui. Ele estÃ¡ praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
+					mes "Por favor visite ^000077Irmão Bartolomeu^000000 e volte aqui. Ele está praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
 					setquest 1003;
 					break;
 				}
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Que a graÃ§a de Deus ilumine seu caminho e o guie durante sua missÃ£o.";
+				mes "Que a graça de Deus ilumine seu caminho e o guie durante sua missão.";
 				close;
 			}
 			mes "[Bispo Tomas Cerbantes]";
-			mes "VocÃª mentiu?";
-			mes "Ã‰ bom que vocÃª";
+			mes "Você mentiu?";
+			mes "É bom que você";
 			mes "tenha confessado seu";
-			mes "pecado. VÃ¡ em";
+			mes "pecado. Vá em";
 			mes "paz, meu filho.";
 			close;
 		}
-		mes "Oh, vocÃª voltou. Deixe-me checar e ver se vocÃª estÃ¡ pronto para servir a Deus. Vamos ver...";
+		mes "Oh, você voltou. Deixe-me checar e ver se você está pronto para servir a Deus. Vamos ver...";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
 		if (getskilllv("NV_BASIC") < 9) {
-			mes "Bom Deus! VocÃª ainda nÃ£o completou o Treinamento BÃ¡sico?! Ã‰ importante que vocÃª termine isso!";
+			mes "Bom Deus! Você ainda não completou o Treinamento Básico?! É importante que você termine isso!";
 			next;
 			mes "[Bispo Tomas Cerbantes]";
-			mes "VocÃª deve treinar mais! Volte e tenha certeza que alcanÃ§arÃ¡ o NÃ­vel 9 de Classe e aprendeu todas Habilidades BÃ¡sicas!";
+			mes "Você deve treinar mais! Volte e tenha certeza que alcançará o Nível 9 de Classe e aprendeu todas Habilidades Básicas!";
 			close;
 		}
 		if (job_acolyte_q < 5) {
-			mes "Oh? Eu nÃ£o achei seu nome na lista de registros.";
+			mes "Oh? Eu não achei seu nome na lista de registros.";
 			next;
 			switch(job_acolyte_q) {
 			case 2:
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Por favor visite ^000077IrmÃ£o SimÃ£o^000000, um membro da parÃ³quia de Prontera e volte aqui.";
+				mes "Por favor visite ^000077Irmão Simão^000000, um membro da paróquia de Prontera e volte aqui.";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ele estÃ¡ praticando devotismo nas ^000077RelÃ­quias ao nordeste da Cidade de Prontera^000000.";
+				mes "Ele está praticando devotismo nas ^000077Relíquias ao nordeste da Cidade de Prontera^000000.";
 				break;
 			case 3:
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Por favor visite ^000077IrmÃ£ Matilda^000000 e entÃ£o volte aqui.";
+				mes "Por favor visite ^000077Irmã Matilda^000000 e então volte aqui.";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ela estÃ¡ praticando devotismo prÃ³ximo Ã  ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
+				mes "Ela está praticando devotismo próximo à ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
 				break;
 			case 4:
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Por favor visite ^000077IrmÃ£o Bartolomeu^000000 e volte aqui.";
+				mes "Por favor visite ^000077Irmão Bartolomeu^000000 e volte aqui.";
 				next;
 				mes "[Father Mareusis]";
-				mes "Ele estÃ¡ praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
+				mes "Ele está praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
 				break;
 			}
 			next;
 			mes "[Bispo Tomas Cerbantes]";
-			mes "Que a graÃ§a de Deus ilumine seu caminho e o guie durante sua missÃ£o.";
+			mes "Que a graça de Deus ilumine seu caminho e o guie durante sua missão.";
 			close;
 		}
 		mes "Hmm...";
-		mes "Seu nome estÃ¡ na lista e vocÃª provou sua qualificaÃ§Ã£o.";
+		mes "Seu nome está na lista e você provou sua qualificação.";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
-		mes "Estou orgulhoso de dizer que vocÃª agora estÃ¡ pronto para se tornar um NoviÃ§o!";
+		mes "Estou orgulhoso de dizer que você agora está pronto para se tornar um Noviço!";
 		next;
 		skill 143,0,0;
 		callfunc "Job_Change",Job_Acolyte;
@@ -196,89 +196,89 @@ prt_church,184,41,4	script	Sacerdote#aco	60,{
 			completequest 1003;
 		}
 		mes "[Bispo Tomas Cerbantes]";
-		mes "Sempre lembre-se de agradecer a Deus, que estÃ¡ cuidando de nÃ³s todo tempo.";
+		mes "Sempre lembre-se de agradecer a Deus, que está cuidando de nós todo tempo.";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
-		mes "Sempre use seus dons para servir Ele, ajudando os outros. No caos e tempos difÃ­ceis, enfrente as dificuldades com a sua fÃ© inabalÃ¡vel.";
+		mes "Sempre use seus dons para servir Ele, ajudando os outros. No caos e tempos difíceis, enfrente as dificuldades com a sua fé inabalável.";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
-		mes "E por Ãºltimo, eu quero te dar os parabÃ©ns pela sua perseveranÃ§a em sua missÃ£o.";
+		mes "E por último, eu quero te dar os parabéns pela sua perseverança em sua missão.";
 		close;
 	case 2:
 		mes "[Bispo Tomas Cerbantes]";
-		mes "VocÃª deseja se tornar um NoviÃ§o? VocÃª deve cumprir dois requerimentos.";
+		mes "Você deseja se tornar um Noviço? Você deve cumprir dois requerimentos.";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
-		mes "Primeiro, vocÃª deve ter alcanÃ§ado o NÃ­vel 9 de Classe como Aprendiz e ter aprendido todas Habilidades BÃ¡sicas. Segundo, vocÃª terÃ¡ que completar uma missÃ£o que serÃ¡ designada a vocÃª.";
+		mes "Primeiro, você deve ter alcançado o Nível 9 de Classe como Aprendiz e ter aprendido todas Habilidades Básicas. Segundo, você terá que completar uma missão que será designada a você.";
 		next;
 		mes "[Bispo Tomas Cerbantes]";
 		if (job_acolyte_q != 0) {
 			switch(job_acolyte_q) {
 			case 2:
-				mes "Por favor visite ^000077IrmÃ£o SimÃ£o^000000, um membro da parÃ³quia de Prontera, e volte aqui.";
+				mes "Por favor visite ^000077Irmão Simão^000000, um membro da paróquia de Prontera, e volte aqui.";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ele estÃ¡ praticando devotismo nas ^000077RelÃ­quias ao nordeste da Cidade de Prontera^000000.";
+				mes "Ele está praticando devotismo nas ^000077Relíquias ao nordeste da Cidade de Prontera^000000.";
 				break;
 			case 3:
-				mes "Por favor visite ^000077IrmÃ£ Matilda^000000 e entÃ£o volte aqui.";
+				mes "Por favor visite ^000077Irmã Matilda^000000 e então volte aqui.";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ela estÃ¡ praticando devotismo prÃ³ximo Ã  ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
+				mes "Ela está praticando devotismo próximo à ^000077Cidade de Morroc, sudoeste da Cidade de Prontera^000000.";
 				break;
 			default:
-				mes "Por favor visite ^000077IrmÃ£o Bartolomeu^000000 e volte aqui.";
+				mes "Por favor visite ^000077Irmão Bartolomeu^000000 e volte aqui.";
 				next;
 				mes "[Bispo Tomas Cerbantes]";
-				mes "Ele estÃ¡ praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
+				mes "Ele está praticando devotismo ao redor de uma ^000077Ponte em algum lugar ao noroeste de Prontera^000000.";
 				break;
 			}
 			next;
 			mes "[Bispo Tomas Cerbantes]";
-			mes "Que a graÃ§a de Deus ilumine seu caminho e o guie durante sua missÃ£o.";
+			mes "Que a graça de Deus ilumine seu caminho e o guie durante sua missão.";
 		}
 		else {
-			mes "O destinatÃ¡rio dessa missÃ£o serÃ¡ decidido assim que vocÃª preencher o formulÃ¡rio de candidatura.";
+			mes "O destinatário dessa missão será decidido assim que você preencher o formulário de candidatura.";
 		}
 		next;
 		mes "[Bispo Tomas Cerbantes]";
-		mes "Por favor volte depois de preencher os dois requerimentos que eu te dei. Enquanto o seu desejo de servir a Deus e aos outros Ã© sincero, vocÃª serÃ¡ capaz de fazer isso.";
+		mes "Por favor volte depois de preencher os dois requerimentos que eu te dei. Enquanto o seu desejo de servir a Deus e aos outros é sincero, você será capaz de fazer isso.";
 		close;
 	case 3:
 		close;
 	}
 }
 
-prt_fild03,365,255,2	script	Devoto#aco	89,{
-	mes "[IrmÃ£o SimÃ£o]";
+prt_fild03,365,255,2	script	Devoto#aco	4_M_ORIENT02,{
+	mes "[Irmão Simão]";
 	if (BaseJob == Job_Novice) {
 		if (job_acolyte_q == 6) {
-			mes "Por favor tome cuidado. Eles jÃ¡ devem saber que vocÃª veio atÃ© mim atÃ© vocÃª chegar lÃ¡.";
+			mes "Por favor tome cuidado. Eles já devem saber que você veio até mim até você chegar lá.";
 			next;
-			mes "[IrmÃ£o SimÃ£o]";
-			mes "Eu enviei um pombo correio com uma mensagem. Eu espero que ele chegue lÃ¡ em seguranÃ§a...";
+			mes "[Irmão Simão]";
+			mes "Eu enviei um pombo correio com uma mensagem. Eu espero que ele chegue lá em segurança...";
 			close;
 		}
 		if (job_acolyte_q != 0) {
 			if (job_acolyte_q == 2) {
-				mes "Oh...? VocÃª deve ser um dos aspirantes a NoviÃ§o. Eu jÃ¡ recebi a mensagem do SantuÃ¡rio avisando que vocÃª viria.";
+				mes "Oh...? Você deve ser um dos aspirantes a Noviço. Eu já recebi a mensagem do Santuário avisando que você viria.";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Agora, seu nome Ã© " + strcharinfo(0) + ", certo? Excelente, obrigado por visitar-me.";
+				mes "[Irmão Simão]";
+				mes "Agora, seu nome é " + strcharinfo(0) + ", certo? Excelente, obrigado por visitar-me.";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Eu acredito que vocÃª ouviu muito do Bispo Tomas Cerbantes sobre NoviÃ§os. AlÃ©m disso, hÃ¡ muitas pessoas que gostam de ajudar no SantuÃ¡rio de Prontera.";
+				mes "[Irmão Simão]";
+				mes "Eu acredito que você ouviu muito do Bispo Tomas Cerbantes sobre Noviços. Além disso, há muitas pessoas que gostam de ajudar no Santuário de Prontera.";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Eu acho que nÃ£o hÃ¡ necessidade de ensinar mais algo pra vocÃª. AlÃ©m disso, eu tenho certeza que alguÃ©m da sua geraÃ§Ã£o vai ter problemas escutando um velho homem como eu. Hahaha~";
+				mes "[Irmão Simão]";
+				mes "Eu acho que não há necessidade de ensinar mais algo pra você. Além disso, eu tenho certeza que alguém da sua geração vai ter problemas escutando um velho homem como eu. Hahaha~";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Ainda assim, os ensinamentos podem vir de lugares que vocÃª menos espera. Deus ama ensinar suas crianÃ§as de maneiras estranhas. VocÃª verÃ¡.";
+				mes "[Irmão Simão]";
+				mes "Ainda assim, os ensinamentos podem vir de lugares que você menos espera. Deus ama ensinar suas crianças de maneiras estranhas. Você verá.";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Bem, eu enviarei uma mensagem dizendo que vocÃª veio me visitar. EntÃ£o, agora vocÃª pode retornar para o SantuÃ¡rio de Prontera.";
+				mes "[Irmão Simão]";
+				mes "Bem, eu enviarei uma mensagem dizendo que você veio me visitar. Então, agora você pode retornar para o Santuário de Prontera.";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
+				mes "[Irmão Simão]";
 				mes "Adeus.";
 				close2;
 				savepoint "prt_fild03",361,255;
@@ -287,67 +287,67 @@ prt_fild03,365,255,2	script	Devoto#aco	89,{
 			}
 			else {
 				mes "Oh...";
-				mes "VocÃª Ã© um dos";
-				mes "Candidatos a NoviÃ§o...?";
+				mes "Você é um dos";
+				mes "Candidatos a Noviço...?";
 				mes "Vamos ver...";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Seu nome Ã© " + strcharinfo(0) + "?";
-				mes "Eu nÃ£o acho que seu nome";
-				mes "estÃ¡ na minha lista. Hmmm...";
+				mes "[Irmão Simão]";
+				mes "Seu nome é " + strcharinfo(0) + "?";
+				mes "Eu não acho que seu nome";
+				mes "está na minha lista. Hmmm...";
 				next;
-				mes "[IrmÃ£o SimÃ£o]";
-				mes "Por que vocÃª nÃ£o volta para o SantuÃ¡rio de Prontera e verifica novamente?";
+				mes "[Irmão Simão]";
+				mes "Por que você não volta para o Santuário de Prontera e verifica novamente?";
 				close;
 			}
 		}
 		else {
-			mes "Huh? O que o traz aqui? Esse Ã© um lugar muito perigoso para um Aprendiz como vocÃª!";
+			mes "Huh? O que o traz aqui? Esse é um lugar muito perigoso para um Aprendiz como você!";
 			close;
 		}
 	}
 	else if (BaseJob == Job_Acolyte) callfunc "F_PadreRub";
 	else {
 		if (BaseJob == Job_Priest) {
-			mes "SaudaÃ§Ãµes.";
+			mes "Saudações.";
 			next;
-			mes "[IrmÃ£o SimÃ£o]";
-			mes "Bem-vindo ao Abismo. Sinta-se livre para sentar e contemplar a palavra de Deus comigo. Esse lugar Ã© maravilhoso, mesmo cercado pelo perigo hÃ¡ uma serenidade...";
+			mes "[Irmão Simão]";
+			mes "Bem-vindo ao Abismo. Sinta-se livre para sentar e contemplar a palavra de Deus comigo. Esse lugar é maravilhoso, mesmo cercado pelo perigo há uma serenidade...";
 			close;
 		}
 		else {
 			mes "Oh ho...";
-			mes "VocÃª veio aqui no Abismo para treinar? Ou vocÃª Ã© apenas um Andarilho?";
+			mes "Você veio aqui no Abismo para treinar? Ou você é apenas um Andarilho?";
 			next;
-			mes "[IrmÃ£o SimÃ£o]";
-			mes "SejÃ¡ lÃ¡ o que vocÃª for, por favor tome cuidado. Os monstros aqui sÃ£o fortes, ao contrÃ¡rio de sua meiga aparÃªncia.";
+			mes "[Irmão Simão]";
+			mes "Sejá lá o que você for, por favor tome cuidado. Os monstros aqui são fortes, ao contrário de sua meiga aparência.";
 			close;
 		}
 	}
 }
 
-moc_fild07,41,355,4	script	Devota#2aco	95,{
-	mes "[IrmÃ£ Matilda]";
+moc_fild07,41,355,4	script	Devota#2aco	4_F_SISTER,{
+	mes "[Irmã Matilda]";
 	if (BaseJob == Job_Novice) {
 		if (job_acolyte_q == 7) {
-			mes "Eu enviarei um pombo correio para o SantuÃ¡rio de Prontera. Quando vocÃª retornar, o Sacerdote jÃ¡ terÃ¡ recebido minha mensagem.";
+			mes "Eu enviarei um pombo correio para o Santuário de Prontera. Quando você retornar, o Sacerdote já terá recebido minha mensagem.";
 			next;
-			mes "[IrmÃ£ Matilda]";
-			mes "Eu orarei a Deus e espero que vocÃª se torne um NoviÃ§o em breve.";
+			mes "[Irmã Matilda]";
+			mes "Eu orarei a Deus e espero que você se torne um Noviço em breve.";
 			close;
 		}
 		if (job_acolyte_q != 0) {
 			if (job_acolyte_q == 3) {
-				mes "Ah, vocÃª deve ser um dos candidatos a NoviÃ§o. Quero te dar as boas-vindas.";
+				mes "Ah, você deve ser um dos candidatos a Noviço. Quero te dar as boas-vindas.";
 				next;
-				mes "[IrmÃ£ Matilda]";
-				mes "Qual Ã© seu nome? " + strcharinfo(0) + "? Vamos ver... Ah, vocÃª estÃ¡ na minha lista.";
+				mes "[Irmã Matilda]";
+				mes "Qual é seu nome? " + strcharinfo(0) + "? Vamos ver... Ah, você está na minha lista.";
 				next;
-				mes "[IrmÃ£ Matilda]";
-				mes "Eu enviarei uma mensagem ao SantuÃ¡rio comfirmando que vocÃª, " + strcharinfo(0) + " visitou-me e completou sua missÃ£o.";
+				mes "[Irmã Matilda]";
+				mes "Eu enviarei uma mensagem ao Santuário comfirmando que você, " + strcharinfo(0) + " visitou-me e completou sua missão.";
 				next;
-				mes "[IrmÃ£ Matilda]";
-				mes "Por favor volte para o SantuÃ¡rio em Prontera e fale com o Sacerdote.";
+				mes "[Irmã Matilda]";
+				mes "Por favor volte para o Santuário em Prontera e fale com o Sacerdote.";
 				close2;
 				savepoint "moc_fild07",35,355;
 				set job_acolyte_q,7;
@@ -355,21 +355,21 @@ moc_fild07,41,355,4	script	Devota#2aco	95,{
 			}
 			else {
 				mes "Ah...!";
-				mes "VocÃª deve ser um";
-				mes "dos candidatos a NoviÃ§o.";
+				mes "Você deve ser um";
+				mes "dos candidatos a Noviço.";
 				mes "Quero te dar as boas-vindas.";
 				next;
-				mes "[IrmÃ£ Matilda]";
-				mes "Agora, qual Ã© o seu nome?";
+				mes "[Irmã Matilda]";
+				mes "Agora, qual é o seu nome?";
 				mes "" + strcharinfo(0) + "? Deixe-me ver...";
 				next;
-				mes "[IrmÃ£ Matilda]";
+				mes "[Irmã Matilda]";
 				mes "Hmm...";
 				mes "Parece que seu nome";
-				mes "nÃ£o estÃ¡ na minha lista...";
+				mes "não está na minha lista...";
 				next;
-				mes "[IrmÃ£ Matilda]";
-				mes "Talvez vocÃª deva voltar para o SantuÃ¡rio de Prontera e verificar o seu destino da sua missÃ£o santa novamente.";
+				mes "[Irmã Matilda]";
+				mes "Talvez você deva voltar para o Santuário de Prontera e verificar o seu destino da sua missão santa novamente.";
 				close;
 			}
 		}
@@ -381,50 +381,50 @@ moc_fild07,41,355,4	script	Devota#2aco	95,{
 	else if (BaseJob == Job_Acolyte) callfunc "F_MadreMart";
 	else {
 		if (BaseJob == Job_Priest) {
-			mes "OlÃ¡~";
+			mes "Olá~";
 			next;
-			mes "[IrmÃ£ Matilda]";
-			mes "Como estÃ¡ indo sua prÃ¡tica? Eu certamente espero que vocÃª esteja aproveitando a vida com a graÃ§a de Deus.";
+			mes "[Irmã Matilda]";
+			mes "Como está indo sua prática? Eu certamente espero que você esteja aproveitando a vida com a graça de Deus.";
 			close;
 		}
 		else {
 			mes "Que Deus";
-			mes "esteja com vocÃª...";
+			mes "esteja com você...";
 			close;
 		}
 	}
 }
 
-prt_fild00,208,218,6	script	Devoto#3aco	98,{
-	mes "[IrmÃ£o Bartolomeu]";
+prt_fild00,208,218,6	script	Devoto#3aco	4W_M_02,{
+	mes "[Irmão Bartolomeu]";
 	if (BaseJob == Job_Novice) {
 		if (job_acolyte_q == 8) {
 			mes "O que?";
 			next;
-			mes "[IrmÃ£o Bartolomeu]";
-			mes "VocÃª tem algum negÃ³cio pra tratar comigo?! NÃ£o tem! Volte para o SantuÃ¡rio agora!";
+			mes "[Irmão Bartolomeu]";
+			mes "Você tem algum negócio pra tratar comigo?! Não tem! Volte para o Santuário agora!";
 			close;
 		}
 		if (job_acolyte_q != 0) {
 			if (job_acolyte_q == 4) {
 				mes "Ei.";
-				mes "O que quer que vocÃª seja,";
-				mes "vocÃª parece com um";
-				mes "candidato a NoviÃ§o.";
+				mes "O que quer que você seja,";
+				mes "você parece com um";
+				mes "candidato a Noviço.";
 				mes "Certo?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "Nada mau, nada mau. VocÃª resistiu muito bem ao processo de castigo.";
-				mes "EntÃ£o qual o seu nome?";
+				mes "[Irmão Bartolomeu]";
+				mes "Nada mau, nada mau. Você resistiu muito bem ao processo de castigo.";
+				mes "Então qual o seu nome?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
+				mes "[Irmão Bartolomeu]";
 				mes "" + strcharinfo(0) + ", huh?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "Ok. Eu mandarei uma mensagem para o SantuÃ¡rio dizendo que, " + strcharinfo(0) + ", veio me visitar.";
+				mes "[Irmão Bartolomeu]";
+				mes "Ok. Eu mandarei uma mensagem para o Santuário dizendo que, " + strcharinfo(0) + ", veio me visitar.";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "Agora volte para o SantuÃ¡rio e termine de se tornar um NoviÃ§o, crianÃ§a.";
+				mes "[Irmão Bartolomeu]";
+				mes "Agora volte para o Santuário e termine de se tornar um Noviço, criança.";
 				close2;
 				savepoint "prt_fild00",206,230;
 				set job_acolyte_q,8;
@@ -432,24 +432,24 @@ prt_fild00,208,218,6	script	Devoto#3aco	98,{
 			}
 			else {
 				mes "Ei.";
-				mes "VocÃª parece um candidato a NoviÃ§o. NÃ£o Ã©?";
+				mes "Você parece um candidato a Noviço. Não é?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "Nada mau, vocÃª fez toda essa caminhada de Prontera atÃ© aqui. EntÃ£o qual Ã© o seu nome, crianÃ§a?";
+				mes "[Irmão Bartolomeu]";
+				mes "Nada mau, você fez toda essa caminhada de Prontera até aqui. Então qual é o seu nome, criança?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "" + strcharinfo(0) + ", huh? Por que seu nome nÃ£o estÃ¡ na minha lista?";
+				mes "[Irmão Bartolomeu]";
+				mes "" + strcharinfo(0) + ", huh? Por que seu nome não está na minha lista?";
 				next;
-				mes "[IrmÃ£o Bartolomeu]";
-				mes "VocÃª provavelmente cometeu um engano. Volte para o SantuÃ¡rio, e verifique com o Bispo.";
+				mes "[Irmão Bartolomeu]";
+				mes "Você provavelmente cometeu um engano. Volte para o Santuário, e verifique com o Bispo.";
 				close;
 			}
 		}
 		else {
-			mes "VocÃª...";
+			mes "Você...";
 			mes "Aprendiz.";
 			mes "Tem alguma coisa";
-			mes "que vocÃª quer me dizer?";
+			mes "que você quer me dizer?";
 			close;
 		}
 	}
@@ -458,13 +458,13 @@ prt_fild00,208,218,6	script	Devoto#3aco	98,{
 		if (BaseJob == Job_Priest) {
 			mes "Ei...";
 			next;
-			mes "[IrmÃ£o Bartolomeu]";
-			mes "Se vocÃª gostar, venha sentar aqui comigo e meditar as grandes verdades. A majestade de Deus Ã© verdadeiramente inspiradora...";
+			mes "[Irmão Bartolomeu]";
+			mes "Se você gostar, venha sentar aqui comigo e meditar as grandes verdades. A majestade de Deus é verdadeiramente inspiradora...";
 			close;
 		}
 		else {
-			mes "VocÃª tem algo para falar? Porque infelizmente para vocÃª,";
-			mes "eu nÃ£o tenho nenhuma resposta.";
+			mes "Você tem algo para falar? Porque infelizmente para você,";
+			mes "eu não tenho nenhuma resposta.";
 			close;
 		}
 	}

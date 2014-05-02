@@ -2,14 +2,14 @@
 //= Guilda dos Mercadores
 //===== Por: ==================================================
 //= kobra_k88; L0ne_W0lf
-//===== VersÃ£o Atual: ========================================= 
+//===== Versão Atual: ========================================= 
 //= 2.3a
-//===== CompatÃ­vel com: ======================================= 
+//===== Compatível com: ======================================= 
 //= Cronus SVN
-//===== DescriÃ§Ã£o: ============================================ 
+//===== Descrição: ============================================ 
 //= [Aegis Conversion]
 //= Quest para Classe Mercador
-//===== ComentÃ¡rios Adicionais: ===============================
+//===== Comentários Adicionais: ===============================
 //= v1.1 Added instant job change for High Novice [Lupus]
 //= v1.3 Added Baby Class support [Lupus]
 //= v1.4 Optimised and moved first checker to Jfunc1-1 [massdriller]
@@ -25,37 +25,37 @@
 //= 1.9b Typo. "nextl" -> "next;" (Barron-Monster) [L0ne_W0lf]
 //= 2.0 Should "fix" the problem with the Biliban Kafra. [L0ne_W0lf]
 //= 2.1 Fixed mistake in condition check. [L0ne_W0lf]
-//= 2.1a Traduzido para portuguÃªs [Cardoso]
-//= 2.1b RevisÃ£o Geral do Script [Mara]
+//= 2.1a Traduzido para português [Cardoso]
+//= 2.1b Revisão Geral do Script [Mara]
 //= 2.2 Adicionados comandos do Quest Log. [LEOzinn]
 //= 2.3 Corrigido problema ao completar a quests [Asus]
-//= 2.3a Revisado [KyukE]
+//= 2.3a Revisão e atualização view_id [KyukE]
 //============================================================
 
-alberta_in,53,43,6	script	Mercardor#mer	86,{
+alberta_in,53,43,6	script	Mercardor#mer	4_M_04,{
 	if (Upper == 1) {
 		if (Class == Job_Novice_High && (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator)) {
 			mes "[Chefe Mahnsoo]";
-			mes "HÃ¡ quanto tempo!";
-			mes "Ei, vocÃª nÃ£o desistiu";
-			mes "dos seus negÃ³cios, desistiu?";
+			mes "Há quanto tempo!";
+			mes "Ei, você não desistiu";
+			mes "dos seus negócios, desistiu?";
 			mes "O que aconteceu?";
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Oh...";
-			mes "VocÃª ja foi atÃ© Valhalla?! Wow, vocÃª jÃ¡ foi longe em...";
+			mes "Você ja foi até Valhalla?! Wow, você já foi longe em...";
 			next;
 			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chefe Mahnsoo]";
 				mes "Hmmm...";
-				mes "Parece que vocÃª ainda nÃ£o estÃ¡ pronto para virar um mercador novamente. VÃ¡ e conquiste suas habilidades de aprendiz antes.";
+				mes "Parece que você ainda não está pronto para virar um mercador novamente. Vá e conquiste suas habilidades de aprendiz antes.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "NÃ£o se preocupe, nÃ³s sempre teremos um cargo de mercador esperando por vocÃª. Apenas volte quando estiver pronto, certo?";
+				mes "Não se preocupe, nós sempre teremos um cargo de mercador esperando por você. Apenas volte quando estiver pronto, certo?";
 				close;
 			}
 			mes "[Chefe Mahnsoo]";
-			mes "Eu acho que Ã© o destino que nos farÃ¡ fazer isso de novo. Tudo bem. Novamente, Deixe-me tornÃ¡-lo um Mercador!";
+			mes "Eu acho que é o destino que nos fará fazer isso de novo. Tudo bem. Novamente, Deixe-me torná-lo um Mercador!";
 			next;
 			skill 143,0,0;
 			jobchange Job_Merchant_High;
@@ -63,96 +63,96 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 			skill 154,1,0;
 			skill 155,1,0;
 			mes "[Chefe Mahnsoo]";
-			mes "Ah~ Que nostalgia. Como os velhos tempos! Ã“timo, faÃ§a seu melhor!";
+			mes "Ah~ Que nostalgia. Como os velhos tempos! Ótimo, faça seu melhor!";
 			close;
 		}
 		else {
 			mes "[Chefe Mahnsoo]";
 			mes "^333333*Snif*^000000";
-			mes "Estou tÃ£o entediado...";
+			mes "Estou tão entediado...";
 			mes "Quando eu vou reencontrar minha linda florzinha?";
 			close;
 		}
 	}
 	if (BaseJob == Job_Merchant) {
 		mes "[Chefe Mahnsoo]";
-		mes "OlÃ¡!";
-		mes "Como vocÃª se sente";
+		mes "Olá!";
+		mes "Como você se sente";
 		mes "sendo um Mercador?";
 		next;
 		mes "[Chefe Mahnsoo]";
 		mes "Mecher com dinheiro";
 		mes "certamente tem um";
 		mes "lado bom,";
-		mes "nÃ£o Ã© mesmo?";
+		mes "não é mesmo?";
 		close;
 	}
 	else if (BaseJob != Job_Merchant && BaseJob != Job_Novice) {
 		mes "[Chefe Mahnsoo]";
-		mes "NÃ³s mercadores odiamos pessoas que possuem dupla personalidade. Ã‰ ruim para os negÃ³cios.";
+		mes "Nós mercadores odiamos pessoas que possuem dupla personalidade. É ruim para os negócios.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "Pessoas que sempre tentam tirar vantagens de outras vendendo coisas com preÃ§os ridÃ­culos, sÃ£o os piores mercadores.";
+		mes "Pessoas que sempre tentam tirar vantagens de outras vendendo coisas com preços ridículos, são os piores mercadores.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "Bem, em qualquer caso, nÃ³s sÃ³ aceitamos Apredizes que querem percertencer a classe mercadora. Mas eu aprecio seu interesse no que nÃ³s fazemos.";
+		mes "Bem, em qualquer caso, nós só aceitamos Apredizes que querem percertencer a classe mercadora. Mas eu aprecio seu interesse no que nós fazemos.";
 		close;
 	}
 	else if (job_merchant_q == 9) {
 		mes "[Chefe Mahnsoo]";
-		mes "OlÃ¡,";
+		mes "Olá,";
 		mes ""+ strcharinfo(0) +".";
 		set job_merchant_q,0;
 		set job_merchant_q2,0;
 		set quest_alb_01,0;
-		mes "Infelizmente, vocÃª falhou no teste.";
+		mes "Infelizmente, você falhou no teste.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "Eu vou apagar seus arquivos, entÃ£o volte quando vocÃª quiser tentar novamente.";
+		mes "Eu vou apagar seus arquivos, então volte quando você quiser tentar novamente.";
 		close;
 	}
 	else if (job_merchant_q == 8 || job_merchant_q == 7) {
 		mes "[Chefe Mahnsoo]";
-		mes "OlÃ¡,";
+		mes "Olá,";
 		mes ""+ strcharinfo(0) +".";
-		mes "Eu fico feliz em dizer a vocÃª";
-		mes "que eu tenho boas notÃ­cias!";
+		mes "Eu fico feliz em dizer a você";
+		mes "que eu tenho boas notícias!";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "A Guilda de Mercadores aceitou seu pedido. Vemos que vocÃª ja estÃ¡ qualificado para se tornar um Mercador.";
+		mes "A Guilda de Mercadores aceitou seu pedido. Vemos que você ja está qualificado para se tornar um Mercador.";
 		if (job_merchant_q == 7) {
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "A Ãºnica coisa que falta Ã© vocÃª comprar sua licenÃ§a de membro.";
-			mes "VocÃª estÃ¡ pronto?";
+			mes "A única coisa que falta é você comprar sua licença de membro.";
+			mes "Você está pronto?";
 			next;
 			switch(select("Pagar o resto dos 500 Zeny:Sair")) {
 			case 1:
 				mes "[Chefe Mahnsoo]";
 				if (Zeny < 500) {
 					mes "Hmmm...";
-					mes "Vejo que vocÃª nÃ£o tem o dinheiro necessÃ¡rio para a compra da licenÃ§a.";
+					mes "Vejo que você não tem o dinheiro necessário para a compra da licença.";
 					next;
 					mes "[Chefe Mahnsoo]";
-					mes "Por favor, retorne quando vocÃª tiver os 500 zeny e quiser se tornar um Mercador.";
+					mes "Por favor, retorne quando você tiver os 500 zeny e quiser se tornar um Mercador.";
 					close;
 				}
 				set zeny,zeny-500;
 				mes "Sim...!";
 				mes "Agora sua";
-				mes "lincenÃ§a";
-				mes "ja estÃ¡ toda pagada!";
+				mes "lincença";
+				mes "ja está toda pagada!";
 				break;
 			case 2:
 				mes "[Chefe Mahnsoo]";
-				mes "Eu suponho que vocÃª necessite de mais tempo para conseguir o dinheiro.";
-				mes "Volte quando vocÃª estiver pronto.";
+				mes "Eu suponho que você necessite de mais tempo para conseguir o dinheiro.";
+				mes "Volte quando você estiver pronto.";
 				close;
 			}
 		}
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "ParabÃ©ns!";
+		mes "Parabéns!";
 		callfunc "Job_Change",Job_Merchant;
 		callfunc "F_ClearJobVar";
 		if(checkquest(1009) != -1) {
@@ -167,89 +167,89 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 		else {
 			completequest 1012;
 		}
-		mes "Estou muito feliz por vocÃª ter se juntado a Guilda dos Mercadores e espero que vocÃª participe ativamente na economia de Rune-Midgard.";
+		mes "Estou muito feliz por você ter se juntado a Guilda dos Mercadores e espero que você participe ativamente na economia de Rune-Midgard.";
 		next;
 		if (quest_alb_01 == 1) {
 			mes "[Chefe Mahnsoo]";
-			mes "*ham* Eeeee deixe me dar a vocÃª uma pequna quantidade de dinheiro por ter entregado a mensagem para mim.";
-			mes "Espero que um dia ainda vocÃª possa me ajudar~";
+			mes "*ham* Eeeee deixe me dar a você uma pequna quantidade de dinheiro por ter entregado a mensagem para mim.";
+			mes "Espero que um dia ainda você possa me ajudar~";
 			set zeny,zeny+200;
 			set quest_alb_01,2;
 		}
 		else {
 			mes "[Chefe Mahnsoo]";
-			mes "A mensagem foi entregue como eu pedi? VocÃª esqueceu? Hum bem. Bom Trabalho!";
+			mes "A mensagem foi entregue como eu pedi? Você esqueceu? Hum bem. Bom Trabalho!";
 		}
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "Nosso objetivo Ã© controlar 20% do comÃ©rcio mundial! NÃ³s precisamos de pessoas jovens, como vocÃª!";
+		mes "Nosso objetivo é controlar 20% do comércio mundial! Nós precisamos de pessoas jovens, como você!";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "PorÃ©m, nÃ³s sempre estaremos felizes realizando nossos emprÃ©stimos.";
-		mes "Mas disso todos nÃ³s sabemos~";
+		mes "Porém, nós sempre estaremos felizes realizando nossos empréstimos.";
+		mes "Mas disso todos nós sabemos~";
 		close;
 	}
 	else if (job_merchant_q <= 6 && job_merchant_q != 0) {
 		mes "[Chefe Mahnsoo]";
 		if (job_merchant_q2 == 1 || job_merchant_q2 == 2) {
-			mes "Primeiro, pegue um pacote no armazÃ©m, e leve-o atÃ© a antiga Guilda dos Espadachins em Prontera.";
+			mes "Primeiro, pegue um pacote no armazém, e leve-o até a antiga Guilda dos Espadachins em Prontera.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Quado vocÃª chegar lÃ¡, entregue o pacote Ã  Kafra que estarÃ¡ lÃ¡ por perto. O nome dela Ã© Flor. VocÃª entendeu?";
+			mes "Quado você chegar lá, entregue o pacote à Kafra que estará lá por perto. O nome dela é Flor. Você entendeu?";
 			next;
 			if (job_merchant_q2 == 1) {
 				mes "[Chefe Mahnsoo]";
-				mes "Lembre-se, o nÃºmero de sÃ©rie desse pacote Ã© ^3355FF2485741^000000.";
+				mes "Lembre-se, o número de série desse pacote é ^3355FF2485741^000000.";
 				setquest 1009;
 			}
 			else {
 				mes "[Chefe Mahnsoo]";
-				mes "Lembre-se, o nÃºmero de sÃ©rie desse pacote Ã© ^3355FF2328137^000000.";
+				mes "Lembre-se, o número de série desse pacote é ^3355FF2328137^000000.";
 				setquest 1009;
 			}
 		}
 		else if (job_merchant_q2 == 3 || job_merchant_q2 == 4) {
-			mes "Primeiro, pegue um pacote no armazÃ©m, e leve atÃ© a Guilda dos Magos em Geffen.";
+			mes "Primeiro, pegue um pacote no armazém, e leve até a Guilda dos Magos em Geffen.";
 			next;
 			if (job_merchant_q2 == 3) {
 				mes "[Chefe Mahnsoo]";
-				mes "Quando vocÃª chegar lÃ¡, entregue o pacote ao mago que lÃ¡ estiver. Lembre-se, o nÃºmero de sÃ©rie desse pacote Ã© ^3355FF2989396^000000.";
+				mes "Quando você chegar lá, entregue o pacote ao mago que lá estiver. Lembre-se, o número de série desse pacote é ^3355FF2989396^000000.";
 				setquest 1010;
 			}
 			else {
 				mes "[Chefe Mahnsoo]";
-				mes "Quando vocÃª chegar lÃ¡, entregue o pacote ao Mestre da Guilda. Lembre-se, o nÃºmero de sÃ©rie desse pacote Ã© ^3355FF2191737^000000.";
+				mes "Quando você chegar lá, entregue o pacote ao Mestre da Guilda. Lembre-se, o número de série desse pacote é ^3355FF2191737^000000.";
 				setquest 1010;
 			}
 		}
 		else if (job_merchant_q2 == 5 || job_merchant_q2 == 6) {
-			mes "Primeiro, pegue o pacote no armazÃ©m, e o leve atÃ© Morroc.";
+			mes "Primeiro, pegue o pacote no armazém, e o leve até Morroc.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "VocÃª irÃ¡ encontrar Java Dullihan, o tintureiro, entÃ£o entregue o pacote a ele.";
+			mes "Você irá encontrar Java Dullihan, o tintureiro, então entregue o pacote a ele.";
 			next;
 			if (job_merchant_q2 == 5) {
 				mes "[Chefe Mahnsoo]";
-				mes "Mas ele Ã© meio esquecido, entÃ£o entregue o pacote para um de seus estudantes. Lembre-se, o nÃºmero de sÃ©rie do pacote Ã© ^3355FF3012685^000000.";
+				mes "Mas ele é meio esquecido, então entregue o pacote para um de seus estudantes. Lembre-se, o número de série do pacote é ^3355FF3012685^000000.";
 				setquest 1011;
 			}
 			else {
 				mes "[Chefe Mahnsoo]";
-				mes "Mas ele Ã© meio esquecido, entÃ£o entregue o pacote para um de seus estudantes. Lembre-se, o nÃºmero de sÃ©rie do pacote Ã© ^3355FF3487372^000000.";
+				mes "Mas ele é meio esquecido, então entregue o pacote para um de seus estudantes. Lembre-se, o número de série do pacote é ^3355FF3487372^000000.";
 				setquest 1011;
 			}
 		}
 		else if (job_merchant_q2 == 7 || job_merchant_q2 == 8) {
-			mes "Primeiro, pegue o pacote no armazÃ©m, e o entregue para a Kafra que se encontra na Ilha de Byalan. O nome dela Ã© Flor.";
+			mes "Primeiro, pegue o pacote no armazém, e o entregue para a Kafra que se encontra na Ilha de Byalan. O nome dela é Flor.";
 			next;
 			if (job_merchant_q2 == 7) {
 				mes "[Chefe Mahnsoo]";
-				mes "Lembre-se, o nÃºmero de sÃ©rie do pacote Ã© ^3355FF3318702^000000.";
+				mes "Lembre-se, o número de série do pacote é ^3355FF3318702^000000.";
 				setquest 1012;
 			}
 			else {
 				mes "[Chefe Mahnsoo]";
-				mes "Lembre-se, o nÃºmero de sÃ©rie do pacote Ã© ^3355FF3543625^000000.";
+				mes "Lembre-se, o número de série do pacote é ^3355FF3543625^000000.";
 				setquest 1012;
 			}
 		}
@@ -257,88 +257,88 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Eeeeeeeee...";
-			mes "NÃ£o se esqueÃ§a de entregar a mensagem para mim~";
+			mes "Não se esqueça de entregar a mensagem para mim~";
 		}
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "NÃ£o esqueÃ§a o destino do pacote e o nÃºmero de sÃ©rie dele.";
-		mes "VocÃª irÃ¡ precisar dele";
-		mes "para falar com o guarda do armazÃ©m.";
+		mes "Não esqueça o destino do pacote e o número de série dele.";
+		mes "Você irá precisar dele";
+		mes "para falar com o guarda do armazém.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "O armazÃ©m Ã© esta sala localizada";
-		mes "Ã  minha direita. LÃ¡, vocÃª pode falar";
-		mes "com o guarda, e ele irÃ¡";
-		mes "ajudar vocÃª.";
+		mes "O armazém é esta sala localizada";
+		mes "à minha direita. Lá, você pode falar";
+		mes "com o guarda, e ele irá";
+		mes "ajudar você.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "Depois de fazer a entrega, volte ao armazÃ©m e dÃª o recibo ao guarda.";
-		mes "ApÃ³s, volte";
+		mes "Depois de fazer a entrega, volte ao armazém e dê o recibo ao guarda.";
+		mes "Após, volte";
 		mes "e fale comigo.";
 		next;
 		mes "[Chefe Mahnsoo]";
-		mes "EstÃ¡ claro?";
-		mes "Ã“timo, este Ã©";
-		mes "o espÃ­rito.";
+		mes "Está claro?";
+		mes "Ótimo, este é";
+		mes "o espírito.";
 		mes "Tome cuidado!";
 		close;
 	}
 	else if (job_merchant_q == 0) {
 		mes "[Chefe Mahnsoo]";
-		mes "EntÃ£o, o que traz vocÃª";
-		mes "Ã  AssossiaÃ§Ã£o dos mercadores?";
+		mes "Então, o que traz você";
+		mes "à Assossiação dos mercadores?";
 		mes "Existe alguma coisa em";
 		mes "que eu possa te ajudar?";
 		next;
 		switch(select("Eu quero me tornar um Mercador!.:Me fale sobre os Mercadores.:Me fale os requerimentos.:Nada.")) {
 		case 1:
 			mes "[Chefe Mahnsoo]";
-			mes "VocÃª deseja se";
+			mes "Você deseja se";
 			mes "tornar um Mercador?";
 			mes "Bem...";
 			next;
 			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chefe Mahnsoo]";
-				mes "Primeiro, vocÃª deve ser um aprendiz com nÃ­veis de classe nÃ­vel 10. ApÃ³s conseguir isto, destribua-os.";
+				mes "Primeiro, você deve ser um aprendiz com níveis de classe nível 10. Após conseguir isto, destribua-os.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "NÃ³s nÃ£o somos apenas";
+				mes "Nós não somos apenas";
 				mes "fazedores de dinheiro!";
-				mes "NÃ³s negociamos e tornamos algo sem valor em talvez algo valioso!";
+				mes "Nós negociamos e tornamos algo sem valor em talvez algo valioso!";
 				close;
 			}
 			mes "[Chefe Mahnsoo]";
-			mes "Certo, vocÃª precisa preencher este contrato e me dar 1.000 zeny para o pagamento da sua licenÃ§a.";
+			mes "Certo, você precisa preencher este contrato e me dar 1.000 zeny para o pagamento da sua licença.";
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Oh...!";
-			mes "Se vocÃª nÃ£o tiver todo o dinehiro,";
-			mes "VocÃª pode apenas me pagar 500 zeny agora.";
-			mes "E o resto vocÃª me paga apÃ³s cumprir";
-			mes "o seu teste, entÃ£o eu lhe darei sua";
-			mes "LicenÃ§a da Guilda dos Mercadores.";
+			mes "Se você não tiver todo o dinehiro,";
+			mes "Você pode apenas me pagar 500 zeny agora.";
+			mes "E o resto você me paga após cumprir";
+			mes "o seu teste, então eu lhe darei sua";
+			mes "Licença da Guilda dos Mercadores.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "EntÃ£o o que vocÃª acha?";
-			mes "VocÃª estÃ¡ pronto para comeÃ§ar agora?";
+			mes "Então o que você acha?";
+			mes "Você está pronto para começar agora?";
 			next;
 			if (select("Sim, estou.:Ummm, talvez depois...") ==1 ) {
 				mes "[Chefe Mahnsoo]";
-				mes "Deixe-me checar se vocÃª";
+				mes "Deixe-me checar se você";
 				mes "preencheu tudo corretamente";
-				mes "no seu formulÃ¡rio...";
+				mes "no seu formulário...";
 				next;
 				mes "[Chefe Mahnsoo]";
 				mes "Hmm... ";
 				mes "" + strcharinfo(0) + "...";
-				mes "Ã‰ um bom nome.";
+				mes "É um bom nome.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "Este formulÃ¡rio sÃ³ serÃ¡";
+				mes "Este formulário só será";
 				mes "registrado depois de";
-				mes "paga a licenÃ§a.";
-				mes "De que forma vocÃª";
-				mes "realizarÃ¡ o pagamento?";
+				mes "paga a licença.";
+				mes "De que forma você";
+				mes "realizará o pagamento?";
 				next;
 				switch(select("Pagar todos os 1,000 Zeny agora!:Duas parcelas de 500 Zeny.:Sair")) {
 				case 1:
@@ -351,7 +351,7 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 						mes "Excelente, excelente.";
 					}
 					else {
-						mes "Se vocÃª nÃ£o tem o dinheiro para pagar toda licenÃ§a agora, porquÃª vocÃª nÃ£o paga em duas parcelas de 500 zeny? Pense nisso.";
+						mes "Se você não tem o dinheiro para pagar toda licença agora, porquê você não paga em duas parcelas de 500 zeny? Pense nisso.";
 						close;
 					}
 					break;
@@ -361,11 +361,11 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 						set job_merchant_q,1;
 						set zeny,zeny-500;
 						mes "Deixe-me ver...";
-						mes "SÃ£o 500 Zeny. De qualquer modo eu acho que parcelar nÃ£o Ã© uma boa idÃ©ia para nenhum mercador, Ã© bom que vocÃª jÃ¡ comece aprendendo.";
+						mes "São 500 Zeny. De qualquer modo eu acho que parcelar não é uma boa idéia para nenhum mercador, é bom que você já comece aprendendo.";
 					}
 					else {
 						mes "Hmm...";
-						mes "Parece que vocÃª nÃ£o tem dinheiro o suficiente para comprar sua licenÃ§a. Por favor, volte quando vocÃª tiver a quantidade de zeny suficiente.";
+						mes "Parece que você não tem dinheiro o suficiente para comprar sua licença. Por favor, volte quando você tiver a quantidade de zeny suficiente.";
 						close;
 					}
 					break;
@@ -378,116 +378,116 @@ alberta_in,53,43,6	script	Mercardor#mer	86,{
 			}
 			else {
 				mes "[Chefe Mahnsoo]";
-				mes "VocÃª nÃ£o tem zeny suficiente agora? Isto nÃ£o Ã© problema. Volte aqui quando vocÃª tiver fundos suficientes,";
+				mes "Você não tem zeny suficiente agora? Isto não é problema. Volte aqui quando você tiver fundos suficientes,";
 				mes "ok?";
 				close;
 			}
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Certo, vocÃª estÃ¡ agora na lista de candidatos. Ah, antes que eu comece deixe-me dizer uma coisa.";
+			mes "Certo, você está agora na lista de candidatos. Ah, antes que eu comece deixe-me dizer uma coisa.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Existem pessoas burras e ganÃ¢nciosas ai fora, que nÃ£o sabem o que Ã© ser um Mercador.";
-			mes "Eu espero que vocÃª nÃ£o se torne uma delas, certo?";
+			mes "Existem pessoas burras e ganânciosas ai fora, que não sabem o que é ser um Mercador.";
+			mes "Eu espero que você não se torne uma delas, certo?";
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Agora, me deixe";
-			mes "explicar a vocÃª o";
-			mes "que vocÃª necessita para";
+			mes "explicar a você o";
+			mes "que você necessita para";
 			mes "adquirir sua Licensa de Mercador.";
 			next;
 			mes "[Chefe Mahnsoo]";
 			switch(rand(1,4)) {
 			case 1:
-				mes "Primeiro, pegue um pacote no armazÃ©m, e leve-o atÃ© a antiga Guilda dos Espadashins em Prontera.";
+				mes "Primeiro, pegue um pacote no armazém, e leve-o até a antiga Guilda dos Espadashins em Prontera.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "Quando chegar lÃ¡, fale com a funcionÃ¡ria Kafra que estarÃ¡ ali perto. O nome dela Ã© Flor.";
-				mes "VocÃª entendeu tudo?";
+				mes "Quando chegar lá, fale com a funcionária Kafra que estará ali perto. O nome dela é Flor.";
+				mes "Você entendeu tudo?";
 				callsub S_GiveSerial,2485741,1,2328137,2;
 				break;
 			case 2:
-				mes "Primeiro, pegue um pacote no armazÃ©m, e leve atÃ© a Guilda dos Magos em Geffen, e fale com o mago que estiver lÃ¡.";
+				mes "Primeiro, pegue um pacote no armazém, e leve até a Guilda dos Magos em Geffen, e fale com o mago que estiver lá.";
 				callsub S_GiveSerial,2989396,3,2191737,4;
 				break;
 			case 3:
-				mes "Primeiro, pegue um pacote no armazÃ©m, e entÃ£o vÃ¡ atÃ© Morroc. Chegando lÃ¡ ache Java Dullihan, o tintureiro.";
+				mes "Primeiro, pegue um pacote no armazém, e então vá até Morroc. Chegando lá ache Java Dullihan, o tintureiro.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "Ele Ã© um pouco esquecido, entÃ£o entregue o pacote para um de seus estudantes.";
+				mes "Ele é um pouco esquecido, então entregue o pacote para um de seus estudantes.";
 				callsub S_GiveSerial,3012685,5,3487372,6;
 				break;
 			case 4:
-				mes "Primeiro, pegue um pacote no armazÃ©m, e o entegue para a funcionÃ¡ria Kafra da Ilha de Baylan.";
+				mes "Primeiro, pegue um pacote no armazém, e o entegue para a funcionária Kafra da Ilha de Baylan.";
 				callsub S_GiveSerial,3318702,7,3543625,8;
 				next;
 				mes "[Chefe Mahnsoo]";
 				mes "Ummmm...";
 				mes "E eu irei pedir";
 				mes "algo um pouco pessoal";
-				mes "para vocÃª.";
+				mes "para você.";
 				next;
 				mes "[Chefe Mahnsoo]";
-				mes "AlÃ©m do pacote vocÃª poderia entregar essa carta a ela para mim? Por Favor~";
+				mes "Além do pacote você poderia entregar essa carta a ela para mim? Por Favor~";
 				getitem 1072,1; //Delivery_Message
 				break;
 			}
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "NÃ£o esqueÃ§a o destino da entrega e o nÃºmero de sÃ©rie. VocÃª precisa falar com o guarda do armazÃ©m ao meu lado e ele irÃ¡ lhe dar o pacote.";
+			mes "Não esqueça o destino da entrega e o número de série. Você precisa falar com o guarda do armazém ao meu lado e ele irá lhe dar o pacote.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Depois da entrega, dÃª o recibo ao guarda do armazÃ©m, e depois venha falar comigo de novo.";
+			mes "Depois da entrega, dê o recibo ao guarda do armazém, e depois venha falar comigo de novo.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "EstÃ¡ tudo claro?";
-			mes "Certo, este Ã©";
-			mes "o espÃ­rito!";
+			mes "Está tudo claro?";
+			mes "Certo, este é";
+			mes "o espírito!";
 			mes "Tenha cuidado!";
 			close;
 		case 2:
 			mes "[Chefe Mahnsoo]";
 			mes "Mercador?";
-			mes "Bem, nÃ³s basicamente vendemos coisas para ganhar dinheiro. Esta Ã© a funÃ§Ã£o";
+			mes "Bem, nós basicamente vendemos coisas para ganhar dinheiro. Esta é a função";
 			mes "de um Mercador.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "NÃ³s nÃ£o somos os melhores nas lutas, e nÃ³s nÃ£o temos muitos ataques especiais. E tambÃ©m nÃ£o temos habilidades de cura...";
+			mes "Nós não somos os melhores nas lutas, e nós não temos muitos ataques especiais. E também não temos habilidades de cura...";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "PorÃ©m nÃ³s podemos comprar produtos mais baratos nos NPC de venda and e vende-los Ã  um preÃ§o maior Ã s pessoas~";
+			mes "Porém nós podemos comprar produtos mais baratos nos NPC de venda and e vende-los à um preço maior às pessoas~";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Nossa habilidade de ataque Ã© a 'Mammonita.' A forÃ§a da mamonita vem do impacto";
-			mes "Onde nÃ³s somos forÃ§ados a usar o nosso dineheiro para atacar.";
+			mes "Nossa habilidade de ataque é a 'Mammonita.' A força da mamonita vem do impacto";
+			mes "Onde nós somos forçados a usar o nosso dineheiro para atacar.";
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Jogando zeny dessa maneira";
 			mes "causa um dano muito grando quanto qualquer ataque normal de um Mercador!";
-			mes "Apenas pensar nisso jÃ¡ me deixa";
+			mes "Apenas pensar nisso já me deixa";
 			mes "com o sangue quente!";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "De qualquer modo, nÃ³s podemos usar muitas armas,";
-			mes "exceto arcos, e espadas de duas mÃ£os. Mas nÃ³s sempre podemos vende-las.";
+			mes "De qualquer modo, nós podemos usar muitas armas,";
+			mes "exceto arcos, e espadas de duas mãos. Mas nós sempre podemos vende-las.";
 			next;
 			mes "[Chefe Mahnsoo]";
 			mes "Sim...";
-			mes "NÃ³s Mercadores geralmente";
+			mes "Nós Mercadores geralmente";
 			mes "temos sempre dinheiro no bolso...";
 			close;
 		case 3:
 			mes "[Chefe Mahnsoo]";
-			mes "Existem trÃªs requerimentos que vocÃª deve cumprir para se tornar um Mercador.";
+			mes "Existem três requerimentos que você deve cumprir para se tornar um Mercador.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Primeiro, vocÃª deve ser um aprendiz com nÃ­vel de classe 10, e jÃ¡ ter aprendido todas a habilidades bÃ¡sicas.";
+			mes "Primeiro, você deve ser um aprendiz com nível de classe 10, e já ter aprendido todas a habilidades básicas.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Segundo, VocÃª deve pagar 1.000 zeny para sua licenÃ§a de Mercador. Eu acredito que todo o candidato a Mercador deve ter esse dinheiro em mÃ£os.";
+			mes "Segundo, Você deve pagar 1.000 zeny para sua licença de Mercador. Eu acredito que todo o candidato a Mercador deve ter esse dinheiro em mãos.";
 			next;
 			mes "[Chefe Mahnsoo]";
-			mes "Terceiro, existe um teste fÃ­sico que vocÃª deverar fazer. VocÃª deverÃ¡ fazer a entrega de um pacote Ã  uma certa pessoa em um certo local.";
+			mes "Terceiro, existe um teste físico que você deverar fazer. Você deverá fazer a entrega de um pacote à uma certa pessoa em um certo local.";
 			close;
 		case 4:
 			close;
@@ -498,56 +498,56 @@ S_GiveSerial:
 	mes "[Chefe Mahnsoo]";
 	mes "Lembre-se...";
 	if (rand(1)) {
-		mes "O nÃºmero de sÃ©rie";
-		mes "do pacote Ã©";
+		mes "O número de série";
+		mes "do pacote é";
 		mes "^3355FF"+getarg(0)+"^000000.";
 		set job_merchant_q2,getarg(1);
 	}
 	else {
-		mes "O nÃºmero de sÃ©rie";
-		mes "do pacote Ã©";
+		mes "O número de série";
+		mes "do pacote é";
 		mes "^3355FF"+getarg(2)+"^000000.";
 		set job_merchant_q2,getarg(3);
 	}
 	return;
 }
 
-alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
+alberta_in,28,29,2	script	Mercador da Guilda#mer	4_M_01,{
 	if (BaseJob == Job_Merchant) {
 		mes "[Guarda Kay]";
-		mes "OlÃ¡ amigo.";
-		mes "como vocÃª estÃ¡?";
+		mes "Olá amigo.";
+		mes "como você está?";
 		close;
 	}
 	else if (BaseJob != Job_Merchant && BaseJob != Job_Novice) {
 		mes "[Guarda Kay]";
-		mes "Ei vocÃª. NÃ³s nÃ£o temos nenhum trabalho para vocÃª agora. Se vocÃª quiser ganhar dinheiro, vÃ¡ achar algo para fazer na cidade.";
+		mes "Ei você. Nós não temos nenhum trabalho para você agora. Se você quiser ganhar dinheiro, vá achar algo para fazer na cidade.";
 		close;
 	}
 	else if (job_merchant_q == 9) {
 		mes "[Guarda Kay]";
-		mes "Ei vocÃª. Sim, vocÃª.";
-		mes "Se vocÃª quiser reiniciar o teste, vÃ¡ falar com Mahnsoo na outra sala. E depois nÃ³s nos falamos.";
+		mes "Ei você. Sim, você.";
+		mes "Se você quiser reiniciar o teste, vá falar com Mahnsoo na outra sala. E depois nós nos falamos.";
 		close;
 	}
 	else if (job_merchant_q == 8 || job_merchant_q == 7) {
 		mes "[Guarda Kay]";
-		mes "Certo! Tudo parece perfeito! Eu irei dizer que vocÃª conseguiu ao chefe. Agora vÃ¡ falar com o Chefe Mahnsoo, certo?";
+		mes "Certo! Tudo parece perfeito! Eu irei dizer que você conseguiu ao chefe. Agora vá falar com o Chefe Mahnsoo, certo?";
 		close;
 	}
 	else if (job_merchant_q == 6 || job_merchant_q == 5) {
 		mes "[Guarda Kay]";
-		mes "Oh, sim? Ok, deixe-me checar. Seu nome Ã© " + strcharinfo(0) + "? Certo, seu destino era...";
+		mes "Oh, sim? Ok, deixe-me checar. Seu nome é " + strcharinfo(0) + "? Certo, seu destino era...";
 		next;
 		mes "[Guarda Kay]";
 		if (job_merchant_q2 == 1 || job_merchant_q2 == 2)
-			mes "Nossa! VocÃª falou com a Kafra em Prontera?! Que sorte~ ...Recibo?";
+			mes "Nossa! Você falou com a Kafra em Prontera?! Que sorte~ ...Recibo?";
 		else if (job_merchant_q2 == 3 || job_merchant_q2 == 4)
-			mes "Academia de MÃ¡gica de Geffen. Certo, recibo?";
+			mes "Academia de Mágica de Geffen. Certo, recibo?";
 		else if (job_merchant_q2 == 5 || job_merchant_q2 == 6)
 			mes "O tintureiro de Morroc. Nada ruim. Recibo?";
 		else if (job_merchant_q2 == 7 || job_merchant_q2 == 8)
-			mes "Oh hohohoho~! A funcionÃ¡ria Kafra da ilha de Baylan?! IncrÃ­vel! De qualquer modo, vocÃª me trouxe o recibo?";
+			mes "Oh hohohoho~! A funcionária Kafra da ilha de Baylan?! Incrível! De qualquer modo, você me trouxe o recibo?";
 
 		if (job_merchant_q2 == 1 && countitem(1073) != 0)
 			delitem 1073,1; //Merchant_Voucher_1
@@ -570,16 +570,16 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 			set job_merchant_q,9;
 			mes " [Guarda Kay] ";
 			mes "Espere um pouco.";
-			mes "Aonde estÃ¡ o recibo?";
+			mes "Aonde está o recibo?";
 			mes "O que aconteceu?";
 			next;
 			mes " [Guarda Kay] ";
-			mes "Se vocÃª nÃ£o tive o recibo, vocÃª falhou no teste! Ã‰ melhor vocÃª ir falar com Mahnsoo, certo? Tenha atenÃ§Ã£o na prÃ³xima vez!";
+			mes "Se você não tive o recibo, você falhou no teste! É melhor você ir falar com Mahnsoo, certo? Tenha atenção na próxima vez!";
 			close;
 		}
 		next;
 		mes " [Guarda Kay] ";
-		mes "...Ã³timo! Tudo estÃ¡ perfeito! Eu irei dizer ao chefe que vocÃª conseguiu. VÃ¡ falar com o Chefe Mahnsoo agora, certo?";
+		mes "...ótimo! Tudo está perfeito! Eu irei dizer ao chefe que você conseguiu. Vá falar com o Chefe Mahnsoo agora, certo?";
 		close2;
 		if (job_merchant_q == 6)
 			set job_merchant_q,8;
@@ -590,17 +590,17 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 	else if (job_merchant_q == 4 || job_merchant_q == 3 && countitem(1081) == 0 && countitem(1082) == 0 && countitem(1091) == 0) {
 		mes " [Guarda Kay] ";
 		mes "Huh?";
-		mes "VocÃª voltou?";
-		mes "EntÃ£o como foi";
+		mes "Você voltou?";
+		mes "Então como foi";
 		mes "a entrega?";
 		next;
 		if (select("*Sob* Eu perdi o pacote.:Normal.") == 1) {
 			set job_merchant_q,9;
 			mes "[Guarda Kay]";
-			mes "VocÃª estÃ¡ brincando comigo? VocÃª irÃ¡ falhar no teste se vocÃª perder o pacote!";
+			mes "Você está brincando comigo? Você irá falhar no teste se você perder o pacote!";
 			next;
 			mes "[Guarda Kay]";
-			mes "Awwww cara. Bem, Se vocÃª quiser refazer o teste, Fale com Mahnsoo, beleza? VocÃª tem sorte de receber uma segunda chance!";
+			mes "Awwww cara. Bem, Se você quiser refazer o teste, Fale com Mahnsoo, beleza? Você tem sorte de receber uma segunda chance!";
 			close;
 		}
 		mes "[Guarda Kay]";
@@ -610,37 +610,37 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 	}
 	else if (job_merchant_q == 4 || job_merchant_q == 3 && countitem(1081) != 0 || countitem(1082) != 0 || countitem(1091) != 0) {
 		mes "[Guarda Kay]";
-		mes "Ei, o que vocÃª ainda estÃ¡ fazendo aqui? VocÃª jÃ¡ nÃ£o devia estar indo para o seu destino?";
+		mes "Ei, o que você ainda está fazendo aqui? Você já não devia estar indo para o seu destino?";
 		next;
-		if (select("Eu preciso de um novo pacote.:Ah, sim. VocÃª estÃ¡ certo!") == 1) {
+		if (select("Eu preciso de um novo pacote.:Ah, sim. Você está certo!") == 1) {
 			if (countitem(1081) == 0 && countitem(1082) == 0 && countitem(1083) == 0 && countitem(1091) == 0) {
 				mes "[Guarda Kay]";
 				mes "O q--?";
 				mes "Mas o que aconteceu";
 				mes "com o seu pacote?";
-				mes "Aonde estÃ¡ ele?!";
+				mes "Aonde está ele?!";
 				next;
 				if (select("*Sob* Eu o perdi!:Eu o tenho aqui.") == 1) {
 					set job_merchant_q,9;
 					mes "[Guarda Kay]";
-					mes "VocÃª...";
+					mes "Você...";
 					mes "O perdeu?!";
-					mes "VocÃª falhou no teste!";
+					mes "Você falhou no teste!";
 					next;
 					mes "[Guarda Kay]";
-					mes "*Sigh* Se vocÃª quiser refazer o teste, vÃ¡ falar com Mahnsoo na outra sala, beleza?";
+					mes "*Sigh* Se você quiser refazer o teste, vá falar com Mahnsoo na outra sala, beleza?";
 					close;
 				}
 				mes "[Guarda Kay]";
 				mes "Huh.";
-				mes "Se vocÃª nÃ£o";
+				mes "Se você não";
 				mes "perdeu o pacote.";
 				mes "Porque eu lhe";
 				mes "daria outro?";
 				close;
 			}
 			mes "[Guarda Kay]";
-			mes "*Sigh* Cara, vocÃª estÃ¡ virando um pÃ© no saco. Espere, me deixe cancelar seu histÃ³rico...";
+			mes "*Sigh* Cara, você está virando um pé no saco. Espere, me deixe cancelar seu histórico...";
 			if (countitem(1081) != 0)
 				delitem 1081,1; //Merchant_Box_1
 			else if (countitem(1082) != 0)
@@ -663,30 +663,30 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 	else if ((job_merchant_q == 0 || job_merchant_q == 1 || job_merchant_q == 2)) {
 		set where_village,0;
 		mes "[Guarda Kay]";
-		mes "Ei vocÃª.";
+		mes "Ei você.";
 		mes "O que te traz";
 		mes "aqui?";
 		next;
-		switch(select("Meu teste de licenÃ§a de Mercador.:Eu estou procurando por trabalho.:Nada.")) {
+		switch(select("Meu teste de licença de Mercador.:Eu estou procurando por trabalho.:Nada.")) {
 		case 1:
 			mes "[Guarda Kay]";
 			mes "Entendo.";
 			mes "Certo.";
-			mes "Qual Ã©";
+			mes "Qual é";
 			mes "o seu nome?";
 			mes "" + strcharinfo(0) + "...?";
 			next;
 			if (job_merchant_q == 0) {
 				mes "[Guarda Kay]";
-				mes "Huh. Seu nome nÃ£o estÃ¡ em minha lista. VocÃª jÃ¡ se alistou para o teste da classe?";
+				mes "Huh. Seu nome não está em minha lista. Você já se alistou para o teste da classe?";
 				next;
 				mes "[Guarda Kay]";
-				mes "VocÃª deve falar com o Chefe Mahnsoo na sala ao lado";
-				mes "deste prÃ©dio, correto?";
+				mes "Você deve falar com o Chefe Mahnsoo na sala ao lado";
+				mes "deste prédio, correto?";
 				close;
 			}
 			mes "[Guarda Kay]";
-			mes "Certo, vamos lÃ¡. Deixe-me lhe dar seu pacote. Agora, escolha o destino da entrega.";
+			mes "Certo, vamos lá. Deixe-me lhe dar seu pacote. Agora, escolha o destino da entrega.";
 			next;
 			switch(select("Prontera.:Geffen.:Morocc.:Ilha de Byalan.")) {
 			case 1: set .@where_village,1; break;
@@ -695,23 +695,23 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 			case 4: set .@where_village,4; break;
 			}
 			mes "[Guarda Kay]";
-			mes "Certo, agora me passe o nÃºmero de sÃ©rie da entrega. Se vocÃª quiser cancelar, apenas digite '0', tudo bem?";
+			mes "Certo, agora me passe o número de série da entrega. Se você quiser cancelar, apenas digite '0', tudo bem?";
 			next;
 			while(1) {
 				while(1) {
 					input .@input;
 					if (.@input == 0) {
 						mes "[Guarda Kay]";
-						mes "VocÃª tem certeza que deseja cancelar?";
+						mes "Você tem certeza que deseja cancelar?";
 						if (select("Sim.:Deixe-me tentar novamente.") == 1) {
-							mes "Certo, nÃ³s iremos cancelar por agora.";
+							mes "Certo, nós iremos cancelar por agora.";
 							close;
 						}
 						next;
 					}
 					else if (.@input < 1000000 || .@input > 5000000) {
 						mes "[Guarda Kay]";
-						mes "Ei ei. Este nÃºmero nÃ£o Ã© vÃ¡lido! Entre com um valor ente 1000000 a 5000000. entendido?";
+						mes "Ei ei. Este número não é válido! Entre com um valor ente 1000000 a 5000000. entendido?";
 						next;
 					}
 					else 
@@ -719,15 +719,15 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 				}
 				mes "[Guarda Kay]";
 				if (.@where_village == 1)
-					mes "Destino Ã© Prontera. O numero de sÃ©rie Ã© " + .@input + ". EstÃ¡ tudo certo?";
+					mes "Destino é Prontera. O numero de série é " + .@input + ". Está tudo certo?";
 				else if (.@where_village == 2)
-					mes "Destino Ã© Geffen. Opa! Ã‰ muito longe! O nÃºmero de sÃ©rie Ã© " + .@input + ". EstÃ¡ tudo certo?";
+					mes "Destino é Geffen. Opa! É muito longe! O número de série é " + .@input + ". Está tudo certo?";
 				else if (.@where_village == 3)
-					mes "Destino Ã© Morocc. VocÃª irÃ¡ ir longe! O nÃºmero de sÃ©rie Ã© " + .@input + ". EstÃ¡ tudo certo?";
+					mes "Destino é Morocc. Você irá ir longe! O número de série é " + .@input + ". Está tudo certo?";
 				else
-					mes "Boa Sorte! O seu destino Ã© a Ilha de Byalan. O nÃºmero de sÃ©rie Ã© " + .@input + ". EstÃ¡ tudo certo?";
+					mes "Boa Sorte! O seu destino é a Ilha de Byalan. O número de série é " + .@input + ". Está tudo certo?";
 				next;
-				if (select("Certo!:Uoopss! NÃºmero errado!") == 1) {
+				if (select("Certo!:Uoopss! Número errado!") == 1) {
 					break;
 				}
 			}
@@ -768,33 +768,33 @@ alberta_in,28,29,2	script	Mercador da Guilda#mer	83,{
 			else if (job_merchant_q == 1)
 				set job_merchant_q,3;
 			mes "[Guarda Kay]";
-			mes "Certo. Pegue este pacote e o guarde como se fosse sua vida e entregue ao cliente. NÃ£o o perca, entendido?";
+			mes "Certo. Pegue este pacote e o guarde como se fosse sua vida e entregue ao cliente. Não o perca, entendido?";
 			next;
 			mes "[Guarda Kay]";
-			mes "EntÃ£o, eu lhe desejo sorte. Lembre-se, vocÃª deve trazer a mim";
-			mes "o recibo que vocÃª receber do cliente, entendido?";
+			mes "Então, eu lhe desejo sorte. Lembre-se, você deve trazer a mim";
+			mes "o recibo que você receber do cliente, entendido?";
 			close;
 		case 2:
 			mes "[Guarda Kay]";
-			mes "Trabalho? Desculpe amigo, nÃ£o posso oferecer nada...";
+			mes "Trabalho? Desculpe amigo, não posso oferecer nada...";
 			close;
 		case 3:
 			mes "[Guarda Kay]";
 			mes "Nada, certo?";
-			mes "Eu acho que vocÃª gosta";
+			mes "Eu acho que você gosta";
 			mes "de encher o saco das pessoas";
-			mes "sem nenhuma razÃ£o, nÃ£o Ã©?";
+			mes "sem nenhuma razão, não é?";
 			close;
 		}
 	}
 }
 
-morocc_in,140,102,4	script	Estudante#mer	86,{
+morocc_in,140,102,4	script	Estudante#mer	4_M_04,{
 	if ((job_merchant_q == 4) || (job_merchant_q == 3)) {
 		mes "[Estudante]";
-		mes "VocÃª veio da";
+		mes "Você veio da";
 		mes "Guilda dos Mercadores?";
-		mes "Sim! VocÃª veio ao";
+		mes "Sim! Você veio ao";
 		mes "lugar certo.";
 		next;
 		mes "[Estudante]";
@@ -806,28 +806,28 @@ morocc_in,140,102,4	script	Estudante#mer	86,{
 		}
 		else {
 			mes "Mas...";
-			mes "Aonde estÃ¡ o";
+			mes "Aonde está o";
 			mes "pacote que eu pedi?";
-			mes "Este me Ã© estranho...";
+			mes "Este me é estranho...";
 			close;
 		}
 		next;
 		mes "[Estudante]";
-		mes "Me deixe checar o nÃºmero de sÃ©rie do pacote para que eu possa lhe dar o recibo, tudo bem?";
+		mes "Me deixe checar o número de série do pacote para que eu possa lhe dar o recibo, tudo bem?";
 		next;
 		mes "[Estudante]";
 		if (job_merchant_q2 == 5 && countitem(1081) != 0) {
 			mes "3012685...";
-			mes "EstÃ¡ certo.";
-			mes "Aqui estÃ¡ o seu";
+			mes "Está certo.";
+			mes "Aqui está o seu";
 			mes "recibo.";
 			delitem 1081,1; //Merchant_Box_1
 			getitem 1077,1; //Merchant_Voucher_5
 		}
 		else if (job_merchant_q2 == 6 && countitem(1082) != 0) {
 			mes "3487372...";
-			mes "EstÃ¡ certo.";
-			mes "Aqui estÃ¡ o seu";
+			mes "Está certo.";
+			mes "Aqui está o seu";
 			mes "recibo.";
 			delitem 1082,1; //Merchant_Box_2
 			getitem 1078,1; //Merchant_Voucher_6
@@ -835,11 +835,11 @@ morocc_in,140,102,4	script	Estudante#mer	86,{
 		else {
 			mes "Me desculper, mas...";
 			if (job_merchant_q2 == 5)
-				mes "Eu nÃ£o acho que esse Ã© o pacote que eu pedi. O nÃºmero de sÃ©rie deveria ser 3012685. Entende?";
+				mes "Eu não acho que esse é o pacote que eu pedi. O número de série deveria ser 3012685. Entende?";
 			else if (job_merchant_q2 == 6)
-				mes "Eu nÃ£o acho que esse Ã© o pacote que eu pedi. O nÃºmero de sÃ©rie deveria ser 3487372. Entende?";
+				mes "Eu não acho que esse é o pacote que eu pedi. O número de série deveria ser 3487372. Entende?";
 			else
-				mes "Eu nÃ£o acho que esse Ã© o pacote que eu pedi. O nÃºmero de sÃ©rie deveria ser 3012685 ou 3487372. Bem, um desses dois...";
+				mes "Eu não acho que esse é o pacote que eu pedi. O número de série deveria ser 3012685 ou 3487372. Bem, um desses dois...";
 			close;
 		}
 		if (job_merchant_q == 4)
@@ -849,83 +849,83 @@ morocc_in,140,102,4	script	Estudante#mer	86,{
 		next;
 		mes "[Estudante]";
 		mes "Muito obrigado!";
-		mes "AtÃ© mais ver!";
+		mes "Até mais ver!";
 		close;
 	}
 	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 6 || job_merchant_q2 == 5) {
 		mes "[Estudante]";
 		mes "Oh...";
-		mes "VocÃª irÃ¡";
+		mes "Você irá";
 		mes "voltar? Tudo bem.";
 		mes "Tenha cuidado!";
 		close;
 	}
 	else {
 		mes "[Estudante]";
-		mes "Mr. Java Dullihan Ã© o primeiro e o melhor produtor de tinta em todo continente de Rune-Midgard.";
+		mes "Mr. Java Dullihan é o primeiro e o melhor produtor de tinta em todo continente de Rune-Midgard.";
 		next;
 		mes "[Estudante]";
-		mes "Eeeee eu me orgulho de dizer que eu sou estudante dele! Algum dia, Eu estarei pronto para fazer lindas tintas tambÃ©m!";
+		mes "Eeeee eu me orgulho de dizer que eu sou estudante dele! Algum dia, Eu estarei pronto para fazer lindas tintas também!";
 		next;
 		mes "[Estudante]";
-		mes "Claro, eu estou aprendendo o bÃ¡sico agora, mas algum dia...";
+		mes "Claro, eu estou aprendendo o básico agora, mas algum dia...";
 		close;
 	}
 }
 
-geffen_in,155,122,4	script	Mago#mer	47,{
+geffen_in,155,122,4	script	Mago#mer	1_M_01,{
 	if (job_merchant_q == 4 || job_merchant_q == 3) {
 		mes "[Mago]";
-		mes "Ah, vocÃª deve ter vindo da Guilda dos Mercadores. Finalmente, meu pacote chegou! Ã³timo...!";
+		mes "Ah, você deve ter vindo da Guilda dos Mercadores. Finalmente, meu pacote chegou! ótimo...!";
 		next;
 		mes "[Mago]";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
-			mes "VocÃª deve estar muito cansado";
+			mes "Você deve estar muito cansado";
 			mes "por ter feito esta viagem";
 			mes "neste tipo de clima...";
 		}
 		else {
 			mes "Espere...";
-			mes "Aonde estÃ¡ o";
+			mes "Aonde está o";
 			mes "pacote?";
 			close;
 		}
 		next;
 		mes "[Mago]";
 		mes "Certo, me deixe checar";
-		mes "o nÃºmero de sÃ©rie...";
+		mes "o número de série...";
 		if (job_merchant_q2 == 3 && countitem(1081) != 0) {
-			mes "2989396. Sim, este Ã© o que nÃ³s pedimos. Aqui estÃ¡ o seu recibo.";
+			mes "2989396. Sim, este é o que nós pedimos. Aqui está o seu recibo.";
 			delitem 1081,1; //Merchant_Box_1
 			getitem 1075,1; //Merchant_Voucher_3
 		}
 		else if (job_merchant_q2 == 4 && countitem(1082) != 0) {
-			mes "2191737. Sim, este Ã© o que nÃ³s pedimos. Aqui estÃ¡ o seu recibo.";
+			mes "2191737. Sim, este é o que nós pedimos. Aqui está o seu recibo.";
 			delitem 1082,1; //Merchant_Box_2
 			getitem 1076,1; //Merchant_Voucher_4
 		}
 		else {
-			mes "Ah oh, este nÃºmero estÃ¡ errado. Isto nÃ£o Ã© o que eu pedi...";
+			mes "Ah oh, este número está errado. Isto não é o que eu pedi...";
 			next;
 			mes "[Mago]";
 			if (job_merchant_q2 == 3) {
-				mes "O nÃºmero de sÃ©rie";
+				mes "O número de série";
 				mes "deve ser 2989396.";
 			}
 			else if (job_merchant_q2 == 4) {
-				mes "O nÃºmero de sÃ©rie";
+				mes "O número de série";
 				mes "deve ser 2191737.";
 			}
 			else {
-				mes "O nÃºmero de sÃ©rie";
+				mes "O número de série";
 				mes "deve ser 2989396";
 				mes "ou 2191737, um";
 				mes "desses dois.";
 			}
 			mes "Olhe aqui!";
-			mes "VocÃª nÃ£o vÃª";
+			mes "Você não vê";
 			mes "que algo";
-			mes "estÃ¡ errado?";
+			mes "está errado?";
 			close;
 		}
 		if (job_merchant_q == 4)
@@ -941,83 +941,83 @@ geffen_in,155,122,4	script	Mago#mer	47,{
 	}
 	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 4 || job_merchant_q2 == 3) {
 		mes "[Mago]";
-		mes "OlÃ¡,";
+		mes "Olá,";
 		mes "Mercador~";
 		mes "Lhe dou meu obrigado.";
 		close;
 	}
 	else {
 		mes "[Mago]";
-		mes "Meu pacote jÃ¡ deveria ter chegado. Huh. Estes Mercadores estÃ£o andando um pouco devagar...";
+		mes "Meu pacote já deveria ter chegado. Huh. Estes Mercadores estão andando um pouco devagar...";
 		close;
 	}
 }
 
-prontera,248,42,0	script	FuncionÃ¡ria Kafra#mer	116,{
+prontera,248,42,0	script	Funcionária Kafra#mer	4_F_KAFRA2,{
 	cutin "kafra_02",2;
 	if (job_merchant_q == 6 || job_merchant_q == 5) && (job_merchant_q2 == 2 || job_merchant_q2 == 1) {
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Oh! Obrigado por";
-		mes "viajar tÃ£o longe";
-		mes "para vir atÃ© aqui~";
+		mes "viajar tão longe";
+		mes "para vir até aqui~";
 		close2;
 		cutin "",255;
 		end;
 	}
 	else if (job_merchant_q == 4 || job_merchant_q == 3) {
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Uma entrega da";
 		mes "Guilda dos Mercadores?";
 		mes "Oh, sim, deixe-me ver";
-		mes "se estÃ¡ tudo certo por aqui...";
+		mes "se está tudo certo por aqui...";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
-			mes "VocÃª deve estar muito cansado";
-			mes "depois de viajar de tÃ£o longe atÃ© aqui!";
+			mes "Você deve estar muito cansado";
+			mes "depois de viajar de tão longe até aqui!";
 		}
 		else {
-			mes "E-espere. VocÃª nÃ£o o trouxe?";
-			mes "Aonde estÃ¡ o pacote?";
+			mes "E-espere. Você não o trouxe?";
+			mes "Aonde está o pacote?";
 			close2;
 			cutin "",255;
 			end;
 		}
 		next;
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Agora, me deixe checar";
-		mes "o nÃºmero de sÃ©rie...";
+		mes "o número de série...";
 		if (job_merchant_q2 == 1 && countitem(1081) != 0) {
-			mes "2485741. Certo, isto Ã©";
+			mes "2485741. Certo, isto é";
 			mes "o que eu pedi. Oh,";
-			mes "e nÃ£o esqueÃ§a seu recibo!";
+			mes "e não esqueça seu recibo!";
 			next;
 			delitem 1081,1; //Merchant_Box_1
 			getitem 1073,1; //Merchant_Voucher_1
 		}
 		else if (job_merchant_q2 == 2 && countitem(1082) != 0) {
-			mes "2328137. Certo, isto Ã©";
+			mes "2328137. Certo, isto é";
 			mes "o que eu pedi. Oh,";
-			mes "e nÃ£o esqueÃ§a seu recibo!";
+			mes "e não esqueça seu recibo!";
 			next;
 			delitem 1082,1; //Merchant_Box_2
 			getitem 1074,1; //Merchant_Voucher_2
 		}
 		else {
 			mes "Mmmm? Espere. Este pacote";
-			mes "nÃ£o Ã© o que eu pedi. O qual";
+			mes "não é o que eu pedi. O qual";
 			if (job_merchant_q2 == 1)
-				mes "eu pedi, tinha o nÃºmero de sÃ©rie 2485741. E este Ã© outro.";
+				mes "eu pedi, tinha o número de série 2485741. E este é outro.";
 			else if (job_merchant_q2 == 2)
-				mes "eu pedi, tinha o nÃºmero de sÃ©rie 2328137. E este Ã© outro.";
+				mes "eu pedi, tinha o número de série 2328137. E este é outro.";
 			else
-				mes "eu pedi, tinha o nÃºmero de sÃ©rie 2328137 ou 2328137.";
+				mes "eu pedi, tinha o número de série 2328137 ou 2328137.";
 			next;
-			mes "[FuncionÃ¡ria Kafra]";
+			mes "[Funcionária Kafra]";
 			mes "Eu estou com medo aqui,";
 			mes "deve ter ocorrido";
-			mes "algum erro. NÃ£o seria";
-			mes "melhor vocÃª voltar atÃ©";
+			mes "algum erro. Não seria";
+			mes "melhor você voltar até";
 			mes "a Guilda dos Mercadores";
-			mes "e resolver esta situaÃ§Ã£o?";
+			mes "e resolver esta situação?";
 			close2;
 			cutin "",255;
 			end;
@@ -1026,7 +1026,7 @@ prontera,248,42,0	script	FuncionÃ¡ria Kafra#mer	116,{
 			set job_merchant_q,6;
 		else if (job_merchant_q == 3)
 			set job_merchant_q,5;
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Obrigada novamente";
 		mes "por ter resolvido";
 		mes "todo este problema~";
@@ -1035,26 +1035,26 @@ prontera,248,42,0	script	FuncionÃ¡ria Kafra#mer	116,{
 		end;
 	}
 	else {
-		mes "[FuncionÃ¡ria Kafra]";
-		mes "Bem vindo Ã ";
-		mes "CorporaÃ§Ã£o Kafra,";
-		mes "Nossos serviÃ§os estÃ£o";
+		mes "[Funcionária Kafra]";
+		mes "Bem vindo à";
+		mes "Corporação Kafra,";
+		mes "Nossos serviços estão";
 		mes "sempre ao seu lado~";
 		next;
-		mes "[FuncionÃ¡ria Kafra]";
-		mes "Como vocÃª pode ver, a";
-		mes "AssossiaÃ§Ã£o dos Espadachins";
+		mes "[Funcionária Kafra]";
+		mes "Como você pode ver, a";
+		mes "Assossiação dos Espadachins";
 		mes "mudou-se para Izlude, a";
-		mes "cidade satÃ©lite de Prontera.";
-		mes "Devido a isto, nÃ³s oferecemos o";
-		mes "serviÃ§o de teletransporte para Izlude por 600 zeny.";
+		mes "cidade satélite de Prontera.";
+		mes "Devido a isto, nós oferecemos o";
+		mes "serviço de teletransporte para Izlude por 600 zeny.";
 		next;
 		if (select("Usar:Cancelar") == 1) {
 			if (Zeny < 600) {
-				mes "[FuncionÃ¡ria Kafra]";
-				mes "Me desculpe, mas vocÃª";
-				mes "nÃ£o tem zeny suficiente";
-				mes "para este serviÃ§o de teletransporte.";
+				mes "[Funcionária Kafra]";
+				mes "Me desculpe, mas você";
+				mes "não tem zeny suficiente";
+				mes "para este serviço de teletransporte.";
 				close2;
 				cutin "",255;
 				end;
@@ -1070,62 +1070,62 @@ prontera,248,42,0	script	FuncionÃ¡ria Kafra#mer	116,{
 		end;
 	}
 }
-//izlu2dun,106,58,4	script	FuncionÃ¡ria Kafra#mer	116,{
+//izlu2dun,106,58,4	script	Funcionária Kafra#mer	4_F_KAFRA2,{
 function	script	F_MercKafra	{
 	if ((job_merchant_q == 6 || job_merchant_q == 5) && (job_merchant_q2 == 8 || job_merchant_q2 == 7)) {
-		mes "[FuncionÃ¡ria Kafra]";
-		mes "OlÃ¡~";
+		mes "[Funcionária Kafra]";
+		mes "Olá~";
 		mes "Hum, existe alguma";
-		mes "razÃ£o especial pela qual";
-		mes "vocÃª tenha vindo atÃ© aqui?";
+		mes "razão especial pela qual";
+		mes "você tenha vindo até aqui?";
 		close2;
 		cutin "",255;
 		end;
 	}
 	else if (job_merchant_q == 4 || job_merchant_q == 3) {
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Uma entrega vinda da";
 		mes "Guilda dos Mercadores?";
 		mes "Oh, sim, por favor coloque";
 		mes "o pacote aqui...";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
-			mes "VocÃª deve estar muito cansado";
-			mes "depois de ter viajado de tÃ£o longe!";
+			mes "Você deve estar muito cansado";
+			mes "depois de ter viajado de tão longe!";
 		}
 		else {
-			mes "E-espere. VocÃª nÃ£o o trouxe?";
-			mes "Aonde estÃ¡ o pacote?";
+			mes "E-espere. Você não o trouxe?";
+			mes "Aonde está o pacote?";
 			close2;
 			cutin "",255;
 			end;
 		}
 		next;
-		mes "[FuncionÃ¡ria Kafra]";
+		mes "[Funcionária Kafra]";
 		mes "Agora, me deixe checar";
-		mes "o nÃºmero de sÃ©rie...";
+		mes "o número de série...";
 		if (job_merchant_q2 == 7 && countitem(1081) != 0) {
-			mes "3318702. Certo, este Ã©";
+			mes "3318702. Certo, este é";
 			mes "o que eu pedi. Oh,";
-			mes "e nÃ£o esqueÃ§a seu recibo!";
+			mes "e não esqueça seu recibo!";
 			delitem 1081,1; //Merchant_Box_1
 			getitem 1079,1; //Merchant_Voucher_7
 		}
 		else if (job_merchant_q2 == 8 && countitem(1082) != 0) {
-			mes "3543625. Certo, este Ã©";
+			mes "3543625. Certo, este é";
 			mes "o que eu pedi. Oh,";
-			mes "e nÃ£o esqueÃ§a seu recibo!";
+			mes "e não esqueça seu recibo!";
 			delitem 1082,1; //Merchant_Box_2
 			getitem 1080,1; //Merchant_Voucher_8
 		}
 		else {
-			mes "Mmmm? Espere. Este nÃ£o Ã©";
+			mes "Mmmm? Espere. Este não é";
 			mes "o pacote que eu pedi. O qual eu";
 			if (job_merchant_q2 == 7)
-				mes "pedi, tinha nÃºmero de sÃ©rie 3318702. E este nÃ£o Ã© ele.";
+				mes "pedi, tinha número de série 3318702. E este não é ele.";
 			else if (job_merchant_q2 == 8)
-				mes "pedi, tinha nÃºmero de sÃ©rie 3543625. E este nÃ£o Ã© ele.";
+				mes "pedi, tinha número de série 3543625. E este não é ele.";
 			else
-				mes "pedi, tinha nÃºmero de sÃ©rie 3318702 ou 3543625.";
+				mes "pedi, tinha número de série 3318702 ou 3543625.";
 			close2;
 			cutin "",255;
 			end;
@@ -1136,31 +1136,31 @@ function	script	F_MercKafra	{
 			set job_merchant_q,5;
 		next;
 		if (countitem(1072) != 0 && quest_alb_01 == 0) {
-			select("Isto Ã© do Chefe Mahnsoo da Guilda dos Mercadores...");
+			select("Isto é do Chefe Mahnsoo da Guilda dos Mercadores...");
 			delitem 1072,1; //Delivery_Message
 			set quest_alb_01,1;
-			mes "[FuncionÃ¡ria Kafra]";
+			mes "[Funcionária Kafra]";
 			mes "Oh~! Uma carta de";
 			mes "Mahnsoo! Obrigada,";
 			mes "Eu estava querendo";
 			mes "ouvir algo sobre ele. Como";
-			mes "ele estÃ¡, estÃ¡ tudo bem?";
-			mes "Eu nÃ£o posso esperar para lÃª-la...";
+			mes "ele está, está tudo bem?";
+			mes "Eu não posso esperar para lê-la...";
 			next;
-			mes "[FuncionÃ¡ria Kafra]";
+			mes "[Funcionária Kafra]";
 			mes "Oh, obrigada por se";
 			mes "envolver em todo essa";
-			mes "confusÃ£o para entregar";
-			mes "isto para mim. Isto nÃ£o Ã©";
+			mes "confusão para entregar";
+			mes "isto para mim. Isto não é";
 			mes "grandes coisas, mas aceite isto.";
-			mes "Bem, vejo vocÃª depois~";
+			mes "Bem, vejo você depois~";
 			getitem 513,5; //Banana
 		}
 		else {
-			mes "[FuncionÃ¡ria Kafra]";
+			mes "[Funcionária Kafra]";
 			mes "Obrigada novamente";
 			mes "por passar por toda";
-			mes "esta confusÃ£o~";
+			mes "esta confusão~";
 		}
 		close2;
 		cutin "",255;
