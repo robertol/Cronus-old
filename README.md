@@ -1,9 +1,10 @@
 ﻿Cronus-Emulator
 ===============
 
-* Website: (http://forum.cronus-emulator.com/)
+* Portal: (http://portal.cronus-emulator.com/)
+* Forum: (http://forum.cronus-emulator.com/)
 
-Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/tracker).
+Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/trackdown).
 
 E caso queira candidatar-se a uma vaga na equipe de desenvolvimento, preencha [este formulário](http://forum.cronus-emulator.com/index.php?app=contato).
 
@@ -28,15 +29,15 @@ Equipe de Desenvolvimento
 - Raizen	- Carlos Lain
 
 ### Coordenadores
-- Kooler
-- Portalcake » Amanda Gonçalo
+- Kooler	- Gustavo Bucci
+- Wolf		- João Victor Senos
 
 ### Desenvolvedores
-- BOO		- José Filho
-- sreskimo/Eski	- Alexandre Firmino
-- DEMETRYUS
-- Zephyrus
-- Shermie
-- SynGates
-- Perfectz
-- KyukE - Thiago Gomes
+- Schrwaizer	- Junior Backes
+- xChiron	- Diego da S. Pinheiro
+- Okuz		- Lucas Oliveira
+- Kyuke		- Thiago da Silva Gomes
+- Shermie	- David Martins
+	
+### Estágiários/Aprendizes
+- Kira Cross	- Júlio César
