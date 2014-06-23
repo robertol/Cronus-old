@@ -1,12 +1,19 @@
 ﻿Cronus-Emulator
 ===============
 
-* Portal: (http://portal.cronus-emulator.com/)
-* Forum: (http://forum.cronus-emulator.com/)
+* Forum: (https://forum.cronus-emulator.com/)
 
-Caso tenha dúvidas, procure ajuda no forum. Qualquer bug favor reportar [aqui](http://forum.cronus-emulator.com/trackdown).
+Seja bem vindo ao repositório oficial do Cronus-Emulator.
 
-E caso queira candidatar-se a uma vaga na equipe de desenvolvimento, preencha [este formulário](http://forum.cronus-emulator.com/index.php?app=contato).
+Atualmente o desenvolvimento deste projeto encontra-se finalizado. Após 9 longos anos, nós decidimos que o melhor para o projeto era finalizar o desenvolvimento, uma vez em que a comunidade não se encontra mais disposta a contribuir com a manutenção e tradução deste projeto.
+
+
+Todo o código fonte deste projeto foi removido para nos dedicarmos unicamente à tradução do emulador.
+
+
+Procure ajuda em nosso forum. Qualquer bug deve ser reportado atraves do email contato@cronus-emulator.com
+
+
 
 --------------
 Estado da compilação atual:
@@ -14,7 +21,6 @@ Estado da compilação atual:
 [![Build Status](https://travis-ci.org/Cronus-Emulator/Cronus.png?branch=master)](https://travis-ci.org/Cronus-Emulator/Cronus)
 
 --------------
-
 Agradecimentos
 --------------
 Nossos agradecimentos especiais a equipe do eAthena por desenvolver a base deste emulador e a todos que contribuem ou um dia contribuiram ao Cronus-Emulator.
@@ -22,22 +28,13 @@ Nossos agradecimentos especiais a equipe do eAthena por desenvolver a base deste
 Special thanks to eAthena team for the development of the emulator base and to everyone that contribute or that contributed in the past to Cronus-Emulator.
 
 
-Equipe de Desenvolvimento
+Equipe de Gestão
+
 ------
 ### Administradores
-- Roberto	- Roberto Lima
+- Roberto	- Roberto Oliveira
 - Raizen	- Carlos Lain
 
 ### Coordenadores
 - Kooler	- Gustavo Bucci
 - Wolf		- João Victor Senos
-
-### Desenvolvedores
-- Schrwaizer	- Junior Backes
-- xChiron	- Diego da S. Pinheiro
-- Okuz		- Lucas Oliveira
-- Kyuke		- Thiago da Silva Gomes
-- Shermie	- David Martins
-	
-### Estágiários/Aprendizes
-- Kira Cross	- Júlio César
