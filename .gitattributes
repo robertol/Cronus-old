@@ -1,5 +1,0 @@
-*        text=auto
-*.c      diff=cpp
-*.sln    merge=union
-*.vcproj merge=union
-*.vcxproj merge=union
